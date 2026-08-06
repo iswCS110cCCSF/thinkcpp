@@ -32,7 +32,7 @@ cout &lt;&lt; '}' &lt;&lt; endl;
       </evaluate>
     </evaluation>
   </exercise>
-  <exercise label="values2.0">
+  <exercise label="values2-0">
     <statement>
       <p>Click on all integer VALUES.</p>
     </statement>
@@ -53,7 +53,7 @@ cout &lt;&lt; '}' &lt;&lt; endl;
       <cline>}</cline>
     </areas>
   </exercise>
-  <exercise label="values2.1">
+  <exercise label="values2-1">
     <statement>
       <p>Click on all string VALUES.</p>
     </statement>

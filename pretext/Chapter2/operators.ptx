@@ -99,7 +99,7 @@ cout &lt;&lt; minute * 100 / 60 &lt;&lt; endl;</program>
       </evaluate>
     </evaluation>
   </exercise>
-  <exercise label="operators_3.1">
+  <exercise label="operators_3-1">
     <statement>
       <program>int num1 = 12;
 int num2 = 5;
@@ -115,7 +115,7 @@ cout &lt;&lt; num1 / num2;</program>
       </evaluate>
     </evaluation>
   </exercise>
-  <exercise label="operators_3.2">
+  <exercise label="operators_3-2">
     <statement>
       <program>int num1 = 10;
 int num2 = 48;
@@ -133,7 +133,7 @@ cout &lt;&lt; num2 / num1;</program>
       </evaluate>
     </evaluation>
   </exercise>
-  <exercise label="operators_3.3">
+  <exercise label="operators_3-3">
     <statement>
       <program>int num1 = 10;
 int num2 = 40;
@@ -151,7 +151,7 @@ cout &lt;&lt; num2 / num1;</program>
       </evaluate>
     </evaluation>
   </exercise>
-  <exercise label="operators_3.4">
+  <exercise label="operators_3-4">
     <statement>
       <program>int num1 = 10;
 int num2 = 39;
@@ -169,7 +169,7 @@ cout &lt;&lt; num2 / num1;</program>
       </evaluate>
     </evaluation>
   </exercise>
-  <exercise label="operators_3.5">
+  <exercise label="operators_3-5">
     <statement>
       <program>int num1 = 7;
 int num2 = 8;

@@ -3,7 +3,7 @@
   <exercise label="cp_15_1">
     <statement>
       <p>Write a program that takes in an input file called <c>poem.txt</c> <fn>
-          <datafile label="poem.txt" filename="poem.txt" cols="10" rows="5">
+          <datafile label="poem-txt" filename="poem.txt" cols="10" rows="5">
             <pre>Two roads diverged in a yellow wood,
 And sorry I could not travel both
 And be one traveler, long I stood
@@ -153,7 +153,7 @@ using namespace std;
   <exercise label="cp_15_3">
     <statement>
       <p>Write a program that takes in an input file called <c>heights.txt</c><fn>
-          <datafile label="heights.txt" filename="heights.txt">
+          <datafile label="heights-txt" filename="heights.txt">
             <pre>62  67      75      68      65
 67  70      72      74      66
 72  66      66      73      69
@@ -326,7 +326,7 @@ int main() {
   alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus,
   ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file
   called <c>message.txt</c><fn>
-          <datafile label="message.txt" filename="message.txt">
+          <datafile label="message-txt" filename="message.txt">
             <pre>Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.</pre>
           </datafile>
         </fn>applies ROT13, and outputs the result to
@@ -396,7 +396,7 @@ int main() {
   <exercise label="cp_15_7">
     <statement>
       <p>Write a program that reads in data about a class from the file <c>class_data.txt</c><fn>
-          <datafile label="class_data.txt" filename="class_data.txt">
+          <datafile label="class_data-txt" filename="class_data.txt">
             <p>Below are the contents of the input file.</p>
             <pre>First    Last       Grade    GPA    Age
 Alex     Jones      9        3.4    14
@@ -476,7 +476,7 @@ using namespace std;
             Include proper file error checking.
             Use the lines to construct the code, then go back to complete the Activecode.</p>
 
-          <datafile label="shrimp.txt" filename="shrimp.txt">
+          <datafile label="shrimp-txt" filename="shrimp.txt">
             <pre>There's pineapple shrimp, lemon shrimp, coconut shrimp,
 pepper shrimp, shrimp soup, shrimp stew, shrimp salad,
 shrimp and potatoes, shrimp burger, shrimp sandwich.

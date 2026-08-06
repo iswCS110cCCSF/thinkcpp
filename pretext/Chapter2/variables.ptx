@@ -62,7 +62,7 @@ char tom;
       </evaluate>
     </evaluation>
   </exercise>
-  <exercise label="variables2.0">
+  <exercise label="variables2-0">
     <statement>
       <p>Click on all instances of integer VARIABLES.</p>
     </statement>
@@ -84,7 +84,7 @@ char tom;
       <cline>}</cline>
     </areas>
   </exercise>
-  <exercise label="variables2.1">
+  <exercise label="variables2-1">
     <statement>
       <p>Click on all instances of character VARIABLES.</p>
     </statement>
