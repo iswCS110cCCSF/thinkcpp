@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: salem                          *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TCPP2 Vector of random numbers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script type="module">import { startMathJax } from './_static/pretext/js/dist/mathjax_startup.js';
+startMathJax({
+hasWebworkReps: false,
+hasSage: false,
+isReact: false,
+htmlPresentation: false,
+});
+</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta name="twitter:title" content="How To Think Like a Computer Scientist C++ Edition: The Pretext Interactive Version">
+<meta property="og:title" content="How To Think Like a Computer Scientist C++ Edition: The Pretext Interactive Version">
+<meta property="book:title" content="How To Think Like a Computer Scientist C++ Edition: The Pretext Interactive Version">
+<meta name="twitter:description" content="Based on the original open source book by Allen Downey, Think C++: How to Think Like a Computer Scientist. This book is an introduction to computer science using C++.">
+<meta property="og:description" content="Based on the original open source book by Allen Downey, Think C++: How to Think Like a Computer Scientist. This book is an introduction to computer science using C++.">
+<meta name="twitter:card" content="summary">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/dist/pretext-core.js?v=2.45"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '8.2.4';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.40bd1420d3277749.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.b388362b5f43738a.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.8086b62682b271d1.css">
+<script src="_static/pretext/js/dist/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/dist/pretext_search.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="thinkcpp2" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead" role="banner"><div class="ptx-banner"><div class="title-container">
+<div class="heading ptx-banner-heading"><a href="book.html"><span class="title">How To Think Like a Computer Scientist C++ Edition</span> <span class="subtitle">The Pretext Interactive Version</span></a></div>
+<p class="byline">Barbara Ericson, Allen B. Downey, Jason L. Wright (Editor)</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button id="ptx-toc-toggle" type="button" aria-controls="ptx-sidebar" class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="ptx-search-box">
+<div class="ptx-search-widget"><button id="ptx-search-button" type="button" class="ptx-search-button button" title="Search Book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<dialog id="ptx-search-dialog" class="ptx-dialog ptx-search-dialog"><div class="ptx-search-dialog-controls">
+<input aria-label="Search term" id="ptx-search-terms" class="ptx-search-terms" type="text" name="terms" placeholder="Search terms"><button aria-label="Close" id="ptx-search-close" class="ptx-search-close"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cd;</span></button>
+</div>
+<div id="ptx-search-status" class="ptx-search-status" aria-live="polite" aria-atomic="true"></div>
+<h2 class="heading ptx-search-results-heading">Search Results: </h2>
+<div id="ptx-search-empty" class="ptx-search-empty"><span>No results.</span></div>
+<ol id="ptx-search-results" class="ptx-search-results"></ol></dialog>
+</div>
+<span class="nav-other-controls"><button id="ptx-readability-options-button" class="ptx-readability-options-button button" title="Readability settings"><span class="icon material-symbols-outlined" aria-hidden="true">&#xf6f1;</span><span class="name">Readability settings</span></button><dialog class="ptx-dialog ptx-readability-options-popup" id="ptx-readability-options-popup"><div class="ptx-readability-options-popup-controls">
+<h2 class="heading">Readability settings</h2>
+<button class="ptx-readability-options-close-button button" id="ptx-readability-options-close-button" title="Close"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cd;</span></button>
+</div>
+<div class="ptx-readability-options-group">
+<label class="ptx-readability-slider-label" for="ptx-readability-line-height"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe240;</span><span>Line height</span><output id="ptx-readability-line-height-value" for="ptx-readability-line-height">1.35</output></label><input type="range" id="ptx-readability-line-height" min="1.10" max="3" step="0.05" value="1.35">
+</div>
+<div class="ptx-readability-options-group">
+<label class="ptx-readability-slider-label" for="ptx-readability-font-size"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe245;</span><span>Content font size</span><output id="ptx-readability-font-size-value" for="ptx-readability-font-size">100%</output></label><input type="range" id="ptx-readability-font-size" min="0.8" max="1.5" step="0.05" value="1">
+</div>
+<fieldset class="ptx-readability-options-group ptx-readability-options-group-theme">
+<legend>Theme</legend>
+<label for="ptx-readability-theme-system"><input type="radio" name="ptx-readability-theme" id="ptx-readability-theme-system" value="system"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe1ab;</span><span>System</span></label><label for="ptx-readability-theme-light"><input type="radio" name="ptx-readability-theme" id="ptx-readability-theme-light" value="light"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe518;</span><span>Light</span></label><label for="ptx-readability-theme-dark"><input type="radio" name="ptx-readability-theme" id="ptx-readability-theme-dark" value="dark"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span>Dark</span></label>
+</fieldset>
+<fieldset class="ptx-readability-options-group">
+<legend>Assistive technologies</legend>
+<label for="ptx-readability-accessible-permalinks"><input type="checkbox" id="ptx-readability-accessible-permalinks"><span>🔗</span><span>Expose permalinks</span></label>
+</fieldset>
+<div class="ptx-readability-options-group"><button type="button" class="ptx-readability-reset-button button" id="ptx-readability-reset-button"><span class="icon material-symbols-outlined" aria-hidden="true">&#xf053;</span><span class="name">Reset All</span></button></div></dialog></span><span class="treebuttons"><a class="previous-button button" href="chapter10_statistics.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="vectors.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="chapter10_counting.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" role="complementary" class="ptx-sidebar"><nav id="ptx-toc" tabindex="-1" aria-label="Contents" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">About this book</span></a></div>
+<ul id="ptx-toc-group-frontmatter" class="structural toc-item-list">
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">License</span></a></div></li>
+<li class="toc-item toc-acknowledgement"><div class="toc-title-box"><a href="acknowledgement.html" class="internal"><span class="title">Acknowledgements</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="way-of-the-program.html" class="internal"><span class="codenumber">1</span> <span class="title">The way of the program</span></a></div>
+<ul id="ptx-toc-group-way-of-the-program" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter1_the-way-of-the-program.html" class="internal"><span class="codenumber">1.1</span> <span class="title">The Way of the Program</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter1_what-is-a-programming-language.html" class="internal"><span class="codenumber">1.2</span> <span class="title">What is a Programming Language?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter1_what-is-a-program.html" class="internal"><span class="codenumber">1.3</span> <span class="title">What is a Program?</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter1_what-is-debugging.html" class="internal"><span class="codenumber">1.4</span> <span class="title">What is Debugging?</span></a></div>
+<ul id="ptx-toc-group-chapter1_what-is-debugging" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter1_what-is-debugging.html#chapter1_compile-time-errors" class="internal"><span class="codenumber">1.4.1</span> <span class="title">Compile-time errors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter1_what-is-debugging.html#chapter1_run-time-errors-run-time" class="internal"><span class="codenumber">1.4.2</span> <span class="title">Run-time errors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter1_what-is-debugging.html#chapter1_logic-errors-and-semantics" class="internal"><span class="codenumber">1.4.3</span> <span class="title">Logic errors and semantics</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter1_what-is-debugging.html#chapter1_experimental-debugging" class="internal"><span class="codenumber">1.4.4</span> <span class="title">Experimental debugging</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter1_formal-and-natural-languages-formal.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Formal and Natural Languages</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter1_the-first-program-hello.html" class="internal"><span class="codenumber">1.6</span> <span class="title">The First Program</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter1_glossary.html" class="internal"><span class="codenumber">1.7</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter1_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter1_glossary.html#chapter1_glossary-2" class="internal"><span class="codenumber">1.7</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter1_glossary.html#chapter1_glossary-3" class="internal"><span class="codenumber">1.7</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter1_multiple-choice-exercises.html" class="internal"><span class="codenumber">1.8</span> <span class="title">Chapter Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="variables-types.html" class="internal"><span class="codenumber">2</span> <span class="title">Variables and Types</span></a></div>
+<ul id="ptx-toc-group-variables-types" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_more-output.html" class="internal"><span class="codenumber">2.1</span> <span class="title">More Output</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_values.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_variables.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Variables</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_assignment.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Assignment</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_outputting-variables.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Outputting Variables</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_keywords.html" class="internal"><span class="codenumber">2.6</span> <span class="title">Keywords</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_operators.html" class="internal"><span class="codenumber">2.7</span> <span class="title">Operators</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_order-of-operations.html" class="internal"><span class="codenumber">2.8</span> <span class="title">Order of Operations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_operators-for-characters.html" class="internal"><span class="codenumber">2.9</span> <span class="title">Operators for Characters</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_composition.html" class="internal"><span class="codenumber">2.10</span> <span class="title">Composition</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter2_glossary.html" class="internal"><span class="codenumber">2.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter2_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter2_glossary.html#chapter2_glossary-2" class="internal"><span class="codenumber">2.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter2_glossary.html#chapter2_glossary-3" class="internal"><span class="codenumber">2.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter2_multiple-choice-exercises.html" class="internal"><span class="codenumber">2.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter2_mixed-up-code-exercises-1.html" class="internal"><span class="codenumber">2.13</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter2_activecode-exercises.html" class="internal"><span class="codenumber">2.14</span> <span class="title">Activecode Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="functions.html" class="internal"><span class="codenumber">3</span> <span class="title">Functions</span></a></div>
+<ul id="ptx-toc-group-functions" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_floating-point.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Floating-point</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_converting-from-double-to-int.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Converting from <code class="code-inline tex2jax_ignore">double</code> to <code class="code-inline tex2jax_ignore">int</code></span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_math-functions.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Math Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_composition.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Composition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_adding-new-functions.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Adding New Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_definitions-and-uses.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Definitions and Uses</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_programs-with-multiple-functions.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Programs with Multiple Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_parameters-and-arguments.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Parameters and Arguments</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_parameters-and-variables-are-local.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Parameters and Variables are Local</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_functions-with-multiple-parameters.html" class="internal"><span class="codenumber">3.10</span> <span class="title">Functions with Multiple Parameters</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_functions-with-results.html" class="internal"><span class="codenumber">3.11</span> <span class="title">Functions with Results</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter3_glossary.html" class="internal"><span class="codenumber">3.12</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter3_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter3_glossary.html#chapter3_glossary-2" class="internal"><span class="codenumber">3.12</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter3_glossary.html#chapter3_glossary-3" class="internal"><span class="codenumber">3.12</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter3_multiple-choice-exercises.html" class="internal"><span class="codenumber">3.13</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter3_mixed-up-code-exercises.html" class="internal"><span class="codenumber">3.14</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter3_activecode-exercises.html" class="internal"><span class="codenumber">3.15</span> <span class="title">Activecode Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
+<ul id="ptx-toc-group-conditionals" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Modulus Operator</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Alternative Execution</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Chained Conditionals</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_nested-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Nested Conditionals</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">The Return Statement</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Infinite Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Stack Diagrams for Recursive Functions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter4_glossary.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter4_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter4_glossary.html#chapter4_glossary-2" class="internal"><span class="codenumber">4.10</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter4_glossary.html#chapter4_glossary-3" class="internal"><span class="codenumber">4.10</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter4_multiple-choice-exercises.html" class="internal"><span class="codenumber">4.11</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter4_mixed-up-code-exercises.html" class="internal"><span class="codenumber">4.12</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter4_activecode-exercises.html" class="internal"><span class="codenumber">4.13</span> <span class="title">Activecode Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="fruitful-functions.html" class="internal"><span class="codenumber">5</span> <span class="title">Fruitful functions</span></a></div>
+<ul id="ptx-toc-group-fruitful-functions" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_return-values.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Return Values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_program-development-distance.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Program Development</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_composition.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Composition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_overloading.html" class="internal"><span class="codenumber">5.4</span> <span class="title">Overloading</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_boolean-values.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Boolean Values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_boolean-variables.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Boolean Variables</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_logical-operators.html" class="internal"><span class="codenumber">5.7</span> <span class="title">Logical operators</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_bool-functions-bool.html" class="internal"><span class="codenumber">5.8</span> <span class="title">Bool Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_returning-from-main.html" class="internal"><span class="codenumber">5.9</span> <span class="title">Returning from main</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_more-recursion.html" class="internal"><span class="codenumber">5.10</span> <span class="title">More recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_leap-of-faith.html" class="internal"><span class="codenumber">5.11</span> <span class="title">Leap of faith</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter5_one-more-example.html" class="internal"><span class="codenumber">5.12</span> <span class="title">One more example</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter5_glossary.html" class="internal"><span class="codenumber">5.13</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter5_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter5_glossary.html#chapter5_glossary-2" class="internal"><span class="codenumber">5.13</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter5_glossary.html#chapter5_glossary-3" class="internal"><span class="codenumber">5.13</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter5_multiple-choice-exercises.html" class="internal"><span class="codenumber">5.14</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter5_mixed-up-code-exercises.html" class="internal"><span class="codenumber">5.15</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter5_coding-practice.html" class="internal"><span class="codenumber">5.16</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="iteration.html" class="internal"><span class="codenumber">6</span> <span class="title">Iteration</span></a></div>
+<ul id="ptx-toc-group-iteration" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_multiple-assignment.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Multiple assignment</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_iteration.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Iteration</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_the-while-statement.html" class="internal"><span class="codenumber">6.3</span> <span class="title">The while statement</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_tables.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Tables</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_two-dimensional-tables.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Two-dimensional tables</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_encapsulation-and-generalization.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Encapsulation and generalization</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_functions.html" class="internal"><span class="codenumber">6.7</span> <span class="title">Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_more-encapsulation.html" class="internal"><span class="codenumber">6.8</span> <span class="title">More encapsulation</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_local-variables.html" class="internal"><span class="codenumber">6.9</span> <span class="title">Local variables</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_more-generalization.html" class="internal"><span class="codenumber">6.10</span> <span class="title">More generalization</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter6_glossary.html" class="internal"><span class="codenumber">6.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter6_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter6_glossary.html#chapter6_glossary-2" class="internal"><span class="codenumber">6.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter6_glossary.html#chapter6_glossary-3" class="internal"><span class="codenumber">6.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_multiple-choice-exercises.html" class="internal"><span class="codenumber">6.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_mixed-up-code-exercises.html" class="internal"><span class="codenumber">6.13</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_coding-practice.html" class="internal"><span class="codenumber">6.14</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="strings.html" class="internal"><span class="codenumber">7</span> <span class="title">Strings and things</span></a></div>
+<ul id="ptx-toc-group-strings" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_containers-for-strings.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Containers for strings</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_string-variables.html" class="internal"><span class="codenumber">7.2</span> <span class="title"><code class="code-inline tex2jax_ignore">string</code> variables</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_extracting-characters-from-a-string.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Extracting characters from a string</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_length.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Length</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_traversal.html" class="internal"><span class="codenumber">7.5</span> <span class="title">Traversal</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_a-run-time-error.html" class="internal"><span class="codenumber">7.6</span> <span class="title">A run-time error</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_the-find-function.html" class="internal"><span class="codenumber">7.7</span> <span class="title">The <code class="code-inline tex2jax_ignore">find</code> function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_our-own-version-of-find.html" class="internal"><span class="codenumber">7.8</span> <span class="title">Our own version of <code class="code-inline tex2jax_ignore">find</code></span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_looping-and-counting-loopcount.html" class="internal"><span class="codenumber">7.9</span> <span class="title">Looping and counting</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_increment-and-decrement-operators.html" class="internal"><span class="codenumber">7.10</span> <span class="title">Increment and decrement operators</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_string-concatenation.html" class="internal"><span class="codenumber">7.11</span> <span class="title">String concatenation</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_strings-are-mutable.html" class="internal"><span class="codenumber">7.12</span> <span class="title"><code class="code-inline tex2jax_ignore">string</code>s are mutable</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_strings-are-comparable.html" class="internal"><span class="codenumber">7.13</span> <span class="title"><code class="code-inline tex2jax_ignore">string</code>s are comparable</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_character-classification.html" class="internal"><span class="codenumber">7.14</span> <span class="title">Character classification</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_other-string-functions.html" class="internal"><span class="codenumber">7.15</span> <span class="title">Other <code class="code-inline tex2jax_ignore">string</code> functions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter7_glossary.html" class="internal"><span class="codenumber">7.16</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter7_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter7_glossary.html#chapter7_glossary-2" class="internal"><span class="codenumber">7.16</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter7_glossary.html#chapter7_glossary-3" class="internal"><span class="codenumber">7.16</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_multiple-choice-exercises.html" class="internal"><span class="codenumber">7.17</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_mixed-up-code-exercises.html" class="internal"><span class="codenumber">7.18</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_coding-practice.html" class="internal"><span class="codenumber">7.19</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="structures.html" class="internal"><span class="codenumber">8</span> <span class="title">Structures</span></a></div>
+<ul id="ptx-toc-group-structures" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_compound-values.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Compound values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_point-objects.html" class="internal"><span class="codenumber">8.2</span> <span class="title"><code class="code-inline tex2jax_ignore">Point</code> objects</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_accessing-instance-variables.html" class="internal"><span class="codenumber">8.3</span> <span class="title">Accessing instance variables</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_operations-on-structures.html" class="internal"><span class="codenumber">8.4</span> <span class="title">Operations on structures</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_structures-as-parameters.html" class="internal"><span class="codenumber">8.5</span> <span class="title">Structures as parameters</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_call-by-value.html" class="internal"><span class="codenumber">8.6</span> <span class="title">Call by value</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_call-by-reference.html" class="internal"><span class="codenumber">8.7</span> <span class="title">Call by reference</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_rectangles.html" class="internal"><span class="codenumber">8.8</span> <span class="title">Rectangles</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_structures-as-return-types.html" class="internal"><span class="codenumber">8.9</span> <span class="title">Structures as return types</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_passing-other-types-by-reference.html" class="internal"><span class="codenumber">8.10</span> <span class="title">Passing other types by reference</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_getting-user-input.html" class="internal"><span class="codenumber">8.11</span> <span class="title">Getting user input</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter8_glossary.html" class="internal"><span class="codenumber">8.12</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter8_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter8_glossary.html#chapter8_glossary-2" class="internal"><span class="codenumber">8.12</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter8_glossary.html#chapter8_glossary-3" class="internal"><span class="codenumber">8.12</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter8_multiple-choice-exercises.html" class="internal"><span class="codenumber">8.13</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter8_mixed-up-code-practice.html" class="internal"><span class="codenumber">8.14</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter8_coding-practice.html" class="internal"><span class="codenumber">8.15</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="more-structures.html" class="internal"><span class="codenumber">9</span> <span class="title">More structures</span></a></div>
+<ul id="ptx-toc-group-more-structures" class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter9_time.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Time</span></a></div>
+<ul id="ptx-toc-group-chapter9_time" class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter9_time.html#chapter9_time-12" class="internal"><span class="codenumber">9.1</span> <span class="title">Exercises</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_printtime.html" class="internal"><span class="codenumber">9.2</span> <span class="title"><code class="code-inline tex2jax_ignore">printTime</code></span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_functions-for-objects.html" class="internal"><span class="codenumber">9.3</span> <span class="title">Functions for objects</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_pure-functions.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Pure functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_const-parameters.html" class="internal"><span class="codenumber">9.5</span> <span class="title"><code class="code-inline tex2jax_ignore">const</code> parameters</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter9_modifiers.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Modifiers</span></a></div>
+<ul id="ptx-toc-group-chapter9_modifiers" class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter9_modifiers.html#chapter9_modifiers-9" class="internal"><span class="codenumber">9.6</span> <span class="title">Exercises</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_fill-in-functions.html" class="internal"><span class="codenumber">9.7</span> <span class="title">Fill-in functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_which-is-best.html" class="internal"><span class="codenumber">9.8</span> <span class="title">Which is best?</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter9_incremental-development-versus-planning.html" class="internal"><span class="codenumber">9.9</span> <span class="title">Incremental development versus planning</span></a></div>
+<ul id="ptx-toc-group-chapter9_incremental-development-versus-planning" class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter9_incremental-development-versus-planning.html#chapter9_incremental-development-versus-planning-15" class="internal"><span class="codenumber">9.9</span> <span class="title">Exercises</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_generalization.html" class="internal"><span class="codenumber">9.10</span> <span class="title">Generalization</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_algorithms.html" class="internal"><span class="codenumber">9.11</span> <span class="title">Algorithms</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter9_glossary.html" class="internal"><span class="codenumber">9.12</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter9_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter9_glossary.html#chapter9_glossary-2" class="internal"><span class="codenumber">9.12</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter9_glossary.html#chapter9_glossary-3" class="internal"><span class="codenumber">9.12</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter9_multiple-choice-exercises.html" class="internal"><span class="codenumber">9.13</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter9_mixed-up-code.html" class="internal"><span class="codenumber">9.14</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter9_coding-practice.html" class="internal"><span class="codenumber">9.15</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="vectors.html" class="internal"><span class="codenumber">10</span> <span class="title">Vectors</span></a></div>
+<ul class="structural toc-item-list contains-active" id="ptx-toc-group-vectors">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_vectors.html" class="internal"><span class="codenumber">10.1</span> <span class="title">Vectors</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_accessing-elements.html" class="internal"><span class="codenumber">10.2</span> <span class="title">Accessing elements</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_copying-vectors.html" class="internal"><span class="codenumber">10.3</span> <span class="title">Copying vectors</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_for-loops.html" class="internal"><span class="codenumber">10.4</span> <span class="title"><code class="code-inline tex2jax_ignore">for</code> loops</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_vector-size.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Vector size</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_vector-functions.html" class="internal"><span class="codenumber">10.6</span> <span class="title">Vector functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_random-numbers-random.html" class="internal"><span class="codenumber">10.7</span> <span class="title">Random numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_statistics.html" class="internal"><span class="codenumber">10.8</span> <span class="title">Statistics</span></a></div></li>
+<li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter10_vector-of-random-numbers.html" class="internal"><span class="codenumber">10.9</span> <span class="title">Vector of random numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_counting.html" class="internal"><span class="codenumber">10.10</span> <span class="title">Counting</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_checking-the-other-values.html" class="internal"><span class="codenumber">10.11</span> <span class="title">Checking the other values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_a-histogram.html" class="internal"><span class="codenumber">10.12</span> <span class="title">A histogram</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_a-single-pass-solution.html" class="internal"><span class="codenumber">10.13</span> <span class="title">A single-pass solution</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_random-seeds.html" class="internal"><span class="codenumber">10.14</span> <span class="title">Random seeds</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter10_glossary.html" class="internal"><span class="codenumber">10.15</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter10_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter10_glossary.html#chapter10_glossary-2" class="internal"><span class="codenumber">10.15</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter10_glossary.html#chapter10_glossary-3" class="internal"><span class="codenumber">10.15</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter10_multiple-choice-exercises.html" class="internal"><span class="codenumber">10.16</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter10_mixed-up-code-exercises-1.html" class="internal"><span class="codenumber">10.17</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter10_activecode-exercises.html" class="internal"><span class="codenumber">10.18</span> <span class="title">Activecode Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="member-functions.html" class="internal"><span class="codenumber">11</span> <span class="title">Member functions</span></a></div>
+<ul id="ptx-toc-group-member-functions" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter11_objects-and-functions.html" class="internal"><span class="codenumber">11.1</span> <span class="title">Objects and functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter11_print.html" class="internal"><span class="codenumber">11.2</span> <span class="title"><code class="code-inline tex2jax_ignore">print</code></span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter11_implicit-variable-access.html" class="internal"><span class="codenumber">11.3</span> <span class="title">Implicit variable access</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter11_another-example.html" class="internal"><span class="codenumber">11.4</span> <span class="title">Another example</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter11_yet-another-example.html" class="internal"><span class="codenumber">11.5</span> <span class="title">Yet another example</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter11_a-more-complicated-example.html" class="internal"><span class="codenumber">11.6</span> <span class="title">A more complicated example</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter11_constructors.html" class="internal"><span class="codenumber">11.7</span> <span class="title">Constructors</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter11_initialize-or-construct.html" class="internal"><span class="codenumber">11.8</span> <span class="title">Initialize or construct?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter11_one-last-example.html" class="internal"><span class="codenumber">11.9</span> <span class="title">One last example</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter11_header-files.html" class="internal"><span class="codenumber">11.10</span> <span class="title">Header files</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter11_glossary.html" class="internal"><span class="codenumber">11.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter11_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter11_glossary.html#chapter11_glossary-2" class="internal"><span class="codenumber">11.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter11_glossary.html#chapter11_glossary-3" class="internal"><span class="codenumber">11.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter11_multiple-choice-exercises.html" class="internal"><span class="codenumber">11.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter11_mixed-up-code-practice.html" class="internal"><span class="codenumber">11.13</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter11_coding-practice.html" class="internal"><span class="codenumber">11.14</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="vectors-of-objects.html" class="internal"><span class="codenumber">12</span> <span class="title">Vectors of Objects</span></a></div>
+<ul id="ptx-toc-group-vectors-of-objects" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_composition.html" class="internal"><span class="codenumber">12.1</span> <span class="title">Composition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_card-objects.html" class="internal"><span class="codenumber">12.2</span> <span class="title"><code class="code-inline tex2jax_ignore">Card</code> objects</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_the-printcard-function.html" class="internal"><span class="codenumber">12.3</span> <span class="title">The <code class="code-inline tex2jax_ignore">printCard</code> function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_the-equals-function.html" class="internal"><span class="codenumber">12.4</span> <span class="title">The <code class="code-inline tex2jax_ignore">equals</code> function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_the-isgreater-function.html" class="internal"><span class="codenumber">12.5</span> <span class="title">The <code class="code-inline tex2jax_ignore">isGreater</code> function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_vectors-of-cards.html" class="internal"><span class="codenumber">12.6</span> <span class="title">Vectors of cards</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_the-printdeck-function-printdeck.html" class="internal"><span class="codenumber">12.7</span> <span class="title">The <code class="code-inline tex2jax_ignore">printDeck</code> function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_searching-find.html" class="internal"><span class="codenumber">12.8</span> <span class="title">Searching</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_bisection-search.html" class="internal"><span class="codenumber">12.9</span> <span class="title">Bisection search</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_decks-and-subdecks.html" class="internal"><span class="codenumber">12.10</span> <span class="title">Decks and subdecks</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter12_glossary.html" class="internal"><span class="codenumber">12.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter12_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter12_glossary.html#chapter12_glossary-2" class="internal"><span class="codenumber">12.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter12_glossary.html#chapter12_glossary-3" class="internal"><span class="codenumber">12.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter12_multiple-choice-exercises.html" class="internal"><span class="codenumber">12.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter12_mixed-up-code-practice.html" class="internal"><span class="codenumber">12.13</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter12_coding-practice.html" class="internal"><span class="codenumber">12.14</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="objects-of-vectors.html" class="internal"><span class="codenumber">13</span> <span class="title">Objects of Vectors</span></a></div>
+<ul id="ptx-toc-group-objects-of-vectors" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_enumerated-types.html" class="internal"><span class="codenumber">13.1</span> <span class="title">Enumerated types</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_switch-statement.html" class="internal"><span class="codenumber">13.2</span> <span class="title"><code class="code-inline tex2jax_ignore">switch</code> statement</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_decks.html" class="internal"><span class="codenumber">13.3</span> <span class="title">Decks</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_another-constructor.html" class="internal"><span class="codenumber">13.4</span> <span class="title">Another constructor</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_deck-member-functions.html" class="internal"><span class="codenumber">13.5</span> <span class="title"><code class="code-inline tex2jax_ignore">Deck</code> member functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_shuffling.html" class="internal"><span class="codenumber">13.6</span> <span class="title">Shuffling</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_sorting.html" class="internal"><span class="codenumber">13.7</span> <span class="title">Sorting</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_subdecks.html" class="internal"><span class="codenumber">13.8</span> <span class="title">Subdecks</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_shuffling-and-dealing.html" class="internal"><span class="codenumber">13.9</span> <span class="title">Shuffling and dealing</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_mergesort.html" class="internal"><span class="codenumber">13.10</span> <span class="title">Mergesort</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_glossary.html" class="internal"><span class="codenumber">13.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter13_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter13_glossary.html#chapter13_glossary-2" class="internal"><span class="codenumber">13.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter13_glossary.html#chapter13_glossary-3" class="internal"><span class="codenumber">13.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_multiple-choice-exercises.html" class="internal"><span class="codenumber">13.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_mixed-up-code-practice.html" class="internal"><span class="codenumber">13.13</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_coding-practice.html" class="internal"><span class="codenumber">13.14</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="classes.html" class="internal"><span class="codenumber">14</span> <span class="title">Classes</span></a></div>
+<ul id="ptx-toc-group-classes" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter14_private-data-and-classes.html" class="internal"><span class="codenumber">14.1</span> <span class="title">Private data and classes</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter14_what-is-a-class.html" class="internal"><span class="codenumber">14.2</span> <span class="title">What is a class?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter14_complex-numbers.html" class="internal"><span class="codenumber">14.3</span> <span class="title">Complex numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter14_accessor-functions.html" class="internal"><span class="codenumber">14.4</span> <span class="title">Accessor functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter14_output.html" class="internal"><span class="codenumber">14.5</span> <span class="title">Output</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter14_a-function-on-complex-numbers.html" class="internal"><span class="codenumber">14.6</span> <span class="title">A function on <code class="code-inline tex2jax_ignore">Complex</code> numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter14_another-function-on-complex-numbers.html" class="internal"><span class="codenumber">14.7</span> <span class="title">Another function on <code class="code-inline tex2jax_ignore">Complex</code> numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter14_invariants.html" class="internal"><span class="codenumber">14.8</span> <span class="title">Invariants</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter14_preconditions.html" class="internal"><span class="codenumber">14.9</span> <span class="title">Preconditions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter14_private-functions.html" class="internal"><span class="codenumber">14.10</span> <span class="title">Private functions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter14_glossary.html" class="internal"><span class="codenumber">14.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter14_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter14_glossary.html#chapter14_glossary-2" class="internal"><span class="codenumber">14.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter14_glossary.html#chapter14_glossary-3" class="internal"><span class="codenumber">14.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter14_multiple-choice-exercises.html" class="internal"><span class="codenumber">14.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter14_mixed-up-code-practice.html" class="internal"><span class="codenumber">14.13</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter14_coding-practice.html" class="internal"><span class="codenumber">14.14</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="file-io.html" class="internal"><span class="codenumber">15</span> <span class="title">File Input/Output and matrixes</span></a></div>
+<ul id="ptx-toc-group-file-io" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_file-input-output-and-matrixes.html" class="internal"><span class="codenumber">15.1</span> <span class="title">File Input/Output and <code class="code-inline tex2jax_ignore">matrix</code>es</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_streams.html" class="internal"><span class="codenumber">15.2</span> <span class="title">Streams</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_file-input-finput.html" class="internal"><span class="codenumber">15.3</span> <span class="title">File input</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_file-output.html" class="internal"><span class="codenumber">15.4</span> <span class="title">File output</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_parsing-input-parsing.html" class="internal"><span class="codenumber">15.5</span> <span class="title">Parsing input</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_parsing-numbers.html" class="internal"><span class="codenumber">15.6</span> <span class="title">Parsing numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_the-set-data-structure.html" class="internal"><span class="codenumber">15.7</span> <span class="title">The <code class="code-inline tex2jax_ignore">Set</code> data structure</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_matrix.html" class="internal"><span class="codenumber">15.8</span> <span class="title"><code class="code-inline tex2jax_ignore">matrix</code></span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_a-distance-matrix.html" class="internal"><span class="codenumber">15.9</span> <span class="title">A distance matrix</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_a-proper-distance-matrix.html" class="internal"><span class="codenumber">15.10</span> <span class="title">A proper distance matrix</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter15_glossary.html" class="internal"><span class="codenumber">15.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter15_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter15_glossary.html#chapter15_glossary-2" class="internal"><span class="codenumber">15.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter15_glossary.html#chapter15_glossary-3" class="internal"><span class="codenumber">15.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter15_multiple-choice-exercises.html" class="internal"><span class="codenumber">15.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter15_mixed-up-code-practice.html" class="internal"><span class="codenumber">15.13</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter15_coding-practice.html" class="internal"><span class="codenumber">15.14</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content">
+<section class="section" id="chapter10_vector-of-random-numbers">
+<h1 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.9</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Vector of random numbers</span>
+</h1>
+<div class="para" id="chapter10_vector-of-random-numbers-2">The first step is to generate a large number of random values and store them in a vector. By “large number,” of course, I mean 20. It’s always a good idea to start with a manageable number, to help with debugging, and then increase it later.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_vector-of-random-numbers-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter10_vector-of-random-numbers-3">The following function takes a single argument, the size of the vector. It allocates a new vector of <code class="code-inline tex2jax_ignore">int</code>s, and fills it with random values between 0 and <code class="code-inline tex2jax_ignore">upperBound-1</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_vector-of-random-numbers-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">std::vector&lt;int&gt; randomVector(int n, int upperBound) {
+  std::vector&lt;int&gt; vec (n);
+  for (size_t i = 0; i &lt; vec.size(); i++) {
+    vec[i] = random() % upperBound;
+  }
+  return vec;
+}
+</code></pre></div>
+<div class="para" id="chapter10_vector-of-random-numbers-5">The return type is <code class="code-inline tex2jax_ignore">std::vector&lt;int&gt;</code>, which means that this function returns a vector of integers. To test this function, it is convenient to have a function that outputs the contents of a vector.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_vector-of-random-numbers-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void printVector(const std::vector&lt;int&gt;&amp; vec) {
+  for (size_t i = 0; i &lt; vec.size(); i++) {
+    std::cout &lt;&lt; vec[i] &lt;&lt; " ";
+  }
+}
+</code></pre></div>
+<div class="para" id="chapter10_vector-of-random-numbers-7">Notice that it is legal to pass <code class="code-inline tex2jax_ignore"> std::vector</code>s by reference. In fact it is quite common, since it makes it unnecessary to copy the vector. Since <code class="code-inline tex2jax_ignore">printVector</code> does not modify the vector, we declare the parameter <code class="code-inline tex2jax_ignore">const</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_vector-of-random-numbers-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter10_vector-of-random-numbers-8">The following code generates a vector and outputs it:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_vector-of-random-numbers-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int numValues = 20;
+int upperBound = 10;
+std::vector&lt;int&gt; vector = randomVector(numValues, upperBound);
+printVector(vector);
+</code></pre></div>
+<div class="para" id="chapter10_vector-of-random-numbers-10">On my machine the output is<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_vector-of-random-numbers-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="console clipboardable">3 6 7 5 3 5 6 2 9 1 2 7 0 9 3 6 0 6 2 6
+</pre></div>
+<div class="para" id="chapter10_vector-of-random-numbers-12">which is pretty random-looking. Your results might be different.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_vector-of-random-numbers-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="vector_of_rand_nums_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.9.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Try running this active code.<div class="autopermalink" aria-hidden="true" data-description="Listing 10.9.1: Try running this active code."><a tabindex="-1" href="#vector_of_rand_nums_AC_1" title="Copy heading and permalink for Listing 10.9.1: Try running this active code." aria-label="Copy heading and permalink for Listing 10.9.1: Try running this active code.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-vector_of_rand_nums_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+std::vector&lt;int&gt; randomVector(int n, int upperBound);
+void printVector(const std::vector&lt;int&gt; &amp; vec);
+
+int main() {
+    int numValues = 20;
+    int upperBound = 10;
+    std::vector&lt;int&gt; std::vector = randomVector(numValues, upperBound);
+    printVector(std::vector);
+}
+</code></pre></div>
+</figure>
+<div class="para" id="chapter10_vector-of-random-numbers-14">If these numbers are really random, we expect each digit to appear the same number of times—twice each. In fact, the number 6 appears five times, and the numbers 4 and 8 never appear at all.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_vector-of-random-numbers-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter10_vector-of-random-numbers-15">Do these results mean the values are not really uniform? It’s hard to tell. With so few values, the chances are slim that we would get exactly what we expect. But as the number of values increases, the outcome should be more predictable.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_vector-of-random-numbers-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter10_vector-of-random-numbers-16">To test this theory, we’ll write some programs that count the number of times each value appears, and then see what happens when we increase <code class="code-inline tex2jax_ignore">numValues</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_vector-of-random-numbers-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="exercise exercise-like" id="vector_of_rand_nums_1"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.9.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-vector_of_rand_nums_1"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"vector_of_rand_nums_1-1-1\">How should we declare the parameter, <dfn class=\"terminology\">std::vector<\/dfn>, if we don’t intend to make any changes to it? <input type=\"text\" id=\"vector_of_rand_nums_1-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#vector_of_rand_nums_1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0},
+"feedbackArray": [[{"regex": "^\\s*const\\s*$", "regexFlags": "", "feedback": "Correct!"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "Incorrect, Try again! Hint: what word do we put before <code class=\"code-inline tex2jax_ignore\">vector &amp;lt;TYPE &amp;gt;<\/code>"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 10.9.1"><a tabindex="-1" href="#vector_of_rand_nums_1" title="Copy heading and permalink for Checkpoint 10.9.1" aria-label="Copy heading and permalink for Checkpoint 10.9.1">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="vector_of_rand_nums_2"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.9.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="vector_of_rand_nums_2-1-1">As we store more and more random numbers in a vector, we expect its contents to be __________.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#vector_of_rand_nums_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-vector_of_rand_nums_2" data-multipleanswers="false">
+<li data-component="answer" id="rs-vector_of_rand_nums_2_opt_a" data-correct="">
+<div class="para" id="vector_of_rand_nums_2-2-1-1-1">more uniform</div>
+</li>
+<li data-component="feedback" id="rs-vector_of_rand_nums_2_opt_a">
+<div class="para" id="vector_of_rand_nums_2-2-1-2-1">Correct!</div>
+</li>
+<li data-component="answer" id="rs-vector_of_rand_nums_2_opt_b">
+<div class="para" id="vector_of_rand_nums_2-2-2-1-1">less uniform</div>
+</li>
+<li data-component="feedback" id="rs-vector_of_rand_nums_2_opt_b">
+<div class="para" id="vector_of_rand_nums_2-2-2-2-1">Incorrect! As we store more random numbers in a vector, we see that the frequencies of each number are approximately equal.</div>
+</li>
+<li data-component="answer" id="rs-vector_of_rand_nums_2_opt_c">
+<div class="para" id="vector_of_rand_nums_2-2-3-1-1">more normal</div>
+</li>
+<li data-component="feedback" id="rs-vector_of_rand_nums_2_opt_c">
+<div class="para" id="vector_of_rand_nums_2-2-3-2-1">Incorrect! The distribution of random numbers is not related to the normal distribution.</div>
+</li>
+<li data-component="answer" id="rs-vector_of_rand_nums_2_opt_d">
+<div class="para" id="vector_of_rand_nums_2-2-4-1-1">less normal</div>
+</li>
+<li data-component="feedback" id="rs-vector_of_rand_nums_2_opt_d">
+<div class="para" id="vector_of_rand_nums_2-2-4-2-1">Incorrect! The distribution of random numbers is not related to the normal distribution.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 10.9.2"><a tabindex="-1" href="#vector_of_rand_nums_2" title="Copy heading and permalink for Checkpoint 10.9.2" aria-label="Copy heading and permalink for Checkpoint 10.9.2">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="vector_of_rand_nums_3"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.9.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="vector_of_rand_nums_3-1-1">Would compiling the following code lead to a compiler error?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#vector_of_rand_nums_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable line-numbers"><code class="language-cpp">void dostuff(const std::vector&lt;int&gt; &amp; vec) {
+   for (size_t i = 0; i &lt; vec.size(); i++) {
+      vec[i] = vec[i] ;
+   }
+}
+</code></pre></div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-vector_of_rand_nums_3" data-multipleanswers="false">
+<li data-component="answer" id="rs-vector_of_rand_nums_3_opt_a" data-correct="">
+<div class="para" id="vector_of_rand_nums_3-2-1-1-1">yes we would get a compile error</div>
+</li>
+<li data-component="feedback" id="rs-vector_of_rand_nums_3_opt_a">
+<div class="para" id="vector_of_rand_nums_3-2-1-2-1">Correct! we can’t make changes to a vector we take in by constant reference</div>
+</li>
+<li data-component="answer" id="rs-vector_of_rand_nums_3_opt_b">
+<div class="para" id="vector_of_rand_nums_3-2-2-1-1">no we would not because values remain same.</div>
+</li>
+<li data-component="feedback" id="rs-vector_of_rand_nums_3_opt_b">
+<div class="para" id="vector_of_rand_nums_3-2-2-2-1">Even if we keep the values same we are editing a constant which is not allowed.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 10.9.3"><a tabindex="-1" href="#vector_of_rand_nums_3" title="Copy heading and permalink for Checkpoint 10.9.3" aria-label="Copy heading and permalink for Checkpoint 10.9.3">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Section 10.9: Vector of random numbers"><a tabindex="-1" href="#chapter10_vector-of-random-numbers" title="Copy heading and permalink for Section 10.9: Vector of random numbers" aria-label="Copy heading and permalink for Section 10.9: Vector of random numbers">🔗</a></div>
+</section>
+</div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="chapter10_statistics.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="chapter10_counting.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>
