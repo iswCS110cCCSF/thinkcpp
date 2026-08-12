@@ -34,7 +34,7 @@ Rectangle box = { corner, 100.0, 200.0 };</program>
   </figure>
   <p>We can access the <c>width</c> and <c>height</c> in the usual way:</p>
   <program>box.width += 50.0;
-cout &lt;&lt; box.height &lt;&lt; endl;</program>
+cout &lt;&lt; box.height &lt;&lt; std::endl ;</program>
   <p>In order to access the instance variables of <c>corner</c>, we can use a temporary variable:</p>
   <program>Point temp = box.corner;
 double x = temp.x;</program>
@@ -60,7 +60,6 @@ Rectangle box = { { 0.0, 0.0 }, 100.0, 200.0 };
     <program interactive="activecode" line-numbers="yes" label="rectangles_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Point {
     double x, y;
@@ -74,8 +73,8 @@ struct Rectangle {
 int main() {
     Rectangle box = { { 0.0, 0.0 }, 100.0, 200.0 };
     box.width += 50.0;
-    cout << box.height << endl;
-    cout << box.width << endl;
+    std::cout << box.height << std::endl;
+    std::cout << box.width << std::endl;
 }
         ]]></code>
     </program>

@@ -12,10 +12,10 @@
   <p>For example, look at the following function:</p>
   <program>void countdown(int n) {
   if (n == 0) {
-    cout &lt;&lt; &quot;Blastoff!&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Blastoff!&quot; &lt;&lt; std::endl ;
   }
   else {
-    cout &lt;&lt; n &lt;&lt; endl;
+    std::cout &lt;&lt; n &lt;&lt; std::endl ;
     countdown(n - 1);
   }
 }</program>
@@ -30,14 +30,13 @@
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 void countdown(int n) {
     if (n == 0) {
-        cout << "Blastoff!" << endl;
+        std::cout << "Blastoff!" << std::endl;
     }
     else {
-        cout << n << endl;
+        std::cout << n << std::endl;
         countdown(n-1);
     }
 }
@@ -76,7 +75,7 @@ int main() {
 Blastoff!</program>
   <p>As a second example, let's look again at the functions <c>newLine</c> and <c>threeLine</c>.</p>
   <program>void newLine() {
-  cout &lt;&lt; endl;
+  std::cout &lt;&lt; std::endl ;
 }
 
 void threeLine() {
@@ -88,7 +87,7 @@ void threeLine() {
     newlines, or 4 newlines. A better alternative would be</p>
   <program>void nLines(int n) {
   if (n &gt; 0) {
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl ;
     nLines (n - 1);
   }
 }</program>
@@ -104,22 +103,21 @@ void threeLine() {
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-using namespace std;
 
 void guessTheNumber(int num) {
-    cout << "Enter your guess!";
+    std::cout << "Enter your guess!";
     int guess;
-    cin >> guess;
-    cout << "Your guess " << guess << ". ";
+    std::cin >> guess;
+    std::cout << "Your guess " << guess << ". ";
     if (guess == num) {
-        cout << "That's it!";
+        std::cout << "That's it!";
     }
     else if (guess > num) {
-        cout << "Too high! " << endl;
+        std::cout << "Too high! " << std::endl;
         guessTheNumber(num);
     }
     else {
-        cout << "Too low! " << endl;
+        std::cout << "Too low! " << std::endl;
         guessTheNumber(num);
     }
 }
@@ -137,11 +135,10 @@ int main() {
     <statement>
       <p>What will print?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 void exclamationPoint(int n) {
   if (n &gt; 0) {
-    cout &lt;&lt; &quot;!&quot;;
+    std::cout &lt;&lt; &quot;!&quot;;
     exclamationPoint (n-1);
   }
 }
@@ -192,11 +189,10 @@ int main() {
     <statement>
       <p>What will print?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 void exclamationPoint(int n) {
   if (n &gt; 0) {
-    cout &lt;&lt; &quot;!&quot;;
+    std::cout &lt;&lt; &quot;!&quot;;
     exclamationPoint (n-1);
   }
 }

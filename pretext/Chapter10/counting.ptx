@@ -28,7 +28,7 @@
   <p>In this case, I have a function in mind called <c>howMany</c> that counts the number of elements in a
     vector that equal a given value. The parameters are the vector and the integer value we are
     looking for. The return value is the number of times the value appears.</p>
-  <program>int howMany(const vector&lt;int&gt;&amp; vec, int value) {
+  <program>int howMany(const std::vector&lt;int&gt;&amp; vec, int value) {
   int count = 0;
   for (size_t i = 0; i &lt; vec.size(); i++) {
     if (vec[i] == value) count++;
@@ -45,26 +45,25 @@
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
-vector<int> randomVector(int n, int upperBound);
-void printVector(const vector<int>& vec);
-int howMany(const vector<int>& vec, int value);
+std::vector<int> randomVector(int n, int upperBound);
+void printVector(const std::vector<int>& vec);
+int howMany(const std::vector<int>& vec, int value);
 
 int main() {
     int numValues = 20;
     int upperBound = 10;
     int target = 6;
-    vector<int> vector = randomVector(numValues, upperBound);
-    printVector(vector);
-    cout << endl;
-    cout << "The number " << target << " appears " << howMany(vector,target) << " times in our vector!";
+    std::vector<int> std::vector = randomVector(numValues, upperBound);
+    printVector(std::vector);
+    std::cout << std::endl;
+    std::cout << "The number " << target << " appears " << howMany(std::vector,target) << " times in our std::vector!";
 }
 
         ]]></code>
       <tests>
 
-int howMany(const vector&lt;int&gt;&amp; vec, int value) {
+int howMany(const std::vector&lt;int&gt;&amp; vec, int value) {
    int count = 0;
    for (size_t i = 0; i &lt; vec.size(); i++) {
       if (vec[i] == value) count++;
@@ -72,17 +71,17 @@ int howMany(const vector&lt;int&gt;&amp; vec, int value) {
    return count;
 }
 
-vector&lt;int&gt; randomVector(int n, int upperBound) {
-   vector&lt;int&gt; vec (n);
+std::vector&lt;int&gt; randomVector(int n, int upperBound) {
+   std::vector&lt;int&gt; vec (n);
    for (size_t i = 0; i &lt; vec.size(); i++) {
       vec[i] = random() % upperBound;
    }
    return vec;
 }
 
-void printVector(const vector&lt;int&gt;&amp; vec) {
+void printVector(const std::vector&lt;int&gt;&amp; vec) {
    for (size_t i = 0; i &lt; vec.size(); i++) {
-      cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
+      std::cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
    }
 }
 </tests>
@@ -140,7 +139,7 @@ void printVector(const vector&lt;int&gt;&amp; vec) {
     </statement>
     <blocks>
       <block order="1">
-        <cline><![CDATA[int just_right(const vector<int>& vec, int lowerbound, int upperbound) {]]></cline>
+        <cline><![CDATA[int just_right(const std::vector<int>& vec, int lowerbound, int upperbound) {]]></cline>
       </block>
       <block order="7">
         <cline>   int count = 0;</cline>

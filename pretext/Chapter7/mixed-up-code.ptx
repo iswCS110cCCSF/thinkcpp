@@ -19,22 +19,22 @@
         <cline>int main() {</cline>
       </block>
       <block order="7">
-        <cline>   string word = "irritating";</cline>
+        <cline>  std::string word = "irritating";</cline>
       </block>
       <block order="2">
-        <cline><![CDATA[   cout << word[3] << endl;]]></cline>
+        <cline><![CDATA[   std::cout << word[3] << std::endl ;]]></cline>
       </block>
       <block order="10"
              correct="no">
-        <cline><![CDATA[   cout << irritating[3] << endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << irritating[3] << std::endl ;  ]]></cline>
       </block>
       <block order="9"
              correct="no">
-        <cline><![CDATA[   cout << word.at(4) << endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << word.at(4) << std::endl ;  ]]></cline>
       </block>
       <block order="6"
              correct="no">
-        <cline><![CDATA[   cout << word[4] << endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << word[4] << std::endl ;  ]]></cline>
       </block>
       <block order="4">
         <cline>   while (word.find('i') != string::npos) {</cline>
@@ -58,7 +58,7 @@
         <cline>   }</cline>
       </block>
       <block order="1">
-        <cline><![CDATA[   cout << word << endl;]]></cline>
+        <cline><![CDATA[   std::cout << word << std::endl ;]]></cline>
       </block>
       <block order="14">
         <cline>}</cline>
@@ -81,14 +81,14 @@
       </block>
       <block order="1">
         <choice correct="yes">
-          <cline>   string original = "night";</cline>
+          <cline>  std::string original = "night";</cline>
         </choice>
         <choice>
-          <cline>   string original = "thing";  </cline>
+          <cline>  std::string original = "thing";  </cline>
         </choice>
       </block>
       <block order="9">
-        <cline>   string anagram = original;</cline>
+        <cline>  std::string anagram = original;</cline>
       </block>
       <block order="7">
         <cline>   anagram[0] = original[original.find('t')];</cline>
@@ -106,7 +106,7 @@
         <cline>   anagram[4] = original[original.find('g')];</cline>
       </block>
       <block order="10">
-        <cline>   cout &lt;&lt; anagram;</cline>
+        <cline>   std::cout &lt;&lt; anagram;</cline>
       </block>
       <block order="5">
         <cline>}</cline>
@@ -141,7 +141,7 @@
         </choice>
       </block>
       <block order="3">
-        <cline><![CDATA[      cout << first << " is longer than " << second << endl;]]></cline>
+        <cline><![CDATA[      std::cout << first << " is longer than " << second << std::endl ;]]></cline>
       </block>
       <block order="4">
         <cline>   }</cline>
@@ -151,10 +151,10 @@
       </block>
       <block order="5">
         <choice correct="yes">
-          <cline><![CDATA[      cout << second << " is longer than " << first << endl;]]></cline>
+          <cline><![CDATA[      std::cout << second << " is longer than " << first << std::endl ;]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[      cout << second << " is longer than " << second << endl;  ]]></cline>
+          <cline><![CDATA[      std::cout << second << " is longer than " << second << std::endl ;  ]]></cline>
         </choice>
       </block>
       <block order="6">
@@ -168,7 +168,7 @@
         <cline>   else (first.length() == second.length()) {  </cline>
       </block>
       <block order="2">
-        <cline><![CDATA[      cout << first << " and " << second << " are the same length" << endl;]]></cline>
+        <cline><![CDATA[      std::cout << first << " and " << second << " are the same length" << std::endl ;]]></cline>
       </block>
       <block order="7">
         <cline>   }</cline>
@@ -223,7 +223,7 @@
       </block>
       <block order="12">
         <choice correct="yes">
-          <cline>   cout &lt;&lt; input;</cline>
+          <cline>   std::cout &lt;&lt; input;</cline>
         </choice>
         <choice>
           <cline>   return input;  </cline>
@@ -248,7 +248,7 @@
         <cline>int main() {</cline>
       </block>
       <block order="4">
-        <cline>   string tongue_twister = "twelve twins twirled twelve twigs";</cline>
+        <cline>  std::string tongue_twister = "twelve twins twirled twelve twigs";</cline>
       </block>
       <block order="7">
         <choice correct="yes">
@@ -285,7 +285,7 @@
         <cline>   }</cline>
       </block>
       <block order="2">
-        <cline>   cout &lt;&lt; count;</cline>
+        <cline>   std::cout &lt;&lt; count;</cline>
       </block>
       <block order="6">
         <cline>}</cline>
@@ -306,7 +306,7 @@
         <cline>int main() {</cline>
       </block>
       <block order="9">
-        <cline>   string quote = "Your time is limited, so don't waste it living someone else's life.";</cline>
+        <cline>  std::string quote = "Your time is limited, so don't waste it living someone else's life.";</cline>
       </block>
       <block order="7"
              correct="no">
@@ -329,10 +329,10 @@
       </block>
       <block order="4">
         <choice correct="yes">
-          <cline>   cout &lt;&lt; index;</cline>
+          <cline>   std::cout &lt;&lt; index;</cline>
         </choice>
         <choice>
-          <cline>   cout &lt;&lt; first;  </cline>
+          <cline>   std::cout &lt;&lt; first;  </cline>
         </choice>
       </block>
       <block order="10">
@@ -356,10 +356,10 @@
       </block>
       <block order="8"
              correct="no">
-        <cline>   string name = 'Sorty'; </cline>
+        <cline>  std::string name = 'Sorty'; </cline>
       </block>
       <block order="1">
-        <cline>   string suffix = "orty";</cline>
+        <cline>  std::string suffix = "orty";</cline>
       </block>
       <block order="4">
         <cline>   char letter = 'S';</cline>
@@ -376,7 +376,7 @@
         </choice>
       </block>
       <block order="5">
-        <cline><![CDATA[         cout << letter + suffix << endl;]]></cline>
+        <cline><![CDATA[         std::cout << letter + suffix << std::endl ;]]></cline>
       </block>
       <block order="9">
         <cline>      }</cline>
@@ -418,7 +418,7 @@
       </block>
       <block order="4"
              correct="no">
-        <cline>   string copy = input;  </cline>
+        <cline>  std::string copy = input;  </cline>
       </block>
       <block order="8">
         <cline>   size_t i = 0;</cline>
@@ -562,7 +562,7 @@
           <cline>   }</cline>
         </choice>
         <choice>
-          <cline><![CDATA[      cout << second << first;  ]]></cline>
+          <cline><![CDATA[      std::cout << second << first;  ]]></cline>
           <cline>   }</cline>
         </choice>
       </block>
@@ -575,7 +575,7 @@
           <cline>   }</cline>
         </choice>
         <choice>
-          <cline><![CDATA[      cout << first << second;  ]]></cline>
+          <cline><![CDATA[      std::cout << first << second;  ]]></cline>
           <cline>   }</cline>
         </choice>
       </block>

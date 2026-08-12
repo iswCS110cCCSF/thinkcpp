@@ -7,7 +7,7 @@
   <p>If the function refers to <c>hour</c>, <c>minute</c>, or <c>second</c>, all by themselves with no dot notation,
     C++ knows that it must be referring to the current object. So we could have written:</p>
   <program>void Time::print () {
-  cout &lt;&lt; hour &lt;&lt; ":" &lt;&lt; minute &lt;&lt; ":" &lt;&lt; second &lt;&lt; endl;
+  std::cout &lt;&lt; hour &lt;&lt; ":" &lt;&lt; minute &lt;&lt; ":" &lt;&lt; second &lt;&lt; std::endl ;
 }</program>
   <p>This kind of variable access is called <term>implicit</term> because the name of the object
     does not appear explicitly. Features like this are one reason member functions are often more

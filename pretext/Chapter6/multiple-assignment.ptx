@@ -10,13 +10,12 @@
     <program label="multiple_assignment_AC_1_editor" interactive="activecode" line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int fred = 5;
-    cout << fred;
+    std::cout << fred;
     fred = 7;
-    cout << fred;
+    std::cout << fred;
     return 0;
 }
         ]]></code>
@@ -31,12 +30,11 @@ int main() {
     <program label="multiple_assignment_AC_2_editor" interactive="activecode" line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int fred = 5;
     fred = 7;
-    cout << fred;
+    std::cout << fred;
     return 0;
 }
         ]]></code>
@@ -112,13 +110,12 @@ a = 3;         // a and b are no longer equal</program>
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
   int x = 10;
-  cout << x << "!";
+  std::cout << x << "!";
   x = 1;
-  cout << x << "!";
+  std::cout << x << "!";
   return 0;
 }
 ]]></code>
@@ -165,7 +162,6 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
   int x = 0;
@@ -173,7 +169,7 @@ int main() {
   int y = x;
   y = 5;
   bool z = x == y;
-  cout << z;
+  std::cout << z;
 }
 ]]></code>
       </program>

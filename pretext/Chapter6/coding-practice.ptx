@@ -16,7 +16,6 @@
       </console>
     <program interactive="activecode" label="lb-cp_6_AC_1"><code><![CDATA[
            #include <iostream>
-           using namespace std;
 
            int main() {
                // Write your implementation here.
@@ -28,17 +27,16 @@
       <program xml:id="cp_6_AC_1a"
                line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int row = 0;
     while (row < 5) {
         int col = 0;
         while (col <= row) {
-            cout << "*";
+            std::cout << "*";
             col++;
         }
-        cout << endl;
+        std::cout << std::endl;
         row++;
     }
 }
@@ -63,7 +61,6 @@ int main() {
              line-numbers="yes">
               <code><![CDATA[
     #include <iostream>
-    using namespace std;
     
     void printTriangle(int n) {
         // Write your implementation here.
@@ -125,14 +122,14 @@ int main() {
             </choice>
           </block>
           <block order="3">
-            <cline><![CDATA[   cout << "*";]]></cline>
+            <cline><![CDATA[   std::cout << "*";]]></cline>
             <cline>   col++;</cline>
           </block>
           <block order="2">
             <cline>  }</cline>
           </block>
           <block order="1">
-            <cline><![CDATA[  cout << endl;]]></cline>
+            <cline><![CDATA[  std::cout << std::endl ;]]></cline>
             <cline>  row++;</cline>
           </block>
           <block order="8">
@@ -160,7 +157,6 @@ int main() {
       </console>
     <program interactive="activecode" label="lb-cp_6_AC_3"><code><![CDATA[
            #include <iostream>
-           using namespace std;
 
            void printPyramid (int n) {
                // Write your implementation here.
@@ -177,7 +173,6 @@ int main() {
       <program xml:id="cp_6_AC_3a"
                line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printPyramid(int n) {
     int space, numAsterisks;
@@ -185,15 +180,15 @@ void printPyramid(int n) {
     while (count <= n) {
         space = n - count;
         while (space > 0) {
-            cout << " ";
+            std::cout << " ";
             space--;
         }
         numAsterisks = 2 * count - 1;
         while (numAsterisks > 0) {
-            cout << "*";
+            std::cout << "*";
             numAsterisks--;
         }
-        cout << endl;
+        std::cout << std::endl;
         count++;
     }
 }
@@ -224,7 +219,6 @@ int main() {
              line-numbers="yes">
           <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printNumPyramid(int n) {
     // Write your implementation here.
@@ -280,7 +274,7 @@ int main() {
           </block>
           <block order="7">
             <cline>  while (space &gt; 0) {</cline>
-            <cline><![CDATA[   cout << " ";]]></cline>
+            <cline><![CDATA[   std::cout << " ";]]></cline>
             <cline>   space --</cline>
             <cline>  }</cline>
           </block>
@@ -289,18 +283,18 @@ int main() {
           </block>
           <block order="10">
             <cline>  while (numPrinted &gt; 0) {</cline>
-            <cline><![CDATA[   cout << n - sub;]]></cline>
+            <cline><![CDATA[   std::cout << n - sub;]]></cline>
             <cline>   numPrinted--;</cline>
             <cline>  }</cline>
           </block>
           <block order="1">
             <choice correct="yes">
-              <cline><![CDATA[  cout << endl;]]></cline>
+              <cline><![CDATA[  std::cout << std::endl ;]]></cline>
               <cline>  count ++;</cline>
               <cline>  sub--;</cline>
             </choice>
             <choice>
-              <cline><![CDATA[  cout << endl; ;]]></cline>
+              <cline><![CDATA[  std::cout << std::endl ; ;]]></cline>
               <cline>  count++;</cline>
               <cline>  sub++;</cline>
             </choice>
@@ -344,7 +338,6 @@ Buzz
       </console>
     <program interactive="activecode" label="cp_6_AC_5_editor"><code><![CDATA[
            #include <iostream>
-           using namespace std;
 
            void printPyramid (int n) {
                // Write your implementation here.
@@ -362,22 +355,21 @@ Buzz
       <program xml:id="cp_6_AC_5a"
                line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int n = 1;
     while (n <= 100) {
         if (n % 3 == 0 && n % 5 == 0) {
-            cout << "FizzBuzz" << endl;
+            std::cout << "FizzBuzz" << std::endl;
         }
         else if (n % 3 == 0) {
-            cout << "Fizz" << endl;
+            std::cout << "Fizz" << std::endl;
         }
         else if (n % 5 == 0) {
-            cout << "Buzz" << endl;
+            std::cout << "Buzz" << std::endl;
         }
         else {
-            cout << n << endl;
+            std::cout << n << std::endl;
         }
         n++;
     }
@@ -411,7 +403,6 @@ int main() {
              line-numbers="yes">
           <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printAddTable(int n) {
     // Write your implementation here.
@@ -467,13 +458,13 @@ int main() {
             <cline><![CDATA[        for (int j = 0; j < n; j++) { ]]></cline>
           </block>
           <block order="6">
-            <cline><![CDATA[            cout << i + j << '\t';]]></cline>
+            <cline><![CDATA[            std::cout << i + j << '\t';]]></cline>
           </block>
           <block order="2">
             <cline>        }</cline>
           </block>
           <block order="4">
-            <cline><![CDATA[        cout << '\n';]]></cline>
+            <cline><![CDATA[        std::cout << '\n';]]></cline>
           </block>
           <block order="8">
             <cline>    }</cline>
@@ -493,7 +484,6 @@ int main() {
     <program interactive="activecode" label="lb-cp_6_AC_7">
             <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 bool isPrime (int num) {
     // Write your implementation here.
@@ -525,7 +515,6 @@ TEST_CASE("isPrime for 0") {
       <program xml:id="cp_6_AC_7a"
                line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 bool isPrime(int num) {
     if (num <= 1) {
@@ -568,7 +557,6 @@ TEST_CASE("isPrime for 0") {
              line-numbers="yes">
           <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     // Write your implementation here.
@@ -600,7 +588,7 @@ int main() {
             </choice>
           </block>
           <block order="2">
-            <cline><![CDATA[        cout << letter << endl;]]></cline>
+            <cline><![CDATA[        std::cout << letter << std::endl ;]]></cline>
           </block>
           <block order="4">
             <cline>        letter++;</cline>
@@ -624,7 +612,6 @@ int main() {
     <program interactive="activecode" label="lb-cp_6_AC_9">
             <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     // Write your implementation here.
@@ -651,17 +638,16 @@ TEST_CASE("isPrime function") {
       <program xml:id="cp_6_AC_9a"
                line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int first = 0;
     int second = 1;
     int third;
     int n = 2;
-    cout << first << " " << second << " ";
+    std::cout << first << " " << second << " ";
     while (n < 20) {
         third = first + second;
-        cout << third << " ";
+        std::cout << third << " ";
         first = second;
         second = third;
         n++;
@@ -682,7 +668,6 @@ int main() {
              line-numbers="yes">
           <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int factorial(int n) {
     // Write your implementation here.

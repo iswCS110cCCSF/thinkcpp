@@ -92,7 +92,7 @@
         <cline>  double setRadius(double r) {  </cline>
       </block>
       <block order="4">
-        <cline><![CDATA[   if (r < 0) { cout << "Error! Cannot have a negative radius!" << endl; }]]></cline>
+        <cline><![CDATA[   if (r < 0) { std::cout << "Error! Cannot have a negative radius!" << std::endl ; }]]></cline>
       </block>
       <block order="10">
         <cline>   else { radius = r; }</cline>
@@ -130,11 +130,11 @@
         <cline> c.radius = 2.4;  </cline>
       </block>
       <block order="4">
-        <cline><![CDATA[ cout << "Radius: " << c.getRadius() << endl;]]></cline>
+        <cline><![CDATA[ std::cout << "Radius: " << c.getRadius() << std::endl ;]]></cline>
       </block>
       <block order="5"
              correct="no">
-        <cline><![CDATA[ cout << "Radius: " << c.radius << endl;  ]]></cline>
+        <cline><![CDATA[ std::cout << "Radius: " << c.radius << std::endl ;  ]]></cline>
       </block>
       <block order="8"
              correct="no">
@@ -144,11 +144,11 @@
         <cline> s.setRadius (3.6);</cline>
       </block>
       <block order="11">
-        <cline><![CDATA[ cout << "New radius: " << c.getRadius() << endl;]]></cline>
+        <cline><![CDATA[ std::cout << "New radius: " << c.getRadius() << std::endl ;]]></cline>
       </block>
       <block order="6"
              correct="no">
-        <cline><![CDATA[ cout << "New radius: " << c.radius << endl;  ]]></cline>
+        <cline><![CDATA[ std::cout << "New radius: " << c.radius << std::endl ;  ]]></cline>
       </block>
       <block order="1">
         <cline>}</cline>
@@ -336,14 +336,14 @@ Afterwards, write the ``Rectangle</c> member function <c>calculateArea</c>, whic
         <cline> r.calculateSides();</cline>
       </block>
       <block order="3">
-        <cline><![CDATA[ cout << "Length: " << r.length << ", Height: " << r.height << endl;]]></cline>
+        <cline><![CDATA[ std::cout << "Length: " << r.length << ", Height: " << r.height << std::endl ;]]></cline>
       </block>
       <block order="13"
              correct="no">
-        <cline><![CDATA[ cout << "Length: " << r.getLength() << ", Height: " << r.getHeight() << endl;  ]]></cline>
+        <cline><![CDATA[ std::cout << "Length: " << r.getLength() << ", Height: " << r.getHeight() << std::endl ;  ]]></cline>
       </block>
       <block order="2">
-        <cline><![CDATA[ cout << "Area: " << r.calculateArea() << endl;]]></cline>
+        <cline><![CDATA[ std::cout << "Area: " << r.calculateArea() << std::endl ;]]></cline>
       </block>
       <block order="1">
         <cline> Point p3(4.2, 10.7);</cline>
@@ -359,7 +359,7 @@ Afterwards, write the ``Rectangle</c> member function <c>calculateArea</c>, whic
         <cline> r.calculateSides();</cline>
       </block>
       <block order="7">
-        <cline><![CDATA[ cout << "New area: " << r.calculateArea() << endl;]]></cline>
+        <cline><![CDATA[ std::cout << "New area: " << r.calculateArea() << std::endl ;]]></cline>
       </block>
       <block order="6">
         <cline>}</cline>
@@ -372,7 +372,7 @@ Afterwards, write the ``Rectangle</c> member function <c>calculateArea</c>, whic
             indentation="hide">
     <statement>
       <p>Let's write the <c>Date</c> class. <c>Date</c> stores information about the day, month, and year in
-        private variables, in addition to a <c>vector</c> of the number of days in each month. Write
+        private variables, in addition to a <c> std::vector</c> of the number of days in each month. Write
         accessor functions for each variable, keeping in mind the valid values each variable can
         take. In addition, write the default constructor, which initializes the date to January 1,
         2000. Write another constructor which takes in a day, month, and year in that order.</p>
@@ -388,7 +388,7 @@ Afterwards, write the ``Rectangle</c> member function <c>calculateArea</c>, whic
         <cline> int day, month, year;</cline>
       </block>
       <block order="7">
-        <cline><![CDATA[ vector<int> daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };]]></cline>
+        <cline><![CDATA[ std::vector<int> daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };]]></cline>
       </block>
       <block order="16">
         <cline>public:</cline>
@@ -454,15 +454,15 @@ Afterwards, write the ``Rectangle</c> member function <c>calculateArea</c>, whic
         <cline><![CDATA[ if (getYear() < 0) {]]></cline>
       </block>
       <block order="10">
-        <cline><![CDATA[  cout << getMonth() << "/" << getDay() << "/" << -getYear() << " BCE" << endl;]]></cline>
+        <cline><![CDATA[  std::cout << getMonth() << "/" << getDay() << "/" << -getYear() << " BCE" << std::endl ;]]></cline>
       </block>
       <block order="6"
              correct="no">
-        <cline><![CDATA[  cout << month << "/" << day << "/" << year << " BCE" << endl;  ]]></cline>
+        <cline><![CDATA[  std::cout << month << "/" << day << "/" << year << " BCE" << std::endl ;  ]]></cline>
       </block>
       <block order="2"
              correct="no">
-        <cline><![CDATA[  cout << getMonth() << "/" << getDay() << "/" << getYear() << " BCE" << endl;  ]]></cline>
+        <cline><![CDATA[  std::cout << getMonth() << "/" << getDay() << "/" << getYear() << " BCE" << std::endl ;  ]]></cline>
       </block>
       <block order="9">
         <cline> }</cline>
@@ -471,7 +471,7 @@ Afterwards, write the ``Rectangle</c> member function <c>calculateArea</c>, whic
         <cline> else {</cline>
       </block>
       <block order="1">
-        <cline><![CDATA[  cout << getMonth() << "/" << getDay() << "/" << getYear() << " CE" << endl;]]></cline>
+        <cline><![CDATA[  std::cout << getMonth() << "/" << getDay() << "/" << getYear() << " CE" << std::endl ;]]></cline>
       </block>
       <block order="3">
         <cline> }</cline>

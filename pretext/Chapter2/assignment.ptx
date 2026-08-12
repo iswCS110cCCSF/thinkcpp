@@ -94,7 +94,6 @@ int minute = "59";         // WRONG!
     <statement>
       <p>What must be changed in order for this code block to work?</p>
       <program line-numbers="yes">#include &lt;iostream&gt;
-using namespace std;
 // main: generate some simple output
 
 int main() {

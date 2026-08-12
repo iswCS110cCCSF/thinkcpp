@@ -11,18 +11,17 @@
     <program interactive="activecode" line-numbers="yes" label="chained_conditionals_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int x = -4;
     if (x > 0) {
-        cout << "x is positive" << endl;
+        std::cout << "x is positive" << std::endl;
     }
     else if (x < 0) {
-        cout << "x is negative" << endl;
+        std::cout << "x is negative" << std::endl;
     }
     else {
-        cout << "x is zero" << endl;
+        std::cout << "x is zero" << std::endl;
     }
     return 0;
 }
@@ -46,18 +45,17 @@ int main() {
     <statement>
       <p>What will print after the following code is executed?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 int main() {
   int x = 10;
   if (x &gt; 8) {
-    cout &lt;&lt; &quot;One! &quot;;
+    std::cout &lt;&lt; &quot;One! &quot;;
   }
   if (x &gt; 6) {
-    cout &lt;&lt; &quot;Two! &quot;;
+    std::cout &lt;&lt; &quot;Two! &quot;;
   }
   if (x &gt; 3) {
-    cout &lt;&lt; &quot;Three!&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Three!&quot; &lt;&lt; std::endl;
   }
   return 0;
 }</program>
@@ -102,18 +100,17 @@ int main() {
     <statement>
       <p>What will print after the following code is executed?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 int main() {
   int x = 10;
   if (x &gt; 8) {
-    cout &lt;&lt; &quot;One! &quot; ;
+    std::cout &lt;&lt; &quot;One! &quot; ;
   }
   else if (x &gt; 6) {
-    cout &lt;&lt; &quot;Two! &quot;;
+    std::cout &lt;&lt; &quot;Two! &quot;;
   }
   else {
-    cout &lt;&lt; &quot;Three!&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Three!&quot; &lt;&lt; std::endl;
   }
   return 0;
 }</program>
@@ -160,18 +157,17 @@ int main() {
     <statement>
       <p>What will print after the following code is executed?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 int main() {
   int x = 7;
   if (x &gt; 8) {
-    cout &lt;&lt; &quot;One! &quot; ;
+    std::cout &lt;&lt; &quot;One! &quot; ;
   }
   if (x &gt; 6) {
-    cout &lt;&lt; &quot;Two! &quot;;
+    std::cout &lt;&lt; &quot;Two! &quot;;
   }
   if (x &gt; 3) {
-    cout &lt;&lt; &quot;Three!&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Three!&quot; &lt;&lt; std::endl;
   }
   return 0;
 }</program>
@@ -217,18 +213,17 @@ int main() {
     <statement>
       <p>What will print after the following code is executed?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 int main() {
   int x = 7;
   if (x &gt; 8) {
-    cout &lt;&lt; &quot;One! &quot; ;
+    std::cout &lt;&lt; &quot;One! &quot; ;
   }
   else if (x &gt; 6) {
-    cout &lt;&lt; &quot;Two! &quot;;
+    std::cout &lt;&lt; &quot;Two! &quot;;
   }
   else {
-    cout &lt;&lt; &quot;Three!&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Three!&quot; &lt;&lt; std::endl;
   }
   return 0;
 }</program>

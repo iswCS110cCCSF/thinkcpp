@@ -40,7 +40,6 @@ currentTime.print();</program>
     <program interactive="activecode" line-numbers="yes" label="another_example_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -58,7 +57,7 @@ int main() {
         ]]></code>
       <tests>
 void Time::print() {
-  cout &lt;&lt; hour &lt;&lt; &quot;:&quot; &lt;&lt; minute &lt;&lt; &quot;:&quot; &lt;&lt; second &lt;&lt; endl;
+  std::cout &lt;&lt; hour &lt;&lt; &quot;:&quot; &lt;&lt; minute &lt;&lt; &quot;:&quot; &lt;&lt; second &lt;&lt; std::endl;
 }
 
 void Time::increment(double secs) {
@@ -140,18 +139,18 @@ void Time::increment(double secs) {
       <block order="1">
         <choice correct="yes">
           <cline> if (mood == &quot;happy&quot;) {</cline>
-          <cline><![CDATA[   cout << "purrr" << endl;]]></cline>
+          <cline><![CDATA[   std::cout << "purrr" << std::endl ;]]></cline>
           <cline> }</cline>
           <cline> else {</cline>
-          <cline><![CDATA[   cout << "MEOW" << endl;]]></cline>
+          <cline><![CDATA[   std::cout << "MEOW" << std::endl ;]]></cline>
           <cline> }</cline>
         </choice>
         <choice>
           <cline> if (cat.mood == &quot;happy&quot;) {                         </cline>
-          <cline><![CDATA[  cout << "purrr" << endl;]]></cline>
+          <cline><![CDATA[  std::cout << "purrr" << std::endl ;]]></cline>
           <cline> }</cline>
           <cline> else {</cline>
-          <cline><![CDATA[   cout << "MEOW" << endl;]]></cline>
+          <cline><![CDATA[   std::cout << "MEOW" << std::endl ;]]></cline>
           <cline> }</cline>
         </choice>
       </block>

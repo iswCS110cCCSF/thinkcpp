@@ -59,7 +59,7 @@ public:
         <code><![CDATA[
 struct Deck {
 private:
-  vector<Card> cards;
+  std::vector<Card> cards;
 
 public:
   Deck();

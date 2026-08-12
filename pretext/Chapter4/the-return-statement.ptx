@@ -12,15 +12,14 @@
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 void printLogarithm(double x) {
     if (x <= 0.0) {
-        cout << "Positive numbers only, please." << endl;
+        std::cout << "Positive numbers only, please." << std::endl;
         return;
     }
     double result = log (x);
-    cout << "The log of x is " << result;
+    std::cout << "The log of x is " << result;
 }
 
  int main() {
@@ -45,18 +44,17 @@ void printLogarithm(double x) {
     <statement>
       <p>What will print?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 int main() {
   int x = 8;
   if (x &gt; 8) {
-    cout &lt;&lt; &quot;One! &quot;;
+    std::cout &lt;&lt; &quot;One! &quot;;
   }
   if (x &gt; 6) {
-    cout &lt;&lt; &quot;Two! &quot;;
+    std::cout &lt;&lt; &quot;Two! &quot;;
   }
   if (x &gt; 3) {
-    cout &lt;&lt; &quot;Three!&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Three!&quot; &lt;&lt; std::endl;
   }
   return 0;
 }</program>
@@ -110,20 +108,19 @@ int main() {
     <statement>
       <p>What will print?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 int main() {
   int x = 8;
   if (x &gt; 8) {
-    cout &lt;&lt; &quot;One! &quot;;
+    std::cout &lt;&lt; &quot;One! &quot;;
     return 0;
   }
   if (x &gt; 6) {
-    cout &lt;&lt; &quot;Two! &quot;;
+    std::cout &lt;&lt; &quot;Two! &quot;;
     return 0;
   }
   if (x &gt; 3) {
-    cout &lt;&lt; &quot;Three!&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Three!&quot; &lt;&lt; std::endl;
     return 0;
   }
   return 0;

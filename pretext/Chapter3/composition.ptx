@@ -19,11 +19,10 @@ double x = cos(angle + pi / 2);
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 int main() {
     double x = exp(log(10.0));
-    cout << x;
+    std::cout << x;
 }
         ]]></code>
     </program>

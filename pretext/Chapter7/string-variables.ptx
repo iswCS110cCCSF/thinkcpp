@@ -11,12 +11,11 @@
       <code><![CDATA[
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
-    string first;
+    std::string first;
     first = "Hello, ";
-    string second = "world.";
+    std::string second = "world.";
 }
         ]]></code>
     </program>
@@ -26,7 +25,7 @@ int main() {
     values.</p>
   <p>We can output strings in the usual way:</p>
   <program>
-cout &lt;&lt; first &lt;&lt; second &lt;&lt; endl;
+cout &lt;&lt; first &lt;&lt; second &lt;&lt; std::endl ;
 </program>
   <note><p>In order to compile this code, you will have to include the header file for the <c>string</c> class.
     If you are already including <c>iostream</c>, you may get away with not explicitly including <c>string</c>.
@@ -40,13 +39,12 @@ cout &lt;&lt; first &lt;&lt; second &lt;&lt; endl;
       <code><![CDATA[
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
-    string first;
+    std::string first;
     first = "Hello, ";
-    string second = "world.";
-    cout << first << second << endl;
+    std::string second = "world.";
+    std::cout << first << second << std::endl;
 }
         ]]></code>
     </program>
@@ -68,7 +66,7 @@ int main() {
         </choice>
       </block>
       <block order="1">
-        <cline>cout &lt;&lt; x &lt;&lt; endl;</cline>
+        <cline>cout &lt;&lt; x &lt;&lt; std::endl ;</cline>
       </block>
     </blocks>
   </exercise>

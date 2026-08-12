@@ -4,10 +4,9 @@
   <p>Pulling together all the code fragments from the previous section, the
     whole program looks like this:</p>
   <program>#include &lt;iostream&gt;
-using namespace std;
 
 void newLine() {
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl;
 }
 
 void threeLine() {
@@ -17,9 +16,9 @@ void threeLine() {
 }
 
 int main() {
-  cout &lt;&lt; "First Line." &lt;&lt; endl;
+  std::cout &lt;&lt; "First Line." &lt;&lt; std::endl;
   threeLine();
-  cout &lt;&lt; "Second Line." &lt;&lt; endl;
+  std::cout &lt;&lt; "Second Line." &lt;&lt; std::endl;
   return 0;
 }</program>
   <p>This program contains three function definitions: <c>newLine</c>, <c>threeLine</c>, and <c>main</c>.</p>
@@ -113,7 +112,7 @@ int main() {
         <cline> int plustwo = x + 2;</cline>
       </block>
       <block order="5">
-        <cline> cout &lt;&lt; plustwo;</cline>
+        <cline> std::cout &lt;&lt; plustwo;</cline>
       </block>
       <block order="6">
         <cline>}</cline>

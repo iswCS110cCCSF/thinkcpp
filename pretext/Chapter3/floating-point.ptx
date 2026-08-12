@@ -191,20 +191,19 @@ cout &lt;&lt; e_double;</program>
              line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     double value = 5.0/2; //(a)
-    cout << "current value (a) is " << value << endl;
+    std::cout << "current value (a) is " << value << std::endl;
 
     value = 5/2.0; //(b)
-    cout << "current value (b) is " << value << endl;
+    std::cout << "current value (b) is " << value << std::endl;
 
     value = 5/2; //(c)
-    cout << "current value (c) is " << value << endl;
+    std::cout << "current value (c) is " << value << std::endl;
 
     value = 5.0/2.0; //(d)
-    cout << "current value (d) is " << value << endl;
+    std::cout << "current value (d) is " << value << std::endl;
     return 0;
 }
         ]]></code>

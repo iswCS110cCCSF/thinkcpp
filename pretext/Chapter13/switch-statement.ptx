@@ -11,7 +11,7 @@ case '*':
     perform_multiplication();
     break;
 default:
-    cout &lt;&lt; &quot;I only know how to perform addition and multiplication&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;I only know how to perform addition and multiplication&quot; &lt;&lt; std::endl ;
     break;
 }</program>
   <p>This <c>switch</c> statement is equivalent to the following chained conditional:</p>
@@ -22,7 +22,7 @@ else if (symbol == '*') {
     perform_multiplication();
 }
 else {
-    cout &lt;&lt; &quot;I only know how to perform addition and multiplication&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;I only know how to perform addition and multiplication&quot; &lt;&lt; std::endl ;
 }</program>
   <p>The <c>break</c> statements are necessary in each branch in a <c>switch</c> statement because otherwise
     the flow of execution <q>falls through</q> to the next case.</p>
@@ -43,23 +43,22 @@ else {
       <code><![CDATA[
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
     char type = 'w';
 
     switch (type) {
     case 'g':
-        cout << "You've chosen Bulbasaur!" << endl;
+        std::cout << "You've chosen Bulbasaur!" << std::endl;
         break;
     case 'f':
-        cout << "You've chosen Charmander!" << endl;
+        std::cout << "You've chosen Charmander!" << std::endl;
         break;
     case 'w':
-        cout << "You've chosen Squirtle!" << endl;
+        std::cout << "You've chosen Squirtle!" << std::endl;
        break;
     default:
-        cout << "Invalid type! Please try again." << endl;
+        std::cout << "Invalid type! Please try again." << std::endl;
         break;
     }
 }
@@ -148,15 +147,15 @@ int main() {
 
   switch (num) {
   case 1:
-    cout << 1;
+    std::cout << 1;
     break;
   case 2:
-    cout << 4;
+    std::cout << 4;
   case 3:
-    cout << 9;
+    std::cout << 9;
     break;
   default:
-    cout << "Invalid num! Please try again.";
+    std::cout << "Invalid num! Please try again.";
     break;
   }
 }
@@ -216,14 +215,14 @@ int main() {
 
   switch (num) {
   case 1:
-    cout << 1;
+    std::cout << 1;
     break;
   case 2:
-    cout << 4;
+    std::cout << 4;
   case 3:
-    cout << 9;
+    std::cout << 9;
   default:
-    cout << "Invalid num! Please try again.";
+    std::cout << "Invalid num! Please try again.";
   }
 }
 ]]></code>
@@ -282,14 +281,14 @@ int main() {
 
   switch (num) {
   case 1:
-    cout << 1;
+    std::cout << 1;
     break;
   case 2:
-    cout << 4;
+    std::cout << 4;
   case 3:
-    cout << 9;
+    std::cout << 9;
   default:
-    cout << "Invalid num! Please try again.";
+    std::cout << "Invalid num! Please try again.";
   }
 }
 ]]></code>

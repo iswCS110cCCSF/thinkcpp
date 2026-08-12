@@ -8,7 +8,7 @@
                line-numbers="yes">
         <code>
 struct Book {
-  string title, author;
+ std::string title, author;
   int yearPublished;
   double price;
 };
@@ -16,7 +16,7 @@ struct Book {
 int main() {
   Book gatsby = { "The Great Gatsby", "F. Scott Fitzgerald", 1925, 4.75 };
   Book frankenstein = { "Frankenstein", "Mary Shelley", 1823, 5.99 };
-  string flies = "Lord of the Flies";
+ std::string flies = "Lord of the Flies";
   int year = 1954;
 }
 </code>
@@ -72,7 +72,7 @@ int main() {
                line-numbers="yes">
         <code>
 struct Book {
-  string title, author;
+ std::string title, author;
   int yearPublished;
   double price;
 };
@@ -80,7 +80,7 @@ struct Book {
 int main() {
   Book gatsby = { "The Great Gatsby", "F. Scott Fitzgerald", 1925, 4.75 };
   Book frankenstein = { "Frankenstein", "Mary Shelley", 1823, 5.99 };
-  string flies = "Lord of the Flies";
+ std::string flies = "Lord of the Flies";
   int year = 1954;
 }
 </code>
@@ -136,13 +136,13 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 struct Book {
-  string title, author;
+ std::string title, author;
   int yearPublished;
   double price;
 };
 
 void printBook(Book& b) {
-  cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << endl;
+  std::cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << std::endl ;
 }
 
 int main() {
@@ -197,13 +197,13 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 struct Book {
-  string title, author;
+ std::string title, author;
   int yearPublished;
   double price;
 };
 
 void printBook(Book& b) {
-  cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << endl;
+  std::cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << std::endl ;
 }
 
 int main() {
@@ -255,13 +255,13 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 struct Book {
-  string title, author;
+ std::string title, author;
   int yearPublished;
   double price;
 }
 
 void printBook(Book& b) {
-  cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << endl;
+  std::cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << std::endl ;
 }
 
 void applyDiscount(const Book& b, double discount) {
@@ -320,13 +320,13 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 struct Book {
-  string title, author;
+ std::string title, author;
   int yearPublished;
   double price;
 };
 
 void printBook(Book& b) {
-  cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << endl;
+  std::cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << std::endl ;
 }
 
 void applyDiscount(Book& b, double discount) {
@@ -387,7 +387,7 @@ struct Point3D {
 };
 
 void printPoint3D(const Point3D& p) {
-  cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << endl;
+  std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << std::endl ;
 }
 
 void midpoint(const Point3D& p1, const Point3D& p2, Point3D p3) {
@@ -453,7 +453,7 @@ struct Point3D {
 };
 
 void printPoint3D(const Point3D& p) {
-  cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << endl;
+  std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << std::endl ;
 }
 
 void midpoint(const Point3D& p1, const Point3D& p2, Point3D& p3) {
@@ -519,7 +519,7 @@ struct Point3D {
 };
 
 void printPoint3D(const Point3D& p) {
-  cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << endl;
+  std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << std::endl ;
 }
 
 void midpoint(const Point3D& p1, const Point3D& p2, Point3D& p3) {
@@ -588,7 +588,7 @@ struct Point3D {
 };
 
 void printPoint3D(const Point3D& p) {
-  cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << endl;
+  std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << std::endl ;
 }
 
 void midpoint(const Point3D& p1, const Point3D& p2, Point3D& p3) {

@@ -19,10 +19,10 @@
         <cline>Struct Song {  </cline>
       </block>
       <block order="3">
-        <cline>   string title;</cline>
+        <cline>  std::string title;</cline>
       </block>
       <block order="1">
-        <cline>   string artist;</cline>
+        <cline>  std::string artist;</cline>
       </block>
       <block order="6">
         <cline>   int numLikes;</cline>
@@ -56,10 +56,10 @@
       </block>
       <block order="3"
              correct="no">
-        <cline>   string title;  </cline>
+        <cline>  std::string title;  </cline>
       </block>
       <block order="7">
-        <cline>   string name;</cline>
+        <cline>  std::string name;</cline>
       </block>
       <block order="9">
         <cline>   int year;</cline>
@@ -69,11 +69,11 @@
         <cline>   Song song;  </cline>
       </block>
       <block order="8">
-        <cline>   vector&lt;Song&gt; songs;</cline>
+        <cline>   std::vector&lt;Song&gt; songs;</cline>
       </block>
       <block order="2"
              correct="no">
-        <cline>   vector&lt;string&gt; Song;  </cline>
+        <cline>   std::vector&lt;string&gt; Song;  </cline>
       </block>
       <block order="4">
         <cline>};</cline>
@@ -268,13 +268,13 @@
         <cline>   }</cline>
       </block>
       <block order="12">
-        <cline><![CDATA[   cout << "The most liked song is " << songs[maxIndex].title;]]></cline>
+        <cline><![CDATA[   std::cout << "The most liked song is " << songs[maxIndex].title;]]></cline>
       </block>
       <block order="14">
-        <cline><![CDATA[   cout << " by " << songs[maxIndex].artist << " with ";]]></cline>
+        <cline><![CDATA[   std::cout << " by " << songs[maxIndex].artist << " with ";]]></cline>
       </block>
       <block order="6">
-        <cline><![CDATA[   cout << songs[maxIndex].numLikes << " likes." << endl;]]></cline>
+        <cline><![CDATA[   std::cout << songs[maxIndex].numLikes << " likes." << std::endl ;]]></cline>
       </block>
       <block order="3">
         <cline>}</cline>
@@ -299,7 +299,7 @@
         <cline>struct product {  </cline>
       </block>
       <block order="5">
-        <cline>   string name;</cline>
+        <cline>  std::string name;</cline>
       </block>
       <block order="7">
         <cline>   double price;</cline>
@@ -336,14 +336,14 @@
         <cline>Struct List {  </cline>
       </block>
       <block order="7">
-        <cline>   string type;</cline>
+        <cline>  std::string type;</cline>
       </block>
       <block order="8"
              correct="no">
         <cline>   Product type;  </cline>
       </block>
       <block order="4">
-        <cline>   vector&lt;Product&gt; products;</cline>
+        <cline>   std::vector&lt;Product&gt; products;</cline>
       </block>
       <block order="3"
              correct="no">

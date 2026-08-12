@@ -51,12 +51,12 @@ struct Student {
 private:
   int id;
 public:
-  string name;
+ std::string name;
   int year;
 
   int getID() { return id; }
   int setID(int i) { id = i; }
-  void printInfo() { cout << "Student: " << name << ", " << year; }
+  void printInfo() { std::cout << "Student: " << name << ", " << year; }
 };
 ]]></code>
       </program>
@@ -216,14 +216,14 @@ class rightTriangle {
         <code><![CDATA[
 class Plane {
   int flightNumber;
-  string model;
-  string origin;
-  string destination;
+ std::string model;
+ std::string origin;
+ std::string destination;
 
   public:
     void printInfo() {
-      cout << "Flight " << flightNumber << " (" << model
-           << ") from " << origin << " to " << destination << endl;
+      std::cout << "Flight " << flightNumber << " (" << model
+           << ") from " << origin << " to " << destination << std::endl ;
     }
 };
 
@@ -295,10 +295,10 @@ public:
   void setCelsius(double c) { celsius = c; is_celsius = true; is_fahrenheit = false; }
   void printTemp() {
     if (is_fahrenheit) {
-      cout << "It is " << getFahrenheit() << " degrees Fahrenheit" << endl;
+      std::cout << "It is " << getFahrenheit() << " degrees Fahrenheit" << std::endl ;
     }
     else {
-      cout << "It is " << getCelsius() << " degrees Celsius" << endl;
+      std::cout << "It is " << getCelsius() << " degrees Celsius" << std::endl ;
     }
   }
 };
@@ -400,7 +400,7 @@ private:
   int month;
   int year;
   bool is_birthday;
-  string message;
+ std::string message;
 
 public:
   Date(int hour, int d, int m, int y, bool b, string m) {

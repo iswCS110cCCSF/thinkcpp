@@ -111,7 +111,6 @@ public:
     <program interactive="activecode" download="yes" line-numbers="yes" label="fourteentwo_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 class Triangle {
 private:
@@ -130,7 +129,7 @@ public:
 
 int main() {
   Triangle t1(3, 4, 5);
-  cout << t1.perimeter();
+  std::cout << t1.perimeter();
 }
         ]]></code>
     </program>
@@ -147,7 +146,6 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 class Triangle {
 private:
@@ -158,19 +156,19 @@ public:
     side_a = a_in;
     side_b = b_in;
     // Law of Cosines: c^2 = a^2 + b^2 - 2abcosC
-    angle = acos((pow(a_in, 2) + pow(b_in, 2) - pow(c_in, 2))
+    angle = acos((std::pow(a_in, 2) + std::pow(b_in, 2) - std::pow(c_in, 2))
                   / 2 * a_in * b_in);
   }
   double perimeter() {
     return side_a + side_b +
-            sqrt(pow(side_a, 2) + pow(side_b, 2)
+            std::sqrt(std::pow(side_a, 2) + std::pow(side_b, 2)
             - 2 * side_a * side_b * cos(angle));
   }
 };
 
 int main() {
   Triangle t1(3, 4, 5);
-  cout << t1.perimeter();
+  std::cout << t1.perimeter();
 }
         ]]></code>
     </program>

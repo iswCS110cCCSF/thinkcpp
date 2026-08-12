@@ -12,10 +12,10 @@
   <program>void printMultiples(int n) {
   int i = 1;
   while (i &lt;= 6) {
-    cout &lt;&lt; n * i &lt;&lt; "   ";
+    std::cout &lt;&lt; n * i &lt;&lt; "   ";
     i = i + 1;
   }
-  cout &lt;&lt; endl;
+  std::cout &lt;&lt; std::endl ;
 }</program>
   <p>To encapsulate, all I had to do was add the first line, which declares the name, parameter, and
     return type. To generalize, all I had to do was replace the value 2 with the parameter <c>n</c>.</p>
@@ -43,15 +43,14 @@ while (i &lt;= 6) {
              line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printMultiples(int n) {
     int i = 1;
     while (i <= 6) {
-        cout << n * i << "   ";
+        std::cout << n * i << "   ";
         i = i + 1;
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
 int main() {
@@ -82,15 +81,14 @@ int main() {
              line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printMultiples(int n) {
     int i = 1;
     while (i <= 6) {
-        cout << n * i << '\t';
+        std::cout << n * i << '\t';
         i = i + 1;
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
 int main() {
@@ -162,10 +160,10 @@ int main() {
       </block>
       <block order="2">
         <choice correct="yes">
-          <cline><![CDATA[    cout << x << "\t" << pow(2, x) << endl;]]></cline>
+          <cline><![CDATA[    std::cout << x << "\t" << pow(2, x) << std::endl ;]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[    cout << x << "\t" << pow(x, 2) << endl;  ]]></cline>
+          <cline><![CDATA[    std::cout << x << "\t" << pow(x, 2) << std::endl ;  ]]></cline>
         </choice>
       </block>
       <block order="3">
@@ -200,10 +198,10 @@ int main() {
       </block>
       <block order="7">
         <choice correct="yes">
-          <cline><![CDATA[    cout << x << "\t" << pow(n, x) << endl;]]></cline>
+          <cline><![CDATA[    std::cout << x << "\t" << pow(n, x) << std::endl ;]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[    cout << x << "\t" << pow(5, x) << endl;  ]]></cline>
+          <cline><![CDATA[    std::cout << x << "\t" << pow(5, x) << std::endl ;  ]]></cline>
         </choice>
       </block>
       <block order="2">

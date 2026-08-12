@@ -20,7 +20,6 @@ printPoint (center);</program>
     <program interactive="activecode" line-numbers="yes" label="structures_return_types_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Point {
     double x, y;
@@ -32,7 +31,7 @@ struct Rectangle {
 };
 
 void printPoint(Point p) {
-    cout << "(" << p.x << ", " << p.y << ")" << endl;
+    std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
 }
 
 Point findCenter (Rectangle& box) {
@@ -73,7 +72,7 @@ Rectangle addTwo (Point& p) {
 }
 
 void printPoint(Point p) {
-  cout << "(" << p.x << ", " << p.y << ")" << endl;
+  std::cout << "(" << p.x << ", " << p.y << ")" << std::endl ;
 }
 
 Point findCenter (Rectangle& box) {
@@ -86,7 +85,7 @@ Point findCenter (Rectangle& box) {
 int main() {
   Rectangle box = { {0.0, 0.0}, 100, 200 };
   Point center = findCenter (box);
-  cout << addTwo (center) << endl;
+  std::cout << addTwo (center) << std::endl ;
   printPoint (center);
 }
 ]]></code>

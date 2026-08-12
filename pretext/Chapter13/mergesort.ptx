@@ -2,7 +2,7 @@
   <title>Mergesort</title>
   <p>In <xref ref="chapter13_sorting"/>, we saw a simple
     sorting algorithm that turns out not to be very efficient. In order to sort <m>n</m> items, it
-    has to traverse the vector <m>n</m> times, and each traversal takes an amount of time that is
+    has to traverse the  std::vector<m>n</m> times, and each traversal takes an amount of time that is
     proportional to <m>n</m>. The total time, therefore, is proportional to <m>n^2</m>.</p>
   <p>In this section I will sketch a more efficient algorithm called <term>mergesort</term>. To sort <m>
     n</m> items, mergesort takes time proportional to <m>n \log n</m>. That may not seem impressive,
@@ -150,7 +150,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES };
 
@@ -170,7 +169,7 @@ struct Card {
 };
 
 struct Deck {
-    vector<Card> cards;
+    std::vector<Card> cards;
     Deck();
     Deck(int n);
     void print() const;
@@ -202,18 +201,18 @@ int main() {
     // Sort each half
     d1.sortDeck();
     d2.sortDeck();
-    cout << "Sorted first half:" << endl;
+    std::cout << "Sorted first half:" << std::endl;
     d1.print();
-    cout << endl;
-    cout << "Sorted second half:" << endl;
+    std::cout << std::endl;
+    std::cout << "Sorted second half:" << std::endl;
     d2.print();
-    cout << endl;
+    std::cout << std::endl;
 
     // Merge sorted decks together
     Deck finished = merge(d1, d2);
 
     // We should see a sorted standard deck of 52 cards
-    cout << "Merged sorted full deck:" << endl;
+    std::cout << "Merged sorted full deck:" << std::endl;
     finished.print();
 }
         ]]></code>
@@ -227,13 +226,13 @@ Card::Card(Suit s, Rank r) {
 }
 
 void Card::print() const {
-    vector&lt;string&gt; suits(4);
+    std::vector&lt;std::string&gt; suits(4);
     suits[0] = &quot;Clubs&quot;;
     suits[1] = &quot;Diamonds&quot;;
     suits[2] = &quot;Hearts&quot;;
     suits[3] = &quot;Spades&quot;;
 
-    vector&lt;string&gt; ranks(14);
+    std::vector&lt;std::string&gt; ranks(14);
     ranks[1] = &quot;Ace&quot;;
     ranks[2] = &quot;2&quot;;
     ranks[3] = &quot;3&quot;;
@@ -248,7 +247,7 @@ void Card::print() const {
     ranks[12] = &quot;Queen&quot;;
     ranks[13] = &quot;King&quot;;
 
-    cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; endl;
+    std::cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; std::endl;
 }
 
 bool Card::isGreater(const Card&amp; c2) const {
@@ -264,7 +263,7 @@ bool Card::equals(const Card&amp; c2) const {
 }
 
 Deck::Deck() {
-    vector&lt;Card&gt; temp (52);
+    std::vector&lt;Card&gt; temp (52);
     cards = temp;
 
     int i = 0;
@@ -278,7 +277,7 @@ Deck::Deck() {
 }
 
 Deck::Deck(int size) {
-    vector&lt;Card&gt; temp (size);
+    std::vector&lt;Card&gt; temp (size);
     cards = temp;
 }
 
@@ -302,13 +301,13 @@ void Deck::swapCards(int index1, int index2) {
 }
 
 int Deck::findLowestCard(int index) {
-    int min = index;
+    int std::min = index;
     for (size_t i = index; i &lt; cards.size(); ++i) {
-        if (cards[min].isGreater(cards[i])) {
-            min = i;
+        if (cards[std::min].isGreater(cards[i])) {
+            std::min = i;
         }
     }
-    return min;
+    return std::min;
 }
 
 Deck Deck::subdeck(int low, int high) const {
@@ -443,7 +442,6 @@ void Deck::sortDeck() {
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES };
 
@@ -463,7 +461,7 @@ struct Card {
 };
 
 struct Deck {
-    vector<Card> cards;
+    std::vector<Card> cards;
     Deck();
     Deck(int n);
     void print() const;
@@ -521,13 +519,13 @@ Card::Card(Suit s, Rank r) {
 }
 
 void Card::print() const {
-    vector&lt;string&gt; suits(4);
+    std::vector&lt;std::string&gt; suits(4);
     suits[0] = &quot;Clubs&quot;;
     suits[1] = &quot;Diamonds&quot;;
     suits[2] = &quot;Hearts&quot;;
     suits[3] = &quot;Spades&quot;;
 
-    vector&lt;string&gt; ranks(14);
+    std::vector&lt;std::string&gt; ranks(14);
     ranks[1] = &quot;Ace&quot;;
     ranks[2] = &quot;2&quot;;
     ranks[3] = &quot;3&quot;;
@@ -542,7 +540,7 @@ void Card::print() const {
     ranks[12] = &quot;Queen&quot;;
     ranks[13] = &quot;King&quot;;
 
-    cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; endl;
+    std::cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; std::endl;
 }
 
 bool Card::isGreater(const Card&amp; c2) const {
@@ -558,7 +556,7 @@ bool Card::equals(const Card&amp; c2) const {
 }
 
 Deck::Deck() {
-    vector&lt;Card&gt; temp (52);
+    std::vector&lt;Card&gt; temp (52);
     cards = temp;
 
     int i = 0;
@@ -572,7 +570,7 @@ Deck::Deck() {
 }
 
 Deck::Deck(int size) {
-    vector&lt;Card&gt; temp (size);
+    std::vector&lt;Card&gt; temp (size);
     cards = temp;
 }
 
@@ -596,13 +594,13 @@ void Deck::swapCards(int index1, int index2) {
 }
 
 int Deck::findLowestCard(int index) {
-    int min = index;
+    int std::min = index;
     for (size_t i = index; i &lt; cards.size(); ++i) {
-        if (cards[min].isGreater(cards[i])) {
-            min = i;
+        if (cards[std::min].isGreater(cards[i])) {
+            std::min = i;
         }
     }
-    return min;
+    return std::min;
 }
 
 Deck Deck::subdeck(int low, int high) const {

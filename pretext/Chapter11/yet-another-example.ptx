@@ -25,7 +25,6 @@
     <program interactive="activecode" line-numbers="yes" label="yet_another_example_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -38,15 +37,15 @@ int main() {
     Time currentTime = { 9, 14, 30.0 };
     double secs = currentTime.convertToSeconds();
 
-    cout << "The current time is "; currentTime.print(); cout << "." << endl;
-    cout << "This time in seconds is " << secs << "." << endl;
+    std::cout << "The current time is "; currentTime.print(); std::cout << "." << std::endl;
+    std::cout << "This time in seconds is " << secs << "." << std::endl;
 }
 
         ]]></code>
       <tests>
 
 void Time::print() {
-  cout &lt;&lt; hour &lt;&lt; &quot;:&quot; &lt;&lt; minute &lt;&lt; &quot;:&quot; &lt;&lt; second;
+  std::cout &lt;&lt; hour &lt;&lt; &quot;:&quot; &lt;&lt; minute &lt;&lt; &quot;:&quot; &lt;&lt; second;
 }
 
 double Time::convertToSeconds() const {

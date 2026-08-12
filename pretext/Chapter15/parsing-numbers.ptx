@@ -12,11 +12,10 @@
     string. At the end of the loop, the result string contains all the
     digits from the original string, in order.</p>
   <program> #include &lt;iostream&gt;
- using namespace std;
 
-int convertToInt(const string&amp; s)
+int convertToInt(const std::string&amp; s)
 {
-  string digitString = &quot;&quot;;
+  std::string digitString = &quot;&quot;;
 
   for (size_t i = 0; i &lt; s.length(); i++) {
     if (isdigit (s[i])) {
@@ -46,10 +45,9 @@ digitString = digitString + s[i];
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
-int convertToInt(const string& s) {
-   string digitString = "";
+int convertToInt(const std::string& s) {
+   std::string digitString = "";
 
    for (size_t i = 0; i < s.length(); i++) {
       if (isdigit (s[i])) {
@@ -61,7 +59,7 @@ int convertToInt(const string& s) {
 
 int main() {
    int num = convertToInt("867-5309");
-   cout << num << endl;
+   std::cout << num << std::endl;
 }
         ]]></code>
   </program>

@@ -7,7 +7,7 @@
   <p>Technically, it is legal to increment a variable and use it in an
     expression at the same time. For example, you might see something like:</p>
   <program>
-cout &lt;&lt; i++ &lt;&lt; endl;
+cout &lt;&lt; i++ &lt;&lt; std::endl ;
 </program>
   <p>Looking at this, it is not clear whether the increment will take effect
     before or after the value is displayed. Because expressions like this
@@ -22,12 +22,11 @@ cout &lt;&lt; i++ &lt;&lt; endl;
     <program interactive="activecode" line-numbers="yes" label="increment_decrement_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int x = 0;
-    // We incremented x, so it should print out 1 now right?
-    cout << x++ << endl; // Weird, x is still 0?
+    // We incremented x, so it should print out 1 now std::right?
+    std::cout << x++ << std::endl; // Weird, x is still 0?
 }
         ]]></code>
     </program>
@@ -50,10 +49,9 @@ while (index &lt; length) {
     <program interactive="activecode" line-numbers="yes" label="increment_decrement_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    string fruit = "banana";
+    std::string fruit = "banana";
     int count = 0;
 
     size_t index = 0;
@@ -63,7 +61,7 @@ int main() {
         }
         index++;
     }
-    cout << count << endl;
+    std::cout << count << std::endl;
 }
         ]]></code>
     </program>
@@ -89,7 +87,7 @@ index = index++;             // WRONG!!
       <cline><area correct="no">count = count + 1;</area></cline>
       <cline><area correct="no">index++;</area></cline>
       <cline><area correct="yes">count = count++;</area></cline>
-      <cline><area correct="yes">cout &lt;&lt; x++ &lt;&lt; endl;</area></cline>
+      <cline><area correct="yes">cout &lt;&lt; x++ &lt;&lt; std::endl ;</area></cline>
       <cline><area correct="no">count--; </area></cline>
     </areas>
   </exercise>
@@ -101,7 +99,7 @@ index = index++;             // WRONG!!
 int x = -5;
 while (x < 0) {
   x++;
-  cout << x << " ";
+  std::cout << x << " ";
 }
 ]]></code>
       </program>
@@ -149,7 +147,7 @@ while (x < 0) {
         <cline>while (x &lt;= 10) {</cline>
       </block>
       <block order="4">
-        <cline> <![CDATA[cout << "Number " << x << endl;]]></cline>
+        <cline> <![CDATA[cout << "Number " << x << std::endl ;]]></cline>
       </block>
       <block order="1" correct="no">
         <cline> <![CDATA[cout << "Number " << x; ]]></cline>

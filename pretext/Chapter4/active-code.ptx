@@ -12,20 +12,19 @@
     <program interactive="activecode" line-numbers="yes" label="cond_rec_a1q_editor">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
   int x = 8;
   int y = 8;
 
   if (x % 2 == 0) {
-      cout << "THE TEAM";
+      std::cout << "THE TEAM";
   }
   else if (x >= y) {
-      cout << "THE TEAM";
+      std::cout << "THE TEAM";
   }
   else if (y >= x) {
-      cout << "THE TEAM";
+      std::cout << "THE TEAM";
   }
 }
           ]]></code>
@@ -36,19 +35,18 @@ int main() {
       <program interactive="activecode" line-numbers="yes" label="cond_rec_a1_a_editor-1">
           <code><![CDATA[
 #include <iostream>
-using namespace std;
 int main() {
    int x = 8;
    int y = 8;
 
    if (x % 2 == 0) {
-       cout << "THE TEAM" << endl;
+       std::cout << "THE TEAM" << std::endl;
    }
    if (x >= y) {
-       cout << "THE TEAM" << endl;
+       std::cout << "THE TEAM" << std::endl;
    }
    if (y >= x) {
-       cout <<< "THE TEAM" << endl;
+       std::cout <<< "THE TEAM" << std::endl;
    }
 }
 ]]></code>
@@ -64,9 +62,8 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cond_rec_a2_editor">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-string whichDoor(double grade) {
+std::string whichDoor(double grade) {
   s = "";
   if (grade < 50) {
       s = "C";
@@ -77,7 +74,7 @@ string whichDoor(double grade) {
   if (grade >= 95) {
       s = "A";
   }
-  cout << s;
+  std::cout << s;
 }
       ]]></code>
       </program></statement>
@@ -98,7 +95,7 @@ string whichDoor(double grade) {
           </block>
           <block order="1">
             <choice correct="yes">
-              <cline>    string s = &quot;&quot;;</cline>
+              <cline>   std::string s = &quot;&quot;;</cline>
             </choice>
             <choice>
               <cline>    s = &quot;&quot;; </cline>
@@ -127,7 +124,7 @@ string whichDoor(double grade) {
             <cline>    }</cline>
           </block>
           <block order="5">
-            <cline>    cout &lt;&lt; s;</cline>
+            <cline>    std::cout &lt;&lt; s;</cline>
             <cline>}</cline>
           </block>
         </blocks>
@@ -145,16 +142,15 @@ string whichDoor(double grade) {
     <program interactive="activecode" line-numbers="yes" label="cond_rec_a3q_editor">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void countBy2(int num) {
     if (num != 10) {
-        cout << num;
+        std::cout << num;
         countBy2 (num + 2);
     }
     else {
-        cout << num << endl;
-        cout << "Done counting!";
+        std::cout << num << std::endl;
+        std::cout << "Done counting!";
     }
 }
 
@@ -172,16 +168,15 @@ int main() {
       </p>
       <program xml:id="cond_rec_a3_a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void countBy2(int num) {
     if (num < 9) {
-        cout << num;
+        std::cout << num;
         countBy2(num + 2);
     }
     else {
-        cout << num << endl;
-        cout << "Done counting!";
+        std::cout << num << std::endl;
+        std::cout << "Done counting!";
     }
 }
 
@@ -199,11 +194,10 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cond_rec_a4_editor">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void is_even(int num) {
   if (num % 2 == 0) {
-      cout << true;
+      std::cout << true;
   }
 }
 
@@ -224,24 +218,24 @@ int main() {
           <block order="2">
             <choice correct="yes">
               <cline>    if (num % 2 == 0) {</cline>
-              <cline><![CDATA[        cout << "true";]]></cline>
+              <cline><![CDATA[        std::cout << "true";]]></cline>
               <cline>    }</cline>
             </choice>
             <choice>
               <cline>    if (num % 2 == 0) { </cline>
-              <cline><![CDATA[        cout << true;]]></cline>
+              <cline><![CDATA[        std::cout << true;]]></cline>
               <cline>    }</cline>
             </choice>
           </block>
           <block order="5">
             <choice correct="yes">
               <cline>    else {</cline>
-              <cline><![CDATA[        cout << "false";]]></cline>
+              <cline><![CDATA[        std::cout << "false";]]></cline>
               <cline>    }</cline>
             </choice>
             <choice>
               <cline>    else { </cline>
-              <cline><![CDATA[        cout << false;]]></cline>
+              <cline><![CDATA[        std::cout << false;]]></cline>
               <cline>    }</cline>
             </choice>
           </block>
@@ -261,14 +255,13 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cond_rec_a5q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-bool guessTheWord(string correct) {
-    cout << "Guess the word!";
-    string guess;
-    cin >> guess;
+bool guessTheWord(std::string correct) {
+    std::cout << "Guess the word!";
+    std::string guess;
+    std::cin >> guess;
     if (guess == correct) {
-        cout << "That's it!";
+        std::cout << "That's it!";
     }
 }
         ]]></code>
@@ -277,14 +270,13 @@ bool guessTheWord(string correct) {
       <p>Below is one way to complete the program.</p>
       <program xml:id="cond_rec_a5a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
-bool guessTheWord(string correct) {
-    cout << "Guess the word!";
-    string guess;
-    cin >> guess;
+bool guessTheWord(std::string correct) {
+    std::cout << "Guess the word!";
+    std::string guess;
+    std::cin >> guess;
     if (guess == correct) {
-        cout << "That's it!";
+        std::cout << "That's it!";
     }
     else {
         guessTheWord(correct);
@@ -301,7 +293,6 @@ bool guessTheWord(string correct) {
     <program interactive="activecode" line-numbers="yes" label="cond_rec_a6_editor">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void greaterThan(FIX ME) {
 
@@ -324,22 +315,22 @@ void greaterThan(FIX ME) {
           </block>
           <block order="5">
             <cline>    if (a &gt; b) {</cline>
-            <cline><![CDATA[        cout << "true";]]></cline>
+            <cline><![CDATA[        std::cout << "true";]]></cline>
             <cline>    }</cline>
           </block>
           <block order="2">
             <cline>    if (a &lt; b) {</cline>
-            <cline><![CDATA[        cout << true;]]></cline>
+            <cline><![CDATA[        std::cout << true;]]></cline>
             <cline>    }</cline>
           </block>
           <block order="4">
             <cline>    else {</cline>
-            <cline><![CDATA[        cout << "false";]]></cline>
+            <cline><![CDATA[        std::cout << "false";]]></cline>
             <cline>    }</cline>
           </block>
           <block order="7" correct="no">
             <cline>    if (double a &gt; double b) { </cline>
-            <cline><![CDATA[        cout << true;]]></cline>
+            <cline><![CDATA[        std::cout << true;]]></cline>
             <cline>    }</cline>
           </block>
           <block order="1">
@@ -358,9 +349,8 @@ void greaterThan(FIX ME) {
     <program interactive="activecode" line-numbers="yes" label="cond_rec_a7q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-void goodVibes(string mood) {
+void goodVibes(std::string mood) {
 
 }
         ]]></code>
@@ -370,13 +360,12 @@ void goodVibes(string mood) {
         there are bad vibes in the room. Otherise, the function prints as directed. </p>
       <program xml:id="cond_rec_a7a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
-void goodVibes(string mood) {
+void goodVibes(std::string mood) {
     if (mood == "bad") {
         return;
     }
-    cout << "I'm having a " << mood << " day";
+    std::cout << "I'm having a " << mood << " day";
 }
         ]]></code></program>
     </solution>
@@ -389,7 +378,6 @@ void goodVibes(string mood) {
     <program interactive="activecode" line-numbers="yes" label="cond_rec_a8_editor">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void exclusiveOr(bool a, bool b) {
 
@@ -408,18 +396,18 @@ void exclusiveOr(bool a, bool b) {
           <block order="1">
             <choice correct="yes">
               <cline>    if (a == true || b == true) {</cline>
-              <cline><![CDATA[        cout << "true";]]></cline>
+              <cline><![CDATA[        std::cout << "true";]]></cline>
               <cline>    }</cline>
             </choice>
             <choice>
               <cline>    if (a == true &amp;&amp; b == true) { </cline>
-              <cline><![CDATA[        cout << "true";]]></cline>
+              <cline><![CDATA[        std::cout << "true";]]></cline>
               <cline>    }</cline>
             </choice>
           </block>
           <block order="3">
             <cline>    else {</cline>
-            <cline><![CDATA[        cout << "false";]]></cline>
+            <cline><![CDATA[        std::cout << "false";]]></cline>
             <cline>    }</cline>
           </block>
           <block order="5">
@@ -438,7 +426,6 @@ void exclusiveOr(bool a, bool b) {
     <program interactive="activecode" line-numbers="yes" label="cond_rec_a9q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void countdown(int num) {
 
@@ -449,16 +436,15 @@ void countdown(int num) {
       <p>Below is one way to write the program.</p>
       <program xml:id="cond_rec_a9a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void countdown(int num) {
     if (num != 0) {
-        cout << num << endl;
+        std::cout << num << std::endl;
         num -= 1;
         countdown (num);
     }
     else {
-        cout << "Blastoff!";
+        std::cout << "Blastoff!";
     }
 }
         ]]></code></program>
@@ -473,7 +459,6 @@ void countdown(int num) {
     <program interactive="activecode" line-numbers="yes" label="cond_rec_a10_editor">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printNegativeNum() {
 
@@ -494,10 +479,10 @@ void printNegativeNum() {
             <cline>    int negative;</cline>
           </block>
           <block order="1">
-            <cline><![CDATA[    cout << "Please provide a negative number." << endl;]]></cline>
+            <cline><![CDATA[    std::cout << "Please provide a negative number." << std::endl ;]]></cline>
           </block>
           <block order="6">
-            <cline>    cin &gt;&gt; negative;</cline>
+            <cline>    std::cin &gt;&gt; negative;</cline>
           </block>
           <block order="8">
             <choice correct="yes">
@@ -507,12 +492,12 @@ void printNegativeNum() {
             </choice>
             <choice>
               <cline>    if (negative &gt;= 0) { </cline>
-              <cline><![CDATA[        cout << "Please provide a negative nunber." << endl;]]></cline>
+              <cline><![CDATA[        std::cout << "Please provide a negative nunber." << std::endl ;]]></cline>
               <cline>    }</cline>
             </choice>
           </block>
           <block order="4">
-            <cline><![CDATA[    cout << negative << endl;]]></cline>
+            <cline><![CDATA[    std::cout << negative << std::endl ;]]></cline>
           </block>
           <block order="5">
             <cline>}</cline>

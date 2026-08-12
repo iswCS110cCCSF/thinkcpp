@@ -49,7 +49,6 @@ public:
 #include <iostream>
 #include <cmath>
 #include <cassert>
-using namespace std;
 
 class Complex
 {
@@ -111,7 +110,7 @@ double Complex::getImag() {
 }
 
 void Complex::calculatePolar() {
-  mag = sqrt(pow(real, 2) + pow(imag, 2));
+  mag = std::sqrt(std::pow(real, 2) + std::pow(imag, 2));
   theta = atan(imag / real);
   polar = true;
 }
@@ -131,11 +130,11 @@ double Complex::getTheta() {
 }
 
 void Complex::printCartesian() {
-  cout &lt;&lt; getReal() &lt;&lt; &quot; + &quot; &lt;&lt; getImag() &lt;&lt; &quot;i&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; getReal() &lt;&lt; &quot; + &quot; &lt;&lt; getImag() &lt;&lt; &quot;i&quot; &lt;&lt; std::endl;
 }
 
 void Complex::printPolar() {
-  cout &lt;&lt; getMag() &lt;&lt; &quot; e^ &quot; &lt;&lt; getTheta() &lt;&lt; &quot;i&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; getMag() &lt;&lt; &quot; e^ &quot; &lt;&lt; getTheta() &lt;&lt; &quot;i&quot; &lt;&lt; std::endl;
 }
 
 Complex add (Complex&amp; a, Complex&amp; b) {

@@ -16,7 +16,7 @@
       <p>Multiple Response: How could you re-write the following code using a single conditional?</p>
       <program>if (x &gt; 0) {
   if (x &lt; 10) {
-    cout &lt;&lt; &quot;x is a positive single digit&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;x is a positive single digit&quot; &lt;&lt; std::endl ;
   }
 }</program>
     </statement>

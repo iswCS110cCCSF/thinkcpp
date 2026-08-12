@@ -62,7 +62,6 @@
              line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int factorial(int n) {
     if (n == 0) {
@@ -76,7 +75,7 @@ int factorial(int n) {
 }
 
 int main() {
-    cout << factorial(3) << endl;
+    std::cout << factorial(3) << std::endl;
 }
         ]]></code>
     </program></statement>

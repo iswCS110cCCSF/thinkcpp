@@ -40,7 +40,6 @@
     <program interactive="activecode" line-numbers="yes" label="one_last_example_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -54,10 +53,10 @@ struct Time {
 };
 
 int main() {
-    Time t1(9, 20, 0.0); cout << "t1 = "; t1.print(); cout << endl;
-    Time t2(7, 30, 0.0); cout << "t2 = "; t2.print(); cout << endl;
+    Time t1(9, 20, 0.0); std::cout << "t1 = "; t1.print(); std::cout << std::endl;
+    Time t2(7, 30, 0.0); std::cout << "t2 = "; t2.print(); std::cout << std::endl;
     Time t3 = t1.add(t2);
-    cout << "Time t1 + Time t2 = "; t3.print(); cout << endl;
+    std::cout << "Time t1 + Time t2 = "; t3.print(); std::cout << std::endl;
 }
 
         ]]></code>
@@ -76,7 +75,7 @@ Time::Time(int h, int m, double s) {
 }
 
 void Time::print() {
-  cout &lt;&lt; hour &lt;&lt; &quot;:&quot; &lt;&lt; minute &lt;&lt; &quot;:&quot; &lt;&lt; second;
+  std::cout &lt;&lt; hour &lt;&lt; &quot;:&quot; &lt;&lt; minute &lt;&lt; &quot;:&quot; &lt;&lt; second;
 }
 
 double Time::convertToSeconds() const {

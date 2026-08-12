@@ -8,7 +8,6 @@
       <program interactive="activecode" label="cp_5_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 double calculator(double first, double second, char operation) {
     // Write your implementation here.
@@ -77,7 +76,6 @@ double calculator(double first, double second, char operation) {
       <code><![CDATA[
 #include <iostream>
 #include <bits/stdc++.h>
-using namespace std;
 
 int convertToBinary(int decimal) {
 // Write your implementation here.
@@ -145,7 +143,6 @@ TEST_CASE(&quot;convertToBinary function&quot;) {
       <code>
         <![CDATA[
 #include <iostream>
-using namespace std;
 
 double calculateIntAngle(int numSides) {
     // Write your implementation here.
@@ -160,7 +157,6 @@ double calculateIntAngle(int numSides) {
           instead of 180 to avoid integer division.</p>
         <program xml:id="cp_5_AC_3a" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 double calculateIntAngle(int numSides) {
     return (numSides - 2) * 180.0 / numSides;
@@ -194,9 +190,8 @@ TEST_CASE(&quot;calculateIntAngle function&quot;) {
       <program interactive="activecode" line-numbers="yes" label="cp_5_AC_4q_editor">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-string birthSeason(int month, int day) {
+std::string birthSeason(int month, int day) {
   // Write your implementation here.
 }
       ]]></code>
@@ -287,7 +282,6 @@ TEST_CASE(&quot;birthSeason function: winter&quot;) {
       <program interactive="activecode" label="cp_5_AC_5_editor">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int dogToHumanYears (int dogAge) {
     // Write your implementation here.
@@ -316,7 +310,6 @@ TEST_CASE("dogToHumanYears function for > 1") {
           we can use the formula to return the correct age in human years.</p>
         <program xml:id="cp_5_AC_5a" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int dogToHumanYears(int dogAge) {
     if (dogAge == 1) {
@@ -339,7 +332,6 @@ int dogToHumanYears(int dogAge) {
       <program interactive="activecode" line-numbers="yes" label="cp_5_AC_6q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 bool isCommonFactor(int num1, int num2, int factor) {
 // Write your implementation here.
@@ -411,7 +403,6 @@ TEST_CASE(&quot;isCommonFactor function: false cases&quot;) {
       <program interactive="activecode" label="cp_5_AC_7_editor">
       <code><![CDATA[ 
 #include <iostream>
-using namespace std;
 
 bool isLeapYear(int year) {
     // Write your implementation here.
@@ -450,7 +441,6 @@ TEST_CASE(&quot;isLeapYear divisible by 400&quot;) {
 
         <program xml:id="cp_5_AC_7a" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 bool isLeapYear(int year) {
     if (year % 400 == 0) {
@@ -483,7 +473,6 @@ bool isLeapYear(int year) {
       <program interactive="activecode" line-numbers="yes" label="cp_5_AC_8q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 bool isPoisonous(char size, int numSpots, bool isRed) {
     // Write your implementation here.
@@ -566,7 +555,6 @@ TEST_CASE(&quot;isPoisonous function: false cases&quot;) {
       <program interactive="activecode" label="ecp_5_AC_9_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int triangularNum(int n) {
     // Write your implementation here.
@@ -592,7 +580,6 @@ int triangularNum(int n) {
           1. Otherwise, we recursively call <c>triangularNum</c> on <c>n-1</c>.</p>
         <program xml:id="cp_5_AC_9a" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int triangularNum(int n) {
     if (n == 1) {
@@ -615,7 +602,6 @@ int triangularNum(int n) {
       <program interactive="activecode" line-numbers="yes" label="cp_5_AC_10q_editor">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int digitSum(int num) {
     // Write your implementation here.

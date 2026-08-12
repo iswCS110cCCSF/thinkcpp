@@ -34,7 +34,6 @@
   <p><c>Time.cpp</c> contains the definitions of the member functions (I have elided the function bodies to
     save space):</p>
   <program>#include &lt;iostream&gt;
-using namespace std;
 #include "Time.h"
 
 Time::Time(int h, int m, double s)  ...
@@ -69,7 +68,6 @@ double Time::convertToSeconds() const ...</program>
   <p>Finally, <c>main.cpp</c> contains the function <c>main</c> along with any functions we want that are not
     members of the <c>Time</c> structure (in this case there are none):</p>
   <program>#include &lt;iostream&gt;
-using namespace std;
 #include "Time.h"
 
 int main() {
@@ -82,7 +80,7 @@ int main() {
   doneTime.print();
 
   if (doneTime.after(currentTime)) {
-    cout &lt;&lt; "The bread will be done after it starts." &lt;&lt; endl;
+    std::cout &lt;&lt; "The bread will be done after it starts." &lt;&lt; std::endl;
   }
   return 0;
 }</program>
@@ -117,7 +115,7 @@ int main() {
     this feature, especially since it explains one of the statements that
     appeared in the first program we wrote:</p>
   <program>#include &lt;iostream&gt;
-using namespace std;</program>
+</program>
   <p><c>iostream</c> is the header file that contains declarations for <c>cin</c> and <c>cout</c> and the functions
     that operate on them. When you compile your program, you need the information in that header
     file.</p>

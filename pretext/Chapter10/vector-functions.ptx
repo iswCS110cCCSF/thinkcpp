@@ -9,21 +9,20 @@
     <title>A program that reads in numbers, adding each to a vector, until the user inputs -1.</title>
   <program>#include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 int main() {
-  vector&lt;int&gt; values;
+  std::vector&lt;int&gt; values;
   int c, i;
   size_t len;
-  cin &gt;&gt; c;
+  std::cin &gt;&gt; c;
 
   while (c != -1) {
     values.push_back(c);
-    cin &gt;&gt; c;
+    std::cin &gt;&gt; c;
   }
   len = values.size();
   for (i = 0; i &lt; len; i++) {
-    cout &lt;&lt; values[i] &lt;&lt; endl;
+    std::cout &lt;&lt; values[i] &lt;&lt; std::endl;
   }
 }</program>
 </listing>
@@ -34,18 +33,17 @@ int main() {
   <listing label="vector_functions_AC_1">
     <title>
       This active code uses the <c>push_back</c> function to add even numbers less than or equal to 10 to
-        the vector <c>values</c>.
+        the  std::vector<c>values</c>.
     </title>
     <program interactive="activecode" line-numbers="yes" label="vector_functions_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
-void print_vec(vector<int> vec);
+void print_vec(std::vector<int> vec);
 
 int main() {
-    vector<int> values;
+    std::vector<int> values;
     int i = 0;
 
     while (i <= 10) {
@@ -58,22 +56,22 @@ int main() {
         ]]></code>
       <tests>
 
-void print_vec(vector&lt;int&gt; vec) {
+void print_vec(std::vector&lt;int&gt; vec) {
    size_t i = 0;
-   cout &lt;&lt; &quot;[&quot;;
+   std::cout &lt;&lt; &quot;[&quot;;
    while (i &lt; vec.size()-1) {
-       cout &lt;&lt; vec[i] &lt;&lt; &quot;,&quot;;
+       std::cout &lt;&lt; vec[i] &lt;&lt; &quot;,&quot;;
        i++;
    }
-   cout &lt;&lt; vec[vec.size()-1];
-   cout &lt;&lt; &quot;]&quot; &lt;&lt; endl;
+   std::cout &lt;&lt; vec[vec.size()-1];
+   std::cout &lt;&lt; &quot;]&quot; &lt;&lt; std::endl;
 }
 </tests>
     </program>
   </listing>
   <exercise label="vector_functions_1">
     <statement>
-      <p>Let <term>nums</term> be the vector { 0, 1, 2, 3, 4 }. If we run the command <c>nums.push_back(3)</c>, what
+      <p>Let <term>nums</term> be the std::vector { 0, 1, 2, 3, 4 }. If we run the command <c>nums.push_back(3)</c>, what
         will be returned by <c>nums.size()</c>?</p>
     </statement>
     <choices>
@@ -119,10 +117,10 @@ void print_vec(vector&lt;int&gt; vec) {
     <blocks>
       <block order="10">
         <choice correct="yes">
-          <cline><![CDATA[vector<int> make_even(vector<int> vec) {]]></cline>
+          <cline><![CDATA[ std::vector<int> make_even( std::vector<int> vec) {]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[void make_even(vector<int> vec) {                         ]]></cline>
+          <cline><![CDATA[void make_even( std::vector<int> vec) {                         ]]></cline>
         </choice>
       </block>
       <block order="2">
@@ -168,7 +166,7 @@ void print_vec(vector&lt;int&gt; vec) {
       <p>What does the following code print?</p>
       <program line-numbers="yes">
         <code><![CDATA[
-vector<int> numbers(5);
+ std::vector<int> numbers(5);
 int size = 5;
 for (int i = 0; i < size; i++) {
    numbers[i] = i;
@@ -182,10 +180,10 @@ for (int i = 0; i < size; i++) {
 }
 
 for (int i = 0; i < size; i++) {
-   cout << numbers[i] << "  ";
+   std::cout << numbers[i] << "  ";
 }
 
-cout << endl;
+cout << std::endl ;
 ]]></code>
       </program>
     </statement>

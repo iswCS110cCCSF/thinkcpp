@@ -484,7 +484,7 @@
         <c>() {</c>
       </p>
       <p>
-        <c><![CDATA[ cout << "Hello world " << endl]]></c>
+        <c><![CDATA[ std::cout << "Hello world " << std::endl ]]></c>
         <fillin answer=";"/>
       </p>
       <p>

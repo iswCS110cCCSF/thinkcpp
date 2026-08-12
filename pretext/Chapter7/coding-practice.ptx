@@ -9,9 +9,8 @@
       <code><![CDATA[
 #include <iostream>
 #include <cctype>
-using namespace std;
 
-bool isPalindrome(string input) {
+bool isPalindrome(std::string input) {
     // Write your implementation here.
 }
 ]]></code>
@@ -33,9 +32,8 @@ TEST_CASE("factorial function") {
       <program xml:id="cp_7_AC_1a" line-numbers="yes"><code><![CDATA[
 #include <iostream>
 #include <cctype>
-using namespace std;
 
-bool isPalindrome(string input) {
+bool isPalindrome(std::string input) {
     size_t front = 0;
     size_t back = input.length() - 1;
     while (front < back) {
@@ -68,9 +66,8 @@ bool isPalindrome(string input) {
           <code><![CDATA[
 #include <iostream>
 #include "ctype.h"
-using namespace std;
 
-void stringToLower(string &input) {
+void stringToLower(std::string &input) {
     size_t i = 0;
     while (i < input.length()) {
         if (isalpha(input[i]) && isupper(input[i])) {
@@ -80,12 +77,12 @@ void stringToLower(string &input) {
     }
 }
 
-int countWord(string input, string word) {
+int countWord(std::string input, std::string word) {
     // Write your implementation here.
 }
 
 int main() {
-    string quote =
+    std::string quote =
         "Anyway, like I was sayin', shrimp is the fruit of the sea. You can "
         "barbecue it, boil it, broil it, bake it, saute it. Dey's uh, "
         "shrimp-kabobs, shrimp creole, shrimp gumbo. Pan fried, deep fried, "
@@ -93,7 +90,7 @@ int main() {
         "pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and "
         "potatoes, shrimp burger, shrimp sandwich. That- that's about "
         "it.";
-    cout << "Your output: " << countWord(quote, "shrimp") << ", Correct output: 14" << endl;
+    std::cout << "Your output: " << countWord(quote, "shrimp") << ", Correct output: 14" << std::endl;
 }
         ]]></code>
         </program></statement>
@@ -162,9 +159,8 @@ int main() {
     <program interactive="activecode" label="cp_7_AC_3_editor">
       <code><![CDATA[
            #include <iostream>
-           using namespace std;
 
-           void censorWord(string input, string word) {
+           void censorWord(std::string input, std::string word) {
                // Write your implementation here.
            }
 
@@ -180,11 +176,10 @@ int main() {
         the length of the word with asterisks.</p>
       <program xml:id="cp_7_AC_3a" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
-void censorWord(string input, string word) {
+void censorWord(std::string input, std::string word) {
     size_t length = word.length();
-    while (input.find(word) != string::npos) {{
+    while (input.find(word) != std::string::npos) {{
         int index = input.find(word);
         size_t i = 0;
         while (i < length) {
@@ -192,7 +187,7 @@ void censorWord(string input, string word) {
             i++;
         }
     }
-    cout << input;
+    std::cout << input;
 }
 
 int main() {
@@ -207,7 +202,7 @@ int main() {
       <p>Write a void function <c>removeWord</c> that removes a given word from a given string and prints out
         the new string. <c>removeWord</c> should take two strings <c>input</c> and <c>word</c> as parameters and prints
         out <c>input</c> with every occurence of <c>word</c> removed. Use string concatenation and the C++
-        string function <c>substr</c>. <c>substr</c> takes two parameters, a starting index and a length. For
+       std::string function <c>substr</c>. <c>substr</c> takes two parameters, a starting index and a length. For
         example, if <c>string greeting = &quot;hello world&quot;</c>, then <c>greeting.substr(6, 5)</c> returns the string <c>&quot;world&quot;</c>. Test your function in main.
         Check the hint below for help with the construction of the code. The output should be:</p>
       <console>
@@ -217,9 +212,8 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <string>
-using namespace std;
 
-void removeWord(string input, string word) {
+void removeWord(std::string input, std::string word) {
     // Write your implementation here.
 }
 
@@ -271,7 +265,7 @@ int main() {
           <block order="4">
             <cline>        }</cline>
             <cline>    }</cline>
-            <cline>    cout &lt;&lt; input;</cline>
+            <cline>    std::cout &lt;&lt; input;</cline>
             <cline>}</cline>
           </block>
         </blocks>
@@ -292,23 +286,22 @@ int main() {
       <code><![CDATA[
           #include <iostream>
           #include <cctype>
-          using namespace std;
 
-          string ROT13 (string input) {
+          std::string ROT13 (std::string input) {
               // Write your implementation here.
           }
 
           int main() {
-              string original = "Encrypt me then decrypt me!";
-              string encrypted = ROT13 (original);
-              string decrypted = ROT13 (encrypted);
-              cout << "Original string: " << original << endl;
-              cout << "Encrypted string: " << encrypted << endl;
-              cout << "Decrypted string: " << decrypted << endl;
+              std::string original = "Encrypt me then decrypt me!";
+              std::string encrypted = ROT13 (original);
+              std::string decrypted = ROT13 (encrypted);
+              std::cout << "Original std::string: " << original << std::endl;
+              std::cout << "Encrypted std::string: " << encrypted << std::endl;
+              std::cout << "Decrypted std::string: " << decrypted << std::endl;
 
               // Uncomment and run the code below once your function works!
-              // string secretMessage = "Pbatenghyngvbaf! Lbh'ir fhpprffshyyl vzcyrzragrq EBG13 naq qrpbqrq gur frperg zrffntr :)";
-              // cout << ROT13 (secretMessage) << endl;
+              // std::string secretMessage = "Pbatenghyngvbaf! Lbh'ir fhpprffshyyl vzcyrzragrq EBG13 naq qrpbqrq gur frperg zrffntr :)";
+              // std::cout << ROT13 (secretMessage) << std::endl;
           }
 ]]></code>
     </program></statement>
@@ -320,9 +313,8 @@ int main() {
       <program xml:id="cp_7_AC_5a" line-numbers="yes"><code><![CDATA[
 #include <iostream>
 #include <cctype>
-using namespace std;
 
-string ROT13(string input) {
+std::string ROT13(std::string input) {
     size_t n = 0;
     while (n < input.length()) {
         if (isalpha(input[n])) {
@@ -339,16 +331,16 @@ string ROT13(string input) {
 }
 
 int main() {
-    string original = "Encrypt me then decrypt me!";
-    string encrypted = ROT13 (original);
-    string decrypted = ROT13 (encrypted);
-    cout << "Original string: " << original << endl;
-    cout << "Encrypted string: " << encrypted << endl;
-    cout << "Decrypted string: " << decrypted << endl;
+    std::string original = "Encrypt me then decrypt me!";
+    std::string encrypted = ROT13 (original);
+    std::string decrypted = ROT13 (encrypted);
+    std::cout << "Original std::string: " << original << std::endl;
+    std::cout << "Encrypted std::string: " << encrypted << std::endl;
+    std::cout << "Decrypted std::string: " << decrypted << std::endl;
 
     // Uncomment and run the code below once your function works!
-    // string secretMessage = "Pbatenghyngvbaf! Lbh'ir fhpprffshyyl vzcyrzragrq EBG13 naq qrpbqrq gur frperg zrffntr :)";
-    // cout << ROT13 (secretMessage) << endl;
+    // std::string secretMessage = "Pbatenghyngvbaf! Lbh'ir fhpprffshyyl vzcyrzragrq EBG13 naq qrpbqrq gur frperg zrffntr :)";
+    // std::cout << ROT13 (secretMessage) << std::endl;
 }
         ]]></code></program>
     </solution>
@@ -362,9 +354,8 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cp_7_AC_6q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-string reverseWord(string input) {
+std::string reverseWord(std::string input) {
     // Write your implementation here.
 }
 ]]></code>
@@ -393,7 +384,7 @@ TEST_CASE("reverseWord function") {
             <cline>    size_t len = input.length();</cline>
           </block>
           <block order="1">
-            <cline>    string reverse;</cline>
+            <cline>   std::string reverse;</cline>
           </block>
           <block order="4">
             <choice correct="yes">
@@ -426,15 +417,14 @@ TEST_CASE("reverseWord function") {
       <code><![CDATA[
           #include <iostream>
           #include <cctype>
-          using namespace std;
 
-          string capitalize(string input) {
+          std::string capitalize(std::string input) {
               // Write your implementation here.
           }
 
           int main() {
-              cout << capitalize("every word in this string should be capitalized!") << endl;
-              cout << capitalize("this String As well") << endl;
+              std::cout << capitalize("every word in this std::string should be capitalized!") << std::endl;
+              std::cout << capitalize("this String As well") << std::endl;
           }
 ]]></code>
     </program></statement>
@@ -445,9 +435,8 @@ TEST_CASE("reverseWord function") {
       <program xml:id="cp_7_AC_7a" line-numbers="yes"><code><![CDATA[
 #include <iostream>
 #include <cctype>
-using namespace std;
 
-string capitalize(string input) {
+std::string capitalize(std::string input) {
     size_t n = 0;
     while (n < input.length()) {
         if (n == 0) {
@@ -462,8 +451,8 @@ string capitalize(string input) {
 }
 
 int main() {
-    cout << capitalize ("every word in this string should be capitalized!") << endl;
-    cout << capitalize ("this String As well") << endl;
+    std::cout << capitalize ("every word in this std::string should be capitalized!") << std::endl;
+    std::cout << capitalize ("this String As well") << std::endl;
 }
 ]]></code></program>
     </solution>
@@ -477,9 +466,8 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cp_7_AC_8q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-int countVowels(string input) {
+int countVowels(std::string input) {
     // Write your implementation here.
 }
 ]]></code>
@@ -546,9 +534,8 @@ TEST_CASE("countVowels function") {
     <program interactive="activecode" label="cp_7_AC_9_editor">
       <code><![CDATA[
           #include <iostream>
-          using namespace std;
 
-          string longestWord (string input) {
+          std::string longestWord (std::string input) {
               // Write your implementation here.
           }
 ]]></code>
@@ -557,7 +544,7 @@ TEST_CASE("countVowels function") {
 #include "doctest.h"
 
 TEST_CASE("longestWord function") {
-    CHECK_EQ(longestWord("what is the longest word in this string"), "longest");
+    CHECK_EQ(longestWord("what is the longest word in this std::string"), "longest");
     CHECK_EQ(longestWord("these words are very close in size"), "these");
     CHECK_EQ(longestWord("vowels"), "vowels");
 }
@@ -572,9 +559,8 @@ TEST_CASE("longestWord function") {
         reach the end of the string, and the longest word is returned.</p>
       <program xml:id="cp_7_AC_9a" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
-string longestWord(string input) {
+std::string longestWord(std::string input) {
     size_t n = 0;
     size_t maxLength = 0;
     while (n < input.length()) {
@@ -609,13 +595,12 @@ string longestWord(string input) {
 #include <iostream>
 #include <string>
 #include "ctype.h"
-using namespace std;
 
-string snakeToCamel(string input) {
+std::string snakeToCamel(std::string input) {
     // Write your implementation here.
 }
 
-string camelToSnake(string input) {
+std::string camelToSnake(std::string input) {
     // Write your implementation here.
 }
     ]]></code>

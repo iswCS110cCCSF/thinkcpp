@@ -1,36 +1,36 @@
 <?xml version="1.0"?>
 <section xml:id="chapter10_vectors">
   <title>Vectors</title>
-  <p>A <term>vector</term> is a set of values where each value is identified by a number (called an
+  <p>A <term> std::vector</term> is a set of values where each value is identified by a number (called an
     index). An <c>string</c> is similar to a vector, since it is made up of an indexed set of characters.
     The nice thing about vectors is that they can be made up of any type of element, including basic
     types like <c>int</c>s and <c>double</c>s, and user-defined types like <c>Point</c> and <c>Time</c>.</p>
   <note>
     <p>All elements of a vector must have the same type.</p>
   </note>
-  <p>The <c>vector</c> type is defined in the C++ Standard Template Library (STL). In order to use it, you
-    have to include the header file <c>vector</c>; again, the details of how to do that depend on your
+  <p>The <c> std::vector</c> type is defined in the C++ Standard Template Library (STL). In order to use it, you
+    have to include the header file <c> std::vector</c>; again, the details of how to do that depend on your
     programming environment.</p>
   <p>You can create a vector the same way you create other variable types:</p>
-  <program>vector&lt;int&gt; count;
-vector&lt;double&gt; doubleVector;</program>
+  <program>std::vector&lt;int&gt; count;
+std::vector&lt;double&gt; doubleVector;</program>
   <p>The type that makes up the vector appears in angle brackets (<c>&lt;</c> and <c>&gt;</c>). The first
     line creates a vector of integers named <c>count</c>; the second creates a vector of <c>double</c>s.
     Although these statements are legal, they are not very useful because they create vectors that
     have no elements (their size is zero). It is more common to specify the size of the vector in
     parentheses:</p>
   <program>
-vector&lt;int&gt; count (4);
+std::vector&lt;int&gt; count (4);
 </program>
   <p>The syntax here is a little odd; it looks like a combination of a variable declarations and a
-    function call. In fact, that's exactly what it is. The function we are invoking is an <c>vector</c>
+    function call. In fact, that's exactly what it is. The function we are invoking is an <c> std::vector</c>
     constructor. A <term>constructor</term> is a special function that creates new objects and
     initializes their instance variables. In this case, the constructor takes a single argument,
     which is the size of the new vector.</p>
   <p>The following figure shows how vectors are represented in state
     diagrams:</p>
   <figure>
-      <caption>Representation of vector</caption>
+      <caption>Representation of std::vector</caption>
       <image source="Chapter10/Images/10.1state_diagram.png" width="50%">
           <description><p>
               'count' names a box. In it is a row of 4 boxes labeled 0 through 3. Each numbered box has 0 inside.'
@@ -40,10 +40,10 @@ vector&lt;int&gt; count (4);
   <p>The large numbers inside the boxes are the <term>elements</term> of the vector. The small
     numbers outside the boxes are the indices used to identify each box. When you allocate a new
     vector, the elements are not initialized. They could contain any values.</p>
-  <p>There is another constructor for <c>vector</c>s that takes two parameters; the second is a <q>fill
+  <p>There is another constructor for <c> std::vector</c>s that takes two parameters; the second is a <q>fill
     value,</q> the value that will be assigned to each of the elements.</p>
   <program>
-vector&lt;int&gt; count (4, 0);
+std::vector&lt;int&gt; count (4, 0);
 </program>
   <p>This statement creates a vector of four elements and initializes all of
     them to zero.</p>
@@ -55,7 +55,7 @@ vector&lt;int&gt; count (4, 0);
       <choice>
         <statement>
           <p>
-            <c><![CDATA[vector<string> words ("", 5);]]></c>
+            <c><![CDATA[ std::vector<string> words ("", 5);]]></c>
           </p>
         </statement>
         <feedback><p>
@@ -65,7 +65,7 @@ vector&lt;int&gt; count (4, 0);
       <choice correct="yes">
         <statement>
           <p>
-            <c><![CDATA[vector<string> words (5);]]></c>
+            <c><![CDATA[ std::vector<string> words (5);]]></c>
           </p>
         </statement>
         <feedback><p>
@@ -75,7 +75,7 @@ vector&lt;int&gt; count (4, 0);
       <choice correct="yes">
         <statement>
           <p>
-            <c><![CDATA[vector<string> words (5, "");]]></c>
+            <c><![CDATA[ std::vector<string> words (5, "");]]></c>
           </p>
         </statement>
         <feedback><p>
@@ -85,7 +85,7 @@ vector&lt;int&gt; count (4, 0);
       <choice>
         <statement>
           <p>
-            <c><![CDATA[vector<char> words (5, '');]]></c>
+            <c><![CDATA[ std::vector<char> words (5, '');]]></c>
           </p>
         </statement>
         <feedback><p>
@@ -186,7 +186,7 @@ vector&lt;int&gt; count (4, 0);
     <statement>
       <p>What are the values of <c>number</c>'s elements after this declaration?</p>
       <program>
-vector&lt;int&gt; numbers(6);
+std::vector&lt;int&gt; numbers(6);
 </program>
     </statement>
     <choices>

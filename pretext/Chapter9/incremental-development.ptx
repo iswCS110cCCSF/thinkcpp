@@ -45,7 +45,6 @@
     <program interactive="activecode" line-numbers="yes" label="incremental_development_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -53,7 +52,7 @@ struct Time {
 };
 
 void printTime(Time& t) {
-    cout << t.hour << ":" << t.minute << ":" << t.second << endl;
+    std::cout << t.hour << ":" << t.minute << ":" << t.second << std::endl;
 }
 
 double convertToSeconds(const Time& t) {
@@ -97,7 +96,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="incremental_development_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -105,7 +103,7 @@ struct Time {
 };
 
 void printTime(Time& t) {
-    cout << t.hour << ":" << t.minute << ":" << t.second << endl;
+    std::cout << t.hour << ":" << t.minute << ":" << t.second << std::endl;
 }
 
 double convertToSeconds(const Time& t) {

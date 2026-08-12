@@ -26,16 +26,15 @@
     <program interactive="activecode" line-numbers="yes" label="operators_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int hour, minute;
     hour = 12;
     minute = 59;
-    cout << "Number of minutes since midnight: ";
-    cout << hour * 60 + minute << endl;
-    cout << "Fraction of the hour that has passed: ";
-    cout << minute / 60 << endl;
+    std::cout << "Number of minutes since midnight: ";
+    std::cout << hour * 60 + minute << std::endl;
+    std::cout << "Fraction of the hour that has passed: ";
+    std::cout << minute / 60 << std::endl;
     return 0;
 }
         ]]></code>
@@ -50,7 +49,7 @@ int main() {
   <p>A possible alternative in this case is to calculate a percentage rather
     than a fraction:</p>
   <program>cout &lt;&lt; &quot;Percentage of the hour that has passed: &quot;;
-cout &lt;&lt; minute * 100 / 60 &lt;&lt; endl;</program>
+cout &lt;&lt; minute * 100 / 60 &lt;&lt; std::endl ;</program>
   <p>The result is:</p>
   <console><output>Percentage of the hour that has passed: 98</output></console>
   <p>Again the result is <em>truncated</em>, but at least now the answer is
@@ -228,12 +227,12 @@ cout &lt;&lt; &quot;Decimal:&quot; &lt;&lt; num1 / num2;</program>
       </block>
       <block order="11">
         <choice correct="yes">
-          <cline><![CDATA[ cout << "The total cost of your meal is $";]]></cline>
-          <cline><![CDATA[ cout << priceWithTax << "." << endl;]]></cline>
+          <cline><![CDATA[ std::cout << "The total cost of your meal is $";]]></cline>
+          <cline><![CDATA[ std::cout << priceWithTax << "." << std::endl ;]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[ cout << "The total cost of your meal is $"; ]]></cline>
-          <cline><![CDATA[ cout << price << "." << endl;]]></cline>
+          <cline><![CDATA[ std::cout << "The total cost of your meal is $"; ]]></cline>
+          <cline><![CDATA[ std::cout << price << "." << std::endl ;]]></cline>
         </choice>
       </block>
       <block order="6">

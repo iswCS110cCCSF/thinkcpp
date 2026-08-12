@@ -14,10 +14,9 @@
     <program interactive="activecode" line-numbers="yes" label="composition_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    cout << 17 * 3;
+    std::cout << 17 * 3;
 }
         ]]></code>
     </program>
@@ -33,12 +32,11 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="composition_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int hour = 7;
     int minute = 1;
-    cout << hour * 60 + minute << endl;
+    std::cout << hour * 60 + minute << std::endl;
 }
         ]]></code>
     </program>
@@ -52,13 +50,12 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="composition_AC_3_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int minute = 3;
     int percentage;
     percentage = (minute * 100) / 60;
-    cout << percentage;
+    std::cout << percentage;
 }
         ]]></code>
     </program>
@@ -82,7 +79,7 @@ int main() {
     int cats = 6;
     int pets;
     dogs + cats = pets;
-    cout &lt;&lt; &quot;I have &quot; &lt;&lt; pets &lt;&lt; &quot; pets!&quot;;
+    std::cout &lt;&lt; &quot;I have &quot; &lt;&lt; pets &lt;&lt; &quot; pets!&quot;;
     return 0;
 }</program>
     </statement>
@@ -159,7 +156,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="compos_4_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
    int v0 = 5, a = 3, t = 4, velocity;
@@ -167,9 +163,9 @@ int main() {
    // You may only use the next line for your code.
    velocity = ;
 
-   cout << "Testing..." << endl;
-   cout << "Yours = " << velocity << endl;
-   cout << "Correct = 17";
+   std::cout << "Testing..." << std::endl;
+   std::cout << "Yours = " << velocity << std::endl;
+   std::cout << "Correct = 17";
 }
         ]]></code>
     </program></statement>
@@ -180,7 +176,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="compos_5_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
    int l = 2, w = 3, h = 4, volume;
@@ -188,9 +183,9 @@ int main() {
    // You may only use the next line for your code.
    volume = ;
 
-   cout << "Testing..." << endl;
-   cout << "Yours = " << volume << endl;
-   cout << "Correct = 24";
+   std::cout << "Testing..." << std::endl;
+   std::cout << "Yours = " << volume << std::endl;
+   std::cout << "Correct = 24";
 }
         ]]></code>
     </program></statement>

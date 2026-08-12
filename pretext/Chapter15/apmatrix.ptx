@@ -3,7 +3,7 @@
   <title>
     <c>matrix</c>
   </title>
-  <p>A <c>matrix</c> is similar to a <c>vector</c> except it is two-dimensional. Instead of a length, it has two
+  <p>A <c>matrix</c> is similar to a <c> std::vector</c> except it is two-dimensional. Instead of a length, it has two
     dimensions, called <c>numrows</c> and <c>numcols</c>, for <q>number of rows</q> and <q>number of
       columns.</q></p>
   <p>Each element in the matrix is indentified by two indices; one specifies
@@ -18,7 +18,7 @@ matrix&lt;double&gt; m4(m3);</program>
     is the same as the second, except that it takes an additional parameter that is used to
     initialized the elements of the matrix. The fourth is a copy constructor that takes another <c>matrix</c>
     as a parameter.</p>
-  <p>Just as with <c>vectors</c>, we can make <c>matrix</c>es with any type of elements (including <c>vector</c>s, and
+  <p>Just as with <c>vectors</c>, we can make <c>matrix</c>es with any type of elements (including <c> std::vector</c>s, and
     even <c>matrix</c>es).</p>
   <p>To access the elements of a matrix, we use the <c>[]</c> operator to specify the row and column:</p>
   <program>m2[0][0] = 1;
@@ -38,9 +38,9 @@ m3[1][2] = 10.0 * m2[0][0];</program>
     and newlines between the rows:</p>
   <program>for (int row=0; row &lt; m2.numrows(); row++) {
   for (int col=0; col &lt; m2.numcols(); col++) {
-    cout &lt;&lt; m2[row][col] &lt;&lt; "\t";
+    std::cout &lt;&lt; m2[row][col] &lt;&lt; "\t";
   }
-  cout &lt;&lt; endl;
+  std::cout &lt;&lt; std::endl ;
 }</program>
   <exercise label="question15_8_1">
     <statement>
@@ -65,7 +65,7 @@ m3[1][2] = 10.0 * m2[0][0];</program>
       </choice>
       <choice correct="yes">
         <statement>
-          <p>vector&lt;int&gt;</p>
+          <p>std::vector&lt;int&gt;</p>
         </statement>
         <feedback><p>
           Correct!
@@ -73,7 +73,7 @@ m3[1][2] = 10.0 * m2[0][0];</program>
       </choice>
       <choice correct="yes">
         <statement>
-          <p>vector&lt;vector&lt;int&gt;&gt;</p>
+          <p>vector&lt;std::vector&lt;int&gt;&gt;</p>
         </statement>
         <feedback><p>
           Correct! This is a technically type of matrix!

@@ -4,21 +4,20 @@
   <p>Sending output to a file is similar. For example, we could modify the
     previous program to copy lines from one file to another.</p>
   <program>#include &lt;iostream&gt;
-using namespace std;
 
 int main() {
- ifstream infile("input-file");
- ofstream outfile("output-file");
+ std::ifstream infile("input-file");
+ std::ofstream outfile("output-file");
 
  if (infile.good() == false || outfile.good() == false) {
-   cout &lt;&lt; "Unable to open one of the files." &lt;&lt; endl;
+   std::cout &lt;&lt; "Unable to open one of the files." &lt;&lt; std::endl;
    exit (1);
  }
 
  while (true) {
-   getline(infile, line);
+   std::getline(infile, line);
    if (infile.eof()) break;
-   outfile &lt;&lt; line &lt;&lt; endl;
+   outfile &lt;&lt; line &lt;&lt; std::endl;
  }
 }</program>
   <exercise label="question15_4_1"
@@ -41,7 +40,7 @@ int main() {
         <cline> if (in_file.good() == false || out_file.good() == false) {</cline>
       </block>
       <block order="4">
-        <cline><![CDATA[   cout << "Unable to open one of the files." << endl;]]></cline>
+        <cline><![CDATA[   std::cout << "Unable to open one of the files." << std::endl ;]]></cline>
       </block>
       <block order="2">
         <cline>   exit(1);</cline>
@@ -57,7 +56,7 @@ int main() {
         <cline>   if (in_file.eof()) break;</cline>
       </block>
       <block order="7">
-        <cline><![CDATA[   outfile << line << endl;]]></cline>
+        <cline><![CDATA[   outfile << line << std::endl ;]]></cline>
         <cline> }</cline>
         <cline>}</cline>
       </block>

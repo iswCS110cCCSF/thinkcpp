@@ -12,15 +12,14 @@
     <program interactive="activecode" line-numbers="yes" label="find_function_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    string fruit = "banana";
+    std::string fruit = "banana";
     size_t index = fruit.find('a');
-    cout << index << endl;
-    string dessert = "pudding";
+    std::cout << index << std::endl;
+    std::string dessert = "pudding";
     size_t another_index = dessert.find('a');
-    cout << another_index << " = " << string::npos << endl;
+    std::cout << another_index << " = " << std::string::npos << std::endl;
 }
         ]]></code>
     </program>
@@ -40,12 +39,11 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="find_function_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    string fruit = "banana";
+    std::string fruit = "banana";
     size_t index = fruit.find("nan");
-    cout << index;
+    std::cout << index;
 }
         ]]></code>
     </program>
@@ -101,7 +99,7 @@ int main() {
         </choice>
       </block>
       <block order="3">
-        <cline> <![CDATA[cout << index << endl;]]></cline>
+        <cline> <![CDATA[cout << index << std::endl ;]]></cline>
         <cline>}</cline>
       </block>
     </blocks>
@@ -114,7 +112,7 @@ int main() {
 string sentence = "Most seas are rough but this sea is so calm!";
 string target = "sea";
 size_t index = sentence.find(target);
-cout << "Index to find sea is " << index << endl;
+cout << "Index to find sea is " << index << std::endl ;
 ]]></code>
       </program>
       <p>

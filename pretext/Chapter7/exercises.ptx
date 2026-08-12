@@ -10,8 +10,8 @@
 int main() {
   int x = 0;
   double y = 4.5;
-  string word = "hello";
-  string letter = "a";
+ std::string word = "hello";
+ std::string letter = "a";
   char c = 'c';
   bool isPrime = 1;
 }
@@ -98,8 +98,8 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string quote = "Not my tempo.";
-  cout << quote[?];
+ std::string quote = "Not my tempo.";
+  std::cout << quote[?];
 }
 ]]></code>
       </program>
@@ -146,7 +146,7 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string quote = "I love you 3000.";
+ std::string quote = "I love you 3000.";
   int x = 3;
   int y = 3 * x;
   int z = 1;
@@ -156,7 +156,7 @@ int main() {
   else {
     z = z + y - x;
   }
-  cout << quote[z];
+  std::cout << quote[z];
 }
 ]]></code>
       </program>
@@ -203,9 +203,9 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string quote = "Look at me. I'm the captain now.";
+ std::string quote = "Look at me. I'm the captain now.";
   int x = quote.length();
-  cout << quote[x];
+  std::cout << quote[x];
 }
 ]]></code>
       </program>
@@ -261,11 +261,11 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string quote = "With great power comes great responsiblity.";
+ std::string quote = "With great power comes great responsiblity.";
   size_t n = 0;
   while (n < quote.length()) {
     if (n % 5 == 0) {
-      cout << quote[n];
+      std::cout << quote[n];
     }
     n++;
   }
@@ -315,9 +315,9 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string quote = "Why so serious?";
+ std::string quote = "Why so serious?";
   size_t index = quote.find("a");
-  cout << index;
+  std::cout << index;
 }
 ]]></code>
       </program>
@@ -366,9 +366,9 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string quote = "How much wood could a woodchuck chuck if a woodchuck could chuck wood?";
+ std::string quote = "How much wood could a woodchuck chuck if a woodchuck could chuck wood?";
   size_t index = quote.find("wood");
-  cout << index;
+  std::cout << index;
 }
 ]]></code>
       </program>
@@ -424,9 +424,9 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string quote = "How much wood could a woodchuck chuck if a woodchuck could chuck wood?";
+ std::string quote = "How much wood could a woodchuck chuck if a woodchuck could chuck wood?";
   size_t index = quote.find('w', quote.find("wood") + 1);
-  cout << index;
+  std::cout << index;
 }
 ]]></code>
       </program>
@@ -473,7 +473,7 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string quote = "Life is like a box of chocolates. You never know what you're gonna get.";
+ std::string quote = "Life is like a box of chocolates. You never know what you're gonna get.";
   size_t i = 0;
   size_t count = 0;
   while (i < quote.length()) {
@@ -482,7 +482,7 @@ int main() {
     }
     i++;
   }
-  cout << count;
+  std::cout << count;
 }
 ]]></code>
       </program>
@@ -529,10 +529,10 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string call = "Marco!";
-  string response = "Polo!";
-  string output = "call" + "response";
-  cout << output;
+ std::string call = "Marco!";
+ std::string response = "Polo!";
+ std::string output = "call" + "response";
+  std::cout << output;
 }
 ]]></code>
       </program>
@@ -590,7 +590,7 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string question = "Honey? Where'X my Xuper Xuit?";
+ std::string question = "Honey? Where'X my Xuper Xuit?";
   size_t i = 0;
   while (i < question.length()) {
     if (question[i] == 'X') {
@@ -598,7 +598,7 @@ int main() {
     }
     i++;
   }
-  cout << question;
+  std::cout << question;
 }
 ]]></code>
       </program>
@@ -653,7 +653,7 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  cout << ("butter" < "butterfly");
+  std::cout << ("butter" < "butterfly");
 }
 ]]></code>
       </program>
@@ -709,7 +709,7 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-   string quote = "Suffering builds character";
+  std::string quote = "Suffering builds character";
    size_t count = 0;
    size_t index = 17;
    while ( index != quote.length() ) {
@@ -718,7 +718,7 @@ int main() {
      }
      index = index + 1;
    }
-   cout << count << endl;
+   std::cout << count << std::endl ;
 }
 ]]></code>
       </program>
@@ -767,13 +767,13 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-   string quote = "Its Bond, James Bond";
+  std::string quote = "Its Bond, James Bond";
    size_t index = 1;
    while( index < quote.length() ) {
      quote[index] = 'M';
      index = index * 2;
    }
-   cout << quote << endl;
+   std::cout << quote << std::endl ;
 }
 ]]></code>
       </program>

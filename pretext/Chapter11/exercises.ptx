@@ -101,7 +101,7 @@
       <program line-numbers="yes">
         <code>
 struct StarWars {
-  string name;
+ std::string name;
   int num_appearences;
   bool isJedi;
 
@@ -198,7 +198,7 @@ int main() {
   c1.mass = 120
   c.density = 2;
   c1.density = 50;
-  cout << c.greater_density(c1) << endl;
+  std::cout << c.greater_density(c1) << std::endl ;
 }
 ]]></code>
       </program>
@@ -245,7 +245,7 @@ int main() {
         <code>
 struct Penguin {
   int age;
-  string gender;
+ std::string gender;
 
   Penguin();
 };
@@ -306,7 +306,7 @@ int main() {
         <code>
 struct Penguin {
   int age;
-  string gender;
+ std::string gender;
 
   Penguin();
   Penguin(int age_in, string gender_in);
@@ -376,7 +376,7 @@ int main() {
 struct Student {
   // Instance variables
   int age, id;
-  string year;
+ std::string year;
 
   // Constructors
   Student(int age, int id, string year);
@@ -438,7 +438,7 @@ struct Student {
         <code><![CDATA[
 struct Penguin {
   int age;
-  string gender;
+ std::string gender;
 
   Penguin();
   Penguin(int age_in, string gender_in);
@@ -457,7 +457,7 @@ Penguin::Penguin(int age_in, string gender_in) {
 int main() {
   Penguin p1;
   Penguin p2(3, "male");
-  cout << p2.age << " " << p1.gender << endl;
+  std::cout << p2.age << " " << p1.gender << std::endl ;
 }
 ]]></code>
       </program>
@@ -510,7 +510,7 @@ struct Point3D {
     x = 4;
     y = 2;
     z = 3;
-    cout << "Sum of relevant variables = " << x+x+y << endl;
+    std::cout << "Sum of relevant variables = " << x+x+y << std::endl ;
   }
 };
 

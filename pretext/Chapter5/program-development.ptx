@@ -25,7 +25,7 @@
   <p>In order to test the new function, we have to call it with sample
     values. Somewhere in main I would add:</p>
   <program>double dist = distance(1.0, 2.0, 4.0, 6.0);
-cout &lt;&lt; dist &lt;&lt; endl;</program>
+cout &lt;&lt; dist &lt;&lt; std::endl ;</program>
   <p>I chose these values so that the horizontal distance is 3 and the
     vertical distance is 4; that way, the result will be 5 (the hypotenuse
     of a 3-4-5 triangle). When you are testing a function, it is useful to
@@ -39,8 +39,8 @@ cout &lt;&lt; dist &lt;&lt; endl;</program>
   <program>double distance(double x1, double y1, double x2, double y2) {
   double dx = x2 - x1;
   double dy = y2 - y1;
-  cout &lt;&lt; &quot;dx is &quot; &lt;&lt; dx &lt;&lt; endl;
-  cout &lt;&lt; &quot;dy is &quot; &lt;&lt; dy &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;dx is &quot; &lt;&lt; dx &lt;&lt; std::endl ;
+  std::cout &lt;&lt; &quot;dy is &quot; &lt;&lt; dy &lt;&lt; std::endl ;
   return 0.0;
 }</program>
   <p>I added output statements that will let me check the intermediate values
@@ -61,7 +61,7 @@ cout &lt;&lt; dist &lt;&lt; endl;</program>
   double dx = x2 - x1;
   double dy = y2 - y1;
   double dsquared = dx*dx + dy*dy;
-  cout &lt;&lt; &quot;dsquared is &quot; &lt;&lt; dsquared;
+  std::cout &lt;&lt; &quot;dsquared is &quot; &lt;&lt; dsquared;
   return 0.0;
 }</program>
   <p>Again, I would compile and run the program at this stage and check the
@@ -84,19 +84,18 @@ cout &lt;&lt; dist &lt;&lt; endl;</program>
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 double distance(double x1, double y1, double x2, double y2) {
     double dx = x2 - x1;
     double dy = y2 - y1;
     double dsquared = dx*dx + dy*dy;
-    double result = sqrt(dsquared);
+    double result = std::sqrt(dsquared);
     return result;
 }
 
 int main() {
     double dist = distance(1.0, 2.0, 4.0, 6.0);
-    cout << dist << endl;
+    std::cout << dist << std::endl;
    return 0;
 }
         ]]></code>
@@ -215,13 +214,12 @@ int main() {
       <p>The print statements in the distance function will be removed after testing. What is this
         called, and what is its purpose?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 double distance(double x1, double y1, double x2, double y2) {
   double dx = x2 - x1;
   double dy = y2 - y1;
-  cout &lt;&lt; &quot;dx is &quot; &lt;&lt; dx &lt;&lt; endl;
-  cout &lt;&lt; &quot;dy is &quot; &lt;&lt; dy &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;dx is &quot; &lt;&lt; dx &lt;&lt; std::endl;
+  std::cout &lt;&lt; &quot;dy is &quot; &lt;&lt; dy &lt;&lt; std::endl;
   return 0.0;
 }</program>
     </statement>

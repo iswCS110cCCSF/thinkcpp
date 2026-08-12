@@ -24,17 +24,17 @@
         <cline>struct Movie (  </cline>
       </block>
       <block order="11">
-        <cline>   string title;</cline>
+        <cline>  std::string title;</cline>
       </block>
       <block order="2">
-        <cline>   string director;</cline>
+        <cline>  std::string director;</cline>
       </block>
       <block order="5">
         <cline>   int releaseYear;</cline>
       </block>
       <block order="9"
              correct="no">
-        <cline>   string releaseYear;  </cline>
+        <cline>  std::string releaseYear;  </cline>
       </block>
       <block order="6"
              correct="no">
@@ -75,26 +75,26 @@
         <cline>Movie printMovie (Movie m) {  </cline>
       </block>
       <block order="1">
-        <cline><![CDATA[   cout << "\"" << m.title << "\" directed by ";]]></cline>
+        <cline><![CDATA[   std::cout << "\"" << m.title << "\" directed by ";]]></cline>
       </block>
       <block order="6">
-        <cline><![CDATA[   cout << m.director << " (" << m.releaseYear << ")" << endl;]]></cline>
+        <cline><![CDATA[   std::cout << m.director << " (" << m.releaseYear << ")" << std::endl ;]]></cline>
       </block>
       <block order="4"
              correct="no">
-        <cline><![CDATA[   cout << title << director << releaseYear;  ]]></cline>
+        <cline><![CDATA[   std::cout << title << director << releaseYear;  ]]></cline>
       </block>
       <block order="2"
              correct="no">
-        <cline><![CDATA[   cout << "\"" << title << "\" directed by ";  ]]></cline>
+        <cline><![CDATA[   std::cout << "\"" << title << "\" directed by ";  ]]></cline>
       </block>
       <block order="8"
              correct="no">
-        <cline><![CDATA[   cout << """ << m.title << "" directed by ";  ]]></cline>
+        <cline><![CDATA[   std::cout << """ << m.title << "" directed by ";  ]]></cline>
       </block>
       <block order="10"
              correct="no">
-        <cline><![CDATA[   cout << director << " (" << releaseYear << ")" << endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << director << " (" << releaseYear << ")" << std::endl ;  ]]></cline>
       </block>
       <block order="7">
         <cline>}</cline>
@@ -168,15 +168,15 @@
       </block>
       <block order="1"
              correct="no">
-        <cline>   string day;  </cline>
+        <cline>  std::string day;  </cline>
       </block>
       <block order="5"
              correct="no">
-        <cline>   string month;  </cline>
+        <cline>  std::string month;  </cline>
       </block>
       <block order="6"
              correct="no">
-        <cline>   string year;  </cline>
+        <cline>  std::string year;  </cline>
       </block>
       <block order="4">
         <cline>};</cline>
@@ -214,15 +214,15 @@
         <cline>Date printDate (Date d) {  </cline>
       </block>
       <block order="4">
-        <cline><![CDATA[   cout << d.month << "/" << d.day << "/" << d.year << endl;]]></cline>
+        <cline><![CDATA[   std::cout << d.month << "/" << d.day << "/" << d.year << std::endl ;]]></cline>
       </block>
       <block order="5"
              correct="no">
-        <cline><![CDATA[   cout << month << "/" << day << "/" << year << endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << month << "/" << day << "/" << year << std::endl ;  ]]></cline>
       </block>
       <block order="3"
              correct="no">
-        <cline><![CDATA[   cout << d.day << "/" << d.month << "/" << d.year << endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << d.day << "/" << d.month << "/" << d.year << std::endl ;  ]]></cline>
       </block>
       <block order="7">
         <cline>}</cline>
@@ -325,7 +325,7 @@
       </block>
       <block order="7"
              correct="no">
-        <cline>   string feet;  </cline>
+        <cline>  std::string feet;  </cline>
       </block>
       <block order="9"
              correct="no">
@@ -367,15 +367,15 @@
         <cline>string printLength(Length l) {  </cline>
       </block>
       <block order="7">
-        <cline><![CDATA[   cout << l.yards << " yds, " << l.feet << " feet, " << l.inches << " in" endl;]]></cline>
+        <cline><![CDATA[   std::cout << l.yards << " yds, " << l.feet << " feet, " << l.inches << " in" std::endl ;]]></cline>
       </block>
       <block order="5"
              correct="no">
-        <cline><![CDATA[   cout << yards << " yds, " << feet << " feet, " << inches << " in" endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << yards << " yds, " << feet << " feet, " << inches << " in" std::endl ;  ]]></cline>
       </block>
       <block order="2"
              correct="no">
-        <cline><![CDATA[   cout << l.inches << " in, " << l.feet << " feet, " << l.yards << " yds" endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << l.inches << " in, " << l.feet << " feet, " << l.yards << " yds" std::endl ;  ]]></cline>
       </block>
       <block order="4">
         <cline>}</cline>

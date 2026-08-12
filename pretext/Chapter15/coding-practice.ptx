@@ -31,7 +31,6 @@ And that has made all the difference.</pre>
         <code>
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
-using namespace std;
 
 // Write your code here.
         </code>
@@ -44,18 +43,17 @@ using namespace std;
         <code>
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
-using namespace std;
 
 int main() {
-    ifstream infile(&quot;poem.txt&quot;);
-    string input;
+    std::ifstream infile(&quot;poem.txt&quot;);
+    std::string input;
     if (!infile.good()) {
-        cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; std::endl;
         exit(1);
     }
     for (int i = 0; i &lt; 5; ++i) {
-        getline(infile, input);
-        cout &lt;&lt; input &lt;&lt; endl;
+        std::getline(infile, input);
+        std::cout &lt;&lt; input &lt;&lt; std::endl;
     }
 }
         </code>
@@ -82,7 +80,6 @@ unwilling to postpone, and one we intend to win, and the others, too.</pre>
         <code>
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
-using namespace std;
 
 // Write your code here.
         </code>
@@ -101,30 +98,30 @@ using namespace std;
             <cline>int main () {</cline>
           </block>
           <block order="6">
-            <cline>   string fileIn;</cline>
+            <cline>  std::string fileIn;</cline>
           </block>
           <block order="12">
             <cline>   int n;</cline>
           </block>
           <block order="9">
-            <cline>   string line;</cline>
+            <cline>  std::string line;</cline>
           </block>
           <block order="8">
-            <cline>   cout &lt;&lt; &quot;Enter the name of the file: &quot;;</cline>
-            <cline>   cin &gt;&gt; fileIn;</cline>
-            <cline>   cout &lt;&lt; fileIn &lt;&lt; endl;</cline>
+            <cline>   std::cout &lt;&lt; &quot;Enter the name of the file: &quot;;</cline>
+            <cline>   std::cin &gt;&gt; fileIn;</cline>
+            <cline>   std::cout &lt;&lt; fileIn &lt;&lt; std::endl ;</cline>
           </block>
           <block order="11">
-            <cline>   cout &lt;&lt; &quot;Enter an integer: &quot;;</cline>
-            <cline>   cin &gt;&gt; n;</cline>
-            <cline>   cout &lt;&lt; n &lt;&lt; endl;</cline>
+            <cline>   std::cout &lt;&lt; &quot;Enter an integer: &quot;;</cline>
+            <cline>   std::cin &gt;&gt; n;</cline>
+            <cline>   std::cout &lt;&lt; n &lt;&lt; std::endl ;</cline>
           </block>
           <block order="3">
             <cline>   ifstream inFile(fileIn.c_str());</cline>
           </block>
           <block order="1">
             <cline>   if (inFile.good() == false) {</cline>
-            <cline>      cout &lt;&lt; &quot;Unable to open the file named &quot; &lt;&lt; fileIn &lt;&lt; &quot; and output &quot; &lt;&lt; n &lt;&lt; &quot; lines.&quot; &lt;&lt; endl;</cline>
+            <cline>      std::cout &lt;&lt; &quot;Unable to open the file named &quot; &lt;&lt; fileIn &lt;&lt; &quot; and output &quot; &lt;&lt; n &lt;&lt; &quot; lines.&quot; &lt;&lt; std::endl ;</cline>
             <cline>      exit(1);</cline>
             <cline>   }</cline>
           </block>
@@ -135,7 +132,7 @@ using namespace std;
             <cline>      getline(inFile, line);</cline>
           </block>
           <block order="4">
-            <cline>      cout &lt;&lt; line &lt;&lt; endl;</cline>
+            <cline>      std::cout &lt;&lt; line &lt;&lt; std::endl ;</cline>
           </block>
           <block order="2">
             <cline>   }</cline>
@@ -168,7 +165,6 @@ using namespace std;
 #include &lt;fstream&gt;
 #include &lt;vector&gt;
 #include &lt;algorithm&gt;
-using namespace std;
 
 // Write your code here.
         </code>
@@ -184,28 +180,27 @@ using namespace std;
 #include &lt;fstream&gt;
 #include &lt;vector&gt;
 #include &lt;algorithm&gt;
-using namespace std;
 
 int main() {
-    ifstream infile(&quot;heights.txt&quot;);
-    vector&lt;int&gt; data;
+    std::ifstream infile(&quot;heights.txt&quot;);
+    std::vector&lt;int&gt; data;
     double median;
     int height;
     if (!infile.good()) {
-        cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; std::endl;
         exit(1);
     }
     while (infile &gt;&gt; height) {
         data.push_back(height);
     }
-    sort(data.begin(), data.end());
+    std::sort(data.begin(), data.end());
     if (data.size() % 2 == 0) {
         median = (data[data.size() / 2 - 1] + data[data.size() / 2]) / 2.0;
     }
     else {
         median = data[data.size() / 2];
     }
-    cout &lt;&lt; &quot;The median height is: &quot; &lt;&lt; median &lt;&lt; &quot; inches&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;The median height is: &quot; &lt;&lt; median &lt;&lt; &quot; inches&quot; &lt;&lt; std::endl;
 }
         </code>
     </program>
@@ -224,7 +219,6 @@ int main() {
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
 #include &lt;cmath&gt;
-using namespace std;
 
 int main() {
    // Write your code here.
@@ -234,13 +228,13 @@ int main() {
 
 
    // Do not modify the code below
-   ifstream student_output(&quot;powers.txt&quot;);
+   std::ifstream student_output(&quot;powers.txt&quot;);
    if (!student_output.good()) {
-         cout &lt;&lt; &quot;Error opening student's output.&quot; &lt;&lt; endl;
+         std::cout &lt;&lt; &quot;Error opening student's output.&quot; &lt;&lt; std::endl;
    }
-   string answer;
-   while (getline(student_output, answer)) {
-         cout &lt;&lt; answer &lt;&lt; endl;
+   std::string answer;
+   while (std::getline(student_output, answer)) {
+         std::cout &lt;&lt; answer &lt;&lt; std::endl;
    }
 }
         </code>
@@ -261,20 +255,20 @@ int main() {
             <cline>   int n;</cline>
           </block>
           <block order="14">
-            <cline>   cout &lt;&lt; &quot;Enter an integer: &quot;;</cline>
+            <cline>   std::cout &lt;&lt; &quot;Enter an integer: &quot;;</cline>
           </block>
           <block order="9">
-            <cline>   cin &gt;&gt; n;</cline>
+            <cline>   std::cin &gt;&gt; n;</cline>
           </block>
           <block order="6">
-            <cline>   cout &lt;&lt; n &lt;&lt; endl;</cline>
+            <cline>   std::cout &lt;&lt; n &lt;&lt; std::endl ;</cline>
           </block>
           <block order="4">
             <cline>   ofstream outfile (&quot;powers.txt&quot;);</cline>
           </block>
           <block order="12">
             <cline>   if (outfile.good() == false) {</cline>
-            <cline>      cout &lt;&lt; &quot;Unable to open output file.&quot; &lt;&lt; endl;</cline>
+            <cline>      std::cout &lt;&lt; &quot;Unable to open output file.&quot; &lt;&lt; std::endl ;</cline>
             <cline>      exit (1);</cline>
             <cline>   }</cline>
           </block>
@@ -285,7 +279,7 @@ int main() {
             <cline>      for (int i = 0; i &lt; n; i++) {</cline>
           </block>
           <block order="15">
-            <cline>            outfile &lt;&lt; pow(2,i) &lt;&lt; endl;</cline>
+            <cline>            outfile &lt;&lt; pow(2,i) &lt;&lt; std::endl ;</cline>
           </block>
           <block order="8">
             <cline>      }</cline>
@@ -298,15 +292,15 @@ int main() {
           </block>
           <block order="13">
             <cline>   if (!student_output.good()) {</cline>
-            <cline>      cout &lt;&lt; &quot;Error opening student's output.&quot; &lt;&lt; endl;</cline>
+            <cline>      std::cout &lt;&lt; &quot;Error opening student's output.&quot; &lt;&lt; std::endl ;</cline>
             <cline>   }</cline>
           </block>
           <block order="2">
-            <cline>   string answer;</cline>
+            <cline>  std::string answer;</cline>
           </block>
           <block order="1">
             <cline>   while (getline(student_output, answer)) {</cline>
-            <cline>      cout &lt;&lt; answer &lt;&lt; endl;</cline>
+            <cline>      std::cout &lt;&lt; answer &lt;&lt; std::endl ;</cline>
             <cline>   }</cline>
           </block>
           <block order="16">
@@ -336,7 +330,6 @@ int main() {
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
 #include &lt;cctype&gt;
-using namespace std;
 
 int main() {
     // Write your code here.
@@ -352,9 +345,8 @@ int main() {
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
 #include &lt;cctype&gt;
-using namespace std;
 
-string ROT13 (string message) {
+std::string ROT13 (std::string message) {
     for (size_t i = 0; i &lt; message.size(); ++i) {
         if (isalpha(message[i])) {
             if (message[i] &gt;= 'A' &amp;&amp; message[i] &lt;= 'Z') {
@@ -379,14 +371,14 @@ string ROT13 (string message) {
 }
 
 int main() {
-    ifstream infile(&quot;message.txt&quot;);
-    string message;
+    std::ifstream infile(&quot;message.txt&quot;);
+    std::string message;
     if (!infile.good()) {
-        cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; std::endl;
         exit(1);
     }
-    while (getline(infile, message)) {
-        cout &lt;&lt; ROT13(message) &lt;&lt; endl;
+    while (std::getline(infile, message)) {
+        std::cout &lt;&lt; ROT13(message) &lt;&lt; std::endl;
     }
 }
         </code>
@@ -412,7 +404,6 @@ Gina     Zhou       9        3.2    14</pre>
         <code>
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
-using namespace std;
 
 int main() {
     // Write your code here.
@@ -427,22 +418,21 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
-using namespace std;
 
 int main() {
-    ifstream infile(&quot;class_data.txt&quot;);
-    string fname, lname;
+    std::ifstream infile(&quot;class_data.txt&quot;);
+    std::string fname, lname;
     int grade, age;
     double gpa;
     if (!infile.good()) {
-        cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; std::endl;
         exit(1);
     }
-    getline(infile, fname);
+    std::getline(infile, fname);
     while (infile &gt;&gt; fname &gt;&gt; lname &gt;&gt; grade &gt;&gt; gpa &gt;&gt; age) {
         if (gpa &gt;= 3.5) {
-            cout &lt;&lt; fname &lt;&lt; '\t' &lt;&lt; lname &lt;&lt; '\t' &lt;&lt; grade
-                 &lt;&lt; '\t' &lt;&lt; gpa &lt;&lt; '\t' &lt;&lt; age &lt;&lt; endl;
+            std::cout &lt;&lt; fname &lt;&lt; '\t' &lt;&lt; lname &lt;&lt; '\t' &lt;&lt; grade
+                 &lt;&lt; '\t' &lt;&lt; gpa &lt;&lt; '\t' &lt;&lt; age &lt;&lt; std::endl;
         }
     }
 }
@@ -462,7 +452,6 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
-using namespace std;
 
 // Write your code here.
         </code>
@@ -488,25 +477,25 @@ That- that's about it.</pre>
             <cline>int main() {</cline>
           </block>
           <block order="14">
-            <cline>   string word;</cline>
+            <cline>  std::string word;</cline>
           </block>
           <block order="7">
-            <cline>   cout &lt;&lt; &quot;Enter word to replace 'shrimp': &quot;;</cline>
+            <cline>   std::cout &lt;&lt; &quot;Enter word to replace 'shrimp': &quot;;</cline>
           </block>
           <block order="15">
-            <cline>   cin &gt;&gt; word;</cline>
+            <cline>   std::cin &gt;&gt; word;</cline>
           </block>
           <block order="10">
-            <cline>   cout &lt;&lt; word &lt;&lt; endl;</cline>
+            <cline>   std::cout &lt;&lt; word &lt;&lt; std::endl ;</cline>
           </block>
           <block order="2">
-            <cline>   string replace = &quot;shrimp&quot;;</cline>
+            <cline>  std::string replace = &quot;shrimp&quot;;</cline>
           </block>
           <block order="17">
             <cline>   ifstream inFile(&quot;shrimp.txt&quot;);</cline>
           </block>
           <block order="9">
-            <cline>   string line;</cline>
+            <cline>  std::string line;</cline>
           </block>
           <block order="13">
             <cline>   for (int i = 0; i &lt; 4; i++) {</cline>
@@ -533,7 +522,7 @@ That- that's about it.</pre>
             <cline>      }</cline>
           </block>
           <block order="19">
-            <cline>      cout &lt;&lt; line&lt;&lt; endl;</cline>
+            <cline>      std::cout &lt;&lt; line&lt;&lt; std::endl ;</cline>
           </block>
           <block order="11">
             <cline>   }</cline>
@@ -555,7 +544,6 @@ That- that's about it.</pre>
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 int main() {
     // Write your code here.
@@ -570,16 +558,15 @@ int main() {
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 int main() {
-    ofstream outfile(&quot;mult_table.txt&quot;);
+    std::ofstream outfile(&quot;mult_table.txt&quot;);
     if (!outfile.good()) {
-        cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; std::endl;
         exit(1);
     }
-    vector&lt;int&gt; rows(10);
-    vector&lt;vector&lt;int&gt; &gt; mat;
+    std::vector&lt;int&gt; rows(10);
+    std::vector&lt;std::vector&lt;int&gt; &gt; mat;
     for (int i = 0; i &lt; 10; ++i) {
         mat.push_back(rows);
     }
@@ -592,7 +579,7 @@ int main() {
         for (int j = 0; i &lt; 10; ++j) {
             outfile &lt;&lt; matrix[i][j] &lt;&lt; '\t';
         }
-        cout &lt;&lt; endl;
+        std::cout &lt;&lt; std::endl;
     }
 }
         </code>
@@ -615,7 +602,6 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;fstream&gt;
-using namespace std;
 
 int main() {
    /*

@@ -27,7 +27,7 @@ count[3] -= 60;</program>
     most common ways to index a vector is with a loop variable. For example:</p>
   <program>int i = 0;
 while (i &lt; 4) {
-  cout &lt;&lt; count[i] &lt;&lt; endl;
+  std::cout &lt;&lt; count[i] &lt;&lt; std::endl ;
   i++;
 }</program>
   <p>This <c>while</c> loop counts from 0 to 4; when the loop variable <c>i</c> is 4, the condition fails
@@ -45,32 +45,31 @@ while (i &lt; 4) {
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
-void print_vec(vector<int> vec) {
-    cout << "[";
+void print_vec(std::vector<int> vec) {
+    std::cout << "[";
     for (size_t i = 0; i < vec.size() - 1; ++i) {
-        cout <<  vec[i] << ",";
+        std::cout <<  vec[i] << ",";
     }
-    cout << vec[vec.size()-1];
-    cout << "]" << endl;
+    std::cout << vec[vec.size()-1];
+    std::cout << "]" << std::endl;
 }
 
 int main() {
-    vector<int> count = {1,2,3,4};
-    cout << "Before we make any changes, count = "; print_vec(count);
+    std::vector<int> count = {1,2,3,4};
+    std::cout << "Before we make any changes, count = "; print_vec(count);
     count[0] = 7;
     count[1] = count[0] * 2;
     count[2]++;
     count[3] -= 60;
-    cout << "After we made the above changes, count = "; print_vec(count);
+    std::cout << "After we made the above changes, count = "; print_vec(count);
 }
         ]]></code>
     </program>
   </listing>
   <exercise label="accessing_elements_1">
     <statement>
-      <p><term>Multiple Response</term> How would you increment the third element of <c>vector&lt;int&gt; vec</c> by one?</p>
+      <p><term>Multiple Response</term> How would you increment the third element of <c>std::vector&lt;int&gt; vec</c> by one?</p>
     </statement>
     <choices>
       <choice>

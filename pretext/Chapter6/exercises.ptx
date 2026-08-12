@@ -14,7 +14,7 @@ int main() {
     x = i;
     i++;
   }
-  cout << x;
+  std::cout << x;
 }
 ]]></code>
       </program>
@@ -71,7 +71,7 @@ int main() {
     x = i;
     i++;
   }
-  cout << x;
+  std::cout << x;
 }
 ]]></code>
       </program>
@@ -174,17 +174,17 @@ int main() {
 int main() {
   int j = 6;
   int i = j + 4;
-  cout << "People ";
+  std::cout << "People ";
   i = i % 2;
   i = i - 1;
   while (i < 3) {
-    cout << "really ";
+    std::cout << "really ";
     if (i > 0) {
-      cout << "really ";
+      std::cout << "really ";
     }
     i += 2;
   }
-  cout << "like Joe's Pizza." << endl;
+  std::cout << "like Joe's Pizza." << std::endl ;
 }
 ]]></code>
       </program>
@@ -234,13 +234,13 @@ int main() {
         <code><![CDATA[
 int main() {
   int n = 10;
-  // cout << "Da ";
-  cout << "na ";
+  // std::cout << "Da ";
+  std::cout << "na ";
   while (n != 3) {
-    cout << "na ";
+    std::cout << "na ";
     n--;
   }
-  cout << "Batman!";
+  std::cout << "Batman!";
 }
 ]]></code>
       </program>
@@ -289,12 +289,12 @@ int main() {
         <code><![CDATA[
 int main() {
   int n = 10;
-  cout << "Da ";
-  cout << "na ";
+  std::cout << "Da ";
+  std::cout << "na ";
   while (n != 3) {
-    cout << "na ";
+    std::cout << "na ";
   }
-  cout << "Batman!";
+  std::cout << "Batman!";
 }
 ]]></code>
       </program>
@@ -344,7 +344,7 @@ int main() {
 int main() {
   int x = 1;
   while (x < 6) {
-    cout << x << "\t" << pow (x, 5) / pow (x, 3) << endl;
+    std::cout << x << "\t" << pow (x, 5) / pow (x, 3) << std::endl ;
     x++;
   }
 }
@@ -401,7 +401,7 @@ int superSecretFunction(int n) {
 
 int main() {
   int x = 1;
-  cout << "After using the super secret function, we get " << superSecretFunction (x);
+  std::cout << "After using the super secret function, we get " << superSecretFunction (x);
 }
 ]]></code>
       </program>
@@ -459,9 +459,9 @@ int loopFive(int n) {
 }
 
 int main() {
-  cout << loopFive (2);
-  cout << loopFive (3);
-  cout << loopFive (4);
+  std::cout << loopFive (2);
+  std::cout << loopFive (3);
+  std::cout << loopFive (4);
 }
 ]]></code>
       </program>
@@ -515,7 +515,7 @@ int main() {
 void repeatBot(string input) {
   int n = 0;
   while (n < 5) {
-    cout << input << " ";
+    std::cout << input << " ";
     n--;
   }
 }
@@ -577,7 +577,7 @@ int main() {
 void repeatBot(string input) {
   int n = 0;
   while (n > 5) {
-    cout << input << " ";
+    std::cout << input << " ";
     n++;
   }
 }

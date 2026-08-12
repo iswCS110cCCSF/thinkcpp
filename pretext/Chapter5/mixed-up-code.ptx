@@ -203,7 +203,7 @@
       </block>
       <block order="1"
              correct="no">
-        <cline><![CDATA[   cout << 0.5 * base * height << endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << 0.5 * base * height << std::endl ;  ]]></cline>
       </block>
       <block order="4">
         <cline>}</cline>

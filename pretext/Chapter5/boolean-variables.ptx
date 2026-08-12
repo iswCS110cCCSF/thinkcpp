@@ -14,7 +14,7 @@ bool testResult = false;</program>
 bool plusFlag = (x &gt; 0);    // true if x is positive</program>
   <p>and then use it as part of a conditional statement later</p>
   <program>if (evenFlag) {
-  cout &lt;&lt; &quot;n was even when I checked it&quot;;
+  std::cout &lt;&lt; &quot;n was even when I checked it&quot;;
 }</program>
   <p>A variable used in this way is called a <term>flag</term>, since it flags the presence or
     absence of some condition.</p>
@@ -68,11 +68,11 @@ bool evenFlag = (n % 2 == 0);
 bool plusFlag = (x &gt; 0);
 
 if (evenFlag) {
-  cout &lt;&lt; &quot;n was even when I checked it &quot;;
+  std::cout &lt;&lt; &quot;n was even when I checked it &quot;;
 }
 
 if (plusFlag) {
-  cout &lt;&lt; &quot;x was positive when I checked it&quot;;
+  std::cout &lt;&lt; &quot;x was positive when I checked it&quot;;
 }</program>
     </statement>
     <choices>

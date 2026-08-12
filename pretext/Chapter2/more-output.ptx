@@ -10,11 +10,10 @@
     <program label="more_output_AC_1_editor" interactive="activecode" line-numbers="yes" highlight-lines="5-6">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    cout << "Hello, world." << endl;     // output one line
-    cout << "How are you?" << endl;      // output another
+    std::cout << "Hello, world." << std::endl;     // output one line
+    std::cout << "How are you?" << std::endl;      // output another
 }
         ]]></code>
     </program>
@@ -38,11 +37,10 @@ int main() {
     <program interactive="activecode" line-numbers="yes" highlight-lines="5" label="more_output_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    cout << "Goodbye, ";
-    cout << "cruel world!" << endl;
+    std::cout << "Goodbye, ";
+    std::cout << "cruel world!" << std::endl;
 }
 ]]></code>
     </program>
@@ -62,11 +60,10 @@ world!</c>. Notice in <c>main</c> that there is a
     <program interactive="activecode" line-numbers="yes" label="more_output_AC_3_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    cout<<"Goodbye, ";
-    cout<<"cruel world!"<<endl;
+    std::cout<<"Goodbye, ";
+    std::cout<<"cruel world!"<<std::endl;
 }
         ]]></code>
     </program>
@@ -83,9 +80,8 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="more_output_AC_4_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-int main() {cout<<"Goodbye, ";cout<<"cruel world!"<<endl;}
+int main() {std::cout<<"Goodbye, ";std::cout<<"cruel world!"<<std::endl;}
         ]]></code>
     </program>
   </listing>
@@ -110,13 +106,12 @@ int main() {cout<<"Goodbye, ";cout<<"cruel world!"<<endl;}
       <p>On how many separate lines will the 7's be printed?</p>
       <program line-numbers="yes">
 #include &lt;iostream&gt;
-using namespace std;
 
 int main() {
-  cout &lt;&lt; 7 &lt;&lt; endl;
-  cout &lt;&lt; 7;
-  cout &lt;&lt; 7;
-  cout &lt;&lt; 7;
+  std::cout &lt;&lt; 7 &lt;&lt; std::endl;
+  std::cout &lt;&lt; 7;
+  std::cout &lt;&lt; 7;
+  std::cout &lt;&lt; 7;
 }
       </program>
     </statement>
@@ -159,7 +154,7 @@ int main() {
   <exercise label="more_output_3" number="yes" adaptive="yes" indentation="show">
     <statement>
       <p>Construct a main function that prints <q>Snap!</q> on the first line, <q>Crackle!</q> on
-        the third line, and <q>Pop!</q> on the sixth line. You might not use all of endl blocks
+        the third line, and <q>Pop!</q> on the sixth line. You might not use all of std::endl  blocks
         provided.</p>
     </statement>
     <blocks>
@@ -167,31 +162,31 @@ int main() {
         <cline>int main() {</cline>
       </block>
       <block order="4">
-        <cline> cout &lt;&lt; &quot;Snap!&quot;;</cline>
+        <cline> std::cout &lt;&lt; &quot;Snap!&quot;;</cline>
       </block>
       <block order="8">
-        <cline><![CDATA[ cout << endl; // first endl]]></cline>
+        <cline><![CDATA[ std::cout << std::endl ; // first std::endl ]]></cline>
       </block>
       <block order="7">
-        <cline><![CDATA[ cout << endl; // second endl]]></cline>
+        <cline><![CDATA[ std::cout << std::endl ; // second std::endl ]]></cline>
       </block>
       <block order="2">
-        <cline><![CDATA[ cout << "Crackle!" << endl;]]></cline>
+        <cline><![CDATA[ std::cout << "Crackle!" << std::endl ;]]></cline>
       </block>
       <block order="11">
-        <cline><![CDATA[ cout << endl; // third endl]]></cline>
+        <cline><![CDATA[ std::cout << std::endl ; // third std::endl ]]></cline>
       </block>
       <block order="6">
-        <cline><![CDATA[ cout << endl; // fourth endl]]></cline>
+        <cline><![CDATA[ std::cout << std::endl ; // fourth std::endl ]]></cline>
       </block>
       <block order="9">
-        <cline> cout &lt;&lt; &quot;Pop!&quot;;</cline>
+        <cline> std::cout &lt;&lt; &quot;Pop!&quot;;</cline>
       </block>
       <block order="5" correct="no">
-        <cline><![CDATA[ cout << endl; // fifth endl ]]></cline>
+        <cline><![CDATA[ std::cout << std::endl ; // fifth std::endl  ]]></cline>
       </block>
       <block order="10" correct="no">
-        <cline><![CDATA[ cout << endl; // sixth endl ]]></cline>
+        <cline><![CDATA[ std::cout << std::endl ; // sixth std::endl  ]]></cline>
       </block>
       <block order="1">
         <cline>}</cline>
@@ -208,16 +203,16 @@ int main() {
         <cline>int main() {</cline>
       </block>
       <block order="4">
-        <cline><![CDATA[ cout << "Hello," << endl; cout << "world!";]]></cline>
+        <cline><![CDATA[ std::cout << "Hello," << std::endl ; std::cout << "world!";]]></cline>
       </block>
       <block order="5" correct="no">
-        <cline><![CDATA[ cout << "Hello," << "world!" << endl; ]]></cline>
+        <cline><![CDATA[ std::cout << "Hello," << "world!" << std::endl ; ]]></cline>
       </block>
       <block order="1" correct="no">
-        <cline> cout &gt;&gt; &quot;Hello,&quot; &gt;&gt; endl; cout &gt;&gt; &quot;world!&quot;; </cline>
+        <cline> std::cout &gt;&gt; &quot;Hello,&quot; &gt;&gt; std::endl ; std::cout &gt;&gt; &quot;world!&quot;; </cline>
       </block>
       <block order="2" correct="no">
-        <cline> cout &gt;&gt; &quot;Hello,&quot; &gt;&gt; &quot;world!&quot; &gt;&gt; endl; </cline>
+        <cline> std::cout &gt;&gt; &quot;Hello,&quot; &gt;&gt; &quot;world!&quot; &gt;&gt; std::endl ; </cline>
       </block>
       <block order="3">
         <cline>}</cline>

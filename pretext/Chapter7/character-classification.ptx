@@ -6,7 +6,7 @@
     file <c>cctype</c>.</p>
   <program>char letter = 'a';
 if (isalpha(letter)) {
-  cout &lt;&lt; &quot;The character &quot; &lt;&lt; letter &lt;&lt; &quot; is a letter.&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;The character &quot; &lt;&lt; letter &lt;&lt; &quot; is a letter.&quot; &lt;&lt; std::endl ;
 }</program>
   <p>You might expect the return value from <c>isalpha</c> to be a <c>bool</c>, but for reasons I don't even
     want to think about, it is actually an integer that is 0 if the argument is not a letter, and
@@ -26,7 +26,7 @@ if (isalpha(letter)) {
     character.</p>
   <program>char letter = 'a';
 letter = toupper (letter);
-cout &lt;&lt; letter &lt;&lt; endl;</program>
+cout &lt;&lt; letter &lt;&lt; std::endl ;</program>
   <p>The output of this code is <c>A</c>.</p>
   <p>As an exercise, use the character classification and conversion library to write functions
     named <c>stringToUpper</c> and <c>stringToLower</c> that take a single <c>string</c> as a parameter, and return a string with
@@ -42,25 +42,24 @@ cout &lt;&lt; letter &lt;&lt; endl;</program>
       <code><![CDATA[
 #include <iostream>
 #include <cctype>
-using namespace std;
 
-string stringToUpper(string input) {
-    // ``stringToUpper`` should convert a string to uppercase and
+std::string stringToUpper(std::string input) {
+    // ``stringToUpper`` should convert a std::string to uppercase and
     // and return it. Write your implementation here.
 }
 
-string stringToLower(string input) {
-    // ``stringToLower`` should convert a string to lowercase and
+std::string stringToLower(std::string input) {
+    // ``stringToLower`` should convert a std::string to lowercase and
     // and return it. Write your implementation here.
 }
 
 int main() {
-    string upper = "This String Should Be Converted To Uppercase!";
+    std::string upper = "This String Should Be Converted To Uppercase!";
     upper = stringToUpper (upper);
-    cout << upper << endl;
-    string lower = "This String Should Be Converted To Lowercase!";
+    std::cout << upper << std::endl;
+    std::string lower = "This String Should Be Converted To Lowercase!";
     stringToLower (lower);
-    cout << lower << endl;
+    std::cout << lower << std::endl;
 }
         ]]></code>
     </program></statement>

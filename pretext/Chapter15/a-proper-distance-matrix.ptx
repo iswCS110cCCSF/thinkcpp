@@ -34,24 +34,23 @@ public:
   void add(const string&amp; city1, const string&amp; city2, int dist);
   int distance(int i, int j) const;
   int distance(const string&amp; city1, const string&amp; city2) const;
-  string cityName(int i) const;
+ std::string cityName(int i) const;
   int numCities() const;
   void print();
 };</program>
   <p>Using this interface simplifies <c>main</c>:</p>
   <program>#include &lt;iostream&gt;
 #include &lt;fstream&gt;
-using namespace std;
 
 
 int main()
 {
-  string line;
-  ifstream infile("distances");
+  std::string line;
+  std::ifstream infile("distances");
   DistMatrix distances(2);
 
   while (true) {
-    getline(infile, line);
+    std::getline(infile, line);
     if (infile.eof()) break;
     processLine(line, distances);
   }
@@ -63,7 +62,7 @@ int main()
   <program>void processLine(const string&amp; line, DistMatrix&amp; distances)
 {
   char quote = '\"';
-  vector&lt;int&gt; quoteIndex (4);
+  std::vector&lt;int&gt; quoteIndex (4);
   quoteIndex[0] = line.find(quote);
   for (int i=1; i &lt; 4; i++) {
     quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1);
@@ -71,11 +70,11 @@ int main()
 
   // break the line up into substrings
   int len1 = quoteIndex[1] - quoteIndex[0] - 1;
-  string city1 = line.substr(quoteIndex[0]+1, len1);
+ std::string city1 = line.substr(quoteIndex[0]+1, len1);
   int len2 = quoteIndex[3] - quoteIndex[2] - 1;
-  string city2 = line.substr(quoteIndex[2]+1, len2);
+ std::string city2 = line.substr(quoteIndex[2]+1, len2);
   int len3 = line.length() - quoteIndex[2] - 1;
-  string distString = line.substr(quoteIndex[3]+1, len3);
+ std::string distString = line.substr(quoteIndex[3]+1, len3);
   int distance = convertToInt(distString);
 
   // add the new datum to the distances matrix

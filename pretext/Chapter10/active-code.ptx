@@ -16,10 +16,9 @@
 #include &lt;iostream&gt;
 
 
-using namespace std;
 
 int main () {
-    vector&lt;int&gt; nums (5) = 1;
+    std::vector&lt;int&gt; nums (5) = 1;
     nums[3] = 2;
 }
         </code>
@@ -40,10 +39,9 @@ int main () {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 int main () {
-    vector&lt;int&gt; nums (5, 1);
+    std::vector&lt;int&gt; nums (5, 1);
     nums[2] = 2;
 }
         </code>
@@ -65,9 +63,8 @@ int main () {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
-int evenCount(const vector&lt;int&gt; &amp;vec) {
+int evenCount(const std::vector&lt;int&gt; &amp;vec) {
     for (size_t i = 0; i &lt; vec.size(); i++) {
         if (i % 2 == 0) {
             count++;
@@ -77,8 +74,8 @@ int evenCount(const vector&lt;int&gt; &amp;vec) {
 }
 
 int main() {
-    vector&lt;int&gt; vec{1,2,3,4};
-    cout &lt;&lt; evenCount(vec) &lt;&lt; endl;
+    std::vector&lt;int&gt; vec{1,2,3,4};
+    std::cout &lt;&lt; evenCount(vec) &lt;&lt; std::endl;
 }
         </code>
     </program></statement>
@@ -90,7 +87,7 @@ int main() {
         </statement>
         <blocks>
           <block order="7">
-            <cline>int evenCount (const vector&lt;int&gt; &amp;vec) {</cline>
+            <cline>int evenCount (const std::vector&lt;int&gt; &amp;vec) {</cline>
           </block>
           <block order="11">
             <cline>    int count = 0;</cline>
@@ -141,9 +138,8 @@ int main() {
 #include &lt;iostream&gt;
 #include &lt;string&gt;
 #include &lt;vector&gt;
-using namespace std;
 
-int endsWith(const vector&lt;string&gt;&amp; vec, char c) {
+int endsWith(const std::vector&lt;std::string&gt;&amp; vec, char c) {
     int count;
     for (size_t i = 0; i &lt; vec.size(); i++) {
         size_t last = vec.size() - 1;
@@ -172,9 +168,8 @@ int endsWith(const vector&lt;string&gt;&amp; vec, char c) {
 #include &lt;iostream&gt;
 #include &lt;string&gt;
 #include &lt;vector&gt;
-using namespace std;
 
-int endsWith(const vector&lt;string&gt;&amp; vec, char c) {
+int endsWith(const std::vector&lt;std::string&gt;&amp; vec, char c) {
     int count = 0;
     for (size_t i = 0; i &lt; vec.size(); i++) {
         size_t  last = vec[i].size() - 1;
@@ -207,10 +202,9 @@ int endsWith(const vector&lt;string&gt;&amp; vec, char c) {
 #include &lt;iostream&gt;
 
 
-using namespace std;
 
 int main () {
-    vector&lt;double&gt; temps = {98.6, 97.8, 100.3, 97.2, 98.7, 97.8, 99.8, 96.9, 98.2, 99.1, 99.9};
+    std::vector&lt;double&gt; temps = {98.6, 97.8, 100.3, 97.2, 98.7, 97.8, 99.8, 96.9, 98.2, 99.1, 99.9};
 
     int covid_count = 0;
     for (size_t i = 0; i &lt; temps.size(); i++) {
@@ -233,13 +227,12 @@ int main () {
           <block order="10">
             <cline>#include &lt;iostream&gt;</cline>
             <cline>#include &lt;vector&gt;</cline>
-            <cline>using namespace std;</cline>
           </block>
           <block order="4">
             <cline>int main() {</cline>
           </block>
           <block order="9">
-            <cline>    vector&lt;double&gt; temps = {98.6, 97.8, 100.3, 97.2, 98.7, 97.8, 99.8, 96.9, 98.2, 99.1, 99.9};</cline>
+            <cline>    std::vector&lt;double&gt; temps = {98.6, 97.8, 100.3, 97.2, 98.7, 97.8, 99.8, 96.9, 98.2, 99.1, 99.9};</cline>
           </block>
           <block order="3">
             <cline>    int covid_count = 0;</cline>
@@ -260,7 +253,7 @@ int main () {
             <cline>    }</cline>
           </block>
           <block order="5">
-            <cline>    cout &lt;&lt; covid_count &lt;&lt; endl;</cline>
+            <cline>   std::cout &lt;&lt; covid_count &lt;&lt; std::endl ;</cline>
           </block>
           <block order="6">
             <cline>}</cline>
@@ -281,10 +274,9 @@ int main () {
 #include &lt;iostream&gt;
 
 
-using namespace std;
 
 int main () {
-    vector&lt;string&gt; words = {&quot;roses&quot;, &quot;are&quot;, &quot;red&quot;, &quot;violets&quot;, &quot;stop&quot;, &quot;are&quot;, &quot;blue&quot;}
+    std::vector&lt;std::string&gt; words = {&quot;roses&quot;, &quot;are&quot;, &quot;red&quot;, &quot;violets&quot;, &quot;stop&quot;, &quot;are&quot;, &quot;blue&quot;}
 
     while(          ) {
 
@@ -308,10 +300,9 @@ int main () {
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
 
-using namespace std;
 
 int main () {
-    vector&lt;string&gt; words = {&quot;roses&quot;, &quot;are&quot;, &quot;red&quot;, &quot;violets&quot;, &quot;stop&quot;, &quot;are&quot;, &quot;blue&quot;};
+    std::vector&lt;std::string&gt; words = {&quot;roses&quot;, &quot;are&quot;, &quot;red&quot;, &quot;violets&quot;, &quot;stop&quot;, &quot;are&quot;, &quot;blue&quot;};
 
     while (words[words.size() - 1] != &quot;stop&quot;){
         words.pop_back();
@@ -338,16 +329,15 @@ int main () {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 // Write the endsEven function here
 
 
 int main() {
-    vector&lt;int&gt; vec{1,2,3,4,5,6,7,7,9};
+    std::vector&lt;int&gt; vec{1,2,3,4,5,6,7,7,9};
     endsEven(vec);
     for(int unsigned i = 0; i &lt; vec.size(); i++) {
-        cout &lt;&lt; vec[i] &lt;&lt; endl;
+        std::cout &lt;&lt; vec[i] &lt;&lt; std::endl;
     }
 }
         </code>
@@ -361,10 +351,10 @@ int main() {
         </statement>
         <blocks>
           <block order="3">
-            <cline>void endsEven (vector&lt;int&gt; &amp;vec) {</cline>
+            <cline>void endsEven (std::vector&lt;int&gt; &amp;vec) {</cline>
           </block>
           <block order="1" correct="no">
-            <cline>vector endsEven (vector&lt;int&gt; &amp;vec) { </cline>
+            <cline>vector endsEven (std::vector&lt;int&gt; &amp;vec) { </cline>
           </block>
           <block order="6">
             <choice correct="yes">
@@ -391,7 +381,7 @@ int main() {
   <exercise label="vectors_a7">
     <statement>
       <p>Write a function called <c>has_char</c> that returns a boolean of whether every string in the
-        vector <c>vec</c> contains the character <c>let</c>. It should return true if all strings contain
+         vector<c>vec</c> contains the character <c>let</c>. It should return true if all strings contain
         the <c>let</c>.</p>
 
     <program interactive="activecode" label="vectors_a7q_editor">
@@ -399,7 +389,6 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
         </code>
 <tests>
 
@@ -417,10 +406,9 @@ using namespace std;
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 
-int has_char(const vector&lt;string&gt;&amp; vec, char let) {
+int has_char(const std::vector&lt;std::string&gt;&amp; vec, char let) {
     size_t count = 0;
     for (size_t i = 0; i &lt; vec.size(); i++) {
         for (size_t c = 0; c &lt; vec[i].size(); c++) {
@@ -457,17 +445,16 @@ int has_char(const vector&lt;string&gt;&amp; vec, char let) {
 #include &lt;iostream&gt;
 #include &lt;cstdlib&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 // Write the randomNums function here
 
 
 int main() {
     int num = 10;
-    int max = 100;
-    randomNums(num,max);
-    for (size_t i = 0; i &lt; randomNums(num,max).size(); i++) {
-        cout &lt;&lt; randomNums(num,max)[i] &lt;&lt; endl;
+    int std::max = 100;
+    randomNums(num,std::max);
+    for (size_t i = 0; i &lt; randomNums(num,std::max).size(); i++) {
+        std::cout &lt;&lt; randomNums(num,std::max)[i] &lt;&lt; std::endl;
     }
 }
         </code>
@@ -483,10 +470,10 @@ int main() {
         </statement>
         <blocks>
           <block order="6">
-            <cline>vector&lt;int&gt; randomNums (int num, int max) {</cline>
+            <cline>std::vector&lt;int&gt; randomNums (int num, int max) {</cline>
           </block>
           <block order="7">
-            <cline>    vector&lt;int&gt; randomVec(num);</cline>
+            <cline>    std::vector&lt;int&gt; randomVec(num);</cline>
           </block>
           <block order="3">
             <choice correct="yes">
@@ -525,7 +512,6 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
         </code>
 <tests>
 
@@ -542,9 +528,8 @@ using namespace std;
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
-double mean (const vector&lt;double&gt; nums) {
+double mean (const std::vector&lt;double&gt; nums) {
     double sum = 0;
     for (size_t i = 0; i &lt; nums.size(); ++i) {
         sum = sum + nums[i];
@@ -563,7 +548,7 @@ double mean (const vector&lt;double&gt; nums) {
 
   <exercise label="vectors_a10_q">
     <statement>
-      <p>Write the function <c>hundyBundy</c> that returns a count of all numbers in the passed vector <c>vec</c>
+      <p>Write the function <c>hundyBundy</c> that returns a count of all numbers in the passed  vector<c>vec</c>
         that are divisible by 100. Check the hint below for help with the construction of the
         code.</p>
 
@@ -571,31 +556,30 @@ double mean (const vector&lt;double&gt; nums) {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 // Write the hundyBundy function here
 
 
 int main() {
-    vector&lt;int&gt; vec{ 100,10,300,400,21,1000 };
-    cout &lt;&lt; hundyBundy(vec) &lt;&lt; endl;
+    std::vector&lt;int&gt; vec{ 100,10,300,400,21,1000 };
+    std::cout &lt;&lt; hundyBundy(vec) &lt;&lt; std::endl;
 }
         </code>
     </program></statement>
     <hint>
       <activity label="vectors_a10_pp">
         <statement>
-          <p>Write the function <c>hundyBundy</c> that returns a count of all numbers in the passed vector <c>vec</c>
+          <p>Write the function <c>hundyBundy</c> that returns a count of all numbers in the passed  vector<c>vec</c>
             that are divisible by 100. Use the lines to construct the code, then go back to complete
             the Activecode.</p>
         </statement>
         <blocks>
           <block order="1">
             <choice correct="yes">
-              <cline>int hundyBundy (const vector&lt;int&gt; vec) {</cline>
+              <cline>int hundyBundy (const std::vector&lt;int&gt; vec) {</cline>
             </choice>
             <choice>
-              <cline>vector&lt;int&gt; hundyBundy (const vector&lt;int&gt; vec) { </cline>
+              <cline>std::vector&lt;int&gt; hundyBundy (const std::vector&lt;int&gt; vec) { </cline>
             </choice>
           </block>
           <block order="9">
@@ -641,7 +625,6 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
         </code>
 <tests>
 
@@ -659,9 +642,8 @@ using namespace std;
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
-void make_odd ( vector&lt;int&gt; &amp;nums) {
+void make_odd ( std::vector&lt;int&gt; &amp;nums) {
     for (size_t i = 0; i &lt; nums.size(); ++i) {
 
         if((nums[i] % 2 == 0) &amp;&amp; (nums[i] != 0)){
@@ -690,13 +672,12 @@ void make_odd ( vector&lt;int&gt; &amp;nums) {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 // Write the weird_print function here
 
 
 int main() {
-    vector&lt;int&gt; vec{1,2,3,4,5,6};
+    std::vector&lt;int&gt; vec{1,2,3,4,5,6};
     weird_print(vec);
 }
         </code>
@@ -711,7 +692,7 @@ int main() {
         </statement>
         <blocks>
           <block order="6">
-            <cline>void weird_print (vector&lt;int&gt; vec) {</cline>
+            <cline>void weird_print (std::vector&lt;int&gt; vec) {</cline>
           </block>
           <block order="2">
             <cline>    size_t half = vec.size() / 2;</cline>
@@ -720,7 +701,7 @@ int main() {
             <cline>    for (size_t i = vec.size() - 1; i &gt;= half; i--){</cline>
           </block>
           <block order="5">
-            <cline>        cout &lt;&lt; vec[i-half] &lt;&lt; ' ';</cline>
+            <cline>       std::cout &lt;&lt; vec[i-half] &lt;&lt; ' ';</cline>
           </block>
           <block order="9">
             <cline>    }</cline>
@@ -729,13 +710,13 @@ int main() {
             <cline>    for (int h = 0; h &lt; half; h++) {</cline>
           </block>
           <block order="7">
-            <cline>        cout &lt;&lt; vec[h + half] &lt;&lt; ' ';</cline>
+            <cline>       std::cout &lt;&lt; vec[h + half] &lt;&lt; ' ';</cline>
           </block>
           <block order="3">
             <cline>    }</cline>
           </block>
           <block order="8">
-            <cline>    cout &lt;&lt; endl;</cline>
+            <cline>   std::cout &lt;&lt; std::endl ;</cline>
           </block>
           <block order="1">
             <cline>}</cline>

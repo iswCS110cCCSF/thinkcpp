@@ -12,7 +12,7 @@
   <program>int i = 7;
 int j = 9;
 swap (i, j);
-cout &lt;&lt; i &lt;&lt; j &lt;&lt; endl;</program>
+cout &lt;&lt; i &lt;&lt; j &lt;&lt; std::endl ;</program>
   <p>The output of this program is <c>97</c>. Draw a stack diagram for this
             program to convince yourself this is true. If the parameters <c>x</c> and
             <c>y</c> were declared as regular parameters (without the <c>&amp;</c>s),
@@ -26,9 +26,8 @@ cout &lt;&lt; i &lt;&lt; j &lt;&lt; endl;</program>
     <program interactive="activecode" line-numbers="yes" label="pass_others_reference_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-void swap (int& x, int& y) {
+void std::swap (int& x, int& y) {
     int temp = x;
     x = y;
     y = temp;
@@ -37,8 +36,8 @@ void swap (int& x, int& y) {
 int main() {
     int i = 7;
     int j = 9;
-    swap (i, j);
-    cout << i << j << endl;
+    std::swap (i, j);
+    std::cout << i << j << std::endl;
 }
         ]]></code>
     </program>
@@ -123,7 +122,7 @@ int multiply(int a, int b) {
         <cline>   y = x + y; </cline>
       </block>
       <block order="2">
-        <cline>   cout &lt;&lt; x;</cline>
+        <cline>   std::cout &lt;&lt; x;</cline>
       </block>
       <block order="1" correct="no">
         <cline>   return x; </cline>

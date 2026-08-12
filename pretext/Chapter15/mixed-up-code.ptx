@@ -31,7 +31,7 @@
         </choice>
       </block>
       <block order="5">
-        <cline><![CDATA[      cout << "Unable to open the file." << endl;]]></cline>
+        <cline><![CDATA[      std::cout << "Unable to open the file." << std::endl ;]]></cline>
       </block>
       <block order="6">
         <choice correct="yes">
@@ -63,17 +63,17 @@
       </block>
       <block order="10">
         <choice correct="yes">
-          <cline>   string filename;</cline>
+          <cline>  std::string filename;</cline>
         </choice>
         <choice>
           <cline>   ifstream filename;  </cline>
         </choice>
       </block>
       <block order="12">
-        <cline><![CDATA[   cout << "Enter the name of the file: ";]]></cline>
+        <cline><![CDATA[   std::cout << "Enter the name of the file: ";]]></cline>
       </block>
       <block order="3">
-        <cline>   cin &gt;&gt; filename;</cline>
+        <cline>   std::cin &gt;&gt; filename;</cline>
       </block>
       <block order="7">
         <choice correct="yes">
@@ -87,7 +87,7 @@
         <cline>   if (infile.good() == false) {</cline>
       </block>
       <block order="8">
-        <cline><![CDATA[      cout << "Unable to open the file." << endl;]]></cline>
+        <cline><![CDATA[      std::cout << "Unable to open the file." << std::endl ;]]></cline>
       </block>
       <block order="9">
         <cline>      exit(1);</cline>
@@ -120,13 +120,13 @@
       </block>
       <block order="7">
         <cline>   if (outfile.good() == false) {</cline>
-        <cline><![CDATA[      cout << "Unable to open the file." << endl;]]></cline>
+        <cline><![CDATA[      std::cout << "Unable to open the file." << std::endl ;]]></cline>
         <cline>      exit(1);</cline>
         <cline>   }</cline>
       </block>
       <block order="5"
              correct="no">
-        <cline><![CDATA[   vector<int> list;  ]]></cline>
+        <cline><![CDATA[   std::vector<int> list;  ]]></cline>
       </block>
       <block order="11">
         <cline>   int sum = 0;</cline>
@@ -135,20 +135,20 @@
         <cline>   int n1, n2, n3, n4, n5;</cline>
       </block>
       <block order="9">
-        <cline><![CDATA[   cout << "Enter five integers separated by spaces: ";]]></cline>
+        <cline><![CDATA[   std::cout << "Enter five integers separated by spaces: ";]]></cline>
       </block>
       <block order="3">
-        <cline>   cin &gt;&gt; n1 &gt;&gt; n2 &gt;&gt; n3 &gt;&gt; n4 &gt;&gt; n5;</cline>
+        <cline>   std::cin &gt;&gt; n1 &gt;&gt; n2 &gt;&gt; n3 &gt;&gt; n4 &gt;&gt; n5;</cline>
       </block>
       <block order="8">
         <cline>   sum = n1 + n2 + n3 + n4 + n5;</cline>
       </block>
       <block order="10">
         <choice correct="yes">
-          <cline><![CDATA[   outfile << "The average is " << sum / 5.0 << endl;]]></cline>
+          <cline><![CDATA[   outfile << "The average is " << sum / 5.0 << std::endl ;]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[   cout << "The average is " << sum / 5.0 << endl;  ]]></cline>
+          <cline><![CDATA[   std::cout << "The average is " << sum / 5.0 << std::endl ;  ]]></cline>
         </choice>
       </block>
       <block order="4">
@@ -180,13 +180,13 @@
       </block>
       <block order="9">
         <cline>   if (infile.good() == false || outfile.good() == false) {</cline>
-        <cline><![CDATA[      cout << "Unable to open a file." << endl;]]></cline>
+        <cline><![CDATA[      std::cout << "Unable to open a file." << std::endl ;]]></cline>
         <cline>      exit(1);</cline>
         <cline>   }</cline>
       </block>
       <block order="5"
              correct="no">
-        <cline><![CDATA[   vector<int> data;  ]]></cline>
+        <cline><![CDATA[   std::vector<int> data;  ]]></cline>
       </block>
       <block order="11">
         <cline>   int numData = 1;</cline>
@@ -219,7 +219,7 @@
         <cline>   }</cline>
       </block>
       <block order="10">
-        <cline><![CDATA[   outfile << "Number of data: " << numData << ", min: " << min << ", max: " << max << endl;]]></cline>
+        <cline><![CDATA[   outfile << "Number of data: " << numData << ", min: " << min << ", max: " << max << std::endl ;]]></cline>
       </block>
       <block order="7">
         <cline>}</cline>
@@ -240,11 +240,11 @@
     <blocks>
       <block order="6">
         <cline>struct Employee {</cline>
-        <cline>   string fname;</cline>
-        <cline>   string lname;</cline>
+        <cline>  std::string fname;</cline>
+        <cline>  std::string lname;</cline>
         <cline>   int age;</cline>
         <cline>   int phone;</cline>
-        <cline>   string email;</cline>
+        <cline>  std::string email;</cline>
       </block>
       <block order="10">
         <cline>   Employee(string f, string l, int a, int p, string e) {</cline>
@@ -266,15 +266,15 @@
       </block>
       <block order="7">
         <cline>   if (infile.good() == false) {</cline>
-        <cline><![CDATA[      cout << "Unable to open the file." << endl;]]></cline>
+        <cline><![CDATA[      std::cout << "Unable to open the file." << std::endl ;]]></cline>
         <cline>      exit(1);</cline>
         <cline>   }</cline>
       </block>
       <block order="13">
-        <cline><![CDATA[   vector<Employee> data;]]></cline>
+        <cline><![CDATA[   std::vector<Employee> data;]]></cline>
       </block>
       <block order="9">
-        <cline>   string fname, lname, email;</cline>
+        <cline>  std::string fname, lname, email;</cline>
       </block>
       <block order="5">
         <cline>   int age, phone;</cline>
@@ -339,19 +339,19 @@
       </block>
       <block order="13">
         <cline>   if (infile.good() == false || outfile.good() == false) {</cline>
-        <cline><![CDATA[      cout << "Unable to open a file." << endl;]]></cline>
+        <cline><![CDATA[      std::cout << "Unable to open a file." << std::endl ;]]></cline>
         <cline>      exit(1);</cline>
         <cline>   }</cline>
       </block>
       <block order="8">
-        <cline>   string word;</cline>
+        <cline>  std::string word;</cline>
       </block>
       <block order="1">
         <cline>   while (infile &gt;&gt; word) {</cline>
       </block>
       <block order="5">
         <choice correct="yes">
-          <cline>      string upper = upperToLower(word);</cline>
+          <cline>     std::string upper = upperToLower(word);</cline>
         </choice>
         <choice>
           <cline>      upperToLower(word);  </cline>
@@ -393,7 +393,7 @@
       </block>
       <block order="6">
         <cline>   if (!odds.good() || !evens.good() || !outfile.good()) {</cline>
-        <cline><![CDATA[      cout << "Unable to open a file." << endl;]]></cline>
+        <cline><![CDATA[      std::cout << "Unable to open a file." << std::endl ;]]></cline>
         <cline>      exit(1);</cline>
         <cline>   }</cline>
       </block>
@@ -418,29 +418,29 @@
             indentation="hide">
     <statement>
       <p>In chapter 15.7 we defined the <c>Set</c> data structure. Write a function <c>vectorToSet</c> which takes
-        a <c>vector</c> of data and returns a <c>Set</c> object with the data. Put the necessary blocks of
+        a <c> std::vector</c> of data and returns a <c>Set</c> object with the data. Put the necessary blocks of
         code in the correct order. Put the <c>Set</c> definition first in your answer.</p>
     </statement>
     <blocks>
       <block order="9">
         <cline>class Set {</cline>
         <cline>   private:</cline>
-        <cline><![CDATA[      vector<string> elements;]]></cline>
+        <cline><![CDATA[      std::vector<string> elements;]]></cline>
         <cline>      int numElements;</cline>
         <cline>   public:</cline>
         <cline>      Set(int n);</cline>
         <cline>      int getNumElements() const;</cline>
-        <cline>      string getElement(int i) const;</cline>
+        <cline>     std::string getElement(int i) const;</cline>
         <cline>      int find(const string&amp; s) const;</cline>
         <cline>      int add(const string&amp; s);</cline>
         <cline>};</cline>
       </block>
       <block order="6">
         <choice correct="yes">
-          <cline><![CDATA[Set vectorToSet(vector<string> data) {]]></cline>
+          <cline><![CDATA[Set vectorToSet( std::vector<string> data) {]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[void Set::vectorToSet(vector<string> data) {  ]]></cline>
+          <cline><![CDATA[void Set::vectorToSet( std::vector<string> data) {  ]]></cline>
         </choice>
       </block>
       <block order="2">
@@ -477,8 +477,8 @@
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Let's write the <c>class</c> definition for a <c>Matrix</c>! The underlying data structure is a <c>vector</c>
-        of <c>vector</c>s of <c>int</c>s. Write the constructor and <c>at</c> function, which returns the data
+      <p>Let's write the <c>class</c> definition for a <c>Matrix</c>! The underlying data structure is a <c> std::vector</c>
+        of <c> std::vector</c>s of <c>int</c>s. Write the constructor and <c>at</c> function, which returns the data
         stored at a given row and column. Put the necessary blocks of code in the correct order.</p>
     </statement>
     <blocks>
@@ -489,7 +489,7 @@
         <cline>   private:</cline>
       </block>
       <block order="4">
-        <cline><![CDATA[      vector<vector<int> > elements;]]></cline>
+        <cline><![CDATA[      std::vector< std::vector<int> > elements;]]></cline>
       </block>
       <block order="13">
         <cline>   public:</cline>
@@ -498,7 +498,7 @@
         <cline>      Matrix(int numRows, int numCols) {</cline>
       </block>
       <block order="12">
-        <cline><![CDATA[         vector<int> row(numCols);]]></cline>
+        <cline><![CDATA[         std::vector<int> row(numCols);]]></cline>
       </block>
       <block order="10">
         <cline><![CDATA[         for (int i = 0; i < numRows; ++i) {]]></cline>
@@ -559,7 +559,7 @@
       </block>
       <block order="14">
         <cline>   if (!odds.good() || !evens.good() || !outfile.good()) {</cline>
-        <cline><![CDATA[      cout << "Unable to open a file." << endl;]]></cline>
+        <cline><![CDATA[      std::cout << "Unable to open a file." << std::endl ;]]></cline>
         <cline>      exit(1);</cline>
         <cline>   }</cline>
       </block>

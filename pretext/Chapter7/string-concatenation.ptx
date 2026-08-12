@@ -10,13 +10,12 @@
     <program interactive="activecode" line-numbers="yes" label="string_concatenation_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    string fruit = "banana";
-    string bakedGood = " nut bread";
-    string dessert = fruit + bakedGood;
-    cout << dessert << endl;
+    std::string fruit = "banana";
+    std::string bakedGood = " nut bread";
+    std::string dessert = fruit + bakedGood;
+    std::cout << dessert << std::endl;
 }
         ]]></code>
     </program>
@@ -45,17 +44,16 @@ string dessert = &quot;banana&quot; + &quot; nut bread&quot;;
     <program interactive="activecode" line-numbers="yes" label="string_concatenation_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    string suffix = "ack";
-    string u = "u";
+    std::string suffix = "ack";
+    std::string u = "u";
     char letter = 'J';
     while (letter <= 'Q') {
         if (letter == 'O' || letter == 'Q') {
-            cout << letter + u + suffix << endl;
+            std::cout << letter + u + suffix << std::endl;
         } else {
-            cout << letter + suffix << endl;
+            std::cout << letter + suffix << std::endl;
         }
         letter++;
     }
@@ -82,7 +80,7 @@ Quack</output></console>
         <code><![CDATA[
 string s = "C++";
 string t = "rocks";
-cout << s + t << endl;
+cout << s + t << std::endl ;
 ]]></code>
       </program>
     </statement>
@@ -131,20 +129,20 @@ cout << s + t << endl;
         <cline>int main() {</cline>
       </block>
       <block order="6">
-        <cline>   string language = &quot;C++&quot;;</cline>
-        <cline>   string action = &quot; is so &quot;;</cline>
-        <cline>   string adjective = &quot;fun!&quot;;</cline>
+        <cline>  std::string language = &quot;C++&quot;;</cline>
+        <cline>  std::string action = &quot; is so &quot;;</cline>
+        <cline>  std::string adjective = &quot;fun!&quot;;</cline>
       </block>
       <block order="1" correct="no">
-        <cline>   string language = &quot;C++&quot;; </cline>
-        <cline>   string action = &quot;is so&quot;;</cline>
-        <cline>   string adjective = &quot;fun!&quot;;</cline>
+        <cline>  std::string language = &quot;C++&quot;; </cline>
+        <cline>  std::string action = &quot;is so&quot;;</cline>
+        <cline>  std::string adjective = &quot;fun!&quot;;</cline>
       </block>
       <block order="4">
-        <cline><![CDATA[   cout << language + action + adjective << endl;]]></cline>
+        <cline><![CDATA[   std::cout << language + action + adjective << std::endl ;]]></cline>
       </block>
       <block order="2" correct="no">
-        <cline><![CDATA[   cout << "language" + "action" + "adjective" << endl; ]]></cline>
+        <cline><![CDATA[   std::cout << "language" + "action" + "adjective" << std::endl ; ]]></cline>
       </block>
       <block order="3">
         <cline>}</cline>
@@ -166,29 +164,29 @@ cout << s + t << endl;
       </block>
       <block order="8">
         <choice correct="yes">
-          <cline>   string beginning = &quot;hello &quot;;</cline>
-          <cline>   string end = &quot; goodbye&quot;;</cline>
+          <cline>  std::string beginning = &quot;hello &quot;;</cline>
+          <cline>  std::string end = &quot; goodbye&quot;;</cline>
         </choice>
         <choice>
-          <cline>   string beginning = &quot;hello&quot;; </cline>
-          <cline>   string end = &quot;goodbye&quot;;</cline>
+          <cline>  std::string beginning = &quot;hello&quot;; </cline>
+          <cline>  std::string end = &quot;goodbye&quot;;</cline>
         </choice>
       </block>
       <block order="5">
         <choice correct="yes">
-          <cline>   string new_Word = beginning + message;</cline>
+          <cline>  std::string new_Word = beginning + message;</cline>
           <cline>   new_Word = new_Word + end;</cline>
         </choice>
         <choice>
-          <cline>   string new_Word = message + beginning; </cline>
+          <cline>  std::string new_Word = message + beginning; </cline>
           <cline>   new_Word = message + end;</cline>
         </choice>
       </block>
       <block order="3" correct="no">
-        <cline><![CDATA[   cout << "new_Word"; ]]></cline>
+        <cline><![CDATA[   std::cout << "new_Word"; ]]></cline>
       </block>
       <block order="6">
-        <cline>   cout &lt;&lt; new_Word;</cline>
+        <cline>   std::cout &lt;&lt; new_Word;</cline>
       </block>
       <block order="9">
         <cline>}</cline>

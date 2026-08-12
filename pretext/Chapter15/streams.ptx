@@ -44,10 +44,10 @@
     <choices>
       <choice>
         <statement>
-          <p>an abstract object that works exclusively with cin and cout statements</p>
+          <p>an abstract object that works exclusively with std::cin and std::cout statements</p>
         </statement>
         <feedback><p>
-          Incorrect! Stream objects do work with cin and cout, but that is not all that they do!
+          Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!
         </p></feedback>
       </choice>
       <choice correct="yes">

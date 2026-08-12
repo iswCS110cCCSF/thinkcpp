@@ -62,7 +62,7 @@ reader.
    :answer_d: cmath
    :correct: a
    :feedback_a: Correct!
-   :feedback_b: This is the library for streaming cin and cout.
+   :feedback_b: This is the library for streaming std::cin and cout.
    :feedback_c: This is the library for strings.
    :feedback_d: This is the library for math functions.
 

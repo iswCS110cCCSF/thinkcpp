@@ -11,15 +11,15 @@
 
   <program>int numValues = 100000;
 int upperBound = 10;
-vector&lt;int&gt; vector = randomVector(numValues, upperBound);
-vector&lt;int&gt; histogram(upperBound);
+std::vector&lt;int&gt; vector = randomVector(numValues, upperBound);
+std::vector&lt;int&gt; histogram(upperBound);
 
 for (int i = 0; i &lt; upperBound; i++) {
   int count = howMany(vector, i);
   histogram[i] = count;
 }</program>
 
-  <p>I called the vector <term>histogram</term> because that's a statistical term for a vector of
+  <p>I called the  std::vector<term>histogram</term> because that's a statistical term for a vector of
     numbers that counts the number of appearances of a range of values.</p>
   <p>The tricky thing here is that I am using the loop variable in two different ways. First, it is
     an argument to <c>howMany</c>, specifying which value I am interested in. Second, it is an index into

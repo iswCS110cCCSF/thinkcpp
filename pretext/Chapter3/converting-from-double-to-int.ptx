@@ -26,7 +26,7 @@ int x = int(pi);</program>
       <program>int main() {
   double temp = 7.99999999;
   int roundedTemp = int(temp);
-  cout &lt;&lt; roundedTemp;
+  std::cout &lt;&lt; roundedTemp;
 }</program>
       <p>What is the value of roundedTemp?</p>
     </statement>

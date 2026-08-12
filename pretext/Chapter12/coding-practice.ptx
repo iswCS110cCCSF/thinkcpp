@@ -12,7 +12,6 @@
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 // Write your code for the struct Pixel here.
         ]]></code>
@@ -23,7 +22,6 @@ using namespace std;
       <program xml:id="cp_12_AC_1a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 struct Pixel {
     int r;
@@ -44,7 +42,6 @@ struct Pixel {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 struct Pixel {
     int r;
@@ -73,13 +70,13 @@ struct Pixel {
             <cline>    int width;</cline>
           </block>
           <block order="5">
-            <cline>    vector&lt;vector&lt;Pixel&gt;&gt; matrix;</cline>
+            <cline>    vector&lt;std::vector&lt;Pixel&gt;&gt; matrix;</cline>
           </block>
           <block order="7" correct="no">
-            <cline>    vector&lt;Pixel&gt; matrix; </cline>
+            <cline>    std::vector&lt;Pixel&gt; matrix; </cline>
           </block>
           <block order="1" correct="no">
-            <cline>    vector&lt;vector&gt; matrix; </cline>
+            <cline>    std::vector&lt;vector&gt; matrix; </cline>
           </block>
           <block order="4">
             <cline>};</cline>
@@ -98,7 +95,6 @@ struct Pixel {
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 struct Pixel {
     int r;
@@ -121,7 +117,6 @@ int main() {
       <program xml:id="cp_12_AC_3a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 struct Pixel {
     int r;
@@ -131,7 +126,7 @@ struct Pixel {
 };
 
 void Pixel::printPixel() {
-    cout << "("<< r << ", " << g << ", " << b << ")";
+    std::cout << "("<< r << ", " << g << ", " << b << ")";
 }
 
 int main() {
@@ -153,7 +148,6 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 struct Pixel {
     int r;
@@ -165,14 +159,14 @@ struct Pixel {
 struct Image {
     int height;
     int width;
-    vector&lt;vector&lt;Pixel&gt;&gt; matrix;
+    std::vector&lt;std::vector&lt;Pixel&gt;&gt; matrix;
     void printImage();
 };
 
 // Write your implementation of printImage here.
 
 int main() {
-    vector&lt;vector&lt;Pixel&gt; &gt; matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } },
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } },
                                     { { 30, 60, 50 }, { 20, 135, 200 }, { 60, 80, 125 } } };
     Image image = { 2, 3, matrix };
     image.printImage();
@@ -180,7 +174,7 @@ int main() {
         </code>
 <tests>
 void Pixel::printPixel() {
-    cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
+    std::cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
 }
 </tests>
 
@@ -208,13 +202,13 @@ void Pixel::printPixel() {
             <cline>        matrix[r][c].printPixel();</cline>
           </block>
           <block order="3">
-            <cline>        cout &lt;&lt; &quot; &quot;;</cline>
+            <cline>        std::cout &lt;&lt; &quot; &quot;;</cline>
           </block>
           <block order="2">
             <cline>    }</cline>
           </block>
           <block order="1">
-            <cline>    cout &lt;&lt; endl;</cline>
+            <cline>    std::cout &lt;&lt; std::endl ;</cline>
           </block>
           <block order="7">
             <cline>    }</cline>
@@ -237,7 +231,6 @@ void Pixel::printPixel() {
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 struct Pixel {
     int r;
@@ -249,7 +242,7 @@ struct Pixel {
 struct Image {
     int height;
     int width;
-    vector<vector<Pixel> > matrix;
+    std::vector<std::vector<Pixel> > matrix;
     void printImage();
     void cropImage(int startRow, int stopRow, int startCol, int stopCol);
 };
@@ -257,29 +250,29 @@ struct Image {
 // Write your implementation of cropImage here.
 
 int main() {
-    vector<vector<Pixel> > matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } },
+    std::vector<std::vector<Pixel> > matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } },
                                       { { 30, 60, 50 }, { 20, 135, 200 }, { 60, 80, 125 } },
                                       { { 10, 0, 50 }, { 30, 65, 225 }, { 25, 105, 125 } },
                                       { { 255, 60, 0 }, { 20, 25, 255 }, { 65, 55, 0 } } };
     Image image = { 4, 3, matrix };
     image.printImage();
-    cout << endl;
+    std::cout << std::endl;
     image.cropImage(2, 3, 1, 2);
     image.printImage();
 }
         ]]></code>
       <tests>
 void Pixel::printPixel() {
-    cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
+    std::cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
 }
 
 void Image::printImage() {
     for (int r = 0; r &lt; height; ++r) {
     for (int c = 0; c &lt; width; ++ c) {
         matrix[r][c].printPixel();
-        cout &lt;&lt; &quot; &quot;;
+        std::cout &lt;&lt; &quot; &quot;;
     }
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl;
     }
 }
 </tests>
@@ -293,7 +286,6 @@ void Image::printImage() {
       <program xml:id="cp_12_AC_5a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 struct Pixel {
     int r;
@@ -305,13 +297,13 @@ struct Pixel {
 struct Image {
     int height;
     int width;
-    vector<vector<Pixel> > matrix;
+    std::vector<std::vector<Pixel> > matrix;
     void printImage();
     void cropImage(int startRow, int stopRow, int startCol, int stopCol);
 };
 
 void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) {
-    vector<vector<Pixel> > newMatrix(stopRow - startRow + 1);
+    std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1);
     for (int r = startRow - 1; r < stopRow; ++r) {
         for (int c = startCol - 1; c < stopCol; ++c) {
             newMatrix[r - (startRow - 1)].push_back(matrix[r][c]);
@@ -323,13 +315,13 @@ void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) {
 }
 
 int main() {
-    vector<vector<Pixel> > matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } },
+    std::vector<std::vector<Pixel> > matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } },
                                       { { 30, 60, 50 }, { 20, 135, 200 }, { 60, 80, 125 } },
                                       { { 10, 0, 50 }, { 30, 65, 225 }, { 25, 105, 125 } },
                                       { { 255, 60, 0 }, { 20, 25, 255 }, { 65, 55, 0 } } };
     Image image = { 4, 3, matrix };
     image.printImage();
-    cout << endl;
+    std::cout << std::endl;
     image.cropImage(2, 3, 1, 2);
     image.printImage();
 }
@@ -348,7 +340,6 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 struct Pixel {
     int r;
@@ -360,7 +351,7 @@ struct Pixel {
 struct Image {
     int height;
     int width;
-    vector&lt;vector&lt;Pixel&gt; &gt; matrix;
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; matrix;
     void printImage();
     void cropImage(int startRow, int stopRow, int startCol, int stopCol);
     void swapPixel(int row1, int col1, int row2, int col2);
@@ -369,31 +360,31 @@ struct Image {
 // Write your implementation of swapPixel here.
 
 int main() {
-    vector&lt;vector&lt;Pixel&gt; &gt; matrix = { { { 0, 140, 255 }, { 0, 0, 0 }, { 15, 20, 255 } } };
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; matrix = { { { 0, 140, 255 }, { 0, 0, 0 }, { 15, 20, 255 } } };
     Image image = { 1, 3, matrix };
     image.printImage();
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl;
     image.swapPixel(0, 0, 0, 2);
     image.printImage();
 }
         </code>
 <tests>
 void Pixel::printPixel() {
-    cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
+    std::cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
 }
 
 void Image::printImage() {
     for (int r = 0; r &lt; height; ++r) {
     for (int c = 0; c &lt; width; ++ c) {
         matrix[r][c].printPixel();
-        cout &lt;&lt; &quot; &quot;;
+        std::cout &lt;&lt; &quot; &quot;;
     }
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl;
     }
 }
 
 void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) {
-    vector&lt;vector&lt;Pixel&gt; &gt; newMatrix(stopRow - startRow + 1);
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; newMatrix(stopRow - startRow + 1);
     for (int r = startRow - 1; r &lt; stopRow; ++r) {
         for (int c = startCol - 1; c &lt; stopCol; ++c) {
             newMatrix[r - (startRow - 1)].push_back(matrix[r][c]);
@@ -445,7 +436,6 @@ void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) {
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 struct Pixel {
     int r;
@@ -457,7 +447,7 @@ struct Pixel {
 struct Image {
     int height;
     int width;
-    vector<vector<Pixel> > matrix;
+    std::vector<std::vector<Pixel> > matrix;
     void printImage();
     void cropImage(int startRow, int stopRow, int startCol, int stopCol);
     void swapPixel(int row1, int col1, int row2, int col2);
@@ -467,34 +457,34 @@ struct Image {
 // Write your implementation of flipHorizontal here.
 
 int main() {
-    vector<vector<Pixel> > matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 255, 255, 255 } },
+    std::vector<std::vector<Pixel> > matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 255, 255, 255 } },
                                       { { 50, 50, 50 }, { 10, 10, 10 }, { 255, 255, 255 } },
                                       { { 100, 100, 100 }, { 10, 10, 10 }, { 255, 255, 255 } },
                                       { { 150, 150, 150 }, { 10, 10, 10 }, { 255, 255, 255 } } };
     Image image = { 4, 3, matrix };
     image.printImage();
-    cout << endl;
+    std::cout << std::endl;
     image.flipHorizontal();
     image.printImage();
 }
         ]]></code>
       <tests>
 void Pixel::printPixel() {
-    cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
+    std::cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
 }
 
 void Image::printImage() {
     for (int r = 0; r &lt; height; ++r) {
     for (int c = 0; c &lt; width; ++ c) {
         matrix[r][c].printPixel();
-        cout &lt;&lt; &quot; &quot;;
+        std::cout &lt;&lt; &quot; &quot;;
     }
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl;
     }
 }
 
 void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) {
-    vector&lt;vector&lt;Pixel&gt; &gt; newMatrix(stopRow - startRow + 1);
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; newMatrix(stopRow - startRow + 1);
     for (int r = startRow - 1; r &lt; stopRow; ++r) {
         for (int c = startCol - 1; c &lt; stopCol; ++c) {
             newMatrix[r - (startRow - 1)].push_back(matrix[r][c]);
@@ -521,7 +511,6 @@ void Image::swapPixel(int row1, int col1, int row2, int col2) {
       <program xml:id="cp_12_AC_7a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 struct Pixel {
     int r;
@@ -533,7 +522,7 @@ struct Pixel {
 struct Image {
     int height;
     int width;
-    vector<vector<Pixel> > matrix;
+    std::vector<std::vector<Pixel> > matrix;
     void printImage();
     void cropImage(int startRow, int stopRow, int startCol, int stopCol);
     void swapPixel(int row1, int col1, int row2, int col2);
@@ -553,13 +542,13 @@ void Image::flipHorizontal() {
 }
 
 int main() {
-    vector<vector<Pixel> > matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 255, 255, 255 } },
+    std::vector<std::vector<Pixel> > matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 255, 255, 255 } },
                                       { { 50, 50, 50 }, { 10, 10, 10 }, { 255, 255, 255 } },
                                       { { 100, 100, 100 }, { 10, 10, 10 }, { 255, 255, 255 } },
                                       { { 150, 150, 150 }, { 10, 10, 10 }, { 255, 255, 255 } } };
     Image image = { 4, 3, matrix };
     image.printImage();
-    cout << endl;
+    std::cout << std::endl;
     image.flipHorizontal();
     image.printImage();
 }
@@ -577,7 +566,6 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 struct Pixel {
     int r;
@@ -589,7 +577,7 @@ struct Pixel {
 struct Image {
     int height;
     int width;
-    vector&lt;vector&lt;Pixel&gt; &gt; matrix;
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; matrix;
     void printImage();
     void cropImage(int startRow, int stopRow, int startCol, int stopCol);
     void swapPixel(int row1, int col1, int row2, int col2);
@@ -600,34 +588,34 @@ struct Image {
 // Write your implementation of flipVertical here.
 
 int main() {
-    vector&lt;vector&lt;Pixel&gt; &gt; matrix = { { { 255, 255, 255 }, { 255, 255, 255 }, { 255, 255, 255 } },
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; matrix = { { { 255, 255, 255 }, { 255, 255, 255 }, { 255, 255, 255 } },
                                     { { 50, 50, 50 }, { 10, 10, 10 }, { 50, 50, 50 } },
                                     { { 30, 30, 30 }, { 70, 70, 70 }, { 30, 30, 30 } },
                                     { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } } };
     Image image = { 4, 3, matrix };
     image.printImage();
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl;
     image.flipVertical();
     image.printImage();
 }
         </code>
 <tests>
 void Pixel::printPixel() {
-    cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
+    std::cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
 }
 
 void Image::printImage() {
     for (int r = 0; r &lt; height; ++r) {
     for (int c = 0; c &lt; width; ++ c) {
         matrix[r][c].printPixel();
-        cout &lt;&lt; &quot; &quot;;
+        std::cout &lt;&lt; &quot; &quot;;
     }
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl;
     }
 }
 
 void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) {
-    vector&lt;vector&lt;Pixel&gt; &gt; newMatrix(stopRow - startRow + 1);
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; newMatrix(stopRow - startRow + 1);
     for (int r = startRow - 1; r &lt; stopRow; ++r) {
         for (int c = startCol - 1; c &lt; stopCol; ++c) {
             newMatrix[r - (startRow - 1)].push_back(matrix[r][c]);
@@ -710,7 +698,6 @@ void Image::flipHorizontal() {
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 struct Pixel {
     int r;
@@ -722,7 +709,7 @@ struct Pixel {
 struct Image {
     int height;
     int width;
-    vector<vector<Pixel> > matrix;
+    std::vector<std::vector<Pixel> > matrix;
     void printImage();
     void cropImage(int startRow, int stopRow, int startCol, int stopCol);
     void swapPixel(int row1, int col1, int row2, int col2);
@@ -734,14 +721,14 @@ struct Image {
 // Write your implementation of createBorder here.
 
 int main() {
-    vector<vector<Pixel> > matrix = { { { 25, 65, 23 }, { 73, 56, 24 }, { 255, 255, 255 }, { 253, 61, 56 } },
+    std::vector<std::vector<Pixel> > matrix = { { { 25, 65, 23 }, { 73, 56, 24 }, { 255, 255, 255 }, { 253, 61, 56 } },
                                       { { 50, 50, 50 }, { 145, 52, 102 }, { 2, 0, 25 }, { 52, 47, 35 } },
                                       { { 45, 34, 100 }, { 213, 67, 45 }, { 2, 45, 255 }, { 34, 16, 76 } },
                                       { { 2, 2, 78 }, { 164, 16, 23 }, { 5, 255, 25 }, { 32, 65, 34 } },
                                       { { 150, 150, 150 }, { 241, 42, 64 }, { 1, 4, 255 }, { 16, 73, 84 } } };
     Image image = { 5, 4, matrix };
     image.printImage();
-    cout << endl;
+    std::cout << std::endl;
     Pixel p = { 0, 0, 0 };
     image.createBorder(p);
     image.printImage();
@@ -749,21 +736,21 @@ int main() {
         ]]></code>
       <tests>
 void Pixel::printPixel() {
-    cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
+    std::cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
 }
 
 void Image::printImage() {
     for (int r = 0; r &lt; height; ++r) {
     for (int c = 0; c &lt; width; ++ c) {
         matrix[r][c].printPixel();
-        cout &lt;&lt; &quot; &quot;;
+        std::cout &lt;&lt; &quot; &quot;;
     }
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl;
     }
 }
 
 void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) {
-    vector&lt;vector&lt;Pixel&gt; &gt; newMatrix(stopRow - startRow + 1);
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; newMatrix(stopRow - startRow + 1);
     for (int r = startRow - 1; r &lt; stopRow; ++r) {
         for (int c = startCol - 1; c &lt; stopCol; ++c) {
             newMatrix[r - (startRow - 1)].push_back(matrix[r][c]);
@@ -811,7 +798,6 @@ void Image::flipVertical() {
       <program xml:id="cp_12_AC_9a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 struct Pixel {
     int r;
@@ -823,7 +809,7 @@ struct Pixel {
 struct Image {
     int height;
     int width;
-    vector<vector<Pixel> > matrix;
+    std::vector<std::vector<Pixel> > matrix;
     void printImage();
     void cropImage(int startRow, int stopRow, int startCol, int stopCol);
     void swapPixel(int row1, int col1, int row2, int col2);
@@ -844,14 +830,14 @@ void Image::createBorder(Pixel p) {
 }
 
 int main() {
-    vector<vector<Pixel> > matrix = { { { 25, 65, 23 }, { 73, 56, 24 }, { 255, 255, 255 }, { 253, 61, 56 } },
+    std::vector<std::vector<Pixel> > matrix = { { { 25, 65, 23 }, { 73, 56, 24 }, { 255, 255, 255 }, { 253, 61, 56 } },
                                       { { 50, 50, 50 }, { 145, 52, 102 }, { 2, 0, 25 }, { 52, 47, 35 } },
                                       { { 45, 34, 100 }, { 213, 67, 45 }, { 2, 45, 255 }, { 34, 16, 76 } },
                                       { { 2, 2, 78 }, { 164, 16, 23 }, { 5, 255, 25 }, { 32, 65, 34 } },
                                       { { 150, 150, 150 }, { 241, 42, 64 }, { 1, 4, 255 }, { 16, 73, 84 } } };
     Image image = { 5, 4, matrix };
     image.printImage();
-    cout << endl;
+    std::cout << std::endl;
     Pixel p = { 0, 0, 0 };
     image.createBorder(p);
     image.printImage();
@@ -870,7 +856,6 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 struct Pixel {
     int r;
@@ -882,7 +867,7 @@ struct Pixel {
 struct Image {
     int height;
     int width;
-    vector&lt;vector&lt;Pixel&gt; &gt; matrix;
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; matrix;
     void printImage();
     void cropImage(int startRow, int stopRow, int startCol, int stopCol);
     void swapPixel(int row1, int col1, int row2, int col2);
@@ -895,33 +880,33 @@ struct Image {
 // Write your implementation of clearImage here.
 
 int main() {
-    vector&lt;vector&lt;Pixel&gt; &gt; matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 65, 70, 255 } },
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 65, 70, 255 } },
                                     { { 26, 48, 205 }, { 43, 12, 15 }, { 45, 30, 70 } },
                                     { { 89, 36, 65 }, { 75, 43, 26 }, { 40, 75, 70 } } };
     Image image = { 3, 3, matrix };
     image.printImage();
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl;
     image.clearImage();
     image.printImage();
 }
         </code>
 <tests>
 void Pixel::printPixel() {
-    cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
+    std::cout &lt;&lt; &quot;(&quot;&lt;&lt; r &lt;&lt; &quot;, &quot; &lt;&lt; g &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot;;
 }
 
 void Image::printImage() {
     for (int r = 0; r &lt; height; ++r) {
     for (int c = 0; c &lt; width; ++ c) {
         matrix[r][c].printPixel();
-        cout &lt;&lt; &quot; &quot;;
+        std::cout &lt;&lt; &quot; &quot;;
     }
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl;
     }
 }
 
 void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) {
-    vector&lt;vector&lt;Pixel&gt; &gt; newMatrix(stopRow - startRow + 1);
+    std::vector&lt;std::vector&lt;Pixel&gt; &gt; newMatrix(stopRow - startRow + 1);
     for (int r = startRow - 1; r &lt; stopRow; ++r) {
         for (int c = startCol - 1; c &lt; stopCol; ++c) {
             newMatrix[r - (startRow - 1)].push_back(matrix[r][c]);

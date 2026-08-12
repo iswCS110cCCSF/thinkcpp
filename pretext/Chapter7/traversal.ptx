@@ -17,14 +17,13 @@
       <code><![CDATA[
 #include <string>
 #include <iostream>
-using namespace std;
 
 int main() {
-    string fruit = "apple";
+    std::string fruit = "apple";
     size_t index = 0;
     while (index < fruit.lenght()) {
         char letter = fruit[index];
-        cout << letter << endl;
+        std::cout << letter << std::endl;
         index = index + 1;
     }
 }
@@ -49,11 +48,10 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="traversal_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-void reverseWord(string word) {
+void reverseWord(std::string word) {
     // 'reverseWord' should take the letters of 'word'
-    // and output them in reverse.
+    // and output them in std::reverse.
 }
 
 int main() {
@@ -90,7 +88,7 @@ int main() {
             </choice>
           </block>
           <block order="4">
-            <cline><![CDATA[  cout << input[index];]]></cline>
+            <cline><![CDATA[  std::cout << input[index];]]></cline>
           </block>
           <block order="8">
             <cline>  index = index - 1;</cline>
@@ -117,7 +115,7 @@ int main() {
 string s = "coding rocks";
 size_t i = 1;
 while (i < s.length()) {
-  cout << s[i] << endl;
+  std::cout << s[i] << std::endl ;
   i = i + 2;
 }
 ]]></code>
@@ -159,7 +157,7 @@ string truth = "engr101";
 size_t index = 0;
 int counter = 0;
 while (index < truth.length()) {
-  cout << truth[index] << " ";
+  std::cout << truth[index] << " ";
   index = index + counter;
   counter = counter + 1;
 }

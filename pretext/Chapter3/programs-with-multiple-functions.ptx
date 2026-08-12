@@ -27,10 +27,9 @@
     <program label="multiple_functions_AC_1_editor" interactive="codelens" line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printTotal(int x) {
-    cout << x << endl;
+    std::cout << x << std::endl;
 }
 
 int multiplyTwo(int x) {
@@ -90,10 +89,9 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void newLine() {
-  cout << endl;
+  std::cout << std::endl;
 }
 
 void threeLine() {
@@ -103,9 +101,9 @@ void threeLine() {
 }
 
 int main() {
-  cout << "First Line." << endl;
+  std::cout << "First Line." << std::endl;
   threeLine ();
-  cout << "Second Line." << endl;
+  std::cout << "Second Line." << std::endl;
   return 0;
 }
 ]]></code>
@@ -164,14 +162,13 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void yo() {
-  cout << "yo, ";
+  std::cout << "yo, ";
 }
 
 void hello() {
-  cout << "hello, ";
+  std::cout << "hello, ";
   yo();
   yo();
 }
@@ -179,11 +176,11 @@ void hello() {
 void goodbye() {
   yo();
   hello();
-  cout << "goodbye,";
+  std::cout << "goodbye,";
 }
 
 int main() {
-  cout << "welcome, ";
+  std::cout << "welcome, ";
   goodbye();
   return 0;
 }

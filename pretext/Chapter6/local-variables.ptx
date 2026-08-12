@@ -39,19 +39,18 @@
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-  cout << "Let's print the multiples of 2." << endl;
+  std::cout << "Let's print the multiples of 2." << std::endl;
   int i = 1;
   while (i < 10) {
     int j = i * 2;
-    cout << i << ": " << j << endl;
+    std::cout << i << ": " << j << std::endl;
     i++;
   }
   i = 10;
   j = 20;
-  cout << i << ": " << j << "!";
+  std::cout << i << ": " << j << "!";
 }
 ]]></code>
       </program>
@@ -108,15 +107,14 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printMultiples(int n) {
   int i = 1;
   while (i <= 6) {
-    cout << n * i << '\t';
+    std::cout << n * i << '\t';
     i = i + 1;
   }
-  cout << endl;
+  std::cout << std::endl;
 }
 
 void printMultTable() {
@@ -159,15 +157,14 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printMultiples(int n) {
   int i = 1;
   while (i <= 6) {
-    cout << n * i << '\t';
+    std::cout << n * i << '\t';
     i = i + 1;
   }
-  cout << endl;
+  std::cout << std::endl;
 }
 
 void printMultTable() {

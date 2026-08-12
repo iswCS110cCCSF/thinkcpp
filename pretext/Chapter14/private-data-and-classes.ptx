@@ -13,7 +13,7 @@
     strings and two enumerated types. The programmer who writes the <c>Card</c> member functions needs
     to know which implementation to use, but someone using the <c>Card</c> structure should not have to
     know anything about its internal structure.</p>
-  <p>As another example, we have been using <c>string</c> and <c>vector</c> objects without ever discussing
+  <p>As another example, we have been using <c>string</c> and <c> std::vector</c> objects without ever discussing
     their implementations. There are many possibilities, but as <q>clients</q> of these libraries,
     we don't need to know.</p>
   <p>In C++, the most common way to enforce data encapsulation is to prevent client programs from
@@ -54,7 +54,6 @@ public:
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 struct Card {
 private:
@@ -72,17 +71,17 @@ public:
 int main() {
     Card card (3, 8);
     card.print();
-    cout << "Rank: " << card.getRank() << "    Suit: " << card.getSuit() << endl;
+    std::cout << "Rank: " << card.getRank() << "    Suit: " << card.getSuit() << std::endl;
     card.setRank(12);
     card.setSuit(2);
     card.print();
-    cout << "Rank: " << card.getRank() << "    Suit: " << card.getSuit() << endl;
+    std::cout << "Rank: " << card.getRank() << "    Suit: " << card.getSuit() << std::endl;
 
     // If you uncomment the following code, you'll get an error! We cannot directly
     // access the private data members of Card, which is why we use accessor functions.
 
     /*
-    cout << "Rank: " << card.rank << "\t Suit: " << card.suit << endl;
+    std::cout << "Rank: " << card.rank << "\t Suit: " << card.suit << std::endl;
     card.rank = 4;
     card.suit = 0;
     */
@@ -98,13 +97,13 @@ Card::Card(int s, int r) {
 }
 
 void Card::print() const {
-    vector&lt;string&gt; suits(4);
+    std::vector&lt;std::string&gt; suits(4);
     suits[0] = &quot;Clubs&quot;;
     suits[1] = &quot;Diamonds&quot;;
     suits[2] = &quot;Hearts&quot;;
     suits[3] = &quot;Spades&quot;;
 
-    vector&lt;string&gt; ranks(14);
+    std::vector&lt;std::string&gt; ranks(14);
     ranks[1] = &quot;Ace&quot;;
     ranks[2] = &quot;2&quot;;
     ranks[3] = &quot;3&quot;;
@@ -119,7 +118,7 @@ void Card::print() const {
     ranks[12] = &quot;Queen&quot;;
     ranks[13] = &quot;King&quot;;
 
-    cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; endl;
+    std::cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; std::endl;
 }
 </tests>
     </program>

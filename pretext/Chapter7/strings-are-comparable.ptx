@@ -8,12 +8,11 @@
     <program interactive="activecode" line-numbers="yes" label="strings_comparable_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    string word = "banana";
+    std::string word = "banana";
     if (word == "banana") {
-        cout << "Yes, we have no bananas!" << endl;
+        std::cout << "Yes, we have no bananas!" << std::endl;
     }
     return 0;
 }
@@ -30,18 +29,17 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="strings_comparable_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
 
-  string word = "Zebra";
+  std::string word = "Zebra";
 
   if (word < "banana") {
-    cout << "Your word, " << word << ", comes before banana." << endl;
+    std::cout << "Your word, " << word << ", comes before banana." << std::endl;
   } else if (word > "banana") {
-    cout << "Your word, " << word << ", comes after banana." << endl;
+    std::cout << "Your word, " << word << ", comes after banana." << std::endl;
   } else {
-    cout << "Yes, we have no bananas!" << endl;
+    std::cout << "Yes, we have no bananas!" << std::endl;
   }
 }
         ]]></code>

@@ -5,12 +5,12 @@
     many times each value appears. We can solve that problem with a loop:</p>
   <program>int numValues = 20;
 int upperBound = 10;
-vector&lt;int&gt; vector = randomVector(numValues, upperBound);
+std::vector&lt;int&gt; std::vector = randomVector(numValues, upperBound);
 
 cout &lt;&lt; "value\thowMany";
 
 for (int i = 0; i &lt; upperBound; i++) {
-  cout &lt;&lt; i &lt;&lt; '\t' &lt;&lt; howMany(vector, i) &lt;&lt; endl;
+  std::cout &lt;&lt; i &lt;&lt; '\t' &lt;&lt; howMany(vector, i) &lt;&lt; std::endl ;
 }</program>
   <p>Notice that it is legal to declare a variable inside a <c>for</c> statement. This syntax is
     sometimes convenient, but you should be aware that a variable declared inside a loop only exists

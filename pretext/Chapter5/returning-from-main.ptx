@@ -81,15 +81,15 @@
       <program>int main() {
     bool sun_set=true;
     if(sun_set) {
-        cout &lt;&lt; "its night time ";
+        std::cout &lt;&lt; "its night time ";
         sun_set=false;
         return 0;
     }
     if(!sun_set) {
-        cout &lt;&lt; "Day time ";
+        std::cout &lt;&lt; "Day time ";
     }
     else {
-        cout &lt;&lt; "afternoon ";
+        std::cout &lt;&lt; "afternoon ";
     }
 }</program>
     </statement>

@@ -52,7 +52,6 @@ Card card (1, 11);
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES };
 
@@ -82,13 +81,13 @@ Card::Card(Suit s, Rank r) {
 }
 
 void Card::print() const {
-    vector&lt;string&gt; suits(4);
+    std::vector&lt;std::string&gt; suits(4);
     suits[0] = &quot;Clubs&quot;;
     suits[1] = &quot;Diamonds&quot;;
     suits[2] = &quot;Hearts&quot;;
     suits[3] = &quot;Spades&quot;;
 
-    vector&lt;string&gt; ranks(14);
+    std::vector&lt;std::string&gt; ranks(14);
     ranks[1] = &quot;Ace&quot;;
     ranks[2] = &quot;2&quot;;
     ranks[3] = &quot;3&quot;;
@@ -103,7 +102,7 @@ void Card::print() const {
     ranks[12] = &quot;Queen&quot;;
     ranks[13] = &quot;King&quot;;
 
-    cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; endl;
+    std::cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; std::endl;
 }
 </tests>
     </program>
@@ -193,7 +192,7 @@ struct iceCream {
     printOrder() {
     // To save space, I didn't include the mapping.
     // I'm sure you can still figure it out.
-    cout &lt;&lt; &quot;Who ordered a &quot; &lt;&lt; scoops[scoop] 
+    std::cout &lt;&lt; &quot;Who ordered a &quot; &lt;&lt; scoops[scoop] 
         &lt;&lt; &quot; scoop of &quot; &lt;&lt; flavors[flavor] 
         &lt;&lt; &quot; in a &quot; &lt;&lt; orders[order] &lt;&lt; ?;
    }

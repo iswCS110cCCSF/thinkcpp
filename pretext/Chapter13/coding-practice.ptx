@@ -8,7 +8,6 @@
     <program interactive="activecode" label="cp_13_AC_1q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 // Write your code for the enumerated type Planet.
         </code>
@@ -18,7 +17,6 @@ using namespace std;
     <program xml:id="cp_13_AC_1a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 enum Planet { MERCURY = 1, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE };
         </code>
@@ -37,7 +35,6 @@ enum Planet { MERCURY = 1, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE 
     <program interactive="activecode" label="cp_13_AC_2q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 enum Planet { MERCURY = 1, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE };
 
@@ -72,42 +69,42 @@ int main() {
           </block>
           <block order="9">
             <cline>        case 1:</cline>
-            <cline>            cout &lt;&lt; &quot;Planet Mercury has 88 number of days in a year!&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;Planet Mercury has 88 number of days in a year!&quot; &lt;&lt; std::endl ;</cline>
             <cline>            break;</cline>
           </block>
           <block order="7">
             <cline>        case 2:</cline>
-            <cline>            cout &lt;&lt; &quot;Planet Venus has 225 number of days in a year!&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;Planet Venus has 225 number of days in a year!&quot; &lt;&lt; std::endl ;</cline>
             <cline>            break;</cline>
           </block>
           <block order="1">
             <cline>        case 3:</cline>
-            <cline>            cout &lt;&lt; &quot;Planet Earth has 365 number of days in a year!&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;Planet Earth has 365 number of days in a year!&quot; &lt;&lt; std::endl ;</cline>
             <cline>            break;</cline>
           </block>
           <block order="5">
             <cline>        case 4:</cline>
-            <cline>            cout &lt;&lt; &quot;Planet Mars has 687 number of days in a year!&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;Planet Mars has 687 number of days in a year!&quot; &lt;&lt; std::endl ;</cline>
             <cline>            break;</cline>
           </block>
           <block order="12">
             <cline>        case 5:</cline>
-            <cline>            cout &lt;&lt; &quot;Planet Jupiter has 4333 number of days in a year!&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;Planet Jupiter has 4333 number of days in a year!&quot; &lt;&lt; std::endl ;</cline>
             <cline>            break;</cline>
           </block>
           <block order="10">
             <cline>        case 6:</cline>
-            <cline>            cout &lt;&lt; &quot;Planet Saturn has 10759 number of days in a year!&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;Planet Saturn has 10759 number of days in a year!&quot; &lt;&lt; std::endl ;</cline>
             <cline>            break;</cline>
           </block>
           <block order="13">
             <cline>        case 7:</cline>
-            <cline>            cout &lt;&lt; &quot;Planet Uranus has 30687 number of days in a year!&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;Planet Uranus has 30687 number of days in a year!&quot; &lt;&lt; std::endl ;</cline>
             <cline>            break;</cline>
           </block>
           <block order="3">
             <cline>        case 8:</cline>
-            <cline>            cout &lt;&lt; &quot;Planet Neptune has 60190 number of days in a year!&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;Planet Neptune has 60190 number of days in a year!&quot; &lt;&lt; std::endl ;</cline>
             <cline>            break;</cline>
           </block>
           <block order="2">
@@ -131,7 +128,6 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 // Write your code for the struct Space here.
 
@@ -144,7 +140,6 @@ using namespace std;
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 struct Space {
     int value;
@@ -152,7 +147,7 @@ struct Space {
 };
 
 struct BingoBoard {
-    vector&lt;vector&lt;Space&gt; &gt; board;
+    std::vector&lt;std::vector&lt;Space&gt; &gt; board;
 };
         </code>
     </program>
@@ -162,7 +157,7 @@ struct BingoBoard {
   <exercise label="cp_13_AC_4_q">
     <statement>
       <p>Now let’s generate a <c>BingoBoard</c>! We want to fill the 25 <c>Space</c>s on the <c>BingoBoard</c> with
-        random values from 1 to 75 without repititon. To do this, we’ll make a <c>vector</c> of
+        random values from 1 to 75 without repititon. To do this, we’ll make a <c> std::vector</c> of
         numbers from 1 to 75 and shuffle it using the same method as shown in this chapter. Then we
         will select the first 25 values for the 25 spaces on the <c>BingoBoard</c>. We will do this entire
         process in multiple steps. First, write the function <c>randomInt</c>, which generates a random value
@@ -172,7 +167,6 @@ struct BingoBoard {
         <code>
 #include &lt;iostream&gt;
 // Add any relevant libraries here.
-using namespace std;
 
 // Write your code for the randomInt function here.
         </code>
@@ -181,7 +175,7 @@ using namespace std;
       <activity label="cp_13_AC_4_pp">
         <statement>
           <p>Now let’s generate a <c>BingoBoard</c>! We want to fill the 25 <c>Space</c>s on the <c>BingoBoard</c> with
-            random values from 1 to 75 without repititon. To do this, we’ll make a <c>vector</c> of
+            random values from 1 to 75 without repititon. To do this, we’ll make a <c> std::vector</c> of
             numbers from 1 to 75 and shuffle it using the same method as shown in this chapter. Then
             we will select the first 25 values for the 25 spaces on the <c>BingoBoard</c>. We will do this
             entire process in multiple steps. First, write the function <c>randomInt</c>, which generates a
@@ -215,12 +209,11 @@ using namespace std;
   <exercise label="cp_13_5">
     <statement>
       <p>Now we need a way to swap the values at two indices in a vector. Write the function <c>swapValues</c>,
-        which takes a <c>vector</c> of <c>int</c>s and two indices as parameters.</p>
+        which takes a <c> std::vector</c> of <c>int</c>s and two indices as parameters.</p>
     <program interactive="activecode" label="cp_13_AC_5q">
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 // Write your code for the swapValues function here.
         </code>
@@ -232,9 +225,8 @@ using namespace std;
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
-void swapValues (vector&lt;int&gt; &amp;vec, int index1, int index2) {
+void swapValues (std::vector&lt;int&gt; &amp;vec, int index1, int index2) {
     int temp = vec[index1];
     vec[index1] = vec[index2];
     vec[index2] = temp;
@@ -247,8 +239,8 @@ void swapValues (vector&lt;int&gt; &amp;vec, int index1, int index2) {
   <exercise label="cp_13_AC_6_q">
     <statement>
       <p>Now that we have the functions <c>randomInt</c> and <c>swapValues</c>, we can write the function <c>generateRandVec</c>. <c>generateRandVec</c>
-        creates a <c>vector</c> with values from 1 to 75, shuffles it using <c>randomInt</c> and <c>swapValues</c>, and
-        returns the shuffled <c>vector</c>. Check the hint below for help with the construction of
+        creates a <c> std::vector</c> with values from 1 to 75, shuffles it using <c>randomInt</c> and <c>swapValues</c>, and
+        returns the shuffled <c> std::vector</c>. Check the hint below for help with the construction of
         the code.</p>
 
     <program interactive="activecode" label="cp_13_AC_6q_editor">
@@ -257,7 +249,6 @@ void swapValues (vector&lt;int&gt; &amp;vec, int index1, int index2) {
 #include &lt;vector&gt;
 #include &lt;cstdlib&gt;
 #include &lt;numeric&gt;
-using namespace std;
 
 // Write your code for the generateRandVec function here.
         </code>
@@ -266,16 +257,16 @@ using namespace std;
       <activity label="cp_13_AC_6_pp">
         <statement>
           <p>Now that we have the functions <c>randomInt</c> and <c>swapValues</c>, we can write the function <c>generateRandVec</c>. <c>generateRandVec</c>
-            creates a <c>vector</c> with values from 1 to 75, shuffles it using <c>randomInt</c> and <c>swapValues</c>, and
-            returns the shuffled <c>vector</c>. Use the lines to construct the code, then go back to
+            creates a <c> std::vector</c> with values from 1 to 75, shuffles it using <c>randomInt</c> and <c>swapValues</c>, and
+            returns the shuffled <c> std::vector</c>. Use the lines to construct the code, then go back to
             complete the Activecode.</p>
         </statement>
         <blocks>
           <block order="4">
-            <cline>vector&lt;int&gt; generateRandVec() {</cline>
+            <cline>std::vector&lt;int&gt; generateRandVec() {</cline>
           </block>
           <block order="1">
-            <cline>   vector&lt;int&gt; vec(75);</cline>
+            <cline>   std::vector&lt;int&gt; vec(75);</cline>
           </block>
           <block order="6">
             <cline>   iota(vec.begin(), vec.end(), 1);</cline>
@@ -315,7 +306,6 @@ using namespace std;
 #include &lt;vector&gt;
 #include &lt;cstdlib&gt;
 #include &lt;numeric&gt;
-using namespace std;
 
 struct Space {
     int value;
@@ -323,13 +313,13 @@ struct Space {
 };
 
 struct BingoBoard {
-    vector&lt;vector&lt;Space&gt; &gt; board;
+    std::vector&lt;std::vector&lt;Space&gt; &gt; board;
     void makeBoard ();
 };
 
 int randomInt (int low, int high);
-void swapValues (vector&lt;int&gt; &amp;vec, int index1, int index2);
-vector&lt;int&gt; generateRandVec ();
+void swapValues (std::vector&lt;int&gt; &amp;vec, int index1, int index2);
+std::vector&lt;int&gt; generateRandVec ();
 
 // Write your code for the makeBoard function here.
         </code>
@@ -341,14 +331,14 @@ int randomInt(int low, int high) {
     return y;
 }
 
-void swapValues(vector&lt;int&gt; &amp;vec, int index1, int index2) {
+void swapValues(std::vector&lt;int&gt; &amp;vec, int index1, int index2) {
     int temp = vec[index1];
     vec[index1] = vec[index2];
     vec[index2] = temp;
 }
 
-vector&lt;int&gt; generateRandVec() {
-    vector&lt;int&gt; vec(75);
+std::vector&lt;int&gt; generateRandVec() {
+    std::vector&lt;int&gt; vec(75);
     iota(vec.begin(), vec.end(), 1);
     for (size_t i = 0; i &lt; vec.size(); ++i) {
         int x = randomInt(i, vec.size() - 1);
@@ -360,8 +350,8 @@ vector&lt;int&gt; generateRandVec() {
 
     </program></statement>
     <solution><p>Below is one way to implement the program. First we need to initialize the board to
-      the correct dimensions. Then, we use <c>generateRandVec</c> to create a <c>vector</c> of random values from 1 to
-      75. Afterwards, we set the values of the 25 <c>Space</c>s to the first 25 values in the random <c>vector</c>.
+      the correct dimensions. Then, we use <c>generateRandVec</c> to create a <c> std::vector</c> of random values from 1 to
+      75. Afterwards, we set the values of the 25 <c>Space</c>s to the first 25 values in the random <c> std::vector</c>.
       Lastly, we set the middle <c>Space</c> to 0 and set its <c>is_filled</c> to <c>true</c>.</p>
       <program xml:id="cp_13_AC_7a">
         <code>
@@ -369,7 +359,6 @@ vector&lt;int&gt; generateRandVec() {
 #include &lt;vector&gt;
 #include &lt;cstdlib&gt;
 #include &lt;numeric&gt;
-using namespace std;
 
 struct Space {
     int value;
@@ -377,24 +366,24 @@ struct Space {
 };
 
 struct BingoBoard {
-    vector&lt;vector&lt;Space&gt; &gt; board;
+    std::vector&lt;std::vector&lt;Space&gt; &gt; board;
     void makeBoard ();
 };
 
 int randomInt (int low, int high);
-void swapValues (vector&lt;int&gt; &amp;vec, int index1, int index2);
-vector&lt;int&gt; generateRandVec ();
+void swapValues (std::vector&lt;int&gt; &amp;vec, int index1, int index2);
+std::vector&lt;int&gt; generateRandVec ();
 
 void BingoBoard::makeBoard() {
     // Initialize board
     Space s = {0, false};
-    vector&lt;Space&gt; cols(5, s);
+    std::vector&lt;Space&gt; cols(5, s);
     for (size_t i = 0; i &lt; 5; ++i) {
         board.push_back(cols);
     }
 
     // Fill board with random values
-    vector&lt;int&gt; vec = generateRandVec();
+    std::vector&lt;int&gt; vec = generateRandVec();
     int count = 0;
     for (size_t row = 0; row &lt; board.size(); ++row) {
         for (size_t col = 0; col &lt; board[row].size(); ++col) {
@@ -416,14 +405,14 @@ int randomInt(int low, int high) {
     return y;
 }
 
-void swapValues(vector&lt;int&gt; &amp;vec, int index1, int index2) {
+void swapValues(std::vector&lt;int&gt; &amp;vec, int index1, int index2) {
     int temp = vec[index1];
     vec[index1] = vec[index2];
     vec[index2] = temp;
 }
 
-vector&lt;int&gt; generateRandVec() {
-    vector&lt;int&gt; vec(75);
+std::vector&lt;int&gt; generateRandVec() {
+    std::vector&lt;int&gt; vec(75);
     iota(vec.begin(), vec.end(), 1);
     for (size_t i = 0; i &lt; vec.size(); ++i) {
         int x = randomInt(i, vec.size() - 1);
@@ -448,7 +437,6 @@ vector&lt;int&gt; generateRandVec() {
 #include &lt;vector&gt;
 #include &lt;cstdlib&gt;
 #include &lt;numeric&gt;
-using namespace std;
 
 struct Space {
     int value;
@@ -456,14 +444,14 @@ struct Space {
 };
 
 struct BingoBoard {
-    vector&lt;vector&lt;Space&gt; &gt; board;
+    std::vector&lt;std::vector&lt;Space&gt; &gt; board;
     void makeBoard ();
     void printBoard ();
 };
 
 int randomInt (int low, int high);
-void swapValues (vector&lt;int&gt; &amp;vec, int index1, int index2);
-vector&lt;int&gt; generateRandVec ();
+void swapValues (std::vector&lt;int&gt; &amp;vec, int index1, int index2);
+std::vector&lt;int&gt; generateRandVec ();
 
 // Write your code for the printBoard function here.
 
@@ -481,14 +469,14 @@ int randomInt(int low, int high) {
     return y;
 }
 
-void swapValues(vector&lt;int&gt; &amp;vec, int index1, int index2) {
+void swapValues(std::vector&lt;int&gt; &amp;vec, int index1, int index2) {
     int temp = vec[index1];
     vec[index1] = vec[index2];
     vec[index2] = temp;
 }
 
-vector&lt;int&gt; generateRandVec() {
-    vector&lt;int&gt; vec(75);
+std::vector&lt;int&gt; generateRandVec() {
+    std::vector&lt;int&gt; vec(75);
     iota(vec.begin(), vec.end(), 1);
     for (size_t i = 0; i &lt; vec.size(); ++i) {
         int x = randomInt(i, vec.size() - 1);
@@ -500,13 +488,13 @@ vector&lt;int&gt; generateRandVec() {
 void BingoBoard::makeBoard() {
     // Initialize board
     Space s = {0, false};
-    vector&lt;Space&gt; cols(5, s);
+    std::vector&lt;Space&gt; cols(5, s);
     for (size_t i = 0; i &lt; 5; ++i) {
         board.push_back(cols);
     }
 
     // Fill board with random values
-    vector&lt;int&gt; vec = generateRandVec();
+    std::vector&lt;int&gt; vec = generateRandVec();
     int count = 0;
     for (size_t row = 0; row &lt; board.size(); ++row) {
         for (size_t col = 0; col &lt; board[row].size(); ++col) {
@@ -540,13 +528,13 @@ void BingoBoard::makeBoard() {
             <cline>        for (size_t i = 0; i &lt; board[j].size(); i++) {</cline>
           </block>
           <block order="3">
-            <cline>            cout &lt;&lt; board[j][i].value &lt;&lt; &quot;\t&quot;;</cline>
+            <cline>            std::cout &lt;&lt; board[j][i].value &lt;&lt; &quot;\t&quot;;</cline>
           </block>
           <block order="5">
             <cline>        }</cline>
           </block>
           <block order="2">
-            <cline>        cout &lt;&lt; endl;</cline>
+            <cline>        std::cout &lt;&lt; std::endl ;</cline>
           </block>
           <block order="8">
             <cline>    }</cline>
@@ -562,22 +550,21 @@ void BingoBoard::makeBoard() {
   <exercise label="cp_13_9">
     <statement>
       <p>Bubble sort is a method of sorting that involves repeatedly swapping the adjacent elements
-        if they are in the wrong order. For example, let’s say we have the <c>vector</c> with
+        if they are in the wrong order. For example, let’s say we have the <c> std::vector</c> with
         elements {3, 2, 4, 1}. On the first pass, we take a look at the first two elements, 3 and 2.
-        Since 3 is bigger than 2, we swap them. Thus, the <c>vector</c> now looks like {2, 3, 4, 1}. Next,
+        Since 3 is bigger than 2, we swap them. Thus, the <c> std::vector</c> now looks like {2, 3, 4, 1}. Next,
         we look at the next two elements, 3 and 4. Since 3 is less than 4, we don’t swap.
         Lastly, we look at the last two elements, 4 and 1. Since 4 is greater than 1, we swap the.
-        Thus the <c>vector</c> now looks like {2, 3, 1, 4}. Now we restart and look at the first two
+        Thus the <c> std::vector</c> now looks like {2, 3, 1, 4}. Now we restart and look at the first two
         elements again and the process continues. This way, the biggest elements
-        “bubble” to the back. Write the function <c>bubbleSort</c>, which takes a <c>vector</c> as a
+        “bubble” to the back. Write the function <c>bubbleSort</c>, which takes a <c> std::vector</c> as a
         parameter and sorts it. Feel free to use the provided <c>swapValues</c> function.</p>
     <program interactive="activecode" label="cp_13_AC_9q">
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
-void swapValues(vector&lt;int&gt; &amp;vec, int index1, int index2) {
+void swapValues(std::vector&lt;int&gt; &amp;vec, int index1, int index2) {
     int temp = vec[index1];
     vec[index1] = vec[index2];
     vec[index2] = temp;
@@ -586,10 +573,10 @@ void swapValues(vector&lt;int&gt; &amp;vec, int index1, int index2) {
 // Write your code for the bubbleSort function here.
 
 int main() {
-    vector&lt;int&gt; vec = { 5, 1, 4, 2, 8 };
+    std::vector&lt;int&gt; vec = { 5, 1, 4, 2, 8 };
     bubbleSort (vec);
     for (size_t i = 0; i &lt; vec.size(); ++i) {
-        cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
+        std::cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
     }
 }
         </code>
@@ -602,15 +589,14 @@ int main() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
-void swapValues(vector&lt;int&gt; &amp;vec, int index1, int index2) {
+void swapValues(std::vector&lt;int&gt; &amp;vec, int index1, int index2) {
     int temp = vec[index1];
     vec[index1] = vec[index2];
     vec[index2] = temp;
 }
 
-void bubbleSort(vector&lt;int&gt; &amp;vec) {
+void bubbleSort(std::vector&lt;int&gt; &amp;vec) {
     for (size_t i = 0; i &lt; vec.size() - 1; ++i) {
         for (size_t j = 0; j &lt; vec.size() - 1 - i; ++j) {
             if (vec[j] &gt; vec[j + 1]) {
@@ -621,10 +607,10 @@ void bubbleSort(vector&lt;int&gt; &amp;vec) {
 }
 
 int main() {
-    vector&lt;int&gt; vec = { 5, 1, 4, 2, 8 };
+    std::vector&lt;int&gt; vec = { 5, 1, 4, 2, 8 };
     bubbleSort (vec);
     for (size_t i = 0; i &lt; vec.size(); ++i) {
-        cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
+        std::cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
     }
 }
         </code>
@@ -635,20 +621,19 @@ int main() {
   <exercise label="cp_13_AC_10_q">
     <statement>
       <p>You may have noticed that in some cases, our version of <c>bubbleSort</c> does an unnecessary amount
-        of work. For example, if our <c>vector</c> was {1, 2, 3, 5, 4}, <c>bubbleSort</c> would swap 4 and 5, but
-        then keep going even though our <c>vector</c> is already in order! We can save some work by
+        of work. For example, if our <c> std::vector</c> was {1, 2, 3, 5, 4}, <c>bubbleSort</c> would swap 4 and 5, but
+        then keep going even though our <c> std::vector</c> is already in order! We can save some work by
         including a <c>bool</c> called <c>is_changed</c>. If we swap values during a pass, we set <c>is_changed</c> to true.
         If nothing has been swapped, then <c>is_changed</c> stays false, and we know to break out of the loop
-        since our <c>vector</c> is already sorted. Write the function <c>fastBubbleSort</c>, which is <c>bubbleSort</c> with this
+        since our <c> std::vector</c> is already sorted. Write the function <c>fastBubbleSort</c>, which is <c>bubbleSort</c> with this
         modification. Check the hint below for help with the construction of the code.</p>
 
     <program interactive="activecode" label="cp_13_AC_10q_editor">
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
-void swapValues(vector&lt;int&gt; &amp;vec, int index1, int index2) {
+void swapValues(std::vector&lt;int&gt; &amp;vec, int index1, int index2) {
     int temp = vec[index1];
     vec[index1] = vec[index2];
     vec[index2] = temp;
@@ -657,10 +642,10 @@ void swapValues(vector&lt;int&gt; &amp;vec, int index1, int index2) {
 // Write your code for the fastBubbleSort function here.
 
 int main() {
-    vector&lt;int&gt; vec = { 1, 3, 5, 4, 6, 8, 9 };
+    std::vector&lt;int&gt; vec = { 1, 3, 5, 4, 6, 8, 9 };
     fastBubbleSort (vec);
     for (size_t i = 0; i &lt; vec.size(); ++i) {
-        cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
+        std::cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
     }
 }
         </code>
@@ -669,17 +654,17 @@ int main() {
       <activity label="cp_13_AC_10_pp">
         <statement>
           <p>You may have noticed that in some cases, our version of <c>bubbleSort</c> does an unnecessary
-            amount of work. For example, if our <c>vector</c> was {1, 2, 3, 5, 4}, <c>bubbleSort</c> would swap 4
-            and 5, but then keep going even though our <c>vector</c> is already in order! We can save some
+            amount of work. For example, if our <c> std::vector</c> was {1, 2, 3, 5, 4}, <c>bubbleSort</c> would swap 4
+            and 5, but then keep going even though our <c> std::vector</c> is already in order! We can save some
             work by including a <c>bool</c> called <c>is_changed</c>. If we swap values during a pass, we set <c>is_changed</c>
             to true. If nothing has been swapped, then <c>is_changed</c> stays false, and we know to break out
-            of the loop since our <c>vector</c> is already sorted. Write the function <c>fastBubbleSort</c>, which is <c>bubbleSort</c>
+            of the loop since our <c> std::vector</c> is already sorted. Write the function <c>fastBubbleSort</c>, which is <c>bubbleSort</c>
             with this modification. Use the lines to construct the code, then go back to complete
             the Activecode.</p>
         </statement>
         <blocks>
           <block order="13">
-            <cline>void fastBubbleSort(vector&lt;int&gt; &amp;vec) {</cline>
+            <cline>void fastBubbleSort(std::vector&lt;int&gt; &amp;vec) {</cline>
           </block>
           <block order="7">
             <cline>    bool is_changed = false;</cline>

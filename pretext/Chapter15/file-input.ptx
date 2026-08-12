@@ -10,16 +10,15 @@ ifstream infile(&quot;file-name&quot;);
     including <c>&gt;&gt;</c> and <c>getline</c>.</p>
   <program>#include &lt;iostream&gt;
 #include &lt;fstream&gt;
-using namespace std;
 
 int main()
 {
     int x;
-    string line;
+    std::string line;
 
-    ifstream infile(&quot;file-name&quot;);
+    std::ifstream infile(&quot;file-name&quot;);
     infile &gt;&gt; x;               // get a single integer and store in x
-    getline(infile, line);           // get a whole line and store in line
+    std::getline(infile, line);           // get a whole line and store in line
 }</program>
   <p>If we know ahead of time how much data is in a file, it is
     straightforward to write a loop that reads the entire file and then
@@ -34,24 +33,23 @@ int main()
     displays them on the screen:</p>
   <program>#include &lt;iostream&gt;
 #include &lt;fstream&gt;
-using namespace std;
 
 int main()
 {
- string fileName = ...;
- ifstream infile(fileName);
+ std::string fileName = ...;
+ std::ifstream infile(fileName);
 
  if (infile.good() == false) {
-   cout &lt;&lt; &quot;Unable to open the file named &quot; &lt;&lt; fileName;
+   std::cout &lt;&lt; &quot;Unable to open the file named &quot; &lt;&lt; fileName;
    exit (1);
  }
 
  while (true) {
-   getline(infile, line);
+   std::getline(infile, line);
    if (infile.eof()) {
      break;
    }
-   cout &lt;&lt; line &lt;&lt; endl;
+   std::cout &lt;&lt; line &lt;&lt; std::endl;
  }
 }</program>
   <p>Immediately after opening the file, we invoke the <c>good</c> function. The return value is <c>false</c>
@@ -148,7 +146,7 @@ int main()
         <cline> if (in_file.good() == false) {</cline>
       </block>
       <block order="10">
-        <cline><![CDATA[   cout << "Unable to open the file named " << name_of_file;]]></cline>
+        <cline><![CDATA[   std::cout << "Unable to open the file named " << name_of_file;]]></cline>
       </block>
       <block order="5">
         <cline>   exit(1);</cline>
@@ -164,7 +162,7 @@ int main()
         <cline>   if (in_file.eof()) break;</cline>
       </block>
       <block order="9">
-        <cline><![CDATA[   cout << line << endl;]]></cline>
+        <cline><![CDATA[   std::cout << line << std::endl ;]]></cline>
         <cline> }</cline>
         <cline>}</cline>
       </block>

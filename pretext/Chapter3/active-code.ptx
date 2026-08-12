@@ -12,22 +12,21 @@
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 void printArea(int r) {
     double pi = acos(1.0);
     double area = pi * r ^ 2;
-    cout << area;
+    std::cout << area;
 }
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    cout << "Testing with radius = 5..." << endl; 
-    cout << "    Your function had area = "; printArea(5); cout << endl; 
-    cout << "    The correct solution has area = 78.5398" << endl; 
-    cout << "Testing with radius = 7.5..." << endl; 
-    cout << "    Your function had area = "; printArea(7.5); cout << endl; 
-    cout << "    The correct solution has area = 176.715";
+    std::cout << "Testing with radius = 5..." << std::endl; 
+    std::cout << "    Your function had area = "; printArea(5); std::cout << std::endl; 
+    std::cout << "    The correct solution has area = 78.5398" << std::endl; 
+    std::cout << "Testing with radius = 7.5..." << std::endl; 
+    std::cout << "    Your function had area = "; printArea(7.5); std::cout << std::endl; 
+    std::cout << "    The correct solution has area = 176.715";
 }
         ]]></code>
     </program></statement>
@@ -39,7 +38,7 @@ int main() {
 void printArea(double r) {
     double pi = acos(-1.0);
     double area = pi * r * r;
-    cout << area;
+    std::cout << area;
 }
         ]]></code></program>
     </solution>
@@ -51,10 +50,9 @@ void printArea(double r) {
     <program interactive="activecode" line-numbers="yes" label="functions_a2_editor">
           <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-void printAnimals(string a, int b) {
-    cout << b << a;
+void printAnimals(std::string a, int b) {
+    std::cout << b << a;
 }
 
 int main() {
@@ -79,14 +77,14 @@ int main() {
           </block>
           <block order="5">
             <choice correct="yes">
-              <cline><![CDATA[    cout << a << " " << b;]]></cline>
+              <cline><![CDATA[    std::cout << a << " " << b;]]></cline>
             </choice>
             <choice>
-              <cline><![CDATA[    cout << b << " " << a; ]]></cline>
+              <cline><![CDATA[    std::cout << b << " " << a; ]]></cline>
             </choice>
           </block>
           <block order="1">
-            <cline><![CDATA[    cout << b << a; ]]></cline>
+            <cline><![CDATA[    std::cout << b << a; ]]></cline>
           </block>
           <block order="4">
             <cline>}</cline>
@@ -111,10 +109,9 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="functions_a3q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void divide(int a, int b) {
-    cout << a / b;
+    std::cout << a / b;
 }
 
 int main() {
@@ -122,7 +119,7 @@ int main() {
     int b = 12;
 
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    cout << b << " / " << a << " = ";
+    std::cout << b << " / " << a << " = ";
     divide (b, a);
 }
         ]]></code>
@@ -135,16 +132,15 @@ int main() {
         result.</p>
       <program xml:id="functions_a3a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void divide(double a, double b) {
-    cout << a / b;
+    std::cout << a / b;
 }
 
 int main() {
     int a = 8;
     int b = 12;
-    cout << b << " / " << a << " = ";
+    std::cout << b << " / " << a << " = ";
     divide (b, a);
 }
         ]]></code></program>
@@ -160,22 +156,21 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 void logSubtraction(double a) {
     // Create the variable difference and assign it to the difference mentioned in the instructions
 
-    cout << difference;
+    std::cout << difference;
 }
 
 int main() {
 // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    cout << "Testing with a = 8..." << endl;
-    cout << "    Your solution has difference = "; logSubtraction(8); cout << endl;
-    cout << "    The correct solution has difference = -1.17635" << endl;
-    cout << "Testing with a = -2..." << endl;
-    cout << "    Your solution has difference = "; logSubtraction(-2); cout << endl;
-    cout << "    The correct solution has difference = nan";
+    std::cout << "Testing with a = 8..." << std::endl;
+    std::cout << "    Your solution has difference = "; logSubtraction(8); std::cout << std::endl;
+    std::cout << "    The correct solution has difference = -1.17635" << std::endl;
+    std::cout << "Testing with a = -2..." << std::endl;
+    std::cout << "    Your solution has difference = "; logSubtraction(-2); std::cout << std::endl;
+    std::cout << "    The correct solution has difference = nan";
 }
     ]]></code>
     </program>
@@ -206,7 +201,7 @@ int main() {
             </choice>
           </block>
           <block order="1">
-            <cline><![CDATA[    cout << difference;]]></cline>
+            <cline><![CDATA[    std::cout << difference;]]></cline>
           </block>
           <block order="3">
             <cline>}</cline>
@@ -223,10 +218,9 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="functions_a5q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void border() {
-    cout << "------------" << endl;
+    std::cout << "------------" << std::endl;
 }
 
 int main() {
@@ -244,16 +238,15 @@ int main() {
 
       <program xml:id="functions_a5a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void border() {
-    cout << "------------" << endl;
+    std::cout << "------------" << std::endl;
 }
 
 int main() {
-    cout << "First Line." << endl;
+    std::cout << "First Line." << std::endl;
     border();
-    cout << "Second Line." << endl;
+    std::cout << "Second Line." << std::endl;
 }
         ]]></code></program>
     </solution>
@@ -267,7 +260,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="functions_a6_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void intDivision() {
 
@@ -275,7 +267,7 @@ void intDivision() {
 
 int main() {
 // DO NOT MODIFY ANYTHING BELOW THIS LINE
-cout << "Testing with a = 2.4, b = 6.8..." << endl; cout << "    Your solution has a quotient of "; intDivision(2.4, 6.8); cout << endl; cout << "    The correct solution has a quotient of 0" << endl; cout << "Testing with a = -8.6, b = 4.2..." << endl; cout << "    Your solution has a quotient of "; intDivision(-8.6, 4.2); cout << endl; cout << "    The correct solution has a quotient of -2";
+std::cout << "Testing with a = 2.4, b = 6.8..." << std::endl; std::cout << "    Your solution has a quotient of "; intDivision(2.4, 6.8); std::cout << std::endl; std::cout << "    The correct solution has a quotient of 0" << std::endl; std::cout << "Testing with a = -8.6, b = 4.2..." << std::endl; std::cout << "    Your solution has a quotient of "; intDivision(-8.6, 4.2); std::cout << std::endl; std::cout << "    The correct solution has a quotient of -2";
 }
     ]]></code>
     </program>    </statement>
@@ -309,7 +301,7 @@ cout << "Testing with a = 2.4, b = 6.8..." << endl; cout << "    Your solution h
             <cline>    difference = b / a; </cline>
           </block>
           <block order="3">
-            <cline><![CDATA[    cout << difference << endl;]]></cline>
+            <cline><![CDATA[    std::cout << difference << std::endl ;]]></cline>
           </block>
           <block order="8">
             <cline>}</cline>
@@ -328,19 +320,18 @@ cout << "Testing with a = 2.4, b = 6.8..." << endl; cout << "    Your solution h
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 void gpaBoost() {
 
 }
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    cout << "Testing with GPA = 2.513..." << endl; 
-    cout << "    Your solution rounded the GPA to "; gpaBoost(2.513); cout << endl; 
-    cout << "    The correct solution rounds the GPA to 3.000" << endl; 
-    cout << "Testing with GPA = 4.000..." << endl; 
-    cout << "    Your solution rounded the GPA to "; gpaBoost(4.000); cout << endl; 
-    cout << "    The correct solution rounds the GPA to 4.000";
+    std::cout << "Testing with GPA = 2.513..." << std::endl; 
+    std::cout << "    Your solution rounded the GPA to "; gpaBoost(2.513); std::cout << std::endl; 
+    std::cout << "    The correct solution rounds the GPA to 3.000" << std::endl; 
+    std::cout << "Testing with GPA = 4.000..." << std::endl; 
+    std::cout << "    Your solution rounded the GPA to "; gpaBoost(4.000); std::cout << std::endl; 
+    std::cout << "    The correct solution rounds the GPA to 4.000";
 }
         ]]></code>
     </program>
@@ -356,11 +347,10 @@ int main() {
       <program xml:id="functions_a7a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 void gpaBoost(double GPA) {
     int betterGPA = ceil(GPA);
-    cout << betterGPA << ".000";
+    std::cout << betterGPA << ".000";
 }
         ]]></code></program>
     </solution>
@@ -374,7 +364,6 @@ void gpaBoost(double GPA) {
     <program interactive="activecode" line-numbers="yes" label="functions_a8_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void volumePrism() {
 
@@ -382,12 +371,12 @@ void volumePrism() {
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    cout << "Testing with a = 3, b = 4, c = 5..." << endl;
-    cout << "    Your solution calculated a volume of "; volumePrism(3,4,5); cout << endl;
-    cout << "    The correct solution calculates a volume of 60" << endl;
-    cout << "Testing with a = 5.7, b = 3.9, c = 1.3..." << endl;
-    cout << "    Your solution calculated a volume of "; volumePrism(5.7,3.9,1.3); cout << endl;
-    cout << "    The correct solution calculates a volume of 28.899";
+    std::cout << "Testing with a = 3, b = 4, c = 5..." << std::endl;
+    std::cout << "    Your solution calculated a volume of "; volumePrism(3,4,5); std::cout << std::endl;
+    std::cout << "    The correct solution calculates a volume of 60" << std::endl;
+    std::cout << "Testing with a = 5.7, b = 3.9, c = 1.3..." << std::endl;
+    std::cout << "    Your solution calculated a volume of "; volumePrism(5.7,3.9,1.3); std::cout << std::endl;
+    std::cout << "    The correct solution calculates a volume of 28.899";
 }
     ]]></code>
     </program>
@@ -416,7 +405,7 @@ int main() {
             <cline>    volume = s1 * s2 * s3;</cline>
           </block>
           <block order="1">
-            <cline><![CDATA[    cout << volume << endl;]]></cline>
+            <cline><![CDATA[    std::cout << volume << std::endl ;]]></cline>
           </block>
           <block order="3">
             <cline>}</cline>
@@ -434,19 +423,18 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 void tanDegrees() {
 
 }
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    cout << "Testing with degrees = 45..." << endl; 
-    cout << "    Your solution calculated a tangent of "; tanDegrees(45); cout << endl; 
-    cout << "    The correct solution calculates a tangent of 0.999204" << endl; 
-    cout << "Testing with degrees = 112.1..." << endl; 
-    cout << "    Your solution calculated a tangent of "; tanDegrees(112.1); cout << endl; 
-    cout << "    The correct solution calculates a tangent of -2.46973";
+    std::cout << "Testing with degrees = 45..." << std::endl; 
+    std::cout << "    Your solution calculated a tangent of "; tanDegrees(45); std::cout << std::endl; 
+    std::cout << "    The correct solution calculates a tangent of 0.999204" << std::endl; 
+    std::cout << "Testing with degrees = 112.1..." << std::endl; 
+    std::cout << "    Your solution calculated a tangent of "; tanDegrees(112.1); std::cout << std::endl; 
+    std::cout << "    The correct solution calculates a tangent of -2.46973";
 }
         ]]></code>
     </program>
@@ -457,12 +445,11 @@ int main() {
       <program xml:id="functions_a9a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 void tanDegrees(double degrees) {
     double radians = degrees * (2 * 3.14) / 360.0;
     double tangent = tan(radians);
-    cout << tangent;
+    std::cout << tangent;
 }
         ]]></code></program>
     </solution>
@@ -476,7 +463,6 @@ void tanDegrees(double degrees) {
     <program interactive="activecode" line-numbers="yes" label="functions_a10_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void volumeSphere() {
 
@@ -484,12 +470,12 @@ void volumeSphere() {
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    cout << "Testing with radius = 3..." << endl;
-    cout << "    Your solution calculated a volume of "; volumeSphere(3); cout << endl;
-    cout << "    The correct solution calculates a volume of 113.04" << endl;
-    cout << "Testing with radius = 3.24..." << endl;
-    cout << "    Your solution calculated a volume of "; volumeSphere(3.24); cout << endl;
-    cout << "    The correct solution calculates a volume of 142.398";
+    std::cout << "Testing with radius = 3..." << std::endl;
+    std::cout << "    Your solution calculated a volume of "; volumeSphere(3); std::cout << std::endl;
+    std::cout << "    The correct solution calculates a volume of 113.04" << std::endl;
+    std::cout << "Testing with radius = 3.24..." << std::endl;
+    std::cout << "    Your solution calculated a volume of "; volumeSphere(3.24); std::cout << std::endl;
+    std::cout << "    The correct solution calculates a volume of 142.398";
 }
     ]]></code>
     </program>
@@ -521,7 +507,7 @@ int main() {
             <cline>    volume = 4 / 3 * pi * radius ^ 3; </cline>
           </block>
           <block order="7">
-            <cline><![CDATA[    cout << volume << endl;]]></cline>
+            <cline><![CDATA[    std::cout << volume << std::endl ;]]></cline>
           </block>
           <block order="5">
             <cline>}</cline>

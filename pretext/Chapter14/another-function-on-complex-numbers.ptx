@@ -50,7 +50,6 @@ product.printCartesian();</program>
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 class Complex
 {
@@ -108,7 +107,7 @@ double Complex::getImag() {
 }
 
 void Complex::calculatePolar() {
-  mag = sqrt(pow(real, 2) + pow(imag, 2));
+  mag = std::sqrt(std::pow(real, 2) + std::pow(imag, 2));
   theta = atan(imag / real);
   polar = true;
 }
@@ -128,11 +127,11 @@ double Complex::getTheta() {
 }
 
 void Complex::printCartesian() {
-  cout &lt;&lt; getReal() &lt;&lt; &quot; + &quot; &lt;&lt; getImag() &lt;&lt; &quot;i&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; getReal() &lt;&lt; &quot; + &quot; &lt;&lt; getImag() &lt;&lt; &quot;i&quot; &lt;&lt; std::endl;
 }
 
 void Complex::printPolar() {
-  cout &lt;&lt; getMag() &lt;&lt; &quot; e^ &quot; &lt;&lt; getTheta() &lt;&lt; &quot;i&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; getMag() &lt;&lt; &quot; e^ &quot; &lt;&lt; getTheta() &lt;&lt; &quot;i&quot; &lt;&lt; std::endl;
 }
 
 Complex add (Complex&amp; a, Complex&amp; b) {
@@ -230,7 +229,6 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 class Complex
 {
@@ -254,8 +252,8 @@ public:
 };
 
 void Complex::setCartesian(double r, double i) {
-  // ``setCartesian`` should set real and imag to
-  // r and i respectively and set the cartesian flag.
+  // ``setCartesian`` should std::set real and imag to
+  // r and i respectively and std::set the cartesian flag.
   // Write your implementation here.
 }
 
@@ -298,7 +296,7 @@ double Complex::getImag() {
 }
 
 void Complex::calculatePolar() {
-  mag = sqrt(pow(real, 2) + pow(imag, 2));
+  mag = std::sqrt(std::pow(real, 2) + std::pow(imag, 2));
   theta = atan(imag / real);
   polar = true;
 }
@@ -318,11 +316,11 @@ double Complex::getTheta() {
 }
 
 void Complex::printCartesian() {
-  cout &lt;&lt; getReal() &lt;&lt; &quot; + &quot; &lt;&lt; getImag() &lt;&lt; &quot;i&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; getReal() &lt;&lt; &quot; + &quot; &lt;&lt; getImag() &lt;&lt; &quot;i&quot; &lt;&lt; std::endl;
 }
 
 void Complex::printPolar() {
-  cout &lt;&lt; getMag() &lt;&lt; &quot; e^ &quot; &lt;&lt; getTheta() &lt;&lt; &quot;i&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; getMag() &lt;&lt; &quot; e^ &quot; &lt;&lt; getTheta() &lt;&lt; &quot;i&quot; &lt;&lt; std::endl;
 }
 
 Complex add (Complex&amp; a, Complex&amp; b) {

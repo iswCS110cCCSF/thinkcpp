@@ -7,7 +7,6 @@
     <program interactive="activecode" label="cp_9_AC_1q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 // Write your code for the struct Cake here.
 
@@ -21,11 +20,10 @@ int main() {
     <program xml:id="cp_9_AC_1a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Cake {
-    string name;
-    string color;
+    std::string name;
+    std::string color;
     double diameter;
     bool has_icing;
 };
@@ -49,11 +47,10 @@ int main() {
     <program interactive="activecode" label="cp_9_AC_2q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Cake {
-    string name;
-    string color;
+    std::string name;
+    std::string color;
     double diameter;
     bool has_icing;
 };
@@ -91,12 +88,12 @@ int main() {
           </block>
           <block order="4">
             <cline>        if (c.has_icing) {</cline>
-            <cline>            cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake with icing.&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake with icing.&quot; &lt;&lt; std::endl ;</cline>
             <cline>        }</cline>
           </block>
           <block order="9">
             <cline>        else {</cline>
-            <cline>            cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake without icing.&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake without icing.&quot; &lt;&lt; std::endl ;</cline>
             <cline>        }</cline>
           </block>
           <block order="3">
@@ -107,12 +104,12 @@ int main() {
           </block>
           <block order="2">
             <cline>        if (c.has_icing) {</cline>
-            <cline>            cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes with icing.&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes with icing.&quot; &lt;&lt; std::endl ;</cline>
             <cline>        }</cline>
           </block>
           <block order="5">
             <cline>        else {</cline>
-            <cline>            cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes without icing.&quot; &lt;&lt; endl;</cline>
+            <cline>            std::cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes without icing.&quot; &lt;&lt; std::endl ;</cline>
             <cline>        }</cline>
           </block>
           <block order="8">
@@ -131,11 +128,10 @@ int main() {
     <program interactive="activecode" label="cp_9_AC_3q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Cake {
-    string name;
-    string color;
+    std::string name;
+    std::string color;
     double diameter;
     bool has_icing;
 };
@@ -153,18 +149,18 @@ int main() {
 void printCakeInfo(Cake c) {
     if (c.name == &quot;n/a&quot;) {
         if (c.has_icing) {
-            cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake with icing.&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake with icing.&quot; &lt;&lt; std::endl;
         }
         else {
-            cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake without icing.&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake without icing.&quot; &lt;&lt; std::endl;
         }
     }
     else {
         if (c.has_icing) {
-            cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes with icing.&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes with icing.&quot; &lt;&lt; std::endl;
         }
         else {
-            cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes without icing.&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes without icing.&quot; &lt;&lt; std::endl;
         }
     }
 }
@@ -177,11 +173,10 @@ void printCakeInfo(Cake c) {
     <program xml:id="cp_9_AC_3a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Cake {
-    string name;
-    string color;
+    std::string name;
+    std::string color;
     double diameter;
     bool has_icing;
 };
@@ -190,20 +185,20 @@ void printCakeInfo(Cake c);
 
 Cake makeCake() {
     Cake input;
-    string name, color;
+    std::string name, color;
     double diameter;
     char icing;
-    cout &lt;&lt; &quot;Name: &quot;;
-    cin &gt;&gt; name;
+    std::cout &lt;&lt; &quot;Name: &quot;;
+    std::cin &gt;&gt; name;
     input.name = name;
-    cout &lt;&lt; &quot;Color: &quot;;
-    cin &gt;&gt; color;
+    std::cout &lt;&lt; &quot;Color: &quot;;
+    std::cin &gt;&gt; color;
     input.color = color;
-    cout &lt;&lt; &quot;Diameter: &quot;;
-    cin &gt;&gt; diameter;
+    std::cout &lt;&lt; &quot;Diameter: &quot;;
+    std::cin &gt;&gt; diameter;
     input.diameter = diameter;
-    cout &lt;&lt; &quot;Icing? (y/n) &quot;;
-    cin &gt;&gt; icing;
+    std::cout &lt;&lt; &quot;Icing? (y/n) &quot;;
+    std::cin &gt;&gt; icing;
     if (icing == 'y') {
         input.has_icing = true;
     }
@@ -231,11 +226,10 @@ int main() {
     <program interactive="activecode" label="cp_9_AC_4q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Cake {
-    string name;
-    string color;
+    std::string name;
+    std::string color;
     double diameter;
     bool has_icing;
 };
@@ -255,38 +249,38 @@ int main() {
 void printCakeInfo(Cake c) {
     if (c.name == &quot;n/a&quot;) {
         if (c.has_icing) {
-            cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake with icing.&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake with icing.&quot; &lt;&lt; std::endl;
         }
         else {
-            cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake without icing.&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake without icing.&quot; &lt;&lt; std::endl;
         }
     }
     else {
         if (c.has_icing) {
-            cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes with icing.&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes with icing.&quot; &lt;&lt; std::endl;
         }
         else {
-            cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes without icing.&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes without icing.&quot; &lt;&lt; std::endl;
         }
     }
 }
 
 Cake makeCake() {
     Cake input;
-    string name, color;
+    std::string name, color;
     double diameter;
     char icing;
-    cout &lt;&lt; &quot;Name: &quot;;
-    cin &gt;&gt; name;
+    std::cout &lt;&lt; &quot;Name: &quot;;
+    std::cin &gt;&gt; name;
     input.name = name;
-    cout &lt;&lt; &quot;Color: &quot;;
-    cin &gt;&gt; color;
+    std::cout &lt;&lt; &quot;Color: &quot;;
+    std::cin &gt;&gt; color;
     input.color = color;
-    cout &lt;&lt; &quot;Diameter: &quot;;
-    cin &gt;&gt; diameter;
+    std::cout &lt;&lt; &quot;Diameter: &quot;;
+    std::cin &gt;&gt; diameter;
     input.diameter = diameter;
-    cout &lt;&lt; &quot;Icing? (y/n) &quot;;
-    cin &gt;&gt; icing;
+    std::cout &lt;&lt; &quot;Icing? (y/n) &quot;;
+    std::cin &gt;&gt; icing;
     if (icing == 'y') {
         input.has_icing = true;
     }
@@ -343,11 +337,10 @@ Cake makeCake() {
     <program interactive="activecode" label="cp_9_AC_5q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Cake {
-    string name;
-    string color;
+    std::string name;
+    std::string color;
     double diameter;
     bool has_icing;
 };
@@ -368,38 +361,38 @@ int main() {
  void printCakeInfo(Cake c) {
      if (c.name == &quot;n/a&quot;) {
          if (c.has_icing) {
-             cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake with icing.&quot; &lt;&lt; endl;
+             std::cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake with icing.&quot; &lt;&lt; std::endl;
          }
          else {
-             cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake without icing.&quot; &lt;&lt; endl;
+             std::cout &lt;&lt; &quot;This is a &quot; &lt;&lt; c.color &lt;&lt; &quot;,&quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter cake without icing.&quot; &lt;&lt; std::endl;
          }
      }
      else {
          if (c.has_icing) {
-             cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes with icing.&quot; &lt;&lt; endl;
+             std::cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes with icing.&quot; &lt;&lt; std::endl;
          }
          else {
-             cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes without icing.&quot; &lt;&lt; endl;
+             std::cout &lt;&lt; &quot;Happy birthday &quot; &lt;&lt; c.name &lt;&lt; &quot;! Your cake is &quot; &lt;&lt; c.color &lt;&lt; &quot;, has a &quot; &lt;&lt; c.diameter &lt;&lt; &quot; inch diameter, and comes without icing.&quot; &lt;&lt; std::endl;
          }
      }
  }
 
  Cake makeCake() {
      Cake input;
-     string name, color;
+     std::string name, color;
      double diameter;
      char icing;
-     cout &lt;&lt; &quot;Name: &quot;;
-     cin &gt;&gt; name;
+     std::cout &lt;&lt; &quot;Name: &quot;;
+     std::cin &gt;&gt; name;
      input.name = name;
-     cout &lt;&lt; &quot;Color: &quot;;
-     cin &gt;&gt; color;
+     std::cout &lt;&lt; &quot;Color: &quot;;
+     std::cin &gt;&gt; color;
      input.color = color;
-     cout &lt;&lt; &quot;Diameter: &quot;;
-     cin &gt;&gt; diameter;
+     std::cout &lt;&lt; &quot;Diameter: &quot;;
+     std::cin &gt;&gt; diameter;
      input.diameter = diameter;
-     cout &lt;&lt; &quot;Icing? (y/n) &quot;;
-     cin &gt;&gt; icing;
+     std::cout &lt;&lt; &quot;Icing? (y/n) &quot;;
+     std::cin &gt;&gt; icing;
      if (icing == 'y') {
          input.has_icing = true;
      }
@@ -416,11 +409,10 @@ int main() {
     <program xml:id="cp_9_AC_5a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Cake {
-    string name;
-    string color;
+    std::string name;
+    std::string color;
     double diameter;
     bool has_icing;
 };
@@ -450,7 +442,6 @@ int main() {
     <program interactive="activecode" label="cp_9_AC_7q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 // Write your code for the struct Pants here.
 
@@ -464,11 +455,10 @@ int main() {
     <program xml:id="cp_9_AC_7a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Pants {
     char size;
-    string material;
+    std::string material;
 };
 
 int main() {
@@ -486,7 +476,6 @@ int main() {
     <program interactive="activecode" label="cp_9_AC_6q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 // Write your code for the struct Shirt here.
 
@@ -506,13 +495,13 @@ int main () {
             <cline>struct Shirt {</cline>
           </block>
           <block order="3">
-            <cline>    string color;</cline>
+            <cline>   std::string color;</cline>
           </block>
           <block order="5">
             <cline>    char size;</cline>
           </block>
           <block order="2" correct="no">
-            <cline>    string size; </cline>
+            <cline>   std::string size; </cline>
           </block>
           <block order="6">
             <cline>};</cline>
@@ -534,15 +523,14 @@ int main () {
     <program interactive="activecode" label="cp_9_AC_8q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Pants {
     char size;
-    string material;
+    std::string material;
 };
 
 struct Shirt {
-    string color;
+    std::string color;
     char size;
 };
 // Write your code for the struct Outfit here.
@@ -593,16 +581,15 @@ int main () {
     <program interactive="activecode" label="cp_9_AC_9q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Shirt {
-    string color;
+    std::string color;
     char size;
 };
 
 struct Pants {
     char size;
-    string material;
+    std::string material;
 };
 
 struct Outfit {
@@ -625,16 +612,15 @@ int main() {
       the instance variables in order.</p><program xml:id="cp_9_AC_9a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Shirt {
-    string color;
+    std::string color;
     char size;
 };
 
 struct Pants {
     char size;
-    string material;
+    std::string material;
 };
 
 struct Outfit {
@@ -645,12 +631,12 @@ struct Outfit {
 
 void printOutfit(Outfit o) {
 &quot;Shirt: blue and L; Pants: S and denim; has hat&quot;
-    cout &lt;&lt; &quot;Shirt: &quot; &lt;&lt; o.s.color &lt;&lt; &quot; and &quot; &lt;&lt; o.s.size &lt;&lt; &quot;; Pants:&quot; &lt;&lt; o.p.size &lt;&lt; &quot; and &quot; &lt;&lt; o.p.material &lt;&lt; &quot;; &quot;;
+    std::cout &lt;&lt; &quot;Shirt: &quot; &lt;&lt; o.s.color &lt;&lt; &quot; and &quot; &lt;&lt; o.s.size &lt;&lt; &quot;; Pants:&quot; &lt;&lt; o.p.size &lt;&lt; &quot; and &quot; &lt;&lt; o.p.material &lt;&lt; &quot;; &quot;;
     if (o.has_hat) {
-        cout &lt;&lt; &quot;has hat&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;has hat&quot; &lt;&lt; std::endl;
     }
     else {
-        cout &lt;&lt; &quot;does not have hat&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;does not have hat&quot; &lt;&lt; std::endl;
     }
 }
 
@@ -673,18 +659,17 @@ int main() {
     <program interactive="activecode" label="cp_9_AC_10q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 void printOutfit(Outfit o);
 
 struct Shirt {
-    string color;
+    std::string color;
     char size;
 };
 
 struct Pants {
     char size;
-    string material;
+    std::string material;
 };
 
 struct Outfit {
@@ -711,12 +696,12 @@ int main() {
         </code>
 <tests>
 void printOutfit(Outfit o) {
-    cout &lt;&lt; &quot;Shirt: &quot; &lt;&lt; o.s.color &lt;&lt; &quot; and &quot; &lt;&lt; o.s.size &lt;&lt; &quot;; Pants: &quot; &lt;&lt; o.p.size &lt;&lt; &quot; and &quot; &lt;&lt; o.p.material &lt;&lt; &quot;; &quot;;
+    std::cout &lt;&lt; &quot;Shirt: &quot; &lt;&lt; o.s.color &lt;&lt; &quot; and &quot; &lt;&lt; o.s.size &lt;&lt; &quot;; Pants: &quot; &lt;&lt; o.p.size &lt;&lt; &quot; and &quot; &lt;&lt; o.p.material &lt;&lt; &quot;; &quot;;
     if (o.has_hat) {
-        cout &lt;&lt; &quot;has hat&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;has hat&quot; &lt;&lt; std::endl;
     }
     else {
-        cout &lt;&lt; &quot;does not have hat&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;does not have hat&quot; &lt;&lt; std::endl;
     }
 }
 </tests>

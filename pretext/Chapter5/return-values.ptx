@@ -68,7 +68,6 @@ countdown(n-1);</program>
     <program interactive="activecode" line-numbers="yes" label="return_vals_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 double absoluteValue(double x) {
     if (x < 0) {
@@ -80,7 +79,7 @@ double absoluteValue(double x) {
 }
 
 int main() {
-    cout << absoluteValue(0);
+    std::cout << absoluteValue(0);
     return 0;
 }
         ]]></code>
@@ -111,7 +110,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="return_vals_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 double absoluteValue(double x) {
     if (x < 0) {
@@ -124,7 +122,7 @@ double absoluteValue(double x) {
 }
 
 int main() {
-   cout << absoluteValue(0);
+   std::cout << absoluteValue(0);
    return 0;
 }
         ]]></code>
@@ -186,7 +184,6 @@ int main() {
     <statement>
       <p>What will print?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 int timesTwo(int x) {
   int y = x;
@@ -196,7 +193,7 @@ int timesTwo(int x) {
 
 int main() {
   int i = 2;
-  cout &lt;&lt; timesTwo(i);
+  std::cout &lt;&lt; timesTwo(i);
   return 0;
 }</program>
     </statement>
@@ -240,17 +237,16 @@ int main() {
     <statement>
       <p>What will print?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 double ticket_price(int age) {
    if(age&lt;5) {
        return 5.50;
-       cout&lt;&lt;&quot; You get a child discount yay!&quot;&lt;&lt;endl;
+       std::cout&lt;&lt;&quot; You get a child discount yay!&quot;&lt;&lt;std::endl;
    }
 
    else{
        return 9.50;
-       cout&lt;&lt;&quot; Sorry you have to pay full price.&quot;&lt;&lt;endl;
+       std::cout&lt;&lt;&quot; Sorry you have to pay full price.&quot;&lt;&lt;std::endl;
    }
    return 0.0; //to avoid compiler error
 }
@@ -283,7 +279,7 @@ int main() {
           <p>nothing gets printed</p>
         </statement>
         <feedback><p>
-          The return statement is encountered before the cout statement.
+          The return statement is encountered before the std::cout statement.
         </p></feedback>
       </choice>
       <choice>

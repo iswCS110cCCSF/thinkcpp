@@ -3,7 +3,7 @@
   <p>The reason I chose <c>Cards</c> as the objects for this chapter is that there is an obvious use for
     a vector of cards—a deck. Here is some code that creates a new deck of 52 cards:</p>
   <program>
-vector&lt;Card&gt; deck(52);
+std::vector&lt;Card&gt; deck(52);
 </program>
   <p>Here is the state diagram for this object:</p>
   <figure>
@@ -20,7 +20,7 @@ vector&lt;Card&gt; deck(52);
     in the figure, but in others they could contain any possible value.</p>
   <p>One way to initialize them would be to pass a <c>Card</c> as a second argument to the constructor:</p>
   <program>Card aceOfSpades (3, 1);
-vector&lt;Card&gt; deck(52, aceOfSpades);</program>
+std::vector&lt;Card&gt; deck(52, aceOfSpades);</program>
   <p>This code builds a deck with 52 identical cards, like a special deck for
     a magic trick. Of course, it makes more sense to build a deck with 52
     different cards in it. To do that we use a nested loop.</p>
@@ -51,7 +51,6 @@ for (int suit = 0; suit &lt;= 3; suit++) {
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 struct Card {
     int suit, rank;
@@ -61,8 +60,8 @@ struct Card {
     void print() const;
 };
 
-vector<Card> buildDeck() {
-    vector<Card> deck(52);
+std::vector<Card> buildDeck() {
+    std::vector<Card> deck(52);
     int i = 0;
     for (int suit = 0; suit <= 3; suit++) {
         for (int rank = 1; rank <= 13; rank++) {
@@ -75,9 +74,9 @@ vector<Card> buildDeck() {
 }
 
 int main() {
-    vector<Card> deck = buildDeck();
-    cout << "We just created our deck of 52 cards. We can access an individual card by indexing." << endl;
-    cout << "For example, the first card in the deck is: ";
+    std::vector<Card> deck = buildDeck();
+    std::cout << "We just created our deck of 52 cards. We can access an individual card by indexing." << std::endl;
+    std::cout << "For example, the first card in the deck is: ";
     deck[0].print();
 }
 
@@ -93,13 +92,13 @@ Card::Card(int s, int r) {
 }
 
 void Card::print() const {
-   vector&lt;string&gt; suits(4);
+   std::vector&lt;std::string&gt; suits(4);
    suits[0] = &quot;Clubs&quot;;
    suits[1] = &quot;Diamonds&quot;;
    suits[2] = &quot;Hearts&quot;;
    suits[3] = &quot;Spades&quot;;
 
-   vector&lt;string&gt; ranks(14);
+   std::vector&lt;std::string&gt; ranks(14);
    ranks[1] = &quot;Ace&quot;;
    ranks[2] = &quot;2&quot;;
    ranks[3] = &quot;3&quot;;
@@ -114,7 +113,7 @@ void Card::print() const {
    ranks[12] = &quot;Queen&quot;;
    ranks[13] = &quot;King&quot;;
 
-   cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; endl;
+   std::cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; std::endl;
 }
 </tests>
     </program>
@@ -122,8 +121,8 @@ void Card::print() const {
   <exercise label="vector_of_cards_1">
     <statement>
       <p>Take a look at the code below. What can we say about the deck that is created?</p>
-      <program>vector&lt;Card&gt; createDeck() {
-   vector&lt;Card&gt; deck(16);
+      <program>std::vector&lt;Card&gt; createDeck() {
+   std::vector&lt;Card&gt; deck(16);
    int i = 0;
    for (int suit = 0; suit &lt;= 1; suit++) {
       for (int rank = 4; rank &lt;= 11; rank++) {

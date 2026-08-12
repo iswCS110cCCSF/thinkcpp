@@ -32,7 +32,6 @@
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 class Complex
 {
@@ -67,7 +66,7 @@ public:
 
 int main() {
   Complex c1 (5.0, 3.5);
-  cout << c1.getReal() << ", " << c1.getImag() << endl;
+  std::cout << c1.getReal() << ", " << c1.getImag() << std::endl;
 }
         ]]></code>
     </program>
@@ -82,7 +81,6 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 class Complex
 {
@@ -122,7 +120,7 @@ double Complex::getTheta() {
 int main() {
   Complex c1 (0.0, 1.0);
   // Magnitude should be 1, theta should be pi/2, or about 1.5708
-  cout << c1.getMag() << ", " << c1.getTheta() << endl;
+  std::cout << c1.getMag() << ", " << c1.getTheta() << std::endl;
 }
         ]]></code>
       <tests>

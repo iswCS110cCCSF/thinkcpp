@@ -9,12 +9,11 @@
     <program interactive="activecode" line-numbers="yes" label="strings_are_mutable_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    string greeting = "Hello, world!";
+    std::string greeting = "Hello, world!";
     greeting[0] = 'J';
-    cout << greeting << endl;
+    std::cout << greeting << std::endl;
 }
         ]]></code>
     </program>
@@ -27,7 +26,7 @@ int main() {
         <code><![CDATA[
 string fav_food = "ice cream";
 fav_food[3] = "d";
-cout << fav_food << endl;
+cout << fav_food << std::endl ;
 ]]></code>
       </program></statement>
     <choices>

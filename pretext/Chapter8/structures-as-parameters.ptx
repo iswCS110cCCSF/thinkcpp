@@ -2,7 +2,7 @@
   <title>Structures as parameters</title>
   <p>You can pass structures as parameters in the usual way. For example,</p>
   <program>void printPoint(Point p) {
-  cout &lt;&lt; &quot;(&quot; &lt;&lt; p.x &lt;&lt; &quot;, &quot; &lt;&lt; p.y &lt;&lt; &quot;)&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;(&quot; &lt;&lt; p.x &lt;&lt; &quot;, &quot; &lt;&lt; p.y &lt;&lt; &quot;)&quot; &lt;&lt; std::endl ;
 }</program>
   <p><c>printPoint</c> takes a point as an argument and outputs it in the standard format. If you call <c>printPoint (blank)</c>,
     it will output <c>(3, 4)</c>.</p>
@@ -13,14 +13,13 @@
     <program interactive="activecode" line-numbers="yes" label="structures_parameters_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Point {
     double x, y;
 };
 
 void printPoint(Point p) {
-    cout << "(" << p.x << ", " << p.y << ")" << endl;
+    std::cout << "(" << p.x << ", " << p.y << ")" << std::endl;
 }
 
 int main() {
@@ -46,7 +45,6 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 struct Point {
     double x, y;
@@ -55,13 +53,13 @@ struct Point {
 double distance(Point p1, Point p2) {
     double dx = p2.x - p1.x;
     double dy = p2.y - p1.y;
-    return sqrt (dx*dx + dy*dy);
+    return std::sqrt (dx*dx + dy*dy);
 }
 
 int main() {
     Point origin = { 0.0, 0.0 };
     Point point = { 3.0, 4.0 };
-    cout << "The distance from the point to the origin is " << distance (origin, point) << endl;
+    std::cout << "The distance from the point to the origin is " << distance (origin, point) << std::endl;
 }
         ]]></code>
     </program>
@@ -76,7 +74,7 @@ struct Coordinate {
 };
 
 void printOppositeCoordinate(Coordinate p) {
-  cout << "(" << -p.y << ", " << -p.x << ")" << endl;
+  std::cout << "(" << -p.y << ", " << -p.x << ")" << std::endl ;
 }
 
 int main() {
@@ -145,10 +143,10 @@ int main() {
         <cline> double avgY = (y.p1 + y.p2 + y.p3)/3; </cline>
       </block>
       <block order="7">
-        <cline><![CDATA[ cout << "(" << avgX << "," << avgY << ")";]]></cline>
+        <cline><![CDATA[ std::cout << "(" << avgX << "," << avgY << ")";]]></cline>
       </block>
       <block order="5" correct="no">
-        <cline><![CDATA[ cout << "(" << "avgX" << "," << "avgY" << ")"; ]]></cline>
+        <cline><![CDATA[ std::cout << "(" << "avgX" << "," << "avgY" << ")"; ]]></cline>
       </block>
       <block order="6">
         <cline>}</cline>

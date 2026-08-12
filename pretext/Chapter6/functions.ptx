@@ -30,7 +30,6 @@
            line-numbers="yes">
     <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int x = 4;
@@ -38,49 +37,49 @@ int main() {
     x = x / 2;
     x = x + 2;
     x = x - 2;
-    cout << x << endl;
+    std::cout << x << std::endl;
     x = 13;
     x = x * 2;
     x = x / 2;
     x = x + 2;
     x = x - 2;
-    cout << x << endl;
+    std::cout << x << std::endl;
     x = 100;
     x = x * 2;
     x = x / 2;
     x = x + 2;
     x = x - 2;
-    cout << x << endl;
+    std::cout << x << std::endl;
     x = 22;
     x = x * 2;
     x = x / 2;
     x = x + 2;
     x = x - 2;
-    cout << x << endl;
+    std::cout << x << std::endl;
     x = 220;
     x = x * 2;
     x = x / 2;
     x = x + 2;
     x = x - 2;
-    cout << x << endl;
+    std::cout << x << std::endl;
     x = 0;
     x = x * 2;
     x = x / 2;
     x = x + 2;
     x = x - 2;
-    cout << x << endl;
+    std::cout << x << std::endl;
     x = 1000;
     x = x * 2;
     x = x / 2;
     x = x + 2;
     x = x - 2;
-    cout << x << endl;
+    std::cout << x << std::endl;
     x = 254;
     x = x * 2;
     x = x / 2;
     x = x + 2;
     x = x - 2;
-    cout << x << endl;
+    std::cout << x << std::endl;
 }
         ]]></code>
   </program>
@@ -90,14 +89,13 @@ int main() {
            line-numbers="yes">
     <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void all_operators(int x) {
     x = x * 2;
     x = x / 2;
     x = x + 2;
     x = x - 2;
-    cout << x << endl;
+    std::cout << x << std::endl;
 }
 
 int main() {

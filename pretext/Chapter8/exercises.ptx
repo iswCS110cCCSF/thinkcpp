@@ -8,14 +8,14 @@
                line-numbers="yes">
         <code>
 struct Student {
-  string firstName, lastName;
+ std::string firstName, lastName;
   int year;
   double gpa;
 };
 
 struct Professor {
-  string firstName, lastName;
-  string department;
+ std::string firstName, lastName;
+ std::string department;
   int class;
 };
 
@@ -23,7 +23,7 @@ int main() {
   Student x = { "John", "Doe", 2, 3.46 };
   Student y = { "Jane", "Doe", 3, 3.68 };
   Professor z = { "Richard", "Roe", "Computer Science", 101 };
-  string college = "University of College";
+ std::string college = "University of College";
   int studentPop = 3400;
   double avgGPA = 3.2;
 }
@@ -100,7 +100,7 @@ int main() {
                line-numbers="yes">
         <code>
 struct Chicken {
-  string name;
+ std::string name;
   int numLegs;
   int eggs;
 }
@@ -149,7 +149,7 @@ struct Chicken {
                line-numbers="yes">
         <code>
 struct Dog {
-  string name;
+ std::string name;
   int numLegs;
   bool isPanting;
 };
@@ -220,9 +220,9 @@ int main() {
   c.edgeLength = 4;
   c.volume = 64;
   c.mass = 128;
-  cout << c.edgeLength << ", " << c.mass << ", " << c.volume << ", ";
+  std::cout << c.edgeLength << ", " << c.mass << ", " << c.volume << ", ";
   int density = c.mass / c.volume;
-  cout << density;
+  std::cout << density;
 }
 ]]></code>
       </program>
@@ -290,7 +290,7 @@ int main() {
   Cube c;
   c = (Cube) { 2, 8, 4 };
   int density = calculateDensity(c);
-  cout << density;
+  std::cout << density;
 }
 ]]></code>
       </program>
@@ -337,7 +337,7 @@ int main() {
                line-numbers="yes">
         <code>
 struct Student {
-  string name;
+ std::string name;
   bool isSleepy;
   bool coffeeCupFull;
 };
@@ -399,7 +399,7 @@ int main() {
                line-numbers="yes">
         <code>
 struct Robot {
-  string name;
+ std::string name;
   int batteryLevelPercentage;
   bool isFullyCharged;
 };
@@ -482,7 +482,7 @@ int main() {
   int x = 4;
   int y = 7;
   func (y, x);
-  cout << x << ", " << y;
+  std::cout << x << ", " << y;
 }
 ]]></code>
       </program>
@@ -531,9 +531,9 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string name;
-  cin >> name;
-  cout << "Hello, " << name << "!";
+ std::string name;
+  std::cin >> name;
+  std::cout << "Hello, " << name << "!";
 }
 ]]></code>
       </program>
@@ -581,8 +581,8 @@ int main() {
         <code><![CDATA[
 int main() {
   char name;
-  cin >> name;
-  cout << "Hello, " << name << "!";
+  std::cin >> name;
+  std::cout << "Hello, " << name << "!";
 }
 ]]></code>
       </program>
@@ -630,9 +630,9 @@ int main() {
                line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string quote;
+ std::string quote;
   getline(cin, quote);
-  cout << quote << " is the epitome of Star Wars!";
+  std::cout << quote << " is the epitome of Star Wars!";
 }
 ]]></code>
       </program>

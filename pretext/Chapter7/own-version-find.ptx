@@ -24,9 +24,8 @@
     <program interactive="activecode" line-numbers="yes" label="own_version_find_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
-size_t find(string s, char c, size_t i) {
+size_t find(std::string s, char c, size_t i) {
     size_t length = s.length();
     while (i < length) {
         if (s[i] == c) {
@@ -34,14 +33,14 @@ size_t find(string s, char c, size_t i) {
         }
         i = i + 1;
     }
-    return string::npos;
+    return std::string::npos;
 }
 
 int main() {
-    string dog = "German Shepard";
+    std::string dog = "German Shepard";
     size_t start_shepard = 7;
-    cout << find(dog, 'e', start_shepard) << endl;
-    cout << dog.find('e') << endl;
+    std::cout << find(dog, 'e', start_shepard) << std::endl;
+    std::cout << dog.find('e') << std::endl;
 }
         ]]></code>
     </program>
@@ -52,8 +51,8 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string quote = "The way to get started is to quit talking and begin doing.";
-  cout << find(quote, 't', 11) << ", " << find(quote, 't', 42) << ", " << quote.find('t');
+ std::string quote = "The way to get started is to quit talking and begin doing.";
+  std::cout << find(quote, 't', 11) << ", " << find(quote, 't', 42) << ", " << quote.find('t');
 }
 ]]></code>
       </program>

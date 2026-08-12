@@ -27,7 +27,7 @@
         <cline>      case 0:</cline>
       </block>
       <block order="1">
-        <cline><![CDATA[         cout << "It is not the weekend :(" << endl;]]></cline>
+        <cline><![CDATA[        std::cout << "It is not the weekend :(" << std::endl ;]]></cline>
       </block>
       <block order="12">
         <cline>         break;</cline>
@@ -36,7 +36,7 @@
         <cline>      case 1:</cline>
       </block>
       <block order="9">
-        <cline><![CDATA[         cout << "It is the weekend :)" << endl;]]></cline>
+        <cline><![CDATA[        std::cout << "It is the weekend :)" << std::endl ;]]></cline>
       </block>
       <block order="10">
         <cline>         break;</cline>
@@ -45,7 +45,7 @@
         <cline>      default:</cline>
       </block>
       <block order="3">
-        <cline><![CDATA[         cout << "Invalid input." << endl;]]></cline>
+        <cline><![CDATA[        std::cout << "Invalid input." << std::endl ;]]></cline>
       </block>
       <block order="7">
         <cline>         break;</cline>
@@ -75,10 +75,10 @@
         <cline>   int input;</cline>
       </block>
       <block order="12">
-        <cline><![CDATA[   cout << "Please enter an integer: ";]]></cline>
+        <cline><![CDATA[  std::cout << "Please enter an integer: ";]]></cline>
       </block>
       <block order="11">
-        <cline>   cin &gt;&gt;  input;</cline>
+        <cline>  std::cin &gt;&gt;  input;</cline>
       </block>
       <block order="2">
         <cline>   switch (input % 2) {</cline>
@@ -87,7 +87,7 @@
         <cline>      case 0:</cline>
       </block>
       <block order="4">
-        <cline><![CDATA[         cout << input << " is even!" << endl;]]></cline>
+        <cline><![CDATA[        std::cout << input << " is even!" << std::endl ;]]></cline>
       </block>
       <block order="1">
         <cline>         break;</cline>
@@ -96,7 +96,7 @@
         <cline>      case 1:</cline>
       </block>
       <block order="16">
-        <cline><![CDATA[         cout << input << " is odd!" << endl;]]></cline>
+        <cline><![CDATA[        std::cout << input << " is odd!" << std::endl ;]]></cline>
       </block>
       <block order="3">
         <cline>         break;</cline>
@@ -105,7 +105,7 @@
         <cline>      default:</cline>
       </block>
       <block order="8">
-        <cline><![CDATA[         cout << "Invalid input." << endl;]]></cline>
+        <cline><![CDATA[        std::cout << "Invalid input." << std::endl ;]]></cline>
       </block>
       <block order="5">
         <cline>         break;</cline>
@@ -138,16 +138,16 @@
         <cline>   int input2;</cline>
       </block>
       <block order="5">
-        <cline><![CDATA[   cout << "Please enter first integer: ";]]></cline>
+        <cline><![CDATA[  std::cout << "Please enter first integer: ";]]></cline>
       </block>
       <block order="1">
-        <cline>   cin &gt;&gt;  input1;</cline>
+        <cline>  std::cin &gt;&gt;  input1;</cline>
       </block>
       <block order="9">
-        <cline><![CDATA[   cout << "Please enter second integer: ";]]></cline>
+        <cline><![CDATA[  std::cout << "Please enter second integer: ";]]></cline>
       </block>
       <block order="11">
-        <cline>   cin &gt;&gt;  input2;</cline>
+        <cline>  std::cin &gt;&gt;  input2;</cline>
       </block>
       <block order="10">
         <cline>   switch (input1 &gt; input2) {</cline>
@@ -156,7 +156,7 @@
         <cline>      case 0:</cline>
       </block>
       <block order="4">
-        <cline><![CDATA[         cout << "The maximum is " << input2 << endl;]]></cline>
+        <cline><![CDATA[        std::cout << "The maximum is " << input2 << std::endl ;]]></cline>
       </block>
       <block order="13">
         <cline>         break;</cline>
@@ -165,13 +165,13 @@
         <cline>      case 1:</cline>
       </block>
       <block order="6">
-        <cline><![CDATA[         cout << "The maximum is " << input1 << endl;]]></cline>
+        <cline><![CDATA[        std::cout << "The maximum is " << input1 << std::endl ;]]></cline>
       </block>
       <block order="15">
         <cline>      default:</cline>
       </block>
       <block order="8">
-        <cline><![CDATA[         cout << "Invalid input." << endl;]]></cline>
+        <cline><![CDATA[        std::cout << "Invalid input." << std::endl ;]]></cline>
       </block>
       <block order="3">
         <cline>         break;</cline>
@@ -239,7 +239,7 @@
         <cline>struct Entry {</cline>
       </block>
       <block order="10">
-        <cline>   string word;</cline>
+        <cline>  std::string word;</cline>
       </block>
       <block order="7">
         <cline>   int page;</cline>
@@ -255,11 +255,11 @@
         <cline>struct Dictionary {</cline>
       </block>
       <block order="4">
-        <cline><![CDATA[   vector<Entry> entries;]]></cline>
+        <cline><![CDATA[   std::vector<Entry> entries;]]></cline>
       </block>
       <block order="6"
              correct="no">
-        <cline><![CDATA[   vector<Word> entries;  ]]></cline>
+        <cline><![CDATA[   std::vector<Word> entries;  ]]></cline>
       </block>
       <block order="3"
              correct="no">
@@ -477,15 +477,15 @@
         <cline><![CDATA[   for (size_t i = 0; i < entries.size(); ++i) {]]></cline>
       </block>
       <block order="7">
-        <cline><![CDATA[      cout << entries[i].word << endl;]]></cline>
+        <cline><![CDATA[     std::cout << entries[i].word << std::endl ;]]></cline>
       </block>
       <block order="3"
              correct="no">
-        <cline><![CDATA[      cout << entries[i].Entry << endl;  ]]></cline>
+        <cline><![CDATA[     std::cout << entries[i].Entry << std::endl ;  ]]></cline>
       </block>
       <block order="5"
              correct="no">
-        <cline><![CDATA[      cout << Entry.word << endl;  ]]></cline>
+        <cline><![CDATA[     std::cout << Entry.word << std::endl ;  ]]></cline>
       </block>
       <block order="4">
         <cline>   }</cline>

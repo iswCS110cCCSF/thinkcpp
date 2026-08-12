@@ -12,10 +12,9 @@
     <program interactive="activecode" line-numbers="yes" label="locals_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printTwice(char phil) {
-    cout << phil << phil << endl;
+    std::cout << phil << phil << std::endl;
 }
 
 int main() {
@@ -53,13 +52,13 @@ int main() {
     <statement>
       <p>How many local variables and parameters does <c>main</c> have?</p>
       <program>void prprintHelloName(string name) {
-  cout &lt;&lt; &quot;Hello &quot; &lt;&lt; name &lt;&lt; &quot;!&quot;;
+  std::cout &lt;&lt; &quot;Hello &quot; &lt;&lt; name &lt;&lt; &quot;!&quot;;
 }
 
 int main() {
-  string name1 = &quot;Phil&quot;;
+ std::string name1 = &quot;Phil&quot;;
   printHelloName(name1);
-  string name2 = &quot;Joe&quot;;
+ std::string name2 = &quot;Joe&quot;;
   printHelloName(name2);
   return 0;
 }</program>
@@ -103,13 +102,13 @@ int main() {
     <statement>
       <p>How many local variables and parameters does <c>printHelloName</c> have?</p>
       <program>void prprintHelloName(string name) {
-  cout &lt;&lt; &quot;Hello &quot; &lt;&lt; name &lt;&lt; &quot;!&quot;;
+  std::cout &lt;&lt; &quot;Hello &quot; &lt;&lt; name &lt;&lt; &quot;!&quot;;
 }
 
 int main() {
-  string name1 = &quot;Phil&quot;;
+ std::string name1 = &quot;Phil&quot;;
   printHelloName(name1);
-  string name2 = &quot;Joe&quot;;
+ std::string name2 = &quot;Joe&quot;;
   printHelloName(name2);
   return 0;
 }</program>
@@ -170,7 +169,7 @@ int main() {
     <statement>
       <p>How many calls to <c>hi</c> are made during the exectuion of the entire program?</p>
       <program>void hi() {
-  cout &lt;&lt; &quot;hiii !&quot;&lt;&lt;endl;
+  std::cout &lt;&lt; &quot;hiii !&quot;&lt;&lt;endl;
 }
 
 void printGreeting() {

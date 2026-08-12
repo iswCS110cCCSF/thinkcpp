@@ -8,7 +8,6 @@
     <program interactive="activecode" label="cp_8_AC_1q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 void rectangleInfo() {
     // Write your implementation here.
@@ -26,14 +25,13 @@ int main() {
         <program xml:id="cp_8_AC_1a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 void rectangleInfo() {
     int height, width;
-    cout &lt;&lt; &quot;Please enter the height and width of a rectangle separated by spaces: &quot;;
-    cin &gt;&gt; height &gt;&gt; width;
-    cout &lt;&lt; &quot;The area of the rectangle is &quot; &lt;&lt; height * width &lt;&lt; endl;
-    cout &lt;&lt; &quot;The perimeter of the rectangle is &quot; &lt;&lt; 2 * (height + width) &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Please enter the height and width of a rectangle separated by spaces: &quot;;
+    std::cin &gt;&gt; height &gt;&gt; width;
+    std::cout &lt;&lt; &quot;The area of the rectangle is &quot; &lt;&lt; height * width &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;The perimeter of the rectangle is &quot; &lt;&lt; 2 * (height + width) &lt;&lt; std::endl;
 }
 
 int main() {
@@ -53,7 +51,6 @@ int main() {
     <program interactive="activecode" label="cp_8_AC_2q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 void greetUser () {
     // Write your implementation here.
@@ -76,24 +73,24 @@ int main() {
             <cline>void greetUser () {</cline>
           </block>
           <block order="7">
-            <cline>    string fullName;</cline>
+            <cline>   std::string fullName;</cline>
           </block>
           <block order="5" correct="no">
-            <cline>    string fullName = &quot;Captain America&quot;; </cline>
+            <cline>   std::string fullName = &quot;Captain America&quot;; </cline>
           </block>
           <block order="3">
-            <cline>    cout &lt;&lt; &quot;Please enter your full name!&quot; &lt;&lt; endl;</cline>
+            <cline>    std::cout &lt;&lt; &quot;Please enter your full name!&quot; &lt;&lt; std::endl ;</cline>
           </block>
           <block order="1">
             <choice correct="yes">
               <cline>    getline(cin, fullName);</cline>
             </choice>
             <choice>
-              <cline>    cin &lt;&lt; fullName; </cline>
+              <cline>    std::cin &lt;&lt; fullName; </cline>
             </choice>
           </block>
           <block order="8">
-            <cline>    cout &lt;&lt; &quot;Hello &quot; &lt;&lt; fullName &lt;&lt; &quot;!&quot; &lt;&lt; endl;</cline>
+            <cline>    std::cout &lt;&lt; &quot;Hello &quot; &lt;&lt; fullName &lt;&lt; &quot;!&quot; &lt;&lt; std::endl ;</cline>
           </block>
           <block order="6">
             <cline>}</cline>
@@ -113,7 +110,6 @@ int main() {
     <program interactive="activecode" label="cp_8_AC_3q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 // Write your code for the struct Robot here.
 
@@ -121,10 +117,10 @@ using namespace std;
 
 int main() {
     Robot rob = { &quot;Rob&quot;, &quot;XLV&quot;, 9800, 45, &quot;washing dishes&quot; };
-    cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; std::endl;
     printRobotData (rob);
-    cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; endl;
-    cout &lt;&lt; &quot;Rob (XLV 9800) has 45 percent battery and is currently executing the task \&quot;washing dishes\&quot;&quot;;
+    std::cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Rob (XLV 9800) has 45 percent battery and is currently executing the task \&quot;washing dishes\&quot;&quot;;
 }
         </code>
     </program></statement>
@@ -134,29 +130,28 @@ int main() {
       <program xml:id="cp_8_AC_3a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Robot {
-    string name;
-    string model;
+    std::string name;
+    std::string model;
     int serialNumber;
     int batteryLevelPercentage;
-    string task;
+    std::string task;
 };
 
 void printRobotData (Robot r) {
-     cout &lt;&lt; r.name &lt;&lt; &quot; (&quot; &lt;&lt; r.model &lt;&lt; &quot; &quot; &lt;&lt; r.serialNumber
+     std::cout &lt;&lt; r.name &lt;&lt; &quot; (&quot; &lt;&lt; r.model &lt;&lt; &quot; &quot; &lt;&lt; r.serialNumber
           &lt;&lt; &quot;) has &quot; &lt;&lt; r.batteryLevelPercentage
           &lt;&lt; &quot; percent battery and is currently executing the task \&quot;&quot;
-          &lt;&lt; r.task &lt;&lt; &quot;\&quot;&quot; &lt;&lt; endl;
+          &lt;&lt; r.task &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
 }
 
 int main() {
     Robot rob = { &quot;Rob&quot;, &quot;XLV&quot;, 9800, 45, &quot;washing dishes&quot; };
-    cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; std::endl;
     printRobotData (rob);
-    cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; endl;
-    cout &lt;&lt; &quot;Rob (XLV 9800) has 45 percent battery and is currently executing the task \&quot;washing dishes\&quot;&quot;;
+    std::cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Rob (XLV 9800) has 45 percent battery and is currently executing the task \&quot;washing dishes\&quot;&quot;;
 }
         </code>
     </program>
@@ -172,14 +167,13 @@ int main() {
     <program interactive="activecode" label="cp_8_AC_4q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Robot {
-    string name;
-    string model;
+    std::string name;
+    std::string model;
     int serialNumber;
     int batteryLevelPercentage;
-    string task;
+    std::string task;
 };
 
 void printRobotData (Robot r);
@@ -189,18 +183,18 @@ void printRobotData (Robot r);
 int main() {
     Robot bob = { &quot;Bob&quot;, &quot;MKZ&quot;, 143, 65, &quot;sweeping floors&quot; };
     chargeRobot(bob);
-    cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; std::endl;
     printRobotData (bob);
-    cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; endl;
-    cout &lt;&lt; &quot;Bob (MKZ 143) has 100 percent battery and is currently executing the task \&quot;sweeping floors\&quot;&quot;;
+    std::cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Bob (MKZ 143) has 100 percent battery and is currently executing the task \&quot;sweeping floors\&quot;&quot;;
 }
         </code>
 <tests>
 void printRobotData (Robot r) {
-    cout &lt;&lt; r.name &lt;&lt; &quot; (&quot; &lt;&lt; r.model &lt;&lt; &quot; &quot; &lt;&lt; r.serialNumber
+    std::cout &lt;&lt; r.name &lt;&lt; &quot; (&quot; &lt;&lt; r.model &lt;&lt; &quot; &quot; &lt;&lt; r.serialNumber
             &lt;&lt; &quot;) has &quot; &lt;&lt; r.batteryLevelPercentage
             &lt;&lt; &quot; percent battery and is currently executing the task \&quot;&quot;
-            &lt;&lt; r.task &lt;&lt; &quot;\&quot;&quot; &lt;&lt; endl;
+            &lt;&lt; r.task &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
 }
 </tests>
 
@@ -229,7 +223,7 @@ void printRobotData (Robot r) {
             <cline>    r.batteryLevelPercentage = 100%; </cline>
           </block>
           <block order="1">
-            <cline>    cout &lt;&lt; &quot;Robot &quot; &lt;&lt; r.name &lt;&lt; &quot; is fully charged!&quot; &lt;&lt; endl;</cline>
+            <cline>    std::cout &lt;&lt; &quot;Robot &quot; &lt;&lt; r.name &lt;&lt; &quot; is fully charged!&quot; &lt;&lt; std::endl ;</cline>
           </block>
           <block order="2">
             <cline>}</cline>
@@ -247,14 +241,13 @@ void printRobotData (Robot r) {
     <program interactive="activecode" label="cp_8_AC_5q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Robot {
-    string name;
-    string model;
+    std::string name;
+    std::string model;
     int serialNumber;
     int batteryLevelPercentage;
-    string task;
+    std::string task;
 };
 
 void printRobotData (Robot r);
@@ -264,18 +257,18 @@ void printRobotData (Robot r);
 int main() {
     Robot a = { &quot;Bot&quot;, &quot;RSO&quot;, 1985, 32, &quot;gardening&quot; };
     resetRobot(a);
-    cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; std::endl;
     printRobotData (a);
-    cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; endl;
-    cout &lt;&lt; &quot;EnterAName (RSO 1985) has 100 percent battery and is currently executing the task \&quot;Idle\&quot;&quot;;
+    std::cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;EnterAName (RSO 1985) has 100 percent battery and is currently executing the task \&quot;Idle\&quot;&quot;;
 }
         </code>
 <tests>
 void printRobotData (Robot r) {
-     cout &lt;&lt; r.name &lt;&lt; &quot; (&quot; &lt;&lt; r.model &lt;&lt; &quot; &quot; &lt;&lt; r.serialNumber
+     std::cout &lt;&lt; r.name &lt;&lt; &quot; (&quot; &lt;&lt; r.model &lt;&lt; &quot; &quot; &lt;&lt; r.serialNumber
           &lt;&lt; &quot;) has &quot; &lt;&lt; r.batteryLevelPercentage
           &lt;&lt; &quot; percent battery and is currently executing the task \&quot;&quot;
-          &lt;&lt; r.task &lt;&lt; &quot;\&quot;&quot; &lt;&lt; endl;
+          &lt;&lt; r.task &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
 }
 </tests>
 
@@ -286,14 +279,13 @@ void printRobotData (Robot r) {
       <program xml:id="cp_8_AC_5a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Robot {
-    string name;
-    string model;
+    std::string name;
+    std::string model;
     int serialNumber;
     int batteryLevelPercentage;
-    string task;
+    std::string task;
 };
 
 void printRobotData (Robot r);
@@ -306,18 +298,18 @@ void resetRobot(Robot&amp; r) {
 int main() {
     Robot a = { &quot;Bot&quot;, &quot;RSO&quot;, 1985, 32, &quot;gardening&quot; };
     resetRobot(a);
-    cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; std::endl;
     printRobotData (a);
-    cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; endl;
-    cout &lt;&lt; &quot;EnterAName (RSO 1985) has 100 percent battery and is currently executing the task \&quot;Idle\&quot;&quot;;
+    std::cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;EnterAName (RSO 1985) has 100 percent battery and is currently executing the task \&quot;Idle\&quot;&quot;;
 }
         </code>
 <tests>
 void printRobotData (Robot r) {
-     cout &lt;&lt; r.name &lt;&lt; &quot; (&quot; &lt;&lt; r.model &lt;&lt; &quot; &quot; &lt;&lt; r.serialNumber
+     std::cout &lt;&lt; r.name &lt;&lt; &quot; (&quot; &lt;&lt; r.model &lt;&lt; &quot; &quot; &lt;&lt; r.serialNumber
           &lt;&lt; &quot;) has &quot; &lt;&lt; r.batteryLevelPercentage
           &lt;&lt; &quot; percent battery and is currently executing the task \&quot;&quot;
-          &lt;&lt; r.task &lt;&lt; &quot;\&quot;&quot; &lt;&lt; endl;
+          &lt;&lt; r.task &lt;&lt; &quot;\&quot;&quot; &lt;&lt; std::endl;
 }
 </tests>
 
@@ -335,7 +327,6 @@ void printRobotData (Robot r) {
     <program interactive="activecode" label="cp_8_AC_6q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 // Write your code for the struct Pokemon here.
 
@@ -343,10 +334,10 @@ using namespace std;
 
 int main() {
     Pokemon magikarp = { &quot;Magikarp&quot;, &quot;Water&quot;, 12, 100 };
-    cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Your output:&quot; &lt;&lt; std::endl;
     printPokeInfo(magikarp);
-    cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; endl;
-    cout &lt;&lt; &quot;Magikarp (Lv. 12, 100% HP)&quot;;
+    std::cout &lt;&lt; &quot;Correct output:&quot; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;Magikarp (Lv. 12, 100% HP)&quot;;
 }
         </code>
     </program></statement>
@@ -365,10 +356,10 @@ int main() {
             <cline>struct Pokemon {</cline>
           </block>
           <block order="6">
-            <cline>    string pokeName;</cline>
+            <cline>   std::string pokeName;</cline>
           </block>
           <block order="10">
-            <cline>    string type;</cline>
+            <cline>   std::string type;</cline>
           </block>
           <block order="9">
             <cline>    int level;</cline>
@@ -389,7 +380,7 @@ int main() {
             </choice>
           </block>
           <block order="3">
-            <cline>    cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; endl;</cline>
+            <cline>    std::cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; std::endl ;</cline>
           </block>
           <block order="5">
             <cline>}</cline>
@@ -408,11 +399,10 @@ int main() {
     <program interactive="activecode" label="cp_8_AC_7q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Pokemon {
-    string pokeName;
-    string type;
+    std::string pokeName;
+    std::string type;
     int level;
     int healthPercentage;
 };
@@ -436,7 +426,7 @@ int main() {
         </code>
 <tests>
 void printPokeInfo(Pokemon p) {
-    cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; std::endl;
 }
 </tests>
 
@@ -447,17 +437,16 @@ void printPokeInfo(Pokemon p) {
       <program xml:id="cp_8_AC_7a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Pokemon {
-    string pokeName;
-    string type;
+    std::string pokeName;
+    std::string type;
     int level;
     int healthPercentage;
 };
 
 struct Trainer {
-    string trainerName;
+    std::string trainerName;
     char gender;
     int numBadges;
     Pokemon first, second, third, fourth, fifth, sixth;
@@ -466,8 +455,8 @@ struct Trainer {
 void printPokeInfo(Pokemon p);
 
 void printTrainerInfo(Trainer t) {
-    cout &lt;&lt; &quot;Trainer &quot; &lt;&lt; t.trainerName &lt;&lt; &quot; has &quot; &lt;&lt; t.numBadges
-         &lt;&lt; &quot; badges and &quot; &lt;&lt; t.trainerName &lt;&lt; &quot;'s team consists of &quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Trainer &quot; &lt;&lt; t.trainerName &lt;&lt; &quot; has &quot; &lt;&lt; t.numBadges
+         &lt;&lt; &quot; badges and &quot; &lt;&lt; t.trainerName &lt;&lt; &quot;'s team consists of &quot; &lt;&lt; std::endl;
     printPokeInfo(t.first);
     printPokeInfo(t.second);
     printPokeInfo(t.third);
@@ -489,7 +478,7 @@ int main() {
         </code>
 <tests>
 void printPokeInfo(Pokemon p) {
-    cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; std::endl;
 }
 </tests>
 
@@ -506,17 +495,16 @@ void printPokeInfo(Pokemon p) {
     <program interactive="activecode" label="cp_8_AC_8q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Pokemon {
-    string pokeName;
-    string type;
+    std::string pokeName;
+    std::string type;
     int level;
     int healthPercentage;
 };
 
 struct Trainer {
-    string trainerName;
+    std::string trainerName;
     char gender;
     int numBadges;
     Pokemon first, second, third, fourth, fifth, sixth;
@@ -542,12 +530,12 @@ int main() {
         </code>
 <tests>
 void printPokeInfo(Pokemon p) {
-    cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; std::endl;
 }
 
 void printTrainerInfo(Trainer t) {
-    cout &lt;&lt; &quot;Trainer &quot; &lt;&lt; t.trainerName &lt;&lt; &quot; has &quot; &lt;&lt; t.numBadges
-        &lt;&lt; &quot; badges and &quot; &lt;&lt; t.trainerName &lt;&lt; &quot;'s team consists of &quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Trainer &quot; &lt;&lt; t.trainerName &lt;&lt; &quot; has &quot; &lt;&lt; t.numBadges
+        &lt;&lt; &quot; badges and &quot; &lt;&lt; t.trainerName &lt;&lt; &quot;'s team consists of &quot; &lt;&lt; std::endl;
     printPokeInfo(t.first);
     printPokeInfo(t.second);
     printPokeInfo(t.third);
@@ -611,17 +599,16 @@ void printTrainerInfo(Trainer t) {
     <program interactive="activecode" label="cp_8_AC_9q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Pokemon {
-    string pokeName;
-    string type;
+    std::string pokeName;
+    std::string type;
     int level;
     int healthPercentage;
 };
 
 struct Trainer {
-    string trainerName;
+    std::string trainerName;
     char gender;
     int numBadges;
     Pokemon first, second, third, fourth, fifth, sixth;
@@ -648,12 +635,12 @@ int main() {
         </code>
 <tests>
 void printPokeInfo(Pokemon p) {
-    cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; std::endl;
 }
 
 void printTrainerInfo(Trainer t) {
-    cout &lt;&lt; &quot;Trainer &quot; &lt;&lt; t.trainerName &lt;&lt; &quot; has &quot; &lt;&lt; t.numBadges
-         &lt;&lt; &quot; badges and &quot; &lt;&lt; t.trainerName &lt;&lt; &quot;'s team consists of &quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Trainer &quot; &lt;&lt; t.trainerName &lt;&lt; &quot; has &quot; &lt;&lt; t.numBadges
+         &lt;&lt; &quot; badges and &quot; &lt;&lt; t.trainerName &lt;&lt; &quot;'s team consists of &quot; &lt;&lt; std::endl;
     printPokeInfo(t.first);
     printPokeInfo(t.second);
     printPokeInfo(t.third);
@@ -678,17 +665,16 @@ void healPokemon(Trainer&amp; t) {
         <program xml:id="cp_8_AC_9a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 struct Pokemon {
-    string pokeName;
-    string type;
+    std::string pokeName;
+    std::string type;
     int level;
     int healthPercentage;
 };
 
 struct Trainer {
-    string trainerName;
+    std::string trainerName;
     char gender;
     int numBadges;
     Pokemon first, second, third, fourth, fifth, sixth;
@@ -700,18 +686,18 @@ void healPokemon(Trainer&amp; t);
 
 void pokeCenter(Trainer&amp; t) {
     char response;
-    cout &lt;&lt; &quot;Welcome to the Pokémon Center. Would you like me to take your Pokémon? (y/n) &quot;;
-    cin &gt;&gt; response;
+    std::cout &lt;&lt; &quot;Welcome to the Pokémon Center. Would you like me to take your Pokémon? (y/n) &quot;;
+    std::cin &gt;&gt; response;
     if (response == 'y') {
-        cout &lt;&lt; &quot;Okay, I'll take your Pokémon for a few seconds.&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;Okay, I'll take your Pokémon for a few seconds.&quot; &lt;&lt; std::endl;
         healPokemon(t);
-        cout &lt;&lt; &quot;Your Pokémon are now healed. We hope to see you again.&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;Your Pokémon are now healed. We hope to see you again.&quot; &lt;&lt; std::endl;
     }
     else if (response == 'n') {
-        cout &lt;&lt; &quot;We hope to see you again.&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;We hope to see you again.&quot; &lt;&lt; std::endl;
     }
     else {
-        cout &lt;&lt; &quot;Sorry, not a valid input.&quot; &lt;&lt; endl;
+        std::cout &lt;&lt; &quot;Sorry, not a valid input.&quot; &lt;&lt; std::endl;
     }
 }
 
@@ -730,12 +716,12 @@ int main() {
         </code>
 <tests>
 void printPokeInfo(Pokemon p) {
-    cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; p.pokeName &lt;&lt; &quot; (Lv. &quot; &lt;&lt; p.level &lt;&lt; &quot;, &quot; &lt;&lt; p.healthPercentage &lt;&lt; &quot;% HP)&quot; &lt;&lt; std::endl;
 }
 
 void printTrainerInfo(Trainer t) {
-    cout &lt;&lt; &quot;Trainer &quot; &lt;&lt; t.trainerName &lt;&lt; &quot; has &quot; &lt;&lt; t.numBadges
-         &lt;&lt; &quot; badges and &quot; &lt;&lt; t.trainerName &lt;&lt; &quot;'s team consists of &quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Trainer &quot; &lt;&lt; t.trainerName &lt;&lt; &quot; has &quot; &lt;&lt; t.numBadges
+         &lt;&lt; &quot; badges and &quot; &lt;&lt; t.trainerName &lt;&lt; &quot;'s team consists of &quot; &lt;&lt; std::endl;
     printPokeInfo(t.first);
     printPokeInfo(t.second);
     printPokeInfo(t.third);
@@ -787,7 +773,6 @@ Error, not a valid planet.</pre>
     <program interactive="activecode" label="cp_8_AC_10q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 // Write your code for the function convertWeight here.
 
@@ -832,47 +817,47 @@ int main() {
           </block>
           <block order="13">
             <cline>    if (planet== 1) {</cline>
-            <cline>        cout &lt;&lt; &quot;Your weight on Mercury is &quot; &lt;&lt; earthWeight * .38 &lt;&lt; &quot; pounds.&quot; &lt;&lt; endl;</cline>
+            <cline>        std::cout &lt;&lt; &quot;Your weight on Mercury is &quot; &lt;&lt; earthWeight * .38 &lt;&lt; &quot; pounds.&quot; &lt;&lt; std::endl ;</cline>
             <cline>    }</cline>
           </block>
           <block order="4">
             <cline>    else if(planet == 2) {</cline>
-            <cline>        cout &lt;&lt; &quot;Your weight on Venus is &quot; &lt;&lt; earthWeight * .91 &lt;&lt; &quot; pounds.&quot; &lt;&lt; endl;</cline>
+            <cline>        std::cout &lt;&lt; &quot;Your weight on Venus is &quot; &lt;&lt; earthWeight * .91 &lt;&lt; &quot; pounds.&quot; &lt;&lt; std::endl ;</cline>
             <cline>    }</cline>
           </block>
           <block order="6">
             <cline>    else if (planet == 3) {</cline>
-            <cline>        cout &lt;&lt; &quot;Your weight on Earth is &quot; &lt;&lt; earthWeight * 1 &lt;&lt; &quot; pounds.&quot; &lt;&lt; endl;</cline>
+            <cline>        std::cout &lt;&lt; &quot;Your weight on Earth is &quot; &lt;&lt; earthWeight * 1 &lt;&lt; &quot; pounds.&quot; &lt;&lt; std::endl ;</cline>
             <cline>    }</cline>
           </block>
           <block order="5">
             <cline>    else if(planet == 4) {</cline>
-            <cline>        cout &lt;&lt; &quot;Your weight on Mars is &quot; &lt;&lt; earthWeight * .38 &lt;&lt; &quot; pounds.&quot; &lt;&lt; endl;</cline>
+            <cline>        std::cout &lt;&lt; &quot;Your weight on Mars is &quot; &lt;&lt; earthWeight * .38 &lt;&lt; &quot; pounds.&quot; &lt;&lt; std::endl ;</cline>
             <cline>    }</cline>
           </block>
           <block order="15">
             <cline>    else if(planet == 5) {</cline>
-            <cline>        cout &lt;&lt; &quot;Your weight on Jupiter is &quot; &lt;&lt; earthWeight * 2.34 &lt;&lt; &quot; pounds.&quot; &lt;&lt; endl;</cline>
+            <cline>        std::cout &lt;&lt; &quot;Your weight on Jupiter is &quot; &lt;&lt; earthWeight * 2.34 &lt;&lt; &quot; pounds.&quot; &lt;&lt; std::endl ;</cline>
             <cline>    }</cline>
           </block>
           <block order="10">
             <cline>    else if(planet == 6) {</cline>
-            <cline>        cout &lt;&lt; &quot;Your weight on Saturn is &quot; &lt;&lt; earthWeight * 1.06 &lt;&lt; &quot; pounds.&quot; &lt;&lt; endl;</cline>
+            <cline>        std::cout &lt;&lt; &quot;Your weight on Saturn is &quot; &lt;&lt; earthWeight * 1.06 &lt;&lt; &quot; pounds.&quot; &lt;&lt; std::endl ;</cline>
             <cline>    }</cline>
           </block>
           <block order="11">
             <cline>    else if(planet == 7) {</cline>
-            <cline>        cout &lt;&lt; &quot;Your weight on Uranus is &quot; &lt;&lt; earthWeight * .92 &lt;&lt; &quot; pounds.&quot; &lt;&lt; endl;</cline>
+            <cline>        std::cout &lt;&lt; &quot;Your weight on Uranus is &quot; &lt;&lt; earthWeight * .92 &lt;&lt; &quot; pounds.&quot; &lt;&lt; std::endl ;</cline>
             <cline>    }</cline>
           </block>
           <block order="16">
             <cline>    else if(planet == 8) {</cline>
-            <cline>        cout &lt;&lt; &quot;Your weight on Neptune is &quot; &lt;&lt; earthWeight * 1.19 &lt;&lt; &quot; pounds.&quot; &lt;&lt; endl;</cline>
+            <cline>        std::cout &lt;&lt; &quot;Your weight on Neptune is &quot; &lt;&lt; earthWeight * 1.19 &lt;&lt; &quot; pounds.&quot; &lt;&lt; std::endl ;</cline>
             <cline>    }</cline>
           </block>
           <block order="18">
             <cline>    else {</cline>
-            <cline>        cout &lt;&lt; &quot;Error, not a valid planet.&quot; &lt;&lt; endl;</cline>
+            <cline>        std::cout &lt;&lt; &quot;Error, not a valid planet.&quot; &lt;&lt; std::endl ;</cline>
             <cline>    }</cline>
           </block>
           <block order="1">
@@ -889,14 +874,14 @@ int main() {
             <cline>    int planet;</cline>
           </block>
           <block order="8">
-            <cline>    cout &lt;&lt; &quot;Please enter your weight in pounds: &quot;;</cline>
-            <cline>    cin &gt;&gt; earthWeight;</cline>
-            <cline>    cout &lt;&lt; earthWeight &lt;&lt; endl;</cline>
+            <cline>    std::cout &lt;&lt; &quot;Please enter your weight in pounds: &quot;;</cline>
+            <cline>    std::cin &gt;&gt; earthWeight;</cline>
+            <cline>    std::cout &lt;&lt; earthWeight &lt;&lt; std::endl ;</cline>
           </block>
           <block order="12">
-            <cline>    cout &lt;&lt; &quot;Please select a planet: &quot;;</cline>
-            <cline>    cin &gt;&gt; planet;</cline>
-            <cline>    cout &lt;&lt; planet &lt;&lt; endl;</cline>
+            <cline>    std::cout &lt;&lt; &quot;Please select a planet: &quot;;</cline>
+            <cline>    std::cin &gt;&gt; planet;</cline>
+            <cline>    std::cout &lt;&lt; planet &lt;&lt; std::endl ;</cline>
           </block>
           <block order="2">
             <cline>    convertWeight(earthWeight, planet);</cline>

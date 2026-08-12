@@ -36,10 +36,9 @@
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void multiply(int x, int y) {
-  cout << x * y;
+  std::cout << x * y;
 }
 
 int main() {
@@ -67,16 +66,15 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void multiply(int x, int y) {
-  cout << x * y << endl;
+  std::cout << x * y << std::endl;
 }
 
 int main() {
   int x = 2;
   int y = 4;
-  cout << multiply(x,y);
+  std::cout << multiply(x,y);
 }
 ]]></code>
       </program>

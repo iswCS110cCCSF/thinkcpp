@@ -244,10 +244,10 @@ int func(double x, bool y);
         <code><![CDATA[
 int main() {
   bool x = 2 < 3;
-  cout << x;
-  cout << false;
-  cout << ((1 + 4) * 4 > 24);
-  cout << (23 == (32 + 2 - 11));
+  std::cout << x;
+  std::cout << false;
+  std::cout << ((1 + 4) * 4 > 24);
+  std::cout << (23 == (32 + 2 - 11));
 }
 ]]></code>
       </program>
@@ -299,7 +299,7 @@ int main() {
   bool x = true || 4 > 6;
   bool y = 3 != 6 - 3 && 23 >= 23;
   bool z = (4 + 9 < 15 && 3 != 4) || 2 + 5 == 7;
-  cout << w << x << y << z;
+  std::cout << w << x << y << z;
 }
 ]]></code>
       </program>
@@ -404,11 +404,11 @@ bool isEven(int num) {
         <code><![CDATA[
 double Free_time(int day) {
   if (day == 1 || day == 2 || day == 3 || day == 4) {
-    cout << "Better study on weekday!" << endl;
+    std::cout << "Better study on weekday!" << std::endl ;
     return day*0.25;
   }
   else{
-    cout << "Happy weekend" << endl;
+    std::cout << "Happy weekend" << std::endl ;
     return day;
   }
 }
@@ -458,7 +458,7 @@ double Free_time(int day) {
         <code><![CDATA[
 void moonWeight(double earth) {
   double moon = 0.165 * earth;
-  cout << "You would weigh " << moon << " pounds on the moon." << endl;
+  std::cout << "You would weigh " << moon << " pounds on the moon." << std::endl ;
   return moon;
 }
 ]]></code>
@@ -613,12 +613,12 @@ int factorial(int n) {
         <code><![CDATA[
 void print_sequence(int n) {
   if (n == 0) {
-     cout << 1;
+     std::cout << 1;
      return;
      //we can have an empty return to a void function
   }
   else {
-    cout << n << " ";
+    std::cout << n << " ";
     print_sequence(n - 1);
   }
 }

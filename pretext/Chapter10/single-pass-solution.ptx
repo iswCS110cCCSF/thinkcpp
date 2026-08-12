@@ -7,7 +7,7 @@
     value in the vector we could find the corresponding counter and
     increment it. In other words, we can use the value from the vector as an
     index into the histogram. Here's what that looks like:</p>
-  <program>vector&lt;int&gt; histogram(upperBound, 0);
+  <program>std::vector&lt;int&gt; histogram(upperBound, 0);
 
 for (int i = 0; i &lt; numValues; i++) {
   int index = vector[i];
@@ -68,14 +68,14 @@ for (int i = 0; i &lt; numValues; i++) {
     </statement>
     <blocks>
       <block order="2">
-        <cline>vector&lt;int&gt; histogram(const vector&lt;int&gt;&amp; vec, int range) {</cline>
+        <cline>std::vector&lt;int&gt; histogram(const std::vector&lt;int&gt;&amp; vec, int range) {</cline>
       </block>
       <block order="8">
         <choice correct="yes">
-          <cline>   vector&lt;int&gt; histogram (range, 0);</cline>
+          <cline>   std::vector&lt;int&gt; histogram (range, 0);</cline>
         </choice>
         <choice>
-          <cline>   vector&lt;int&gt; histogram (range);                         </cline>
+          <cline>   std::vector&lt;int&gt; histogram (range);                         </cline>
         </choice>
       </block>
       <block order="9">

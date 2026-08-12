@@ -14,7 +14,7 @@
     definition. The first couple of functions we are going to write also have no parameters, so the
     syntax looks like this:</p>
   <program>void newLine() {
-  cout &lt;&lt; endl;
+  std::cout &lt;&lt; std::endl ;
 }</program>
   <p>This function is named <c>newLine</c>; it contains only a single statement, which outputs a new line
     character, represented by the special value <c>endl</c>.</p>
@@ -24,9 +24,9 @@
   <p>In <c>main</c> we can call this new function using syntax that is similar to the way we call the
     built-in C++ commands:</p>
   <program>int main() {
-  cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; std::endl ;
   newLine();
-  cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; std::endl ;
   return 0;
 }</program>
   <p>The output of this program is</p>
@@ -36,11 +36,11 @@ Second line.</program>
   <p>Notice the extra space between the two lines. What if we wanted more
     space between the lines? We could call the same function repeatedly:</p>
   <program>int main() {
-  cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; std::endl ;
   newLine();
   newLine();
   newLine();
-  cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; std::endl ;
   return 0;
 }</program>
   <p>Or we could write a new function, named <c>threeLine</c>, that prints three new lines:</p>
@@ -53,10 +53,9 @@ Second line.</program>
     <program interactive="activecode" line-numbers="yes" label="new_functions_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void newLine() {
-    cout << '*' << endl;
+    std::cout << '*' << std::endl;
 }
 
 void threeLine() {
@@ -64,9 +63,9 @@ void threeLine() {
 }
 
 int main() {
-    cout << "First Line." << endl;
+    std::cout << "First Line." << std::endl;
     threeLine();
-    cout << "Second Line." << endl;
+    std::cout << "Second Line." << std::endl;
     return 0;
 }
         ]]></code>
@@ -231,7 +230,7 @@ endl</c>?</p>
         <cline> int perimeter_value = twice_length + twice_width;</cline>
       </block>
       <block order="5">
-        <cline> <![CDATA[cout << perimeter_value << endl;]]></cline>
+        <cline> <![CDATA[cout << perimeter_value << std::endl ;]]></cline>
       </block>
       <block order="2" correct="no">
         <cline> return parameter_value; </cline>

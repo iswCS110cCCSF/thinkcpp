@@ -75,12 +75,12 @@ char tom;
       <cline>    int <area correct="yes">y</area> = <area correct="no">10</area>;</cline>
       <cline>    <area correct="no">char c</area> = <area correct="no">'8'</area>;</cline>
       <cline>    while (<area correct="yes">x</area> &lt; <area correct="yes">y</area>) {</cline>
-      <cline>        cout &lt;&lt; <area correct="no">c</area> &lt;&lt; endl;</cline>
+      <cline>        std::cout &lt;&lt; <area correct="no">c</area> &lt;&lt; std::endl ;</cline>
       <cline>        <area correct="yes">x</area>++;</cline>
       <cline>    }</cline>
       <cline>    double <area correct="no">d</area> = <area correct="no">9</area>;</cline>
       <cline>    int <area correct="yes">z</area> = <area correct="yes">x</area> + <area correct="yes">y</area>;</cline>
-      <cline><![CDATA[    cout << "It's the year " << ]]><area correct="no">2000</area> + <area correct="yes">z</area> &lt;&lt; &quot;!&quot;;</cline>
+      <cline><![CDATA[    std::cout << "It's the year " << ]]><area correct="no">2000</area> + <area correct="yes">z</area> &lt;&lt; &quot;!&quot;;</cline>
       <cline>}</cline>
     </areas>
   </exercise>
@@ -94,13 +94,13 @@ char tom;
     <areas>
       <cline>int main() {</cline>
       <cline>    char <area correct="yes">init1</area> = <area correct="no">'K'</area>;</cline>
-      <cline>    string <area correct="no">init2</area> = <area correct="no">&quot;T&quot;</area>;</cline>
-      <cline>    cout &lt;&lt; <area correct="yes">init1</area> &lt;&lt; <area correct="no">&quot;+&quot;</area> &lt;&lt; <area correct="no">init2</area> &lt;&lt; endl;</cline>
-      <cline>    string <area correct="no">init3</area> = <area correct="no">&quot;C&quot;</area>;</cline>
+      <cline>   std::string <area correct="no">init2</area> = <area correct="no">&quot;T&quot;</area>;</cline>
+      <cline>    std::cout &lt;&lt; <area correct="yes">init1</area> &lt;&lt; <area correct="no">&quot;+&quot;</area> &lt;&lt; <area correct="no">init2</area> &lt;&lt; std::endl ;</cline>
+      <cline>   std::string <area correct="no">init3</area> = <area correct="no">&quot;C&quot;</area>;</cline>
       <cline>    char <area correct="yes">init4</area> = <area correct="no">'J'</area>;</cline>
-      <cline>    cout &lt;&lt; <area correct="no">init3</area> &lt;&lt; <area correct="no">'+'</area> &lt;&lt; <area correct="yes">init4</area> &lt;&lt; endl;</cline>
-      <cline>    string <area correct="no">c</area> = <area correct="no">&quot;Carved their initials in a tree!&quot;</area>;</cline>
-      <cline>    cout &lt;&lt; <area correct="no">c</area>;</cline>
+      <cline>    std::cout &lt;&lt; <area correct="no">init3</area> &lt;&lt; <area correct="no">'+'</area> &lt;&lt; <area correct="yes">init4</area> &lt;&lt; std::endl ;</cline>
+      <cline>   std::string <area correct="no">c</area> = <area correct="no">&quot;Carved their initials in a tree!&quot;</area>;</cline>
+      <cline>    std::cout &lt;&lt; <area correct="no">c</area>;</cline>
       <cline>}</cline>
     </areas>
   </exercise>

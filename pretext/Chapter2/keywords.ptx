@@ -53,7 +53,7 @@
           <p>cout</p>
         </statement>
         <feedback><p>
-          cout cannot be used as a variable name!
+          std::cout cannot be used as a variable name!
         </p></feedback>
       </choice>
       <choice>
@@ -69,7 +69,7 @@
           <p>string</p>
         </statement>
         <feedback><p>
-          string cannot be used as a variable name.
+         std::string cannot be used as a variable name.
         </p></feedback>
       </choice>
       <choice correct="yes">
@@ -109,12 +109,11 @@
     <program interactive="activecode" line-numbers="yes" label="keywords_4_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int friend = 4;
     int enemy = friend * (-1);
-    cout << "enemy = " << enemy << endl;
+    std::cout << "enemy = " << enemy << std::endl;
 
     // Do not modify anything below.
     return 0;

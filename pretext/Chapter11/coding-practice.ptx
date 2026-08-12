@@ -8,7 +8,6 @@
     <program interactive="activecode" line-numbers="yes" label="cp_11_AC_1q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 // Write your code for the struct Cake here.
 
@@ -23,17 +22,16 @@ int main() {
           instance variables in order.</p>
       <program interactive="activecode" line-numbers="yes" label="cp_11_AC_1a_editor"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Cake {
-    string name;
+    std::string name;
     double weight;
     bool has_icing;
 };
 
 int main() {
      Cake c = { "Choco lava", 3.5};
-     cout << c.has_icing() << endl;
+     std::cout << c.has_icing() << std::endl;
 }
         ]]></code></program>
     </solution>
@@ -46,10 +44,9 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cp_11_AC_2q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Cake {
-    string name;
+    std::string name;
     double weight;
     bool has_icing();
 };
@@ -65,10 +62,9 @@ int main() {
         <p>Below is one way to implement the program.</p>
       <program interactive="activecode" line-numbers="yes" label="cp_9_AC_2a_editor"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Cake {
-    string name;
+    std::string name;
     double weight;
     bool has_icing();
 };
@@ -96,7 +92,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cp_11_AC_3q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 // Write your code for the struct Music here.
 
@@ -111,7 +106,6 @@ int main() {
         <p>Below is one way to implement the program.</p>
         <program interactive="activecode" line-numbers="yes" label="cp_11_AC_3a_editor"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Music {
     int num_sold;
@@ -121,7 +115,7 @@ struct Music {
 };
 
 void Music::sold(int num_sold) {
-   cout << 2 * num_sold << endl;
+   std::cout << 2 * num_sold << std::endl;
 }
 
 bool Music:: is_new(int year) {
@@ -147,7 +141,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cp_11_AC_4q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 // Write your code for the struct Music here.
 
@@ -164,7 +157,6 @@ int main() {
         <p>Below is one way to implement the program.</p>
         <program interactive="activecode" line-numbers="yes" label="cp_11_AC_4a_editor"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Music {
     int num_sold;
@@ -197,10 +189,9 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cp_11_AC_5q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Music {
-    string artist;
+    std::string artist;
     int year;
     bool has_featured;
 };
@@ -219,24 +210,23 @@ int main() {
         <p>Below is one way to implement the program.</p>
       <program interactive="activecode" line-numbers="yes" label="cp_11_AC_5a_editor"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Music {
-    string artist;
+    std::string artist;
     int year;
     bool has_featured;
 };
 
 void printInfo(Music m) {
     if (m.artist == "n/a") {
-        cout << "Unknown artist! Your album is from " << m.year << "." << endl;
+        std::cout << "Unknown artist! Your album is from " << m.year << "." << std::endl;
     }
     else {
         if (m.has_featured == true) {
-            cout << "This is a " << m.artist << ", " << m.year << " album with featured artists." << endl;
+            std::cout << "This is a " << m.artist << ", " << m.year << " album with featured artists." << std::endl;
         }
         if (m.has_featured == false) {
-            cout << "This is a " << m.artist << ", " << m.year << " album without featured artists." << endl;
+            std::cout << "This is a " << m.artist << ", " << m.year << " album without featured artists." << std::endl;
         }
     }
 }
@@ -257,10 +247,9 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cp_11_AC_6q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Cake {
-    string name;
+    std::string name;
     double weight;
     bool has_icing();
 };
@@ -276,10 +265,9 @@ int main() {
         <p>Below is one way to implement the program.</p>
       <program interactive="activecode" line-numbers="yes" label="cp_11_AC_6a_editor"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Cake {
-    string name;
+    std::string name;
     double weight;
     bool has_icing();
 };
@@ -307,7 +295,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cp_11_AC_7q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 // Write your code for the struct Pants here.
 
@@ -324,11 +311,10 @@ int main() {
           instance variables in order. In addition, we write a default constructor.</p>
       <program interactive="activecode" line-numbers="yes" label="cp_11_AC_7a_editor"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Pants {
     char size;
-    string material;
+    std::string material;
     Pants();
 };
 
@@ -353,14 +339,13 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cp_11_AC_8q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Book {
-    string name;
+    std::string name;
     int publish_year;
     bool is_famous();
     Book();
-    Book(string name_in, int publish_year_in);
+    Book(std::string name_in, int publish_year_in);
 };
 
 // Write your code for the default constructor here
@@ -377,14 +362,13 @@ int main() {
         <p>Below is one way to implement the program.</p>
       <program interactive="activecode" line-numbers="yes" label="cp_11_AC_8a_editor"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Book {
-    string name;
+    std::string name;
     int year;
     bool is_famous();
     Book();
-    Book(string name_in, int publish_year_in);
+    Book(std::string name_in, int publish_year_in);
 };
 
 Book::Book() {
@@ -392,7 +376,7 @@ Book::Book() {
    publish_year = 0;
 }
 
-Book::Book(string name_in, int publish_year_in) {
+Book::Book(std::string name_in, int publish_year_in) {
    name = name_in;
    publish_year = publish_year_in ;
 }
@@ -413,16 +397,15 @@ int main() {
       <code><![CDATA[
 struct Book {
     // Group and label the following as instance variables, constructors, modifiers or functions as would be seen in a header (Book.h) file
-    string name;
+    std::string name;
     int publish_year;
     bool is_famous();
     Book();
-    Book(string name_in, int publish_year_in);
+    Book(std::string name_in, int publish_year_in);
 };
 
 
 #include <iostream>
-using namespace std;
 // Write the inclusion of the header file that is needed in main.cpp
 
 int main() {
@@ -436,18 +419,17 @@ int main() {
       <program interactive="activecode" line-numbers="yes" label="cp_11_AC_9a_editor"><code><![CDATA[
 struct Book {
     // Instance variables
-    string name;
+    std::string name;
     int publish_year;
     // Functions
     bool is_famous();
     // Constructors
     Book();
-    Book(string name_in, int publish_year_in);
+    Book(std::string name_in, int publish_year_in);
 };
 
 
 #include <iostream>
-using namespace std;
 #include "Book.h"
 
 int main() {
@@ -465,7 +447,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="cp_11_AC_10q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 // Write your struct definition and constructors here
 
@@ -479,14 +460,13 @@ int main() {
         <p>Below is one way to implement the program.</p>
       <program interactive="activecode" line-numbers="yes" label="cp_11_AC_10a_editor"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Instrument {
-    string name;
+    std::string name;
     int year_made;
     bool is_popular();
     Instrument();
-    Instrument(string name_in, int year_made_in);
+    Instrument(std::string name_in, int year_made_in);
 };
 
 Instrument::Instrument() {
@@ -494,7 +474,7 @@ Instrument::Instrument() {
    publish_year = 2000;
 }
 
-Instrument::Instrument(string name_in, int year_made_in) {
+Instrument::Instrument(std::string name_in, int year_made_in) {
    name = name_in;
    year_made = year_made_in;
 }

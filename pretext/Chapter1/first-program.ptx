@@ -12,10 +12,9 @@
     <program interactive="activecode" line-numbers="yes" label="first_prog_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 // main: generate some simple output
 int main() {
-    cout << "Hello, World." << endl;
+    std::cout << "Hello, World." << std::endl;
     return 0;
 }
         ]]></code>

@@ -11,7 +11,7 @@
     surprise you that when you write a class definition, the parameter list
     indicates the type of each parameter. For example:</p>
   <program>void printTwice(char phil) {
-  cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; endl;
+  std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl ;
 }</program>
   <p>This function takes a single parameter, named phil, that has type <c>char</c>. Whatever that
     parameter is (and at this point we have no idea what it is), it gets printed twice, followed by
@@ -58,10 +58,9 @@
     <program interactive="activecode" line-numbers="yes" label="params_args_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void printTwice(char phil) {
-    cout << phil << phil << endl;
+    std::cout << phil << phil << std::endl;
 }
 
 int main() {
@@ -78,14 +77,13 @@ int main() {
         throw an error, type <q>error</q>.</p>
         <program>
           #include &lt;iostream&gt;
-          using namespace std;
 
           void printTwice(char phil) {
-            cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; endl;
+            std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl;
           }
 
           int main() {
-            string argument = &quot;s&quot;;
+            std::string argument = &quot;s&quot;;
             printTwice(argument);
             return 0;
           }
@@ -109,10 +107,9 @@ int main() {
 
       <program>
         #include &lt;iostream&gt;
-        using namespace std;
 
         void printTwice(char phil) {
-          cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; endl;
+          std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl;
         }
 
         int main() {

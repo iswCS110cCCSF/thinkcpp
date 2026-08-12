@@ -79,7 +79,7 @@ Seattle 2650    2000    3000    2150    1350    2300    3100    1450    0
       </choice>
       <choice correct="yes">
         <statement>
-          <p>a two-dimensional vector</p>
+          <p>a two-dimensional std::vector</p>
         </statement>
         <feedback><p>
           Correct!

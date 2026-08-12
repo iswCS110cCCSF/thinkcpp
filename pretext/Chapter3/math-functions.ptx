@@ -23,15 +23,14 @@
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 int main() {
     double result = log(17.0);
     double angle = 1.5;
     double height = sin(angle);
-    cout << result << endl;
-    cout << angle << endl;
-    cout << height << endl;
+    std::cout << result << std::endl;
+    std::cout << angle << std::endl;
+    std::cout << height << std::endl;
     return 0;
 }
         ]]></code>
@@ -60,15 +59,14 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 int main() {
     double pi = acos(-1.0);
     double degrees = 90;
     double angle = degrees * 2 * pi / 360.0;
-    cout << pi << endl;
-    cout << degrees << endl;
-    cout << angle << endl;
+    std::cout << pi << std::endl;
+    std::cout << degrees << std::endl;
+    std::cout << angle << std::endl;
     return 0;
 }
         ]]></code>
@@ -79,18 +77,16 @@ int main() {
     your program. For example, in the <q>Hello, world!</q> program we included a header file named
     iostream using an <term>include</term> statement:</p>
   <program>#include &lt;iostream&gt;
-using namespace std;</program>
+</program>
   <p><url href="https://en.cppreference.com/w/cpp/header/iostream">
     iostream</url> contains information about input and output (I/O) streams, including the object named <c>cout</c>.
     C++ has a powerful feature called namespaces, that allow you to write your own implementation of
     cout. But in most cases, we would need to use the standard implementation. To convey this to the
     compiler, we use the line</p>
   <program>
-using namespace std;
 </program>
   <note>
-    <p>As a rule of the thumb, you should write <c>using namespace std;</c> whenever you use iostream.</p>
-  </note>
+<p>As a rule of thumb, qualify standard-library names with the <c>std::</c> prefix when you use facilities from headers such as <c>iostream</c>.</p>  </note>
   <p>Similarly, the <url href="https://en.cppreference.com/w/cpp/header/cmath">
       cmath</url> header file contains information about the math
     functions. You can include it at the beginning of your program along

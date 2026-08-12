@@ -4,7 +4,7 @@
     conditions and change the behavior of the program accordingly. <term>Conditional statements</term>
     give us this ability. The simplest form is the if statement:</p>
   <program>if (x &gt; 0) {
-  cout &lt;&lt; &quot;x is positive&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;x is positive&quot; &lt;&lt; std::endl ;
 }</program>
   <p>The expression in parentheses is called the condition. If it is true,
     then the statements in brackets get executed. If the condition is not
@@ -29,13 +29,12 @@ x &lt;= y               // x is less than or equal to y</program>
     <program interactive="activecode" line-numbers="yes" label="composition_AC_31_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int minute = 3;
     int percentage;
     percentage = (minute * 100) / 60;
-    cout << percentage;
+    std::cout << percentage;
 }
         ]]></code>
     </program>
@@ -49,18 +48,17 @@ int main() {
     <program label="conditional_execution_AC_1_editor" interactive="activecode" line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int x = 12;
     if (x == 12) {
-        cout << "Equal!" << endl;
+        std::cout << "Equal!" << std::endl;
     }
     if (x != 13) {
-        cout << "Not equal!" << endl;
+        std::cout << "Not equal!" << std::endl;
     }
     if (x < 6) {
-        cout << "Bigger!" << endl;
+        std::cout << "Bigger!" << std::endl;
     }
     return 0;
 }

@@ -19,12 +19,11 @@
     <program interactive="activecode" line-numbers="yes" label="runtime_error_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    string greeting = "Hello world";
-    cout << "The first letter is " << greeting[-1] << endl;
-    cout << "The last letter is " << greeting[greeting.length()] << endl;
+    std::string greeting = "Hello world";
+    std::cout << "The first letter is " << greeting[-1] << std::endl;
+    std::cout << "The last letter is " << greeting[greeting.length()] << std::endl;
 }
         ]]></code>
     </program>
@@ -42,9 +41,9 @@ int main() {
       <cline>    <area correct="no">string fruit = &quot;apple&quot;;</area></cline>
       <cline>    char letter = <area correct="no">fruit[0];</area></cline>
       <cline>    char letter = <area correct="yes">fruit[9];</area></cline>
-      <cline>    cout &lt;&lt; <area correct="no">fruit</area> &lt;&lt; endl;</cline>
-      <cline>    cout &lt;&lt; <area correct="yes">fruit[-4]</area> &lt;&lt; endl;</cline>
-      <cline>    cout &lt;&lt; <area correct="no">fruit[4]</area> &lt;&lt; endl;</cline>
+      <cline>    std::cout &lt;&lt; <area correct="no">fruit</area> &lt;&lt; std::endl ;</cline>
+      <cline>    std::cout &lt;&lt; <area correct="yes">fruit[-4]</area> &lt;&lt; std::endl ;</cline>
+      <cline>    std::cout &lt;&lt; <area correct="no">fruit[4]</area> &lt;&lt; std::endl ;</cline>
       <cline>}</cline>
     </areas>
   </exercise>
@@ -78,7 +77,7 @@ int main() {
         <cline> sentence[10] = &quot;h&quot;;</cline>
       </block>
       <block order="4">
-        <cline> <![CDATA[cout << sentence << endl;]]></cline>
+        <cline> <![CDATA[cout << sentence << std::endl ;]]></cline>
         <cline>}</cline>
       </block>
     </blocks>

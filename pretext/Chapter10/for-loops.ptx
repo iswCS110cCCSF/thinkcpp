@@ -19,12 +19,12 @@ while (CONDITION) {
     statements in one place, it is easier to read. For example:</p>
   <program>int i;
 for (i = 0; i &lt; 4; i++) {
-  cout &lt;&lt; count[i] &lt;&lt; endl;
+  std::cout &lt;&lt; count[i] &lt;&lt; std::endl ;
 }</program>
   <p>is equivalent to</p>
   <program>int i = 0;
 while (i &lt; 4) {
-  cout &lt;&lt; count[i] &lt;&lt; endl;
+  std::cout &lt;&lt; count[i] &lt;&lt; std::endl ;
   i++;
 }</program>
   <listing label="for_loops_AC_1">
@@ -35,13 +35,12 @@ while (i &lt; 4) {
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 int main() {
-    vector<int> count = {1,2,3,4};
+    std::vector<int> count = {1,2,3,4};
     int i;
     for (i = 0; i < 4; i++) {
-        cout << count[i] << endl;
+        std::cout << count[i] << std::endl;
     }
 }
         ]]></code>
@@ -55,13 +54,12 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 int main() {
-    vector<int> count = {1,2,3,4};
+    std::vector<int> count = {1,2,3,4};
     int i = 0;
     while (i < 4) {
-        cout << count[i] << endl;
+        std::cout << count[i] << std::endl;
         i++;
     }
 }
@@ -79,13 +77,12 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 int main() {
-    vector<int> count = {1,2,3,4};
+    std::vector<int> count = {1,2,3,4};
     int i;
     for (i = 3; i > -1; i--) {
-       cout << count[i] << endl;
+       std::cout << count[i] << std::endl;
     }
 }
         ]]></code>
@@ -184,7 +181,7 @@ int main() {
         </choice>
       </block>
       <block order="3">
-        <cline><![CDATA[      cout << new_amount << endl;]]></cline>
+        <cline><![CDATA[      std::cout << new_amount << std::endl ;]]></cline>
       </block>
       <block order="7" correct="no">
         <cline>   return new_amount;                         </cline>

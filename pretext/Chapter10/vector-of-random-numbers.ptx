@@ -5,27 +5,27 @@
     help with debugging, and then increase it later.</p>
   <p>The following function takes a single argument, the size of the vector. It allocates a new
     vector of <c>int</c>s, and fills it with random values between 0 and <c>upperBound-1</c>.</p>
-  <program>vector&lt;int&gt; randomVector(int n, int upperBound) {
-  vector&lt;int&gt; vec (n);
+  <program>std::vector&lt;int&gt; randomVector(int n, int upperBound) {
+  std::vector&lt;int&gt; vec (n);
   for (size_t i = 0; i &lt; vec.size(); i++) {
     vec[i] = random() % upperBound;
   }
   return vec;
 }</program>
-  <p>The return type is <c>vector&lt;int&gt;</c>, which means that this function returns a vector of integers. To
+  <p>The return type is <c>std::vector&lt;int&gt;</c>, which means that this function returns a vector of integers. To
     test this function, it is convenient to have a function that outputs the contents of a vector.</p>
-  <program>void printVector(const vector&lt;int&gt;&amp; vec) {
+  <program>void printVector(const std::vector&lt;int&gt;&amp; vec) {
   for (size_t i = 0; i &lt; vec.size(); i++) {
-    cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
+    std::cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
   }
 }</program>
-  <p>Notice that it is legal to pass <c>vector</c>s by reference. In fact it is quite common, since it
+  <p>Notice that it is legal to pass <c> std::vector</c>s by reference. In fact it is quite common, since it
     makes it unnecessary to copy the vector. Since <c>printVector</c> does not modify the vector, we declare
     the parameter <c>const</c>.</p>
   <p>The following code generates a vector and outputs it:</p>
   <program>int numValues = 20;
 int upperBound = 10;
-vector&lt;int&gt; vector = randomVector(numValues, upperBound);
+std::vector&lt;int&gt; vector = randomVector(numValues, upperBound);
 printVector(vector);</program>
   <p>On my machine the output is</p>
   <console>
@@ -40,32 +40,31 @@ printVector(vector);</program>
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
-vector<int> randomVector(int n, int upperBound);
-void printVector(const vector<int> & vec);
+std::vector<int> randomVector(int n, int upperBound);
+void printVector(const std::vector<int> & vec);
 
 int main() {
     int numValues = 20;
     int upperBound = 10;
-    vector<int> vector = randomVector(numValues, upperBound);
-    printVector(vector);
+    std::vector<int> std::vector = randomVector(numValues, upperBound);
+    printVector(std::vector);
 }
 
         ]]></code>
       <tests>
 
-vector&lt;int&gt; randomVector(int n, int upperBound) {
-   vector&lt;int&gt; vec (n);
+std::vector&lt;int&gt; randomVector(int n, int upperBound) {
+   std::vector&lt;int&gt; vec (n);
    for (size_t i = 0; i &lt; vec.size(); i++) {
       vec[i] = random() % upperBound;
    }
    return vec;
 }
 
-void printVector(const vector&lt;int&gt;&amp; vec) {
+void printVector(const std::vector&lt;int&gt;&amp; vec) {
    for (size_t i = 0; i &lt; vec.size(); i++) {
-      cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
+      std::cout &lt;&lt; vec[i] &lt;&lt; &quot; &quot;;
    }
 }
 </tests>
@@ -82,7 +81,7 @@ void printVector(const vector&lt;int&gt;&amp; vec) {
     appears, and then see what happens when we increase <c>numValues</c>.</p>
   <exercise label="vector_of_rand_nums_1">
     <statement>
-      <p>How should we declare the parameter, <term>vector</term>, if we don't intend to make any
+      <p>How should we declare the parameter, <term> std::vector</term>, if we don't intend to make any
         changes to it? <fillin answer="const"/>
       </p>
     </statement>
@@ -146,7 +145,7 @@ void printVector(const vector&lt;int&gt;&amp; vec) {
       <p>Would compiling the following code lead to a compiler error?</p>
       <program line-numbers="yes">
         <code><![CDATA[
-void dostuff(const vector<int> & vec) {
+void dostuff(const std::vector<int> & vec) {
    for (size_t i = 0; i < vec.size(); i++) {
       vec[i] = vec[i] ;
    }

@@ -8,7 +8,7 @@
     <statement>
       <p>Let's write the code for the struct definition of Song.
         The Song structure will have the instance variables string title,
-        string artist, string album, and int year in that order.
+       std::string artist, string album, and int year in that order.
         Put the necessary blocks of code in the correct order.</p>
     </statement>
     <blocks>
@@ -24,20 +24,20 @@
         <cline>struct Song (  </cline>
       </block>
       <block order="3">
-        <cline>   string title;</cline>
+        <cline>  std::string title;</cline>
       </block>
       <block order="8">
-        <cline>   string artist;</cline>
+        <cline>  std::string artist;</cline>
       </block>
       <block order="11">
-        <cline>   string album;</cline>
+        <cline>  std::string album;</cline>
       </block>
       <block order="10">
         <cline>   int year;</cline>
       </block>
       <block order="4"
              correct="no">
-        <cline>   string year;  </cline>
+        <cline>  std::string year;  </cline>
       </block>
       <block order="9">
         <cline>};</cline>
@@ -122,26 +122,26 @@
         </choice>
       </block>
       <block order="2">
-        <cline><![CDATA[   cout << "\"" << s.title << "\" by " << s.artist;]]></cline>
+        <cline><![CDATA[   std::cout << "\"" << s.title << "\" by " << s.artist;]]></cline>
       </block>
       <block order="5">
-        <cline><![CDATA[   cout << " (" << s.album << ", " << s.year << ")" << endl;]]></cline>
+        <cline><![CDATA[   std::cout << " (" << s.album << ", " << s.year << ")" << std::endl ;]]></cline>
       </block>
       <block order="9"
              correct="no">
-        <cline><![CDATA[   cout << title << artist << album << year;  ]]></cline>
+        <cline><![CDATA[   std::cout << title << artist << album << year;  ]]></cline>
       </block>
       <block order="8"
              correct="no">
-        <cline><![CDATA[   cout << "\"" << title << "\" by " << artist;  ]]></cline>
+        <cline><![CDATA[   std::cout << "\"" << title << "\" by " << artist;  ]]></cline>
       </block>
       <block order="7"
              correct="no">
-        <cline><![CDATA[   cout << """ << s.title << "" by " << s.artist;  ]]></cline>
+        <cline><![CDATA[   std::cout << """ << s.title << "" by " << s.artist;  ]]></cline>
       </block>
       <block order="3"
              correct="no">
-        <cline><![CDATA[   cout << " (" << album << ", " << year << ")" << endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << " (" << album << ", " << year << ")" << std::endl ;  ]]></cline>
       </block>
       <block order="1">
         <cline>}</cline>
@@ -168,7 +168,7 @@
         <cline>Struct Unicorn {  </cline>
       </block>
       <block order="8">
-        <cline>   string name;</cline>
+        <cline>  std::string name;</cline>
       </block>
       <block order="3">
         <cline>   int age;</cline>
@@ -177,7 +177,7 @@
         <cline>   double hornLength;</cline>
       </block>
       <block order="10">
-        <cline>   string hairColor;</cline>
+        <cline>  std::string hairColor;</cline>
       </block>
       <block order="5">
         <cline>   bool isSparkly;</cline>
@@ -320,7 +320,7 @@
         <cline>   int houseNumber;</cline>
       </block>
       <block order="9">
-        <cline>   string state;</cline>
+        <cline>  std::string state;</cline>
       </block>
       <block order="15">
         <cline>   int postalAddress;</cline>
@@ -340,7 +340,7 @@
         <cline>Struct Employee {  </cline>
       </block>
       <block order="14">
-        <cline>   string name;</cline>
+        <cline>  std::string name;</cline>
       </block>
       <block order="10">
         <cline>   Address address;</cline>
@@ -350,7 +350,7 @@
       </block>
       <block order="1"
              correct="no">
-        <cline>   string address;  </cline>
+        <cline>  std::string address;  </cline>
       </block>
       <block order="3"
              correct="no">
@@ -378,22 +378,22 @@
         </choice>
       </block>
       <block order="3">
-        <cline><![CDATA[   cout << e.name << " (" << e.id << ") lives at ";]]></cline>
+        <cline><![CDATA[   std::cout << e.name << " (" << e.id << ") lives at ";]]></cline>
       </block>
       <block order="2"
              correct="no">
-        <cline><![CDATA[   cout << e.address.name << " (" << e.address.id << ") lives at ";  ]]></cline>
+        <cline><![CDATA[   std::cout << e.address.name << " (" << e.address.id << ") lives at ";  ]]></cline>
       </block>
       <block order="7"
              correct="no">
-        <cline><![CDATA[   cout << e.name << "(" << e.address.id << ") lives at";  ]]></cline>
+        <cline><![CDATA[   std::cout << e.name << "(" << e.address.id << ") lives at";  ]]></cline>
       </block>
       <block order="6">
-        <cline><![CDATA[   cout << e.address.houseNumber << " in " << e.address.state << ", " << e.address.postalAddress << endl;]]></cline>
+        <cline><![CDATA[   std::cout << e.address.houseNumber << " in " << e.address.state << ", " << e.address.postalAddress << std::endl ;]]></cline>
       </block>
       <block order="5"
              correct="no">
-        <cline><![CDATA[   cout << e.houseNumber << " in " << e.state << ", " << e.postalAddress << endl;  ]]></cline>
+        <cline><![CDATA[   std::cout << e.houseNumber << " in " << e.state << ", " << e.postalAddress << std::endl ;  ]]></cline>
       </block>
       <block order="4">
         <cline>}</cline>

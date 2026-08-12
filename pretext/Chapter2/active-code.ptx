@@ -12,14 +12,13 @@
     <program interactive="activecode" line-numbers="yes" language="python" label="VARS_a1q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     char true = 'T';
     char false = 'F';
 
-    cout << true << " is short for true. ";
-    cout << false << " is short for false." << endl;
+    std::cout << true << " is short for true. ";
+    std::cout << false << " is short for false." << std::endl;
 }
         ]]></code>
     </program></statement>
@@ -28,13 +27,12 @@ int main() {
         keywords, so they cannot be used as variable names.</p>
       <program xml:id="VARS_a1a_editor" line-numbers="yes"><code><![CDATA[
            #include <iostream>
-           using namespace std;
            
            int main() {
                char t = 'T';
                char f = 'F';
-               cout << t << " is short for true. ";
-               cout << f << " is short for false." << endl; cout << f << " is short for false." << endl;
+               std::cout << t << " is short for true. ";
+               std::cout << f << " is short for false." << std::endl; std::cout << f << " is short for false." << std::endl;
            }
                    ]]></code>
            </program>
@@ -47,18 +45,17 @@ int main() {
     <program interactive="activecode" language="cpp" line-numbers="yes" label="VARS_a2_editor">
           <code><![CDATA[
     #include <iostream>
-    using namespace std;
     
     int main() {
-        string make;
+        std::string make;
         make = "Buick"
     
         // Finish the rest of the assignment statements by assigning
         // 2014 and Regal to their respective variables.
     
         // DO NOT MODIFY ANYTHING BELOW THIS LINE.
-        cout << "I drive a " << year << " " << make << " ";
-        cout << model << endl;
+        std::cout << "I drive a " << year << " " << make << " ";
+        std::cout << model << std::endl;
     }
         ]]></code>
         </program></statement>
@@ -122,14 +119,13 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="VARS_a3q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     // Modify the next line so that Cady = 0.9.
     int Cady = 3 * 5 * (6 / 100);
 
     // DO NOT MODIFY ANYTHING BELOW THIS LINE.
-    cout << "Cady scored " << Cady * 100 << "% on the exam.";
+    std::cout << "Cady scored " << Cady * 100 << "% on the exam.";
 }
         ]]></code>
     </program></statement>
@@ -138,11 +134,10 @@ int main() {
         that our result isn't rounded down to 0 through integer division.</p>
       <program xml:id="VARS_a3a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     double Cady = 3 * 5 * (6 / 100.0);
-    cout << "Cady scored " << Cady * 100 << "% on the exam.";
+    std::cout << "Cady scored " << Cady * 100 << "% on the exam.";
 }
         ]]></code></program>
     </solution>
@@ -157,7 +152,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="VARS_a4_ps_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int radius = 5;
@@ -167,8 +161,8 @@ int main() {
     volume =
 
     // DO NOT MODIFY ANYTHING BELOW THIS LINE.
-    cout << "Your solution had volume = " << volume << endl;
-    cout << "The correct solution has volume = 104.667";
+    std::cout << "Your solution had volume = " << volume << std::endl;
+    std::cout << "The correct solution has volume = 104.667";
 }
     ]]></code>
     </program></statement>
@@ -214,7 +208,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="VARS_a5q_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     char a = 's';
@@ -224,7 +217,7 @@ int main() {
     a = a - 3 * 4 + (1 + 3);
 
     // DO NOT MODIFY ANYTHING BELOW THIS LINE.
-    cout << a;
+    std::cout << a;
 }
         ]]></code>
     </program></statement>
@@ -233,12 +226,11 @@ int main() {
       that will bring you to 'a', here is one way.</p>
       <program xml:id="VARS_a5a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     char a = 's';
     a = a - (3 * (4 + 1) + 3);
-    cout << a;
+    std::cout << a;
 }
         ]]></code>
     </program>
@@ -255,9 +247,9 @@ int main() {
 int main() {
 
     // DO NOT MODIFY ANYTHING BELOW THIS LINE.
-    cout << "Your solution had apples = " << apples;
-    cout << "and oranges = " << oranges << "." << endl;
-    cout << "The correct solution has apples = apples, and oranges = oranges.";
+    std::cout << "Your solution had apples = " << apples;
+    std::cout << "and oranges = " << oranges << "." << std::endl ;
+    std::cout << "The correct solution has apples = apples, and oranges = oranges.";
 }
       ]]></code>
       </program></statement>
@@ -314,12 +306,11 @@ int main() {
     <solution><p> Below is one way to implement the solution.</p>
     <program xml:id="VARS_a7a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    cout << "Eat" << endl;
-    cout << "More" << endl;
-    cout << "Chicken" << endl;
+    std::cout << "Eat" << std::endl;
+    std::cout << "More" << std::endl;
+    std::cout << "Chicken" << std::endl;
 }
         ]]></code></program>
     </solution>
@@ -335,8 +326,8 @@ int main() {
 int main() {
 
     // DO NOT MODIFY ANYTHING BELOW THIS LINE.
-    cout << "Your solution had plusTip = " << plusTip << endl;
-    cout << "The correct solution has plusTip = 43.5";
+    std::cout << "Your solution had plusTip = " << plusTip << std::endl ;
+    std::cout << "The correct solution has plusTip = 43.5";
 }
     ]]></code>
     </program></statement>
@@ -384,15 +375,14 @@ int main() {
 int main() {
 
     // DO NOT MODIFY ANYTHING BELOW THIS LINE.
-    cout << "Your solution had seconds = " << seconds << endl;
-    cout << "The correct solution has seconds = 11700";
+    std::cout << "Your solution had seconds = " << seconds << std::endl ;
+    std::cout << "The correct solution has seconds = 11700";
 }
         ]]></code>
     </program></statement>
     <solution><p> Below is one way to implement the solution.</p>
     <program xml:id="VARS_a9a_editor" line-numbers="yes"><code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int hours = 3;
@@ -414,8 +404,8 @@ int main() {
     int main() {
     
        // DO NOT MODIFY ANYTHING BELOW THIS LINE.
-       cout << endl;
-       cout << "Your program should have printed 2.365";
+       std::cout << std::endl ;
+       std::cout << "Your program should have printed 2.365";
     }
             ]]></code>
             </program></statement>

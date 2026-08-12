@@ -31,10 +31,10 @@
       </block>
       <block order="4">
         <choice correct="yes">
-          <cline> cout &lt;&lt; d;</cline>
+          <cline> std::cout &lt;&lt; d;</cline>
         </choice>
         <choice>
-          <cline> cout d; </cline>
+          <cline> std::cout d; </cline>
         </choice>
       </block>
       <block order="1">
@@ -56,7 +56,7 @@
         <cline>void newLine() {</cline>
       </block>
       <block order="7">
-        <cline> cout &lt;&lt; endl;</cline>
+        <cline> std::cout &lt;&lt; std::endl ;</cline>
       </block>
       <block order="3">
         <cline>}</cline>
@@ -74,18 +74,18 @@
           <cline> newLine();  //first call</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ cout << newLine();  //first call ]]></cline>
+          <cline><![CDATA[ std::cout << newLine();  //first call ]]></cline>
         </choice>
       </block>
       <block order="11">
-        <cline><![CDATA[ cout << ". . . . . . . . . . . . " << endl;]]></cline>
+        <cline><![CDATA[ std::cout << ". . . . . . . . . . . . " << std::endl ;]]></cline>
       </block>
       <block order="2">
         <choice correct="yes">
           <cline> newline();  //second call</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ cout << newLine();  //second call ]]></cline>
+          <cline><![CDATA[ std::cout << newLine();  //second call ]]></cline>
         </choice>
       </block>
       <block order="8">
@@ -127,7 +127,7 @@
         </choice>
       </block>
       <block order="6">
-        <cline> cout &lt;&lt; vol;</cline>
+        <cline> std::cout &lt;&lt; vol;</cline>
       </block>
       <block order="4">
         <cline>}</cline>
@@ -147,7 +147,6 @@
       </block>
       <block order="1">
         <cline>#include &lt;iostream&gt;</cline>
-        <cline>using namespace std;</cline>
       </block>
       <block order="11">
         <choice correct="yes">
@@ -174,7 +173,7 @@
         </choice>
       </block>
       <block order="3">
-        <cline> cout &lt;&lt; sine;</cline>
+        <cline> std::cout &lt;&lt; sine;</cline>
       </block>
       <block order="5">
         <cline>}</cline>
@@ -217,7 +216,7 @@
         <cline> double final = item - discount * 0.08; </cline>
       </block>
       <block order="8">
-        <cline> cout &lt;&lt; final;</cline>
+        <cline> std::cout &lt;&lt; final;</cline>
       </block>
       <block order="7">
         <cline>}</cline>
@@ -266,10 +265,10 @@
       </block>
       <block order="6">
         <choice correct="yes">
-          <cline><![CDATA[ cout << "The sides of the triangle are: " << s1 << ", " << s2 << ", " << hyp;]]></cline>
+          <cline><![CDATA[ std::cout << "The sides of the triangle are: " << s1 << ", " << s2 << ", " << hyp;]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[ cout << "The sides of the triangle are: " << s1 << ", " << s2 << ", " << s3; ]]></cline>
+          <cline><![CDATA[ std::cout << "The sides of the triangle are: " << s1 << ", " << s2 << ", " << s3; ]]></cline>
         </choice>
       </block>
       <block order="5">
@@ -297,24 +296,24 @@
       </block>
       <block order="2">
         <choice correct="yes">
-          <cline> cout &lt;&lt; "Eat";</cline>
+          <cline> std::cout &lt;&lt; "Eat";</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ cout << "Eat" << endl; ]]></cline>
+          <cline><![CDATA[ std::cout << "Eat" << std::endl ; ]]></cline>
         </choice>
       </block>
       <block order="8">
-        <cline><![CDATA[ cout << endl; cout << "More" << endl;]]></cline>
+        <cline><![CDATA[ std::cout << std::endl ; std::cout << "More" << std::endl ;]]></cline>
       </block>
       <block order="9">
-        <cline> cout &lt;&lt; endl;</cline>
+        <cline> std::cout &lt;&lt; std::endl ;</cline>
       </block>
       <block order="4">
         <choice correct="yes">
-          <cline><![CDATA[ cout << animal << "!" << endl;]]></cline>
+          <cline><![CDATA[ std::cout << animal << "!" << std::endl ;]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[ cout << animal << ! << endl; ]]></cline>
+          <cline><![CDATA[ std::cout << animal << ! << std::endl ; ]]></cline>
         </choice>
       </block>
       <block order="7">
@@ -353,10 +352,10 @@
       </block>
       <block order="4">
         <choice correct="yes">
-          <cline><![CDATA[ cout << "$" << dollarTotal << "." << centTotal;]]></cline>
+          <cline><![CDATA[ std::cout << "$" << dollarTotal << "." << centTotal;]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[ cout << "$" << dollarTotal << centTotal; ]]></cline>
+          <cline><![CDATA[ std::cout << "$" << dollarTotal << centTotal; ]]></cline>
         </choice>
       </block>
       <block order="1">
@@ -394,7 +393,7 @@
         </choice>
       </block>
       <block order="1">
-        <cline> cout &lt;&lt; prob;</cline>
+        <cline> std::cout &lt;&lt; prob;</cline>
       </block>
       <block order="2">
         <cline>}</cline>
@@ -460,14 +459,14 @@
       </block>
       <block order="8">
         <choice correct="yes">
-          <cline><![CDATA[ cout << int(final_grade);]]></cline>
+          <cline><![CDATA[ std::cout << int(final_grade);]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[ cout << int(final_grade) + 1; ]]></cline>
+          <cline><![CDATA[ std::cout << int(final_grade) + 1; ]]></cline>
         </choice>
       </block>
       <block order="1">
-        <cline><![CDATA[ cout << final_grade; ]]></cline>
+        <cline><![CDATA[ std::cout << final_grade; ]]></cline>
       </block>
       <block order="2">
         <cline>}</cline>

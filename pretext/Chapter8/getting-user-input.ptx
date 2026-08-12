@@ -29,25 +29,24 @@ cin &gt;&gt; x;</program>
     <program interactive="activecode" line-numbers="yes" label="getting_user_input_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int x;
 
     // prompt the user for input
-    cout << "Enter an integer: ";
+    std::cout << "Enter an integer: ";
 
     // get input
-    cin >> x;
+    std::cin >> x;
 
     // check and see if the input statement succeeded
-    if (cin.fail()) {
-        cout << "That was not an integer." << endl;
+    if (std::cin.fail()) {
+        std::cout << "That was not an integer." << std::endl;
         return -1;
     }
 
     // print the value we got from the user
-    cout << x << endl;
+    std::cout << x << std::endl;
     return 0;
 }
         ]]></code>
@@ -59,7 +58,7 @@ int main() {
 
 cout &lt;&lt; &quot;What is your name? &quot;;
 cin &gt;&gt; name;
-cout &lt;&lt; name &lt;&lt; endl;</program>
+cout &lt;&lt; name &lt;&lt; std::endl ;</program>
   <p>Unfortunately, this statement only takes the first word of input, and
     leaves the rest for the next input statement. So, if you run this
     program and type your full name, it will only output your first name.</p>
@@ -70,7 +69,7 @@ cout &lt;&lt; name &lt;&lt; endl;</program>
 
 cout &lt;&lt; &quot;What is your name? &quot;;
 getline(cin, name);
-cout &lt;&lt; name &lt;&lt; endl;</program>
+cout &lt;&lt; name &lt;&lt; std::endl ;</program>
   <p>The first argument to <c>getline</c> is <c>cin</c>, which is where the input is coming from. The second
     argument is the name of the <c>string</c> where you want the result to be stored.</p>
   <p><c>getline</c> reads the entire line until the user hits Return or Enter. This is useful for inputting
@@ -84,14 +83,13 @@ cout &lt;&lt; name &lt;&lt; endl;</program>
       <code><![CDATA[
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
-   string name;
+   std::string name;
 
-   cout << "What is your full name? ";
-   getline(cin, name);
-   cout << "Hello " << name << "!" << endl;
+   std::cout << "What is your full name? ";
+   std::getline(std::cin, name);
+   std::cout << "Hello " << name << "!" << std::endl;
 }
         ]]></code>
       <stdin>Indiana Jones</stdin>
@@ -144,9 +142,9 @@ int main() {
         <code><![CDATA[
 int main() {
   char name;
-  cout << "What is your name? ";
-  cin >> name;
-  cout << name << endl;
+  std::cout << "What is your name? ";
+  std::cin >> name;
+  std::cout << name << std::endl ;
 }
 ]]></code>
       </program>
@@ -190,10 +188,10 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string name;
-  cout << "What is your name? ";
-  cin >> name;
-  cout << name << endl;
+ std::string name;
+  std::cout << "What is your name? ";
+  std::cin >> name;
+  std::cout << name << std::endl ;
 }
 ]]></code>
       </program>
@@ -237,10 +235,10 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string name;
-  cout << "What is your name? ";
+ std::string name;
+  std::cout << "What is your name? ";
   getline(cin, name);
-  cout << name << endl;
+  std::cout << name << std::endl ;
 }
 ]]></code>
       </program>
@@ -284,14 +282,14 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string first_name;
-  string last_name;
-  string address;
-  cout << "What is your name? ";
-  cin >> first_name >> last_name;
-  cout << "What is your address? ";
+ std::string first_name;
+ std::string last_name;
+ std::string address;
+  std::cout << "What is your name? ";
+  std::cin >> first_name >> last_name;
+  std::cout << "What is your address? ";
   getline(cin, address);
-  cout << first_name << " " << last_name << " lives at " << address << endl;
+  std::cout << first_name << " " << last_name << " lives at " << address << std::endl ;
 }
 ]]></code>
       </program>

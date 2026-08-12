@@ -21,7 +21,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES };
 
@@ -37,7 +36,7 @@ struct Card {
 };
 
 struct Deck {
-    vector<Card> cards;
+    std::vector<Card> cards;
     Deck();
    void print() const;
 };
@@ -58,13 +57,13 @@ Card::Card(Suit s, Rank r) {
 }
 
 void Card::print() const {
-    vector&lt;string&gt; suits(4);
+    std::vector&lt;std::string&gt; suits(4);
     suits[0] = &quot;Clubs&quot;;
     suits[1] = &quot;Diamonds&quot;;
     suits[2] = &quot;Hearts&quot;;
     suits[3] = &quot;Spades&quot;;
 
-    vector&lt;string&gt; ranks(14);
+    std::vector&lt;std::string&gt; ranks(14);
     ranks[1] = &quot;Ace&quot;;
     ranks[2] = &quot;2&quot;;
    ranks[3] = &quot;3&quot;;
@@ -79,11 +78,11 @@ void Card::print() const {
     ranks[12] = &quot;Queen&quot;;
     ranks[13] = &quot;King&quot;;
 
-    cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; endl;
+    std::cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; std::endl;
 }
 
 Deck::Deck() {
-    vector&lt;Card&gt; temp (52);
+    std::vector&lt;Card&gt; temp (52);
     cards = temp;
 
     int i = 0;
@@ -140,7 +139,7 @@ struct Card {
 
 // and then later we provide the definition of Deck
 struct Deck {
-  vector&lt;Card&gt; cards;
+  std::vector&lt;Card&gt; cards;
 
   Deck();
   Deck(int n);
@@ -236,7 +235,6 @@ struct Deck {
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES };
 
@@ -253,7 +251,7 @@ struct Card {
 };
 
 struct Deck {
-    vector<Card> cards;
+    std::vector<Card> cards;
     Deck();
     void print() const;
     int find(Card card) const;
@@ -264,8 +262,8 @@ int main() {
     Card card (CLUBS, ACE);
     Card card2 (DIAMONDS, ACE);
     // Should output 0 and 13
-    cout << deck.find(card) << endl;
-    cout << deck.find(card2) << endl;
+    std::cout << deck.find(card) << std::endl;
+    std::cout << deck.find(card2) << std::endl;
 }
 
         ]]></code>
@@ -279,13 +277,13 @@ Card::Card(Suit s, Rank r) {
 }
 
 void Card::print() const {
-    vector&lt;string&gt; suits(4);
+    std::vector&lt;std::string&gt; suits(4);
     suits[0] = &quot;Clubs&quot;;
     suits[1] = &quot;Diamonds&quot;;
     suits[2] = &quot;Hearts&quot;;
     suits[3] = &quot;Spades&quot;;
 
-    vector&lt;string&gt; ranks(14);
+    std::vector&lt;std::string&gt; ranks(14);
     ranks[1] = &quot;Ace&quot;;
     ranks[2] = &quot;2&quot;;
     ranks[3] = &quot;3&quot;;
@@ -300,11 +298,11 @@ void Card::print() const {
     ranks[12] = &quot;Queen&quot;;
     ranks[13] = &quot;King&quot;;
 
-    cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; endl;
+    std::cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; std::endl;
 }
 
 Deck::Deck() {
-    vector&lt;Card&gt; temp (52);
+    std::vector&lt;Card&gt; temp (52);
     cards = temp;
 
     int i = 0;

@@ -48,7 +48,7 @@ int index = line.find('\"');
   char quote = '\"';
 
   // store the indices of the quotation marks in a vector
-  vector&lt;int&gt; quoteIndex (4);
+  std::vector&lt;int&gt; quoteIndex (4);
 
   // find the first quotation mark using the built-in find
   quoteIndex[0] = line.find(quote);
@@ -60,14 +60,14 @@ int index = line.find('\"');
 
   // break the line up into substrings
   int len1 = quoteIndex[1] - quoteIndex[0] - 1;
-  string city1 = line.substr(quoteIndex[0]+1, len1);
+ std::string city1 = line.substr(quoteIndex[0]+1, len1);
   int len2 = quoteIndex[3] - quoteIndex[2] - 1;
-  string city2 = line.substr(quoteIndex[2]+1, len2);
+ std::string city2 = line.substr(quoteIndex[2]+1, len2);
   int len3 = line.length() - quoteIndex[2] - 1;
-  string distString = line.substr(quoteIndex[3]+1, len3);
+ std::string distString = line.substr(quoteIndex[3]+1, len3);
 
   // output the extracted information
-  cout &lt;&lt; city1 &lt;&lt; "\t" &lt;&lt; city2 &lt;&lt; "\t" &lt;&lt; distString &lt;&lt; endl;
+  std::cout &lt;&lt; city1 &lt;&lt; "\t" &lt;&lt; city2 &lt;&lt; "\t" &lt;&lt; distString &lt;&lt; std::endl ;
 }</program>
   <p>Of course, just displaying the extracted information is not exactly what
     we want, but it is a good starting place.</p>

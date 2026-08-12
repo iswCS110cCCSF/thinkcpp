@@ -1,6 +1,6 @@
 <?xml version="1.0" ?><section xml:id="chapter10_vector-size">
   <title>Vector size</title>
-  <p>There are a few functions you can invoke on an <c>vector</c>. One of them is very useful, though: <c>size</c>.
+  <p>There are a few functions you can invoke on an <c> std::vector</c>. One of them is very useful, though: <c>size</c>.
     Not surprisingly, it returns the size of the Vector(the number of elements).</p>
   <p>It is a good idea to use this value as the upper bound of a loop, rather
     than a constant. That way, if the size of the vector changes, you won't
@@ -8,7 +8,7 @@
     correctly for any size vector.</p>
   <program>size_t i;
 for (i = 0; i &lt; count.size(); i++) {
-  cout &lt;&lt; count[i] &lt;&lt; endl;
+  std::cout &lt;&lt; count[i] &lt;&lt; std::endl ;
 }</program>
   <note>
     <p>On some machines, comparing an <c>int</c> to the output from <c>size</c> will generate a type error.
@@ -30,13 +30,12 @@ for (i = 0; i &lt; count.size(); i++) {
       <code><![CDATA[
 #include <iostream>
 #include <vector>
-using namespace std;
 
 int main() {
-    vector<int> count = {1,2,3,4};
+    std::vector<int> count = {1,2,3,4};
     size_t i;
     for (i = 0; i < count.size(); i++) {
-        cout << count[i] << endl;
+        std::cout << count[i] << std::endl;
     }
 }
         ]]></code>
@@ -44,7 +43,7 @@ int main() {
   </listing>
   <exercise label="vector_size_1">
     <statement>
-      <p>Let <term>nums</term> be the vector { 0, 1, 2, 3, 4 }. What is the variable type <em>of</em> <c>nums.size()</c>
+      <p>Let <term>nums</term> be the std::vector { 0, 1, 2, 3, 4 }. What is the variable type <em>of</em> <c>nums.size()</c>
         ? <fillin answer="size_t"/>
       </p>
     </statement>
@@ -64,7 +63,7 @@ int main() {
   </exercise>
   <exercise label="vector_size_2">
     <statement>
-      <p>Let <term>nums</term> be the vector { 0, 1, 2, 3, 4 }. What is the value <em>of</em> <c>nums.size()</c>
+      <p>Let <term>nums</term> be the std::vector { 0, 1, 2, 3, 4 }. What is the value <em>of</em> <c>nums.size()</c>
         ? <fillin answer="5"/>
       </p>
     </statement>
@@ -78,7 +77,7 @@ int main() {
   </exercise>
   <exercise label="vector_size_3">
     <statement>
-      <p>Let <term>nums</term> be the vector { 0, 1, 2, 3, 4 }. What is the value <em>at</em> <c>nums[nums.size()]</c>
+      <p>Let <term>nums</term> be the std::vector { 0, 1, 2, 3, 4 }. What is the value <em>at</em> <c>nums[nums.size()]</c>
         ?</p>
     </statement>
     <choices>

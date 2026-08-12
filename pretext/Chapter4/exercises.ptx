@@ -61,16 +61,16 @@ int mod = y % x;</program>
       <program>int x = 8;
 
 if (x % 3 == 2) {
-    cout &lt;&lt; "hey!" &lt;&lt; endl;
+    std::cout &lt;&lt; "hey!" &lt;&lt; std::endl ;
 }
 else if (x != 7) {
-    cout &lt;&lt; "hi!" &lt;&lt; endl;
+    std::cout &lt;&lt; "hi!" &lt;&lt; std::endl ;
 }
 else if (x % 2 == 0) {
-    cout &lt;&lt; "hello!" &lt;&lt; endl;
+    std::cout &lt;&lt; "hello!" &lt;&lt; std::endl ;
 }
 else {
-    cout &lt;&lt; "bye!" &lt;&lt; endl;
+    std::cout &lt;&lt; "bye!" &lt;&lt; std::endl ;
 }</program>
     </statement>
     <choices>
@@ -134,16 +134,16 @@ bye!
       <program>int x = 34;
 
 if (32 &lt; x) {
-    cout &lt;&lt; "It's Freezing!";
+    std::cout &lt;&lt; "It's Freezing!";
 }
 if (x &lt; 40) {
-    cout &lt;&lt; "It's Cold!";
+    std::cout &lt;&lt; "It's Cold!";
 }
 if (x &gt; 65) {
-    cout &lt;&lt; "It's Warm!"'
+    std::cout &lt;&lt; "It's Warm!"'
 }
 else {
-    cout &lt;&lt; "It's Hot!";
+    std::cout &lt;&lt; "It's Hot!";
 }</program>
     </statement>
     <choices>
@@ -213,7 +213,7 @@ It's Hot!
     if (a &gt; b) {
         return;
     }
-    cout &lt;&lt; a + b;
+    std::cout &lt;&lt; a + b;
 }</program>
       <p>What is printed when we run the following code?</p>
       <program>
@@ -261,22 +261,22 @@ int x = practicingReturns(2, 3);
       <program>void fortuneCookie(int a, bool b, char c) {
     if (c &lt; 'm') {
         if (a % 2 == 0) {
-            cout &lt;&lt; "An alien of some sort will be appearing to you shortly.";
+            std::cout &lt;&lt; "An alien of some sort will be appearing to you shortly.";
         }
         else {
-            cout &lt;&lt; "The fortune you seek is in another cookie.";
+            std::cout &lt;&lt; "The fortune you seek is in another cookie.";
         }
     }
     else if (c &lt; 'r') {
         if (b) {
-            cout &lt;&lt; "He who laughs at himself never runs out of things to laugh at.";
+            std::cout &lt;&lt; "He who laughs at himself never runs out of things to laugh at.";
         }
         else {
-            cout &lt;&lt; "You will be hungry again in one hour.";
+            std::cout &lt;&lt; "You will be hungry again in one hour.";
         }
     }
     else {
-        cout &lt;&lt; "Fortune not found? Abort, retry, ignore.";
+        std::cout &lt;&lt; "Fortune not found? Abort, retry, ignore.";
     }
 }</program>
       <p>What will be your fortune if you run the following code?</p>
@@ -343,22 +343,22 @@ fortuneCookie(14, false, 'm'');
       <program>void fortuneCookie(int a, bool b, char c) {
     if (c &lt; 'm') {
         if (a % 2 == 0) {
-            cout &lt;&lt; "An alien of some sort will be appearing to you shortly.";
+            std::cout &lt;&lt; "An alien of some sort will be appearing to you shortly.";
         }
         else {
-            cout &lt;&lt; "The fortune you seek is in another cookie.";
+            std::cout &lt;&lt; "The fortune you seek is in another cookie.";
         }
     }
     else if (c &lt; 'r') {
         if (b) {
-            cout &lt;&lt; "He who laughs at himself never runs out of things to laugh at.";
+            std::cout &lt;&lt; "He who laughs at himself never runs out of things to laugh at.";
         }
         else {
-            cout &lt;&lt; "You will be hungry again in one hour.";
+            std::cout &lt;&lt; "You will be hungry again in one hour.";
         }
     }
     else {
-        cout &lt;&lt; "Fortune not found? Abort, retry, ignore.";
+        std::cout &lt;&lt; "Fortune not found? Abort, retry, ignore.";
     }
 }</program>
       <p>What will be your fortune if you run the following code?</p>
@@ -425,25 +425,25 @@ fortuneCookie(22, true, 'b');
       <program>void theThing(int m, int n, bool b) {
     if (b) {
         if (m % 4 == 0) {
-            cout &lt;&lt; m;
+            std::cout &lt;&lt; m;
             return;
         }
         if ((m + n) &gt; 10) {
-            cout &lt;&lt; m + n;
+            std::cout &lt;&lt; m + n;
             return;
         }
     }
     else if ((m &gt; n) == b) {
-        cout &lt;&lt; m - n;
+        std::cout &lt;&lt; m - n;
         return;
     }
     else {
         if (n % 3 == 0) {
-            cout &lt;&lt; n;
+            std::cout &lt;&lt; n;
             return;
         }
     }
-    cout &lt;&lt; -1;
+    std::cout &lt;&lt; -1;
 }</program>
       <p>What is printed when we run the following code?</p>
       <program>
@@ -499,25 +499,25 @@ theThing(5, 10, false);
       <program>void theThing(int m, int n, bool b) {
     if (b) {
         if (m % 4 == 0) {
-            cout &lt;&lt; m;
+            std::cout &lt;&lt; m;
             return;
         }
         if ((m + n) &gt; 10) {
-            cout &lt;&lt; m + n;
+            std::cout &lt;&lt; m + n;
             return;
         }
     }
     else if ((m &gt; n) == b) {
-        cout &lt;&lt; m - n;
+        std::cout &lt;&lt; m - n;
         return;
     }
     else {
         if (n % 3 == 0) {
-            cout &lt;&lt; n;
+            std::cout &lt;&lt; n;
             return;
         }
     }
-    cout &lt;&lt; -1;
+    std::cout &lt;&lt; -1;
 }</program>
       <p>What is printed when we run the following code?</p>
       <program>
@@ -562,7 +562,7 @@ theThing(6, 4, true);
           <p>-1</p>
         </statement>
         <feedback><p>
-          None of the conditions were met, so we reach the default cout -1.
+          None of the conditions were met, so we reach the default std::cout -1.
         </p></feedback>
       </choice>
     </choices>
@@ -573,11 +573,11 @@ theThing(6, 4, true);
       <program>void moo(int m, int n) {
     if (m != n) {
         m += 2;
-        cout &lt;&lt; "Moo!";
+        std::cout &lt;&lt; "Moo!";
         moo(m, n);
     }
     else {
-        cout &lt;&lt; "Got Milk?";
+        std::cout &lt;&lt; "Got Milk?";
     }
 }</program>
       <p>How many times does <q>Moo!</q> print when we run the following?</p>
@@ -636,11 +636,11 @@ moo(4, 8);
       <program>void moo(int m, int n) {
     if (m != n) {
         m += 2;
-        cout &lt;&lt; "Moo!";
+        std::cout &lt;&lt; "Moo!";
         moo(m, n);
     }
     else {
-        cout &lt;&lt; "Got Milk?";
+        std::cout &lt;&lt; "Got Milk?";
     }
 }</program>
       <p>How many times does <q>Moo!</q> print when we run the following?</p>

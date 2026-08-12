@@ -13,11 +13,11 @@
           <code><![CDATA[
 struct Student {
      int id, year;
-     string name;
+    std::string name;
 };
 
 void printStudent(const Student& stu) {
-     cout << stu.id << ":" << stu.year << ":" << stu.name << endl;
+     std::cout << stu.id << ":" << stu.year << ":" << stu.name << std::endl ;
 }
 
 int main( ) {
@@ -56,7 +56,7 @@ int main( ) {
         <cline>Student stu = *this;</cline>
       </block>
       <block order="8">
-        <cline><![CDATA[cout << stu.id << ":" << stu.year << ":" << stu.name << endl;]]></cline>
+        <cline><![CDATA[cout << stu.id << ":" << stu.year << ":" << stu.name << std::endl ;]]></cline>
         <cline>}</cline>
       </block>
       <block order="10">
@@ -94,7 +94,7 @@ int main( ) {
         <cline>string Album {  </cline>
       </block>
       <block order="3">
-        <cline>   string name;</cline>
+        <cline>  std::string name;</cline>
       </block>
       <block order="4">
         <cline>   int year;</cline>

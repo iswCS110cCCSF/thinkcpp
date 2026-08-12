@@ -27,7 +27,7 @@
         with n = 4?</p>
       <program>void nLines(int n) {
   if (n &gt; 0) {
-    cout &lt;&lt; endl;
+    std::cout &lt;&lt; std::endl ;
     nLines(n + 1);
   }
 }</program>

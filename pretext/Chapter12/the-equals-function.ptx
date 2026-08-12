@@ -17,7 +17,7 @@
 Card card2 (1, 11);
 
 if (card1.equals(card2)) {
-  cout &lt;&lt; &quot;Yup, that's the same card.&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;Yup, that's the same card.&quot; &lt;&lt; std::endl ;
 }</program>
   <p>This method of invocation always seems strange to me when the function is something like <c>equals</c>,
     in which the two arguments are symmetric. What I mean by symmetric is that it does not matter
@@ -30,7 +30,7 @@ if (card1.equals(card2)) {
   <p>When we call this version of the function, the arguments appear
     side-by-side in a way that makes more logical sense, to me at least.</p>
   <program>if (equals(card1, card2)) {
-  cout &lt;&lt; &quot;Yup, that's the same card.&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;Yup, that's the same card.&quot; &lt;&lt; std::endl ;
 }</program>
   <p>Of course, this is a matter of taste. My point here is that you should
     be comfortable writing both member and nonmember functions, so that you
@@ -44,7 +44,6 @@ if (card1.equals(card2)) {
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 struct Card {
     int suit, rank;
@@ -77,22 +76,22 @@ Card::Card(int s, int r) {
 bool Card::equals(const Card&amp; c2) const {
   bool boolean = (rank == c2.rank &amp;&amp; suit == c2.suit);
   if (boolean == true) {
-    cout &lt;&lt; &quot;Yup, that's the same card.&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Yup, that's the same card.&quot; &lt;&lt; std::endl;
   }
   else {
-    cout &lt;&lt; &quot;Nope, those cards are different.&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;Nope, those cards are different.&quot; &lt;&lt; std::endl;
   }
   return boolean;
 }
 
 void Card::print() const {
-  vector&lt;string&gt; suits(4);
+  std::vector&lt;std::string&gt; suits(4);
   suits[0] = &quot;Clubs&quot;;
   suits[1] = &quot;Diamonds&quot;;
   suits[2] = &quot;Hearts&quot;;
   suits[3] = &quot;Spades&quot;;
 
-  vector&lt;string&gt; ranks(14);
+  std::vector&lt;std::string&gt; ranks(14);
   ranks[1] = &quot;Ace&quot;;
   ranks[2] = &quot;2&quot;;
   ranks[3] = &quot;3&quot;;
@@ -107,7 +106,7 @@ void Card::print() const {
   ranks[12] = &quot;Queen&quot;;
   ranks[13] = &quot;King&quot;;
 
-   cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; endl;
+   std::cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; std::endl;
 }
 </tests>
     </program>

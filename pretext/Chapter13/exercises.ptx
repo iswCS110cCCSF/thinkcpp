@@ -12,7 +12,7 @@ MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC };
 int main() {
   Month m1 = JUL;
   Month m2 = NOV;
-  cout << m1 << " " << m2 << endl;
+  std::cout << m1 << " " << m2 << std::endl ;
 }
 ]]></code>
       </program>
@@ -58,20 +58,20 @@ int main() {
       <program line-numbers="yes">
         <code><![CDATA[
 int main() {
-  string s = "summer";
+ std::string s = "summer";
   switch (s) {
     case "spring":
-      cout << "It's spring!";
+      std::cout << "It's spring!";
       break;
     case "summer":
-      cout << "It's summer!";
+      std::cout << "It's summer!";
     case "fall":
-      cout << "It's fall!";
+      std::cout << "It's fall!";
       break;
     case "winter":
-      cout << "It's winter!";
+      std::cout << "It's winter!";
     default:
-      cout << "Invalid season!";
+      std::cout << "Invalid season!";
       break;
   }
 }
@@ -124,17 +124,17 @@ int main() {
   Season s = SUMMER;
   switch (s) {
     case SPRING:
-      cout << "It's spring!";
+      std::cout << "It's spring!";
       break;
     case SUMMER:
-      cout << "It's summer!";
+      std::cout << "It's summer!";
     case FALL:
-      cout << "It's fall!";
+      std::cout << "It's fall!";
       break;
     case WINTER:
-      cout << "It's winter!";
+      std::cout << "It's winter!";
     default:
-      cout << "Invalid season!";
+      std::cout << "Invalid season!";
       break;
   }
 }
@@ -181,11 +181,11 @@ int main() {
   <exercise label="mce_13_4">
     <statement>
       <p>Take a look at the <c>struct</c> definition of <c>Entry</c>. If we wanted to make a <c>struct</c> called <c>Dictionary</c>,
-        how can we create a <c>vector</c> of <c>Entry</c>s as a member variable?</p>
+        how can we create a <c> std::vector</c> of <c>Entry</c>s as a member variable?</p>
       <program line-numbers="yes">
         <code>
 struct Entry {
-  string word;
+ std::string word;
   int page;
 }
 </code>
@@ -195,11 +195,11 @@ struct Entry {
       <choice correct="yes">
         <statement>
           <p>
-            <c><![CDATA[vector<Entry> entries;]]></c>
+            <c><![CDATA[ std::vector<Entry> entries;]]></c>
           </p>
         </statement>
         <feedback><p>
-          We create a <c>vector</c> with type <c>Entry</c>.
+          We create a <c> std::vector</c> with type <c>Entry</c>.
         </p></feedback>
       </choice>
       <choice>
@@ -215,19 +215,19 @@ struct Entry {
       <choice>
         <statement>
           <p>
-            <c><![CDATA[vector<Dictionary> Entry]]></c>
+            <c><![CDATA[ std::vector<Dictionary> Entry]]></c>
           </p>
         </statement>
         <feedback><p>
-          This creates a <c>vector</c> of <c>Dictionary</c>s called <c>Entry</c>.
+          This creates a <c> std::vector</c> of <c>Dictionary</c>s called <c>Entry</c>.
         </p></feedback>
       </choice>
       <choice>
         <statement>
-          <p>We can't make an object that contains a <c>vector</c>.</p>
+          <p>We can't make an object that contains a <c> std::vector</c>.</p>
         </statement>
         <feedback><p>
-          We can have <c>vector</c>s inside objects.
+          We can have <c> std::vector</c>s inside objects.
         </p></feedback>
       </choice>
     </choices>
@@ -249,7 +249,7 @@ struct Card {
 };
 
 struct Deck {
-  vector<Card> cards;
+  std::vector<Card> cards;
 
   Deck();
   Deck(int n);
@@ -262,10 +262,10 @@ struct Deck {
     <choices>
       <choice>
         <statement>
-          <p>We can't have a <c>vector</c> in <c>Deck</c>.</p>
+          <p>We can't have a <c> std::vector</c> in <c>Deck</c>.</p>
         </statement>
         <feedback><p>
-          We are allowed to have <c>vector</c>s in objects.
+          We are allowed to have <c> std::vector</c>s in objects.
         </p></feedback>
       </choice>
       <choice correct="yes">

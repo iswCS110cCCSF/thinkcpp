@@ -10,7 +10,7 @@
 };
 
 void printTime(const Time&amp; time) {
-  cout &lt;&lt; time.hour &lt;&lt; &quot;:&quot; &lt;&lt; time.minute &lt;&lt; &quot;:&quot; &lt;&lt; time.second &lt;&lt; endl;
+  std::cout &lt;&lt; time.hour &lt;&lt; &quot;:&quot; &lt;&lt; time.minute &lt;&lt; &quot;:&quot; &lt;&lt; time.second &lt;&lt; std::endl ;
 }</program>
   <p>To call this function, we had to pass a <c>Time</c> object as a parameter.</p>
   <program>Time currentTime = { 9, 14, 30.0 };
@@ -31,7 +31,7 @@ printTime(currentTime);</program>
     following function, we use it to assign the value of <c>this</c> to a local variable named <c>time</c>.</p>
   <program>void Time::print() {
   Time time = *this;
-  cout &lt;&lt; time.hour &lt;&lt; &quot;:&quot; &lt;&lt; time.minute &lt;&lt; &quot;:&quot; &lt;&lt; time.second &lt;&lt; endl;
+  std::cout &lt;&lt; time.hour &lt;&lt; &quot;:&quot; &lt;&lt; time.minute &lt;&lt; &quot;:&quot; &lt;&lt; time.second &lt;&lt; std::endl ;
 }</program>
   <p>The first two lines of this function changed quite a bit as we
     transformed it into a member function, but notice that the output
@@ -68,7 +68,6 @@ currentTime.print();</program>
     <program interactive="activecode" line-numbers="yes" label="print_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -85,7 +84,7 @@ int main() {
         ]]></code>
       <tests>
 void Time::print() {
-  cout &lt;&lt; hour &lt;&lt; &quot;:&quot; &lt;&lt; minute &lt;&lt; &quot;:&quot; &lt;&lt; second &lt;&lt; endl;
+  std::cout &lt;&lt; hour &lt;&lt; &quot;:&quot; &lt;&lt; minute &lt;&lt; &quot;:&quot; &lt;&lt; second &lt;&lt; std::endl;
 }
 </tests>
     </program>
@@ -184,7 +183,7 @@ void Time::print() {
         </choice>
       </block>
       <block order="1">
-        <cline><![CDATA[ cout << "RUFF!" << endl;]]></cline>
+        <cline><![CDATA[ std::cout << "RUFF!" << std::endl ;]]></cline>
         <cline>}</cline>
       </block>
       <block order="12">

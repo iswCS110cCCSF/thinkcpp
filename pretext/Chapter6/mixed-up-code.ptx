@@ -39,7 +39,7 @@
         </choice>
       </block>
       <block order="12">
-        <cline><![CDATA[      cout << n << endl;]]></cline>
+        <cline><![CDATA[      std::cout << n << std::endl ;]]></cline>
       </block>
       <block order="3">
         <cline>      n = n + 2;</cline>
@@ -92,7 +92,7 @@
         <cline>   while (n &gt; 0) { </cline>
       </block>
       <block order="10">
-        <cline><![CDATA[      cout << n << endl;]]></cline>
+        <cline><![CDATA[      std::cout << n << std::endl ;]]></cline>
       </block>
       <block order="5">
         <cline>      n -= 10;</cline>
@@ -149,7 +149,7 @@
       </block>
       <block order="6"
              correct="no">
-        <cline><![CDATA[      cout << n << endl;  ]]></cline>
+        <cline><![CDATA[      std::cout << n << std::endl ;  ]]></cline>
       </block>
       <block order="1">
         <cline>      sum = sum + n;</cline>
@@ -199,7 +199,7 @@
         </choice>
       </block>
       <block order="7">
-        <cline><![CDATA[      cout << "hello" << endl;]]></cline>
+        <cline><![CDATA[      std::cout << "hello" << std::endl ;]]></cline>
       </block>
       <block order="3">
         <choice correct="yes">
@@ -247,10 +247,10 @@
       </block>
       <block order="7">
         <choice correct="yes">
-          <cline><![CDATA[      cout << input << endl;]]></cline>
+          <cline><![CDATA[      std::cout << input << std::endl ;]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[      cout << string << endl;                  ]]></cline>
+          <cline><![CDATA[      std::cout << string << std::endl ;                  ]]></cline>
         </choice>
       </block>
       <block order="3">
@@ -297,7 +297,7 @@
         </choice>
       </block>
       <block order="9">
-        <cline><![CDATA[      cout << input << endl;]]></cline>
+        <cline><![CDATA[      std::cout << input << std::endl ;]]></cline>
       </block>
       <block order="2">
         <choice correct="yes">
@@ -349,7 +349,7 @@
         </choice>
       </block>
       <block order="4">
-        <cline><![CDATA[      cout << n << " ";]]></cline>
+        <cline><![CDATA[      std::cout << n << " ";]]></cline>
       </block>
       <block order="9">
         <choice correct="yes">
@@ -362,7 +362,7 @@
         </choice>
       </block>
       <block order="5">
-        <cline><![CDATA[   cout << "Happy New Year!" << endl;]]></cline>
+        <cline><![CDATA[   std::cout << "Happy New Year!" << std::endl ;]]></cline>
         <cline>}</cline>
       </block>
     </blocks>
@@ -400,7 +400,7 @@
         </choice>
       </block>
       <block order="5">
-        <cline><![CDATA[      cout << "More power!" << endl;]]></cline>
+        <cline><![CDATA[      std::cout << "More power!" << std::endl ;]]></cline>
       </block>
       <block order="12">
         <choice correct="yes">
@@ -422,7 +422,7 @@
         <cline><![CDATA[   if (powerLevel < 9000) {  ]]></cline>
       </block>
       <block order="1">
-        <cline><![CDATA[   cout << "It's over 9000!" << endl;]]></cline>
+        <cline><![CDATA[   std::cout << "It's over 9000!" << std::endl ;]]></cline>
         <cline>}</cline>
       </block>
     </blocks>

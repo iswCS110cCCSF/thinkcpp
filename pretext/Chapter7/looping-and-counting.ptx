@@ -8,10 +8,9 @@
     <program interactive="activecode" line-numbers="yes" label="looping_and_counting_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
-    string fruit = "banana";
+    std::string fruit = "banana";
     size_t count = 0;
 
     size_t index = 0;
@@ -21,7 +20,7 @@ int main() {
         }
         index = index + 1;
     }
-    cout << count << endl;
+    std::cout << count << std::endl;
 }
         ]]></code>
     </program>
@@ -39,7 +38,7 @@ int main() {
 int x = -5;
 while (x < 0) {
   x = x + 1;
-  cout << x << " ";
+  std::cout << x << " ";
 }
 ]]></code>
       </program>
@@ -138,7 +137,7 @@ while (x < 0) {
         <cline>while (x &lt; 10) { </cline>
       </block>
       <block order="2">
-        <cline> <![CDATA[cout << x << endl;]]></cline>
+        <cline> <![CDATA[cout << x << std::endl ;]]></cline>
       </block>
       <block order="6">
         <cline> x = x + 2;</cline>

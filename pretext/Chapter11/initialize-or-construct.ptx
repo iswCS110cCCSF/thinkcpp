@@ -43,7 +43,6 @@ Time currentTime(9, 14, 30.0);
              line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -55,9 +54,9 @@ struct Time {
 
 int main() {
     Time marathon(9000);
-    cout << "My marathon time is "; marathon.print(); cout << "." << endl;
+    std::cout << "My marathon time is "; marathon.print(); std::cout << "." << std::endl;
     Time race(7, 30, 0.0);
-    cout << "My next race is at "; race.print(); cout << "." << endl;
+    std::cout << "My next race is at "; race.print(); std::cout << "." << std::endl;
 }
 
         ]]></code>
@@ -76,7 +75,7 @@ Time::Time(int h, int m, double s) {
 }
 
 void Time::print() {
-  cout &lt;&lt; hour &lt;&lt; ":" &lt;&lt; minute &lt;&lt; ":" &lt;&lt; second;
+  std::cout &lt;&lt; hour &lt;&lt; ":" &lt;&lt; minute &lt;&lt; ":" &lt;&lt; second;
 }
 </tests>
     </program>

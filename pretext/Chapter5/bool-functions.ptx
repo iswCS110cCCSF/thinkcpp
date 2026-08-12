@@ -21,22 +21,21 @@
   return (x &gt;= 0 &amp;&amp; x &lt; 10);
 }</program>
   <p>In main you can call this function in the usual ways:</p>
-  <program>cout &lt;&lt; isSingleDigit(2) &lt;&lt; endl;
+  <program>cout &lt;&lt; isSingleDigit(2) &lt;&lt; std::endl ;
 bool bigFlag = !isSingleDigit(17);</program>
   <program interactive="activecode" line-numbers="yes" label="bool_fun_AC_1">
     <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
  bool isSingleDigit(int x) {
    return (x >= 0 && x < 10);
  }
 
   int main() {
-    cout << isSingleDigit(2) << endl;
+    std::cout << isSingleDigit(2) << std::endl;
     bool bigFlag = !isSingleDigit(17);
-    cout << bigFlag;
+    std::cout << bigFlag;
     return 0;
   }
         ]]></code>
@@ -48,14 +47,14 @@ using namespace std;
     number.</p>
   <p>The most common use of bool functions is inside conditional statements</p>
   <program>if (isSingleDigit(x)) {
-  cout &lt;&lt; &quot;x is little&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;x is little&quot; &lt;&lt; std::endl ;
 }
 else {
-  cout &lt;&lt; &quot;x is big&quot; &lt;&lt; endl;
+  std::cout &lt;&lt; &quot;x is big&quot; &lt;&lt; std::endl ;
 }</program>
   <exercise label="bool_fun_1">
     <statement>
-      <p>Match the conditional statement to its output, assuming it is outputted using cout and x =
+      <p>Match the conditional statement to its output, assuming it is outputted using std::cout and x =
         3.</p>
     </statement>
     <feedback><p>
@@ -100,25 +99,25 @@ else {
         <cline>if (evenFlag || positiveFlag) {  </cline>
       </block>
       <block order="9">
-        <cline> cout &lt;&lt; &quot;both&quot;;</cline>
+        <cline> std::cout &lt;&lt; &quot;both&quot;;</cline>
       </block>
       <block order="6">
         <cline>} else if (evenFlag) {</cline>
       </block>
       <block order="4">
-        <cline> cout &lt;&lt; &quot;even&quot;;</cline>
+        <cline> std::cout &lt;&lt; &quot;even&quot;;</cline>
       </block>
       <block order="13">
         <cline>} else if (positiveFlag) {</cline>
       </block>
       <block order="7">
-        <cline><![CDATA[ cout << "positive";]]></cline>
+        <cline><![CDATA[ std::cout << "positive";]]></cline>
       </block>
       <block order="12">
         <cline>} else {</cline>
       </block>
       <block order="8">
-        <cline> cout &lt;&lt; &quot;neither&quot;;</cline>
+        <cline> std::cout &lt;&lt; &quot;neither&quot;;</cline>
       </block>
       <block order="5">
         <cline>}</cline>

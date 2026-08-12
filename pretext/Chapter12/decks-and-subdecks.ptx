@@ -2,7 +2,7 @@
 <section xml:id="chapter12_decks-and-subdecks">
   <title>Decks and subdecks</title>
   <p>Looking at the interface to <c>findBisect</c></p>
-  <program>int findBisect(const Card&amp; card, const vector&lt;Card&gt;&amp; deck,
+  <program>int findBisect(const Card&amp; card, const std::vector&lt;Card&gt;&amp; deck,
         int low, int high) {</program>
   <p>it might make sense to treat three of the parameters, <c>deck</c>, <c>low</c> and <c>high</c>, as a single
     parameter that specifies a <em>subdeck</em>.</p>

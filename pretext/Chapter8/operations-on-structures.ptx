@@ -24,7 +24,7 @@ blank = (Point) { 3.0, 4.0 };</program>
   <p>It is legal to assign one structure to another. For example:</p>
   <program>Point p1 = { 3.0, 4.0 };
 Point p2 = p1;
-cout &lt;&lt; p2.x &lt;&lt; ", " &lt;&lt;  p2.y &lt;&lt; endl;</program>
+cout &lt;&lt; p2.x &lt;&lt; ", " &lt;&lt;  p2.y &lt;&lt; std::endl ;</program>
   <p>The output of this program is <c>3, 4</c>.</p>
   <exercise label="operations_structures_1">
     <statement>

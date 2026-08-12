@@ -61,7 +61,7 @@
   </p>
   <p>Steps 3 and 4 look suspiciously like recursive invocations. Here's what
     this all looks like translated into C++:</p>
-  <program>int findBisect(const Card&amp; card, const vector&lt;Card&gt;&amp; deck,
+  <program>int findBisect(const Card&amp; card, const std::vector&lt;Card&gt;&amp; deck,
                 int low, int high) {
   int mid = (high + low) / 2;
 
@@ -85,10 +85,10 @@
     deck, of course, but what I mean is that there are no cards in the segment of the deck indicated
     by <c>low</c> and <c>high</c>.</p>
   <p>With that line added, the function works correctly:</p>
-  <program>int findBisect(const Card&amp; card, const vector&lt;Card&gt;&amp; deck,
+  <program>int findBisect(const Card&amp; card, const std::vector&lt;Card&gt;&amp; deck,
                 int low, int high) {
 
-  cout &lt;&lt; low &lt;&lt; &quot;, &quot; &lt;&lt; high &lt;&lt; endl;
+  std::cout &lt;&lt; low &lt;&lt; &quot;, &quot; &lt;&lt; high &lt;&lt; std::endl ;
 
   if (high &lt; low) return -1;
 
@@ -143,7 +143,6 @@ I found the card at index = -1</output>
 #include <iostream>
 #include <string>
 #include <vector>
-using namespace std;
 
 struct Card {
     int suit, rank;
@@ -154,21 +153,21 @@ struct Card {
     bool isGreater(const Card& c2) const;
 };
 
-vector<Card> buildDeck();
+std::vector<Card> buildDeck();
 
 bool equals(const Card& c1, const Card& c2) {
     return (c1.rank == c2.rank && c1.suit == c2.suit);
 }
 
-void printDeck(const vector<Card>& deck);
-int find(const Card& card, const vector<Card>& deck);
-int findBisect(const Card& card, const vector<Card>& deck, int low, int high);
+void printDeck(const std::vector<Card>& deck);
+int find(const Card& card, const std::vector<Card>& deck);
+int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high);
 
 int main() {
-    vector<Card> deck = buildDeck();
+    std::vector<Card> deck = buildDeck();
     Card card (3, 6);
-    // We need to sort from the first card (0) to the last card (size-1)
-    cout << findBisect(card, deck, 0, deck.size() - 1);
+    // We need to std::sort from the first card (0) to the last card (size-1)
+    std::cout << findBisect(card, deck, 0, deck.size() - 1);
 }
 
         ]]></code>
@@ -183,13 +182,13 @@ Card::Card(int s, int r) {
 }
 
 void Card::print() const {
-   vector&lt;string&gt; suits(4);
+   std::vector&lt;std::string&gt; suits(4);
    suits[0] = &quot;Clubs&quot;;
    suits[1] = &quot;Diamonds&quot;;
    suits[2] = &quot;Hearts&quot;;
    suits[3] = &quot;Spades&quot;;
 
-   vector&lt;string&gt; ranks(14);
+   std::vector&lt;std::string&gt; ranks(14);
    ranks[1] = &quot;Ace&quot;;
    ranks[2] = &quot;2&quot;;
    ranks[3] = &quot;3&quot;;
@@ -204,11 +203,11 @@ void Card::print() const {
    ranks[12] = &quot;Queen&quot;;
    ranks[13] = &quot;King&quot;;
 
-   cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; endl;
+   std::cout &lt;&lt; ranks[rank] &lt;&lt; &quot; of &quot; &lt;&lt; suits[suit] &lt;&lt; std::endl;
  }
 
-vector&lt;Card&gt; buildDeck() {
-   vector&lt;Card&gt; deck(52);
+std::vector&lt;Card&gt; buildDeck() {
+   std::vector&lt;Card&gt; deck(52);
    int i = 0;
    for (int suit = 0; suit &lt;= 3; suit++) {
       for (int rank = 1; rank &lt;= 13; rank++) {
@@ -220,22 +219,22 @@ vector&lt;Card&gt; buildDeck() {
    return deck;
 }
 
- void printDeck(const vector&lt;Card&gt;&amp; deck) {
+ void printDeck(const std::vector&lt;Card&gt;&amp; deck) {
    for (size_t i = 0; i &lt; deck.size(); i++) {
      deck[i].print();
    }
  }
 
-int find(const Card&amp; card, const vector&lt;Card&gt;&amp; deck) {
+int find(const Card&amp; card, const std::vector&lt;Card&gt;&amp; deck) {
    for (size_t i = 0; i &lt; deck.size(); i++) {
     if (equals(deck[i], card)) return i;
    }
    return -1;
 }
 
-int findBisect(const Card&amp; card, const vector&lt;Card&gt;&amp; deck, int low, int high) {
+int findBisect(const Card&amp; card, const std::vector&lt;Card&gt;&amp; deck, int low, int high) {
 
-   cout &lt;&lt; low &lt;&lt; &quot;, &quot; &lt;&lt; high &lt;&lt; endl;
+   std::cout &lt;&lt; low &lt;&lt; &quot;, &quot; &lt;&lt; high &lt;&lt; std::endl;
 
    if (high &lt; low) return -1;
 

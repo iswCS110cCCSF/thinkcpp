@@ -8,7 +8,6 @@
     <program interactive="activecode" label="cp_14_AC_1q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 // Turn the struct definition of Room into a class definition.
 struct Room {
@@ -31,7 +30,6 @@ struct Room {
     <program xml:id="cp_14_AC_1a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 class Room {
 private:
@@ -61,7 +59,6 @@ public:
     <program interactive="activecode" label="cp_14_AC_2q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 class Room {
 private:
@@ -86,9 +83,9 @@ int main() {
     r.length = 12;
     r.width = 14;
     r.height = 10;
-    cout &lt;&lt; &quot;The room with dimensions &quot; &lt;&lt; r.length &quot;, &quot; &lt;&lt; r.width
+    std::cout &lt;&lt; &quot;The room with dimensions &quot; &lt;&lt; r.length &quot;, &quot; &lt;&lt; r.width
         &lt;&lt; &quot;, and &quot; &lt;&lt; r.height &lt;&lt; &quot; has an area of &quot; &lt;&lt; r.calculateArea()
-        &lt;&lt; &quot; and a volume of &quot; &lt;&lt; r.calculateVolume &lt;&lt; endl;
+        &lt;&lt; &quot; and a volume of &quot; &lt;&lt; r.calculateVolume &lt;&lt; std::endl;
 }
         </code>
     </program></statement>
@@ -166,9 +163,9 @@ int main() {
             <cline> r.setHeight(10);</cline>
           </block>
           <block order="10">
-            <cline> cout &lt;&lt; &quot;The room with dimensions &quot; &lt;&lt; r.getLength() &lt;&lt; &quot;, &quot; &lt;&lt; r.getWidth()</cline>
+            <cline> std::cout &lt;&lt; &quot;The room with dimensions &quot; &lt;&lt; r.getLength() &lt;&lt; &quot;, &quot; &lt;&lt; r.getWidth()</cline>
             <cline>  &lt;&lt; &quot;, and &quot; &lt;&lt; r.getHeight() &lt;&lt; &quot; has an area of &quot; &lt;&lt; r.calculateArea()</cline>
-            <cline>  &lt;&lt; &quot; and a volume of &quot; &lt;&lt; r.calculateVolume() &lt;&lt; endl;</cline>
+            <cline>  &lt;&lt; &quot; and a volume of &quot; &lt;&lt; r.calculateVolume() &lt;&lt; std::endl ;</cline>
           </block>
           <block order="7">
             <cline>}</cline>
@@ -187,7 +184,6 @@ int main() {
     <program interactive="activecode" label="cp_14_AC_3q">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 class Temp {
 private:
@@ -207,10 +203,10 @@ public:
     void setCelsius (double c) { celsius = c; is_celsius = true; is_fahrenheit = false; }
     void printTemp () {
         if (is_fahrenheit) {
-            cout &lt;&lt; &quot;It is &quot; &lt;&lt; getFahrenheit() &lt;&lt; &quot; degrees Fahrenheit&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;It is &quot; &lt;&lt; getFahrenheit() &lt;&lt; &quot; degrees Fahrenheit&quot; &lt;&lt; std::endl;
         }
         else {
-            cout &lt;&lt; &quot;It is &quot; &lt;&lt; getCelsius() &lt;&lt; &quot; degrees Celsius&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;It is &quot; &lt;&lt; getCelsius() &lt;&lt; &quot; degrees Celsius&quot; &lt;&lt; std::endl;
         }
     }
 };
@@ -221,7 +217,6 @@ public:
     <program xml:id="cp_14_AC_3a">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 class Temp {
 private:
@@ -251,10 +246,10 @@ public:
     void setCelsius (double c) { celsius = c; is_celsius = true; is_fahrenheit = false; }
     void printTemp () {
         if (is_fahrenheit) {
-            cout &lt;&lt; &quot;It is &quot; &lt;&lt; getFahrenheit() &lt;&lt; &quot; degrees Fahrenheit&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;It is &quot; &lt;&lt; getFahrenheit() &lt;&lt; &quot; degrees Fahrenheit&quot; &lt;&lt; std::endl;
         }
         else {
-            cout &lt;&lt; &quot;It is &quot; &lt;&lt; getCelsius() &lt;&lt; &quot; degrees Celsius&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;It is &quot; &lt;&lt; getCelsius() &lt;&lt; &quot; degrees Celsius&quot; &lt;&lt; std::endl;
         }
     }
 };
@@ -271,7 +266,6 @@ public:
     <program interactive="activecode" label="cp_14_AC_4q_editor">
         <code>
 #include &lt;iostream&gt;
-using namespace std;
 
 class Temp {
 private:
@@ -301,10 +295,10 @@ public:
     void setCelsius (double c) { celsius = c; is_celsius = true; is_fahrenheit = false; }
     void printTemp () {
         if (is_fahrenheit) {
-            cout &lt;&lt; &quot;It is &quot; &lt;&lt; getFahrenheit() &lt;&lt; &quot; degrees Fahrenheit&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;It is &quot; &lt;&lt; getFahrenheit() &lt;&lt; &quot; degrees Fahrenheit&quot; &lt;&lt; std::endl;
         }
         else {
-            cout &lt;&lt; &quot;It is &quot; &lt;&lt; getCelsius() &lt;&lt; &quot; degrees Celsius&quot; &lt;&lt; endl;
+            std::cout &lt;&lt; &quot;It is &quot; &lt;&lt; getCelsius() &lt;&lt; &quot; degrees Celsius&quot; &lt;&lt; std::endl;
         }
     }
 };
@@ -346,17 +340,16 @@ int main() {
 
   <exercise label="cp_14_5">
     <statement>
-      <p>We took a look at <c>vector</c>s in chapter 10, where we saw how we could add data to the end of
-        a <c>vector</c> and remove data from the end of a <c>vector</c>. But what if we wanted to add and remove
-        things at the beginning of a <c>vector</c>? Or we wanted to print out a <c>vector</c> without painfully
+      <p>We took a look at <c> std::vector</c>s in chapter 10, where we saw how we could add data to the end of
+        a <c> std::vector</c> and remove data from the end of a <c> std::vector</c>. But what if we wanted to add and remove
+        things at the beginning of a <c> std::vector</c>? Or we wanted to print out a <c> std::vector</c> without painfully
         constructing a loop every time? We can create our own <c>MyVector</c> class! Write the <c>MyVector</c>
-        class, which has a <c>vector</c> of <c>int</c>s as a private member variable. Also write the default
+        class, which has a <c> std::vector</c> of <c>int</c>s as a private member variable. Also write the default
         constructor.</p>
     <program interactive="activecode" label="cp_14_AC_5q">
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 // Write the class definition for MyVector here.
         </code>
@@ -367,11 +360,10 @@ using namespace std;
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 class MyVector {
 private:
-    vector&lt;int&gt; elements;
+    std::vector&lt;int&gt; elements;
 
 public:
     MyVector() {};
@@ -383,18 +375,17 @@ public:
 
   <exercise label="cp_14_6_q">
     <statement>
-      <p>What if we had an existing <c>vector</c> with data that we want to copy into our <c>MyVector</c>? Write a
-        constructor that takes a <c>vector</c> and copies the data into the <c>elements</c> vector. Check the hint below for help with the construction of the code.</p>
+      <p>What if we had an existing <c> std::vector</c> with data that we want to copy into our <c>MyVector</c>? Write a
+        constructor that takes a <c> std::vector</c> and copies the data into the <c>elements</c> vector. Check the hint below for help with the construction of the code.</p>
 
     <program interactive="activecode" label="cp_14_AC_6q_editor">
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 class MyVector {
 private:
-    vector&lt;int&gt; elements;
+    std::vector&lt;int&gt; elements;
 
 public:
     MyVector() {};
@@ -405,13 +396,13 @@ public:
     <hint>
       <activity label="cp_14_AC_6q_pp">
         <statement>
-          <p>What if we had an existing <c>vector</c> with data that we want to copy into our <c>MyVector</c>?
-            Write a constructor that takes a <c>vector</c> and copies the data into the <c>elements</c> vector.
+          <p>What if we had an existing <c> std::vector</c> with data that we want to copy into our <c>MyVector</c>?
+            Write a constructor that takes a <c> std::vector</c> and copies the data into the <c>elements</c> vector.
             Use the lines to construct the code, then go back to complete the Activecode.</p>
         </statement>
         <blocks>
           <block order="1">
-            <cline>MyVector (vector&lt;int&gt; vec) {</cline>
+            <cline>MyVector (std::vector&lt;int&gt; vec) {</cline>
           </block>
           <block order="2">
             <cline>   elements = vec;</cline>
@@ -428,25 +419,24 @@ public:
     <statement>
       <p>The reason why we have <c>elements</c> as a private member variable is that people using our <c>MyVector</c>
         class don’t need to know how we implemented our class, so we can implement it however
-        we want. This means for functions <c>MyVector</c> has that overlap with functions that <c>vector</c> has,
+        we want. This means for functions <c>MyVector</c> has that overlap with functions that <c> std::vector</c> has,
         we can just call the same function on our <c>elements</c> vector. Write the <c>MyVector</c> functions <c>size</c>
         , <c>push_back</c>, <c>pop_back</c>, and <c>at</c>. <c>size</c> returns the size of our <c>MyVector</c>. <c>push_back</c> takes an <c>int</c>
         and adds it to the end of our <c>MyVector</c>. <c>pop_back</c> removes the last element. <c>at</c> takes an
-        index and returns the data stored at that index. Use existing <c>vector</c> functions to implement
+        index and returns the data stored at that index. Use existing <c> std::vector</c> functions to implement
         these <c>MyVector</c> functions!</p>
     <program interactive="activecode" label="cp_14_AC_7q">
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 class MyVector {
 private:
-    vector&lt;int&gt; elements;
+    std::vector&lt;int&gt; elements;
 
 public:
     MyVector() {};
-    MyVector(vector&lt;int&gt; vec);
+    MyVector(std::vector&lt;int&gt; vec);
 
     // Write the size function here.
 
@@ -458,39 +448,38 @@ public:
 };
 
 int main() {
-    vector&lt;int&gt; data = { 2, 4, 1, 5, 2, 6 };
+    std::vector&lt;int&gt; data = { 2, 4, 1, 5, 2, 6 };
     MyVector myVec(data);
-    cout &lt;&lt; &quot;The first element is &quot; &lt;&lt; myVec.at(0) &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;The first element is &quot; &lt;&lt; myVec.at(0) &lt;&lt; std::endl;
     myVec.pop_back();
     myVec.pop_back();
     myVec.push_back(12);
-    cout &lt;&lt; &quot;The size of myVec is &quot; &lt;&lt; myVec.size() &lt;&lt; endl;
-    cout &lt;&lt; &quot;The last three elements are &quot; &lt;&lt; myVec.at(2) &lt;&lt; &quot;, &quot;
-         &lt;&lt; myVec.at(3) &lt;&lt; &quot;, and &quot; &lt;&lt; myVec.at(4) &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;The size of myVec is &quot; &lt;&lt; myVec.size() &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;The last three elements are &quot; &lt;&lt; myVec.at(2) &lt;&lt; &quot;, &quot;
+         &lt;&lt; myVec.at(3) &lt;&lt; &quot;, and &quot; &lt;&lt; myVec.at(4) &lt;&lt; std::endl;
 }
         </code>
 <tests>
-MyVector::MyVector (vector&lt;int&gt; vec) {
+MyVector::MyVector (std::vector&lt;int&gt; vec) {
     elements = vec;
 }
 </tests>
 
     </program></statement>
     <solution><p>Below is one way to implement these functions. Since these functions are defined
-    for <c>vector</c>s, we can call them on <c>elements</c>.</p>
+    for <c> std::vector</c>s, we can call them on <c>elements</c>.</p>
     <program xml:id="cp_14_AC_7a">
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 class MyVector {
 private:
-    vector&lt;int&gt; elements;
+    std::vector&lt;int&gt; elements;
 
 public:
     MyVector() {};
-    MyVector(vector&lt;int&gt; vec);
+    MyVector(std::vector&lt;int&gt; vec);
 
     size_t size() { return elements.size(); }
     void push_back(int value) { elements.push_back(value); }
@@ -499,19 +488,19 @@ public:
 };
 
 int main() {
-    vector&lt;int&gt; data = { 2, 4, 1, 5, 2, 6 };
+    std::vector&lt;int&gt; data = { 2, 4, 1, 5, 2, 6 };
     MyVector myVec(data);
-    cout &lt;&lt; &quot;The first element is &quot; &lt;&lt; myVec.at(0) &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;The first element is &quot; &lt;&lt; myVec.at(0) &lt;&lt; std::endl;
     myVec.pop_back();
     myVec.pop_back();
     myVec.push_back(12);
-    cout &lt;&lt; &quot;The size of myVec is &quot; &lt;&lt; myVec.size() &lt;&lt; endl;
-    cout &lt;&lt; &quot;The last three elements are &quot; &lt;&lt; myVec.at(2) &lt;&lt; &quot;, &quot;
-         &lt;&lt; myVec.at(3) &lt;&lt; &quot;, and &quot; &lt;&lt; myVec.at(4) &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;The size of myVec is &quot; &lt;&lt; myVec.size() &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;The last three elements are &quot; &lt;&lt; myVec.at(2) &lt;&lt; &quot;, &quot;
+         &lt;&lt; myVec.at(3) &lt;&lt; &quot;, and &quot; &lt;&lt; myVec.at(4) &lt;&lt; std::endl;
 }
         </code>
 <tests>
-MyVector::MyVector (vector&lt;int&gt; vec) {
+MyVector::MyVector (std::vector&lt;int&gt; vec) {
     elements = vec;
 }
 </tests>
@@ -523,7 +512,7 @@ MyVector::MyVector (vector&lt;int&gt; vec) {
   <exercise label="cp_14_8_q">
     <statement>
       <p>Now we can write some of our own fun functions! No longer do we need to write <c>for</c> loops
-        every time we want to print out a <c>vector</c>. With <c>MyVector</c>, we can just call the member
+        every time we want to print out a <c> std::vector</c>. With <c>MyVector</c>, we can just call the member
         function <c>print</c>! Write the <c>MyVector</c> member function <c>print</c>, which prints out the contents
         of <c>MyVector</c>. For example, if our <c>MyVector</c> contained the elements 2, 5, 1, and 8, <c>print</c>
         should print out [2, 5, 1, 8] followed by a newline. Check the hint below for help with the construction of the code.</p>
@@ -532,15 +521,14 @@ MyVector::MyVector (vector&lt;int&gt; vec) {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 class MyVector {
 private:
-    vector&lt;int&gt; elements;
+    std::vector&lt;int&gt; elements;
 
 public:
     MyVector() {};
-    MyVector(vector&lt;int&gt; vec);
+    MyVector(std::vector&lt;int&gt; vec);
 
     size_t size();
     void push_back(int value);
@@ -562,7 +550,7 @@ int main() {
 }
         </code>
 <tests>
-MyVector::MyVector (vector&lt;int&gt; vec) {
+MyVector::MyVector (std::vector&lt;int&gt; vec) {
     elements = vec;
 }
 
@@ -580,7 +568,7 @@ int MyVector::at(int index) { return elements[index]; }
       <activity label="cp_14_AC_8q_pp">
         <statement>
           <p>Now we can write some of our own fun functions! No longer do we need to write <c>for</c>
-            loops every time we want to print out a <c>vector</c>. With <c>MyVector</c>, we can just call the
+            loops every time we want to print out a <c> std::vector</c>. With <c>MyVector</c>, we can just call the
             member function <c>print</c>! Write the <c>MyVector</c> member function <c>print</c>, which prints out the
             contents of <c>MyVector</c>. For example, if our <c>MyVector</c> contained the elements 2, 5, 1, and 8, <c>print</c>
             should print out [2, 5, 1, 8] followed by a newline. Use the lines to construct the
@@ -591,19 +579,19 @@ int MyVector::at(int index) { return elements[index]; }
             <cline>void print() {</cline>
           </block>
           <block order="7">
-            <cline>   cout &lt;&lt; &quot;[&quot;;</cline>
+            <cline>   std::cout &lt;&lt; &quot;[&quot;;</cline>
           </block>
           <block order="2">
             <cline>   for (size_t i = 0; i &lt; elements.size() - 1; ++i) {</cline>
           </block>
           <block order="4">
-            <cline>       cout &lt;&lt; elements[i] &lt;&lt; &quot;, &quot;;</cline>
+            <cline>       std::cout &lt;&lt; elements[i] &lt;&lt; &quot;, &quot;;</cline>
           </block>
           <block order="3">
             <cline>   }</cline>
           </block>
           <block order="6">
-            <cline>   cout &lt;&lt; elements[elements.size() - 1] &lt;&lt; &quot;]&quot; &lt;&lt; endl;</cline>
+            <cline>   std::cout &lt;&lt; elements[elements.size() - 1] &lt;&lt; &quot;]&quot; &lt;&lt; std::endl ;</cline>
           </block>
           <block order="1">
             <cline>}</cline>
@@ -621,15 +609,14 @@ int MyVector::at(int index) { return elements[index]; }
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 class MyVector {
 private:
-    vector&lt;int&gt; elements;
+    std::vector&lt;int&gt; elements;
 
 public:
     MyVector() {};
-    MyVector(vector&lt;int&gt; vec);
+    MyVector(std::vector&lt;int&gt; vec);
 
     size_t size();
     void push_back(int value);
@@ -643,17 +630,17 @@ public:
 // Write your implementation of pop_front here.
 
 int main() {
-    vector&lt;int&gt; data = { 2, 14, 5 };
+    std::vector&lt;int&gt; data = { 2, 14, 5 };
     MyVector myVec(data);
     myVec.pop_front();
     myVec.push_front(5);
     myVec.push_front(10);
-    cout &lt;&lt; &quot;The new size is &quot; &lt;&lt; myVec.size(); &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;The new size is &quot; &lt;&lt; myVec.size(); &lt;&lt; std::endl;
     myVec.print();
 }
         </code>
 <tests>
-MyVector::MyVector (vector&lt;int&gt; vec) {
+MyVector::MyVector (std::vector&lt;int&gt; vec) {
     elements = vec;
 }
 
@@ -666,11 +653,11 @@ void MyVector::pop_back() { elements.pop_back(); };
 int MyVector::at(int index) { return elements[index]; }
 
 void MyVector::print() {
-    cout &lt;&lt; &quot;[&quot;;
+    std::cout &lt;&lt; &quot;[&quot;;
     for (size_t i = 0; i &lt; elements.size() - 1; ++i) {
-        cout &lt;&lt; elements[i] &lt;&lt; &quot;, &quot;;
+        std::cout &lt;&lt; elements[i] &lt;&lt; &quot;, &quot;;
     }
-    cout &lt;&lt; elements[elements.size() - 1] &lt;&lt; &quot;]&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; elements[elements.size() - 1] &lt;&lt; &quot;]&quot; &lt;&lt; std::endl;
 }
 </tests>
 
@@ -684,15 +671,14 @@ void MyVector::print() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 class MyVector {
 private:
-    vector&lt;int&gt; elements;
+    std::vector&lt;int&gt; elements;
 
 public:
     MyVector() {};
-    MyVector(vector&lt;int&gt; vec);
+    MyVector(std::vector&lt;int&gt; vec);
 
     size_t size();
     void push_back(int value);
@@ -702,7 +688,7 @@ public:
 };
 
 void MyVector::push_front(int value) {
-    vector&lt;int&gt; temp;
+    std::vector&lt;int&gt; temp;
     temp.push_back(value);
     for (size_t i = 0; i &lt; elements.size(); ++i) {
         temp.push_back(elements[i]);
@@ -718,17 +704,17 @@ void MyVector::pop_front() {
 }
 
 int main() {
-    vector&lt;int&gt; data = { 2, 14, 5 };
+    std::vector&lt;int&gt; data = { 2, 14, 5 };
     MyVector myVec(data);
     myVec.pop_front();
     myVec.push_front(5);
     myVec.push_front(10);
-    cout &lt;&lt; &quot;The new size is &quot; &lt;&lt; myVec.size() &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;The new size is &quot; &lt;&lt; myVec.size() &lt;&lt; std::endl;
     myVec.print();
 }
         </code>
 <tests>
-MyVector::MyVector (vector&lt;int&gt; vec) {
+MyVector::MyVector (std::vector&lt;int&gt; vec) {
     elements = vec;
 }
 
@@ -741,11 +727,11 @@ void MyVector::pop_back() { elements.pop_back(); };
 int MyVector::at(int index) { return elements[index]; }
 
 void MyVector::print() {
-    cout &lt;&lt; &quot;[&quot;;
+    std::cout &lt;&lt; &quot;[&quot;;
     for (size_t i = 0; i &lt; elements.size() - 1; ++i) {
-        cout &lt;&lt; elements[i] &lt;&lt; &quot;, &quot;;
+        std::cout &lt;&lt; elements[i] &lt;&lt; &quot;, &quot;;
     }
-    cout &lt;&lt; elements[elements.size() - 1] &lt;&lt; &quot;]&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; elements[elements.size() - 1] &lt;&lt; &quot;]&quot; &lt;&lt; std::endl;
 }
 </tests>
 
@@ -764,11 +750,10 @@ void MyVector::print() {
         <code>
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
-using namespace std;
 
 class MyVector {
 private:
-    vector&lt;int&gt; elements;
+    std::vector&lt;int&gt; elements;
 
     // Write your findMax function here.
 
@@ -776,7 +761,7 @@ private:
 
 public:
     MyVector() {};
-    MyVector(vector&lt;int&gt; vec);
+    MyVector(std::vector&lt;int&gt; vec);
 
     size_t size();
     void push_back(int value);
@@ -787,19 +772,19 @@ public:
     void pop_front();
 };
 
-// Write your max function here.
+// Write your std::max function here.
 
-// Write your min function here.
+// Write your std::min function here.
 
 int main() {
-    vector&lt;int&gt; vec = { 8, 1, 5, 87, 23, 64 };
+    std::vector&lt;int&gt; vec = { 8, 1, 5, 87, 23, 64 };
     MyVector myVec(vec);
-    cout &lt;&lt; &quot;The largest element is &quot; &lt;&lt; myVec.max() &lt;&lt; endl;
-    cout &lt;&lt; &quot;The smallest element is &quot; &lt;&lt; myVec.min() &lt;&lt; endl;
+    std::cout &lt;&lt; &quot;The largest element is &quot; &lt;&lt; myVec.std::max() &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;The smallest element is &quot; &lt;&lt; myVec.std::min() &lt;&lt; std::endl;
 }
         </code>
 <tests>
-MyVector::MyVector (vector&lt;int&gt; vec) {
+MyVector::MyVector (std::vector&lt;int&gt; vec) {
     elements = vec;
 }
 
@@ -812,15 +797,15 @@ void MyVector::pop_back() { elements.pop_back(); };
 int MyVector::at(int index) { return elements[index]; }
 
 void MyVector::print() {
-    cout &lt;&lt; &quot;[&quot;;
+    std::cout &lt;&lt; &quot;[&quot;;
     for (size_t i = 0; i &lt; elements.size() - 1; ++i) {
-        cout &lt;&lt; elements[i] &lt;&lt; &quot;, &quot;;
+        std::cout &lt;&lt; elements[i] &lt;&lt; &quot;, &quot;;
     }
-    cout &lt;&lt; elements[elements.size() - 1] &lt;&lt; &quot;]&quot; &lt;&lt; endl;
+    std::cout &lt;&lt; elements[elements.size() - 1] &lt;&lt; &quot;]&quot; &lt;&lt; std::endl;
 }
 
 void MyVector::push_front(int value) {
-    vector&lt;int&gt; temp;
+    std::vector&lt;int&gt; temp;
     temp.push_back(value);
     for (size_t i = 0; i &lt; elements.size(); ++i) {
         temp.push_back(elements[i]);
@@ -850,7 +835,7 @@ void MyVector::pop_front() {
         <blocks>
           <block order="3">
             <cline>// findMax private member function</cline>
-            <cline>int findMax (vector&lt;int&gt; vec) {</cline>
+            <cline>int findMax (std::vector&lt;int&gt; vec) {</cline>
           </block>
           <block order="22">
             <cline>    int inMax;</cline>
@@ -884,7 +869,7 @@ void MyVector::pop_front() {
           </block>
           <block order="2">
             <cline>// findMin private member function</cline>
-            <cline>int findMin (vector&lt;int&gt; vec) {</cline>
+            <cline>int findMin (std::vector&lt;int&gt; vec) {</cline>
           </block>
           <block order="20">
             <cline>    int inMin;</cline>

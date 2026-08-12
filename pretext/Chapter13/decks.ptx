@@ -6,19 +6,19 @@
     going to create a new object, called a <c>Deck</c>, that contains a vector of <c>Card</c>s.</p>
   <p>The structure definition looks like this</p>
   <program>struct Deck {
-  vector&lt;Card&gt; cards;
+  std::vector&lt;Card&gt; cards;
 
   Deck(int n);
 };
 
 Deck::Deck(int size) {
-  vector&lt;Card&gt; temp (size);
+  std::vector&lt;Card&gt; temp (size);
   cards = temp;
 }</program>
   <p>The name of the instance variable is <c>cards</c> to help distinguish the <c>Deck</c> object from the
     vector of <c>Card</c>s that it contains.</p>
   <p>For now there is only one constructor. It creates a local variable named <c>temp</c>, which it
-    initializes by invoking the constructor for the <c>vector</c> class, passing the size as a parameter.
+    initializes by invoking the constructor for the <c> std::vector</c> class, passing the size as a parameter.
     Then it copies the vector from <c>temp</c> into the instance variable <c>cards</c>.</p>
   <p>Now we can create a deck of cards like this:</p>
   <program>

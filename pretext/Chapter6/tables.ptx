@@ -30,12 +30,11 @@
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 int main() {
     double x = 1.0;
     while (x < 10.0) {
-        cout << x << "\t" << log(x) << "\n";
+        std::cout << x << "\t" << log(x) << "\n";
         x = x + 1.0;
     }
     return 0;
@@ -70,7 +69,7 @@ int main() {
   <m>\log_2 x = \frac {log_e x}{log_e 2}</m></p>
   <p>Changing the output statement to</p>
   <program>
-cout &lt;&lt; x &lt;&lt; "\t" &lt;&lt; log(x) / log(2.0) &lt;&lt; endl;
+cout &lt;&lt; x &lt;&lt; "\t" &lt;&lt; log(x) / log(2.0) &lt;&lt; std::endl ;
 </program>
   <p>yields</p>
   <console>
@@ -98,12 +97,11 @@ cout &lt;&lt; x &lt;&lt; "\t" &lt;&lt; log(x) / log(2.0) &lt;&lt; endl;
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 int main() {
     double x = 1.0;
     while (x < 100.0) {
-        cout << x << "\t" << log(x) / log(2.0) << endl;
+        std::cout << x << "\t" << log(x) / log(2.0) << std::endl;
         x = x * 2.0;
     }
 }
@@ -138,12 +136,11 @@ int main() {
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 int main() {
     double x = 1.0;
     while (x < 100.0) {
-        cout << x << "\t" << log(x) / log(2.0) << endl;
+        std::cout << x << "\t" << log(x) / log(2.0) << std::endl;
         x = x * 2.0;
     }
 }
@@ -174,10 +171,10 @@ int main() {
         </block>
         <block order="6">
           <choice correct="yes">
-            <cline><![CDATA[      cout << x << "\t" << pow(2, x) << endl;]]></cline>
+            <cline><![CDATA[      std::cout << x << "\t" << pow(2, x) << std::endl ;]]></cline>
           </choice>
           <choice>
-            <cline><![CDATA[      cout << x << "\t" << pow(x, 2) << endl;                        ]]></cline>
+            <cline><![CDATA[      std::cout << x << "\t" << pow(x, 2) << std::endl ;                        ]]></cline>
           </choice>
         </block>
         <block order="1">
@@ -191,7 +188,7 @@ int main() {
   </exercise>
   <exercise label="tables_2">
     <statement>
-      <p>What is the equivalent of endl, and typically used at the end of a string? <fillin answer="(newline.*)|(.*\\n.*)"/>
+      <p>What is the equivalent of std::endl , and typically used at the end of a string? <fillin answer="(newline.*)|(.*\\n.*)"/>
       </p>
     </statement>
     <evaluation>
@@ -224,7 +221,7 @@ int main() {
 int main() {
   int x = 1;
   while (x < 11) {
-    cout << x << "\t" << pow(x, 2) << endl;
+    std::cout << x << "\t" << pow(x, 2) << std::endl ;
     x = x + 1;
   }
 }

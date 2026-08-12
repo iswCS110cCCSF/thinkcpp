@@ -13,7 +13,6 @@
     <program interactive="activecode" line-numbers="yes" label="pure_function_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -32,7 +31,7 @@ bool after(Time& time1, Time& time2) {
 int main() {
     Time time = { 11, 59, 3.14159 };
     Time time2 = { 1, 50, 3.14159 };
-    cout << after(time, time2);
+    std::cout << after(time, time2);
 }
         ]]></code>
     </program>
@@ -63,7 +62,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="pure_function_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -71,7 +69,7 @@ struct Time {
 };
 
 void printTime(Time& t) {
-    cout << t.hour << ":" << t.minute << ":" << t.second << endl;
+    std::cout << t.hour << ":" << t.minute << ":" << t.second << std::endl;
 }
 
 Time addTime(Time& t1, Time& t2) {
@@ -106,7 +104,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="pure_function_AC_3_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -114,7 +111,7 @@ struct Time {
 };
 
 void printTime(Time& t) {
-    cout << t.hour << ":" << t.minute << ":" << t.second << endl;
+    std::cout << t.hour << ":" << t.minute << ":" << t.second << std::endl;
 }
 
 Time addTime(Time& t1, Time& t2) {

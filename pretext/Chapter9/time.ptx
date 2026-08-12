@@ -14,7 +14,6 @@
     <program interactive="activecode" line-numbers="yes" label="time_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -23,7 +22,7 @@ struct Time {
 
 int main() {
     Time time = { 11, 59, 3.14159 };
-    cout << time.hour << ":" << time.minute << ":" << time.second;
+    std::cout << time.hour << ":" << time.minute << ":" << time.second;
 }
         ]]></code>
     </program>
@@ -181,7 +180,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="time_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 struct Time {
     int hour, minute;
@@ -219,10 +217,10 @@ int main() {
         </block>
         <block order="5">
           <choice correct="yes">
-            <cline><![CDATA[   cout << time.hour << ":" << time.minute << ":" << time.second;]]></cline>
+            <cline><![CDATA[   std::cout << time.hour << ":" << time.minute << ":" << time.second;]]></cline>
           </choice>
           <choice>
-            <cline><![CDATA[   cout << hour << ":" << minute << ":" << second;                        ]]></cline>
+            <cline><![CDATA[   std::cout << hour << ":" << minute << ":" << second;                        ]]></cline>
           </choice>
         </block>
         <block order="2">

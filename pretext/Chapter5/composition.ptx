@@ -40,13 +40,12 @@ return result;</program>
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-using namespace std;
 
 double distance(double x1, double y1, double x2, double y2) {
     double dx = x2 - x1;
     double dy = y2 - y1;
     double dsquared = dx * dx + dy * dy;
-    double result = sqrt(dsquared);
+    double result = std::sqrt(dsquared);
     return result;
 }
 
@@ -61,7 +60,7 @@ double fred(double xc, double yc, double xp, double yp) {
 
 int main() {
     double circle_area = fred(1.0, 2.0, 4.0, 6.0);
-    cout << circle_area << endl;
+    std::cout << circle_area << std::endl;
     return 0;
 }
         ]]></code>
@@ -112,7 +111,7 @@ int main() {
       <p>It turns out you already have a function called <c>printHelloName</c> so you must rename this one. Which
         of the following could be the new name for your function?</p>
       <program>void printHelloName(string name) {
-  cout &lt;&lt; &quot;Hello &quot; &lt;&lt; name &lt;&lt; &quot;!&quot; &lt;&lt;  endl;
+  std::cout &lt;&lt; &quot;Hello &quot; &lt;&lt; name &lt;&lt; &quot;!&quot; &lt;&lt;  std::endl ;
 }</program>
     </statement>
     <choices>
@@ -174,14 +173,13 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="multi_comp_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int increase_population(int population) {
     return population*2;
 }
 
 void print_population(int population) {
-    cout<<"The current population is "<<population<<endl;
+    std::cout<<"The current population is "<<population<<std::endl;
 }
 
 void grow_4(int start_size) {

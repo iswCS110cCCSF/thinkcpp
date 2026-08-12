@@ -20,7 +20,6 @@ The current time is 11:59
     <program interactive="activecode" line-numbers="yes" label="output_vars_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int hour, minute;
@@ -30,11 +29,11 @@ int main() {
     minute = 59;
     colon = ':';
 
-    cout << "The current time is ";
-    cout << hour;
-    cout << colon;
-    cout << minute;
-    cout << endl;
+    std::cout << "The current time is ";
+    std::cout << hour;
+    std::cout << colon;
+    std::cout << minute;
+    std::cout << std::endl;
 
     return 0;
 }
@@ -55,7 +54,6 @@ int main() {
     <program interactive="activecode" line-numbers="yes" label="output_vars_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 int main() {
     int hour, minute;
@@ -65,7 +63,7 @@ int main() {
     minute = 59;
     colon = ':';
 
-    cout << "The current time is " << hour << colon << minute << endl;
+    std::cout << "The current time is " << hour << colon << minute << std::endl;
 
     return 0;
 }
@@ -82,7 +80,7 @@ int main() {
   char b;
   a = 'z';
   b = '8';
-  cout &lt;&lt; &quot;a&quot;;
+  std::cout &lt;&lt; &quot;a&quot;;
 }</program>
     </statement>
     <choices>
@@ -107,7 +105,7 @@ int main() {
           <p>z</p>
         </statement>
         <feedback><p>
-          The cout statement prints a, not the value of the variable a.
+          The std::cout statement prints a, not the value of the variable a.
         </p></feedback>
       </choice>
       <choice>
@@ -136,7 +134,7 @@ int main() {
   char b;
   a = 'z';
   b = '8';
-  cout &lt;&lt; b;
+  std::cout &lt;&lt; b;
 }</program>
     </statement>
     <choices>
@@ -190,7 +188,7 @@ int main() {
   char y;
   x = '3';
   y = 'e';
-  cout &lt;&lt; 'y';
+  std::cout &lt;&lt; 'y';
 }</program>
     </statement>
     <choices>
@@ -285,14 +283,14 @@ int main() {
       </block>
       <block order="1">
         <choice correct="yes">
-          <cline> cout &lt;&lt; h;</cline>
+          <cline> std::cout &lt;&lt; h;</cline>
         </choice>
         <choice>
-          <cline> cout &lt;&lt; &quot;Hello&quot;; </cline>
+          <cline> std::cout &lt;&lt; &quot;Hello&quot;; </cline>
         </choice>
       </block>
       <block order="7">
-        <cline> cout &lt;&lt; &quot;h&quot;; </cline>
+        <cline> std::cout &lt;&lt; &quot;h&quot;; </cline>
       </block>
       <block order="5">
         <cline>}</cline>

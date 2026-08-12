@@ -27,7 +27,7 @@
           <p>There is no faster way to search through an unsorted vector than using a linear search.</p>
         </statement>
         <feedback><p>
-          If the <c>vector</c> were sorted, then there are faster search methods.
+          If the <c> std::vector</c> were sorted, then there are faster search methods.
         </p></feedback>
       </choice>
       <choice correct="yes">
@@ -42,23 +42,23 @@
   </exercise>
   <exercise label="mce_12_2">
     <statement>
-      <p>What is the correct way to declare a <c>vector</c> of <c>vector</c>s of <c>int</c>s called <c>vec</c>?</p>
+      <p>What is the correct way to declare a <c> std::vector</c> of <c> std::vector</c>s of <c>int</c>s called <c>vec</c>?</p>
     </statement>
     <choices>
       <choice>
         <statement>
           <p>
-            <c>vector&lt;int&gt; vec;</c>
+            <c>std::vector&lt;int&gt; vec;</c>
           </p>
         </statement>
         <feedback><p>
-          This declares a <c>vector</c> of <c>int</c>s.
+          This declares a <c> std::vector</c> of <c>int</c>s.
         </p></feedback>
       </choice>
       <choice>
         <statement>
           <p>
-            <c><![CDATA[vector<int> vec<int>;]]></c>
+            <c><![CDATA[ std::vector<int> vec<int>;]]></c>
           </p>
         </statement>
         <feedback><p>
@@ -68,7 +68,7 @@
       <choice>
         <statement>
           <p>
-            <c><![CDATA[vector<vector<int> vec;]]></c>
+            <c><![CDATA[ std::vector< std::vector<int> vec;]]></c>
           </p>
         </statement>
         <feedback><p>
@@ -78,11 +78,11 @@
       <choice correct="yes">
         <statement>
           <p>
-            <c><![CDATA[vector<vector<int> > vec;]]></c>
+            <c><![CDATA[ std::vector< std::vector<int> > vec;]]></c>
           </p>
         </statement>
         <feedback><p>
-          This is the proper way to declare a <c>vector</c> of <c>vector</c>s of <c>int</c>s.
+          This is the proper way to declare a <c> std::vector</c> of <c> std::vector</c>s of <c>int</c>s.
         </p></feedback>
       </choice>
     </choices>
@@ -217,7 +217,7 @@ struct Card {
 int main() {
   Card card1 (2,12);
   Card card2 (2,2);
-  cout << card1.isGreater (card2) << endl;
+  std::cout << card1.isGreater (card2) << std::endl ;
 }
 ]]></code>
       </program>
@@ -270,20 +270,20 @@ struct Card {
   bool isGreater(const Card& c2) const;
 };
 
-vector<Card> buildDeck();
+ std::vector<Card> buildDeck();
 
 bool equals(const Card& c1, const Card& c2) {
   return (c1.rank == c2.rank && c1.suit == c2.suit);
 }
 
-void printDeck(const vector<Card>& deck);
+void printDeck(const std::vector<Card>& deck);
 
-int find(const Card& card, const vector<Card>& deck);
+int find(const Card& card, const std::vector<Card>& deck);
 
 int main() {
-  vector<Card> deck = buildDeck();
+  std::vector<Card> deck = buildDeck();
   Card card (3, 13);
-  cout << find(card, deck);
+  std::cout << find(card, deck);
 }
 ]]></code>
       </program>
@@ -302,7 +302,7 @@ int main() {
           <p>52</p>
         </statement>
         <feedback><p>
-          Since the <c>vector</c> is size 52, it cannot have an index of 52.
+          Since the <c> std::vector</c> is size 52, it cannot have an index of 52.
         </p></feedback>
       </choice>
       <choice>
@@ -336,8 +336,8 @@ struct Card {
   bool isGreater(const Card& c2) const;
 };
 
-vector<Card> createDeck() {
-  vector<Card> deck(12);
+ std::vector<Card> createDeck() {
+  std::vector<Card> deck(12);
   int i = 0;
   for (int suit = 0; suit <= 3; suit++) {
     for (int rank = 1; rank < 4; rank++) {
@@ -350,7 +350,7 @@ vector<Card> createDeck() {
 }
 
 int main() {
-  vector<Card> deck = createDeck();
+  std::vector<Card> deck = createDeck();
 }
 ]]></code>
       </program>
@@ -361,7 +361,7 @@ int main() {
           <p>It contains 12 <c>Card</c>s.</p>
         </statement>
         <feedback><p>
-          <c>createDeck</c> returns a <c>vector</c> of size 12, corresponding to 12 <c>Card</c>s.
+          <c>createDeck</c> returns a <c> std::vector</c> of size 12, corresponding to 12 <c>Card</c>s.
         </p></feedback>
       </choice>
       <choice>
@@ -403,16 +403,16 @@ struct Card {
   bool isGreater(const Card& c2) const;
 };
 
-vector<Card> buildDeck();
+ std::vector<Card> buildDeck();
 bool equals(const Card& c1, const Card& c2);
-void printDeck(const vector<Card>& deck);
-int find(const Card& card, const vector<Card>& deck);
-int findBisect(const Card& card, const vector<Card>& deck, int low, int high);
+void printDeck(const std::vector<Card>& deck);
+int find(const Card& card, const std::vector<Card>& deck);
+int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high);
 
 int main() {
-  vector<Card> deck = buildDeck();
+  std::vector<Card> deck = buildDeck();
   Card card (1, 13);
-  cout << findBisect(card, deck, 0, 51);
+  std::cout << findBisect(card, deck, 0, 51);
 }
 ]]></code>
       </program>
@@ -467,20 +467,20 @@ struct Card {
   bool isGreater(const Card& c2) const;
 };
 
-vector<Card> buildDeck();
+ std::vector<Card> buildDeck();
 bool equals(const Card& c1, const Card& c2);
-void printDeck(const vector<Card>& deck);
+void printDeck(const std::vector<Card>& deck);
 
-void findAllQueens(const vector<Card>& deck) {
+void findAllQueens(const std::vector<Card>& deck) {
   for (size_t i = 0; i < deck.____; ++i) {
     if (deck[i].____ == 12) {
-      cout << ____ << " ";
+      std::cout << ____ << " ";
     }
   }
 }
 
 int main() {
-  vector<Card> deck = buildDeck();
+  std::vector<Card> deck = buildDeck();
   findAllQueens (deck);
 }
 ]]></code>

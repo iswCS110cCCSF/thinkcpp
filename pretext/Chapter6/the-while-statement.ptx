@@ -12,14 +12,13 @@
              line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
-using namespace std;
 
 void countdown(int n) {
     while (n > 0) {
-        cout << n << endl;
+        std::cout << n << std::endl;
         n = n - 1;
     }
-    cout << "Blastoff!" << endl;
+    std::cout << "Blastoff!" << std::endl;
 }
 
 int main() {
@@ -54,7 +53,7 @@ int main() {
   <p>The body of the loop should change the value of one or more variables so that, eventually, the
     condition becomes false and the loop terminates. Otherwise the loop will repeat forever, which
     is called an <term>infinite
-      loop</term>. An endless source of amusement for computer scientists is the observation that
+      loop</term>. An std::endl ess source of amusement for computer scientists is the observation that
     the directions on shampoo, <q>Lather, rinse, repeat,</q> are an infinite loop.</p>
   <warning>
     <p>Make sure your while loops don't loop forever! If they are
@@ -67,7 +66,7 @@ int main() {
     cases it is not so easy to tell:</p>
   <program>void sequence(int n) {
   while (n != 1) {
-    cout &lt;&lt; n &lt;&lt; endl;
+    std::cout &lt;&lt; n &lt;&lt; std::endl ;
     if (n % 2 == 0) {           // n is even
       n = n / 2;
     }
@@ -185,7 +184,7 @@ cout << answer;
         order for the code to run successfully.</p>
       <program>int n = 0;
   while (_____) {    // while statement condition
-  cout &lt;&lt; n &lt;&lt; endl;
+  std::cout &lt;&lt; n &lt;&lt; std::endl ;
   _______;           // iteration of the variable
 }</program>
     </statement>

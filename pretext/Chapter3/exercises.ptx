@@ -11,12 +11,11 @@
         update your GPA using the program below. What is the GPA that you will
         have on display for future employers?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 int main() {
   double GPA = 3.52;
   int updatedGPA = int(GPA);
-  cout &lt;&lt; "GPA: " &lt;&lt; updatedGPA;
+  std::cout &lt;&lt; "GPA: " &lt;&lt; updatedGPA;
 }</program>
     </statement>
     <choices>
@@ -79,7 +78,6 @@ int main() {
     <statement>
       <p>What is the value of x after the program executes?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 int main() {
   int x = acos(-1);
@@ -137,7 +135,6 @@ int main() {
       <p><term>Multiple Response</term> Select all variables that have a <em>non-zero</em> value
         after the decimal place. (3.1 has a <em>non-zero</em> value, while 3.0 does not)</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 int main() {
   int a = 1.5;
@@ -288,10 +285,9 @@ int main() {
     <statement>
       <p>What is printed when the following code runs? Are there any errors?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
 void giveCompliment() {
-    cout &lt;&lt; "You are awesome!";
+    std::cout &lt;&lt; "You are awesome!";
 }
 
 void giveInsult() {
@@ -347,15 +343,14 @@ int main() {
         announce this fact to the rest of their friends. What is printed when they run the code
         below? Are there any errors?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
-void bestFriends(string a, string b) {
-    cout &lt;&lt; a &lt;&lt; " is best friends with " &lt;&lt; b;
+void bestFriends(std::string a, std::string b) {
+    std::cout &lt;&lt; a &lt;&lt; " is best friends with " &lt;&lt; b;
 }
 
 int main() {
-    string a = "Rachel";
-    string b = "Monica";
+    std::string a = "Rachel";
+    std::string b = "Monica";
     bestFriends(b, a);
 }</program>
     </statement>
@@ -416,21 +411,20 @@ friends with " << b]]></c>, we call the function with
     <statement>
       <p>What is printed when the following code runs? Are there any errors?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
-void greeting(string name) {
-    cout &lt;&lt; "hello, " &lt;&lt; name &lt;&lt; "!";
+void greeting(std::string name) {
+    std::cout &lt;&lt; "hello, " &lt;&lt; name &lt;&lt; "!";
 }
 
-void goodbye(string name) {
+void goodbye(std::string name) {
     greeting(name);
-    cout &lt;&lt; "!!";
+    std::cout &lt;&lt; "!!";
 }
 
 int main() {
-    string hannah = "Hannah";
-    string anna = "Anna";
-    string louise = hannah;
+    std::string hannah = "Hannah";
+    std::string anna = "Anna";
+    std::string louise = hannah;
     hannah = anna;
     anna = louise;
     goodbye(anna);
@@ -503,15 +497,14 @@ int main() {
     <statement>
       <p><term>Multiple Response</term> Which of the following are legal function calls of <c>orderFood</c>?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
-void orderFood(string food, int quantity) {
-    cout &lt;&lt; "I'll have " &lt;&lt; quantity &lt;&lt; " " &lt;&lt; food;
+void orderFood(std::string food, int quantity) {
+    std::cout &lt;&lt; "I'll have " &lt;&lt; quantity &lt;&lt; " " &lt;&lt; food;
 }
 
 int main() {
-    string a = "wings";
-    string b = "sliders";
+    std::string a = "wings";
+    std::string b = "sliders";
     int c = 3;
     double d = 8.64;
     char e = 'p';
@@ -574,10 +567,9 @@ int main() {
     <statement>
       <p>What is printed when the following code runs? Are there any errors?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
-void printWord(string w) {
-    cout &lt;&lt; w &lt;&lt; w;
+void printWord(std::string w) {
+    std::cout &lt;&lt; w &lt;&lt; w;
 }
 
 int main() {
@@ -644,7 +636,7 @@ int main() {
       <p>How many local variables and parameters does <c>mult</c> have?</p>
       <program>void mult(int a, int b, int c) {
     int d = 7;
-    cout &lt;&lt; a * b * c * d;
+    std::cout &lt;&lt; a * b * c * d;
 }</program>
     </statement>
     <choices>
@@ -697,11 +689,10 @@ int main() {
     <statement>
       <p>How many calls are made to <c>party</c> during the entire program?</p>
       <program>#include &lt;iostream&gt;
-using namespace std;
 
-void party(int day_of_month, string address) {
-    cout &lt;&lt; "party on "&lt;&lt;day_of_month&lt;&lt;" at "
-         &lt;&lt; address &lt;&lt; endl;
+void party(int day_of_month, std::string address) {
+    std::cout &lt;&lt; "party on "&lt;&lt;day_of_month&lt;&lt;" at "
+         &lt;&lt; address &lt;&lt; std::endl;
 }
 
 void weekend(bool available) {
@@ -709,7 +700,7 @@ void weekend(bool available) {
        party(21,"Big house");
        party(22,"CCTC");
     } else {
-       cout &lt;&lt; "sorry I have to study for ENGR101!" &lt;&lt; endl;
+       std::cout &lt;&lt; "sorry I have to study for ENGR101!" &lt;&lt; std::endl;
     }
 }
 

@@ -17,18 +17,18 @@ distances[index1][index2] = distance;
 distances[index2][index1] = distance;</program>
   <p>Finally, in <c>main</c> we can print the information in a human-readable form:</p>
   <program>for (int i=0; i &lt; cities.getNumElements(); i++) {
-  cout &lt;&lt; cities.getElement(i) &lt;&lt; "\t";
+  std::cout &lt;&lt; cities.getElement(i) &lt;&lt; "\t";
 
   for (int j=0; j&lt;=i; j++) {
-    cout &lt;&lt; distances[i][j] &lt;&lt; "\t";
+    std::cout &lt;&lt; distances[i][j] &lt;&lt; "\t";
   }
-  cout &lt;&lt; endl;
+  std::cout &lt;&lt; std::endl ;
 }
 
 cout &lt;&lt; "\t";
 for (int i=0; i &lt; cities.getNumElements(); i++) {
-  cout &lt;&lt; cities.getElement(i) &lt;&lt; "\t";
+  std::cout &lt;&lt; cities.getElement(i) &lt;&lt; "\t";
 }
-cout &lt;&lt; endl;</program>
+cout &lt;&lt; std::endl ;</program>
   <p>This code produces the output shown at the beginning of the chapter.</p>
 </section>

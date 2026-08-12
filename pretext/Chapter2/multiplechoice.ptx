@@ -11,11 +11,11 @@
       <program>int main() {
   int hour = 7;
   int min = 50;
-  cout &lt;&lt; "The current time is: " &lt;&lt; endl;
-  cout &lt;&lt; hour;
-  cout &lt;&lt; ":";  cout &lt;&lt; minute;
-  cout &lt;&lt; endl;
-  cout &lt;&lt; "I'm going to be late for my 8am!";
+  std::cout &lt;&lt; "The current time is: " &lt;&lt; std::endl ;
+  std::cout &lt;&lt; hour;
+  std::cout &lt;&lt; ":";  std::cout &lt;&lt; minute;
+  std::cout &lt;&lt; std::endl ;
+  std::cout &lt;&lt; "I'm going to be late for my 8am!";
 }</program>
     </statement>
     <choices>
@@ -161,7 +161,7 @@ x = 2 + (13 - 5) * 2 + 6 /3;
   x = z;
   z = 6;
   y = x + z;
-  cout &lt;&lt; y + z;
+  std::cout &lt;&lt; y + z;
 }</program>
     </statement>
     <choices>
@@ -218,7 +218,7 @@ x = 2 + (13 - 5) * 2 + 6 /3;
   int d;
   c = "3";
   d = 4;
-  cout &lt;&lt; c; cout &lt;&lt; d;
+  std::cout &lt;&lt; c; std::cout &lt;&lt; d;
 }</program>
     </statement>
     <choices>
@@ -268,13 +268,13 @@ x = 2 + (13 - 5) * 2 + 6 /3;
     <statement>
       <p>What is the output of the following code block?</p>
       <program>int main() {
-  string apples;
+ std::string apples;
   apples = "bananas";
-  string pineapple;
-  string mango = "mango";
+ std::string pineapple;
+ std::string mango = "mango";
   pineapple = apples;
-  cout &lt;&lt; "My favorite fruit is ";
-  cout &lt;&lt; pineapple &lt;&lt; endl;
+  std::cout &lt;&lt; "My favorite fruit is ";
+  std::cout &lt;&lt; pineapple &lt;&lt; std::endl ;
   pineapple = mango;
 }</program>
     </statement>
@@ -336,10 +336,10 @@ x = 2 + (13 - 5) * 2 + 6 /3;
       <p>What line does the first error occur in the following program? If there is no error, what
         is the output?</p>
       <program>int main() {
-  string Tom = "Tom";
-  string friend = "Jerry";
-  cout &lt;&lt; tom;
-  cout &lt;&lt; "is friends with"; cout &lt;&lt; friend;
+ std::string Tom = "Tom";
+ std::string friend = "Jerry";
+  std::cout &lt;&lt; tom;
+  std::cout &lt;&lt; "is friends with"; std::cout &lt;&lt; friend;
 }</program>
     </statement>
     <choices>
@@ -455,7 +455,7 @@ x = 2 + (13 - 5) * 2 + 6 /3;
   char r = 'r';
   int x = 3;
   r = r + x;
-  cout &lt;&lt; r;
+  std::cout &lt;&lt; r;
 }</program>
     </statement>
     <choices>
