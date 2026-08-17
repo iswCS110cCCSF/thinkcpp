@@ -8,12 +8,12 @@
     characters. An <term>integer</term> is a whole number like 1 or 17. You can output integer
     values the same way you output strings:</p>
   <program>
-cout &lt;&lt; 17 &lt;&lt; std::endl ;
+std::cout &lt;&lt; 17 &lt;&lt; std::endl ;
 </program>
   <p>A <term>character</term> value is a letter or digit or punctuation mark enclosed in single
     quotes, like 'a' or '5'. You can output character values the same way:</p>
   <program>
-cout &lt;&lt; '}' &lt;&lt; std::endl ;
+std::cout &lt;&lt; '}' &lt;&lt; std::endl ;
 </program>
   <p>This example outputs a single close squiggly-brace on a line by itself.</p>
   <p>It is easy to confuse different types of values, like <c>&quot;5&quot;</c>, <c>'5'</c>, and <c>5</c>, but if you pay
