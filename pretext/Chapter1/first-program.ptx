@@ -23,24 +23,24 @@ int main() {
   <p>Some people judge the quality of a programming language by the simplicity of the <q>Hello,
     World.</q> program. By this standard, C++ does reasonably well. Even so, this simple program
     contains several features that are hard to explain to beginning programmers. For now, we will
-    ignore some of them, like the first two lines.</p>
-  <p>The third line of <xref ref="first_program_AC_list"/> begins with <c>//</c>, which indicates that
+    ignore some of them, like the first line.</p>
+  <p>The second line of <xref ref="first_program_AC_list"/> begins with <c>//</c>, which indicates that
     it is a <term>comment</term>. A comment is a bit of English text that you can put in the middle
     of a program, usually to explain what the program does. When the compiler sees a <c>//</c>, it
     ignores everything from there until the end of the line.</p>
-  <p>In the fourth line, you can ignore the word <c>int</c> for now, but notice the word <c>main</c> . <c>main</c>
+  <p>In the third line, you can ignore the word <c>int</c> for now, but notice the word <c>main</c> . <c>main</c>
     is a special name that indicates the place in the program where execution begins. When the
     program runs, it starts by executing the first statement in <c>main</c> and it continues, in order,
     until it gets to the last statement, and then it quits.</p>
   <p>There is no limit to the number of statements that can be in <c>main</c>, but the example contains
     only one. It is a basic <term>output</term> statement, meaning that it outputs or displays a
     message on the screen.</p>
-  <p><c>cout</c> is a special object provided by the system to allow you to send output to the screen.
-    The symbol <c>&lt;&lt;</c> is an operator that you apply to <c>cout</c> and a string, and that causes the
+  <p><c>std::cout</c> is a special object provided by the system to allow you to send output to the screen.
+    The symbol <c>&lt;&lt;</c> is an operator that you apply to <c>std::cout</c> and a string, and that causes the
     string to be displayed.</p>
-  <p><c>endl</c> is a special symbol that represents the end of a line. When you send an <c>endl</c> to <c>cout</c>,
+  <p><c>std::endl</c> is a special symbol that represents the end of a line. When you send an <c>std::endl</c> to <c>cout</c>,
     it causes the cursor to move to the next line of the display. The next time you output
-    something, the new text appears on the next line.</p>
+    something, the new text appears on the next line. We will learn about what <c>std::</c> means later.</p>
   <p>Like all statements, the output statement ends with a semi-colon (<c>;</c>).</p>
   <warning>
     <p>Failure to terminate a statement with a semicolon will result in a syntax (compile) error.</p>

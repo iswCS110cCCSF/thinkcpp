@@ -19,7 +19,7 @@
         <gi>
             <title>keyword</title>
             <p>A reserved word that is used by the compiler to parse programs.
-            Examples we have seen include int, void and std::endl .</p>
+            Examples we have seen include int, and void.</p>
         </gi>
         <gi>
             <title>statement</title>
