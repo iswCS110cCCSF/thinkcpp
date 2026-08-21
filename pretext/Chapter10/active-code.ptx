@@ -64,7 +64,7 @@ int main () {
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
 
-int evenCount(const std::vector&lt;int&gt; &amp;vec) {
+int even_count(const std::vector&lt;int&gt; &amp;vec) {
     for (size_t i = 0; i &lt; vec.size(); i++) {
         if (i % 2 == 0) {
             count++;
@@ -75,7 +75,7 @@ int evenCount(const std::vector&lt;int&gt; &amp;vec) {
 
 int main() {
     std::vector&lt;int&gt; vec{1,2,3,4};
-    std::cout &lt;&lt; evenCount(vec) &lt;&lt; std::endl;
+    std::cout &lt;&lt; even_count(vec) &lt;&lt; std::endl;
 }
         </code>
     </program></statement>
@@ -87,7 +87,7 @@ int main() {
         </statement>
         <blocks>
           <block order="7">
-            <cline>int evenCount (const std::vector&lt;int&gt; &amp;vec) {</cline>
+            <cline>int even_count(const std::vector&lt;int&gt; &amp;vec) {</cline>
           </block>
           <block order="11">
             <cline>    int count = 0;</cline>
@@ -139,7 +139,7 @@ int main() {
 #include &lt;string&gt;
 #include &lt;vector&gt;
 
-int endsWith(const std::vector&lt;std::string&gt;&amp; vec, char c) {
+int ends_with(const std::vector&lt;std::string&gt;&amp; vec, char c) {
     int count;
     for (size_t i = 0; i &lt; vec.size(); i++) {
         size_t last = vec.size() - 1;
@@ -169,7 +169,7 @@ int endsWith(const std::vector&lt;std::string&gt;&amp; vec, char c) {
 #include &lt;string&gt;
 #include &lt;vector&gt;
 
-int endsWith(const std::vector&lt;std::string&gt;&amp; vec, char c) {
+int ends_with(const std::vector&lt;std::string&gt;&amp; vec, char c) {
     int count = 0;
     for (size_t i = 0; i &lt; vec.size(); i++) {
         size_t  last = vec[i].size() - 1;
@@ -321,7 +321,7 @@ int main () {
 
   <exercise label="vectors_a6_q">
     <statement>
-      <p>Write the function <c>endsEven</c> that takes a vector and removes elements from the end of the
+      <p>Write the function <c>ends_even</c> that takes a vector and removes elements from the end of the
         vector until it ends with an even number. Check the hint below for help with the
         construction of the code.</p>
 
@@ -330,12 +330,12 @@ int main () {
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
 
-// Write the endsEven function here
+// Write the ends_even function here
 
 
 int main() {
     std::vector&lt;int&gt; vec{1,2,3,4,5,6,7,7,9};
-    endsEven(vec);
+    ends_even(vec);
     for(int unsigned i = 0; i &lt; vec.size(); i++) {
         std::cout &lt;&lt; vec[i] &lt;&lt; std::endl;
     }
@@ -345,16 +345,16 @@ int main() {
     <hint>
       <activity label="vectors_a6_pp">
         <statement>
-          <p>Write the function <c>endsEven</c> that takes a vector and removes elements from the end of the
+          <p>Write the function <c>ends_even</c> that takes a vector and removes elements from the end of the
             vector until it ends with an even number. Use the lines to construct the code, then go
             back to complete the Activecode.</p>
         </statement>
         <blocks>
           <block order="3">
-            <cline>void endsEven (std::vector&lt;int&gt; &amp;vec) {</cline>
+            <cline>void ends_even (std::vector&lt;int&gt; &amp;vec) {</cline>
           </block>
           <block order="1" correct="no">
-            <cline>vector endsEven (std::vector&lt;int&gt; &amp;vec) { </cline>
+            <cline>vector ends_even (std::vector&lt;int&gt; &amp;vec) { </cline>
           </block>
           <block order="6">
             <choice correct="yes">
@@ -434,7 +434,7 @@ int has_char(const std::vector&lt;std::string&gt;&amp; vec, char let) {
 
   <exercise label="vectors_a8_q">
     <statement>
-      <p>Write the function <c>randomNums</c> that takes two integers: <c>num</c> which is the number of random
+      <p>Write the function <c>random_nums</c> that takes two integers: <c>num</c> which is the number of random
         numbers you wish to generate, and <c>max</c>, which is the maximum value of random number you
         wish to generate. Your function should return a vector of <c>num</c> integers that are between
         1 and <c>max</c>, inclusive. Check the hint below for help with the construction of the
@@ -446,15 +446,15 @@ int has_char(const std::vector&lt;std::string&gt;&amp; vec, char let) {
 #include &lt;cstdlib&gt;
 #include &lt;vector&gt;
 
-// Write the randomNums function here
+// Write the random_nums function here
 
 
 int main() {
     int num = 10;
     int std::max = 100;
-    randomNums(num,std::max);
-    for (size_t i = 0; i &lt; randomNums(num,std::max).size(); i++) {
-        std::cout &lt;&lt; randomNums(num,std::max)[i] &lt;&lt; std::endl;
+    random_nums(num,std::max);
+    for (size_t i = 0; i &lt; random_nums(num,std::max).size(); i++) {
+        std::cout &lt;&lt; random_nums(num,std::max)[i] &lt;&lt; std::endl;
     }
 }
         </code>
@@ -462,7 +462,7 @@ int main() {
     <hint>
       <activity label="vectors_a8_pp">
         <statement>
-          <p>Write the function <c>randomNums</c> that takes two integers: <c>num</c> which is the number of
+          <p>Write the function <c>random_nums</c> that takes two integers: <c>num</c> which is the number of
             random numbers you wish to generate, and <c>max</c>, which is the maximum value of random
             number you wish to generate. Your function should return a vector of <c>num</c> integers
             that are between 1 and <c>max</c>, inclusive. Use the lines to construct the code, then go
@@ -470,30 +470,30 @@ int main() {
         </statement>
         <blocks>
           <block order="6">
-            <cline>std::vector&lt;int&gt; randomNums (int num, int max) {</cline>
+            <cline>std::vector&lt;int&gt; random_nums (int num, int max) {</cline>
           </block>
           <block order="7">
-            <cline>    std::vector&lt;int&gt; randomVec(num);</cline>
+            <cline>    std::vector&lt;int&gt; random_vec(num);</cline>
           </block>
           <block order="3">
             <choice correct="yes">
               <cline>    for (int i = 0; i &lt; num; i++) {</cline>
             </choice>
             <choice>
-              <cline>    for (size_t i = 0; i &lt;= randomVec.size(); i++) { </cline>
+              <cline>    for (size_t i = 0; i &lt;= random_vec.size(); i++) { </cline>
             </choice>
           </block>
           <block order="5">
-            <cline>        randomVec[i] = rand() % max + 1;</cline>
+            <cline>        random_vec[i] = rand() % max + 1;</cline>
           </block>
           <block order="2">
             <cline>    }</cline>
           </block>
           <block order="4">
-            <cline>    return randomVec;</cline>
+            <cline>    return random_vec;</cline>
           </block>
           <block order="9" correct="no">
-            <cline>    return randomVec[i]; </cline>
+            <cline>    return random_vec[i]; </cline>
           </block>
           <block order="8">
             <cline>}</cline>
@@ -548,7 +548,7 @@ double mean (const std::vector&lt;double&gt; nums) {
 
   <exercise label="vectors_a10_q">
     <statement>
-      <p>Write the function <c>hundyBundy</c> that returns a count of all numbers in the passed  vector<c>vec</c>
+      <p>Write the function <c>hundy_bundy</c> that returns a count of all numbers in the passed  vector<c>vec</c>
         that are divisible by 100. Check the hint below for help with the construction of the
         code.</p>
 
@@ -557,29 +557,29 @@ double mean (const std::vector&lt;double&gt; nums) {
 #include &lt;iostream&gt;
 #include &lt;vector&gt;
 
-// Write the hundyBundy function here
+// Write the hundy_bundy function here
 
 
 int main() {
     std::vector&lt;int&gt; vec{ 100,10,300,400,21,1000 };
-    std::cout &lt;&lt; hundyBundy(vec) &lt;&lt; std::endl;
+    std::cout &lt;&lt; hundy_bundy(vec) &lt;&lt; std::endl;
 }
         </code>
     </program></statement>
     <hint>
       <activity label="vectors_a10_pp">
         <statement>
-          <p>Write the function <c>hundyBundy</c> that returns a count of all numbers in the passed  vector<c>vec</c>
+          <p>Write the function <c>hundy_bundy</c> that returns a count of all numbers in the passed  vector<c>vec</c>
             that are divisible by 100. Use the lines to construct the code, then go back to complete
             the Activecode.</p>
         </statement>
         <blocks>
           <block order="1">
             <choice correct="yes">
-              <cline>int hundyBundy (const std::vector&lt;int&gt; vec) {</cline>
+              <cline>int hundy_bundy (const std::vector&lt;int&gt; vec) {</cline>
             </choice>
             <choice>
-              <cline>std::vector&lt;int&gt; hundyBundy (const std::vector&lt;int&gt; vec) { </cline>
+              <cline>std::vector&lt;int&gt; hundy_bundy (const std::vector&lt;int&gt; vec) { </cline>
             </choice>
           </block>
           <block order="9">

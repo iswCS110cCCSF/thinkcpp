@@ -2,7 +2,7 @@
 <section xml:id="chapter3_functions-with-results">
   <title>Functions with Results</title>
   <p>You might have noticed by now that some of the functions we are using, like the math functions,
-    yield results. Other functions, like <c>newLine</c>, perform an action but don't return a value. That
+    yield results. Other functions, like <c>new_line</c>, perform an action but don't return a value. That
     raises some questions:</p>
   <p>
     <ul>
@@ -12,12 +12,12 @@
           of a larger expression)?</p>
       </li>
       <li>
-        <p>What happens if you use a function without a result as part of an expression, like <c>newLine() + 7</c>
+        <p>What happens if you use a function without a result as part of an expression, like <c>new_line() + 7</c>
           ?</p>
       </li>
       <li>
         <p>Can we write functions that yield results, or are we stuck with
-          things like newLine and printTwice?</p>
+          things like new_line and print_twice?</p>
       </li>
     </ul>
   </p>

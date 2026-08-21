@@ -88,9 +88,9 @@ double y = 1.0 / 3.0;
           int servings = 12;
           int people = 5;
           
-          double servingSize = servings / people;</program>
+          double serving_size = servings / people;</program>
 
-        <p>The program claims <c>servingSize</c> is <fillin answer="2"/> servings.
+        <p>The program claims <c>serving_size</c> is <fillin answer="2"/> servings.
           This is <fillin answer="less"/> (more, less, the same) than/as the correct answer.</p>
     </statement>
     <evaluation>
@@ -104,7 +104,7 @@ double y = 1.0 / 3.0;
           <test>
             <strcmp>.*</strcmp>
             <feedback>
-              Hint: servingSize and people are integer variables!
+              Hint: serving_size and people are integer variables!
             </feedback>
           </test>
       </evaluate>

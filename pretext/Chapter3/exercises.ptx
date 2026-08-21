@@ -14,8 +14,8 @@
 
 int main() {
   double GPA = 3.52;
-  int updatedGPA = int(GPA);
-  std::cout &lt;&lt; "GPA: " &lt;&lt; updatedGPA;
+  int updated_gpa = int(GPA);
+  std::cout &lt;&lt; "GPA: " &lt;&lt; updated_gpa;
 }</program>
     </statement>
     <choices>
@@ -220,7 +220,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>printHelloWorld() {</c>
+            <c>print_hello_world() {</c>
           </p>
         </statement>
         <feedback><p>
@@ -251,7 +251,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>char shiftThree(char letter)</c>
+            <c>char shift_three(char letter)</c>
           </p>
         </statement>
         <feedback><p>
@@ -261,7 +261,7 @@ int main() {
       <choice correct="yes">
         <statement>
           <p>
-            <c>void giveCompliment() {</c>
+            <c>void give_compliment() {</c>
           </p>
         </statement>
         <feedback><p>
@@ -286,16 +286,16 @@ int main() {
       <p>What is printed when the following code runs? Are there any errors?</p>
       <program>#include &lt;iostream&gt;
 
-void giveCompliment() {
+void give_compliment() {
     std::cout &lt;&lt; "You are awesome!";
 }
 
-void giveInsult() {
+void give_insult() {
     insult = "You suck!";
 }
 
 int main() {
-    giveInsult();
+    give_insult();
 }</program>
     </statement>
     <choices>
@@ -306,7 +306,7 @@ int main() {
           </p>
         </statement>
         <feedback><p>
-          The <c>giveCompliment</c> function is not called in <c>main</c>.
+          The <c>give_compliment</c> function is not called in <c>main</c>.
         </p></feedback>
       </choice>
       <choice>
@@ -316,7 +316,7 @@ int main() {
           </p>
         </statement>
         <feedback><p>
-          The <c>giveInsult</c> function doesn't <c>cout</c> anything.
+          The <c>give_insult</c> function doesn't <c>cout</c> anything.
         </p></feedback>
       </choice>
       <choice>
@@ -339,19 +339,19 @@ int main() {
   </exercise>
   <exercise label="functions_mc6">
     <statement>
-      <p>Rachel and Monica are best friends. They write a function called <c>bestFriends</c> so that they
+      <p>Rachel and Monica are best friends. They write a function called <c>best_friends</c> so that they
         announce this fact to the rest of their friends. What is printed when they run the code
         below? Are there any errors?</p>
       <program>#include &lt;iostream&gt;
 
-void bestFriends(std::string a, std::string b) {
+void best_friends(std::string a, std::string b) {
     std::cout &lt;&lt; a &lt;&lt; " is best friends with " &lt;&lt; b;
 }
 
 int main() {
     std::string a = "Rachel";
     std::string b = "Monica";
-    bestFriends(b, a);
+    best_friends(b, a);
 }</program>
     </statement>
     <choices>
@@ -495,7 +495,7 @@ int main() {
   </exercise>
   <exercise label="functions_mc8">
     <statement>
-      <p><term>Multiple Response</term> Which of the following are legal function calls of <c>orderFood</c>?</p>
+      <p><term>Multiple Response</term> Which of the following are legal function calls of <c>order_food</c>?</p>
       <program>#include &lt;iostream&gt;
 
 void orderFood(std::string food, int quantity) {
@@ -514,7 +514,7 @@ int main() {
       <choice correct="yes">
         <statement>
           <p>
-            <c>orderFood(a, c);</c>
+            <c>order_food(a, c);</c>
           </p>
         </statement>
         <feedback><p>
@@ -524,7 +524,7 @@ int main() {
       <choice correct="yes">
         <statement>
           <p>
-            <c>orderFood(b, d);</c>
+            <c>order_food(b, d);</c>
           </p>
         </statement>
         <feedback><p>
@@ -534,7 +534,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>orderFood(e, c);</c>
+            <c>order_food(e, c);</c>
           </p>
         </statement>
         <feedback><p>
@@ -554,7 +554,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>orderFood(c, a);</c>
+            <c>order_food(c, a);</c>
           </p>
         </statement>
         <feedback><p>
@@ -568,13 +568,13 @@ int main() {
       <p>What is printed when the following code runs? Are there any errors?</p>
       <program>#include &lt;iostream&gt;
 
-void printWord(std::string w) {
+void print_word(std::string w) {
     std::cout &lt;&lt; w &lt;&lt; w;
 }
 
 int main() {
     char a = 'a' + 5;
-    printWord (a);
+    print_word (a);
 }</program>
     </statement>
     <choices>
@@ -626,7 +626,7 @@ int main() {
           <p>Error!</p>
         </statement>
         <feedback><p>
-          <c>printWord</c> takes a string, not a character, as an argument.
+          <c>print_word</c> takes a string, not a character, as an argument.
         </p></feedback>
       </choice>
     </choices>

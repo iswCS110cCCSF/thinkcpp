@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <section xml:id="chapter10_checking-the-other-values">
   <title>Checking the other values</title>
-  <p><c>howMany</c> only counts the occurrences of a particular value, and we are interested in seeing how
+  <p><c>how_many</c> only counts the occurrences of a particular value, and we are interested in seeing how
     many times each value appears. We can solve that problem with a loop:</p>
-  <program>int numValues = 20;
-int upperBound = 10;
-std::vector&lt;int&gt; std::vector = randomVector(numValues, upperBound);
+  <program>int num_values = 20;
+int upper_bound = 10;
+std::vector&lt;int&gt; std::vector = random_vector(num_values, upper_bound);
 
-cout &lt;&lt; "value\thowMany";
+cout &lt;&lt; "value\thow_many";
 
-for (int i = 0; i &lt; upperBound; i++) {
-  std::cout &lt;&lt; i &lt;&lt; '\t' &lt;&lt; howMany(vector, i) &lt;&lt; std::endl ;
+for (int i = 0; i &lt; upper_bound; i++) {
+  std::cout &lt;&lt; i &lt;&lt; '\t' &lt;&lt; how_many(vector, i) &lt;&lt; std::endl ;
 }</program>
   <p>Notice that it is legal to declare a variable inside a <c>for</c> statement. This syntax is
     sometimes convenient, but you should be aware that a variable declared inside a loop only exists
     inside the loop. If you try to refer to <c>i</c> later, you will get a compiler error.</p>
-  <p>This code uses the loop variable as an argument to <c>howMany</c>, in order to check each value
+  <p>This code uses the loop variable as an argument to <c>how_many</c>, in order to check each value
     between 0 and 9, in order. The result is:</p>
   <console><output>value   howMany
 0       2
@@ -28,9 +28,9 @@ for (int i = 0; i &lt; upperBound; i++) {
 7       2
 8       0
 9       2</output></console>
-  <p>Again, it is hard to tell if the digits are really appearing equally often. If we increase <c>numValues</c>
+  <p>Again, it is hard to tell if the digits are really appearing equally often. If we increase <c>num_values</c>
     to 100,000 we get the following:</p>
-  <console><output>value   howMany
+  <console><output>value   how_many
 0       10130
 1       10072
 2       9990
@@ -77,7 +77,7 @@ for (int i = 0; i &lt; upperBound; i++) {
   </exercise>
   <exercise label="checking_values_2">
     <statement>
-      <p><term>Multiple Response</term> When we increase the size of <c>numValues</c>, which of the following
+      <p><term>Multiple Response</term> When we increase the size of <c>num_values</c>, which of the following
         is true:</p>
     </statement>
     <choices>
@@ -112,7 +112,7 @@ for (int i = 0; i &lt; upperBound; i++) {
             decreases</p>
         </statement>
         <feedback><p>
-          Incorrect! As we continue to increase the size of numValues, the percent by which the
+          Incorrect! As we continue to increase the size of num_values, the percent by which the
             number of appearances differes from the expected value approaches 0.
         </p></feedback>
       </choice>

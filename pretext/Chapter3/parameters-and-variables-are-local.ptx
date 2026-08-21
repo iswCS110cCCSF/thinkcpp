@@ -2,10 +2,10 @@
   <title>Parameters and Variables are Local</title>
   <p>Parameters and variables only exist inside their own functions. In the code below, within the confines of <c>main</c>,
     there is no such thing as <c>phil</c>. If you try to use it, the compiler will complain. Similarly,
-    inside <c>printTwice</c> there is no such thing as argument.</p>
+    inside <c>print_twice</c> there is no such thing as argument.</p>
   <listing xml:id="locals_AC_1" label="locals_AC_1">
     <title>
-      The following code will show the output of the printTwice function.
+      The following code will show the output of the print_twice function.
         Notice that it is the argument ‘b' that is outputted, not the
         variable ‘phil'.
     </title>
@@ -13,13 +13,13 @@
       <code><![CDATA[
 #include <iostream>
 
-void printTwice(char phil) {
+void print_twice(char phil) {
     std::cout << phil << phil << std::endl;
 }
 
 int main() {
     char argument = 'b';
-    printTwice(argument);
+    print_twice(argument);
     return 0;
 }
         ]]></code>
@@ -29,13 +29,13 @@ int main() {
     local variables, it is useful to draw a <term>stack
       diagram</term>. Like state diagrams, stack diagrams show the value of each variable, but the
     variables are contained in larger boxes that indicate which function they belong to.</p>
-  <p>For example, the state diagram for <c>printTwice</c> looks like this:</p>
+  <p>For example, the state diagram for <c>print_twice</c> looks like this:</p>
   <figure>
       <caption>Local variable stack diagram</caption>
       <image source="Chapter3/Images/3.9stackdiagram.png">
           <description><p>
               Two boxes. One labeled main that contains a variable named 'argument'
-              which is 'b'. The other labeled printTwice that contains a variable named
+              which is 'b'. The other labeled print_twice that contains a variable named
               'phil' which is 'b'.
           </p></description>
       </image>
@@ -46,20 +46,20 @@ int main() {
     outside and the variables and parameters inside.</p>
   <note><p>When you use the Codelens feature to run a program, it shows the variables organized in a
     stack diagram. Try it on <xref ref="locals_AC_1"/> above.</p></note>
-  <p>In the example, <c>main</c> has one local variable, argument, and no parameters. <c>printTwice</c> has no
+  <p>In the example, <c>main</c> has one local variable, argument, and no parameters. <c>print_twice</c> has no
     local variables and one parameter, named phil.</p>
   <exercise label="locals_1">
     <statement>
       <p>How many local variables and parameters does <c>main</c> have?</p>
-      <program>void prprintHelloName(string name) {
+      <program>void print_hello_name(string name) {
   std::cout &lt;&lt; &quot;Hello &quot; &lt;&lt; name &lt;&lt; &quot;!&quot;;
 }
 
 int main() {
  std::string name1 = &quot;Phil&quot;;
-  printHelloName(name1);
+  print_hello_name(name1);
  std::string name2 = &quot;Joe&quot;;
-  printHelloName(name2);
+  print_hello_name(name2);
   return 0;
 }</program>
     </statement>
@@ -100,16 +100,16 @@ int main() {
   </exercise>
   <exercise label="locals_2">
     <statement>
-      <p>How many local variables and parameters does <c>printHelloName</c> have?</p>
-      <program>void prprintHelloName(string name) {
+      <p>How many local variables and parameters does <c>print_hello_name</c> have?</p>
+      <program>void print_hello_name(string name) {
   std::cout &lt;&lt; &quot;Hello &quot; &lt;&lt; name &lt;&lt; &quot;!&quot;;
 }
 
 int main() {
  std::string name1 = &quot;Phil&quot;;
-  printHelloName(name1);
+  print_hello_name(name1);
  std::string name2 = &quot;Joe&quot;;
-  printHelloName(name2);
+  print_hello_name(name2);
   return 0;
 }</program>
     </statement>
@@ -172,7 +172,7 @@ int main() {
   std::cout &lt;&lt; &quot;hiii !&quot;&lt;&lt;endl;
 }
 
-void printGreeting() {
+void print_greeting() {
   hi();
   cout&lt;&lt;&quot;how are you doing today. &quot;&lt;&lt;endl;
   hi();
@@ -180,7 +180,7 @@ void printGreeting() {
 
 int main() {
   hi();
-  printGreeting();
+  print_greeting();
   hi();
   return 0;
 }</program>

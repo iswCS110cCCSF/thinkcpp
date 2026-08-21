@@ -25,10 +25,10 @@ int x = int(pi);</program>
         code.</p>
       <program>int main() {
   double temp = 7.99999999;
-  int roundedTemp = int(temp);
-  std::cout &lt;&lt; roundedTemp;
+  int rounded_temp = int(temp);
+  std::cout &lt;&lt; rounded_temp;
 }</program>
-      <p>What is the value of roundedTemp?</p>
+      <p>What is the value of rounded_temp?</p>
     </statement>
     <choices>
       <choice>

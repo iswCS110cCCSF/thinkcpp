@@ -13,7 +13,7 @@
 #include <iostream>
 #include <cmath>
 
-void printArea(int r) {
+void print_area(int r) {
     double pi = acos(1.0);
     double area = pi * r ^ 2;
     std::cout << area;
@@ -22,10 +22,10 @@ void printArea(int r) {
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
     std::cout << "Testing with radius = 5..." << std::endl; 
-    std::cout << "    Your function had area = "; printArea(5); std::cout << std::endl; 
+    std::cout << "    Your function had area = "; print_area(5); std::cout << std::endl; 
     std::cout << "    The correct solution has area = 78.5398" << std::endl; 
     std::cout << "Testing with radius = 7.5..." << std::endl; 
-    std::cout << "    Your function had area = "; printArea(7.5); std::cout << std::endl; 
+    std::cout << "    Your function had area = "; print_area(7.5); std::cout << std::endl; 
     std::cout << "    The correct solution has area = 176.715";
 }
         ]]></code>
@@ -35,7 +35,7 @@ int main() {
         can get the square of r by multiplying it by itself. We call the function with an
         argument of 5.</p>
       <program xml:id="functions_a1a_editor" line-numbers="yes"><code><![CDATA[
-void printArea(double r) {
+void print_area(double r) {
     double pi = acos(-1.0);
     double area = pi * r * r;
     std::cout << area;
@@ -51,13 +51,13 @@ void printArea(double r) {
           <code><![CDATA[
 #include <iostream>
 
-void printAnimals(std::string a, int b) {
+void print_animals(std::string a, int b) {
     std::cout << b << a;
 }
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    printAnimals(2, "elephants");
+    print_animals(2, "elephants");
 }
         ]]></code>
         </program></statement>
@@ -69,10 +69,10 @@ int main() {
         <blocks>
           <block order="2">
             <choice correct="yes">
-              <cline>void printAnimals(int a, string b) {</cline>
+              <cline>void print_animals(int a, string b) {</cline>
             </choice>
             <choice>
-              <cline>void printAnimals(string a, int b) { </cline>
+              <cline>void print_animals(string a, int b) { </cline>
             </choice>
           </block>
           <block order="5">
@@ -93,7 +93,7 @@ int main() {
             <cline>int main() {</cline>
           </block>
           <block order="3">
-            <cline>    printAnimals(2, &quot;elephants&quot;);</cline>
+            <cline>    print_animals(2, &quot;elephants&quot;);</cline>
           </block>
           <block order="8">
             <cline>}</cline>
@@ -157,7 +157,7 @@ int main() {
 #include <iostream>
 #include <cmath>
 
-void logSubtraction(double a) {
+void log_subtraction(double a) {
     // Create the variable difference and assign it to the difference mentioned in the instructions
 
     std::cout << difference;
@@ -166,10 +166,10 @@ void logSubtraction(double a) {
 int main() {
 // DO NOT MODIFY ANYTHING BELOW THIS LINE
     std::cout << "Testing with a = 8..." << std::endl;
-    std::cout << "    Your solution has difference = "; logSubtraction(8); std::cout << std::endl;
+    std::cout << "    Your solution has difference = "; log_subtraction(8); std::cout << std::endl;
     std::cout << "    The correct solution has difference = -1.17635" << std::endl;
     std::cout << "Testing with a = -2..." << std::endl;
-    std::cout << "    Your solution has difference = "; logSubtraction(-2); std::cout << std::endl;
+    std::cout << "    Your solution has difference = "; log_subtraction(-2); std::cout << std::endl;
     std::cout << "    The correct solution has difference = nan";
 }
     ]]></code>
@@ -182,7 +182,7 @@ int main() {
       <activity label="functions_a4_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
         <blocks>
           <block order="4">
-            <cline>void logSubtraction(double a) {</cline>
+            <cline>void log_subtraction(double a) {</cline>
           </block>
           <block order="7">
             <choice correct="yes">
@@ -254,36 +254,36 @@ int main() {
 
   <exercise label="functions_a6">
     <statement>
-      <p>Write a function called <c>intDivision</c> that takes two doubles as parameters and prints the
+      <p>Write a function called <c>int_division</c> that takes two doubles as parameters and prints the
         quotient of the <term>integer division</term> of the first number divided by the second. Be
         sure to include any necessary headers.</p>
     <program interactive="activecode" line-numbers="yes" label="functions_a6_editor">
       <code><![CDATA[
 #include <iostream>
 
-void intDivision() {
+void int_division() {
 
 }
 
 int main() {
 // DO NOT MODIFY ANYTHING BELOW THIS LINE
-std::cout << "Testing with a = 2.4, b = 6.8..." << std::endl; std::cout << "    Your solution has a quotient of "; intDivision(2.4, 6.8); std::cout << std::endl; std::cout << "    The correct solution has a quotient of 0" << std::endl; std::cout << "Testing with a = -8.6, b = 4.2..." << std::endl; std::cout << "    Your solution has a quotient of "; intDivision(-8.6, 4.2); std::cout << std::endl; std::cout << "    The correct solution has a quotient of -2";
+std::cout << "Testing with a = 2.4, b = 6.8..." << std::endl; std::cout << "    Your solution has a quotient of "; int_division(2.4, 6.8); std::cout << std::endl; std::cout << "    The correct solution has a quotient of 0" << std::endl; std::cout << "Testing with a = -8.6, b = 4.2..." << std::endl; std::cout << "    Your solution has a quotient of "; int_division(-8.6, 4.2); std::cout << std::endl; std::cout << "    The correct solution has a quotient of -2";
 }
     ]]></code>
     </program>    </statement>
 
     <hint>
-      <p>Write a function called <c>intDivision</c> that takes two doubles as parameters and prints the
+      <p>Write a function called <c>int_division</c> that takes two doubles as parameters and prints the
         quotient of the <term>integer division</term> of the first number divided by the second. Use
         the lines to construct the code, then go back to complete the Activecode.</p>
       <activity label="functions_a6_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
         <blocks>
           <block order="6">
             <choice correct="yes">
-              <cline>void intDivision( double a, double b ) {</cline>
+              <cline>void int_division( double a, double b ) {</cline>
             </choice>
             <choice>
-              <cline>void intDivision( int a, int b ) { </cline>
+              <cline>void int_division( int a, int b ) { </cline>
             </choice>
           </block>
           <block order="7">
@@ -313,24 +313,24 @@ std::cout << "Testing with a = 2.4, b = 6.8..." << std::endl; std::cout << "    
 
   <exercise label="functions_a7">
     <statement>
-      <p>Write a function called gpaBoost that prints your GPA rounded up to the nearest
+      <p>Write a function called gpa_boost that prints your GPA rounded up to the nearest
         point. If your GPA is already at the nearest point, there is no rounding. Be sure to
         include any necessary headers.</p>
     <program interactive="activecode" line-numbers="yes" label="functions_a7q_editor">
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-void gpaBoost() {
+void gpa_boost() {
 
 }
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
     std::cout << "Testing with GPA = 2.513..." << std::endl; 
-    std::cout << "    Your solution rounded the GPA to "; gpaBoost(2.513); std::cout << std::endl; 
+    std::cout << "    Your solution rounded the GPA to "; gpa_boost(2.513); std::cout << std::endl; 
     std::cout << "    The correct solution rounds the GPA to 3.000" << std::endl; 
     std::cout << "Testing with GPA = 4.000..." << std::endl; 
-    std::cout << "    Your solution rounded the GPA to "; gpaBoost(4.000); std::cout << std::endl; 
+    std::cout << "    Your solution rounded the GPA to "; gpa_boost(4.000); std::cout << std::endl; 
     std::cout << "    The correct solution rounds the GPA to 4.000";
 }
         ]]></code>
@@ -348,9 +348,9 @@ int main() {
 #include <iostream>
 #include <cmath>
 
-void gpaBoost(double GPA) {
-    int betterGPA = ceil(GPA);
-    std::cout << betterGPA << ".000";
+void gpa_boost(double GPA) {
+    int better_gpa = ceil(GPA);
+    std::cout << better_gpa << ".000";
 }
         ]]></code></program>
     </solution>
@@ -358,41 +358,41 @@ void gpaBoost(double GPA) {
 
   <exercise label="functions_a8">
     <statement>
-      <p>Write a function called <c>volumePrism</c> that takes three <c>double</c> sidelengths as parameters, and
+      <p>Write a function called <c>volume_prism</c> that takes three <c>double</c> sidelengths as parameters, and
         calculates and prints the volume of a the rectangular prism. Be sure to include any
         necessary headers.</p>
     <program interactive="activecode" line-numbers="yes" label="functions_a8_editor">
       <code><![CDATA[
 #include <iostream>
 
-void volumePrism() {
+void volume_prism() {
 
 }
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
     std::cout << "Testing with a = 3, b = 4, c = 5..." << std::endl;
-    std::cout << "    Your solution calculated a volume of "; volumePrism(3,4,5); std::cout << std::endl;
+    std::cout << "    Your solution calculated a volume of "; volume_prism(3,4,5); std::cout << std::endl;
     std::cout << "    The correct solution calculates a volume of 60" << std::endl;
     std::cout << "Testing with a = 5.7, b = 3.9, c = 1.3..." << std::endl;
-    std::cout << "    Your solution calculated a volume of "; volumePrism(5.7,3.9,1.3); std::cout << std::endl;
+    std::cout << "    Your solution calculated a volume of "; volume_prism(5.7,3.9,1.3); std::cout << std::endl;
     std::cout << "    The correct solution calculates a volume of 28.899";
 }
     ]]></code>
     </program>
     </statement>
     <hint>
-      <p>Write a function called <c>volumePrism</c> that takes three <c>double</c> sidelengths as parameters, and
+      <p>Write a function called <c>volume_prism</c> that takes three <c>double</c> sidelengths as parameters, and
         calculates and prints the volume of a the rectangular prism. Use the lines to construct the
         code, then go back to complete the Activecode.</p>
       <activity label="functions_a8_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
         <blocks>
           <block order="4">
             <choice correct="yes">
-              <cline>void volumePrism(double s1, double s2, double s3) {</cline>
+              <cline>void volume_prism(double s1, double s2, double s3) {</cline>
             </choice>
             <choice>
-              <cline>void volumePrism(int s1, int s2, int s3) { </cline>
+              <cline>void volume_prism(int s1, int s2, int s3) { </cline>
             </choice>
           </block>
           <block order="7">
@@ -417,23 +417,23 @@ int main() {
 
   <exercise label="functions_a9">
     <statement>
-      <p>Write a function called <c>tanD</c> that prints the tangent of an angle given as a <c>double</c> in
+      <p>Write a function called <c>tan_degrees</c> that prints the tangent of an angle given as a <c>double</c> in
         degrees. Use 3.14 for pi. Be sure to include any necessary headers.</p>
     <program interactive="activecode" line-numbers="yes" label="functions_a9q_editor">
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
-void tanDegrees() {
+void tan_degrees() {
 
 }
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
     std::cout << "Testing with degrees = 45..." << std::endl; 
-    std::cout << "    Your solution calculated a tangent of "; tanDegrees(45); std::cout << std::endl; 
+    std::cout << "    Your solution calculated a tangent of "; tan_degrees(45); std::cout << std::endl; 
     std::cout << "    The correct solution calculates a tangent of 0.999204" << std::endl; 
     std::cout << "Testing with degrees = 112.1..." << std::endl; 
-    std::cout << "    Your solution calculated a tangent of "; tanDegrees(112.1); std::cout << std::endl; 
+    std::cout << "    Your solution calculated a tangent of "; tan_degrees(112.1); std::cout << std::endl; 
     std::cout << "    The correct solution calculates a tangent of -2.46973";
 }
         ]]></code>
@@ -446,7 +446,7 @@ int main() {
 #include <iostream>
 #include <cmath>
 
-void tanDegrees(double degrees) {
+void tan_degrees(double degrees) {
     double radians = degrees * (2 * 3.14) / 360.0;
     double tangent = tan(radians);
     std::cout << tangent;
@@ -457,37 +457,37 @@ void tanDegrees(double degrees) {
 
   <exercise label="functions_a10">
     <statement>
-      <p>Write a function called <c>volumeSphere</c> that takes a <c>double</c> radius as a parameter, and calculates
+      <p>Write a function called <c>volume_sphere</c> that takes a <c>double</c> radius as a parameter, and calculates
         and prints the volume of a sphere with that radius. Use 3.14 for <c>pi</c>. Be sure to include
         any necessary headers.</p>
     <program interactive="activecode" line-numbers="yes" label="functions_a10_editor">
       <code><![CDATA[
 #include <iostream>
 
-void volumeSphere() {
+void volume_sphere() {
 
 }
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
     std::cout << "Testing with radius = 3..." << std::endl;
-    std::cout << "    Your solution calculated a volume of "; volumeSphere(3); std::cout << std::endl;
+    std::cout << "    Your solution calculated a volume of "; volume_sphere(3); std::cout << std::endl;
     std::cout << "    The correct solution calculates a volume of 113.04" << std::endl;
     std::cout << "Testing with radius = 3.24..." << std::endl;
-    std::cout << "    Your solution calculated a volume of "; volumeSphere(3.24); std::cout << std::endl;
+    std::cout << "    Your solution calculated a volume of "; volume_sphere(3.24); std::cout << std::endl;
     std::cout << "    The correct solution calculates a volume of 142.398";
 }
     ]]></code>
     </program>
     </statement>
     <hint>
-      <p>Write a function called <c>volumeSphere</c> that takes a <c>double</c> radius as a parameter, and calculates
+      <p>Write a function called <c>volume_sphere</c> that takes a <c>double</c> radius as a parameter, and calculates
         and prints the volume of a sphere with that radius. Use 3.14 for <c>pi</c>. Use the lines to
         construct the code, then go back to complete the Activecode.</p>
       <activity label="functions_a10_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
         <blocks>
           <block order="6">
-            <cline>void volumeSphere(double radius) {</cline>
+            <cline>void volume_sphere(double radius) {</cline>
           </block>
           <block order="3">
             <cline>    double pi = 3.14;</cline>

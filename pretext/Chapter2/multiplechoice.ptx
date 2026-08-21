@@ -379,7 +379,7 @@ x = 2 + (13 - 5) * 2 + 6 /3;
       </choice>
       <choice>
         <statement>
-          <p>No error, <c>Tomis friends withJerry</c></p>
+          <p>No error, <c>Tomis friends with_jerry</c></p>
         </statement>
         <feedback><p>
           If the error was corrected, this would be the output. Unfortunately, there is an error

@@ -219,16 +219,16 @@ cout &lt;&lt; &quot;Decimal:&quot; &lt;&lt; num1 / num2;</program>
       </block>
       <block order="1">
         <choice correct="yes">
-          <cline> double priceWithTax = price + price * tax;</cline>
+          <cline> double price_with_tax = price + price * tax;</cline>
         </choice>
         <choice>
-          <cline> double priceWithTax = price * tax; </cline>
+          <cline> double price_with_tax = price * tax; </cline>
         </choice>
       </block>
       <block order="11">
         <choice correct="yes">
           <cline><![CDATA[ std::cout << "The total cost of your meal is $";]]></cline>
-          <cline><![CDATA[ std::cout << priceWithTax << "." << std::endl ;]]></cline>
+          <cline><![CDATA[ std::cout << price_with_tax << "." << std::endl ;]]></cline>
         </choice>
         <choice>
           <cline><![CDATA[ std::cout << "The total cost of your meal is $"; ]]></cline>

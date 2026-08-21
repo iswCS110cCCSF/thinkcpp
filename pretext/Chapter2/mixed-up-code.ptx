@@ -325,24 +325,24 @@
       </block>
       <block order="2">
         <choice correct="yes">
-          <cline> string favClass = "MATH";</cline>
+          <cline> string fav_class = "MATH";</cline>
         </choice>
         <choice>
-          <cline> string favClass = 'MATH'; </cline>
+          <cline> string fav_class = 'MATH'; </cline>
         </choice>
       </block>
       <block order="3">
         <choice correct="yes">
           <cline><![CDATA[ std::cout << "My favorite class is ";]]></cline>
-          <cline> std::cout &lt;&lt; favClass;</cline>
+          <cline> std::cout &lt;&lt; fav_class;</cline>
         </choice>
         <choice>
           <cline><![CDATA[ std::cout << "My favorite class is " << std::endl ; ]]></cline>
-          <cline> std::cout &lt;&lt; favClass;</cline>
+          <cline> std::cout &lt;&lt; fav_class;</cline>
         </choice>
       </block>
       <block order="4">
-        <cline><![CDATA[ std::cout << "My favorite class is" << favClass; ]]></cline>
+        <cline><![CDATA[ std::cout << "My favorite class is" << fav_class; ]]></cline>
       </block>
       <block order="1">
         <cline>}</cline>
@@ -380,14 +380,14 @@
       </block>
       <block order="9">
         <choice correct="yes">
-          <cline> double moneySaved = game - discount;</cline>
+          <cline> double money_saved = game - discount;</cline>
         </choice>
         <choice>
-          <cline> double moneySaved = discount; </cline>
+          <cline> double money_saved = discount; </cline>
         </choice>
       </block>
       <block order="1">
-        <cline> double moneySaved = game + discount; </cline>
+        <cline> double money_saved = game + discount; </cline>
       </block>
       <block order="6">
         <cline>}</cline>
@@ -425,8 +425,8 @@
       </block>
       <block order="10">
         <choice correct="yes">
-          <cline> string newName = "Higgins";</cline>
-          <cline> name = newName;</cline>
+          <cline> string new_name = "Higgins";</cline>
+          <cline> name = new_name;</cline>
         </choice>
         <choice>
           <cline> string name = "Higgins"; </cline>

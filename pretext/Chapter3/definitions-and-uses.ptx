@@ -5,25 +5,25 @@
     whole program looks like this:</p>
   <program>#include &lt;iostream&gt;
 
-void newLine() {
+void new_line() {
     std::cout &lt;&lt; std::endl;
 }
 
-void threeLine() {
-    newLine();
-    newLine();
-    newLine();
+void three_line() {
+    new_line();
+    new_line();
+    new_line();
 }
 
 int main() {
   std::cout &lt;&lt; "First Line." &lt;&lt; std::endl;
-  threeLine();
+  three_line();
   std::cout &lt;&lt; "Second Line." &lt;&lt; std::endl;
   return 0;
 }</program>
-  <p>This program contains three function definitions: <c>newLine</c>, <c>threeLine</c>, and <c>main</c>.</p>
-  <p>Inside the definition of <c>main</c>, there is a statement that uses or calls <c>threeLine</c>. Similarly, <c>threeLine</c>
-    calls <c>newLine</c> three times. Notice that the definition of each function appears above the place
+  <p>This program contains three function definitions: <c>new_line</c>, <c>three_line</c>, and <c>main</c>.</p>
+  <p>Inside the definition of <c>main</c>, there is a statement that uses or calls <c>three_line</c>. Similarly, <c>three_line</c>
+    calls <c>new_line</c> three times. Notice that the definition of each function appears above the place
     where it is used.</p>
   <p>This is necessary in C++; the definition of a function must appear
     before (above) the first use of the function. You should try compiling
@@ -50,7 +50,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>void printName()</c>
+            <c>void print_name()</c>
           </p>
         </statement>
         <feedback><p>
@@ -61,7 +61,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>totalCostAfterTax() {</c>
+            <c>total_cost_after_tax() {</c>
           </p>
         </statement>
         <feedback><p>
@@ -71,7 +71,7 @@ int main() {
       <choice correct="yes">
         <statement>
           <p>
-            <c>void todaysWeather() {</c>
+            <c>void todays_weather() {</c>
           </p>
         </statement>
         <feedback><p>Correct!</p></feedback>
@@ -79,7 +79,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>void finalGrade {</c>
+            <c>void final_grade {</c>
           </p>
         </statement>
         <feedback><p>
@@ -93,26 +93,26 @@ int main() {
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Construct a block of code that correctly defines a the addTwo function.</p>
+      <p>Construct a block of code that correctly defines a the add_two function.</p>
     </statement>
     <blocks>
       <block order="3"
              correct="yes">
-      <cline>void addTwo(int x) {</cline>
+      <cline>void add_two(int x) {</cline>
       </block>
       <block order="1"
              correct="no">
-        <cline>void addTwo(int x); </cline>
+        <cline>void add_two(int x); </cline>
       </block>
       <block order="7"
              correct="no">
-        <cline>void addTwo(int x) </cline>
+        <cline>void add_two(int x) </cline>
       </block>
       <block order="4">
-        <cline> int plustwo = x + 2;</cline>
+        <cline> int plus_two = x + 2;</cline>
       </block>
       <block order="5">
-        <cline> std::cout &lt;&lt; plustwo;</cline>
+        <cline> std::cout &lt;&lt; plus_two;</cline>
       </block>
       <block order="6">
         <cline>}</cline>

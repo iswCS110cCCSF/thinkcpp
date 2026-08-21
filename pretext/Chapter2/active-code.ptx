@@ -319,15 +319,15 @@ int main() {
   <exercise label="VARS_a8_ps">
     <statement>
       <p>Write code that calculates how much you you will spend after tipping 20% on your $36.25
-        dinner. Save the result of this calculation in <c>plusTip</c>. Be sure to include any necessary
+        dinner. Save the result of this calculation in <c>plus_tip</c>. Be sure to include any necessary
         headers.</p>
     <program interactive="activecode" line-numbers="yes" label="VARS_a8_ps_editor">
       <code><![CDATA[
 int main() {
 
     // DO NOT MODIFY ANYTHING BELOW THIS LINE.
-    std::cout << "Your solution had plusTip = " << plusTip << std::endl ;
-    std::cout << "The correct solution has plusTip = 43.5";
+    std::cout << "Your solution had plus_tip = " << plus_tip << std::endl ;
+    std::cout << "The correct solution has plus_tip = 43.5";
 }
     ]]></code>
     </program></statement>
@@ -350,10 +350,10 @@ int main() {
             </choice>
           </block>
           <block order="5">
-            <cline>Calculate plusTip using tip and price;</cline>
+            <cline>Calculate plus_tip using tip and price;</cline>
           </block>
           <block order="3">
-            <cline>Output plusTip;</cline>
+            <cline>Output plus_tip;</cline>
           </block>
           <block order="7">
             <cline>Close main()</cline>
@@ -387,8 +387,8 @@ int main() {
 int main() {
     int hours = 3;
     int minutes = 15;
-    int totalMinutes = minutes + 60 * hours;
-    int seconds = totalMinutes * 60;
+    int total_minutes = minutes + 60 * hours;
+    int seconds = total_minutes * 60;
 }
         ]]></code></program>
     </solution>

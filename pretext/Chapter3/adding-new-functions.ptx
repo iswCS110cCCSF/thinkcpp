@@ -13,10 +13,10 @@
   <p><c>main</c> doesn't take any parameters, as indicated by the empty parentheses() in it's
     definition. The first couple of functions we are going to write also have no parameters, so the
     syntax looks like this:</p>
-  <program>void newLine() {
+  <program>void new_line() {
   std::cout &lt;&lt; std::endl ;
 }</program>
-  <p>This function is named <c>newLine</c>; it contains only a single statement, which outputs a new line
+  <p>This function is named <c>new_line</c>; it contains only a single statement, which outputs a new line
     character, represented by the special value <c>endl</c>.</p>
   <p>The first word of the header is the <q>return type</q>: <term>void</term> returns nothing; <term>
     int</term> returns an int; <term>double</term> returns a double; <term>string</term> returns a
@@ -25,7 +25,7 @@
     built-in C++ commands:</p>
   <program>int main() {
   std::cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; std::endl ;
-  newLine();
+  new_line();
   std::cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; std::endl ;
   return 0;
 }</program>
@@ -37,16 +37,16 @@ Second line.</program>
     space between the lines? We could call the same function repeatedly:</p>
   <program>int main() {
   std::cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; std::endl ;
-  newLine();
-  newLine();
-  newLine();
+  new_line();
+  new_line();
+  new_line();
   std::cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; std::endl ;
   return 0;
 }</program>
-  <p>Or we could write a new function, named <c>threeLine</c>, that prints three new lines:</p>
+  <p>Or we could write a new function, named <c>three_line</c>, that prints three new lines:</p>
   <listing label="new_functions_AC_1">
     <title>
-      Here we define the threeLine function, which calls the newLine function three times. The
+      Here we define the three_line function, which calls the newLine function three times. The
         result is a function that prints three lines after it is called (each of those empty lines
         begins with a <q>*</q>).
     </title>
@@ -54,17 +54,17 @@ Second line.</program>
       <code><![CDATA[
 #include <iostream>
 
-void newLine() {
+void new_line() {
     std::cout << '*' << std::endl;
 }
 
-void threeLine() {
-    newLine();  newLine();  newLine();
+void three_line() {
+    new_line();  new_line();  new_line();
 }
 
 int main() {
     std::cout << "First Line." << std::endl;
-    threeLine();
+    three_line();
     std::cout << "Second Line." << std::endl;
     return 0;
 }
@@ -79,11 +79,11 @@ int main() {
           common and useful to do so.</p>
       </li>
       <li>
-        <p>You can have one function call another function. In this case, <c>main</c> calls <c>threeLine</c> and
-          threeLine calls <c>newLine</c>. Again, this is common and useful.</p>
+        <p>You can have one function call another function. In this case, <c>main</c> calls <c>three_line</c> and
+          three_line calls <c>new_line</c>. Again, this is common and useful.</p>
       </li>
       <li>
-        <p>In <c>threeLine</c> I wrote three statements all on the same line, which is syntactically legal
+        <p>In <c>three_line</c> I wrote three statements all on the same line, which is syntactically legal
           (remember that spaces and new lines usually don't change the meaning of a program). On the
           other hand, <term>it is usually a
             better idea to put each statement on a line by itself</term>, to make your program easy
@@ -104,13 +104,13 @@ int main() {
       <li>
         <p>Creating a new function gives you an opportunity to give a name to a group of statements.
           Functions can simplify a program by hiding a complex computation behind a single command,
-          and by using English words in place of arcane code. Which is clearer, <c>newLine</c> or <c>cout &lt;&lt;
+          and by using English words in place of arcane code. Which is clearer, <c>new_line</c> or <c>cout &lt;&lt;
 endl</c>?</p>
       </li>
       <li>
         <p>Creating a new function can make a program smaller by eliminating
           repetitive code. For example, a short way to print nine consecutive
-          new lines is to call threeLine three times. How would you print 27
+          new lines is to call three_line three times. How would you print 27
           new lines?</p>
       </li>
     </ol>
@@ -162,24 +162,24 @@ endl</c>?</p>
       Remember, the operator '=' is used for assignment.
     </p></feedback>
     <areas>
-      <cline><area correct="yes">void printX() {</area></cline>
+      <cline><area correct="yes">void print_x() {</area></cline>
       <cline>    <area correct="no">cout &lt;&lt; &quot;X&quot;;</area></cline>
       <cline>}</cline>
       <cline/>
-      <cline><area correct="yes">void printVar(int a) {</area></cline>
+      <cline><area correct="yes">void print_var(int a) {</area></cline>
       <cline>    <area correct="no">cout &lt;&lt; a;</area></cline>
       <cline>}</cline>
       <cline/>
       <cline><area correct="yes">int main() {</area></cline>
       <cline>    <area correct="no">int x = 7;</area></cline>
-      <cline>    <area correct="no">printVar(x);</area></cline>
+      <cline>    <area correct="no">print_var(x);</area></cline>
       <cline>    <area correct="no">if (x &lt; 10) {</area></cline>
       <cline>    <area correct="no">x = x - 1;</area></cline>
       <cline>}</cline>
-      <cline><area correct="no">printX();</area></cline>
+      <cline><area correct="no">print_x();</area></cline>
       <cline>    <area correct="no">int y = 3;</area></cline>
       <cline>    <area correct="no">double result = x / y;</area></cline>
-      <cline>    <area correct="no">printVar(result);</area></cline>
+      <cline>    <area correct="no">print_var(result);</area></cline>
       <cline>    return 0;</cline>
       <cline>}</cline>
     </areas>
@@ -192,24 +192,24 @@ endl</c>?</p>
       Remember, the operator '=' is used for assignment.
     </p></feedback>
     <areas>
-      <cline><area correct="no">void printX() {</area></cline>
+      <cline><area correct="no">void print_x() {</area></cline>
       <cline>    <area correct="no">cout &lt;&lt; &quot;X&quot;;</area></cline>
       <cline>}</cline>
       <cline/>
-      <cline><area correct="no">void printVar(int a) {</area></cline>
+      <cline><area correct="no">void print_var(int a) {</area></cline>
       <cline>    <area correct="no">cout &lt;&lt; a;</area></cline>
       <cline>}</cline>
       <cline/>
       <cline><area correct="no">int main() {</area></cline>
       <cline>    <area correct="no">int x = 7;</area></cline>
-      <cline>    <area correct="yes">printVar(x);</area></cline>
+      <cline>    <area correct="yes">print_var(x);</area></cline>
       <cline>    <area correct="no">if (x &lt; 10) {</area></cline>
       <cline>    <area correct="no">x = x - 1;</area></cline>
       <cline>}</cline>
-      <cline><area correct="yes">printX();</area></cline>
+      <cline><area correct="yes">print_x();</area></cline>
       <cline>    <area correct="no">int y = 3;</area></cline>
       <cline>    <area correct="no">double result = x / y;</area></cline>
-      <cline>    <area correct="yes">printVar(result);</area></cline>
+      <cline>    <area correct="yes">print_var(result);</area></cline>
       <cline>    return 0;</cline>
       <cline>}</cline>
     </areas>

@@ -27,8 +27,8 @@ int bob;
     plan to do with the variable. For example, if you saw these variable
     declarations:</p>
   <program>
-char firstLetter;
-char lastLetter;
+char first_letter;
+char last_letter;
 int hour, minute;</program>
   <p>you could probably make a good guess at what values would be stored in them. This example also
     demonstrates the syntax for declaring multiple variables with the same type: hour and minute are
@@ -129,7 +129,7 @@ char tom;
   </exercise>
   <exercise label="variables_4" number="yes" adaptive="yes" indentation="hide">
     <statement>
-      <p>Arrange the code blocks to create the variables <c>name</c>, <c>firstInitial</c>, and <c>numberOfSiblings</c> IN THAT
+      <p>Arrange the code blocks to create the variables <c>name</c>, <c>first_initial</c>, and <c>number_of_siblings</c> IN THAT
         ORDER. It is up to you to choose the correct types for these variables.</p>
     </statement>
     <blocks>
@@ -143,18 +143,18 @@ char tom;
       </block>
       <block order="2">
         <choice correct="yes">
-          <cline>char firstInitial;</cline>
+          <cline>char first_initial;</cline>
         </choice>
         <choice>
-          <cline>string firstInitial;</cline>
+          <cline>string first_initial;</cline>
         </choice>
       </block>
       <block order="3">
         <choice correct="yes">
-          <cline>int numberOfSiblings;</cline>
+          <cline>int number_of_siblings;</cline>
         </choice>
         <choice>
-          <cline>double numberOfSiblings;</cline>
+          <cline>double number_of_siblings;</cline>
         </choice>
       </block>
     </blocks>

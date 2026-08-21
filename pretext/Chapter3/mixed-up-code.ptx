@@ -15,10 +15,10 @@
     <blocks>
       <block order="6">
         <choice correct="yes">
-          <cline>void printInteger(double d) {</cline>
+          <cline>void print_integer(double d) {</cline>
         </choice>
         <choice>
-          <cline>printInteger(double d); </cline>
+          <cline>print_integer(double d); </cline>
         </choice>
       </block>
       <block order="5">
@@ -47,13 +47,13 @@
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Construct a function called newLine that takes no arguments and prints a blank line. Then
+      <p>Construct a function called new_line that takes no arguments and prints a blank line. Then
         construct another function called divider that prints two blank lines separated by a line of <q>&#x2026;
         &#x2026; &#x2026; &#x2026;</q></p>
     </statement>
     <blocks>
       <block order="6">
-        <cline>void newLine() {</cline>
+        <cline>void new_line() {</cline>
       </block>
       <block order="7">
         <cline> std::cout &lt;&lt; std::endl ;</cline>
@@ -66,15 +66,15 @@
           <cline>void divider() {</cline>
         </choice>
         <choice>
-          <cline> void divider (newLine) { </cline>
+          <cline> void divider (new_line) { </cline>
         </choice>
       </block>
       <block order="4">
         <choice correct="yes">
-          <cline> newLine();  //first call</cline>
+          <cline> new_line();  //first call</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ std::cout << newLine();  //first call ]]></cline>
+          <cline><![CDATA[ std::cout << new_line();  //first call ]]></cline>
         </choice>
       </block>
       <block order="11">
@@ -85,7 +85,7 @@
           <cline> newline();  //second call</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ std::cout << newLine();  //second call ]]></cline>
+          <cline><![CDATA[ std::cout << new_line();  //second call ]]></cline>
         </choice>
       </block>
       <block order="8">
@@ -104,10 +104,10 @@
     <blocks>
       <block order="1">
         <choice correct="yes">
-          <cline>void volumeCone(double r, double h) {</cline>
+          <cline>void volume_cone(double r, double h) {</cline>
         </choice>
         <choice>
-          <cline>double volumeCone(double r, double h) { </cline>
+          <cline>double volume_cone(double r, double h) { </cline>
         </choice>
       </block>
       <block order="2">
@@ -150,10 +150,10 @@
       </block>
       <block order="11">
         <choice correct="yes">
-          <cline>void sineDegrees(double d) {</cline>
+          <cline>void sine_degrees(double d) {</cline>
         </choice>
         <choice>
-          <cline>void sineDegrees() { </cline>
+          <cline>void sine_degrees() { </cline>
         </choice>
       </block>
       <block order="7">
@@ -195,10 +195,10 @@
     <blocks>
       <block order="5">
         <choice correct="yes">
-          <cline>void finalPrice(double item) {</cline>
+          <cline>void final_price(double item) {</cline>
         </choice>
         <choice>
-          <cline>void finalPrice(string item) { </cline>
+          <cline>void final_price(string item) { </cline>
         </choice>
       </block>
       <block order="2">
@@ -228,7 +228,7 @@
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Suppose you have already defined a function called sumOfSquares which returns the sum of
+      <p>Suppose you have already defined a function called sum_of_squares which returns the sum of
         the squares of two numbers and root which returns the square root of a number. Construct a
         function that calculates the hypotenuse of the right triangle and prints the three
         sidelengths.</p>
@@ -249,15 +249,15 @@
       </block>
       <block order="10">
         <choice correct="yes">
-          <cline> double sqSum = sumOfSquares(s2, s1);</cline>
+          <cline> double sq_sum = sum_of_squares(s2, s1);</cline>
         </choice>
         <choice>
-          <cline> sqSum = sumOfSquares(s1, s2); </cline>
+          <cline> sq_sum = sum_of_squares(s1, s2); </cline>
         </choice>
       </block>
       <block order="1">
         <choice correct="yes">
-          <cline> double hyp = root(sqSum);</cline>
+          <cline> double hyp = root(sq_sum);</cline>
         </choice>
         <choice>
           <cline> double hyp = root(s1, s2); </cline>
@@ -288,10 +288,10 @@
     <blocks>
       <block order="6">
         <choice correct="yes">
-          <cline>void eatMore(string animal) {</cline>
+          <cline>void eat_more(string animal) {</cline>
         </choice>
         <choice>
-          <cline>void eatMore() { </cline>
+          <cline>void eat_more() { </cline>
         </choice>
       </block>
       <block order="2">
@@ -332,30 +332,30 @@
     </statement>
     <blocks>
       <block order="6">
-        <cline>void printAmount(int dollars, int cents) {</cline>
+        <cline>void print_amount(int dollars, int cents) {</cline>
       </block>
       <block order="8">
         <choice correct="yes">
-          <cline> int dollarTotal = dollars + cents / 100;</cline>
+          <cline> int dollar_total = dollars + cents / 100;</cline>
         </choice>
         <choice>
-          <cline> double dollarTotal = dollars + cents / 100.0; </cline>
+          <cline> double dollar_total = dollars + cents / 100.0; </cline>
         </choice>
       </block>
       <block order="2">
         <choice correct="yes">
-          <cline> double centTotal = cents % 100;</cline>
+          <cline> double cent_total = cents % 100;</cline>
         </choice>
         <choice>
-          <cline> double centTotal = cents / 100; </cline>
+          <cline> double cent_total = cents / 100; </cline>
         </choice>
       </block>
       <block order="4">
         <choice correct="yes">
-          <cline><![CDATA[ std::cout << "$" << dollarTotal << "." << centTotal;]]></cline>
+          <cline><![CDATA[ std::cout << "$" << dollar_total << "." << cent_total;]]></cline>
         </choice>
         <choice>
-          <cline><![CDATA[ std::cout << "$" << dollarTotal << centTotal; ]]></cline>
+          <cline><![CDATA[ std::cout << "$" << dollar_total << cent_total; ]]></cline>
         </choice>
       </block>
       <block order="1">
@@ -378,10 +378,10 @@
     <blocks>
       <block order="9">
         <choice correct="yes">
-          <cline>void conditionalProb(double B, double both) {</cline>
+          <cline>void conditional_prob(double B, double both) {</cline>
         </choice>
         <choice>
-          <cline>void conditionalProb(double B, both) { </cline>
+          <cline>void conditional_prob(double B, both) { </cline>
         </choice>
       </block>
       <block order="6">
@@ -402,20 +402,20 @@
         <cline>int main() {</cline>
       </block>
       <block order="4">
-        <cline> double pSnow = 0.14;</cline>
-        <cline> double pSnowday = 0.04;</cline>
-        <cline> double pBoth = 0.08;</cline>
+        <cline> double p_snow = 0.14;</cline>
+        <cline> double p_snow_day = 0.04;</cline>
+        <cline> double p_both = 0.08;</cline>
       </block>
       <block order="5">
         <choice correct="yes">
-          <cline> conditionalProb(pSnow, pBoth);</cline>
+          <cline> conditionalProb(p_snow, p_both);</cline>
         </choice>
         <choice>
-          <cline> conditionalProb(pSnowday, pBoth); </cline>
+          <cline> conditionalProb(p_snow_day, p_both); </cline>
         </choice>
       </block>
       <block order="3">
-        <cline> conditionalProb(pSnowday, pSnow); </cline>
+        <cline> conditionalProb(p_snow_day, p_snow); </cline>
       </block>
       <block order="7">
         <cline>}</cline>
@@ -438,10 +438,10 @@
     <blocks>
       <block order="9">
         <choice correct="yes">
-          <cline>void finalGrade(double m1, double m2, double f) {</cline>
+          <cline>void final_grade(double m1, double m2, double f) {</cline>
         </choice>
         <choice>
-          <cline>void finalGrade(double m1, m2, f) { </cline>
+          <cline>void final_grade(double m1, m2, f) { </cline>
         </choice>
       </block>
       <block order="6">

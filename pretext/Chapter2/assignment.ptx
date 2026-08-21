@@ -4,7 +4,7 @@
   <p>Now that we have created some variables, we would like to store values in them. We do that with
     an <term>assignment statement</term>.</p>
   <program>
-firstLetter = 'a';   // give firstLetter the value 'a'
+first_letter = 'a';   // give first_letter the value 'a'
 hour = 11;           // assign the value 11 to hour
 minute = 59;         // set minute to 59
 </program>
@@ -30,7 +30,7 @@ minute = 59;         // set minute to 59
       <caption>State diagram for variables</caption>
       <image source="Chapter2/Images/2.4statediagram.png" width="50%">
           <description><p>
-              Three boxes. One labeled firstLetter containing 'a'. One labeled
+              Three boxes. One labeled first_letter containing 'a'. One labeled
               hour containing 11. One labeled minute containing 59.
           </p></description>
       </image>
@@ -50,8 +50,8 @@ minute = 59;         // set minute to 59
       code.</p>
     <program interactive="codelens" xml:id="state_of_mind_ed">
   int main() {
-    char firstLetter;
-    firstLetter = 'a';   // give firstLetter the value 'a'
+    char first_letter;
+    first_letter = 'a';   // give first_letter the value 'a'
     int hour;
     hour = 11;           // assign the value 11 to hour
     int minute;

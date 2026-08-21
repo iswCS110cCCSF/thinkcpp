@@ -3,7 +3,7 @@
   <p>The syntax for declaring and invoking functions with multiple parameters
     is a common source of errors. First, remember that you have to declare
     the type of every parameter. For example</p>
-  <program>void printTime(int hour, int minute) {
+  <program>void print_time(int hour, int minute) {
   std::cout &lt;&lt; hour;
   std::cout &lt;&lt; &quot;:&quot;;
   std::cout &lt;&lt; minute;
@@ -14,31 +14,31 @@
     the types of arguments when you call a function. The following is wrong!</p>
   <program>int hour = 11;
 int minute = 59;
-printTime(int hour, int minute);   // WRONG!</program>
+print_time(int hour, int minute);   // WRONG!</program>
   <p>In this case, the compiler can tell the type of hour and minute by
     looking at their declarations.</p>
   <warning>
     <p>It is unnecessary and illegal to include the type when you pass
       variables as arguments! The type is only needed for declaration.</p>
   </warning>
-  <p>The correct syntax is printTime(hour, minute).</p>
+  <p>The correct syntax is print_time(hour, minute).</p>
   <listing label="multiple_params_AC_1">
     <title>
       This program shows how the dollar_amount and cent_amount arguments
-        are passed into the printPrice function.
+        are passed into the print_price function.
     </title>
     <program interactive="activecode" line-numbers="yes" label="multiple_params_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
 
-void printPrice(int dollars, int cents) {
+void print_price(int dollars, int cents) {
     std::cout << "Price is " << dollars << " dollars and " << cents << " cents." << std::endl;
 }
 
 int main() {
     int dollar_amount = 2;
     int cent_amount = 92;
-    printPrice(dollar_amount, cent_amount);
+    print_price(dollar_amount, cent_amount);
     return 0;
 }
         ]]></code>
@@ -64,17 +64,17 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>totalCost(double cost, double tax) {</c>
+            <c>total_cost(double cost, double tax) {</c>
           </p>
         </statement>
         <feedback><p>
-          <c>totalcost</c> needs a return type.
+          <c>total_cost</c> needs a return type.
         </p></feedback>
       </choice>
       <choice correct="yes">
         <statement>
           <p>
-            <c>void totalCost(double cost, double tax, double discount) {</c>
+            <c>void total_cost(double cost, double tax, double discount) {</c>
           </p>
         </statement>
         <feedback><p>Correct!</p></feedback>
@@ -84,7 +84,7 @@ int main() {
   <exercise label="multiple_params_2">
     <statement>
       <p>Which of the following is a legal function call of the function below?</p>
-      <program>void multiplyTwo(int num, string name) {
+      <program>void multiply_two(int num, string name) {
   int total = num * 2;
   std::cout &lt;&lt; &quot;Hi &quot; &lt;&lt; name &lt;&lt; &quot;, your total is &quot; &lt;&lt; total &lt;&lt; &quot;!&quot; &lt;&lt; std::endl ;
 }
@@ -98,7 +98,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>multiplyTwo(int x, string phil);</c>
+            <c>multiply_two(int x, string phil);</c>
           </p>
         </statement>
         <feedback><p>
@@ -108,7 +108,7 @@ int main() {
       <choice correct="yes">
         <statement>
           <p>
-            <c>multiplyTwo (x, phil);</c>
+            <c>multiply_two (x, phil);</c>
           </p>
         </statement>
         <feedback><p>Correct!</p></feedback>
@@ -116,7 +116,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>void multiplyTwo(int num, string name) {</c>
+            <c>void multiply_two(int num, string name) {</c>
           </p>
         </statement>
         <feedback><p>This is the function definition.</p></feedback>
@@ -124,7 +124,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>void multiplyTwo(int x, string phil);</c>
+            <c>void multiply_two(int x, string phil);</c>
           </p>
         </statement>
         <feedback><p>
