@@ -2059,7 +2059,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "2.10",
   "title": "Composition",
-  "body": " Composition  So far we have looked at the elements of a programming language—variables, expressions, and statements—in isolation, without talking about how to combine them.  One of the most useful features of programming languages is their ability to take small building blocks and compose them. For example, we know how to multiply integers and we know how to output values; it turns out we can do both at the same time:   This program performs multiplication and prints the result.   #include <iostream> int main() { std::cout << 17 * 3; }    Actually, I shouldn't say at the same time, since in reality the multiplication has to happen before the output, but the point is that any expression, involving numbers, characters, and variables, can be used inside an output statement. We've already seen one example:   This program performs a calculation involving variables and prints the result at the same time.   #include <iostream> int main() { int hour = 7; int minute = 1; std::cout << hour * 60 + minute << std::endl; }    You can also put arbitrary expressions on the right-hand side of an assignment statement:   This program performs a calculation involving variables and assigns the result to a variable.   #include <iostream> int main() { int minute = 3; int percentage; percentage = (minute * 100) \/ 60; std::cout << percentage; }    This ability may not seem so impressive now, but we will see other examples where composition makes it possible to express complex computations neatly and concisely.   There are limits on where you can use certain expressions; most notably, the left-hand side of an assignment statement has to be a variable name, not an expression.   That's because the left side indicates the storage location where the result will go. Expressions do not represent storage locations, only values. So the following is illegal: minute + 1 = hour; .    What must be changed in order for this code block to work?  int main() { int dogs = 3; int cats = 6; int pets; dogs + cats = pets; std::cout << \"I have \" << pets << \" pets!\"; return 0; }      Change line 5 to pets = dogs + cats;   Assignment statements operate such that the evaluated expression on the right is assigned to the variable on the left.     Change line 5 to int pets = dogs + cats;   pets has already been declared as an int.     Change line 5 to pets == dogs + cats;   The == operator checks if the left side EQUALS the right side. It is not the correct operator here.     Change line 5 to int pets == dogs + cats;   pets has already been declared as an int. Also, the == operator is not the proper choice here.     No change, the code runs fine as is.   Assignment statements assign the value on the right to the variable on the left.       The left-hand side of an assignment statement has to be a name, not an expression.             In programming, another word for combine is .             Finish the code below so that the velocity is calculated completely on a single line. Hint: the current velocity results from 1) the initial velocity and 2) the acceleration over a window of time. Use v0 for initial velocity, a for acceleration, and t for time.   #include <iostream> int main() { int v0 = 5, a = 3, t = 4, velocity; \/\/ You may only use the next line for your code. velocity = ; std::cout << \"Testing...\" << std::endl; std::cout << \"Yours = \" << velocity << std::endl; std::cout << \"Correct = 17\"; }      Finish the code below so that the volume of a rectangular prism with length l , width w , and height h is calculated on a single line.   #include <iostream> int main() { int l = 2, w = 3, h = 4, volume; \/\/ You may only use the next line for your code. volume = ; std::cout << \"Testing...\" << std::endl; std::cout << \"Yours = \" << volume << std::endl; std::cout << \"Correct = 24\"; }    "
+  "body": " Composition  So far we have looked at the elements of a programming language—variables, expressions, and statements—in isolation, without talking about how to combine them.  One of the most useful features of programming languages is their ability to take small building blocks and compose them. For example, we know how to multiply integers and we know how to output values; it turns out we can do both at the same time:   This program performs multiplication and prints the result.   #include <iostream> int main() { std::cout << 17 * 3; }    Actually, I shouldn't say at the same time, since in reality the multiplication has to happen before the output, but the point is that any expression, involving numbers, characters, and variables, can be used inside an output statement. We've already seen one example:   This program performs a calculation involving variables and prints the result at the same time.   #include <iostream> int main() { int hour = 7; int minute = 1; std::cout << hour * 60 + minute << std::endl; }    You can also put arbitrary expressions on the right-hand side of an assignment statement:   This program performs a calculation involving variables and assigns the result to a variable.   #include <iostream> int main() { int minute = 3; int percentage; percentage = (minute * 100) \/ 60; std::cout << percentage; }    This ability may not seem so impressive now, but we will see other examples where composition makes it possible to express complex computations neatly and concisely.   Newlines with '\\n'  You have already seen std::endl used to move output to the next line.    std::endl adds a newline and flushes the output stream.    '\\n' adds a newline without forcing a flush.    For normal output, '\\n' is usually sufficient and may be more efficient.    For plain text:   std::cout << \"Hello\\n\";   When combining output:   std::cout << \"Score: \" << score << '\\n';   In this course, prefer '\\n' for ordinary line breaks and use std::endl only when you specifically need to flush the output stream.    There are limits on where you can use certain expressions; most notably, the left-hand side of an assignment statement has to be a variable name, not an expression.   That's because the left side indicates the storage location where the result will go. Expressions do not represent storage locations, only values. So the following is illegal: minute + 1 = hour; .    What must be changed in order for this code block to work?  int main() { int dogs = 3; int cats = 6; int pets; dogs + cats = pets; std::cout << \"I have \" << pets << \" pets!\"; return 0; }      Change line 5 to pets = dogs + cats;   Assignment statements operate such that the evaluated expression on the right is assigned to the variable on the left.     Change line 5 to int pets = dogs + cats;   pets has already been declared as an int.     Change line 5 to pets == dogs + cats;   The == operator checks if the left side EQUALS the right side. It is not the correct operator here.     Change line 5 to int pets == dogs + cats;   pets has already been declared as an int. Also, the == operator is not the proper choice here.     No change, the code runs fine as is.   Assignment statements assign the value on the right to the variable on the left.       The left-hand side of an assignment statement has to be a name, not an expression.             In programming, another word for combine is .             Finish the code below so that the velocity is calculated completely on a single line. Hint: the current velocity results from 1) the initial velocity and 2) the acceleration over a window of time. Use v0 for initial velocity, a for acceleration, and t for time.   #include <iostream> int main() { int v0 = 5, a = 3, t = 4, velocity; \/\/ You may only use the next line for your code. velocity = ; std::cout << \"Testing...\" << std::endl; std::cout << \"Yours = \" << velocity << std::endl; std::cout << \"Correct = 17\"; }      Finish the code below so that the volume of a rectangular prism with length l , width w , and height h is calculated on a single line.   #include <iostream> int main() { int l = 2, w = 3, h = 4, volume; \/\/ You may only use the next line for your code. volume = ; std::cout << \"Testing...\" << std::endl; std::cout << \"Yours = \" << volume << std::endl; std::cout << \"Correct = 24\"; }    "
 },
 {
   "id": "chapter2_composition-2",
@@ -2134,18 +2134,81 @@ var ptx_lunr_docs = [
   "body": "This ability may not seem so impressive now, but we will see other examples where composition makes it possible to express complex computations neatly and concisely. "
 },
 {
-  "id": "chapter2_composition-10",
+  "id": "chapter2_composition-10-2",
   "level": "2",
-  "url": "chapter2_composition.html#chapter2_composition-10",
+  "url": "chapter2_composition.html#chapter2_composition-10-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "You have already seen std::endl used to move output to the next line. "
+},
+{
+  "id": "chapter2_composition-10-3-1-1",
+  "level": "2",
+  "url": "chapter2_composition.html#chapter2_composition-10-3-1-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "std::endl adds a newline and flushes the output stream. "
+},
+{
+  "id": "chapter2_composition-10-3-2-1",
+  "level": "2",
+  "url": "chapter2_composition.html#chapter2_composition-10-3-2-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "'\\n' adds a newline without forcing a flush. "
+},
+{
+  "id": "chapter2_composition-10-3-3-1",
+  "level": "2",
+  "url": "chapter2_composition.html#chapter2_composition-10-3-3-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "For normal output, '\\n' is usually sufficient and may be more efficient. "
+},
+{
+  "id": "chapter2_composition-10-4",
+  "level": "2",
+  "url": "chapter2_composition.html#chapter2_composition-10-4",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "For plain text: "
+},
+{
+  "id": "chapter2_composition-10-6",
+  "level": "2",
+  "url": "chapter2_composition.html#chapter2_composition-10-6",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "When combining output: "
+},
+{
+  "id": "chapter2_composition-10-8",
+  "level": "2",
+  "url": "chapter2_composition.html#chapter2_composition-10-8",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In this course, prefer '\\n' for ordinary line breaks and use std::endl only when you specifically need to flush the output stream. "
+},
+{
+  "id": "chapter2_composition-11",
+  "level": "2",
+  "url": "chapter2_composition.html#chapter2_composition-11",
   "type": "Warning",
   "number": "2.10.1",
   "title": "",
   "body": " There are limits on where you can use certain expressions; most notably, the left-hand side of an assignment statement has to be a variable name, not an expression.  "
 },
 {
-  "id": "chapter2_composition-11",
+  "id": "chapter2_composition-12",
   "level": "2",
-  "url": "chapter2_composition.html#chapter2_composition-11",
+  "url": "chapter2_composition.html#chapter2_composition-12",
   "type": "Paragraph",
   "number": "",
   "title": "",
