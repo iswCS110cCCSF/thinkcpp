@@ -64,7 +64,7 @@ int main() {
             examples where composition makes it possible to express complex
             computations neatly and concisely.</p>
 			
-<aside>
+<subsection>
     <title>Newlines with <c>'\n'</c></title>
 
     <p>
@@ -103,7 +103,7 @@ std::cout &lt;&lt; "Score: " &lt;&lt; score &lt;&lt; '\n';
         In this course, prefer <c>'\n'</c> for ordinary line breaks and use
         <c>std::endl</c> only when you specifically need to flush the output stream.
     </p>
-</aside>
+</subsection>
   <warning>
     <p>There are limits on where you can use certain expressions; most
                 notably, the left-hand side of an assignment statement has to be a
