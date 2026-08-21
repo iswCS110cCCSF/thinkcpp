@@ -2134,67 +2134,13 @@ var ptx_lunr_docs = [
   "body": "This ability may not seem so impressive now, but we will see other examples where composition makes it possible to express complex computations neatly and concisely. "
 },
 {
-  "id": "chapter2_composition-10-2",
+  "id": "chapter2_composition-10",
   "level": "2",
-  "url": "chapter2_composition.html#chapter2_composition-10-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "You have already seen std::endl used to move output to the next line. "
-},
-{
-  "id": "chapter2_composition-10-3-1-1",
-  "level": "2",
-  "url": "chapter2_composition.html#chapter2_composition-10-3-1-1",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "std::endl adds a newline and flushes the output stream. "
-},
-{
-  "id": "chapter2_composition-10-3-2-1",
-  "level": "2",
-  "url": "chapter2_composition.html#chapter2_composition-10-3-2-1",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "'\\n' adds a newline without forcing a flush. "
-},
-{
-  "id": "chapter2_composition-10-3-3-1",
-  "level": "2",
-  "url": "chapter2_composition.html#chapter2_composition-10-3-3-1",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For normal output, '\\n' is usually sufficient and may be more efficient. "
-},
-{
-  "id": "chapter2_composition-10-4",
-  "level": "2",
-  "url": "chapter2_composition.html#chapter2_composition-10-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For plain text: "
-},
-{
-  "id": "chapter2_composition-10-6",
-  "level": "2",
-  "url": "chapter2_composition.html#chapter2_composition-10-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "When combining output: "
-},
-{
-  "id": "chapter2_composition-10-8",
-  "level": "2",
-  "url": "chapter2_composition.html#chapter2_composition-10-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In this course, prefer '\\n' for ordinary line breaks and use std::endl only when you specifically need to flush the output stream. "
+  "url": "chapter2_composition.html#chapter2_composition-10",
+  "type": "Subsection",
+  "number": "2.10.1",
+  "title": "Newlines with <code class=\"code-inline tex2jax_ignore\">'\\n'<\/code>",
+  "body": " Newlines with '\\n'  You have already seen std::endl used to move output to the next line.    std::endl adds a newline and flushes the output stream.    '\\n' adds a newline without forcing a flush.    For normal output, '\\n' is usually sufficient and may be more efficient.    For plain text:   std::cout << \"Hello\\n\";   When combining output:   std::cout << \"Score: \" << score << '\\n';   In this course, prefer '\\n' for ordinary line breaks and use std::endl only when you specifically need to flush the output stream.  "
 },
 {
   "id": "chapter2_composition-11",
