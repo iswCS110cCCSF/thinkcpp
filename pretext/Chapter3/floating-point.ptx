@@ -65,6 +65,9 @@ double y = 1.0 / 3.0;
     interested to know that the underlying mechanism is completely
     different. In fact, most processors have special hardware just for
     performing floating-point operations.</p>
+	
+	
+	
   <exercise label="floating_point_1">
     <statement>
       <p>A(n) <fillin answer="initialization"/> statment consists of a declaration statement and an assignment statement, which

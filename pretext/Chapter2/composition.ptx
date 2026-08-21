@@ -63,6 +63,47 @@ int main() {
   <p>This ability may not seem so impressive now, but we will see other
             examples where composition makes it possible to express complex
             computations neatly and concisely.</p>
+			
+<aside>
+    <title>Newlines with <c>'\n'</c></title>
+
+    <p>
+        You have already seen <c>std::endl</c> used to move output to the next line.
+    </p>
+
+    <ul>
+        <li>
+            <p><c>std::endl</c> adds a newline <em>and</em> flushes the output stream.</p>
+        </li>
+        <li>
+            <p><c>'\n'</c> adds a newline without forcing a flush.</p>
+        </li>
+        <li>
+            <p>For normal output, <c>'\n'</c> is usually sufficient and may be more efficient.</p>
+        </li>
+    </ul>
+
+    <p>For plain text:</p>
+
+    <program language="cpp">
+        <input>
+std::cout &lt;&lt; "Hello\n";
+        </input>
+    </program>
+
+    <p>When combining output:</p>
+
+    <program language="cpp">
+        <input>
+std::cout &lt;&lt; "Score: " &lt;&lt; score &lt;&lt; '\n';
+        </input>
+    </program>
+
+    <p>
+        In this course, prefer <c>'\n'</c> for ordinary line breaks and use
+        <c>std::endl</c> only when you specifically need to flush the output stream.
+    </p>
+</aside>
   <warning>
     <p>There are limits on where you can use certain expressions; most
                 notably, the left-hand side of an assignment statement has to be a
