@@ -533,7 +533,7 @@ eBookConfig.enable_chatcodes =  false;
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
 void new_line() {
-    std::cout &lt;&lt; std::endl;
+    std::cout &lt;&lt; '\n';
 }
 
 void three_line() {
@@ -543,9 +543,9 @@ void three_line() {
 }
 
 int main() {
-  std::cout &lt;&lt; "First Line." &lt;&lt; std::endl;
+  std::cout &lt;&lt; "First Line." &lt;&lt; '\n';
   three_line();
-  std::cout &lt;&lt; "Second Line." &lt;&lt; std::endl;
+  std::cout &lt;&lt; "Second Line." &lt;&lt; '\n';
   return 0;
 }
 </code></pre></div>

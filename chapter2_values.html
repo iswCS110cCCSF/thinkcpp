@@ -528,19 +528,42 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Values</span>
 </h1>
-<div class="para" id="chapter2_values-2">A <dfn class="terminology">value</dfn> is one of the fundamental things—like a letter or a number—that a program manipulates. The only values we have manipulated so far are the std::string values we have been outputting, like “Hello, world.”. You (and the compiler) can identify <code class="code-inline tex2jax_ignore">string</code> values because they are enclosed in quotation marks.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter2_values-2">A <dfn class="terminology">value</dfn> is one of the fundamental things—like a letter or a number—that a program manipulates. The only values we have manipulated so far are text values we have been outputting, like “Hello, world.”. Text enclosed in quotation marks like this is called a <dfn class="terminology">string literal</dfn>. Later, we will use string literals to create and initialize std::string objects.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter2_values-3">There many different kinds of values, called <dfn class="terminology">types</dfn>. This includes integers and characters. An <dfn class="terminology">integer</dfn> is a whole number like 1 or 17. You can output integer values the same way you output strings:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter2_values-3">For example:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">std::string greeting = "Hello";
+</code></pre></div>
+<ul class="disc" id="chapter2_values-5">
+<li id="chapter2_values-5-1">
+<div class="para" id="chapter2_values-5-1-1">
+<code class="code-inline tex2jax_ignore">"Hello"</code> is a <dfn class="terminology">string literal</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter2_values-5-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="chapter2_values-5-2">
+<div class="para" id="chapter2_values-5-2-1">
+<code class="code-inline tex2jax_ignore">greeting</code> is an <code class="code-inline tex2jax_ignore">std::string</code> object.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-5-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter2_values-5-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="chapter2_values-5-3">
+<div class="para" id="chapter2_values-5-3-1">The string literal <code class="code-inline tex2jax_ignore">"Hello"</code> is used to initialize the <code class="code-inline tex2jax_ignore">std::string</code> object <code class="code-inline tex2jax_ignore">greeting</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-5-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter2_values-5-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="para" id="chapter2_values-6">There many different kinds of values, called <dfn class="terminology">types</dfn>. This includes integers and characters. An <dfn class="terminology">integer</dfn> is a whole number like 1 or 17. You can output integer values the same way you output strings:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">std::cout &lt;&lt; 17 &lt;&lt; std::endl ;
 </code></pre></div>
-<div class="para" id="chapter2_values-5">A <dfn class="terminology">character</dfn> value is a letter or digit or punctuation mark enclosed in single quotes, like ’a’ or ’5’. You can output character values the same way:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter2_values-8">A <dfn class="terminology">character</dfn> value is a letter or digit or punctuation mark enclosed in single quotes, like ’a’ or ’5’. You can output character values the same way:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">std::cout &lt;&lt; '}' &lt;&lt; std::endl ;
 </code></pre></div>
-<div class="para" id="chapter2_values-7">This example outputs a single close squiggly-brace on a line by itself.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter2_values-10">This example outputs a single close squiggly-brace on a line by itself.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter2_values-8">It is easy to confuse different types of values, like <code class="code-inline tex2jax_ignore">"5"</code>, <code class="code-inline tex2jax_ignore">'5'</code>, and <code class="code-inline tex2jax_ignore">5</code>, but if you pay attention to the punctuation, it should be clear that the first is a string, the second is a character and the third is an integer. The reason this distinction is important should become clear soon.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter2_values-11">It is easy to confuse different types of values, like <code class="code-inline tex2jax_ignore">"5"</code>, <code class="code-inline tex2jax_ignore">'5'</code>, and <code class="code-inline tex2jax_ignore">5</code>, but if you pay attention to the punctuation, it should be clear that the first is a string, the second is a character and the third is an integer. The reason this distinction is important should become clear soon.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_values-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="exercise exercise-like" id="values_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.2.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
@@ -560,7 +583,7 @@ eBookConfig.enable_chatcodes =  false;
 </h2>
 <div class="ptx-runestone-container"><div class="runestone clickablearea_section"><div data-component="clickablearea" data-question_label="" style="visibility: hidden;" id="rs-values2-0">
 <span data-question="">
-<div class="para" id="values2-0-1-1">Click on all integer VALUES.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#values2-0-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="values2-0-1-1">Click on all integer VALUES. We will learn about the utility of <code class="code-inline tex2jax_ignore">while</code> and lines 4-7 later.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#values2-0-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></span><span data-feedback="">
 <div class="para" id="values2-0-2-1">Try again!</div></span><pre><span data-incorrect="">int main() {</span>
     <span data-incorrect="">int x</span> = <span data-correct="">7</span>;

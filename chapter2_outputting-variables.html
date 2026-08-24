@@ -678,105 +678,45 @@ int main() {
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.5.2"><a tabindex="-1" href="#output_vars_2" title="Copy heading and permalink for Checkpoint 2.5.2" aria-label="Copy heading and permalink for Checkpoint 2.5.2">🔗</a></div>
 </article>
-<article class="exercise exercise-like" id="output_vars_3"><h2 class="heading">
+<article class="exercise exercise-like" id="outputting_variables_3"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.5.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="output_vars_3-1-1">And now, what prints?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#output_vars_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int main() {
-  int x;
-  char y;
-  x = '3';
-  y = 'e';
-  std::cout &lt;&lt; 'y';
-}
+<div class="para" id="outputting_variables_3-1-1">What happens when the following code is compiled?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#outputting_variables_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int number = "3";
+std::cout &lt;&lt; number &lt;&lt; '\n';
 </code></pre></div>
 </div>
-<ul data-component="multiplechoice" class="exercise-interactives" id="rs-output_vars_3" data-multipleanswers="false">
-<li data-component="answer" id="rs-output_vars_3_opt_a">
-<div class="para" id="output_vars_3-2-1-1-1">x</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-outputting_variables_3" data-multipleanswers="false">
+<li data-component="answer" id="rs-outputting_variables_3_opt_a">
+<div class="para" id="outputting_variables_3-2-1-1-1">The program compiles and prints <code class="code-inline tex2jax_ignore">3</code>.</div>
 </li>
-<li data-component="feedback" id="rs-output_vars_3_opt_a">
-<div class="para" id="output_vars_3-2-1-2-1">Take a look at the code again.</div>
+<li data-component="feedback" id="rs-outputting_variables_3_opt_a">
+<div class="para" id="outputting_variables_3-2-1-2-1">The value <code class="code-inline tex2jax_ignore">"3"</code> is a string literal, not an integer value. It cannot be used to initialize an <code class="code-inline tex2jax_ignore">int</code> variable this way.</div>
 </li>
-<li data-component="answer" id="rs-output_vars_3_opt_b">
-<div class="para" id="output_vars_3-2-2-1-1">y</div>
+<li data-component="answer" id="rs-outputting_variables_3_opt_b" data-correct="">
+<div class="para" id="outputting_variables_3-2-2-1-1">The compiler reports a type error.</div>
 </li>
-<li data-component="feedback" id="rs-output_vars_3_opt_b">
-<div class="para" id="output_vars_3-2-2-2-1">Take a look at the code again.</div>
+<li data-component="feedback" id="rs-outputting_variables_3_opt_b">
+<div class="para" id="outputting_variables_3-2-2-2-1">Correct. <code class="code-inline tex2jax_ignore">number</code> has type <code class="code-inline tex2jax_ignore">int</code>, but <code class="code-inline tex2jax_ignore">"3"</code> is a string literal. These types are not compatible for this initialization.</div>
 </li>
-<li data-component="answer" id="rs-output_vars_3_opt_c">
-<div class="para" id="output_vars_3-2-3-1-1">3</div>
+<li data-component="answer" id="rs-outputting_variables_3_opt_c">
+<div class="para" id="outputting_variables_3-2-3-1-1">The program compiles and prints <code class="code-inline tex2jax_ignore">"3"</code>.</div>
 </li>
-<li data-component="feedback" id="rs-output_vars_3_opt_c">
-<div class="para" id="output_vars_3-2-3-2-1">Take a look at the code again.</div>
+<li data-component="feedback" id="rs-outputting_variables_3_opt_c">
+<div class="para" id="outputting_variables_3-2-3-2-1">
+<code class="code-inline tex2jax_ignore">std::cout</code> would print the value stored in <code class="code-inline tex2jax_ignore">number</code>, but the program does not compile because <code class="code-inline tex2jax_ignore">"3"</code> cannot initialize an <code class="code-inline tex2jax_ignore">int</code>.</div>
 </li>
-<li data-component="answer" id="rs-output_vars_3_opt_d">
-<div class="para" id="output_vars_3-2-4-1-1">e</div>
+<li data-component="answer" id="rs-outputting_variables_3_opt_d">
+<div class="para" id="outputting_variables_3-2-4-1-1">The program compiles but produces a semantic error.</div>
 </li>
-<li data-component="feedback" id="rs-output_vars_3_opt_d">
-<div class="para" id="output_vars_3-2-4-2-1">Take a look at the code again.</div>
-</li>
-<li data-component="answer" id="rs-output_vars_3_opt_e" data-correct="">
-<div class="para" id="output_vars_3-2-5-1-1">Nothing! There will be a compile error!</div>
-</li>
-<li data-component="feedback" id="rs-output_vars_3_opt_e">
-<div class="para" id="output_vars_3-2-5-2-1">There is a type mismatch, so there will be a compile error!</div>
+<li data-component="feedback" id="rs-outputting_variables_3_opt_d">
+<div class="para" id="outputting_variables_3-2-4-2-1">A semantic error occurs when code compiles but does not do what was intended. This program does not reach that stage because the type mismatch prevents successful compilation.</div>
 </li>
 </ul>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.5.3"><a tabindex="-1" href="#output_vars_3" title="Copy heading and permalink for Checkpoint 2.5.3" aria-label="Copy heading and permalink for Checkpoint 2.5.3">🔗</a></div>
-</article>
-<article class="exercise exercise-like" id="output_vars_4"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.5.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h2>
-<div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-output_vars_4">
-<span data-subcomponent="question">
-<div class="para" id="output_vars_4-1-1">Match the variable initialization to its correct type. Do so by dragging items on the left to the matching box on the right.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#output_vars_4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div></span><span data-subcomponent="feedback">
-<div class="para" id="output_vars_4-2-1">Try again!</div></span><li data-subcomponent="draggable" id="rs-output_vars_4_drag1" data-category="1">
-<div class="para" id="output_vars_4-3-1-1-1"><code class="code-inline tex2jax_ignore">x = 2</code></div>
-</li>
-<li data-subcomponent="dropzone" for="rs-output_vars_4_drag1" data-category="1">int</li>
-<li data-subcomponent="draggable" id="rs-output_vars_4_drag2" data-category="2">
-<div class="para" id="output_vars_4-3-2-1-1"><code class="code-inline tex2jax_ignore">y = "2"</code></div>
-</li>
-<li data-subcomponent="dropzone" for="rs-output_vars_4_drag2" data-category="2">string</li>
-<li data-subcomponent="draggable" id="rs-output_vars_4_drag3" data-category="3">
-<div class="para" id="output_vars_4-3-3-1-1"><code class="code-inline tex2jax_ignore">z = '2'</code></div>
-</li>
-<li data-subcomponent="dropzone" for="rs-output_vars_4_drag3" data-category="3">char</li>
-</ul></div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.5.4"><a tabindex="-1" href="#output_vars_4" title="Copy heading and permalink for Checkpoint 2.5.4" aria-label="Copy heading and permalink for Checkpoint 2.5.4">🔗</a></div>
-</article>
-<article class="exercise exercise-like" id="output_vars_5"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.5.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h2>
-<div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-output_vars_5">
-<div class="parsons_question parsons-text">
-<div class="para" id="output_vars_5-1-1">Construct a main function that assigns “Hello” to the variable h, then prints out h’s value.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#output_vars_5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-</div>
-<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">int main() {
----
- string h;
----
- char h;  #paired
----
- h = "Hello";
----
- h = Hello;  #paired
----
- std::cout &lt;&lt; h;
----
- std::cout &lt;&lt; "Hello";  #paired
----
- std::cout &lt;&lt; "h"; 
----
-}</pre>
-</div></div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.5.5"><a tabindex="-1" href="#output_vars_5" title="Copy heading and permalink for Checkpoint 2.5.5" aria-label="Copy heading and permalink for Checkpoint 2.5.5">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.5.3"><a tabindex="-1" href="#outputting_variables_3" title="Copy heading and permalink for Checkpoint 2.5.3" aria-label="Copy heading and permalink for Checkpoint 2.5.3">🔗</a></div>
 </article><div class="autopermalink" aria-hidden="true" data-description="Section 2.5: Outputting Variables"><a tabindex="-1" href="#chapter2_outputting-variables" title="Copy heading and permalink for Section 2.5: Outputting Variables" aria-label="Copy heading and permalink for Section 2.5: Outputting Variables">🔗</a></div>
 </section>
 </div>
