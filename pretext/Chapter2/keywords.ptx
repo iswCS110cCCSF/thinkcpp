@@ -3,8 +3,7 @@
   <p>A few sections ago, I said that you can make up any name you want for your variables, but
     that's not quite true. There are certain words that are reserved in C++ because they are used by
     the compiler to parse the structure of your program, and if you use them as variable names, it
-    will get confused. These words, called <term>keywords</term>, include <c>int</c>, <c>char</c>, <c>void</c>, <c>endl</c>
-    and many more.</p>
+    will get confused. These words, called <term>keywords</term>, include <c>int</c>, <c>char</c>, <c>void</c> and many more.</p>
   <p>A list of C++ keywords is availiable publically on <url href="https://en.cppreference.com/w/cpp/keyword">
     cppreference</url>.</p>
   <p>Rather than memorize the list, I would suggest that you take advantage
@@ -92,14 +91,13 @@
       Try again!
     </p></feedback>
     <areas>
-      <cline><area correct="yes">int</area> main() {</cline>
-      <cline>    <area correct="yes">double </area><area correct="no">x</area> = 1.0;</cline>
-      <cline>    <area correct="yes">int </area><area correct="no">y</area> = <area correct="no">x</area> + 5;</cline>
-      <cline>    <area correct="yes">bool </area><area correct="no">Bool = <area correct="yes">true</area>;</cline>
-      <cline>    <area correct="no">std::string </area><area correct="no">s</area> = <area correct="no">&quot;void&quot;</area>;</cline>
-     
-      <cline>    <area correct="no">std::cout</area> &lt;&lt; <area correct="no">Bool</area> &lt;&lt; <area correct="no">endl</area>;</cline>
-      <cline>}</cline>
+<cline>int main() {</cline>
+<cline>    <area correct="yes">double</area> <area correct="no">x</area> = 1.0;</cline>
+<cline>    <area correct="yes">int</area> <area correct="no">y</area> = <area correct="no">x</area> + 5;</cline>
+<cline>    <area correct="yes">bool</area> <area correct="no">Bool</area> = <area correct="yes">true</area>;</cline>
+<cline>    <area correct="yes">std::string</area> <area correct="no">s</area> = "void";</cline>
+<cline>    std::cout &lt;&lt; <area correct="no">Bool</area> &lt;&lt; '\n';</cline>
+<cline>}</cline>
     </areas>
   </exercise>
   <exercise label="keywords_4">

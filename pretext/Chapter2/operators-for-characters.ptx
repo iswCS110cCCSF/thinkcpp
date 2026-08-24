@@ -85,38 +85,53 @@ int main() {
       </evaluate>
     </evaluation>
   </exercise>
-  <exercise label="char_operations_2" number="yes" adaptive="yes" indentation="hide">
-    <statement>
-      <p>Construct a main function that uses character operations to generate the output ‘r'.</p>
-    </statement>
-    <blocks>
-      <block order="3">
-        <cline>int main() {</cline>
-      </block>
-      <block order="1">
-        <cline> char r;</cline>
-      </block>
-      <block order="5" correct="no">
-        <cline> int r; </cline>
-      </block>
-      <block order="2">
-        <cline> r = 'p' + 2;</cline>
-      </block>
-      <block order="7" correct="no">
-        <cline> r = p + 2; </cline>
-      </block>
-      <block order="6" correct="no">
-        <cline> r = 'p' + 3; </cline>
-      </block>
-      <block order="8">
-        <cline> std::cout &lt;&lt; r;</cline>
-      </block>
-      <block order="4" correct="no">
-        <cline> std::cout &lt;&lt; &quot;r&quot;; </cline>
-      </block>
-      <block order="9">
-        <cline>}</cline>
-      </block>
-    </blocks>
-  </exercise>
+  <exercise label="char_operations_2"
+          number="yes"
+          adaptive="yes"
+          indentation="hide">
+  <statement>
+    <p>
+      Construct a <c>main</c> function that uses character operations to generate
+      the output letter <c>r</c> on an ASCII-compatible system.
+    </p>
+  </statement>
+
+  <blocks>
+    <block order="1">
+      <cline>int main() {</cline>
+    </block>
+
+    <block order="2">
+      <cline>    char r;</cline>
+    </block>
+
+    <block order="6" correct="no">
+      <cline>    int r;</cline>
+    </block>
+
+    <block order="3">
+      <cline>    r = 'p' + 2;</cline>
+    </block>
+
+    <block order="7" correct="no">
+      <cline>    r = p + 2;</cline>
+    </block>
+
+    <block order="8" correct="no">
+      <cline>    r = 'p' + 3;</cline>
+    </block>
+
+    <block order="4">
+      <cline>    std::cout &lt;&lt; r &lt;&lt; '\n';</cline>
+    </block>
+
+    <block order="9" correct="no">
+      <cline>    std::cout &lt;&lt; "r\n";</cline>
+    </block>
+
+    <block order="5">
+      <cline>}</cline>
+    </block>
+  </blocks>
+</exercise>
 </section>

@@ -167,11 +167,11 @@ int year = 0;
       </choice>
     </block>
 
-    <block order="4">
+    <block order="4" correct="no">
       <cline>make = "Jeep;"</cline>
     </block>
 
-    <block order="6">
+    <block order="2">
       <choice correct="yes">
         <cline>model = "Cherokee";</cline>
       </choice>
@@ -180,11 +180,11 @@ int year = 0;
       </choice>
     </block>
 
-    <block order="3">
+    <block order="5" correct="no">
       <cline>std::string model = Cherokee;</cline>
     </block>
 
-    <block order="9">
+    <block order="3">
       <choice correct="yes">
         <cline>year = 2001;</cline>
       </choice>
@@ -193,7 +193,7 @@ int year = 0;
       </choice>
     </block>
 
-    <block order="5">
+    <block order="6" correct="no">
       <cline>year = 2001</cline>
     </block>
   </blocks>

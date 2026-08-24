@@ -243,8 +243,8 @@
       <program>
         <code>
           int radius = 7;
-          int height = 8;
-          double volume = 3.14 * radius * height;
+          int height = 8
+          double volume = 3.14 * r * r * height;
         </code>
       </program>
     </statement>
