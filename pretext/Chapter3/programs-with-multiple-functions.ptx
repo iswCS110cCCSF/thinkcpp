@@ -29,7 +29,7 @@
 #include <iostream>
 
 void print_total(int x) {
-    std::cout << x << std::endl;
+    std::cout << x << '\n';
 }
 
 int multiply_two(int x) {
@@ -91,7 +91,7 @@ int main() {
 #include <iostream>
 
 void new_line() {
-  std::cout << std::endl;
+  std::cout << '\n';
 }
 
 void three_line() {
@@ -101,9 +101,11 @@ void three_line() {
 }
 
 int main() {
-  std::cout << "First Line." << std::endl;
+  std::cout << "First Line.
+";
   three_line ();
-  std::cout << "Second Line." << std::endl;
+  std::cout << "Second Line.
+";
   return 0;
 }
 ]]></code>

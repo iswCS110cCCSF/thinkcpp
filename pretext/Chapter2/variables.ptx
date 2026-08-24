@@ -118,7 +118,7 @@ char tom;
         <response><c>'x'</c></response>
       </match>
       <match>
-        <premise order="2"><p><c>string ten;</c></p></premise>
+        <premise order="2"><p><c>std::string ten;</c></p></premise>
         <response><c>&quot;Joe&quot;</c></response>
       </match>
       <match>
@@ -135,10 +135,10 @@ char tom;
     <blocks>
       <block order="1">
         <choice correct="yes">
-          <cline>string name;</cline>
+          <cline>std::string name;</cline>
         </choice>
         <choice>
-          <cline>string name </cline>
+          <cline>std::string name </cline>
         </choice>
       </block>
       <block order="2">
@@ -146,7 +146,7 @@ char tom;
           <cline>char first_initial;</cline>
         </choice>
         <choice>
-          <cline>string first_initial;</cline>
+          <cline>std::string first_initial;</cline>
         </choice>
       </block>
       <block order="3">

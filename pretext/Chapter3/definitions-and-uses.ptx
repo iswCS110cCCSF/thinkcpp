@@ -6,7 +6,7 @@
   <program>#include &lt;iostream&gt;
 
 void new_line() {
-    std::cout &lt;&lt; std::endl;
+    std::cout &lt;&lt; '\n';
 }
 
 void three_line() {
@@ -16,9 +16,9 @@ void three_line() {
 }
 
 int main() {
-  std::cout &lt;&lt; "First Line." &lt;&lt; std::endl;
+  std::cout &lt;&lt; "First Line." &lt;&lt; '\n';
   three_line();
-  std::cout &lt;&lt; "Second Line." &lt;&lt; std::endl;
+  std::cout &lt;&lt; "Second Line." &lt;&lt; '\n';
   return 0;
 }</program>
   <p>This program contains three function definitions: <c>new_line</c>, <c>three_line</c>, and <c>main</c>.</p>

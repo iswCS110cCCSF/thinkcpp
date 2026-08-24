@@ -17,7 +17,7 @@
       </li>
       <li>
         <p>Any time you want to override the rules of precedence (or you are not sure what they are)
-          you can use parentheses. Expressions in parentheses are evaluated first, so <c>2 * (3 - 1) is 4</c>. You
+          you can use parentheses. Expressions in parentheses are evaluated first, so <c>2 * (3 - 1) evaluates to 4</c>. You
           can also use parentheses to make an expression easier to read, as in <c>(minute * 100) / 60</c>, even though
           it doesn't change the result.</p>
       </li>

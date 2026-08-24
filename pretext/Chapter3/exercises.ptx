@@ -692,7 +692,7 @@ int main() {
 
 void party(int day_of_month, std::string address) {
     std::cout &lt;&lt; "party on "&lt;&lt;day_of_month&lt;&lt;" at "
-         &lt;&lt; address &lt;&lt; std::endl;
+         &lt;&lt; address &lt;&lt; '\n';
 }
 
 void weekend(bool available) {
@@ -700,7 +700,7 @@ void weekend(bool available) {
        party(21,"Big house");
        party(22,"CCTC");
     } else {
-       std::cout &lt;&lt; "sorry I have to study for ENGR101!" &lt;&lt; std::endl;
+       std::cout &lt;&lt; "sorry I have to study for ENGR101!" &lt;&lt; '\n';
     }
 }
 

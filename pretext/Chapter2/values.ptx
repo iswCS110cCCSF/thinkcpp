@@ -1,9 +1,33 @@
 <?xml version="1.0" ?><section xml:id="chapter2_values">
   <title>Values</title>
-  <p>A <term>value</term> is one of the fundamental things—like a letter or a
-    number—that a program manipulates. The only values we have manipulated so far are the
-   std::string values we have been outputting, like <q>Hello, world.</q>. You (and the compiler) can
-    identify <c>string</c> values because they are enclosed in quotation marks.</p>
+  <p>
+  A <term>value</term> is one of the fundamental things—like a letter or a number—that a program manipulates. The only values we have manipulated so far are text values we have been outputting, like <q>Hello, world.</q>. Text enclosed in quotation marks like this is called a <term>string literal</term>. Later, we will use string literals to create and initialize std::string objects.
+ </p>
+ 
+ <p>
+  For example:
+</p>
+
+<program language="cpp">
+  <input>
+std::string greeting = "Hello";
+  </input>
+</program>
+
+<ul>
+  <li>
+    <p><c>"Hello"</c> is a <term>string literal</term>.</p>
+  </li>
+  <li>
+    <p><c>greeting</c> is an <c>std::string</c> object.</p>
+  </li>
+  <li>
+    <p>
+      The string literal <c>"Hello"</c> is used to initialize the
+      <c>std::string</c> object <c>greeting</c>.
+    </p>
+  </li>
+</ul>
   <p>There many different kinds of values, called <term>types</term>. This includes integers and
     characters. An <term>integer</term> is a whole number like 1 or 17. You can output integer
     values the same way you output strings:</p>
@@ -34,7 +58,7 @@ std::cout &lt;&lt; '}' &lt;&lt; std::endl ;
   </exercise>
   <exercise label="values2-0">
     <statement>
-      <p>Click on all integer VALUES.</p>
+      <p>Click on all integer VALUES. We will learn about the utility of <c>while</c> and lines 4-7 later.</p>
     </statement>
     <feedback><p>
       Try again!

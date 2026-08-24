@@ -10,7 +10,7 @@
     parameters there are, but also what type they are. So it shouldn't
     surprise you that when you write a class definition, the parameter list
     indicates the type of each parameter. For example:</p>
-  <program>void printTwice(char phil) {
+  <program>void print_twice(char phil) {
   std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl ;
 }</program>
   <p>This function takes a single parameter, named phil, that has type <c>char</c>. Whatever that
@@ -20,16 +20,16 @@
   <p>In order to call this function, we have to provide a <c>char</c>. For example, we might have a <c>main</c>
     function like this:</p>
   <program>int main() {
-  printTwice('a');
+  print_twice('a');
   return 0;
 }</program>
   <p>The <c>char</c> value you provide is called an <term>argument</term>, and we say that the argument
     is <term>passed</term> to the function. In this case the value 'a' is passed as an argument to
-    printTwice where it will get printed twice.</p>
+    print_twice where it will get printed twice.</p>
   <p>Alternatively, if we had a <c>char</c> variable, we could use it as an argument instead:</p>
   <program>int main() {
   char argument = 'b';
-  printTwice(argument);
+  print_twice(argument);
   return 0;
 }</program>
   <p>Notice something very important here: the name of the variable we pass
@@ -52,20 +52,20 @@
     exceptions later.</p>
   <listing label="params_args_AC_1">
     <title>
-      The following code will show the output of the printTwice function.
+      The following code will show the output of the print_twice function.
         Try modifying the value of argument to change the output.
     </title>
     <program interactive="activecode" line-numbers="yes" label="params_args_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
 
-void printTwice(char phil) {
-    std::cout << phil << phil << std::endl;
+void print_twice(char phil) {
+    std::cout << phil << phil << '\n';
 }
 
 int main() {
     char argument = 'b';
-    printTwice(argument);
+    print_twice(argument);
     return 0;
 }
         ]]></code>
@@ -78,13 +78,13 @@ int main() {
         <program>
           #include &lt;iostream&gt;
 
-          void printTwice(char phil) {
-            std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl;
+          void print_twice(char phil) {
+            std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; '\n';
           }
 
           int main() {
             std::string argument = &quot;s&quot;;
-            printTwice(argument);
+            print_twice(argument);
             return 0;
           }
         </program>
@@ -108,13 +108,13 @@ int main() {
       <program>
         #include &lt;iostream&gt;
 
-        void printTwice(char phil) {
-          std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl;
+        void print_twice(char phil) {
+          std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; '\n';
         }
 
         int main() {
           char argument = 'b';
-          printTwice(argument);
+          print_twice(argument);
           return 0;
         }
       </program>
@@ -127,7 +127,7 @@ int main() {
         <test correct="yes">
           <strcmp use-answer="yes"/>
           <feedback>
-            The printTwice function will print the character argument provided two times.
+            The print_twice function will print the character argument provided two times.
           </feedback>
         </test>
       </evaluate>
@@ -142,20 +142,20 @@ int main() {
     </p></feedback>
     <cardsort>
       <match>
-        <premise order="1">int timesTwo(int x, int y);</premise>
-        <response>timesTwo(4, 7);</response>
+        <premise order="1">int times_two(int x, int y);</premise>
+        <response>times_two(4, 7);</response>
       </match>
       <match>
-        <premise order="2">int timesTwo(string y, int x);</premise>
-        <response>timesTwo(&quot;hello&quot;, 10);</response>
+        <premise order="2">int times_two(string y, int x);</premise>
+        <response>times_two(&quot;hello&quot;, 10);</response>
       </match>
       <match>
-        <premise order="3">int timesTwo(double x, string y);</premise>
-        <response>timesTwo(4.5, &quot;hello&quot;);</response>
+        <premise order="3">int times_two(double x, string y);</premise>
+        <response>times_two(4.5, &quot;hello&quot;);</response>
       </match>
       <match>
-        <premise order="4">int timesTwo(string x, string y);</premise>
-        <response>timesTwo(&quot;hello&quot;, &quot;hi&quot;);</response>
+        <premise order="4">int times_two(string x, string y);</premise>
+        <response>times_two(&quot;hello&quot;, &quot;hi&quot;);</response>
       </match>
     </cardsort>
   </exercise>

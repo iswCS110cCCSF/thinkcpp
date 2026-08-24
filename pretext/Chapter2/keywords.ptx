@@ -34,6 +34,7 @@
       </evaluate>
     </evaluation>
   </exercise>
+  <!--
   <exercise label="keywords_2">
     <statement>
       <p>Multiple Response: Which of the following are keywords or will otherwise generate some
@@ -50,7 +51,7 @@
       </choice>
       <choice correct="yes">
         <statement>
-          <p>cout</p>
+          <p>std::cout</p>
         </statement>
         <feedback><p>
           std::cout cannot be used as a variable name!
@@ -66,7 +67,7 @@
       </choice>
       <choice correct="yes">
         <statement>
-          <p>string</p>
+          <p>std::string</p>
         </statement>
         <feedback><p>
          std::string cannot be used as a variable name.
@@ -82,6 +83,7 @@
       </choice>
     </choices>
   </exercise>
+  -->
   <exercise label="keywords_3">
     <statement>
       <p>Click on all keywords.</p>
@@ -91,14 +93,12 @@
     </p></feedback>
     <areas>
       <cline><area correct="yes">int</area> main() {</cline>
-      <cline>    <area correct="yes">double</area><area correct="no">x</area> = 1.0;</cline>
-      <cline>    <area correct="yes">int</area><area correct="no">y</area> = <area correct="no">x</area> + 5;</cline>
-      <cline>    <area correct="yes">bool</area><area correct="no">Bool</area>;</cline>
-      <cline>    <area correct="yes">string</area><area correct="no">s</area> = <area correct="no">&quot;void&quot;</area>;</cline>
-      <cline>    <area correct="yes">if</area> (<area correct="no">y</area> &gt; <area correct="no">x</area>) {</cline>
-      <cline>        <area correct="no">Bool</area> = <area correct="yes">true</area>;</cline>
-      <cline>    }</cline>
-      <cline>    <area correct="no">cout</area> &lt;&lt; <area correct="no">Bool</area> &lt;&lt; <area correct="yes">endl</area>;</cline>
+      <cline>    <area correct="yes">double </area><area correct="no">x</area> = 1.0;</cline>
+      <cline>    <area correct="yes">int </area><area correct="no">y</area> = <area correct="no">x</area> + 5;</cline>
+      <cline>    <area correct="yes">bool </area><area correct="no">Bool = <area correct="yes">true</area>;</cline>
+      <cline>    <area correct="no">std::string </area><area correct="no">s</area> = <area correct="no">&quot;void&quot;</area>;</cline>
+     
+      <cline>    <area correct="no">std::cout</area> &lt;&lt; <area correct="no">Bool</area> &lt;&lt; <area correct="no">endl</area>;</cline>
       <cline>}</cline>
     </areas>
   </exercise>

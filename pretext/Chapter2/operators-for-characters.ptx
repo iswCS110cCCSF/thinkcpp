@@ -18,8 +18,14 @@ int main() {
   </listing>
   
   <p>Computing <c>'a' + 1</c> converts
-    the character <c>'a'</c> to ASCII, adds 1 to this value, then converts the
+    the character <c>'a'</c> to <url href="https://www.ascii-code.com/ASCII">ASCII</url>, adds 1 to this value, then converts the
     result from ASCIIs back to a character.</p>
+	<p>
+  Because character values have integer representations, character arithmetic is possible.
+  However, the exact numeric representation depends on the character encoding.
+  In this course, we will usually work with characters directly rather than rely on their
+  numeric codes.
+</p>
   <p>Although it is syntactically legal to multiply characters, it is almost never
     useful to do it.</p>
   <p>Earlier I said that you can only assign integer values to integer
@@ -48,10 +54,12 @@ int main() {
     characters as characters, and integers as integers, and only convert
     from one to the other if there is a good reason.</p>
   <note>
-    <p>Characters in C++ hold <url href="https://www.ascii-code.com/ASCII">ASCII</url> values, which range from 0 to 128. Uppercase
-      ‘A' has an ASCII value of 65, lowercase ‘a' has a value of 97, and a space has a
-      value of 32. C++ converts characters to their ASCII values to perform automatic type
-      conversion and character arithmetic.</p>
+  <p>
+  Character values have integer representations in the character encoding used by the program.
+  On many common systems, the familiar English letters, digits, and punctuation use
+  ASCII-compatible values. For example, <c>'A'</c> and <c>'B'</c> have consecutive
+  integer representations on ASCII-based systems.
+</p>
   </note>
   <p>Automatic type conversion is an example of a common problem in designing a programming
     language, which is that there is a conflict between <term>formalism</term>, which is the

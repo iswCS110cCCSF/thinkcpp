@@ -21,11 +21,14 @@ void print_area(int r) {
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with radius = 5..." << std::endl; 
-    std::cout << "    Your function had area = "; print_area(5); std::cout << std::endl; 
-    std::cout << "    The correct solution has area = 78.5398" << std::endl; 
-    std::cout << "Testing with radius = 7.5..." << std::endl; 
-    std::cout << "    Your function had area = "; print_area(7.5); std::cout << std::endl; 
+    std::cout << "Testing with radius = 5...
+"; 
+    std::cout << "    Your function had area = "; print_area(5); std::cout << '\n'; 
+    std::cout << "    The correct solution has area = 78.5398
+"; 
+    std::cout << "Testing with radius = 7.5...
+"; 
+    std::cout << "    Your function had area = "; print_area(7.5); std::cout << '\n'; 
     std::cout << "    The correct solution has area = 176.715";
 }
         ]]></code>
@@ -165,11 +168,14 @@ void log_subtraction(double a) {
 
 int main() {
 // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with a = 8..." << std::endl;
-    std::cout << "    Your solution has difference = "; log_subtraction(8); std::cout << std::endl;
-    std::cout << "    The correct solution has difference = -1.17635" << std::endl;
-    std::cout << "Testing with a = -2..." << std::endl;
-    std::cout << "    Your solution has difference = "; log_subtraction(-2); std::cout << std::endl;
+    std::cout << "Testing with a = 8...
+";
+    std::cout << "    Your solution has difference = "; log_subtraction(8); std::cout << '\n';
+    std::cout << "    The correct solution has difference = -1.17635
+";
+    std::cout << "Testing with a = -2...
+";
+    std::cout << "    Your solution has difference = "; log_subtraction(-2); std::cout << '\n';
     std::cout << "    The correct solution has difference = nan";
 }
     ]]></code>
@@ -220,7 +226,8 @@ int main() {
 #include <iostream>
 
 void border() {
-    std::cout << "------------" << std::endl;
+    std::cout << "------------
+";
 }
 
 int main() {
@@ -240,13 +247,16 @@ int main() {
 #include <iostream>
 
 void border() {
-    std::cout << "------------" << std::endl;
+    std::cout << "------------
+";
 }
 
 int main() {
-    std::cout << "First Line." << std::endl;
+    std::cout << "First Line.
+";
     border();
-    std::cout << "Second Line." << std::endl;
+    std::cout << "Second Line.
+";
 }
         ]]></code></program>
     </solution>
@@ -267,7 +277,10 @@ void int_division() {
 
 int main() {
 // DO NOT MODIFY ANYTHING BELOW THIS LINE
-std::cout << "Testing with a = 2.4, b = 6.8..." << std::endl; std::cout << "    Your solution has a quotient of "; int_division(2.4, 6.8); std::cout << std::endl; std::cout << "    The correct solution has a quotient of 0" << std::endl; std::cout << "Testing with a = -8.6, b = 4.2..." << std::endl; std::cout << "    Your solution has a quotient of "; int_division(-8.6, 4.2); std::cout << std::endl; std::cout << "    The correct solution has a quotient of -2";
+std::cout << "Testing with a = 2.4, b = 6.8...
+"; std::cout << "    Your solution has a quotient of "; int_division(2.4, 6.8); std::cout << '\n'; std::cout << "    The correct solution has a quotient of 0
+"; std::cout << "Testing with a = -8.6, b = 4.2...
+"; std::cout << "    Your solution has a quotient of "; int_division(-8.6, 4.2); std::cout << '\n'; std::cout << "    The correct solution has a quotient of -2";
 }
     ]]></code>
     </program>    </statement>
@@ -326,11 +339,14 @@ void gpa_boost() {
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with GPA = 2.513..." << std::endl; 
-    std::cout << "    Your solution rounded the GPA to "; gpa_boost(2.513); std::cout << std::endl; 
-    std::cout << "    The correct solution rounds the GPA to 3.000" << std::endl; 
-    std::cout << "Testing with GPA = 4.000..." << std::endl; 
-    std::cout << "    Your solution rounded the GPA to "; gpa_boost(4.000); std::cout << std::endl; 
+    std::cout << "Testing with GPA = 2.513...
+"; 
+    std::cout << "    Your solution rounded the GPA to "; gpa_boost(2.513); std::cout << '\n'; 
+    std::cout << "    The correct solution rounds the GPA to 3.000
+"; 
+    std::cout << "Testing with GPA = 4.000...
+"; 
+    std::cout << "    Your solution rounded the GPA to "; gpa_boost(4.000); std::cout << '\n'; 
     std::cout << "    The correct solution rounds the GPA to 4.000";
 }
         ]]></code>
@@ -371,11 +387,14 @@ void volume_prism() {
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with a = 3, b = 4, c = 5..." << std::endl;
-    std::cout << "    Your solution calculated a volume of "; volume_prism(3,4,5); std::cout << std::endl;
-    std::cout << "    The correct solution calculates a volume of 60" << std::endl;
-    std::cout << "Testing with a = 5.7, b = 3.9, c = 1.3..." << std::endl;
-    std::cout << "    Your solution calculated a volume of "; volume_prism(5.7,3.9,1.3); std::cout << std::endl;
+    std::cout << "Testing with a = 3, b = 4, c = 5...
+";
+    std::cout << "    Your solution calculated a volume of "; volume_prism(3,4,5); std::cout << '\n';
+    std::cout << "    The correct solution calculates a volume of 60
+";
+    std::cout << "Testing with a = 5.7, b = 3.9, c = 1.3...
+";
+    std::cout << "    Your solution calculated a volume of "; volume_prism(5.7,3.9,1.3); std::cout << '\n';
     std::cout << "    The correct solution calculates a volume of 28.899";
 }
     ]]></code>
@@ -429,11 +448,14 @@ void tan_degrees() {
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with degrees = 45..." << std::endl; 
-    std::cout << "    Your solution calculated a tangent of "; tan_degrees(45); std::cout << std::endl; 
-    std::cout << "    The correct solution calculates a tangent of 0.999204" << std::endl; 
-    std::cout << "Testing with degrees = 112.1..." << std::endl; 
-    std::cout << "    Your solution calculated a tangent of "; tan_degrees(112.1); std::cout << std::endl; 
+    std::cout << "Testing with degrees = 45...
+"; 
+    std::cout << "    Your solution calculated a tangent of "; tan_degrees(45); std::cout << '\n'; 
+    std::cout << "    The correct solution calculates a tangent of 0.999204
+"; 
+    std::cout << "Testing with degrees = 112.1...
+"; 
+    std::cout << "    Your solution calculated a tangent of "; tan_degrees(112.1); std::cout << '\n'; 
     std::cout << "    The correct solution calculates a tangent of -2.46973";
 }
         ]]></code>
@@ -470,11 +492,14 @@ void volume_sphere() {
 
 int main() {
     // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with radius = 3..." << std::endl;
-    std::cout << "    Your solution calculated a volume of "; volume_sphere(3); std::cout << std::endl;
-    std::cout << "    The correct solution calculates a volume of 113.04" << std::endl;
-    std::cout << "Testing with radius = 3.24..." << std::endl;
-    std::cout << "    Your solution calculated a volume of "; volume_sphere(3.24); std::cout << std::endl;
+    std::cout << "Testing with radius = 3...
+";
+    std::cout << "    Your solution calculated a volume of "; volume_sphere(3); std::cout << '\n';
+    std::cout << "    The correct solution calculates a volume of 113.04
+";
+    std::cout << "Testing with radius = 3.24...
+";
+    std::cout << "    Your solution calculated a volume of "; volume_sphere(3.24); std::cout << '\n';
     std::cout << "    The correct solution calculates a volume of 142.398";
 }
     ]]></code>

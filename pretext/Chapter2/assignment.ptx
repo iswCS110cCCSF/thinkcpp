@@ -140,52 +140,62 @@ int main() {
     </choices>
   </exercise>
   <exercise label="assignment_3"
-           number="yes"
-           adaptive="yes"
-           indentation="hide">
-    <statement>
-      <p>You love your car, and you decide to keep track of its make, model, and year. You do so
-        using three assignment statements IN THAT ORDER. For the sake of this problem, suppose you
-        drive a 2001 Jeep Cherokee. Hint: there are a couple ways to write an assignment statement.</p>
-    </statement>
-    <blocks>
-      <block order="1">
-        <choice correct="yes">
-          <cline>string make;</cline>
-          <cline>make = "Jeep";</cline>
-        </choice>
-        <choice>
-          <cline>string make = Jeep; </cline>
-        </choice>
-      </block>
-      <block order="4">
-        <cline>make = "Jeep;" </cline>
-      </block>
-      <block order="6">
-        <choice correct="yes">
-          <cline>string model = "Cherokee";</cline>
-        </choice>
-        <choice>
-          <cline>string model; </cline>
-          <cline>model = Cherokee;</cline>
-        </choice>
-      </block>
-      <block order="3">
-        <cline>string model = Cherokee; </cline>
-      </block>
-      <block order="9">
-        <choice correct="yes">
-          <cline>int year = 2001;</cline>
-        </choice>
-        <choice>
-          <cline>int year; </cline>
-          <cline>2001 = year;</cline>
-        </choice>
-      </block>
-      <block order="5">
-        <cline>int year; </cline>
-        <cline>year = 2001</cline>
-      </block>
-    </blocks>
-  </exercise>
+          number="yes"
+          adaptive="yes"
+          indentation="hide">
+  <statement>
+    <p>You love your car, and you decide to keep track of its make, model, and year. You do so
+      using three assignment statements IN THAT ORDER. For the sake of this problem, suppose you
+      drive a 2001 Jeep Cherokee. The variables have already been declared as shown below.</p>
+
+    <program language="cpp">
+      <input>
+std::string make;
+std::string model;
+int year = 0;
+      </input>
+    </program>
+  </statement>
+
+  <blocks>
+    <block order="1">
+      <choice correct="yes">
+        <cline>make = "Jeep";</cline>
+      </choice>
+      <choice>
+        <cline>make = Jeep;</cline>
+      </choice>
+    </block>
+
+    <block order="4">
+      <cline>make = "Jeep;"</cline>
+    </block>
+
+    <block order="6">
+      <choice correct="yes">
+        <cline>model = "Cherokee";</cline>
+      </choice>
+      <choice>
+        <cline>model = Cherokee;</cline>
+      </choice>
+    </block>
+
+    <block order="3">
+      <cline>std::string model = Cherokee;</cline>
+    </block>
+
+    <block order="9">
+      <choice correct="yes">
+        <cline>year = 2001;</cline>
+      </choice>
+      <choice>
+        <cline>2001 = year;</cline>
+      </choice>
+    </block>
+
+    <block order="5">
+      <cline>year = 2001</cline>
+    </block>
+  </blocks>
+</exercise>
 </section>

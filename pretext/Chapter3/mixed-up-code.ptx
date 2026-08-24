@@ -78,7 +78,8 @@
         </choice>
       </block>
       <block order="11">
-        <cline><![CDATA[ std::cout << ". . . . . . . . . . . . " << std::endl ;]]></cline>
+        <cline><![CDATA[ std::cout << ". . . . . . . . . . . . 
+" ;]]></cline>
       </block>
       <block order="2">
         <choice correct="yes">
@@ -299,18 +300,21 @@
           <cline> std::cout &lt;&lt; "Eat";</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ std::cout << "Eat" << std::endl ; ]]></cline>
+          <cline><![CDATA[ std::cout << "Eat
+" ; ]]></cline>
         </choice>
       </block>
       <block order="8">
-        <cline><![CDATA[ std::cout << std::endl ; std::cout << "More" << std::endl ;]]></cline>
+        <cline><![CDATA[ std::cout << std::endl ; std::cout << "More
+" ;]]></cline>
       </block>
       <block order="9">
         <cline> std::cout &lt;&lt; std::endl ;</cline>
       </block>
       <block order="4">
         <choice correct="yes">
-          <cline><![CDATA[ std::cout << animal << "!" << std::endl ;]]></cline>
+          <cline><![CDATA[ std::cout << animal << "!
+" ;]]></cline>
         </choice>
         <choice>
           <cline><![CDATA[ std::cout << animal << ! << std::endl ; ]]></cline>

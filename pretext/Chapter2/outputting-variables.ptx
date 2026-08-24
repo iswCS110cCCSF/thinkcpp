@@ -180,121 +180,73 @@ int main() {
       </choice>
     </choices>
   </exercise>
-  <exercise label="output_vars_3">
-    <statement>
-      <p>And now, what prints?</p>
-      <program>int main() {
-  int x;
-  char y;
-  x = '3';
-  y = 'e';
-  std::cout &lt;&lt; 'y';
-}</program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>x</p>
-        </statement>
-        <feedback><p>
-          Take a look at the code again.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>y</p>
-        </statement>
-        <feedback><p>
-          Take a look at the code again.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>3</p>
-        </statement>
-        <feedback><p>
-          Take a look at the code again.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>e</p>
-        </statement>
-        <feedback><p>
-          Take a look at the code again.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Nothing! There will be a compile error!</p>
-        </statement>
-        <feedback><p>
-          There is a type mismatch, so there will be a compile error!
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="output_vars_4">
-    <statement>
-      <p>Match the variable initialization to its correct type. Do so by dragging items on the left to the matching box on the right.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1"><p><c>x = 2</c></p></premise>
-        <response>int</response>
-      </match>
-      <match>
-        <premise order="2"><p><c>y = &quot;2&quot;</c></p></premise>
-        <response>string</response>
-      </match>
-      <match>
-        <premise order="3"><p><c>z = '2'</c></p></premise>
-        <response>char</response>
-      </match>
-    </cardsort>
-  </exercise>
-  <exercise label="output_vars_5" number="yes" adaptive="yes" indentation="hide">
-    <statement>
-      <p>Construct a main function that assigns <q>Hello</q> to the variable h, then prints out h's
-        value.</p>
-    </statement>
-    <blocks>
-      <block order="4">
-        <cline>int main() {</cline>
-      </block>
-      <block order="3">
-        <choice correct="yes">
-          <cline> string h;</cline>
-        </choice>
-        <choice>
-          <cline> char h; </cline>
-        </choice>
-      </block>
-      <block order="2">
-        <choice correct="yes">
-          <cline> h = &quot;Hello&quot;;</cline>
-        </choice>
-        <choice>
-          <cline> h = Hello; </cline>
-        </choice>
-      </block>
-      <block order="1">
-        <choice correct="yes">
-          <cline> std::cout &lt;&lt; h;</cline>
-        </choice>
-        <choice>
-          <cline> std::cout &lt;&lt; &quot;Hello&quot;; </cline>
-        </choice>
-      </block>
-      <block order="7">
-        <cline> std::cout &lt;&lt; &quot;h&quot;; </cline>
-      </block>
-      <block order="5">
-        <cline>}</cline>
-      </block>
-    </blocks>
-  </exercise>
+  <exercise label="outputting_variables_3"
+          number="yes"
+          adaptive="yes"
+          indentation="hide">
+  <statement>
+    <p>
+      What happens when the following code is compiled?
+    </p>
+
+    <program language="cpp">
+      <input>
+int number = "3";
+std::cout &lt;&lt; number &lt;&lt; '\n';
+      </input>
+    </program>
+  </statement>
+
+  <choices>
+    <choice>
+      <statement>
+        <p>The program compiles and prints <c>3</c>.</p>
+      </statement>
+      <feedback>
+        <p>
+          The value <c>"3"</c> is a string literal, not an integer value.
+          It cannot be used to initialize an <c>int</c> variable this way.
+        </p>
+      </feedback>
+    </choice>
+
+    <choice correct="yes">
+      <statement>
+        <p>The compiler reports a type error.</p>
+      </statement>
+      <feedback>
+        <p>
+          Correct. <c>number</c> has type <c>int</c>, but <c>"3"</c> is a
+          string literal. These types are not compatible for this initialization.
+        </p>
+      </feedback>
+    </choice>
+
+    <choice>
+      <statement>
+        <p>The program compiles and prints <c>"3"</c>.</p>
+      </statement>
+      <feedback>
+        <p>
+          <c>std::cout</c> would print the value stored in <c>number</c>, but
+          the program does not compile because <c>"3"</c> cannot initialize
+          an <c>int</c>.
+        </p>
+      </feedback>
+    </choice>
+
+    <choice>
+      <statement>
+        <p>The program compiles but produces a semantic error.</p>
+      </statement>
+      <feedback>
+        <p>
+          A semantic error occurs when code compiles but does not do what was intended.
+          This program does not reach that stage because the type mismatch prevents
+          successful compilation.
+        </p>
+      </feedback>
+    </choice>
+  </choices>
+</exercise>
 </section>

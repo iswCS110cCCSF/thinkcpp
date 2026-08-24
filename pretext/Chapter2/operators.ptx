@@ -48,7 +48,7 @@ int main() {
     on), the result must also be an integer, and by definition integer division <term>truncates</term> the answer. <em>Truncating</em> a value means dropping the decimal portion, even in cases like this where the next integer is so close.</p>
   <p>A possible alternative in this case is to calculate a percentage rather
     than a fraction:</p>
-  <program>cout &lt;&lt; &quot;Percentage of the hour that has passed: &quot;;
+  <program>std::cout &lt;&lt; &quot;Percentage of the hour that has passed: &quot;;
 cout &lt;&lt; minute * 100 / 60 &lt;&lt; std::endl ;</program>
   <p>The result is:</p>
   <console><output>Percentage of the hour that has passed: 98</output></console>
@@ -57,7 +57,8 @@ cout &lt;&lt; minute * 100 / 60 &lt;&lt; std::endl ;</program>
     could use a different type of variable, called floating-point, that is
     capable of storing fractional values.</p>
   <note>
-    <p>In C++, <term>floating-points</term> are declared as type <c>double</c>. We'll get to that in the
+  
+    <p>In C++, <c>double</c> is one commonly used <term>floating-points</term> type. We'll get to that in the
       next chapter.</p>
   </note>
   <exercise label="operators_1">
@@ -102,7 +103,7 @@ cout &lt;&lt; minute * 100 / 60 &lt;&lt; std::endl ;</program>
     <statement>
       <program>int num1 = 12;
 int num2 = 5;
-cout &lt;&lt; num1 / num2;</program>
+std::cout &lt;&lt; num1 / num2;</program>
       <p>What is printed to the terminal?</p>
       <p><fillin answer="2"/></p>
     </statement>
@@ -118,7 +119,7 @@ cout &lt;&lt; num1 / num2;</program>
     <statement>
       <program>int num1 = 10;
 int num2 = 48;
-cout &lt;&lt; num2 / num1;</program>
+std::cout &lt;&lt; num2 / num1;</program>
       <p>What is printed to the terminal?</p>
       <p>
         <fillin answer="4"/>
@@ -136,7 +137,7 @@ cout &lt;&lt; num2 / num1;</program>
     <statement>
       <program>int num1 = 10;
 int num2 = 40;
-cout &lt;&lt; num2 / num1;</program>
+std::cout &lt;&lt; num2 / num1;</program>
       <p>What is printed to the terminal?</p>
       <p>
         <fillin answer="4"/>
@@ -154,7 +155,7 @@ cout &lt;&lt; num2 / num1;</program>
     <statement>
       <program>int num1 = 10;
 int num2 = 39;
-cout &lt;&lt; num2 / num1;</program>
+std::cout &lt;&lt; num2 / num1;</program>
       <p>What is printed to the terminal?</p>
       <p>
         <fillin answer="3"/>
@@ -172,7 +173,7 @@ cout &lt;&lt; num2 / num1;</program>
     <statement>
       <program>int num1 = 7;
 int num2 = 8;
-cout &lt;&lt; &quot;Decimal:&quot; &lt;&lt; num1 / num2;</program>
+std::cout &lt;&lt; &quot;Decimal:&quot; &lt;&lt; num1 / num2;</program>
       <p>What is printed after <c>Decimal:</c>?</p>
       <p>
         <fillin answer="0"/>

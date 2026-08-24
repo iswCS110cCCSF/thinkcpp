@@ -14,7 +14,7 @@
 #include <iostream>
 
 void print_twice(char phil) {
-    std::cout << phil << phil << std::endl;
+    std::cout << phil << phil << '\n';
 }
 
 int main() {
@@ -169,12 +169,12 @@ int main() {
     <statement>
       <p>How many calls to <c>hi</c> are made during the exectuion of the entire program?</p>
       <program>void hi() {
-  std::cout &lt;&lt; &quot;hiii !&quot;&lt;&lt;endl;
+  std::cout &lt;&lt; &quot;hiii !\n&quot;;
 }
 
 void print_greeting() {
   hi();
-  cout&lt;&lt;&quot;how are you doing today. &quot;&lt;&lt;endl;
+  std::cout &quot;how are you doing today. \n&quot;;
   hi();
 }
 

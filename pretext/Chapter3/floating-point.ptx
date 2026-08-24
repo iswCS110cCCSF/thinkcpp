@@ -133,7 +133,7 @@ double y = 1.0 / 3.0;
       <program>double e = 2.71828;
 int e_int = e;
 double e_double = e_int;
-cout &lt;&lt; e_double;</program>
+std::cout &lt;&lt; e_double;</program>
       <p>What is the value of <c>e_double</c> that is printed to the terminal?</p>
     </statement>
     <choices>
@@ -197,16 +197,16 @@ cout &lt;&lt; e_double;</program>
 
 int main() {
     double value = 5.0/2; //(a)
-    std::cout << "current value (a) is " << value << std::endl;
+    std::cout << "current value (a) is " << value << '\n';
 
     value = 5/2.0; //(b)
-    std::cout << "current value (b) is " << value << std::endl;
+    std::cout << "current value (b) is " << value << '\n';
 
     value = 5/2; //(c)
-    std::cout << "current value (c) is " << value << std::endl;
+    std::cout << "current value (c) is " << value << '\n';
 
     value = 5.0/2.0; //(d)
-    std::cout << "current value (d) is " << value << std::endl;
+    std::cout << "current value (d) is " << value << '\n';
     return 0;
 }
         ]]></code>

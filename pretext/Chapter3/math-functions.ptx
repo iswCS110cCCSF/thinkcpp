@@ -28,9 +28,9 @@ int main() {
     double result = log(17.0);
     double angle = 1.5;
     double height = sin(angle);
-    std::cout << result << std::endl;
-    std::cout << angle << std::endl;
-    std::cout << height << std::endl;
+    std::cout << result << '\n';
+    std::cout << angle << '\n';
+    std::cout << height << '\n';
     return 0;
 }
         ]]></code>
@@ -64,9 +64,9 @@ int main() {
     double pi = acos(-1.0);
     double degrees = 90;
     double angle = degrees * 2 * pi / 360.0;
-    std::cout << pi << std::endl;
-    std::cout << degrees << std::endl;
-    std::cout << angle << std::endl;
+    std::cout << pi << '\n';
+    std::cout << degrees << '\n';
+    std::cout << angle << '\n';
     return 0;
 }
         ]]></code>

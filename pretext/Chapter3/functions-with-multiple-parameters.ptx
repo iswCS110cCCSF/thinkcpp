@@ -32,7 +32,8 @@ print_time(int hour, int minute);   // WRONG!</program>
 #include <iostream>
 
 void print_price(int dollars, int cents) {
-    std::cout << "Price is " << dollars << " dollars and " << cents << " cents." << std::endl;
+    std::cout << "Price is " << dollars << " dollars and " << cents << " cents.
+";
 }
 
 int main() {
