@@ -682,12 +682,12 @@ int main() {
 <div class="exercise-statement">
 <div class="para" id="locals_4-1-1">How many calls to <code class="code-inline tex2jax_ignore">hi</code> are made during the exectuion of the entire program?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#locals_4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void hi() {
-  std::cout &lt;&lt; "hiii !"&lt;&lt;endl;
+  std::cout &lt;&lt; "hiii !\n";
 }
 
 void print_greeting() {
   hi();
-  cout&lt;&lt;"how are you doing today. "&lt;&lt;endl;
+  std::cout "how are you doing today. \n";
   hi();
 }
 

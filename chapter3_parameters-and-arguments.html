@@ -534,7 +534,7 @@ eBookConfig.enable_chatcodes =  false;
 </div>
 <div class="para" id="chapter3_parameters-and-arguments-4">Notice that in each of these cases we have to specify not only how many parameters there are, but also what type they are. So it shouldn’t surprise you that when you write a class definition, the parameter list indicates the type of each parameter. For example:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void printTwice(char phil) {
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void print_twice(char phil) {
   std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl ;
 }
 </code></pre></div>
@@ -543,17 +543,17 @@ eBookConfig.enable_chatcodes =  false;
 <div class="para" id="chapter3_parameters-and-arguments-7">In order to call this function, we have to provide a <code class="code-inline tex2jax_ignore">char</code>. For example, we might have a <code class="code-inline tex2jax_ignore">main</code> function like this:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int main() {
-  printTwice('a');
+  print_twice('a');
   return 0;
 }
 </code></pre></div>
-<div class="para" id="chapter3_parameters-and-arguments-9">The <code class="code-inline tex2jax_ignore">char</code> value you provide is called an <dfn class="terminology">argument</dfn>, and we say that the argument is <dfn class="terminology">passed</dfn> to the function. In this case the value ’a’ is passed as an argument to printTwice where it will get printed twice.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-arguments-9">The <code class="code-inline tex2jax_ignore">char</code> value you provide is called an <dfn class="terminology">argument</dfn>, and we say that the argument is <dfn class="terminology">passed</dfn> to the function. In this case the value ’a’ is passed as an argument to print_twice where it will get printed twice.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="chapter3_parameters-and-arguments-10">Alternatively, if we had a <code class="code-inline tex2jax_ignore">char</code> variable, we could use it as an argument instead:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int main() {
   char argument = 'b';
-  printTwice(argument);
+  print_twice(argument);
   return 0;
 }
 </code></pre></div>
@@ -577,15 +577,15 @@ eBookConfig.enable_chatcodes =  false;
 </article>
 <div class="para" id="chapter3_parameters-and-arguments-16">This rule is important, but it is sometimes confusing because C++ sometimes converts arguments from one type to another automatically. For now you should learn the general rule, and we will deal with exceptions later.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="params_args_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.8.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The following code will show the output of the printTwice function. Try modifying the value of argument to change the output.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.8.1: The following code will show the output of the printTwice function. Try modifying the value of argument to change the output."><a tabindex="-1" href="#params_args_AC_1" title="Copy heading and permalink for Listing 3.8.1: The following code will show the output of the printTwice function. Try modifying the value of argument to change the output." aria-label="Copy heading and permalink for Listing 3.8.1: The following code will show the output of the printTwice function. Try modifying the value of argument to change the output.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-params_args_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+<figure class="listing figure-like" id="params_args_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.8.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The following code will show the output of the print_twice function. Try modifying the value of argument to change the output.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.8.1: The following code will show the output of the print_twice function. Try modifying the value of argument to change the output."><a tabindex="-1" href="#params_args_AC_1" title="Copy heading and permalink for Listing 3.8.1: The following code will show the output of the print_twice function. Try modifying the value of argument to change the output." aria-label="Copy heading and permalink for Listing 3.8.1: The following code will show the output of the print_twice function. Try modifying the value of argument to change the output.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-params_args_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void printTwice(char phil) {
+void print_twice(char phil) {
     std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl;
 }
 
 int main() {
     char argument = 'b';
-    printTwice(argument);
+    print_twice(argument);
     return 0;
 }
 </code></pre></div>
@@ -595,7 +595,7 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-params_args_1"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"params_args_1-1-1\">What will be printed to the terminal? If nothing will print, or if the compiler will throw an error, type “error”.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"code-box\"><pre class=\"program clipboardable\"><code class=\"language-cpp\">#include &lt;iostream&gt;\n\nvoid printTwice(char phil) {\n  std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl;\n}\n\nint main() {\n  std::string argument = \"s\";\n  printTwice(argument);\n  return 0;\n}\n<\/code><\/pre><\/div>\n<div class=\"para\" id=\"params_args_1-1-3\"><input type=\"text\" id=\"params_args_1-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_1-1-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"params_args_1-1-1\">What will be printed to the terminal? If nothing will print, or if the compiler will throw an error, type “error”.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"code-box\"><pre class=\"program clipboardable\"><code class=\"language-cpp\">#include &lt;iostream&gt;\n\nvoid print_twice(char phil) {\n  std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl;\n}\n\nint main() {\n  std::string argument = \"s\";\n  print_twice(argument);\n  return 0;\n}\n<\/code><\/pre><\/div>\n<div class=\"para\" id=\"params_args_1-1-3\"><input type=\"text\" id=\"params_args_1-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_1-1-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0},
 "feedbackArray": [[{"regex": "^\\s*error\\s*$", "regexFlags": "i", "feedback": "Correct!"}, {"feedback": "Incorrect."}]]
@@ -608,10 +608,10 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-params_args_2"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"params_args_2-1-1\">What will be printed to the terminal? If nothing will print, or if the compiler will throw an error, type “error”.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_2-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"code-box\"><pre class=\"program clipboardable\"><code class=\"language-cpp\">#include &lt;iostream&gt;\n\nvoid printTwice(char phil) {\n  std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl;\n}\n\nint main() {\n  char argument = 'b';\n  printTwice(argument);\n  return 0;\n}\n<\/code><\/pre><\/div>\n<div class=\"para\" id=\"params_args_2-1-3\"><input type=\"text\" id=\"params_args_2-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_2-1-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"params_args_2-1-1\">What will be printed to the terminal? If nothing will print, or if the compiler will throw an error, type “error”.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_2-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"code-box\"><pre class=\"program clipboardable\"><code class=\"language-cpp\">#include &lt;iostream&gt;\n\nvoid print_twice(char phil) {\n  std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl;\n}\n\nint main() {\n  char argument = 'b';\n  print_twice(argument);\n  return 0;\n}\n<\/code><\/pre><\/div>\n<div class=\"para\" id=\"params_args_2-1-3\"><input type=\"text\" id=\"params_args_2-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_2-1-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0},
-"feedbackArray": [[{"regex": "^\\s*bb\\s*$", "regexFlags": "", "feedback": "The printTwice function will print the character argument provided two times."}, {"feedback": "Incorrect."}]]
+"feedbackArray": [[{"regex": "^\\s*bb\\s*$", "regexFlags": "", "feedback": "The print_twice function will print the character argument provided two times."}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.8.2"><a tabindex="-1" href="#params_args_2" title="Copy heading and permalink for Checkpoint 3.8.2" aria-label="Copy heading and permalink for Checkpoint 3.8.2">🔗</a></div>
@@ -623,14 +623,14 @@ int main() {
 <span data-subcomponent="question">
 <div class="para" id="params_args_4-1-1">Match the function declaration to an example of its function call.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#params_args_4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></span><span data-subcomponent="feedback">
-<div class="para" id="params_args_4-2-1">Try again!</div></span><li data-subcomponent="draggable" id="rs-params_args_4_drag1" data-category="1">int timesTwo(int x, int y);</li>
-<li data-subcomponent="dropzone" for="rs-params_args_4_drag1" data-category="1">timesTwo(4, 7);</li>
-<li data-subcomponent="draggable" id="rs-params_args_4_drag2" data-category="2">int timesTwo(string y, int x);</li>
-<li data-subcomponent="dropzone" for="rs-params_args_4_drag2" data-category="2">timesTwo("hello", 10);</li>
-<li data-subcomponent="draggable" id="rs-params_args_4_drag3" data-category="3">int timesTwo(double x, string y);</li>
-<li data-subcomponent="dropzone" for="rs-params_args_4_drag3" data-category="3">timesTwo(4.5, "hello");</li>
-<li data-subcomponent="draggable" id="rs-params_args_4_drag4" data-category="4">int timesTwo(string x, string y);</li>
-<li data-subcomponent="dropzone" for="rs-params_args_4_drag4" data-category="4">timesTwo("hello", "hi");</li>
+<div class="para" id="params_args_4-2-1">Try again!</div></span><li data-subcomponent="draggable" id="rs-params_args_4_drag1" data-category="1">int times_two(int x, int y);</li>
+<li data-subcomponent="dropzone" for="rs-params_args_4_drag1" data-category="1">times_two(4, 7);</li>
+<li data-subcomponent="draggable" id="rs-params_args_4_drag2" data-category="2">int times_two(string y, int x);</li>
+<li data-subcomponent="dropzone" for="rs-params_args_4_drag2" data-category="2">times_two("hello", 10);</li>
+<li data-subcomponent="draggable" id="rs-params_args_4_drag3" data-category="3">int times_two(double x, string y);</li>
+<li data-subcomponent="dropzone" for="rs-params_args_4_drag3" data-category="3">times_two(4.5, "hello");</li>
+<li data-subcomponent="draggable" id="rs-params_args_4_drag4" data-category="4">int times_two(string x, string y);</li>
+<li data-subcomponent="dropzone" for="rs-params_args_4_drag4" data-category="4">times_two("hello", "hi");</li>
 </ul></div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.8.3"><a tabindex="-1" href="#params_args_4" title="Copy heading and permalink for Checkpoint 3.8.3" aria-label="Copy heading and permalink for Checkpoint 3.8.3">🔗</a></div>
 </article><div class="autopermalink" aria-hidden="true" data-description="Section 3.8: Parameters and Arguments"><a tabindex="-1" href="#chapter3_parameters-and-arguments" title="Copy heading and permalink for Section 3.8: Parameters and Arguments" aria-label="Copy heading and permalink for Section 3.8: Parameters and Arguments">🔗</a></div>
