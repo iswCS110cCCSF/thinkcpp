@@ -23,7 +23,7 @@
   <exercise label="keywords_1">
     <statement>
       <p>Words that are reserved in C++ because they are used by the compiler to parse the structure
-        of your program are called <fillin answer="keywords?"/>.</p>
+        of your program are called <fillin answer="keywords"/>.</p>
     </statement>
     <evaluation>
       <evaluate>
