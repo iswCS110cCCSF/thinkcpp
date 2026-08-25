@@ -552,11 +552,11 @@ double pi = 3.14159;
 </article>
 <div class="para" id="chapter3_floating-point-9">Although floating-point numbers are useful, they are often a source of confusion because there seems to be an overlap between integers and floating-point numbers. For example, if you have the value 1, is that an integer, a floating-point number, or both?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_floating-point-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_floating-point-10">Strictly speaking, C++ distinguishes the integer value 1 from the floating-point value 1.0, even though they seem to be the same number. They belong to different types, and strictly speaking, you are not allowed to make assignments between types. For example, the following is illegal:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_floating-point-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_floating-point-10">Strictly speaking, C++ distinguishes the integer value 1 from the floating-point value 1.0, even though they seem to be the same number. They belong to different types, and strictly speaking, you are not allowed to make assignments between types. However, the following is llegal:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_floating-point-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int x = 1.1;
 </code></pre></div>
-<div class="para" id="chapter3_floating-point-12">because the variable on the left is an <code class="code-inline tex2jax_ignore">int</code> and the value on the right is a <code class="code-inline tex2jax_ignore">double</code>. But it is easy to forget this rule, especially because there are places where C++ automatically converts from one type to another. For example,<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_floating-point-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_floating-point-12">because the  double is converted to<code class="code-inline tex2jax_ignore">int</code> and the the fractional part is discarded. But it is easy to forget this rule, especially because there are places where C++ automatically converts from one type to another. For example,<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_floating-point-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">double y = 1;
 </code></pre></div>
@@ -632,7 +632,7 @@ std::cout &lt;&lt; e_double;
 <div class="para" id="floating_point_3-2-2-1-1">3</div>
 </li>
 <li data-component="feedback" id="rs-floating_point_3_opt_b">
-<div class="para" id="floating_point_3-2-2-2-1">Converting to an int always rounds down.</div>
+<div class="para" id="floating_point_3-2-2-2-1">Converting to an int always truncates toward zero.</div>
 </li>
 <li data-component="answer" id="rs-floating_point_3_opt_c" data-correct="">
 <div class="para" id="floating_point_3-2-3-1-1">2</div>
@@ -644,7 +644,7 @@ std::cout &lt;&lt; e_double;
 <div class="para" id="floating_point_3-2-4-1-1">3.0</div>
 </li>
 <li data-component="feedback" id="rs-floating_point_3_opt_d">
-<div class="para" id="floating_point_3-2-4-2-1">Converting to an int always rounds down.</div>
+<div class="para" id="floating_point_3-2-4-2-1">Converting to an int always truncates toward zero.</div>
 </li>
 <li data-component="answer" id="rs-floating_point_3_opt_e">
 <div class="para" id="floating_point_3-2-5-1-1">2.71828</div>
