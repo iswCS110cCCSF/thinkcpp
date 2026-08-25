@@ -45,7 +45,7 @@ std::cout &lt;&lt; '}' &lt;&lt; std::endl ;
     character and the third is an integer. The reason this distinction is important should become
     clear soon.</p>
   <exercise label="values_1">
-    <statement>
+    <statement> 
       <p>A <fillin answer="char"/> value is a single letter, number, or punctuation enclosed in single quotes. </p>
     </statement>
     <evaluation>
