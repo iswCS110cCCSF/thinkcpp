@@ -29,12 +29,12 @@ double pi = 3.14159;</program>
   <p>Strictly speaking, C++ distinguishes the integer value 1 from the
     floating-point value 1.0, even though they seem to be the same number.
     They belong to different types, and strictly speaking, you are not
-    allowed to make assignments between types. For example, the following is
-    illegal:</p>
+    allowed to make assignments between types. However, the following is
+    llegal:</p>
   <program>
 int x = 1.1;
 </program>
-  <p>because the variable on the left is an <c>int</c> and the value on the right is a <c>double</c>. But it
+  <p>because the  double is converted to<c>int</c> and the the fractional part is discarded. But it
     is easy to forget this rule, especially because there are places where C++ automatically
     converts from one type to another. For example,</p>
   <program>
@@ -150,7 +150,7 @@ std::cout &lt;&lt; e_double;</program>
           <p>3</p>
         </statement>
         <feedback><p>
-          Converting to an int always rounds down.
+          Converting to an int always truncates toward zero.
         </p></feedback>
       </choice>
       <choice correct="yes">
@@ -167,7 +167,7 @@ std::cout &lt;&lt; e_double;</program>
           <p>3.0</p>
         </statement>
         <feedback><p>
-          Converting to an int always rounds down.
+          Converting to an int always truncates toward zero.
         </p></feedback>
       </choice>
       <choice>
