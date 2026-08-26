@@ -3247,7 +3247,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.6",
   "title": "Definitions and Uses",
-  "body": " Definitions and Uses  Pulling together all the code fragments from the previous section, the whole program looks like this:  #include <iostream> void new_line() { std::cout << '\\n'; } void three_line() { new_line(); new_line(); new_line(); } int main() { std::cout << \"First Line.\" << '\\n'; three_line(); std::cout << \"Second Line.\" << '\\n'; return 0; }  This program contains three function definitions: new_line , three_line , and main .  Inside the definition of main , there is a statement that uses or calls three_line . Similarly, three_line calls new_line three times. Notice that the definition of each function appears above the place where it is used.  This is necessary in C++; the definition of a function must appear before (above) the first use of the function. You should try compiling this program with the functions in a different order and see what error messages you get.    The function definition must be written the first use of the function.             Which of the following is a correct function header (first line of a function definition)?       void print_name()    This function header is missing a { , which is needed to begin defining the function.      total_cost_after_tax() {    This function header is missing a return type.      void todays_weather() {    Correct!      void final_grade {    This function header is missing parentheses. Even if a function does not take in any parameters, empty parentheses should be used.       Construct a block of code that correctly defines a the add_two function.     void add_two(int x) {    void add_two(int x);    void add_two(int x)    int plus_two = x + 2;    std::cout << plus_two;    }     "
+  "body": " Definitions and Uses  Pulling together all the code fragments from the previous section, the whole program can be organized like this:  #include <iostream> \/\/ Function declarations void new_line(); void three_line(); int main() { std::cout << \"First Line.\" << '\\n'; three_line(); std::cout << \"Second Line.\" << '\\n'; return 0; } \/\/ Function definitions void new_line() { std::cout << '\\n'; } void three_line() { new_line(); new_line(); new_line(); }  This program contains three function definitions: main , new_line , and three_line . It also contains declarations for new_line and three_line before main .  A function declaration , sometimes called a function prototype , tells the compiler a function's name, return type, and parameter types before the full function definition appears.  For example:   void new_line(); void three_line();   Notice the semicolon at the end of each declaration. A declaration does not contain the function body.  Inside main , the program calls three_line . Later, the definition of three_line calls new_line three times.  The important rule is that a function must be declared before it is called . The full function definition does not have to appear before the call, as long as the compiler has already seen a declaration for the function.  Organizing a program with function declarations before main and function definitions after main makes it easy to see which functions the program provides while keeping main near the top of the program. Later, we will use header files to organize function declarations in larger programs.    A function must be before it is called.       Yes. The compiler must see a declaration before a function is called. The full definition may appear later.        Which of the following is a correct function declaration for a function named print_name that takes no parameters and returns no value?       void print_name();     Correct. A function declaration includes the return type, function name, parameter list, and a semicolon.       void print_name() {     The opening brace begins a function definition rather than a function declaration.       print_name();     This is a function call. A declaration must also specify the function's return type.       void print_name;     A function declaration requires parentheses after the function name, even when the function takes no parameters.        Construct a block of code that correctly declares add_two , calls it from main , and then defines it.     void add_two(int x);    int main() {    add_two(5);    }    void add_two(int x) {    int plus_two = x + 2;    std::cout << plus_two << '\\n';    }    void add_two(int x)    add_two(int x);     "
 },
 {
   "id": "chapter3_definitions-and-uses-2",
@@ -3256,7 +3256,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Pulling together all the code fragments from the previous section, the whole program looks like this: "
+  "body": "Pulling together all the code fragments from the previous section, the whole program can be organized like this: "
 },
 {
   "id": "chapter3_definitions-and-uses-4",
@@ -3265,7 +3265,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This program contains three function definitions: new_line , three_line , and main . "
+  "body": "This program contains three function definitions: main , new_line , and three_line . It also contains declarations for new_line and three_line before main . "
 },
 {
   "id": "chapter3_definitions-and-uses-5",
@@ -3274,7 +3274,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Inside the definition of main , there is a statement that uses or calls three_line . Similarly, three_line calls new_line three times. Notice that the definition of each function appears above the place where it is used. "
+  "body": "A function declaration , sometimes called a function prototype , tells the compiler a function's name, return type, and parameter types before the full function definition appears. "
 },
 {
   "id": "chapter3_definitions-and-uses-6",
@@ -3283,7 +3283,43 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This is necessary in C++; the definition of a function must appear before (above) the first use of the function. You should try compiling this program with the functions in a different order and see what error messages you get. "
+  "body": "For example: "
+},
+{
+  "id": "chapter3_definitions-and-uses-8",
+  "level": "2",
+  "url": "chapter3_definitions-and-uses.html#chapter3_definitions-and-uses-8",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Notice the semicolon at the end of each declaration. A declaration does not contain the function body. "
+},
+{
+  "id": "chapter3_definitions-and-uses-9",
+  "level": "2",
+  "url": "chapter3_definitions-and-uses.html#chapter3_definitions-and-uses-9",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Inside main , the program calls three_line . Later, the definition of three_line calls new_line three times. "
+},
+{
+  "id": "chapter3_definitions-and-uses-10",
+  "level": "2",
+  "url": "chapter3_definitions-and-uses.html#chapter3_definitions-and-uses-10",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The important rule is that a function must be declared before it is called . The full function definition does not have to appear before the call, as long as the compiler has already seen a declaration for the function. "
+},
+{
+  "id": "chapter3_definitions-and-uses-11",
+  "level": "2",
+  "url": "chapter3_definitions-and-uses.html#chapter3_definitions-and-uses-11",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Organizing a program with function declarations before main and function definitions after main makes it easy to see which functions the program provides while keeping main near the top of the program. Later, we will use header files to organize function declarations in larger programs. "
 },
 {
   "id": "defns_uses_1",
@@ -3292,7 +3328,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.6.1",
   "title": "",
-  "body": "  The function definition must be written the first use of the function.          "
+  "body": "  A function must be before it is called.       Yes. The compiler must see a declaration before a function is called. The full definition may appear later.     "
 },
 {
   "id": "defns_uses_2",
@@ -3301,7 +3337,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.6.2",
   "title": "",
-  "body": "  Which of the following is a correct function header (first line of a function definition)?       void print_name()    This function header is missing a { , which is needed to begin defining the function.      total_cost_after_tax() {    This function header is missing a return type.      void todays_weather() {    Correct!      void final_grade {    This function header is missing parentheses. Even if a function does not take in any parameters, empty parentheses should be used.    "
+  "body": "  Which of the following is a correct function declaration for a function named print_name that takes no parameters and returns no value?       void print_name();     Correct. A function declaration includes the return type, function name, parameter list, and a semicolon.       void print_name() {     The opening brace begins a function definition rather than a function declaration.       print_name();     This is a function call. A declaration must also specify the function's return type.       void print_name;     A function declaration requires parentheses after the function name, even when the function takes no parameters.     "
 },
 {
   "id": "defns_uses_3",
@@ -3310,7 +3346,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.6.3",
   "title": "",
-  "body": "  Construct a block of code that correctly defines a the add_two function.     void add_two(int x) {    void add_two(int x);    void add_two(int x)    int plus_two = x + 2;    std::cout << plus_two;    }    "
+  "body": "  Construct a block of code that correctly declares add_two , calls it from main , and then defines it.     void add_two(int x);    int main() {    add_two(5);    }    void add_two(int x) {    int plus_two = x + 2;    std::cout << plus_two << '\\n';    }    void add_two(int x)    add_two(int x);    "
 },
 {
   "id": "chapter3_programs-with-multiple-functions",

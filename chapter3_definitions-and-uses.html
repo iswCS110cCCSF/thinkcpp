@@ -529,10 +529,22 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.6</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Definitions and Uses</span>
 </h1>
-<div class="para" id="chapter3_definitions-and-uses-2">Pulling together all the code fragments from the previous section, the whole program looks like this:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_definitions-and-uses-2">Pulling together all the code fragments from the previous section, the whole program can be organized like this:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
+// Function declarations
+void new_line();
+void three_line();
+
+int main() {
+    std::cout &lt;&lt; "First Line." &lt;&lt; '\n';
+    three_line();
+    std::cout &lt;&lt; "Second Line." &lt;&lt; '\n';
+    return 0;
+}
+
+// Function definitions
 void new_line() {
     std::cout &lt;&lt; '\n';
 }
@@ -542,29 +554,33 @@ void three_line() {
     new_line();
     new_line();
 }
-
-int main() {
-  std::cout &lt;&lt; "First Line." &lt;&lt; '\n';
-  three_line();
-  std::cout &lt;&lt; "Second Line." &lt;&lt; '\n';
-  return 0;
-}
 </code></pre></div>
-<div class="para" id="chapter3_definitions-and-uses-4">This program contains three function definitions: <code class="code-inline tex2jax_ignore">new_line</code>, <code class="code-inline tex2jax_ignore">three_line</code>, and <code class="code-inline tex2jax_ignore">main</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_definitions-and-uses-4">This program contains three function definitions: <code class="code-inline tex2jax_ignore">main</code>, <code class="code-inline tex2jax_ignore">new_line</code>, and <code class="code-inline tex2jax_ignore">three_line</code>. It also contains declarations for <code class="code-inline tex2jax_ignore">new_line</code> and <code class="code-inline tex2jax_ignore">three_line</code> before <code class="code-inline tex2jax_ignore">main</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_definitions-and-uses-5">Inside the definition of <code class="code-inline tex2jax_ignore">main</code>, there is a statement that uses or calls <code class="code-inline tex2jax_ignore">three_line</code>. Similarly, <code class="code-inline tex2jax_ignore">three_line</code> calls <code class="code-inline tex2jax_ignore">new_line</code> three times. Notice that the definition of each function appears above the place where it is used.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_definitions-and-uses-5">A <dfn class="terminology">function declaration</dfn>, sometimes called a <dfn class="terminology">function prototype</dfn>, tells the compiler a function’s name, return type, and parameter types before the full function definition appears.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_definitions-and-uses-6">This is necessary in C++; the definition of a function must appear before (above) the first use of the function. You should try compiling this program with the functions in a different order and see what error messages you get.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_definitions-and-uses-6">For example:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void new_line();
+void three_line();
+</code></pre></div>
+<div class="para" id="chapter3_definitions-and-uses-8">Notice the semicolon at the end of each declaration. A declaration does not contain the function body.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter3_definitions-and-uses-9">Inside <code class="code-inline tex2jax_ignore">main</code>, the program calls <code class="code-inline tex2jax_ignore">three_line</code>. Later, the definition of <code class="code-inline tex2jax_ignore">three_line</code> calls <code class="code-inline tex2jax_ignore">new_line</code> three times.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter3_definitions-and-uses-10">The important rule is that a function must be <em class="emphasis">declared before it is called</em>. The full function definition does not have to appear before the call, as long as the compiler has already seen a declaration for the function.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter3_definitions-and-uses-11">Organizing a program with function declarations before <code class="code-inline tex2jax_ignore">main</code> and function definitions after <code class="code-inline tex2jax_ignore">main</code> makes it easy to see which functions the program provides while keeping <code class="code-inline tex2jax_ignore">main</code> near the top of the program. Later, we will use header files to organize function declarations in larger programs.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_definitions-and-uses-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="exercise exercise-like" id="defns_uses_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.6.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-defns_uses_1"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"defns_uses_1-1-1\">The function definition must be written <input type=\"text\" id=\"defns_uses_1-blank1\"\/> the first use of the function.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#defns_uses_1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"defns_uses_1-1-1\">A function must be <input type=\"text\" id=\"defns_uses_1-blank1\"\/> before it is called.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#defns_uses_1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0},
-"feedbackArray": [[{"regex": "^\\s*\\(before\\)\\|\\(above\\)\\s*$", "regexFlags": "i", "feedback": "Correct!"}, {"feedback": "Incorrect."}]]
+"feedbackArray": [[{"regex": "^\\s*declared\\s*$", "regexFlags": "i", "feedback": "Yes. The compiler must see a declaration before a function is called. The full definition may appear later."}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.6.1"><a tabindex="-1" href="#defns_uses_1" title="Copy heading and permalink for Checkpoint 3.6.1" aria-label="Copy heading and permalink for Checkpoint 3.6.1">🔗</a></div>
@@ -574,33 +590,33 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="defns_uses_2-1-1">Which of the following is a correct function header (first line of a function definition)?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#defns_uses_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="defns_uses_2-1-1">Which of the following is a correct function declaration for a function named <code class="code-inline tex2jax_ignore">print_name</code> that takes no parameters and returns no value?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#defns_uses_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-defns_uses_2" data-multipleanswers="false">
-<li data-component="answer" id="rs-defns_uses_2_opt_a">
-<div class="para" id="defns_uses_2-2-1-1-1"><code class="code-inline tex2jax_ignore">void print_name()</code></div>
+<li data-component="answer" id="rs-defns_uses_2_opt_a" data-correct="">
+<div class="para" id="defns_uses_2-2-1-1-1"><code class="code-inline tex2jax_ignore">void print_name();</code></div>
 </li>
 <li data-component="feedback" id="rs-defns_uses_2_opt_a">
-<div class="para" id="defns_uses_2-2-1-2-1">This function header is missing a <code class="code-inline tex2jax_ignore">{</code>, which is needed to begin defining the function.</div>
+<div class="para" id="defns_uses_2-2-1-2-1">Correct. A function declaration includes the return type, function name, parameter list, and a semicolon.</div>
 </li>
 <li data-component="answer" id="rs-defns_uses_2_opt_b">
-<div class="para" id="defns_uses_2-2-2-1-1"><code class="code-inline tex2jax_ignore">total_cost_after_tax() {</code></div>
+<div class="para" id="defns_uses_2-2-2-1-1"><code class="code-inline tex2jax_ignore">void print_name() {</code></div>
 </li>
 <li data-component="feedback" id="rs-defns_uses_2_opt_b">
-<div class="para" id="defns_uses_2-2-2-2-1">This function header is missing a return type.</div>
+<div class="para" id="defns_uses_2-2-2-2-1">The opening brace begins a function definition rather than a function declaration.</div>
 </li>
-<li data-component="answer" id="rs-defns_uses_2_opt_c" data-correct="">
-<div class="para" id="defns_uses_2-2-3-1-1"><code class="code-inline tex2jax_ignore">void todays_weather() {</code></div>
+<li data-component="answer" id="rs-defns_uses_2_opt_c">
+<div class="para" id="defns_uses_2-2-3-1-1"><code class="code-inline tex2jax_ignore">print_name();</code></div>
 </li>
 <li data-component="feedback" id="rs-defns_uses_2_opt_c">
-<div class="para" id="defns_uses_2-2-3-2-1">Correct!</div>
+<div class="para" id="defns_uses_2-2-3-2-1">This is a function call. A declaration must also specify the function’s return type.</div>
 </li>
 <li data-component="answer" id="rs-defns_uses_2_opt_d">
-<div class="para" id="defns_uses_2-2-4-1-1"><code class="code-inline tex2jax_ignore">void final_grade {</code></div>
+<div class="para" id="defns_uses_2-2-4-1-1"><code class="code-inline tex2jax_ignore">void print_name;</code></div>
 </li>
 <li data-component="feedback" id="rs-defns_uses_2_opt_d">
-<div class="para" id="defns_uses_2-2-4-2-1">This function header is missing parentheses. Even if a function does not take in any parameters, empty parentheses should be used.</div>
+<div class="para" id="defns_uses_2-2-4-2-1">A function declaration requires parentheses after the function name, even when the function takes no parameters.</div>
 </li>
 </ul>
 </div></div>
@@ -611,20 +627,28 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-defns_uses_3">
 <div class="parsons_question parsons-text">
-<div class="para" id="defns_uses_3-1-1">Construct a block of code that correctly defines a the add_two function.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#defns_uses_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="defns_uses_3-1-1">Construct a block of code that correctly declares <code class="code-inline tex2jax_ignore">add_two</code>, calls it from <code class="code-inline tex2jax_ignore">main</code>, and then defines it.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#defns_uses_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
-<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void add_two(int x) {
+<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void add_two(int x);
 ---
-void add_two(int x);  #distractor
+int main() {
 ---
-void add_two(int x)  #distractor
+    add_two(5);
 ---
- int plus_two = x + 2;
+}
 ---
- std::cout &lt;&lt; plus_two;
+void add_two(int x) {
 ---
-}</pre>
+    int plus_two = x + 2;
+---
+    std::cout &lt;&lt; plus_two &lt;&lt; '\n';
+---
+}
+---
+void add_two(int x) #distractor
+---
+add_two(int x); #distractor</pre>
 </div></div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.6.3"><a tabindex="-1" href="#defns_uses_3" title="Copy heading and permalink for Checkpoint 3.6.3" aria-label="Copy heading and permalink for Checkpoint 3.6.3">🔗</a></div>
 </article><div class="autopermalink" aria-hidden="true" data-description="Section 3.6: Definitions and Uses"><a tabindex="-1" href="#chapter3_definitions-and-uses" title="Copy heading and permalink for Section 3.6: Definitions and Uses" aria-label="Copy heading and permalink for Section 3.6: Definitions and Uses">🔗</a></div>
