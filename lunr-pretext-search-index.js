@@ -3907,31 +3907,103 @@ var ptx_lunr_docs = [
   "body": "  What value is stored in result after this code runs?   int double_value(int value) { return value * 2; } int main() { int result = double_value(6); }      2   The parameter value receives 6 , and the function returns value * 2 .     6   6 is the argument passed to the function, but the function returns twice that value.     12   Correct! double_value(6) returns 6 * 2 , which is 12 .     Nothing, because the function does not print anything.   A function does not need to print a value in order to return one. The return statement sends the result back to the caller.     "
 },
 {
-  "id": "chapter3_glossary",
+  "id": "functions-13",
   "level": "1",
-  "url": "chapter3_glossary.html",
-  "type": "Section",
-  "number": "3.12",
-  "title": "Glossary",
-  "body": " Glossary    floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double.    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A piece of information you provide in order to call a function. Parameters are like variables in the sense that they contain values and have types.    argument  A value that you provide when you call a function. This value must have the same type as the corresponding parameter.    call  Cause a function to be executed.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    floating-point  A type of value that can contain fractions as well as integers.    initialization  A statement that declares a new variable and assigns a value to it.    call  Causes a function to be executed.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    function  A named sequence of statements that performs some useful function.    parameter  A piece of information you provide in order to call a function.    argument  A value that you provide when you call a function.      "
-},
-{
-  "id": "chapter3_glossary-2",
-  "level": "2",
-  "url": "chapter3_glossary.html#chapter3_glossary-2",
+  "url": "functions-13.html",
   "type": "Glossary",
   "number": "3.12",
   "title": "Glossary",
-  "body": "  floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double.    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A piece of information you provide in order to call a function. Parameters are like variables in the sense that they contain values and have types.    argument  A value that you provide when you call a function. This value must have the same type as the corresponding parameter.    call  Cause a function to be executed.   "
+  "body": "  floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double .    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A variable declared in a function's parameter list. A parameter receives a value when the function is called.    argument  A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter.    call  Cause a function to be executed.    return type  The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value.    return statement  A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call.    return value  The value that a function sends back to its caller.    value-returning function  A function that returns a value to its caller. Its return type is a type other than void .   "
 },
 {
-  "id": "chapter3_glossary-3",
+  "id": "functions-13-1-2",
   "level": "2",
-  "url": "chapter3_glossary.html#chapter3_glossary-3",
-  "type": "Reading Questions",
-  "number": "3.12",
-  "title": "Reading Questions",
-  "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    floating-point  A type of value that can contain fractions as well as integers.    initialization  A statement that declares a new variable and assigns a value to it.    call  Causes a function to be executed.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    function  A named sequence of statements that performs some useful function.    parameter  A piece of information you provide in order to call a function.    argument  A value that you provide when you call a function.     "
+  "url": "functions-13.html#functions-13-1-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double . "
+},
+{
+  "id": "functions-13-2-2",
+  "level": "2",
+  "url": "functions-13.html#functions-13-2-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A statement that declares a new variable and assigns a value to it at the same time. "
+},
+{
+  "id": "functions-13-3-2",
+  "level": "2",
+  "url": "functions-13.html#functions-13-3-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result. "
+},
+{
+  "id": "functions-13-4-2",
+  "level": "2",
+  "url": "functions-13.html#functions-13-4-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A variable declared in a function's parameter list. A parameter receives a value when the function is called. "
+},
+{
+  "id": "functions-13-5-2",
+  "level": "2",
+  "url": "functions-13.html#functions-13-5-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter. "
+},
+{
+  "id": "functions-13-6-2",
+  "level": "2",
+  "url": "functions-13.html#functions-13-6-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Cause a function to be executed. "
+},
+{
+  "id": "functions-13-7-2",
+  "level": "2",
+  "url": "functions-13.html#functions-13-7-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value. "
+},
+{
+  "id": "functions-13-8-2",
+  "level": "2",
+  "url": "functions-13.html#functions-13-8-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call. "
+},
+{
+  "id": "functions-13-9-2",
+  "level": "2",
+  "url": "functions-13.html#functions-13-9-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The value that a function sends back to its caller. "
+},
+{
+  "id": "functions-13-10-2",
+  "level": "2",
+  "url": "functions-13.html#functions-13-10-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A function that returns a value to its caller. Its return type is a type other than void . "
 },
 {
   "id": "chapter3_multiple-choice-exercises",
