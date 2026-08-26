@@ -4,7 +4,7 @@
     you use one expression as part of another. For example, you can use any expression as an
     argument to a function:</p>
   <program>
-double x = cos(angle + pi / 2);
+double x = std::cos(angle + pi / 2);
 </program>
   <p>This statement takes the value of pi, divides it by two and adds the result to the value of
     angle. The sum is then passed as an argument to the <c>cos</c> function.</p>
@@ -21,7 +21,7 @@ double x = cos(angle + pi / 2);
 #include <cmath>
 
 int main() {
-    double x = exp(log(10.0));
+    double x = std::exp(std::log(10.0));
     std::cout << x;
 }
         ]]></code>
@@ -35,7 +35,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>double x = log6(12);</c>
+            <c>double x = std::log6(12);</c>
           </p>
         </statement>
         <feedback><p>
@@ -46,7 +46,7 @@ int main() {
       <choice correct="yes">
         <statement>
           <p>
-            <c>double val = abs(tan(1.57));</c>
+            <c>double val = std::abs(std::tan(1.57));</c>
           </p>
         </statement>
         <feedback><p>
@@ -56,7 +56,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>double num = exp(cosine(0.86667));</c>
+            <c>double num = std::exp(std::cosine(0.86667));</c>
           </p>
         </statement>
         <feedback><p>
@@ -66,7 +66,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>double y = exp(cos(1.047)) + exp(tan(2.094))</c>
+            <c>double y = std::exp(std::cos(1.047)) + std::exp(std::tan(2.094))</c>
           </p>
         </statement>
         <feedback><p>
@@ -84,7 +84,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>y = cos(330);</c>
+            <c>y = std::cos(330);</c>
           </p>
         </statement>
         <feedback><p>
@@ -94,7 +94,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>y = cos(330 * 2 * pi / 360);</c>
+            <c>y = std::cos(330 * 2 * pi / 360);</c>
           </p>
         </statement>
         <feedback><p>
@@ -104,7 +104,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>y = sin(330);</c>
+            <c>y = std::sin(330);</c>
           </p>
         </statement>
         <feedback><p>
@@ -114,7 +114,7 @@ int main() {
       <choice correct="yes">
         <statement>
           <p>
-            <c>y = sin(330 * 2 * pi / 360);</c>
+            <c>y = std::sin(330 * 2 * pi / 360);</c>
           </p>
         </statement>
         <feedback><p>
@@ -124,7 +124,7 @@ int main() {
       <choice>
         <statement>
           <p>
-            <c>y = tan(330 * 2 * pi / 360);</c>
+            <c>y = std::tan(330 * 2 * pi / 360);</c>
           </p>
         </statement>
         <feedback><p>

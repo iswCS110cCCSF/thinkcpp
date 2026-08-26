@@ -3,8 +3,7 @@
   <title>Converting from <c>double</c> to <c>int</c></title>
   <p>As I mentioned, C++ converts <c>int</c>'s to <c>double</c>'s automatically if necessary, because no
     information is lost in the translation. On the other hand, going from a <c>double</c> to an <c>int</c>
-    requires rounding off. C++ doesn't perform this operation automatically, in order to make sure
-    that you, as the programmer, are aware of the loss of the fractional part of the number.</p>
+    requires truncating to the neareast integer toward zero. The implicit conversion is allowed but you'd lose the fractional part doing so. You, as the programmer, should be aware of the loss of the fractional part of the number.</p>
   <p>The simplest way to convert a floating-point value to an integer is to use a <term>typecast</term>.
     Typecasting is so called because it allows you to take a value that belongs to one type and <q>
     cast</q> it into another type (in the sense of molding or reforming, not throwing).</p>
@@ -12,11 +11,11 @@
     example:</p>
   <program>double pi = 3.14159;
 int x = int(pi);</program>
-  <p>The int function returns an integer, so x gets the value 3. Converting
-    to an integer always rounds down, even if the fraction part is
+  <p>The int function returns an integer, so x gets the value 3. Casting to an integer always truncates to the neareast integer toward zero even if the fraction part is
     0.99999999.</p>
   <p>For every type in C++, there is a corresponding function that typecasts
-    its argument to the appropriate type.</p>
+    its argument to the appropriate type. However, modern C++ standard recommends using static_cast function like below. Note that the type we are casting into must go between &lt;&gt;. We will learn more on &lt;int&gt; kind of notations later in the book.</p>
+<program>int x = static_cast&lt;int&gt;(pi);</program>	
   <exercise label="double_to_int_1">
     <statement>
       <p>In the lab, we measured a temperature of 7.99999999 degrees C, using
@@ -44,7 +43,7 @@ int x = int(pi);</program>
           <p>8</p>
         </statement>
         <feedback><p>
-          Remember that converting to an integer always rounds down.
+          Remember that converting to an integer always truncates to the neareast integer toward zero.
         </p></feedback>
       </choice>
       <choice correct="yes">
@@ -109,30 +108,30 @@ int final = int((exam1 + exam2 + exam3) / 3);
       <choice>
         <statement>
           <p><term>Method 1:</term> the rounding happens at the beginning, so all three of my test
-            scores will be rounded to the nearest <c>int</c>, which in my case, will round all of them
+            scores will be truncated to the neareast integer toward zero <c>int</c>, which in my case, will truncated them
             up.</p>
         </statement>
         <feedback><p>
-          Converting to an <c>int</c> always rounds <em>down</em>, even if your <c>double</c> is very
+          Converting to an <c>int</c> always truncated to the neareast integer toward zero, even if your <c>double</c> is very
             close to the next integer.
         </p></feedback>
       </choice>
       <choice>
         <statement>
-          <p><term>Method 2:</term><c>final</c> is an <c>int</c>, so it gets rounded up.</p>
+          <p><term>Method 2:</term><c>final</c> is an <c>int</c>, so it gets truncated to he neareast integer up.</p>
         </statement>
         <feedback><p>
-          Converting to an <c>int</c> always rounds <em>down</em>, even if your <c>double</c> is very
+          Converting to an <c>int</c> always truncated to the neareast integer toward zero, even if your <c>double</c> is very
             close to the next integer.
         </p></feedback>
       </choice>
       <choice correct="yes">
         <statement>
-          <p><term>Method 2:</term> the rounding happens at the very end, so my grade will be
+          <p><term>Method 2:</term> the truncating happens at the very end, so my grade will be
             higher!</p>
         </statement>
         <feedback><p>
-          Always save your rounding until the end!
+          Always save your truncating until the end!
         </p></feedback>
       </choice>
     </choices>

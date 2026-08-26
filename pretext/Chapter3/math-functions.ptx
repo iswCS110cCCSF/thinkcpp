@@ -11,7 +11,7 @@
   <p>This process can be applied repeatedly to evaluate more complicated expressions like <m>
     \log(1/\sin(\pi/2))</m>. First we evaluate the argument of the innermost function, then
     evaluate the function, and so on.</p>
-  <p>C++ provides a set of built-in functions that includes most of the
+  <p>C++ provides a math library that includes most of the
     mathematical operations you can think of. The math functions are invoked
     using a syntax that is similar to mathematical notation:</p>
   <listing label="math_functions_AC_1">
@@ -25,9 +25,9 @@
 #include <cmath>
 
 int main() {
-    double result = log(17.0);
+    double result = std::log(17.0);
     double angle = 1.5;
-    double height = sin(angle);
+    double height = std::sin(angle);
     std::cout << result << '\n';
     std::cout << angle << '\n';
     std::cout << height << '\n';
@@ -61,7 +61,7 @@ int main() {
 #include <cmath>
 
 int main() {
-    double pi = acos(-1.0);
+    double pi = std::acos(-1.0);
     double degrees = 90;
     double angle = degrees * 2 * pi / 360.0;
     std::cout << pi << '\n';
@@ -81,8 +81,7 @@ int main() {
   <p><url href="https://en.cppreference.com/w/cpp/header/iostream">
     iostream</url> contains information about input and output (I/O) streams, including the object named <c>cout</c>.
     C++ has a powerful feature called namespaces, that allow you to write your own implementation of
-    cout. But in most cases, we would need to use the standard implementation. To convey this to the
-    compiler, we use the line</p>
+    cout. But in most cases, we would need to use the standard implementation of cout which your explisitly get using std::cout.</p>
   <program>
 </program>
   <note>
@@ -114,7 +113,7 @@ int main() {
       </match>
       <match>
         <premise order="3">namespace std</premise>
-        <response>the standard implementation of cout</response>
+        <response>provides the standard implementation of cout</response>
       </match>
     </cardsort>
   </exercise>

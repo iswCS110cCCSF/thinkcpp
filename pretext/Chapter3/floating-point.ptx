@@ -150,7 +150,7 @@ std::cout &lt;&lt; e_double;</program>
           <p>3</p>
         </statement>
         <feedback><p>
-          Converting to an int always truncates toward zero.
+          Converting to an int always truncates to the neareast integer toward zero.
         </p></feedback>
       </choice>
       <choice correct="yes">
@@ -158,7 +158,7 @@ std::cout &lt;&lt; e_double;</program>
           <p>2</p>
         </statement>
         <feedback><p>
-          When we converted e to an int, e was rounded down to 2. When we converted e_nt to
+          When we converted e to an int, e was truncated to the neareast integer toward zero. In this case to 2. When we converted e_nt to
             e_double, the decimal places from e were lost, and the value of e_double is 2.
         </p></feedback>
       </choice>
@@ -175,7 +175,7 @@ std::cout &lt;&lt; e_double;</program>
           <p>2.71828</p>
         </statement>
         <feedback><p>
-          When we converted e to an int, e was rounded down to 2. When we converted e_nt to
+          When we converted e to an int, e was truncated to the neareast integer toward zero. In this case to 2. When we converted e_nt to
             e_double, the decimal places from e were lost.
         </p></feedback>
       </choice>
