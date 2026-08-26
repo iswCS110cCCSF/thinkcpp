@@ -3778,7 +3778,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.11",
   "title": "Functions with Results",
-  "body": " Functions with Results  You might have noticed by now that some of the functions we are using, like the math functions, yield results. Other functions, like new_line , perform an action but don't return a value. That raises some questions:     What happens if you call a function and you don't do anything with the result (i.e. you don't assign it to a variable or use it as part of a larger expression)?    What happens if you use a function without a result as part of an expression, like new_line() + 7 ?    Can we write functions that yield results, or are we stuck with things like new_line and print_twice?     The answer to the third question is yes, you can write functions that return values, and we'll do it in a couple of chapters. I will leave it up to you to answer the other two questions by trying them out.   Any time you have a question about what is legal or illegal in C++, a good way to find out is to ask the compiler. It will let you answer your question by throwing an error… or not!     What will be printed when the following code runs?    #include <iostream> void multiply(int x, int y) { std::cout << x * y; } int main() { int x = 2; int y = 4; multiply(x,y); }        Yes! 2*4=8 so that will be printed but not returned        Will the following code compile?   #include <iostream> void multiply(int x, int y) { std::cout << x * y << '\\n'; } int main() { int x = 2; int y = 4; std::cout << multiply(x,y); }       Yes   Can you print the result of a void function?     No   Correct! You can't print the result of a void function      "
+  "body": " Functions with Results  You might have noticed by now that some of the functions we are using, like the math functions, yield results. Other functions, like new_line , perform an action but don't return a value. That raises some questions:     What happens if you call a function and you don't do anything with the result (i.e. you don't assign it to a variable or use it as part of a larger expression)?    What happens if you use a function without a result as part of an expression, like new_line() + 7 ?    Can we write functions that yield results, or are we stuck with things like new_line and print_twice ?     The answer to the third question is yes, you can write functions that return values. A function that returns a value has a return type instead of void . It uses a return statement to send a value back to the caller.  For example:   int double_value(int value) { return value * 2; }   In this example, int is the return type. The statement return value * 2; computes an integer and sends that value back to the caller.  A call to a value-returning function can be used anywhere a value of that type is appropriate. For example:   int result = double_value(5); std::cout << result << '\\n';   The call double_value(5) returns the value 10 , so result is initialized to 10 .  Parameters carry information into a function. A return value carries a result back to the caller .  A function can have multiple parameters and still return one value:   double rectangle_area(double width, double height) { return width * height; }   The returned value can be stored in a variable or used directly in another expression:   double area = rectangle_area(4.0, 3.0); std::cout << area << '\\n';    Any time you have a question about what is legal or illegal in C++, a good way to find out is to ask the compiler. It will let you answer your question by throwing an error… or not!     What will be printed when the following code runs?    #include <iostream> void multiply(int x, int y) { std::cout << x * y; } int main() { int x = 2; int y = 4; multiply(x,y); }        Yes! 2*4=8 so that will be printed but not returned        Will the following code compile?   #include <iostream> void multiply(int x, int y) { std::cout << x * y << '\\n'; } int main() { int x = 2; int y = 4; std::cout << multiply(x,y); }       Yes    Can you print the result of a void function?      No    Correct! A void function does not produce a value that can be sent to std::cout .        What value is stored in result after this code runs?   int double_value(int value) { return value * 2; } int main() { int result = double_value(6); }      2   The parameter value receives 6 , and the function returns value * 2 .     6   6 is the argument passed to the function, but the function returns twice that value.     12   Correct! double_value(6) returns 6 * 2 , which is 12 .     Nothing, because the function does not print anything.   A function does not need to print a value in order to return one. The return statement sends the result back to the caller.      "
 },
 {
   "id": "chapter3_functions-with-results-2",
@@ -3796,7 +3796,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "   What happens if you call a function and you don't do anything with the result (i.e. you don't assign it to a variable or use it as part of a larger expression)?    What happens if you use a function without a result as part of an expression, like new_line() + 7 ?    Can we write functions that yield results, or are we stuck with things like new_line and print_twice?    "
+  "body": "   What happens if you call a function and you don't do anything with the result (i.e. you don't assign it to a variable or use it as part of a larger expression)?    What happens if you use a function without a result as part of an expression, like new_line() + 7 ?    Can we write functions that yield results, or are we stuck with things like new_line and print_twice ?    "
 },
 {
   "id": "chapter3_functions-with-results-4",
@@ -3805,12 +3805,75 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The answer to the third question is yes, you can write functions that return values, and we'll do it in a couple of chapters. I will leave it up to you to answer the other two questions by trying them out. "
+  "body": "The answer to the third question is yes, you can write functions that return values. A function that returns a value has a return type instead of void . It uses a return statement to send a value back to the caller. "
 },
 {
   "id": "chapter3_functions-with-results-5",
   "level": "2",
   "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-5",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "For example: "
+},
+{
+  "id": "chapter3_functions-with-results-7",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-7",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In this example, int is the return type. The statement return value * 2; computes an integer and sends that value back to the caller. "
+},
+{
+  "id": "chapter3_functions-with-results-8",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-8",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A call to a value-returning function can be used anywhere a value of that type is appropriate. For example: "
+},
+{
+  "id": "chapter3_functions-with-results-10",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-10",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The call double_value(5) returns the value 10 , so result is initialized to 10 . "
+},
+{
+  "id": "chapter3_functions-with-results-11",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-11",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Parameters carry information into a function. A return value carries a result back to the caller . "
+},
+{
+  "id": "chapter3_functions-with-results-12",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-12",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A function can have multiple parameters and still return one value: "
+},
+{
+  "id": "chapter3_functions-with-results-14",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-14",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The returned value can be stored in a variable or used directly in another expression: "
+},
+{
+  "id": "chapter3_functions-with-results-16",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-16",
   "type": "Note",
   "number": "3.11.1",
   "title": "",
@@ -3832,7 +3895,16 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.11.2",
   "title": "",
-  "body": "  Will the following code compile?   #include <iostream> void multiply(int x, int y) { std::cout << x * y << '\\n'; } int main() { int x = 2; int y = 4; std::cout << multiply(x,y); }       Yes   Can you print the result of a void function?     No   Correct! You can't print the result of a void function     "
+  "body": "  Will the following code compile?   #include <iostream> void multiply(int x, int y) { std::cout << x * y << '\\n'; } int main() { int x = 2; int y = 4; std::cout << multiply(x,y); }       Yes    Can you print the result of a void function?      No    Correct! A void function does not produce a value that can be sent to std::cout .     "
+},
+{
+  "id": "fuwresults_3",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#fuwresults_3",
+  "type": "Checkpoint",
+  "number": "3.11.3",
+  "title": "",
+  "body": "  What value is stored in result after this code runs?   int double_value(int value) { return value * 2; } int main() { int result = double_value(6); }      2   The parameter value receives 6 , and the function returns value * 2 .     6   6 is the argument passed to the function, but the function returns twice that value.     12   Correct! double_value(6) returns 6 * 2 , which is 12 .     Nothing, because the function does not print anything.   A function does not need to print a value in order to return one. The return statement sends the result back to the caller.     "
 },
 {
   "id": "chapter3_glossary",
