@@ -14,7 +14,7 @@
 <!--******************************************-->
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TCPP2 Acknowledgements</title>
+<title>TCPP2 Pass by Value and Pass by Reference</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -103,7 +103,7 @@ eBookConfig.enable_chatcodes =  false;
 <legend>Assistive technologies</legend>
 <label for="ptx-readability-accessible-permalinks"><input type="checkbox" id="ptx-readability-accessible-permalinks"><span>🔗</span><span>Expose permalinks</span></label>
 </fieldset>
-<div class="ptx-readability-options-group"><button type="button" class="ptx-readability-reset-button button" id="ptx-readability-reset-button"><span class="icon material-symbols-outlined" aria-hidden="true">&#xf053;</span><span class="name">Reset All</span></button></div></dialog></span><span class="treebuttons"><a class="previous-button button" href="front-colophon.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="frontmatter.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="way-of-the-program.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+<div class="ptx-readability-options-group"><button type="button" class="ptx-readability-reset-button button" id="ptx-readability-reset-button"><span class="icon material-symbols-outlined" aria-hidden="true">&#xf053;</span><span class="name">Reset All</span></button></div></dialog></span><span class="treebuttons"><a class="previous-button button" href="chapter3_functions-with-results.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="functions.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="chapter3_glossary.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
 </div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
@@ -113,11 +113,11 @@ eBookConfig.enable_chatcodes =  false;
 \)</span></div>
 <div class="ptx-page">
 <div id="ptx-sidebar" role="complementary" class="ptx-sidebar"><nav id="ptx-toc" tabindex="-1" aria-label="Contents" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
-<li class="toc-item toc-frontmatter contains-active">
+<li class="toc-item toc-frontmatter">
 <div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">About this book</span></a></div>
-<ul class="structural toc-item-list contains-active" id="ptx-toc-group-frontmatter">
+<ul id="ptx-toc-group-frontmatter" class="structural toc-item-list">
 <li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">License</span></a></div></li>
-<li class="toc-item toc-acknowledgement active"><div class="toc-title-box"><a href="acknowledgement.html" class="internal"><span class="title">Acknowledgements</span></a></div></li>
+<li class="toc-item toc-acknowledgement"><div class="toc-title-box"><a href="acknowledgement.html" class="internal"><span class="title">Acknowledgements</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-chapter">
@@ -175,9 +175,9 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter2_activecode-exercises.html" class="internal"><span class="codenumber">2.14</span> <span class="title">Activecode Exercises</span></a></div></li>
 </ul>
 </li>
-<li class="toc-item toc-chapter">
+<li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="functions.html" class="internal"><span class="codenumber">3</span> <span class="title">Functions</span></a></div>
-<ul id="ptx-toc-group-functions" class="structural toc-item-list">
+<ul class="structural toc-item-list contains-active" id="ptx-toc-group-functions">
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_floating-point.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Floating-point</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_converting-from-double-to-int.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Converting from <code class="code-inline tex2jax_ignore">double</code> to <code class="code-inline tex2jax_ignore">int</code></span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_math-functions.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Math Functions</span></a></div></li>
@@ -189,7 +189,7 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_parameters-and-variables-are-local.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Parameters and Variables are Local</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_functions-with-multiple-parameters.html" class="internal"><span class="codenumber">3.10</span> <span class="title">Functions with Multiple Parameters</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_functions-with-results.html" class="internal"><span class="codenumber">3.11</span> <span class="title">Functions with Results</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_pass-by-reference.html" class="internal"><span class="codenumber">3.12</span> <span class="title">Pass by Value and Pass by Reference</span></a></div></li>
+<li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter3_pass-by-reference.html" class="internal"><span class="codenumber">3.12</span> <span class="title">Pass by Value and Pass by Reference</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter3_glossary.html" class="internal"><span class="codenumber">3.13</span> <span class="title">Glossary</span></a></div>
 <ul id="ptx-toc-group-chapter3_glossary" class="structural toc-item-list">
@@ -525,53 +525,190 @@ eBookConfig.enable_chatcodes =  false;
 </li>
 </ul></nav></div>
 <main class="ptx-main"><div id="ptx-content" class="ptx-content">
-<section class="acknowledgement" id="acknowledgement">
+<section class="section" id="chapter3_pass-by-reference">
 <h1 class="heading hide-type">
-<span class="type">Acknowledgements</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber"></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Acknowledgements</span>
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.12</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Pass by Value and Pass by Reference</span>
 </h1>
-<div class="para" id="acknowledgement-1">This ebook in an interactive version of <a class="external" href="https://open.umn.edu/opentextbooks/textbooks/how-to-think-like-a-computer-scientist-c-version" target="_blank">How to Think Like a Computer Scientist: C++ Version by Allen Downey.</a><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#acknowledgement-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_pass-by-reference-2">So far, function parameters have received copies of the values passed to them. This is called <dfn class="terminology">pass by value</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="acknowledgement-2">We thank Brad Miller for all of his tremendous work on Runestone including getting C++ to work, adding unit tests for C++, and adding a visualizer for C++.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#acknowledgement-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_pass-by-reference-3">For example, suppose we try to write a function that swaps two values:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="acknowledgement-3">Jason Wright has provided many updates to the work and currently maintains it.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#acknowledgement-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void swap_values(int first, int second) {
+    int temp = first;
+    first = second;
+    second = temp;
+}
+</code></pre></div>
+<div class="para" id="chapter3_pass-by-reference-5">Now consider this call:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="acknowledgement-4">Andrew Scholer converted this work from Runestone markup to PreTeXt.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#acknowledgement-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int x = 3;
+int y = 7;
+
+swap_values(x, y);
+</code></pre></div>
+<div class="para" id="chapter3_pass-by-reference-7">Inside <code class="code-inline tex2jax_ignore">swap_values</code>, the parameters <code class="code-inline tex2jax_ignore">first</code> and <code class="code-inline tex2jax_ignore">second</code> are separate variables that receive copies of the values stored in <code class="code-inline tex2jax_ignore">x</code> and <code class="code-inline tex2jax_ignore">y</code>. The function swaps those copies, but the original variables <code class="code-inline tex2jax_ignore">x</code> and <code class="code-inline tex2jax_ignore">y</code> are unchanged.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para logical" id="acknowledgement-5">
-<div class="para">The following individuals have added interactive questions to the ebook:</div>
-<ul class="disc" id="acknowledgement-5-1">
-<li id="acknowledgement-5-1-1">
-<div class="para" id="p-derived-acknowledgement-5-1-1">Ewelina Papiez</div>
-<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#acknowledgement-5-1-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+<div class="para" id="chapter3_pass-by-reference-8">After the function call, the values are still:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">x = 3
+y = 7
+</code></pre></div>
+<div class="para" id="chapter3_pass-by-reference-10">Sometimes we want a function to work with the caller’s variables directly. C++ allows us to do this with <dfn class="terminology">reference parameters</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter3_pass-by-reference-11">A reference parameter is written with an ampersand <code class="code-inline tex2jax_ignore">&amp;</code> after the parameter type:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void swap_values(int&amp; first, int&amp; second) {
+    int temp = first;
+    first = second;
+    second = temp;
+}
+</code></pre></div>
+<div class="para" id="chapter3_pass-by-reference-13">In this version, <code class="code-inline tex2jax_ignore">first</code> refers to the caller’s variable <code class="code-inline tex2jax_ignore">x</code>, and <code class="code-inline tex2jax_ignore">second</code> refers to the caller’s variable <code class="code-inline tex2jax_ignore">y</code>. Changes made through the reference parameters therefore affect the original variables.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int x = 3;
+int y = 7;
+
+swap_values(x, y);
+
+std::cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; '\n';
+std::cout &lt;&lt; "y = " &lt;&lt; y &lt;&lt; '\n';
+</code></pre></div>
+<div class="para" id="chapter3_pass-by-reference-15">The output is:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-none">x = 7
+y = 3
+</code></pre></div>
+<div class="para" id="chapter3_pass-by-reference-17">The key difference is:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<ul class="disc" id="chapter3_pass-by-reference-18">
+<li id="chapter3_pass-by-reference-18-1">
+<div class="para" id="chapter3_pass-by-reference-18-1-1">With <dfn class="terminology">pass by value</dfn>, the parameter receives a copy of the argument’s value. Changes to the parameter do not change the caller’s variable.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-18-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter3_pass-by-reference-18-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
 </li>
-<li id="acknowledgement-5-1-2">
-<div class="para" id="p-derived-acknowledgement-5-1-2">Mariah Zeweke</div>
-<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#acknowledgement-5-1-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
-</li>
-<li id="acknowledgement-5-1-3">
-<div class="para" id="p-derived-acknowledgement-5-1-3">Richard Wang</div>
-<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#acknowledgement-5-1-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
-</li>
-<li id="acknowledgement-5-1-4">
-<div class="para" id="p-derived-acknowledgement-5-1-4">Sravani Battula</div>
-<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#acknowledgement-5-1-4" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
-</li>
-<li id="acknowledgement-5-1-5">
-<div class="para" id="p-derived-acknowledgement-5-1-5">Haochen Yu</div>
-<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#acknowledgement-5-1-5" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
-</li>
-<li id="acknowledgement-5-1-6">
-<div class="para" id="p-derived-acknowledgement-5-1-6">Charles Alford IV</div>
-<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#acknowledgement-5-1-6" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+<li id="chapter3_pass-by-reference-18-2">
+<div class="para" id="chapter3_pass-by-reference-18-2-1">With <dfn class="terminology">pass by reference</dfn>, the reference parameter refers to the caller’s variable. Changes made through the parameter affect that variable.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-18-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter3_pass-by-reference-18-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
 </li>
 </ul>
-<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#acknowledgement-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="note remark-like" id="chapter3_pass-by-reference-19"><h2 class="heading">
+<span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.12.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="para" id="chapter3_pass-by-reference-19-1">For now, you only need to recognize that <code class="code-inline tex2jax_ignore">&amp;</code> in a parameter declaration creates a reference parameter. We will study references, memory addresses, and pointers in more detail later.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_pass-by-reference-19-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Acknowledgements"><a tabindex="-1" href="#acknowledgement" title="Copy heading and permalink for Acknowledgements" aria-label="Copy heading and permalink for Acknowledgements">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Note 3.12.1"><a tabindex="-1" href="#chapter3_pass-by-reference-19" title="Copy heading and permalink for Note 3.12.1" aria-label="Copy heading and permalink for Note 3.12.1">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="pass_by_reference_1"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.12.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="pass_by_reference_1-1-1">What are the values of <code class="code-inline tex2jax_ignore">x</code> and <code class="code-inline tex2jax_ignore">y</code> after the following code runs?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#pass_by_reference_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable line-numbers"><code class="language-cpp">void swap_values(int first, int second) {
+    int temp = first;
+    first = second;
+    second = temp;
+}
+
+int main() {
+    int x = 3;
+    int y = 7;
+
+    swap_values(x, y);
+}
+</code></pre></div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-pass_by_reference_1" data-multipleanswers="false">
+<li data-component="answer" id="rs-pass_by_reference_1_opt_a" data-correct="">
+<div class="para" id="pass_by_reference_1-2-1-1-1">
+<code class="code-inline tex2jax_ignore">x</code> is 3 and <code class="code-inline tex2jax_ignore">y</code> is 7.</div>
+</li>
+<li data-component="feedback" id="rs-pass_by_reference_1_opt_a">
+<div class="para" id="pass_by_reference_1-2-1-2-1">Correct. The parameters receive copies of <code class="code-inline tex2jax_ignore">x</code> and <code class="code-inline tex2jax_ignore">y</code>, so swapping the parameters does not change the caller’s variables.</div>
+</li>
+<li data-component="answer" id="rs-pass_by_reference_1_opt_b">
+<div class="para" id="pass_by_reference_1-2-2-1-1">
+<code class="code-inline tex2jax_ignore">x</code> is 7 and <code class="code-inline tex2jax_ignore">y</code> is 3.</div>
+</li>
+<li data-component="feedback" id="rs-pass_by_reference_1_opt_b">
+<div class="para" id="pass_by_reference_1-2-2-2-1">The values are swapped only inside the function’s local parameters. The caller’s variables are unchanged.</div>
+</li>
+<li data-component="answer" id="rs-pass_by_reference_1_opt_c">
+<div class="para" id="pass_by_reference_1-2-3-1-1">
+<code class="code-inline tex2jax_ignore">x</code> is 3 and <code class="code-inline tex2jax_ignore">y</code> is 3.</div>
+</li>
+<li data-component="feedback" id="rs-pass_by_reference_1_opt_c">
+<div class="para" id="pass_by_reference_1-2-3-2-1">The function does not modify either variable in <code class="code-inline tex2jax_ignore">main</code>.</div>
+</li>
+<li data-component="answer" id="rs-pass_by_reference_1_opt_d">
+<div class="para" id="pass_by_reference_1-2-4-1-1">
+<code class="code-inline tex2jax_ignore">x</code> is 7 and <code class="code-inline tex2jax_ignore">y</code> is 7.</div>
+</li>
+<li data-component="feedback" id="rs-pass_by_reference_1_opt_d">
+<div class="para" id="pass_by_reference_1-2-4-2-1">The function changes only its local copies, not the variables in <code class="code-inline tex2jax_ignore">main</code>.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.12.1"><a tabindex="-1" href="#pass_by_reference_1" title="Copy heading and permalink for Checkpoint 3.12.1" aria-label="Copy heading and permalink for Checkpoint 3.12.1">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="pass_by_reference_2"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.12.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="pass_by_reference_2-1-1">What are the values of <code class="code-inline tex2jax_ignore">x</code> and <code class="code-inline tex2jax_ignore">y</code> after the following code runs?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#pass_by_reference_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable line-numbers"><code class="language-cpp">void swap_values(int&amp; first, int&amp; second) {
+    int temp = first;
+    first = second;
+    second = temp;
+}
+
+int main() {
+    int x = 3;
+    int y = 7;
+
+    swap_values(x, y);
+}
+</code></pre></div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-pass_by_reference_2" data-multipleanswers="false">
+<li data-component="answer" id="rs-pass_by_reference_2_opt_a">
+<div class="para" id="pass_by_reference_2-2-1-1-1">
+<code class="code-inline tex2jax_ignore">x</code> is 3 and <code class="code-inline tex2jax_ignore">y</code> is 7.</div>
+</li>
+<li data-component="feedback" id="rs-pass_by_reference_2_opt_a">
+<div class="para" id="pass_by_reference_2-2-1-2-1">The parameters are references, so changes made through them affect <code class="code-inline tex2jax_ignore">x</code> and <code class="code-inline tex2jax_ignore">y</code>.</div>
+</li>
+<li data-component="answer" id="rs-pass_by_reference_2_opt_b" data-correct="">
+<div class="para" id="pass_by_reference_2-2-2-1-1">
+<code class="code-inline tex2jax_ignore">x</code> is 7 and <code class="code-inline tex2jax_ignore">y</code> is 3.</div>
+</li>
+<li data-component="feedback" id="rs-pass_by_reference_2_opt_b">
+<div class="para" id="pass_by_reference_2-2-2-2-1">Correct. The reference parameters refer to the caller’s variables, so the swap changes <code class="code-inline tex2jax_ignore">x</code> and <code class="code-inline tex2jax_ignore">y</code>.</div>
+</li>
+<li data-component="answer" id="rs-pass_by_reference_2_opt_c">
+<div class="para" id="pass_by_reference_2-2-3-1-1">
+<code class="code-inline tex2jax_ignore">x</code> is 3 and <code class="code-inline tex2jax_ignore">y</code> is 3.</div>
+</li>
+<li data-component="feedback" id="rs-pass_by_reference_2_opt_c">
+<div class="para" id="pass_by_reference_2-2-3-2-1">The three assignments in <code class="code-inline tex2jax_ignore">swap_values</code> exchange the two values rather than assigning the same value to both.</div>
+</li>
+<li data-component="answer" id="rs-pass_by_reference_2_opt_d">
+<div class="para" id="pass_by_reference_2-2-4-1-1">
+<code class="code-inline tex2jax_ignore">x</code> is 7 and <code class="code-inline tex2jax_ignore">y</code> is 7.</div>
+</li>
+<li data-component="feedback" id="rs-pass_by_reference_2_opt_d">
+<div class="para" id="pass_by_reference_2-2-4-2-1">The temporary variable preserves the original value of <code class="code-inline tex2jax_ignore">first</code>, allowing the two values to be exchanged.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.12.2"><a tabindex="-1" href="#pass_by_reference_2" title="Copy heading and permalink for Checkpoint 3.12.2" aria-label="Copy heading and permalink for Checkpoint 3.12.2">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Section 3.12: Pass by Value and Pass by Reference"><a tabindex="-1" href="#chapter3_pass-by-reference" title="Copy heading and permalink for Section 3.12: Pass by Value and Pass by Reference" aria-label="Copy heading and permalink for Section 3.12: Pass by Value and Pass by Reference">🔗</a></div>
 </section>
 </div>
 <div id="ptx-content-footer" class="ptx-content-footer">
-<a class="previous-button button" href="front-colophon.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="way-of-the-program.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+<a class="previous-button button" href="chapter3_functions-with-results.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="chapter3_glossary.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>
 </div>
 <div id="ptx-page-footer" class="ptx-page-footer">

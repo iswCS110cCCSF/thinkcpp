@@ -3907,110 +3907,182 @@ var ptx_lunr_docs = [
   "body": "  What value is stored in result after this code runs?   int double_value(int value) { return value * 2; } int main() { int result = double_value(6); }      2   The parameter value receives 6 , and the function returns value * 2 .     6   6 is the argument passed to the function, but the function returns twice that value.     12   Correct! double_value(6) returns 6 * 2 , which is 12 .     Nothing, because the function does not print anything.   A function does not need to print a value in order to return one. The return statement sends the result back to the caller.     "
 },
 {
-  "id": "functions-13",
+  "id": "chapter3_pass-by-reference",
   "level": "1",
-  "url": "functions-13.html",
-  "type": "Glossary",
+  "url": "chapter3_pass-by-reference.html",
+  "type": "Section",
   "number": "3.12",
+  "title": "Pass by Value and Pass by Reference",
+  "body": " Pass by Value and Pass by Reference  So far, function parameters have received copies of the values passed to them. This is called pass by value .  For example, suppose we try to write a function that swaps two values:   void swap_values(int first, int second) { int temp = first; first = second; second = temp; }   Now consider this call:   int x = 3; int y = 7; swap_values(x, y);   Inside swap_values , the parameters first and second are separate variables that receive copies of the values stored in x and y . The function swaps those copies, but the original variables x and y are unchanged.  After the function call, the values are still:   x = 3 y = 7   Sometimes we want a function to work with the caller's variables directly. C++ allows us to do this with reference parameters .  A reference parameter is written with an ampersand & after the parameter type:   void swap_values(int& first, int& second) { int temp = first; first = second; second = temp; }   In this version, first refers to the caller's variable x , and second refers to the caller's variable y . Changes made through the reference parameters therefore affect the original variables.   int x = 3; int y = 7; swap_values(x, y); std::cout << \"x = \" << x << '\\n'; std::cout << \"y = \" << y << '\\n';   The output is:   x = 7 y = 3   The key difference is:    With pass by value , the parameter receives a copy of the argument's value. Changes to the parameter do not change the caller's variable.    With pass by reference , the reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.     For now, you only need to recognize that & in a parameter declaration creates a reference parameter. We will study references, memory addresses, and pointers in more detail later.     What are the values of x and y after the following code runs?   void swap_values(int first, int second) { int temp = first; first = second; second = temp; } int main() { int x = 3; int y = 7; swap_values(x, y); }       x is 3 and y is 7.    Correct. The parameters receive copies of x and y , so swapping the parameters does not change the caller's variables.      x is 7 and y is 3.    The values are swapped only inside the function's local parameters. The caller's variables are unchanged.      x is 3 and y is 3.    The function does not modify either variable in main .      x is 7 and y is 7.    The function changes only its local copies, not the variables in main .        What are the values of x and y after the following code runs?   void swap_values(int& first, int& second) { int temp = first; first = second; second = temp; } int main() { int x = 3; int y = 7; swap_values(x, y); }       x is 3 and y is 7.    The parameters are references, so changes made through them affect x and y .      x is 7 and y is 3.    Correct. The reference parameters refer to the caller's variables, so the swap changes x and y .      x is 3 and y is 3.    The three assignments in swap_values exchange the two values rather than assigning the same value to both.      x is 7 and y is 7.    The temporary variable preserves the original value of first , allowing the two values to be exchanged.      "
+},
+{
+  "id": "chapter3_pass-by-reference-2",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "So far, function parameters have received copies of the values passed to them. This is called pass by value . "
+},
+{
+  "id": "chapter3_pass-by-reference-3",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "For example, suppose we try to write a function that swaps two values: "
+},
+{
+  "id": "chapter3_pass-by-reference-5",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-5",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Now consider this call: "
+},
+{
+  "id": "chapter3_pass-by-reference-7",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-7",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Inside swap_values , the parameters first and second are separate variables that receive copies of the values stored in x and y . The function swaps those copies, but the original variables x and y are unchanged. "
+},
+{
+  "id": "chapter3_pass-by-reference-8",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-8",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "After the function call, the values are still: "
+},
+{
+  "id": "chapter3_pass-by-reference-10",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-10",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Sometimes we want a function to work with the caller's variables directly. C++ allows us to do this with reference parameters . "
+},
+{
+  "id": "chapter3_pass-by-reference-11",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-11",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A reference parameter is written with an ampersand & after the parameter type: "
+},
+{
+  "id": "chapter3_pass-by-reference-13",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-13",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In this version, first refers to the caller's variable x , and second refers to the caller's variable y . Changes made through the reference parameters therefore affect the original variables. "
+},
+{
+  "id": "chapter3_pass-by-reference-15",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-15",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The output is: "
+},
+{
+  "id": "chapter3_pass-by-reference-17",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-17",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The key difference is: "
+},
+{
+  "id": "chapter3_pass-by-reference-18-1-1",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-18-1-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "With pass by value , the parameter receives a copy of the argument's value. Changes to the parameter do not change the caller's variable. "
+},
+{
+  "id": "chapter3_pass-by-reference-18-2-1",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-18-2-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "With pass by reference , the reference parameter refers to the caller's variable. Changes made through the parameter affect that variable. "
+},
+{
+  "id": "chapter3_pass-by-reference-19",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-19",
+  "type": "Note",
+  "number": "3.12.1",
+  "title": "",
+  "body": " For now, you only need to recognize that & in a parameter declaration creates a reference parameter. We will study references, memory addresses, and pointers in more detail later.  "
+},
+{
+  "id": "pass_by_reference_1",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#pass_by_reference_1",
+  "type": "Checkpoint",
+  "number": "3.12.1",
+  "title": "",
+  "body": "  What are the values of x and y after the following code runs?   void swap_values(int first, int second) { int temp = first; first = second; second = temp; } int main() { int x = 3; int y = 7; swap_values(x, y); }       x is 3 and y is 7.    Correct. The parameters receive copies of x and y , so swapping the parameters does not change the caller's variables.      x is 7 and y is 3.    The values are swapped only inside the function's local parameters. The caller's variables are unchanged.      x is 3 and y is 3.    The function does not modify either variable in main .      x is 7 and y is 7.    The function changes only its local copies, not the variables in main .     "
+},
+{
+  "id": "pass_by_reference_2",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#pass_by_reference_2",
+  "type": "Checkpoint",
+  "number": "3.12.2",
+  "title": "",
+  "body": "  What are the values of x and y after the following code runs?   void swap_values(int& first, int& second) { int temp = first; first = second; second = temp; } int main() { int x = 3; int y = 7; swap_values(x, y); }       x is 3 and y is 7.    The parameters are references, so changes made through them affect x and y .      x is 7 and y is 3.    Correct. The reference parameters refer to the caller's variables, so the swap changes x and y .      x is 3 and y is 3.    The three assignments in swap_values exchange the two values rather than assigning the same value to both.      x is 7 and y is 7.    The temporary variable preserves the original value of first , allowing the two values to be exchanged.     "
+},
+{
+  "id": "chapter3_glossary",
+  "level": "1",
+  "url": "chapter3_glossary.html",
+  "type": "Section",
+  "number": "3.13",
   "title": "Glossary",
-  "body": "  floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double .    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A variable declared in a function's parameter list. A parameter receives a value when the function is called.    argument  A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter.    call  Cause a function to be executed.    return type  The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value.    return statement  A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call.    return value  The value that a function sends back to its caller.    value-returning function  A function that returns a value to its caller. Its return type is a type other than void .   "
+  "body": " Glossary    floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double .    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A variable declared in a function's parameter list. A parameter receives a value when the function is called.    argument  A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter.    call  Cause a function to be executed.    return type  The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value.    return statement  A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call.    return value  The value that a function sends back to its caller.    value-returning function  A function that returns a value to its caller. Its return type is a type other than void .    pass by value  A way of passing an argument to a function in which the parameter receives a copy of the argument's value. Changes made to the parameter do not change the caller's variable.    reference  Another name for an existing variable or object. In this chapter, references are used as function parameters so a function can work with the caller's variable directly.    reference parameter  A parameter that refers to the caller's variable instead of receiving a separate copy. A reference parameter is written with & after the parameter type.    pass by reference  A way of passing an argument to a function in which a reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    floating-point  A type of value that can contain fractions as well as integers.    initialization  A statement that declares a new variable and assigns a value to it.    call  Causes a function to be executed.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    function  A named sequence of statements that performs some useful function.    parameter  A variable declared in a function's parameter list.    argument  A value or expression supplied when a function is called.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    return type  The type of value that a function returns to its caller.    return statement  A statement that sends a value back to the caller and ends the function call.    return value  The value that a function sends back to its caller.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    pass by value  The parameter receives a copy of the argument's value.    reference  Another name for an existing variable or object.    reference parameter  A parameter that refers to the caller's variable.    pass by reference  Allows changes made through a parameter to affect the caller's variable.      "
 },
 {
-  "id": "functions-13-1-2",
+  "id": "chapter3_glossary-2",
   "level": "2",
-  "url": "functions-13.html#functions-13-1-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double . "
+  "url": "chapter3_glossary.html#chapter3_glossary-2",
+  "type": "Glossary",
+  "number": "3.13",
+  "title": "Glossary",
+  "body": "  floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double .    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A variable declared in a function's parameter list. A parameter receives a value when the function is called.    argument  A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter.    call  Cause a function to be executed.    return type  The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value.    return statement  A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call.    return value  The value that a function sends back to its caller.    value-returning function  A function that returns a value to its caller. Its return type is a type other than void .    pass by value  A way of passing an argument to a function in which the parameter receives a copy of the argument's value. Changes made to the parameter do not change the caller's variable.    reference  Another name for an existing variable or object. In this chapter, references are used as function parameters so a function can work with the caller's variable directly.    reference parameter  A parameter that refers to the caller's variable instead of receiving a separate copy. A reference parameter is written with & after the parameter type.    pass by reference  A way of passing an argument to a function in which a reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.   "
 },
 {
-  "id": "functions-13-2-2",
+  "id": "chapter3_glossary-3",
   "level": "2",
-  "url": "functions-13.html#functions-13-2-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A statement that declares a new variable and assigns a value to it at the same time. "
-},
-{
-  "id": "functions-13-3-2",
-  "level": "2",
-  "url": "functions-13.html#functions-13-3-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result. "
-},
-{
-  "id": "functions-13-4-2",
-  "level": "2",
-  "url": "functions-13.html#functions-13-4-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A variable declared in a function's parameter list. A parameter receives a value when the function is called. "
-},
-{
-  "id": "functions-13-5-2",
-  "level": "2",
-  "url": "functions-13.html#functions-13-5-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter. "
-},
-{
-  "id": "functions-13-6-2",
-  "level": "2",
-  "url": "functions-13.html#functions-13-6-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Cause a function to be executed. "
-},
-{
-  "id": "functions-13-7-2",
-  "level": "2",
-  "url": "functions-13.html#functions-13-7-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value. "
-},
-{
-  "id": "functions-13-8-2",
-  "level": "2",
-  "url": "functions-13.html#functions-13-8-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call. "
-},
-{
-  "id": "functions-13-9-2",
-  "level": "2",
-  "url": "functions-13.html#functions-13-9-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The value that a function sends back to its caller. "
-},
-{
-  "id": "functions-13-10-2",
-  "level": "2",
-  "url": "functions-13.html#functions-13-10-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A function that returns a value to its caller. Its return type is a type other than void . "
+  "url": "chapter3_glossary.html#chapter3_glossary-3",
+  "type": "Reading Questions",
+  "number": "3.13",
+  "title": "Reading Questions",
+  "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    floating-point  A type of value that can contain fractions as well as integers.    initialization  A statement that declares a new variable and assigns a value to it.    call  Causes a function to be executed.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    function  A named sequence of statements that performs some useful function.    parameter  A variable declared in a function's parameter list.    argument  A value or expression supplied when a function is called.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    return type  The type of value that a function returns to its caller.    return statement  A statement that sends a value back to the caller and ends the function call.    return value  The value that a function sends back to its caller.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    pass by value  The parameter receives a copy of the argument's value.    reference  Another name for an existing variable or object.    reference parameter  A parameter that refers to the caller's variable.    pass by reference  Allows changes made through a parameter to affect the caller's variable.     "
 },
 {
   "id": "chapter3_multiple-choice-exercises",
   "level": "1",
   "url": "chapter3_multiple-choice-exercises.html",
   "type": "Exercises",
-  "number": "3.13",
+  "number": "3.14",
   "title": "Multiple Choice Exercises",
   "body": " Multiple Choice Exercises  Answer the following Multiple Choice questions to assess what you have learned in this chapter.    You want to spice up your resume before the career fair, so you decide to update your GPA using the program below. What is the GPA that you will have on display for future employers?  #include <iostream> int main() { double GPA = 3.52; int updated_gpa = int(GPA); std::cout << \"GPA: \" << updated_gpa; }       3.0    Its correct to think that your GPA will be rounded down, but what else happens when you convert from int to double ?      3    Converting to an int always rounds down to the nearest integer, so I do not recommend using type conversions to build your resume… especially if you're close to 4.0 .      4.0    Converting to an int will round your GPA, but not in the direction that you were hoping for… what else happens when you convert from int to double ?      4    Converting to an int will round yor GPA, but not in the direction that you were hoping for.     Error!   No errors here! Type conversions are perfectly legal in C++!       What is the value of x after the program executes?  #include <iostream> int main() { int x = acos(-1); }      3.14159265358979323846   If x were a double, C++ would automatically round the value of pi to 15 decimal places.     3.142   If x were a double, C++ would automatically round the value of pi to 15 decimal places.     3.0   Automatic type conversion will round the value of pi down to the nearest integer, but what else happens when we convert a double to an int ?     3   The value of x should be 3, since automatic type conversion will round the value of pi down to the nearest integer. Are you sure this program compiles?     Error!   Whenever we use math functions, we must include the <cmath> header file.       Multiple Response Select all variables that have a non-zero value after the decimal place. (3.1 has a non-zero value, while 3.0 does not)  #include <iostream> int main() { int a = 1.5; double b = a + 1.5; double c = 2.4; double d = 1\/5; int e = c * c; double f = int(c); }       a    C++ performs automatic type conversion to round 1.5 down to the nearest integer.      b    Since a = 1 , we know that b = 2.5 , which is a non-zero decimal.      c     c is a double and has a non-zero decimal.      d    C++ performs integer division to round 1\/5 down to the nearest integer. The value will be stored as 0 , not 0.2 .      e     c squared may have a non-zero decimal, but automatic type conversion will round it down to the nearest integer before storing the value in e .      f     int(c) rounds c down to the nearest integer before storing the value in f .       Multiple Response Which of the following would work as a function header (first line of a function).       print_hello_world() {    This function header is missing a type.      string palindrome(word) {    The function's parameter is missing a type.      int mult(int a, int b) {    Correct! The function header has a type, empty parentheses, and a squiggly bracket.      char shift_three(char letter)    This function header is missing a squiggly bracket { .      void give_compliment() {    Correct! The function header has a type, empty parentheses, and a squiggly bracket.      string friend(string name) {     friend is a reserved keyword in C++.       What is printed when the following code runs? Are there any errors?  #include <iostream> void give_compliment() { std::cout << \"You are awesome!\"; } void give_insult() { insult = \"You suck!\"; } int main() { give_insult(); }       \"You are awesome!\"    The give_compliment function is not called in main .      \"You suck!\"    The give_insult function doesn't cout anything.     Nothing is printed.    insult data type is not defined.     Error!   Correct! insult data type is not defined.       Rachel and Monica are best friends. They write a function called best_friends so that they announce this fact to the rest of their friends. What is printed when they run the code below? Are there any errors?  #include <iostream> void best_friends(std::string a, std::string b) { std::cout << a << \" is best friends with \" << b; } int main() { std::string a = \"Rachel\"; std::string b = \"Monica\"; best_friends(b, a); }       \"Monica is best friends with Rachel\"    Correct! Although the function definition has a << \" is best friends with \" << b , we call the function with variable b as argument a and variable a as argument b .      \"Rachel is best friends with Monica\"    You seem to be confusing your arguments and parameters!      a is best friends with b    The function couts the values of the variables, not their names!      b is best friends with a    The function couts the values of the variables, not their names!     Error!   There are no errors with this program!       What is printed when the following code runs? Are there any errors?  #include <iostream> void greeting(std::string name) { std::cout << \"hello, \" << name << \"!\"; } void goodbye(std::string name) { greeting(name); std::cout << \"!!\"; } int main() { std::string hannah = \"Hannah\"; std::string anna = \"Anna\"; std::string louise = hannah; hannah = anna; anna = louise; goodbye(anna); }       hello, Hannah!!!    Correct! The string Hannah is assigned to the variable louise , then the value of louise is assigned to the variable anna . When goodbye(anna) runs, anna has the value Hannah .      hello, anna!!!    The function couts the value of the variable anna not the variable name!      hello, Anna!!!    Is \"Anna\" still the value of anna ?      hello, Louise!    The goodbye function adds extra exclamation points.      hello, Louise!!!    We assigned the value of louise to anna . Is \"Louise\" the value of louise ?     Error!   There are no errors with this program!       Multiple Response Which of the following are legal function calls of order_food ?  #include <iostream> void orderFood(std::string food, int quantity) { std::cout << \"I'll have \" << quantity << \" \" << food; } int main() { std::string a = \"wings\"; std::string b = \"sliders\"; int c = 3; double d = 8.64; char e = 'p'; }       order_food(a, c);    Correct! a is a string and c is an int.      order_food(b, d);    Correct! Automatic type conversion will convert d to an int .      order_food(e, c);     e has a character value, and this function takes a string .      orderfood(a, d);    Correct! Automatic type conversion will convert d to an int .      order_food(c, a);    You have to input your arguments in the correct order.       What is printed when the following code runs? Are there any errors?  #include <iostream> void print_word(std::string w) { std::cout << w << w; } int main() { char a = 'a' + 5; print_word (a); }       a     'a' is no longer the value of a , and the function would print it more than once. Hint: think about the type of a .      f     'f' is the value of a, but the function would print it more than once. Hint: think about the type of a .      aa     'a' is no longer the value of a . Hint: think about the type of a .      ff    Hint: think about the type of a .     Error!    print_word takes a string, not a character, as an argument.       How many local variables and parameters does mult have?  void mult(int a, int b, int c) { int d = 7; std::cout << a * b * c * d; }      1 parameter, 3 local variables   Remember, the parameters are declared in the function definition, and the local variables are declared inside of the function.     2 parameters, 4 local variables   You can declare multiple variables at once! Also, remember that local variables are declared inside of the function.     2 parameters, 1 local variables   You can declare multiple variables at once!     3 parameters, 1 local variable    a , b , and c are parameters declared in the function definition. d is a local variable declared inside of the function.     3 parameters, 4 local variables   Remember that local variables are declared inside of the function.       How many calls are made to party during the entire program?  #include <iostream> void party(int day_of_month, std::string address) { std::cout << \"party on \"<<day_of_month<<\" at \" << address << '\\n'; } void weekend(bool available) { if(available==true) { party(21,\"Big house\"); party(22,\"CCTC\"); } else { std::cout << \"sorry I have to study for ENGR101!\" << '\\n'; } } int main() { bool im_free=false; party(25, \"North campus\"); weekend(im_free); im_free=true; party(25, \"Central campus\"); weekend(im_free); return 0; }      6 calls   Take into account that weekend only calls party if a conditional is true!     2 calls    weekend can also call the function party      4 calls   Correct! two calls by main and two calls by weekend      3 calls   One invocation of weekend calls party twice.     "
 },
@@ -4028,7 +4100,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc1",
   "type": "Exercise",
-  "number": "3.13.1",
+  "number": "3.14.1",
   "title": "",
   "body": "  You want to spice up your resume before the career fair, so you decide to update your GPA using the program below. What is the GPA that you will have on display for future employers?  #include <iostream> int main() { double GPA = 3.52; int updated_gpa = int(GPA); std::cout << \"GPA: \" << updated_gpa; }       3.0    Its correct to think that your GPA will be rounded down, but what else happens when you convert from int to double ?      3    Converting to an int always rounds down to the nearest integer, so I do not recommend using type conversions to build your resume… especially if you're close to 4.0 .      4.0    Converting to an int will round your GPA, but not in the direction that you were hoping for… what else happens when you convert from int to double ?      4    Converting to an int will round yor GPA, but not in the direction that you were hoping for.     Error!   No errors here! Type conversions are perfectly legal in C++!    "
 },
@@ -4037,7 +4109,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc2",
   "type": "Exercise",
-  "number": "3.13.2",
+  "number": "3.14.2",
   "title": "",
   "body": "  What is the value of x after the program executes?  #include <iostream> int main() { int x = acos(-1); }      3.14159265358979323846   If x were a double, C++ would automatically round the value of pi to 15 decimal places.     3.142   If x were a double, C++ would automatically round the value of pi to 15 decimal places.     3.0   Automatic type conversion will round the value of pi down to the nearest integer, but what else happens when we convert a double to an int ?     3   The value of x should be 3, since automatic type conversion will round the value of pi down to the nearest integer. Are you sure this program compiles?     Error!   Whenever we use math functions, we must include the <cmath> header file.    "
 },
@@ -4046,7 +4118,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc3",
   "type": "Exercise",
-  "number": "3.13.3",
+  "number": "3.14.3",
   "title": "",
   "body": "  Multiple Response Select all variables that have a non-zero value after the decimal place. (3.1 has a non-zero value, while 3.0 does not)  #include <iostream> int main() { int a = 1.5; double b = a + 1.5; double c = 2.4; double d = 1\/5; int e = c * c; double f = int(c); }       a    C++ performs automatic type conversion to round 1.5 down to the nearest integer.      b    Since a = 1 , we know that b = 2.5 , which is a non-zero decimal.      c     c is a double and has a non-zero decimal.      d    C++ performs integer division to round 1\/5 down to the nearest integer. The value will be stored as 0 , not 0.2 .      e     c squared may have a non-zero decimal, but automatic type conversion will round it down to the nearest integer before storing the value in e .      f     int(c) rounds c down to the nearest integer before storing the value in f .    "
 },
@@ -4055,7 +4127,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc4",
   "type": "Exercise",
-  "number": "3.13.4",
+  "number": "3.14.4",
   "title": "",
   "body": "  Multiple Response Which of the following would work as a function header (first line of a function).       print_hello_world() {    This function header is missing a type.      string palindrome(word) {    The function's parameter is missing a type.      int mult(int a, int b) {    Correct! The function header has a type, empty parentheses, and a squiggly bracket.      char shift_three(char letter)    This function header is missing a squiggly bracket { .      void give_compliment() {    Correct! The function header has a type, empty parentheses, and a squiggly bracket.      string friend(string name) {     friend is a reserved keyword in C++.    "
 },
@@ -4064,7 +4136,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc5",
   "type": "Exercise",
-  "number": "3.13.5",
+  "number": "3.14.5",
   "title": "",
   "body": "  What is printed when the following code runs? Are there any errors?  #include <iostream> void give_compliment() { std::cout << \"You are awesome!\"; } void give_insult() { insult = \"You suck!\"; } int main() { give_insult(); }       \"You are awesome!\"    The give_compliment function is not called in main .      \"You suck!\"    The give_insult function doesn't cout anything.     Nothing is printed.    insult data type is not defined.     Error!   Correct! insult data type is not defined.    "
 },
@@ -4073,7 +4145,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc6",
   "type": "Exercise",
-  "number": "3.13.6",
+  "number": "3.14.6",
   "title": "",
   "body": "  Rachel and Monica are best friends. They write a function called best_friends so that they announce this fact to the rest of their friends. What is printed when they run the code below? Are there any errors?  #include <iostream> void best_friends(std::string a, std::string b) { std::cout << a << \" is best friends with \" << b; } int main() { std::string a = \"Rachel\"; std::string b = \"Monica\"; best_friends(b, a); }       \"Monica is best friends with Rachel\"    Correct! Although the function definition has a << \" is best friends with \" << b , we call the function with variable b as argument a and variable a as argument b .      \"Rachel is best friends with Monica\"    You seem to be confusing your arguments and parameters!      a is best friends with b    The function couts the values of the variables, not their names!      b is best friends with a    The function couts the values of the variables, not their names!     Error!   There are no errors with this program!    "
 },
@@ -4082,7 +4154,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc7",
   "type": "Exercise",
-  "number": "3.13.7",
+  "number": "3.14.7",
   "title": "",
   "body": "  What is printed when the following code runs? Are there any errors?  #include <iostream> void greeting(std::string name) { std::cout << \"hello, \" << name << \"!\"; } void goodbye(std::string name) { greeting(name); std::cout << \"!!\"; } int main() { std::string hannah = \"Hannah\"; std::string anna = \"Anna\"; std::string louise = hannah; hannah = anna; anna = louise; goodbye(anna); }       hello, Hannah!!!    Correct! The string Hannah is assigned to the variable louise , then the value of louise is assigned to the variable anna . When goodbye(anna) runs, anna has the value Hannah .      hello, anna!!!    The function couts the value of the variable anna not the variable name!      hello, Anna!!!    Is \"Anna\" still the value of anna ?      hello, Louise!    The goodbye function adds extra exclamation points.      hello, Louise!!!    We assigned the value of louise to anna . Is \"Louise\" the value of louise ?     Error!   There are no errors with this program!    "
 },
@@ -4091,7 +4163,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc8",
   "type": "Exercise",
-  "number": "3.13.8",
+  "number": "3.14.8",
   "title": "",
   "body": "  Multiple Response Which of the following are legal function calls of order_food ?  #include <iostream> void orderFood(std::string food, int quantity) { std::cout << \"I'll have \" << quantity << \" \" << food; } int main() { std::string a = \"wings\"; std::string b = \"sliders\"; int c = 3; double d = 8.64; char e = 'p'; }       order_food(a, c);    Correct! a is a string and c is an int.      order_food(b, d);    Correct! Automatic type conversion will convert d to an int .      order_food(e, c);     e has a character value, and this function takes a string .      orderfood(a, d);    Correct! Automatic type conversion will convert d to an int .      order_food(c, a);    You have to input your arguments in the correct order.    "
 },
@@ -4100,7 +4172,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc9",
   "type": "Exercise",
-  "number": "3.13.9",
+  "number": "3.14.9",
   "title": "",
   "body": "  What is printed when the following code runs? Are there any errors?  #include <iostream> void print_word(std::string w) { std::cout << w << w; } int main() { char a = 'a' + 5; print_word (a); }       a     'a' is no longer the value of a , and the function would print it more than once. Hint: think about the type of a .      f     'f' is the value of a, but the function would print it more than once. Hint: think about the type of a .      aa     'a' is no longer the value of a . Hint: think about the type of a .      ff    Hint: think about the type of a .     Error!    print_word takes a string, not a character, as an argument.    "
 },
@@ -4109,7 +4181,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc10",
   "type": "Exercise",
-  "number": "3.13.10",
+  "number": "3.14.10",
   "title": "",
   "body": "  How many local variables and parameters does mult have?  void mult(int a, int b, int c) { int d = 7; std::cout << a * b * c * d; }      1 parameter, 3 local variables   Remember, the parameters are declared in the function definition, and the local variables are declared inside of the function.     2 parameters, 4 local variables   You can declare multiple variables at once! Also, remember that local variables are declared inside of the function.     2 parameters, 1 local variables   You can declare multiple variables at once!     3 parameters, 1 local variable    a , b , and c are parameters declared in the function definition. d is a local variable declared inside of the function.     3 parameters, 4 local variables   Remember that local variables are declared inside of the function.    "
 },
@@ -4118,7 +4190,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc11",
   "type": "Exercise",
-  "number": "3.13.11",
+  "number": "3.14.11",
   "title": "",
   "body": "  How many calls are made to party during the entire program?  #include <iostream> void party(int day_of_month, std::string address) { std::cout << \"party on \"<<day_of_month<<\" at \" << address << '\\n'; } void weekend(bool available) { if(available==true) { party(21,\"Big house\"); party(22,\"CCTC\"); } else { std::cout << \"sorry I have to study for ENGR101!\" << '\\n'; } } int main() { bool im_free=false; party(25, \"North campus\"); weekend(im_free); im_free=true; party(25, \"Central campus\"); weekend(im_free); return 0; }      6 calls   Take into account that weekend only calls party if a conditional is true!     2 calls    weekend can also call the function party      4 calls   Correct! two calls by main and two calls by weekend      3 calls   One invocation of weekend calls party twice.    "
 },
@@ -4127,7 +4199,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter3_mixed-up-code-exercises.html",
   "type": "Exercises",
-  "number": "3.14",
+  "number": "3.15",
   "title": "Mixed-Up Code Exercises",
   "body": " Mixed-Up Code Exercises  Answer the following Mixed-Up Code questions to assess what you have learned in this chapter.    Construct a function that correctly prints the integer conversion of the passed double.      void print_integer(double d) {    print_integer(double d);      d = int(d);    d = integer(d);      std::cout << d;    std::cout d;     }       Construct a function called new_line that takes no arguments and prints a blank line. Then construct another function called divider that prints two blank lines separated by a line of … … … …     void new_line() {    std::cout << std::endl ;    }     void divider() {    void divider (new_line) {      new_line(); \/\/first call    std::cout << new_line(); \/\/first call     std::cout << \". . . . . . . . . . . . \" ;     newline(); \/\/second call    std::cout << new_line(); \/\/second call     }       Construct a function that correctly calculates the volume of a cone with as much precision as possible and prints the value to the terminal. Use 3.14 for pi.      void volume_cone(double r, double h) {    double volume_cone(double r, double h) {      double vol = 1\/3.0 * 3.14 * r * r * h;    double vol = 1\/3 * 3.14 * r * r * h;      int vol = 1\/3 * 3.14 * r * r * h;    int vol = 1\/3.0 * 3.14 * r * r * h;     std::cout << vol;    }       Construct a function that prints the sin of an angle given in degrees. Use 3.14 for pi.     #include <cmath>    #include <iostream>     void sine_degrees(double d) {    void sine_degrees() {      double r = d * (2 * 3.14) \/ 360.0;    double r = d * 360.0 \/ (2 * 3.14);      double sine = sin(r);    double sine = sin(d);     std::cout << sine;    }    #include <math>       Construct a function that prints the price (with 8% sales tax) of an item with after using a 30% off coupon.      void final_price(double item) {    void final_price(string item) {     double discount = item * 0.30;     double final = (item - discount) * 1.08;    double final = (item - discount) * 0.08;     double final = item - discount * 0.08;    std::cout << final;    }       Suppose you have already defined a function called sum_of_squares which returns the sum of the squares of two numbers and root which returns the square root of a number. Construct a function that calculates the hypotenuse of the right triangle and prints the three sidelengths.     int main() {     double s1 = 4.8;  double s2 = 3.8;    int s1 = 4.8;  int s2 = 3.6;      double sq_sum = sum_of_squares(s2, s1);    sq_sum = sum_of_squares(s1, s2);      double hyp = root(sq_sum);    double hyp = root(s1, s2);      std::cout << \"The sides of the triangle are: \" << s1 << \", \" << s2 << \", \" << hyp;    std::cout << \"The sides of the triangle are: \" << s1 << \", \" << s2 << \", \" << s3;     }       The chickens from the previous chapter are infuriated. Construct a function that prints Eat on the first line, More on the second line, and the name of the passed animal on the fourth line, followed by an exclamation point.      void eat_more(string animal) {    void eat_more() {      std::cout << \"Eat\";    std::cout << \"Eat \" ;     std::cout << std::endl ; std::cout << \"More \" ;    std::cout << std::endl ;     std::cout << animal << \"! \" ;    std::cout << animal << ! << std::endl ;     }       Construct a function that takes a dollar amount and cent amount and prints the total amount of money that you have. Hint: the mod operator ‘%' returns the remainder of a division.     void print_amount(int dollars, int cents) {     int dollar_total = dollars + cents \/ 100;    double dollar_total = dollars + cents \/ 100.0;      double cent_total = cents % 100;    double cent_total = cents \/ 100;      std::cout << \"$\" << dollar_total << \".\" << cent_total;    std::cout << \"$\" << dollar_total << cent_total;     }       In Michigan, the probability that it snows on any given day in the winter is about 14%. The probability of having a snow day on any given day in the winter is about 4%. The probability that is snows and you have a snow day is 8%. Construct and call a function that calculates the probability of a having a snow day, given the fact that it will snow tonight. For reference, the formula for conditional probability is: P(A|B) = P(B and A) \/ P(B).      void conditional_prob(double B, double both) {    void conditional_prob(double B, both) {      double prob = both \/ B;    double prob = B \/ both;     std::cout << prob;    }    int main() {    double p_snow = 0.14;  double p_snow_day = 0.04;  double p_both = 0.08;     conditionalProb(p_snow, p_both);    conditionalProb(p_snow_day, p_both);     conditionalProb(p_snow_day, p_snow);    }       Your final grade is determined by a midterm component (each midterm is worth 20% of the grade) and a final component. In order to avoid any discrepancies with students who's grades are on the fence, your teacher follows this strict grading scale: [0%,60%) = F, [60%, 70%) = D, [70%, 80%) = C, [80%, 90%) = B and [90%, 100%] = A. He does not round until the very end. Construct a function that determines a student's final grade percentage according to this grading scheme and prints the result.      void final_grade(double m1, double m2, double f) {    void final_grade(double m1, m2, f) {      double m_comp = m1 * 0.2 + m2 * 0.2;  double f_comp = f * 0.06;    int m_comp = m1 * 0.2 + m2 * 0.2;  int f_comp = f * 0.06;     double final_grade = m_comp + f_comp;     std::cout << int(final_grade);    std::cout << int(final_grade) + 1;     std::cout << final_grade;    }     "
 },
@@ -4145,7 +4217,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p9",
   "type": "Exercise",
-  "number": "3.14.yes",
+  "number": "3.15.yes",
   "title": "",
   "body": "  Construct a function that correctly prints the integer conversion of the passed double.      void print_integer(double d) {    print_integer(double d);      d = int(d);    d = integer(d);      std::cout << d;    std::cout d;     }    "
 },
@@ -4154,7 +4226,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p0",
   "type": "Exercise",
-  "number": "3.14.yes",
+  "number": "3.15.yes",
   "title": "",
   "body": "  Construct a function called new_line that takes no arguments and prints a blank line. Then construct another function called divider that prints two blank lines separated by a line of … … … …     void new_line() {    std::cout << std::endl ;    }     void divider() {    void divider (new_line) {      new_line(); \/\/first call    std::cout << new_line(); \/\/first call     std::cout << \". . . . . . . . . . . . \" ;     newline(); \/\/second call    std::cout << new_line(); \/\/second call     }    "
 },
@@ -4163,7 +4235,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p1",
   "type": "Exercise",
-  "number": "3.14.yes",
+  "number": "3.15.yes",
   "title": "",
   "body": "  Construct a function that correctly calculates the volume of a cone with as much precision as possible and prints the value to the terminal. Use 3.14 for pi.      void volume_cone(double r, double h) {    double volume_cone(double r, double h) {      double vol = 1\/3.0 * 3.14 * r * r * h;    double vol = 1\/3 * 3.14 * r * r * h;      int vol = 1\/3 * 3.14 * r * r * h;    int vol = 1\/3.0 * 3.14 * r * r * h;     std::cout << vol;    }    "
 },
@@ -4172,7 +4244,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p3",
   "type": "Exercise",
-  "number": "3.14.yes",
+  "number": "3.15.yes",
   "title": "",
   "body": "  Construct a function that prints the sin of an angle given in degrees. Use 3.14 for pi.     #include <cmath>    #include <iostream>     void sine_degrees(double d) {    void sine_degrees() {      double r = d * (2 * 3.14) \/ 360.0;    double r = d * 360.0 \/ (2 * 3.14);      double sine = sin(r);    double sine = sin(d);     std::cout << sine;    }    #include <math>    "
 },
@@ -4181,7 +4253,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p4",
   "type": "Exercise",
-  "number": "3.14.yes",
+  "number": "3.15.yes",
   "title": "",
   "body": "  Construct a function that prints the price (with 8% sales tax) of an item with after using a 30% off coupon.      void final_price(double item) {    void final_price(string item) {     double discount = item * 0.30;     double final = (item - discount) * 1.08;    double final = (item - discount) * 0.08;     double final = item - discount * 0.08;    std::cout << final;    }    "
 },
@@ -4190,7 +4262,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p5",
   "type": "Exercise",
-  "number": "3.14.yes",
+  "number": "3.15.yes",
   "title": "",
   "body": "  Suppose you have already defined a function called sum_of_squares which returns the sum of the squares of two numbers and root which returns the square root of a number. Construct a function that calculates the hypotenuse of the right triangle and prints the three sidelengths.     int main() {     double s1 = 4.8;  double s2 = 3.8;    int s1 = 4.8;  int s2 = 3.6;      double sq_sum = sum_of_squares(s2, s1);    sq_sum = sum_of_squares(s1, s2);      double hyp = root(sq_sum);    double hyp = root(s1, s2);      std::cout << \"The sides of the triangle are: \" << s1 << \", \" << s2 << \", \" << hyp;    std::cout << \"The sides of the triangle are: \" << s1 << \", \" << s2 << \", \" << s3;     }    "
 },
@@ -4199,7 +4271,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p6",
   "type": "Exercise",
-  "number": "3.14.yes",
+  "number": "3.15.yes",
   "title": "",
   "body": "  The chickens from the previous chapter are infuriated. Construct a function that prints Eat on the first line, More on the second line, and the name of the passed animal on the fourth line, followed by an exclamation point.      void eat_more(string animal) {    void eat_more() {      std::cout << \"Eat\";    std::cout << \"Eat \" ;     std::cout << std::endl ; std::cout << \"More \" ;    std::cout << std::endl ;     std::cout << animal << \"! \" ;    std::cout << animal << ! << std::endl ;     }    "
 },
@@ -4208,7 +4280,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p7",
   "type": "Exercise",
-  "number": "3.14.yes",
+  "number": "3.15.yes",
   "title": "",
   "body": "  Construct a function that takes a dollar amount and cent amount and prints the total amount of money that you have. Hint: the mod operator ‘%' returns the remainder of a division.     void print_amount(int dollars, int cents) {     int dollar_total = dollars + cents \/ 100;    double dollar_total = dollars + cents \/ 100.0;      double cent_total = cents % 100;    double cent_total = cents \/ 100;      std::cout << \"$\" << dollar_total << \".\" << cent_total;    std::cout << \"$\" << dollar_total << cent_total;     }    "
 },
@@ -4217,7 +4289,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p8",
   "type": "Exercise",
-  "number": "3.14.yes",
+  "number": "3.15.yes",
   "title": "",
   "body": "  In Michigan, the probability that it snows on any given day in the winter is about 14%. The probability of having a snow day on any given day in the winter is about 4%. The probability that is snows and you have a snow day is 8%. Construct and call a function that calculates the probability of a having a snow day, given the fact that it will snow tonight. For reference, the formula for conditional probability is: P(A|B) = P(B and A) \/ P(B).      void conditional_prob(double B, double both) {    void conditional_prob(double B, both) {      double prob = both \/ B;    double prob = B \/ both;     std::cout << prob;    }    int main() {    double p_snow = 0.14;  double p_snow_day = 0.04;  double p_both = 0.08;     conditionalProb(p_snow, p_both);    conditionalProb(p_snow_day, p_both);     conditionalProb(p_snow_day, p_snow);    }    "
 },
@@ -4226,7 +4298,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p2",
   "type": "Exercise",
-  "number": "3.14.yes",
+  "number": "3.15.yes",
   "title": "",
   "body": "  Your final grade is determined by a midterm component (each midterm is worth 20% of the grade) and a final component. In order to avoid any discrepancies with students who's grades are on the fence, your teacher follows this strict grading scale: [0%,60%) = F, [60%, 70%) = D, [70%, 80%) = C, [80%, 90%) = B and [90%, 100%] = A. He does not round until the very end. Construct a function that determines a student's final grade percentage according to this grading scheme and prints the result.      void final_grade(double m1, double m2, double f) {    void final_grade(double m1, m2, f) {      double m_comp = m1 * 0.2 + m2 * 0.2;  double f_comp = f * 0.06;    int m_comp = m1 * 0.2 + m2 * 0.2;  int f_comp = f * 0.06;     double final_grade = m_comp + f_comp;     std::cout << int(final_grade);    std::cout << int(final_grade) + 1;     std::cout << final_grade;    }    "
 },
@@ -4235,7 +4307,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter3_activecode-exercises.html",
   "type": "Exercises",
-  "number": "3.15",
+  "number": "3.16",
   "title": "Activecode Exercises",
   "body": " Activecode Exercises  Answer the following Activecode questions to assess what you have learned in this chapter.    Fix the errors in the code below so that it prints the area of a circle with radius 5. Use cmath functions to get an accurate value for pi.   #include <iostream> #include <cmath> void print_area(int r) { double pi = acos(1.0); double area = pi * r ^ 2; std::cout << area; } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with radius = 5... \"; std::cout << \" Your function had area = \"; print_area(5); std::cout << '\\n'; std::cout << \" The correct solution has area = 78.5398 \"; std::cout << \"Testing with radius = 7.5... \"; std::cout << \" Your function had area = \"; print_area(7.5); std::cout << '\\n'; std::cout << \" The correct solution has area = 176.715\"; }    Below is one way to fix the program. C++ doesn't use the ^ operator for exponents. We can get the square of r by multiplying it by itself. We call the function with an argument of 5.  void print_area(double r) { double pi = acos(-1.0); double area = pi * r * r; std::cout << area; }      Fix the code below so that it prints 2 elephants .   #include <iostream> void print_animals(std::string a, int b) { std::cout << b << a; } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE print_animals(2, \"elephants\"); }    Fix the code below so that it prints 2 elephants . Use the lines to construct the code, then go back to complete the Activecode.      void print_animals(int a, string b) {    void print_animals(string a, int b) {      std::cout << a << \" \" << b;    std::cout << b << \" \" << a;     std::cout << b << a;    }    int main() {    print_animals(2, \"elephants\");    }         Fix the code below so that it prints 12 \/ 8 = 1.5.   #include <iostream> void divide(int a, int b) { std::cout << a \/ b; } int main() { int a = 8; int b = 12; \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << b << \" \/ \" << a << \" = \"; divide (b, a); }    Below is one way to fix the program. It's crucial that you input your arguments in the correct order so as to avoid a semantic error. Also, it's important that you understand that when you divide two integers you will get an integer as a result.  #include <iostream> void divide(double a, double b) { std::cout << a \/ b; } int main() { int a = 8; int b = 12; std::cout << b << \" \/ \" << a << \" = \"; divide (b, a); }      Finish the code below so that it calculates the common log of a minus the natural log of a and prints the difference. You will need to use cmath functions.   #include <iostream> #include <cmath> void log_subtraction(double a) { \/\/ Create the variable difference and assign it to the difference mentioned in the instructions std::cout << difference; } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with a = 8... \"; std::cout << \" Your solution has difference = \"; log_subtraction(8); std::cout << '\\n'; std::cout << \" The correct solution has difference = -1.17635 \"; std::cout << \"Testing with a = -2... \"; std::cout << \" Your solution has difference = \"; log_subtraction(-2); std::cout << '\\n'; std::cout << \" The correct solution has difference = nan\"; }     Finish the code below so that it calculates the common log of a minus the natural log of a and prints the difference. You will need to use cmath functions. Use the lines to construct the code, then go back to complete the Activecode.     void log_subtraction(double a) {     double difference;    int difference;      difference = log10(a) - log(a);    difference = log(a) - log10(a);     std::cout << difference;    }         Finish the code below so that it prints First Line , a border, and Second Line. on three separate lines.   #include <iostream> void border() { std::cout << \"------------ \"; } int main() { \/\/ Write some code below to call the function appropriately }     Below is one way to complete the program.  #include <iostream> void border() { std::cout << \"------------ \"; } int main() { std::cout << \"First Line. \"; border(); std::cout << \"Second Line. \"; }      Write a function called int_division that takes two doubles as parameters and prints the quotient of the integer division of the first number divided by the second. Be sure to include any necessary headers.   #include <iostream> void int_division() { } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with a = 2.4, b = 6.8... \"; std::cout << \" Your solution has a quotient of \"; int_division(2.4, 6.8); std::cout << '\\n'; std::cout << \" The correct solution has a quotient of 0 \"; std::cout << \"Testing with a = -8.6, b = 4.2... \"; std::cout << \" Your solution has a quotient of \"; int_division(-8.6, 4.2); std::cout << '\\n'; std::cout << \" The correct solution has a quotient of -2\"; }     Write a function called int_division that takes two doubles as parameters and prints the quotient of the integer division of the first number divided by the second. Use the lines to construct the code, then go back to complete the Activecode.      void int_division( double a, double b ) {    void int_division( int a, int b ) {      int difference;    double difference;     difference = a \/ b;    difference = b \/ a;    std::cout << difference << std::endl ;    }         Write a function called gpa_boost that prints your GPA rounded up to the nearest point. If your GPA is already at the nearest point, there is no rounding. Be sure to include any necessary headers.   #include <iostream> #include <cmath> void gpa_boost() { } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with GPA = 2.513... \"; std::cout << \" Your solution rounded the GPA to \"; gpa_boost(2.513); std::cout << '\\n'; std::cout << \" The correct solution rounds the GPA to 3.000 \"; std::cout << \"Testing with GPA = 4.000... \"; std::cout << \" Your solution rounded the GPA to \"; gpa_boost(4.000); std::cout << '\\n'; std::cout << \" The correct solution rounds the GPA to 4.000\"; }     Below is one way to complete the program. I used the ceil function from the cmath library, but you could have solved this problem without using any functions from cmath.  #include <iostream> #include <cmath> void gpa_boost(double GPA) { int better_gpa = ceil(GPA); std::cout << better_gpa << \".000\"; }      Write a function called volume_prism that takes three double sidelengths as parameters, and calculates and prints the volume of a the rectangular prism. Be sure to include any necessary headers.   #include <iostream> void volume_prism() { } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with a = 3, b = 4, c = 5... \"; std::cout << \" Your solution calculated a volume of \"; volume_prism(3,4,5); std::cout << '\\n'; std::cout << \" The correct solution calculates a volume of 60 \"; std::cout << \"Testing with a = 5.7, b = 3.9, c = 1.3... \"; std::cout << \" Your solution calculated a volume of \"; volume_prism(5.7,3.9,1.3); std::cout << '\\n'; std::cout << \" The correct solution calculates a volume of 28.899\"; }     Write a function called volume_prism that takes three double sidelengths as parameters, and calculates and prints the volume of a the rectangular prism. Use the lines to construct the code, then go back to complete the Activecode.      void volume_prism(double s1, double s2, double s3) {    void volume_prism(int s1, int s2, int s3) {     double volume;    int volume;    volume = s1 * s2 * s3;    std::cout << volume << std::endl ;    }         Write a function called tan_degrees that prints the tangent of an angle given as a double in degrees. Use 3.14 for pi. Be sure to include any necessary headers.   #include <iostream> #include <cmath> void tan_degrees() { } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with degrees = 45... \"; std::cout << \" Your solution calculated a tangent of \"; tan_degrees(45); std::cout << '\\n'; std::cout << \" The correct solution calculates a tangent of 0.999204 \"; std::cout << \"Testing with degrees = 112.1... \"; std::cout << \" Your solution calculated a tangent of \"; tan_degrees(112.1); std::cout << '\\n'; std::cout << \" The correct solution calculates a tangent of -2.46973\"; }     Below is one way to complete the program. You need to make sure to convert your angle to radians before doing any calculations with sinusoidal functions.  #include <iostream> #include <cmath> void tan_degrees(double degrees) { double radians = degrees * (2 * 3.14) \/ 360.0; double tangent = tan(radians); std::cout << tangent; }      Write a function called volume_sphere that takes a double radius as a parameter, and calculates and prints the volume of a sphere with that radius. Use 3.14 for pi . Be sure to include any necessary headers.   #include <iostream> void volume_sphere() { } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with radius = 3... \"; std::cout << \" Your solution calculated a volume of \"; volume_sphere(3); std::cout << '\\n'; std::cout << \" The correct solution calculates a volume of 113.04 \"; std::cout << \"Testing with radius = 3.24... \"; std::cout << \" Your solution calculated a volume of \"; volume_sphere(3.24); std::cout << '\\n'; std::cout << \" The correct solution calculates a volume of 142.398\"; }     Write a function called volume_sphere that takes a double radius as a parameter, and calculates and prints the volume of a sphere with that radius. Use 3.14 for pi . Use the lines to construct the code, then go back to complete the Activecode.     void volume_sphere(double radius) {    double pi = 3.14;     double volume;    int volume;     volume = 4 * pi * radius * radius * radius \/ 3;    volume = 4 \/ 3 * pi * radius ^ 3;    std::cout << volume << std::endl ;    }       "
 },
@@ -4253,7 +4325,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a1",
   "type": "Exercise",
-  "number": "3.15.1",
+  "number": "3.16.1",
   "title": "",
   "body": "  Fix the errors in the code below so that it prints the area of a circle with radius 5. Use cmath functions to get an accurate value for pi.   #include <iostream> #include <cmath> void print_area(int r) { double pi = acos(1.0); double area = pi * r ^ 2; std::cout << area; } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with radius = 5... \"; std::cout << \" Your function had area = \"; print_area(5); std::cout << '\\n'; std::cout << \" The correct solution has area = 78.5398 \"; std::cout << \"Testing with radius = 7.5... \"; std::cout << \" Your function had area = \"; print_area(7.5); std::cout << '\\n'; std::cout << \" The correct solution has area = 176.715\"; }    Below is one way to fix the program. C++ doesn't use the ^ operator for exponents. We can get the square of r by multiplying it by itself. We call the function with an argument of 5.  void print_area(double r) { double pi = acos(-1.0); double area = pi * r * r; std::cout << area; }   "
 },
@@ -4262,7 +4334,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a2",
   "type": "Exercise",
-  "number": "3.15.2",
+  "number": "3.16.2",
   "title": "",
   "body": "  Fix the code below so that it prints 2 elephants .   #include <iostream> void print_animals(std::string a, int b) { std::cout << b << a; } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE print_animals(2, \"elephants\"); }    Fix the code below so that it prints 2 elephants . Use the lines to construct the code, then go back to complete the Activecode.      void print_animals(int a, string b) {    void print_animals(string a, int b) {      std::cout << a << \" \" << b;    std::cout << b << \" \" << a;     std::cout << b << a;    }    int main() {    print_animals(2, \"elephants\");    }      "
 },
@@ -4271,7 +4343,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a3",
   "type": "Exercise",
-  "number": "3.15.3",
+  "number": "3.16.3",
   "title": "",
   "body": "  Fix the code below so that it prints 12 \/ 8 = 1.5.   #include <iostream> void divide(int a, int b) { std::cout << a \/ b; } int main() { int a = 8; int b = 12; \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << b << \" \/ \" << a << \" = \"; divide (b, a); }    Below is one way to fix the program. It's crucial that you input your arguments in the correct order so as to avoid a semantic error. Also, it's important that you understand that when you divide two integers you will get an integer as a result.  #include <iostream> void divide(double a, double b) { std::cout << a \/ b; } int main() { int a = 8; int b = 12; std::cout << b << \" \/ \" << a << \" = \"; divide (b, a); }   "
 },
@@ -4280,7 +4352,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a4",
   "type": "Exercise",
-  "number": "3.15.4",
+  "number": "3.16.4",
   "title": "",
   "body": "  Finish the code below so that it calculates the common log of a minus the natural log of a and prints the difference. You will need to use cmath functions.   #include <iostream> #include <cmath> void log_subtraction(double a) { \/\/ Create the variable difference and assign it to the difference mentioned in the instructions std::cout << difference; } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with a = 8... \"; std::cout << \" Your solution has difference = \"; log_subtraction(8); std::cout << '\\n'; std::cout << \" The correct solution has difference = -1.17635 \"; std::cout << \"Testing with a = -2... \"; std::cout << \" Your solution has difference = \"; log_subtraction(-2); std::cout << '\\n'; std::cout << \" The correct solution has difference = nan\"; }     Finish the code below so that it calculates the common log of a minus the natural log of a and prints the difference. You will need to use cmath functions. Use the lines to construct the code, then go back to complete the Activecode.     void log_subtraction(double a) {     double difference;    int difference;      difference = log10(a) - log(a);    difference = log(a) - log10(a);     std::cout << difference;    }      "
 },
@@ -4289,7 +4361,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a5",
   "type": "Exercise",
-  "number": "3.15.5",
+  "number": "3.16.5",
   "title": "",
   "body": "  Finish the code below so that it prints First Line , a border, and Second Line. on three separate lines.   #include <iostream> void border() { std::cout << \"------------ \"; } int main() { \/\/ Write some code below to call the function appropriately }     Below is one way to complete the program.  #include <iostream> void border() { std::cout << \"------------ \"; } int main() { std::cout << \"First Line. \"; border(); std::cout << \"Second Line. \"; }   "
 },
@@ -4298,7 +4370,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a6",
   "type": "Exercise",
-  "number": "3.15.6",
+  "number": "3.16.6",
   "title": "",
   "body": "  Write a function called int_division that takes two doubles as parameters and prints the quotient of the integer division of the first number divided by the second. Be sure to include any necessary headers.   #include <iostream> void int_division() { } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with a = 2.4, b = 6.8... \"; std::cout << \" Your solution has a quotient of \"; int_division(2.4, 6.8); std::cout << '\\n'; std::cout << \" The correct solution has a quotient of 0 \"; std::cout << \"Testing with a = -8.6, b = 4.2... \"; std::cout << \" Your solution has a quotient of \"; int_division(-8.6, 4.2); std::cout << '\\n'; std::cout << \" The correct solution has a quotient of -2\"; }     Write a function called int_division that takes two doubles as parameters and prints the quotient of the integer division of the first number divided by the second. Use the lines to construct the code, then go back to complete the Activecode.      void int_division( double a, double b ) {    void int_division( int a, int b ) {      int difference;    double difference;     difference = a \/ b;    difference = b \/ a;    std::cout << difference << std::endl ;    }      "
 },
@@ -4307,7 +4379,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a7",
   "type": "Exercise",
-  "number": "3.15.7",
+  "number": "3.16.7",
   "title": "",
   "body": "  Write a function called gpa_boost that prints your GPA rounded up to the nearest point. If your GPA is already at the nearest point, there is no rounding. Be sure to include any necessary headers.   #include <iostream> #include <cmath> void gpa_boost() { } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with GPA = 2.513... \"; std::cout << \" Your solution rounded the GPA to \"; gpa_boost(2.513); std::cout << '\\n'; std::cout << \" The correct solution rounds the GPA to 3.000 \"; std::cout << \"Testing with GPA = 4.000... \"; std::cout << \" Your solution rounded the GPA to \"; gpa_boost(4.000); std::cout << '\\n'; std::cout << \" The correct solution rounds the GPA to 4.000\"; }     Below is one way to complete the program. I used the ceil function from the cmath library, but you could have solved this problem without using any functions from cmath.  #include <iostream> #include <cmath> void gpa_boost(double GPA) { int better_gpa = ceil(GPA); std::cout << better_gpa << \".000\"; }   "
 },
@@ -4316,7 +4388,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a8",
   "type": "Exercise",
-  "number": "3.15.8",
+  "number": "3.16.8",
   "title": "",
   "body": "  Write a function called volume_prism that takes three double sidelengths as parameters, and calculates and prints the volume of a the rectangular prism. Be sure to include any necessary headers.   #include <iostream> void volume_prism() { } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with a = 3, b = 4, c = 5... \"; std::cout << \" Your solution calculated a volume of \"; volume_prism(3,4,5); std::cout << '\\n'; std::cout << \" The correct solution calculates a volume of 60 \"; std::cout << \"Testing with a = 5.7, b = 3.9, c = 1.3... \"; std::cout << \" Your solution calculated a volume of \"; volume_prism(5.7,3.9,1.3); std::cout << '\\n'; std::cout << \" The correct solution calculates a volume of 28.899\"; }     Write a function called volume_prism that takes three double sidelengths as parameters, and calculates and prints the volume of a the rectangular prism. Use the lines to construct the code, then go back to complete the Activecode.      void volume_prism(double s1, double s2, double s3) {    void volume_prism(int s1, int s2, int s3) {     double volume;    int volume;    volume = s1 * s2 * s3;    std::cout << volume << std::endl ;    }      "
 },
@@ -4325,7 +4397,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a9",
   "type": "Exercise",
-  "number": "3.15.9",
+  "number": "3.16.9",
   "title": "",
   "body": "  Write a function called tan_degrees that prints the tangent of an angle given as a double in degrees. Use 3.14 for pi. Be sure to include any necessary headers.   #include <iostream> #include <cmath> void tan_degrees() { } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with degrees = 45... \"; std::cout << \" Your solution calculated a tangent of \"; tan_degrees(45); std::cout << '\\n'; std::cout << \" The correct solution calculates a tangent of 0.999204 \"; std::cout << \"Testing with degrees = 112.1... \"; std::cout << \" Your solution calculated a tangent of \"; tan_degrees(112.1); std::cout << '\\n'; std::cout << \" The correct solution calculates a tangent of -2.46973\"; }     Below is one way to complete the program. You need to make sure to convert your angle to radians before doing any calculations with sinusoidal functions.  #include <iostream> #include <cmath> void tan_degrees(double degrees) { double radians = degrees * (2 * 3.14) \/ 360.0; double tangent = tan(radians); std::cout << tangent; }   "
 },
@@ -4334,7 +4406,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a10",
   "type": "Exercise",
-  "number": "3.15.10",
+  "number": "3.16.10",
   "title": "",
   "body": "  Write a function called volume_sphere that takes a double radius as a parameter, and calculates and prints the volume of a sphere with that radius. Use 3.14 for pi . Be sure to include any necessary headers.   #include <iostream> void volume_sphere() { } int main() { \/\/ DO NOT MODIFY ANYTHING BELOW THIS LINE std::cout << \"Testing with radius = 3... \"; std::cout << \" Your solution calculated a volume of \"; volume_sphere(3); std::cout << '\\n'; std::cout << \" The correct solution calculates a volume of 113.04 \"; std::cout << \"Testing with radius = 3.24... \"; std::cout << \" Your solution calculated a volume of \"; volume_sphere(3.24); std::cout << '\\n'; std::cout << \" The correct solution calculates a volume of 142.398\"; }     Write a function called volume_sphere that takes a double radius as a parameter, and calculates and prints the volume of a sphere with that radius. Use 3.14 for pi . Use the lines to construct the code, then go back to complete the Activecode.     void volume_sphere(double radius) {    double pi = 3.14;     double volume;    int volume;     volume = 4 * pi * radius * radius * radius \/ 3;    volume = 4 \/ 3 * pi * radius ^ 3;    std::cout << volume << std::endl ;    }      "
 },
