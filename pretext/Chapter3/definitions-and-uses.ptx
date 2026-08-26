@@ -1,10 +1,26 @@
 <?xml version="1.0"?>
 <section xml:id="chapter3_definitions-and-uses">
   <title>Definitions and Uses</title>
-  <p>Pulling together all the code fragments from the previous section, the
-    whole program looks like this:</p>
+
+  <p>
+    Pulling together all the code fragments from the previous section, the
+    whole program can be organized like this:
+  </p>
+
   <program>#include &lt;iostream&gt;
 
+// Function declarations
+void new_line();
+void three_line();
+
+int main() {
+    std::cout &lt;&lt; "First Line." &lt;&lt; '\n';
+    three_line();
+    std::cout &lt;&lt; "Second Line." &lt;&lt; '\n';
+    return 0;
+}
+
+// Function definitions
 void new_line() {
     std::cout &lt;&lt; '\n';
 }
@@ -13,110 +29,199 @@ void three_line() {
     new_line();
     new_line();
     new_line();
-}
-
-int main() {
-  std::cout &lt;&lt; "First Line." &lt;&lt; '\n';
-  three_line();
-  std::cout &lt;&lt; "Second Line." &lt;&lt; '\n';
-  return 0;
 }</program>
-  <p>This program contains three function definitions: <c>new_line</c>, <c>three_line</c>, and <c>main</c>.</p>
-  <p>Inside the definition of <c>main</c>, there is a statement that uses or calls <c>three_line</c>. Similarly, <c>three_line</c>
-    calls <c>new_line</c> three times. Notice that the definition of each function appears above the place
-    where it is used.</p>
-  <p>This is necessary in C++; the definition of a function must appear
-    before (above) the first use of the function. You should try compiling
-    this program with the functions in a different order and see what error
-    messages you get.</p>
+
+  <p>
+    This program contains three function definitions:
+    <c>main</c>, <c>new_line</c>, and <c>three_line</c>.
+    It also contains declarations for <c>new_line</c> and
+    <c>three_line</c> before <c>main</c>.
+  </p>
+
+  <p>
+    A <term>function declaration</term>, sometimes called a
+    <term>function prototype</term>, tells the compiler a function's name,
+    return type, and parameter types before the full function definition
+    appears.
+  </p>
+
+  <p>
+    For example:
+  </p>
+
+  <program language="cpp">
+    <input>
+void new_line();
+void three_line();
+    </input>
+  </program>
+
+  <p>
+    Notice the semicolon at the end of each declaration. A declaration does
+    not contain the function body.
+  </p>
+
+  <p>
+    Inside <c>main</c>, the program calls <c>three_line</c>.
+    Later, the definition of <c>three_line</c> calls
+    <c>new_line</c> three times.
+  </p>
+
+  <p>
+    The important rule is that a function must be
+    <em>declared before it is called</em>. The full function definition
+    does not have to appear before the call, as long as the compiler has
+    already seen a declaration for the function.
+  </p>
+
+  <p>
+    Organizing a program with function declarations before <c>main</c> and
+    function definitions after <c>main</c> makes it easy to see which
+    functions the program provides while keeping <c>main</c> near the top
+    of the program. Later, we will use header files to organize function
+    declarations in larger programs.
+  </p>
+
   <exercise label="defns_uses_1">
     <statement>
-      <p>The function definition must be written <fillin answer="(before)|(above)"/> the first use of the function. </p>
+      <p>
+        A function must be <fillin answer="declared"/> before it is called.
+      </p>
     </statement>
+
     <evaluation>
       <evaluate>
         <test correct="yes">
           <strcmp use-answer="yes" case="insensitive"/>
+          <feedback>
+            Yes. The compiler must see a declaration before a function is called.
+            The full definition may appear later.
+          </feedback>
         </test>
       </evaluate>
     </evaluation>
   </exercise>
+
   <exercise label="defns_uses_2">
     <statement>
-      <p>Which of the following is a correct function header (first line of
-        a function definition)?</p>
+      <p>
+        Which of the following is a correct function declaration for a
+        function named <c>print_name</c> that takes no parameters and
+        returns no value?
+      </p>
     </statement>
+
     <choices>
-      <choice>
-        <statement>
-          <p>
-            <c>void print_name()</c>
-          </p>
-        </statement>
-        <feedback><p>
-          This function header is missing a <c>{</c>, which is needed to begin defining the
-            function.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>total_cost_after_tax() {</c>
-          </p>
-        </statement>
-        <feedback><p>
-          This function header is missing a return type.
-        </p></feedback>
-      </choice>
       <choice correct="yes">
         <statement>
           <p>
-            <c>void todays_weather() {</c>
+            <c>void print_name();</c>
           </p>
         </statement>
-        <feedback><p>Correct!</p></feedback>
+        <feedback>
+          <p>
+            Correct. A function declaration includes the return type,
+            function name, parameter list, and a semicolon.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
-            <c>void final_grade {</c>
+            <c>void print_name() {</c>
           </p>
         </statement>
-        <feedback><p>
-          This function header is missing parentheses. Even if a function does not take in any
-            parameters, empty parentheses should be used.
-        </p></feedback>
+        <feedback>
+          <p>
+            The opening brace begins a function definition rather than a
+            function declaration.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>
+            <c>print_name();</c>
+          </p>
+        </statement>
+        <feedback>
+          <p>
+            This is a function call. A declaration must also specify the
+            function's return type.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>
+            <c>void print_name;</c>
+          </p>
+        </statement>
+        <feedback>
+          <p>
+            A function declaration requires parentheses after the function
+            name, even when the function takes no parameters.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="defns_uses_3"
             adaptive="yes"
             indentation="hide">
+
     <statement>
-      <p>Construct a block of code that correctly defines a the add_two function.</p>
+      <p>
+        Construct a block of code that correctly declares <c>add_two</c>,
+        calls it from <c>main</c>, and then defines it.
+      </p>
     </statement>
+
     <blocks>
-      <block order="3"
-             correct="yes">
-      <cline>void add_two(int x) {</cline>
+      <block order="1">
+        <cline>void add_two(int x);</cline>
       </block>
-      <block order="1"
-             correct="no">
-        <cline>void add_two(int x); </cline>
+
+      <block order="2">
+        <cline>int main() {</cline>
       </block>
-      <block order="7"
-             correct="no">
-        <cline>void add_two(int x) </cline>
+
+      <block order="3">
+        <cline>    add_two(5);</cline>
       </block>
+
       <block order="4">
-        <cline> int plus_two = x + 2;</cline>
-      </block>
-      <block order="5">
-        <cline> std::cout &lt;&lt; plus_two;</cline>
-      </block>
-      <block order="6">
         <cline>}</cline>
+      </block>
+
+      <block order="5">
+        <cline>void add_two(int x) {</cline>
+      </block>
+
+      <block order="6">
+        <cline>    int plus_two = x + 2;</cline>
+      </block>
+
+      <block order="7">
+        <cline>    std::cout &lt;&lt; plus_two &lt;&lt; '\n';</cline>
+      </block>
+
+      <block order="8">
+        <cline>}</cline>
+      </block>
+
+      <block order="9" correct="no">
+        <cline>void add_two(int x)</cline>
+      </block>
+
+      <block order="10" correct="no">
+        <cline>add_two(int x);</cline>
       </block>
     </blocks>
   </exercise>
+
 </section>
