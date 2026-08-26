@@ -45,17 +45,21 @@ std::cout &lt;&lt; '}' &lt;&lt; std::endl ;
     character and the third is an integer. The reason this distinction is important should become
     clear soon.</p>
   <exercise label="values_1">
-    <statement> 
-      <p>A <fillin answer="char"/> value is a single letter, number, or punctuation enclosed in single quotes. </p>
-    </statement>
-    <evaluation>
-      <evaluate>
-        <test correct="yes">
-          <strcmp case="insensitive"/>
-        </test>
-      </evaluate>
-    </evaluation>
-  </exercise>
+  <statement>
+    <p>
+      A <fillin mode="string" answer="char"/> value is a single letter,
+      number, or punctuation enclosed in single quotes.
+    </p>
+  </statement>
+
+  <evaluation>
+    <evaluate>
+      <test correct="yes">
+        <strcmp use-answer="yes" case="insensitive"/>
+      </test>
+    </evaluate>
+  </evaluation>
+</exercise>
   <exercise label="values2-0">
     <statement>
       <p>Click on all integer VALUES. We will learn about the utility of <c>while</c> and lines 4-7 later.</p>
