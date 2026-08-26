@@ -13,20 +13,20 @@
   <p><c>main</c> doesn't take any parameters, as indicated by the empty parentheses() in it's
     definition. The first couple of functions we are going to write also have no parameters, so the
     syntax looks like this:</p>
-  <program>void new_line() {
-  std::cout &lt;&lt; std::endl ;
+  <program>void new_line(){
+  std::cout &lt;&lt; '\n';
 }</program>
   <p>This function is named <c>new_line</c>; it contains only a single statement, which outputs a new line
-    character, represented by the special value <c>endl</c>.</p>
+    character.</p>
   <p>The first word of the header is the <q>return type</q>: <term>void</term> returns nothing; <term>
-    int</term> returns an int; <term>double</term> returns a double; <term>string</term> returns a
+    int</term> returns an int; <term>double</term> returns a double; <term>std::string</term> returns a
     string;</p>
   <p>In <c>main</c> we can call this new function using syntax that is similar to the way we call the
-    built-in C++ commands:</p>
-  <program>int main() {
-  std::cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; std::endl ;
+    C++ math library functions like std::sin :</p>
+  <program>int main(){
+  std::cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; '\n';
   new_line();
-  std::cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; std::endl ;
+  std::cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; '\n';
   return 0;
 }</program>
   <p>The output of this program is</p>
@@ -35,18 +35,18 @@
 Second line.</program>
   <p>Notice the extra space between the two lines. What if we wanted more
     space between the lines? We could call the same function repeatedly:</p>
-  <program>int main() {
-  std::cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; std::endl ;
+  <program>int main(){
+  std::cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; '\n';
   new_line();
   new_line();
   new_line();
-  std::cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; std::endl ;
+  std::cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; '\n';
   return 0;
 }</program>
   <p>Or we could write a new function, named <c>three_line</c>, that prints three new lines:</p>
   <listing label="new_functions_AC_1">
     <title>
-      Here we define the three_line function, which calls the newLine function three times. The
+      Here we define the three_line function, which calls the new_line function three times. The
         result is a function that prints three lines after it is called (each of those empty lines
         begins with a <q>*</q>).
     </title>
@@ -54,20 +54,18 @@ Second line.</program>
       <code><![CDATA[
 #include <iostream>
 
-void new_line() {
+void new_line(){
     std::cout << '*' << '\n';
 }
 
-void three_line() {
+void three_line(){
     new_line();  new_line();  new_line();
 }
 
 int main() {
-    std::cout << "First Line.
-";
+    std::cout << "First Line. ";
     three_line();
-    std::cout << "Second Line.
-";
+    std::cout << "Second Line. ";
     return 0;
 }
         ]]></code>
@@ -105,9 +103,8 @@ int main() {
     <ol>
       <li>
         <p>Creating a new function gives you an opportunity to give a name to a group of statements.
-          Functions can simplify a program by hiding a complex computation behind a single command,
-          and by using English words in place of arcane code. Which is clearer, <c>new_line</c> or <c>cout &lt;&lt;
-endl</c>?</p>
+          Functions can simplify a program by hiding a complex computation behind a single command(the name of the function),
+          and by using English words in place of arcane code. Which is clearer, <c>new_line</c> or <c>std::cout '\n';</c>?</p>
       </li>
       <li>
         <p>Creating a new function can make a program smaller by eliminating
@@ -165,11 +162,11 @@ endl</c>?</p>
     </p></feedback>
     <areas>
       <cline><area correct="yes">void print_x() {</area></cline>
-      <cline>    <area correct="no">cout &lt;&lt; &quot;X&quot;;</area></cline>
+      <cline>    <area correct="no">std::cout &lt;&lt; &quot;X&quot;;</area></cline>
       <cline>}</cline>
       <cline/>
       <cline><area correct="yes">void print_var(int a) {</area></cline>
-      <cline>    <area correct="no">cout &lt;&lt; a;</area></cline>
+      <cline>    <area correct="no">std::cout &lt;&lt; a;</area></cline>
       <cline>}</cline>
       <cline/>
       <cline><area correct="yes">int main() {</area></cline>
@@ -195,11 +192,11 @@ endl</c>?</p>
     </p></feedback>
     <areas>
       <cline><area correct="no">void print_x() {</area></cline>
-      <cline>    <area correct="no">cout &lt;&lt; &quot;X&quot;;</area></cline>
+      <cline>    <area correct="no">std::cout &lt;&lt; &quot;X&quot;;</area></cline>
       <cline>}</cline>
       <cline/>
       <cline><area correct="no">void print_var(int a) {</area></cline>
-      <cline>    <area correct="no">cout &lt;&lt; a;</area></cline>
+      <cline>    <area correct="no">std::cout &lt;&lt; a;</area></cline>
       <cline>}</cline>
       <cline/>
       <cline><area correct="no">int main() {</area></cline>
@@ -232,7 +229,7 @@ endl</c>?</p>
         <cline> int perimeter_value = twice_length + twice_width;</cline>
       </block>
       <block order="5">
-        <cline> <![CDATA[cout << perimeter_value << std::endl ;]]></cline>
+        <cline> <![CDATA[cout << perimeter_value << '\n';]]></cline>
       </block>
       <block order="2" correct="no">
         <cline> return parameter_value; </cline>
