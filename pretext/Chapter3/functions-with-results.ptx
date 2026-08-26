@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <section xml:id="chapter3_functions-with-results">
   <title>Functions with Results</title>
+
   <p>You might have noticed by now that some of the functions we are using, like the math functions,
     yield results. Other functions, like <c>new_line</c>, perform an action but don't return a value. That
     raises some questions:</p>
+
   <p>
     <ul>
       <li>
@@ -12,26 +14,95 @@
           of a larger expression)?</p>
       </li>
       <li>
-        <p>What happens if you use a function without a result as part of an expression, like <c>new_line() + 7</c>
-          ?</p>
+        <p>What happens if you use a function without a result as part of an expression, like
+          <c>new_line() + 7</c>?</p>
       </li>
       <li>
         <p>Can we write functions that yield results, or are we stuck with
-          things like new_line and print_twice?</p>
+          things like <c>new_line</c> and <c>print_twice</c>?</p>
       </li>
     </ul>
   </p>
-  <p>The answer to the third question is <q>yes, you can write functions that
-      return values,</q> and we'll do it in a couple of chapters. I will leave it up to you to
-    answer the other two questions by trying them out.</p>
+
+  <p>
+    The answer to the third question is <q>yes, you can write functions that
+    return values.</q> A function that returns a value has a
+    <term>return type</term> instead of <c>void</c>. It uses a
+    <term>return statement</term> to send a value back to the caller.
+  </p>
+
+  <p>For example:</p>
+
+  <program language="cpp">
+    <input>
+int double_value(int value) {
+    return value * 2;
+}
+    </input>
+  </program>
+
+  <p>
+    In this example, <c>int</c> is the return type. The statement
+    <c>return value * 2;</c> computes an integer and sends that value
+    back to the caller.
+  </p>
+
+  <p>
+    A call to a value-returning function can be used anywhere a value of
+    that type is appropriate. For example:
+  </p>
+
+  <program language="cpp">
+    <input>
+int result = double_value(5);
+std::cout &lt;&lt; result &lt;&lt; '\n';
+    </input>
+  </program>
+
+  <p>
+    The call <c>double_value(5)</c> returns the value <c>10</c>, so
+    <c>result</c> is initialized to <c>10</c>.
+  </p>
+
+  <p>
+    Parameters carry information <em>into</em> a function. A return value
+    carries a result <em>back to the caller</em>.
+  </p>
+
+  <p>
+    A function can have multiple parameters and still return one value:
+  </p>
+
+  <program language="cpp">
+    <input>
+double rectangle_area(double width, double height) {
+    return width * height;
+}
+    </input>
+  </program>
+
+  <p>
+    The returned value can be stored in a variable or used directly in
+    another expression:
+  </p>
+
+  <program language="cpp">
+    <input>
+double area = rectangle_area(4.0, 3.0);
+std::cout &lt;&lt; area &lt;&lt; '\n';
+    </input>
+  </program>
+
   <note>
     <p>Any time you have a question about what is legal or illegal in C++, a
       good way to find out is to ask the compiler. It will let you answer
       your question by throwing an error&#x2026; or not!</p>
   </note>
+
   <exercise label="fuwresults_1">
     <statement>
-      <p>What will be <term>printed</term> when the following code runs? <fillin answer="8"/>
+      <p>What will be <term>printed</term> when the following code runs?
+        <fillin answer="8"/>
       </p>
       <program line-numbers="yes">
         <code><![CDATA[
@@ -60,6 +131,7 @@ int main() {
       </evaluate>
     </evaluation>
   </exercise>
+
   <exercise label="fuwresults_2">
     <statement>
       <p>Will the following code compile?</p>
@@ -84,13 +156,63 @@ int main() {
         <statement>
           <p>Yes</p>
         </statement>
-        <feedback><p>Can you print the result of a void function?</p></feedback>
+        <feedback>
+          <p>Can you print the result of a <c>void</c> function?</p>
+        </feedback>
       </choice>
       <choice correct="yes">
         <statement>
           <p>No</p>
         </statement>
-        <feedback><p>Correct! You can't print the result of a void function</p>
+        <feedback>
+          <p>Correct! A <c>void</c> function does not produce a value that can be sent to <c>std::cout</c>.</p>
+        </feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="fuwresults_3">
+    <statement>
+      <p>What value is stored in <c>result</c> after this code runs?</p>
+      <program line-numbers="yes">
+        <code><![CDATA[
+int double_value(int value) {
+  return value * 2;
+}
+
+int main() {
+  int result = double_value(6);
+}
+]]></code>
+      </program>
+    </statement>
+
+    <choices>
+      <choice>
+        <statement><p>2</p></statement>
+        <feedback>
+          <p>The parameter <c>value</c> receives <c>6</c>, and the function returns <c>value * 2</c>.</p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>6</p></statement>
+        <feedback>
+          <p><c>6</c> is the argument passed to the function, but the function returns twice that value.</p>
+        </feedback>
+      </choice>
+
+      <choice correct="yes">
+        <statement><p>12</p></statement>
+        <feedback>
+          <p>Correct! <c>double_value(6)</c> returns <c>6 * 2</c>, which is <c>12</c>.</p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Nothing, because the function does not print anything.</p></statement>
+        <feedback>
+          <p>A function does not need to print a value in order to return one. The <c>return</c> statement sends the result back to the caller.</p>
         </feedback>
       </choice>
     </choices>
