@@ -529,7 +529,7 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Converting from <code class="code-inline tex2jax_ignore">double</code> to <code class="code-inline tex2jax_ignore">int</code></span>
 </h1>
-<div class="para" id="chapter3_converting-from-double-to-int-2">As I mentioned, C++ converts <code class="code-inline tex2jax_ignore">int</code>’s to <code class="code-inline tex2jax_ignore">double</code>’s automatically if necessary, because no information is lost in the translation. On the other hand, going from a <code class="code-inline tex2jax_ignore">double</code> to an <code class="code-inline tex2jax_ignore">int</code> requires rounding off. C++ doesn’t perform this operation automatically, in order to make sure that you, as the programmer, are aware of the loss of the fractional part of the number.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_converting-from-double-to-int-2">As I mentioned, C++ converts <code class="code-inline tex2jax_ignore">int</code>’s to <code class="code-inline tex2jax_ignore">double</code>’s automatically if necessary, because no information is lost in the translation. On the other hand, going from a <code class="code-inline tex2jax_ignore">double</code> to an <code class="code-inline tex2jax_ignore">int</code> requires truncating to the neareast integer toward zero. The implicit conversion is allowed but you’d lose the fractional part doing so. You, as the programmer, should be aware of the loss of the fractional part of the number.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="chapter3_converting-from-double-to-int-3">The simplest way to convert a floating-point value to an integer is to use a <dfn class="terminology">typecast</dfn>. Typecasting is so called because it allows you to take a value that belongs to one type and “cast” it into another type (in the sense of molding or reforming, not throwing).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -538,10 +538,12 @@ eBookConfig.enable_chatcodes =  false;
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">double pi = 3.14159;
 int x = int(pi);
 </code></pre></div>
-<div class="para" id="chapter3_converting-from-double-to-int-6">The int function returns an integer, so x gets the value 3. Converting to an integer always rounds down, even if the fraction part is 0.99999999.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_converting-from-double-to-int-6">The int function returns an integer, so x gets the value 3. Casting to an integer always truncates to the neareast integer toward zero even if the fraction part is 0.99999999.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_converting-from-double-to-int-7">For every type in C++, there is a corresponding function that typecasts its argument to the appropriate type.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_converting-from-double-to-int-7">For every type in C++, there is a corresponding function that typecasts its argument to the appropriate type. However, modern C++ standard recommends using static_cast function like below. Note that the type we are casting into must go between &lt;&gt;. We will learn more on &lt;int&gt; kind of notations later in the book.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int x = static_cast&lt;int&gt;(pi);
+</code></pre></div>
 <article class="exercise exercise-like" id="double_to_int_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
@@ -568,7 +570,7 @@ int x = int(pi);
 <div class="para" id="double_to_int_1-2-2-1-1">8</div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_1_opt_b">
-<div class="para" id="double_to_int_1-2-2-2-1">Remember that converting to an integer always rounds down.</div>
+<div class="para" id="double_to_int_1-2-2-2-1">Remember that converting to an integer always truncates to the neareast integer toward zero.</div>
 </li>
 <li data-component="answer" id="rs-double_to_int_1_opt_c" data-correct="">
 <div class="para" id="double_to_int_1-2-3-1-1">7</div>
@@ -623,24 +625,24 @@ double exam3 = 97.9;
 </li>
 <li data-component="answer" id="rs-double_to_int_2_opt_b">
 <div class="para" id="double_to_int_2-2-2-1-1">
-<dfn class="terminology">Method 1:</dfn> the rounding happens at the beginning, so all three of my test scores will be rounded to the nearest <code class="code-inline tex2jax_ignore">int</code>, which in my case, will round all of them up.</div>
+<dfn class="terminology">Method 1:</dfn> the rounding happens at the beginning, so all three of my test scores will be truncated to the neareast integer toward zero <code class="code-inline tex2jax_ignore">int</code>, which in my case, will truncated them up.</div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_2_opt_b">
-<div class="para" id="double_to_int_2-2-2-2-1">Converting to an <code class="code-inline tex2jax_ignore">int</code> always rounds <em class="emphasis">down</em>, even if your <code class="code-inline tex2jax_ignore">double</code> is very close to the next integer.</div>
+<div class="para" id="double_to_int_2-2-2-2-1">Converting to an <code class="code-inline tex2jax_ignore">int</code> always truncated to the neareast integer toward zero, even if your <code class="code-inline tex2jax_ignore">double</code> is very close to the next integer.</div>
 </li>
 <li data-component="answer" id="rs-double_to_int_2_opt_c">
 <div class="para" id="double_to_int_2-2-3-1-1">
-<dfn class="terminology">Method 2:</dfn><code class="code-inline tex2jax_ignore">final</code> is an <code class="code-inline tex2jax_ignore">int</code>, so it gets rounded up.</div>
+<dfn class="terminology">Method 2:</dfn><code class="code-inline tex2jax_ignore">final</code> is an <code class="code-inline tex2jax_ignore">int</code>, so it gets truncated to he neareast integer up.</div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_2_opt_c">
-<div class="para" id="double_to_int_2-2-3-2-1">Converting to an <code class="code-inline tex2jax_ignore">int</code> always rounds <em class="emphasis">down</em>, even if your <code class="code-inline tex2jax_ignore">double</code> is very close to the next integer.</div>
+<div class="para" id="double_to_int_2-2-3-2-1">Converting to an <code class="code-inline tex2jax_ignore">int</code> always truncated to the neareast integer toward zero, even if your <code class="code-inline tex2jax_ignore">double</code> is very close to the next integer.</div>
 </li>
 <li data-component="answer" id="rs-double_to_int_2_opt_d" data-correct="">
 <div class="para" id="double_to_int_2-2-4-1-1">
-<dfn class="terminology">Method 2:</dfn> the rounding happens at the very end, so my grade will be higher!</div>
+<dfn class="terminology">Method 2:</dfn> the truncating happens at the very end, so my grade will be higher!</div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_2_opt_d">
-<div class="para" id="double_to_int_2-2-4-2-1">Always save your rounding until the end!</div>
+<div class="para" id="double_to_int_2-2-4-2-1">Always save your truncating until the end!</div>
 </li>
 </ul>
 </div></div>

@@ -535,15 +535,15 @@ eBookConfig.enable_chatcodes =  false;
 </div>
 <div class="para" id="chapter3_math-functions-4">This process can be applied repeatedly to evaluate more complicated expressions like <span class="process-math">\(\log(1/\sin(\pi/2))\text{.}\)</span> First we evaluate the argument of the innermost function, then evaluate the function, and so on.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_math-functions-5">C++ provides a set of built-in functions that includes most of the mathematical operations you can think of. The math functions are invoked using a syntax that is similar to mathematical notation:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-5">C++ provides a math library that includes most of the mathematical operations you can think of. The math functions are invoked using a syntax that is similar to mathematical notation:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <figure class="listing figure-like" id="math_functions_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.3.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program performs calculations using some of the built-in functions from the cmath library.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.3.1: This program performs calculations using some of the built-in functions from the cmath library."><a tabindex="-1" href="#math_functions_AC_1" title="Copy heading and permalink for Listing 3.3.1: This program performs calculations using some of the built-in functions from the cmath library." aria-label="Copy heading and permalink for Listing 3.3.1: This program performs calculations using some of the built-in functions from the cmath library.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-math_functions_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
 #include &lt;cmath&gt;
 
 int main() {
-    double result = log(17.0);
+    double result = std::log(17.0);
     double angle = 1.5;
-    double height = sin(angle);
+    double height = std::sin(angle);
     std::cout &lt;&lt; result &lt;&lt; '\n';
     std::cout &lt;&lt; angle &lt;&lt; '\n';
     std::cout &lt;&lt; height &lt;&lt; '\n';
@@ -568,7 +568,7 @@ int main() {
 #include &lt;cmath&gt;
 
 int main() {
-    double pi = acos(-1.0);
+    double pi = std::acos(-1.0);
     double degrees = 90;
     double angle = degrees * 2 * pi / 360.0;
     std::cout &lt;&lt; pi &lt;&lt; '\n';
@@ -583,7 +583,7 @@ int main() {
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 </code></pre></div>
 <div class="para" id="chapter3_math-functions-14">
-<a class="external" href="https://en.cppreference.com/w/cpp/header/iostream" target="_blank">iostream</a> contains information about input and output (I/O) streams, including the object named <code class="code-inline tex2jax_ignore">cout</code>. C++ has a powerful feature called namespaces, that allow you to write your own implementation of cout. But in most cases, we would need to use the standard implementation. To convey this to the compiler, we use the line<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<a class="external" href="https://en.cppreference.com/w/cpp/header/iostream" target="_blank">iostream</a> contains information about input and output (I/O) streams, including the object named <code class="code-inline tex2jax_ignore">cout</code>. C++ has a powerful feature called namespaces, that allow you to write your own implementation of cout. But in most cases, we would need to use the standard implementation of cout which your explisitly get using std::cout.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"></div>
 <article class="note remark-like" id="chapter3_math-functions-16"><h2 class="heading">
@@ -617,7 +617,7 @@ int main() {
 <li data-subcomponent="draggable" id="rs-dnd1_drag2" data-category="2">iostream</li>
 <li data-subcomponent="dropzone" for="rs-dnd1_drag2" data-category="2">contains information about input and output streams</li>
 <li data-subcomponent="draggable" id="rs-dnd1_drag3" data-category="3">namespace std</li>
-<li data-subcomponent="dropzone" for="rs-dnd1_drag3" data-category="3">the standard implementation of cout</li>
+<li data-subcomponent="dropzone" for="rs-dnd1_drag3" data-category="3">provides the standard implementation of cout</li>
 </ul></div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.3.1"><a tabindex="-1" href="#dnd1" title="Copy heading and permalink for Checkpoint 3.3.1" aria-label="Copy heading and permalink for Checkpoint 3.3.1">🔗</a></div>
 </article>

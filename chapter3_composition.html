@@ -531,7 +531,7 @@ eBookConfig.enable_chatcodes =  false;
 </h1>
 <div class="para" id="chapter3_composition-2">Just as with mathematical functions, C++ functions can be <dfn class="terminology">composed</dfn>, meaning that you use one expression as part of another. For example, you can use any expression as an argument to a function:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_composition-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">double x = cos(angle + pi / 2);
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">double x = std::cos(angle + pi / 2);
 </code></pre></div>
 <div class="para" id="chapter3_composition-4">This statement takes the value of pi, divides it by two and adds the result to the value of angle. The sum is then passed as an argument to the <code class="code-inline tex2jax_ignore">cos</code> function.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_composition-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -541,7 +541,7 @@ eBookConfig.enable_chatcodes =  false;
 #include &lt;cmath&gt;
 
 int main() {
-    double x = exp(log(10.0));
+    double x = std::exp(std::log(10.0));
     std::cout &lt;&lt; x;
 }
 </code></pre></div>
@@ -556,27 +556,27 @@ int main() {
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-function_comp_1" data-multipleanswers="false">
 <li data-component="answer" id="rs-function_comp_1_opt_a">
-<div class="para" id="function_comp_1-2-1-1-1"><code class="code-inline tex2jax_ignore">double x = log6(12);</code></div>
+<div class="para" id="function_comp_1-2-1-1-1"><code class="code-inline tex2jax_ignore">double x = std::log6(12);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_1_opt_a">
 <div class="para" id="function_comp_1-2-1-2-1">
 <code class="code-inline tex2jax_ignore">log6</code> is not a built in cmath function, but you could write an implementation for it if you wanted!</div>
 </li>
 <li data-component="answer" id="rs-function_comp_1_opt_b" data-correct="">
-<div class="para" id="function_comp_1-2-2-1-1"><code class="code-inline tex2jax_ignore">double val = abs(tan(1.57));</code></div>
+<div class="para" id="function_comp_1-2-2-1-1"><code class="code-inline tex2jax_ignore">double val = std::abs(std::tan(1.57));</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_1_opt_b">
 <div class="para" id="function_comp_1-2-2-2-1">This correctly uses cmath functions!</div>
 </li>
 <li data-component="answer" id="rs-function_comp_1_opt_c">
-<div class="para" id="function_comp_1-2-3-1-1"><code class="code-inline tex2jax_ignore">double num = exp(cosine(0.86667));</code></div>
+<div class="para" id="function_comp_1-2-3-1-1"><code class="code-inline tex2jax_ignore">double num = std::exp(std::cosine(0.86667));</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_1_opt_c">
 <div class="para" id="function_comp_1-2-3-2-1">
 <code class="code-inline tex2jax_ignore">cosine</code> is not a built in cmath function, but <code class="code-inline tex2jax_ignore">cos</code> is!</div>
 </li>
 <li data-component="answer" id="rs-function_comp_1_opt_d">
-<div class="para" id="function_comp_1-2-4-1-1"><code class="code-inline tex2jax_ignore">double y = exp(cos(1.047)) + exp(tan(2.094))</code></div>
+<div class="para" id="function_comp_1-2-4-1-1"><code class="code-inline tex2jax_ignore">double y = std::exp(std::cos(1.047)) + std::exp(std::tan(2.094))</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_1_opt_d">
 <div class="para" id="function_comp_1-2-4-2-1">This would be correct if it ended in a semi-colon.</div>
@@ -595,33 +595,33 @@ int main() {
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-function_comp_2" data-multipleanswers="false">
 <li data-component="answer" id="rs-function_comp_2_opt_a">
-<div class="para" id="function_comp_2-2-1-1-1"><code class="code-inline tex2jax_ignore">y = cos(330);</code></div>
+<div class="para" id="function_comp_2-2-1-1-1"><code class="code-inline tex2jax_ignore">y = std::cos(330);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_2_opt_a">
 <div class="para" id="function_comp_2-2-1-2-1">You must always convert to radians before using sinusoidal functions.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_2_opt_b">
-<div class="para" id="function_comp_2-2-2-1-1"><code class="code-inline tex2jax_ignore">y = cos(330 * 2 * pi / 360);</code></div>
+<div class="para" id="function_comp_2-2-2-1-1"><code class="code-inline tex2jax_ignore">y = std::cos(330 * 2 * pi / 360);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_2_opt_b">
 <div class="para" id="function_comp_2-2-2-2-1">
 <code class="code-inline tex2jax_ignore">cos</code> will return the x-component.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_2_opt_c">
-<div class="para" id="function_comp_2-2-3-1-1"><code class="code-inline tex2jax_ignore">y = sin(330);</code></div>
+<div class="para" id="function_comp_2-2-3-1-1"><code class="code-inline tex2jax_ignore">y = std::sin(330);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_2_opt_c">
 <div class="para" id="function_comp_2-2-3-2-1">You must always convert to radians before using sinusoidal functions.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_2_opt_d" data-correct="">
-<div class="para" id="function_comp_2-2-4-1-1"><code class="code-inline tex2jax_ignore">y = sin(330 * 2 * pi / 360);</code></div>
+<div class="para" id="function_comp_2-2-4-1-1"><code class="code-inline tex2jax_ignore">y = std::sin(330 * 2 * pi / 360);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_2_opt_d">
 <div class="para" id="function_comp_2-2-4-2-1">
 <code class="code-inline tex2jax_ignore">sin</code> returns the y-component, <code class="code-inline tex2jax_ignore">cos</code> returns the x-component.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_2_opt_e">
-<div class="para" id="function_comp_2-2-5-1-1"><code class="code-inline tex2jax_ignore">y = tan(330 * 2 * pi / 360);</code></div>
+<div class="para" id="function_comp_2-2-5-1-1"><code class="code-inline tex2jax_ignore">y = std::tan(330 * 2 * pi / 360);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_2_opt_e">
 <div class="para" id="function_comp_2-2-5-2-1">
