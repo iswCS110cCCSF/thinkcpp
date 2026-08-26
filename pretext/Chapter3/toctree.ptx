@@ -13,9 +13,10 @@
   <xi:include href='./parameters-and-arguments.ptx'/>
   <xi:include href='./parameters-and-variables-are-local.ptx'/>
   <xi:include href='./functions-with-multiple-parameters.ptx'/>
-  <xi:include href='./functions-with-results.ptx'/>
-  <xi:include href='./glossary.ptx'/>
-  <xi:include href='./exercises.ptx'/>
+  <xi:include href="functions-with-results.ptx"/>
+  <xi:include href="pass-by-reference.ptx"/>
+  <xi:include href="glossary.ptx"/>
+  <xi:include href="exercises.ptx"/>
   <xi:include href='./mixed-up-code.ptx'/>
   <xi:include href='./active-code.ptx'/>
 </chapter>
