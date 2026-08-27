@@ -89,7 +89,7 @@ cout &lt;&lt; minute * 100 / 60 &lt;&lt; std::endl ;</program>
   </exercise>
   <exercise label="operators_3">
     <statement>
-      <p>Integer division always <fillin answer="truncates?"/> the answer by dropping any decimal portion.</p>
+      <p>Integer division always <fillin answer="truncates"/> the answer by dropping any decimal portion.</p>
     </statement>
     <evaluation>
       <evaluate>
