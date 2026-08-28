@@ -3355,7 +3355,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.7",
   "title": "Programs with Multiple Functions",
-  "body": " Programs with Multiple Functions  When you look at a class definition that contains several functions, it is tempting to read it from top to bottom, but that is likely to be confusing, because that is not the order of execution of the program.   The order of execution is not necessarily the order in which functions are defined! For example, the last function that you write might be the first one that you call in the main function.   Execution always begins at the first statement of main , regardless of where it is in the program** (often it is at the bottom). Statements are executed one at a time, in order, until you reach a function call. Function calls are like a detour in the flow of execution. Instead of going to the next statement, you go to the first line of the called function, execute all the statements there, and then come back and pick up again where you left off.  That sounds simple enough, except that you have to remember that one function can call another. Thus, while we are in the middle of main , we might have to go off and execute the statements in three_line . But while we are executing three_line , we get interrupted three times to go off and execute new_line .  Fortunately, C++ is adept at keeping track of where it is, so each time new_line completes, the program picks up where it left off in three_line , and eventually gets back to main so the program can terminate.    This program calls the multiply_two and add_two functions in the main. Follow the order of execution using the Codelens.   #include <iostream> void print_total(int x) { std::cout << x << '\\n'; } int multiply_two(int x) { int total = x * 2; print_total(total); return total; } int add_two(int x) { int total = x + 2; return total; } int main() { int num = 3; int newNum = multiply_two(num); int newerNum = add_two(newNum); print_total(newerNum); return 0; }     What's the moral of this sordid tale? When you read a program, don't read from top to bottom. Instead, follow the flow of execution .    Match the function to the order it is executed in the program above.   Try again!    multiply_two  executes second    print_total  executes third    main  executes first    add_two  executes last       Consider the following C++ code. Note that line numbers are included on the left.   #include <iostream> void new_line() { std::cout << '\\n'; } void three_line() { new_line (); new_line (); new_line (); } int main() { std::cout << \"First Line. \"; three_line (); std::cout << \"Second Line. \"; return 0; }   Which of the following reflects the order in which these functions are executed in C++?       new_line, three_line, main    Remember to follow the order of execution, which is not necessarily the order the program is written.      new_line, three_line, new_line, new_line, new_line, main    Remember to follow the order of execution, which is not necessarily the order the program is written.      main, three_line, new_line, new_line, new_line    Execution begins in the main, then functions are executed as they are called.      main, three_line    Note that new_line is called inside of three_line .       Consider the following C++ code.   #include <iostream> void yo() { std::cout << \"yo, \"; } void hello() { std::cout << \"hello, \"; yo(); yo(); } void goodbye() { yo(); hello(); std::cout << \"goodbye,\"; } int main() { std::cout << \"welcome, \"; goodbye(); return 0; }   What is printed when the code is executed?       welcome, yo, hello, goodbye,    take into account hello also calls yo .      welcome, goodbye,     goodbye calls other functions that print output as well.      welcome, yo, hello, yo, yo, goodbye,    The order of calls and composition of yo in hello and both of those in goodbye produce this output.      yo, hello, yo, yo, goodbye,    Note that the main also prints something directly.     "
+  "body": " Programs with Multiple Functions  When you look at a program that contains several functions, it is tempting to read it from top to bottom. However, the order in which functions appear in the source code is not necessarily the order of execution of the program.   The order of execution is not necessarily the order in which functions are defined. A function defined near the end of a program might be called before another function defined above it.   In the programs in this chapter, execution begins with the statements in main . Statements execute one at a time, in order, until a function call is reached. A function call temporarily transfers execution to the called function. When that function finishes, execution returns to the statement following the function call.  One function can also call another function. For example, while main is executing, it might call three_line . While three_line is executing, it can call new_line several times. Each time new_line finishes, execution returns to three_line . When three_line finishes, execution returns to main .  C++ keeps track of where execution should return after each function call. This allows functions to call other functions while the program still continues from the correct place afterward.    This program calls several functions from main . Follow the order of execution using CodeLens.   #include <iostream> \/\/ Function declarations void print_total(int x); int multiply_two(int x); int add_two(int x); int main() { int num = 3; int new_num = multiply_two(num); int newer_num = add_two(new_num); print_total(newer_num); return 0; } \/\/ Function definitions void print_total(int x) { std::cout << x << '\\n'; } int multiply_two(int x) { int total = x * 2; print_total(total); return total; } int add_two(int x) { int total = x + 2; return total; }     Notice that the function definitions appear after main , but their declarations appear before main . As we learned in the previous section, the compiler only needs to see a function declaration before the function is called.  When reading a program with several functions, do not assume that execution follows the top-to-bottom order of the source code. Instead, follow the flow of execution , beginning with main and following each function call.    Match each step with its position in the flow of execution for the program above.    Try again! Begin in main and follow each function call.     main begins  executes first    multiply_two is called  executes second    print_total is called inside multiply_two  executes third    add_two is called  executes fourth    print_total is called from main  executes fifth       Consider the following C++ code. Note that line numbers are included on the left.   #include <iostream> \/\/ Function declarations void new_line(); void three_line(); int main() { std::cout << \"First Line.\" << '\\n'; three_line(); std::cout << \"Second Line.\" << '\\n'; return 0; } \/\/ Function definitions void new_line() { std::cout << '\\n'; } void three_line() { new_line(); new_line(); new_line(); }   Which of the following reflects the order in which the functions begin executing?       new_line, three_line, main     Function definition order does not determine execution order. Execution begins in main .       new_line, three_line, new_line, new_line, new_line, main     Execution begins in main , not with the first function definition in the source file.       main, three_line, new_line, new_line, new_line     Correct. Execution begins in main . Then three_line is called, and it calls new_line three times.       main, three_line      three_line also calls new_line three times.        Consider the following C++ code.   #include <iostream> \/\/ Function declarations void yo(); void hello(); void goodbye(); int main() { std::cout << \"welcome, \"; goodbye(); return 0; } \/\/ Function definitions void yo() { std::cout << \"yo, \"; } void hello() { std::cout << \"hello, \"; yo(); yo(); } void goodbye() { yo(); hello(); std::cout << \"goodbye,\"; }   What is printed when the code is executed?       welcome, yo, hello, goodbye,      hello calls yo twice, so those calls also produce output.       welcome, goodbye,      goodbye calls other functions before printing goodbye, .       welcome, yo, hello, yo, yo, goodbye,     Correct. main prints first and calls goodbye . goodbye calls yo and then hello , and hello calls yo twice.       yo, hello, yo, yo, goodbye,     Before calling goodbye , main prints welcome, .      "
 },
 {
   "id": "chapter3_programs-with-multiple-functions-2",
@@ -3364,7 +3364,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "When you look at a class definition that contains several functions, it is tempting to read it from top to bottom, but that is likely to be confusing, because that is not the order of execution of the program. "
+  "body": "When you look at a program that contains several functions, it is tempting to read it from top to bottom. However, the order in which functions appear in the source code is not necessarily the order of execution of the program. "
 },
 {
   "id": "chapter3_programs-with-multiple-functions-3",
@@ -3373,7 +3373,7 @@ var ptx_lunr_docs = [
   "type": "Note",
   "number": "3.7.1",
   "title": "",
-  "body": " The order of execution is not necessarily the order in which functions are defined! For example, the last function that you write might be the first one that you call in the main function.  "
+  "body": " The order of execution is not necessarily the order in which functions are defined. A function defined near the end of a program might be called before another function defined above it.  "
 },
 {
   "id": "chapter3_programs-with-multiple-functions-4",
@@ -3382,7 +3382,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Execution always begins at the first statement of main , regardless of where it is in the program** (often it is at the bottom). Statements are executed one at a time, in order, until you reach a function call. Function calls are like a detour in the flow of execution. Instead of going to the next statement, you go to the first line of the called function, execute all the statements there, and then come back and pick up again where you left off. "
+  "body": "In the programs in this chapter, execution begins with the statements in main . Statements execute one at a time, in order, until a function call is reached. A function call temporarily transfers execution to the called function. When that function finishes, execution returns to the statement following the function call. "
 },
 {
   "id": "chapter3_programs-with-multiple-functions-5",
@@ -3391,7 +3391,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "That sounds simple enough, except that you have to remember that one function can call another. Thus, while we are in the middle of main , we might have to go off and execute the statements in three_line . But while we are executing three_line , we get interrupted three times to go off and execute new_line . "
+  "body": "One function can also call another function. For example, while main is executing, it might call three_line . While three_line is executing, it can call new_line several times. Each time new_line finishes, execution returns to three_line . When three_line finishes, execution returns to main . "
 },
 {
   "id": "chapter3_programs-with-multiple-functions-6",
@@ -3400,7 +3400,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Fortunately, C++ is adept at keeping track of where it is, so each time new_line completes, the program picks up where it left off in three_line , and eventually gets back to main so the program can terminate. "
+  "body": "C++ keeps track of where execution should return after each function call. This allows functions to call other functions while the program still continues from the correct place afterward. "
 },
 {
   "id": "multiple_functions_AC_1",
@@ -3409,7 +3409,7 @@ var ptx_lunr_docs = [
   "type": "Activity",
   "number": "3.7.1",
   "title": "",
-  "body": "  This program calls the multiply_two and add_two functions in the main. Follow the order of execution using the Codelens.   #include <iostream> void print_total(int x) { std::cout << x << '\\n'; } int multiply_two(int x) { int total = x * 2; print_total(total); return total; } int add_two(int x) { int total = x + 2; return total; } int main() { int num = 3; int newNum = multiply_two(num); int newerNum = add_two(newNum); print_total(newerNum); return 0; }    "
+  "body": "  This program calls several functions from main . Follow the order of execution using CodeLens.   #include <iostream> \/\/ Function declarations void print_total(int x); int multiply_two(int x); int add_two(int x); int main() { int num = 3; int new_num = multiply_two(num); int newer_num = add_two(new_num); print_total(newer_num); return 0; } \/\/ Function definitions void print_total(int x) { std::cout << x << '\\n'; } int multiply_two(int x) { int total = x * 2; print_total(total); return total; } int add_two(int x) { int total = x + 2; return total; }    "
 },
 {
   "id": "chapter3_programs-with-multiple-functions-8",
@@ -3418,7 +3418,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "What's the moral of this sordid tale? When you read a program, don't read from top to bottom. Instead, follow the flow of execution . "
+  "body": "Notice that the function definitions appear after main , but their declarations appear before main . As we learned in the previous section, the compiler only needs to see a function declaration before the function is called. "
+},
+{
+  "id": "chapter3_programs-with-multiple-functions-9",
+  "level": "2",
+  "url": "chapter3_programs-with-multiple-functions.html#chapter3_programs-with-multiple-functions-9",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "When reading a program with several functions, do not assume that execution follows the top-to-bottom order of the source code. Instead, follow the flow of execution , beginning with main and following each function call. "
 },
 {
   "id": "multiple_fun_1",
@@ -3427,7 +3436,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.7.1",
   "title": "",
-  "body": "  Match the function to the order it is executed in the program above.   Try again!    multiply_two  executes second    print_total  executes third    main  executes first    add_two  executes last    "
+  "body": "  Match each step with its position in the flow of execution for the program above.    Try again! Begin in main and follow each function call.     main begins  executes first    multiply_two is called  executes second    print_total is called inside multiply_two  executes third    add_two is called  executes fourth    print_total is called from main  executes fifth    "
 },
 {
   "id": "multiple_fun_2",
@@ -3436,7 +3445,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.7.2",
   "title": "",
-  "body": "  Consider the following C++ code. Note that line numbers are included on the left.   #include <iostream> void new_line() { std::cout << '\\n'; } void three_line() { new_line (); new_line (); new_line (); } int main() { std::cout << \"First Line. \"; three_line (); std::cout << \"Second Line. \"; return 0; }   Which of the following reflects the order in which these functions are executed in C++?       new_line, three_line, main    Remember to follow the order of execution, which is not necessarily the order the program is written.      new_line, three_line, new_line, new_line, new_line, main    Remember to follow the order of execution, which is not necessarily the order the program is written.      main, three_line, new_line, new_line, new_line    Execution begins in the main, then functions are executed as they are called.      main, three_line    Note that new_line is called inside of three_line .    "
+  "body": "  Consider the following C++ code. Note that line numbers are included on the left.   #include <iostream> \/\/ Function declarations void new_line(); void three_line(); int main() { std::cout << \"First Line.\" << '\\n'; three_line(); std::cout << \"Second Line.\" << '\\n'; return 0; } \/\/ Function definitions void new_line() { std::cout << '\\n'; } void three_line() { new_line(); new_line(); new_line(); }   Which of the following reflects the order in which the functions begin executing?       new_line, three_line, main     Function definition order does not determine execution order. Execution begins in main .       new_line, three_line, new_line, new_line, new_line, main     Execution begins in main , not with the first function definition in the source file.       main, three_line, new_line, new_line, new_line     Correct. Execution begins in main . Then three_line is called, and it calls new_line three times.       main, three_line      three_line also calls new_line three times.     "
 },
 {
   "id": "multiple_fun_3",
@@ -3445,7 +3454,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.7.3",
   "title": "",
-  "body": "  Consider the following C++ code.   #include <iostream> void yo() { std::cout << \"yo, \"; } void hello() { std::cout << \"hello, \"; yo(); yo(); } void goodbye() { yo(); hello(); std::cout << \"goodbye,\"; } int main() { std::cout << \"welcome, \"; goodbye(); return 0; }   What is printed when the code is executed?       welcome, yo, hello, goodbye,    take into account hello also calls yo .      welcome, goodbye,     goodbye calls other functions that print output as well.      welcome, yo, hello, yo, yo, goodbye,    The order of calls and composition of yo in hello and both of those in goodbye produce this output.      yo, hello, yo, yo, goodbye,    Note that the main also prints something directly.    "
+  "body": "  Consider the following C++ code.   #include <iostream> \/\/ Function declarations void yo(); void hello(); void goodbye(); int main() { std::cout << \"welcome, \"; goodbye(); return 0; } \/\/ Function definitions void yo() { std::cout << \"yo, \"; } void hello() { std::cout << \"hello, \"; yo(); yo(); } void goodbye() { yo(); hello(); std::cout << \"goodbye,\"; }   What is printed when the code is executed?       welcome, yo, hello, goodbye,      hello calls yo twice, so those calls also produce output.       welcome, goodbye,      goodbye calls other functions before printing goodbye, .       welcome, yo, hello, yo, yo, goodbye,     Correct. main prints first and calls goodbye . goodbye calls yo and then hello , and hello calls yo twice.       yo, hello, yo, yo, goodbye,     Before calling goodbye , main prints welcome, .     "
 },
 {
   "id": "chapter3_parameters-and-arguments",
