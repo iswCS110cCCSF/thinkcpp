@@ -53,6 +53,19 @@
 			The name can be used only within that function.</p>
 		</gi>
 
+		<gi>
+			<title>global scope</title>
+			<p>The scope of a name declared outside all functions. A global name
+			can be used by functions that are within its scope.</p>
+		</gi>
+
+		<gi>
+			<title>constexpr</title>
+			<p>A C++ keyword meaning <q>constant expression</q>. A
+			<c>constexpr</c> variable cannot be changed after initialization and
+			is intended to be usable as a compile-time constant.</p>
+		</gi>
+
         <gi>
             <title>return type</title>
             <p>The type of value that a function returns to its caller. The return

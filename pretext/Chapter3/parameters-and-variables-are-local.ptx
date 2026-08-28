@@ -8,12 +8,55 @@
     part of the program where they are in scope.
   </p>
 
-  <p>
-    The part of a program where a name can be used is called its
-    <term>scope</term>. A parameter or variable declared inside a function
-    has <term>local scope</term>, which means it can be used only within
-    that function.
-  </p>
+ <p>
+  The part of a program where a name can be used is called its
+  <term>scope</term>. A parameter or variable declared inside a function
+  has <term>local scope</term>, which means it can be used only within
+  that function.
+</p>
+
+<p>
+  In C++, <c>main</c> is a function with its own local scope. A variable
+  declared inside <c>main</c> is not global and is not automatically
+  visible inside other functions. If another function needs that value,
+  it is usually passed as an argument.
+</p>
+
+<p>
+  A variable declared outside all functions has <term>global scope</term>.
+  A global variable can be accessed by functions that are within its scope.
+  However, global variables that can change may make programs harder to
+  understand because multiple functions can modify the same data.
+</p>
+
+<p>
+  In this course, we will usually prefer local variables and function
+  parameters. When a fixed value is needed throughout a program, a global
+  constant can be appropriate. For example:
+</p>
+
+<program language="cpp">
+  <input>
+#include &lt;iostream&gt;
+
+constexpr double pi = 3.14159;
+
+int main() {
+    std::cout &lt;&lt; pi &lt;&lt; '\n';
+}
+  </input>
+</program>
+
+<p>
+  Because <c>pi</c> is declared outside all functions, it has global scope.
+  In this example, the declaration appears before <c>main</c>.
+</p>
+
+<p>
+  The keyword <c>constexpr</c> means <q>constant expression</q>.
+  A <c>constexpr</c> variable cannot be changed after it is initialized
+  and is intended to be usable as a compile-time constant.
+</p>
 
   <p>
     For example, <c>letter</c> has local scope within <c>main</c>, while
@@ -95,7 +138,26 @@ void print_twice(char symbol) {
     <term>instance</term> of the function call. In a stack diagram, each
     active call is represented by its own box.
   </p>
+<p>
+  A variable declared outside all functions has <term>global scope</term>.
+  Unlike a variable declared inside <c>main</c>, a global variable can be
+  accessed by functions that are within its scope.
+</p>
 
+<note>
+  <p>
+    In C++, <c>main</c> is a function with its own local scope. A variable
+    declared inside <c>main</c> is not global and is not automatically
+    visible inside other functions.
+  </p>
+</note>
+
+<p>
+  Global variables can make programs harder to understand because many
+  functions may be able to change the same data. In this course, we will
+  usually prefer local variables and parameters. Global constants may be
+  appropriate when a fixed value is needed throughout a program.
+</p>
   <note>
     <p>
       When you use CodeLens to step through a program, you can see the
