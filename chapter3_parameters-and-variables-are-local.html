@@ -529,43 +529,43 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.9</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Parameters and Variables are Local</span>
 </h1>
-<div class="para" id="chapter3_parameters-and-variables-are-local-2">Parameters and variables only exist inside their own functions. In the code below, within the confines of <code class="code-inline tex2jax_ignore">main</code>, there is no such thing as <code class="code-inline tex2jax_ignore">phil</code>. If you try to use it, the compiler will complain. Similarly, inside <code class="code-inline tex2jax_ignore">print_twice</code> there is no such thing as argument.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-variables-are-local-2">Parameters and variables declared inside a function are <dfn class="terminology">local</dfn> to that function. They can be used only within the part of the program where they are in scope.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="locals_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.9.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The following code will show the output of the print_twice function. Notice that it is the argument ‘b’ that is outputted, not the variable ‘phil’.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.9.1: The following code will show the output of the print_twice function. Notice that it is the argument ‘b’ that is outputted, not the variable ‘phil’."><a tabindex="-1" href="#locals_AC_1" title="Copy heading and permalink for Listing 3.9.1: The following code will show the output of the print_twice function. Notice that it is the argument ‘b’ that is outputted, not the variable ‘phil’." aria-label="Copy heading and permalink for Listing 3.9.1: The following code will show the output of the print_twice function. Notice that it is the argument ‘b’ that is outputted, not the variable ‘phil’.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-locals_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
-
-void print_twice(char phil) {
-    std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; '\n';
-}
-
-int main() {
-    char argument = 'b';
-    print_twice(argument);
-    return 0;
-}
-</code></pre></div>
+<div class="para" id="chapter3_parameters-and-variables-are-local-3">The part of a program where a name can be used is called its <dfn class="terminology">scope</dfn>. A parameter or variable declared inside a function has <dfn class="terminology">local scope</dfn>, which means it can be used only within that function.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter3_parameters-and-variables-are-local-4">For example, <code class="code-inline tex2jax_ignore">letter</code> has local scope within <code class="code-inline tex2jax_ignore">main</code>, while <code class="code-inline tex2jax_ignore">symbol</code> has local scope within <code class="code-inline tex2jax_ignore">print_twice</code>. The function <code class="code-inline tex2jax_ignore">print_twice</code> cannot directly use <code class="code-inline tex2jax_ignore">letter</code> from <code class="code-inline tex2jax_ignore">main</code>. Similarly, <code class="code-inline tex2jax_ignore">main</code> cannot directly use the parameter <code class="code-inline tex2jax_ignore">symbol</code> from <code class="code-inline tex2jax_ignore">print_twice</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="locals_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.9.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Follow the execution of this program. Notice that the argument value stored in <code class="code-inline tex2jax_ignore">letter</code> is passed to the parameter <code class="code-inline tex2jax_ignore">symbol</code>.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.9.1: Follow the execution of this program. Notice that the argument value stored in letter is passed to the parameter symbol."><a tabindex="-1" href="#locals_AC_1" title="Copy heading and permalink for Listing 3.9.1: Follow the execution of this program. Notice that the argument value stored in letter is passed to the parameter symbol." aria-label="Copy heading and permalink for Listing 3.9.1: Follow the execution of this program. Notice that the argument value stored in letter is passed to the parameter symbol.">🔗</a></div></figcaption><div class="listing__contents"><div class="ptx-runestone-container"><div class="runestone codelens">
+<div class="cd_section" data-component="codelens" data-question_label=""><div class="pytutorVisualizer exercise-interactive" id="rs-locals_AC_1_editor" data-params='{"embeddedMode": true, "lang": "cpp", "jumpToEnd": false}'></div></div>
+<script src="generated/trace/locals_AC_1_editor.js"> </script>
+</div></div></div>
 </figure>
-<div class="para" id="chapter3_parameters-and-variables-are-local-4">Variables like this are said to be <dfn class="terminology">local</dfn>. In order to keep track of parameters and local variables, it is useful to draw a <dfn class="terminology">stack diagram</dfn>. Like state diagrams, stack diagrams show the value of each variable, but the variables are contained in larger boxes that indicate which function they belong to.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-variables-are-local-6">When <code class="code-inline tex2jax_ignore">print_twice(letter)</code> is called, the value <code class="code-inline tex2jax_ignore">'b'</code> is passed as the argument. The parameter <code class="code-inline tex2jax_ignore">symbol</code> receives that value. Inside <code class="code-inline tex2jax_ignore">print_twice</code>, it is the parameter <code class="code-inline tex2jax_ignore">symbol</code> that is used to produce the output.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_parameters-and-variables-are-local-5">For example, the state diagram for <code class="code-inline tex2jax_ignore">print_twice</code> looks like this:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-variables-are-local-7">Variables like <code class="code-inline tex2jax_ignore">letter</code> and parameters like <code class="code-inline tex2jax_ignore">symbol</code> are local to their respective functions. To keep track of parameters and local variables while a program runs, it is useful to draw a <dfn class="terminology">stack diagram</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="figure figure-like" id="chapter3_parameters-and-variables-are-local-6"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
-<img src="external/Chapter3/Images/3.9stackdiagram.png" class="contained" alt="described in detail following the image" aria-describedby="chapter3_parameters-and-variables-are-local-6-2-description"><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="chapter3_parameters-and-variables-are-local-6-2-description">
-<div class="para" id="chapter3_parameters-and-variables-are-local-6-2-1-1">Two boxes. One labeled main that contains a variable named ’argument’ which is ’b’. The other labeled print_twice that contains a variable named ’phil’ which is ’b’.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-6-2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-variables-are-local-8">Like state diagrams, stack diagrams show the values of variables. However, the variables are grouped into boxes that indicate which active function call they belong to.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter3_parameters-and-variables-are-local-9">For example, the stack diagram for this call to <code class="code-inline tex2jax_ignore">print_twice</code> looks like this:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="chapter3_parameters-and-variables-are-local-10"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;">
+<img src="external/Chapter3/Images/3.9stackdiagram.png" class="contained" alt="described in detail following the image" aria-describedby="chapter3_parameters-and-variables-are-local-10-2-description"><details class="image-description" aria-live="polite"><summary title="details"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span></summary><div id="chapter3_parameters-and-variables-are-local-10-2-description">
+<div class="para" id="chapter3_parameters-and-variables-are-local-10-2-1-1">Two boxes. One is labeled main and contains a variable named letter whose value is ’b’. The other is labeled print_twice and contains a parameter named symbol whose value is ’b’.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-10-2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div></details>
 </div>
-<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.9.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Local variable stack diagram<div class="autopermalink" aria-hidden="true" data-description="Figure 3.9.2"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-6" title="Copy heading and permalink for Figure 3.9.2" aria-label="Copy heading and permalink for Figure 3.9.2">🔗</a></div></figcaption>
+<figcaption><span class="type">Figure</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.9.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Local variable stack diagram<div class="autopermalink" aria-hidden="true" data-description="Figure 3.9.2"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-10" title="Copy heading and permalink for Figure 3.9.2" aria-label="Copy heading and permalink for Figure 3.9.2">🔗</a></div></figcaption>
 </figure>
-<div class="para" id="chapter3_parameters-and-variables-are-local-7">Whenever a function is called, it creates a new <dfn class="terminology">instance</dfn> of that function. Each instance of a function contains the parameters and local variables for that function. In the diagram an instance of a function is represented by a box with the name of the function on the outside and the variables and parameters inside.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-variables-are-local-11">Each time a function is called, that call gets its own parameters and local variables. This is sometimes described as creating a new <dfn class="terminology">instance</dfn> of the function call. In a stack diagram, each active call is represented by its own box.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="note remark-like" id="chapter3_parameters-and-variables-are-local-8"><h2 class="heading">
+<article class="note remark-like" id="chapter3_parameters-and-variables-are-local-12"><h2 class="heading">
 <span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.9.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
-<div class="para" id="chapter3_parameters-and-variables-are-local-8-1">When you use the Codelens feature to run a program, it shows the variables organized in a stack diagram. Try it on <a href="chapter3_parameters-and-variables-are-local.html#locals_AC_1" class="internal" title="Listing 3.9.1: The following code will show the output of the print_twice function. Notice that it is the argument ‘b’ that is outputted, not the variable ‘phil’.">Listing 3.9.1</a> above.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-8-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-variables-are-local-12-1">When you use CodeLens to step through a program, you can see the variables associated with each active function call. Try it on <a href="chapter3_parameters-and-variables-are-local.html#locals_AC_1" class="internal" title="Listing 3.9.1: Follow the execution of this program. Notice that the argument value stored in letter is passed to the parameter symbol.">Listing 3.9.1</a> above.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-12-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Note 3.9.1"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-8" title="Copy heading and permalink for Note 3.9.1" aria-label="Copy heading and permalink for Note 3.9.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Note 3.9.1"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-12" title="Copy heading and permalink for Note 3.9.1" aria-label="Copy heading and permalink for Note 3.9.1">🔗</a></div>
 </article>
-<div class="para" id="chapter3_parameters-and-variables-are-local-9">In the example, <code class="code-inline tex2jax_ignore">main</code> has one local variable, argument, and no parameters. <code class="code-inline tex2jax_ignore">print_twice</code> has no local variables and one parameter, named phil.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-variables-are-local-13">In the example, <code class="code-inline tex2jax_ignore">main</code> has one local variable, <code class="code-inline tex2jax_ignore">letter</code>, and no parameters. <code class="code-inline tex2jax_ignore">print_twice</code> has no additional local variables and one parameter, <code class="code-inline tex2jax_ignore">symbol</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-variables-are-local-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="exercise exercise-like" id="locals_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.9.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
@@ -573,16 +573,23 @@ int main() {
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
 <div class="para" id="locals_1-1-1">How many local variables and parameters does <code class="code-inline tex2jax_ignore">main</code> have?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#locals_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void print_hello_name(string name) {
-  std::cout &lt;&lt; "Hello " &lt;&lt; name &lt;&lt; "!";
-}
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void print_hello_name(std::string name);
 
 int main() {
- std::string name1 = "Phil";
-  print_hello_name(name1);
- std::string name2 = "Joe";
-  print_hello_name(name2);
-  return 0;
+    std::string name1 = "Phil";
+    print_hello_name(name1);
+
+    std::string name2 = "Joe";
+    print_hello_name(name2);
+
+    return 0;
+}
+
+void print_hello_name(std::string name) {
+    std::cout &lt;&lt; "Hello " &lt;&lt; name &lt;&lt; "!\n";
 }
 </code></pre></div>
 </div>
@@ -591,25 +598,26 @@ int main() {
 <div class="para" id="locals_1-2-1-1-1">1 local variable, 1 parameter</div>
 </li>
 <li data-component="feedback" id="rs-locals_1_opt_a">
-<div class="para" id="locals_1-2-1-2-1">A parameter would be located within the parentheses next to the function’s name.</div>
+<div class="para" id="locals_1-2-1-2-1">The variables <code class="code-inline tex2jax_ignore">name1</code> and <code class="code-inline tex2jax_ignore">name2</code> are both declared inside <code class="code-inline tex2jax_ignore">main</code>. The empty parentheses in <code class="code-inline tex2jax_ignore">main()</code> show that it has no parameters in this example.</div>
 </li>
 <li data-component="answer" id="rs-locals_1_opt_b">
 <div class="para" id="locals_1-2-2-1-1">0 local variables, 1 parameter</div>
 </li>
 <li data-component="feedback" id="rs-locals_1_opt_b">
-<div class="para" id="locals_1-2-2-2-1">A parameter would be located within the parentheses next to the function’s name.</div>
+<div class="para" id="locals_1-2-2-2-1">
+<code class="code-inline tex2jax_ignore">main</code> declares both <code class="code-inline tex2jax_ignore">name1</code> and <code class="code-inline tex2jax_ignore">name2</code>, and its parameter list is empty.</div>
 </li>
 <li data-component="answer" id="rs-locals_1_opt_c" data-correct="">
 <div class="para" id="locals_1-2-3-1-1">2 local variables, 0 parameters</div>
 </li>
 <li data-component="feedback" id="rs-locals_1_opt_c">
-<div class="para" id="locals_1-2-3-2-1">Correct!</div>
+<div class="para" id="locals_1-2-3-2-1">Correct. <code class="code-inline tex2jax_ignore">name1</code> and <code class="code-inline tex2jax_ignore">name2</code> are local variables in <code class="code-inline tex2jax_ignore">main</code>, and <code class="code-inline tex2jax_ignore">main()</code> has no parameters in this example.</div>
 </li>
 <li data-component="answer" id="rs-locals_1_opt_d">
 <div class="para" id="locals_1-2-4-1-1">2 local variables, 1 parameter</div>
 </li>
 <li data-component="feedback" id="rs-locals_1_opt_d">
-<div class="para" id="locals_1-2-4-2-1">A parameter would be located within the parentheses next to the function’s name.</div>
+<div class="para" id="locals_1-2-4-2-1">There are two local variables, but the empty parameter list in <code class="code-inline tex2jax_ignore">main()</code> means that this version of <code class="code-inline tex2jax_ignore">main</code> has no parameters.</div>
 </li>
 </ul>
 </div></div>
@@ -621,16 +629,23 @@ int main() {
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
 <div class="para" id="locals_2-1-1">How many local variables and parameters does <code class="code-inline tex2jax_ignore">print_hello_name</code> have?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#locals_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void print_hello_name(string name) {
-  std::cout &lt;&lt; "Hello " &lt;&lt; name &lt;&lt; "!";
-}
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void print_hello_name(std::string name);
 
 int main() {
- std::string name1 = "Phil";
-  print_hello_name(name1);
- std::string name2 = "Joe";
-  print_hello_name(name2);
-  return 0;
+    std::string name1 = "Phil";
+    print_hello_name(name1);
+
+    std::string name2 = "Joe";
+    print_hello_name(name2);
+
+    return 0;
+}
+
+void print_hello_name(std::string name) {
+    std::cout &lt;&lt; "Hello " &lt;&lt; name &lt;&lt; "!\n";
 }
 </code></pre></div>
 </div>
@@ -639,25 +654,28 @@ int main() {
 <div class="para" id="locals_2-2-1-1-1">1 local variable, 1 parameter</div>
 </li>
 <li data-component="feedback" id="rs-locals_2_opt_a">
-<div class="para" id="locals_2-2-1-2-1">A local variable exists when a variable is declared within a function.</div>
+<div class="para" id="locals_2-2-1-2-1">
+<code class="code-inline tex2jax_ignore">name</code> is a parameter because it is declared in the function’s parameter list. No additional variable is declared inside the function body.</div>
 </li>
 <li data-component="answer" id="rs-locals_2_opt_b" data-correct="">
 <div class="para" id="locals_2-2-2-1-1">0 local variables, 1 parameter</div>
 </li>
 <li data-component="feedback" id="rs-locals_2_opt_b">
-<div class="para" id="locals_2-2-2-2-1">Correct!</div>
+<div class="para" id="locals_2-2-2-2-1">Correct. <code class="code-inline tex2jax_ignore">name</code> is the function’s one parameter, and no additional local variables are declared in the function body.</div>
 </li>
 <li data-component="answer" id="rs-locals_2_opt_c">
 <div class="para" id="locals_2-2-3-1-1">2 local variables, 0 parameters</div>
 </li>
 <li data-component="feedback" id="rs-locals_2_opt_c">
-<div class="para" id="locals_2-2-3-2-1">A local variable exists when a variable is declared within a function.</div>
+<div class="para" id="locals_2-2-3-2-1">
+<code class="code-inline tex2jax_ignore">name1</code> and <code class="code-inline tex2jax_ignore">name2</code> belong to <code class="code-inline tex2jax_ignore">main</code>, not to <code class="code-inline tex2jax_ignore">print_hello_name</code>. The parameter <code class="code-inline tex2jax_ignore">name</code> belongs to <code class="code-inline tex2jax_ignore">print_hello_name</code>.</div>
 </li>
 <li data-component="answer" id="rs-locals_2_opt_d">
 <div class="para" id="locals_2-2-4-1-1">2 local variables, 1 parameter</div>
 </li>
 <li data-component="feedback" id="rs-locals_2_opt_d">
-<div class="para" id="locals_2-2-4-2-1">A local variable exists when a variable is declared within a function.</div>
+<div class="para" id="locals_2-2-4-2-1">
+<code class="code-inline tex2jax_ignore">name1</code> and <code class="code-inline tex2jax_ignore">name2</code> are local to <code class="code-inline tex2jax_ignore">main</code>. They are not local variables of <code class="code-inline tex2jax_ignore">print_hello_name</code>.</div>
 </li>
 </ul>
 </div></div>
@@ -668,10 +686,10 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-locals_3"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"locals_3-1-1\">Whenever we make a function call, we create a(n) <input type=\"text\" id=\"locals_3-blank1\"\/> of that function, which contains the parameters and local variables for that function.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#locals_3-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"locals_3-1-1\">Each time a function is called, that call gets its own <input type=\"text\" id=\"locals_3-blank1\"\/> and local variables.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#locals_3-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0},
-"feedbackArray": [[{"regex": "^\\s*instance\\s*$", "regexFlags": "i", "feedback": "You could create many instances of one function, each with their own parameters and local variables if you wanted!"}, {"feedback": "Incorrect."}]]
+"feedbackArray": [[{"regex": "^\\s*parameters\\s*$", "regexFlags": "i", "feedback": "Each active function call has its own parameters and local variables."}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.9.3"><a tabindex="-1" href="#locals_3" title="Copy heading and permalink for Checkpoint 3.9.3" aria-label="Copy heading and permalink for Checkpoint 3.9.3">🔗</a></div>
@@ -681,22 +699,28 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="locals_4-1-1">How many calls to <code class="code-inline tex2jax_ignore">hi</code> are made during the exectuion of the entire program?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#locals_4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void hi() {
-  std::cout &lt;&lt; "hiii !\n";
+<div class="para" id="locals_4-1-1">How many calls to <code class="code-inline tex2jax_ignore">hi</code> are made during the execution of the entire program?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#locals_4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+
+void hi();
+void print_greeting();
+
+int main() {
+    hi();
+    print_greeting();
+    hi();
+
+    return 0;
+}
+
+void hi() {
+    std::cout &lt;&lt; "hiii!\n";
 }
 
 void print_greeting() {
-  hi();
-  std::cout "how are you doing today. \n";
-  hi();
-}
-
-int main() {
-  hi();
-  print_greeting();
-  hi();
-  return 0;
+    hi();
+    std::cout &lt;&lt; "How are you doing today?\n";
+    hi();
 }
 </code></pre></div>
 </div>
@@ -705,25 +729,27 @@ int main() {
 <div class="para" id="locals_4-2-1-1-1">1 call</div>
 </li>
 <li data-component="feedback" id="rs-locals_4_opt_a">
-<div class="para" id="locals_4-2-1-2-1">hi( ) is called from multiple functions.</div>
+<div class="para" id="locals_4-2-1-2-1">
+<code class="code-inline tex2jax_ignore">hi</code> is called directly from <code class="code-inline tex2jax_ignore">main</code> and also from <code class="code-inline tex2jax_ignore">print_greeting</code>.</div>
 </li>
 <li data-component="answer" id="rs-locals_4_opt_b" data-correct="">
 <div class="para" id="locals_4-2-2-1-1">4 calls</div>
 </li>
 <li data-component="feedback" id="rs-locals_4_opt_b">
-<div class="para" id="locals_4-2-2-2-1">Correct!</div>
+<div class="para" id="locals_4-2-2-2-1">Correct. <code class="code-inline tex2jax_ignore">main</code> calls <code class="code-inline tex2jax_ignore">hi</code> twice, and <code class="code-inline tex2jax_ignore">print_greeting</code> calls <code class="code-inline tex2jax_ignore">hi</code> twice more.</div>
 </li>
 <li data-component="answer" id="rs-locals_4_opt_c">
 <div class="para" id="locals_4-2-3-1-1">2 calls</div>
 </li>
 <li data-component="feedback" id="rs-locals_4_opt_c">
-<div class="para" id="locals_4-2-3-2-1">hi( ) is called from multiple functions.</div>
+<div class="para" id="locals_4-2-3-2-1">There are two direct calls from <code class="code-inline tex2jax_ignore">main</code>, plus two more calls inside <code class="code-inline tex2jax_ignore">print_greeting</code>.</div>
 </li>
 <li data-component="answer" id="rs-locals_4_opt_d">
 <div class="para" id="locals_4-2-4-1-1">3 calls</div>
 </li>
 <li data-component="feedback" id="rs-locals_4_opt_d">
-<div class="para" id="locals_4-2-4-2-1">Two calls from one function are indeed two seperate calls.</div>
+<div class="para" id="locals_4-2-4-2-1">
+<code class="code-inline tex2jax_ignore">main</code> calls <code class="code-inline tex2jax_ignore">hi</code> twice, and <code class="code-inline tex2jax_ignore">print_greeting</code> contains two additional calls.</div>
 </li>
 </ul>
 </div></div>

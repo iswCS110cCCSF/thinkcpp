@@ -3652,7 +3652,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.9",
   "title": "Parameters and Variables are Local",
-  "body": " Parameters and Variables are Local  Parameters and variables only exist inside their own functions. In the code below, within the confines of main , there is no such thing as phil . If you try to use it, the compiler will complain. Similarly, inside print_twice there is no such thing as argument.   The following code will show the output of the print_twice function. Notice that it is the argument ‘b' that is outputted, not the variable ‘phil'.   #include <iostream> void print_twice(char phil) { std::cout << phil << phil << '\\n'; } int main() { char argument = 'b'; print_twice(argument); return 0; }    Variables like this are said to be local . In order to keep track of parameters and local variables, it is useful to draw a stack diagram . Like state diagrams, stack diagrams show the value of each variable, but the variables are contained in larger boxes that indicate which function they belong to.  For example, the state diagram for print_twice looks like this:   Local variable stack diagram   Two boxes. One labeled main that contains a variable named 'argument' which is 'b'. The other labeled print_twice that contains a variable named 'phil' which is 'b'.    Whenever a function is called, it creates a new instance of that function. Each instance of a function contains the parameters and local variables for that function. In the diagram an instance of a function is represented by a box with the name of the function on the outside and the variables and parameters inside.  When you use the Codelens feature to run a program, it shows the variables organized in a stack diagram. Try it on above.  In the example, main has one local variable, argument, and no parameters. print_twice has no local variables and one parameter, named phil.    How many local variables and parameters does main have?  void print_hello_name(string name) { std::cout << \"Hello \" << name << \"!\"; } int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; }      1 local variable, 1 parameter   A parameter would be located within the parentheses next to the function's name.     0 local variables, 1 parameter   A parameter would be located within the parentheses next to the function's name.     2 local variables, 0 parameters   Correct!     2 local variables, 1 parameter   A parameter would be located within the parentheses next to the function's name.       How many local variables and parameters does print_hello_name have?  void print_hello_name(string name) { std::cout << \"Hello \" << name << \"!\"; } int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; }      1 local variable, 1 parameter   A local variable exists when a variable is declared within a function.     0 local variables, 1 parameter   Correct!     2 local variables, 0 parameters   A local variable exists when a variable is declared within a function.     2 local variables, 1 parameter   A local variable exists when a variable is declared within a function.       Whenever we make a function call, we create a(n) of that function, which contains the parameters and local variables for that function.       You could create many instances of one function, each with their own parameters and local variables if you wanted!        How many calls to hi are made during the exectuion of the entire program?  void hi() { std::cout << \"hiii !\\n\"; } void print_greeting() { hi(); std::cout \"how are you doing today. \\n\"; hi(); } int main() { hi(); print_greeting(); hi(); return 0; }      1 call   hi( ) is called from multiple functions.     4 calls   Correct!     2 calls   hi( ) is called from multiple functions.     3 calls   Two calls from one function are indeed two seperate calls.     "
+  "body": " Parameters and Variables are Local  Parameters and variables declared inside a function are local to that function. They can be used only within the part of the program where they are in scope.  The part of a program where a name can be used is called its scope . A parameter or variable declared inside a function has local scope , which means it can be used only within that function.  For example, letter has local scope within main , while symbol has local scope within print_twice . The function print_twice cannot directly use letter from main . Similarly, main cannot directly use the parameter symbol from print_twice .   Follow the execution of this program. Notice that the argument value stored in letter is passed to the parameter symbol .   #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }    When print_twice(letter) is called, the value 'b' is passed as the argument. The parameter symbol receives that value. Inside print_twice , it is the parameter symbol that is used to produce the output.  Variables like letter and parameters like symbol are local to their respective functions. To keep track of parameters and local variables while a program runs, it is useful to draw a stack diagram .  Like state diagrams, stack diagrams show the values of variables. However, the variables are grouped into boxes that indicate which active function call they belong to.  For example, the stack diagram for this call to print_twice looks like this:   Local variable stack diagram    Two boxes. One is labeled main and contains a variable named letter whose value is 'b'. The other is labeled print_twice and contains a parameter named symbol whose value is 'b'.     Each time a function is called, that call gets its own parameters and local variables. This is sometimes described as creating a new instance of the function call. In a stack diagram, each active call is represented by its own box.   When you use CodeLens to step through a program, you can see the variables associated with each active function call. Try it on above.   In the example, main has one local variable, letter , and no parameters. print_twice has no additional local variables and one parameter, symbol .    How many local variables and parameters does main have?  #include <iostream> #include <string> void print_hello_name(std::string name); int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; } void print_hello_name(std::string name) { std::cout << \"Hello \" << name << \"!\\n\"; }      1 local variable, 1 parameter    The variables name1 and name2 are both declared inside main . The empty parentheses in main() show that it has no parameters in this example.      0 local variables, 1 parameter     main declares both name1 and name2 , and its parameter list is empty.      2 local variables, 0 parameters    Correct. name1 and name2 are local variables in main , and main() has no parameters in this example.      2 local variables, 1 parameter    There are two local variables, but the empty parameter list in main() means that this version of main has no parameters.        How many local variables and parameters does print_hello_name have?  #include <iostream> #include <string> void print_hello_name(std::string name); int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; } void print_hello_name(std::string name) { std::cout << \"Hello \" << name << \"!\\n\"; }      1 local variable, 1 parameter     name is a parameter because it is declared in the function's parameter list. No additional variable is declared inside the function body.      0 local variables, 1 parameter    Correct. name is the function's one parameter, and no additional local variables are declared in the function body.      2 local variables, 0 parameters     name1 and name2 belong to main , not to print_hello_name . The parameter name belongs to print_hello_name .      2 local variables, 1 parameter     name1 and name2 are local to main . They are not local variables of print_hello_name .        Each time a function is called, that call gets its own and local variables.       Each active function call has its own parameters and local variables.        How many calls to hi are made during the execution of the entire program?  #include <iostream> void hi(); void print_greeting(); int main() { hi(); print_greeting(); hi(); return 0; } void hi() { std::cout << \"hiii!\\n\"; } void print_greeting() { hi(); std::cout << \"How are you doing today?\\n\"; hi(); }      1 call     hi is called directly from main and also from print_greeting .      4 calls    Correct. main calls hi twice, and print_greeting calls hi twice more.      2 calls    There are two direct calls from main , plus two more calls inside print_greeting .      3 calls     main calls hi twice, and print_greeting contains two additional calls.      "
 },
 {
   "id": "chapter3_parameters-and-variables-are-local-2",
@@ -3661,16 +3661,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Parameters and variables only exist inside their own functions. In the code below, within the confines of main , there is no such thing as phil . If you try to use it, the compiler will complain. Similarly, inside print_twice there is no such thing as argument. "
+  "body": "Parameters and variables declared inside a function are local to that function. They can be used only within the part of the program where they are in scope. "
 },
 {
-  "id": "locals_AC_1",
+  "id": "chapter3_parameters-and-variables-are-local-3",
   "level": "2",
-  "url": "chapter3_parameters-and-variables-are-local.html#locals_AC_1",
-  "type": "Listing",
-  "number": "3.9.1",
-  "title": "The following code will show the output of the print_twice function. Notice that it is the argument ‘b’ that is outputted, not the variable ‘phil’.",
-  "body": " The following code will show the output of the print_twice function. Notice that it is the argument ‘b' that is outputted, not the variable ‘phil'.   #include <iostream> void print_twice(char phil) { std::cout << phil << phil << '\\n'; } int main() { char argument = 'b'; print_twice(argument); return 0; }   "
+  "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The part of a program where a name can be used is called its scope . A parameter or variable declared inside a function has local scope , which means it can be used only within that function. "
 },
 {
   "id": "chapter3_parameters-and-variables-are-local-4",
@@ -3679,25 +3679,25 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Variables like this are said to be local . In order to keep track of parameters and local variables, it is useful to draw a stack diagram . Like state diagrams, stack diagrams show the value of each variable, but the variables are contained in larger boxes that indicate which function they belong to. "
+  "body": "For example, letter has local scope within main , while symbol has local scope within print_twice . The function print_twice cannot directly use letter from main . Similarly, main cannot directly use the parameter symbol from print_twice . "
 },
 {
-  "id": "chapter3_parameters-and-variables-are-local-5",
+  "id": "locals_AC_1",
   "level": "2",
-  "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For example, the state diagram for print_twice looks like this: "
+  "url": "chapter3_parameters-and-variables-are-local.html#locals_AC_1",
+  "type": "Listing",
+  "number": "3.9.1",
+  "title": "Follow the execution of this program. Notice that the argument value stored in <code class=\"code-inline tex2jax_ignore\">letter<\/code> is passed to the parameter <code class=\"code-inline tex2jax_ignore\">symbol<\/code>.",
+  "body": " Follow the execution of this program. Notice that the argument value stored in letter is passed to the parameter symbol .   #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }   "
 },
 {
   "id": "chapter3_parameters-and-variables-are-local-6",
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-6",
-  "type": "Figure",
-  "number": "3.9.2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": " Local variable stack diagram   Two boxes. One labeled main that contains a variable named 'argument' which is 'b'. The other labeled print_twice that contains a variable named 'phil' which is 'b'.   "
+  "body": "When print_twice(letter) is called, the value 'b' is passed as the argument. The parameter symbol receives that value. Inside print_twice , it is the parameter symbol that is used to produce the output. "
 },
 {
   "id": "chapter3_parameters-and-variables-are-local-7",
@@ -3706,16 +3706,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Whenever a function is called, it creates a new instance of that function. Each instance of a function contains the parameters and local variables for that function. In the diagram an instance of a function is represented by a box with the name of the function on the outside and the variables and parameters inside. "
+  "body": "Variables like letter and parameters like symbol are local to their respective functions. To keep track of parameters and local variables while a program runs, it is useful to draw a stack diagram . "
 },
 {
   "id": "chapter3_parameters-and-variables-are-local-8",
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-8",
-  "type": "Note",
-  "number": "3.9.1",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "When you use the Codelens feature to run a program, it shows the variables organized in a stack diagram. Try it on above. "
+  "body": "Like state diagrams, stack diagrams show the values of variables. However, the variables are grouped into boxes that indicate which active function call they belong to. "
 },
 {
   "id": "chapter3_parameters-and-variables-are-local-9",
@@ -3724,7 +3724,43 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In the example, main has one local variable, argument, and no parameters. print_twice has no local variables and one parameter, named phil. "
+  "body": "For example, the stack diagram for this call to print_twice looks like this: "
+},
+{
+  "id": "chapter3_parameters-and-variables-are-local-10",
+  "level": "2",
+  "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-10",
+  "type": "Figure",
+  "number": "3.9.2",
+  "title": "",
+  "body": " Local variable stack diagram    Two boxes. One is labeled main and contains a variable named letter whose value is 'b'. The other is labeled print_twice and contains a parameter named symbol whose value is 'b'.    "
+},
+{
+  "id": "chapter3_parameters-and-variables-are-local-11",
+  "level": "2",
+  "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-11",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Each time a function is called, that call gets its own parameters and local variables. This is sometimes described as creating a new instance of the function call. In a stack diagram, each active call is represented by its own box. "
+},
+{
+  "id": "chapter3_parameters-and-variables-are-local-12",
+  "level": "2",
+  "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-12",
+  "type": "Note",
+  "number": "3.9.1",
+  "title": "",
+  "body": " When you use CodeLens to step through a program, you can see the variables associated with each active function call. Try it on above.  "
+},
+{
+  "id": "chapter3_parameters-and-variables-are-local-13",
+  "level": "2",
+  "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-13",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In the example, main has one local variable, letter , and no parameters. print_twice has no additional local variables and one parameter, symbol . "
 },
 {
   "id": "locals_1",
@@ -3733,7 +3769,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.9.1",
   "title": "",
-  "body": "  How many local variables and parameters does main have?  void print_hello_name(string name) { std::cout << \"Hello \" << name << \"!\"; } int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; }      1 local variable, 1 parameter   A parameter would be located within the parentheses next to the function's name.     0 local variables, 1 parameter   A parameter would be located within the parentheses next to the function's name.     2 local variables, 0 parameters   Correct!     2 local variables, 1 parameter   A parameter would be located within the parentheses next to the function's name.    "
+  "body": "  How many local variables and parameters does main have?  #include <iostream> #include <string> void print_hello_name(std::string name); int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; } void print_hello_name(std::string name) { std::cout << \"Hello \" << name << \"!\\n\"; }      1 local variable, 1 parameter    The variables name1 and name2 are both declared inside main . The empty parentheses in main() show that it has no parameters in this example.      0 local variables, 1 parameter     main declares both name1 and name2 , and its parameter list is empty.      2 local variables, 0 parameters    Correct. name1 and name2 are local variables in main , and main() has no parameters in this example.      2 local variables, 1 parameter    There are two local variables, but the empty parameter list in main() means that this version of main has no parameters.     "
 },
 {
   "id": "locals_2",
@@ -3742,7 +3778,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.9.2",
   "title": "",
-  "body": "  How many local variables and parameters does print_hello_name have?  void print_hello_name(string name) { std::cout << \"Hello \" << name << \"!\"; } int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; }      1 local variable, 1 parameter   A local variable exists when a variable is declared within a function.     0 local variables, 1 parameter   Correct!     2 local variables, 0 parameters   A local variable exists when a variable is declared within a function.     2 local variables, 1 parameter   A local variable exists when a variable is declared within a function.    "
+  "body": "  How many local variables and parameters does print_hello_name have?  #include <iostream> #include <string> void print_hello_name(std::string name); int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; } void print_hello_name(std::string name) { std::cout << \"Hello \" << name << \"!\\n\"; }      1 local variable, 1 parameter     name is a parameter because it is declared in the function's parameter list. No additional variable is declared inside the function body.      0 local variables, 1 parameter    Correct. name is the function's one parameter, and no additional local variables are declared in the function body.      2 local variables, 0 parameters     name1 and name2 belong to main , not to print_hello_name . The parameter name belongs to print_hello_name .      2 local variables, 1 parameter     name1 and name2 are local to main . They are not local variables of print_hello_name .     "
 },
 {
   "id": "locals_3",
@@ -3751,7 +3787,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.9.3",
   "title": "",
-  "body": "  Whenever we make a function call, we create a(n) of that function, which contains the parameters and local variables for that function.       You could create many instances of one function, each with their own parameters and local variables if you wanted!     "
+  "body": "  Each time a function is called, that call gets its own and local variables.       Each active function call has its own parameters and local variables.     "
 },
 {
   "id": "locals_4",
@@ -3760,7 +3796,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.9.4",
   "title": "",
-  "body": "  How many calls to hi are made during the exectuion of the entire program?  void hi() { std::cout << \"hiii !\\n\"; } void print_greeting() { hi(); std::cout \"how are you doing today. \\n\"; hi(); } int main() { hi(); print_greeting(); hi(); return 0; }      1 call   hi( ) is called from multiple functions.     4 calls   Correct!     2 calls   hi( ) is called from multiple functions.     3 calls   Two calls from one function are indeed two seperate calls.    "
+  "body": "  How many calls to hi are made during the execution of the entire program?  #include <iostream> void hi(); void print_greeting(); int main() { hi(); print_greeting(); hi(); return 0; } void hi() { std::cout << \"hiii!\\n\"; } void print_greeting() { hi(); std::cout << \"How are you doing today?\\n\"; hi(); }      1 call     hi is called directly from main and also from print_greeting .      4 calls    Correct. main calls hi twice, and print_greeting calls hi twice more.      2 calls    There are two direct calls from main , plus two more calls inside print_greeting .      3 calls     main calls hi twice, and print_greeting contains two additional calls.     "
 },
 {
   "id": "chapter3_functions-with-multiple-parameters",
@@ -4138,7 +4174,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.13",
   "title": "Glossary",
-  "body": " Glossary    floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double .    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A variable declared in a function's parameter list. A parameter receives a value when the function is called.    argument  A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter.    call  Cause a function to be executed.    return type  The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value.    return statement  A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call.    return value  The value that a function sends back to its caller.    value-returning function  A function that returns a value to its caller. Its return type is a type other than void .    pass by value  A way of passing an argument to a function in which the parameter receives a copy of the argument's value. Changes made to the parameter do not change the caller's variable.    reference  Another name for an existing variable or object. In this chapter, references are used as function parameters so a function can work with the caller's variable directly.    reference parameter  A parameter that refers to the caller's variable instead of receiving a separate copy. A reference parameter is written with & after the parameter type.    pass by reference  A way of passing an argument to a function in which a reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    floating-point  A type of value that can contain fractions as well as integers.    initialization  A statement that declares a new variable and assigns a value to it.    call  Causes a function to be executed.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    function  A named sequence of statements that performs some useful function.    parameter  A variable declared in a function's parameter list.    argument  A value or expression supplied when a function is called.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    return type  The type of value that a function returns to its caller.    return statement  A statement that sends a value back to the caller and ends the function call.    return value  The value that a function sends back to its caller.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    pass by value  The parameter receives a copy of the argument's value.    reference  Another name for an existing variable or object.    reference parameter  A parameter that refers to the caller's variable.    pass by reference  Allows changes made through a parameter to affect the caller's variable.      "
+  "body": " Glossary    floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double .    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A variable declared in a function's parameter list. A parameter receives a value when the function is called.    argument  A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter.    call  Cause a function to be executed.    scope  The part of a program where a name, such as a variable or parameter name, can be used.    local scope  The scope of a parameter or variable declared inside a function. The name can be used only within that function.    return type  The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value.    return statement  A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call.    return value  The value that a function sends back to its caller.    value-returning function  A function that returns a value to its caller. Its return type is a type other than void .    pass by value  A way of passing an argument to a function in which the parameter receives a copy of the argument's value. Changes made to the parameter do not change the caller's variable.    reference  Another name for an existing variable or object. In this chapter, references are used as function parameters so a function can work with the caller's variable directly.    reference parameter  A parameter that refers to the caller's variable instead of receiving a separate copy. A reference parameter is written with & after the parameter type.    pass by reference  A way of passing an argument to a function in which a reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    floating-point  A type of value that can contain fractions as well as integers.    initialization  A statement that declares a new variable and assigns a value to it.    call  Causes a function to be executed.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    function  A named sequence of statements that performs some useful function.    parameter  A variable declared in a function's parameter list.    argument  A value or expression supplied when a function is called.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    return type  The type of value that a function returns to its caller.    return statement  A statement that sends a value back to the caller and ends the function call.    return value  The value that a function sends back to its caller.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    pass by value  The parameter receives a copy of the argument's value.    reference  Another name for an existing variable or object.    reference parameter  A parameter that refers to the caller's variable.    pass by reference  Allows changes made through a parameter to affect the caller's variable.      "
 },
 {
   "id": "chapter3_glossary-2",
@@ -4147,7 +4183,7 @@ var ptx_lunr_docs = [
   "type": "Glossary",
   "number": "3.13",
   "title": "Glossary",
-  "body": "  floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double .    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A variable declared in a function's parameter list. A parameter receives a value when the function is called.    argument  A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter.    call  Cause a function to be executed.    return type  The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value.    return statement  A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call.    return value  The value that a function sends back to its caller.    value-returning function  A function that returns a value to its caller. Its return type is a type other than void .    pass by value  A way of passing an argument to a function in which the parameter receives a copy of the argument's value. Changes made to the parameter do not change the caller's variable.    reference  Another name for an existing variable or object. In this chapter, references are used as function parameters so a function can work with the caller's variable directly.    reference parameter  A parameter that refers to the caller's variable instead of receiving a separate copy. A reference parameter is written with & after the parameter type.    pass by reference  A way of passing an argument to a function in which a reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.   "
+  "body": "  floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double .    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A variable declared in a function's parameter list. A parameter receives a value when the function is called.    argument  A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter.    call  Cause a function to be executed.    scope  The part of a program where a name, such as a variable or parameter name, can be used.    local scope  The scope of a parameter or variable declared inside a function. The name can be used only within that function.    return type  The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value.    return statement  A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call.    return value  The value that a function sends back to its caller.    value-returning function  A function that returns a value to its caller. Its return type is a type other than void .    pass by value  A way of passing an argument to a function in which the parameter receives a copy of the argument's value. Changes made to the parameter do not change the caller's variable.    reference  Another name for an existing variable or object. In this chapter, references are used as function parameters so a function can work with the caller's variable directly.    reference parameter  A parameter that refers to the caller's variable instead of receiving a separate copy. A reference parameter is written with & after the parameter type.    pass by reference  A way of passing an argument to a function in which a reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.   "
 },
 {
   "id": "chapter3_glossary-3",
