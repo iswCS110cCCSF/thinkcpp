@@ -3463,7 +3463,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.8",
   "title": "Parameters and Arguments",
-  "body": " Parameters and Arguments  Some of the built-in functions we have used have parameters , which are values that you provide to let the function do its job. For example, if you want to find the sine of a number, you have to indicate what the number is. Thus, sin takes a double value as a parameter.  Some functions take more than one parameter, like pow , which takes two double s, the base and the exponent.  Notice that in each of these cases we have to specify not only how many parameters there are, but also what type they are. So it shouldn't surprise you that when you write a class definition, the parameter list indicates the type of each parameter. For example:  void print_twice(char phil) { std::cout << phil << phil << std::endl ; }  This function takes a single parameter, named phil, that has type char . Whatever that parameter is (and at this point we have no idea what it is), it gets printed twice, followed by a new line. I chose the name phil to suggest that the name you give a parameter is up to you, but in general you want to choose something more illustrative than phil.  In order to call this function, we have to provide a char . For example, we might have a main function like this:  int main() { print_twice('a'); return 0; }  The char value you provide is called an argument , and we say that the argument is passed to the function. In this case the value 'a' is passed as an argument to print_twice where it will get printed twice.  Alternatively, if we had a char variable, we could use it as an argument instead:  int main() { char argument = 'b'; print_twice(argument); return 0; }  Notice something very important here: the name of the variable we pass as an argument (argument) has nothing to do with the name of the parameter (phil). Let me say that again:   The name of the variable we pass as an argument has nothing to do with the name of the parameter.   They can be the same or they can be different, but it is important to realize that they are not the same thing, except that they happen to have the same value (in this case, the character 'b').   The value you provide as an argument must have the same type as the parameter of the function you call.   This rule is important, but it is sometimes confusing because C++ sometimes converts arguments from one type to another automatically. For now you should learn the general rule, and we will deal with exceptions later.   The following code will show the output of the print_twice function. Try modifying the value of argument to change the output.   #include <iostream> void print_twice(char phil) { std::cout << phil << phil << '\\n'; } int main() { char argument = 'b'; print_twice(argument); return 0; }      What will be printed to the terminal? If nothing will print, or if the compiler will throw an error, type error .  #include <iostream> void print_twice(char phil) { std::cout << phil << phil << '\\n'; } int main() { std::string argument = \"s\"; print_twice(argument); return 0; }                What will be printed to the terminal? If nothing will print, or if the compiler will throw an error, type error .  #include <iostream> void print_twice(char phil) { std::cout << phil << phil << '\\n'; } int main() { char argument = 'b'; print_twice(argument); return 0; }          The print_twice function will print the character argument provided two times.        Match the function declaration to an example of its function call.   Try again!    int times_two(int x, int y);  times_two(4, 7);    int times_two(string y, int x);  times_two(\"hello\", 10);    int times_two(double x, string y);  times_two(4.5, \"hello\");    int times_two(string x, string y);  times_two(\"hello\", \"hi\");     "
+  "body": " Parameters and Arguments  Some of the standard-library functions we have used take arguments . For example, when you call std::sin , you provide the value whose sine you want to calculate.  The function itself has a parameter that receives the value supplied by the caller. A parameter is a variable declared in the function's parameter list.  Some functions have more than one parameter. For example, std::pow takes two values: a base and an exponent. When we write our own functions, the parameter list specifies the type and name of each parameter.  For example, consider this function declaration:   void print_twice(char symbol);   The declaration tells us that print_twice has one parameter of type char . The parameter is named symbol .  A complete program can place the function declaration before main and the function definition after main :  #include <iostream> \/\/ Function declaration void print_twice(char symbol); int main() { print_twice('a'); return 0; } \/\/ Function definition void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }  In the function definition, symbol is the parameter . When print_twice is called, the parameter receives a value supplied by the caller.  In the call   print_twice('a');   the character 'a' is the argument . We say that the argument is passed to the function. The value 'a' is passed to print_twice , where the parameter symbol receives that value.   In some programming courses and textbooks, a parameter in a function definition is called a formal parameter , while the value or expression supplied in a function call is called an actual parameter or argument . In this book, we will usually use the shorter C++ terms parameter and argument .   A variable can also be used as an argument:  #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }  In this example, letter is a variable in main . It is used as the argument in the function call. The parameter symbol is a different variable inside print_twice .   The name of an argument variable does not need to match the name of the corresponding parameter. The argument supplies a value, and the parameter receives that value when the function is called.   For example, when letter contains 'b' , calling print_twice(letter) passes the value 'b' to the parameter symbol .   An argument must provide a value that is compatible with the type of its corresponding parameter.   The argument and parameter do not always have to have exactly the same type. C++ can perform some conversions automatically when the types are compatible. However, not every type can be converted to every other type.   The following code shows the output of the print_twice function. Try modifying the value of letter to change the output.   #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }      What will be printed to the terminal? If the program does not compile, enter error .  #include <iostream> #include <string> void print_twice(char symbol); int main() { std::string argument = \"s\"; print_twice(argument); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }          A std::string object cannot be passed as the char argument required by print_twice .        What will be printed to the terminal? If the program does not compile, enter error .  #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }          The argument letter supplies the value 'b' to the parameter symbol , so print_twice prints bb .        Match each function declaration with a compatible function call.    Try again! Compare the number, order, and types of the arguments with the parameters in each declaration.     int combine_values(int x, int y);  combine_values(4, 7);    int combine_values(std::string text, int x);  combine_values(\"hello\", 10);    int combine_values(double x, std::string text);  combine_values(4.5, \"hello\");    int combine_values(std::string first, std::string second);  combine_values(\"hello\", \"hi\");     "
 },
 {
   "id": "chapter3_parameters-and-arguments-2",
@@ -3472,7 +3472,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Some of the built-in functions we have used have parameters , which are values that you provide to let the function do its job. For example, if you want to find the sine of a number, you have to indicate what the number is. Thus, sin takes a double value as a parameter. "
+  "body": "Some of the standard-library functions we have used take arguments . For example, when you call std::sin , you provide the value whose sine you want to calculate. "
 },
 {
   "id": "chapter3_parameters-and-arguments-3",
@@ -3481,7 +3481,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Some functions take more than one parameter, like pow , which takes two double s, the base and the exponent. "
+  "body": "The function itself has a parameter that receives the value supplied by the caller. A parameter is a variable declared in the function's parameter list. "
 },
 {
   "id": "chapter3_parameters-and-arguments-4",
@@ -3490,16 +3490,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Notice that in each of these cases we have to specify not only how many parameters there are, but also what type they are. So it shouldn't surprise you that when you write a class definition, the parameter list indicates the type of each parameter. For example: "
+  "body": "Some functions have more than one parameter. For example, std::pow takes two values: a base and an exponent. When we write our own functions, the parameter list specifies the type and name of each parameter. "
 },
 {
-  "id": "chapter3_parameters-and-arguments-6",
+  "id": "chapter3_parameters-and-arguments-5",
   "level": "2",
-  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-6",
+  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-5",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This function takes a single parameter, named phil, that has type char . Whatever that parameter is (and at this point we have no idea what it is), it gets printed twice, followed by a new line. I chose the name phil to suggest that the name you give a parameter is up to you, but in general you want to choose something more illustrative than phil. "
+  "body": "For example, consider this function declaration: "
 },
 {
   "id": "chapter3_parameters-and-arguments-7",
@@ -3508,16 +3508,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In order to call this function, we have to provide a char . For example, we might have a main function like this: "
+  "body": "The declaration tells us that print_twice has one parameter of type char . The parameter is named symbol . "
 },
 {
-  "id": "chapter3_parameters-and-arguments-9",
+  "id": "chapter3_parameters-and-arguments-8",
   "level": "2",
-  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-9",
+  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-8",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The char value you provide is called an argument , and we say that the argument is passed to the function. In this case the value 'a' is passed as an argument to print_twice where it will get printed twice. "
+  "body": "A complete program can place the function declaration before main and the function definition after main : "
 },
 {
   "id": "chapter3_parameters-and-arguments-10",
@@ -3526,52 +3526,88 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Alternatively, if we had a char variable, we could use it as an argument instead: "
+  "body": "In the function definition, symbol is the parameter . When print_twice is called, the parameter receives a value supplied by the caller. "
 },
 {
-  "id": "chapter3_parameters-and-arguments-12",
+  "id": "chapter3_parameters-and-arguments-11",
   "level": "2",
-  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-12",
+  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-11",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Notice something very important here: the name of the variable we pass as an argument (argument) has nothing to do with the name of the parameter (phil). Let me say that again: "
+  "body": "In the call "
 },
 {
   "id": "chapter3_parameters-and-arguments-13",
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-13",
-  "type": "Note",
-  "number": "3.8.1",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": " The name of the variable we pass as an argument has nothing to do with the name of the parameter.  "
+  "body": "the character 'a' is the argument . We say that the argument is passed to the function. The value 'a' is passed to print_twice , where the parameter symbol receives that value. "
 },
 {
   "id": "chapter3_parameters-and-arguments-14",
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-14",
-  "type": "Paragraph",
-  "number": "",
+  "type": "Note",
+  "number": "3.8.1",
   "title": "",
-  "body": "They can be the same or they can be different, but it is important to realize that they are not the same thing, except that they happen to have the same value (in this case, the character 'b'). "
+  "body": " In some programming courses and textbooks, a parameter in a function definition is called a formal parameter , while the value or expression supplied in a function call is called an actual parameter or argument . In this book, we will usually use the shorter C++ terms parameter and argument .  "
 },
 {
   "id": "chapter3_parameters-and-arguments-15",
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-15",
-  "type": "Warning",
-  "number": "3.8.2",
-  "title": "",
-  "body": " The value you provide as an argument must have the same type as the parameter of the function you call.  "
-},
-{
-  "id": "chapter3_parameters-and-arguments-16",
-  "level": "2",
-  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-16",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This rule is important, but it is sometimes confusing because C++ sometimes converts arguments from one type to another automatically. For now you should learn the general rule, and we will deal with exceptions later. "
+  "body": "A variable can also be used as an argument: "
+},
+{
+  "id": "chapter3_parameters-and-arguments-17",
+  "level": "2",
+  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-17",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In this example, letter is a variable in main . It is used as the argument in the function call. The parameter symbol is a different variable inside print_twice . "
+},
+{
+  "id": "chapter3_parameters-and-arguments-18",
+  "level": "2",
+  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-18",
+  "type": "Note",
+  "number": "3.8.2",
+  "title": "",
+  "body": " The name of an argument variable does not need to match the name of the corresponding parameter. The argument supplies a value, and the parameter receives that value when the function is called.  "
+},
+{
+  "id": "chapter3_parameters-and-arguments-19",
+  "level": "2",
+  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-19",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "For example, when letter contains 'b' , calling print_twice(letter) passes the value 'b' to the parameter symbol . "
+},
+{
+  "id": "chapter3_parameters-and-arguments-20",
+  "level": "2",
+  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-20",
+  "type": "Warning",
+  "number": "3.8.3",
+  "title": "",
+  "body": " An argument must provide a value that is compatible with the type of its corresponding parameter.  "
+},
+{
+  "id": "chapter3_parameters-and-arguments-21",
+  "level": "2",
+  "url": "chapter3_parameters-and-arguments.html#chapter3_parameters-and-arguments-21",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The argument and parameter do not always have to have exactly the same type. C++ can perform some conversions automatically when the types are compatible. However, not every type can be converted to every other type. "
 },
 {
   "id": "params_args_AC_1",
@@ -3579,8 +3615,8 @@ var ptx_lunr_docs = [
   "url": "chapter3_parameters-and-arguments.html#params_args_AC_1",
   "type": "Listing",
   "number": "3.8.1",
-  "title": "The following code will show the output of the print_twice function. Try modifying the value of argument to change the output.",
-  "body": " The following code will show the output of the print_twice function. Try modifying the value of argument to change the output.   #include <iostream> void print_twice(char phil) { std::cout << phil << phil << '\\n'; } int main() { char argument = 'b'; print_twice(argument); return 0; }   "
+  "title": "The following code shows the output of the <code class=\"code-inline tex2jax_ignore\">print_twice<\/code> function. Try modifying the value of <code class=\"code-inline tex2jax_ignore\">letter<\/code> to change the output.",
+  "body": " The following code shows the output of the print_twice function. Try modifying the value of letter to change the output.   #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }   "
 },
 {
   "id": "params_args_1",
@@ -3589,7 +3625,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.8.1",
   "title": "",
-  "body": "  What will be printed to the terminal? If nothing will print, or if the compiler will throw an error, type error .  #include <iostream> void print_twice(char phil) { std::cout << phil << phil << '\\n'; } int main() { std::string argument = \"s\"; print_twice(argument); return 0; }             "
+  "body": "  What will be printed to the terminal? If the program does not compile, enter error .  #include <iostream> #include <string> void print_twice(char symbol); int main() { std::string argument = \"s\"; print_twice(argument); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }          A std::string object cannot be passed as the char argument required by print_twice .     "
 },
 {
   "id": "params_args_2",
@@ -3598,7 +3634,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.8.2",
   "title": "",
-  "body": "  What will be printed to the terminal? If nothing will print, or if the compiler will throw an error, type error .  #include <iostream> void print_twice(char phil) { std::cout << phil << phil << '\\n'; } int main() { char argument = 'b'; print_twice(argument); return 0; }          The print_twice function will print the character argument provided two times.     "
+  "body": "  What will be printed to the terminal? If the program does not compile, enter error .  #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }          The argument letter supplies the value 'b' to the parameter symbol , so print_twice prints bb .     "
 },
 {
   "id": "params_args_4",
@@ -3607,7 +3643,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.8.3",
   "title": "",
-  "body": "  Match the function declaration to an example of its function call.   Try again!    int times_two(int x, int y);  times_two(4, 7);    int times_two(string y, int x);  times_two(\"hello\", 10);    int times_two(double x, string y);  times_two(4.5, \"hello\");    int times_two(string x, string y);  times_two(\"hello\", \"hi\");    "
+  "body": "  Match each function declaration with a compatible function call.    Try again! Compare the number, order, and types of the arguments with the parameters in each declaration.     int combine_values(int x, int y);  combine_values(4, 7);    int combine_values(std::string text, int x);  combine_values(\"hello\", 10);    int combine_values(double x, std::string text);  combine_values(4.5, \"hello\");    int combine_values(std::string first, std::string second);  combine_values(\"hello\", \"hi\");    "
 },
 {
   "id": "chapter3_parameters-and-variables-are-local",

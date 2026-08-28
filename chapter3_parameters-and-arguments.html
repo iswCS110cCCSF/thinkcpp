@@ -529,65 +529,98 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.8</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Parameters and Arguments</span>
 </h1>
-<div class="para" id="chapter3_parameters-and-arguments-2">Some of the built-in functions we have used have <dfn class="terminology">parameters</dfn>, which are values that you provide to let the function do its job. For example, if you want to find the sine of a number, you have to indicate what the number is. Thus, <code class="code-inline tex2jax_ignore">sin</code> takes a <code class="code-inline tex2jax_ignore">double</code> value as a parameter.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-arguments-2">Some of the standard-library functions we have used take <dfn class="terminology">arguments</dfn>. For example, when you call <code class="code-inline tex2jax_ignore">std::sin</code>, you provide the value whose sine you want to calculate.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_parameters-and-arguments-3">Some functions take more than one parameter, like <code class="code-inline tex2jax_ignore">pow</code>, which takes two <code class="code-inline tex2jax_ignore">double</code>s, the base and the exponent.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-arguments-3">The function itself has a <dfn class="terminology">parameter</dfn> that receives the value supplied by the caller. A parameter is a variable declared in the function’s parameter list.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_parameters-and-arguments-4">Notice that in each of these cases we have to specify not only how many parameters there are, but also what type they are. So it shouldn’t surprise you that when you write a class definition, the parameter list indicates the type of each parameter. For example:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-arguments-4">Some functions have more than one parameter. For example, <code class="code-inline tex2jax_ignore">std::pow</code> takes two values: a base and an exponent. When we write our own functions, the parameter list specifies the type and name of each parameter.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void print_twice(char phil) {
-  std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; std::endl ;
-}
+<div class="para" id="chapter3_parameters-and-arguments-5">For example, consider this function declaration:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void print_twice(char symbol);
 </code></pre></div>
-<div class="para" id="chapter3_parameters-and-arguments-6">This function takes a single parameter, named phil, that has type <code class="code-inline tex2jax_ignore">char</code>. Whatever that parameter is (and at this point we have no idea what it is), it gets printed twice, followed by a new line. I chose the name phil to suggest that the name you give a parameter is up to you, but in general you want to choose something more illustrative than phil.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-arguments-7">The declaration tells us that <code class="code-inline tex2jax_ignore">print_twice</code> has one parameter of type <code class="code-inline tex2jax_ignore">char</code>. The parameter is named <code class="code-inline tex2jax_ignore">symbol</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_parameters-and-arguments-7">In order to call this function, we have to provide a <code class="code-inline tex2jax_ignore">char</code>. For example, we might have a <code class="code-inline tex2jax_ignore">main</code> function like this:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_parameters-and-arguments-8">A complete program can place the function declaration before <code class="code-inline tex2jax_ignore">main</code> and the function definition after <code class="code-inline tex2jax_ignore">main</code>:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int main() {
-  print_twice('a');
-  return 0;
-}
-</code></pre></div>
-<div class="para" id="chapter3_parameters-and-arguments-9">The <code class="code-inline tex2jax_ignore">char</code> value you provide is called an <dfn class="terminology">argument</dfn>, and we say that the argument is <dfn class="terminology">passed</dfn> to the function. In this case the value ’a’ is passed as an argument to print_twice where it will get printed twice.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="chapter3_parameters-and-arguments-10">Alternatively, if we had a <code class="code-inline tex2jax_ignore">char</code> variable, we could use it as an argument instead:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int main() {
-  char argument = 'b';
-  print_twice(argument);
-  return 0;
-}
-</code></pre></div>
-<div class="para" id="chapter3_parameters-and-arguments-12">Notice something very important here: the name of the variable we pass as an argument (argument) has nothing to do with the name of the parameter (phil). Let me say that again:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<article class="note remark-like" id="chapter3_parameters-and-arguments-13"><h2 class="heading">
-<span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.8.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h2>
-<div class="para" id="chapter3_parameters-and-arguments-13-1">The name of the variable we pass as an argument has nothing to do with the name of the parameter.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-13-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" aria-hidden="true" data-description="Note 3.8.1"><a tabindex="-1" href="#chapter3_parameters-and-arguments-13" title="Copy heading and permalink for Note 3.8.1" aria-label="Copy heading and permalink for Note 3.8.1">🔗</a></div>
-</article>
-<div class="para" id="chapter3_parameters-and-arguments-14">They can be the same or they can be different, but it is important to realize that they are not the same thing, except that they happen to have the same value (in this case, the character ’b’).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<article class="warning remark-like" id="chapter3_parameters-and-arguments-15"><h2 class="heading">
-<span class="type">Warning</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.8.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h2>
-<div class="para" id="chapter3_parameters-and-arguments-15-1">The value you provide as an argument must have the same type as the parameter of the function you call.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-15-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" aria-hidden="true" data-description="Warning 3.8.2"><a tabindex="-1" href="#chapter3_parameters-and-arguments-15" title="Copy heading and permalink for Warning 3.8.2" aria-label="Copy heading and permalink for Warning 3.8.2">🔗</a></div>
-</article>
-<div class="para" id="chapter3_parameters-and-arguments-16">This rule is important, but it is sometimes confusing because C++ sometimes converts arguments from one type to another automatically. For now you should learn the general rule, and we will deal with exceptions later.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<figure class="listing figure-like" id="params_args_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.8.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The following code will show the output of the print_twice function. Try modifying the value of argument to change the output.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.8.1: The following code will show the output of the print_twice function. Try modifying the value of argument to change the output."><a tabindex="-1" href="#params_args_AC_1" title="Copy heading and permalink for Listing 3.8.1: The following code will show the output of the print_twice function. Try modifying the value of argument to change the output." aria-label="Copy heading and permalink for Listing 3.8.1: The following code will show the output of the print_twice function. Try modifying the value of argument to change the output.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-params_args_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
-void print_twice(char phil) {
-    std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; '\n';
-}
+// Function declaration
+void print_twice(char symbol);
 
 int main() {
-    char argument = 'b';
-    print_twice(argument);
+    print_twice('a');
     return 0;
+}
+
+// Function definition
+void print_twice(char symbol) {
+    std::cout &lt;&lt; symbol &lt;&lt; symbol &lt;&lt; '\n';
+}
+</code></pre></div>
+<div class="para" id="chapter3_parameters-and-arguments-10">In the function definition, <code class="code-inline tex2jax_ignore">symbol</code> is the <dfn class="terminology">parameter</dfn>. When <code class="code-inline tex2jax_ignore">print_twice</code> is called, the parameter receives a value supplied by the caller.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter3_parameters-and-arguments-11">In the call<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">print_twice('a');
+</code></pre></div>
+<div class="para" id="chapter3_parameters-and-arguments-13">the character <code class="code-inline tex2jax_ignore">'a'</code> is the <dfn class="terminology">argument</dfn>. We say that the argument is <dfn class="terminology">passed</dfn> to the function. The value <code class="code-inline tex2jax_ignore">'a'</code> is passed to <code class="code-inline tex2jax_ignore">print_twice</code>, where the parameter <code class="code-inline tex2jax_ignore">symbol</code> receives that value.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="note remark-like" id="chapter3_parameters-and-arguments-14"><h2 class="heading">
+<span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.8.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="para" id="chapter3_parameters-and-arguments-14-1">In some programming courses and textbooks, a parameter in a function definition is called a <dfn class="terminology">formal parameter</dfn>, while the value or expression supplied in a function call is called an <dfn class="terminology">actual parameter</dfn> or <dfn class="terminology">argument</dfn>. In this book, we will usually use the shorter C++ terms <dfn class="terminology">parameter</dfn> and <dfn class="terminology">argument</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-14-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Note 3.8.1"><a tabindex="-1" href="#chapter3_parameters-and-arguments-14" title="Copy heading and permalink for Note 3.8.1" aria-label="Copy heading and permalink for Note 3.8.1">🔗</a></div>
+</article>
+<div class="para" id="chapter3_parameters-and-arguments-15">A variable can also be used as an argument:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+
+void print_twice(char symbol);
+
+int main() {
+    char letter = 'b';
+    print_twice(letter);
+    return 0;
+}
+
+void print_twice(char symbol) {
+    std::cout &lt;&lt; symbol &lt;&lt; symbol &lt;&lt; '\n';
+}
+</code></pre></div>
+<div class="para" id="chapter3_parameters-and-arguments-17">In this example, <code class="code-inline tex2jax_ignore">letter</code> is a variable in <code class="code-inline tex2jax_ignore">main</code>. It is used as the argument in the function call. The parameter <code class="code-inline tex2jax_ignore">symbol</code> is a different variable inside <code class="code-inline tex2jax_ignore">print_twice</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="note remark-like" id="chapter3_parameters-and-arguments-18"><h2 class="heading">
+<span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.8.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="para" id="chapter3_parameters-and-arguments-18-1">The name of an argument variable does not need to match the name of the corresponding parameter. The argument supplies a value, and the parameter receives that value when the function is called.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-18-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Note 3.8.2"><a tabindex="-1" href="#chapter3_parameters-and-arguments-18" title="Copy heading and permalink for Note 3.8.2" aria-label="Copy heading and permalink for Note 3.8.2">🔗</a></div>
+</article>
+<div class="para" id="chapter3_parameters-and-arguments-19">For example, when <code class="code-inline tex2jax_ignore">letter</code> contains <code class="code-inline tex2jax_ignore">'b'</code>, calling <code class="code-inline tex2jax_ignore">print_twice(letter)</code> passes the value <code class="code-inline tex2jax_ignore">'b'</code> to the parameter <code class="code-inline tex2jax_ignore">symbol</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-19" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="warning remark-like" id="chapter3_parameters-and-arguments-20"><h2 class="heading">
+<span class="type">Warning</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.8.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="para" id="chapter3_parameters-and-arguments-20-1">An argument must provide a value that is compatible with the type of its corresponding parameter.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-20-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Warning 3.8.3"><a tabindex="-1" href="#chapter3_parameters-and-arguments-20" title="Copy heading and permalink for Warning 3.8.3" aria-label="Copy heading and permalink for Warning 3.8.3">🔗</a></div>
+</article>
+<div class="para" id="chapter3_parameters-and-arguments-21">The argument and parameter do not always have to have exactly the same type. C++ can perform some conversions automatically when the types are compatible. However, not every type can be converted to every other type.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_parameters-and-arguments-21" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="params_args_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.8.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>The following code shows the output of the <code class="code-inline tex2jax_ignore">print_twice</code> function. Try modifying the value of <code class="code-inline tex2jax_ignore">letter</code> to change the output.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.8.1: The following code shows the output of the print_twice function. Try modifying the value of letter to change the output."><a tabindex="-1" href="#params_args_AC_1" title="Copy heading and permalink for Listing 3.8.1: The following code shows the output of the print_twice function. Try modifying the value of letter to change the output." aria-label="Copy heading and permalink for Listing 3.8.1: The following code shows the output of the print_twice function. Try modifying the value of letter to change the output.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-params_args_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+
+void print_twice(char symbol);
+
+int main() {
+    char letter = 'b';
+    print_twice(letter);
+    return 0;
+}
+
+void print_twice(char symbol) {
+    std::cout &lt;&lt; symbol &lt;&lt; symbol &lt;&lt; '\n';
 }
 </code></pre></div>
 </figure>
@@ -596,10 +629,10 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-params_args_1"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"params_args_1-1-1\">What will be printed to the terminal? If nothing will print, or if the compiler will throw an error, type “error”.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"code-box\"><pre class=\"program clipboardable\"><code class=\"language-cpp\">#include &lt;iostream&gt;\n\nvoid print_twice(char phil) {\n  std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; '\\n';\n}\n\nint main() {\n  std::string argument = \"s\";\n  print_twice(argument);\n  return 0;\n}\n<\/code><\/pre><\/div>\n<div class=\"para\" id=\"params_args_1-1-3\"><input type=\"text\" id=\"params_args_1-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_1-1-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"params_args_1-1-1\">What will be printed to the terminal? If the program does not compile, enter “error”.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"code-box\"><pre class=\"program clipboardable\"><code class=\"language-cpp\">#include &lt;iostream&gt;\n#include &lt;string&gt;\n\nvoid print_twice(char symbol);\n\nint main() {\n    std::string argument = \"s\";\n    print_twice(argument);\n    return 0;\n}\n\nvoid print_twice(char symbol) {\n    std::cout &lt;&lt; symbol &lt;&lt; symbol &lt;&lt; '\\n';\n}\n<\/code><\/pre><\/div>\n<div class=\"para\" id=\"params_args_1-1-3\"><input type=\"text\" id=\"params_args_1-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_1-1-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0},
-"feedbackArray": [[{"regex": "^\\s*error\\s*$", "regexFlags": "i", "feedback": "Correct!"}, {"feedback": "Incorrect."}]]
+"feedbackArray": [[{"regex": "^\\s*error\\s*$", "regexFlags": "i", "feedback": "A <code class=\"code-inline tex2jax_ignore\">std::string<\/code> object cannot be passed as the <code class=\"code-inline tex2jax_ignore\">char<\/code> argument required by <code class=\"code-inline tex2jax_ignore\">print_twice<\/code>."}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.8.1"><a tabindex="-1" href="#params_args_1" title="Copy heading and permalink for Checkpoint 3.8.1" aria-label="Copy heading and permalink for Checkpoint 3.8.1">🔗</a></div>
@@ -609,10 +642,10 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-params_args_2"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"params_args_2-1-1\">What will be printed to the terminal? If nothing will print, or if the compiler will throw an error, type “error”.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_2-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"code-box\"><pre class=\"program clipboardable\"><code class=\"language-cpp\">#include &lt;iostream&gt;\n\nvoid print_twice(char phil) {\n  std::cout &lt;&lt; phil &lt;&lt; phil &lt;&lt; '\\n';\n}\n\nint main() {\n  char argument = 'b';\n  print_twice(argument);\n  return 0;\n}\n<\/code><\/pre><\/div>\n<div class=\"para\" id=\"params_args_2-1-3\"><input type=\"text\" id=\"params_args_2-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_2-1-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"params_args_2-1-1\">What will be printed to the terminal? If the program does not compile, enter “error”.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_2-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div><div class=\"code-box\"><pre class=\"program clipboardable\"><code class=\"language-cpp\">#include &lt;iostream&gt;\n\nvoid print_twice(char symbol);\n\nint main() {\n    char letter = 'b';\n    print_twice(letter);\n    return 0;\n}\n\nvoid print_twice(char symbol) {\n    std::cout &lt;&lt; symbol &lt;&lt; symbol &lt;&lt; '\\n';\n}\n<\/code><\/pre><\/div>\n<div class=\"para\" id=\"params_args_2-1-3\"><input type=\"text\" id=\"params_args_2-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#params_args_2-1-3\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0},
-"feedbackArray": [[{"regex": "^\\s*bb\\s*$", "regexFlags": "", "feedback": "The print_twice function will print the character argument provided two times."}, {"feedback": "Incorrect."}]]
+"feedbackArray": [[{"regex": "^\\s*bb\\s*$", "regexFlags": "", "feedback": "The argument <code class=\"code-inline tex2jax_ignore\">letter<\/code> supplies the value <code class=\"code-inline tex2jax_ignore\">'b'<\/code> to the parameter <code class=\"code-inline tex2jax_ignore\">symbol<\/code>, so <code class=\"code-inline tex2jax_ignore\">print_twice<\/code> prints <code class=\"code-inline tex2jax_ignore\">bb<\/code>."}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.8.2"><a tabindex="-1" href="#params_args_2" title="Copy heading and permalink for Checkpoint 3.8.2" aria-label="Copy heading and permalink for Checkpoint 3.8.2">🔗</a></div>
@@ -622,16 +655,16 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-params_args_4">
 <span data-subcomponent="question">
-<div class="para" id="params_args_4-1-1">Match the function declaration to an example of its function call.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#params_args_4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="params_args_4-1-1">Match each function declaration with a compatible function call.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#params_args_4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></span><span data-subcomponent="feedback">
-<div class="para" id="params_args_4-2-1">Try again!</div></span><li data-subcomponent="draggable" id="rs-params_args_4_drag1" data-category="1">int times_two(int x, int y);</li>
-<li data-subcomponent="dropzone" for="rs-params_args_4_drag1" data-category="1">times_two(4, 7);</li>
-<li data-subcomponent="draggable" id="rs-params_args_4_drag2" data-category="2">int times_two(string y, int x);</li>
-<li data-subcomponent="dropzone" for="rs-params_args_4_drag2" data-category="2">times_two("hello", 10);</li>
-<li data-subcomponent="draggable" id="rs-params_args_4_drag3" data-category="3">int times_two(double x, string y);</li>
-<li data-subcomponent="dropzone" for="rs-params_args_4_drag3" data-category="3">times_two(4.5, "hello");</li>
-<li data-subcomponent="draggable" id="rs-params_args_4_drag4" data-category="4">int times_two(string x, string y);</li>
-<li data-subcomponent="dropzone" for="rs-params_args_4_drag4" data-category="4">times_two("hello", "hi");</li>
+<div class="para" id="params_args_4-2-1">Try again! Compare the number, order, and types of the arguments with the parameters in each declaration.</div></span><li data-subcomponent="draggable" id="rs-params_args_4_drag1" data-category="1">int combine_values(int x, int y);</li>
+<li data-subcomponent="dropzone" for="rs-params_args_4_drag1" data-category="1">combine_values(4, 7);</li>
+<li data-subcomponent="draggable" id="rs-params_args_4_drag2" data-category="2">int combine_values(std::string text, int x);</li>
+<li data-subcomponent="dropzone" for="rs-params_args_4_drag2" data-category="2">combine_values("hello", 10);</li>
+<li data-subcomponent="draggable" id="rs-params_args_4_drag3" data-category="3">int combine_values(double x, std::string text);</li>
+<li data-subcomponent="dropzone" for="rs-params_args_4_drag3" data-category="3">combine_values(4.5, "hello");</li>
+<li data-subcomponent="draggable" id="rs-params_args_4_drag4" data-category="4">int combine_values(std::string first, std::string second);</li>
+<li data-subcomponent="dropzone" for="rs-params_args_4_drag4" data-category="4">combine_values("hello", "hi");</li>
 </ul></div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.8.3"><a tabindex="-1" href="#params_args_4" title="Copy heading and permalink for Checkpoint 3.8.3" aria-label="Copy heading and permalink for Checkpoint 3.8.3">🔗</a></div>
 </article><div class="autopermalink" aria-hidden="true" data-description="Section 3.8: Parameters and Arguments"><a tabindex="-1" href="#chapter3_parameters-and-arguments" title="Copy heading and permalink for Section 3.8: Parameters and Arguments" aria-label="Copy heading and permalink for Section 3.8: Parameters and Arguments">🔗</a></div>
