@@ -41,6 +41,18 @@
             <p>Cause a function to be executed.</p>
         </gi>
 
+		<gi>
+			<title>scope</title>
+			<p>The part of a program where a name, such as a variable or parameter
+			name, can be used.</p>
+		</gi>
+
+		<gi>
+			<title>local scope</title>
+			<p>The scope of a parameter or variable declared inside a function.
+			The name can be used only within that function.</p>
+		</gi>
+
         <gi>
             <title>return type</title>
             <p>The type of value that a function returns to its caller. The return

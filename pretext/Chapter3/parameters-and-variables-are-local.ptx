@@ -1,223 +1,384 @@
-<?xml version="1.0" ?><section xml:id="chapter3_parameters-and-variables-are-local">
+<?xml version="1.0"?>
+<section xml:id="chapter3_parameters-and-variables-are-local">
   <title>Parameters and Variables are Local</title>
-  <p>Parameters and variables only exist inside their own functions. In the code below, within the confines of <c>main</c>,
-    there is no such thing as <c>phil</c>. If you try to use it, the compiler will complain. Similarly,
-    inside <c>print_twice</c> there is no such thing as argument.</p>
+
+  <p>
+    Parameters and variables declared inside a function are
+    <term>local</term> to that function. They can be used only within the
+    part of the program where they are in scope.
+  </p>
+
+  <p>
+    The part of a program where a name can be used is called its
+    <term>scope</term>. A parameter or variable declared inside a function
+    has <term>local scope</term>, which means it can be used only within
+    that function.
+  </p>
+
+  <p>
+    For example, <c>letter</c> has local scope within <c>main</c>, while
+    <c>symbol</c> has local scope within <c>print_twice</c>.
+    The function <c>print_twice</c> cannot directly use <c>letter</c>
+    from <c>main</c>. Similarly, <c>main</c> cannot directly use the
+    parameter <c>symbol</c> from <c>print_twice</c>.
+  </p>
+
   <listing xml:id="locals_AC_1" label="locals_AC_1">
     <title>
-      The following code will show the output of the print_twice function.
-        Notice that it is the argument ‘b' that is outputted, not the
-        variable ‘phil'.
+      Follow the execution of this program. Notice that the argument value
+      stored in <c>letter</c> is passed to the parameter <c>symbol</c>.
     </title>
-    <program interactive="activecode" line-numbers="yes" label="locals_AC_1_editor">
+
+    <program interactive="codelens"
+             line-numbers="yes"
+             label="locals_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
 
-void print_twice(char phil) {
-    std::cout << phil << phil << '\n';
-}
+void print_twice(char symbol);
 
 int main() {
-    char argument = 'b';
-    print_twice(argument);
+    char letter = 'b';
+    print_twice(letter);
+
     return 0;
 }
-        ]]></code>
+
+void print_twice(char symbol) {
+    std::cout << symbol << symbol << '\n';
+}
+      ]]></code>
     </program>
   </listing>
-  <p>Variables like this are said to be <term>local</term>. In order to keep track of parameters and
-    local variables, it is useful to draw a <term>stack
-      diagram</term>. Like state diagrams, stack diagrams show the value of each variable, but the
-    variables are contained in larger boxes that indicate which function they belong to.</p>
-  <p>For example, the state diagram for <c>print_twice</c> looks like this:</p>
+
+  <p>
+    When <c>print_twice(letter)</c> is called, the value <c>'b'</c>
+    is passed as the argument. The parameter <c>symbol</c> receives that
+    value. Inside <c>print_twice</c>, it is the parameter
+    <c>symbol</c> that is used to produce the output.
+  </p>
+
+  <p>
+    Variables like <c>letter</c> and parameters like <c>symbol</c> are
+    local to their respective functions. To keep track of parameters and
+    local variables while a program runs, it is useful to draw a
+    <term>stack diagram</term>.
+  </p>
+
+  <p>
+    Like state diagrams, stack diagrams show the values of variables.
+    However, the variables are grouped into boxes that indicate which
+    active function call they belong to.
+  </p>
+
+  <p>
+    For example, the stack diagram for this call to <c>print_twice</c>
+    looks like this:
+  </p>
+
   <figure>
-      <caption>Local variable stack diagram</caption>
-      <image source="Chapter3/Images/3.9stackdiagram.png">
-          <description><p>
-              Two boxes. One labeled main that contains a variable named 'argument'
-              which is 'b'. The other labeled print_twice that contains a variable named
-              'phil' which is 'b'.
-          </p></description>
-      </image>
+    <caption>Local variable stack diagram</caption>
+    <image source="Chapter3/Images/3.9stackdiagram.png">
+      <description>
+        <p>
+          Two boxes. One is labeled main and contains a variable named
+          letter whose value is 'b'. The other is labeled print_twice and
+          contains a parameter named symbol whose value is 'b'.
+        </p>
+      </description>
+    </image>
   </figure>
-  <p>Whenever a function is called, it creates a new <term>instance</term> of that function. Each
-    instance of a function contains the parameters and local variables for that function. In the
-    diagram an instance of a function is represented by a box with the name of the function on the
-    outside and the variables and parameters inside.</p>
-  <note><p>When you use the Codelens feature to run a program, it shows the variables organized in a
-    stack diagram. Try it on <xref ref="locals_AC_1"/> above.</p></note>
-  <p>In the example, <c>main</c> has one local variable, argument, and no parameters. <c>print_twice</c> has no
-    local variables and one parameter, named phil.</p>
+
+  <p>
+    Each time a function is called, that call gets its own parameters and
+    local variables. This is sometimes described as creating a new
+    <term>instance</term> of the function call. In a stack diagram, each
+    active call is represented by its own box.
+  </p>
+
+  <note>
+    <p>
+      When you use CodeLens to step through a program, you can see the
+      variables associated with each active function call. Try it on
+      <xref ref="locals_AC_1"/> above.
+    </p>
+  </note>
+
+  <p>
+    In the example, <c>main</c> has one local variable,
+    <c>letter</c>, and no parameters. <c>print_twice</c> has no
+    additional local variables and one parameter, <c>symbol</c>.
+  </p>
+
   <exercise label="locals_1">
     <statement>
-      <p>How many local variables and parameters does <c>main</c> have?</p>
-      <program>void print_hello_name(string name) {
-  std::cout &lt;&lt; &quot;Hello &quot; &lt;&lt; name &lt;&lt; &quot;!&quot;;
-}
+      <p>
+        How many local variables and parameters does <c>main</c> have?
+      </p>
+
+      <program>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void print_hello_name(std::string name);
 
 int main() {
- std::string name1 = &quot;Phil&quot;;
-  print_hello_name(name1);
- std::string name2 = &quot;Joe&quot;;
-  print_hello_name(name2);
-  return 0;
-}</program>
+    std::string name1 = "Phil";
+    print_hello_name(name1);
+
+    std::string name2 = "Joe";
+    print_hello_name(name2);
+
+    return 0;
+}
+
+void print_hello_name(std::string name) {
+    std::cout &lt;&lt; "Hello " &lt;&lt; name &lt;&lt; "!\n";
+}
+      </program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>1 local variable, 1 parameter</p>
         </statement>
-        <feedback><p>
-          A parameter would be located within the parentheses next to the function's name.
-        </p></feedback>
+        <feedback>
+          <p>
+            The variables <c>name1</c> and <c>name2</c> are both
+            declared inside <c>main</c>. The empty parentheses in
+            <c>main()</c> show that it has no parameters in this example.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>0 local variables, 1 parameter</p>
         </statement>
-        <feedback><p>
-          A parameter would be located within the parentheses next to the function's name.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>main</c> declares both <c>name1</c> and
+            <c>name2</c>, and its parameter list is empty.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>2 local variables, 0 parameters</p>
         </statement>
-        <feedback><p>
-          Correct!
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>name1</c> and <c>name2</c> are local
+            variables in <c>main</c>, and <c>main()</c> has no
+            parameters in this example.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>2 local variables, 1 parameter</p>
         </statement>
-        <feedback><p>
-          A parameter would be located within the parentheses next to the function's name.
-        </p></feedback>
+        <feedback>
+          <p>
+            There are two local variables, but the empty parameter list in
+            <c>main()</c> means that this version of <c>main</c> has no
+            parameters.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="locals_2">
     <statement>
-      <p>How many local variables and parameters does <c>print_hello_name</c> have?</p>
-      <program>void print_hello_name(string name) {
-  std::cout &lt;&lt; &quot;Hello &quot; &lt;&lt; name &lt;&lt; &quot;!&quot;;
-}
+      <p>
+        How many local variables and parameters does
+        <c>print_hello_name</c> have?
+      </p>
+
+      <program>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void print_hello_name(std::string name);
 
 int main() {
- std::string name1 = &quot;Phil&quot;;
-  print_hello_name(name1);
- std::string name2 = &quot;Joe&quot;;
-  print_hello_name(name2);
-  return 0;
-}</program>
+    std::string name1 = "Phil";
+    print_hello_name(name1);
+
+    std::string name2 = "Joe";
+    print_hello_name(name2);
+
+    return 0;
+}
+
+void print_hello_name(std::string name) {
+    std::cout &lt;&lt; "Hello " &lt;&lt; name &lt;&lt; "!\n";
+}
+      </program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>1 local variable, 1 parameter</p>
         </statement>
-        <feedback><p>
-          A local variable exists when a variable is declared within a function.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>name</c> is a parameter because it is declared in the
+            function's parameter list. No additional variable is declared
+            inside the function body.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>0 local variables, 1 parameter</p>
         </statement>
-        <feedback><p>
-          Correct!
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>name</c> is the function's one parameter, and
+            no additional local variables are declared in the function body.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>2 local variables, 0 parameters</p>
         </statement>
-        <feedback><p>
-          A local variable exists when a variable is declared within a function.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>name1</c> and <c>name2</c> belong to
+            <c>main</c>, not to <c>print_hello_name</c>.
+            The parameter <c>name</c> belongs to
+            <c>print_hello_name</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>2 local variables, 1 parameter</p>
         </statement>
-        <feedback><p>
-          A local variable exists when a variable is declared within a function.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>name1</c> and <c>name2</c> are local to
+            <c>main</c>. They are not local variables of
+            <c>print_hello_name</c>.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="locals_3">
     <statement>
-      <p>Whenever we make a function call, we create a(n) <fillin answer="instance"/> of that function, which contains
-        the parameters and local variables for that function. </p>
+      <p>
+        Each time a function is called, that call gets its own
+        <fillin answer="parameters"/> and local variables.
+      </p>
     </statement>
+
     <evaluation>
       <evaluate>
         <test correct="yes">
           <strcmp use-answer="yes" case="insensitive"/>
           <feedback>
-            You could create many instances of one function, each with their own parameters and
-              local variables if you wanted!
+            Each active function call has its own parameters and local
+            variables.
           </feedback>
         </test>
       </evaluate>
     </evaluation>
   </exercise>
+
   <exercise label="locals_4">
     <statement>
-      <p>How many calls to <c>hi</c> are made during the exectuion of the entire program?</p>
-      <program>void hi() {
-  std::cout &lt;&lt; &quot;hiii !\n&quot;;
+      <p>
+        How many calls to <c>hi</c> are made during the execution of the
+        entire program?
+      </p>
+
+      <program>
+#include &lt;iostream&gt;
+
+void hi();
+void print_greeting();
+
+int main() {
+    hi();
+    print_greeting();
+    hi();
+
+    return 0;
+}
+
+void hi() {
+    std::cout &lt;&lt; "hiii!\n";
 }
 
 void print_greeting() {
-  hi();
-  std::cout &quot;how are you doing today. \n&quot;;
-  hi();
+    hi();
+    std::cout &lt;&lt; "How are you doing today?\n";
+    hi();
 }
-
-int main() {
-  hi();
-  print_greeting();
-  hi();
-  return 0;
-}</program>
+      </program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>1 call</p>
         </statement>
-        <feedback><p>
-          hi( ) is called from multiple functions.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>hi</c> is called directly from <c>main</c> and also
+            from <c>print_greeting</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>4 calls</p>
         </statement>
-        <feedback><p>
-          Correct!
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>main</c> calls <c>hi</c> twice, and
+            <c>print_greeting</c> calls <c>hi</c> twice more.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>2 calls</p>
         </statement>
-        <feedback><p>
-          hi( ) is called from multiple functions.
-        </p></feedback>
+        <feedback>
+          <p>
+            There are two direct calls from <c>main</c>, plus two more
+            calls inside <c>print_greeting</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>3 calls</p>
         </statement>
-        <feedback><p>
-          Two calls from one function are indeed two seperate calls.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>main</c> calls <c>hi</c> twice, and
+            <c>print_greeting</c> contains two additional calls.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </section>
