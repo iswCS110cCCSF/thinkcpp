@@ -1,33 +1,75 @@
-<?xml version="1.0" ?><section xml:id="chapter3_programs-with-multiple-functions">
+<?xml version="1.0"?>
+<section xml:id="chapter3_programs-with-multiple-functions">
   <title>Programs with Multiple Functions</title>
-  <p>When you look at a class definition that contains several functions, it is tempting to read it
-    from top to bottom, but that is likely to be confusing, because that is not the <term>order of
-    execution</term> of the program.</p>
+
+  <p>
+    When you look at a program that contains several functions, it is tempting
+    to read it from top to bottom. However, the order in which functions appear
+    in the source code is not necessarily the <term>order of execution</term>
+    of the program.
+  </p>
+
   <note>
-    <p>The order of execution is not necessarily the order in which functions are defined! For
-      example, the last function that you write might be the first one that you call in the <c>main</c>
-      function.</p>
+    <p>
+      The order of execution is not necessarily the order in which functions
+      are defined. A function defined near the end of a program might be called
+      before another function defined above it.
+    </p>
   </note>
-  <p>Execution always begins at the first statement of <c>main</c>, regardless of where it is in the
-    program** (often it is at the bottom). Statements are executed one at a time, in order, until
-    you reach a function call. Function calls are like a detour in the flow of execution. Instead of
-    going to the next statement, you go to the first line of the called function, execute all the
-    statements there, and then come back and pick up again where you left off.</p>
-  <p>That sounds simple enough, except that you have to remember that one function can call another.
-    Thus, while we are in the middle of <c>main</c>, we might have to go off and execute the statements
-    in <c>three_line</c>. But while we are executing <c>three_line</c>, we get interrupted three times to go off and
-    execute <c>new_line</c>.</p>
-  <p>Fortunately, C++ is adept at keeping track of where it is, so each time <c>new_line</c> completes, the
-    program picks up where it left off in <c>three_line</c>, and eventually gets back to <c>main</c> so the
-    program can terminate.</p>
+
+  <p>
+    In the programs in this chapter, execution begins with the statements in
+    <c>main</c>. Statements execute one at a time, in order, until a function
+    call is reached. A function call temporarily transfers execution to the
+    called function. When that function finishes, execution returns to the
+    statement following the function call.
+  </p>
+
+  <p>
+    One function can also call another function. For example, while
+    <c>main</c> is executing, it might call <c>three_line</c>. While
+    <c>three_line</c> is executing, it can call <c>new_line</c> several
+    times. Each time <c>new_line</c> finishes, execution returns to
+    <c>three_line</c>. When <c>three_line</c> finishes, execution returns
+    to <c>main</c>.
+  </p>
+
+  <p>
+    C++ keeps track of where execution should return after each function call.
+    This allows functions to call other functions while the program still
+    continues from the correct place afterward.
+  </p>
+
   <activity label="multiple_functions_AC_1">
     <statement>
-      <p>This program calls the multiply_two and add_two functions in the
-        main. Follow the order of execution using the Codelens.</p>
-    <program label="multiple_functions_AC_1_editor" interactive="codelens" line-numbers="yes">
-      <code><![CDATA[
+      <p>
+        This program calls several functions from <c>main</c>. Follow the
+        order of execution using CodeLens.
+      </p>
+
+      <program label="multiple_functions_AC_1_editor"
+               interactive="codelens"
+               line-numbers="yes">
+        <code><![CDATA[
 #include <iostream>
 
+// Function declarations
+void print_total(int x);
+int multiply_two(int x);
+int add_two(int x);
+
+int main() {
+    int num = 3;
+
+    int new_num = multiply_two(num);
+    int newer_num = add_two(new_num);
+
+    print_total(newer_num);
+
+    return 0;
+}
+
+// Function definitions
 void print_total(int x) {
     std::cout << x << '\n';
 }
@@ -42,77 +84,107 @@ int add_two(int x) {
     int total = x + 2;
     return total;
 }
-
-int main() {
-    int num = 3;
-    int newNum = multiply_two(num);
-    int newerNum = add_two(newNum);
-    print_total(newerNum);
-    return 0;
-}
         ]]></code>
-    </program>
+      </program>
     </statement>
   </activity>
-  <p>What's the moral of this sordid tale? When you read a program, don't read from top to bottom.
-    Instead, <term>follow the flow of execution</term>.</p>
+
+  <p>
+    Notice that the function definitions appear after <c>main</c>, but their
+    declarations appear before <c>main</c>. As we learned in the previous
+    section, the compiler only needs to see a function declaration before the
+    function is called.
+  </p>
+
+  <p>
+    When reading a program with several functions, do not assume that execution
+    follows the top-to-bottom order of the source code. Instead,
+    <term>follow the flow of execution</term>, beginning with <c>main</c>
+    and following each function call.
+  </p>
+
   <exercise label="multiple_fun_1">
     <statement>
-      <p>Match the function to the order it is executed in the program above.</p>
+      <p>
+        Match each step with its position in the flow of execution for the
+        program above.
+      </p>
     </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
+
+    <feedback>
+      <p>Try again! Begin in <c>main</c> and follow each function call.</p>
+    </feedback>
+
     <cardsort>
       <match>
-        <premise order="1">multiply_two </premise>
-        <response> executes second</response>
+        <premise order="1"><c>main</c> begins</premise>
+        <response>executes first</response>
       </match>
+
       <match>
-        <premise order="2">print_total </premise>
-        <response> executes third</response>
+        <premise order="2"><c>multiply_two</c> is called</premise>
+        <response>executes second</response>
       </match>
+
       <match>
-        <premise order="3">main </premise>
-        <response> executes first</response>
+        <premise order="3"><c>print_total</c> is called inside <c>multiply_two</c></premise>
+        <response>executes third</response>
       </match>
+
       <match>
-        <premise order="4">add_two </premise>
-        <response> executes last</response>
+        <premise order="4"><c>add_two</c> is called</premise>
+        <response>executes fourth</response>
+      </match>
+
+      <match>
+        <premise order="5"><c>print_total</c> is called from <c>main</c></premise>
+        <response>executes fifth</response>
       </match>
     </cardsort>
   </exercise>
+
   <exercise label="multiple_fun_2">
     <statement>
-      <p>Consider the following C++ code. Note that line numbers are included
-        on the left.</p>
+      <p>
+        Consider the following C++ code. Note that line numbers are included
+        on the left.
+      </p>
+
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
 
+// Function declarations
+void new_line();
+void three_line();
+
+int main() {
+    std::cout << "First Line." << '\n';
+    three_line();
+    std::cout << "Second Line." << '\n';
+
+    return 0;
+}
+
+// Function definitions
 void new_line() {
-  std::cout << '\n';
+    std::cout << '\n';
 }
 
 void three_line() {
-  new_line ();
-  new_line ();
-  new_line ();
-}
-
-int main() {
-  std::cout << "First Line.
-";
-  three_line ();
-  std::cout << "Second Line.
-";
-  return 0;
+    new_line();
+    new_line();
+    new_line();
 }
 ]]></code>
       </program>
-      <p>Which of the following reflects the order in which these functions
-        are executed in C++?</p>
+
+      <p>
+        Which of the following reflects the order in which the functions
+        begin executing?
+      </p>
     </statement>
+
     <choices>
       <choice>
         <statement>
@@ -120,76 +192,100 @@ int main() {
             <c>new_line, three_line, main</c>
           </p>
         </statement>
-        <feedback><p>
-          Remember to follow the order of execution, which is not necessarily the order the
-            program is written.
-        </p></feedback>
+        <feedback>
+          <p>
+            Function definition order does not determine execution order.
+            Execution begins in <c>main</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
             <c>new_line, three_line, new_line, new_line, new_line, main</c>
           </p>
         </statement>
-        <feedback><p>
-          Remember to follow the order of execution, which is not necessarily the order the
-            program is written.
-        </p></feedback>
+        <feedback>
+          <p>
+            Execution begins in <c>main</c>, not with the first function
+            definition in the source file.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>
             <c>main, three_line, new_line, new_line, new_line</c>
           </p>
         </statement>
-        <feedback><p>
-          Execution begins in the main, then functions are executed as they are called.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. Execution begins in <c>main</c>. Then
+            <c>three_line</c> is called, and it calls <c>new_line</c>
+            three times.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
             <c>main, three_line</c>
           </p>
         </statement>
-        <feedback><p>
-          Note that <c>new_line</c> is called inside of <c>three_line</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>three_line</c> also calls <c>new_line</c> three times.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="multiple_fun_3">
     <statement>
       <p>Consider the following C++ code.</p>
+
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
 
+// Function declarations
+void yo();
+void hello();
+void goodbye();
+
+int main() {
+    std::cout << "welcome, ";
+    goodbye();
+
+    return 0;
+}
+
+// Function definitions
 void yo() {
-  std::cout << "yo, ";
+    std::cout << "yo, ";
 }
 
 void hello() {
-  std::cout << "hello, ";
-  yo();
-  yo();
+    std::cout << "hello, ";
+    yo();
+    yo();
 }
 
 void goodbye() {
-  yo();
-  hello();
-  std::cout << "goodbye,";
-}
-
-int main() {
-  std::cout << "welcome, ";
-  goodbye();
-  return 0;
+    yo();
+    hello();
+    std::cout << "goodbye,";
 }
 ]]></code>
       </program>
+
       <p>What is printed when the code is executed?</p>
     </statement>
+
     <choices>
       <choice>
         <statement>
@@ -197,41 +293,57 @@ int main() {
             <q>welcome, yo, hello, goodbye,</q>
           </p>
         </statement>
-        <feedback><p>
-          take into account <c>hello</c> also calls <c>yo</c> .
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>hello</c> calls <c>yo</c> twice, so those calls also
+            produce output.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
             <q>welcome, goodbye,</q>
           </p>
         </statement>
-        <feedback><p>
-          <c>goodbye</c> calls other functions that print output as well.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>goodbye</c> calls other functions before printing
+            <q>goodbye,</q>.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>
             <q>welcome, yo, hello, yo, yo, goodbye,</q>
           </p>
         </statement>
-        <feedback><p>
-          The order of calls and composition of <c>yo</c> in <c>hello</c> and both of those in <c>goodbye</c>
-            produce this output.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>main</c> prints first and calls <c>goodbye</c>.
+            <c>goodbye</c> calls <c>yo</c> and then <c>hello</c>, and
+            <c>hello</c> calls <c>yo</c> twice.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
             <q>yo, hello, yo, yo, goodbye,</q>
           </p>
         </statement>
-        <feedback><p>
-          Note that the <c>main</c> also prints something directly.
-        </p></feedback>
+        <feedback>
+          <p>
+            Before calling <c>goodbye</c>, <c>main</c> prints
+            <q>welcome, </q>.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </section>
