@@ -1,139 +1,253 @@
 <?xml version="1.0"?>
 <section xml:id="chapter3_converting-from-double-to-int">
   <title>Converting from <c>double</c> to <c>int</c></title>
-  <p>As I mentioned, C++ converts <c>int</c>'s to <c>double</c>'s automatically if necessary, because no
-    information is lost in the translation. On the other hand, going from a <c>double</c> to an <c>int</c>
-    requires truncating to the neareast integer toward zero. The implicit conversion is allowed but you'd lose the fractional part doing so. You, as the programmer, should be aware of the loss of the fractional part of the number.</p>
-  <p>The simplest way to convert a floating-point value to an integer is to use a <term>typecast</term>.
-    Typecasting is so called because it allows you to take a value that belongs to one type and <q>
-    cast</q> it into another type (in the sense of molding or reforming, not throwing).</p>
-  <p>The syntax for typecasting is like the syntax for a function call. For
-    example:</p>
-  <program>double pi = 3.14159;
-int x = int(pi);</program>
-  <p>The int function returns an integer, so x gets the value 3. Casting to an integer always truncates to the neareast integer toward zero even if the fraction part is
-    0.99999999.</p>
-  <p>For every type in C++, there is a corresponding function that typecasts
-    its argument to the appropriate type. However, modern C++ standard recommends using static_cast function like below. Note that the type we are casting into must go between &lt;&gt;. We will learn more on &lt;int&gt; kind of notations later in the book.</p>
-<program>int x = static_cast&lt;int&gt;(pi);</program>	
+
+  <p>
+    As we saw in the previous section, C++ can automatically convert an
+    <c>int</c> value to a <c>double</c> when needed. For example,
+    the integer value <c>3</c> can be converted to the floating-point
+    value <c>3.0</c>.
+  </p>
+
+  <p>
+    Converting in the other direction, from <c>double</c> to
+    <c>int</c>, can lose information because an <c>int</c> cannot store
+    a fractional part. When a floating-point value is converted to an
+    integer, the fractional part is discarded. This is also described as
+    truncating toward zero.
+  </p>
+
+  <p>
+    C++ allows this conversion implicitly in some situations, but when you
+    intend to convert a value explicitly, it is clearer to say so in the
+    code. In modern C++, we will use <c>static_cast</c>.
+  </p>
+
+  <p>
+    For example:
+  </p>
+
+  <program>
+double pi = 3.14159;
+int x = static_cast&lt;int&gt;(pi);
+  </program>
+
+  <p>
+    The expression <c>static_cast&lt;int&gt;(pi)</c> explicitly converts
+    the value stored in <c>pi</c> to an <c>int</c>. The fractional part
+    is discarded, so <c>x</c> receives the value <c>3</c>.
+  </p>
+
+  <p>
+    The type we want to convert to appears between the angle brackets
+    <c>&lt;</c> and <c>&gt;</c>. We will see this kind of syntax again
+    later in the course.
+  </p>
+
+  <p>
+    Notice that truncation is not the same as rounding. For example:
+  </p>
+
+  <program>
+int a = static_cast&lt;int&gt;(7.99999999);
+int b = static_cast&lt;int&gt;(-7.99999999);
+  </program>
+
+  <p>
+    The value of <c>a</c> is <c>7</c>, and the value of <c>b</c> is
+    <c>-7</c>. In both cases, the fractional part is discarded, which
+    means the result moves toward zero.
+  </p>
+
+
   <exercise label="double_to_int_1">
     <statement>
-      <p>In the lab, we measured a temperature of 7.99999999 degrees C, using
-        an extremely precise measuring device. Now we are writing a program
-        to perform some calculations with our data. Consider the following C++
-        code.</p>
-      <program>int main() {
-  double temp = 7.99999999;
-  int rounded_temp = int(temp);
-  std::cout &lt;&lt; rounded_temp;
+      <p>
+        Consider the following C++ code:
+      </p>
+
+      <program>#include &lt;iostream&gt;
+
+int main() {
+    double temp = 7.99999999;
+    int truncated_temp = static_cast&lt;int&gt;(temp);
+
+    std::cout &lt;&lt; truncated_temp &lt;&lt; '\n';
+
+    return 0;
 }</program>
-      <p>What is the value of rounded_temp?</p>
+
+      <p>
+        What value is printed?
+      </p>
     </statement>
+
     <choices>
       <choice>
         <statement>
-          <p>temp</p>
+          <p><c>temp</c></p>
         </statement>
-        <feedback><p>
-          This is the name of a variable. Only the value of a variable will print with cout.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>temp</c> is the variable name. The program prints the value
+            stored in <c>truncated_temp</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>8</p>
+          <p><c>8</c></p>
         </statement>
-        <feedback><p>
-          Remember that converting to an integer always truncates to the neareast integer toward zero.
-        </p></feedback>
+        <feedback>
+          <p>
+            Converting to <c>int</c> does not round to the nearest integer.
+            The fractional part is discarded.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>7</p>
+          <p><c>7</c></p>
         </statement>
-        <feedback><p>
-          Correct!
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. Converting <c>7.99999999</c> to <c>int</c> discards
+            the fractional part, producing <c>7</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>8.0</p>
+          <p><c>8.0</c></p>
         </statement>
-        <feedback><p>
-          This is not an integer data type, and it's not the right number.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>truncated_temp</c> has type <c>int</c>, and the conversion
+            produces <c>7</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>7.0</p>
+          <p><c>7.0</c></p>
         </statement>
-        <feedback><p>
-          This is not an integer data type.
-        </p></feedback>
+        <feedback>
+          <p>
+            The numeric value is based on <c>7</c>, but
+            <c>truncated_temp</c> has type <c>int</c>.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
   <exercise label="double_to_int_2">
     <statement>
-      <p>Your final grade consists of your average performance on exam 1 and exam 2.
-        Your professor is using C++ to grade the exams and allows you to choose which
-        method you'd like your exam to be graded.</p>
-      <program>double exam1 = 88.8;
+      <p>
+        Consider these exam scores:
+      </p>
+
+      <program>
+double exam1 = 88.8;
 double exam2 = 72.7;
-double exam3 = 97.9;</program>
+double exam3 = 97.9;
+      </program>
+
+      <p>
+        Compare the following two calculations:
+      </p>
+
       <p>
         <term>Method 1:</term>
       </p>
+
       <program>
-double final = (int(exam1) + int(exam2) + int(exam3)) / 3;
-</program>
+int final1 =
+    (static_cast&lt;int&gt;(exam1)
+    + static_cast&lt;int&gt;(exam2)
+    + static_cast&lt;int&gt;(exam3)) / 3;
+      </program>
+
       <p>
         <term>Method 2:</term>
       </p>
+
       <program>
-int final = int((exam1 + exam2 + exam3) / 3);
-</program>
-      <p>Which method would <term>you</term> choose and why?</p>
+int final2 =
+    static_cast&lt;int&gt;((exam1 + exam2 + exam3) / 3.0);
+      </program>
+
+      <p>
+        Which statement is correct?
+      </p>
     </statement>
+
     <choices>
       <choice>
         <statement>
-          <p><term>Method 1:</term><c>final</c> is a <c>double</c>, meaning my final grade will have more
-            digits past the decimal, and will be higher than the <c>int</c> in Method 2.</p>
+          <p>
+            Method 1 gives the larger result because each individual score
+            is converted to <c>int</c> first.
+          </p>
         </statement>
-        <feedback><p>
-          Although <c>final</c> is a <c>double</c>, it doesn't have any digits past the decimal due to the
-            integer division.
-        </p></feedback>
+        <feedback>
+          <p>
+            Converting each score first discards each fractional part before
+            the average is computed.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p><term>Method 1:</term> the rounding happens at the beginning, so all three of my test
-            scores will be truncated to the neareast integer toward zero <c>int</c>, which in my case, will truncated them
-            up.</p>
+          <p>
+            Method 1 and Method 2 always produce the same result.
+          </p>
         </statement>
-        <feedback><p>
-          Converting to an <c>int</c> always truncated to the neareast integer toward zero, even if your <c>double</c> is very
-            close to the next integer.
-        </p></feedback>
+        <feedback>
+          <p>
+            Converting before a calculation can produce a different result
+            from converting after the calculation.
+          </p>
+        </feedback>
       </choice>
-      <choice>
-        <statement>
-          <p><term>Method 2:</term><c>final</c> is an <c>int</c>, so it gets truncated to he neareast integer up.</p>
-        </statement>
-        <feedback><p>
-          Converting to an <c>int</c> always truncated to the neareast integer toward zero, even if your <c>double</c> is very
-            close to the next integer.
-        </p></feedback>
-      </choice>
+
       <choice correct="yes">
         <statement>
-          <p><term>Method 2:</term> the truncating happens at the very end, so my grade will be
-            higher!</p>
+          <p>
+            Method 2 gives the larger result because the fractional parts are
+            kept while the average is calculated, and the conversion to
+            <c>int</c> happens only at the end.
+          </p>
         </statement>
-        <feedback><p>
-          Always save your truncating until the end!
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. Method 1 first changes the scores to
+            <c>88</c>, <c>72</c>, and <c>97</c>. Method 2 keeps the
+            fractional parts until after the average has been calculated.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>
+            Method 2 rounds the average to the nearest integer.
+          </p>
+        </statement>
+        <feedback>
+          <p>
+            <c>static_cast&lt;int&gt;</c> does not round to the nearest
+            integer. It discards the fractional part.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </section>

@@ -1,189 +1,304 @@
-<?xml version="1.0" ?><section xml:id="chapter3_math-functions">
+<?xml version="1.0"?>
+<section xml:id="chapter3_math-functions">
   <title>Math Functions</title>
-  <p>In mathematics, you have probably seen functions like <m>\sin</m> and <m>\log</m>,
-    and you have learned to evaluate expressions like <m>\sin(\pi/2)</m> and <m>\log(1/x)</m>.
-    First, you evaluate the expression in parentheses, which is called the argument of the function.
-    For example, <m>\pi/2</m> is approximately 1.571, and <m>1/x</m> is 0.1 (if <m>x</m>
-    happens to be 10).</p>
-  <p>Then you can evaluate the function itself, either by looking it up in a table or by performing
-    various computations. The <m>\sin</m> of 1.571 is 1, and the <m>\log</m> of 0.1 is
-    -1 (assuming that <m>\log</m> indicates the logarithm base 10).</p>
-  <p>This process can be applied repeatedly to evaluate more complicated expressions like <m>
-    \log(1/\sin(\pi/2))</m>. First we evaluate the argument of the innermost function, then
-    evaluate the function, and so on.</p>
-  <p>C++ provides a math library that includes most of the
-    mathematical operations you can think of. The math functions are invoked
-    using a syntax that is similar to mathematical notation:</p>
+
+  <p>
+    In mathematics, you have probably seen functions such as
+    <m>\sin</m> and <m>\log</m>, and you have learned to evaluate
+    expressions such as <m>\sin(\pi/2)</m> and <m>\log(1/x)</m>.
+    First, you evaluate the expression inside the parentheses, which is
+    called the argument of the function. For example, <m>\pi/2</m> is
+    approximately 1.571, and <m>1/x</m> is 0.1 if <m>x</m> is 10.
+  </p>
+
+  <p>
+    Then you evaluate the function itself. For example,
+    <m>\sin(\pi/2)</m> is 1. If <m>\log</m> means logarithm base 10,
+    then <m>\log(0.1)</m> is -1.
+  </p>
+
+  <p>
+    This process can be applied repeatedly to evaluate more complicated
+    expressions such as <m>\log(1/\sin(\pi/2))</m>. We begin with the
+    innermost expression and work outward.
+  </p>
+
+  <p>
+    The C++ standard library provides many mathematical functions through
+    the <c>&lt;cmath&gt;</c> header. Function calls use syntax similar
+    to mathematical notation.
+  </p>
+
   <listing label="math_functions_AC_1">
     <title>
-      This program performs calculations using some of the built-in functions
-        from the cmath library.
+      This program performs calculations using standard-library functions
+      from <c>&lt;cmath&gt;</c>.
     </title>
-    <program interactive="activecode" line-numbers="yes" label="math_functions_AC_1_editor">
+
+    <program interactive="activecode"
+             line-numbers="yes"
+             label="math_functions_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
 
 int main() {
     double result = std::log(17.0);
+
     double angle = 1.5;
     double height = std::sin(angle);
+
     std::cout << result << '\n';
     std::cout << angle << '\n';
     std::cout << height << '\n';
+
     return 0;
 }
-        ]]></code>
+      ]]></code>
     </program>
   </listing>
-  <p>The first example sets log to the logarithm of 17, base <m>e</m>. There is also a
-    function called <c>log10</c> that takes logarithms base 10.</p>
-  <p>The second example finds the sine of the value of the variable angle. C++ assumes that the
-    values you use with <c>sin</c> and the other trigonometric functions (<c>cos</c>, <c>tan</c>) are in <em>
-    radians</em>.</p>
+
+  <p>
+    The call <c>std::log(17.0)</c> computes the natural logarithm of
+    <c>17.0</c>, which uses base <m>e</m>. The function
+    <c>std::log10</c> computes a logarithm using base 10.
+  </p>
+
+  <p>
+    The call <c>std::sin(angle)</c> computes the sine of the value stored
+    in <c>angle</c>. C++ trigonometric functions such as
+    <c>std::sin</c>, <c>std::cos</c>, and <c>std::tan</c> use angles
+    measured in <term>radians</term>.
+  </p>
+
   <note>
-    <p>To convert from degrees to radians, you can divide by 360 and multiply
-      by 2 * pi.</p>
+    <p>
+      To convert an angle from degrees to radians, multiply by pi and
+      divide by 180:
+      <c>radians = degrees * pi / 180.0</c>.
+    </p>
   </note>
-  <p>If you don't happen to know <m>\pi</m> to 15 digits, you can calculate it using the <c>acos</c>
-    function. The arccosine (or inverse cosine) of -1 is <m>\pi</m>, because the cosine of <m>
-    \pi</m> is -1.</p>
+
+  <p>
+    If you need an accurate value for <m>\pi</m>, you can calculate it
+    using <c>std::acos</c>. The arccosine, or inverse cosine, of
+    <c>-1.0</c> is <m>\pi</m>.
+  </p>
+
   <listing label="math_functions_AC_2">
     <title>
-      This program also uses built-in functions from the cmath library,
-        specifically the functions that deal with angles. As you can see,
-        we have a line of code that converts the default radians value to
-        degrees.
+      This program calculates pi and converts an angle from degrees to
+      radians.
     </title>
-    <program interactive="activecode" line-numbers="yes" label="math_functions_AC_2_editor">
+
+    <program interactive="activecode"
+             line-numbers="yes"
+             label="math_functions_AC_2_editor">
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
 
 int main() {
     double pi = std::acos(-1.0);
-    double degrees = 90;
-    double angle = degrees * 2 * pi / 360.0;
+
+    double degrees = 90.0;
+    double radians = degrees * pi / 180.0;
+
     std::cout << pi << '\n';
     std::cout << degrees << '\n';
-    std::cout << angle << '\n';
+    std::cout << radians << '\n';
+
     return 0;
 }
-        ]]></code>
+      ]]></code>
     </program>
   </listing>
-  <p>Before you can use any of the math functions, you have to include the math header file. <term>Header
-    files</term> contain information the compiler needs about functions that are defined outside
-    your program. For example, in the <q>Hello, world!</q> program we included a header file named
-    iostream using an <term>include</term> statement:</p>
-  <program>#include &lt;iostream&gt;
-</program>
-  <p><url href="https://en.cppreference.com/w/cpp/header/iostream">
-    iostream</url> contains information about input and output (I/O) streams, including the object named <c>cout</c>.
-    C++ has a powerful feature called namespaces, that allow you to write your own implementation of
-    cout. But in most cases, we would need to use the standard implementation of cout which your explisitly get using std::cout.</p>
+
+  <p>
+    Before using a standard-library facility, include the header that
+    declares it. For example, <c>&lt;iostream&gt;</c> provides the
+    declarations needed for stream input and output, including
+    <c>std::cout</c>:
+  </p>
+
   <program>
-</program>
+#include &lt;iostream&gt;
+  </program>
+
+  <p>
+    Standard-library names are generally placed in the
+    <c>std</c> namespace. That is why we write <c>std::cout</c> rather
+    than simply <c>cout</c>.
+  </p>
+
   <note>
-<p>As a rule of thumb, qualify standard-library names with the <c>std::</c> prefix when you use facilities from headers such as <c>iostream</c>.</p>  </note>
-  <p>Similarly, the <url href="https://en.cppreference.com/w/cpp/header/cmath">
-      cmath</url> header file contains information about the math
-    functions. You can include it at the beginning of your program along
-    with iostream:</p>
+    <p>
+      In this course, qualify standard-library names with the
+      <c>std::</c> prefix rather than using
+      <c>using namespace std;</c>.
+    </p>
+  </note>
+
+  <p>
+    Similarly, mathematical functions such as <c>std::sin</c>,
+    <c>std::log</c>, and <c>std::sqrt</c> are declared by
+    <c>&lt;cmath&gt;</c>:
+  </p>
+
   <program>
 #include &lt;cmath&gt;
-</program>
-  <note><p><term>cmath</term> is one of a number of header files that start with ‘c' to signify that
-    they are derived from similar header files in the <term>C</term> language. In <term>C</term> the math
-    library is named <c>math.h</c>. In <term>C++</term> you should always use the version of the library
-    that starts with 'c' as opposed to the one that ends with '.h'.</p></note>
+  </program>
+
+  <note>
+    <p>
+      The C++ header <c>&lt;cmath&gt;</c> is related to the older C header
+      <c>&lt;math.h&gt;</c>. In C++ programs, prefer
+      <c>&lt;cmath&gt;</c> and the corresponding
+      <c>std::</c>-qualified function names.
+    </p>
+  </note>
+
+
   <exercise label="dnd1">
     <statement>
-      <p>Match the statement to its description.</p>
+      <p>
+        Match each item with its description.
+      </p>
     </statement>
-    <feedback><p>This is feedback.</p></feedback>
+
+    <feedback>
+      <p>Try again.</p>
+    </feedback>
+
     <cardsort>
       <match>
-        <premise order="1">cmath</premise>
-        <response>allows the use of functions like log and sin</response>
+        <premise order="1">&lt;cmath&gt;</premise>
+        <response>
+          declares standard-library mathematical functions such as
+          std::log and std::sin
+        </response>
       </match>
+
       <match>
-        <premise order="2">iostream</premise>
-        <response>contains information about input and output streams</response>
+        <premise order="2">&lt;iostream&gt;</premise>
+        <response>
+          declares facilities for stream input and output, including
+          std::cout
+        </response>
       </match>
+
       <match>
-        <premise order="3">namespace std</premise>
-        <response>provides the standard implementation of cout</response>
+        <premise order="3">std</premise>
+        <response>
+          the namespace containing many names from the C++ standard library
+        </response>
       </match>
     </cardsort>
   </exercise>
+
+
   <exercise label="math_functions_2">
     <statement>
-      <p>What are the units used by sinusoidal functions (sin, asin, e.t.c.) in C++? <fillin answer="radians?"/>
+      <p>
+        What unit of angle is used by C++ trigonometric functions such as
+        <c>std::sin</c> and <c>std::cos</c>?
+        <fillin mode="string" answer="radians"/>
       </p>
     </statement>
+
     <evaluation>
       <evaluate>
         <test correct="yes">
           <strcmp use-answer="yes" case="insensitive"/>
           <feedback>
-            If you need to convert to degrees, just multiply by 360 and divide by 2pi.
+            Correct. C++ trigonometric functions use radians.
           </feedback>
         </test>
+
         <test>
-          <strcmp>degrees?</strcmp>
+          <strcmp case="insensitive">degrees</strcmp>
           <feedback>
-            This is a unit sometimes used for sinusoidal functions, but not the one used by C++.
+            Degrees are commonly used to measure angles, but C++
+            trigonometric functions use radians.
+          </feedback>
+        </test>
+
+        <test>
+          <strcmp>.*</strcmp>
+          <feedback>
+            Review the unit expected by functions such as
+            <c>std::sin</c> and <c>std::cos</c>.
           </feedback>
         </test>
       </evaluate>
     </evaluation>
   </exercise>
+
+
   <exercise label="math_functions_3">
     <statement>
-      <p><term>Multiple Response</term> Select all correct cmath functions.</p>
+      <p>
+        <term>Multiple Response</term> Select all valid standard-library
+        functions declared by <c>&lt;cmath&gt;</c>.
+      </p>
     </statement>
+
     <choices>
       <choice correct="yes">
         <statement>
-          <p>
-            <c>cos</c>
-          </p>
+          <p><c>std::cos</c></p>
         </statement>
-        <feedback><p>This function computes the cosine of an angle.</p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>std::cos</c> computes the cosine of an angle.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>arctan</c>
-          </p>
+          <p><c>std::arctan</c></p>
         </statement>
-        <feedback><p>The arc tangent function is actually called <c>atan</c>.</p></feedback>
+        <feedback>
+          <p>
+            The inverse tangent function is named <c>std::atan</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>
-            <c>log10</c>
-          </p>
+          <p><c>std::log10</c></p>
         </statement>
-        <feedback><p>This function computes the common logarithm.</p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>std::log10</c> computes a base-10 logarithm.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>
-            <c>pow</c>
-          </p>
+          <p><c>std::pow</c></p>
         </statement>
-        <feedback><p>This function raises an expression to a power.</p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>std::pow</c> raises a value to a power.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>ln</c>
-          </p>
+          <p><c>std::ln</c></p>
         </statement>
-        <feedback><p>The natural log function is actually called <c>log</c>.</p></feedback>
+        <feedback>
+          <p>
+            The natural logarithm function is named <c>std::log</c>.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </section>

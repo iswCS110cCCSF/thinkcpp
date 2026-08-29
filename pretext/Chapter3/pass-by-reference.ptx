@@ -158,7 +158,7 @@ y = 3
       For now, you only need to recognize and use <c>&amp;</c> in a
       parameter declaration to create a reference parameter. We will study
       references in more detail, along with memory addresses and pointers,
-      later in the course.
+      in later chapters.
     </p>
   </note>
 

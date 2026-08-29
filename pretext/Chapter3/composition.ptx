@@ -1,36 +1,73 @@
-<?xml version="1.0" ?><section xml:id="chapter3_composition">
+<?xml version="1.0"?>
+<section xml:id="chapter3_composition">
   <title>Composition</title>
-  <p>Just as with mathematical functions, C++ functions can be <term>composed</term>, meaning that
-    you use one expression as part of another. For example, you can use any expression as an
-    argument to a function:</p>
+
+  <p>
+    Just as with mathematical functions, C++ functions can be
+    <term>composed</term>. This means using one expression or function
+    result as part of another expression.
+  </p>
+
+  <p>
+    For example, an expression can be used directly as an argument to a
+    function:
+  </p>
+
   <program>
-double x = std::cos(angle + pi / 2);
-</program>
-  <p>This statement takes the value of pi, divides it by two and adds the result to the value of
-    angle. The sum is then passed as an argument to the <c>cos</c> function.</p>
-  <p>You can also take the result of one function and pass it as an argument
-    to another:</p>
+double x = std::cos(angle + pi / 2.0);
+  </program>
+
+  <p>
+    First, <c>pi / 2.0</c> is evaluated and added to <c>angle</c>.
+    The resulting value is then passed as the argument to
+    <c>std::cos</c>.
+  </p>
+
+  <p>
+    You can also use the result returned by one function as the argument
+    to another function:
+  </p>
+
   <listing label="function_comp_AC_1">
     <title>
-      This program finds the log base e of 10 and raises e to that power. The
-        result of this computation is assigned to x.
+      This program computes the natural logarithm of 10 and then passes
+      that result to <c>std::exp</c>.
     </title>
-    <program interactive="activecode" line-numbers="yes" label="function_comp_AC_1_editor">
+
+    <program interactive="activecode"
+             line-numbers="yes"
+             label="function_comp_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
 #include <cmath>
 
 int main() {
     double x = std::exp(std::log(10.0));
-    std::cout << x;
+
+    std::cout << x << '\n';
+
+    return 0;
 }
-        ]]></code>
+      ]]></code>
     </program>
   </listing>
+
+  <p>
+    The inner call <c>std::log(10.0)</c> is evaluated first. Its return
+    value becomes the argument to <c>std::exp</c>. Since
+    <c>std::exp</c> raises <m>e</m> to the given power, the result is
+    approximately <c>10</c>.
+  </p>
+
+
   <exercise label="function_comp_1">
     <statement>
-      <p>Which of these statements has proper syntax?</p>
+      <p>
+        Which of these statements has correct C++ syntax and uses valid
+        standard-library functions from <c>&lt;cmath&gt;</c>?
+      </p>
     </statement>
+
     <choices>
       <choice>
         <statement>
@@ -38,48 +75,66 @@ int main() {
             <c>double x = std::log6(12);</c>
           </p>
         </statement>
-        <feedback><p>
-          <c>log6</c> is not a built in cmath function, but you could write an implementation for it
-            if you wanted!
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>std::log6</c> is not a standard-library function.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>
             <c>double val = std::abs(std::tan(1.57));</c>
           </p>
         </statement>
-        <feedback><p>
-          This correctly uses cmath functions!
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. The result of <c>std::tan(1.57)</c> is passed as the
+            argument to <c>std::abs</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
             <c>double num = std::exp(std::cosine(0.86667));</c>
           </p>
         </statement>
-        <feedback><p>
-          <c>cosine</c> is not a built in cmath function, but <c>cos</c> is!
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>std::cosine</c> is not a standard-library function.
+            The cosine function is named <c>std::cos</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
             <c>double y = std::exp(std::cos(1.047)) + std::exp(std::tan(2.094))</c>
           </p>
         </statement>
-        <feedback><p>
-          This would be correct if it ended in a semi-colon.
-        </p></feedback>
+        <feedback>
+          <p>
+            The function calls are valid, but the statement is missing
+            a semicolon.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
   <exercise label="function_comp_2">
     <statement>
-      <p>Which of these statements returns the y-component of the unit
-        vector at 330 degrees?</p>
+      <p>
+        Which statement computes the y-component of a unit vector at
+        330 degrees? Assume <c>pi</c> has already been defined.
+      </p>
     </statement>
+
     <choices>
       <choice>
         <statement>
@@ -87,50 +142,70 @@ int main() {
             <c>y = std::cos(330);</c>
           </p>
         </statement>
-        <feedback><p>
-          You must always convert to radians before using sinusoidal functions.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>std::cos</c> gives the x-component, and C++ trigonometric
+            functions expect angles in radians.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
-            <c>y = std::cos(330 * 2 * pi / 360);</c>
+            <c>y = std::cos(330 * pi / 180.0);</c>
           </p>
         </statement>
-        <feedback><p>
-          <c>cos</c> will return the x-component.
-        </p></feedback>
+        <feedback>
+          <p>
+            The angle is converted correctly, but <c>std::cos</c> gives
+            the x-component of the unit vector.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
             <c>y = std::sin(330);</c>
           </p>
         </statement>
-        <feedback><p>
-          You must always convert to radians before using sinusoidal functions.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>std::sin</c> gives the y-component, but the angle must be
+            converted from degrees to radians first.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>
-            <c>y = std::sin(330 * 2 * pi / 360);</c>
+            <c>y = std::sin(330 * pi / 180.0);</c>
           </p>
         </statement>
-        <feedback><p>
-          <c>sin</c> returns the y-component, <c>cos</c> returns the x-component.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>std::sin</c> gives the y-component, and
+            <c>330 * pi / 180.0</c> converts 330 degrees to radians.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
-            <c>y = std::tan(330 * 2 * pi / 360);</c>
+            <c>y = std::tan(330 * pi / 180.0);</c>
           </p>
         </statement>
-        <feedback><p>
-          <c>tan</c> is not the proper function to use here.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>std::tan</c> does not directly give the y-component of a
+            unit vector.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </section>

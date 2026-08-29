@@ -1,242 +1,435 @@
-<?xml version="1.0" ?><section xml:id="chapter3_adding-new-functions">
+<?xml version="1.0"?>
+<section xml:id="chapter3_adding-new-functions">
   <title>Adding New Functions</title>
-  <p>So far we have only been using the functions that are built into C++, but it is also possible
-    to add new functions. Actually, we have already seen one function definition: <c>main</c>. The
-    function named <c>main</c> is special because it indicates where the execution of the program
-    begins, but the syntax for <c>main</c> is the same as for any other function definition:</p>
-  <program>void NAME( LIST OF PARAMETERS ) {
-  STATEMENTS
-}</program>
-  <p>You can make up any name you want for your function, except that you can't call it <c>main</c> or
-    any other C++ keyword. The list of parameters specifies what information – if any
-    – you have to provide in order to use, or <term>call</term>, the new function.</p>
-  <p><c>main</c> doesn't take any parameters, as indicated by the empty parentheses() in it's
-    definition. The first couple of functions we are going to write also have no parameters, so the
-    syntax looks like this:</p>
-  <program>void new_line(){
-  std::cout &lt;&lt; '\n';
-}</program>
-  <p>This function is named <c>new_line</c>; it contains only a single statement, which outputs a new line
-    character.</p>
-  <p>The first word of the header is the <q>return type</q>: <term>void</term> returns nothing; <term>
-    int</term> returns an int; <term>double</term> returns a double; <term>std::string</term> returns a
-    string;</p>
-  <p>In <c>main</c> we can call this new function using syntax that is similar to the way we call the
-    C++ math library functions like std::sin :</p>
-  <program>int main(){
-  std::cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; '\n';
-  new_line();
-  std::cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; '\n';
-  return 0;
-}</program>
-  <p>The output of this program is</p>
-  <program>First line.
 
-Second line.</program>
-  <p>Notice the extra space between the two lines. What if we wanted more
-    space between the lines? We could call the same function repeatedly:</p>
-  <program>int main(){
-  std::cout &lt;&lt; &quot;First Line.&quot; &lt;&lt; '\n';
-  new_line();
-  new_line();
-  new_line();
-  std::cout &lt;&lt; &quot;Second Line.&quot; &lt;&lt; '\n';
-  return 0;
+  <p>
+    So far, we have called functions provided by the C++ standard library,
+    such as <c>std::sin</c>. C++ also allows us to define our own
+    functions. In fact, we have already seen one function:
+    <c>main</c>.
+  </p>
+
+  <p>
+    The function <c>main</c> is special because program execution begins
+    there. Other functions are executed only when they are
+    <term>called</term>.
+  </p>
+
+  <p>
+    A function definition has this general form:
+  </p>
+
+  <program>
+RETURN_TYPE FUNCTION_NAME(PARAMETER_LIST) {
+    STATEMENTS
+}
+  </program>
+
+  <p>
+    The first line of a function definition is called the
+    <term>function header</term>. It contains the function's return type,
+    name, and parameter list.
+  </p>
+
+  <p>
+    A function name is an identifier, so it must follow the C++ identifier
+    rules you learned earlier. It also cannot be a C++ keyword. In this
+    course, we will use meaningful <c>snake_case</c> names for functions.
+  </p>
+
+  <p>
+    The parameter list specifies what information, if any, the caller must
+    provide to the function. A function that does not need any information
+    from its caller has an empty parameter list:
+  </p>
+
+  <program>
+void new_line() {
+    std::cout &lt;&lt; '\n';
+}
+  </program>
+
+  <p>
+    This function is named <c>new_line</c>. Its parameter list is empty,
+    and its body contains one statement that prints a newline character.
+  </p>
+
+  <p>
+    The word <c>void</c> is the function's <term>return type</term>.
+    A function with return type <c>void</c> does not return a value to
+    its caller. Later in this chapter, we will write functions with return
+    types such as <c>int</c> and <c>double</c> that do return values.
+  </p>
+
+  <p>
+    To use <c>new_line</c> from <c>main</c>, we call it by writing its
+    name followed by parentheses:
+  </p>
+
+  <program>#include &lt;iostream&gt;
+
+void new_line();
+
+int main() {
+    std::cout &lt;&lt; "First Line." &lt;&lt; '\n';
+    new_line();
+    std::cout &lt;&lt; "Second Line." &lt;&lt; '\n';
+
+    return 0;
+}
+
+void new_line() {
+    std::cout &lt;&lt; '\n';
 }</program>
-  <p>Or we could write a new function, named <c>three_line</c>, that prints three new lines:</p>
+
+  <p>
+    The line
+  </p>
+
+  <program>
+new_line();
+  </program>
+
+  <p>
+    is a <term>function call</term>. When the call is reached,
+    <c>new_line</c> executes and then control returns to
+    <c>main</c>.
+  </p>
+
+  <p>
+    The output is:
+  </p>
+
+  <program language="text">
+    <code>First Line.
+
+Second Line.</code>
+  </program>
+
+  <p>
+    A function can be called more than once. For example:
+  </p>
+
+  <program>#include &lt;iostream&gt;
+
+void new_line();
+
+int main() {
+    std::cout &lt;&lt; "First Line." &lt;&lt; '\n';
+
+    new_line();
+    new_line();
+    new_line();
+
+    std::cout &lt;&lt; "Second Line." &lt;&lt; '\n';
+
+    return 0;
+}
+
+void new_line() {
+    std::cout &lt;&lt; '\n';
+}</program>
+
+  <p>
+    One function can also call another function. For example, we can write
+    a function named <c>three_line</c> that calls <c>new_line</c> three
+    times.
+  </p>
+
   <listing label="new_functions_AC_1">
     <title>
-      Here we define the three_line function, which calls the new_line function three times. The
-        result is a function that prints three lines after it is called (each of those empty lines
-        begins with a <q>*</q>).
+      This program shows one user-defined function calling another.
     </title>
-    <program interactive="activecode" line-numbers="yes" label="new_functions_AC_1_editor">
+
+    <program interactive="activecode"
+             line-numbers="yes"
+             label="new_functions_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
 
-void new_line(){
-    std::cout << '*' << '\n';
-}
-
-void three_line(){
-    new_line();  new_line();  new_line();
-}
+void new_line();
+void three_line();
 
 int main() {
-    std::cout << "First Line. ";
+    std::cout << "First Line." << '\n';
+
     three_line();
-    std::cout << "Second Line. ";
+
+    std::cout << "Second Line." << '\n';
+
     return 0;
 }
-        ]]></code>
+
+void new_line() {
+    std::cout << '\n';
+}
+
+void three_line() {
+    new_line();
+    new_line();
+    new_line();
+}
+      ]]></code>
     </program>
   </listing>
-  <p>You should notice a few things about this program:</p>
+
   <p>
-    <ul>
-      <li>
-        <p>You can call the same procedure repeatedly. In fact, it is quite
-          common and useful to do so.</p>
-      </li>
-      <li>
-        <p>You can have one function call another function. In this case, <c>main</c> calls <c>three_line</c> and
-          three_line calls <c>new_line</c>. Again, this is common and useful.</p>
-      </li>
-      <li>
-        <p>In <c>three_line</c> I wrote three statements all on the same line, which is syntactically legal
-          (remember that spaces and new lines usually don't change the meaning of a program). On the
-          other hand, <term>it is usually a
-            better idea to put each statement on a line by itself</term>, to make your program easy
-          to read. I sometimes break that rule in this book to save space.</p>
-      </li>
-    </ul>
+    Notice several things about this program:
   </p>
+
+  <ul>
+    <li>
+      <p>
+        The same function can be called many times.
+      </p>
+    </li>
+
+    <li>
+      <p>
+        One function can call another function. Here, <c>main</c> calls
+        <c>three_line</c>, and <c>three_line</c> calls
+        <c>new_line</c>.
+      </p>
+    </li>
+
+    <li>
+      <p>
+        Each statement is written on its own line. C++ often permits
+        multiple statements on one line, but placing one statement per line
+        usually makes the program easier to read.
+      </p>
+    </li>
+  </ul>
+
   <note>
-    <p>In general, you'll want to write your code so that it is easy for others
-      to follow. This is especially important if you choose computer science
-      as a career!</p>
+    <p>
+      Write code so that its organization is clear to another programmer,
+      not just to the compiler.
+    </p>
   </note>
-  <p>So far, it may not be clear why it is worth the trouble to create all
-    these new functions. Actually, there are a lot of reasons, but this
-    example only demonstrates two:</p>
+
   <p>
-    <ol>
-      <li>
-        <p>Creating a new function gives you an opportunity to give a name to a group of statements.
-          Functions can simplify a program by hiding a complex computation behind a single command(the name of the function),
-          and by using English words in place of arcane code. Which is clearer, <c>new_line</c> or <c>std::cout '\n';</c>?</p>
-      </li>
-      <li>
-        <p>Creating a new function can make a program smaller by eliminating
-          repetitive code. For example, a short way to print nine consecutive
-          new lines is to call three_line three times. How would you print 27
-          new lines?</p>
-      </li>
-    </ol>
+    Creating functions is useful for several reasons:
   </p>
+
+  <ol>
+    <li>
+      <p>
+        A function gives a meaningful name to a group of statements.
+        Instead of thinking about the individual output statement each time,
+        we can call <c>new_line()</c> and think about the action it
+        performs.
+      </p>
+    </li>
+
+    <li>
+      <p>
+        Functions reduce repeated code. For example,
+        <c>three_line()</c> represents three calls to
+        <c>new_line()</c>. If the same action is needed again, we can call
+        <c>three_line()</c> rather than rewriting those statements.
+      </p>
+    </li>
+
+    <li>
+      <p>
+        Functions help break a larger program into smaller pieces that are
+        easier to understand, test, and reuse.
+      </p>
+    </li>
+  </ol>
+
+
   <exercise label="new_functions_mc_1">
     <statement>
-      <p>Which of these statements is false about functions?</p>
+      <p>
+        Which statement about functions is false?
+      </p>
     </statement>
+
     <choices>
       <choice correct="yes">
         <statement>
-          <p>You can name a function anything you want.</p>
+          <p>
+            A function can be given any name, including a C++ keyword.
+          </p>
         </statement>
-        <feedback><p>
-          You can't name a function the same name as a reserved keyword.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. A function name is an identifier and cannot be a C++
+            keyword.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>You can have a function with several parameters or a function with none.</p>
+          <p>
+            A function can have parameters or have an empty parameter list.
+          </p>
         </statement>
-        <feedback><p>
-          This is true! However, you must always use parentheses.
-        </p></feedback>
+        <feedback>
+          <p>
+            This is true. Parentheses are still required even when the
+            parameter list is empty.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>You can call a function inside of another function.</p>
+          <p>
+            One function can call another function.
+          </p>
         </statement>
-        <feedback><p>
-          This is true! It is common and useful.
-        </p></feedback>
+        <feedback>
+          <p>
+            This is true. Functions commonly call other functions.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>You can write multiple statements on one line of a function.</p>
+          <p>
+            The same function can be called more than once.
+          </p>
         </statement>
-        <feedback><p>
-          This is true! As long as each statement ends with a semicolon.
-        </p></feedback>
+        <feedback>
+          <p>
+            This is true. Reusing a function is one of the reasons
+            functions are useful.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
   <exercise label="new_functions_2">
     <statement>
-      <p>Click on all function HEADERS.</p>
+      <p>
+        Click on all function <em>headers</em>.
+      </p>
     </statement>
-    <feedback><p>
-      Remember, the operator '=' is used for assignment.
-    </p></feedback>
+
+    <feedback>
+      <p>
+        A function header contains the return type, function name, and
+        parameter list and begins a function definition.
+      </p>
+    </feedback>
+
     <areas>
       <cline><area correct="yes">void print_x() {</area></cline>
-      <cline>    <area correct="no">std::cout &lt;&lt; &quot;X&quot;;</area></cline>
+      <cline>    <area correct="no">std::cout &lt;&lt; "X";</area></cline>
       <cline>}</cline>
       <cline/>
-      <cline><area correct="yes">void print_var(int a) {</area></cline>
-      <cline>    <area correct="no">std::cout &lt;&lt; a;</area></cline>
+
+      <cline><area correct="yes">void print_var(int value) {</area></cline>
+      <cline>    <area correct="no">std::cout &lt;&lt; value;</area></cline>
       <cline>}</cline>
       <cline/>
+
       <cline><area correct="yes">int main() {</area></cline>
       <cline>    <area correct="no">int x = 7;</area></cline>
       <cline>    <area correct="no">print_var(x);</area></cline>
-      <cline>    <area correct="no">if (x &lt; 10) {</area></cline>
-      <cline>    <area correct="no">x = x - 1;</area></cline>
-      <cline>}</cline>
-      <cline><area correct="no">print_x();</area></cline>
+      <cline>    <area correct="no">print_x();</area></cline>
       <cline>    <area correct="no">int y = 3;</area></cline>
-      <cline>    <area correct="no">double result = x / y;</area></cline>
-      <cline>    <area correct="no">print_var(result);</area></cline>
+      <cline>    <area correct="no">double result = x / static_cast&lt;double&gt;(y);</area></cline>
+      <cline>    <area correct="no">print_var(static_cast&lt;int&gt;(result));</area></cline>
       <cline>    return 0;</cline>
       <cline>}</cline>
     </areas>
   </exercise>
+
+
   <exercise label="new_functions_3">
     <statement>
-      <p>Click on all function CALLS.</p>
+      <p>
+        Click on all function <em>calls</em>.
+      </p>
     </statement>
-    <feedback><p>
-      Remember, the operator '=' is used for assignment.
-    </p></feedback>
+
+    <feedback>
+      <p>
+        A function call causes a function to execute.
+      </p>
+    </feedback>
+
     <areas>
       <cline><area correct="no">void print_x() {</area></cline>
-      <cline>    <area correct="no">std::cout &lt;&lt; &quot;X&quot;;</area></cline>
+      <cline>    <area correct="no">std::cout &lt;&lt; "X";</area></cline>
       <cline>}</cline>
       <cline/>
-      <cline><area correct="no">void print_var(int a) {</area></cline>
-      <cline>    <area correct="no">std::cout &lt;&lt; a;</area></cline>
+
+      <cline><area correct="no">void print_var(int value) {</area></cline>
+      <cline>    <area correct="no">std::cout &lt;&lt; value;</area></cline>
       <cline>}</cline>
       <cline/>
+
       <cline><area correct="no">int main() {</area></cline>
       <cline>    <area correct="no">int x = 7;</area></cline>
       <cline>    <area correct="yes">print_var(x);</area></cline>
-      <cline>    <area correct="no">if (x &lt; 10) {</area></cline>
-      <cline>    <area correct="no">x = x - 1;</area></cline>
-      <cline>}</cline>
-      <cline><area correct="yes">print_x();</area></cline>
+      <cline>    <area correct="yes">print_x();</area></cline>
       <cline>    <area correct="no">int y = 3;</area></cline>
-      <cline>    <area correct="no">double result = x / y;</area></cline>
-      <cline>    <area correct="yes">print_var(result);</area></cline>
+      <cline>    <area correct="no">double result = x / static_cast&lt;double&gt;(y);</area></cline>
+      <cline>    <area correct="yes">print_var(static_cast&lt;int&gt;(result));</area></cline>
       <cline>    return 0;</cline>
       <cline>}</cline>
     </areas>
   </exercise>
-  <exercise label="new_functions_pp_1" number="yes" adaptive="yes" indentation="hide">
+
+
+  <exercise label="new_functions_pp_1"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
+
     <statement>
-      <p>Construct a function that correctly prints the perimeter of a rectangle.</p>
+      <p>
+        Construct a function that takes the length and width of a rectangle
+        and prints its perimeter.
+      </p>
     </statement>
+
     <blocks>
-      <block order="3">
-        <cline>void perimeter(int length,int width) {</cline>
+      <block order="1">
+        <choice correct="yes">
+          <cline>void print_perimeter(int length, int width) {</cline>
+        </choice>
+        <choice>
+          <cline>void print_perimeter(int length, width) {</cline>
+        </choice>
       </block>
-      <block order="7">
+
+      <block order="2">
         <cline> int twice_length = 2 * length;</cline>
         <cline> int twice_width = 2 * width;</cline>
       </block>
-      <block order="6">
-        <cline> int perimeter_value = twice_length + twice_width;</cline>
+
+      <block order="3">
+        <choice correct="yes">
+          <cline> int perimeter = twice_length + twice_width;</cline>
+        </choice>
+        <choice>
+          <cline> int perimeter = twice_length * twice_width;</cline>
+        </choice>
       </block>
+
+      <block order="4">
+        <choice correct="yes">
+          <cline> std::cout &lt;&lt; perimeter &lt;&lt; '\n';</cline>
+        </choice>
+        <choice>
+          <cline> return perimeter;</cline>
+        </choice>
+      </block>
+
       <block order="5">
-        <cline> <![CDATA[cout << perimeter_value << '\n';]]></cline>
-      </block>
-      <block order="2" correct="no">
-        <cline> return parameter_value; </cline>
-      </block>
-      <block order="1">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
 </section>

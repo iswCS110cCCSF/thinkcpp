@@ -1,194 +1,316 @@
 <?xml version="1.0"?>
 <section xml:id="chapter3_floating-point">
   <title>Floating-point</title>
-  <p>In the last chapter we had some problems dealing with numbers that were not integers. We worked
-    around the problem by measuring percentages instead of fractions, but a more general solution is
-    to use <term>floating-point</term> numbers, which can represent fractions as well as integers.
-    In C++, there are two floating-point types, called <c>float</c> and <c>double</c>. In this book we will use
-    doubles exclusively.</p>
-  <p>You can create floating-point variables and assign values to them using
-    the same syntax we used for the other types. For example:</p>
-  <program>double pi;
-pi = 3.14159;</program>
-  <p>It is also legal to declare a variable and assign a value to it at the
-    same time:</p>
-  <program>int x = 1;
-string empty = "";
-double pi = 3.14159;</program>
-  <p>In fact, this syntax is quite common. A combined declaration and assignment is sometimes called
-    an <term>initialization</term>.</p>
+
+  <p>
+    In the last chapter we had some problems dealing with numbers that were
+    not integers. We worked around the problem by measuring percentages
+    instead of fractions, but a more general solution is to use
+    <term>floating-point</term> numbers, which can represent fractional
+    values as well as whole-number values. C++ provides several
+    floating-point types, including <c>float</c>, <c>double</c>, and
+    <c>long double</c>. In this book, we will normally use <c>double</c>.
+  </p>
+
+  <p>
+    You can create floating-point variables and assign values to them using
+    the same syntax we used for other types. For example:
+  </p>
+
+  <program>
+double pi;
+pi = 3.14159;
+  </program>
+
+  <p>
+    It is also possible to declare a variable and give it an initial value
+    at the same time:
+  </p>
+
+  <program>
+int x = 1;
+std::string empty = "";
+double pi = 3.14159;
+  </program>
+
+  <p>
+    Giving a variable its initial value when it is declared is called
+    <term>initialization</term>.
+  </p>
+
   <warning>
-    <p>It is important that you <term>initialize</term> any and all variables that you declare.
-      Failure to do so will generate an error (if you're lucky), or C++ will initialize the variable
-      to leftover memory, which could lead to undefined behavior.</p>
+    <p>
+      It is a good habit to initialize fundamental local variables, such as
+      <c>int</c> and <c>double</c>, before using their values. An
+      uninitialized fundamental local variable may contain an indeterminate
+      value, and using that value can lead to undefined behavior.
+    </p>
   </warning>
-  <p>Although floating-point numbers are useful, they are often a source of
+
+  <p>
+    Although floating-point numbers are useful, they can also be a source of
     confusion because there seems to be an overlap between integers and
-    floating-point numbers. For example, if you have the value 1, is that an
-    integer, a floating-point number, or both?</p>
-  <p>Strictly speaking, C++ distinguishes the integer value 1 from the
-    floating-point value 1.0, even though they seem to be the same number.
-    They belong to different types, and strictly speaking, you are not
-    allowed to make assignments between types. However, the following is
-    llegal:</p>
+    floating-point numbers. For example, the integer value <c>1</c> and
+    the floating-point value <c>1.0</c> represent the same mathematical
+    quantity, but they have different C++ types.
+  </p>
+
+  <p>
+    C++ allows many conversions between numeric types. For example, the
+    following initialization is legal:
+  </p>
+
   <program>
 int x = 1.1;
-</program>
-  <p>because the  double is converted to<c>int</c> and the the fractional part is discarded. But it
-    is easy to forget this rule, especially because there are places where C++ automatically
-    converts from one type to another. For example,</p>
+  </program>
+
+  <p>
+    The value <c>1.1</c> has type <c>double</c>, but <c>x</c> has type
+    <c>int</c>. When the value is converted to <c>int</c>, its fractional
+    part is discarded, so <c>x</c> receives the value <c>1</c>.
+  </p>
+
+  <p>
+    C++ can also automatically convert an integer value to a floating-point
+    value. For example:
+  </p>
+
   <program>
 double y = 1;
-</program>
-  <p>should technically not be legal, but C++ allows it by converting the <c>int</c> to a <c>double</c>
-    automatically. This leniency is convenient, but it can cause problems; for example:</p>
+  </program>
+
+  <p>
+    The integer value <c>1</c> is implicitly converted to the
+    <c>double</c> value <c>1.0</c>. These automatic conversions are
+    convenient, but they do not change how an expression is evaluated
+    before the conversion takes place. For example:
+  </p>
+
   <program>
 double y = 1 / 3;
-</program>
-  <p>You might expect the variable y to be given the value 0.333333, which is a legal floating-point
-    value, but in fact it will get the value 0.0. The reason is that the expression on the right
-    appears to be the ratio of two integers, so C++ does <em>integer</em> division, which yields the
-    integer value 0. Converted to floating-point, the result is 0.0.</p>
+  </program>
+
+  <p>
+    You might expect <c>y</c> to receive a value close to
+    <c>0.333333</c>, but it receives <c>0.0</c>. Both operands in
+    <c>1 / 3</c> are integers, so C++ performs integer division first.
+    Integer division produces <c>0</c>, and that result is then converted
+    to the <c>double</c> value <c>0.0</c>.
+  </p>
+
   <warning>
-    <p>It's crucial that you understand that when given two integers, C++
-      performs integer division! This is a common logic error that can be
-      hard to catch, since your program will compile without problems.</p>
+    <p>
+      When both operands of division are integers, C++ performs integer
+      division. The fractional part of the mathematical result is discarded.
+      This can create a logic error even though the program compiles
+      successfully.
+    </p>
   </warning>
-  <p>One way to solve this problem (once you figure out what it is) is to
-    make the right-hand side a floating-point expression:</p>
+
+  <p>
+    One way to get floating-point division is to make at least one operand
+    a floating-point value:
+  </p>
+
   <program>
 double y = 1.0 / 3.0;
-</program>
-  <p>This sets y to 0.333333, as expected.</p>
-  <p>All the operations we have seen&#x2014;addition, subtraction, multiplication,
-    and division&#x2014;work on floating-point values, although you might be
-    interested to know that the underlying mechanism is completely
-    different. In fact, most processors have special hardware just for
-    performing floating-point operations.</p>
-	
-	
-	
+  </program>
+
+  <p>
+    This gives <c>y</c> a value close to <c>0.333333</c>, as expected.
+  </p>
+
+  <p>
+    The arithmetic operations we have seen so far—addition, subtraction,
+    multiplication, and division—also work with floating-point values.
+    Internally, processors generally use specialized hardware to perform
+    floating-point operations.
+  </p>
+
+
   <exercise label="floating_point_1">
     <statement>
-      <p>A(n) <fillin answer="initialization"/> statment consists of a declaration statement and an assignment statement, which
-        are combined. </p>
+      <p>
+        Giving a variable its initial value when it is declared is called
+        <fillin mode="string" answer="initialization"/>.
+      </p>
     </statement>
+
     <evaluation>
       <evaluate>
         <test correct="yes">
           <strcmp use-answer="yes" case="insensitive"/>
+          <feedback>
+            Correct. This is called initialization.
+          </feedback>
         </test>
       </evaluate>
     </evaluation>
   </exercise>
+
+
   <exercise label="floating_point_2">
     <statement>
-      <p>It's your birthday and your cake can serve 12. You want to slice it evenly so that you and
-        each of your 4 friends receive an equal amount. One of your friends wants to know the serving size of his slice. You write the following code in C++ to answer
-        her question:</p>
-        
-        <program>
-          int servings = 12;
-          int people = 5;
-          
-          double serving_size = servings / people;</program>
+      <p>
+        A cake contains 12 servings and is divided equally among 5 people.
+        Consider the following code:
+      </p>
 
-        <p>The program claims <c>serving_size</c> is <fillin answer="2"/> servings.
-          This is <fillin answer="less"/> (more, less, the same) than/as the correct answer.</p>
+      <program>
+int servings = 12;
+int people = 5;
+
+double serving_size = servings / people;
+      </program>
+
+      <p>
+        The program stores <fillin answer="2"/> in
+        <c>serving_size</c>. This is
+        <fillin mode="string" answer="less"/> (more, less, the same)
+        than the mathematically correct result.
+      </p>
     </statement>
+
     <evaluation>
       <evaluate>
-          <test correct="yes">
-            <strcmp use-answer="yes"/>
-            <feedback>
-              Correct! C++ performs integer division.
-            </feedback>
-          </test>
-          <test>
-            <strcmp>.*</strcmp>
-            <feedback>
-              Hint: serving_size and people are integer variables!
-            </feedback>
-          </test>
+        <test correct="yes">
+          <strcmp use-answer="yes"/>
+          <feedback>
+            Correct. Both operands are integers, so <c>12 / 5</c>
+            performs integer division and produces <c>2</c>.
+          </feedback>
+        </test>
+
+        <test>
+          <strcmp>.*</strcmp>
+          <feedback>
+            Both <c>servings</c> and <c>people</c> have type
+            <c>int</c>. What kind of division will C++ perform?
+          </feedback>
+        </test>
       </evaluate>
+
       <evaluate>
-          <test correct="yes">
-            <strcmp use-answer="yes" case="insensitive"/>
-          </test>
-          <test>
-            <strcmp>.*</strcmp>
-            <feedback>
-              Is the answer the program computes more or less than you would get if you did decimal division?
-            </feedback>
-          </test>
+        <test correct="yes">
+          <strcmp use-answer="yes" case="insensitive"/>
+          <feedback>
+            Correct. The mathematical result is <c>2.4</c>, so
+            <c>2</c> is less than the correct result.
+          </feedback>
+        </test>
+
+        <test>
+          <strcmp>.*</strcmp>
+          <feedback>
+            Compare the program's result, <c>2</c>, with the mathematical
+            result of <c>12 / 5</c>.
+          </feedback>
+        </test>
       </evaluate>
     </evaluation>
   </exercise>
+
+
   <exercise label="floating_point_3">
     <statement>
-      <p>In the lab, we measured a temperature of 7.99999999 degrees C, using
-        an extremely precise measuring device. Now we are writing a program
-        to perform some calculations with our data. Consider the following C++
-        code.</p>
-      <program>double e = 2.71828;
+      <p>
+        Consider the following C++ code:
+      </p>
+
+      <program>
+double e = 2.71828;
 int e_int = e;
 double e_double = e_int;
-std::cout &lt;&lt; e_double;</program>
-      <p>What is the value of <c>e_double</c> that is printed to the terminal?</p>
+
+std::cout &lt;&lt; e_double;
+      </program>
+
+      <p>
+        What value is printed?
+      </p>
     </statement>
+
     <choices>
       <choice>
         <statement>
-          <p>e</p>
+          <p><c>e</c></p>
         </statement>
-        <feedback><p>
-          This is the name of a variable. Only the value of a variable will print with cout.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>e</c> is the variable name. <c>std::cout</c> prints
+            the value stored in <c>e_double</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>3</p>
+          <p><c>3</c></p>
         </statement>
-        <feedback><p>
-          Converting to an int always truncates to the neareast integer toward zero.
-        </p></feedback>
+        <feedback>
+          <p>
+            Converting <c>2.71828</c> to <c>int</c> does not round it
+            to the nearest integer. The fractional part is discarded.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>2</p>
+          <p><c>2</c></p>
         </statement>
-        <feedback><p>
-          When we converted e to an int, e was truncated to the neareast integer toward zero. In this case to 2. When we converted e_nt to
-            e_double, the decimal places from e were lost, and the value of e_double is 2.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. Converting <c>e</c> to <c>int</c> discards the
+            fractional part, so <c>e_int</c> becomes <c>2</c>.
+            Converting that value back to <c>double</c> gives
+            <c>2.0</c>, which <c>std::cout</c> displays as
+            <c>2</c> by default.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>3.0</p>
+          <p><c>3.0</c></p>
         </statement>
-        <feedback><p>
-          Converting to an int always truncates toward zero.
-        </p></feedback>
+        <feedback>
+          <p>
+            The conversion to <c>int</c> discards the fractional part of
+            <c>2.71828</c>, producing <c>2</c>, not <c>3</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>2.71828</p>
+          <p><c>2.71828</c></p>
         </statement>
-        <feedback><p>
-          When we converted e to an int, e was truncated to the neareast integer toward zero. In this case to 2. When we converted e_nt to
-            e_double, the decimal places from e were lost.
-        </p></feedback>
+        <feedback>
+          <p>
+            The fractional part is lost when <c>e</c> is converted to
+            <c>int</c>. Converting the resulting <c>2</c> back to
+            <c>double</c> cannot restore the lost fractional part.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
-  <p>Identifying whether an operation carries out integer division or floating point division
-    can get tricky when we have a mix of integers and doubles in our expression.
-    The thing to remeber is if either the divisor or the dividend is a double
-    then the program will carry out floating point division.</p>
+
+
+  <p>
+    Identifying whether division uses integer or floating-point arithmetic
+    can become trickier when an expression mixes integers and floating-point
+    values. If either operand of the division is a floating-point value, C++
+    performs floating-point division. If both operands are integers, it
+    performs integer division.
+  </p>
+
   <listing label="floating_point_a1">
     <title>
       Run the code to see what type of division occurs each time.
     </title>
+
     <program label="floating_point_a1_editor"
              interactive="activecode"
              line-numbers="yes">
@@ -196,20 +318,22 @@ std::cout &lt;&lt; e_double;</program>
 #include <iostream>
 
 int main() {
-    double value = 5.0/2; //(a)
+    double value = 5.0 / 2;       // (a)
     std::cout << "current value (a) is " << value << '\n';
 
-    value = 5/2.0; //(b)
+    value = 5 / 2.0;              // (b)
     std::cout << "current value (b) is " << value << '\n';
 
-    value = 5/2; //(c)
+    value = 5 / 2;                // (c)
     std::cout << "current value (c) is " << value << '\n';
 
-    value = 5.0/2.0; //(d)
+    value = 5.0 / 2.0;            // (d)
     std::cout << "current value (d) is " << value << '\n';
+
     return 0;
 }
-        ]]></code>
+      ]]></code>
     </program>
   </listing>
+
 </section>
