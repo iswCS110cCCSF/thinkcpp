@@ -10,12 +10,11 @@
           to Think Like a Computer Scientist. This book is an introduction to
           computer science using C++.
       </blurb>
-    <numbering>
-      <figures level="2"/>
-      <exercises level="2"/>
-    </numbering>
-    <programs language="cpp"
-              compiler-args="-Wall -Wextra -std=c++17"/>
+	  <directories external="../assets"/>
+	<defaults>
+	  <programs language="cpp"
+				compiler-args="-Wall -Wextra -std=c++17"/>
+	</defaults>
     <rename element="insight">Tip</rename>
     <rename element="colophon">License</rename>
     <rename element="frontmatter">About this book</rename>
