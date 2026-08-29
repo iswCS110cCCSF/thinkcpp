@@ -1427,7 +1427,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#chapter2_assignment-11",
   "type": "Warning",
-  "number": "2.4.1",
+  "number": "2.4.2",
   "title": "",
   "body": " The variable type that you declare must match the type of the value assigned to it. A type mismatch will generate a compile error.  "
 },
@@ -3605,7 +3605,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_programs-with-multiple-functions.html#multiple_functions_AC_1",
   "type": "Activity",
-  "number": "3.7.1",
+  "number": "3.7.2",
   "title": "",
   "body": "  This program calls several functions from main . Follow the order of execution using CodeLens.   #include <iostream> \/\/ Function declarations void print_total(int x); int multiply_two(int x); int add_two(int x); int main() { int num = 3; int new_num = multiply_two(num); int newer_num = add_two(new_num); print_total(newer_num); return 0; } \/\/ Function definitions void print_total(int x) { std::cout << x << '\\n'; } int multiply_two(int x) { int total = x * 2; print_total(total); return total; } int add_two(int x) { int total = x + 2; return total; }    "
 },
@@ -5423,7 +5423,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_AC_1",
   "type": "Activity",
-  "number": "4.7.1",
+  "number": "4.7.2",
   "title": "",
   "body": "  Watch how the countdown function works when we start with a value of 3.   #include <iostream> #include <cmath> void countdown(int n) { if (n == 0) { std::cout << \"Blastoff!\" << std::endl; } else { std::cout << n << std::endl; countdown(n-1); } } int main() { countdown(3); return 0; }   "
 },
@@ -7187,7 +7187,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter5_more-recursion.html#more_recursion_AC_1",
   "type": "Activity",
-  "number": "5.10.1",
+  "number": "5.10.2",
   "title": "",
   "body": "  This program uses recursion to calculate the factorial of the passed argument. Watch it run step by step and pay attention to the value returned from each call to factorial   #include <iostream> int factorial(int n) { if (n == 0) { return 1; } else { int recurse = factorial(n-1); int result = n * recurse; return result; } } int main() { std::cout << factorial(3) << std::endl; }   "
 },
@@ -14153,7 +14153,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_random-numbers-random.html#random_numbers_AC_3",
   "type": "Activity",
-  "number": "10.7.1",
+  "number": "10.7.4",
   "title": "",
   "body": "  This active code generates random numbers between 0 and 1. Can you modify it to generate random numbers between 100.0 and 200.0? If you're stuck you can reveal the hint below!   #include <iostream> #include <cstdlib> int main() { std::cout << \"Let's generate some random numbers between 0 and 1!\" << std::endl; for (int i = 0; i < 10; i++) { int x = random(); double y = double(x) \/ RAND_MAX; std::cout << y << \" \"; } }    The formula to generate random numbers between min and max is min + (max - min) * double(x) \/ RAND_MAX.   "
 },
