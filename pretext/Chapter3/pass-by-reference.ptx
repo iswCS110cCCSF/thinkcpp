@@ -4,48 +4,66 @@
 
   <p>
     So far, function parameters have received copies of the values passed
-    to them. This is called <term>pass by value</term>.
+    to them. This is called <term>pass by value</term>. Changing a
+    pass-by-value parameter changes only the local parameter, not the
+    caller's variable.
   </p>
 
   <p>
-    For example, suppose we try to write a function that swaps two values:
+    For example, suppose we try to write a function that swaps the values
+    of two variables:
   </p>
 
   <program language="cpp">
     <input>
+void swap_values(int first, int second);
+    </input>
+  </program>
+
+  <p>
+    Here is a complete program using that function:
+  </p>
+
+  <program>#include &lt;iostream&gt;
+
+void swap_values(int first, int second);
+
+int main() {
+    int x = 3;
+    int y = 7;
+
+    swap_values(x, y);
+
+    std::cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; '\n';
+    std::cout &lt;&lt; "y = " &lt;&lt; y &lt;&lt; '\n';
+
+    return 0;
+}
+
 void swap_values(int first, int second) {
     int temp = first;
     first = second;
     second = temp;
-}
-    </input>
-  </program>
+}</program>
 
   <p>
-    Now consider this call:
-  </p>
-
-  <program language="cpp">
-    <input>
-int x = 3;
-int y = 7;
-
-swap_values(x, y);
-    </input>
-  </program>
-
-  <p>
-    Inside <c>swap_values</c>, the parameters <c>first</c> and
-    <c>second</c> are separate variables that receive copies of the values
-    stored in <c>x</c> and <c>y</c>. The function swaps those copies, but
-    the original variables <c>x</c> and <c>y</c> are unchanged.
+    When <c>swap_values(x, y)</c> is called, the parameter
+    <c>first</c> receives a copy of the value in <c>x</c>, and
+    <c>second</c> receives a copy of the value in <c>y</c>.
+    The function swaps those copies.
   </p>
 
   <p>
-    After the function call, the values are still:
+    The parameters <c>first</c> and <c>second</c> have local scope
+    inside <c>swap_values</c>. Changing them does not change
+    <c>x</c> or <c>y</c> in <c>main</c>.
   </p>
 
-  <program language="cpp">
+  <p>
+    Therefore, the output is:
+  </p>
+
+  <program language="text">
     <input>
 x = 3
 y = 7
@@ -65,35 +83,45 @@ y = 7
 
   <program language="cpp">
     <input>
+void swap_values(int&amp; first, int&amp; second);
+    </input>
+  </program>
+
+  <p>
+    Now consider the complete program:
+  </p>
+
+  <program>#include &lt;iostream&gt;
+
+void swap_values(int&amp; first, int&amp; second);
+
+int main() {
+    int x = 3;
+    int y = 7;
+
+    swap_values(x, y);
+
+    std::cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; '\n';
+    std::cout &lt;&lt; "y = " &lt;&lt; y &lt;&lt; '\n';
+
+    return 0;
+}
+
 void swap_values(int&amp; first, int&amp; second) {
     int temp = first;
     first = second;
     second = temp;
-}
-    </input>
-  </program>
+}</program>
 
   <p>
     In this version, <c>first</c> refers to the caller's variable
     <c>x</c>, and <c>second</c> refers to the caller's variable
     <c>y</c>. Changes made through the reference parameters therefore
-    affect the original variables.
+    affect those variables.
   </p>
 
-  <program language="cpp">
-    <input>
-int x = 3;
-int y = 7;
-
-swap_values(x, y);
-
-std::cout &lt;&lt; "x = " &lt;&lt; x &lt;&lt; '\n';
-std::cout &lt;&lt; "y = " &lt;&lt; y &lt;&lt; '\n';
-    </input>
-  </program>
-
   <p>
-    The output is:
+    The output is now:
   </p>
 
   <program language="text">
@@ -127,11 +155,13 @@ y = 3
 
   <note>
     <p>
-      For now, you only need to recognize that <c>&amp;</c> in a parameter
-      declaration creates a reference parameter. We will study references,
-      memory addresses, and pointers in more detail later.
+      For now, you only need to recognize and use <c>&amp;</c> in a
+      parameter declaration to create a reference parameter. We will study
+      references in more detail, along with memory addresses and pointers,
+      later in the course.
     </p>
   </note>
+
 
   <exercise label="pass_by_reference_1">
     <statement>
@@ -142,18 +172,22 @@ y = 3
 
       <program line-numbers="yes">
         <code><![CDATA[
+void swap_values(int first, int second);
+
+int main() {
+    int x = 3;
+    int y = 7;
+
+    swap_values(x, y);
+
+    return 0;
+}
+
 void swap_values(int first, int second) {
     int temp = first;
     first = second;
     second = temp;
 }
-
-int main() {
-    int x = 3;
-    int y = 7;
-
-    swap_values(x, y);
-}
 ]]></code>
       </program>
     </statement>
@@ -165,9 +199,9 @@ int main() {
         </statement>
         <feedback>
           <p>
-            Correct. The parameters receive copies of <c>x</c> and
-            <c>y</c>, so swapping the parameters does not change the
-            caller's variables.
+            Correct. <c>first</c> and <c>second</c> receive copies of
+            the argument values. Swapping those local parameters does not
+            change <c>x</c> or <c>y</c>.
           </p>
         </feedback>
       </choice>
@@ -178,8 +212,9 @@ int main() {
         </statement>
         <feedback>
           <p>
-            The values are swapped only inside the function's local
-            parameters. The caller's variables are unchanged.
+            The values of the local parameters are swapped, but
+            <c>x</c> and <c>y</c> are passed by value and remain
+            unchanged.
           </p>
         </feedback>
       </choice>
@@ -190,8 +225,8 @@ int main() {
         </statement>
         <feedback>
           <p>
-            The function does not modify either variable in
-            <c>main</c>.
+            The assignments affect only the local parameters inside
+            <c>swap_values</c>.
           </p>
         </feedback>
       </choice>
@@ -202,34 +237,98 @@ int main() {
         </statement>
         <feedback>
           <p>
-            The function changes only its local copies, not the variables
-            in <c>main</c>.
+            Neither variable in <c>main</c> is changed by this
+            pass-by-value function.
           </p>
         </feedback>
       </choice>
     </choices>
   </exercise>
+
 
   <exercise label="pass_by_reference_2">
     <statement>
       <p>
-        What are the values of <c>x</c> and <c>y</c> after the following
-        code runs?
+        Which function declaration allows <c>add_one</c> to change the
+        caller's <c>int</c> variable?
+      </p>
+    </statement>
+
+    <choices>
+      <choice>
+        <statement>
+          <p><c>void add_one(int value);</c></p>
+        </statement>
+        <feedback>
+          <p>
+            This passes the value by value, so <c>value</c> receives a
+            copy of the argument.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice correct="yes">
+        <statement>
+          <p><c>void add_one(int&amp; value);</c></p>
+        </statement>
+        <feedback>
+          <p>
+            Correct. <c>value</c> is a reference parameter, so changes
+            made through it affect the caller's variable.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>int add_one(int value);</c></p>
+        </statement>
+        <feedback>
+          <p>
+            This function can return an <c>int</c>, but <c>value</c>
+            itself is still passed by value.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>void add_one(value);</c></p>
+        </statement>
+        <feedback>
+          <p>
+            A parameter in a function declaration must have a type.
+          </p>
+        </feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+
+  <exercise label="pass_by_reference_3">
+    <statement>
+      <p>
+        What is printed by the following program?
       </p>
 
       <program line-numbers="yes">
         <code><![CDATA[
-void swap_values(int& first, int& second) {
-    int temp = first;
-    first = second;
-    second = temp;
-}
+#include <iostream>
+
+void add_one(int& value);
 
 int main() {
-    int x = 3;
-    int y = 7;
+    int count = 5;
 
-    swap_values(x, y);
+    add_one(count);
+
+    std::cout << count << '\n';
+
+    return 0;
+}
+
+void add_one(int& value) {
+    value = value + 1;
 }
 ]]></code>
       </program>
@@ -238,51 +337,52 @@ int main() {
     <choices>
       <choice>
         <statement>
-          <p><c>x</c> is 3 and <c>y</c> is 7.</p>
+          <p><c>1</c></p>
         </statement>
         <feedback>
           <p>
-            The parameters are references, so changes made through them
-            affect <c>x</c> and <c>y</c>.
+            <c>value</c> refers to <c>count</c>, whose value starts at
+            <c>5</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>5</c></p>
+        </statement>
+        <feedback>
+          <p>
+            Because <c>value</c> is a reference parameter, changing it
+            also changes <c>count</c>.
           </p>
         </feedback>
       </choice>
 
       <choice correct="yes">
         <statement>
-          <p><c>x</c> is 7 and <c>y</c> is 3.</p>
+          <p><c>6</c></p>
         </statement>
         <feedback>
           <p>
-            Correct. The reference parameters refer to the caller's
-            variables, so the swap changes <c>x</c> and <c>y</c>.
+            Correct. <c>value</c> refers to <c>count</c>, so adding
+            <c>1</c> changes <c>count</c> from <c>5</c> to <c>6</c>.
           </p>
         </feedback>
       </choice>
 
       <choice>
         <statement>
-          <p><c>x</c> is 3 and <c>y</c> is 3.</p>
+          <p>Error!</p>
         </statement>
         <feedback>
           <p>
-            The three assignments in <c>swap_values</c> exchange the two
-            values rather than assigning the same value to both.
-          </p>
-        </feedback>
-      </choice>
-
-      <choice>
-        <statement>
-          <p><c>x</c> is 7 and <c>y</c> is 7.</p>
-        </statement>
-        <feedback>
-          <p>
-            The temporary variable preserves the original value of
-            <c>first</c>, allowing the two values to be exchanged.
+            Passing an <c>int</c> variable to an <c>int&amp;</c>
+            reference parameter is legal.
           </p>
         </feedback>
       </choice>
     </choices>
   </exercise>
+
 </section>

@@ -2,62 +2,84 @@
 <section xml:id="chapter3_functions-with-results">
   <title>Functions with Results</title>
 
-  <p>You might have noticed by now that some of the functions we are using, like the math functions,
-    yield results. Other functions, like <c>new_line</c>, perform an action but don't return a value. That
-    raises some questions:</p>
+  <p>
+    You might have noticed by now that some of the functions we are using,
+    such as mathematical functions, produce results. Other functions, such
+    as <c>new_line</c>, perform an action but do not return a value.
+    That raises some questions:
+  </p>
 
   <p>
     <ul>
       <li>
-        <p>What happens if you call a function and you don't do anything with
-          the result (i.e. you don't assign it to a variable or use it as part
-          of a larger expression)?</p>
+        <p>
+          What happens if you call a function and do not use its result?
+        </p>
       </li>
+
       <li>
-        <p>What happens if you use a function without a result as part of an expression, like
-          <c>new_line() + 7</c>?</p>
+        <p>
+          What happens if you try to use a function that does not return a
+          value as part of an expression, such as <c>new_line() + 7</c>?
+        </p>
       </li>
+
       <li>
-        <p>Can we write functions that yield results, or are we stuck with
-          things like <c>new_line</c> and <c>print_twice</c>?</p>
+        <p>
+          Can we write our own functions that return values?
+        </p>
       </li>
     </ul>
   </p>
 
   <p>
-    The answer to the third question is <q>yes, you can write functions that
-    return values.</q> A function that returns a value has a
-    <term>return type</term> instead of <c>void</c>. It uses a
+    The answer to the third question is <q>yes</q>. A function that returns
+    a value has a non-<c>void</c> <term>return type</term> and uses a
     <term>return statement</term> to send a value back to the caller.
   </p>
 
-  <p>For example:</p>
+  <p>
+    For example, consider this function declaration:
+  </p>
 
   <program language="cpp">
     <input>
+int double_value(int value);
+    </input>
+  </program>
+
+  <p>
+    The return type is <c>int</c>, which tells us that
+    <c>double_value</c> returns an integer value.
+  </p>
+
+  <p>
+    Here is a complete program using the function:
+  </p>
+
+  <program>
+#include &lt;iostream&gt;
+
+int double_value(int value);
+
+int main() {
+    int result = double_value(5);
+
+    std::cout &lt;&lt; result &lt;&lt; '\n';
+
+    return 0;
+}
+
 int double_value(int value) {
     return value * 2;
 }
-    </input>
   </program>
 
   <p>
-    In this example, <c>int</c> is the return type. The statement
+    In the function definition, the statement
     <c>return value * 2;</c> computes an integer and sends that value
     back to the caller.
   </p>
-
-  <p>
-    A call to a value-returning function can be used anywhere a value of
-    that type is appropriate. For example:
-  </p>
-
-  <program language="cpp">
-    <input>
-int result = double_value(5);
-std::cout &lt;&lt; result &lt;&lt; '\n';
-    </input>
-  </program>
 
   <p>
     The call <c>double_value(5)</c> returns the value <c>10</c>, so
@@ -70,62 +92,90 @@ std::cout &lt;&lt; result &lt;&lt; '\n';
   </p>
 
   <p>
-    A function can have multiple parameters and still return one value:
+    Returning a value is different from printing a value. A function can
+    compute and return a value without displaying anything on the screen.
+    The caller can then decide what to do with the returned value.
   </p>
 
-  <program language="cpp">
-    <input>
+  <p>
+    A function can have multiple parameters and still return one value.
+    For example:
+  </p>
+
+  <program>
+#include &lt;iostream&gt;
+
+double rectangle_area(double width, double height);
+
+int main() {
+    double area = rectangle_area(4.0, 3.0);
+
+    std::cout &lt;&lt; area &lt;&lt; '\n';
+
+    return 0;
+}
+
 double rectangle_area(double width, double height) {
     return width * height;
 }
-    </input>
   </program>
 
   <p>
-    The returned value can be stored in a variable or used directly in
-    another expression:
+    The returned value can be stored in a variable, as shown above. It can
+    also be used directly in a larger expression:
   </p>
 
   <program language="cpp">
     <input>
-double area = rectangle_area(4.0, 3.0);
-std::cout &lt;&lt; area &lt;&lt; '\n';
+std::cout &lt;&lt; rectangle_area(4.0, 3.0) &lt;&lt; '\n';
     </input>
   </program>
 
   <note>
-    <p>Any time you have a question about what is legal or illegal in C++, a
-      good way to find out is to ask the compiler. It will let you answer
-      your question by throwing an error&#x2026; or not!</p>
+    <p>
+      Any time you have a question about what is legal or illegal in C++,
+      one useful way to investigate is to ask the compiler. It will either
+      compile the code or report an error that can help you understand the
+      rule being violated.
+    </p>
   </note>
 
   <exercise label="fuwresults_1">
     <statement>
-      <p>What will be <term>printed</term> when the following code runs?
+      <p>
+        What will be <term>printed</term> when the following code runs?
         <fillin answer="8"/>
       </p>
+
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
 
-void multiply(int x, int y) {
-  std::cout << x * y;
-}
+void multiply(int x, int y);
 
 int main() {
-  int x = 2;
-  int y = 4;
-  multiply(x,y);
+    int x = 2;
+    int y = 4;
+
+    multiply(x, y);
+
+    return 0;
+}
+
+void multiply(int x, int y) {
+    std::cout << x * y;
 }
 ]]></code>
       </program>
     </statement>
+
     <evaluation>
       <evaluate>
         <test correct="yes">
           <strcmp use-answer="yes"/>
           <feedback>
-            Yes! 2*4=8 so that will be printed but not returned
+            The function prints <c>2 * 4</c>, which is <c>8</c>.
+            It prints the value but does not return it.
           </feedback>
         </test>
       </evaluate>
@@ -134,38 +184,54 @@ int main() {
 
   <exercise label="fuwresults_2">
     <statement>
-      <p>Will the following code compile?</p>
+      <p>
+        Will the following code compile?
+      </p>
+
       <program line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
 
-void multiply(int x, int y) {
-  std::cout << x * y << '\n';
-}
+void multiply(int x, int y);
 
 int main() {
-  int x = 2;
-  int y = 4;
-  std::cout << multiply(x,y);
+    int x = 2;
+    int y = 4;
+
+    std::cout << multiply(x, y);
+
+    return 0;
+}
+
+void multiply(int x, int y) {
+    std::cout << x * y << '\n';
 }
 ]]></code>
       </program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>Yes</p>
         </statement>
         <feedback>
-          <p>Can you print the result of a <c>void</c> function?</p>
+          <p>
+            <c>multiply</c> has return type <c>void</c>, so the call does
+            not produce a value that can be sent to <c>std::cout</c>.
+          </p>
         </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>No</p>
         </statement>
         <feedback>
-          <p>Correct! A <c>void</c> function does not produce a value that can be sent to <c>std::cout</c>.</p>
+          <p>
+            Correct. A <c>void</c> function does not produce a return value
+            that can be used as part of this output expression.
+          </p>
         </feedback>
       </choice>
     </choices>
@@ -173,15 +239,22 @@ int main() {
 
   <exercise label="fuwresults_3">
     <statement>
-      <p>What value is stored in <c>result</c> after this code runs?</p>
+      <p>
+        What value is stored in <c>result</c> after this code runs?
+      </p>
+
       <program line-numbers="yes">
         <code><![CDATA[
-int double_value(int value) {
-  return value * 2;
-}
+int double_value(int value);
 
 int main() {
-  int result = double_value(6);
+    int result = double_value(6);
+
+    return 0;
+}
+
+int double_value(int value) {
+    return value * 2;
 }
 ]]></code>
       </program>
@@ -189,32 +262,127 @@ int main() {
 
     <choices>
       <choice>
-        <statement><p>2</p></statement>
+        <statement>
+          <p>2</p>
+        </statement>
         <feedback>
-          <p>The parameter <c>value</c> receives <c>6</c>, and the function returns <c>value * 2</c>.</p>
+          <p>
+            The parameter <c>value</c> receives <c>6</c>, so
+            <c>value * 2</c> is <c>12</c>.
+          </p>
         </feedback>
       </choice>
 
       <choice>
-        <statement><p>6</p></statement>
+        <statement>
+          <p>6</p>
+        </statement>
         <feedback>
-          <p><c>6</c> is the argument passed to the function, but the function returns twice that value.</p>
+          <p>
+            <c>6</c> is the argument passed to the function, but the
+            function returns twice that value.
+          </p>
         </feedback>
       </choice>
 
       <choice correct="yes">
-        <statement><p>12</p></statement>
+        <statement>
+          <p>12</p>
+        </statement>
         <feedback>
-          <p>Correct! <c>double_value(6)</c> returns <c>6 * 2</c>, which is <c>12</c>.</p>
+          <p>
+            Correct. <c>double_value(6)</c> returns <c>6 * 2</c>,
+            which is <c>12</c>.
+          </p>
         </feedback>
       </choice>
 
       <choice>
-        <statement><p>Nothing, because the function does not print anything.</p></statement>
+        <statement>
+          <p>Nothing, because the function does not print anything.</p>
+        </statement>
         <feedback>
-          <p>A function does not need to print a value in order to return one. The <c>return</c> statement sends the result back to the caller.</p>
+          <p>
+            Printing and returning are different. The <c>return</c>
+            statement sends the value back to the caller even though the
+            function itself does not print anything.
+          </p>
         </feedback>
       </choice>
     </choices>
   </exercise>
+	<exercise label="fuwresults_4">
+	  <statement>
+		<p>
+		  What will be printed when the following code runs?
+		</p>
+
+		<program line-numbers="yes">
+		  <code><![CDATA[
+	#include <iostream>
+
+	int double_value(int value);
+
+	int main() {
+		std::cout << double_value(4) + 3 << '\n';
+
+		return 0;
+	}
+
+	int double_value(int value) {
+		return value * 2;
+	}
+	]]></code>
+		</program>
+	  </statement>
+
+	  <choices>
+		<choice>
+		  <statement>
+			<p>7</p>
+		  </statement>
+		  <feedback>
+			<p>
+			  <c>double_value(4)</c> returns <c>8</c>, not <c>4</c>.
+			</p>
+		  </feedback>
+		</choice>
+
+		<choice>
+		  <statement>
+			<p>8</p>
+		  </statement>
+		  <feedback>
+			<p>
+			  <c>8</c> is the value returned by <c>double_value(4)</c>, but
+			  then <c>3</c> is added to that value.
+			</p>
+		  </feedback>
+		</choice>
+
+		<choice correct="yes">
+		  <statement>
+			<p>11</p>
+		  </statement>
+		  <feedback>
+			<p>
+			  Correct. <c>double_value(4)</c> returns <c>8</c>, so the
+			  expression becomes <c>8 + 3</c>.
+			</p>
+		  </feedback>
+		</choice>
+
+		<choice>
+		  <statement>
+			<p>Nothing, because the returned value is not stored in a variable.</p>
+		  </statement>
+		  <feedback>
+			<p>
+			  A returned value does not have to be stored in a variable. It can
+			  be used directly as part of a larger expression.
+			</p>
+		  </feedback>
+		</choice>
+	  </choices>
+	</exercise>
 </section>

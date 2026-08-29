@@ -1,416 +1,562 @@
 <?xml version="1.0"?>
 <exercises xml:id="chapter3_multiple-choice-exercises">
-    <title>Multiple Choice Exercises</title>
-    <introduction><p>
-        Answer the following <term>Multiple Choice</term> questions to assess what
-        you have learned in this chapter.
-    </p></introduction>
+  <title>Multiple Choice Exercises</title>
+
+  <introduction>
+    <p>
+      Answer the following <term>Multiple Choice</term> questions to assess
+      what you have learned in this chapter.
+    </p>
+  </introduction>
+
+  <!-- Q1 -->
   <exercise label="functions_mc1">
     <statement>
-      <p>You want to spice up your resume before the career fair, so you decide to
-        update your GPA using the program below. What is the GPA that you will
-        have on display for future employers?</p>
+      <p>
+        What is printed by the following program?
+      </p>
+
       <program>#include &lt;iostream&gt;
 
 int main() {
-  double GPA = 3.52;
-  int updated_gpa = int(GPA);
-  std::cout &lt;&lt; "GPA: " &lt;&lt; updated_gpa;
+    double gpa = 3.52;
+    int updated_gpa = static_cast&lt;int&gt;(gpa);
+
+    std::cout &lt;&lt; "GPA: " &lt;&lt; updated_gpa &lt;&lt; '\n';
 }</program>
     </statement>
+
     <choices>
       <choice>
         <statement>
-          <p>
-            <c>3.0</c>
-          </p>
+          <p><c>GPA: 3.0</c></p>
         </statement>
-        <feedback><p>
-          Its correct to think that your GPA will be rounded down, but what else happens when you
-            convert from <c>int</c> to <c>double</c>?
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>updated_gpa</c> has type <c>int</c>, so it stores an
+            integer value.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>
-            <c>3</c>
-          </p>
+          <p><c>GPA: 3</c></p>
         </statement>
-        <feedback><p>
-          Converting to an <c>int</c> always rounds down to the nearest integer, so I do not
-            recommend using type conversions to build your resume&#x2026; especially if you're close
-            to <c>4.0</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. Converting <c>3.52</c> to <c>int</c> discards the
+            fractional part, producing <c>3</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>4.0</c>
-          </p>
+          <p><c>GPA: 4.0</c></p>
         </statement>
-        <feedback><p>
-          Converting to an int <em>will</em> round your GPA, but not in the direction that you
-            were hoping for&#x2026; what else happens when you convert from <c>int</c> to <c>double</c>?
-        </p></feedback>
+        <feedback>
+          <p>
+            Converting a <c>double</c> to an <c>int</c> does not round
+            to the nearest integer.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>4</c>
-          </p>
+          <p><c>GPA: 4</c></p>
         </statement>
-        <feedback><p>
-          Converting to an int <em>will</em> round yor GPA, but not in the direction that you
-            were hoping for.
-        </p></feedback>
+        <feedback>
+          <p>
+            The fractional part is discarded, so <c>3.52</c> becomes
+            <c>3</c>, not <c>4</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Error!</p>
         </statement>
-        <feedback><p>
-          No errors here! Type conversions are perfectly legal in C++!
-        </p></feedback>
+        <feedback>
+          <p>
+            This explicit conversion is legal in C++.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
+  <!-- Q2 -->
   <exercise label="functions_mc2">
     <statement>
-      <p>What is the value of x after the program executes?</p>
+      <p>
+        Which header must be included to use <c>std::acos</c> in the
+        following program?
+      </p>
+
       <program>#include &lt;iostream&gt;
 
 int main() {
-  int x = acos(-1);
+    double pi = std::acos(-1.0);
+
+    std::cout &lt;&lt; pi &lt;&lt; '\n';
 }</program>
     </statement>
+
     <choices>
       <choice>
         <statement>
-          <p>3.14159265358979323846</p>
+          <p><c>&lt;iostream&gt;</c></p>
         </statement>
-        <feedback><p>
-          If <c>x</c> were a double, C++ would automatically round the value of pi to <term>15</term>
-            decimal places.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>&lt;iostream&gt;</c> provides stream input and output,
+            including <c>std::cout</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>3.142</p>
+          <p><c>&lt;string&gt;</c></p>
         </statement>
-        <feedback><p>
-          If <c>x</c> were a double, C++ would automatically round the value of pi to <term>15</term>
-            decimal places.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>&lt;string&gt;</c> provides <c>std::string</c>, not the
+            mathematical functions.
+          </p>
+        </feedback>
       </choice>
-      <choice>
-        <statement>
-          <p>3.0</p>
-        </statement>
-        <feedback><p>
-          Automatic type conversion will round the value of pi down to the nearest integer, but
-            what else happens when we convert a <c>double</c> to an <c>int</c>?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>3</p>
-        </statement>
-        <feedback><p>
-          The value of x <em>should</em> be 3, since automatic type conversion will round the
-            value of pi down to the nearest integer. Are you sure this program compiles?
-        </p></feedback>
-      </choice>
+
       <choice correct="yes">
         <statement>
-          <p>Error!</p>
+          <p><c>&lt;cmath&gt;</c></p>
         </statement>
-        <feedback><p>
-          Whenever we use math functions, we must include the <c>&lt;cmath&gt;</c> header file.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>std::acos</c> is provided by the
+            <c>&lt;cmath&gt;</c> header.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>&lt;cstdlib&gt;</c></p>
+        </statement>
+        <feedback>
+          <p>
+            The mathematical function <c>std::acos</c> is declared in
+            <c>&lt;cmath&gt;</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>No additional header is needed.</p>
+        </statement>
+        <feedback>
+          <p>
+            Include the header that declares each standard-library
+            facility you use. <c>std::acos</c> requires
+            <c>&lt;cmath&gt;</c>.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
+  <!-- Q3 -->
   <exercise label="functions_mc3">
     <statement>
-      <p><term>Multiple Response</term> Select all variables that have a <em>non-zero</em> value
-        after the decimal place. (3.1 has a <em>non-zero</em> value, while 3.0 does not)</p>
-      <program>#include &lt;iostream&gt;
+      <p>
+        <term>Multiple Response</term> Select all variables whose values
+        have a non-zero fractional part after these statements execute.
+      </p>
 
-int main() {
-  int a = 1.5;
-  double b = a + 1.5;
-  double c = 2.4;
-  double d = 1/5;
-  int e = c * c;
-  double f = int(c);
-}</program>
+      <program>int a = 1.5;
+double b = a + 1.5;
+double c = 2.4;
+double d = 1 / 5;
+int e = c * c;
+double f = static_cast&lt;int&gt;(c);</program>
     </statement>
+
     <choices>
       <choice>
         <statement>
-          <p>
-            <c>a</c>
-          </p>
+          <p><c>a</c></p>
         </statement>
-        <feedback><p>
-          C++ performs automatic type conversion to round 1.5 down to the
-            nearest integer.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>a</c> has type <c>int</c>. The conversion discards the
+            fractional part of <c>1.5</c>, so <c>a</c> becomes
+            <c>1</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>
-            <c>b</c>
-          </p>
+          <p><c>b</c></p>
         </statement>
-        <feedback><p>
-          Since <c>a = 1</c>, we know that <c>b = 2.5</c>, which is a non-zero decimal.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. Since <c>a</c> is <c>1</c>,
+            <c>a + 1.5</c> produces <c>2.5</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>
-            <c>c</c>
-          </p>
+          <p><c>c</c></p>
         </statement>
-        <feedback><p>
-          <c>c</c> is a <c>double</c> and has a non-zero decimal.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>c</c> contains <c>2.4</c>, which has a non-zero
+            fractional part.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>d</c>
-          </p>
+          <p><c>d</c></p>
         </statement>
-        <feedback><p>
-          C++ performs integer division to round <c>1/5</c> down to the nearest integer. The value
-            will be stored as <c>0</c>, not <c>0.2</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            Both operands in <c>1 / 5</c> are integers, so integer
+            division produces <c>0</c>. That value is then stored as the
+            <c>double</c> value <c>0.0</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>e</c>
-          </p>
+          <p><c>e</c></p>
         </statement>
-        <feedback><p>
-          <c>c</c> squared may have a non-zero decimal, but automatic type conversion will round
-            it down to the nearest integer before storing the value in <c>e</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>c * c</c> produces a floating-point value, but storing it
+            in <c>e</c> converts it to <c>int</c> and discards the
+            fractional part.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>f</c>
-          </p>
+          <p><c>f</c></p>
         </statement>
-        <feedback><p>
-          <c>int(c)</c> rounds <c>c</c> down to the nearest integer before storing the value in <c>f</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>static_cast&lt;int&gt;(c)</c> produces the integer
+            <c>2</c>. It is then stored in <c>f</c> as <c>2.0</c>.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
+  <!-- Q4 -->
   <exercise label="functions_mc4">
     <statement>
-      <p><term>Multiple Response</term> Which of the following would work as a function header
-        (first line of a function).</p>
+      <p>
+        <term>Multiple Response</term> Which of the following can be the
+        first line of a function definition?
+      </p>
     </statement>
+
     <choices>
       <choice>
         <statement>
-          <p>
-            <c>print_hello_world() {</c>
-          </p>
+          <p><c>print_hello_world() {</c></p>
         </statement>
-        <feedback><p>
-          This function header is missing a type.
-        </p></feedback>
+        <feedback>
+          <p>
+            A function definition needs a return type.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>string palindrome(word) {</c>
-          </p>
+          <p><c>std::string palindrome(word) {</c></p>
         </statement>
-        <feedback><p>
-          The function's parameter is missing a type.
-        </p></feedback>
+        <feedback>
+          <p>
+            The parameter <c>word</c> needs a type.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>
-            <c>int mult(int a, int b) {</c>
-          </p>
+          <p><c>int mult(int a, int b) {</c></p>
         </statement>
-        <feedback><p>
-          Correct! The function header has a type, empty parentheses, and
-            a squiggly bracket.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. The function has a return type, a name, typed
+            parameters, and an opening brace.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>char shift_three(char letter)</c>
-          </p>
+          <p><c>char shift_three(char letter)</c></p>
         </statement>
-        <feedback><p>
-          This function header is missing a squiggly bracket <c>{</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            This could be a function declaration if followed by a
+            semicolon, but the first line of a definition needs an
+            opening brace.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>
-            <c>void give_compliment() {</c>
-          </p>
+          <p><c>void give_compliment() {</c></p>
         </statement>
-        <feedback><p>
-          Correct! The function header has a type, empty parentheses, and
-            a squiggly bracket.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. This begins the definition of a function with no
+            parameters and return type <c>void</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>string friend(string name) {</c>
-          </p>
+          <p><c>std::string friend(std::string name) {</c></p>
         </statement>
-        <feedback><p>
-          <c>friend</c> is a reserved keyword in C++.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>friend</c> is a C++ keyword and cannot be used as the
+            function name.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
+  <!-- Q5 -->
   <exercise label="functions_mc5">
     <statement>
-      <p>What is printed when the following code runs? Are there any errors?</p>
+      <p>
+        What is printed by the following program?
+      </p>
+
       <program>#include &lt;iostream&gt;
 
-void give_compliment() {
-    std::cout &lt;&lt; "You are awesome!";
-}
-
-void give_insult() {
-    insult = "You suck!";
-}
+int add_values(int first, int second);
 
 int main() {
-    give_insult();
+    int result = add_values(3, 4) * 2;
+
+    std::cout &lt;&lt; result &lt;&lt; '\n';
+
+    return 0;
+}
+
+int add_values(int first, int second) {
+    return first + second;
 }</program>
     </statement>
+
     <choices>
       <choice>
         <statement>
-          <p>
-            <c>"You are awesome!"</c>
-          </p>
+          <p><c>7</c></p>
         </statement>
-        <feedback><p>
-          The <c>give_compliment</c> function is not called in <c>main</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>add_values(3, 4)</c> returns <c>7</c>, but that returned
+            value is then multiplied by <c>2</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
+          <p><c>8</c></p>
+        </statement>
+        <feedback>
           <p>
-            <c>"You suck!"</c>
+            First evaluate the function call:
+            <c>add_values(3, 4)</c> returns <c>7</c>.
           </p>
-        </statement>
-        <feedback><p>
-          The <c>give_insult</c> function doesn't <c>cout</c> anything.
-        </p></feedback>
+        </feedback>
       </choice>
-      <choice>
-        <statement>
-          <p>Nothing is printed.</p>
-        </statement>
-        <feedback><p>
-          <c>insult</c> data type is not defined.
-        </p></feedback>
-      </choice>
+
       <choice correct="yes">
+        <statement>
+          <p><c>14</c></p>
+        </statement>
+        <feedback>
+          <p>
+            Correct. The function returns <c>7</c>, so the expression
+            becomes <c>7 * 2</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>34</c></p>
+        </statement>
+        <feedback>
+          <p>
+            The arguments are integers. The function adds their values;
+            it does not join them together.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
         <statement>
           <p>Error!</p>
         </statement>
-        <feedback><p>
-          Correct! <c>insult</c> data type is not defined.
-        </p></feedback>
+        <feedback>
+          <p>
+            A call to a value-returning function can be used as part of
+            a larger expression.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
+  <!-- Q6 -->
   <exercise label="functions_mc6">
     <statement>
-      <p>Rachel and Monica are best friends. They write a function called <c>best_friends</c> so that they
-        announce this fact to the rest of their friends. What is printed when they run the code
-        below? Are there any errors?</p>
-      <program>#include &lt;iostream&gt;
+      <p>
+        What is printed when the following program runs?
+      </p>
 
-void best_friends(std::string a, std::string b) {
-    std::cout &lt;&lt; a &lt;&lt; " is best friends with " &lt;&lt; b;
-}
+      <program>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void best_friends(std::string first, std::string second);
 
 int main() {
-    std::string a = "Rachel";
-    std::string b = "Monica";
-    best_friends(b, a);
+    std::string rachel = "Rachel";
+    std::string monica = "Monica";
+
+    best_friends(monica, rachel);
+
+    return 0;
+}
+
+void best_friends(std::string first, std::string second) {
+    std::cout &lt;&lt; first
+              &lt;&lt; " is best friends with "
+              &lt;&lt; second
+              &lt;&lt; '\n';
 }</program>
     </statement>
+
     <choices>
       <choice correct="yes">
         <statement>
-          <p>
-            <c>"Monica is best friends with Rachel"</c>
-          </p>
+          <p><c>Monica is best friends with Rachel</c></p>
         </statement>
-        <feedback><p>
-          Correct! Although the function definition has <c><![CDATA[a << " is best
-friends with " << b]]></c>, we call the function with
-            variable <c>b</c> as argument <c>a</c> and variable <c>a</c> as argument <c>b</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>monica</c> is the first argument, so its value is
+            passed to <c>first</c>. <c>rachel</c> is passed to
+            <c>second</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>"Rachel is best friends with Monica"</c>
-          </p>
+          <p><c>Rachel is best friends with Monica</c></p>
         </statement>
-        <feedback><p>
-          You seem to be confusing your arguments and parameters!
-        </p></feedback>
+        <feedback>
+          <p>
+            Arguments are matched with parameters by position. Look at
+            the order used in the function call.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>a is best friends with b</c>
-          </p>
+          <p><c>first is best friends with second</c></p>
         </statement>
-        <feedback><p>
-          The function <c>couts</c> the <em>values</em> of the variables, not their names!
-        </p></feedback>
+        <feedback>
+          <p>
+            The output uses the values stored in the parameters, not
+            their variable names.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>b is best friends with a</c>
-          </p>
+          <p><c>monica is best friends with rachel</c></p>
         </statement>
-        <feedback><p>
-          The function <c>couts</c> the <em>values</em> of the variables, not their names!
-        </p></feedback>
+        <feedback>
+          <p>
+            The variable names are not printed. Their string values are
+            <c>"Monica"</c> and <c>"Rachel"</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Error!</p>
         </statement>
-        <feedback><p>
-          There are no errors with this program!
-        </p></feedback>
+        <feedback>
+          <p>
+            The argument types are compatible with the corresponding
+            parameter types, so the call is legal.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
+  <!-- Q7 -->
   <exercise label="functions_mc7">
     <statement>
-      <p>What is printed when the following code runs? Are there any errors?</p>
+      <p>
+        What is printed when the following program runs?
+      </p>
+
       <program>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void greeting(std::string name);
+void goodbye(std::string name);
+
+int main() {
+    std::string hannah = "Hannah";
+    std::string anna = "Anna";
+    std::string louise = hannah;
+
+    hannah = anna;
+    anna = louise;
+
+    goodbye(anna);
+
+    return 0;
+}
 
 void greeting(std::string name) {
     std::cout &lt;&lt; "hello, " &lt;&lt; name &lt;&lt; "!";
@@ -418,89 +564,87 @@ void greeting(std::string name) {
 
 void goodbye(std::string name) {
     greeting(name);
-    std::cout &lt;&lt; "!!";
-}
-
-int main() {
-    std::string hannah = "Hannah";
-    std::string anna = "Anna";
-    std::string louise = hannah;
-    hannah = anna;
-    anna = louise;
-    goodbye(anna);
+    std::cout &lt;&lt; "!!\n";
 }</program>
     </statement>
+
     <choices>
       <choice correct="yes">
         <statement>
-          <p>
-            <c>hello, Hannah!!!</c>
-          </p>
+          <p><c>hello, Hannah!!!</c></p>
         </statement>
-        <feedback><p>
-          Correct! The string <q>Hannah</q> is assigned to the variable <c>louise</c>, then the value
-            of <c>louise</c> is assigned to the variable <c>anna</c>. When <c>goodbye(anna)</c> runs, <c>anna</c> has the value <q>
-            Hannah</q>.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>louise</c> first receives the value
+            <c>"Hannah"</c>, and that value is later assigned to
+            <c>anna</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>hello, anna!!!</c>
-          </p>
+          <p><c>hello, anna!!!</c></p>
         </statement>
-        <feedback><p>
-          The function <c>couts</c> the <em>value</em> of the variable <c>anna</c> not the variable name!
-        </p></feedback>
+        <feedback>
+          <p>
+            The function prints the value stored in <c>anna</c>, not the
+            variable's name.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>hello, Anna!!!</c>
-          </p>
+          <p><c>hello, Anna!!!</c></p>
         </statement>
-        <feedback><p>
-          Is <c>"Anna"</c> still the value of <c>anna</c>?
-        </p></feedback>
+        <feedback>
+          <p>
+            Trace the assignments before <c>goodbye(anna)</c>. Is
+            <c>"Anna"</c> still stored in <c>anna</c>?
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>hello, Louise!</c>
-          </p>
+          <p><c>hello, Louise!!!</c></p>
         </statement>
-        <feedback><p>
-          The <c>goodbye</c> function adds extra exclamation points.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
+        <feedback>
           <p>
-            <c>hello, Louise!!!</c>
+            <c>louise</c> is a variable name. Its stored value is
+            <c>"Hannah"</c>.
           </p>
-        </statement>
-        <feedback><p>
-          We assigned the value of <c>louise</c> to <c>anna</c>. Is <c>"Louise"</c> the value of <c>louise</c>?
-        </p></feedback>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Error!</p>
         </statement>
-        <feedback><p>
-          There are no errors with this program!
-        </p></feedback>
+        <feedback>
+          <p>
+            The program is valid. Trace the values assigned to the string
+            variables.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
+  <!-- Q8 -->
   <exercise label="functions_mc8">
     <statement>
-      <p><term>Multiple Response</term> Which of the following are legal function calls of <c>order_food</c>?</p>
-      <program>#include &lt;iostream&gt;
+      <p>
+        <term>Multiple Response</term> Which of the following are legal
+        calls to <c>order_food</c>?
+      </p>
 
-void orderFood(std::string food, int quantity) {
-    std::cout &lt;&lt; "I'll have " &lt;&lt; quantity &lt;&lt; " " &lt;&lt; food;
-}
+      <program>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void order_food(std::string food, int quantity);
 
 int main() {
     std::string a = "wings";
@@ -508,246 +652,348 @@ int main() {
     int c = 3;
     double d = 8.64;
     char e = 'p';
+
+    return 0;
+}
+
+void order_food(std::string food, int quantity) {
+    std::cout &lt;&lt; "I'll have "
+              &lt;&lt; quantity
+              &lt;&lt; " "
+              &lt;&lt; food
+              &lt;&lt; '\n';
 }</program>
     </statement>
+
     <choices>
       <choice correct="yes">
         <statement>
-          <p>
-            <c>order_food(a, c);</c>
-          </p>
+          <p><c>order_food(a, c);</c></p>
         </statement>
-        <feedback><p>
-          Correct! <c>a</c> is a string and <c>c</c> is an int.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>a</c> is a <c>std::string</c> and <c>c</c> is
+            an <c>int</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>
-            <c>order_food(b, d);</c>
-          </p>
+          <p><c>order_food(b, d);</c></p>
         </statement>
-        <feedback><p>
-          Correct! Automatic type conversion will convert d to an <c>int</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. The <c>double</c> argument can be implicitly
+            converted to the <c>int</c> required by the second parameter.
+            Its fractional part is discarded.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>order_food(e, c);</c>
-          </p>
+          <p><c>order_food(e, c);</c></p>
         </statement>
-        <feedback><p>
-          <c>e</c> has a character value, and this function takes a <em>string</em>.
-        </p></feedback>
+        <feedback>
+          <p>
+            The first parameter requires a <c>std::string</c>.
+            A <c>char</c> is not implicitly converted to a
+            <c>std::string</c> for this call.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>
-            <c>orderfood(a, d);</c>
-          </p>
+          <p><c>order_food(a, d);</c></p>
         </statement>
-        <feedback><p>
-          Correct! Automatic type conversion will convert d to an <c>int</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>a</c> matches the first parameter, and
+            <c>d</c> can be converted to <c>int</c> for the second
+            parameter.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>order_food(c, a);</c>
-          </p>
+          <p><c>order_food(c, a);</c></p>
         </statement>
-        <feedback><p>
-          You have to input your arguments in the correct order.
-        </p></feedback>
+        <feedback>
+          <p>
+            The arguments are in the wrong order. The first parameter
+            requires a <c>std::string</c>, and the second requires an
+            <c>int</c>.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
+  <!-- Q9 -->
   <exercise label="functions_mc9">
     <statement>
-      <p>What is printed when the following code runs? Are there any errors?</p>
+      <p>
+        What is printed when the following program runs?
+      </p>
+
       <program>#include &lt;iostream&gt;
 
-void print_word(std::string w) {
-    std::cout &lt;&lt; w &lt;&lt; w;
-}
+void add_one(int&amp; value);
 
 int main() {
-    char a = 'a' + 5;
-    print_word (a);
+    int count = 5;
+
+    add_one(count);
+
+    std::cout &lt;&lt; count &lt;&lt; '\n';
+
+    return 0;
+}
+
+void add_one(int&amp; value) {
+    value = value + 1;
 }</program>
     </statement>
+
     <choices>
       <choice>
         <statement>
-          <p>
-            <c>a</c>
-          </p>
+          <p><c>1</c></p>
         </statement>
-        <feedback><p>
-          <c>'a'</c> is no longer the value of <c>a</c>, and the function would print it more than
-            once. Hint: think about the <em>type</em> of <c>a</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>value</c> refers to the caller's variable
+            <c>count</c>, whose initial value is <c>5</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>
-            <c>f</c>
-          </p>
+          <p><c>5</c></p>
         </statement>
-        <feedback><p>
-          <c>'f'</c> is the value of a, but the function would print it more than once. Hint: think
-            about the <em>type</em> of <c>a</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
+        <feedback>
           <p>
-            <c>aa</c>
+            Because <c>value</c> is a reference parameter, changing it
+            also changes <c>count</c>.
           </p>
-        </statement>
-        <feedback><p>
-          <c>'a'</c> is no longer the value of <c>a</c>. Hint: think about the <em>type</em> of <c>a</c>
-            .
-        </p></feedback>
+        </feedback>
       </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>ff</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Hint: think about the <em>type</em> of <c>a</c>.
-        </p></feedback>
-      </choice>
+
       <choice correct="yes">
+        <statement>
+          <p><c>6</c></p>
+        </statement>
+        <feedback>
+          <p>
+            Correct. <c>value</c> refers to <c>count</c>, so adding
+            <c>1</c> changes <c>count</c> from <c>5</c> to <c>6</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>51</c></p>
+        </statement>
+        <feedback>
+          <p>
+            These are integer values. <c>value + 1</c> performs integer
+            addition.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
         <statement>
           <p>Error!</p>
         </statement>
-        <feedback><p>
-          <c>print_word</c> takes a string, not a character, as an argument.
-        </p></feedback>
+        <feedback>
+          <p>
+            Passing an <c>int</c> variable to an <c>int&amp;</c>
+            reference parameter is legal.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
+  <!-- Q10 -->
   <exercise label="functions_mc10">
     <statement>
-      <p>How many local variables and parameters does <c>mult</c> have?</p>
-      <program>void mult(int a, int b, int c) {
+      <p>
+        How many parameters and local variables are declared in
+        <c>mult</c>?
+      </p>
+
+      <program>int mult(int a, int b, int c) {
     int d = 7;
-    std::cout &lt;&lt; a * b * c * d;
+
+    return a * b * c * d;
 }</program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>1 parameter, 3 local variables</p>
         </statement>
-        <feedback><p>
-          Remember, the parameters are declared in the function definition, and the local
-            variables are declared <em>inside</em> of the function.
-        </p></feedback>
+        <feedback>
+          <p>
+            Parameters appear in the function's parameter list. Count
+            <c>a</c>, <c>b</c>, and <c>c</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>2 parameters, 4 local variables</p>
         </statement>
-        <feedback><p>
-          You can declare multiple variables at once! Also, remember that local variables are
-            declared <em>inside</em> of the function.
-        </p></feedback>
+        <feedback>
+          <p>
+            Count the names in the parameter list separately from the
+            variable declared in the function body.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>2 parameters, 1 local variables</p>
+          <p>2 parameters, 1 local variable</p>
         </statement>
-        <feedback><p>
-          You can declare multiple variables at once!
-        </p></feedback>
+        <feedback>
+          <p>
+            There are three parameters in the parameter list.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>3 parameters, 1 local variable</p>
         </statement>
-        <feedback><p>
-          <c>a</c>, <c>b</c>, and <c>c</c> are parameters declared in the function definition. <c>d</c>
-            is a local variable declared inside of the function.
-        </p></feedback>
+        <feedback>
+          <p>
+            Correct. <c>a</c>, <c>b</c>, and <c>c</c> are parameters.
+            <c>d</c> is a local variable declared in the function body.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>3 parameters, 4 local variables</p>
         </statement>
-        <feedback><p>
-          Remember that local variables are declared <em>inside</em> of the function.
-        </p></feedback>
+        <feedback>
+          <p>
+            The parameters have local scope, but this question counts
+            parameters separately from variables declared in the
+            function body. Only <c>d</c> is declared there.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
+
+  <!-- Q11 -->
   <exercise label="functions_mc11">
     <statement>
-      <p>How many calls are made to <c>party</c> during the entire program?</p>
+      <p>
+        How many times is <c>party</c> called while the following program
+        runs?
+      </p>
+
       <program>#include &lt;iostream&gt;
+#include &lt;string&gt;
 
-void party(int day_of_month, std::string address) {
-    std::cout &lt;&lt; "party on "&lt;&lt;day_of_month&lt;&lt;" at "
-         &lt;&lt; address &lt;&lt; '\n';
-}
-
-void weekend(bool available) {
-    if(available==true) {
-       party(21,"Big house");
-       party(22,"CCTC");
-    } else {
-       std::cout &lt;&lt; "sorry I have to study for ENGR101!" &lt;&lt; '\n';
-    }
-}
+void party(std::string location);
+void weekend();
 
 int main() {
-    bool im_free=false;
-    party(25, "North campus");
-    weekend(im_free);
+    party("North campus");
+    weekend();
+    party("Central campus");
 
-    im_free=true;
-    party(25, "Central campus");
-    weekend(im_free);
     return 0;
+}
+
+void party(std::string location) {
+    std::cout &lt;&lt; "Party at " &lt;&lt; location &lt;&lt; '\n';
+}
+
+void weekend() {
+    party("Big house");
+    party("CCTC");
 }</program>
     </statement>
+
     <choices>
-      <choice>
-        <statement>
-          <p>6 calls</p>
-        </statement>
-        <feedback><p>
-          Take into account that <c>weekend</c> only calls <c>party</c> if a conditional is true!
-        </p></feedback>
-      </choice>
       <choice>
         <statement>
           <p>2 calls</p>
         </statement>
-        <feedback><p>
-          <c>weekend</c> can also call the function <c>party</c>
-        </p></feedback>
+        <feedback>
+          <p>
+            There are two direct calls to <c>party</c> in
+            <c>main</c>, but <c>weekend</c> also calls it.
+          </p>
+        </feedback>
       </choice>
-      <choice correct="yes">
-        <statement>
-          <p>4 calls</p>
-        </statement>
-        <feedback><p>
-          Correct! two calls by <c>main</c> and two calls by <c>weekend</c>
-        </p></feedback>
-      </choice>
+
       <choice>
         <statement>
           <p>3 calls</p>
         </statement>
-        <feedback><p>
-          One invocation of <c>weekend</c> calls <c>party</c> twice.
-        </p></feedback>
+        <feedback>
+          <p>
+            Look inside <c>weekend</c>. It calls <c>party</c> twice.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice correct="yes">
+        <statement>
+          <p>4 calls</p>
+        </statement>
+        <feedback>
+          <p>
+            Correct. <c>main</c> calls <c>party</c> twice, and its call
+            to <c>weekend</c> causes two more calls to <c>party</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>5 calls</p>
+        </statement>
+        <feedback>
+          <p>
+            Calling <c>weekend</c> is not itself a call to
+            <c>party</c>. Count only executions of <c>party</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>6 calls</p>
+        </statement>
+        <feedback>
+          <p>
+            Trace the calls beginning in <c>main</c>. Only four calls
+            reach <c>party</c>.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </exercises>

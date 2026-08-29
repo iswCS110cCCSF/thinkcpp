@@ -1,137 +1,258 @@
-<?xml version="1.0" ?><section xml:id="chapter3_functions-with-multiple-parameters">
+<?xml version="1.0"?>
+<section xml:id="chapter3_functions-with-multiple-parameters">
   <title>Functions with Multiple Parameters</title>
-  <p>The syntax for declaring and invoking functions with multiple parameters
-    is a common source of errors. First, remember that you have to declare
-    the type of every parameter. For example</p>
-  <program>void print_time(int hour, int minute) {
-  std::cout &lt;&lt; hour;
-  std::cout &lt;&lt; &quot;:&quot;;
-  std::cout &lt;&lt; minute;
-}</program>
-  <p>It might be tempting to write <c>(int hour, minute)</c>, but that format is only legal for variable declarations,
-    not for parameters.</p>
-  <p>Another common source of confusion is that you do not have to declare
-    the types of arguments when you call a function. The following is wrong!</p>
-  <program>int hour = 11;
-int minute = 59;
-print_time(int hour, int minute);   // WRONG!</program>
-  <p>In this case, the compiler can tell the type of hour and minute by
-    looking at their declarations.</p>
+
+  <p>
+    The syntax for declaring and calling functions with multiple parameters
+    is a common source of errors. First, remember that you must declare the
+    type of every parameter.
+  </p>
+
+  <p>
+    For example, this function declaration has two parameters:
+  </p>
+
+  <program language="cpp">
+    <input>
+void print_time(int hour, int minute);
+    </input>
+  </program>
+
+  <p>
+    The complete program can be organized with the declaration before
+    <c>main</c> and the definition after <c>main</c>:
+  </p>
+
+  <program>
+#include &lt;iostream&gt;
+
+void print_time(int hour, int minute);
+
+int main() {
+    int hour = 11;
+    int minute = 59;
+
+    print_time(hour, minute);
+
+    return 0;
+}
+
+void print_time(int hour, int minute) {
+    std::cout &lt;&lt; hour &lt;&lt; ":" &lt;&lt; minute &lt;&lt; '\n';
+}
+  </program>
+
+  <p>
+    Each parameter needs its own type. It might be tempting to write
+    <c>(int hour, minute)</c>, but that is not valid syntax for a function
+    parameter list. The correct form is
+    <c>(int hour, int minute)</c>.
+  </p>
+
+  <p>
+    When calling a function, however, you do not write the types of the
+    arguments. The following call is wrong:
+  </p>
+
+  <program language="cpp">
+    <input>
+print_time(int hour, int minute);   // WRONG
+    </input>
+  </program>
+
+  <p>
+    The variables <c>hour</c> and <c>minute</c> have already been
+    declared, so their types are already known. The correct function call is:
+  </p>
+
+  <program language="cpp">
+    <input>
+print_time(hour, minute);
+    </input>
+  </program>
+
   <warning>
-    <p>It is unnecessary and illegal to include the type when you pass
-      variables as arguments! The type is only needed for declaration.</p>
+    <p>
+      Include parameter types in a function declaration or definition.
+      Do not include types when supplying variables or values as arguments
+      in a function call.
+    </p>
   </warning>
-  <p>The correct syntax is print_time(hour, minute).</p>
+
   <listing label="multiple_params_AC_1">
     <title>
-      This program shows how the dollar_amount and cent_amount arguments
-        are passed into the print_price function.
+      This program shows how the <c>dollar_amount</c> and
+      <c>cent_amount</c> arguments are passed to the
+      <c>print_price</c> function.
     </title>
-    <program interactive="activecode" line-numbers="yes" label="multiple_params_AC_1_editor">
+
+    <program interactive="activecode"
+             line-numbers="yes"
+             label="multiple_params_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
 
-void print_price(int dollars, int cents) {
-    std::cout << "Price is " << dollars << " dollars and " << cents << " cents.
-";
-}
+void print_price(int dollars, int cents);
 
 int main() {
     int dollar_amount = 2;
     int cent_amount = 92;
+
     print_price(dollar_amount, cent_amount);
+
     return 0;
 }
-        ]]></code>
+
+void print_price(int dollars, int cents) {
+    std::cout << "Price is "
+              << dollars
+              << " dollars and "
+              << cents
+              << " cents.\n";
+}
+      ]]></code>
     </program>
   </listing>
+
   <exercise label="multiple_params_1">
     <statement>
-      <p>Which of the following is a correct function header (first line of
-        a function definition)?</p>
+      <p>
+        Which of the following is a correct function header (the first
+        line of a function definition)?
+      </p>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>
-            <c>totalcost(double cost, tax, discount)</c>
+            <c>total_cost(double cost, tax, discount) {</c>
           </p>
         </statement>
-        <feedback><p>
-            <c>totalcost</c> needs a return type,
-            and each parameter needs a data type.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>total_cost</c> needs a return type, and each parameter
+            needs its own type.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
             <c>total_cost(double cost, double tax) {</c>
           </p>
         </statement>
-        <feedback><p>
-          <c>total_cost</c> needs a return type.
-        </p></feedback>
+        <feedback>
+          <p>
+            <c>total_cost</c> needs a return type.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>
             <c>void total_cost(double cost, double tax, double discount) {</c>
           </p>
         </statement>
-        <feedback><p>Correct!</p></feedback>
+        <feedback>
+          <p>
+            Correct. The function has a return type, and each parameter
+            has its own type.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="multiple_params_2">
     <statement>
-      <p>Which of the following is a legal function call of the function below?</p>
-      <program>void multiply_two(int num, string name) {
-  int total = num * 2;
-  std::cout &lt;&lt; &quot;Hi &quot; &lt;&lt; name &lt;&lt; &quot;, your total is &quot; &lt;&lt; total &lt;&lt; &quot;!&quot; &lt;&lt; std::endl ;
-}
+      <p>
+        Which of the following is a legal function call for
+        <c>multiply_two</c> in the program below?
+      </p>
+
+      <program>
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void multiply_two(int num, std::string name);
 
 int main() {
-  int x = 2;
- std::string phil = &quot;Phil&quot;;
-}</program>
+    int x = 2;
+    std::string person = "Phil";
+
+    return 0;
+}
+
+void multiply_two(int num, std::string name) {
+    int total = num * 2;
+
+    std::cout &lt;&lt; "Hi "
+              &lt;&lt; name
+              &lt;&lt; ", your total is "
+              &lt;&lt; total
+              &lt;&lt; "!\n";
+}
+      </program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>
-            <c>multiply_two(int x, string phil);</c>
+            <c>multiply_two(int x, std::string person);</c>
           </p>
         </statement>
-        <feedback><p>
-            Data types are not needed when calling a function.
-        </p></feedback>
+        <feedback>
+          <p>
+            Types belong in the function declaration or definition, not
+            in the argument list of a function call.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>
-            <c>multiply_two (x, phil);</c>
+            <c>multiply_two(x, person);</c>
           </p>
         </statement>
-        <feedback><p>Correct!</p></feedback>
+        <feedback>
+          <p>
+            Correct. The arguments are supplied in the same order as the
+            corresponding parameters.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
-            <c>void multiply_two(int num, string name) {</c>
+            <c>void multiply_two(int num, std::string name) {</c>
           </p>
         </statement>
-        <feedback><p>This is the function definition.</p></feedback>
+        <feedback>
+          <p>
+            This begins a function definition rather than a function call.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>
-            <c>void multiply_two(int x, string phil);</c>
+            <c>void multiply_two(int x, std::string person);</c>
           </p>
         </statement>
-        <feedback><p>
-          Data types are not needed when calling a function.
-        </p></feedback>
+        <feedback>
+          <p>
+            This is a function declaration, not a function call.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </section>
