@@ -2644,7 +2644,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.1",
   "title": "Floating-point",
-  "body": " Floating-point  In the last chapter we had some problems dealing with numbers that were not integers. We worked around the problem by measuring percentages instead of fractions, but a more general solution is to use floating-point numbers, which can represent fractions as well as integers. In C++, there are two floating-point types, called float and double . In this book we will use doubles exclusively.  You can create floating-point variables and assign values to them using the same syntax we used for the other types. For example:  double pi; pi = 3.14159;  It is also legal to declare a variable and assign a value to it at the same time:  int x = 1; string empty = \"\"; double pi = 3.14159;  In fact, this syntax is quite common. A combined declaration and assignment is sometimes called an initialization .   It is important that you initialize any and all variables that you declare. Failure to do so will generate an error (if you're lucky), or C++ will initialize the variable to leftover memory, which could lead to undefined behavior.   Although floating-point numbers are useful, they are often a source of confusion because there seems to be an overlap between integers and floating-point numbers. For example, if you have the value 1, is that an integer, a floating-point number, or both?  Strictly speaking, C++ distinguishes the integer value 1 from the floating-point value 1.0, even though they seem to be the same number. They belong to different types, and strictly speaking, you are not allowed to make assignments between types. However, the following is llegal:  int x = 1.1;  because the double is converted to int and the the fractional part is discarded. But it is easy to forget this rule, especially because there are places where C++ automatically converts from one type to another. For example,  double y = 1;  should technically not be legal, but C++ allows it by converting the int to a double automatically. This leniency is convenient, but it can cause problems; for example:  double y = 1 \/ 3;  You might expect the variable y to be given the value 0.333333, which is a legal floating-point value, but in fact it will get the value 0.0. The reason is that the expression on the right appears to be the ratio of two integers, so C++ does integer division, which yields the integer value 0. Converted to floating-point, the result is 0.0.   It's crucial that you understand that when given two integers, C++ performs integer division! This is a common logic error that can be hard to catch, since your program will compile without problems.   One way to solve this problem (once you figure out what it is) is to make the right-hand side a floating-point expression:  double y = 1.0 \/ 3.0;  This sets y to 0.333333, as expected.  All the operations we have seen—addition, subtraction, multiplication, and division—work on floating-point values, although you might be interested to know that the underlying mechanism is completely different. In fact, most processors have special hardware just for performing floating-point operations.    A(n) statment consists of a declaration statement and an assignment statement, which are combined.             It's your birthday and your cake can serve 12. You want to slice it evenly so that you and each of your 4 friends receive an equal amount. One of your friends wants to know the serving size of his slice. You write the following code in C++ to answer her question:  int servings = 12; int people = 5; double serving_size = servings \/ people;  The program claims serving_size is servings. This is (more, less, the same) than\/as the correct answer.       Correct! C++ performs integer division.    .*  Hint: serving_size and people are integer variables!         .*  Is the answer the program computes more or less than you would get if you did decimal division?        In the lab, we measured a temperature of 7.99999999 degrees C, using an extremely precise measuring device. Now we are writing a program to perform some calculations with our data. Consider the following C++ code.  double e = 2.71828; int e_int = e; double e_double = e_int; std::cout << e_double;  What is the value of e_double that is printed to the terminal?      e   This is the name of a variable. Only the value of a variable will print with cout.     3   Converting to an int always truncates to the neareast integer toward zero.     2   When we converted e to an int, e was truncated to the neareast integer toward zero. In this case to 2. When we converted e_nt to e_double, the decimal places from e were lost, and the value of e_double is 2.     3.0   Converting to an int always truncates toward zero.     2.71828   When we converted e to an int, e was truncated to the neareast integer toward zero. In this case to 2. When we converted e_nt to e_double, the decimal places from e were lost.     Identifying whether an operation carries out integer division or floating point division can get tricky when we have a mix of integers and doubles in our expression. The thing to remeber is if either the divisor or the dividend is a double then the program will carry out floating point division.   Run the code to see what type of division occurs each time.   #include <iostream> int main() { double value = 5.0\/2; \/\/(a) std::cout << \"current value (a) is \" << value << '\\n'; value = 5\/2.0; \/\/(b) std::cout << \"current value (b) is \" << value << '\\n'; value = 5\/2; \/\/(c) std::cout << \"current value (c) is \" << value << '\\n'; value = 5.0\/2.0; \/\/(d) std::cout << \"current value (d) is \" << value << '\\n'; return 0; }    "
+  "body": " Floating-point  In the last chapter we had some problems dealing with numbers that were not integers. We worked around the problem by measuring percentages instead of fractions, but a more general solution is to use floating-point numbers, which can represent fractional values as well as whole-number values. C++ provides several floating-point types, including float , double , and long double . In this book, we will normally use double .  You can create floating-point variables and assign values to them using the same syntax we used for other types. For example:  double pi; pi = 3.14159;  It is also possible to declare a variable and give it an initial value at the same time:  int x = 1; std::string empty = \"\"; double pi = 3.14159;  Giving a variable its initial value when it is declared is called initialization .   It is a good habit to initialize fundamental local variables, such as int and double , before using their values. An uninitialized fundamental local variable may contain an indeterminate value, and using that value can lead to undefined behavior.   Although floating-point numbers are useful, they can also be a source of confusion because there seems to be an overlap between integers and floating-point numbers. For example, the integer value 1 and the floating-point value 1.0 represent the same mathematical quantity, but they have different C++ types.  C++ allows many conversions between numeric types. For example, the following initialization is legal:  int x = 1.1;  The value 1.1 has type double , but x has type int . When the value is converted to int , its fractional part is discarded, so x receives the value 1 .  C++ can also automatically convert an integer value to a floating-point value. For example:  double y = 1;  The integer value 1 is implicitly converted to the double value 1.0 . These automatic conversions are convenient, but they do not change how an expression is evaluated before the conversion takes place. For example:  double y = 1 \/ 3;  You might expect y to receive a value close to 0.333333 , but it receives 0.0 . Both operands in 1 \/ 3 are integers, so C++ performs integer division first. Integer division produces 0 , and that result is then converted to the double value 0.0 .   When both operands of division are integers, C++ performs integer division. The fractional part of the mathematical result is discarded. This can create a logic error even though the program compiles successfully.   One way to get floating-point division is to make at least one operand a floating-point value:  double y = 1.0 \/ 3.0;  This gives y a value close to 0.333333 , as expected.  The arithmetic operations we have seen so far—addition, subtraction, multiplication, and division—also work with floating-point values. Internally, processors generally use specialized hardware to perform floating-point operations.    Giving a variable its initial value when it is declared is called .       Correct. This is called initialization.        A cake contains 12 servings and is divided equally among 5 people. Consider the following code:  int servings = 12; int people = 5; double serving_size = servings \/ people;  The program stores in serving_size . This is (more, less, the same) than the mathematically correct result.       Correct. Both operands are integers, so 12 \/ 5 performs integer division and produces 2 .    .*  Both servings and people have type int . What kind of division will C++ perform?       Correct. The mathematical result is 2.4 , so 2 is less than the correct result.    .*  Compare the program's result, 2 , with the mathematical result of 12 \/ 5 .        Consider the following C++ code:  double e = 2.71828; int e_int = e; double e_double = e_int; std::cout << e_double;  What value is printed?      e     e is the variable name. std::cout prints the value stored in e_double .      3    Converting 2.71828 to int does not round it to the nearest integer. The fractional part is discarded.      2    Correct. Converting e to int discards the fractional part, so e_int becomes 2 . Converting that value back to double gives 2.0 , which std::cout displays as 2 by default.      3.0    The conversion to int discards the fractional part of 2.71828 , producing 2 , not 3 .      2.71828    The fractional part is lost when e is converted to int . Converting the resulting 2 back to double cannot restore the lost fractional part.      Identifying whether division uses integer or floating-point arithmetic can become trickier when an expression mixes integers and floating-point values. If either operand of the division is a floating-point value, C++ performs floating-point division. If both operands are integers, it performs integer division.   Run the code to see what type of division occurs each time.   #include <iostream> int main() { double value = 5.0 \/ 2; \/\/ (a) std::cout << \"current value (a) is \" << value << '\\n'; value = 5 \/ 2.0; \/\/ (b) std::cout << \"current value (b) is \" << value << '\\n'; value = 5 \/ 2; \/\/ (c) std::cout << \"current value (c) is \" << value << '\\n'; value = 5.0 \/ 2.0; \/\/ (d) std::cout << \"current value (d) is \" << value << '\\n'; return 0; }    "
 },
 {
   "id": "chapter3_floating-point-2",
@@ -2653,7 +2653,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In the last chapter we had some problems dealing with numbers that were not integers. We worked around the problem by measuring percentages instead of fractions, but a more general solution is to use floating-point numbers, which can represent fractions as well as integers. In C++, there are two floating-point types, called float and double . In this book we will use doubles exclusively. "
+  "body": "In the last chapter we had some problems dealing with numbers that were not integers. We worked around the problem by measuring percentages instead of fractions, but a more general solution is to use floating-point numbers, which can represent fractional values as well as whole-number values. C++ provides several floating-point types, including float , double , and long double . In this book, we will normally use double . "
 },
 {
   "id": "chapter3_floating-point-3",
@@ -2662,7 +2662,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "You can create floating-point variables and assign values to them using the same syntax we used for the other types. For example: "
+  "body": "You can create floating-point variables and assign values to them using the same syntax we used for other types. For example: "
 },
 {
   "id": "chapter3_floating-point-5",
@@ -2671,7 +2671,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "It is also legal to declare a variable and assign a value to it at the same time: "
+  "body": "It is also possible to declare a variable and give it an initial value at the same time: "
 },
 {
   "id": "chapter3_floating-point-7",
@@ -2680,7 +2680,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In fact, this syntax is quite common. A combined declaration and assignment is sometimes called an initialization . "
+  "body": "Giving a variable its initial value when it is declared is called initialization . "
 },
 {
   "id": "chapter3_floating-point-8",
@@ -2689,7 +2689,7 @@ var ptx_lunr_docs = [
   "type": "Warning",
   "number": "3.1.1",
   "title": "",
-  "body": " It is important that you initialize any and all variables that you declare. Failure to do so will generate an error (if you're lucky), or C++ will initialize the variable to leftover memory, which could lead to undefined behavior.  "
+  "body": " It is a good habit to initialize fundamental local variables, such as int and double , before using their values. An uninitialized fundamental local variable may contain an indeterminate value, and using that value can lead to undefined behavior.  "
 },
 {
   "id": "chapter3_floating-point-9",
@@ -2698,7 +2698,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Although floating-point numbers are useful, they are often a source of confusion because there seems to be an overlap between integers and floating-point numbers. For example, if you have the value 1, is that an integer, a floating-point number, or both? "
+  "body": "Although floating-point numbers are useful, they can also be a source of confusion because there seems to be an overlap between integers and floating-point numbers. For example, the integer value 1 and the floating-point value 1.0 represent the same mathematical quantity, but they have different C++ types. "
 },
 {
   "id": "chapter3_floating-point-10",
@@ -2707,7 +2707,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Strictly speaking, C++ distinguishes the integer value 1 from the floating-point value 1.0, even though they seem to be the same number. They belong to different types, and strictly speaking, you are not allowed to make assignments between types. However, the following is llegal: "
+  "body": "C++ allows many conversions between numeric types. For example, the following initialization is legal: "
 },
 {
   "id": "chapter3_floating-point-12",
@@ -2716,52 +2716,52 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "because the double is converted to int and the the fractional part is discarded. But it is easy to forget this rule, especially because there are places where C++ automatically converts from one type to another. For example, "
+  "body": "The value 1.1 has type double , but x has type int . When the value is converted to int , its fractional part is discarded, so x receives the value 1 . "
 },
 {
-  "id": "chapter3_floating-point-14",
+  "id": "chapter3_floating-point-13",
   "level": "2",
-  "url": "chapter3_floating-point.html#chapter3_floating-point-14",
+  "url": "chapter3_floating-point.html#chapter3_floating-point-13",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "should technically not be legal, but C++ allows it by converting the int to a double automatically. This leniency is convenient, but it can cause problems; for example: "
+  "body": "C++ can also automatically convert an integer value to a floating-point value. For example: "
 },
 {
-  "id": "chapter3_floating-point-16",
+  "id": "chapter3_floating-point-15",
   "level": "2",
-  "url": "chapter3_floating-point.html#chapter3_floating-point-16",
+  "url": "chapter3_floating-point.html#chapter3_floating-point-15",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "You might expect the variable y to be given the value 0.333333, which is a legal floating-point value, but in fact it will get the value 0.0. The reason is that the expression on the right appears to be the ratio of two integers, so C++ does integer division, which yields the integer value 0. Converted to floating-point, the result is 0.0. "
+  "body": "The integer value 1 is implicitly converted to the double value 1.0 . These automatic conversions are convenient, but they do not change how an expression is evaluated before the conversion takes place. For example: "
 },
 {
   "id": "chapter3_floating-point-17",
   "level": "2",
   "url": "chapter3_floating-point.html#chapter3_floating-point-17",
-  "type": "Warning",
-  "number": "3.1.2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": " It's crucial that you understand that when given two integers, C++ performs integer division! This is a common logic error that can be hard to catch, since your program will compile without problems.  "
+  "body": "You might expect y to receive a value close to 0.333333 , but it receives 0.0 . Both operands in 1 \/ 3 are integers, so C++ performs integer division first. Integer division produces 0 , and that result is then converted to the double value 0.0 . "
 },
 {
   "id": "chapter3_floating-point-18",
   "level": "2",
   "url": "chapter3_floating-point.html#chapter3_floating-point-18",
-  "type": "Paragraph",
-  "number": "",
+  "type": "Warning",
+  "number": "3.1.2",
   "title": "",
-  "body": "One way to solve this problem (once you figure out what it is) is to make the right-hand side a floating-point expression: "
+  "body": " When both operands of division are integers, C++ performs integer division. The fractional part of the mathematical result is discarded. This can create a logic error even though the program compiles successfully.  "
 },
 {
-  "id": "chapter3_floating-point-20",
+  "id": "chapter3_floating-point-19",
   "level": "2",
-  "url": "chapter3_floating-point.html#chapter3_floating-point-20",
+  "url": "chapter3_floating-point.html#chapter3_floating-point-19",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This sets y to 0.333333, as expected. "
+  "body": "One way to get floating-point division is to make at least one operand a floating-point value: "
 },
 {
   "id": "chapter3_floating-point-21",
@@ -2770,7 +2770,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "All the operations we have seen—addition, subtraction, multiplication, and division—work on floating-point values, although you might be interested to know that the underlying mechanism is completely different. In fact, most processors have special hardware just for performing floating-point operations. "
+  "body": "This gives y a value close to 0.333333 , as expected. "
+},
+{
+  "id": "chapter3_floating-point-22",
+  "level": "2",
+  "url": "chapter3_floating-point.html#chapter3_floating-point-22",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The arithmetic operations we have seen so far—addition, subtraction, multiplication, and division—also work with floating-point values. Internally, processors generally use specialized hardware to perform floating-point operations. "
 },
 {
   "id": "floating_point_1",
@@ -2779,7 +2788,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.1.1",
   "title": "",
-  "body": "  A(n) statment consists of a declaration statement and an assignment statement, which are combined.          "
+  "body": "  Giving a variable its initial value when it is declared is called .       Correct. This is called initialization.     "
 },
 {
   "id": "floating_point_2",
@@ -2788,7 +2797,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.1.2",
   "title": "",
-  "body": "  It's your birthday and your cake can serve 12. You want to slice it evenly so that you and each of your 4 friends receive an equal amount. One of your friends wants to know the serving size of his slice. You write the following code in C++ to answer her question:  int servings = 12; int people = 5; double serving_size = servings \/ people;  The program claims serving_size is servings. This is (more, less, the same) than\/as the correct answer.       Correct! C++ performs integer division.    .*  Hint: serving_size and people are integer variables!         .*  Is the answer the program computes more or less than you would get if you did decimal division?     "
+  "body": "  A cake contains 12 servings and is divided equally among 5 people. Consider the following code:  int servings = 12; int people = 5; double serving_size = servings \/ people;  The program stores in serving_size . This is (more, less, the same) than the mathematically correct result.       Correct. Both operands are integers, so 12 \/ 5 performs integer division and produces 2 .    .*  Both servings and people have type int . What kind of division will C++ perform?       Correct. The mathematical result is 2.4 , so 2 is less than the correct result.    .*  Compare the program's result, 2 , with the mathematical result of 12 \/ 5 .     "
 },
 {
   "id": "floating_point_3",
@@ -2797,16 +2806,16 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.1.3",
   "title": "",
-  "body": "  In the lab, we measured a temperature of 7.99999999 degrees C, using an extremely precise measuring device. Now we are writing a program to perform some calculations with our data. Consider the following C++ code.  double e = 2.71828; int e_int = e; double e_double = e_int; std::cout << e_double;  What is the value of e_double that is printed to the terminal?      e   This is the name of a variable. Only the value of a variable will print with cout.     3   Converting to an int always truncates to the neareast integer toward zero.     2   When we converted e to an int, e was truncated to the neareast integer toward zero. In this case to 2. When we converted e_nt to e_double, the decimal places from e were lost, and the value of e_double is 2.     3.0   Converting to an int always truncates toward zero.     2.71828   When we converted e to an int, e was truncated to the neareast integer toward zero. In this case to 2. When we converted e_nt to e_double, the decimal places from e were lost.    "
+  "body": "  Consider the following C++ code:  double e = 2.71828; int e_int = e; double e_double = e_int; std::cout << e_double;  What value is printed?      e     e is the variable name. std::cout prints the value stored in e_double .      3    Converting 2.71828 to int does not round it to the nearest integer. The fractional part is discarded.      2    Correct. Converting e to int discards the fractional part, so e_int becomes 2 . Converting that value back to double gives 2.0 , which std::cout displays as 2 by default.      3.0    The conversion to int discards the fractional part of 2.71828 , producing 2 , not 3 .      2.71828    The fractional part is lost when e is converted to int . Converting the resulting 2 back to double cannot restore the lost fractional part.     "
 },
 {
-  "id": "chapter3_floating-point-25",
+  "id": "chapter3_floating-point-26",
   "level": "2",
-  "url": "chapter3_floating-point.html#chapter3_floating-point-25",
+  "url": "chapter3_floating-point.html#chapter3_floating-point-26",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Identifying whether an operation carries out integer division or floating point division can get tricky when we have a mix of integers and doubles in our expression. The thing to remeber is if either the divisor or the dividend is a double then the program will carry out floating point division. "
+  "body": "Identifying whether division uses integer or floating-point arithmetic can become trickier when an expression mixes integers and floating-point values. If either operand of the division is a floating-point value, C++ performs floating-point division. If both operands are integers, it performs integer division. "
 },
 {
   "id": "floating_point_a1",
@@ -2815,7 +2824,7 @@ var ptx_lunr_docs = [
   "type": "Listing",
   "number": "3.1.1",
   "title": "Run the code to see what type of division occurs each time.",
-  "body": " Run the code to see what type of division occurs each time.   #include <iostream> int main() { double value = 5.0\/2; \/\/(a) std::cout << \"current value (a) is \" << value << '\\n'; value = 5\/2.0; \/\/(b) std::cout << \"current value (b) is \" << value << '\\n'; value = 5\/2; \/\/(c) std::cout << \"current value (c) is \" << value << '\\n'; value = 5.0\/2.0; \/\/(d) std::cout << \"current value (d) is \" << value << '\\n'; return 0; }   "
+  "body": " Run the code to see what type of division occurs each time.   #include <iostream> int main() { double value = 5.0 \/ 2; \/\/ (a) std::cout << \"current value (a) is \" << value << '\\n'; value = 5 \/ 2.0; \/\/ (b) std::cout << \"current value (b) is \" << value << '\\n'; value = 5 \/ 2; \/\/ (c) std::cout << \"current value (c) is \" << value << '\\n'; value = 5.0 \/ 2.0; \/\/ (d) std::cout << \"current value (d) is \" << value << '\\n'; return 0; }   "
 },
 {
   "id": "chapter3_converting-from-double-to-int",
@@ -2824,7 +2833,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.2",
   "title": "Converting from <code class=\"code-inline tex2jax_ignore\">double<\/code> to <code class=\"code-inline tex2jax_ignore\">int<\/code>",
-  "body": " Converting from double to int  As I mentioned, C++ converts int 's to double 's automatically if necessary, because no information is lost in the translation. On the other hand, going from a double to an int requires truncating to the neareast integer toward zero. The implicit conversion is allowed but you'd lose the fractional part doing so. You, as the programmer, should be aware of the loss of the fractional part of the number.  The simplest way to convert a floating-point value to an integer is to use a typecast . Typecasting is so called because it allows you to take a value that belongs to one type and cast it into another type (in the sense of molding or reforming, not throwing).  The syntax for typecasting is like the syntax for a function call. For example:  double pi = 3.14159; int x = int(pi);  The int function returns an integer, so x gets the value 3. Casting to an integer always truncates to the neareast integer toward zero even if the fraction part is 0.99999999.  For every type in C++, there is a corresponding function that typecasts its argument to the appropriate type. However, modern C++ standard recommends using static_cast function like below. Note that the type we are casting into must go between <>. We will learn more on <int> kind of notations later in the book.  int x = static_cast<int>(pi);    In the lab, we measured a temperature of 7.99999999 degrees C, using an extremely precise measuring device. Now we are writing a program to perform some calculations with our data. Consider the following C++ code.  int main() { double temp = 7.99999999; int rounded_temp = int(temp); std::cout << rounded_temp; }  What is the value of rounded_temp?      temp   This is the name of a variable. Only the value of a variable will print with cout.     8   Remember that converting to an integer always truncates to the neareast integer toward zero.     7   Correct!     8.0   This is not an integer data type, and it's not the right number.     7.0   This is not an integer data type.       Your final grade consists of your average performance on exam 1 and exam 2. Your professor is using C++ to grade the exams and allows you to choose which method you'd like your exam to be graded.  double exam1 = 88.8; double exam2 = 72.7; double exam3 = 97.9;   Method 1:   double final = (int(exam1) + int(exam2) + int(exam3)) \/ 3;   Method 2:   int final = int((exam1 + exam2 + exam3) \/ 3);  Which method would you choose and why?      Method 1: final is a double , meaning my final grade will have more digits past the decimal, and will be higher than the int in Method 2.   Although final is a double , it doesn't have any digits past the decimal due to the integer division.     Method 1: the rounding happens at the beginning, so all three of my test scores will be truncated to the neareast integer toward zero int , which in my case, will truncated them up.   Converting to an int always truncated to the neareast integer toward zero, even if your double is very close to the next integer.     Method 2: final is an int , so it gets truncated to he neareast integer up.   Converting to an int always truncated to the neareast integer toward zero, even if your double is very close to the next integer.     Method 2: the truncating happens at the very end, so my grade will be higher!   Always save your truncating until the end!     "
+  "body": " Converting from double to int  As we saw in the previous section, C++ can automatically convert an int value to a double when needed. For example, the integer value 3 can be converted to the floating-point value 3.0 .  Converting in the other direction, from double to int , can lose information because an int cannot store a fractional part. When a floating-point value is converted to an integer, the fractional part is discarded. This is also described as truncating toward zero.  C++ allows this conversion implicitly in some situations, but when you intend to convert a value explicitly, it is clearer to say so in the code. In modern C++, we will use static_cast .  For example:  double pi = 3.14159; int x = static_cast<int>(pi);  The expression static_cast<int>(pi) explicitly converts the value stored in pi to an int . The fractional part is discarded, so x receives the value 3 .  The type we want to convert to appears between the angle brackets < and > . We will see this kind of syntax again later in the course.  Notice that truncation is not the same as rounding. For example:  int a = static_cast<int>(7.99999999); int b = static_cast<int>(-7.99999999);  The value of a is 7 , and the value of b is -7 . In both cases, the fractional part is discarded, which means the result moves toward zero.    Consider the following C++ code:  #include <iostream> int main() { double temp = 7.99999999; int truncated_temp = static_cast<int>(temp); std::cout << truncated_temp << '\\n'; return 0; }  What value is printed?      temp     temp is the variable name. The program prints the value stored in truncated_temp .      8    Converting to int does not round to the nearest integer. The fractional part is discarded.      7    Correct. Converting 7.99999999 to int discards the fractional part, producing 7 .      8.0     truncated_temp has type int , and the conversion produces 7 .      7.0    The numeric value is based on 7 , but truncated_temp has type int .        Consider these exam scores:  double exam1 = 88.8; double exam2 = 72.7; double exam3 = 97.9;  Compare the following two calculations:   Method 1:   int final1 = (static_cast<int>(exam1) + static_cast<int>(exam2) + static_cast<int>(exam3)) \/ 3;   Method 2:   int final2 = static_cast<int>((exam1 + exam2 + exam3) \/ 3.0);  Which statement is correct?      Method 1 gives the larger result because each individual score is converted to int first.    Converting each score first discards each fractional part before the average is computed.      Method 1 and Method 2 always produce the same result.    Converting before a calculation can produce a different result from converting after the calculation.      Method 2 gives the larger result because the fractional parts are kept while the average is calculated, and the conversion to int happens only at the end.    Correct. Method 1 first changes the scores to 88 , 72 , and 97 . Method 2 keeps the fractional parts until after the average has been calculated.      Method 2 rounds the average to the nearest integer.     static_cast<int> does not round to the nearest integer. It discards the fractional part.      "
 },
 {
   "id": "chapter3_converting-from-double-to-int-2",
@@ -2833,7 +2842,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "As I mentioned, C++ converts int 's to double 's automatically if necessary, because no information is lost in the translation. On the other hand, going from a double to an int requires truncating to the neareast integer toward zero. The implicit conversion is allowed but you'd lose the fractional part doing so. You, as the programmer, should be aware of the loss of the fractional part of the number. "
+  "body": "As we saw in the previous section, C++ can automatically convert an int value to a double when needed. For example, the integer value 3 can be converted to the floating-point value 3.0 . "
 },
 {
   "id": "chapter3_converting-from-double-to-int-3",
@@ -2842,7 +2851,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The simplest way to convert a floating-point value to an integer is to use a typecast . Typecasting is so called because it allows you to take a value that belongs to one type and cast it into another type (in the sense of molding or reforming, not throwing). "
+  "body": "Converting in the other direction, from double to int , can lose information because an int cannot store a fractional part. When a floating-point value is converted to an integer, the fractional part is discarded. This is also described as truncating toward zero. "
 },
 {
   "id": "chapter3_converting-from-double-to-int-4",
@@ -2851,16 +2860,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The syntax for typecasting is like the syntax for a function call. For example: "
+  "body": "C++ allows this conversion implicitly in some situations, but when you intend to convert a value explicitly, it is clearer to say so in the code. In modern C++, we will use static_cast . "
 },
 {
-  "id": "chapter3_converting-from-double-to-int-6",
+  "id": "chapter3_converting-from-double-to-int-5",
   "level": "2",
-  "url": "chapter3_converting-from-double-to-int.html#chapter3_converting-from-double-to-int-6",
+  "url": "chapter3_converting-from-double-to-int.html#chapter3_converting-from-double-to-int-5",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The int function returns an integer, so x gets the value 3. Casting to an integer always truncates to the neareast integer toward zero even if the fraction part is 0.99999999. "
+  "body": "For example: "
 },
 {
   "id": "chapter3_converting-from-double-to-int-7",
@@ -2869,7 +2878,34 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "For every type in C++, there is a corresponding function that typecasts its argument to the appropriate type. However, modern C++ standard recommends using static_cast function like below. Note that the type we are casting into must go between <>. We will learn more on <int> kind of notations later in the book. "
+  "body": "The expression static_cast<int>(pi) explicitly converts the value stored in pi to an int . The fractional part is discarded, so x receives the value 3 . "
+},
+{
+  "id": "chapter3_converting-from-double-to-int-8",
+  "level": "2",
+  "url": "chapter3_converting-from-double-to-int.html#chapter3_converting-from-double-to-int-8",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The type we want to convert to appears between the angle brackets < and > . We will see this kind of syntax again later in the course. "
+},
+{
+  "id": "chapter3_converting-from-double-to-int-9",
+  "level": "2",
+  "url": "chapter3_converting-from-double-to-int.html#chapter3_converting-from-double-to-int-9",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Notice that truncation is not the same as rounding. For example: "
+},
+{
+  "id": "chapter3_converting-from-double-to-int-11",
+  "level": "2",
+  "url": "chapter3_converting-from-double-to-int.html#chapter3_converting-from-double-to-int-11",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The value of a is 7 , and the value of b is -7 . In both cases, the fractional part is discarded, which means the result moves toward zero. "
 },
 {
   "id": "double_to_int_1",
@@ -2878,7 +2914,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.2.1",
   "title": "",
-  "body": "  In the lab, we measured a temperature of 7.99999999 degrees C, using an extremely precise measuring device. Now we are writing a program to perform some calculations with our data. Consider the following C++ code.  int main() { double temp = 7.99999999; int rounded_temp = int(temp); std::cout << rounded_temp; }  What is the value of rounded_temp?      temp   This is the name of a variable. Only the value of a variable will print with cout.     8   Remember that converting to an integer always truncates to the neareast integer toward zero.     7   Correct!     8.0   This is not an integer data type, and it's not the right number.     7.0   This is not an integer data type.    "
+  "body": "  Consider the following C++ code:  #include <iostream> int main() { double temp = 7.99999999; int truncated_temp = static_cast<int>(temp); std::cout << truncated_temp << '\\n'; return 0; }  What value is printed?      temp     temp is the variable name. The program prints the value stored in truncated_temp .      8    Converting to int does not round to the nearest integer. The fractional part is discarded.      7    Correct. Converting 7.99999999 to int discards the fractional part, producing 7 .      8.0     truncated_temp has type int , and the conversion produces 7 .      7.0    The numeric value is based on 7 , but truncated_temp has type int .     "
 },
 {
   "id": "double_to_int_2",
@@ -2887,7 +2923,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.2.2",
   "title": "",
-  "body": "  Your final grade consists of your average performance on exam 1 and exam 2. Your professor is using C++ to grade the exams and allows you to choose which method you'd like your exam to be graded.  double exam1 = 88.8; double exam2 = 72.7; double exam3 = 97.9;   Method 1:   double final = (int(exam1) + int(exam2) + int(exam3)) \/ 3;   Method 2:   int final = int((exam1 + exam2 + exam3) \/ 3);  Which method would you choose and why?      Method 1: final is a double , meaning my final grade will have more digits past the decimal, and will be higher than the int in Method 2.   Although final is a double , it doesn't have any digits past the decimal due to the integer division.     Method 1: the rounding happens at the beginning, so all three of my test scores will be truncated to the neareast integer toward zero int , which in my case, will truncated them up.   Converting to an int always truncated to the neareast integer toward zero, even if your double is very close to the next integer.     Method 2: final is an int , so it gets truncated to he neareast integer up.   Converting to an int always truncated to the neareast integer toward zero, even if your double is very close to the next integer.     Method 2: the truncating happens at the very end, so my grade will be higher!   Always save your truncating until the end!    "
+  "body": "  Consider these exam scores:  double exam1 = 88.8; double exam2 = 72.7; double exam3 = 97.9;  Compare the following two calculations:   Method 1:   int final1 = (static_cast<int>(exam1) + static_cast<int>(exam2) + static_cast<int>(exam3)) \/ 3;   Method 2:   int final2 = static_cast<int>((exam1 + exam2 + exam3) \/ 3.0);  Which statement is correct?      Method 1 gives the larger result because each individual score is converted to int first.    Converting each score first discards each fractional part before the average is computed.      Method 1 and Method 2 always produce the same result.    Converting before a calculation can produce a different result from converting after the calculation.      Method 2 gives the larger result because the fractional parts are kept while the average is calculated, and the conversion to int happens only at the end.    Correct. Method 1 first changes the scores to 88 , 72 , and 97 . Method 2 keeps the fractional parts until after the average has been calculated.      Method 2 rounds the average to the nearest integer.     static_cast<int> does not round to the nearest integer. It discards the fractional part.     "
 },
 {
   "id": "chapter3_math-functions",
@@ -2896,7 +2932,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.3",
   "title": "Math Functions",
-  "body": " Math Functions  In mathematics, you have probably seen functions like and , and you have learned to evaluate expressions like and . First, you evaluate the expression in parentheses, which is called the argument of the function. For example, is approximately 1.571, and is 0.1 (if happens to be 10).  Then you can evaluate the function itself, either by looking it up in a table or by performing various computations. The of 1.571 is 1, and the of 0.1 is -1 (assuming that indicates the logarithm base 10).  This process can be applied repeatedly to evaluate more complicated expressions like . First we evaluate the argument of the innermost function, then evaluate the function, and so on.  C++ provides a math library that includes most of the mathematical operations you can think of. The math functions are invoked using a syntax that is similar to mathematical notation:   This program performs calculations using some of the built-in functions from the cmath library.   #include <iostream> #include <cmath> int main() { double result = std::log(17.0); double angle = 1.5; double height = std::sin(angle); std::cout << result << '\\n'; std::cout << angle << '\\n'; std::cout << height << '\\n'; return 0; }    The first example sets log to the logarithm of 17, base . There is also a function called log10 that takes logarithms base 10.  The second example finds the sine of the value of the variable angle. C++ assumes that the values you use with sin and the other trigonometric functions ( cos , tan ) are in radians .   To convert from degrees to radians, you can divide by 360 and multiply by 2 * pi.   If you don't happen to know to 15 digits, you can calculate it using the acos function. The arccosine (or inverse cosine) of -1 is , because the cosine of is -1.   This program also uses built-in functions from the cmath library, specifically the functions that deal with angles. As you can see, we have a line of code that converts the default radians value to degrees.   #include <iostream> #include <cmath> int main() { double pi = std::acos(-1.0); double degrees = 90; double angle = degrees * 2 * pi \/ 360.0; std::cout << pi << '\\n'; std::cout << degrees << '\\n'; std::cout << angle << '\\n'; return 0; }    Before you can use any of the math functions, you have to include the math header file. Header files contain information the compiler needs about functions that are defined outside your program. For example, in the Hello, world! program we included a header file named iostream using an include statement:  #include <iostream>  iostream contains information about input and output (I\/O) streams, including the object named cout . C++ has a powerful feature called namespaces, that allow you to write your own implementation of cout. But in most cases, we would need to use the standard implementation of cout which your explisitly get using std::cout.     As a rule of thumb, qualify standard-library names with the std:: prefix when you use facilities from headers such as iostream .   Similarly, the cmath header file contains information about the math functions. You can include it at the beginning of your program along with iostream:  #include <cmath>  cmath is one of a number of header files that start with ‘c' to signify that they are derived from similar header files in the C language. In C the math library is named math.h . In C++ you should always use the version of the library that starts with 'c' as opposed to the one that ends with '.h'.    Match the statement to its description.   This is feedback.    cmath  allows the use of functions like log and sin    iostream  contains information about input and output streams    namespace std  provides the standard implementation of cout       What are the units used by sinusoidal functions (sin, asin, e.t.c.) in C++?        If you need to convert to degrees, just multiply by 360 and divide by 2pi.    degrees?  This is a unit sometimes used for sinusoidal functions, but not the one used by C++.        Multiple Response Select all correct cmath functions.       cos    This function computes the cosine of an angle.      arctan    The arc tangent function is actually called atan .      log10    This function computes the common logarithm.      pow    This function raises an expression to a power.      ln    The natural log function is actually called log .     "
+  "body": " Math Functions  In mathematics, you have probably seen functions such as and , and you have learned to evaluate expressions such as and . First, you evaluate the expression inside the parentheses, which is called the argument of the function. For example, is approximately 1.571, and is 0.1 if is 10.  Then you evaluate the function itself. For example, is 1. If means logarithm base 10, then is -1.  This process can be applied repeatedly to evaluate more complicated expressions such as . We begin with the innermost expression and work outward.  The C++ standard library provides many mathematical functions through the <cmath> header. Function calls use syntax similar to mathematical notation.   This program performs calculations using standard-library functions from <cmath> .   #include <iostream> #include <cmath> int main() { double result = std::log(17.0); double angle = 1.5; double height = std::sin(angle); std::cout << result << '\\n'; std::cout << angle << '\\n'; std::cout << height << '\\n'; return 0; }    The call std::log(17.0) computes the natural logarithm of 17.0 , which uses base . The function std::log10 computes a logarithm using base 10.  The call std::sin(angle) computes the sine of the value stored in angle . C++ trigonometric functions such as std::sin , std::cos , and std::tan use angles measured in radians .   To convert an angle from degrees to radians, multiply by pi and divide by 180: radians = degrees * pi \/ 180.0 .   If you need an accurate value for , you can calculate it using std::acos . The arccosine, or inverse cosine, of -1.0 is .   This program calculates pi and converts an angle from degrees to radians.   #include <iostream> #include <cmath> int main() { double pi = std::acos(-1.0); double degrees = 90.0; double radians = degrees * pi \/ 180.0; std::cout << pi << '\\n'; std::cout << degrees << '\\n'; std::cout << radians << '\\n'; return 0; }    Before using a standard-library facility, include the header that declares it. For example, <iostream> provides the declarations needed for stream input and output, including std::cout :  #include <iostream>  Standard-library names are generally placed in the std namespace. That is why we write std::cout rather than simply cout .   In this course, qualify standard-library names with the std:: prefix rather than using using namespace std; .   Similarly, mathematical functions such as std::sin , std::log , and std::sqrt are declared by <cmath> :  #include <cmath>   The C++ header <cmath> is related to the older C header <math.h> . In C++ programs, prefer <cmath> and the corresponding std:: -qualified function names.     Match each item with its description.    Try again.     <cmath>  declares standard-library mathematical functions such as std::log and std::sin    <iostream>  declares facilities for stream input and output, including std::cout    std  the namespace containing many names from the C++ standard library       What unit of angle is used by C++ trigonometric functions such as std::sin and std::cos ?        Correct. C++ trigonometric functions use radians.    degrees  Degrees are commonly used to measure angles, but C++ trigonometric functions use radians.    .*  Review the unit expected by functions such as std::sin and std::cos .         Multiple Response Select all valid standard-library functions declared by <cmath> .      std::cos    Correct. std::cos computes the cosine of an angle.      std::arctan    The inverse tangent function is named std::atan .      std::log10    Correct. std::log10 computes a base-10 logarithm.      std::pow    Correct. std::pow raises a value to a power.      std::ln    The natural logarithm function is named std::log .      "
 },
 {
   "id": "chapter3_math-functions-2",
@@ -2905,7 +2941,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In mathematics, you have probably seen functions like and , and you have learned to evaluate expressions like and . First, you evaluate the expression in parentheses, which is called the argument of the function. For example, is approximately 1.571, and is 0.1 (if happens to be 10). "
+  "body": "In mathematics, you have probably seen functions such as and , and you have learned to evaluate expressions such as and . First, you evaluate the expression inside the parentheses, which is called the argument of the function. For example, is approximately 1.571, and is 0.1 if is 10. "
 },
 {
   "id": "chapter3_math-functions-3",
@@ -2914,7 +2950,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Then you can evaluate the function itself, either by looking it up in a table or by performing various computations. The of 1.571 is 1, and the of 0.1 is -1 (assuming that indicates the logarithm base 10). "
+  "body": "Then you evaluate the function itself. For example, is 1. If means logarithm base 10, then is -1. "
 },
 {
   "id": "chapter3_math-functions-4",
@@ -2923,7 +2959,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This process can be applied repeatedly to evaluate more complicated expressions like . First we evaluate the argument of the innermost function, then evaluate the function, and so on. "
+  "body": "This process can be applied repeatedly to evaluate more complicated expressions such as . We begin with the innermost expression and work outward. "
 },
 {
   "id": "chapter3_math-functions-5",
@@ -2932,7 +2968,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "C++ provides a math library that includes most of the mathematical operations you can think of. The math functions are invoked using a syntax that is similar to mathematical notation: "
+  "body": "The C++ standard library provides many mathematical functions through the <cmath> header. Function calls use syntax similar to mathematical notation. "
 },
 {
   "id": "math_functions_AC_1",
@@ -2940,8 +2976,8 @@ var ptx_lunr_docs = [
   "url": "chapter3_math-functions.html#math_functions_AC_1",
   "type": "Listing",
   "number": "3.3.1",
-  "title": "This program performs calculations using some of the built-in functions from the cmath library.",
-  "body": " This program performs calculations using some of the built-in functions from the cmath library.   #include <iostream> #include <cmath> int main() { double result = std::log(17.0); double angle = 1.5; double height = std::sin(angle); std::cout << result << '\\n'; std::cout << angle << '\\n'; std::cout << height << '\\n'; return 0; }   "
+  "title": "This program performs calculations using standard-library functions from <code class=\"code-inline tex2jax_ignore\">&lt;cmath&gt;<\/code>.",
+  "body": " This program performs calculations using standard-library functions from <cmath> .   #include <iostream> #include <cmath> int main() { double result = std::log(17.0); double angle = 1.5; double height = std::sin(angle); std::cout << result << '\\n'; std::cout << angle << '\\n'; std::cout << height << '\\n'; return 0; }   "
 },
 {
   "id": "chapter3_math-functions-7",
@@ -2950,7 +2986,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The first example sets log to the logarithm of 17, base . There is also a function called log10 that takes logarithms base 10. "
+  "body": "The call std::log(17.0) computes the natural logarithm of 17.0 , which uses base . The function std::log10 computes a logarithm using base 10. "
 },
 {
   "id": "chapter3_math-functions-8",
@@ -2959,7 +2995,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The second example finds the sine of the value of the variable angle. C++ assumes that the values you use with sin and the other trigonometric functions ( cos , tan ) are in radians . "
+  "body": "The call std::sin(angle) computes the sine of the value stored in angle . C++ trigonometric functions such as std::sin , std::cos , and std::tan use angles measured in radians . "
 },
 {
   "id": "chapter3_math-functions-9",
@@ -2968,7 +3004,7 @@ var ptx_lunr_docs = [
   "type": "Note",
   "number": "3.3.1",
   "title": "",
-  "body": " To convert from degrees to radians, you can divide by 360 and multiply by 2 * pi.  "
+  "body": " To convert an angle from degrees to radians, multiply by pi and divide by 180: radians = degrees * pi \/ 180.0 .  "
 },
 {
   "id": "chapter3_math-functions-10",
@@ -2977,7 +3013,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "If you don't happen to know to 15 digits, you can calculate it using the acos function. The arccosine (or inverse cosine) of -1 is , because the cosine of is -1. "
+  "body": "If you need an accurate value for , you can calculate it using std::acos . The arccosine, or inverse cosine, of -1.0 is . "
 },
 {
   "id": "math_functions_AC_2",
@@ -2985,8 +3021,8 @@ var ptx_lunr_docs = [
   "url": "chapter3_math-functions.html#math_functions_AC_2",
   "type": "Listing",
   "number": "3.3.2",
-  "title": "This program also uses built-in functions from the cmath library, specifically the functions that deal with angles. As you can see, we have a line of code that converts the default radians value to degrees.",
-  "body": " This program also uses built-in functions from the cmath library, specifically the functions that deal with angles. As you can see, we have a line of code that converts the default radians value to degrees.   #include <iostream> #include <cmath> int main() { double pi = std::acos(-1.0); double degrees = 90; double angle = degrees * 2 * pi \/ 360.0; std::cout << pi << '\\n'; std::cout << degrees << '\\n'; std::cout << angle << '\\n'; return 0; }   "
+  "title": "This program calculates pi and converts an angle from degrees to radians.",
+  "body": " This program calculates pi and converts an angle from degrees to radians.   #include <iostream> #include <cmath> int main() { double pi = std::acos(-1.0); double degrees = 90.0; double radians = degrees * pi \/ 180.0; std::cout << pi << '\\n'; std::cout << degrees << '\\n'; std::cout << radians << '\\n'; return 0; }   "
 },
 {
   "id": "chapter3_math-functions-12",
@@ -2995,7 +3031,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Before you can use any of the math functions, you have to include the math header file. Header files contain information the compiler needs about functions that are defined outside your program. For example, in the Hello, world! program we included a header file named iostream using an include statement: "
+  "body": "Before using a standard-library facility, include the header that declares it. For example, <iostream> provides the declarations needed for stream input and output, including std::cout : "
 },
 {
   "id": "chapter3_math-functions-14",
@@ -3004,34 +3040,34 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "iostream contains information about input and output (I\/O) streams, including the object named cout . C++ has a powerful feature called namespaces, that allow you to write your own implementation of cout. But in most cases, we would need to use the standard implementation of cout which your explisitly get using std::cout. "
+  "body": "Standard-library names are generally placed in the std namespace. That is why we write std::cout rather than simply cout . "
+},
+{
+  "id": "chapter3_math-functions-15",
+  "level": "2",
+  "url": "chapter3_math-functions.html#chapter3_math-functions-15",
+  "type": "Note",
+  "number": "3.3.2",
+  "title": "",
+  "body": " In this course, qualify standard-library names with the std:: prefix rather than using using namespace std; .  "
 },
 {
   "id": "chapter3_math-functions-16",
   "level": "2",
   "url": "chapter3_math-functions.html#chapter3_math-functions-16",
-  "type": "Note",
-  "number": "3.3.2",
-  "title": "",
-  "body": " As a rule of thumb, qualify standard-library names with the std:: prefix when you use facilities from headers such as iostream .  "
-},
-{
-  "id": "chapter3_math-functions-17",
-  "level": "2",
-  "url": "chapter3_math-functions.html#chapter3_math-functions-17",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Similarly, the cmath header file contains information about the math functions. You can include it at the beginning of your program along with iostream: "
+  "body": "Similarly, mathematical functions such as std::sin , std::log , and std::sqrt are declared by <cmath> : "
 },
 {
-  "id": "chapter3_math-functions-19",
+  "id": "chapter3_math-functions-18",
   "level": "2",
-  "url": "chapter3_math-functions.html#chapter3_math-functions-19",
+  "url": "chapter3_math-functions.html#chapter3_math-functions-18",
   "type": "Note",
   "number": "3.3.3",
   "title": "",
-  "body": "cmath is one of a number of header files that start with ‘c' to signify that they are derived from similar header files in the C language. In C the math library is named math.h . In C++ you should always use the version of the library that starts with 'c' as opposed to the one that ends with '.h'. "
+  "body": " The C++ header <cmath> is related to the older C header <math.h> . In C++ programs, prefer <cmath> and the corresponding std:: -qualified function names.  "
 },
 {
   "id": "dnd1",
@@ -3040,7 +3076,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.3.1",
   "title": "",
-  "body": "  Match the statement to its description.   This is feedback.    cmath  allows the use of functions like log and sin    iostream  contains information about input and output streams    namespace std  provides the standard implementation of cout    "
+  "body": "  Match each item with its description.    Try again.     <cmath>  declares standard-library mathematical functions such as std::log and std::sin    <iostream>  declares facilities for stream input and output, including std::cout    std  the namespace containing many names from the C++ standard library    "
 },
 {
   "id": "math_functions_2",
@@ -3049,7 +3085,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.3.2",
   "title": "",
-  "body": "  What are the units used by sinusoidal functions (sin, asin, e.t.c.) in C++?        If you need to convert to degrees, just multiply by 360 and divide by 2pi.    degrees?  This is a unit sometimes used for sinusoidal functions, but not the one used by C++.     "
+  "body": "  What unit of angle is used by C++ trigonometric functions such as std::sin and std::cos ?        Correct. C++ trigonometric functions use radians.    degrees  Degrees are commonly used to measure angles, but C++ trigonometric functions use radians.    .*  Review the unit expected by functions such as std::sin and std::cos .     "
 },
 {
   "id": "math_functions_3",
@@ -3058,7 +3094,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.3.3",
   "title": "",
-  "body": "  Multiple Response Select all correct cmath functions.       cos    This function computes the cosine of an angle.      arctan    The arc tangent function is actually called atan .      log10    This function computes the common logarithm.      pow    This function raises an expression to a power.      ln    The natural log function is actually called log .    "
+  "body": "   Multiple Response Select all valid standard-library functions declared by <cmath> .      std::cos    Correct. std::cos computes the cosine of an angle.      std::arctan    The inverse tangent function is named std::atan .      std::log10    Correct. std::log10 computes a base-10 logarithm.      std::pow    Correct. std::pow raises a value to a power.      std::ln    The natural logarithm function is named std::log .     "
 },
 {
   "id": "chapter3_composition",
@@ -3067,7 +3103,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.4",
   "title": "Composition",
-  "body": " Composition  Just as with mathematical functions, C++ functions can be composed , meaning that you use one expression as part of another. For example, you can use any expression as an argument to a function:  double x = std::cos(angle + pi \/ 2);  This statement takes the value of pi, divides it by two and adds the result to the value of angle. The sum is then passed as an argument to the cos function.  You can also take the result of one function and pass it as an argument to another:   This program finds the log base e of 10 and raises e to that power. The result of this computation is assigned to x.   #include <iostream> #include <cmath> int main() { double x = std::exp(std::log(10.0)); std::cout << x; }      Which of these statements has proper syntax?       double x = std::log6(12);     log6 is not a built in cmath function, but you could write an implementation for it if you wanted!      double val = std::abs(std::tan(1.57));    This correctly uses cmath functions!      double num = std::exp(std::cosine(0.86667));     cosine is not a built in cmath function, but cos is!      double y = std::exp(std::cos(1.047)) + std::exp(std::tan(2.094))    This would be correct if it ended in a semi-colon.       Which of these statements returns the y-component of the unit vector at 330 degrees?       y = std::cos(330);    You must always convert to radians before using sinusoidal functions.      y = std::cos(330 * 2 * pi \/ 360);     cos will return the x-component.      y = std::sin(330);    You must always convert to radians before using sinusoidal functions.      y = std::sin(330 * 2 * pi \/ 360);     sin returns the y-component, cos returns the x-component.      y = std::tan(330 * 2 * pi \/ 360);     tan is not the proper function to use here.     "
+  "body": " Composition  Just as with mathematical functions, C++ functions can be composed . This means using one expression or function result as part of another expression.  For example, an expression can be used directly as an argument to a function:  double x = std::cos(angle + pi \/ 2.0);  First, pi \/ 2.0 is evaluated and added to angle . The resulting value is then passed as the argument to std::cos .  You can also use the result returned by one function as the argument to another function:   This program computes the natural logarithm of 10 and then passes that result to std::exp .   #include <iostream> #include <cmath> int main() { double x = std::exp(std::log(10.0)); std::cout << x << '\\n'; return 0; }    The inner call std::log(10.0) is evaluated first. Its return value becomes the argument to std::exp . Since std::exp raises to the given power, the result is approximately 10 .    Which of these statements has correct C++ syntax and uses valid standard-library functions from <cmath> ?       double x = std::log6(12);      std::log6 is not a standard-library function.       double val = std::abs(std::tan(1.57));     Correct. The result of std::tan(1.57) is passed as the argument to std::abs .       double num = std::exp(std::cosine(0.86667));      std::cosine is not a standard-library function. The cosine function is named std::cos .       double y = std::exp(std::cos(1.047)) + std::exp(std::tan(2.094))     The function calls are valid, but the statement is missing a semicolon.        Which statement computes the y-component of a unit vector at 330 degrees? Assume pi has already been defined.       y = std::cos(330);      std::cos gives the x-component, and C++ trigonometric functions expect angles in radians.       y = std::cos(330 * pi \/ 180.0);     The angle is converted correctly, but std::cos gives the x-component of the unit vector.       y = std::sin(330);      std::sin gives the y-component, but the angle must be converted from degrees to radians first.       y = std::sin(330 * pi \/ 180.0);     Correct. std::sin gives the y-component, and 330 * pi \/ 180.0 converts 330 degrees to radians.       y = std::tan(330 * pi \/ 180.0);      std::tan does not directly give the y-component of a unit vector.      "
 },
 {
   "id": "chapter3_composition-2",
@@ -3076,16 +3112,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Just as with mathematical functions, C++ functions can be composed , meaning that you use one expression as part of another. For example, you can use any expression as an argument to a function: "
+  "body": "Just as with mathematical functions, C++ functions can be composed . This means using one expression or function result as part of another expression. "
 },
 {
-  "id": "chapter3_composition-4",
+  "id": "chapter3_composition-3",
   "level": "2",
-  "url": "chapter3_composition.html#chapter3_composition-4",
+  "url": "chapter3_composition.html#chapter3_composition-3",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This statement takes the value of pi, divides it by two and adds the result to the value of angle. The sum is then passed as an argument to the cos function. "
+  "body": "For example, an expression can be used directly as an argument to a function: "
 },
 {
   "id": "chapter3_composition-5",
@@ -3094,7 +3130,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "You can also take the result of one function and pass it as an argument to another: "
+  "body": "First, pi \/ 2.0 is evaluated and added to angle . The resulting value is then passed as the argument to std::cos . "
+},
+{
+  "id": "chapter3_composition-6",
+  "level": "2",
+  "url": "chapter3_composition.html#chapter3_composition-6",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "You can also use the result returned by one function as the argument to another function: "
 },
 {
   "id": "function_comp_AC_1",
@@ -3102,8 +3147,17 @@ var ptx_lunr_docs = [
   "url": "chapter3_composition.html#function_comp_AC_1",
   "type": "Listing",
   "number": "3.4.1",
-  "title": "This program finds the log base e of 10 and raises e to that power. The result of this computation is assigned to x.",
-  "body": " This program finds the log base e of 10 and raises e to that power. The result of this computation is assigned to x.   #include <iostream> #include <cmath> int main() { double x = std::exp(std::log(10.0)); std::cout << x; }   "
+  "title": "This program computes the natural logarithm of 10 and then passes that result to <code class=\"code-inline tex2jax_ignore\">std::exp<\/code>.",
+  "body": " This program computes the natural logarithm of 10 and then passes that result to std::exp .   #include <iostream> #include <cmath> int main() { double x = std::exp(std::log(10.0)); std::cout << x << '\\n'; return 0; }   "
+},
+{
+  "id": "chapter3_composition-8",
+  "level": "2",
+  "url": "chapter3_composition.html#chapter3_composition-8",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The inner call std::log(10.0) is evaluated first. Its return value becomes the argument to std::exp . Since std::exp raises to the given power, the result is approximately 10 . "
 },
 {
   "id": "function_comp_1",
@@ -3112,7 +3166,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.4.1",
   "title": "",
-  "body": "  Which of these statements has proper syntax?       double x = std::log6(12);     log6 is not a built in cmath function, but you could write an implementation for it if you wanted!      double val = std::abs(std::tan(1.57));    This correctly uses cmath functions!      double num = std::exp(std::cosine(0.86667));     cosine is not a built in cmath function, but cos is!      double y = std::exp(std::cos(1.047)) + std::exp(std::tan(2.094))    This would be correct if it ended in a semi-colon.    "
+  "body": "  Which of these statements has correct C++ syntax and uses valid standard-library functions from <cmath> ?       double x = std::log6(12);      std::log6 is not a standard-library function.       double val = std::abs(std::tan(1.57));     Correct. The result of std::tan(1.57) is passed as the argument to std::abs .       double num = std::exp(std::cosine(0.86667));      std::cosine is not a standard-library function. The cosine function is named std::cos .       double y = std::exp(std::cos(1.047)) + std::exp(std::tan(2.094))     The function calls are valid, but the statement is missing a semicolon.     "
 },
 {
   "id": "function_comp_2",
@@ -3121,7 +3175,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.4.2",
   "title": "",
-  "body": "  Which of these statements returns the y-component of the unit vector at 330 degrees?       y = std::cos(330);    You must always convert to radians before using sinusoidal functions.      y = std::cos(330 * 2 * pi \/ 360);     cos will return the x-component.      y = std::sin(330);    You must always convert to radians before using sinusoidal functions.      y = std::sin(330 * 2 * pi \/ 360);     sin returns the y-component, cos returns the x-component.      y = std::tan(330 * 2 * pi \/ 360);     tan is not the proper function to use here.    "
+  "body": "  Which statement computes the y-component of a unit vector at 330 degrees? Assume pi has already been defined.       y = std::cos(330);      std::cos gives the x-component, and C++ trigonometric functions expect angles in radians.       y = std::cos(330 * pi \/ 180.0);     The angle is converted correctly, but std::cos gives the x-component of the unit vector.       y = std::sin(330);      std::sin gives the y-component, but the angle must be converted from degrees to radians first.       y = std::sin(330 * pi \/ 180.0);     Correct. std::sin gives the y-component, and 330 * pi \/ 180.0 converts 330 degrees to radians.       y = std::tan(330 * pi \/ 180.0);      std::tan does not directly give the y-component of a unit vector.     "
 },
 {
   "id": "chapter3_adding-new-functions",
@@ -3130,7 +3184,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.5",
   "title": "Adding New Functions",
-  "body": " Adding New Functions  So far we have only been using the functions that are built into C++, but it is also possible to add new functions. Actually, we have already seen one function definition: main . The function named main is special because it indicates where the execution of the program begins, but the syntax for main is the same as for any other function definition:  void NAME( LIST OF PARAMETERS ) { STATEMENTS }  You can make up any name you want for your function, except that you can't call it main or any other C++ keyword. The list of parameters specifies what information – if any – you have to provide in order to use, or call , the new function.  main doesn't take any parameters, as indicated by the empty parentheses() in it's definition. The first couple of functions we are going to write also have no parameters, so the syntax looks like this:  void new_line(){ std::cout << '\\n'; }  This function is named new_line ; it contains only a single statement, which outputs a new line character.  The first word of the header is the return type : void returns nothing; int returns an int; double returns a double; std::string returns a string;  In main we can call this new function using syntax that is similar to the way we call the C++ math library functions like std::sin :  int main(){ std::cout << \"First Line.\" << '\\n'; new_line(); std::cout << \"Second Line.\" << '\\n'; return 0; }  The output of this program is  First line. Second line.  Notice the extra space between the two lines. What if we wanted more space between the lines? We could call the same function repeatedly:  int main(){ std::cout << \"First Line.\" << '\\n'; new_line(); new_line(); new_line(); std::cout << \"Second Line.\" << '\\n'; return 0; }  Or we could write a new function, named three_line , that prints three new lines:   Here we define the three_line function, which calls the new_line function three times. The result is a function that prints three lines after it is called (each of those empty lines begins with a * ).   #include <iostream> void new_line(){ std::cout << '*' << '\\n'; } void three_line(){ new_line(); new_line(); new_line(); } int main() { std::cout << \"First Line. \"; three_line(); std::cout << \"Second Line. \"; return 0; }    You should notice a few things about this program:     You can call the same procedure repeatedly. In fact, it is quite common and useful to do so.    You can have one function call another function. In this case, main calls three_line and three_line calls new_line . Again, this is common and useful.    In three_line I wrote three statements all on the same line, which is syntactically legal (remember that spaces and new lines usually don't change the meaning of a program). On the other hand, it is usually a better idea to put each statement on a line by itself , to make your program easy to read. I sometimes break that rule in this book to save space.      In general, you'll want to write your code so that it is easy for others to follow. This is especially important if you choose computer science as a career!   So far, it may not be clear why it is worth the trouble to create all these new functions. Actually, there are a lot of reasons, but this example only demonstrates two:     Creating a new function gives you an opportunity to give a name to a group of statements. Functions can simplify a program by hiding a complex computation behind a single command(the name of the function), and by using English words in place of arcane code. Which is clearer, new_line or std::cout '\\n'; ?    Creating a new function can make a program smaller by eliminating repetitive code. For example, a short way to print nine consecutive new lines is to call three_line three times. How would you print 27 new lines?       Which of these statements is false about functions?      You can name a function anything you want.   You can't name a function the same name as a reserved keyword.     You can have a function with several parameters or a function with none.   This is true! However, you must always use parentheses.     You can call a function inside of another function.   This is true! It is common and useful.     You can write multiple statements on one line of a function.   This is true! As long as each statement ends with a semicolon.       Click on all function HEADERS.   Remember, the operator '=' is used for assignment.   void print_x() {   std::cout << \"X\";  }   void print_var(int a) {   std::cout << a;  }   int main() {   int x = 7;   print_var(x);   if (x < 10) {   x = x - 1;  }  print_x();   int y = 3;   double result = x \/ y;   print_var(result);  return 0;  }      Click on all function CALLS.   Remember, the operator '=' is used for assignment.   void print_x() {   std::cout << \"X\";  }   void print_var(int a) {   std::cout << a;  }   int main() {   int x = 7;   print_var(x);   if (x < 10) {   x = x - 1;  }  print_x();   int y = 3;   double result = x \/ y;   print_var(result);  return 0;  }      Construct a function that correctly prints the perimeter of a rectangle.     void perimeter(int length,int width) {    int twice_length = 2 * length;  int twice_width = 2 * width;    int perimeter_value = twice_length + twice_width;    cout << perimeter_value << '\\n';    return parameter_value;    }     "
+  "body": " Adding New Functions  So far, we have called functions provided by the C++ standard library, such as std::sin . C++ also allows us to define our own functions. In fact, we have already seen one function: main .  The function main is special because program execution begins there. Other functions are executed only when they are called .  A function definition has this general form:  RETURN_TYPE FUNCTION_NAME(PARAMETER_LIST) { STATEMENTS }  The first line of a function definition is called the function header . It contains the function's return type, name, and parameter list.  A function name is an identifier, so it must follow the C++ identifier rules you learned earlier. It also cannot be a C++ keyword. In this course, we will use meaningful snake_case names for functions.  The parameter list specifies what information, if any, the caller must provide to the function. A function that does not need any information from its caller has an empty parameter list:  void new_line() { std::cout << '\\n'; }  This function is named new_line . Its parameter list is empty, and its body contains one statement that prints a newline character.  The word void is the function's return type . A function with return type void does not return a value to its caller. Later in this chapter, we will write functions with return types such as int and double that do return values.  To use new_line from main , we call it by writing its name followed by parentheses:  #include <iostream> void new_line(); int main() { std::cout << \"First Line.\" << '\\n'; new_line(); std::cout << \"Second Line.\" << '\\n'; return 0; } void new_line() { std::cout << '\\n'; }  The line  new_line();  is a function call . When the call is reached, new_line executes and then control returns to main .  The output is:   First Line. Second Line.   A function can be called more than once. For example:  #include <iostream> void new_line(); int main() { std::cout << \"First Line.\" << '\\n'; new_line(); new_line(); new_line(); std::cout << \"Second Line.\" << '\\n'; return 0; } void new_line() { std::cout << '\\n'; }  One function can also call another function. For example, we can write a function named three_line that calls new_line three times.   This program shows one user-defined function calling another.   #include <iostream> void new_line(); void three_line(); int main() { std::cout << \"First Line.\" << '\\n'; three_line(); std::cout << \"Second Line.\" << '\\n'; return 0; } void new_line() { std::cout << '\\n'; } void three_line() { new_line(); new_line(); new_line(); }    Notice several things about this program:    The same function can be called many times.    One function can call another function. Here, main calls three_line , and three_line calls new_line .    Each statement is written on its own line. C++ often permits multiple statements on one line, but placing one statement per line usually makes the program easier to read.     Write code so that its organization is clear to another programmer, not just to the compiler.   Creating functions is useful for several reasons:    A function gives a meaningful name to a group of statements. Instead of thinking about the individual output statement each time, we can call new_line() and think about the action it performs.    Functions reduce repeated code. For example, three_line() represents three calls to new_line() . If the same action is needed again, we can call three_line() rather than rewriting those statements.    Functions help break a larger program into smaller pieces that are easier to understand, test, and reuse.      Which statement about functions is false?      A function can be given any name, including a C++ keyword.    Correct. A function name is an identifier and cannot be a C++ keyword.      A function can have parameters or have an empty parameter list.    This is true. Parentheses are still required even when the parameter list is empty.      One function can call another function.    This is true. Functions commonly call other functions.      The same function can be called more than once.    This is true. Reusing a function is one of the reasons functions are useful.        Click on all function headers .    A function header contains the return type, function name, and parameter list and begins a function definition.    void print_x() {   std::cout << \"X\";  }   void print_var(int value) {   std::cout << value;  }   int main() {   int x = 7;   print_var(x);   print_x();   int y = 3;   double result = x \/ static_cast<double>(y);   print_var(static_cast<int>(result));  return 0;  }      Click on all function calls .    A function call causes a function to execute.    void print_x() {   std::cout << \"X\";  }   void print_var(int value) {   std::cout << value;  }   int main() {   int x = 7;   print_var(x);   print_x();   int y = 3;   double result = x \/ static_cast<double>(y);   print_var(static_cast<int>(result));  return 0;  }      Construct a function that takes the length and width of a rectangle and prints its perimeter.      void print_perimeter(int length, int width) {    void print_perimeter(int length, width) {     int twice_length = 2 * length;  int twice_width = 2 * width;     int perimeter = twice_length + twice_width;    int perimeter = twice_length * twice_width;      std::cout << perimeter << '\\n';    return perimeter;     }     "
 },
 {
   "id": "chapter3_adding-new-functions-2",
@@ -3139,7 +3193,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "So far we have only been using the functions that are built into C++, but it is also possible to add new functions. Actually, we have already seen one function definition: main . The function named main is special because it indicates where the execution of the program begins, but the syntax for main is the same as for any other function definition: "
+  "body": "So far, we have called functions provided by the C++ standard library, such as std::sin . C++ also allows us to define our own functions. In fact, we have already seen one function: main . "
+},
+{
+  "id": "chapter3_adding-new-functions-3",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The function main is special because program execution begins there. Other functions are executed only when they are called . "
 },
 {
   "id": "chapter3_adding-new-functions-4",
@@ -3148,16 +3211,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "You can make up any name you want for your function, except that you can't call it main or any other C++ keyword. The list of parameters specifies what information – if any – you have to provide in order to use, or call , the new function. "
+  "body": "A function definition has this general form: "
 },
 {
-  "id": "chapter3_adding-new-functions-5",
+  "id": "chapter3_adding-new-functions-6",
   "level": "2",
-  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-5",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-6",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "main doesn't take any parameters, as indicated by the empty parentheses() in it's definition. The first couple of functions we are going to write also have no parameters, so the syntax looks like this: "
+  "body": "The first line of a function definition is called the function header . It contains the function's return type, name, and parameter list. "
 },
 {
   "id": "chapter3_adding-new-functions-7",
@@ -3166,7 +3229,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This function is named new_line ; it contains only a single statement, which outputs a new line character. "
+  "body": "A function name is an identifier, so it must follow the C++ identifier rules you learned earlier. It also cannot be a C++ keyword. In this course, we will use meaningful snake_case names for functions. "
 },
 {
   "id": "chapter3_adding-new-functions-8",
@@ -3175,16 +3238,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The first word of the header is the return type : void returns nothing; int returns an int; double returns a double; std::string returns a string; "
+  "body": "The parameter list specifies what information, if any, the caller must provide to the function. A function that does not need any information from its caller has an empty parameter list: "
 },
 {
-  "id": "chapter3_adding-new-functions-9",
+  "id": "chapter3_adding-new-functions-10",
   "level": "2",
-  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-9",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-10",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In main we can call this new function using syntax that is similar to the way we call the C++ math library functions like std::sin : "
+  "body": "This function is named new_line . Its parameter list is empty, and its body contains one statement that prints a newline character. "
 },
 {
   "id": "chapter3_adding-new-functions-11",
@@ -3193,34 +3256,34 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The output of this program is "
+  "body": "The word void is the function's return type . A function with return type void does not return a value to its caller. Later in this chapter, we will write functions with return types such as int and double that do return values. "
 },
 {
-  "id": "chapter3_adding-new-functions-13",
+  "id": "chapter3_adding-new-functions-12",
   "level": "2",
-  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-13",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-12",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Notice the extra space between the two lines. What if we wanted more space between the lines? We could call the same function repeatedly: "
+  "body": "To use new_line from main , we call it by writing its name followed by parentheses: "
 },
 {
-  "id": "chapter3_adding-new-functions-15",
+  "id": "chapter3_adding-new-functions-14",
   "level": "2",
-  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-15",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-14",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Or we could write a new function, named three_line , that prints three new lines: "
+  "body": "The line "
 },
 {
-  "id": "new_functions_AC_1",
+  "id": "chapter3_adding-new-functions-16",
   "level": "2",
-  "url": "chapter3_adding-new-functions.html#new_functions_AC_1",
-  "type": "Listing",
-  "number": "3.5.1",
-  "title": "Here we define the three_line function, which calls the new_line function three times. The result is a function that prints three lines after it is called (each of those empty lines begins with a “*”).",
-  "body": " Here we define the three_line function, which calls the new_line function three times. The result is a function that prints three lines after it is called (each of those empty lines begins with a * ).   #include <iostream> void new_line(){ std::cout << '*' << '\\n'; } void three_line(){ new_line(); new_line(); new_line(); } int main() { std::cout << \"First Line. \"; three_line(); std::cout << \"Second Line. \"; return 0; }   "
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-16",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "is a function call . When the call is reached, new_line executes and then control returns to main . "
 },
 {
   "id": "chapter3_adding-new-functions-17",
@@ -3229,34 +3292,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "You should notice a few things about this program: "
-},
-{
-  "id": "chapter3_adding-new-functions-18",
-  "level": "2",
-  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-18",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "   You can call the same procedure repeatedly. In fact, it is quite common and useful to do so.    You can have one function call another function. In this case, main calls three_line and three_line calls new_line . Again, this is common and useful.    In three_line I wrote three statements all on the same line, which is syntactically legal (remember that spaces and new lines usually don't change the meaning of a program). On the other hand, it is usually a better idea to put each statement on a line by itself , to make your program easy to read. I sometimes break that rule in this book to save space.    "
+  "body": "The output is: "
 },
 {
   "id": "chapter3_adding-new-functions-19",
   "level": "2",
   "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-19",
-  "type": "Note",
-  "number": "3.5.1",
-  "title": "",
-  "body": " In general, you'll want to write your code so that it is easy for others to follow. This is especially important if you choose computer science as a career!  "
-},
-{
-  "id": "chapter3_adding-new-functions-20",
-  "level": "2",
-  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-20",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "So far, it may not be clear why it is worth the trouble to create all these new functions. Actually, there are a lot of reasons, but this example only demonstrates two: "
+  "body": "A function can be called more than once. For example: "
 },
 {
   "id": "chapter3_adding-new-functions-21",
@@ -3265,7 +3310,97 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "   Creating a new function gives you an opportunity to give a name to a group of statements. Functions can simplify a program by hiding a complex computation behind a single command(the name of the function), and by using English words in place of arcane code. Which is clearer, new_line or std::cout '\\n'; ?    Creating a new function can make a program smaller by eliminating repetitive code. For example, a short way to print nine consecutive new lines is to call three_line three times. How would you print 27 new lines?    "
+  "body": "One function can also call another function. For example, we can write a function named three_line that calls new_line three times. "
+},
+{
+  "id": "new_functions_AC_1",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#new_functions_AC_1",
+  "type": "Listing",
+  "number": "3.5.1",
+  "title": "This program shows one user-defined function calling another.",
+  "body": " This program shows one user-defined function calling another.   #include <iostream> void new_line(); void three_line(); int main() { std::cout << \"First Line.\" << '\\n'; three_line(); std::cout << \"Second Line.\" << '\\n'; return 0; } void new_line() { std::cout << '\\n'; } void three_line() { new_line(); new_line(); new_line(); }   "
+},
+{
+  "id": "chapter3_adding-new-functions-23",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-23",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Notice several things about this program: "
+},
+{
+  "id": "chapter3_adding-new-functions-24-1-1",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-24-1-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The same function can be called many times. "
+},
+{
+  "id": "chapter3_adding-new-functions-24-2-1",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-24-2-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "One function can call another function. Here, main calls three_line , and three_line calls new_line . "
+},
+{
+  "id": "chapter3_adding-new-functions-24-3-1",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-24-3-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Each statement is written on its own line. C++ often permits multiple statements on one line, but placing one statement per line usually makes the program easier to read. "
+},
+{
+  "id": "chapter3_adding-new-functions-25",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-25",
+  "type": "Note",
+  "number": "3.5.1",
+  "title": "",
+  "body": " Write code so that its organization is clear to another programmer, not just to the compiler.  "
+},
+{
+  "id": "chapter3_adding-new-functions-26",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-26",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Creating functions is useful for several reasons: "
+},
+{
+  "id": "chapter3_adding-new-functions-27-1-1",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-27-1-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A function gives a meaningful name to a group of statements. Instead of thinking about the individual output statement each time, we can call new_line() and think about the action it performs. "
+},
+{
+  "id": "chapter3_adding-new-functions-27-2-1",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-27-2-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Functions reduce repeated code. For example, three_line() represents three calls to new_line() . If the same action is needed again, we can call three_line() rather than rewriting those statements. "
+},
+{
+  "id": "chapter3_adding-new-functions-27-3-1",
+  "level": "2",
+  "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-27-3-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Functions help break a larger program into smaller pieces that are easier to understand, test, and reuse. "
 },
 {
   "id": "new_functions_mc_1",
@@ -3274,7 +3409,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.5.1",
   "title": "",
-  "body": "  Which of these statements is false about functions?      You can name a function anything you want.   You can't name a function the same name as a reserved keyword.     You can have a function with several parameters or a function with none.   This is true! However, you must always use parentheses.     You can call a function inside of another function.   This is true! It is common and useful.     You can write multiple statements on one line of a function.   This is true! As long as each statement ends with a semicolon.    "
+  "body": "  Which statement about functions is false?      A function can be given any name, including a C++ keyword.    Correct. A function name is an identifier and cannot be a C++ keyword.      A function can have parameters or have an empty parameter list.    This is true. Parentheses are still required even when the parameter list is empty.      One function can call another function.    This is true. Functions commonly call other functions.      The same function can be called more than once.    This is true. Reusing a function is one of the reasons functions are useful.     "
 },
 {
   "id": "new_functions_2",
@@ -3283,7 +3418,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.5.2",
   "title": "",
-  "body": "  Click on all function HEADERS.   Remember, the operator '=' is used for assignment.   void print_x() {   std::cout << \"X\";  }   void print_var(int a) {   std::cout << a;  }   int main() {   int x = 7;   print_var(x);   if (x < 10) {   x = x - 1;  }  print_x();   int y = 3;   double result = x \/ y;   print_var(result);  return 0;  }   "
+  "body": "  Click on all function headers .    A function header contains the return type, function name, and parameter list and begins a function definition.    void print_x() {   std::cout << \"X\";  }   void print_var(int value) {   std::cout << value;  }   int main() {   int x = 7;   print_var(x);   print_x();   int y = 3;   double result = x \/ static_cast<double>(y);   print_var(static_cast<int>(result));  return 0;  }   "
 },
 {
   "id": "new_functions_3",
@@ -3292,7 +3427,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.5.3",
   "title": "",
-  "body": "  Click on all function CALLS.   Remember, the operator '=' is used for assignment.   void print_x() {   std::cout << \"X\";  }   void print_var(int a) {   std::cout << a;  }   int main() {   int x = 7;   print_var(x);   if (x < 10) {   x = x - 1;  }  print_x();   int y = 3;   double result = x \/ y;   print_var(result);  return 0;  }   "
+  "body": "  Click on all function calls .    A function call causes a function to execute.    void print_x() {   std::cout << \"X\";  }   void print_var(int value) {   std::cout << value;  }   int main() {   int x = 7;   print_var(x);   print_x();   int y = 3;   double result = x \/ static_cast<double>(y);   print_var(static_cast<int>(result));  return 0;  }   "
 },
 {
   "id": "new_functions_pp_1",
@@ -3301,7 +3436,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.5.4",
   "title": "",
-  "body": "  Construct a function that correctly prints the perimeter of a rectangle.     void perimeter(int length,int width) {    int twice_length = 2 * length;  int twice_width = 2 * width;    int perimeter_value = twice_length + twice_width;    cout << perimeter_value << '\\n';    return parameter_value;    }    "
+  "body": "  Construct a function that takes the length and width of a rectangle and prints its perimeter.      void print_perimeter(int length, int width) {    void print_perimeter(int length, width) {     int twice_length = 2 * length;  int twice_width = 2 * width;     int perimeter = twice_length + twice_width;    int perimeter = twice_length * twice_width;      std::cout << perimeter << '\\n';    return perimeter;     }    "
 },
 {
   "id": "chapter3_definitions-and-uses",
@@ -4201,7 +4336,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.12",
   "title": "Pass by Value and Pass by Reference",
-  "body": " Pass by Value and Pass by Reference  So far, function parameters have received copies of the values passed to them. This is called pass by value . Changing a pass-by-value parameter changes only the local parameter, not the caller's variable.  For example, suppose we try to write a function that swaps the values of two variables:   void swap_values(int first, int second);   Here is a complete program using that function:  #include <iostream> void swap_values(int first, int second); int main() { int x = 3; int y = 7; swap_values(x, y); std::cout << \"x = \" << x << '\\n'; std::cout << \"y = \" << y << '\\n'; return 0; } void swap_values(int first, int second) { int temp = first; first = second; second = temp; }  When swap_values(x, y) is called, the parameter first receives a copy of the value in x , and second receives a copy of the value in y . The function swaps those copies.  The parameters first and second have local scope inside swap_values . Changing them does not change x or y in main .  Therefore, the output is:   x = 3 y = 7   Sometimes we want a function to work with the caller's variables directly. C++ allows us to do this with reference parameters .  A reference parameter is written with an ampersand & after the parameter type:   void swap_values(int& first, int& second);   Now consider the complete program:  #include <iostream> void swap_values(int& first, int& second); int main() { int x = 3; int y = 7; swap_values(x, y); std::cout << \"x = \" << x << '\\n'; std::cout << \"y = \" << y << '\\n'; return 0; } void swap_values(int& first, int& second) { int temp = first; first = second; second = temp; }  In this version, first refers to the caller's variable x , and second refers to the caller's variable y . Changes made through the reference parameters therefore affect those variables.  The output is now:   x = 7 y = 3   The key difference is:    With pass by value , the parameter receives a copy of the argument's value. Changes to the parameter do not change the caller's variable.    With pass by reference , the reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.     For now, you only need to recognize and use & in a parameter declaration to create a reference parameter. We will study references in more detail, along with memory addresses and pointers, later in the course.     What are the values of x and y after the following code runs?   void swap_values(int first, int second); int main() { int x = 3; int y = 7; swap_values(x, y); return 0; } void swap_values(int first, int second) { int temp = first; first = second; second = temp; }       x is 3 and y is 7.    Correct. first and second receive copies of the argument values. Swapping those local parameters does not change x or y .      x is 7 and y is 3.    The values of the local parameters are swapped, but x and y are passed by value and remain unchanged.      x is 3 and y is 3.    The assignments affect only the local parameters inside swap_values .      x is 7 and y is 7.    Neither variable in main is changed by this pass-by-value function.        Which function declaration allows add_one to change the caller's int variable?      void add_one(int value);    This passes the value by value, so value receives a copy of the argument.      void add_one(int& value);    Correct. value is a reference parameter, so changes made through it affect the caller's variable.      int add_one(int value);    This function can return an int , but value itself is still passed by value.      void add_one(value);    A parameter in a function declaration must have a type.        What is printed by the following program?   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }       1     value refers to count , whose value starts at 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      Error!    Passing an int variable to an int& reference parameter is legal.      "
+  "body": " Pass by Value and Pass by Reference  So far, function parameters have received copies of the values passed to them. This is called pass by value . Changing a pass-by-value parameter changes only the local parameter, not the caller's variable.  For example, suppose we try to write a function that swaps the values of two variables:   void swap_values(int first, int second);   Here is a complete program using that function:  #include <iostream> void swap_values(int first, int second); int main() { int x = 3; int y = 7; swap_values(x, y); std::cout << \"x = \" << x << '\\n'; std::cout << \"y = \" << y << '\\n'; return 0; } void swap_values(int first, int second) { int temp = first; first = second; second = temp; }  When swap_values(x, y) is called, the parameter first receives a copy of the value in x , and second receives a copy of the value in y . The function swaps those copies.  The parameters first and second have local scope inside swap_values . Changing them does not change x or y in main .  Therefore, the output is:   x = 3 y = 7   Sometimes we want a function to work with the caller's variables directly. C++ allows us to do this with reference parameters .  A reference parameter is written with an ampersand & after the parameter type:   void swap_values(int& first, int& second);   Now consider the complete program:  #include <iostream> void swap_values(int& first, int& second); int main() { int x = 3; int y = 7; swap_values(x, y); std::cout << \"x = \" << x << '\\n'; std::cout << \"y = \" << y << '\\n'; return 0; } void swap_values(int& first, int& second) { int temp = first; first = second; second = temp; }  In this version, first refers to the caller's variable x , and second refers to the caller's variable y . Changes made through the reference parameters therefore affect those variables.  The output is now:   x = 7 y = 3   The key difference is:    With pass by value , the parameter receives a copy of the argument's value. Changes to the parameter do not change the caller's variable.    With pass by reference , the reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.     For now, you only need to recognize and use & in a parameter declaration to create a reference parameter. We will study references in more detail, along with memory addresses and pointers, in later chapters.     What are the values of x and y after the following code runs?   void swap_values(int first, int second); int main() { int x = 3; int y = 7; swap_values(x, y); return 0; } void swap_values(int first, int second) { int temp = first; first = second; second = temp; }       x is 3 and y is 7.    Correct. first and second receive copies of the argument values. Swapping those local parameters does not change x or y .      x is 7 and y is 3.    The values of the local parameters are swapped, but x and y are passed by value and remain unchanged.      x is 3 and y is 3.    The assignments affect only the local parameters inside swap_values .      x is 7 and y is 7.    Neither variable in main is changed by this pass-by-value function.        Which function declaration allows add_one to change the caller's int variable?      void add_one(int value);    This passes the value by value, so value receives a copy of the argument.      void add_one(int& value);    Correct. value is a reference parameter, so changes made through it affect the caller's variable.      int add_one(int value);    This function can return an int , but value itself is still passed by value.      void add_one(value);    A parameter in a function declaration must have a type.        What is printed by the following program?   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }       1     value refers to count , whose value starts at 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      Error!    Passing an int variable to an int& reference parameter is legal.      "
 },
 {
   "id": "chapter3_pass-by-reference-2",
@@ -4336,7 +4471,7 @@ var ptx_lunr_docs = [
   "type": "Note",
   "number": "3.12.1",
   "title": "",
-  "body": " For now, you only need to recognize and use & in a parameter declaration to create a reference parameter. We will study references in more detail, along with memory addresses and pointers, later in the course.  "
+  "body": " For now, you only need to recognize and use & in a parameter declaration to create a reference parameter. We will study references in more detail, along with memory addresses and pointers, in later chapters.  "
 },
 {
   "id": "pass_by_reference_1",
@@ -4624,7 +4759,7 @@ var ptx_lunr_docs = [
   "type": "Exercises",
   "number": "3.16",
   "title": "Activecode Exercises",
-  "body": " Activecode Exercises   Answer the following Activecode questions to assess what you have learned in this chapter.      Fix the errors in the code below so that it prints the area of a circle. Use a <cmath> function to obtain an accurate value for pi.   #include <iostream> #include <cmath> void print_area(double radius); int main() { std::cout << \"Testing with radius = 5...\\n\"; std::cout << \" Your function had area = \"; print_area(5.0); std::cout << '\\n'; std::cout << \"Testing with radius = 7.5...\\n\"; std::cout << \" Your function had area = \"; print_area(7.5); std::cout << '\\n'; return 0; } void print_area(double radius) { double pi = std::acos(1.0); double area = pi * radius ^ 2; std::cout << area; }      std::acos(-1.0) gives pi. C++ does not use ^ for exponentiation, so the radius can be squared by multiplying it by itself.   void print_area(double radius) { double pi = std::acos(-1.0); double area = pi * radius * radius; std::cout << area; }        Fix the code below so that it prints 2 elephants .   #include <iostream> #include <string> void print_animals(std::string animal, int count); int main() { print_animals(2, \"elephants\"); return 0; } void print_animals(std::string animal, int count) { std::cout << count << animal << '\\n'; }     The arguments must match the corresponding parameter types and order, and a space is needed between the number and animal name.   #include <iostream> #include <string> void print_animals(int count, std::string animal); int main() { print_animals(2, \"elephants\"); return 0; } void print_animals(int count, std::string animal) { std::cout << count << \" \" << animal << '\\n'; }        Fix the code below so that it prints 12 \/ 8 = 1.5 .   #include <iostream> double divide(int first, int second); int main() { int a = 8; int b = 12; std::cout << b << \" \/ \" << a << \" = \"; std::cout << divide(b, a) << '\\n'; return 0; } double divide(int first, int second) { return first \/ second; }     Because both parameters are int , first \/ second performs integer division before the result is returned. One way to fix the function is to convert one operand to double .   double divide(int first, int second) { return static_cast<double>(first) \/ second; }        Finish the function so that it returns the common logarithm of a minus the natural logarithm of a . You will need functions from <cmath> .   #include <iostream> #include <cmath> double log_difference(double a); int main() { std::cout << log_difference(8.0) << '\\n'; return 0; } double log_difference(double a) { \/\/ Compute and return log base 10 of a minus natural log of a. }     Use std::log10 for the common logarithm and std::log for the natural logarithm.   double log_difference(double a) { return std::log10(a) - std::log(a); }        Finish the code so that it prints First Line , a border, and Second Line on three separate lines.   #include <iostream> void border(); int main() { \/\/ Write your code here. return 0; } void border() { std::cout << \"------------\\n\"; }     Print the first line, call border , and then print the second line.   #include <iostream> void border(); int main() { std::cout << \"First Line\\n\"; border(); std::cout << \"Second Line\\n\"; return 0; } void border() { std::cout << \"------------\\n\"; }        Write a function called add_one that takes an int by reference and increases the caller's variable by one.   #include <iostream> void add_one(); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one() { }     Use a reference parameter so that changes made through the parameter affect the caller's variable.   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }        Write a function called round_up that takes a double and returns the smallest integer value that is greater than or equal to it. Use a function from <cmath> .   #include <iostream> #include <cmath> double round_up(double value); int main() { std::cout << round_up(2.513) << '\\n'; std::cout << round_up(4.0) << '\\n'; return 0; } double round_up(double value) { }      std::ceil returns the smallest integer-valued floating-point value greater than or equal to its argument.   double round_up(double value) { return std::ceil(value); }        Write a value-returning function called volume_prism that takes three double side lengths and returns the volume of the rectangular prism.   #include <iostream> double volume_prism(); int main() { std::cout << volume_prism(3.0, 4.0, 5.0) << '\\n'; std::cout << volume_prism(5.7, 3.9, 1.3) << '\\n'; return 0; } double volume_prism() { }     The function needs three double parameters and should return their product.   double volume_prism(double side1, double side2, double side3) { return side1 * side2 * side3; }        Write a function called tan_degrees that returns the tangent of an angle given in degrees. Use 3.14 for pi.   #include <iostream> #include <cmath> double tan_degrees(double degrees); int main() { std::cout << tan_degrees(45.0) << '\\n'; std::cout << tan_degrees(112.1) << '\\n'; return 0; } double tan_degrees(double degrees) { }     Convert the angle from degrees to radians before calling std::tan .   double tan_degrees(double degrees) { constexpr double pi = 3.14; double radians = degrees * pi \/ 180.0; return std::tan(radians); }        Write a value-returning function called volume_sphere that takes a double radius and returns the volume of the sphere. Use 3.14 for pi.   #include <iostream> double volume_sphere(double radius); int main() { std::cout << volume_sphere(3.0) << '\\n'; std::cout << volume_sphere(3.24) << '\\n'; return 0; } double volume_sphere(double radius) { }     Use 4.0 \/ 3.0 so the calculation uses floating-point division, and multiply the radius by itself three times.   double volume_sphere(double radius) { constexpr double pi = 3.14; return (4.0 \/ 3.0) * pi * radius * radius * radius; }     "
+  "body": " Activecode Exercises   Answer the following Activecode questions to assess what you have learned in this chapter.      Fix the errors in the code below so that it prints the area of a circle. Use a <cmath> function to obtain an accurate value for pi.   #include <iostream> #include <cmath> void print_area(double radius); int main() { std::cout << \"Testing with radius = 5...\\n\"; std::cout << \" Your function had area = \"; print_area(5.0); std::cout << '\\n'; std::cout << \"Testing with radius = 7.5...\\n\"; std::cout << \" Your function had area = \"; print_area(7.5); std::cout << '\\n'; return 0; } void print_area(double radius) { double pi = std::acos(1.0); double area = pi * radius ^ 2; std::cout << area; }      std::acos(-1.0) gives pi because cos(pi) = -1. C++ does not use ^ for exponentiation, so the radius can be squared by multiplying it by itself.   void print_area(double radius) { double pi = std::acos(-1.0); \/\/ cos(pi) = -1 double area = pi * radius * radius; std::cout << area; }        Fix the code below so that it prints 2 elephants .   #include <iostream> #include <string> void print_animals(std::string animal, int count); int main() { print_animals(2, \"elephants\"); return 0; } void print_animals(std::string animal, int count) { std::cout << count << animal << '\\n'; }     The arguments must match the corresponding parameter types and order, and a space is needed between the number and animal name.   #include <iostream> #include <string> void print_animals(int count, std::string animal); int main() { print_animals(2, \"elephants\"); return 0; } void print_animals(int count, std::string animal) { std::cout << count << \" \" << animal << '\\n'; }        Fix the code below so that it prints 12 \/ 8 = 1.5 .   #include <iostream> double divide(int first, int second); int main() { int a = 8; int b = 12; std::cout << b << \" \/ \" << a << \" = \"; std::cout << divide(b, a) << '\\n'; return 0; } double divide(int first, int second) { return first \/ second; }     Because both parameters are int , first \/ second performs integer division before the result is returned. One way to fix the function is to convert one operand to double .   double divide(int first, int second) { return static_cast<double>(first) \/ second; }        Finish the function so that it returns the common logarithm of a minus the natural logarithm of a . You will need functions from <cmath> .   #include <iostream> #include <cmath> double log_difference(double a); int main() { std::cout << log_difference(8.0) << '\\n'; return 0; } double log_difference(double a) { \/\/ Compute and return log base 10 of a minus natural log of a. }     Use std::log10 for the common logarithm and std::log for the natural logarithm.   double log_difference(double a) { return std::log10(a) - std::log(a); }        Finish the code so that it prints First Line , a border, and Second Line on three separate lines.   #include <iostream> void border(); int main() { \/\/ Write your code here. return 0; } void border() { std::cout << \"------------\\n\"; }     Print the first line, call border , and then print the second line.   #include <iostream> void border(); int main() { std::cout << \"First Line\\n\"; border(); std::cout << \"Second Line\\n\"; return 0; } void border() { std::cout << \"------------\\n\"; }        Write a function called add_one that takes an int by reference and increases the caller's variable by one.   #include <iostream> void add_one(); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one() { }     Use a reference parameter so that changes made through the parameter affect the caller's variable.   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }        Write a function called round_up that takes a double and returns the smallest integer value that is greater than or equal to it. Use a function from <cmath> .   #include <iostream> #include <cmath> double round_up(double value); int main() { std::cout << round_up(2.513) << '\\n'; std::cout << round_up(4.0) << '\\n'; return 0; } double round_up(double value) { }      std::ceil returns the smallest integer-valued floating-point value greater than or equal to its argument.   double round_up(double value) { return std::ceil(value); }        Write a value-returning function called volume_prism that takes three double side lengths and returns the volume of the rectangular prism.   #include <iostream> double volume_prism(); int main() { std::cout << volume_prism(3.0, 4.0, 5.0) << '\\n'; std::cout << volume_prism(5.7, 3.9, 1.3) << '\\n'; return 0; } double volume_prism() { }     The function needs three double parameters and should return their product.   double volume_prism(double side1, double side2, double side3) { return side1 * side2 * side3; }        Write a function called tan_degrees that returns the tangent of an angle given in degrees. Use 3.14 for pi.   #include <iostream> #include <cmath> double tan_degrees(double degrees); int main() { std::cout << tan_degrees(45.0) << '\\n'; std::cout << tan_degrees(112.1) << '\\n'; return 0; } double tan_degrees(double degrees) { }     Convert the angle from degrees to radians before calling std::tan .   double tan_degrees(double degrees) { constexpr double pi = 3.14; double radians = degrees * pi \/ 180.0; return std::tan(radians); }        Write a value-returning function called volume_sphere that takes a double radius and returns the volume of the sphere. Use 3.14 for pi.   #include <iostream> double volume_sphere(double radius); int main() { std::cout << volume_sphere(3.0) << '\\n'; std::cout << volume_sphere(3.24) << '\\n'; return 0; } double volume_sphere(double radius) { }     Use 4.0 \/ 3.0 so the calculation uses floating-point division, and multiply the radius by itself three times.   double volume_sphere(double radius) { constexpr double pi = 3.14; return (4.0 \/ 3.0) * pi * radius * radius * radius; }     "
 },
 {
   "id": "chapter3_activecode-exercises-2-1",
@@ -4642,7 +4777,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.16.1",
   "title": "",
-  "body": "  Fix the errors in the code below so that it prints the area of a circle. Use a <cmath> function to obtain an accurate value for pi.   #include <iostream> #include <cmath> void print_area(double radius); int main() { std::cout << \"Testing with radius = 5...\\n\"; std::cout << \" Your function had area = \"; print_area(5.0); std::cout << '\\n'; std::cout << \"Testing with radius = 7.5...\\n\"; std::cout << \" Your function had area = \"; print_area(7.5); std::cout << '\\n'; return 0; } void print_area(double radius) { double pi = std::acos(1.0); double area = pi * radius ^ 2; std::cout << area; }      std::acos(-1.0) gives pi. C++ does not use ^ for exponentiation, so the radius can be squared by multiplying it by itself.   void print_area(double radius) { double pi = std::acos(-1.0); double area = pi * radius * radius; std::cout << area; }    "
+  "body": "  Fix the errors in the code below so that it prints the area of a circle. Use a <cmath> function to obtain an accurate value for pi.   #include <iostream> #include <cmath> void print_area(double radius); int main() { std::cout << \"Testing with radius = 5...\\n\"; std::cout << \" Your function had area = \"; print_area(5.0); std::cout << '\\n'; std::cout << \"Testing with radius = 7.5...\\n\"; std::cout << \" Your function had area = \"; print_area(7.5); std::cout << '\\n'; return 0; } void print_area(double radius) { double pi = std::acos(1.0); double area = pi * radius ^ 2; std::cout << area; }      std::acos(-1.0) gives pi because cos(pi) = -1. C++ does not use ^ for exponentiation, so the radius can be squared by multiplying it by itself.   void print_area(double radius) { double pi = std::acos(-1.0); \/\/ cos(pi) = -1 double area = pi * radius * radius; std::cout << area; }    "
 },
 {
   "id": "functions_a2",

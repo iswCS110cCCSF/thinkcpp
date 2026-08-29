@@ -529,29 +529,36 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Composition</span>
 </h1>
-<div class="para" id="chapter3_composition-2">Just as with mathematical functions, C++ functions can be <dfn class="terminology">composed</dfn>, meaning that you use one expression as part of another. For example, you can use any expression as an argument to a function:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_composition-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_composition-2">Just as with mathematical functions, C++ functions can be <dfn class="terminology">composed</dfn>. This means using one expression or function result as part of another expression.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_composition-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">double x = std::cos(angle + pi / 2);
+<div class="para" id="chapter3_composition-3">For example, an expression can be used directly as an argument to a function:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_composition-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">double x = std::cos(angle + pi / 2.0);
 </code></pre></div>
-<div class="para" id="chapter3_composition-4">This statement takes the value of pi, divides it by two and adds the result to the value of angle. The sum is then passed as an argument to the <code class="code-inline tex2jax_ignore">cos</code> function.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_composition-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_composition-5">First, <code class="code-inline tex2jax_ignore">pi / 2.0</code> is evaluated and added to <code class="code-inline tex2jax_ignore">angle</code>. The resulting value is then passed as the argument to <code class="code-inline tex2jax_ignore">std::cos</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_composition-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_composition-5">You can also take the result of one function and pass it as an argument to another:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_composition-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_composition-6">You can also use the result returned by one function as the argument to another function:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_composition-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="function_comp_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.4.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program finds the log base e of 10 and raises e to that power. The result of this computation is assigned to x.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.4.1: This program finds the log base e of 10 and raises e to that power. The result of this computation is assigned to x."><a tabindex="-1" href="#function_comp_AC_1" title="Copy heading and permalink for Listing 3.4.1: This program finds the log base e of 10 and raises e to that power. The result of this computation is assigned to x." aria-label="Copy heading and permalink for Listing 3.4.1: This program finds the log base e of 10 and raises e to that power. The result of this computation is assigned to x.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-function_comp_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+<figure class="listing figure-like" id="function_comp_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.4.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program computes the natural logarithm of 10 and then passes that result to <code class="code-inline tex2jax_ignore">std::exp</code>.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.4.1: This program computes the natural logarithm of 10 and then passes that result to std::exp."><a tabindex="-1" href="#function_comp_AC_1" title="Copy heading and permalink for Listing 3.4.1: This program computes the natural logarithm of 10 and then passes that result to std::exp." aria-label="Copy heading and permalink for Listing 3.4.1: This program computes the natural logarithm of 10 and then passes that result to std::exp.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-function_comp_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
 #include &lt;cmath&gt;
 
 int main() {
     double x = std::exp(std::log(10.0));
-    std::cout &lt;&lt; x;
+
+    std::cout &lt;&lt; x &lt;&lt; '\n';
+
+    return 0;
 }
 </code></pre></div>
 </figure>
+<div class="para" id="chapter3_composition-8">The inner call <code class="code-inline tex2jax_ignore">std::log(10.0)</code> is evaluated first. Its return value becomes the argument to <code class="code-inline tex2jax_ignore">std::exp</code>. Since <code class="code-inline tex2jax_ignore">std::exp</code> raises <span class="process-math">\(e\)</span> to the given power, the result is approximately <code class="code-inline tex2jax_ignore">10</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_composition-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
 <article class="exercise exercise-like" id="function_comp_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.4.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="function_comp_1-1-1">Which of these statements has proper syntax?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#function_comp_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="function_comp_1-1-1">Which of these statements has correct C++ syntax and uses valid standard-library functions from <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code>?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#function_comp_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-function_comp_1" data-multipleanswers="false">
@@ -560,26 +567,26 @@ int main() {
 </li>
 <li data-component="feedback" id="rs-function_comp_1_opt_a">
 <div class="para" id="function_comp_1-2-1-2-1">
-<code class="code-inline tex2jax_ignore">log6</code> is not a built in cmath function, but you could write an implementation for it if you wanted!</div>
+<code class="code-inline tex2jax_ignore">std::log6</code> is not a standard-library function.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_1_opt_b" data-correct="">
 <div class="para" id="function_comp_1-2-2-1-1"><code class="code-inline tex2jax_ignore">double val = std::abs(std::tan(1.57));</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_1_opt_b">
-<div class="para" id="function_comp_1-2-2-2-1">This correctly uses cmath functions!</div>
+<div class="para" id="function_comp_1-2-2-2-1">Correct. The result of <code class="code-inline tex2jax_ignore">std::tan(1.57)</code> is passed as the argument to <code class="code-inline tex2jax_ignore">std::abs</code>.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_1_opt_c">
 <div class="para" id="function_comp_1-2-3-1-1"><code class="code-inline tex2jax_ignore">double num = std::exp(std::cosine(0.86667));</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_1_opt_c">
 <div class="para" id="function_comp_1-2-3-2-1">
-<code class="code-inline tex2jax_ignore">cosine</code> is not a built in cmath function, but <code class="code-inline tex2jax_ignore">cos</code> is!</div>
+<code class="code-inline tex2jax_ignore">std::cosine</code> is not a standard-library function. The cosine function is named <code class="code-inline tex2jax_ignore">std::cos</code>.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_1_opt_d">
 <div class="para" id="function_comp_1-2-4-1-1"><code class="code-inline tex2jax_ignore">double y = std::exp(std::cos(1.047)) + std::exp(std::tan(2.094))</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_1_opt_d">
-<div class="para" id="function_comp_1-2-4-2-1">This would be correct if it ended in a semi-colon.</div>
+<div class="para" id="function_comp_1-2-4-2-1">The function calls are valid, but the statement is missing a semicolon.</div>
 </li>
 </ul>
 </div></div>
@@ -590,7 +597,7 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="function_comp_2-1-1">Which of these statements returns the y-component of the unit vector at 330 degrees?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#function_comp_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="function_comp_2-1-1">Which statement computes the y-component of a unit vector at 330 degrees? Assume <code class="code-inline tex2jax_ignore">pi</code> has already been defined.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#function_comp_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-function_comp_2" data-multipleanswers="false">
@@ -598,34 +605,34 @@ int main() {
 <div class="para" id="function_comp_2-2-1-1-1"><code class="code-inline tex2jax_ignore">y = std::cos(330);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_2_opt_a">
-<div class="para" id="function_comp_2-2-1-2-1">You must always convert to radians before using sinusoidal functions.</div>
+<div class="para" id="function_comp_2-2-1-2-1">
+<code class="code-inline tex2jax_ignore">std::cos</code> gives the x-component, and C++ trigonometric functions expect angles in radians.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_2_opt_b">
-<div class="para" id="function_comp_2-2-2-1-1"><code class="code-inline tex2jax_ignore">y = std::cos(330 * 2 * pi / 360);</code></div>
+<div class="para" id="function_comp_2-2-2-1-1"><code class="code-inline tex2jax_ignore">y = std::cos(330 * pi / 180.0);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_2_opt_b">
-<div class="para" id="function_comp_2-2-2-2-1">
-<code class="code-inline tex2jax_ignore">cos</code> will return the x-component.</div>
+<div class="para" id="function_comp_2-2-2-2-1">The angle is converted correctly, but <code class="code-inline tex2jax_ignore">std::cos</code> gives the x-component of the unit vector.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_2_opt_c">
 <div class="para" id="function_comp_2-2-3-1-1"><code class="code-inline tex2jax_ignore">y = std::sin(330);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_2_opt_c">
-<div class="para" id="function_comp_2-2-3-2-1">You must always convert to radians before using sinusoidal functions.</div>
+<div class="para" id="function_comp_2-2-3-2-1">
+<code class="code-inline tex2jax_ignore">std::sin</code> gives the y-component, but the angle must be converted from degrees to radians first.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_2_opt_d" data-correct="">
-<div class="para" id="function_comp_2-2-4-1-1"><code class="code-inline tex2jax_ignore">y = std::sin(330 * 2 * pi / 360);</code></div>
+<div class="para" id="function_comp_2-2-4-1-1"><code class="code-inline tex2jax_ignore">y = std::sin(330 * pi / 180.0);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_2_opt_d">
-<div class="para" id="function_comp_2-2-4-2-1">
-<code class="code-inline tex2jax_ignore">sin</code> returns the y-component, <code class="code-inline tex2jax_ignore">cos</code> returns the x-component.</div>
+<div class="para" id="function_comp_2-2-4-2-1">Correct. <code class="code-inline tex2jax_ignore">std::sin</code> gives the y-component, and <code class="code-inline tex2jax_ignore">330 * pi / 180.0</code> converts 330 degrees to radians.</div>
 </li>
 <li data-component="answer" id="rs-function_comp_2_opt_e">
-<div class="para" id="function_comp_2-2-5-1-1"><code class="code-inline tex2jax_ignore">y = std::tan(330 * 2 * pi / 360);</code></div>
+<div class="para" id="function_comp_2-2-5-1-1"><code class="code-inline tex2jax_ignore">y = std::tan(330 * pi / 180.0);</code></div>
 </li>
 <li data-component="feedback" id="rs-function_comp_2_opt_e">
 <div class="para" id="function_comp_2-2-5-2-1">
-<code class="code-inline tex2jax_ignore">tan</code> is not the proper function to use here.</div>
+<code class="code-inline tex2jax_ignore">std::tan</code> does not directly give the y-component of a unit vector.</div>
 </li>
 </ul>
 </div></div>

@@ -564,10 +564,10 @@ void print_area(double radius) {
 <details id="functions_a1-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
 <div class="solution solution-like knowl__content">
 <div class="para" id="functions_a1-2-1">
-<code class="code-inline tex2jax_ignore">std::acos(-1.0)</code> gives pi. C++ does not use <code class="code-inline tex2jax_ignore">^</code> for exponentiation, so the radius can be squared by multiplying it by itself.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_a1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<code class="code-inline tex2jax_ignore">std::acos(-1.0)</code> gives pi because cos(pi) = -1. C++ does not use <code class="code-inline tex2jax_ignore">^</code> for exponentiation, so the radius can be squared by multiplying it by itself.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_a1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-functions_a1a_editor" class="language-cpp">void print_area(double radius) {
-    double pi = std::acos(-1.0);
+    double pi = std::acos(-1.0); // cos(pi) = -1
     double area = pi * radius * radius;
 
     std::cout &lt;&lt; area;

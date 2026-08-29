@@ -529,66 +529,80 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Converting from <code class="code-inline tex2jax_ignore">double</code> to <code class="code-inline tex2jax_ignore">int</code></span>
 </h1>
-<div class="para" id="chapter3_converting-from-double-to-int-2">As I mentioned, C++ converts <code class="code-inline tex2jax_ignore">int</code>’s to <code class="code-inline tex2jax_ignore">double</code>’s automatically if necessary, because no information is lost in the translation. On the other hand, going from a <code class="code-inline tex2jax_ignore">double</code> to an <code class="code-inline tex2jax_ignore">int</code> requires truncating to the neareast integer toward zero. The implicit conversion is allowed but you’d lose the fractional part doing so. You, as the programmer, should be aware of the loss of the fractional part of the number.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_converting-from-double-to-int-2">As we saw in the previous section, C++ can automatically convert an <code class="code-inline tex2jax_ignore">int</code> value to a <code class="code-inline tex2jax_ignore">double</code> when needed. For example, the integer value <code class="code-inline tex2jax_ignore">3</code> can be converted to the floating-point value <code class="code-inline tex2jax_ignore">3.0</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_converting-from-double-to-int-3">The simplest way to convert a floating-point value to an integer is to use a <dfn class="terminology">typecast</dfn>. Typecasting is so called because it allows you to take a value that belongs to one type and “cast” it into another type (in the sense of molding or reforming, not throwing).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_converting-from-double-to-int-3">Converting in the other direction, from <code class="code-inline tex2jax_ignore">double</code> to <code class="code-inline tex2jax_ignore">int</code>, can lose information because an <code class="code-inline tex2jax_ignore">int</code> cannot store a fractional part. When a floating-point value is converted to an integer, the fractional part is discarded. This is also described as truncating toward zero.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_converting-from-double-to-int-4">The syntax for typecasting is like the syntax for a function call. For example:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_converting-from-double-to-int-4">C++ allows this conversion implicitly in some situations, but when you intend to convert a value explicitly, it is clearer to say so in the code. In modern C++, we will use <code class="code-inline tex2jax_ignore">static_cast</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter3_converting-from-double-to-int-5">For example:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">double pi = 3.14159;
-int x = int(pi);
+int x = static_cast&lt;int&gt;(pi);
 </code></pre></div>
-<div class="para" id="chapter3_converting-from-double-to-int-6">The int function returns an integer, so x gets the value 3. Casting to an integer always truncates to the neareast integer toward zero even if the fraction part is 0.99999999.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_converting-from-double-to-int-7">The expression <code class="code-inline tex2jax_ignore">static_cast&lt;int&gt;(pi)</code> explicitly converts the value stored in <code class="code-inline tex2jax_ignore">pi</code> to an <code class="code-inline tex2jax_ignore">int</code>. The fractional part is discarded, so <code class="code-inline tex2jax_ignore">x</code> receives the value <code class="code-inline tex2jax_ignore">3</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_converting-from-double-to-int-7">For every type in C++, there is a corresponding function that typecasts its argument to the appropriate type. However, modern C++ standard recommends using static_cast function like below. Note that the type we are casting into must go between &lt;&gt;. We will learn more on &lt;int&gt; kind of notations later in the book.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_converting-from-double-to-int-8">The type we want to convert to appears between the angle brackets <code class="code-inline tex2jax_ignore">&lt;</code> and <code class="code-inline tex2jax_ignore">&gt;</code>. We will see this kind of syntax again later in the course.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int x = static_cast&lt;int&gt;(pi);
+<div class="para" id="chapter3_converting-from-double-to-int-9">Notice that truncation is not the same as rounding. For example:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int a = static_cast&lt;int&gt;(7.99999999);
+int b = static_cast&lt;int&gt;(-7.99999999);
 </code></pre></div>
+<div class="para" id="chapter3_converting-from-double-to-int-11">The value of <code class="code-inline tex2jax_ignore">a</code> is <code class="code-inline tex2jax_ignore">7</code>, and the value of <code class="code-inline tex2jax_ignore">b</code> is <code class="code-inline tex2jax_ignore">-7</code>. In both cases, the fractional part is discarded, which means the result moves toward zero.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_converting-from-double-to-int-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
 <article class="exercise exercise-like" id="double_to_int_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.2.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="double_to_int_1-1-1">In the lab, we measured a temperature of 7.99999999 degrees C, using an extremely precise measuring device. Now we are writing a program to perform some calculations with our data. Consider the following C++ code.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int main() {
-  double temp = 7.99999999;
-  int rounded_temp = int(temp);
-  std::cout &lt;&lt; rounded_temp;
+<div class="para" id="double_to_int_1-1-1">Consider the following C++ code:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    double temp = 7.99999999;
+    int truncated_temp = static_cast&lt;int&gt;(temp);
+
+    std::cout &lt;&lt; truncated_temp &lt;&lt; '\n';
+
+    return 0;
 }
 </code></pre></div> 
-<div class="para" id="double_to_int_1-1-3">What is the value of rounded_temp?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_1-1-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="double_to_int_1-1-3">What value is printed?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_1-1-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-double_to_int_1" data-multipleanswers="false">
 <li data-component="answer" id="rs-double_to_int_1_opt_a">
-<div class="para" id="double_to_int_1-2-1-1-1">temp</div>
+<div class="para" id="double_to_int_1-2-1-1-1"><code class="code-inline tex2jax_ignore">temp</code></div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_1_opt_a">
-<div class="para" id="double_to_int_1-2-1-2-1">This is the name of a variable. Only the value of a variable will print with cout.</div>
+<div class="para" id="double_to_int_1-2-1-2-1">
+<code class="code-inline tex2jax_ignore">temp</code> is the variable name. The program prints the value stored in <code class="code-inline tex2jax_ignore">truncated_temp</code>.</div>
 </li>
 <li data-component="answer" id="rs-double_to_int_1_opt_b">
-<div class="para" id="double_to_int_1-2-2-1-1">8</div>
+<div class="para" id="double_to_int_1-2-2-1-1"><code class="code-inline tex2jax_ignore">8</code></div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_1_opt_b">
-<div class="para" id="double_to_int_1-2-2-2-1">Remember that converting to an integer always truncates to the neareast integer toward zero.</div>
+<div class="para" id="double_to_int_1-2-2-2-1">Converting to <code class="code-inline tex2jax_ignore">int</code> does not round to the nearest integer. The fractional part is discarded.</div>
 </li>
 <li data-component="answer" id="rs-double_to_int_1_opt_c" data-correct="">
-<div class="para" id="double_to_int_1-2-3-1-1">7</div>
+<div class="para" id="double_to_int_1-2-3-1-1"><code class="code-inline tex2jax_ignore">7</code></div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_1_opt_c">
-<div class="para" id="double_to_int_1-2-3-2-1">Correct!</div>
+<div class="para" id="double_to_int_1-2-3-2-1">Correct. Converting <code class="code-inline tex2jax_ignore">7.99999999</code> to <code class="code-inline tex2jax_ignore">int</code> discards the fractional part, producing <code class="code-inline tex2jax_ignore">7</code>.</div>
 </li>
 <li data-component="answer" id="rs-double_to_int_1_opt_d">
-<div class="para" id="double_to_int_1-2-4-1-1">8.0</div>
+<div class="para" id="double_to_int_1-2-4-1-1"><code class="code-inline tex2jax_ignore">8.0</code></div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_1_opt_d">
-<div class="para" id="double_to_int_1-2-4-2-1">This is not an integer data type, and it’s not the right number.</div>
+<div class="para" id="double_to_int_1-2-4-2-1">
+<code class="code-inline tex2jax_ignore">truncated_temp</code> has type <code class="code-inline tex2jax_ignore">int</code>, and the conversion produces <code class="code-inline tex2jax_ignore">7</code>.</div>
 </li>
 <li data-component="answer" id="rs-double_to_int_1_opt_e">
-<div class="para" id="double_to_int_1-2-5-1-1">7.0</div>
+<div class="para" id="double_to_int_1-2-5-1-1"><code class="code-inline tex2jax_ignore">7.0</code></div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_1_opt_e">
-<div class="para" id="double_to_int_1-2-5-2-1">This is not an integer data type.</div>
+<div class="para" id="double_to_int_1-2-5-2-1">The numeric value is based on <code class="code-inline tex2jax_ignore">7</code>, but <code class="code-inline tex2jax_ignore">truncated_temp</code> has type <code class="code-inline tex2jax_ignore">int</code>.</div>
 </li>
 </ul>
 </div></div>
@@ -599,50 +613,53 @@ int x = int(pi);
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="double_to_int_2-1-1">Your final grade consists of your average performance on exam 1 and exam 2. Your professor is using C++ to grade the exams and allows you to choose which method you’d like your exam to be graded.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="double_to_int_2-1-1">Consider these exam scores:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">double exam1 = 88.8;
 double exam2 = 72.7;
 double exam3 = 97.9;
 </code></pre></div> 
-<div class="para" id="double_to_int_2-1-3">
-<dfn class="terminology">Method 1:</dfn><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_2-1-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">double final = (int(exam1) + int(exam2) + int(exam3)) / 3;
+<div class="para" id="double_to_int_2-1-3">Compare the following two calculations:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_2-1-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> 
+<div class="para" id="double_to_int_2-1-4">
+<dfn class="terminology">Method 1:</dfn><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_2-1-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int final1 =
+    (static_cast&lt;int&gt;(exam1)
+    + static_cast&lt;int&gt;(exam2)
+    + static_cast&lt;int&gt;(exam3)) / 3;
 </code></pre></div> 
-<div class="para" id="double_to_int_2-1-5">
-<dfn class="terminology">Method 2:</dfn><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_2-1-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int final = int((exam1 + exam2 + exam3) / 3);
+<div class="para" id="double_to_int_2-1-6">
+<dfn class="terminology">Method 2:</dfn><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_2-1-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int final2 =
+    static_cast&lt;int&gt;((exam1 + exam2 + exam3) / 3.0);
 </code></pre></div> 
-<div class="para" id="double_to_int_2-1-7">Which method would <dfn class="terminology">you</dfn> choose and why?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_2-1-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="double_to_int_2-1-8">Which statement is correct?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#double_to_int_2-1-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-double_to_int_2" data-multipleanswers="false">
 <li data-component="answer" id="rs-double_to_int_2_opt_a">
-<div class="para" id="double_to_int_2-2-1-1-1">
-<dfn class="terminology">Method 1:</dfn><code class="code-inline tex2jax_ignore">final</code> is a <code class="code-inline tex2jax_ignore">double</code>, meaning my final grade will have more digits past the decimal, and will be higher than the <code class="code-inline tex2jax_ignore">int</code> in Method 2.</div>
+<div class="para" id="double_to_int_2-2-1-1-1">Method 1 gives the larger result because each individual score is converted to <code class="code-inline tex2jax_ignore">int</code> first.</div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_2_opt_a">
-<div class="para" id="double_to_int_2-2-1-2-1">Although <code class="code-inline tex2jax_ignore">final</code> is a <code class="code-inline tex2jax_ignore">double</code>, it doesn’t have any digits past the decimal due to the integer division.</div>
+<div class="para" id="double_to_int_2-2-1-2-1">Converting each score first discards each fractional part before the average is computed.</div>
 </li>
 <li data-component="answer" id="rs-double_to_int_2_opt_b">
-<div class="para" id="double_to_int_2-2-2-1-1">
-<dfn class="terminology">Method 1:</dfn> the rounding happens at the beginning, so all three of my test scores will be truncated to the neareast integer toward zero <code class="code-inline tex2jax_ignore">int</code>, which in my case, will truncated them up.</div>
+<div class="para" id="double_to_int_2-2-2-1-1">Method 1 and Method 2 always produce the same result.</div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_2_opt_b">
-<div class="para" id="double_to_int_2-2-2-2-1">Converting to an <code class="code-inline tex2jax_ignore">int</code> always truncated to the neareast integer toward zero, even if your <code class="code-inline tex2jax_ignore">double</code> is very close to the next integer.</div>
+<div class="para" id="double_to_int_2-2-2-2-1">Converting before a calculation can produce a different result from converting after the calculation.</div>
 </li>
-<li data-component="answer" id="rs-double_to_int_2_opt_c">
-<div class="para" id="double_to_int_2-2-3-1-1">
-<dfn class="terminology">Method 2:</dfn><code class="code-inline tex2jax_ignore">final</code> is an <code class="code-inline tex2jax_ignore">int</code>, so it gets truncated to he neareast integer up.</div>
+<li data-component="answer" id="rs-double_to_int_2_opt_c" data-correct="">
+<div class="para" id="double_to_int_2-2-3-1-1">Method 2 gives the larger result because the fractional parts are kept while the average is calculated, and the conversion to <code class="code-inline tex2jax_ignore">int</code> happens only at the end.</div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_2_opt_c">
-<div class="para" id="double_to_int_2-2-3-2-1">Converting to an <code class="code-inline tex2jax_ignore">int</code> always truncated to the neareast integer toward zero, even if your <code class="code-inline tex2jax_ignore">double</code> is very close to the next integer.</div>
+<div class="para" id="double_to_int_2-2-3-2-1">Correct. Method 1 first changes the scores to <code class="code-inline tex2jax_ignore">88</code>, <code class="code-inline tex2jax_ignore">72</code>, and <code class="code-inline tex2jax_ignore">97</code>. Method 2 keeps the fractional parts until after the average has been calculated.</div>
 </li>
-<li data-component="answer" id="rs-double_to_int_2_opt_d" data-correct="">
-<div class="para" id="double_to_int_2-2-4-1-1">
-<dfn class="terminology">Method 2:</dfn> the truncating happens at the very end, so my grade will be higher!</div>
+<li data-component="answer" id="rs-double_to_int_2_opt_d">
+<div class="para" id="double_to_int_2-2-4-1-1">Method 2 rounds the average to the nearest integer.</div>
 </li>
 <li data-component="feedback" id="rs-double_to_int_2_opt_d">
-<div class="para" id="double_to_int_2-2-4-2-1">Always save your truncating until the end!</div>
+<div class="para" id="double_to_int_2-2-4-2-1">
+<code class="code-inline tex2jax_ignore">static_cast&lt;int&gt;</code> does not round to the nearest integer. It discards the fractional part.</div>
 </li>
 </ul>
 </div></div>

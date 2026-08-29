@@ -529,95 +529,98 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Math Functions</span>
 </h1>
-<div class="para" id="chapter3_math-functions-2">In mathematics, you have probably seen functions like <span class="process-math">\(\sin\)</span> and <span class="process-math">\(\log\text{,}\)</span> and you have learned to evaluate expressions like <span class="process-math">\(\sin(\pi/2)\)</span> and <span class="process-math">\(\log(1/x)\text{.}\)</span> First, you evaluate the expression in parentheses, which is called the argument of the function. For example, <span class="process-math">\(\pi/2\)</span> is approximately 1.571, and <span class="process-math">\(1/x\)</span> is 0.1 (if <span class="process-math">\(x\)</span> happens to be 10).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-2">In mathematics, you have probably seen functions such as <span class="process-math">\(\sin\)</span> and <span class="process-math">\(\log\text{,}\)</span> and you have learned to evaluate expressions such as <span class="process-math">\(\sin(\pi/2)\)</span> and <span class="process-math">\(\log(1/x)\text{.}\)</span> First, you evaluate the expression inside the parentheses, which is called the argument of the function. For example, <span class="process-math">\(\pi/2\)</span> is approximately 1.571, and <span class="process-math">\(1/x\)</span> is 0.1 if <span class="process-math">\(x\)</span> is 10.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_math-functions-3">Then you can evaluate the function itself, either by looking it up in a table or by performing various computations. The <span class="process-math">\(\sin\)</span> of 1.571 is 1, and the <span class="process-math">\(\log\)</span> of 0.1 is -1 (assuming that <span class="process-math">\(\log\)</span> indicates the logarithm base 10).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-3">Then you evaluate the function itself. For example, <span class="process-math">\(\sin(\pi/2)\)</span> is 1. If <span class="process-math">\(\log\)</span> means logarithm base 10, then <span class="process-math">\(\log(0.1)\)</span> is -1.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_math-functions-4">This process can be applied repeatedly to evaluate more complicated expressions like <span class="process-math">\(\log(1/\sin(\pi/2))\text{.}\)</span> First we evaluate the argument of the innermost function, then evaluate the function, and so on.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-4">This process can be applied repeatedly to evaluate more complicated expressions such as <span class="process-math">\(\log(1/\sin(\pi/2))\text{.}\)</span> We begin with the innermost expression and work outward.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_math-functions-5">C++ provides a math library that includes most of the mathematical operations you can think of. The math functions are invoked using a syntax that is similar to mathematical notation:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-5">The C++ standard library provides many mathematical functions through the <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code> header. Function calls use syntax similar to mathematical notation.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="math_functions_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.3.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program performs calculations using some of the built-in functions from the cmath library.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.3.1: This program performs calculations using some of the built-in functions from the cmath library."><a tabindex="-1" href="#math_functions_AC_1" title="Copy heading and permalink for Listing 3.3.1: This program performs calculations using some of the built-in functions from the cmath library." aria-label="Copy heading and permalink for Listing 3.3.1: This program performs calculations using some of the built-in functions from the cmath library.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-math_functions_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+<figure class="listing figure-like" id="math_functions_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.3.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program performs calculations using standard-library functions from <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code>.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.3.1: This program performs calculations using standard-library functions from &lt;cmath&gt;."><a tabindex="-1" href="#math_functions_AC_1" title="Copy heading and permalink for Listing 3.3.1: This program performs calculations using standard-library functions from &lt;cmath&gt;." aria-label="Copy heading and permalink for Listing 3.3.1: This program performs calculations using standard-library functions from &lt;cmath&gt;.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-math_functions_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
 #include &lt;cmath&gt;
 
 int main() {
     double result = std::log(17.0);
+
     double angle = 1.5;
     double height = std::sin(angle);
+
     std::cout &lt;&lt; result &lt;&lt; '\n';
     std::cout &lt;&lt; angle &lt;&lt; '\n';
     std::cout &lt;&lt; height &lt;&lt; '\n';
+
     return 0;
 }
 </code></pre></div>
 </figure>
-<div class="para" id="chapter3_math-functions-7">The first example sets log to the logarithm of 17, base <span class="process-math">\(e\text{.}\)</span> There is also a function called <code class="code-inline tex2jax_ignore">log10</code> that takes logarithms base 10.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-7">The call <code class="code-inline tex2jax_ignore">std::log(17.0)</code> computes the natural logarithm of <code class="code-inline tex2jax_ignore">17.0</code>, which uses base <span class="process-math">\(e\text{.}\)</span> The function <code class="code-inline tex2jax_ignore">std::log10</code> computes a logarithm using base 10.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_math-functions-8">The second example finds the sine of the value of the variable angle. C++ assumes that the values you use with <code class="code-inline tex2jax_ignore">sin</code> and the other trigonometric functions (<code class="code-inline tex2jax_ignore">cos</code>, <code class="code-inline tex2jax_ignore">tan</code>) are in <em class="emphasis">radians</em>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-8">The call <code class="code-inline tex2jax_ignore">std::sin(angle)</code> computes the sine of the value stored in <code class="code-inline tex2jax_ignore">angle</code>. C++ trigonometric functions such as <code class="code-inline tex2jax_ignore">std::sin</code>, <code class="code-inline tex2jax_ignore">std::cos</code>, and <code class="code-inline tex2jax_ignore">std::tan</code> use angles measured in <dfn class="terminology">radians</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="note remark-like" id="chapter3_math-functions-9"><h2 class="heading">
 <span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.3.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
-<div class="para" id="chapter3_math-functions-9-1">To convert from degrees to radians, you can divide by 360 and multiply by 2 * pi.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-9-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-9-1">To convert an angle from degrees to radians, multiply by pi and divide by 180: <code class="code-inline tex2jax_ignore">radians = degrees * pi / 180.0</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-9-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Note 3.3.1"><a tabindex="-1" href="#chapter3_math-functions-9" title="Copy heading and permalink for Note 3.3.1" aria-label="Copy heading and permalink for Note 3.3.1">🔗</a></div>
 </article>
-<div class="para" id="chapter3_math-functions-10">If you don’t happen to know <span class="process-math">\(\pi\)</span> to 15 digits, you can calculate it using the <code class="code-inline tex2jax_ignore">acos</code> function. The arccosine (or inverse cosine) of -1 is <span class="process-math">\(\pi\text{,}\)</span> because the cosine of <span class="process-math">\(\pi\)</span> is -1.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-10">If you need an accurate value for <span class="process-math">\(\pi\text{,}\)</span> you can calculate it using <code class="code-inline tex2jax_ignore">std::acos</code>. The arccosine, or inverse cosine, of <code class="code-inline tex2jax_ignore">-1.0</code> is <span class="process-math">\(\pi\text{.}\)</span><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="math_functions_AC_2"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.3.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program also uses built-in functions from the cmath library, specifically the functions that deal with angles. As you can see, we have a line of code that converts the default radians value to degrees.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.3.2: This program also uses built-in functions from the cmath library, specifically the functions that deal with angles. As you can see, we have a line of code that converts the default radians value to degrees."><a tabindex="-1" href="#math_functions_AC_2" title="Copy heading and permalink for Listing 3.3.2: This program also uses built-in functions from the cmath library, specifically the functions that deal with angles. As you can see, we have a line of code that converts the default radians value to degrees." aria-label="Copy heading and permalink for Listing 3.3.2: This program also uses built-in functions from the cmath library, specifically the functions that deal with angles. As you can see, we have a line of code that converts the default radians value to degrees.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-math_functions_AC_2_editor" class="language-cpp">#include &lt;iostream&gt;
+<figure class="listing figure-like" id="math_functions_AC_2"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.3.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program calculates pi and converts an angle from degrees to radians.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.3.2: This program calculates pi and converts an angle from degrees to radians."><a tabindex="-1" href="#math_functions_AC_2" title="Copy heading and permalink for Listing 3.3.2: This program calculates pi and converts an angle from degrees to radians." aria-label="Copy heading and permalink for Listing 3.3.2: This program calculates pi and converts an angle from degrees to radians.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-math_functions_AC_2_editor" class="language-cpp">#include &lt;iostream&gt;
 #include &lt;cmath&gt;
 
 int main() {
     double pi = std::acos(-1.0);
-    double degrees = 90;
-    double angle = degrees * 2 * pi / 360.0;
+
+    double degrees = 90.0;
+    double radians = degrees * pi / 180.0;
+
     std::cout &lt;&lt; pi &lt;&lt; '\n';
     std::cout &lt;&lt; degrees &lt;&lt; '\n';
-    std::cout &lt;&lt; angle &lt;&lt; '\n';
+    std::cout &lt;&lt; radians &lt;&lt; '\n';
+
     return 0;
 }
 </code></pre></div>
 </figure>
-<div class="para" id="chapter3_math-functions-12">Before you can use any of the math functions, you have to include the math header file. <dfn class="terminology">Header files</dfn> contain information the compiler needs about functions that are defined outside your program. For example, in the “Hello, world!” program we included a header file named iostream using an <dfn class="terminology">include</dfn> statement:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-12">Before using a standard-library facility, include the header that declares it. For example, <code class="code-inline tex2jax_ignore">&lt;iostream&gt;</code> provides the declarations needed for stream input and output, including <code class="code-inline tex2jax_ignore">std::cout</code>:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 </code></pre></div>
-<div class="para" id="chapter3_math-functions-14">
-<a class="external" href="https://en.cppreference.com/w/cpp/header/iostream" target="_blank">iostream</a> contains information about input and output (I/O) streams, including the object named <code class="code-inline tex2jax_ignore">cout</code>. C++ has a powerful feature called namespaces, that allow you to write your own implementation of cout. But in most cases, we would need to use the standard implementation of cout which your explisitly get using std::cout.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-14">Standard-library names are generally placed in the <code class="code-inline tex2jax_ignore">std</code> namespace. That is why we write <code class="code-inline tex2jax_ignore">std::cout</code> rather than simply <code class="code-inline tex2jax_ignore">cout</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"></div>
-<article class="note remark-like" id="chapter3_math-functions-16"><h2 class="heading">
+<article class="note remark-like" id="chapter3_math-functions-15"><h2 class="heading">
 <span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.3.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
-<div class="para" id="chapter3_math-functions-16-1">As a rule of thumb, qualify standard-library names with the <code class="code-inline tex2jax_ignore">std::</code> prefix when you use facilities from headers such as <code class="code-inline tex2jax_ignore">iostream</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-16-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-15-1">In this course, qualify standard-library names with the <code class="code-inline tex2jax_ignore">std::</code> prefix rather than using <code class="code-inline tex2jax_ignore">using namespace std;</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-15-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Note 3.3.2"><a tabindex="-1" href="#chapter3_math-functions-16" title="Copy heading and permalink for Note 3.3.2" aria-label="Copy heading and permalink for Note 3.3.2">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Note 3.3.2"><a tabindex="-1" href="#chapter3_math-functions-15" title="Copy heading and permalink for Note 3.3.2" aria-label="Copy heading and permalink for Note 3.3.2">🔗</a></div>
 </article>
-<div class="para" id="chapter3_math-functions-17">Similarly, the <a class="external" href="https://en.cppreference.com/w/cpp/header/cmath" target="_blank">cmath</a> header file contains information about the math functions. You can include it at the beginning of your program along with iostream:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-17" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-16">Similarly, mathematical functions such as <code class="code-inline tex2jax_ignore">std::sin</code>, <code class="code-inline tex2jax_ignore">std::log</code>, and <code class="code-inline tex2jax_ignore">std::sqrt</code> are declared by <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code>:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;cmath&gt;
 </code></pre></div>
-<article class="note remark-like" id="chapter3_math-functions-19"><h2 class="heading">
+<article class="note remark-like" id="chapter3_math-functions-18"><h2 class="heading">
 <span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.3.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
-<div class="para" id="chapter3_math-functions-19-1">
-<dfn class="terminology">cmath</dfn> is one of a number of header files that start with ‘c’ to signify that they are derived from similar header files in the <dfn class="terminology">C</dfn> language. In <dfn class="terminology">C</dfn> the math library is named <code class="code-inline tex2jax_ignore">math.h</code>. In <dfn class="terminology">C++</dfn> you should always use the version of the library that starts with ’c’ as opposed to the one that ends with ’.h’.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-19-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_math-functions-18-1">The C++ header <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code> is related to the older C header <code class="code-inline tex2jax_ignore">&lt;math.h&gt;</code>. In C++ programs, prefer <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code> and the corresponding <code class="code-inline tex2jax_ignore">std::</code>-qualified function names.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_math-functions-18-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Note 3.3.3"><a tabindex="-1" href="#chapter3_math-functions-19" title="Copy heading and permalink for Note 3.3.3" aria-label="Copy heading and permalink for Note 3.3.3">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Note 3.3.3"><a tabindex="-1" href="#chapter3_math-functions-18" title="Copy heading and permalink for Note 3.3.3" aria-label="Copy heading and permalink for Note 3.3.3">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="dnd1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.3.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-dnd1">
 <span data-subcomponent="question">
-<div class="para" id="dnd1-1-1">Match the statement to its description.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#dnd1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="dnd1-1-1">Match each item with its description.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#dnd1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></span><span data-subcomponent="feedback">
-<div class="para" id="dnd1-2-1">This is feedback.</div></span><li data-subcomponent="draggable" id="rs-dnd1_drag1" data-category="1">cmath</li>
-<li data-subcomponent="dropzone" for="rs-dnd1_drag1" data-category="1">allows the use of functions like log and sin</li>
-<li data-subcomponent="draggable" id="rs-dnd1_drag2" data-category="2">iostream</li>
-<li data-subcomponent="dropzone" for="rs-dnd1_drag2" data-category="2">contains information about input and output streams</li>
-<li data-subcomponent="draggable" id="rs-dnd1_drag3" data-category="3">namespace std</li>
-<li data-subcomponent="dropzone" for="rs-dnd1_drag3" data-category="3">provides the standard implementation of cout</li>
+<div class="para" id="dnd1-2-1">Try again.</div></span><li data-subcomponent="draggable" id="rs-dnd1_drag1" data-category="1">&lt;cmath&gt;</li>
+<li data-subcomponent="dropzone" for="rs-dnd1_drag1" data-category="1">declares standard-library mathematical functions such as std::log and std::sin</li>
+<li data-subcomponent="draggable" id="rs-dnd1_drag2" data-category="2">&lt;iostream&gt;</li>
+<li data-subcomponent="dropzone" for="rs-dnd1_drag2" data-category="2">declares facilities for stream input and output, including std::cout</li>
+<li data-subcomponent="draggable" id="rs-dnd1_drag3" data-category="3">std</li>
+<li data-subcomponent="dropzone" for="rs-dnd1_drag3" data-category="3">the namespace containing many names from the C++ standard library</li>
 </ul></div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.3.1"><a tabindex="-1" href="#dnd1" title="Copy heading and permalink for Checkpoint 3.3.1" aria-label="Copy heading and permalink for Checkpoint 3.3.1">🔗</a></div>
 </article>
@@ -626,10 +629,10 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-math_functions_2"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"math_functions_2-1-1\">What are the units used by sinusoidal functions (sin, asin, e.t.c.) in C++? <input type=\"text\" id=\"math_functions_2-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#math_functions_2-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"math_functions_2-1-1\">What unit of angle is used by C++ trigonometric functions such as <code class=\"code-inline tex2jax_ignore\">std::sin<\/code> and <code class=\"code-inline tex2jax_ignore\">std::cos<\/code>? <input type=\"text\" id=\"math_functions_2-blank1\"\/><div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#math_functions_2-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0},
-"feedbackArray": [[{"regex": "^\\s*radians\\?\\s*$", "regexFlags": "i", "feedback": "If you need to convert to degrees, just multiply by 360 and divide by 2pi."}, {"regex": "^\\s*degrees?\\s*$", "regexFlags": "", "feedback": "This is a unit sometimes used for sinusoidal functions, but not the one used by C++."}, {"feedback": "Incorrect."}]]
+"feedbackArray": [[{"regex": "^\\s*radians\\s*$", "regexFlags": "i", "feedback": "Correct. C++ trigonometric functions use radians."}, {"regex": "^\\s*degrees\\s*$", "regexFlags": "i", "feedback": "Degrees are commonly used to measure angles, but C++ trigonometric functions use radians."}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "Review the unit expected by functions such as <code class=\"code-inline tex2jax_ignore\">std::sin<\/code> and <code class=\"code-inline tex2jax_ignore\">std::cos<\/code>."}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 3.3.2"><a tabindex="-1" href="#math_functions_2" title="Copy heading and permalink for Checkpoint 3.3.2" aria-label="Copy heading and permalink for Checkpoint 3.3.2">🔗</a></div>
@@ -640,39 +643,39 @@ int main() {
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
 <div class="para" id="math_functions_3-1-1">
-<dfn class="terminology">Multiple Response</dfn> Select all correct cmath functions.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#math_functions_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Multiple Response</dfn> Select all valid standard-library functions declared by <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#math_functions_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-math_functions_3" data-multipleanswers="true">
 <li data-component="answer" id="rs-math_functions_3_opt_a" data-correct="">
-<div class="para" id="math_functions_3-2-1-1-1"><code class="code-inline tex2jax_ignore">cos</code></div>
+<div class="para" id="math_functions_3-2-1-1-1"><code class="code-inline tex2jax_ignore">std::cos</code></div>
 </li>
 <li data-component="feedback" id="rs-math_functions_3_opt_a">
-<div class="para" id="math_functions_3-2-1-2-1">This function computes the cosine of an angle.</div>
+<div class="para" id="math_functions_3-2-1-2-1">Correct. <code class="code-inline tex2jax_ignore">std::cos</code> computes the cosine of an angle.</div>
 </li>
 <li data-component="answer" id="rs-math_functions_3_opt_b">
-<div class="para" id="math_functions_3-2-2-1-1"><code class="code-inline tex2jax_ignore">arctan</code></div>
+<div class="para" id="math_functions_3-2-2-1-1"><code class="code-inline tex2jax_ignore">std::arctan</code></div>
 </li>
 <li data-component="feedback" id="rs-math_functions_3_opt_b">
-<div class="para" id="math_functions_3-2-2-2-1">The arc tangent function is actually called <code class="code-inline tex2jax_ignore">atan</code>.</div>
+<div class="para" id="math_functions_3-2-2-2-1">The inverse tangent function is named <code class="code-inline tex2jax_ignore">std::atan</code>.</div>
 </li>
 <li data-component="answer" id="rs-math_functions_3_opt_c" data-correct="">
-<div class="para" id="math_functions_3-2-3-1-1"><code class="code-inline tex2jax_ignore">log10</code></div>
+<div class="para" id="math_functions_3-2-3-1-1"><code class="code-inline tex2jax_ignore">std::log10</code></div>
 </li>
 <li data-component="feedback" id="rs-math_functions_3_opt_c">
-<div class="para" id="math_functions_3-2-3-2-1">This function computes the common logarithm.</div>
+<div class="para" id="math_functions_3-2-3-2-1">Correct. <code class="code-inline tex2jax_ignore">std::log10</code> computes a base-10 logarithm.</div>
 </li>
 <li data-component="answer" id="rs-math_functions_3_opt_d" data-correct="">
-<div class="para" id="math_functions_3-2-4-1-1"><code class="code-inline tex2jax_ignore">pow</code></div>
+<div class="para" id="math_functions_3-2-4-1-1"><code class="code-inline tex2jax_ignore">std::pow</code></div>
 </li>
 <li data-component="feedback" id="rs-math_functions_3_opt_d">
-<div class="para" id="math_functions_3-2-4-2-1">This function raises an expression to a power.</div>
+<div class="para" id="math_functions_3-2-4-2-1">Correct. <code class="code-inline tex2jax_ignore">std::pow</code> raises a value to a power.</div>
 </li>
 <li data-component="answer" id="rs-math_functions_3_opt_e">
-<div class="para" id="math_functions_3-2-5-1-1"><code class="code-inline tex2jax_ignore">ln</code></div>
+<div class="para" id="math_functions_3-2-5-1-1"><code class="code-inline tex2jax_ignore">std::ln</code></div>
 </li>
 <li data-component="feedback" id="rs-math_functions_3_opt_e">
-<div class="para" id="math_functions_3-2-5-2-1">The natural log function is actually called <code class="code-inline tex2jax_ignore">log</code>.</div>
+<div class="para" id="math_functions_3-2-5-2-1">The natural logarithm function is named <code class="code-inline tex2jax_ignore">std::log</code>.</div>
 </li>
 </ul>
 </div></div>
