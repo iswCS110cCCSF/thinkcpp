@@ -58,14 +58,14 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '8.2.9';
+eBookConfig.runestone_version = '8.2.10';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.5ef53875c58b216b.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.c5ba0ffa5f963084.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
+<script src="_static/prefix-runtime.e3f9706509fcf6f7.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.c5ba0ffa5f963084.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
 <link rel="stylesheet" type="text/css" href="_static/prefix-runestone.efe427683fc41f98.css">
 <script src="_static/pretext/js/dist/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/dist/pretext_search.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
@@ -535,20 +535,20 @@ eBookConfig.enable_chatcodes =  false;
 <article class="exercise exercise-like" id="functions_p9"><h2 class="heading"><span class="codenumber">yes<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-functions_p9">
 <div class="parsons_question parsons-text">
-<div class="para" id="functions_p9-1-1">Construct a function that correctly prints the integer conversion of the passed double.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p9-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_p9-1-1">Construct a function that takes a <code class="code-inline tex2jax_ignore">double</code>, converts it to an <code class="code-inline tex2jax_ignore">int</code>, and prints the converted value.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p9-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
-<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void print_integer(double d) {
+<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void print_integer(double value) {
 ---
-print_integer(double d);  #paired
+void print_integer(int value) { #paired
 ---
- d = int(d);
+ int converted = static_cast&lt;int&gt;(value);
 ---
- d = integer(d);  #paired
+ double converted = static_cast&lt;double&gt;(value); #paired
 ---
- std::cout &lt;&lt; d;
+ std::cout &lt;&lt; converted &lt;&lt; '\n';
 ---
- std::cout d;  #paired
+ std::cout converted; #paired
 ---
 }</pre>
 </div></div></div>
@@ -557,29 +557,28 @@ print_integer(double d);  #paired
 <article class="exercise exercise-like" id="functions_p0"><h2 class="heading"><span class="codenumber">yes<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-functions_p0">
 <div class="parsons_question parsons-text">
-<div class="para" id="functions_p0-1-1">Construct a function called new_line that takes no arguments and prints a blank line. Then construct another function called divider that prints two blank lines separated by a line of “… … … …”<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p0-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_p0-1-1">Construct two functions. <code class="code-inline tex2jax_ignore">new_line</code> prints one blank line. <code class="code-inline tex2jax_ignore">divider</code> calls <code class="code-inline tex2jax_ignore">new_line</code>, prints a divider, and then calls <code class="code-inline tex2jax_ignore">new_line</code> again.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p0-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void new_line() {
 ---
- std::cout &lt;&lt; std::endl ;
+ std::cout &lt;&lt; '\n';
 ---
 }
 ---
 void divider() {
 ---
- void divider (new_line) {  #paired
+void divider(new_line) { #paired
 ---
- new_line();  //first call
+ new_line();
 ---
- std::cout &lt;&lt; new_line();  //first call  #paired
+ std::cout &lt;&lt; new_line(); #paired
 ---
- std::cout &lt;&lt; ". . . . . . . . . . . . 
-" ;
+ std::cout &lt;&lt; ". . . . . . . . . . . .\n";
 ---
- newline();  //second call
+ new_line();
 ---
- std::cout &lt;&lt; new_line();  //second call  #paired
+ newline(); #paired
 ---
 }</pre>
 </div></div></div>
@@ -588,22 +587,22 @@ void divider() {
 <article class="exercise exercise-like" id="functions_p1"><h2 class="heading"><span class="codenumber">yes<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-functions_p1">
 <div class="parsons_question parsons-text">
-<div class="para" id="functions_p1-1-1">Construct a function that correctly calculates the volume of a cone with as much precision as possible and prints the value to the terminal. Use 3.14 for pi.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_p1-1-1">Construct a function that returns the volume of a cone. Use <code class="code-inline tex2jax_ignore">3.14</code> for pi.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
-<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void volume_cone(double r, double h) {
+<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">double cone_volume(double radius, double height) {
 ---
-double volume_cone(double r, double h) {  #paired
+void cone_volume(double radius, double height) { #paired
 ---
- double vol = 1/3.0 * 3.14 * r * r * h;
+ constexpr double pi = 3.14;
 ---
- double vol = 1/3 * 3.14 * r * r * h;  #paired
+ double volume = (1.0 / 3.0) * pi * radius * radius * height;
 ---
- int vol = 1/3 * 3.14 * r * r * h; 
+ double volume = (1 / 3) * pi * radius * radius * height; #paired
 ---
- int vol = 1/3.0 * 3.14 * r * r * h;  #paired
+ return volume;
 ---
- std::cout &lt;&lt; vol;
+ std::cout &lt;&lt; volume; #paired
 ---
 }</pre>
 </div></div></div>
@@ -612,52 +611,52 @@ double volume_cone(double r, double h) {  #paired
 <article class="exercise exercise-like" id="functions_p3"><h2 class="heading"><span class="codenumber">yes<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-functions_p3">
 <div class="parsons_question parsons-text">
-<div class="para" id="functions_p3-1-1">Construct a function that prints the sin of an angle given in degrees. Use 3.14 for pi.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_p3-1-1">Construct a function that prints the sine of an angle given in degrees. Use <code class="code-inline tex2jax_ignore">3.14</code> for pi.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">#include &lt;cmath&gt;
 ---
 #include &lt;iostream&gt;
 ---
-void sine_degrees(double d) {
+void print_sine_degrees(double degrees) {
 ---
-void sine_degrees() {  #paired
+void print_sine_degrees() { #paired
 ---
- double r = d * (2 * 3.14) / 360.0;
+ constexpr double pi = 3.14;
 ---
- double r = d * 360.0 / (2 * 3.14);  #paired
+ double radians = degrees * pi / 180.0;
 ---
- double sine = sin(r);
+ double radians = degrees * 180.0 / pi; #paired
 ---
- double sine = sin(d);  #paired
+ double sine = std::sin(radians);
 ---
- std::cout &lt;&lt; sine;
+ double sine = std::sin(degrees); #paired
 ---
-}
+ std::cout &lt;&lt; sine &lt;&lt; '\n';
 ---
- #include &lt;math&gt;  #distractor</pre>
+}</pre>
 </div></div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 3.15.yes"><a tabindex="-1" href="#functions_p3" title="Copy heading and permalink for Exercise 3.15.yes" aria-label="Copy heading and permalink for Exercise 3.15.yes">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="functions_p4"><h2 class="heading"><span class="codenumber">yes<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-functions_p4">
 <div class="parsons_question parsons-text">
-<div class="para" id="functions_p4-1-1">Construct a function that prints the price (with 8% sales tax) of an item with after using a 30% off coupon.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_p4-1-1">Construct a function that returns the final price of an item after a 30% discount and then 8% sales tax.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
-<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void final_price(double item) {
+<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">double calculate_final_price(double item_price) {
 ---
-void final_price(string item) {  #paired
+double calculate_final_price(std::string item_price) { #paired
 ---
- double discount = item * 0.30;
+ double discounted_price = item_price * 0.70;
 ---
- double final = (item - discount) * 1.08;
+ double discounted_price = item_price * 0.30; #paired
 ---
- double final = (item - discount) * 0.08;  #paired
+ double price_with_tax = discounted_price * 1.08;
 ---
- double final = item - discount * 0.08; 
+ double price_with_tax = discounted_price * 0.08; #paired
 ---
- std::cout &lt;&lt; final;
+ return price_with_tax;
 ---
 }</pre>
 </div></div></div>
@@ -666,28 +665,20 @@ void final_price(string item) {  #paired
 <article class="exercise exercise-like" id="functions_p5"><h2 class="heading"><span class="codenumber">yes<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-functions_p5">
 <div class="parsons_question parsons-text">
-<div class="para" id="functions_p5-1-1">Suppose you have already defined a function called sum_of_squares which returns the sum of the squares of two numbers and root which returns the square root of a number. Construct a function that calculates the hypotenuse of the right triangle and prints the three sidelengths.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_p5-1-1">Suppose <code class="code-inline tex2jax_ignore">sum_of_squares</code> returns the sum of the squares of two numbers, and <code class="code-inline tex2jax_ignore">root</code> returns the square root of one number. Construct a function that returns the hypotenuse of a right triangle.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
-<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">int main() {
+<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">double hypotenuse(double side1, double side2) {
 ---
- double s1 = 4.8;
- double s2 = 3.8;
+void hypotenuse(double side1, double side2) { #paired
 ---
- int s1 = 4.8; 
- int s2 = 3.6; #paired
+ double square_sum = sum_of_squares(side1, side2);
 ---
- double sq_sum = sum_of_squares(s2, s1);
+ double square_sum = root(side1, side2); #paired
 ---
- sq_sum = sum_of_squares(s1, s2);  #paired
+ return root(square_sum);
 ---
- double hyp = root(sq_sum);
----
- double hyp = root(s1, s2);  #paired
----
- std::cout &lt;&lt; "The sides of the triangle are: " &lt;&lt; s1 &lt;&lt; ", " &lt;&lt; s2 &lt;&lt; ", " &lt;&lt; hyp;
----
- std::cout &lt;&lt; "The sides of the triangle are: " &lt;&lt; s1 &lt;&lt; ", " &lt;&lt; s2 &lt;&lt; ", " &lt;&lt; s3;  #paired
+ return sum_of_squares(square_sum); #paired
 ---
 }</pre>
 </div></div></div>
@@ -696,27 +687,20 @@ void final_price(string item) {  #paired
 <article class="exercise exercise-like" id="functions_p6"><h2 class="heading"><span class="codenumber">yes<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-functions_p6">
 <div class="parsons_question parsons-text">
-<div class="para" id="functions_p6-1-1">The chickens from the previous chapter are infuriated. Construct a function that prints “Eat” on the first line, “More” on the second line, and the name of the passed animal on the fourth line, followed by an exclamation point.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p6-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_p6-1-1">Construct a function that swaps the values of two <code class="code-inline tex2jax_ignore">int</code> variables in the caller.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p6-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
-<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void eat_more(string animal) {
+<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void swap_values(int&amp; first, int&amp; second) {
 ---
-void eat_more() {  #paired
+void swap_values(int first, int second) { #paired
 ---
- std::cout &lt;&lt; "Eat";
+ int temp = first;
 ---
- std::cout &lt;&lt; "Eat
-" ;  #paired
+ first = second;
 ---
- std::cout &lt;&lt; std::endl ; std::cout &lt;&lt; "More
-" ;
+ second = temp;
 ---
- std::cout &lt;&lt; std::endl ;
----
- std::cout &lt;&lt; animal &lt;&lt; "!
-" ;
----
- std::cout &lt;&lt; animal &lt;&lt; ! &lt;&lt; std::endl ;  #paired
+ second = first; #paired
 ---
 }</pre>
 </div></div></div>
@@ -725,22 +709,20 @@ void eat_more() {  #paired
 <article class="exercise exercise-like" id="functions_p7"><h2 class="heading"><span class="codenumber">yes<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-functions_p7">
 <div class="parsons_question parsons-text">
-<div class="para" id="functions_p7-1-1">Construct a function that takes a dollar amount and cent amount and prints the total amount of money that you have. Hint: the mod operator ‘%’ returns the remainder of a division.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_p7-1-1">Construct a function that takes a dollar amount and a cent amount and returns the total number of cents.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
-<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void print_amount(int dollars, int cents) {
+<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">int total_cents(int dollars, int cents) {
 ---
- int dollar_total = dollars + cents / 100;
+int total_cents(int dollars, cents) { #paired
 ---
- double dollar_total = dollars + cents / 100.0;  #paired
+ int total = dollars * 100 + cents;
 ---
- double cent_total = cents % 100;
+ int total = dollars + cents / 100; #paired
 ---
- double cent_total = cents / 100;  #paired
+ return total;
 ---
- std::cout &lt;&lt; "$" &lt;&lt; dollar_total &lt;&lt; "." &lt;&lt; cent_total;
----
- std::cout &lt;&lt; "$" &lt;&lt; dollar_total &lt;&lt; cent_total;  #paired
+ std::cout &lt;&lt; total; #paired
 ---
 }</pre>
 </div></div></div>
@@ -749,32 +731,37 @@ void eat_more() {  #paired
 <article class="exercise exercise-like" id="functions_p8"><h2 class="heading"><span class="codenumber">yes<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-functions_p8">
 <div class="parsons_question parsons-text">
-<div class="para" id="functions_p8-1-1">In Michigan, the probability that it snows on any given day in the winter is about 14%. The probability of having a snow day on any given day in the winter is about 4%. The probability that is snows and you have a snow day is 8%. Construct and call a function that calculates the probability of a having a snow day, given the fact that it will snow tonight. For reference, the formula for conditional probability is: P(A|B) = P(B and A) / P(B).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p8-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_p8-1-1">Suppose the probability of snow is <code class="code-inline tex2jax_ignore">0.14</code> and the probability of both snow and a snow day is <code class="code-inline tex2jax_ignore">0.02</code>. Construct the program that calculates and prints the probability of a snow day given that it snows.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p8-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> 
+<div class="para" id="functions_p8-1-2">Use the formula <code class="code-inline tex2jax_ignore">P(A given B) = P(A and B) / P(B)</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p8-1-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
-<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void conditional_prob(double B, double both) {
+<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">#include &lt;iostream&gt;
 ---
-void conditional_prob(double B, both) {  #paired
+double conditional_probability(double probability_b, double probability_both);
 ---
- double prob = both / B;
----
- double prob = B / both;  #paired
----
- std::cout &lt;&lt; prob;
----
-}
+double conditional_probability(double probability_b, probability_both); #paired
 ---
 int main() {
 ---
  double p_snow = 0.14;
- double p_snow_day = 0.04;
- double p_both = 0.08;
+ double p_both = 0.02;
 ---
- conditionalProb(p_snow, p_both);
+ double result = conditional_probability(p_snow, p_both);
 ---
- conditionalProb(p_snow_day, p_both);  #paired
+ double result = conditional_probability(p_both, p_snow); #paired
 ---
- conditionalProb(p_snow_day, p_snow); 
+ std::cout &lt;&lt; result &lt;&lt; '\n';
+---
+ return 0;
+---
+}
+---
+double conditional_probability(double probability_b, double probability_both) {
+---
+ return probability_both / probability_b;
+---
+ return probability_b / probability_both; #paired
 ---
 }</pre>
 </div></div></div>
@@ -783,26 +770,24 @@ int main() {
 <article class="exercise exercise-like" id="functions_p2"><h2 class="heading"><span class="codenumber">yes<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-functions_p2">
 <div class="parsons_question parsons-text">
-<div class="para" id="functions_p2-1-1">Your final grade is determined by a midterm component (each midterm is worth 20% of the grade) and a final component. In order to avoid any discrepancies with students who’s grades are on the fence, your teacher follows this strict grading scale: [0%,60%) = F, [60%, 70%) = D, [70%, 80%) = C, [80%, 90%) = B and [90%, 100%] = A. He does not round until the very end. Construct a function that determines a student’s final grade percentage according to this grading scheme and prints the result.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_p2-1-1">Two midterms are each worth 20% of a course grade, and the final exam is worth 60%. Construct a function that returns the weighted final percentage.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_p2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
-<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">void final_grade(double m1, double m2, double f) {
+<pre class="parsonsblocks" data-question_label="" style="visibility: hidden;" data-language="cpp" data-adaptive="true" data-noindent="false">double final_percentage(double midterm1, double midterm2, double final_exam) {
 ---
-void final_grade(double m1, m2, f) {  #paired
+double final_percentage(double midterm1, midterm2, final_exam) { #paired
 ---
- double m_comp = m1 * 0.2 + m2 * 0.2;
- double f_comp = f * 0.06;
+ double midterm_component = midterm1 * 0.20 + midterm2 * 0.20;
 ---
- int m_comp = m1 * 0.2 + m2 * 0.2; 
- int f_comp = f * 0.06; #paired
+ int midterm_component = midterm1 * 0.20 + midterm2 * 0.20; #paired
 ---
- double final_grade = m_comp + f_comp;
+ double final_component = final_exam * 0.60;
 ---
- std::cout &lt;&lt; int(final_grade);
+ double final_component = final_exam * 0.06; #paired
 ---
- std::cout &lt;&lt; int(final_grade) + 1;  #paired
+ return midterm_component + final_component;
 ---
- std::cout &lt;&lt; final_grade; 
+ return static_cast&lt;int&gt;(midterm_component + final_component); #paired
 ---
 }</pre>
 </div></div></div>
