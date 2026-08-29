@@ -15,6 +15,41 @@
     <p>If you type a variable name and it turns blue, watch out! You might get
       some strange behavior from the compiler.</p>
   </warning>
+  <p>
+  The name of a variable, function, or other program element is called an
+  <term>identifier</term>. In C++, an identifier can begin only with a
+  letter or an underscore (<c>_</c>). After the first character, it may
+  contain letters, digits, and only underscores and not other punctuations.
+</p>
+
+<ul>
+  <li>
+    <p><c>total_cost</c> is valid.</p>
+  </li>
+  <li>
+    <p><c>score2</c> is valid.</p>
+  </li>
+  <li>
+    <p><c>2nd_score</c> is not valid because it begins with a digit.</p>
+  </li>
+  <li>
+    <p><c>total-cost</c> is not valid because <c>-</c> is not allowed in an identifier.</p>
+  </li>
+</ul>
+
+<p>
+  Identifiers are case-sensitive, so <c>score</c>, <c>Score</c>, and
+  <c>SCORE</c> are different names. C++ keywords such as <c>int</c>,
+  <c>return</c>, and <c>friend</c> also cannot be used as identifiers.
+</p>
+
+<note>
+  <p>
+    In this course, use meaningful <c>snake_case</c> names for variables
+    and functions.
+  </p>
+</note>
+  
   <note>
     <p>Case matters! You can name a <c>string</c> variable <c>String</c> without an issue because C++ does not
       consider <c>String</c> to be the same as keyword <c>string</c>. Also, a anything written in quotes, for

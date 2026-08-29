@@ -1,480 +1,569 @@
 <?xml version="1.0"?>
 <exercises xml:id="chapter3_mixed-up-code-exercises">
-    <title>Mixed-Up Code Exercises</title>
-    <introduction><p>
-        Answer the following <term>Mixed-Up Code</term> questions to assess what
-        you have learned in this chapter.
-    </p></introduction>
+  <title>Mixed-Up Code Exercises</title>
+
+  <introduction>
+    <p>
+      Answer the following <term>Mixed-Up Code</term> questions to assess
+      what you have learned in this chapter.
+    </p>
+  </introduction>
+
+
+  <!-- Explicit conversion -->
   <exercise label="functions_p9"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Construct a function that correctly prints the integer conversion of the passed double.</p>
+      <p>
+        Construct a function that takes a <c>double</c>, converts it to an
+        <c>int</c>, and prints the converted value.
+      </p>
     </statement>
+
     <blocks>
-      <block order="6">
-        <choice correct="yes">
-          <cline>void print_integer(double d) {</cline>
-        </choice>
-        <choice>
-          <cline>print_integer(double d); </cline>
-        </choice>
-      </block>
-      <block order="5">
-        <choice correct="yes">
-          <cline> d = int(d);</cline>
-        </choice>
-        <choice>
-          <cline> d = integer(d); </cline>
-        </choice>
-      </block>
-      <block order="4">
-        <choice correct="yes">
-          <cline> std::cout &lt;&lt; d;</cline>
-        </choice>
-        <choice>
-          <cline> std::cout d; </cline>
-        </choice>
-      </block>
       <block order="1">
+        <choice correct="yes">
+          <cline>void print_integer(double value) {</cline>
+        </choice>
+        <choice>
+          <cline>void print_integer(int value) {</cline>
+        </choice>
+      </block>
+
+      <block order="2">
+        <choice correct="yes">
+          <cline> int converted = static_cast&lt;int&gt;(value);</cline>
+        </choice>
+        <choice>
+          <cline> double converted = static_cast&lt;double&gt;(value);</cline>
+        </choice>
+      </block>
+
+      <block order="3">
+        <choice correct="yes">
+          <cline> std::cout &lt;&lt; converted &lt;&lt; '\n';</cline>
+        </choice>
+        <choice>
+          <cline> std::cout converted;</cline>
+        </choice>
+      </block>
+
+      <block order="4">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
+
+  <!-- Calling one function from another -->
   <exercise label="functions_p0"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Construct a function called new_line that takes no arguments and prints a blank line. Then
-        construct another function called divider that prints two blank lines separated by a line of <q>&#x2026;
-        &#x2026; &#x2026; &#x2026;</q></p>
+      <p>
+        Construct two functions. <c>new_line</c> prints one blank line.
+        <c>divider</c> calls <c>new_line</c>, prints a divider, and then
+        calls <c>new_line</c> again.
+      </p>
     </statement>
+
     <blocks>
-      <block order="6">
+      <block order="1">
         <cline>void new_line() {</cline>
       </block>
-      <block order="7">
-        <cline> std::cout &lt;&lt; std::endl ;</cline>
+
+      <block order="2">
+        <cline> std::cout &lt;&lt; '\n';</cline>
       </block>
+
       <block order="3">
         <cline>}</cline>
       </block>
-      <block order="5">
+
+      <block order="4">
         <choice correct="yes">
           <cline>void divider() {</cline>
         </choice>
         <choice>
-          <cline> void divider (new_line) { </cline>
+          <cline>void divider(new_line) {</cline>
         </choice>
       </block>
-      <block order="4">
+
+      <block order="5">
         <choice correct="yes">
-          <cline> new_line();  //first call</cline>
+          <cline> new_line();</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ std::cout << new_line();  //first call ]]></cline>
+          <cline><![CDATA[ std::cout << new_line();]]></cline>
         </choice>
       </block>
-      <block order="11">
-        <cline><![CDATA[ std::cout << ". . . . . . . . . . . . 
-" ;]]></cline>
+
+      <block order="6">
+        <cline><![CDATA[ std::cout << ". . . . . . . . . . . .\n";]]></cline>
       </block>
-      <block order="2">
+
+      <block order="7">
         <choice correct="yes">
-          <cline> newline();  //second call</cline>
+          <cline> new_line();</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ std::cout << new_line();  //second call ]]></cline>
+          <cline> newline();</cline>
         </choice>
       </block>
+
       <block order="8">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
+
+  <!-- Value-returning function -->
   <exercise label="functions_p1"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Construct a function that correctly calculates the volume of a cone with as much precision
-        as possible and prints the value to the terminal. Use 3.14 for pi.</p>
+      <p>
+        Construct a function that returns the volume of a cone.
+        Use <c>3.14</c> for pi.
+      </p>
     </statement>
+
     <blocks>
       <block order="1">
         <choice correct="yes">
-          <cline>void volume_cone(double r, double h) {</cline>
+          <cline>double cone_volume(double radius, double height) {</cline>
         </choice>
         <choice>
-          <cline>double volume_cone(double r, double h) { </cline>
+          <cline>void cone_volume(double radius, double height) {</cline>
         </choice>
       </block>
+
       <block order="2">
+        <cline> constexpr double pi = 3.14;</cline>
+      </block>
+
+      <block order="3">
         <choice correct="yes">
-          <cline> double vol = 1/3.0 * 3.14 * r * r * h;</cline>
+          <cline> double volume = (1.0 / 3.0) * pi * radius * radius * height;</cline>
         </choice>
         <choice>
-          <cline> double vol = 1/3 * 3.14 * r * r * h; </cline>
+          <cline> double volume = (1 / 3) * pi * radius * radius * height;</cline>
         </choice>
       </block>
-      <block order="7">
-        <choice correct="yes">
-          <cline> int vol = 1/3 * 3.14 * r * r * h; </cline>
-        </choice>
-        <choice>
-          <cline> int vol = 1/3.0 * 3.14 * r * r * h; </cline>
-        </choice>
-      </block>
-      <block order="6">
-        <cline> std::cout &lt;&lt; vol;</cline>
-      </block>
+
       <block order="4">
+        <choice correct="yes">
+          <cline> return volume;</cline>
+        </choice>
+        <choice>
+          <cline> std::cout &lt;&lt; volume;</cline>
+        </choice>
+      </block>
+
+      <block order="5">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
+
+  <!-- Standard library math function -->
   <exercise label="functions_p3"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Construct a function that prints the sin of an angle given in degrees. Use 3.14 for pi.</p>
+      <p>
+        Construct a function that prints the sine of an angle given in
+        degrees. Use <c>3.14</c> for pi.
+      </p>
     </statement>
+
     <blocks>
-      <block order="9">
+      <block order="1">
         <cline>#include &lt;cmath&gt;</cline>
       </block>
-      <block order="1">
+
+      <block order="2">
         <cline>#include &lt;iostream&gt;</cline>
       </block>
-      <block order="11">
-        <choice correct="yes">
-          <cline>void sine_degrees(double d) {</cline>
-        </choice>
-        <choice>
-          <cline>void sine_degrees() { </cline>
-        </choice>
-      </block>
-      <block order="7">
-        <choice correct="yes">
-          <cline> double r = d * (2 * 3.14) / 360.0;</cline>
-        </choice>
-        <choice>
-          <cline> double r = d * 360.0 / (2 * 3.14); </cline>
-        </choice>
-      </block>
-      <block order="2">
-        <choice correct="yes">
-          <cline> double sine = sin(r);</cline>
-        </choice>
-        <choice>
-          <cline> double sine = sin(d); </cline>
-        </choice>
-      </block>
+
       <block order="3">
-        <cline> std::cout &lt;&lt; sine;</cline>
+        <choice correct="yes">
+          <cline>void print_sine_degrees(double degrees) {</cline>
+        </choice>
+        <choice>
+          <cline>void print_sine_degrees() {</cline>
+        </choice>
       </block>
+
+      <block order="4">
+        <cline> constexpr double pi = 3.14;</cline>
+      </block>
+
       <block order="5">
-        <cline>}</cline>
+        <choice correct="yes">
+          <cline> double radians = degrees * pi / 180.0;</cline>
+        </choice>
+        <choice>
+          <cline> double radians = degrees * 180.0 / pi;</cline>
+        </choice>
       </block>
-      <block order="10"
-             correct="no">
-        <cline> #include &lt;math&gt; </cline>
+
+      <block order="6">
+        <choice correct="yes">
+          <cline> double sine = std::sin(radians);</cline>
+        </choice>
+        <choice>
+          <cline> double sine = std::sin(degrees);</cline>
+        </choice>
+      </block>
+
+      <block order="7">
+        <cline> std::cout &lt;&lt; sine &lt;&lt; '\n';</cline>
+      </block>
+
+      <block order="8">
+        <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
+
+  <!-- Returning a calculated result -->
   <exercise label="functions_p4"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Construct a function that prints the price (with 8% sales tax) of an item with after using
-        a 30% off coupon.</p>
+      <p>
+        Construct a function that returns the final price of an item after
+        a 30% discount and then 8% sales tax.
+      </p>
     </statement>
+
     <blocks>
-      <block order="5">
+      <block order="1">
         <choice correct="yes">
-          <cline>void final_price(double item) {</cline>
+          <cline>double calculate_final_price(double item_price) {</cline>
         </choice>
         <choice>
-          <cline>void final_price(string item) { </cline>
+          <cline>double calculate_final_price(std::string item_price) {</cline>
         </choice>
       </block>
+
       <block order="2">
-        <cline> double discount = item * 0.30;</cline>
+        <choice correct="yes">
+          <cline> double discounted_price = item_price * 0.70;</cline>
+        </choice>
+        <choice>
+          <cline> double discounted_price = item_price * 0.30;</cline>
+        </choice>
       </block>
+
       <block order="3">
         <choice correct="yes">
-          <cline> double final = (item - discount) * 1.08;</cline>
+          <cline> double price_with_tax = discounted_price * 1.08;</cline>
         </choice>
         <choice>
-          <cline> double final = (item - discount) * 0.08; </cline>
+          <cline> double price_with_tax = discounted_price * 0.08;</cline>
         </choice>
       </block>
-      <block order="6">
-        <cline> double final = item - discount * 0.08; </cline>
+
+      <block order="4">
+        <cline> return price_with_tax;</cline>
       </block>
-      <block order="8">
-        <cline> std::cout &lt;&lt; final;</cline>
-      </block>
-      <block order="7">
+
+      <block order="5">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
+
+  <!-- Composition of value-returning functions -->
   <exercise label="functions_p5"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Suppose you have already defined a function called sum_of_squares which returns the sum of
-        the squares of two numbers and root which returns the square root of a number. Construct a
-        function that calculates the hypotenuse of the right triangle and prints the three
-        sidelengths.</p>
+      <p>
+        Suppose <c>sum_of_squares</c> returns the sum of the squares of
+        two numbers, and <c>root</c> returns the square root of one number.
+        Construct a function that returns the hypotenuse of a right triangle.
+      </p>
     </statement>
+
     <blocks>
-      <block order="3">
-        <cline>int main() {</cline>
-      </block>
-      <block order="8">
-        <choice correct="yes">
-          <cline> double s1 = 4.8;</cline>
-          <cline> double s2 = 3.8;</cline>
-        </choice>
-        <choice>
-          <cline> int s1 = 4.8; </cline>
-          <cline> int s2 = 3.6;</cline>
-        </choice>
-      </block>
-      <block order="10">
-        <choice correct="yes">
-          <cline> double sq_sum = sum_of_squares(s2, s1);</cline>
-        </choice>
-        <choice>
-          <cline> sq_sum = sum_of_squares(s1, s2); </cline>
-        </choice>
-      </block>
       <block order="1">
         <choice correct="yes">
-          <cline> double hyp = root(sq_sum);</cline>
+          <cline>double hypotenuse(double side1, double side2) {</cline>
         </choice>
         <choice>
-          <cline> double hyp = root(s1, s2); </cline>
+          <cline>void hypotenuse(double side1, double side2) {</cline>
         </choice>
       </block>
-      <block order="6">
+
+      <block order="2">
         <choice correct="yes">
-          <cline><![CDATA[ std::cout << "The sides of the triangle are: " << s1 << ", " << s2 << ", " << hyp;]]></cline>
+          <cline> double square_sum = sum_of_squares(side1, side2);</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ std::cout << "The sides of the triangle are: " << s1 << ", " << s2 << ", " << s3; ]]></cline>
+          <cline> double square_sum = root(side1, side2);</cline>
         </choice>
       </block>
-      <block order="5">
+
+      <block order="3">
+        <choice correct="yes">
+          <cline> return root(square_sum);</cline>
+        </choice>
+        <choice>
+          <cline> return sum_of_squares(square_sum);</cline>
+        </choice>
+      </block>
+
+      <block order="4">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
+
+  <!-- Pass by reference -->
   <exercise label="functions_p6"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>The chickens from the previous chapter are infuriated. Construct a function that prints <q>
-        Eat</q> on the first line, <q>More</q> on the second line, and the name of the passed animal
-        on the fourth line, followed by an exclamation point.</p>
+      <p>
+        Construct a function that swaps the values of two <c>int</c>
+        variables in the caller.
+      </p>
     </statement>
+
     <blocks>
-      <block order="6">
+      <block order="1">
         <choice correct="yes">
-          <cline>void eat_more(string animal) {</cline>
+          <cline>void swap_values(int&amp; first, int&amp; second) {</cline>
         </choice>
         <choice>
-          <cline>void eat_more() { </cline>
+          <cline>void swap_values(int first, int second) {</cline>
         </choice>
       </block>
+
       <block order="2">
-        <choice correct="yes">
-          <cline> std::cout &lt;&lt; "Eat";</cline>
-        </choice>
-        <choice>
-          <cline><![CDATA[ std::cout << "Eat
-" ; ]]></cline>
-        </choice>
+        <cline> int temp = first;</cline>
       </block>
-      <block order="8">
-        <cline><![CDATA[ std::cout << std::endl ; std::cout << "More
-" ;]]></cline>
+
+      <block order="3">
+        <cline> first = second;</cline>
       </block>
-      <block order="9">
-        <cline> std::cout &lt;&lt; std::endl ;</cline>
-      </block>
+
       <block order="4">
         <choice correct="yes">
-          <cline><![CDATA[ std::cout << animal << "!
-" ;]]></cline>
+          <cline> second = temp;</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ std::cout << animal << ! << std::endl ; ]]></cline>
+          <cline> second = first;</cline>
         </choice>
       </block>
-      <block order="7">
+
+      <block order="5">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
+
+  <!-- Multiple parameters and return value -->
   <exercise label="functions_p7"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Construct a function that takes a dollar amount and cent amount and prints the total amount
-        of money that you have. Hint: the mod operator &#x2018;%' returns the remainder of a
-        division.</p>
+      <p>
+        Construct a function that takes a dollar amount and a cent amount
+        and returns the total number of cents.
+      </p>
     </statement>
+
     <blocks>
-      <block order="6">
-        <cline>void print_amount(int dollars, int cents) {</cline>
-      </block>
-      <block order="8">
+      <block order="1">
         <choice correct="yes">
-          <cline> int dollar_total = dollars + cents / 100;</cline>
+          <cline>int total_cents(int dollars, int cents) {</cline>
         </choice>
         <choice>
-          <cline> double dollar_total = dollars + cents / 100.0; </cline>
+          <cline>int total_cents(int dollars, cents) {</cline>
         </choice>
       </block>
+
       <block order="2">
         <choice correct="yes">
-          <cline> double cent_total = cents % 100;</cline>
+          <cline> int total = dollars * 100 + cents;</cline>
         </choice>
         <choice>
-          <cline> double cent_total = cents / 100; </cline>
+          <cline> int total = dollars + cents / 100;</cline>
         </choice>
       </block>
-      <block order="4">
+
+      <block order="3">
         <choice correct="yes">
-          <cline><![CDATA[ std::cout << "$" << dollar_total << "." << cent_total;]]></cline>
+          <cline> return total;</cline>
         </choice>
         <choice>
-          <cline><![CDATA[ std::cout << "$" << dollar_total << cent_total; ]]></cline>
+          <cline> std::cout &lt;&lt; total;</cline>
         </choice>
       </block>
-      <block order="1">
+
+      <block order="4">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
+
+  <!-- Function declaration, call, and returned result -->
   <exercise label="functions_p8"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>In Michigan, the probability that it snows on any given day in the winter is about 14%. The
-        probability of having a snow day on any given day in the winter is about 4%. The probability
-        that is snows and you have a snow day is 8%.
-        Construct and call a function that calculates the probability of a having a snow day, given
-        the fact that it will snow tonight.
-        For reference, the formula for conditional probability is: P(A|B) = P(B and A) / P(B).</p>
+      <p>
+        Suppose the probability of snow is <c>0.14</c> and the probability
+        of both snow and a snow day is <c>0.02</c>. Construct the program
+        that calculates and prints the probability of a snow day given that
+        it snows.
+      </p>
+
+      <p>
+        Use the formula
+        <c>P(A given B) = P(A and B) / P(B)</c>.
+      </p>
     </statement>
+
     <blocks>
-      <block order="9">
-        <choice correct="yes">
-          <cline>void conditional_prob(double B, double both) {</cline>
-        </choice>
-        <choice>
-          <cline>void conditional_prob(double B, both) { </cline>
-        </choice>
-      </block>
-      <block order="6">
-        <choice correct="yes">
-          <cline> double prob = both / B;</cline>
-        </choice>
-        <choice>
-          <cline> double prob = B / both; </cline>
-        </choice>
-      </block>
       <block order="1">
-        <cline> std::cout &lt;&lt; prob;</cline>
+        <cline>#include &lt;iostream&gt;</cline>
       </block>
+
       <block order="2">
-        <cline>}</cline>
+        <choice correct="yes">
+          <cline>double conditional_probability(double probability_b, double probability_both);</cline>
+        </choice>
+        <choice>
+          <cline>double conditional_probability(double probability_b, probability_both);</cline>
+        </choice>
       </block>
-      <block order="12">
+
+      <block order="3">
         <cline>int main() {</cline>
       </block>
+
       <block order="4">
         <cline> double p_snow = 0.14;</cline>
-        <cline> double p_snow_day = 0.04;</cline>
-        <cline> double p_both = 0.08;</cline>
+        <cline> double p_both = 0.02;</cline>
       </block>
+
       <block order="5">
         <choice correct="yes">
-          <cline> conditionalProb(p_snow, p_both);</cline>
+          <cline> double result = conditional_probability(p_snow, p_both);</cline>
         </choice>
         <choice>
-          <cline> conditionalProb(p_snow_day, p_both); </cline>
+          <cline> double result = conditional_probability(p_both, p_snow);</cline>
         </choice>
       </block>
-      <block order="3">
-        <cline> conditionalProb(p_snow_day, p_snow); </cline>
+
+      <block order="6">
+        <cline> std::cout &lt;&lt; result &lt;&lt; '\n';</cline>
       </block>
+
       <block order="7">
+        <cline> return 0;</cline>
+      </block>
+
+      <block order="8">
+        <cline>}</cline>
+      </block>
+
+      <block order="9">
+        <cline>double conditional_probability(double probability_b, double probability_both) {</cline>
+      </block>
+
+      <block order="10">
+        <choice correct="yes">
+          <cline> return probability_both / probability_b;</cline>
+        </choice>
+        <choice>
+          <cline> return probability_b / probability_both;</cline>
+        </choice>
+      </block>
+
+      <block order="11">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
+
+  <!-- Weighted final percentage -->
   <exercise label="functions_p2"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
-      <p>Your final grade is determined by a midterm component (each midterm is worth 20% of the
-        grade) and a final component. In order to avoid any discrepancies with students who's grades
-        are on the fence, your teacher follows this strict grading scale:
-        [0%,60%) = F, [60%, 70%) = D, [70%, 80%) = C, [80%, 90%) = B and [90%, 100%] = A. He does
-        not round until the very end.
-        Construct a function that determines a student's final grade percentage according to this
-        grading scheme and prints the result.</p>
+      <p>
+        Two midterms are each worth 20% of a course grade, and the final
+        exam is worth 60%. Construct a function that returns the weighted
+        final percentage.
+      </p>
     </statement>
+
     <blocks>
-      <block order="9">
-        <choice correct="yes">
-          <cline>void final_grade(double m1, double m2, double f) {</cline>
-        </choice>
-        <choice>
-          <cline>void final_grade(double m1, m2, f) { </cline>
-        </choice>
-      </block>
-      <block order="6">
-        <choice correct="yes">
-          <cline> double m_comp = m1 * 0.2 + m2 * 0.2;</cline>
-          <cline> double f_comp = f * 0.06;</cline>
-        </choice>
-        <choice>
-          <cline> int m_comp = m1 * 0.2 + m2 * 0.2; </cline>
-          <cline> int f_comp = f * 0.06;</cline>
-        </choice>
-      </block>
-      <block order="7">
-        <cline> double final_grade = m_comp + f_comp;</cline>
-      </block>
-      <block order="8">
-        <choice correct="yes">
-          <cline><![CDATA[ std::cout << int(final_grade);]]></cline>
-        </choice>
-        <choice>
-          <cline><![CDATA[ std::cout << int(final_grade) + 1; ]]></cline>
-        </choice>
-      </block>
       <block order="1">
-        <cline><![CDATA[ std::cout << final_grade; ]]></cline>
+        <choice correct="yes">
+          <cline>double final_percentage(double midterm1, double midterm2, double final_exam) {</cline>
+        </choice>
+        <choice>
+          <cline>double final_percentage(double midterm1, midterm2, final_exam) {</cline>
+        </choice>
       </block>
+
       <block order="2">
+        <choice correct="yes">
+          <cline> double midterm_component = midterm1 * 0.20 + midterm2 * 0.20;</cline>
+        </choice>
+        <choice>
+          <cline> int midterm_component = midterm1 * 0.20 + midterm2 * 0.20;</cline>
+        </choice>
+      </block>
+
+      <block order="3">
+        <choice correct="yes">
+          <cline> double final_component = final_exam * 0.60;</cline>
+        </choice>
+        <choice>
+          <cline> double final_component = final_exam * 0.06;</cline>
+        </choice>
+      </block>
+
+      <block order="4">
+        <choice correct="yes">
+          <cline> return midterm_component + final_component;</cline>
+        </choice>
+        <choice>
+          <cline> return static_cast&lt;int&gt;(midterm_component + final_component);</cline>
+        </choice>
+      </block>
+
+      <block order="5">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
+
 </exercises>

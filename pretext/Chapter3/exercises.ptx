@@ -269,7 +269,13 @@ double f = static_cast&lt;int&gt;(c);</program>
   <!-- Q4 -->
   <exercise label="functions_mc4">
     <statement>
-      <p>
+	
+		<p>
+		  <term>Multiple Response</term> Which of the following are valid
+		  beginnings of a function definition, including the opening brace?
+		</p>      
+	
+	  <p>
         <term>Multiple Response</term> Which of the following can be the
         first line of a function definition?
       </p>
@@ -312,13 +318,11 @@ double f = static_cast&lt;int&gt;(c);</program>
 
       <choice>
         <statement>
-          <p><c>char shift_three(char letter)</c></p>
+          <p><c>char shift_three(char letter);</c></p>
         </statement>
         <feedback>
           <p>
-            This could be a function declaration if followed by a
-            semicolon, but the first line of a definition needs an
-            opening brace.
+            This is a function declaration, not the first line of a function definition.
           </p>
         </feedback>
       </choice>

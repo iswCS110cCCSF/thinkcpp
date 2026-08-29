@@ -1,544 +1,552 @@
-<?xml version="1.0" ?><exercises xml:id="chapter3_activecode-exercises">
-    <title>Activecode Exercises</title>
-    <introduction><p>
-        Answer the following <term>Activecode</term> questions to assess what you
-        have learned in this chapter.
-    </p></introduction>
+<?xml version="1.0"?>
+<exercises xml:id="chapter3_activecode-exercises">
+  <title>Activecode Exercises</title>
+
+  <introduction>
+    <p>
+      Answer the following <term>Activecode</term> questions to assess what
+      you have learned in this chapter.
+    </p>
+  </introduction>
+
+
+  <!-- A1 -->
   <exercise label="functions_a1">
     <statement>
-      <p>Fix the errors in the code below so that it prints the area of a circle with radius
-        5. Use cmath functions to get an accurate value for pi.</p>
-    <program interactive="activecode" line-numbers="yes" label="functions_a1q_editor">
-      <code><![CDATA[
+      <p>
+        Fix the errors in the code below so that it prints the area of a
+        circle. Use a <c>&lt;cmath&gt;</c> function to obtain an accurate
+        value for pi.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="functions_a1q_editor">
+        <code><![CDATA[
 #include <iostream>
 #include <cmath>
 
-void print_area(int r) {
-    double pi = acos(1.0);
-    double area = pi * r ^ 2;
-    std::cout << area;
-}
+void print_area(double radius);
 
 int main() {
-    // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with radius = 5...
-"; 
-    std::cout << "    Your function had area = "; print_area(5); std::cout << '\n'; 
-    std::cout << "    The correct solution has area = 78.5398
-"; 
-    std::cout << "Testing with radius = 7.5...
-"; 
-    std::cout << "    Your function had area = "; print_area(7.5); std::cout << '\n'; 
-    std::cout << "    The correct solution has area = 176.715";
+    std::cout << "Testing with radius = 5...\n";
+    std::cout << "    Your function had area = ";
+    print_area(5.0);
+    std::cout << '\n';
+
+    std::cout << "Testing with radius = 7.5...\n";
+    std::cout << "    Your function had area = ";
+    print_area(7.5);
+    std::cout << '\n';
+
+    return 0;
 }
-        ]]></code>
-    </program></statement>
-    <solution>
-      <p>Below is one way to fix the program. C++ doesn't use the ^ operator for exponents. We
-        can get the square of r by multiplying it by itself. We call the function with an
-        argument of 5.</p>
-      <program xml:id="functions_a1a_editor" line-numbers="yes"><code><![CDATA[
-void print_area(double r) {
-    double pi = acos(-1.0);
-    double area = pi * r * r;
+
+void print_area(double radius) {
+    double pi = std::acos(1.0);
+    double area = pi * radius ^ 2;
+
     std::cout << area;
 }
-        ]]></code></program>
+        ]]></code>
+      </program>
+    </statement>
+
+    <solution>
+      <p>
+        <c>std::acos(-1.0)</c> gives pi because cos(pi) = -1. C++ does not use <c>^</c> for
+        exponentiation, so the radius can be squared by multiplying it by
+        itself.
+      </p>
+
+      <program xml:id="functions_a1a_editor" line-numbers="yes">
+        <code><![CDATA[
+void print_area(double radius) {
+    double pi = std::acos(-1.0); // cos(pi) = -1
+    double area = pi * radius * radius;
+
+    std::cout << area;
+}
+        ]]></code>
+      </program>
     </solution>
   </exercise>
 
+
+  <!-- A2 -->
   <exercise label="functions_a2">
     <statement>
-      <p>Fix the code below so that it prints <q>2 elephants</q>.</p>
-    <program interactive="activecode" line-numbers="yes" label="functions_a2_editor">
-          <code><![CDATA[
-#include <iostream>
+      <p>
+        Fix the code below so that it prints <q>2 elephants</q>.
+      </p>
 
-void print_animals(std::string a, int b) {
-    std::cout << b << a;
-}
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="functions_a2_editor">
+        <code><![CDATA[
+#include <iostream>
+#include <string>
+
+void print_animals(std::string animal, int count);
 
 int main() {
-    // DO NOT MODIFY ANYTHING BELOW THIS LINE
     print_animals(2, "elephants");
+
+    return 0;
+}
+
+void print_animals(std::string animal, int count) {
+    std::cout << count << animal << '\n';
 }
         ]]></code>
-        </program></statement>
+      </program>
+    </statement>
 
-    <hint>
-      <p>Fix the code below so that it prints <q>2 elephants</q>. Use the lines to construct the
-        code, then go back to complete the Activecode.</p>
-      <activity label="functions_a2_ps" number="yes" adaptive="yes" indentation="show" exercise-interactive="parson">
-        <blocks>
-          <block order="2">
-            <choice correct="yes">
-              <cline>void print_animals(int a, string b) {</cline>
-            </choice>
-            <choice>
-              <cline>void print_animals(string a, int b) { </cline>
-            </choice>
-          </block>
-          <block order="5">
-            <choice correct="yes">
-              <cline><![CDATA[    std::cout << a << " " << b;]]></cline>
-            </choice>
-            <choice>
-              <cline><![CDATA[    std::cout << b << " " << a; ]]></cline>
-            </choice>
-          </block>
-          <block order="1">
-            <cline><![CDATA[    std::cout << b << a; ]]></cline>
-          </block>
-          <block order="4">
-            <cline>}</cline>
-          </block>
-          <block order="7">
-            <cline>int main() {</cline>
-          </block>
-          <block order="3">
-            <cline>    print_animals(2, &quot;elephants&quot;);</cline>
-          </block>
-          <block order="8">
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
+    <solution>
+      <p>
+        The arguments must match the corresponding parameter types and
+        order, and a space is needed between the number and animal name.
+      </p>
+
+      <program xml:id="functions_a2a_editor" line-numbers="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <string>
+
+void print_animals(int count, std::string animal);
+
+int main() {
+    print_animals(2, "elephants");
+
+    return 0;
+}
+
+void print_animals(int count, std::string animal) {
+    std::cout << count << " " << animal << '\n';
+}
+        ]]></code>
+      </program>
+    </solution>
   </exercise>
 
+
+  <!-- A3 -->
   <exercise label="functions_a3">
     <statement>
-      <p>Fix the code below so that it prints <c>12 / 8 = 1.5.</c></p>
-    <program interactive="activecode" line-numbers="yes" label="functions_a3q_editor">
-      <code><![CDATA[
+      <p>
+        Fix the code below so that it prints <c>12 / 8 = 1.5</c>.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="functions_a3q_editor">
+        <code><![CDATA[
 #include <iostream>
 
-void divide(int a, int b) {
-    std::cout << a / b;
-}
+double divide(int first, int second);
 
 int main() {
     int a = 8;
     int b = 12;
 
-    // DO NOT MODIFY ANYTHING BELOW THIS LINE
     std::cout << b << " / " << a << " = ";
-    divide (b, a);
+    std::cout << divide(b, a) << '\n';
+
+    return 0;
+}
+
+double divide(int first, int second) {
+    return first / second;
 }
         ]]></code>
-    </program></statement>
+      </program>
+    </statement>
 
     <solution>
-      <p>Below is one way to fix the program. It's crucial that you input your arguments in
-        the correct order so as to avoid a semantic error. Also, it's important that you
-        understand that when you divide two integers you will get an integer as a
-        result.</p>
-      <program xml:id="functions_a3a_editor" line-numbers="yes"><code><![CDATA[
-#include <iostream>
+      <p>
+        Because both parameters are <c>int</c>, <c>first / second</c>
+        performs integer division before the result is returned. One way to
+        fix the function is to convert one operand to <c>double</c>.
+      </p>
 
-void divide(double a, double b) {
-    std::cout << a / b;
+      <program xml:id="functions_a3a_editor" line-numbers="yes">
+        <code><![CDATA[
+double divide(int first, int second) {
+    return static_cast<double>(first) / second;
 }
-
-int main() {
-    int a = 8;
-    int b = 12;
-    std::cout << b << " / " << a << " = ";
-    divide (b, a);
-}
-        ]]></code></program>
+        ]]></code>
+      </program>
     </solution>
   </exercise>
 
+
+  <!-- A4 -->
   <exercise label="functions_a4">
     <statement>
-      <p>Finish the code below so that it calculates the common log of <c>a</c> minus the <em>
-          natural</em> log of <c>a</c> and prints the difference. You will need to use cmath
-        functions.</p>
-    <program interactive="activecode" line-numbers="yes" label="functions_a4_editor">
-      <code><![CDATA[
+      <p>
+        Finish the function so that it returns the common logarithm of
+        <c>a</c> minus the natural logarithm of <c>a</c>.
+        You will need functions from <c>&lt;cmath&gt;</c>.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="functions_a4_editor">
+        <code><![CDATA[
 #include <iostream>
 #include <cmath>
 
-void log_subtraction(double a) {
-    // Create the variable difference and assign it to the difference mentioned in the instructions
-
-    std::cout << difference;
-}
+double log_difference(double a);
 
 int main() {
-// DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with a = 8...
-";
-    std::cout << "    Your solution has difference = "; log_subtraction(8); std::cout << '\n';
-    std::cout << "    The correct solution has difference = -1.17635
-";
-    std::cout << "Testing with a = -2...
-";
-    std::cout << "    Your solution has difference = "; log_subtraction(-2); std::cout << '\n';
-    std::cout << "    The correct solution has difference = nan";
+    std::cout << log_difference(8.0) << '\n';
+
+    return 0;
 }
-    ]]></code>
-    </program>
+
+double log_difference(double a) {
+    // Compute and return log base 10 of a minus natural log of a.
+}
+        ]]></code>
+      </program>
     </statement>
-    <hint>
-      <p>Finish the code below so that it calculates the common log of <c>a</c> minus the <em>
-          natural</em> log of <c>a</c> and prints the difference. You will need to use cmath
-        functions. Use the lines to construct the code, then go back to complete the Activecode.</p>
-      <activity label="functions_a4_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
-        <blocks>
-          <block order="4">
-            <cline>void log_subtraction(double a) {</cline>
-          </block>
-          <block order="7">
-            <choice correct="yes">
-              <cline>    double difference;</cline>
-            </choice>
-            <choice>
-              <cline>    int difference; </cline>
-            </choice>
-          </block>
-          <block order="6">
-            <choice correct="yes">
-              <cline>    difference = log10(a) - log(a);</cline>
-            </choice>
-            <choice>
-              <cline>    difference = log(a) - log10(a); </cline>
-            </choice>
-          </block>
-          <block order="1">
-            <cline><![CDATA[    std::cout << difference;]]></cline>
-          </block>
-          <block order="3">
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
+
+    <solution>
+      <p>
+        Use <c>std::log10</c> for the common logarithm and
+        <c>std::log</c> for the natural logarithm.
+      </p>
+
+      <program xml:id="functions_a4a_editor" line-numbers="yes">
+        <code><![CDATA[
+double log_difference(double a) {
+    return std::log10(a) - std::log(a);
+}
+        ]]></code>
+      </program>
+    </solution>
   </exercise>
 
+
+  <!-- A5 -->
   <exercise label="functions_a5">
     <statement>
-      <p>Finish the code below so that it prints <q>First Line</q>, a border, and <q>Second
-          Line.</q> on three separate lines.</p>
-    <program interactive="activecode" line-numbers="yes" label="functions_a5q_editor">
-      <code><![CDATA[
+      <p>
+        Finish the code so that it prints <q>First Line</q>, a border,
+        and <q>Second Line</q> on three separate lines.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="functions_a5q_editor">
+        <code><![CDATA[
 #include <iostream>
 
-void border() {
-    std::cout << "------------
-";
-}
+void border();
 
 int main() {
-    // Write some code below to call the function appropriately
+    // Write your code here.
 
+    return 0;
+}
+
+void border() {
+    std::cout << "------------\n";
 }
         ]]></code>
-    </program>
+      </program>
     </statement>
+
     <solution>
+      <p>
+        Print the first line, call <c>border</c>, and then print the
+        second line.
+      </p>
 
-
-      <p>Below is one way to complete the program.</p>
-
-
-      <program xml:id="functions_a5a_editor" line-numbers="yes"><code><![CDATA[
+      <program xml:id="functions_a5a_editor" line-numbers="yes">
+        <code><![CDATA[
 #include <iostream>
 
-void border() {
-    std::cout << "------------
-";
-}
+void border();
 
 int main() {
-    std::cout << "First Line.
-";
+    std::cout << "First Line\n";
     border();
-    std::cout << "Second Line.
-";
+    std::cout << "Second Line\n";
+
+    return 0;
 }
-        ]]></code></program>
+
+void border() {
+    std::cout << "------------\n";
+}
+        ]]></code>
+      </program>
     </solution>
   </exercise>
 
+
+  <!-- A6 -->
   <exercise label="functions_a6">
     <statement>
-      <p>Write a function called <c>int_division</c> that takes two doubles as parameters and prints the
-        quotient of the <term>integer division</term> of the first number divided by the second. Be
-        sure to include any necessary headers.</p>
-    <program interactive="activecode" line-numbers="yes" label="functions_a6_editor">
-      <code><![CDATA[
+      <p>
+        Write a function called <c>add_one</c> that takes an
+        <c>int</c> by reference and increases the caller's variable by
+        one.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="functions_a6_editor">
+        <code><![CDATA[
 #include <iostream>
 
-void int_division() {
-
-}
+void add_one();
 
 int main() {
-// DO NOT MODIFY ANYTHING BELOW THIS LINE
-std::cout << "Testing with a = 2.4, b = 6.8...
-"; std::cout << "    Your solution has a quotient of "; int_division(2.4, 6.8); std::cout << '\n'; std::cout << "    The correct solution has a quotient of 0
-"; std::cout << "Testing with a = -8.6, b = 4.2...
-"; std::cout << "    Your solution has a quotient of "; int_division(-8.6, 4.2); std::cout << '\n'; std::cout << "    The correct solution has a quotient of -2";
-}
-    ]]></code>
-    </program>    </statement>
+    int count = 5;
 
-    <hint>
-      <p>Write a function called <c>int_division</c> that takes two doubles as parameters and prints the
-        quotient of the <term>integer division</term> of the first number divided by the second. Use
-        the lines to construct the code, then go back to complete the Activecode.</p>
-      <activity label="functions_a6_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
-        <blocks>
-          <block order="6">
-            <choice correct="yes">
-              <cline>void int_division( double a, double b ) {</cline>
-            </choice>
-            <choice>
-              <cline>void int_division( int a, int b ) { </cline>
-            </choice>
-          </block>
-          <block order="7">
-            <choice correct="yes">
-              <cline>    int difference;</cline>
-            </choice>
-            <choice>
-              <cline>    double difference; </cline>
-            </choice>
-          </block>
-          <block order="5">
-            <cline>    difference = a / b;</cline>
-          </block>
-          <block order="2" correct="no">
-            <cline>    difference = b / a; </cline>
-          </block>
-          <block order="3">
-            <cline><![CDATA[    std::cout << difference << std::endl ;]]></cline>
-          </block>
-          <block order="8">
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
+    add_one(count);
+
+    std::cout << count << '\n';
+
+    return 0;
+}
+
+void add_one() {
+
+}
+        ]]></code>
+      </program>
+    </statement>
+
+    <solution>
+      <p>
+        Use a reference parameter so that changes made through the
+        parameter affect the caller's variable.
+      </p>
+
+      <program xml:id="functions_a6a_editor" line-numbers="yes">
+        <code><![CDATA[
+#include <iostream>
+
+void add_one(int& value);
+
+int main() {
+    int count = 5;
+
+    add_one(count);
+
+    std::cout << count << '\n';
+
+    return 0;
+}
+
+void add_one(int& value) {
+    value = value + 1;
+}
+        ]]></code>
+      </program>
+    </solution>
   </exercise>
 
+
+  <!-- A7 -->
   <exercise label="functions_a7">
     <statement>
-      <p>Write a function called gpa_boost that prints your GPA rounded up to the nearest
-        point. If your GPA is already at the nearest point, there is no rounding. Be sure to
-        include any necessary headers.</p>
-    <program interactive="activecode" line-numbers="yes" label="functions_a7q_editor">
-      <code><![CDATA[
+      <p>
+        Write a function called <c>round_up</c> that takes a
+        <c>double</c> and returns the smallest integer value that is
+        greater than or equal to it. Use a function from
+        <c>&lt;cmath&gt;</c>.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="functions_a7q_editor">
+        <code><![CDATA[
 #include <iostream>
 #include <cmath>
-void gpa_boost() {
 
-}
+double round_up(double value);
 
 int main() {
-    // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with GPA = 2.513...
-"; 
-    std::cout << "    Your solution rounded the GPA to "; gpa_boost(2.513); std::cout << '\n'; 
-    std::cout << "    The correct solution rounds the GPA to 3.000
-"; 
-    std::cout << "Testing with GPA = 4.000...
-"; 
-    std::cout << "    Your solution rounded the GPA to "; gpa_boost(4.000); std::cout << '\n'; 
-    std::cout << "    The correct solution rounds the GPA to 4.000";
+    std::cout << round_up(2.513) << '\n';
+    std::cout << round_up(4.0) << '\n';
+
+    return 0;
+}
+
+double round_up(double value) {
+
 }
         ]]></code>
-    </program>
+      </program>
     </statement>
+
     <solution>
+      <p>
+        <c>std::ceil</c> returns the smallest integer-valued
+        floating-point value greater than or equal to its argument.
+      </p>
 
-
-      <p>Below is one way to complete the program. I used the ceil function from the cmath
-        library, but you could have solved this problem without using any functions from
-        cmath.</p>
-
-
-      <program xml:id="functions_a7a_editor" line-numbers="yes"><code><![CDATA[
-#include <iostream>
-#include <cmath>
-
-void gpa_boost(double GPA) {
-    int better_gpa = ceil(GPA);
-    std::cout << better_gpa << ".000";
+      <program xml:id="functions_a7a_editor" line-numbers="yes">
+        <code><![CDATA[
+double round_up(double value) {
+    return std::ceil(value);
 }
-        ]]></code></program>
+        ]]></code>
+      </program>
     </solution>
   </exercise>
 
+
+  <!-- A8 -->
   <exercise label="functions_a8">
     <statement>
-      <p>Write a function called <c>volume_prism</c> that takes three <c>double</c> sidelengths as parameters, and
-        calculates and prints the volume of a the rectangular prism. Be sure to include any
-        necessary headers.</p>
-    <program interactive="activecode" line-numbers="yes" label="functions_a8_editor">
-      <code><![CDATA[
+      <p>
+        Write a value-returning function called <c>volume_prism</c> that
+        takes three <c>double</c> side lengths and returns the volume of
+        the rectangular prism.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="functions_a8_editor">
+        <code><![CDATA[
 #include <iostream>
 
-void volume_prism() {
-
-}
+double volume_prism();
 
 int main() {
-    // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with a = 3, b = 4, c = 5...
-";
-    std::cout << "    Your solution calculated a volume of "; volume_prism(3,4,5); std::cout << '\n';
-    std::cout << "    The correct solution calculates a volume of 60
-";
-    std::cout << "Testing with a = 5.7, b = 3.9, c = 1.3...
-";
-    std::cout << "    Your solution calculated a volume of "; volume_prism(5.7,3.9,1.3); std::cout << '\n';
-    std::cout << "    The correct solution calculates a volume of 28.899";
-}
-    ]]></code>
-    </program>
-    </statement>
-    <hint>
-      <p>Write a function called <c>volume_prism</c> that takes three <c>double</c> sidelengths as parameters, and
-        calculates and prints the volume of a the rectangular prism. Use the lines to construct the
-        code, then go back to complete the Activecode.</p>
-      <activity label="functions_a8_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
-        <blocks>
-          <block order="4">
-            <choice correct="yes">
-              <cline>void volume_prism(double s1, double s2, double s3) {</cline>
-            </choice>
-            <choice>
-              <cline>void volume_prism(int s1, int s2, int s3) { </cline>
-            </choice>
-          </block>
-          <block order="7">
-            <cline>    double volume;</cline>
-          </block>
-          <block order="5" correct="no">
-            <cline>    int volume; </cline>
-          </block>
-          <block order="2">
-            <cline>    volume = s1 * s2 * s3;</cline>
-          </block>
-          <block order="1">
-            <cline><![CDATA[    std::cout << volume << std::endl ;]]></cline>
-          </block>
-          <block order="3">
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
-  </exercise>
+    std::cout << volume_prism(3.0, 4.0, 5.0) << '\n';
+    std::cout << volume_prism(5.7, 3.9, 1.3) << '\n';
 
-  <exercise label="functions_a9">
-    <statement>
-      <p>Write a function called <c>tan_degrees</c> that prints the tangent of an angle given as a <c>double</c> in
-        degrees. Use 3.14 for pi. Be sure to include any necessary headers.</p>
-    <program interactive="activecode" line-numbers="yes" label="functions_a9q_editor">
-      <code><![CDATA[
-#include <iostream>
-#include <cmath>
-void tan_degrees() {
-
+    return 0;
 }
 
-int main() {
-    // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with degrees = 45...
-"; 
-    std::cout << "    Your solution calculated a tangent of "; tan_degrees(45); std::cout << '\n'; 
-    std::cout << "    The correct solution calculates a tangent of 0.999204
-"; 
-    std::cout << "Testing with degrees = 112.1...
-"; 
-    std::cout << "    Your solution calculated a tangent of "; tan_degrees(112.1); std::cout << '\n'; 
-    std::cout << "    The correct solution calculates a tangent of -2.46973";
+double volume_prism() {
+
 }
         ]]></code>
-    </program>
+      </program>
     </statement>
-    <solution>
-      <p>Below is one way to complete the program. You need to make sure to convert your angle
-        to radians before doing any calculations with sinusoidal functions.</p>
-      <program xml:id="functions_a9a_editor" line-numbers="yes"><code><![CDATA[
-#include <iostream>
-#include <cmath>
 
-void tan_degrees(double degrees) {
-    double radians = degrees * (2 * 3.14) / 360.0;
-    double tangent = tan(radians);
-    std::cout << tangent;
+    <solution>
+      <p>
+        The function needs three <c>double</c> parameters and should
+        return their product.
+      </p>
+
+      <program xml:id="functions_a8a_editor" line-numbers="yes">
+        <code><![CDATA[
+double volume_prism(double side1, double side2, double side3) {
+    return side1 * side2 * side3;
 }
-        ]]></code></program>
+        ]]></code>
+      </program>
     </solution>
   </exercise>
 
-  <exercise label="functions_a10">
+
+  <!-- A9 -->
+  <exercise label="functions_a9">
     <statement>
-      <p>Write a function called <c>volume_sphere</c> that takes a <c>double</c> radius as a parameter, and calculates
-        and prints the volume of a sphere with that radius. Use 3.14 for <c>pi</c>. Be sure to include
-        any necessary headers.</p>
-    <program interactive="activecode" line-numbers="yes" label="functions_a10_editor">
-      <code><![CDATA[
+      <p>
+        Write a function called <c>tan_degrees</c> that returns the
+        tangent of an angle given in degrees. Use <c>3.14</c> for pi.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="functions_a9q_editor">
+        <code><![CDATA[
 #include <iostream>
+#include <cmath>
 
-void volume_sphere() {
-
-}
+double tan_degrees(double degrees);
 
 int main() {
-    // DO NOT MODIFY ANYTHING BELOW THIS LINE
-    std::cout << "Testing with radius = 3...
-";
-    std::cout << "    Your solution calculated a volume of "; volume_sphere(3); std::cout << '\n';
-    std::cout << "    The correct solution calculates a volume of 113.04
-";
-    std::cout << "Testing with radius = 3.24...
-";
-    std::cout << "    Your solution calculated a volume of "; volume_sphere(3.24); std::cout << '\n';
-    std::cout << "    The correct solution calculates a volume of 142.398";
+    std::cout << tan_degrees(45.0) << '\n';
+    std::cout << tan_degrees(112.1) << '\n';
+
+    return 0;
 }
-    ]]></code>
-    </program>
+
+double tan_degrees(double degrees) {
+
+}
+        ]]></code>
+      </program>
     </statement>
-    <hint>
-      <p>Write a function called <c>volume_sphere</c> that takes a <c>double</c> radius as a parameter, and calculates
-        and prints the volume of a sphere with that radius. Use 3.14 for <c>pi</c>. Use the lines to
-        construct the code, then go back to complete the Activecode.</p>
-      <activity label="functions_a10_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
-        <blocks>
-          <block order="6">
-            <cline>void volume_sphere(double radius) {</cline>
-          </block>
-          <block order="3">
-            <cline>    double pi = 3.14;</cline>
-          </block>
-          <block order="1">
-            <choice correct="yes">
-              <cline>    double volume;</cline>
-            </choice>
-            <choice>
-              <cline>    int volume; </cline>
-            </choice>
-          </block>
-          <block order="8">
-            <cline>    volume = 4 * pi * radius * radius * radius / 3;</cline>
-          </block>
-          <block order="2" correct="no">
-            <cline>    volume = 4 / 3 * pi * radius ^ 3; </cline>
-          </block>
-          <block order="7">
-            <cline><![CDATA[    std::cout << volume << std::endl ;]]></cline>
-          </block>
-          <block order="5">
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
+
+    <solution>
+      <p>
+        Convert the angle from degrees to radians before calling
+        <c>std::tan</c>.
+      </p>
+
+      <program xml:id="functions_a9a_editor" line-numbers="yes">
+        <code><![CDATA[
+double tan_degrees(double degrees) {
+    constexpr double pi = 3.14;
+    double radians = degrees * pi / 180.0;
+
+    return std::tan(radians);
+}
+        ]]></code>
+      </program>
+    </solution>
   </exercise>
+
+
+  <!-- A10 -->
+  <exercise label="functions_a10">
+    <statement>
+      <p>
+        Write a value-returning function called <c>volume_sphere</c> that
+        takes a <c>double</c> radius and returns the volume of the sphere.
+        Use <c>3.14</c> for pi.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="functions_a10_editor">
+        <code><![CDATA[
+#include <iostream>
+
+double volume_sphere(double radius);
+
+int main() {
+    std::cout << volume_sphere(3.0) << '\n';
+    std::cout << volume_sphere(3.24) << '\n';
+
+    return 0;
+}
+
+double volume_sphere(double radius) {
+
+}
+        ]]></code>
+      </program>
+    </statement>
+
+    <solution>
+      <p>
+        Use <c>4.0 / 3.0</c> so the calculation uses floating-point
+        division, and multiply the radius by itself three times.
+      </p>
+
+      <program xml:id="functions_a10a_editor" line-numbers="yes">
+        <code><![CDATA[
+double volume_sphere(double radius) {
+    constexpr double pi = 3.14;
+
+    return (4.0 / 3.0) * pi * radius * radius * radius;
+}
+        ]]></code>
+      </program>
+    </solution>
+  </exercise>
+
 </exercises>

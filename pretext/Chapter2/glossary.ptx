@@ -21,6 +21,15 @@
             <p>A reserved word that is used by the compiler to parse programs.
             Examples we have seen include int, and void.</p>
         </gi>
+		
+		<gi>
+		  <title>identifier</title>
+		  <p>
+			A name used for a program element such as a variable or function or a class, etc.
+			An identifier may contain letters, digits, and underscores except other punctuations, but it
+			cannot begin with a digit or be a C++ keyword. Identifiers are also case sensitive.  
+		  </p>
+		</gi>
         <gi>
             <title>statement</title>
             <p>A line of code that represents a command or action. So far, the
