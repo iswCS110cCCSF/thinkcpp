@@ -529,45 +529,67 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.10</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Functions with Multiple Parameters</span>
 </h1>
-<div class="para" id="chapter3_functions-with-multiple-parameters-2">The syntax for declaring and invoking functions with multiple parameters is a common source of errors. First, remember that you have to declare the type of every parameter. For example<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_functions-with-multiple-parameters-2">The syntax for declaring and calling functions with multiple parameters is a common source of errors. First, remember that you must declare the type of every parameter.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void print_time(int hour, int minute) {
-  std::cout &lt;&lt; hour;
-  std::cout &lt;&lt; ":";
-  std::cout &lt;&lt; minute;
+<div class="para" id="chapter3_functions-with-multiple-parameters-3">For example, this function declaration has two parameters:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void print_time(int hour, int minute);
+</code></pre></div>
+<div class="para" id="chapter3_functions-with-multiple-parameters-5">The complete program can be organized with the declaration before <code class="code-inline tex2jax_ignore">main</code> and the definition after <code class="code-inline tex2jax_ignore">main</code>:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+
+void print_time(int hour, int minute);
+
+int main() {
+    int hour = 11;
+    int minute = 59;
+
+    print_time(hour, minute);
+
+    return 0;
+}
+
+void print_time(int hour, int minute) {
+    std::cout &lt;&lt; hour &lt;&lt; ":" &lt;&lt; minute &lt;&lt; '\n';
 }
 </code></pre></div>
-<div class="para" id="chapter3_functions-with-multiple-parameters-4">It might be tempting to write <code class="code-inline tex2jax_ignore">(int hour, minute)</code>, but that format is only legal for variable declarations, not for parameters.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_functions-with-multiple-parameters-7">Each parameter needs its own type. It might be tempting to write <code class="code-inline tex2jax_ignore">(int hour, minute)</code>, but that is not valid syntax for a function parameter list. The correct form is <code class="code-inline tex2jax_ignore">(int hour, int minute)</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter3_functions-with-multiple-parameters-5">Another common source of confusion is that you do not have to declare the types of arguments when you call a function. The following is wrong!<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_functions-with-multiple-parameters-8">When calling a function, however, you do not write the types of the arguments. The following call is wrong:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int hour = 11;
-int minute = 59;
-print_time(int hour, int minute);   // WRONG!
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">print_time(int hour, int minute);   // WRONG
 </code></pre></div>
-<div class="para" id="chapter3_functions-with-multiple-parameters-7">In this case, the compiler can tell the type of hour and minute by looking at their declarations.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_functions-with-multiple-parameters-10">The variables <code class="code-inline tex2jax_ignore">hour</code> and <code class="code-inline tex2jax_ignore">minute</code> have already been declared, so their types are already known. The correct function call is:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="warning remark-like" id="chapter3_functions-with-multiple-parameters-8"><h2 class="heading">
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">print_time(hour, minute);
+</code></pre></div>
+<article class="warning remark-like" id="chapter3_functions-with-multiple-parameters-12"><h2 class="heading">
 <span class="type">Warning</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.10.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
-<div class="para" id="chapter3_functions-with-multiple-parameters-8-1">It is unnecessary and illegal to include the type when you pass variables as arguments! The type is only needed for declaration.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-8-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter3_functions-with-multiple-parameters-12-1">Include parameter types in a function declaration or definition. Do not include types when supplying variables or values as arguments in a function call.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-12-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Warning 3.10.1"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-8" title="Copy heading and permalink for Warning 3.10.1" aria-label="Copy heading and permalink for Warning 3.10.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Warning 3.10.1"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-12" title="Copy heading and permalink for Warning 3.10.1" aria-label="Copy heading and permalink for Warning 3.10.1">🔗</a></div>
 </article>
-<div class="para" id="chapter3_functions-with-multiple-parameters-9">The correct syntax is print_time(hour, minute).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter3_functions-with-multiple-parameters-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<figure class="listing figure-like" id="multiple_params_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.10.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program shows how the dollar_amount and cent_amount arguments are passed into the print_price function.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.10.1: This program shows how the dollar_amount and cent_amount arguments are passed into the print_price function."><a tabindex="-1" href="#multiple_params_AC_1" title="Copy heading and permalink for Listing 3.10.1: This program shows how the dollar_amount and cent_amount arguments are passed into the print_price function." aria-label="Copy heading and permalink for Listing 3.10.1: This program shows how the dollar_amount and cent_amount arguments are passed into the print_price function.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-multiple_params_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+<figure class="listing figure-like" id="multiple_params_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">3.10.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program shows how the <code class="code-inline tex2jax_ignore">dollar_amount</code> and <code class="code-inline tex2jax_ignore">cent_amount</code> arguments are passed to the <code class="code-inline tex2jax_ignore">print_price</code> function.<div class="autopermalink" aria-hidden="true" data-description="Listing 3.10.1: This program shows how the dollar_amount and cent_amount arguments are passed to the print_price function."><a tabindex="-1" href="#multiple_params_AC_1" title="Copy heading and permalink for Listing 3.10.1: This program shows how the dollar_amount and cent_amount arguments are passed to the print_price function." aria-label="Copy heading and permalink for Listing 3.10.1: This program shows how the dollar_amount and cent_amount arguments are passed to the print_price function.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-multiple_params_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void print_price(int dollars, int cents) {
-    std::cout &lt;&lt; "Price is " &lt;&lt; dollars &lt;&lt; " dollars and " &lt;&lt; cents &lt;&lt; " cents.
-";
-}
+void print_price(int dollars, int cents);
 
 int main() {
     int dollar_amount = 2;
     int cent_amount = 92;
+
     print_price(dollar_amount, cent_amount);
+
     return 0;
+}
+
+void print_price(int dollars, int cents) {
+    std::cout &lt;&lt; "Price is "
+              &lt;&lt; dollars
+              &lt;&lt; " dollars and "
+              &lt;&lt; cents
+              &lt;&lt; " cents.\n";
 }
 </code></pre></div>
 </figure>
@@ -576,16 +598,16 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="multiple_params_1-1-1">Which of the following is a correct function header (first line of a function definition)?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#multiple_params_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="multiple_params_1-1-1">Which of the following is a correct function header (the first line of a function definition)?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#multiple_params_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-multiple_params_1" data-multipleanswers="false">
 <li data-component="answer" id="rs-multiple_params_1_opt_a">
-<div class="para" id="multiple_params_1-2-1-1-1"><code class="code-inline tex2jax_ignore">totalcost(double cost, tax, discount)</code></div>
+<div class="para" id="multiple_params_1-2-1-1-1"><code class="code-inline tex2jax_ignore">total_cost(double cost, tax, discount) {</code></div>
 </li>
 <li data-component="feedback" id="rs-multiple_params_1_opt_a">
 <div class="para" id="multiple_params_1-2-1-2-1">
-<code class="code-inline tex2jax_ignore">totalcost</code> needs a return type, and each parameter needs a data type.</div>
+<code class="code-inline tex2jax_ignore">total_cost</code> needs a return type, and each parameter needs its own type.</div>
 </li>
 <li data-component="answer" id="rs-multiple_params_1_opt_b">
 <div class="para" id="multiple_params_1-2-2-1-1"><code class="code-inline tex2jax_ignore">total_cost(double cost, double tax) {</code></div>
@@ -598,7 +620,7 @@ int main() {
 <div class="para" id="multiple_params_1-2-3-1-1"><code class="code-inline tex2jax_ignore">void total_cost(double cost, double tax, double discount) {</code></div>
 </li>
 <li data-component="feedback" id="rs-multiple_params_1_opt_c">
-<div class="para" id="multiple_params_1-2-3-2-1">Correct!</div>
+<div class="para" id="multiple_params_1-2-3-2-1">Correct. The function has a return type, and each parameter has its own type.</div>
 </li>
 </ul>
 </div></div>
@@ -609,42 +631,54 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="multiple_params_2-1-1">Which of the following is a legal function call of the function below?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#multiple_params_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void multiply_two(int num, string name) {
-  int total = num * 2;
-  std::cout &lt;&lt; "Hi " &lt;&lt; name &lt;&lt; ", your total is " &lt;&lt; total &lt;&lt; "!" &lt;&lt; std::endl ;
-}
+<div class="para" id="multiple_params_2-1-1">Which of the following is a legal function call for <code class="code-inline tex2jax_ignore">multiply_two</code> in the program below?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#multiple_params_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void multiply_two(int num, std::string name);
 
 int main() {
-  int x = 2;
- std::string phil = "Phil";
+    int x = 2;
+    std::string person = "Phil";
+
+    return 0;
+}
+
+void multiply_two(int num, std::string name) {
+    int total = num * 2;
+
+    std::cout &lt;&lt; "Hi "
+              &lt;&lt; name
+              &lt;&lt; ", your total is "
+              &lt;&lt; total
+              &lt;&lt; "!\n";
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-multiple_params_2" data-multipleanswers="false">
 <li data-component="answer" id="rs-multiple_params_2_opt_a">
-<div class="para" id="multiple_params_2-2-1-1-1"><code class="code-inline tex2jax_ignore">multiply_two(int x, string phil);</code></div>
+<div class="para" id="multiple_params_2-2-1-1-1"><code class="code-inline tex2jax_ignore">multiply_two(int x, std::string person);</code></div>
 </li>
 <li data-component="feedback" id="rs-multiple_params_2_opt_a">
-<div class="para" id="multiple_params_2-2-1-2-1">Data types are not needed when calling a function.</div>
+<div class="para" id="multiple_params_2-2-1-2-1">Types belong in the function declaration or definition, not in the argument list of a function call.</div>
 </li>
 <li data-component="answer" id="rs-multiple_params_2_opt_b" data-correct="">
-<div class="para" id="multiple_params_2-2-2-1-1"><code class="code-inline tex2jax_ignore">multiply_two (x, phil);</code></div>
+<div class="para" id="multiple_params_2-2-2-1-1"><code class="code-inline tex2jax_ignore">multiply_two(x, person);</code></div>
 </li>
 <li data-component="feedback" id="rs-multiple_params_2_opt_b">
-<div class="para" id="multiple_params_2-2-2-2-1">Correct!</div>
+<div class="para" id="multiple_params_2-2-2-2-1">Correct. The arguments are supplied in the same order as the corresponding parameters.</div>
 </li>
 <li data-component="answer" id="rs-multiple_params_2_opt_c">
-<div class="para" id="multiple_params_2-2-3-1-1"><code class="code-inline tex2jax_ignore">void multiply_two(int num, string name) {</code></div>
+<div class="para" id="multiple_params_2-2-3-1-1"><code class="code-inline tex2jax_ignore">void multiply_two(int num, std::string name) {</code></div>
 </li>
 <li data-component="feedback" id="rs-multiple_params_2_opt_c">
-<div class="para" id="multiple_params_2-2-3-2-1">This is the function definition.</div>
+<div class="para" id="multiple_params_2-2-3-2-1">This begins a function definition rather than a function call.</div>
 </li>
 <li data-component="answer" id="rs-multiple_params_2_opt_d">
-<div class="para" id="multiple_params_2-2-4-1-1"><code class="code-inline tex2jax_ignore">void multiply_two(int x, string phil);</code></div>
+<div class="para" id="multiple_params_2-2-4-1-1"><code class="code-inline tex2jax_ignore">void multiply_two(int x, std::string person);</code></div>
 </li>
 <li data-component="feedback" id="rs-multiple_params_2_opt_d">
-<div class="para" id="multiple_params_2-2-4-2-1">Data types are not needed when calling a function.</div>
+<div class="para" id="multiple_params_2-2-4-2-1">This is a function declaration, not a function call.</div>
 </li>
 </ul>
 </div></div>

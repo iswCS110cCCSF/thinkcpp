@@ -3877,7 +3877,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.10",
   "title": "Functions with Multiple Parameters",
-  "body": " Functions with Multiple Parameters  The syntax for declaring and invoking functions with multiple parameters is a common source of errors. First, remember that you have to declare the type of every parameter. For example  void print_time(int hour, int minute) { std::cout << hour; std::cout << \":\"; std::cout << minute; }  It might be tempting to write (int hour, minute) , but that format is only legal for variable declarations, not for parameters.  Another common source of confusion is that you do not have to declare the types of arguments when you call a function. The following is wrong!  int hour = 11; int minute = 59; print_time(int hour, int minute); \/\/ WRONG!  In this case, the compiler can tell the type of hour and minute by looking at their declarations.   It is unnecessary and illegal to include the type when you pass variables as arguments! The type is only needed for declaration.   The correct syntax is print_time(hour, minute).   This program shows how the dollar_amount and cent_amount arguments are passed into the print_price function.   #include <iostream> void print_price(int dollars, int cents) { std::cout << \"Price is \" << dollars << \" dollars and \" << cents << \" cents. \"; } int main() { int dollar_amount = 2; int cent_amount = 92; print_price(dollar_amount, cent_amount); return 0; }      Which of the following is a correct function header (first line of a function definition)?       totalcost(double cost, tax, discount)     totalcost needs a return type, and each parameter needs a data type.      total_cost(double cost, double tax) {     total_cost needs a return type.      void total_cost(double cost, double tax, double discount) {    Correct!       Which of the following is a legal function call of the function below?  void multiply_two(int num, string name) { int total = num * 2; std::cout << \"Hi \" << name << \", your total is \" << total << \"!\" << std::endl ; } int main() { int x = 2; std::string phil = \"Phil\"; }       multiply_two(int x, string phil);    Data types are not needed when calling a function.      multiply_two (x, phil);    Correct!      void multiply_two(int num, string name) {    This is the function definition.      void multiply_two(int x, string phil);    Data types are not needed when calling a function.     "
+  "body": " Functions with Multiple Parameters  The syntax for declaring and calling functions with multiple parameters is a common source of errors. First, remember that you must declare the type of every parameter.  For example, this function declaration has two parameters:   void print_time(int hour, int minute);   The complete program can be organized with the declaration before main and the definition after main :  #include <iostream> void print_time(int hour, int minute); int main() { int hour = 11; int minute = 59; print_time(hour, minute); return 0; } void print_time(int hour, int minute) { std::cout << hour << \":\" << minute << '\\n'; }  Each parameter needs its own type. It might be tempting to write (int hour, minute) , but that is not valid syntax for a function parameter list. The correct form is (int hour, int minute) .  When calling a function, however, you do not write the types of the arguments. The following call is wrong:   print_time(int hour, int minute); \/\/ WRONG   The variables hour and minute have already been declared, so their types are already known. The correct function call is:   print_time(hour, minute);    Include parameter types in a function declaration or definition. Do not include types when supplying variables or values as arguments in a function call.    This program shows how the dollar_amount and cent_amount arguments are passed to the print_price function.   #include <iostream> void print_price(int dollars, int cents); int main() { int dollar_amount = 2; int cent_amount = 92; print_price(dollar_amount, cent_amount); return 0; } void print_price(int dollars, int cents) { std::cout << \"Price is \" << dollars << \" dollars and \" << cents << \" cents.\\n\"; }      Which of the following is a correct function header (the first line of a function definition)?       total_cost(double cost, tax, discount) {      total_cost needs a return type, and each parameter needs its own type.       total_cost(double cost, double tax) {      total_cost needs a return type.       void total_cost(double cost, double tax, double discount) {     Correct. The function has a return type, and each parameter has its own type.        Which of the following is a legal function call for multiply_two in the program below?  #include <iostream> #include <string> void multiply_two(int num, std::string name); int main() { int x = 2; std::string person = \"Phil\"; return 0; } void multiply_two(int num, std::string name) { int total = num * 2; std::cout << \"Hi \" << name << \", your total is \" << total << \"!\\n\"; }       multiply_two(int x, std::string person);     Types belong in the function declaration or definition, not in the argument list of a function call.       multiply_two(x, person);     Correct. The arguments are supplied in the same order as the corresponding parameters.       void multiply_two(int num, std::string name) {     This begins a function definition rather than a function call.       void multiply_two(int x, std::string person);     This is a function declaration, not a function call.      "
 },
 {
   "id": "chapter3_functions-with-multiple-parameters-2",
@@ -3886,16 +3886,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The syntax for declaring and invoking functions with multiple parameters is a common source of errors. First, remember that you have to declare the type of every parameter. For example "
+  "body": "The syntax for declaring and calling functions with multiple parameters is a common source of errors. First, remember that you must declare the type of every parameter. "
 },
 {
-  "id": "chapter3_functions-with-multiple-parameters-4",
+  "id": "chapter3_functions-with-multiple-parameters-3",
   "level": "2",
-  "url": "chapter3_functions-with-multiple-parameters.html#chapter3_functions-with-multiple-parameters-4",
+  "url": "chapter3_functions-with-multiple-parameters.html#chapter3_functions-with-multiple-parameters-3",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "It might be tempting to write (int hour, minute) , but that format is only legal for variable declarations, not for parameters. "
+  "body": "For example, this function declaration has two parameters: "
 },
 {
   "id": "chapter3_functions-with-multiple-parameters-5",
@@ -3904,7 +3904,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Another common source of confusion is that you do not have to declare the types of arguments when you call a function. The following is wrong! "
+  "body": "The complete program can be organized with the declaration before main and the definition after main : "
 },
 {
   "id": "chapter3_functions-with-multiple-parameters-7",
@@ -3913,25 +3913,34 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In this case, the compiler can tell the type of hour and minute by looking at their declarations. "
+  "body": "Each parameter needs its own type. It might be tempting to write (int hour, minute) , but that is not valid syntax for a function parameter list. The correct form is (int hour, int minute) . "
 },
 {
   "id": "chapter3_functions-with-multiple-parameters-8",
   "level": "2",
   "url": "chapter3_functions-with-multiple-parameters.html#chapter3_functions-with-multiple-parameters-8",
-  "type": "Warning",
-  "number": "3.10.1",
-  "title": "",
-  "body": " It is unnecessary and illegal to include the type when you pass variables as arguments! The type is only needed for declaration.  "
-},
-{
-  "id": "chapter3_functions-with-multiple-parameters-9",
-  "level": "2",
-  "url": "chapter3_functions-with-multiple-parameters.html#chapter3_functions-with-multiple-parameters-9",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The correct syntax is print_time(hour, minute). "
+  "body": "When calling a function, however, you do not write the types of the arguments. The following call is wrong: "
+},
+{
+  "id": "chapter3_functions-with-multiple-parameters-10",
+  "level": "2",
+  "url": "chapter3_functions-with-multiple-parameters.html#chapter3_functions-with-multiple-parameters-10",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The variables hour and minute have already been declared, so their types are already known. The correct function call is: "
+},
+{
+  "id": "chapter3_functions-with-multiple-parameters-12",
+  "level": "2",
+  "url": "chapter3_functions-with-multiple-parameters.html#chapter3_functions-with-multiple-parameters-12",
+  "type": "Warning",
+  "number": "3.10.1",
+  "title": "",
+  "body": " Include parameter types in a function declaration or definition. Do not include types when supplying variables or values as arguments in a function call.  "
 },
 {
   "id": "multiple_params_AC_1",
@@ -3939,8 +3948,8 @@ var ptx_lunr_docs = [
   "url": "chapter3_functions-with-multiple-parameters.html#multiple_params_AC_1",
   "type": "Listing",
   "number": "3.10.1",
-  "title": "This program shows how the dollar_amount and cent_amount arguments are passed into the print_price function.",
-  "body": " This program shows how the dollar_amount and cent_amount arguments are passed into the print_price function.   #include <iostream> void print_price(int dollars, int cents) { std::cout << \"Price is \" << dollars << \" dollars and \" << cents << \" cents. \"; } int main() { int dollar_amount = 2; int cent_amount = 92; print_price(dollar_amount, cent_amount); return 0; }   "
+  "title": "This program shows how the <code class=\"code-inline tex2jax_ignore\">dollar_amount<\/code> and <code class=\"code-inline tex2jax_ignore\">cent_amount<\/code> arguments are passed to the <code class=\"code-inline tex2jax_ignore\">print_price<\/code> function.",
+  "body": " This program shows how the dollar_amount and cent_amount arguments are passed to the print_price function.   #include <iostream> void print_price(int dollars, int cents); int main() { int dollar_amount = 2; int cent_amount = 92; print_price(dollar_amount, cent_amount); return 0; } void print_price(int dollars, int cents) { std::cout << \"Price is \" << dollars << \" dollars and \" << cents << \" cents.\\n\"; }   "
 },
 {
   "id": "multiple_params_1",
@@ -3949,7 +3958,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.10.1",
   "title": "",
-  "body": "  Which of the following is a correct function header (first line of a function definition)?       totalcost(double cost, tax, discount)     totalcost needs a return type, and each parameter needs a data type.      total_cost(double cost, double tax) {     total_cost needs a return type.      void total_cost(double cost, double tax, double discount) {    Correct!    "
+  "body": "  Which of the following is a correct function header (the first line of a function definition)?       total_cost(double cost, tax, discount) {      total_cost needs a return type, and each parameter needs its own type.       total_cost(double cost, double tax) {      total_cost needs a return type.       void total_cost(double cost, double tax, double discount) {     Correct. The function has a return type, and each parameter has its own type.     "
 },
 {
   "id": "multiple_params_2",
@@ -3958,7 +3967,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.10.2",
   "title": "",
-  "body": "  Which of the following is a legal function call of the function below?  void multiply_two(int num, string name) { int total = num * 2; std::cout << \"Hi \" << name << \", your total is \" << total << \"!\" << std::endl ; } int main() { int x = 2; std::string phil = \"Phil\"; }       multiply_two(int x, string phil);    Data types are not needed when calling a function.      multiply_two (x, phil);    Correct!      void multiply_two(int num, string name) {    This is the function definition.      void multiply_two(int x, string phil);    Data types are not needed when calling a function.    "
+  "body": "  Which of the following is a legal function call for multiply_two in the program below?  #include <iostream> #include <string> void multiply_two(int num, std::string name); int main() { int x = 2; std::string person = \"Phil\"; return 0; } void multiply_two(int num, std::string name) { int total = num * 2; std::cout << \"Hi \" << name << \", your total is \" << total << \"!\\n\"; }       multiply_two(int x, std::string person);     Types belong in the function declaration or definition, not in the argument list of a function call.       multiply_two(x, person);     Correct. The arguments are supplied in the same order as the corresponding parameters.       void multiply_two(int num, std::string name) {     This begins a function definition rather than a function call.       void multiply_two(int x, std::string person);     This is a function declaration, not a function call.     "
 },
 {
   "id": "chapter3_functions-with-results",
@@ -3967,7 +3976,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.11",
   "title": "Functions with Results",
-  "body": " Functions with Results  You might have noticed by now that some of the functions we are using, like the math functions, yield results. Other functions, like new_line , perform an action but don't return a value. That raises some questions:     What happens if you call a function and you don't do anything with the result (i.e. you don't assign it to a variable or use it as part of a larger expression)?    What happens if you use a function without a result as part of an expression, like new_line() + 7 ?    Can we write functions that yield results, or are we stuck with things like new_line and print_twice ?     The answer to the third question is yes, you can write functions that return values. A function that returns a value has a return type instead of void . It uses a return statement to send a value back to the caller.  For example:   int double_value(int value) { return value * 2; }   In this example, int is the return type. The statement return value * 2; computes an integer and sends that value back to the caller.  A call to a value-returning function can be used anywhere a value of that type is appropriate. For example:   int result = double_value(5); std::cout << result << '\\n';   The call double_value(5) returns the value 10 , so result is initialized to 10 .  Parameters carry information into a function. A return value carries a result back to the caller .  A function can have multiple parameters and still return one value:   double rectangle_area(double width, double height) { return width * height; }   The returned value can be stored in a variable or used directly in another expression:   double area = rectangle_area(4.0, 3.0); std::cout << area << '\\n';    Any time you have a question about what is legal or illegal in C++, a good way to find out is to ask the compiler. It will let you answer your question by throwing an error… or not!     What will be printed when the following code runs?    #include <iostream> void multiply(int x, int y) { std::cout << x * y; } int main() { int x = 2; int y = 4; multiply(x,y); }        Yes! 2*4=8 so that will be printed but not returned        Will the following code compile?   #include <iostream> void multiply(int x, int y) { std::cout << x * y << '\\n'; } int main() { int x = 2; int y = 4; std::cout << multiply(x,y); }       Yes    Can you print the result of a void function?      No    Correct! A void function does not produce a value that can be sent to std::cout .        What value is stored in result after this code runs?   int double_value(int value) { return value * 2; } int main() { int result = double_value(6); }      2   The parameter value receives 6 , and the function returns value * 2 .     6   6 is the argument passed to the function, but the function returns twice that value.     12   Correct! double_value(6) returns 6 * 2 , which is 12 .     Nothing, because the function does not print anything.   A function does not need to print a value in order to return one. The return statement sends the result back to the caller.      "
+  "body": " Functions with Results  You might have noticed by now that some of the functions we are using, such as mathematical functions, produce results. Other functions, such as new_line , perform an action but do not return a value. That raises some questions:     What happens if you call a function and do not use its result?    What happens if you try to use a function that does not return a value as part of an expression, such as new_line() + 7 ?    Can we write our own functions that return values?     The answer to the third question is yes . A function that returns a value has a non- void  return type and uses a return statement to send a value back to the caller.  For example, consider this function declaration:   int double_value(int value);   The return type is int , which tells us that double_value returns an integer value.  Here is a complete program using the function:  #include <iostream> int double_value(int value); int main() { int result = double_value(5); std::cout << result << '\\n'; return 0; } int double_value(int value) { return value * 2; }  In the function definition, the statement return value * 2; computes an integer and sends that value back to the caller.  The call double_value(5) returns the value 10 , so result is initialized to 10 .  Parameters carry information into a function. A return value carries a result back to the caller .  Returning a value is different from printing a value. A function can compute and return a value without displaying anything on the screen. The caller can then decide what to do with the returned value.  A function can have multiple parameters and still return one value. For example:  #include <iostream> double rectangle_area(double width, double height); int main() { double area = rectangle_area(4.0, 3.0); std::cout << area << '\\n'; return 0; } double rectangle_area(double width, double height) { return width * height; }  The returned value can be stored in a variable, as shown above. It can also be used directly in a larger expression:   std::cout << rectangle_area(4.0, 3.0) << '\\n';    Any time you have a question about what is legal or illegal in C++, one useful way to investigate is to ask the compiler. It will either compile the code or report an error that can help you understand the rule being violated.     What will be printed when the following code runs?    #include <iostream> void multiply(int x, int y); int main() { int x = 2; int y = 4; multiply(x, y); return 0; } void multiply(int x, int y) { std::cout << x * y; }        The function prints 2 * 4 , which is 8 . It prints the value but does not return it.        Will the following code compile?   #include <iostream> void multiply(int x, int y); int main() { int x = 2; int y = 4; std::cout << multiply(x, y); return 0; } void multiply(int x, int y) { std::cout << x * y << '\\n'; }       Yes     multiply has return type void , so the call does not produce a value that can be sent to std::cout .      No    Correct. A void function does not produce a return value that can be used as part of this output expression.        What value is stored in result after this code runs?   int double_value(int value); int main() { int result = double_value(6); return 0; } int double_value(int value) { return value * 2; }       2    The parameter value receives 6 , so value * 2 is 12 .      6     6 is the argument passed to the function, but the function returns twice that value.      12    Correct. double_value(6) returns 6 * 2 , which is 12 .      Nothing, because the function does not print anything.    Printing and returning are different. The return statement sends the value back to the caller even though the function itself does not print anything.        What will be printed when the following code runs?   #include <iostream> int double_value(int value); int main() { std::cout << double_value(4) + 3 << '\\n'; return 0; } int double_value(int value) { return value * 2; }       7     double_value(4) returns 8 , not 4 .      8     8 is the value returned by double_value(4) , but then 3 is added to that value.      11    Correct. double_value(4) returns 8 , so the expression becomes 8 + 3 .      Nothing, because the returned value is not stored in a variable.    A returned value does not have to be stored in a variable. It can be used directly as part of a larger expression.      "
 },
 {
   "id": "chapter3_functions-with-results-2",
@@ -3976,7 +3985,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "You might have noticed by now that some of the functions we are using, like the math functions, yield results. Other functions, like new_line , perform an action but don't return a value. That raises some questions: "
+  "body": "You might have noticed by now that some of the functions we are using, such as mathematical functions, produce results. Other functions, such as new_line , perform an action but do not return a value. That raises some questions: "
 },
 {
   "id": "chapter3_functions-with-results-3",
@@ -3985,7 +3994,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "   What happens if you call a function and you don't do anything with the result (i.e. you don't assign it to a variable or use it as part of a larger expression)?    What happens if you use a function without a result as part of an expression, like new_line() + 7 ?    Can we write functions that yield results, or are we stuck with things like new_line and print_twice ?    "
+  "body": "   What happens if you call a function and do not use its result?    What happens if you try to use a function that does not return a value as part of an expression, such as new_line() + 7 ?    Can we write our own functions that return values?    "
 },
 {
   "id": "chapter3_functions-with-results-4",
@@ -3994,7 +4003,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The answer to the third question is yes, you can write functions that return values. A function that returns a value has a return type instead of void . It uses a return statement to send a value back to the caller. "
+  "body": "The answer to the third question is yes . A function that returns a value has a non- void  return type and uses a return statement to send a value back to the caller. "
 },
 {
   "id": "chapter3_functions-with-results-5",
@@ -4003,7 +4012,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "For example: "
+  "body": "For example, consider this function declaration: "
 },
 {
   "id": "chapter3_functions-with-results-7",
@@ -4012,7 +4021,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In this example, int is the return type. The statement return value * 2; computes an integer and sends that value back to the caller. "
+  "body": "The return type is int , which tells us that double_value returns an integer value. "
 },
 {
   "id": "chapter3_functions-with-results-8",
@@ -4021,7 +4030,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "A call to a value-returning function can be used anywhere a value of that type is appropriate. For example: "
+  "body": "Here is a complete program using the function: "
 },
 {
   "id": "chapter3_functions-with-results-10",
@@ -4030,7 +4039,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The call double_value(5) returns the value 10 , so result is initialized to 10 . "
+  "body": "In the function definition, the statement return value * 2; computes an integer and sends that value back to the caller. "
 },
 {
   "id": "chapter3_functions-with-results-11",
@@ -4039,7 +4048,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Parameters carry information into a function. A return value carries a result back to the caller . "
+  "body": "The call double_value(5) returns the value 10 , so result is initialized to 10 . "
 },
 {
   "id": "chapter3_functions-with-results-12",
@@ -4048,7 +4057,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "A function can have multiple parameters and still return one value: "
+  "body": "Parameters carry information into a function. A return value carries a result back to the caller . "
+},
+{
+  "id": "chapter3_functions-with-results-13",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-13",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Returning a value is different from printing a value. A function can compute and return a value without displaying anything on the screen. The caller can then decide what to do with the returned value. "
 },
 {
   "id": "chapter3_functions-with-results-14",
@@ -4057,16 +4075,25 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The returned value can be stored in a variable or used directly in another expression: "
+  "body": "A function can have multiple parameters and still return one value. For example: "
 },
 {
   "id": "chapter3_functions-with-results-16",
   "level": "2",
   "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-16",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The returned value can be stored in a variable, as shown above. It can also be used directly in a larger expression: "
+},
+{
+  "id": "chapter3_functions-with-results-18",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#chapter3_functions-with-results-18",
   "type": "Note",
   "number": "3.11.1",
   "title": "",
-  "body": " Any time you have a question about what is legal or illegal in C++, a good way to find out is to ask the compiler. It will let you answer your question by throwing an error… or not!  "
+  "body": " Any time you have a question about what is legal or illegal in C++, one useful way to investigate is to ask the compiler. It will either compile the code or report an error that can help you understand the rule being violated.  "
 },
 {
   "id": "fuwresults_1",
@@ -4075,7 +4102,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.11.1",
   "title": "",
-  "body": "  What will be printed when the following code runs?    #include <iostream> void multiply(int x, int y) { std::cout << x * y; } int main() { int x = 2; int y = 4; multiply(x,y); }        Yes! 2*4=8 so that will be printed but not returned     "
+  "body": "  What will be printed when the following code runs?    #include <iostream> void multiply(int x, int y); int main() { int x = 2; int y = 4; multiply(x, y); return 0; } void multiply(int x, int y) { std::cout << x * y; }        The function prints 2 * 4 , which is 8 . It prints the value but does not return it.     "
 },
 {
   "id": "fuwresults_2",
@@ -4084,7 +4111,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.11.2",
   "title": "",
-  "body": "  Will the following code compile?   #include <iostream> void multiply(int x, int y) { std::cout << x * y << '\\n'; } int main() { int x = 2; int y = 4; std::cout << multiply(x,y); }       Yes    Can you print the result of a void function?      No    Correct! A void function does not produce a value that can be sent to std::cout .     "
+  "body": "  Will the following code compile?   #include <iostream> void multiply(int x, int y); int main() { int x = 2; int y = 4; std::cout << multiply(x, y); return 0; } void multiply(int x, int y) { std::cout << x * y << '\\n'; }       Yes     multiply has return type void , so the call does not produce a value that can be sent to std::cout .      No    Correct. A void function does not produce a return value that can be used as part of this output expression.     "
 },
 {
   "id": "fuwresults_3",
@@ -4093,7 +4120,16 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.11.3",
   "title": "",
-  "body": "  What value is stored in result after this code runs?   int double_value(int value) { return value * 2; } int main() { int result = double_value(6); }      2   The parameter value receives 6 , and the function returns value * 2 .     6   6 is the argument passed to the function, but the function returns twice that value.     12   Correct! double_value(6) returns 6 * 2 , which is 12 .     Nothing, because the function does not print anything.   A function does not need to print a value in order to return one. The return statement sends the result back to the caller.     "
+  "body": "  What value is stored in result after this code runs?   int double_value(int value); int main() { int result = double_value(6); return 0; } int double_value(int value) { return value * 2; }       2    The parameter value receives 6 , so value * 2 is 12 .      6     6 is the argument passed to the function, but the function returns twice that value.      12    Correct. double_value(6) returns 6 * 2 , which is 12 .      Nothing, because the function does not print anything.    Printing and returning are different. The return statement sends the value back to the caller even though the function itself does not print anything.     "
+},
+{
+  "id": "fuwresults_4",
+  "level": "2",
+  "url": "chapter3_functions-with-results.html#fuwresults_4",
+  "type": "Checkpoint",
+  "number": "3.11.4",
+  "title": "",
+  "body": "  What will be printed when the following code runs?   #include <iostream> int double_value(int value); int main() { std::cout << double_value(4) + 3 << '\\n'; return 0; } int double_value(int value) { return value * 2; }       7     double_value(4) returns 8 , not 4 .      8     8 is the value returned by double_value(4) , but then 3 is added to that value.      11    Correct. double_value(4) returns 8 , so the expression becomes 8 + 3 .      Nothing, because the returned value is not stored in a variable.    A returned value does not have to be stored in a variable. It can be used directly as part of a larger expression.     "
 },
 {
   "id": "chapter3_pass-by-reference",
@@ -4102,7 +4138,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "3.12",
   "title": "Pass by Value and Pass by Reference",
-  "body": " Pass by Value and Pass by Reference  So far, function parameters have received copies of the values passed to them. This is called pass by value .  For example, suppose we try to write a function that swaps two values:   void swap_values(int first, int second) { int temp = first; first = second; second = temp; }   Now consider this call:   int x = 3; int y = 7; swap_values(x, y);   Inside swap_values , the parameters first and second are separate variables that receive copies of the values stored in x and y . The function swaps those copies, but the original variables x and y are unchanged.  After the function call, the values are still:   x = 3 y = 7   Sometimes we want a function to work with the caller's variables directly. C++ allows us to do this with reference parameters .  A reference parameter is written with an ampersand & after the parameter type:   void swap_values(int& first, int& second) { int temp = first; first = second; second = temp; }   In this version, first refers to the caller's variable x , and second refers to the caller's variable y . Changes made through the reference parameters therefore affect the original variables.   int x = 3; int y = 7; swap_values(x, y); std::cout << \"x = \" << x << '\\n'; std::cout << \"y = \" << y << '\\n';   The output is:   x = 7 y = 3   The key difference is:    With pass by value , the parameter receives a copy of the argument's value. Changes to the parameter do not change the caller's variable.    With pass by reference , the reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.     For now, you only need to recognize that & in a parameter declaration creates a reference parameter. We will study references, memory addresses, and pointers in more detail later.     What are the values of x and y after the following code runs?   void swap_values(int first, int second) { int temp = first; first = second; second = temp; } int main() { int x = 3; int y = 7; swap_values(x, y); }       x is 3 and y is 7.    Correct. The parameters receive copies of x and y , so swapping the parameters does not change the caller's variables.      x is 7 and y is 3.    The values are swapped only inside the function's local parameters. The caller's variables are unchanged.      x is 3 and y is 3.    The function does not modify either variable in main .      x is 7 and y is 7.    The function changes only its local copies, not the variables in main .        What are the values of x and y after the following code runs?   void swap_values(int& first, int& second) { int temp = first; first = second; second = temp; } int main() { int x = 3; int y = 7; swap_values(x, y); }       x is 3 and y is 7.    The parameters are references, so changes made through them affect x and y .      x is 7 and y is 3.    Correct. The reference parameters refer to the caller's variables, so the swap changes x and y .      x is 3 and y is 3.    The three assignments in swap_values exchange the two values rather than assigning the same value to both.      x is 7 and y is 7.    The temporary variable preserves the original value of first , allowing the two values to be exchanged.      "
+  "body": " Pass by Value and Pass by Reference  So far, function parameters have received copies of the values passed to them. This is called pass by value . Changing a pass-by-value parameter changes only the local parameter, not the caller's variable.  For example, suppose we try to write a function that swaps the values of two variables:   void swap_values(int first, int second);   Here is a complete program using that function:  #include <iostream> void swap_values(int first, int second); int main() { int x = 3; int y = 7; swap_values(x, y); std::cout << \"x = \" << x << '\\n'; std::cout << \"y = \" << y << '\\n'; return 0; } void swap_values(int first, int second) { int temp = first; first = second; second = temp; }  When swap_values(x, y) is called, the parameter first receives a copy of the value in x , and second receives a copy of the value in y . The function swaps those copies.  The parameters first and second have local scope inside swap_values . Changing them does not change x or y in main .  Therefore, the output is:   x = 3 y = 7   Sometimes we want a function to work with the caller's variables directly. C++ allows us to do this with reference parameters .  A reference parameter is written with an ampersand & after the parameter type:   void swap_values(int& first, int& second);   Now consider the complete program:  #include <iostream> void swap_values(int& first, int& second); int main() { int x = 3; int y = 7; swap_values(x, y); std::cout << \"x = \" << x << '\\n'; std::cout << \"y = \" << y << '\\n'; return 0; } void swap_values(int& first, int& second) { int temp = first; first = second; second = temp; }  In this version, first refers to the caller's variable x , and second refers to the caller's variable y . Changes made through the reference parameters therefore affect those variables.  The output is now:   x = 7 y = 3   The key difference is:    With pass by value , the parameter receives a copy of the argument's value. Changes to the parameter do not change the caller's variable.    With pass by reference , the reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.     For now, you only need to recognize and use & in a parameter declaration to create a reference parameter. We will study references in more detail, along with memory addresses and pointers, later in the course.     What are the values of x and y after the following code runs?   void swap_values(int first, int second); int main() { int x = 3; int y = 7; swap_values(x, y); return 0; } void swap_values(int first, int second) { int temp = first; first = second; second = temp; }       x is 3 and y is 7.    Correct. first and second receive copies of the argument values. Swapping those local parameters does not change x or y .      x is 7 and y is 3.    The values of the local parameters are swapped, but x and y are passed by value and remain unchanged.      x is 3 and y is 3.    The assignments affect only the local parameters inside swap_values .      x is 7 and y is 7.    Neither variable in main is changed by this pass-by-value function.        Which function declaration allows add_one to change the caller's int variable?      void add_one(int value);    This passes the value by value, so value receives a copy of the argument.      void add_one(int& value);    Correct. value is a reference parameter, so changes made through it affect the caller's variable.      int add_one(int value);    This function can return an int , but value itself is still passed by value.      void add_one(value);    A parameter in a function declaration must have a type.        What is printed by the following program?   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }       1     value refers to count , whose value starts at 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      Error!    Passing an int variable to an int& reference parameter is legal.      "
 },
 {
   "id": "chapter3_pass-by-reference-2",
@@ -4111,7 +4147,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "So far, function parameters have received copies of the values passed to them. This is called pass by value . "
+  "body": "So far, function parameters have received copies of the values passed to them. This is called pass by value . Changing a pass-by-value parameter changes only the local parameter, not the caller's variable. "
 },
 {
   "id": "chapter3_pass-by-reference-3",
@@ -4120,7 +4156,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "For example, suppose we try to write a function that swaps two values: "
+  "body": "For example, suppose we try to write a function that swaps the values of two variables: "
 },
 {
   "id": "chapter3_pass-by-reference-5",
@@ -4129,7 +4165,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Now consider this call: "
+  "body": "Here is a complete program using that function: "
 },
 {
   "id": "chapter3_pass-by-reference-7",
@@ -4138,7 +4174,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Inside swap_values , the parameters first and second are separate variables that receive copies of the values stored in x and y . The function swaps those copies, but the original variables x and y are unchanged. "
+  "body": "When swap_values(x, y) is called, the parameter first receives a copy of the value in x , and second receives a copy of the value in y . The function swaps those copies. "
 },
 {
   "id": "chapter3_pass-by-reference-8",
@@ -4147,16 +4183,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "After the function call, the values are still: "
+  "body": "The parameters first and second have local scope inside swap_values . Changing them does not change x or y in main . "
 },
 {
-  "id": "chapter3_pass-by-reference-10",
+  "id": "chapter3_pass-by-reference-9",
   "level": "2",
-  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-10",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-9",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Sometimes we want a function to work with the caller's variables directly. C++ allows us to do this with reference parameters . "
+  "body": "Therefore, the output is: "
 },
 {
   "id": "chapter3_pass-by-reference-11",
@@ -4165,25 +4201,34 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
+  "body": "Sometimes we want a function to work with the caller's variables directly. C++ allows us to do this with reference parameters . "
+},
+{
+  "id": "chapter3_pass-by-reference-12",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-12",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
   "body": "A reference parameter is written with an ampersand & after the parameter type: "
 },
 {
-  "id": "chapter3_pass-by-reference-13",
+  "id": "chapter3_pass-by-reference-14",
   "level": "2",
-  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-13",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-14",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In this version, first refers to the caller's variable x , and second refers to the caller's variable y . Changes made through the reference parameters therefore affect the original variables. "
+  "body": "Now consider the complete program: "
 },
 {
-  "id": "chapter3_pass-by-reference-15",
+  "id": "chapter3_pass-by-reference-16",
   "level": "2",
-  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-15",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-16",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The output is: "
+  "body": "In this version, first refers to the caller's variable x , and second refers to the caller's variable y . Changes made through the reference parameters therefore affect those variables. "
 },
 {
   "id": "chapter3_pass-by-reference-17",
@@ -4192,34 +4237,43 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
+  "body": "The output is now: "
+},
+{
+  "id": "chapter3_pass-by-reference-19",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-19",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
   "body": "The key difference is: "
 },
 {
-  "id": "chapter3_pass-by-reference-18-1-1",
+  "id": "chapter3_pass-by-reference-20-1-1",
   "level": "2",
-  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-18-1-1",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-20-1-1",
   "type": "Paragraph",
   "number": "",
   "title": "",
   "body": "With pass by value , the parameter receives a copy of the argument's value. Changes to the parameter do not change the caller's variable. "
 },
 {
-  "id": "chapter3_pass-by-reference-18-2-1",
+  "id": "chapter3_pass-by-reference-20-2-1",
   "level": "2",
-  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-18-2-1",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-20-2-1",
   "type": "Paragraph",
   "number": "",
   "title": "",
   "body": "With pass by reference , the reference parameter refers to the caller's variable. Changes made through the parameter affect that variable. "
 },
 {
-  "id": "chapter3_pass-by-reference-19",
+  "id": "chapter3_pass-by-reference-21",
   "level": "2",
-  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-19",
+  "url": "chapter3_pass-by-reference.html#chapter3_pass-by-reference-21",
   "type": "Note",
   "number": "3.12.1",
   "title": "",
-  "body": " For now, you only need to recognize that & in a parameter declaration creates a reference parameter. We will study references, memory addresses, and pointers in more detail later.  "
+  "body": " For now, you only need to recognize and use & in a parameter declaration to create a reference parameter. We will study references in more detail, along with memory addresses and pointers, later in the course.  "
 },
 {
   "id": "pass_by_reference_1",
@@ -4228,7 +4282,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.12.1",
   "title": "",
-  "body": "  What are the values of x and y after the following code runs?   void swap_values(int first, int second) { int temp = first; first = second; second = temp; } int main() { int x = 3; int y = 7; swap_values(x, y); }       x is 3 and y is 7.    Correct. The parameters receive copies of x and y , so swapping the parameters does not change the caller's variables.      x is 7 and y is 3.    The values are swapped only inside the function's local parameters. The caller's variables are unchanged.      x is 3 and y is 3.    The function does not modify either variable in main .      x is 7 and y is 7.    The function changes only its local copies, not the variables in main .     "
+  "body": "  What are the values of x and y after the following code runs?   void swap_values(int first, int second); int main() { int x = 3; int y = 7; swap_values(x, y); return 0; } void swap_values(int first, int second) { int temp = first; first = second; second = temp; }       x is 3 and y is 7.    Correct. first and second receive copies of the argument values. Swapping those local parameters does not change x or y .      x is 7 and y is 3.    The values of the local parameters are swapped, but x and y are passed by value and remain unchanged.      x is 3 and y is 3.    The assignments affect only the local parameters inside swap_values .      x is 7 and y is 7.    Neither variable in main is changed by this pass-by-value function.     "
 },
 {
   "id": "pass_by_reference_2",
@@ -4237,7 +4291,16 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "3.12.2",
   "title": "",
-  "body": "  What are the values of x and y after the following code runs?   void swap_values(int& first, int& second) { int temp = first; first = second; second = temp; } int main() { int x = 3; int y = 7; swap_values(x, y); }       x is 3 and y is 7.    The parameters are references, so changes made through them affect x and y .      x is 7 and y is 3.    Correct. The reference parameters refer to the caller's variables, so the swap changes x and y .      x is 3 and y is 3.    The three assignments in swap_values exchange the two values rather than assigning the same value to both.      x is 7 and y is 7.    The temporary variable preserves the original value of first , allowing the two values to be exchanged.     "
+  "body": "  Which function declaration allows add_one to change the caller's int variable?      void add_one(int value);    This passes the value by value, so value receives a copy of the argument.      void add_one(int& value);    Correct. value is a reference parameter, so changes made through it affect the caller's variable.      int add_one(int value);    This function can return an int , but value itself is still passed by value.      void add_one(value);    A parameter in a function declaration must have a type.     "
+},
+{
+  "id": "pass_by_reference_3",
+  "level": "2",
+  "url": "chapter3_pass-by-reference.html#pass_by_reference_3",
+  "type": "Checkpoint",
+  "number": "3.12.3",
+  "title": "",
+  "body": "  What is printed by the following program?   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }       1     value refers to count , whose value starts at 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      Error!    Passing an int variable to an int& reference parameter is legal.     "
 },
 {
   "id": "chapter3_glossary",
@@ -4273,7 +4336,7 @@ var ptx_lunr_docs = [
   "type": "Exercises",
   "number": "3.14",
   "title": "Multiple Choice Exercises",
-  "body": " Multiple Choice Exercises  Answer the following Multiple Choice questions to assess what you have learned in this chapter.    You want to spice up your resume before the career fair, so you decide to update your GPA using the program below. What is the GPA that you will have on display for future employers?  #include <iostream> int main() { double GPA = 3.52; int updated_gpa = int(GPA); std::cout << \"GPA: \" << updated_gpa; }       3.0    Its correct to think that your GPA will be rounded down, but what else happens when you convert from int to double ?      3    Converting to an int always rounds down to the nearest integer, so I do not recommend using type conversions to build your resume… especially if you're close to 4.0 .      4.0    Converting to an int will round your GPA, but not in the direction that you were hoping for… what else happens when you convert from int to double ?      4    Converting to an int will round yor GPA, but not in the direction that you were hoping for.     Error!   No errors here! Type conversions are perfectly legal in C++!       What is the value of x after the program executes?  #include <iostream> int main() { int x = acos(-1); }      3.14159265358979323846   If x were a double, C++ would automatically round the value of pi to 15 decimal places.     3.142   If x were a double, C++ would automatically round the value of pi to 15 decimal places.     3.0   Automatic type conversion will round the value of pi down to the nearest integer, but what else happens when we convert a double to an int ?     3   The value of x should be 3, since automatic type conversion will round the value of pi down to the nearest integer. Are you sure this program compiles?     Error!   Whenever we use math functions, we must include the <cmath> header file.       Multiple Response Select all variables that have a non-zero value after the decimal place. (3.1 has a non-zero value, while 3.0 does not)  #include <iostream> int main() { int a = 1.5; double b = a + 1.5; double c = 2.4; double d = 1\/5; int e = c * c; double f = int(c); }       a    C++ performs automatic type conversion to round 1.5 down to the nearest integer.      b    Since a = 1 , we know that b = 2.5 , which is a non-zero decimal.      c     c is a double and has a non-zero decimal.      d    C++ performs integer division to round 1\/5 down to the nearest integer. The value will be stored as 0 , not 0.2 .      e     c squared may have a non-zero decimal, but automatic type conversion will round it down to the nearest integer before storing the value in e .      f     int(c) rounds c down to the nearest integer before storing the value in f .       Multiple Response Which of the following would work as a function header (first line of a function).       print_hello_world() {    This function header is missing a type.      string palindrome(word) {    The function's parameter is missing a type.      int mult(int a, int b) {    Correct! The function header has a type, empty parentheses, and a squiggly bracket.      char shift_three(char letter)    This function header is missing a squiggly bracket { .      void give_compliment() {    Correct! The function header has a type, empty parentheses, and a squiggly bracket.      string friend(string name) {     friend is a reserved keyword in C++.       What is printed when the following code runs? Are there any errors?  #include <iostream> void give_compliment() { std::cout << \"You are awesome!\"; } void give_insult() { insult = \"You suck!\"; } int main() { give_insult(); }       \"You are awesome!\"    The give_compliment function is not called in main .      \"You suck!\"    The give_insult function doesn't cout anything.     Nothing is printed.    insult data type is not defined.     Error!   Correct! insult data type is not defined.       Rachel and Monica are best friends. They write a function called best_friends so that they announce this fact to the rest of their friends. What is printed when they run the code below? Are there any errors?  #include <iostream> void best_friends(std::string a, std::string b) { std::cout << a << \" is best friends with \" << b; } int main() { std::string a = \"Rachel\"; std::string b = \"Monica\"; best_friends(b, a); }       \"Monica is best friends with Rachel\"    Correct! Although the function definition has a << \" is best friends with \" << b , we call the function with variable b as argument a and variable a as argument b .      \"Rachel is best friends with Monica\"    You seem to be confusing your arguments and parameters!      a is best friends with b    The function couts the values of the variables, not their names!      b is best friends with a    The function couts the values of the variables, not their names!     Error!   There are no errors with this program!       What is printed when the following code runs? Are there any errors?  #include <iostream> void greeting(std::string name) { std::cout << \"hello, \" << name << \"!\"; } void goodbye(std::string name) { greeting(name); std::cout << \"!!\"; } int main() { std::string hannah = \"Hannah\"; std::string anna = \"Anna\"; std::string louise = hannah; hannah = anna; anna = louise; goodbye(anna); }       hello, Hannah!!!    Correct! The string Hannah is assigned to the variable louise , then the value of louise is assigned to the variable anna . When goodbye(anna) runs, anna has the value Hannah .      hello, anna!!!    The function couts the value of the variable anna not the variable name!      hello, Anna!!!    Is \"Anna\" still the value of anna ?      hello, Louise!    The goodbye function adds extra exclamation points.      hello, Louise!!!    We assigned the value of louise to anna . Is \"Louise\" the value of louise ?     Error!   There are no errors with this program!       Multiple Response Which of the following are legal function calls of order_food ?  #include <iostream> void orderFood(std::string food, int quantity) { std::cout << \"I'll have \" << quantity << \" \" << food; } int main() { std::string a = \"wings\"; std::string b = \"sliders\"; int c = 3; double d = 8.64; char e = 'p'; }       order_food(a, c);    Correct! a is a string and c is an int.      order_food(b, d);    Correct! Automatic type conversion will convert d to an int .      order_food(e, c);     e has a character value, and this function takes a string .      orderfood(a, d);    Correct! Automatic type conversion will convert d to an int .      order_food(c, a);    You have to input your arguments in the correct order.       What is printed when the following code runs? Are there any errors?  #include <iostream> void print_word(std::string w) { std::cout << w << w; } int main() { char a = 'a' + 5; print_word (a); }       a     'a' is no longer the value of a , and the function would print it more than once. Hint: think about the type of a .      f     'f' is the value of a, but the function would print it more than once. Hint: think about the type of a .      aa     'a' is no longer the value of a . Hint: think about the type of a .      ff    Hint: think about the type of a .     Error!    print_word takes a string, not a character, as an argument.       How many local variables and parameters does mult have?  void mult(int a, int b, int c) { int d = 7; std::cout << a * b * c * d; }      1 parameter, 3 local variables   Remember, the parameters are declared in the function definition, and the local variables are declared inside of the function.     2 parameters, 4 local variables   You can declare multiple variables at once! Also, remember that local variables are declared inside of the function.     2 parameters, 1 local variables   You can declare multiple variables at once!     3 parameters, 1 local variable    a , b , and c are parameters declared in the function definition. d is a local variable declared inside of the function.     3 parameters, 4 local variables   Remember that local variables are declared inside of the function.       How many calls are made to party during the entire program?  #include <iostream> void party(int day_of_month, std::string address) { std::cout << \"party on \"<<day_of_month<<\" at \" << address << '\\n'; } void weekend(bool available) { if(available==true) { party(21,\"Big house\"); party(22,\"CCTC\"); } else { std::cout << \"sorry I have to study for ENGR101!\" << '\\n'; } } int main() { bool im_free=false; party(25, \"North campus\"); weekend(im_free); im_free=true; party(25, \"Central campus\"); weekend(im_free); return 0; }      6 calls   Take into account that weekend only calls party if a conditional is true!     2 calls    weekend can also call the function party      4 calls   Correct! two calls by main and two calls by weekend      3 calls   One invocation of weekend calls party twice.     "
+  "body": " Multiple Choice Exercises   Answer the following Multiple Choice questions to assess what you have learned in this chapter.      What is printed by the following program?  #include <iostream> int main() { double gpa = 3.52; int updated_gpa = static_cast<int>(gpa); std::cout << \"GPA: \" << updated_gpa << '\\n'; }      GPA: 3.0     updated_gpa has type int , so it stores an integer value.      GPA: 3    Correct. Converting 3.52 to int discards the fractional part, producing 3 .      GPA: 4.0    Converting a double to an int does not round to the nearest integer.      GPA: 4    The fractional part is discarded, so 3.52 becomes 3 , not 4 .      Error!    This explicit conversion is legal in C++.         Which header must be included to use std::acos in the following program?  #include <iostream> int main() { double pi = std::acos(-1.0); std::cout << pi << '\\n'; }      <iostream>     <iostream> provides stream input and output, including std::cout .      <string>     <string> provides std::string , not the mathematical functions.      <cmath>    Correct. std::acos is provided by the <cmath> header.      <cstdlib>    The mathematical function std::acos is declared in <cmath> .      No additional header is needed.    Include the header that declares each standard-library facility you use. std::acos requires <cmath> .          Multiple Response Select all variables whose values have a non-zero fractional part after these statements execute.  int a = 1.5; double b = a + 1.5; double c = 2.4; double d = 1 \/ 5; int e = c * c; double f = static_cast<int>(c);      a     a has type int . The conversion discards the fractional part of 1.5 , so a becomes 1 .      b    Correct. Since a is 1 , a + 1.5 produces 2.5 .      c    Correct. c contains 2.4 , which has a non-zero fractional part.      d    Both operands in 1 \/ 5 are integers, so integer division produces 0 . That value is then stored as the double value 0.0 .      e     c * c produces a floating-point value, but storing it in e converts it to int and discards the fractional part.      f     static_cast<int>(c) produces the integer 2 . It is then stored in f as 2.0 .          Multiple Response Which of the following can be the first line of a function definition?      print_hello_world() {    A function definition needs a return type.      std::string palindrome(word) {    The parameter word needs a type.      int mult(int a, int b) {    Correct. The function has a return type, a name, typed parameters, and an opening brace.      char shift_three(char letter)    This could be a function declaration if followed by a semicolon, but the first line of a definition needs an opening brace.      void give_compliment() {    Correct. This begins the definition of a function with no parameters and return type void .      std::string friend(std::string name) {     friend is a C++ keyword and cannot be used as the function name.         What is printed by the following program?  #include <iostream> int add_values(int first, int second); int main() { int result = add_values(3, 4) * 2; std::cout << result << '\\n'; return 0; } int add_values(int first, int second) { return first + second; }      7     add_values(3, 4) returns 7 , but that returned value is then multiplied by 2 .      8    First evaluate the function call: add_values(3, 4) returns 7 .      14    Correct. The function returns 7 , so the expression becomes 7 * 2 .      34    The arguments are integers. The function adds their values; it does not join them together.      Error!    A call to a value-returning function can be used as part of a larger expression.         What is printed when the following program runs?  #include <iostream> #include <string> void best_friends(std::string first, std::string second); int main() { std::string rachel = \"Rachel\"; std::string monica = \"Monica\"; best_friends(monica, rachel); return 0; } void best_friends(std::string first, std::string second) { std::cout << first << \" is best friends with \" << second << '\\n'; }      Monica is best friends with Rachel    Correct. monica is the first argument, so its value is passed to first . rachel is passed to second .      Rachel is best friends with Monica    Arguments are matched with parameters by position. Look at the order used in the function call.      first is best friends with second    The output uses the values stored in the parameters, not their variable names.      monica is best friends with rachel    The variable names are not printed. Their string values are \"Monica\" and \"Rachel\" .      Error!    The argument types are compatible with the corresponding parameter types, so the call is legal.         What is printed when the following program runs?  #include <iostream> #include <string> void greeting(std::string name); void goodbye(std::string name); int main() { std::string hannah = \"Hannah\"; std::string anna = \"Anna\"; std::string louise = hannah; hannah = anna; anna = louise; goodbye(anna); return 0; } void greeting(std::string name) { std::cout << \"hello, \" << name << \"!\"; } void goodbye(std::string name) { greeting(name); std::cout << \"!!\\n\"; }      hello, Hannah!!!    Correct. louise first receives the value \"Hannah\" , and that value is later assigned to anna .      hello, anna!!!    The function prints the value stored in anna , not the variable's name.      hello, Anna!!!    Trace the assignments before goodbye(anna) . Is \"Anna\" still stored in anna ?      hello, Louise!!!     louise is a variable name. Its stored value is \"Hannah\" .      Error!    The program is valid. Trace the values assigned to the string variables.          Multiple Response Which of the following are legal calls to order_food ?  #include <iostream> #include <string> void order_food(std::string food, int quantity); int main() { std::string a = \"wings\"; std::string b = \"sliders\"; int c = 3; double d = 8.64; char e = 'p'; return 0; } void order_food(std::string food, int quantity) { std::cout << \"I'll have \" << quantity << \" \" << food << '\\n'; }      order_food(a, c);    Correct. a is a std::string and c is an int .      order_food(b, d);    Correct. The double argument can be implicitly converted to the int required by the second parameter. Its fractional part is discarded.      order_food(e, c);    The first parameter requires a std::string . A char is not implicitly converted to a std::string for this call.      order_food(a, d);    Correct. a matches the first parameter, and d can be converted to int for the second parameter.      order_food(c, a);    The arguments are in the wrong order. The first parameter requires a std::string , and the second requires an int .         What is printed when the following program runs?  #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }      1     value refers to the caller's variable count , whose initial value is 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      51    These are integer values. value + 1 performs integer addition.      Error!    Passing an int variable to an int& reference parameter is legal.         How many parameters and local variables are declared in mult ?  int mult(int a, int b, int c) { int d = 7; return a * b * c * d; }      1 parameter, 3 local variables    Parameters appear in the function's parameter list. Count a , b , and c .      2 parameters, 4 local variables    Count the names in the parameter list separately from the variable declared in the function body.      2 parameters, 1 local variable    There are three parameters in the parameter list.      3 parameters, 1 local variable    Correct. a , b , and c are parameters. d is a local variable declared in the function body.      3 parameters, 4 local variables    The parameters have local scope, but this question counts parameters separately from variables declared in the function body. Only d is declared there.         How many times is party called while the following program runs?  #include <iostream> #include <string> void party(std::string location); void weekend(); int main() { party(\"North campus\"); weekend(); party(\"Central campus\"); return 0; } void party(std::string location) { std::cout << \"Party at \" << location << '\\n'; } void weekend() { party(\"Big house\"); party(\"CCTC\"); }      2 calls    There are two direct calls to party in main , but weekend also calls it.      3 calls    Look inside weekend . It calls party twice.      4 calls    Correct. main calls party twice, and its call to weekend causes two more calls to party .      5 calls    Calling weekend is not itself a call to party . Count only executions of party .      6 calls    Trace the calls beginning in main . Only four calls reach party .      "
 },
 {
   "id": "chapter3_multiple-choice-exercises-2-1",
@@ -4291,7 +4354,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.1",
   "title": "",
-  "body": "  You want to spice up your resume before the career fair, so you decide to update your GPA using the program below. What is the GPA that you will have on display for future employers?  #include <iostream> int main() { double GPA = 3.52; int updated_gpa = int(GPA); std::cout << \"GPA: \" << updated_gpa; }       3.0    Its correct to think that your GPA will be rounded down, but what else happens when you convert from int to double ?      3    Converting to an int always rounds down to the nearest integer, so I do not recommend using type conversions to build your resume… especially if you're close to 4.0 .      4.0    Converting to an int will round your GPA, but not in the direction that you were hoping for… what else happens when you convert from int to double ?      4    Converting to an int will round yor GPA, but not in the direction that you were hoping for.     Error!   No errors here! Type conversions are perfectly legal in C++!    "
+  "body": "  What is printed by the following program?  #include <iostream> int main() { double gpa = 3.52; int updated_gpa = static_cast<int>(gpa); std::cout << \"GPA: \" << updated_gpa << '\\n'; }      GPA: 3.0     updated_gpa has type int , so it stores an integer value.      GPA: 3    Correct. Converting 3.52 to int discards the fractional part, producing 3 .      GPA: 4.0    Converting a double to an int does not round to the nearest integer.      GPA: 4    The fractional part is discarded, so 3.52 becomes 3 , not 4 .      Error!    This explicit conversion is legal in C++.     "
 },
 {
   "id": "functions_mc2",
@@ -4300,7 +4363,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.2",
   "title": "",
-  "body": "  What is the value of x after the program executes?  #include <iostream> int main() { int x = acos(-1); }      3.14159265358979323846   If x were a double, C++ would automatically round the value of pi to 15 decimal places.     3.142   If x were a double, C++ would automatically round the value of pi to 15 decimal places.     3.0   Automatic type conversion will round the value of pi down to the nearest integer, but what else happens when we convert a double to an int ?     3   The value of x should be 3, since automatic type conversion will round the value of pi down to the nearest integer. Are you sure this program compiles?     Error!   Whenever we use math functions, we must include the <cmath> header file.    "
+  "body": "  Which header must be included to use std::acos in the following program?  #include <iostream> int main() { double pi = std::acos(-1.0); std::cout << pi << '\\n'; }      <iostream>     <iostream> provides stream input and output, including std::cout .      <string>     <string> provides std::string , not the mathematical functions.      <cmath>    Correct. std::acos is provided by the <cmath> header.      <cstdlib>    The mathematical function std::acos is declared in <cmath> .      No additional header is needed.    Include the header that declares each standard-library facility you use. std::acos requires <cmath> .     "
 },
 {
   "id": "functions_mc3",
@@ -4309,7 +4372,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.3",
   "title": "",
-  "body": "  Multiple Response Select all variables that have a non-zero value after the decimal place. (3.1 has a non-zero value, while 3.0 does not)  #include <iostream> int main() { int a = 1.5; double b = a + 1.5; double c = 2.4; double d = 1\/5; int e = c * c; double f = int(c); }       a    C++ performs automatic type conversion to round 1.5 down to the nearest integer.      b    Since a = 1 , we know that b = 2.5 , which is a non-zero decimal.      c     c is a double and has a non-zero decimal.      d    C++ performs integer division to round 1\/5 down to the nearest integer. The value will be stored as 0 , not 0.2 .      e     c squared may have a non-zero decimal, but automatic type conversion will round it down to the nearest integer before storing the value in e .      f     int(c) rounds c down to the nearest integer before storing the value in f .    "
+  "body": "   Multiple Response Select all variables whose values have a non-zero fractional part after these statements execute.  int a = 1.5; double b = a + 1.5; double c = 2.4; double d = 1 \/ 5; int e = c * c; double f = static_cast<int>(c);      a     a has type int . The conversion discards the fractional part of 1.5 , so a becomes 1 .      b    Correct. Since a is 1 , a + 1.5 produces 2.5 .      c    Correct. c contains 2.4 , which has a non-zero fractional part.      d    Both operands in 1 \/ 5 are integers, so integer division produces 0 . That value is then stored as the double value 0.0 .      e     c * c produces a floating-point value, but storing it in e converts it to int and discards the fractional part.      f     static_cast<int>(c) produces the integer 2 . It is then stored in f as 2.0 .     "
 },
 {
   "id": "functions_mc4",
@@ -4318,7 +4381,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.4",
   "title": "",
-  "body": "  Multiple Response Which of the following would work as a function header (first line of a function).       print_hello_world() {    This function header is missing a type.      string palindrome(word) {    The function's parameter is missing a type.      int mult(int a, int b) {    Correct! The function header has a type, empty parentheses, and a squiggly bracket.      char shift_three(char letter)    This function header is missing a squiggly bracket { .      void give_compliment() {    Correct! The function header has a type, empty parentheses, and a squiggly bracket.      string friend(string name) {     friend is a reserved keyword in C++.    "
+  "body": "   Multiple Response Which of the following can be the first line of a function definition?      print_hello_world() {    A function definition needs a return type.      std::string palindrome(word) {    The parameter word needs a type.      int mult(int a, int b) {    Correct. The function has a return type, a name, typed parameters, and an opening brace.      char shift_three(char letter)    This could be a function declaration if followed by a semicolon, but the first line of a definition needs an opening brace.      void give_compliment() {    Correct. This begins the definition of a function with no parameters and return type void .      std::string friend(std::string name) {     friend is a C++ keyword and cannot be used as the function name.     "
 },
 {
   "id": "functions_mc5",
@@ -4327,7 +4390,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.5",
   "title": "",
-  "body": "  What is printed when the following code runs? Are there any errors?  #include <iostream> void give_compliment() { std::cout << \"You are awesome!\"; } void give_insult() { insult = \"You suck!\"; } int main() { give_insult(); }       \"You are awesome!\"    The give_compliment function is not called in main .      \"You suck!\"    The give_insult function doesn't cout anything.     Nothing is printed.    insult data type is not defined.     Error!   Correct! insult data type is not defined.    "
+  "body": "  What is printed by the following program?  #include <iostream> int add_values(int first, int second); int main() { int result = add_values(3, 4) * 2; std::cout << result << '\\n'; return 0; } int add_values(int first, int second) { return first + second; }      7     add_values(3, 4) returns 7 , but that returned value is then multiplied by 2 .      8    First evaluate the function call: add_values(3, 4) returns 7 .      14    Correct. The function returns 7 , so the expression becomes 7 * 2 .      34    The arguments are integers. The function adds their values; it does not join them together.      Error!    A call to a value-returning function can be used as part of a larger expression.     "
 },
 {
   "id": "functions_mc6",
@@ -4336,7 +4399,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.6",
   "title": "",
-  "body": "  Rachel and Monica are best friends. They write a function called best_friends so that they announce this fact to the rest of their friends. What is printed when they run the code below? Are there any errors?  #include <iostream> void best_friends(std::string a, std::string b) { std::cout << a << \" is best friends with \" << b; } int main() { std::string a = \"Rachel\"; std::string b = \"Monica\"; best_friends(b, a); }       \"Monica is best friends with Rachel\"    Correct! Although the function definition has a << \" is best friends with \" << b , we call the function with variable b as argument a and variable a as argument b .      \"Rachel is best friends with Monica\"    You seem to be confusing your arguments and parameters!      a is best friends with b    The function couts the values of the variables, not their names!      b is best friends with a    The function couts the values of the variables, not their names!     Error!   There are no errors with this program!    "
+  "body": "  What is printed when the following program runs?  #include <iostream> #include <string> void best_friends(std::string first, std::string second); int main() { std::string rachel = \"Rachel\"; std::string monica = \"Monica\"; best_friends(monica, rachel); return 0; } void best_friends(std::string first, std::string second) { std::cout << first << \" is best friends with \" << second << '\\n'; }      Monica is best friends with Rachel    Correct. monica is the first argument, so its value is passed to first . rachel is passed to second .      Rachel is best friends with Monica    Arguments are matched with parameters by position. Look at the order used in the function call.      first is best friends with second    The output uses the values stored in the parameters, not their variable names.      monica is best friends with rachel    The variable names are not printed. Their string values are \"Monica\" and \"Rachel\" .      Error!    The argument types are compatible with the corresponding parameter types, so the call is legal.     "
 },
 {
   "id": "functions_mc7",
@@ -4345,7 +4408,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.7",
   "title": "",
-  "body": "  What is printed when the following code runs? Are there any errors?  #include <iostream> void greeting(std::string name) { std::cout << \"hello, \" << name << \"!\"; } void goodbye(std::string name) { greeting(name); std::cout << \"!!\"; } int main() { std::string hannah = \"Hannah\"; std::string anna = \"Anna\"; std::string louise = hannah; hannah = anna; anna = louise; goodbye(anna); }       hello, Hannah!!!    Correct! The string Hannah is assigned to the variable louise , then the value of louise is assigned to the variable anna . When goodbye(anna) runs, anna has the value Hannah .      hello, anna!!!    The function couts the value of the variable anna not the variable name!      hello, Anna!!!    Is \"Anna\" still the value of anna ?      hello, Louise!    The goodbye function adds extra exclamation points.      hello, Louise!!!    We assigned the value of louise to anna . Is \"Louise\" the value of louise ?     Error!   There are no errors with this program!    "
+  "body": "  What is printed when the following program runs?  #include <iostream> #include <string> void greeting(std::string name); void goodbye(std::string name); int main() { std::string hannah = \"Hannah\"; std::string anna = \"Anna\"; std::string louise = hannah; hannah = anna; anna = louise; goodbye(anna); return 0; } void greeting(std::string name) { std::cout << \"hello, \" << name << \"!\"; } void goodbye(std::string name) { greeting(name); std::cout << \"!!\\n\"; }      hello, Hannah!!!    Correct. louise first receives the value \"Hannah\" , and that value is later assigned to anna .      hello, anna!!!    The function prints the value stored in anna , not the variable's name.      hello, Anna!!!    Trace the assignments before goodbye(anna) . Is \"Anna\" still stored in anna ?      hello, Louise!!!     louise is a variable name. Its stored value is \"Hannah\" .      Error!    The program is valid. Trace the values assigned to the string variables.     "
 },
 {
   "id": "functions_mc8",
@@ -4354,7 +4417,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.8",
   "title": "",
-  "body": "  Multiple Response Which of the following are legal function calls of order_food ?  #include <iostream> void orderFood(std::string food, int quantity) { std::cout << \"I'll have \" << quantity << \" \" << food; } int main() { std::string a = \"wings\"; std::string b = \"sliders\"; int c = 3; double d = 8.64; char e = 'p'; }       order_food(a, c);    Correct! a is a string and c is an int.      order_food(b, d);    Correct! Automatic type conversion will convert d to an int .      order_food(e, c);     e has a character value, and this function takes a string .      orderfood(a, d);    Correct! Automatic type conversion will convert d to an int .      order_food(c, a);    You have to input your arguments in the correct order.    "
+  "body": "   Multiple Response Which of the following are legal calls to order_food ?  #include <iostream> #include <string> void order_food(std::string food, int quantity); int main() { std::string a = \"wings\"; std::string b = \"sliders\"; int c = 3; double d = 8.64; char e = 'p'; return 0; } void order_food(std::string food, int quantity) { std::cout << \"I'll have \" << quantity << \" \" << food << '\\n'; }      order_food(a, c);    Correct. a is a std::string and c is an int .      order_food(b, d);    Correct. The double argument can be implicitly converted to the int required by the second parameter. Its fractional part is discarded.      order_food(e, c);    The first parameter requires a std::string . A char is not implicitly converted to a std::string for this call.      order_food(a, d);    Correct. a matches the first parameter, and d can be converted to int for the second parameter.      order_food(c, a);    The arguments are in the wrong order. The first parameter requires a std::string , and the second requires an int .     "
 },
 {
   "id": "functions_mc9",
@@ -4363,7 +4426,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.9",
   "title": "",
-  "body": "  What is printed when the following code runs? Are there any errors?  #include <iostream> void print_word(std::string w) { std::cout << w << w; } int main() { char a = 'a' + 5; print_word (a); }       a     'a' is no longer the value of a , and the function would print it more than once. Hint: think about the type of a .      f     'f' is the value of a, but the function would print it more than once. Hint: think about the type of a .      aa     'a' is no longer the value of a . Hint: think about the type of a .      ff    Hint: think about the type of a .     Error!    print_word takes a string, not a character, as an argument.    "
+  "body": "  What is printed when the following program runs?  #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }      1     value refers to the caller's variable count , whose initial value is 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      51    These are integer values. value + 1 performs integer addition.      Error!    Passing an int variable to an int& reference parameter is legal.     "
 },
 {
   "id": "functions_mc10",
@@ -4372,7 +4435,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.10",
   "title": "",
-  "body": "  How many local variables and parameters does mult have?  void mult(int a, int b, int c) { int d = 7; std::cout << a * b * c * d; }      1 parameter, 3 local variables   Remember, the parameters are declared in the function definition, and the local variables are declared inside of the function.     2 parameters, 4 local variables   You can declare multiple variables at once! Also, remember that local variables are declared inside of the function.     2 parameters, 1 local variables   You can declare multiple variables at once!     3 parameters, 1 local variable    a , b , and c are parameters declared in the function definition. d is a local variable declared inside of the function.     3 parameters, 4 local variables   Remember that local variables are declared inside of the function.    "
+  "body": "  How many parameters and local variables are declared in mult ?  int mult(int a, int b, int c) { int d = 7; return a * b * c * d; }      1 parameter, 3 local variables    Parameters appear in the function's parameter list. Count a , b , and c .      2 parameters, 4 local variables    Count the names in the parameter list separately from the variable declared in the function body.      2 parameters, 1 local variable    There are three parameters in the parameter list.      3 parameters, 1 local variable    Correct. a , b , and c are parameters. d is a local variable declared in the function body.      3 parameters, 4 local variables    The parameters have local scope, but this question counts parameters separately from variables declared in the function body. Only d is declared there.     "
 },
 {
   "id": "functions_mc11",
@@ -4381,7 +4444,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "3.14.11",
   "title": "",
-  "body": "  How many calls are made to party during the entire program?  #include <iostream> void party(int day_of_month, std::string address) { std::cout << \"party on \"<<day_of_month<<\" at \" << address << '\\n'; } void weekend(bool available) { if(available==true) { party(21,\"Big house\"); party(22,\"CCTC\"); } else { std::cout << \"sorry I have to study for ENGR101!\" << '\\n'; } } int main() { bool im_free=false; party(25, \"North campus\"); weekend(im_free); im_free=true; party(25, \"Central campus\"); weekend(im_free); return 0; }      6 calls   Take into account that weekend only calls party if a conditional is true!     2 calls    weekend can also call the function party      4 calls   Correct! two calls by main and two calls by weekend      3 calls   One invocation of weekend calls party twice.    "
+  "body": "  How many times is party called while the following program runs?  #include <iostream> #include <string> void party(std::string location); void weekend(); int main() { party(\"North campus\"); weekend(); party(\"Central campus\"); return 0; } void party(std::string location) { std::cout << \"Party at \" << location << '\\n'; } void weekend() { party(\"Big house\"); party(\"CCTC\"); }      2 calls    There are two direct calls to party in main , but weekend also calls it.      3 calls    Look inside weekend . It calls party twice.      4 calls    Correct. main calls party twice, and its call to weekend causes two more calls to party .      5 calls    Calling weekend is not itself a call to party . Count only executions of party .      6 calls    Trace the calls beginning in main . Only four calls reach party .     "
 },
 {
   "id": "chapter3_mixed-up-code-exercises",

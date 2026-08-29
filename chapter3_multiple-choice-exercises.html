@@ -535,46 +535,48 @@ eBookConfig.enable_chatcodes =  false;
 <article class="exercise exercise-like" id="functions_mc1"><h2 class="heading"><span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="functions_mc1-1-1">You want to spice up your resume before the career fair, so you decide to update your GPA using the program below. What is the GPA that you will have on display for future employers?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_mc1-1-1">What is printed by the following program?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
 int main() {
-  double GPA = 3.52;
-  int updated_gpa = int(GPA);
-  std::cout &lt;&lt; "GPA: " &lt;&lt; updated_gpa;
+    double gpa = 3.52;
+    int updated_gpa = static_cast&lt;int&gt;(gpa);
+
+    std::cout &lt;&lt; "GPA: " &lt;&lt; updated_gpa &lt;&lt; '\n';
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-functions_mc1" data-multipleanswers="false">
 <li data-component="answer" id="rs-functions_mc1_opt_a">
-<div class="para" id="functions_mc1-2-1-1-1"><code class="code-inline tex2jax_ignore">3.0</code></div>
+<div class="para" id="functions_mc1-2-1-1-1"><code class="code-inline tex2jax_ignore">GPA: 3.0</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc1_opt_a">
-<div class="para" id="functions_mc1-2-1-2-1">Its correct to think that your GPA will be rounded down, but what else happens when you convert from <code class="code-inline tex2jax_ignore">int</code> to <code class="code-inline tex2jax_ignore">double</code>?</div>
+<div class="para" id="functions_mc1-2-1-2-1">
+<code class="code-inline tex2jax_ignore">updated_gpa</code> has type <code class="code-inline tex2jax_ignore">int</code>, so it stores an integer value.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc1_opt_b" data-correct="">
-<div class="para" id="functions_mc1-2-2-1-1"><code class="code-inline tex2jax_ignore">3</code></div>
+<div class="para" id="functions_mc1-2-2-1-1"><code class="code-inline tex2jax_ignore">GPA: 3</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc1_opt_b">
-<div class="para" id="functions_mc1-2-2-2-1">Converting to an <code class="code-inline tex2jax_ignore">int</code> always rounds down to the nearest integer, so I do not recommend using type conversions to build your resume… especially if you’re close to <code class="code-inline tex2jax_ignore">4.0</code>.</div>
+<div class="para" id="functions_mc1-2-2-2-1">Correct. Converting <code class="code-inline tex2jax_ignore">3.52</code> to <code class="code-inline tex2jax_ignore">int</code> discards the fractional part, producing <code class="code-inline tex2jax_ignore">3</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc1_opt_c">
-<div class="para" id="functions_mc1-2-3-1-1"><code class="code-inline tex2jax_ignore">4.0</code></div>
+<div class="para" id="functions_mc1-2-3-1-1"><code class="code-inline tex2jax_ignore">GPA: 4.0</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc1_opt_c">
-<div class="para" id="functions_mc1-2-3-2-1">Converting to an int <em class="emphasis">will</em> round your GPA, but not in the direction that you were hoping for… what else happens when you convert from <code class="code-inline tex2jax_ignore">int</code> to <code class="code-inline tex2jax_ignore">double</code>?</div>
+<div class="para" id="functions_mc1-2-3-2-1">Converting a <code class="code-inline tex2jax_ignore">double</code> to an <code class="code-inline tex2jax_ignore">int</code> does not round to the nearest integer.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc1_opt_d">
-<div class="para" id="functions_mc1-2-4-1-1"><code class="code-inline tex2jax_ignore">4</code></div>
+<div class="para" id="functions_mc1-2-4-1-1"><code class="code-inline tex2jax_ignore">GPA: 4</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc1_opt_d">
-<div class="para" id="functions_mc1-2-4-2-1">Converting to an int <em class="emphasis">will</em> round yor GPA, but not in the direction that you were hoping for.</div>
+<div class="para" id="functions_mc1-2-4-2-1">The fractional part is discarded, so <code class="code-inline tex2jax_ignore">3.52</code> becomes <code class="code-inline tex2jax_ignore">3</code>, not <code class="code-inline tex2jax_ignore">4</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc1_opt_e">
 <div class="para" id="functions_mc1-2-5-1-1">Error!</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc1_opt_e">
-<div class="para" id="functions_mc1-2-5-2-1">No errors here! Type conversions are perfectly legal in C++!</div>
+<div class="para" id="functions_mc1-2-5-2-1">This explicit conversion is legal in C++.</div>
 </li>
 </ul>
 </div></div>
@@ -583,44 +585,48 @@ int main() {
 <article class="exercise exercise-like" id="functions_mc2"><h2 class="heading"><span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="functions_mc2-1-1">What is the value of x after the program executes?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_mc2-1-1">Which header must be included to use <code class="code-inline tex2jax_ignore">std::acos</code> in the following program?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
 int main() {
-  int x = acos(-1);
+    double pi = std::acos(-1.0);
+
+    std::cout &lt;&lt; pi &lt;&lt; '\n';
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-functions_mc2" data-multipleanswers="false">
 <li data-component="answer" id="rs-functions_mc2_opt_a">
-<div class="para" id="functions_mc2-2-1-1-1">3.14159265358979323846</div>
+<div class="para" id="functions_mc2-2-1-1-1"><code class="code-inline tex2jax_ignore">&lt;iostream&gt;</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc2_opt_a">
-<div class="para" id="functions_mc2-2-1-2-1">If <code class="code-inline tex2jax_ignore">x</code> were a double, C++ would automatically round the value of pi to <dfn class="terminology">15</dfn> decimal places.</div>
+<div class="para" id="functions_mc2-2-1-2-1">
+<code class="code-inline tex2jax_ignore">&lt;iostream&gt;</code> provides stream input and output, including <code class="code-inline tex2jax_ignore">std::cout</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc2_opt_b">
-<div class="para" id="functions_mc2-2-2-1-1">3.142</div>
+<div class="para" id="functions_mc2-2-2-1-1"><code class="code-inline tex2jax_ignore">&lt;string&gt;</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc2_opt_b">
-<div class="para" id="functions_mc2-2-2-2-1">If <code class="code-inline tex2jax_ignore">x</code> were a double, C++ would automatically round the value of pi to <dfn class="terminology">15</dfn> decimal places.</div>
+<div class="para" id="functions_mc2-2-2-2-1">
+<code class="code-inline tex2jax_ignore">&lt;string&gt;</code> provides <code class="code-inline tex2jax_ignore">std::string</code>, not the mathematical functions.</div>
 </li>
-<li data-component="answer" id="rs-functions_mc2_opt_c">
-<div class="para" id="functions_mc2-2-3-1-1">3.0</div>
+<li data-component="answer" id="rs-functions_mc2_opt_c" data-correct="">
+<div class="para" id="functions_mc2-2-3-1-1"><code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc2_opt_c">
-<div class="para" id="functions_mc2-2-3-2-1">Automatic type conversion will round the value of pi down to the nearest integer, but what else happens when we convert a <code class="code-inline tex2jax_ignore">double</code> to an <code class="code-inline tex2jax_ignore">int</code>?</div>
+<div class="para" id="functions_mc2-2-3-2-1">Correct. <code class="code-inline tex2jax_ignore">std::acos</code> is provided by the <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code> header.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc2_opt_d">
-<div class="para" id="functions_mc2-2-4-1-1">3</div>
+<div class="para" id="functions_mc2-2-4-1-1"><code class="code-inline tex2jax_ignore">&lt;cstdlib&gt;</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc2_opt_d">
-<div class="para" id="functions_mc2-2-4-2-1">The value of x <em class="emphasis">should</em> be 3, since automatic type conversion will round the value of pi down to the nearest integer. Are you sure this program compiles?</div>
+<div class="para" id="functions_mc2-2-4-2-1">The mathematical function <code class="code-inline tex2jax_ignore">std::acos</code> is declared in <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code>.</div>
 </li>
-<li data-component="answer" id="rs-functions_mc2_opt_e" data-correct="">
-<div class="para" id="functions_mc2-2-5-1-1">Error!</div>
+<li data-component="answer" id="rs-functions_mc2_opt_e">
+<div class="para" id="functions_mc2-2-5-1-1">No additional header is needed.</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc2_opt_e">
-<div class="para" id="functions_mc2-2-5-2-1">Whenever we use math functions, we must include the <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code> header file.</div>
+<div class="para" id="functions_mc2-2-5-2-1">Include the header that declares each standard-library facility you use. <code class="code-inline tex2jax_ignore">std::acos</code> requires <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code>.</div>
 </li>
 </ul>
 </div></div>
@@ -630,17 +636,13 @@ int main() {
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
 <div class="para" id="functions_mc3-1-1">
-<dfn class="terminology">Multiple Response</dfn> Select all variables that have a <em class="emphasis">non-zero</em> value after the decimal place. (3.1 has a <em class="emphasis">non-zero</em> value, while 3.0 does not)<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
-
-int main() {
-  int a = 1.5;
-  double b = a + 1.5;
-  double c = 2.4;
-  double d = 1/5;
-  int e = c * c;
-  double f = int(c);
-}
+<dfn class="terminology">Multiple Response</dfn> Select all variables whose values have a non-zero fractional part after these statements execute.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int a = 1.5;
+double b = a + 1.5;
+double c = 2.4;
+double d = 1 / 5;
+int e = c * c;
+double f = static_cast&lt;int&gt;(c);
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-functions_mc3" data-multipleanswers="true">
@@ -648,40 +650,40 @@ int main() {
 <div class="para" id="functions_mc3-2-1-1-1"><code class="code-inline tex2jax_ignore">a</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc3_opt_a">
-<div class="para" id="functions_mc3-2-1-2-1">C++ performs automatic type conversion to round 1.5 down to the nearest integer.</div>
+<div class="para" id="functions_mc3-2-1-2-1">
+<code class="code-inline tex2jax_ignore">a</code> has type <code class="code-inline tex2jax_ignore">int</code>. The conversion discards the fractional part of <code class="code-inline tex2jax_ignore">1.5</code>, so <code class="code-inline tex2jax_ignore">a</code> becomes <code class="code-inline tex2jax_ignore">1</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc3_opt_b" data-correct="">
 <div class="para" id="functions_mc3-2-2-1-1"><code class="code-inline tex2jax_ignore">b</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc3_opt_b">
-<div class="para" id="functions_mc3-2-2-2-1">Since <code class="code-inline tex2jax_ignore">a = 1</code>, we know that <code class="code-inline tex2jax_ignore">b = 2.5</code>, which is a non-zero decimal.</div>
+<div class="para" id="functions_mc3-2-2-2-1">Correct. Since <code class="code-inline tex2jax_ignore">a</code> is <code class="code-inline tex2jax_ignore">1</code>, <code class="code-inline tex2jax_ignore">a + 1.5</code> produces <code class="code-inline tex2jax_ignore">2.5</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc3_opt_c" data-correct="">
 <div class="para" id="functions_mc3-2-3-1-1"><code class="code-inline tex2jax_ignore">c</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc3_opt_c">
-<div class="para" id="functions_mc3-2-3-2-1">
-<code class="code-inline tex2jax_ignore">c</code> is a <code class="code-inline tex2jax_ignore">double</code> and has a non-zero decimal.</div>
+<div class="para" id="functions_mc3-2-3-2-1">Correct. <code class="code-inline tex2jax_ignore">c</code> contains <code class="code-inline tex2jax_ignore">2.4</code>, which has a non-zero fractional part.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc3_opt_d">
 <div class="para" id="functions_mc3-2-4-1-1"><code class="code-inline tex2jax_ignore">d</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc3_opt_d">
-<div class="para" id="functions_mc3-2-4-2-1">C++ performs integer division to round <code class="code-inline tex2jax_ignore">1/5</code> down to the nearest integer. The value will be stored as <code class="code-inline tex2jax_ignore">0</code>, not <code class="code-inline tex2jax_ignore">0.2</code>.</div>
+<div class="para" id="functions_mc3-2-4-2-1">Both operands in <code class="code-inline tex2jax_ignore">1 / 5</code> are integers, so integer division produces <code class="code-inline tex2jax_ignore">0</code>. That value is then stored as the <code class="code-inline tex2jax_ignore">double</code> value <code class="code-inline tex2jax_ignore">0.0</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc3_opt_e">
 <div class="para" id="functions_mc3-2-5-1-1"><code class="code-inline tex2jax_ignore">e</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc3_opt_e">
 <div class="para" id="functions_mc3-2-5-2-1">
-<code class="code-inline tex2jax_ignore">c</code> squared may have a non-zero decimal, but automatic type conversion will round it down to the nearest integer before storing the value in <code class="code-inline tex2jax_ignore">e</code>.</div>
+<code class="code-inline tex2jax_ignore">c * c</code> produces a floating-point value, but storing it in <code class="code-inline tex2jax_ignore">e</code> converts it to <code class="code-inline tex2jax_ignore">int</code> and discards the fractional part.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc3_opt_f">
 <div class="para" id="functions_mc3-2-6-1-1"><code class="code-inline tex2jax_ignore">f</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc3_opt_f">
 <div class="para" id="functions_mc3-2-6-2-1">
-<code class="code-inline tex2jax_ignore">int(c)</code> rounds <code class="code-inline tex2jax_ignore">c</code> down to the nearest integer before storing the value in <code class="code-inline tex2jax_ignore">f</code>.</div>
+<code class="code-inline tex2jax_ignore">static_cast&lt;int&gt;(c)</code> produces the integer <code class="code-inline tex2jax_ignore">2</code>. It is then stored in <code class="code-inline tex2jax_ignore">f</code> as <code class="code-inline tex2jax_ignore">2.0</code>.</div>
 </li>
 </ul>
 </div></div>
@@ -691,7 +693,7 @@ int main() {
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
 <div class="para" id="functions_mc4-1-1">
-<dfn class="terminology">Multiple Response</dfn> Which of the following would work as a function header (first line of a function).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Multiple Response</dfn> Which of the following can be the first line of a function definition?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-functions_mc4" data-multipleanswers="true">
@@ -699,38 +701,38 @@ int main() {
 <div class="para" id="functions_mc4-2-1-1-1"><code class="code-inline tex2jax_ignore">print_hello_world() {</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc4_opt_a">
-<div class="para" id="functions_mc4-2-1-2-1">This function header is missing a type.</div>
+<div class="para" id="functions_mc4-2-1-2-1">A function definition needs a return type.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc4_opt_b">
-<div class="para" id="functions_mc4-2-2-1-1"><code class="code-inline tex2jax_ignore">string palindrome(word) {</code></div>
+<div class="para" id="functions_mc4-2-2-1-1"><code class="code-inline tex2jax_ignore">std::string palindrome(word) {</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc4_opt_b">
-<div class="para" id="functions_mc4-2-2-2-1">The function’s parameter is missing a type.</div>
+<div class="para" id="functions_mc4-2-2-2-1">The parameter <code class="code-inline tex2jax_ignore">word</code> needs a type.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc4_opt_c" data-correct="">
 <div class="para" id="functions_mc4-2-3-1-1"><code class="code-inline tex2jax_ignore">int mult(int a, int b) {</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc4_opt_c">
-<div class="para" id="functions_mc4-2-3-2-1">Correct! The function header has a type, empty parentheses, and a squiggly bracket.</div>
+<div class="para" id="functions_mc4-2-3-2-1">Correct. The function has a return type, a name, typed parameters, and an opening brace.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc4_opt_d">
 <div class="para" id="functions_mc4-2-4-1-1"><code class="code-inline tex2jax_ignore">char shift_three(char letter)</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc4_opt_d">
-<div class="para" id="functions_mc4-2-4-2-1">This function header is missing a squiggly bracket <code class="code-inline tex2jax_ignore">{</code>.</div>
+<div class="para" id="functions_mc4-2-4-2-1">This could be a function declaration if followed by a semicolon, but the first line of a definition needs an opening brace.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc4_opt_e" data-correct="">
 <div class="para" id="functions_mc4-2-5-1-1"><code class="code-inline tex2jax_ignore">void give_compliment() {</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc4_opt_e">
-<div class="para" id="functions_mc4-2-5-2-1">Correct! The function header has a type, empty parentheses, and a squiggly bracket.</div>
+<div class="para" id="functions_mc4-2-5-2-1">Correct. This begins the definition of a function with no parameters and return type <code class="code-inline tex2jax_ignore">void</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc4_opt_f">
-<div class="para" id="functions_mc4-2-6-1-1"><code class="code-inline tex2jax_ignore">string friend(string name) {</code></div>
+<div class="para" id="functions_mc4-2-6-1-1"><code class="code-inline tex2jax_ignore">std::string friend(std::string name) {</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc4_opt_f">
 <div class="para" id="functions_mc4-2-6-2-1">
-<code class="code-inline tex2jax_ignore">friend</code> is a reserved keyword in C++.</div>
+<code class="code-inline tex2jax_ignore">friend</code> is a C++ keyword and cannot be used as the function name.</div>
 </li>
 </ul>
 </div></div>
@@ -739,47 +741,55 @@ int main() {
 <article class="exercise exercise-like" id="functions_mc5"><h2 class="heading"><span class="codenumber">5<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="functions_mc5-1-1">What is printed when the following code runs? Are there any errors?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_mc5-1-1">What is printed by the following program?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
-void give_compliment() {
-    std::cout &lt;&lt; "You are awesome!";
-}
-
-void give_insult() {
-    insult = "You suck!";
-}
+int add_values(int first, int second);
 
 int main() {
-    give_insult();
+    int result = add_values(3, 4) * 2;
+
+    std::cout &lt;&lt; result &lt;&lt; '\n';
+
+    return 0;
+}
+
+int add_values(int first, int second) {
+    return first + second;
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-functions_mc5" data-multipleanswers="false">
 <li data-component="answer" id="rs-functions_mc5_opt_a">
-<div class="para" id="functions_mc5-2-1-1-1"><code class="code-inline tex2jax_ignore">"You are awesome!"</code></div>
+<div class="para" id="functions_mc5-2-1-1-1"><code class="code-inline tex2jax_ignore">7</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc5_opt_a">
-<div class="para" id="functions_mc5-2-1-2-1">The <code class="code-inline tex2jax_ignore">give_compliment</code> function is not called in <code class="code-inline tex2jax_ignore">main</code>.</div>
+<div class="para" id="functions_mc5-2-1-2-1">
+<code class="code-inline tex2jax_ignore">add_values(3, 4)</code> returns <code class="code-inline tex2jax_ignore">7</code>, but that returned value is then multiplied by <code class="code-inline tex2jax_ignore">2</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc5_opt_b">
-<div class="para" id="functions_mc5-2-2-1-1"><code class="code-inline tex2jax_ignore">"You suck!"</code></div>
+<div class="para" id="functions_mc5-2-2-1-1"><code class="code-inline tex2jax_ignore">8</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc5_opt_b">
-<div class="para" id="functions_mc5-2-2-2-1">The <code class="code-inline tex2jax_ignore">give_insult</code> function doesn’t <code class="code-inline tex2jax_ignore">cout</code> anything.</div>
+<div class="para" id="functions_mc5-2-2-2-1">First evaluate the function call: <code class="code-inline tex2jax_ignore">add_values(3, 4)</code> returns <code class="code-inline tex2jax_ignore">7</code>.</div>
 </li>
-<li data-component="answer" id="rs-functions_mc5_opt_c">
-<div class="para" id="functions_mc5-2-3-1-1">Nothing is printed.</div>
+<li data-component="answer" id="rs-functions_mc5_opt_c" data-correct="">
+<div class="para" id="functions_mc5-2-3-1-1"><code class="code-inline tex2jax_ignore">14</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc5_opt_c">
-<div class="para" id="functions_mc5-2-3-2-1">
-<code class="code-inline tex2jax_ignore">insult</code> data type is not defined.</div>
+<div class="para" id="functions_mc5-2-3-2-1">Correct. The function returns <code class="code-inline tex2jax_ignore">7</code>, so the expression becomes <code class="code-inline tex2jax_ignore">7 * 2</code>.</div>
 </li>
-<li data-component="answer" id="rs-functions_mc5_opt_d" data-correct="">
-<div class="para" id="functions_mc5-2-4-1-1">Error!</div>
+<li data-component="answer" id="rs-functions_mc5_opt_d">
+<div class="para" id="functions_mc5-2-4-1-1"><code class="code-inline tex2jax_ignore">34</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc5_opt_d">
-<div class="para" id="functions_mc5-2-4-2-1">Correct! <code class="code-inline tex2jax_ignore">insult</code> data type is not defined.</div>
+<div class="para" id="functions_mc5-2-4-2-1">The arguments are integers. The function adds their values; it does not join them together.</div>
+</li>
+<li data-component="answer" id="rs-functions_mc5_opt_e">
+<div class="para" id="functions_mc5-2-5-1-1">Error!</div>
+</li>
+<li data-component="feedback" id="rs-functions_mc5_opt_e">
+<div class="para" id="functions_mc5-2-5-2-1">A call to a value-returning function can be used as part of a larger expression.</div>
 </li>
 </ul>
 </div></div>
@@ -788,50 +798,59 @@ int main() {
 <article class="exercise exercise-like" id="functions_mc6"><h2 class="heading"><span class="codenumber">6<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="functions_mc6-1-1">Rachel and Monica are best friends. They write a function called <code class="code-inline tex2jax_ignore">best_friends</code> so that they announce this fact to the rest of their friends. What is printed when they run the code below? Are there any errors?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc6-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_mc6-1-1">What is printed when the following program runs?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc6-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
 
-void best_friends(std::string a, std::string b) {
-    std::cout &lt;&lt; a &lt;&lt; " is best friends with " &lt;&lt; b;
-}
+void best_friends(std::string first, std::string second);
 
 int main() {
-    std::string a = "Rachel";
-    std::string b = "Monica";
-    best_friends(b, a);
+    std::string rachel = "Rachel";
+    std::string monica = "Monica";
+
+    best_friends(monica, rachel);
+
+    return 0;
+}
+
+void best_friends(std::string first, std::string second) {
+    std::cout &lt;&lt; first
+              &lt;&lt; " is best friends with "
+              &lt;&lt; second
+              &lt;&lt; '\n';
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-functions_mc6" data-multipleanswers="false">
 <li data-component="answer" id="rs-functions_mc6_opt_a" data-correct="">
-<div class="para" id="functions_mc6-2-1-1-1"><code class="code-inline tex2jax_ignore">"Monica is best friends with Rachel"</code></div>
+<div class="para" id="functions_mc6-2-1-1-1"><code class="code-inline tex2jax_ignore">Monica is best friends with Rachel</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc6_opt_a">
-<div class="para" id="functions_mc6-2-1-2-1">Correct! Although the function definition has <code class="code-inline tex2jax_ignore">a &lt;&lt; " is best friends with " &lt;&lt; b</code>, we call the function with variable <code class="code-inline tex2jax_ignore">b</code> as argument <code class="code-inline tex2jax_ignore">a</code> and variable <code class="code-inline tex2jax_ignore">a</code> as argument <code class="code-inline tex2jax_ignore">b</code>.</div>
+<div class="para" id="functions_mc6-2-1-2-1">Correct. <code class="code-inline tex2jax_ignore">monica</code> is the first argument, so its value is passed to <code class="code-inline tex2jax_ignore">first</code>. <code class="code-inline tex2jax_ignore">rachel</code> is passed to <code class="code-inline tex2jax_ignore">second</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc6_opt_b">
-<div class="para" id="functions_mc6-2-2-1-1"><code class="code-inline tex2jax_ignore">"Rachel is best friends with Monica"</code></div>
+<div class="para" id="functions_mc6-2-2-1-1"><code class="code-inline tex2jax_ignore">Rachel is best friends with Monica</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc6_opt_b">
-<div class="para" id="functions_mc6-2-2-2-1">You seem to be confusing your arguments and parameters!</div>
+<div class="para" id="functions_mc6-2-2-2-1">Arguments are matched with parameters by position. Look at the order used in the function call.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc6_opt_c">
-<div class="para" id="functions_mc6-2-3-1-1"><code class="code-inline tex2jax_ignore">a is best friends with b</code></div>
+<div class="para" id="functions_mc6-2-3-1-1"><code class="code-inline tex2jax_ignore">first is best friends with second</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc6_opt_c">
-<div class="para" id="functions_mc6-2-3-2-1">The function <code class="code-inline tex2jax_ignore">couts</code> the <em class="emphasis">values</em> of the variables, not their names!</div>
+<div class="para" id="functions_mc6-2-3-2-1">The output uses the values stored in the parameters, not their variable names.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc6_opt_d">
-<div class="para" id="functions_mc6-2-4-1-1"><code class="code-inline tex2jax_ignore">b is best friends with a</code></div>
+<div class="para" id="functions_mc6-2-4-1-1"><code class="code-inline tex2jax_ignore">monica is best friends with rachel</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc6_opt_d">
-<div class="para" id="functions_mc6-2-4-2-1">The function <code class="code-inline tex2jax_ignore">couts</code> the <em class="emphasis">values</em> of the variables, not their names!</div>
+<div class="para" id="functions_mc6-2-4-2-1">The variable names are not printed. Their string values are <code class="code-inline tex2jax_ignore">"Monica"</code> and <code class="code-inline tex2jax_ignore">"Rachel"</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc6_opt_e">
 <div class="para" id="functions_mc6-2-5-1-1">Error!</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc6_opt_e">
-<div class="para" id="functions_mc6-2-5-2-1">There are no errors with this program!</div>
+<div class="para" id="functions_mc6-2-5-2-1">The argument types are compatible with the corresponding parameter types, so the call is legal.</div>
 </li>
 </ul>
 </div></div>
@@ -840,8 +859,25 @@ int main() {
 <article class="exercise exercise-like" id="functions_mc7"><h2 class="heading"><span class="codenumber">7<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="functions_mc7-1-1">What is printed when the following code runs? Are there any errors?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_mc7-1-1">What is printed when the following program runs?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+void greeting(std::string name);
+void goodbye(std::string name);
+
+int main() {
+    std::string hannah = "Hannah";
+    std::string anna = "Anna";
+    std::string louise = hannah;
+
+    hannah = anna;
+    anna = louise;
+
+    goodbye(anna);
+
+    return 0;
+}
 
 void greeting(std::string name) {
     std::cout &lt;&lt; "hello, " &lt;&lt; name &lt;&lt; "!";
@@ -849,16 +885,7 @@ void greeting(std::string name) {
 
 void goodbye(std::string name) {
     greeting(name);
-    std::cout &lt;&lt; "!!";
-}
-
-int main() {
-    std::string hannah = "Hannah";
-    std::string anna = "Anna";
-    std::string louise = hannah;
-    hannah = anna;
-    anna = louise;
-    goodbye(anna);
+    std::cout &lt;&lt; "!!\n";
 }
 </code></pre></div>
 </div>
@@ -867,37 +894,32 @@ int main() {
 <div class="para" id="functions_mc7-2-1-1-1"><code class="code-inline tex2jax_ignore">hello, Hannah!!!</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc7_opt_a">
-<div class="para" id="functions_mc7-2-1-2-1">Correct! The string “Hannah” is assigned to the variable <code class="code-inline tex2jax_ignore">louise</code>, then the value of <code class="code-inline tex2jax_ignore">louise</code> is assigned to the variable <code class="code-inline tex2jax_ignore">anna</code>. When <code class="code-inline tex2jax_ignore">goodbye(anna)</code> runs, <code class="code-inline tex2jax_ignore">anna</code> has the value “Hannah”.</div>
+<div class="para" id="functions_mc7-2-1-2-1">Correct. <code class="code-inline tex2jax_ignore">louise</code> first receives the value <code class="code-inline tex2jax_ignore">"Hannah"</code>, and that value is later assigned to <code class="code-inline tex2jax_ignore">anna</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc7_opt_b">
 <div class="para" id="functions_mc7-2-2-1-1"><code class="code-inline tex2jax_ignore">hello, anna!!!</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc7_opt_b">
-<div class="para" id="functions_mc7-2-2-2-1">The function <code class="code-inline tex2jax_ignore">couts</code> the <em class="emphasis">value</em> of the variable <code class="code-inline tex2jax_ignore">anna</code> not the variable name!</div>
+<div class="para" id="functions_mc7-2-2-2-1">The function prints the value stored in <code class="code-inline tex2jax_ignore">anna</code>, not the variable’s name.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc7_opt_c">
 <div class="para" id="functions_mc7-2-3-1-1"><code class="code-inline tex2jax_ignore">hello, Anna!!!</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc7_opt_c">
-<div class="para" id="functions_mc7-2-3-2-1">Is <code class="code-inline tex2jax_ignore">"Anna"</code> still the value of <code class="code-inline tex2jax_ignore">anna</code>?</div>
+<div class="para" id="functions_mc7-2-3-2-1">Trace the assignments before <code class="code-inline tex2jax_ignore">goodbye(anna)</code>. Is <code class="code-inline tex2jax_ignore">"Anna"</code> still stored in <code class="code-inline tex2jax_ignore">anna</code>?</div>
 </li>
 <li data-component="answer" id="rs-functions_mc7_opt_d">
-<div class="para" id="functions_mc7-2-4-1-1"><code class="code-inline tex2jax_ignore">hello, Louise!</code></div>
+<div class="para" id="functions_mc7-2-4-1-1"><code class="code-inline tex2jax_ignore">hello, Louise!!!</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc7_opt_d">
-<div class="para" id="functions_mc7-2-4-2-1">The <code class="code-inline tex2jax_ignore">goodbye</code> function adds extra exclamation points.</div>
+<div class="para" id="functions_mc7-2-4-2-1">
+<code class="code-inline tex2jax_ignore">louise</code> is a variable name. Its stored value is <code class="code-inline tex2jax_ignore">"Hannah"</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc7_opt_e">
-<div class="para" id="functions_mc7-2-5-1-1"><code class="code-inline tex2jax_ignore">hello, Louise!!!</code></div>
+<div class="para" id="functions_mc7-2-5-1-1">Error!</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc7_opt_e">
-<div class="para" id="functions_mc7-2-5-2-1">We assigned the value of <code class="code-inline tex2jax_ignore">louise</code> to <code class="code-inline tex2jax_ignore">anna</code>. Is <code class="code-inline tex2jax_ignore">"Louise"</code> the value of <code class="code-inline tex2jax_ignore">louise</code>?</div>
-</li>
-<li data-component="answer" id="rs-functions_mc7_opt_f">
-<div class="para" id="functions_mc7-2-6-1-1">Error!</div>
-</li>
-<li data-component="feedback" id="rs-functions_mc7_opt_f">
-<div class="para" id="functions_mc7-2-6-2-1">There are no errors with this program!</div>
+<div class="para" id="functions_mc7-2-5-2-1">The program is valid. Trace the values assigned to the string variables.</div>
 </li>
 </ul>
 </div></div>
@@ -907,12 +929,11 @@ int main() {
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
 <div class="para" id="functions_mc8-1-1">
-<dfn class="terminology">Multiple Response</dfn> Which of the following are legal function calls of <code class="code-inline tex2jax_ignore">order_food</code>?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc8-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<dfn class="terminology">Multiple Response</dfn> Which of the following are legal calls to <code class="code-inline tex2jax_ignore">order_food</code>?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc8-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
 
-void orderFood(std::string food, int quantity) {
-    std::cout &lt;&lt; "I'll have " &lt;&lt; quantity &lt;&lt; " " &lt;&lt; food;
-}
+void order_food(std::string food, int quantity);
 
 int main() {
     std::string a = "wings";
@@ -920,6 +941,16 @@ int main() {
     int c = 3;
     double d = 8.64;
     char e = 'p';
+
+    return 0;
+}
+
+void order_food(std::string food, int quantity) {
+    std::cout &lt;&lt; "I'll have "
+              &lt;&lt; quantity
+              &lt;&lt; " "
+              &lt;&lt; food
+              &lt;&lt; '\n';
 }
 </code></pre></div>
 </div>
@@ -928,32 +959,31 @@ int main() {
 <div class="para" id="functions_mc8-2-1-1-1"><code class="code-inline tex2jax_ignore">order_food(a, c);</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc8_opt_a">
-<div class="para" id="functions_mc8-2-1-2-1">Correct! <code class="code-inline tex2jax_ignore">a</code> is a string and <code class="code-inline tex2jax_ignore">c</code> is an int.</div>
+<div class="para" id="functions_mc8-2-1-2-1">Correct. <code class="code-inline tex2jax_ignore">a</code> is a <code class="code-inline tex2jax_ignore">std::string</code> and <code class="code-inline tex2jax_ignore">c</code> is an <code class="code-inline tex2jax_ignore">int</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc8_opt_b" data-correct="">
 <div class="para" id="functions_mc8-2-2-1-1"><code class="code-inline tex2jax_ignore">order_food(b, d);</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc8_opt_b">
-<div class="para" id="functions_mc8-2-2-2-1">Correct! Automatic type conversion will convert d to an <code class="code-inline tex2jax_ignore">int</code>.</div>
+<div class="para" id="functions_mc8-2-2-2-1">Correct. The <code class="code-inline tex2jax_ignore">double</code> argument can be implicitly converted to the <code class="code-inline tex2jax_ignore">int</code> required by the second parameter. Its fractional part is discarded.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc8_opt_c">
 <div class="para" id="functions_mc8-2-3-1-1"><code class="code-inline tex2jax_ignore">order_food(e, c);</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc8_opt_c">
-<div class="para" id="functions_mc8-2-3-2-1">
-<code class="code-inline tex2jax_ignore">e</code> has a character value, and this function takes a <em class="emphasis">string</em>.</div>
+<div class="para" id="functions_mc8-2-3-2-1">The first parameter requires a <code class="code-inline tex2jax_ignore">std::string</code>. A <code class="code-inline tex2jax_ignore">char</code> is not implicitly converted to a <code class="code-inline tex2jax_ignore">std::string</code> for this call.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc8_opt_d" data-correct="">
-<div class="para" id="functions_mc8-2-4-1-1"><code class="code-inline tex2jax_ignore">orderfood(a, d);</code></div>
+<div class="para" id="functions_mc8-2-4-1-1"><code class="code-inline tex2jax_ignore">order_food(a, d);</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc8_opt_d">
-<div class="para" id="functions_mc8-2-4-2-1">Correct! Automatic type conversion will convert d to an <code class="code-inline tex2jax_ignore">int</code>.</div>
+<div class="para" id="functions_mc8-2-4-2-1">Correct. <code class="code-inline tex2jax_ignore">a</code> matches the first parameter, and <code class="code-inline tex2jax_ignore">d</code> can be converted to <code class="code-inline tex2jax_ignore">int</code> for the second parameter.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc8_opt_e">
 <div class="para" id="functions_mc8-2-5-1-1"><code class="code-inline tex2jax_ignore">order_food(c, a);</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc8_opt_e">
-<div class="para" id="functions_mc8-2-5-2-1">You have to input your arguments in the correct order.</div>
+<div class="para" id="functions_mc8-2-5-2-1">The arguments are in the wrong order. The first parameter requires a <code class="code-inline tex2jax_ignore">std::string</code>, and the second requires an <code class="code-inline tex2jax_ignore">int</code>.</div>
 </li>
 </ul>
 </div></div>
@@ -962,53 +992,57 @@ int main() {
 <article class="exercise exercise-like" id="functions_mc9"><h2 class="heading"><span class="codenumber">9<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="functions_mc9-1-1">What is printed when the following code runs? Are there any errors?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc9-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_mc9-1-1">What is printed when the following program runs?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc9-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
-void print_word(std::string w) {
-    std::cout &lt;&lt; w &lt;&lt; w;
-}
+void add_one(int&amp; value);
 
 int main() {
-    char a = 'a' + 5;
-    print_word (a);
+    int count = 5;
+
+    add_one(count);
+
+    std::cout &lt;&lt; count &lt;&lt; '\n';
+
+    return 0;
+}
+
+void add_one(int&amp; value) {
+    value = value + 1;
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-functions_mc9" data-multipleanswers="false">
 <li data-component="answer" id="rs-functions_mc9_opt_a">
-<div class="para" id="functions_mc9-2-1-1-1"><code class="code-inline tex2jax_ignore">a</code></div>
+<div class="para" id="functions_mc9-2-1-1-1"><code class="code-inline tex2jax_ignore">1</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc9_opt_a">
 <div class="para" id="functions_mc9-2-1-2-1">
-<code class="code-inline tex2jax_ignore">'a'</code> is no longer the value of <code class="code-inline tex2jax_ignore">a</code>, and the function would print it more than once. Hint: think about the <em class="emphasis">type</em> of <code class="code-inline tex2jax_ignore">a</code>.</div>
+<code class="code-inline tex2jax_ignore">value</code> refers to the caller’s variable <code class="code-inline tex2jax_ignore">count</code>, whose initial value is <code class="code-inline tex2jax_ignore">5</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc9_opt_b">
-<div class="para" id="functions_mc9-2-2-1-1"><code class="code-inline tex2jax_ignore">f</code></div>
+<div class="para" id="functions_mc9-2-2-1-1"><code class="code-inline tex2jax_ignore">5</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc9_opt_b">
-<div class="para" id="functions_mc9-2-2-2-1">
-<code class="code-inline tex2jax_ignore">'f'</code> is the value of a, but the function would print it more than once. Hint: think about the <em class="emphasis">type</em> of <code class="code-inline tex2jax_ignore">a</code>.</div>
+<div class="para" id="functions_mc9-2-2-2-1">Because <code class="code-inline tex2jax_ignore">value</code> is a reference parameter, changing it also changes <code class="code-inline tex2jax_ignore">count</code>.</div>
 </li>
-<li data-component="answer" id="rs-functions_mc9_opt_c">
-<div class="para" id="functions_mc9-2-3-1-1"><code class="code-inline tex2jax_ignore">aa</code></div>
+<li data-component="answer" id="rs-functions_mc9_opt_c" data-correct="">
+<div class="para" id="functions_mc9-2-3-1-1"><code class="code-inline tex2jax_ignore">6</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc9_opt_c">
-<div class="para" id="functions_mc9-2-3-2-1">
-<code class="code-inline tex2jax_ignore">'a'</code> is no longer the value of <code class="code-inline tex2jax_ignore">a</code>. Hint: think about the <em class="emphasis">type</em> of <code class="code-inline tex2jax_ignore">a</code> .</div>
+<div class="para" id="functions_mc9-2-3-2-1">Correct. <code class="code-inline tex2jax_ignore">value</code> refers to <code class="code-inline tex2jax_ignore">count</code>, so adding <code class="code-inline tex2jax_ignore">1</code> changes <code class="code-inline tex2jax_ignore">count</code> from <code class="code-inline tex2jax_ignore">5</code> to <code class="code-inline tex2jax_ignore">6</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc9_opt_d">
-<div class="para" id="functions_mc9-2-4-1-1"><code class="code-inline tex2jax_ignore">ff</code></div>
+<div class="para" id="functions_mc9-2-4-1-1"><code class="code-inline tex2jax_ignore">51</code></div>
 </li>
 <li data-component="feedback" id="rs-functions_mc9_opt_d">
-<div class="para" id="functions_mc9-2-4-2-1">Hint: think about the <em class="emphasis">type</em> of <code class="code-inline tex2jax_ignore">a</code>.</div>
+<div class="para" id="functions_mc9-2-4-2-1">These are integer values. <code class="code-inline tex2jax_ignore">value + 1</code> performs integer addition.</div>
 </li>
-<li data-component="answer" id="rs-functions_mc9_opt_e" data-correct="">
+<li data-component="answer" id="rs-functions_mc9_opt_e">
 <div class="para" id="functions_mc9-2-5-1-1">Error!</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc9_opt_e">
-<div class="para" id="functions_mc9-2-5-2-1">
-<code class="code-inline tex2jax_ignore">print_word</code> takes a string, not a character, as an argument.</div>
+<div class="para" id="functions_mc9-2-5-2-1">Passing an <code class="code-inline tex2jax_ignore">int</code> variable to an <code class="code-inline tex2jax_ignore">int&amp;</code> reference parameter is legal.</div>
 </li>
 </ul>
 </div></div>
@@ -1017,10 +1051,11 @@ int main() {
 <article class="exercise exercise-like" id="functions_mc10"><h2 class="heading"><span class="codenumber">10<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="functions_mc10-1-1">How many local variables and parameters does <code class="code-inline tex2jax_ignore">mult</code> have?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc10-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void mult(int a, int b, int c) {
+<div class="para" id="functions_mc10-1-1">How many parameters and local variables are declared in <code class="code-inline tex2jax_ignore">mult</code>?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc10-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">int mult(int a, int b, int c) {
     int d = 7;
-    std::cout &lt;&lt; a * b * c * d;
+
+    return a * b * c * d;
 }
 </code></pre></div>
 </div>
@@ -1029,32 +1064,31 @@ int main() {
 <div class="para" id="functions_mc10-2-1-1-1">1 parameter, 3 local variables</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc10_opt_a">
-<div class="para" id="functions_mc10-2-1-2-1">Remember, the parameters are declared in the function definition, and the local variables are declared <em class="emphasis">inside</em> of the function.</div>
+<div class="para" id="functions_mc10-2-1-2-1">Parameters appear in the function’s parameter list. Count <code class="code-inline tex2jax_ignore">a</code>, <code class="code-inline tex2jax_ignore">b</code>, and <code class="code-inline tex2jax_ignore">c</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc10_opt_b">
 <div class="para" id="functions_mc10-2-2-1-1">2 parameters, 4 local variables</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc10_opt_b">
-<div class="para" id="functions_mc10-2-2-2-1">You can declare multiple variables at once! Also, remember that local variables are declared <em class="emphasis">inside</em> of the function.</div>
+<div class="para" id="functions_mc10-2-2-2-1">Count the names in the parameter list separately from the variable declared in the function body.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc10_opt_c">
-<div class="para" id="functions_mc10-2-3-1-1">2 parameters, 1 local variables</div>
+<div class="para" id="functions_mc10-2-3-1-1">2 parameters, 1 local variable</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc10_opt_c">
-<div class="para" id="functions_mc10-2-3-2-1">You can declare multiple variables at once!</div>
+<div class="para" id="functions_mc10-2-3-2-1">There are three parameters in the parameter list.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc10_opt_d" data-correct="">
 <div class="para" id="functions_mc10-2-4-1-1">3 parameters, 1 local variable</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc10_opt_d">
-<div class="para" id="functions_mc10-2-4-2-1">
-<code class="code-inline tex2jax_ignore">a</code>, <code class="code-inline tex2jax_ignore">b</code>, and <code class="code-inline tex2jax_ignore">c</code> are parameters declared in the function definition. <code class="code-inline tex2jax_ignore">d</code> is a local variable declared inside of the function.</div>
+<div class="para" id="functions_mc10-2-4-2-1">Correct. <code class="code-inline tex2jax_ignore">a</code>, <code class="code-inline tex2jax_ignore">b</code>, and <code class="code-inline tex2jax_ignore">c</code> are parameters. <code class="code-inline tex2jax_ignore">d</code> is a local variable declared in the function body.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc10_opt_e">
 <div class="para" id="functions_mc10-2-5-1-1">3 parameters, 4 local variables</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc10_opt_e">
-<div class="para" id="functions_mc10-2-5-2-1">Remember that local variables are declared <em class="emphasis">inside</em> of the function.</div>
+<div class="para" id="functions_mc10-2-5-2-1">The parameters have local scope, but this question counts parameters separately from variables declared in the function body. Only <code class="code-inline tex2jax_ignore">d</code> is declared there.</div>
 </li>
 </ul>
 </div></div>
@@ -1063,62 +1097,61 @@ int main() {
 <article class="exercise exercise-like" id="functions_mc11"><h2 class="heading"><span class="codenumber">11<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="functions_mc11-1-1">How many calls are made to <code class="code-inline tex2jax_ignore">party</code> during the entire program?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc11-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="functions_mc11-1-1">How many times is <code class="code-inline tex2jax_ignore">party</code> called while the following program runs?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#functions_mc11-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
 
-void party(int day_of_month, std::string address) {
-    std::cout &lt;&lt; "party on "&lt;&lt;day_of_month&lt;&lt;" at "
-         &lt;&lt; address &lt;&lt; '\n';
-}
-
-void weekend(bool available) {
-    if(available==true) {
-       party(21,"Big house");
-       party(22,"CCTC");
-    } else {
-       std::cout &lt;&lt; "sorry I have to study for ENGR101!" &lt;&lt; '\n';
-    }
-}
+void party(std::string location);
+void weekend();
 
 int main() {
-    bool im_free=false;
-    party(25, "North campus");
-    weekend(im_free);
+    party("North campus");
+    weekend();
+    party("Central campus");
 
-    im_free=true;
-    party(25, "Central campus");
-    weekend(im_free);
     return 0;
+}
+
+void party(std::string location) {
+    std::cout &lt;&lt; "Party at " &lt;&lt; location &lt;&lt; '\n';
+}
+
+void weekend() {
+    party("Big house");
+    party("CCTC");
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-functions_mc11" data-multipleanswers="false">
 <li data-component="answer" id="rs-functions_mc11_opt_a">
-<div class="para" id="functions_mc11-2-1-1-1">6 calls</div>
+<div class="para" id="functions_mc11-2-1-1-1">2 calls</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc11_opt_a">
-<div class="para" id="functions_mc11-2-1-2-1">Take into account that <code class="code-inline tex2jax_ignore">weekend</code> only calls <code class="code-inline tex2jax_ignore">party</code> if a conditional is true!</div>
+<div class="para" id="functions_mc11-2-1-2-1">There are two direct calls to <code class="code-inline tex2jax_ignore">party</code> in <code class="code-inline tex2jax_ignore">main</code>, but <code class="code-inline tex2jax_ignore">weekend</code> also calls it.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc11_opt_b">
-<div class="para" id="functions_mc11-2-2-1-1">2 calls</div>
+<div class="para" id="functions_mc11-2-2-1-1">3 calls</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc11_opt_b">
-<div class="para" id="functions_mc11-2-2-2-1">
-<code class="code-inline tex2jax_ignore">weekend</code> can also call the function <code class="code-inline tex2jax_ignore">party</code>
-</div>
+<div class="para" id="functions_mc11-2-2-2-1">Look inside <code class="code-inline tex2jax_ignore">weekend</code>. It calls <code class="code-inline tex2jax_ignore">party</code> twice.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc11_opt_c" data-correct="">
 <div class="para" id="functions_mc11-2-3-1-1">4 calls</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc11_opt_c">
-<div class="para" id="functions_mc11-2-3-2-1">Correct! two calls by <code class="code-inline tex2jax_ignore">main</code> and two calls by <code class="code-inline tex2jax_ignore">weekend</code>
-</div>
+<div class="para" id="functions_mc11-2-3-2-1">Correct. <code class="code-inline tex2jax_ignore">main</code> calls <code class="code-inline tex2jax_ignore">party</code> twice, and its call to <code class="code-inline tex2jax_ignore">weekend</code> causes two more calls to <code class="code-inline tex2jax_ignore">party</code>.</div>
 </li>
 <li data-component="answer" id="rs-functions_mc11_opt_d">
-<div class="para" id="functions_mc11-2-4-1-1">3 calls</div>
+<div class="para" id="functions_mc11-2-4-1-1">5 calls</div>
 </li>
 <li data-component="feedback" id="rs-functions_mc11_opt_d">
-<div class="para" id="functions_mc11-2-4-2-1">One invocation of <code class="code-inline tex2jax_ignore">weekend</code> calls <code class="code-inline tex2jax_ignore">party</code> twice.</div>
+<div class="para" id="functions_mc11-2-4-2-1">Calling <code class="code-inline tex2jax_ignore">weekend</code> is not itself a call to <code class="code-inline tex2jax_ignore">party</code>. Count only executions of <code class="code-inline tex2jax_ignore">party</code>.</div>
+</li>
+<li data-component="answer" id="rs-functions_mc11_opt_e">
+<div class="para" id="functions_mc11-2-5-1-1">6 calls</div>
+</li>
+<li data-component="feedback" id="rs-functions_mc11_opt_e">
+<div class="para" id="functions_mc11-2-5-2-1">Trace the calls beginning in <code class="code-inline tex2jax_ignore">main</code>. Only four calls reach <code class="code-inline tex2jax_ignore">party</code>.</div>
 </li>
 </ul>
 </div></div>
