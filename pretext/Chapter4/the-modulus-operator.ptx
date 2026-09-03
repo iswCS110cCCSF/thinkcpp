@@ -1,12 +1,18 @@
-<?xml version="1.0" ?><section xml:id="chapter4_the-modulus-operator">
-  <title>The Modulus Operator</title>
-  <p>The modulus operator works on integers (and integer expressions) and yields the <em>remainder</em>
-    when the first operand is divided by the second. In C++, the modulus operator is a percent sign, <c>%</c>.
-    The syntax is exactly the same as for other operators:</p>
+<?xml version="1.0" ?>
+<section xml:id="chapter4_the-modulus-operator">
+  <title>The Remainder Operator</title>
+
+  <p>
+    The remainder operator works on integer operands and yields the
+    <em>remainder</em> when the first operand is divided by the second.
+    In C++, the remainder operator is a percent sign, <c>%</c>.
+    It is also commonly called the modulus or modulo operator.
+  </p>
+
   <listing label="mod_operator_AC_1">
     <title>
-      This program shows the difference between the division operator
-        and the modulus operator.
+      This program shows the difference between integer division
+      and the remainder operator.
     </title>
     <program interactive="activecode" line-numbers="yes" label="mod_operator_AC_1_editor">
       <code><![CDATA[
@@ -15,67 +21,99 @@
 int main() {
     int quotient = 7 / 3;
     int remainder = 7 % 3;
-    std::cout << quotient << std::endl;
-    std::cout << remainder << std::endl;
+
+    std::cout << quotient << '\n';
+    std::cout << remainder << '\n';
+
     return 0;
 }
         ]]></code>
     </program>
   </listing>
-  <p>The first operator, integer division, yields 2. The second operator
-    yields 1. Thus, 7 divided by 3 is 2 with 1 left over.</p>
-  <p>The modulus operator turns out to be surprisingly useful. For example, you can check whether
-    one number is divisible by another: if <c>x % y</c> is zero, then x is divisible by y.</p>
-  <p>Also, you can use the modulus operator to extract the rightmost digit or digits from a number.
-    For example, <c>x % 10</c> yields the rightmost digit of x (in base 10). Similarly <c>x % 100</c> yields the
-    last two digits.</p>
+
+  <p>
+    Integer division yields 2, while the remainder operator yields 1.
+    Thus, 7 divided by 3 is 2 with 1 left over.
+  </p>
+
+  <p>
+    The remainder operator is useful for checking divisibility.
+    If <c>x % y</c> is zero, then <c>x</c> is divisible by <c>y</c>,
+    provided that <c>y</c> is not zero.
+  </p>
+
+  <p>
+    For nonnegative integers, the remainder operator can also be used
+    to extract the rightmost digit or digits of a number.
+    For example, <c>x % 10</c> yields the rightmost decimal digit of
+    <c>x</c>. Similarly, <c>x % 100</c> yields the last two decimal digits.
+  </p>
+
   <exercise label="mod_operator_1">
     <statement>
-      <p>How do you know whether the variable x is odd?</p>
+      <p>
+        Which expression correctly tests whether the integer variable
+        <c>x</c> is odd?
+      </p>
     </statement>
     <choices>
       <choice>
         <statement>
-          <p>Use x % 2, and if the result is 0, it is odd.</p>
+          <p><c>x % 2 == 0</c></p>
         </statement>
-        <feedback><p>
-          If you divide a number by two and it has no remainder, that means it is an even number!
-        </p></feedback>
+        <feedback>
+          <p>
+            A remainder of zero when dividing by 2 indicates an even number.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>Use x % 2, and if the result is 1, it is odd.</p>
+          <p><c>x % 2 != 0</c></p>
         </statement>
-        <feedback><p>
-          If you divide a number by two and it has a remainder of one, that means it is an odd
-            number!
-        </p></feedback>
+        <feedback>
+          <p>
+            An odd integer has a nonzero remainder when divided by 2.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>Use x / 2, and if the result is 0, it is odd.</p>
+          <p><c>x / 2 == 0</c></p>
         </statement>
-        <feedback><p>
-          Dividing a number by two won't give us the information we want.
-        </p></feedback>
+        <feedback>
+          <p>
+            Integer division gives a quotient, not the remainder needed
+            to determine whether a number is odd.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>Use x / 2, and if the result is 1, it is odd.</p>
+          <p><c>x / 2 != 0</c></p>
         </statement>
-        <feedback><p>
-          Dividing a number by two won't give us the information we want.
-        </p></feedback>
+        <feedback>
+          <p>
+            Integer division gives a quotient, not the remainder needed
+            to determine whether a number is odd.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="mod_operator_2">
     <statement>
-      <p>Match the modulo expression to its result.</p>
+      <p>Match each remainder expression to its result.</p>
     </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
+    <feedback>
+      <p>
+        Remember that <c>%</c> gives the remainder after integer division.
+      </p>
+    </feedback>
     <cardsort>
       <match>
         <premise order="1">3 % 2</premise>

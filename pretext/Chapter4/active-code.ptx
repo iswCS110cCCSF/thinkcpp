@@ -1,509 +1,637 @@
-<?xml version="1.0" ?><exercises xml:id="chapter4_activecode-exercises">
-    <title>Activecode Exercises</title>
-    <introduction><p>
-        Answer the following <term>Activecode</term> questions to assess what you have learned in this
-        chapter.
-    </p></introduction>
+<?xml version="1.0" ?>
+<exercises xml:id="chapter4_activecode-exercises">
+  <title>Activecode Exercises</title>
+
+  <introduction>
+    <p>
+      Complete or fix the following programs using the conditional concepts
+      from this chapter.
+    </p>
+  </introduction>
+
   <exercise label="cond_rec_a1">
     <statement>
-      <p>Fix the code below so that it prints <q>THE TEAM</q> <q>THE TEAM</q>
-                    <q>THE TEAM</q> on three
-        separate lines.</p>
-    <program interactive="activecode" line-numbers="yes" label="cond_rec_a1q_editor">
+      <p>
+        Fix the code so that <q>THE TEAM</q> prints three times on separate
+        lines.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a1q_editor">
         <code><![CDATA[
 #include <iostream>
 
 int main() {
-  int x = 8;
-  int y = 8;
+    int x = 8;
+    int y = 8;
 
-  if (x % 2 == 0) {
-      std::cout << "THE TEAM";
-  }
-  else if (x >= y) {
-      std::cout << "THE TEAM";
-  }
-  else if (y >= x) {
-      std::cout << "THE TEAM";
-  }
+    if (x % 2 == 0) {
+        std::cout << "THE TEAM\n";
+    }
+    else if (x >= y) {
+        std::cout << "THE TEAM\n";
+    }
+    else if (y >= x) {
+        std::cout << "THE TEAM\n";
+    }
+
+    return 0;
 }
-          ]]></code>
-      </program></statement>
+        ]]></code>
+      </program>
+    </statement>
+
     <solution>
-      <p>Below is one way to fix the program. Since we want <q>THE TEAM</q> to print three times, we
-        must check all three conditons. this means changing the else if statements to if statements.</p>
-      <program interactive="activecode" line-numbers="yes" label="cond_rec_a1_a_editor-1">
-          <code><![CDATA[
-#include <iostream>
-int main() {
-   int x = 8;
-   int y = 8;
+      <p>
+        All three conditions should be checked independently, so use three
+        separate <c>if</c> statements.
+      </p>
 
-   if (x % 2 == 0) {
-       std::cout << "THE TEAM" << std::endl;
-   }
-   if (x >= y) {
-       std::cout << "THE TEAM" << std::endl;
-   }
-   if (y >= x) {
-       std::cout <<< "THE TEAM" << std::endl;
-   }
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a1_a_editor">
+        <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int x = 8;
+    int y = 8;
+
+    if (x % 2 == 0) {
+        std::cout << "THE TEAM\n";
+    }
+
+    if (x >= y) {
+        std::cout << "THE TEAM\n";
+    }
+
+    if (y >= x) {
+        std::cout << "THE TEAM\n";
+    }
+
+    return 0;
 }
-]]></code>
-        </program>
+        ]]></code>
+      </program>
     </solution>
   </exercise>
 
+
   <exercise label="cond_rec_a2">
     <statement>
-      <p>You are part of a class where everyone passes, but it's very hard
-        to pass with an A. Fix the function so it prints your letter grade
-        according to this scheme. [0, 50) = C, [50, 95) = B, and [95, 100] = A.</p>
-    <program interactive="activecode" line-numbers="yes" label="cond_rec_a2_editor">
+      <p>
+        Fix the function so that it prints <q>C</q> for grades below 50,
+        <q>B</q> for grades from 50 through 94, and <q>A</q> for grades
+        95 or higher.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a2_editor">
         <code><![CDATA[
 #include <iostream>
 
-std::string whichDoor(double grade) {
-  s = "";
-  if (grade < 50) {
-      s = "C";
-  }
-  if (grade < 85) {
-      s = "B";
-  }
-  if (grade >= 95) {
-      s = "A";
-  }
-  std::cout << s;
+void report_letter_grade(double grade) {
+    if (grade < 50.0) {
+        std::cout << "C\n";
+    }
+
+    if (grade < 95.0) {
+        std::cout << "B\n";
+    }
+
+    if (grade >= 95.0) {
+        std::cout << "A\n";
+    }
 }
-      ]]></code>
-      </program></statement>
+
+int main() {
+    report_letter_grade(82.0);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </statement>
+
     <hint>
-      <p>You are part of a class where everyone passes, but it's very hard
-        to pass with an A. Fix the function so it prints your letter grade
-        according to this scheme. [0, 50) = C, [50, 95) = B, and [95, 100] = A.
-        Use the lines to construct the code, then go back to complete the Activecode.</p>
-      <activity label="cond_rec_a2_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
-        <blocks>
-          <block order="7">
-            <choice correct="yes">
-              <cline>void whichDoor(double grade) {</cline>
-            </choice>
-            <choice>
-              <cline>string whichDoor(double grade) { </cline>
-            </choice>
-          </block>
-          <block order="1">
-            <choice correct="yes">
-              <cline>   std::string s = &quot;&quot;;</cline>
-            </choice>
-            <choice>
-              <cline>    s = &quot;&quot;; </cline>
-            </choice>
-          </block>
-          <block order="2">
-            <cline><![CDATA[    if (grade < 50) {]]></cline>
-            <cline>        s = &quot;C&quot;;</cline>
-            <cline>    }</cline>
-          </block>
-          <block order="9">
-            <choice correct="yes">
-              <cline><![CDATA[    if (grade < 95 && grade >= 50) {]]></cline>
-              <cline>        s = &quot;B&quot;;</cline>
-              <cline>    }</cline>
-            </choice>
-            <choice>
-              <cline><![CDATA[    if (grade < 95 || grade >= 50) { ]]></cline>
-              <cline>        s = &quot;B&quot;;</cline>
-              <cline>    }</cline>
-            </choice>
-          </block>
-          <block order="3">
-            <cline>    if (grade &gt;= 95) {</cline>
-            <cline>        s = &quot;A&quot;;</cline>
-            <cline>    }</cline>
-          </block>
-          <block order="5">
-            <cline>    std::cout &lt;&lt; s;</cline>
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
+      <p>
+        Only one letter grade should print. Use one chained conditional so
+        that the first matching branch ends the decision.
+      </p>
     </hint>
+
+    <solution>
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a2_solution">
+        <code><![CDATA[
+#include <iostream>
+
+void report_letter_grade(double grade) {
+    if (grade < 50.0) {
+        std::cout << "C\n";
+    }
+    else if (grade < 95.0) {
+        std::cout << "B\n";
+    }
+    else {
+        std::cout << "A\n";
+    }
+}
+
+int main() {
+    report_letter_grade(82.0);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </solution>
   </exercise>
 
 
   <exercise label="cond_rec_a3">
     <statement>
-      <p>Fix the infinite recursion in the code below. The function
-        should not count any numbers after 10 (the highest numbers
-        that should print are 9 or 10). When it is done counting,
-        the function should print that.</p>
-    <program interactive="activecode" line-numbers="yes" label="cond_rec_a3q_editor">
+      <p>
+        Fix the function so that it prints <q>Odd</q> for odd integers and
+        <q>Even</q> for even integers. It should work correctly for both
+        positive and negative integers.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a3_editor">
         <code><![CDATA[
 #include <iostream>
 
-void countBy2(int num) {
-    if (num != 10) {
-        std::cout << num;
-        countBy2 (num + 2);
-    }
-    else {
-        std::cout << num << std::endl;
-        std::cout << "Done counting!";
+void report_parity(int number) {
+    if (number % 2 == 0) {
+        std::cout << "Even\n";
     }
 }
 
 int main() {
-    countBy2(5);
+    report_parity(-3);
+
+    return 0;
 }
         ]]></code>
-      </program></statement>
+      </program>
+    </statement>
+
     <solution>
-      <p>
-        Below is one way to fix the program. The infinite recursion happens when we use an
-        odd number as an argument. By checking that a number is less than 99, the highest numbers
-        to
-        recurse are 98 and 97. 98 + 2 == 100 and 97 + 2 == 99, so we never count past 100.
-      </p>
-      <program xml:id="cond_rec_a3_a_editor" line-numbers="yes"><code><![CDATA[
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a3_solution">
+        <code><![CDATA[
 #include <iostream>
 
-void countBy2(int num) {
-    if (num < 9) {
-        std::cout << num;
-        countBy2(num + 2);
+void report_parity(int number) {
+    if (number % 2 == 0) {
+        std::cout << "Even\n";
     }
     else {
-        std::cout << num << std::endl;
-        std::cout << "Done counting!";
+        std::cout << "Odd\n";
     }
 }
 
 int main() {
-    countBy2(5);
+    report_parity(-3);
+
+    return 0;
 }
-        ]]></code></program>
+        ]]></code>
+      </program>
     </solution>
   </exercise>
 
+
   <exercise label="cond_rec_a4">
     <statement>
-      <p>Finish the <c>is_even</c>code below so that it prints true if <c>x</c> is even and false if <c>x</c>
-        is odd.</p>
-    <program interactive="activecode" line-numbers="yes" label="cond_rec_a4_editor">
+      <p>
+        Write the function <c>determine_larger</c>. It should return the
+        larger of two integers. If they are equal, return either value.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a4_editor">
         <code><![CDATA[
 #include <iostream>
 
-void is_even(int num) {
-  if (num % 2 == 0) {
-      std::cout << true;
-  }
+int determine_larger(int a, int b) {
+    // Write your code here.
 }
 
 int main() {
-  int x = 3;
-  is_even(x);
+    std::cout << determine_larger(7, 12) << '\n';
+
+    return 0;
 }
-]]></code>
-      </program></statement>
+        ]]></code>
+      </program>
+    </statement>
+
     <hint>
-      <p>Finish the code below so that it prints true if <c>x</c> is even and false if <c>x</c> is
-        odd. Use the lines to construct the code, then go back to complete the Activecode.</p>
-      <activity label="cond_rec_a4_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
-        <blocks>
-          <block order="3">
-            <cline>void is_even(int num) {</cline>
-          </block>
-          <block order="2">
-            <choice correct="yes">
-              <cline>    if (num % 2 == 0) {</cline>
-              <cline><![CDATA[        std::cout << "true";]]></cline>
-              <cline>    }</cline>
-            </choice>
-            <choice>
-              <cline>    if (num % 2 == 0) { </cline>
-              <cline><![CDATA[        std::cout << true;]]></cline>
-              <cline>    }</cline>
-            </choice>
-          </block>
-          <block order="5">
-            <choice correct="yes">
-              <cline>    else {</cline>
-              <cline><![CDATA[        std::cout << "false";]]></cline>
-              <cline>    }</cline>
-            </choice>
-            <choice>
-              <cline>    else { </cline>
-              <cline><![CDATA[        std::cout << false;]]></cline>
-              <cline>    }</cline>
-            </choice>
-          </block>
-          <block order="4">
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
+      <p>
+        Compare the two parameters, then return the appropriate value from
+        each branch.
+      </p>
     </hint>
+
+    <solution>
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a4_solution">
+        <code><![CDATA[
+#include <iostream>
+
+int determine_larger(int a, int b) {
+    if (a > b) {
+        return a;
+    }
+    else {
+        return b;
+    }
+}
+
+int main() {
+    std::cout << determine_larger(7, 12) << '\n';
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </solution>
   </exercise>
 
 
   <exercise label="cond_rec_a5">
     <statement>
-      <p>Finish the code below so that the function will continue to
-        ask for input until the user guesses the word correctly.</p>
-    <program interactive="activecode" line-numbers="yes" label="cond_rec_a5q_editor">
-      <code><![CDATA[
+      <p>
+        Write the function <c>report_temperature</c>. It should print
+        <q>Cold</q> for temperatures below 50, <q>Mild</q> for
+        temperatures from 50 through 74, and <q>Warm</q> for temperatures
+        75 or higher.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a5_editor">
+        <code><![CDATA[
 #include <iostream>
 
-bool guessTheWord(std::string correct) {
-    std::cout << "Guess the word!";
-    std::string guess;
-    std::cin >> guess;
-    if (guess == correct) {
-        std::cout << "That's it!";
-    }
+void report_temperature(int temperature) {
+    // Write your code here.
+}
+
+int main() {
+    report_temperature(68);
+
+    return 0;
 }
         ]]></code>
-    </program></statement>
+      </program>
+    </statement>
+
+    <hint>
+      <p>
+        Use one <c>if</c>/<c>else if</c>/<c>else</c> chain. Check the
+        thresholds in an order that gives each temperature exactly one
+        category.
+      </p>
+    </hint>
+
     <solution>
-      <p>Below is one way to complete the program.</p>
-      <program xml:id="cond_rec_a5a_editor" line-numbers="yes"><code><![CDATA[
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a5_solution">
+        <code><![CDATA[
 #include <iostream>
 
-bool guessTheWord(std::string correct) {
-    std::cout << "Guess the word!";
-    std::string guess;
-    std::cin >> guess;
-    if (guess == correct) {
-        std::cout << "That's it!";
+void report_temperature(int temperature) {
+    if (temperature < 50) {
+        std::cout << "Cold\n";
+    }
+    else if (temperature < 75) {
+        std::cout << "Mild\n";
     }
     else {
-        guessTheWord(correct);
+        std::cout << "Warm\n";
     }
 }
-        ]]></code></program>
+
+int main() {
+    report_temperature(68);
+
+    return 0;
+}
+        ]]></code>
+      </program>
     </solution>
   </exercise>
+
 
   <exercise label="cond_rec_a6">
     <statement>
-      <p>Write the function <c>greaterThan</c> that prints true if the first <c>double</c> argument is greater than
-        the second <c>double</c> argument.</p>
-    <program interactive="activecode" line-numbers="yes" label="cond_rec_a6_editor">
+      <p>
+        Write the function <c>report_comparison</c>. It should print
+        <q>Greater</q> if the first <c>double</c> is greater than the
+        second, <q>Less</q> if it is smaller, and <q>Equal</q> otherwise.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a6_editor">
         <code><![CDATA[
 #include <iostream>
 
-void greaterThan(FIX ME) {
-
+void report_comparison(double a, double b) {
+    // Write your code here.
 }
-      ]]></code>
-      </program></statement>
-    <hint>
-      <p>Write the function <c>greaterThan</c> that prints true if the first <c>double</c> argument is greater than
-        the second <c>double</c> argument. Be sure to include any necessary headers. Use the lines to
-        construct the code, then go back to complete the Activecode.</p>
-      <activity label="cond_rec_a6_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
-        <blocks>
-          <block order="3">
-            <choice correct="yes">
-              <cline>void greaterThan(double a, double b) {</cline>
-            </choice>
-            <choice>
-              <cline>void greaterThan(int a , int b) { </cline>
-            </choice>
-          </block>
-          <block order="5">
-            <cline>    if (a &gt; b) {</cline>
-            <cline><![CDATA[        std::cout << "true";]]></cline>
-            <cline>    }</cline>
-          </block>
-          <block order="2">
-            <cline>    if (a &lt; b) {</cline>
-            <cline><![CDATA[        std::cout << true;]]></cline>
-            <cline>    }</cline>
-          </block>
-          <block order="4">
-            <cline>    else {</cline>
-            <cline><![CDATA[        std::cout << "false";]]></cline>
-            <cline>    }</cline>
-          </block>
-          <block order="7" correct="no">
-            <cline>    if (double a &gt; double b) { </cline>
-            <cline><![CDATA[        std::cout << true;]]></cline>
-            <cline>    }</cline>
-          </block>
-          <block order="1">
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
+
+int main() {
+    report_comparison(4.5, 7.2);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </statement>
+
+    <solution>
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a6_solution">
+        <code><![CDATA[
+#include <iostream>
+
+void report_comparison(double a, double b) {
+    if (a > b) {
+        std::cout << "Greater\n";
+    }
+    else if (a < b) {
+        std::cout << "Less\n";
+    }
+    else {
+        std::cout << "Equal\n";
+    }
+}
+
+int main() {
+    report_comparison(4.5, 7.2);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </solution>
   </exercise>
+
 
   <exercise label="cond_rec_a7">
     <statement>
-      <p>Write the function <c>goodVibes</c> that prints <q>I'm having a <c>mood</c> day!</q> depending on the
-        value of <c>mood</c>. If <c>mood</c> is <q>bad</q>, then the function should not do anything since
-        it's good vibes only. Be sure to include any necessary headers.</p>
-    <program interactive="activecode" line-numbers="yes" label="cond_rec_a7q_editor">
-      <code><![CDATA[
+      <p>
+        Complete the function so that it returns immediately when
+        <c>temperature</c> is below -100. Otherwise, it should print the
+        temperature.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a7q_editor">
+        <code><![CDATA[
 #include <iostream>
 
-void goodVibes(std::string mood) {
+void report_valid_temperature(int temperature) {
+    // Write your code here.
+}
 
+int main() {
+    report_valid_temperature(72);
+
+    return 0;
 }
         ]]></code>
-      </program></statement>
+      </program>
+    </statement>
+
+    <hint>
+      <p>
+        Use an <c>if</c> statement with an early <c>return</c> for the
+        invalid case.
+      </p>
+    </hint>
+
     <solution>
-      <p>Below is one way to write the program. The return allows the function to exit if
-        there are bad vibes in the room. Otherise, the function prints as directed. </p>
-      <program xml:id="cond_rec_a7a_editor" line-numbers="yes"><code><![CDATA[
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a7_solution">
+        <code><![CDATA[
 #include <iostream>
 
-void goodVibes(std::string mood) {
-    if (mood == "bad") {
+void report_valid_temperature(int temperature) {
+    if (temperature < -100) {
         return;
     }
-    std::cout << "I'm having a " << mood << " day";
+
+    std::cout << temperature << '\n';
 }
-        ]]></code></program>
+
+int main() {
+    report_valid_temperature(72);
+
+    return 0;
+}
+        ]]></code>
+      </program>
     </solution>
   </exercise>
+
 
   <exercise label="cond_rec_a8">
     <statement>
-      <p>Write the function <c>exclusiveOr</c> that prints true If either <c>a</c> OR <c>b</c> is true, and
-        prints false otherwise.</p>
-    <program interactive="activecode" line-numbers="yes" label="cond_rec_a8_editor">
+      <p>
+        Write the function <c>determine_exclusive_or</c>. It should return
+        <c>true</c> when exactly one of its two Boolean arguments is true,
+        and <c>false</c> otherwise.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a8_editor">
         <code><![CDATA[
 #include <iostream>
 
-void exclusiveOr(bool a, bool b) {
-
+bool determine_exclusive_or(bool a, bool b) {
+    // Write your code here.
 }
-      ]]></code>
-      </program></statement>
-    <hint>
-      <p>Write the function <c>exclusiveOr</c> that prints true If either <c>a</c> OR <c>b</c> is true, and
-        prints false otherwise. Be sure to include any necessary headers. Use the lines to construct
-        the code, then go back to complete the Activecode.</p>
-      <activity label="cond_rec_a8_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
-        <blocks>
-          <block order="2">
-            <cline>void exclusiveOr(bool a, bool b) {</cline>
-          </block>
-          <block order="1">
-            <choice correct="yes">
-              <cline>    if (a == true || b == true) {</cline>
-              <cline><![CDATA[        std::cout << "true";]]></cline>
-              <cline>    }</cline>
-            </choice>
-            <choice>
-              <cline>    if (a == true &amp;&amp; b == true) { </cline>
-              <cline><![CDATA[        std::cout << "true";]]></cline>
-              <cline>    }</cline>
-            </choice>
-          </block>
-          <block order="3">
-            <cline>    else {</cline>
-            <cline><![CDATA[        std::cout << "false";]]></cline>
-            <cline>    }</cline>
-          </block>
-          <block order="5">
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
-  </exercise>
 
-  <exercise label="cond_rec_a9">
-    <statement>
-      <p>Write the function <c>countdown</c> that takes a positive integer and decrements it until eaching
-        zero, printing the number at each step of the way. Once it reaches zero, it should print <q>
-        Blastoff!</q></p>
-    <program interactive="activecode" line-numbers="yes" label="cond_rec_a9q_editor">
-      <code><![CDATA[
-#include <iostream>
+int main() {
+    std::cout << determine_exclusive_or(true, false) << '\n';
 
-void countdown(int num) {
-
+    return 0;
 }
         ]]></code>
-      </program></statement>
+      </program>
+    </statement>
+
+    <hint>
+      <p>
+        Exclusive OR is true when the two Boolean values are different.
+      </p>
+    </hint>
+
     <solution>
-      <p>Below is one way to write the program.</p>
-      <program xml:id="cond_rec_a9a_editor" line-numbers="yes"><code><![CDATA[
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a8_solution">
+        <code><![CDATA[
 #include <iostream>
 
-void countdown(int num) {
-    if (num != 0) {
-        std::cout << num << std::endl;
-        num -= 1;
-        countdown (num);
+bool determine_exclusive_or(bool a, bool b) {
+    if (a != b) {
+        return true;
     }
     else {
-        std::cout << "Blastoff!";
+        return false;
     }
 }
-        ]]></code></program>
+
+int main() {
+    std::cout << determine_exclusive_or(true, false) << '\n';
+
+    return 0;
+}
+        ]]></code>
+      </program>
     </solution>
   </exercise>
 
-  <exercise label="cond_rec_a10">
+
+  <exercise label="cond_rec_a9">
     <statement>
-      <p>Write the function <c>printNegativeNum</c> that asks the user for a negative number. If the user does not
-        provide a negative number, it should contine asking until the user provides one. It should
-        then print the negative number.</p>
-    <program interactive="activecode" line-numbers="yes" label="cond_rec_a10_editor">
+      <p>
+        <em>Optional recursion:</em> Write the function <c>count_down</c>.
+        It should print each positive integer down to 1 and then print
+        <q>Blastoff!</q>.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a9q_editor">
         <code><![CDATA[
 #include <iostream>
 
-void printNegativeNum() {
-
+void count_down(int number) {
+    // Write your code here.
 }
-      ]]></code>
-      </program></statement>
+
+int main() {
+    count_down(5);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </statement>
+
     <hint>
-      <p>Write the function <c>printNegativeNum</c> that asks the user for a negative number. If the user does not
-        provide a negative number, it should contine asking until the user provides one. It should
-        then print the negative number. Use the lines to construct the code, then go back to
-        complete the Activecode.</p>
-      <activity label="cond_rec_a10_pp" number="yes" adaptive="yes" indentation="hide" exercise-interactive="parson">
-        <blocks>
-          <block order="3">
-            <cline>void printNegativeNum() {</cline>
-          </block>
-          <block order="2">
-            <cline>    int negative;</cline>
-          </block>
-          <block order="1">
-            <cline><![CDATA[    std::cout << "Please provide a negative number." << std::endl ;]]></cline>
-          </block>
-          <block order="6">
-            <cline>    std::cin &gt;&gt; negative;</cline>
-          </block>
-          <block order="8">
-            <choice correct="yes">
-              <cline>    if (negative &gt;= 0) {</cline>
-              <cline>        printNegativeNum();</cline>
-              <cline>    }</cline>
-            </choice>
-            <choice>
-              <cline>    if (negative &gt;= 0) { </cline>
-              <cline><![CDATA[        std::cout << "Please provide a negative nunber." << std::endl ;]]></cline>
-              <cline>    }</cline>
-            </choice>
-          </block>
-          <block order="4">
-            <cline><![CDATA[    std::cout << negative << std::endl ;]]></cline>
-          </block>
-          <block order="5">
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
+      <p>
+        Use zero as the base case. Otherwise, print the current value and
+        make a recursive call with a smaller argument.
+      </p>
     </hint>
+
+    <solution>
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a9_solution">
+        <code><![CDATA[
+#include <iostream>
+
+void count_down(int number) {
+    if (number == 0) {
+        std::cout << "Blastoff!\n";
+    }
+    else {
+        std::cout << number << '\n';
+        count_down(number - 1);
+    }
+}
+
+int main() {
+    count_down(5);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </solution>
   </exercise>
+
+
+  <exercise label="cond_rec_a10">
+    <statement>
+      <p>
+        <em>Optional recursion:</em> Fix the recursive call so that this
+        function eventually reaches its base case instead of recursing
+        indefinitely.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a10_editor">
+        <code><![CDATA[
+#include <iostream>
+
+void print_exclamation_marks(int count) {
+    if (count > 0) {
+        std::cout << "!";
+        print_exclamation_marks(count + 1);
+    }
+}
+
+int main() {
+    print_exclamation_marks(4);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </statement>
+
+    <hint>
+      <p>
+        Each recursive call should move the argument closer to the base
+        case.
+      </p>
+    </hint>
+
+    <solution>
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a10_solution">
+        <code><![CDATA[
+#include <iostream>
+
+void print_exclamation_marks(int count) {
+    if (count > 0) {
+        std::cout << "!";
+        print_exclamation_marks(count - 1);
+    }
+}
+
+int main() {
+    print_exclamation_marks(4);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </solution>
+  </exercise>
+
 </exercises>

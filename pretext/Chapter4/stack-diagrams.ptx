@@ -1,72 +1,153 @@
 <?xml version="1.0"?>
 <section xml:id="chapter4_stack-diagrams-for-recursive-functions">
-  <title>Stack Diagrams for Recursive Functions</title>
-  <p>In the previous chapter we used a <term>stack diagram</term> to represent the state of a
-    program during a function call. The same kind of diagram can make it easier to interpret a
-    recursive function.</p>
-  <p>Remember that every time a function gets called it creates a new
-    instance that contains the function's local variables and parameters.</p>
-  <p>This figure shows a stack diagram for <c>countdown</c>, called with <c>n = 3</c>:</p>
+  <title>Optional: Stack Diagrams for Recursive Functions</title>
+
+  <note>
+    <p>
+      This section continues the optional recursion material by showing how
+      recursive function calls can be represented with stack diagrams.
+    </p>
+  </note>
+
+  <p>
+    In Chapter 3, we used a <term>stack diagram</term> to represent the
+    state of a program during function calls. The same kind of diagram is
+    especially useful for understanding recursion.
+  </p>
+
+  <p>
+    Each time a function is called, that call has its own
+    <term>stack frame</term>. The frame contains information associated
+    with that particular function call, including its parameters and local
+    variables.
+  </p>
+
+  <p>
+    A recursive function can therefore have several stack frames at the
+    same time because each recursive call is a new function call.
+  </p>
+
+  <p>
+    This figure shows a stack diagram for <c>count_down(3)</c>:
+  </p>
+
   <figure>
-      <caption>Stack Diagram</caption>
-      <image source="Chapter4/Images/4.9stackdiagram.png" width="50%">
-          <description><p>
-              A stack of 5 boxes. The top one is labeled main and is empty. The next four are all labeled 'countdown' and respectively contain n = 3, n = 2, n = 1, n = 0.
-          </p></description>
-      </image>
+    <caption>Stack frames created by <c>count_down(3)</c></caption>
+
+    <image source="Chapter4/Images/4.9stackdiagram.png" width="50%">
+      <description>
+        <p>
+          A stack diagram containing one frame for main and four frames
+          for count_down. The count_down frames contain parameter values
+          3, 2, 1, and 0.
+        </p>
+      </description>
+    </image>
   </figure>
-  <p>There is one instance of <c>main</c> and <term>four</term> instances of <c>countdown</c>, each with a
-    different value for the parameter <c>n</c>. The bottom of the stack, <c>countdown</c> with <c>n = 0</c> is the
-    base case. It does not make a recursive call, so there are no more instances of <c>countdown</c>.</p>
-  <p>The instance of <c>main</c> is empty because main does not have any parameters or local variables.
-    As an exercise, draw a stack diagram for <c>nLines</c>, invoked with the parameter n = 4.</p>
+
+  <p>
+    There is one stack frame for <c>main</c> and four stack frames for
+    calls to <c>count_down</c>. Each call has its own value for the
+    parameter.
+  </p>
+
+  <program><![CDATA[
+count_down(3)
+    count_down(2)
+        count_down(1)
+            count_down(0)
+  ]]></program>
+
+  <p>
+    The call <c>count_down(0)</c> reaches the base case and makes no
+    additional recursive call. When that call returns, its stack frame is
+    removed. The earlier calls then return one at a time in reverse order,
+    and their stack frames are also removed.
+  </p>
+
+  <p>
+    This helps explain an important feature of recursion: although every
+    call executes the same function definition, each call has its own
+    parameter values and its own stack frame.
+  </p>
+
   <exercise label="stack_1">
     <statement>
-      <p>Refer to the <c>nLines</c> function below. It is the same as the <c>nLines</c> function defined on the
-        previous page. How many instances of <c>nLines</c> would there be in the stack diagram if we begin
-        with n = 4?</p>
-      <program>void nLines(int n) {
-  if (n &gt; 0) {
-    std::cout &lt;&lt; std::endl ;
-    nLines(n + 1);
-  }
-}</program>
+      <p>
+        Consider the recursive function below. How many stack frames for
+        <c>print_lines</c> exist when the deepest call has been reached
+        after starting with <c>print_lines(4)</c>?
+      </p>
+
+      <program><![CDATA[
+#include <iostream>
+
+void print_lines(int number_of_lines);
+
+int main() {
+    print_lines(4);
+
+    return 0;
+}
+
+void print_lines(int number_of_lines) {
+    if (number_of_lines > 0) {
+        std::cout << '\n';
+        print_lines(number_of_lines - 1);
+    }
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>3</p>
         </statement>
-        <feedback><p>
-          If nLines could reach its base case, it cannot be done in 3 function calls.
-        </p></feedback>
+        <feedback>
+          <p>
+            Trace the argument values beginning with 4 and continue until
+            the base case is reached.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>4</p>
         </statement>
-        <feedback><p>
-          If nLines could reach its base case, it cannot be done in 4 function calls.
-        </p></feedback>
+        <feedback>
+          <p>
+            Remember that the call that reaches the base case also has its
+            own stack frame.
+          </p>
+        </feedback>
       </choice>
-      <choice>
+
+      <choice correct="yes">
         <statement>
           <p>5</p>
         </statement>
-        <feedback><p>
-          If nLines could reach its base case, it could be done in 5 function calls, but does it
-            ever reach the base case?
-        </p></feedback>
+        <feedback>
+          <p>
+            There is one frame for each call with argument values
+            4, 3, 2, 1, and 0.
+          </p>
+        </feedback>
       </choice>
-      <choice correct="yes">
+
+      <choice>
         <statement>
-          <p>infinite</p>
+          <p>Infinitely many</p>
         </statement>
-        <feedback><p>
-          The nLines function never reaches its base case, so the stack diagram would be
-            infinitely long.
-        </p></feedback>
+        <feedback>
+          <p>
+            Check whether each recursive call moves the argument toward
+            or away from the base case.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </section>

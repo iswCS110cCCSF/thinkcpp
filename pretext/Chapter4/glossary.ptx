@@ -1,86 +1,256 @@
-<?xml version="1.0" ?><section xml:id="chapter4_glossary">
-    <title>Glossary</title>
-    <glossary>
-        <gi>
-            <title>modulus</title>
-            <p>An operator that works on integers and yields the remainder when one
-            number is divided by another. In C++ it is denoted with a percent
-            sign (%).</p>
-        </gi>
-        <gi>
-            <title>conditional</title>
-            <p>A block of statements that may or may not be executed depending on
-            some condition.</p>
-        </gi>
-        <gi>
-            <title>chaining</title>
-            <p>A way of joining several conditional statements in sequence.</p>
-        </gi>
-        <gi>
-            <title>nesting</title>
-            <p>Putting a conditional statement inside one or both branches of
-            another conditional statement.</p>
-        </gi>
-        <gi>
-            <title>recursion</title>
-            <p>The process of calling the same function you are currently
-            executing.</p>
-        </gi>
-        <gi>
-            <title>infinite recursion</title>
-            <p>A function that calls itself recursively without every reaching the
-            base case. Eventually an infinite recursion will cause a run-time
-            error.</p>
-        </gi>
-    </glossary>
-    <reading-questions>
-  <exercise label="chapter_four_glossary_1">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">modulus</premise>
-        <response>An operator that works on integers and yields the remainder when one number is
-          divided by another.</response>
-      </match>
-      <match>
-        <premise order="2">chaining</premise>
-        <response>A way of joining several conditional statements in sequence.</response>
-      </match>
-      <match>
-        <premise order="3">nesting</premise>
-        <response>Putting a conditional statement inside one or both branches of another conditional
-          statement.</response>
-      </match>
-    </cardsort>
-  </exercise>
-  <exercise label="chapter_four_glossary_2">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">conditional</premise>
-        <response>A block of statements that may or may not be executed depending on some condition.</response>
-      </match>
-      <match>
-        <premise order="2">recursion</premise>
-        <response>The process of calling the same function you are currently executing.</response>
-      </match>
-      <match>
-        <premise order="3">infinite recursion</premise>
-        <response>The process of making recursive calls without every reaching the base case.</response>
-      </match>
-    </cardsort>
-  </exercise>
-    </reading-questions>
+<?xml version="1.0" ?>
+<section xml:id="chapter4_glossary">
+  <title>Glossary</title>
+
+  <glossary>
+    <gi>
+      <title>remainder operator</title>
+      <p>
+        The operator <c>%</c>, which works with integer operands and
+        produces the remainder from integer division. It is also commonly
+        called the modulus or modulo operator.
+      </p>
+    </gi>
+
+    <gi>
+      <title>conditional statement</title>
+      <p>
+        A statement that uses a condition to determine whether a particular
+        branch of code should execute.
+      </p>
+    </gi>
+
+    <gi>
+      <title>condition</title>
+      <p>
+        An expression that is evaluated as either <c>true</c> or
+        <c>false</c> and is used to control a conditional statement.
+      </p>
+    </gi>
+
+    <gi>
+      <title>comparison operator</title>
+      <p>
+        An operator, such as <c>==</c>, <c>!=</c>, <c>&lt;</c>,
+        <c>&gt;</c>, <c>&lt;=</c>, or <c>&gt;=</c>, that compares
+        two values and produces a Boolean result.
+      </p>
+    </gi>
+
+    <gi>
+      <title>branch</title>
+      <p>
+        One possible path of execution within a conditional statement.
+      </p>
+    </gi>
+
+    <gi>
+      <title>alternative execution</title>
+      <p>
+        A conditional structure using <c>if</c> and <c>else</c> in which
+        exactly one of two branches executes.
+      </p>
+    </gi>
+
+    <gi>
+      <title>if-else-if chain</title>
+      <p>
+        A conditional structure that checks related conditions from top to
+        bottom and executes the first branch whose condition is true.
+      </p>
+    </gi>
+
+    <gi>
+      <title>nested conditional</title>
+      <p>
+        A conditional statement that appears inside a branch of another
+        conditional statement.
+      </p>
+    </gi>
+
+    <gi>
+      <title>recursion</title>
+      <p>
+        The process in which a function calls itself.
+      </p>
+    </gi>
+
+    <gi>
+      <title>recursive</title>
+      <p>
+        Describes a function that calls itself.
+      </p>
+    </gi>
+
+    <gi>
+      <title>base case</title>
+      <p>
+        A case in a recursive function that stops the recursive calls by
+        completing without making another recursive call.
+      </p>
+    </gi>
+
+    <gi>
+      <title>infinite recursion</title>
+      <p>
+        Recursion in which the program continues making recursive calls
+        without reaching a base case. It will typically continue until the
+        program is terminated or available call-stack space is exhausted.
+      </p>
+    </gi>
+
+    <gi>
+      <title>stack frame</title>
+      <p>
+        Information associated with one function call, including its
+        parameters and local variables. Each recursive call has its own
+        stack frame.
+      </p>
+    </gi>
+  </glossary>
+
+  <reading-questions>
+
+    <exercise label="chapter_four_glossary_1">
+      <statement>
+        <p>
+          Match each term with its definition.
+        </p>
+      </statement>
+
+      <feedback>
+        <p>
+          Review the vocabulary used for basic conditional execution.
+        </p>
+      </feedback>
+
+      <cardsort>
+        <match>
+          <premise order="1">remainder operator</premise>
+          <response>
+            The operator % that produces the remainder from integer division.
+          </response>
+        </match>
+
+        <match>
+          <premise order="2">condition</premise>
+          <response>
+            An expression evaluated as true or false to control a conditional statement.
+          </response>
+        </match>
+
+        <match>
+          <premise order="3">branch</premise>
+          <response>
+            One possible path of execution within a conditional statement.
+          </response>
+        </match>
+
+        <match>
+          <premise order="4">alternative execution</premise>
+          <response>
+            An if/else structure in which exactly one of two branches executes.
+          </response>
+        </match>
+      </cardsort>
+    </exercise>
+
+    <exercise label="chapter_four_glossary_2">
+      <statement>
+        <p>
+          Match each term with its definition.
+        </p>
+      </statement>
+
+      <feedback>
+        <p>
+          Think about how each structure organizes decisions in a program.
+        </p>
+      </feedback>
+
+      <cardsort>
+        <match>
+          <premise order="1">comparison operator</premise>
+          <response>
+            An operator that compares two values and produces a Boolean result.
+          </response>
+        </match>
+
+        <match>
+          <premise order="2">conditional statement</premise>
+          <response>
+            A statement that uses a condition to determine whether a branch executes.
+          </response>
+        </match>
+
+        <match>
+          <premise order="3">if-else-if chain</premise>
+          <response>
+            A structure that checks related conditions from top to bottom and executes the first true branch.
+          </response>
+        </match>
+
+        <match>
+          <premise order="4">nested conditional</premise>
+          <response>
+            A conditional statement placed inside a branch of another conditional statement.
+          </response>
+        </match>
+      </cardsort>
+    </exercise>
+
+    <exercise label="chapter_four_glossary_3">
+      <statement>
+        <p>
+          The following terms come from the optional recursion sections.
+          Match each term with its definition.
+        </p>
+      </statement>
+
+      <feedback>
+        <p>
+          Review how recursive calls stop and how individual function calls
+          are represented.
+        </p>
+      </feedback>
+
+      <cardsort>
+        <match>
+          <premise order="1">recursion</premise>
+          <response>
+            The process in which a function calls itself.
+          </response>
+        </match>
+
+        <match>
+          <premise order="2">recursive</premise>
+          <response>
+            Describes a function that calls itself.
+          </response>
+        </match>
+
+        <match>
+          <premise order="3">base case</premise>
+          <response>
+            A case that stops further recursive calls.
+          </response>
+        </match>
+
+        <match>
+          <premise order="4">infinite recursion</premise>
+          <response>
+            Recursive calls that continue without reaching a base case.
+          </response>
+        </match>
+
+        <match>
+          <premise order="5">stack frame</premise>
+          <response>
+            Information associated with one function call, including its parameters and local variables.
+          </response>
+        </match>
+      </cardsort>
+    </exercise>
+
+  </reading-questions>
 </section>

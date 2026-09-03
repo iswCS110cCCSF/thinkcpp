@@ -1,262 +1,332 @@
-<?xml version="1.0" ?><section xml:id="chapter4_recursion">
-  <title>Recursion</title>
-  <p>What mentioned in the last chapter is that it is legal for one function to
-    call another, and we have seen several examples of that. I neglected to
-    mention that it is also legal for a function to call itself. It may not
-    be obvious why that is a good thing, but it turns out to be one of the
-    most magical and interesting things a program can do.</p>
+<?xml version="1.0" ?>
+<section xml:id="chapter4_recursion">
+  <title>Optional: Introduction to Recursion</title>
+
   <note>
-    <p>The process of a function calling itself is called <term>recursion</term>, and such functions
-      are said to be <term>recursive</term>.</p>
+    <p>
+      The next two sections introduce recursion, an important programming
+      technique in which a function calls itself. Recursion is not needed
+      for the material that follows immediately, so these sections may be
+      treated as optional enrichment unless they are assigned.
+    </p>
   </note>
-  <p>For example, look at the following function:</p>
-  <program>void countdown(int n) {
-  if (n == 0) {
-    std::cout &lt;&lt; &quot;Blastoff!&quot; &lt;&lt; std::endl ;
-  }
-  else {
-    std::cout &lt;&lt; n &lt;&lt; std::endl ;
-    countdown(n - 1);
-  }
-}</program>
-  <p>The name of the function is <c>countdown</c> and it takes a single integer as a parameter. If the
-    parameter is zero, it outputs the word <q>Blastoff.</q> Otherwise, it outputs the parameter and
-    then calls a function named <c>countdown</c> —itself— passing <c>n - 1</c> as an argument.</p>
-  <activity label="recursion_AC_1">
-    <statement>
-      <p>Watch how the countdown function works when we start with a value
-        of 3.</p>
-    <program xml:id="recursion_AC_1_editor" interactive="codelens" language="cpp" line-numbers="yes">
+
+  <p>
+    You have already seen that one function can call another function.
+    A function can also call itself. This process is called
+    <term>recursion</term>, and a function that calls itself is called
+    <term>recursive</term>.
+  </p>
+
+  <p>
+    A recursive function usually needs a condition that eventually stops
+    the recursive calls. This stopping condition is called the
+    <term>base case</term>.
+  </p>
+
+  <listing label="recursion_AC_1">
+    <title>
+      This recursive function counts down from a positive integer.
+    </title>
+
+    <program interactive="activecode"
+             line-numbers="yes"
+             label="recursion_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-#include <cmath>
 
-void countdown(int n) {
-    if (n == 0) {
-        std::cout << "Blastoff!" << std::endl;
-    }
-    else {
-        std::cout << n << std::endl;
-        countdown(n-1);
-    }
-}
+// Function declaration
+void count_down(int number);
 
 int main() {
-    countdown(3);
+    count_down(3);
+
     return 0;
 }
-        ]]></code>
-    </program></statement>
-  </activity>
-  <p>What happens if we call <c>countdown</c> function like this:</p>
-  <blockquote>
-    <p>The execution of <c>countdown</c> begins with <c>n = 3</c>, and since n is not zero, it outputs the value
-      3, and then calls itself…</p>
-    <blockquote>
-      <p>The execution of <c>countdown</c> begins with <c>n = 2</c>, and since n is not zero, it outputs the value
-        2, and then calls itself…</p>
-      <blockquote>
-        <p>The execution of <c>countdown</c> begins with <c>n = 1</c>, and since n is not zero, it outputs the
-          value 1, and then calls itself…</p>
-        <blockquote>
-          <p>The execution of <c>countdown</c> begins with <c>n = 0</c>, and since n is zero, it outputs the word <q>
-            Blastoff!</q> and then returns.</p>
-        </blockquote>
-        <p>The <c>countdown</c> that get <c>n = 1</c> returns.</p>
-      </blockquote>
-      <p>The <c>countdown</c> that get <c>n = 2</c> returns.</p>
-    </blockquote>
-    <p>The <c>countdown</c> that get <c>n = 3</c> returns.</p>
-  </blockquote>
-  <p>And then you're back in <c>main</c> (what a trip). So the total output looks like:</p>
-  <program>3
-2
-1
-Blastoff!</program>
-  <p>As a second example, let's look again at the functions <c>newLine</c> and <c>threeLine</c>.</p>
-  <program>void newLine() {
-  std::cout &lt;&lt; std::endl ;
-}
 
-void threeLine() {
-  newLine();
-  newLine();
-  newLine();
-}</program>
-  <p>Although these work, they would not be much help if I wanted to output 2
-    newlines, or 4 newlines. A better alternative would be</p>
-  <program>void nLines(int n) {
-  if (n &gt; 0) {
-    std::cout &lt;&lt; std::endl ;
-    nLines (n - 1);
-  }
-}</program>
-  <p>This program is similar to countdown; as long as n is greater than zero, it outputs one
-    newline, and then calls itself to output <c>n-1</c> additional newlines. Thus, the total number of
-    newlines is <c>1 + (n - 1)</c>, which usually comes out to roughly n.</p>
-  <listing label="recursion_AC_2">
-    <title>
-      You can have a little bit of fun with recursion. Try this guessing game below!
-    </title>
-    <program interactive="activecode" line-numbers="yes" label="recursion_AC_2_editor">
-      <code><![CDATA[
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-
-void guessTheNumber(int num) {
-    std::cout << "Enter your guess!";
-    int guess;
-    std::cin >> guess;
-    std::cout << "Your guess " << guess << ". ";
-    if (guess == num) {
-        std::cout << "That's it!";
-    }
-    else if (guess > num) {
-        std::cout << "Too high! " << std::endl;
-        guessTheNumber(num);
+// Function definition
+void count_down(int number) {
+    if (number == 0) {
+        std::cout << "Blastoff!\n";
     }
     else {
-        std::cout << "Too low! " << std::endl;
-        guessTheNumber(num);
+        std::cout << number << '\n';
+        count_down(number - 1);
     }
 }
-
-int main() {
-    srand((unsigned) time(0));
-    int randomNumber = (rand() % 10) + 1;
-    guessTheNumber(randomNumber);
-}
-        ]]></code>
-        <stdin>1 2 3 4 5 6 7 8 9 10</stdin>
+      ]]></code>
     </program>
   </listing>
-  <exercise label="recursion_1">
-    <statement>
-      <p>What will print?</p>
-      <program>#include &lt;iostream&gt;
 
-void exclamationPoint(int n) {
-  if (n &gt; 0) {
-    std::cout &lt;&lt; &quot;!&quot;;
-    exclamationPoint (n-1);
-  }
-}
+  <p>
+    The function <c>count_down</c> has two cases. When <c>number == 0</c>,
+    the base case is reached and the function does not call itself again.
+    Otherwise, the function prints the current value and calls itself with
+    a smaller argument.
+  </p>
+
+  <p>
+    Calling <c>count_down(3)</c> produces the following sequence of
+    function calls:
+  </p>
+
+  <program><![CDATA[
+count_down(3)
+    count_down(2)
+        count_down(1)
+            count_down(0)
+  ]]></program>
+
+  <p>
+    The call with <c>number == 0</c> reaches the base case and returns.
+    Then each earlier call returns in reverse order until control returns
+    to <c>main</c>.
+  </p>
+
+  <p>The output is:</p>
+
+  <program><![CDATA[
+3
+2
+1
+Blastoff!
+  ]]></program>
+
+  <activity label="recursion_AC_1_trace">
+    <statement>
+      <p>
+        Trace <c>count_down(3)</c>. Notice that each recursive call has
+        its own parameter value and must finish before the previous call
+        can finish.
+      </p>
+    </statement>
+  </activity>
+
+  <p>
+    Recursion can also be used when the same task must be repeated with a
+    smaller input. For example, the following function prints a requested
+    number of blank lines:
+  </p>
+
+  <listing label="recursion_AC_2">
+    <title>
+      This recursive function prints a specified number of blank lines.
+    </title>
+
+    <program interactive="activecode"
+             line-numbers="yes"
+             label="recursion_AC_2_editor">
+      <code><![CDATA[
+#include <iostream>
+
+// Function declaration
+void print_lines(int number_of_lines);
 
 int main() {
-  exclamationPoint(3);
-}</program>
+    print_lines(3);
+
+    return 0;
+}
+
+// Function definition
+void print_lines(int number_of_lines) {
+    if (number_of_lines > 0) {
+        std::cout << '\n';
+        print_lines(number_of_lines - 1);
+    }
+}
+      ]]></code>
+    </program>
+  </listing>
+
+  <p>
+    When <c>number_of_lines</c> is greater than zero, the function prints
+    one newline and calls itself with a value that is one smaller.
+    Eventually the argument becomes zero, the condition is false, and the
+    recursion stops. For a positive argument <c>n</c>, the function prints
+    exactly <c>n</c> newlines.
+  </p>
+
+  <exercise label="recursion_1">
+    <statement>
+      <p>What will this program print?</p>
+
+      <program><![CDATA[
+#include <iostream>
+
+void print_exclamation_marks(int count);
+
+int main() {
+    print_exclamation_marks(3);
+
+    return 0;
+}
+
+void print_exclamation_marks(int count) {
+    if (count > 0) {
+        std::cout << "!";
+        print_exclamation_marks(count - 1);
+    }
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>!</p>
         </statement>
-        <feedback><p>
-          The function keeps executing while n is greater than 0.
-        </p></feedback>
+        <feedback>
+          <p>
+            Trace how the argument changes after each recursive call.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>!!</p>
         </statement>
-        <feedback><p>
-          The function keeps executing while n is greater than 0.
-        </p></feedback>
+        <feedback>
+          <p>
+            Continue tracing until the condition <c>count &gt; 0</c>
+            becomes false.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>!!!</p>
         </statement>
-        <feedback><p>
-          Correct! First, the program enters the if statement within exclamationPoint because n
-            is greater than 0. Then the function prints a &quot;!&quot; and calls itself again, but with n-1,
-            which is 2. This repeats until n is 0, which is when the program exits the function.
-        </p></feedback>
+        <feedback>
+          <p>
+            One exclamation mark is printed for each positive value of
+            <c>count</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>!!!!</p>
         </statement>
-        <feedback><p>
-          The function keeps executing while n is greater than 0. Therefore, when n is 0, it will
-            not print a &quot;!&quot;
-        </p></feedback>
+        <feedback>
+          <p>
+            Check whether anything is printed when <c>count</c> reaches
+            zero.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="recursion_2">
     <statement>
-      <p>What will print?</p>
-      <program>#include &lt;iostream&gt;
+      <p>What will this program print?</p>
 
-void exclamationPoint(int n) {
-  if (n &gt; 0) {
-    std::cout &lt;&lt; &quot;!&quot;;
-    exclamationPoint (n-1);
-  }
-}
+      <program><![CDATA[
+#include <iostream>
+
+void print_exclamation_marks(int count);
 
 int main() {
-  exclamationPoint(0);
-}</program>
+    print_exclamation_marks(0);
+
+    return 0;
+}
+
+void print_exclamation_marks(int count) {
+    if (count > 0) {
+        std::cout << "!";
+        print_exclamation_marks(count - 1);
+    }
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>!!</p>
         </statement>
-        <feedback><p>
-          If we start at zero, will the function ever call itself?
-        </p></feedback>
+        <feedback>
+          <p>
+            Evaluate the condition using the initial argument before
+            looking for a recursive call.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>!</p>
         </statement>
-        <feedback><p>
-          If we start at zero, will the function ever call itself?
-        </p></feedback>
+        <feedback>
+          <p>
+            Check whether the body of the <c>if</c> executes when
+            <c>count</c> begins at zero.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>0</p>
         </statement>
-        <feedback><p>
-          The only output statement in this program prints a &quot;!&quot;, therefore &quot;0&quot; would never
-            print.
-        </p></feedback>
+        <feedback>
+          <p>
+            Look at the program's output statement and identify what it
+            is capable of printing.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>Nothing prints.</p>
         </statement>
-        <feedback><p>
-          Correct! The program never enters the &quot;if&quot; statement within the function because n is
-            never greater than 0.
-        </p></feedback>
+        <feedback>
+          <p>
+            The base case is reached immediately, so the recursive body
+            does not execute.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="recursion_3">
     <statement>
-      <p>A function that calls itself is said to be <fillin answer="recursive"/>.</p>
+      <p>
+        The best technical term for a function that calls itself is
+        <fillin mode="string" answer="recursive"/>.
+      </p>
     </statement>
+
     <evaluation>
       <evaluate>
-          <test correct="yes">
-            <strcmp use-answer="yes" case="insensitive"/>
-            <feedback>
-              And the process by which a function calls itself is called recursion.
-            </feedback>
-          </test>
-          <test>
-            <strcmp>recusion</strcmp>
-            <feedback>
-              That is the process by which a function calls itself. What is used to describe the function itself?
-            </feedback>
-          </test>
+        <test correct="yes">
+          <strcmp use-answer="yes" case="insensitive"/>
+          <feedback>
+            <p>
+              The process is called recursion, while the function itself
+              is described as recursive.
+            </p>
+          </feedback>
+        </test>
+
+        <test>
+          <strcmp>recursion</strcmp>
+          <feedback>
+            <p>
+              That term names the process. The question asks for the
+              adjective that describes the function.
+            </p>
+          </feedback>
+        </test>
       </evaluate>
     </evaluation>
   </exercise>
+
 </section>

@@ -1,429 +1,587 @@
 <?xml version="1.0"?>
 <exercises xml:id="chapter4_mixed-up-code-exercises">
-    <title>Mixed-Up Code Exercises</title>
-    <introduction>
-        <p>Answer the following <term>Mixed-Up Code</term> questions to
-        assess what you have learned in this chapter.</p>
-    </introduction>
-  <exercise label="cond_recc_p1" number="yes" adaptive="yes" indentation="hide">
+  <title>Mixed-Up Code Exercises</title>
+
+  <introduction>
+    <p>
+      Arrange the code blocks to construct solutions using the conditional
+      concepts from this chapter.
+    </p>
+  </introduction>
+
+  <exercise label="cond_recc_p1"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
     <statement>
-      <p>Construct a block of code that prints the remainder of 18 when
-            divided by 13.</p>
+      <p>
+        Construct a program that prints the remainder when 18 is divided
+        by 13.
+      </p>
     </statement>
+
     <blocks>
+      <block order="1">
+        <cline>#include &lt;iostream&gt;</cline>
+      </block>
+
       <block order="2">
         <cline>int main() {</cline>
       </block>
-      <block order="6">
-        <cline> int x = 18;</cline>
-        <cline> int y = 13;</cline>
-      </block>
-      <block order="1">
-        <choice correct="yes">
-          <cline> std::cout &lt;&lt; x % y;</cline>
-        </choice>
-        <choice>
-          <cline> std::cout &lt;&lt; y % x; </cline>
-        </choice>
-      </block>
-      <block order="5">
-        <cline> std::cout &lt;&lt; y / x; </cline>
-      </block>
-      <block order="4">
-        <cline>}</cline>
-      </block>
-    </blocks>
-  </exercise>
-  <exercise label="cond_recc_p2" number="yes" adaptive="yes" indentation="hide">
-    <statement>
-      <p>Construct a function that prints whether a number
-            is true.</p>
-    </statement>
-    <blocks>
-      <block order="1">
-        <choice correct="yes">
-          <cline>void is_true(int number) {</cline>
-        </choice>
-        <choice>
-          <cline>bool is_true(int number) { </cline>
-        </choice>
-      </block>
-      <block order="4">
-        <cline> if (number % 2 == 0) {</cline>
-      </block>
-      <block order="7">
-        <cline>  std::cout &lt;&lt; true;</cline>
-        <cline> }</cline>
-      </block>
+
       <block order="3">
-        <cline> else {</cline>
+        <cline>    int dividend = 18;</cline>
+        <cline>    int divisor = 13;</cline>
       </block>
-      <block order="2">
-        <cline>  std::cout &lt;&lt; false;</cline>
-        <cline> }</cline>
+
+      <block order="4">
+        <choice correct="yes">
+          <cline>    std::cout &lt;&lt; dividend % divisor &lt;&lt; '\n';</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    std::cout &lt;&lt; divisor % dividend &lt;&lt; '\n';</cline>
+        </choice>
       </block>
+
       <block order="5">
+        <cline>    return 0;</cline>
+      </block>
+
+      <block order="6">
         <cline>}</cline>
+      </block>
+
+      <block correct="no">
+        <cline>    std::cout &lt;&lt; dividend / divisor &lt;&lt; '\n';</cline>
       </block>
     </blocks>
   </exercise>
-  <exercise label="cond_recc_p3" number="yes" adaptive="yes" indentation="hide">
+
+
+  <exercise label="cond_recc_p2"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
     <statement>
-      <p>Construct a function that prints the difference of a and b if the result
-            would result in a positive number.  Otherwise, prints -1.</p>
+      <p>
+        Construct a function named <c>report_parity</c> that prints
+        <q>Even</q> when an integer is even and <q>Odd</q> otherwise.
+      </p>
     </statement>
+
     <blocks>
-      <block order="3">
-        <choice correct="yes">
-          <cline>void difference(int a, int b) {</cline>
-        </choice>
-        <choice>
-          <cline>int difference(int a, int b) { </cline>
-        </choice>
-      </block>
-      <block order="8">
-        <choice correct="yes">
-          <cline> if (a - b &gt; 0) {</cline>
-        </choice>
-        <choice>
-          <cline> if (a - b &lt; 0) { </cline>
-        </choice>
-      </block>
       <block order="1">
-        <cline>  std::cout &lt;&lt; a - b;</cline>
-        <cline> }</cline>
+        <cline>void report_parity(int number) {</cline>
       </block>
-      <block order="4">
-        <cline> else {</cline>
-      </block>
-      <block order="6">
-        <cline>  std::cout &lt;&lt; -1;</cline>
-        <cline> }</cline>
-      </block>
+
       <block order="2">
-        <cline>}</cline>
-      </block>
-    </blocks>
-  </exercise>
-  <exercise label="cond_recc_p4" number="yes" adaptive="yes" indentation="hide">
-    <statement>
-      <p>Construct a function, <c>matic</c>, that takes as inputs 2 integers, x and y, and prints <q>automatic</q> if x is
-            an odd number, <q>systematic</q> if x is greater than y, AND
-            <q>hydromatic</q> if y is not equal to x.  Check all 3 conditions.</p>
-    </statement>
-    <blocks>
-      <block order="10">
         <choice correct="yes">
-          <cline>void matic(int x, int y) {</cline>
+          <cline>    if (number % 2 == 0) {</cline>
         </choice>
-        <choice>
-          <cline>int matic(int x, int y) {    </cline>
-        </choice>
-      </block>
-      <block order="11">
-        <choice correct="yes">
-          <cline> if (x % 2 &gt; 0) {</cline>
-        </choice>
-        <choice>
-          <cline> if (x % 2 == 0) { </cline>
+        <choice correct="no">
+          <cline>    if (number % 2 != 0) {</cline>
         </choice>
       </block>
-      <block order="5">
-        <cline><![CDATA[  std::cout << "automatic";]]></cline>
-        <cline> }</cline>
+
+      <block order="3">
+        <cline><![CDATA[        std::cout << "Even\n";]]></cline>
       </block>
-      <block order="9">
-        <choice correct="yes">
-          <cline> if (x &gt; y) {</cline>
-        </choice>
-        <choice>
-          <cline> else if (x &gt; y) { </cline>
-        </choice>
-      </block>
-      <block order="8">
-        <cline><![CDATA[  std::cout << "systematic";]]></cline>
-        <cline> }</cline>
-      </block>
+
       <block order="4">
-        <choice correct="yes">
-          <cline> if (y != x) {</cline>
-        </choice>
-        <choice>
-          <cline> else { </cline>
-        </choice>
+        <cline>    }</cline>
+        <cline>    else {</cline>
       </block>
+
+      <block order="5">
+        <cline><![CDATA[        std::cout << "Odd\n";]]></cline>
+      </block>
+
       <block order="6">
-        <cline><![CDATA[  std::cout << "hydromatic";]]></cline>
-        <cline> }</cline>
+        <cline>    }</cline>
       </block>
+
       <block order="7">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
-  <exercise label="cond_recc_p5" number="yes" adaptive="yes" indentation="hide">
+
+
+  <exercise label="cond_recc_p3"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
     <statement>
-      <p>Construct a block of code that prints <q>Pick me!</q> if x is
-            equal to y, <q>Choose me!</q> if x is less than y, OR <q>Love me!</q>
-            if x + y is even.</p>
+      <p>
+        Construct a function that prints <c>a - b</c> when the difference
+        is positive. Otherwise, it prints -1.
+      </p>
     </statement>
+
     <blocks>
+      <block order="1">
+        <choice correct="yes">
+          <cline>void report_positive_difference(int a, int b) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>int report_positive_difference(int a, int b) {</cline>
+        </choice>
+      </block>
+
+      <block order="2">
+        <choice correct="yes">
+          <cline>    if (a - b &gt; 0) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    if (a - b &lt; 0) {</cline>
+        </choice>
+      </block>
+
+      <block order="3">
+        <cline>        std::cout &lt;&lt; a - b &lt;&lt; '\n';</cline>
+      </block>
+
+      <block order="4">
+        <cline>    }</cline>
+        <cline>    else {</cline>
+      </block>
+
       <block order="5">
+        <cline>        std::cout &lt;&lt; -1 &lt;&lt; '\n';</cline>
+      </block>
+
+      <block order="6">
+        <cline>    }</cline>
+      </block>
+
+      <block order="7">
+        <cline>}</cline>
+      </block>
+    </blocks>
+  </exercise>
+
+
+  <exercise label="cond_recc_p4"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
+    <statement>
+      <p>
+        Construct a function that checks all three conditions independently.
+        Print <q>Odd</q> if <c>x</c> is odd, <q>Greater</q> if
+        <c>x &gt; y</c>, and <q>Different</q> if <c>x != y</c>.
+        More than one message may be printed.
+      </p>
+    </statement>
+
+    <blocks>
+      <block order="1">
+        <cline>void report_number_relationships(int x, int y) {</cline>
+      </block>
+
+      <block order="2">
+        <choice correct="yes">
+          <cline>    if (x % 2 != 0) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    if (x % 2 == 0) {</cline>
+        </choice>
+      </block>
+
+      <block order="3">
+        <cline><![CDATA[        std::cout << "Odd\n";]]></cline>
+        <cline>    }</cline>
+      </block>
+
+      <block order="4">
+        <choice correct="yes">
+          <cline>    if (x &gt; y) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    else if (x &gt; y) {</cline>
+        </choice>
+      </block>
+
+      <block order="5">
+        <cline><![CDATA[        std::cout << "Greater\n";]]></cline>
+        <cline>    }</cline>
+      </block>
+
+      <block order="6">
+        <choice correct="yes">
+          <cline>    if (x != y) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    else if (x != y) {</cline>
+        </choice>
+      </block>
+
+      <block order="7">
+        <cline><![CDATA[        std::cout << "Different\n";]]></cline>
+        <cline>    }</cline>
+      </block>
+
+      <block order="8">
+        <cline>}</cline>
+      </block>
+    </blocks>
+  </exercise>
+
+
+  <exercise label="cond_recc_p5"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
+    <statement>
+      <p>
+        Construct one chained conditional that prints <q>Equal</q> if
+        <c>x == y</c>, <q>Less</q> if <c>x &lt; y</c>, and
+        <q>Greater</q> otherwise.
+      </p>
+    </statement>
+
+    <blocks>
+      <block order="1">
         <choice correct="yes">
           <cline>if (x == y) {</cline>
         </choice>
-        <choice>
-          <cline>if (x = y) { </cline>
+        <choice correct="no">
+          <cline>if (x = y) {</cline>
         </choice>
       </block>
-      <block order="4">
-        <cline><![CDATA[ std::cout << "Pick me!";]]></cline>
-        <cline>}</cline>
+
+      <block order="2">
+        <cline><![CDATA[    std::cout << "Equal\n";]]></cline>
       </block>
-      <block order="7">
-        <choice correct="yes">
-          <cline>else if (y &gt; x) {</cline>
-        </choice>
-        <choice>
-          <cline>if (x &lt; y) { </cline>
-        </choice>
-      </block>
-      <block order="1">
-        <cline><![CDATA[ std::cout << "Choose me!";]]></cline>
-        <cline>}</cline>
-      </block>
+
       <block order="3">
-        <choice correct="yes">
-          <cline>else if ((x + y) % 2 == 0) {</cline>
-        </choice>
-        <choice>
-          <cline>else (x + y % 2 == 0) { </cline>
-        </choice>
+        <cline>}</cline>
+        <cline>else if (x &lt; y) {</cline>
       </block>
-      <block order="8">
-        <cline>else if (x + y % 2 == 0) { </cline>
+
+      <block order="4">
+        <cline><![CDATA[    std::cout << "Less\n";]]></cline>
       </block>
-      <block order="10">
-        <cline><![CDATA[ std::cout << "Love me!"; }]]></cline>
+
+      <block order="5">
+        <cline>}</cline>
+        <cline>else {</cline>
+      </block>
+
+      <block order="6">
+        <cline><![CDATA[    std::cout << "Greater\n";]]></cline>
+      </block>
+
+      <block order="7">
+        <cline>}</cline>
+      </block>
+
+      <block correct="no">
+        <cline>if (x &lt; y) {</cline>
       </block>
     </blocks>
   </exercise>
-  <exercise label="cond_recc_p6" number="yes" adaptive="yes" indentation="hide">
+
+
+  <exercise label="cond_recc_p6"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
     <statement>
-      <p>Construct a function that prints your letter grade according to this scheme.
-            [0, 70) = F, [70, 80) = C, [80, 90) = B, and [90, 100] = A.</p>
+      <p>
+        Construct a function that prints a letter grade using these
+        thresholds: 90 or above = A, 80 or above = B, 70 or above = C,
+        and below 70 = F.
+      </p>
     </statement>
+
     <blocks>
       <block order="1">
-        <cline>void printLetterGrade(double grade) {</cline>
+        <cline>void report_letter_grade(double grade) {</cline>
       </block>
+
+      <block order="2">
+        <choice correct="yes">
+          <cline>    if (grade &gt;= 90.0) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    if (grade &gt;= 70.0) {</cline>
+        </choice>
+      </block>
+
       <block order="3">
-        <cline> if (grade &lt; 70) {</cline>
+        <cline><![CDATA[        std::cout << "A\n";]]></cline>
       </block>
-      <block order="7">
-        <cline>  std::cout &lt;&lt; "F";</cline>
-        <cline> }</cline>
-      </block>
-      <block order="10">
-        <choice correct="yes">
-          <cline><![CDATA[ else if (grade < 80) {]]></cline>
-        </choice>
-        <choice>
-          <cline> if (grade &lt; 80) { </cline>
-        </choice>
-      </block>
-      <block order="14">
-        <cline>  std::cout &lt;&lt; "C";</cline>
-        <cline> }</cline>
-      </block>
-      <block order="6">
-        <choice correct="yes">
-          <cline><![CDATA[ else if (grade < 90) {]]></cline>
-        </choice>
-        <choice>
-          <cline> if (grade &lt; 90) { </cline>
-        </choice>
-      </block>
-      <block order="8">
-        <cline>  std::cout &lt;&lt; "B";</cline>
-        <cline> }</cline>
-      </block>
-      <block order="12">
-        <choice correct="yes">
-          <cline><![CDATA[ else if (grade <= 100) { ]]></cline>
-        </choice>
-        <choice>
-          <cline> else {</cline>
-        </choice>
-      </block>
+
       <block order="4">
-        <cline>  std::cout &lt;&lt; "A";</cline>
-        <cline> }</cline>
+        <cline>    }</cline>
+        <cline>    else if (grade &gt;= 80.0) {</cline>
       </block>
+
+      <block order="5">
+        <cline><![CDATA[        std::cout << "B\n";]]></cline>
+      </block>
+
+      <block order="6">
+        <cline>    }</cline>
+        <cline>    else if (grade &gt;= 70.0) {</cline>
+      </block>
+
+      <block order="7">
+        <cline><![CDATA[        std::cout << "C\n";]]></cline>
+      </block>
+
+      <block order="8">
+        <cline>    }</cline>
+        <cline>    else {</cline>
+      </block>
+
+      <block order="9">
+        <cline><![CDATA[        std::cout << "F\n";]]></cline>
+      </block>
+
+      <block order="10">
+        <cline>    }</cline>
+      </block>
+
+      <block order="11">
+        <cline>}</cline>
+      </block>
+    </blocks>
+  </exercise>
+
+
+  <exercise label="cond_recc_p7"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
+    <statement>
+      <p>
+        Construct a function that returns the larger of two integers.
+        If the values are equal, return either value.
+      </p>
+    </statement>
+
+    <blocks>
+      <block order="1">
+        <choice correct="yes">
+          <cline>int determine_larger(int a, int b) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>void determine_larger(int a, int b) {</cline>
+        </choice>
+      </block>
+
+      <block order="2">
+        <cline>    if (a &gt; b) {</cline>
+      </block>
+
+      <block order="3">
+        <choice correct="yes">
+          <cline>        return a;</cline>
+        </choice>
+        <choice correct="no">
+          <cline>        return b;</cline>
+        </choice>
+      </block>
+
+      <block order="4">
+        <cline>    }</cline>
+        <cline>    else {</cline>
+      </block>
+
+      <block order="5">
+        <choice correct="yes">
+          <cline>        return b;</cline>
+        </choice>
+        <choice correct="no">
+          <cline>        return a;</cline>
+        </choice>
+      </block>
+
+      <block order="6">
+        <cline>    }</cline>
+      </block>
+
+      <block order="7">
+        <cline>}</cline>
+      </block>
+    </blocks>
+  </exercise>
+
+
+  <exercise label="cond_recc_p8"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
+    <statement>
+      <p>
+        Construct a function that uses nested conditionals to determine a
+        seating area. A last initial after <c>'M'</c> selects the back;
+        otherwise it selects the front. Within either area, a first initial
+        after <c>'M'</c> selects the left; otherwise it selects the right.
+      </p>
+    </statement>
+
+    <blocks>
+      <block order="1">
+        <cline>void determine_seating_area(char first_initial, char last_initial) {</cline>
+      </block>
+
+      <block order="2">
+        <cline>    if (last_initial &gt; 'M') {</cline>
+      </block>
+
+      <block order="3">
+        <cline>        if (first_initial &gt; 'M') {</cline>
+        <cline><![CDATA[            std::cout << "Back Left\n";]]></cline>
+        <cline>        }</cline>
+      </block>
+
+      <block order="4">
+        <cline>        else {</cline>
+        <cline><![CDATA[            std::cout << "Back Right\n";]]></cline>
+        <cline>        }</cline>
+      </block>
+
+      <block order="5">
+        <cline>    }</cline>
+        <cline>    else {</cline>
+      </block>
+
+      <block order="6">
+        <cline>        if (first_initial &gt; 'M') {</cline>
+        <cline><![CDATA[            std::cout << "Front Left\n";]]></cline>
+        <cline>        }</cline>
+      </block>
+
+      <block order="7">
+        <cline>        else {</cline>
+        <cline><![CDATA[            std::cout << "Front Right\n";]]></cline>
+        <cline>        }</cline>
+      </block>
+
+      <block order="8">
+        <cline>    }</cline>
+      </block>
+
       <block order="9">
         <cline>}</cline>
       </block>
+
+      <block correct="no">
+        <cline>    else if (last_initial &gt; 'M') {</cline>
+      </block>
     </blocks>
   </exercise>
-  <exercise label="cond_recc_p7" number="yes" adaptive="yes" indentation="hide">
+
+
+  <exercise label="cond_recc_p9"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
     <statement>
-      <p>According to a logic game, a knight is someone who cannot tell a lie,
-            and a knave is someone who cannot tell the truth.  Construct a function
-            that takes two booleans: the truth value of the story, and the truth value
-            told by the person.  The function should print whether the person was a
-            knight or a knave.</p>
+      <p>
+        <em>Optional recursion:</em> Construct a recursive function that
+        counts down from a positive integer and prints <q>Blastoff!</q>
+        when it reaches zero.
+      </p>
     </statement>
+
     <blocks>
-      <block order="7">
-        <cline>void knightKnave(bool truth, bool told) {</cline>
-      </block>
-      <block order="8">
-        <cline> if (truth == true) {</cline>
-      </block>
-      <block order="3">
-        <cline>  if (told == true) {</cline>
-        <cline><![CDATA[   std::cout << "Knight";]]></cline>
-        <cline>  }</cline>
-      </block>
       <block order="1">
-        <cline>  else {</cline>
-        <cline>   std::cout &lt;&lt; "Knave";</cline>
-        <cline>  }</cline>
-        <cline> }</cline>
+        <cline>void count_down(int number) {</cline>
       </block>
-      <block order="5">
-        <cline> else {</cline>
-      </block>
-      <block order="4">
-        <cline>  if (told == true) {</cline>
-        <cline>   std::cout &lt;&lt; "Knave";</cline>
-        <cline>  }</cline>
-      </block>
+
       <block order="2">
-        <cline>  else {</cline>
-        <cline><![CDATA[   std::cout << "Knight";]]></cline>
-        <cline>  }</cline>
-        <cline> }</cline>
+        <choice correct="yes">
+          <cline>    if (number == 0) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    if (number &gt; 0) {</cline>
+        </choice>
       </block>
+
+      <block order="3">
+        <cline><![CDATA[        std::cout << "Blastoff!\n";]]></cline>
+      </block>
+
+      <block order="4">
+        <cline>    }</cline>
+        <cline>    else {</cline>
+      </block>
+
+      <block order="5">
+        <cline>        std::cout &lt;&lt; number &lt;&lt; '\n';</cline>
+      </block>
+
+      <block order="6">
+        <choice correct="yes">
+          <cline>        count_down(number - 1);</cline>
+        </choice>
+        <choice correct="no">
+          <cline>        count_down(number + 1);</cline>
+        </choice>
+      </block>
+
+      <block order="7">
+        <cline>    }</cline>
+      </block>
+
+      <block order="8">
+        <cline>}</cline>
+      </block>
+    </blocks>
+  </exercise>
+
+
+  <exercise label="cond_recc_p10"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
+    <statement>
+      <p>
+        <em>Optional recursion:</em> Construct a recursive function that
+        prints one exclamation mark for each positive value from
+        <c>count</c> down to 1.
+      </p>
+    </statement>
+
+    <blocks>
+      <block order="1">
+        <cline>void print_exclamation_marks(int count) {</cline>
+      </block>
+
+      <block order="2">
+        <choice correct="yes">
+          <cline>    if (count &gt; 0) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    if (count == 0) {</cline>
+        </choice>
+      </block>
+
+      <block order="3">
+        <cline><![CDATA[        std::cout << "!";]]></cline>
+      </block>
+
+      <block order="4">
+        <choice correct="yes">
+          <cline>        print_exclamation_marks(count - 1);</cline>
+        </choice>
+        <choice correct="no">
+          <cline>        print_exclamation_marks(count + 1);</cline>
+        </choice>
+      </block>
+
+      <block order="5">
+        <cline>    }</cline>
+      </block>
+
       <block order="6">
         <cline>}</cline>
       </block>
     </blocks>
   </exercise>
 
-  <exercise label="cond_recc_p8" number="yes" adaptive="yes" indentation="hide">
-    <statement>
-      <p>If a cat is in a good mood, it purrs; when it's in a bad mood, it
-            meows.  If a doog is in a good mood, it barks; when it's in a bad
-            mood it woofs.  Construct a function that accomplishes this.</p>
-    </statement>
-    <blocks>
-      <block order="6">
-        <cline>void makeVocals(string animal, string mood) {</cline>
-      </block>
-      <block order="1">
-        <cline> if (mood == "bad") {</cline>
-      </block>
-      <block order="4">
-        <cline>  if (animal == "dog") {</cline>
-        <cline>   std::cout &lt;&lt; "Woof!";</cline>
-        <cline>  }</cline>
-      </block>
-      <block order="7">
-        <cline>  else {</cline>
-        <cline>   std::cout &lt;&lt; "Meow!";</cline>
-        <cline>  }</cline>
-      </block>
-      <block order="2">
-        <cline> else {</cline>
-      </block>
-      <block order="3">
-        <cline>  if (animal == "dog") {</cline>
-        <cline>   std::cout &lt;&lt; "Bark!";</cline>
-        <cline>  }</cline>
-      </block>
-      <block order="8">
-        <cline>  } else {</cline>
-        <cline>   std::cout &lt;&lt; "Purr!";</cline>
-        <cline>  }</cline>
-      </block>
-      <block order="5">
-        <cline>}</cline>
-      </block>
-    </blocks>
-  </exercise>
-  <exercise label="cond_recc_p9" number="yes" adaptive="yes" indentation="hide">
-    <statement>
-      <p>Construct a recursive function that tells the user to enter a positive
-            number.  It should then output that number to the terminal.  If the user
-            enters a negative number or zero, prompt the user again.</p>
-    </statement>
-    <blocks>
-      <block order="1">
-        <cline>void takeSum() {</cline>
-      </block>
-      <block order="8">
-        <cline><![CDATA[ std::cout << "Input a positive number!";]]></cline>
-      </block>
-      <block order="4">
-        <cline> int num;</cline>
-        <cline> std::cin &gt;&gt; num;</cline>
-      </block>
-      <block order="3">
-        <cline> if (num &lt; 0) {</cline>
-      </block>
-      <block order="2">
-        <cline>  takeSum();</cline>
-      </block>
-      <block order="5">
-        <cline> } // END "if"</cline>
-      </block>
-      <block order="7">
-        <cline> std::cout &lt;&lt; num;</cline>
-      </block>
-      <block order="6">
-        <cline>}</cline>
-      </block>
-    </blocks>
-  </exercise>
-  <exercise label="cond_recc_p10" number="yes" adaptive="yes" indentation="hide">
-    <statement>
-      <p>In the table of ASCII characters, the lowercase alphabet consists
-            of characters 97-122.  The uppercase alphabet consists of characters
-            65-90, which is a 32 character shift back from the lowercase.  Construct
-            a recursive function that asks the user to input a LOWERCASE character,
-            converts that character to UPPERCASE character and prints it.  If the user
-            enters a character outside of the range of the LOWERCASE alphabet, prompt
-            the user again.  Hint:  <q>||</q> means <q>or</q> when used between two conditional
-            statements.</p>
-    </statement>
-    <blocks>
-      <block order="3">
-        <cline>void capitalize() {</cline>
-      </block>
-      <block order="2">
-        <cline><![CDATA[ std::cout << "Input a lowercase character!";]]></cline>
-      </block>
-      <block order="7">
-        <cline> char let;</cline>
-        <cline> std::cin &gt;&gt; let;</cline>
-      </block>
-      <block order="6">
-        <cline><![CDATA[ if (int(let) < 97 || int(let) > 122) {]]></cline>
-      </block>
-      <block order="8">
-        <cline>  capitalize();</cline>
-        <cline> }</cline>
-      </block>
-      <block order="1">
-        <cline> let = let - 32;</cline>
-      </block>
-      <block order="5">
-        <cline> std::cout &lt;&lt; char(let);</cline>
-      </block>
-      <block order="4">
-        <cline>}</cline>
-      </block>
-    </blocks>
-  </exercise>
 </exercises>

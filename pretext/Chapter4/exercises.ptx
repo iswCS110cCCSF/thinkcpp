@@ -1,696 +1,695 @@
 <?xml version="1.0"?>
 <exercises xml:id="chapter4_multiple-choice-exercises">
-    <title>Multiple Choice Exercises</title>
-    <introduction><p>
-        Answer the following <term>Multiple Choice</term> questions to assess what you have learned in
-        this chapter.
-    </p></introduction>
+  <title>Multiple Choice Exercises</title>
+
+  <introduction>
+    <p>
+      Answer the following multiple-choice questions to assess what you
+      have learned in this chapter.
+    </p>
+  </introduction>
+
   <exercise label="cond_rec_mc1">
     <statement>
-      <p>Say you run the following code. What is the value of <c>mod</c>?</p>
-      <program>int x = 4;
+      <p>What value is stored in <c>remainder</c>?</p>
+
+      <program><![CDATA[
+int x = 4;
 int y = 7;
-int mod = y % x;</program>
+int remainder = y % x;
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
-        <statement>
-          <p>0</p>
-        </statement>
-        <feedback><p>
-          There <em>is</em> a remainder.
-        </p></feedback>
+        <statement><p>0</p></statement>
+        <feedback>
+          <p>
+            Check whether 7 is evenly divisible by 4.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>1</p>
-        </statement>
-        <feedback><p>
-          Incorrect!
-        </p></feedback>
+        <statement><p>1</p></statement>
+        <feedback>
+          <p>
+            Think about how much is left after subtracting one complete
+            group of 4 from 7.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>2</p>
-        </statement>
-        <feedback><p>
-          Incorrect!
-        </p></feedback>
+        <statement><p>2</p></statement>
+        <feedback>
+          <p>
+            Use integer division to determine the whole-number quotient,
+            then find what remains.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
-        <statement>
-          <p>3</p>
-        </statement>
-        <feedback><p>
-          The remainder of <c>7 / 4</c> is 3.
-        </p></feedback>
+        <statement><p>3</p></statement>
+        <feedback>
+          <p>
+            The remainder operator produces the amount left after integer
+            division.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>4</p>
-        </statement>
-        <feedback><p>
-          We can't have a remainder of 4, since 4 is the divisor.
-        </p></feedback>
+        <statement><p>4</p></statement>
+        <feedback>
+          <p>
+            A remainder must be smaller than the divisor.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="cond_rec_mc2">
     <statement>
-      <p>What is printed when the following code executes?</p>
-      <program>int x = 8;
+      <p>What will this code print?</p>
+
+      <program><![CDATA[
+int x = 8;
 
 if (x % 3 == 2) {
-    std::cout &lt;&lt; "hey!" &lt;&lt; std::endl ;
+    std::cout << "hey!\n";
 }
 else if (x != 7) {
-    std::cout &lt;&lt; "hi!" &lt;&lt; std::endl ;
+    std::cout << "hi!\n";
 }
 else if (x % 2 == 0) {
-    std::cout &lt;&lt; "hello!" &lt;&lt; std::endl ;
+    std::cout << "hello!\n";
 }
 else {
-    std::cout &lt;&lt; "bye!" &lt;&lt; std::endl ;
-}</program>
+    std::cout << "bye!\n";
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice correct="yes">
-        <statement>
-          <program>
-hey!
-</program>
-        </statement>
-        <feedback><p>
-          Since the first conditon is met, the rest of the chained
-            conditional does not execute.
-        </p></feedback>
+        <statement><p>hey!</p></statement>
+        <feedback>
+          <p>
+            In a chained conditional, once the first true branch is found,
+            the rest of the chain is skipped.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <program>
-hi!
-</program>
-        </statement>
-        <feedback><p>
-          It's true that <c>8 != 7</c>, but <q>hi!</q> is not printed here.
-        </p></feedback>
+        <statement><p>hi!</p></statement>
+        <feedback>
+          <p>
+            Evaluate the first condition before moving to the
+            <c>else if</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <program>
-hi!
-</program>
-        </statement>
-        <feedback><p>
-          It's true that <c>8 % 2 == 0</c>, but <q>hello!</q> is not printed!
-        </p></feedback>
+        <statement><p>hello!</p></statement>
+        <feedback>
+          <p>
+            Even if a later condition is true, it is not checked after an
+            earlier branch has already executed.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <program>hey!
-hi!
-hello!</program>
-        </statement>
-        <feedback><p>
-          All of these conditons are met, but only one expression is
-            printed!
-        </p></feedback>
+        <statement><p>hey! hi! hello!</p></statement>
+        <feedback>
+          <p>
+            This is one chained conditional, not three independent
+            <c>if</c> statements.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <program>
-bye!
-</program>
-        </statement>
-        <feedback><p>
-          At least one of the conditons is met, so the <c>else</c> will not execute!
-        </p></feedback>
+        <statement><p>bye!</p></statement>
+        <feedback>
+          <p>
+            The final <c>else</c> runs only if all earlier conditions are
+            false.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="cond_rec_mc3">
     <statement>
-      <p>What is printed when the following code executes?</p>
-      <program>int x = 34;
+      <p>What will this code print?</p>
 
-if (32 &lt; x) {
-    std::cout &lt;&lt; "It's Freezing!";
+      <program><![CDATA[
+int temperature = 34;
+
+if (temperature > 32) {
+    std::cout << "Above freezing ";
 }
-if (x &lt; 40) {
-    std::cout &lt;&lt; "It's Cold!";
+
+if (temperature < 40) {
+    std::cout << "Cold ";
 }
-if (x &gt; 65) {
-    std::cout &lt;&lt; "It's Warm!"'
+
+if (temperature > 65) {
+    std::cout << "Warm ";
 }
 else {
-    std::cout &lt;&lt; "It's Hot!";
-}</program>
+    std::cout << "Not warm ";
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
-        <statement>
-          <program>
-It's Freezing!
-</program>
-        </statement>
-        <feedback><p>
-          Take a closer look at the conditions and the way they
-            are written in the program.
-        </p></feedback>
+        <statement><p>Above freezing</p></statement>
+        <feedback>
+          <p>
+            There is more than one independent <c>if</c> statement here.
+          </p>
+        </feedback>
       </choice>
+
+      <choice>
+        <statement><p>Cold</p></statement>
+        <feedback>
+          <p>
+            Evaluate each independent <c>if</c> condition separately.
+          </p>
+        </feedback>
+      </choice>
+
       <choice>
         <statement>
-          <program>
-It's Cold!
-</program>
+          <p>Above freezing Cold</p>
         </statement>
-        <feedback><p>
-          Take a closer look at the conditions and the way they
-            are written in the program.
-        </p></feedback>
+        <feedback>
+          <p>
+            Also trace the final <c>if</c>/<c>else</c> pair.
+          </p>
+        </feedback>
       </choice>
-      <choice>
-        <statement>
-          <program>It's Freezing!
-It's Cold!</program>
-        </statement>
-        <feedback><p>
-          You've identified some of the conditons that are met! Take another look at the <em>
-            chain</em> of conditionals at the end!
-        </p></feedback>
-      </choice>
+
       <choice correct="yes">
         <statement>
-          <program>It's Freezing!
-It's Cold!
-It's Hot!</program>
+          <p>Above freezing Cold Not warm</p>
         </statement>
-        <feedback><p>
-          These statements are quite contradicting, but that's exactly
-            what the output would be if we ran this code.
-        </p></feedback>
+        <feedback>
+          <p>
+            The first two independent conditions are true, and the final
+            <c>else</c> belongs only to the last <c>if</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <program>
-It's Hot!
-</program>
-        </statement>
-        <feedback><p>
-          Take a closer look at the conditions and the way they
-            are written in the program.
-        </p></feedback>
+        <statement><p>Not warm</p></statement>
+        <feedback>
+          <p>
+            Do not skip the earlier independent <c>if</c> statements.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="cond_rec_mc4">
     <statement>
-      <p>Suppose you have defined the following function:</p>
-      <program>void practicingReturns(int a, int b) {
-    if (a &lt; b) {
+      <p>What will this program print?</p>
+
+      <program><![CDATA[
+#include <iostream>
+
+void report_value(int a, int b);
+
+int main() {
+    report_value(2, 3);
+
+    return 0;
+}
+
+void report_value(int a, int b) {
+    if (a < b) {
         a += 2;
     }
-    if (a &gt; b) {
+
+    if (a > b) {
         return;
     }
-    std::cout &lt;&lt; a + b;
-}</program>
-      <p>What is printed when we run the following code?</p>
-      <program>
-int x = practicingReturns(2, 3);
-</program>
+
+    std::cout << a + b << '\n';
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
-        <statement>
-          <p>5</p>
-        </statement>
-        <feedback><p>
-          This is what <c>a + b</c> would be before the first conditonal.
-        </p></feedback>
+        <statement><p>5</p></statement>
+        <feedback>
+          <p>
+            Trace how <c>a</c> changes before the second condition is
+            evaluated.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>7</p>
-        </statement>
-        <feedback><p>
-          This is the value of <c>a + b</c> after the first conditional, but it doesn't print.
-        </p></feedback>
+        <statement><p>7</p></statement>
+        <feedback>
+          <p>
+            Check whether execution reaches the output statement after the
+            second <c>if</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>23</p>
-        </statement>
-        <feedback><p>
-          This is not the value of <c>a + b</c>.
-        </p></feedback>
+        <statement><p>23</p></statement>
+        <feedback>
+          <p>
+            The expression uses integer addition, not digit concatenation.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
-        <statement>
-          <p>Nothing.</p>
-        </statement>
-        <feedback><p>
-          The function exits with a return before anything is printed.
-        </p></feedback>
+        <statement><p>Nothing</p></statement>
+        <feedback>
+          <p>
+            Once the <c>return</c> statement executes, the current function
+            call ends immediately.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="cond_rec_mc5">
     <statement>
-      <p>Suppose you have defined the following function:</p>
-      <program>void fortuneCookie(int a, bool b, char c) {
-    if (c &lt; 'm') {
-        if (a % 2 == 0) {
-            std::cout &lt;&lt; "An alien of some sort will be appearing to you shortly.";
-        }
-        else {
-            std::cout &lt;&lt; "The fortune you seek is in another cookie.";
-        }
+      <p>What will this function return for <c>determine_category(82)</c>?</p>
+
+      <program><![CDATA[
+char determine_category(int score) {
+    if (score >= 90) {
+        return 'A';
     }
-    else if (c &lt; 'r') {
-        if (b) {
-            std::cout &lt;&lt; "He who laughs at himself never runs out of things to laugh at.";
-        }
-        else {
-            std::cout &lt;&lt; "You will be hungry again in one hour.";
-        }
+    else if (score >= 80) {
+        return 'B';
+    }
+    else if (score >= 70) {
+        return 'C';
     }
     else {
-        std::cout &lt;&lt; "Fortune not found? Abort, retry, ignore.";
+        return 'D';
     }
-}</program>
-      <p>What will be your fortune if you run the following code?</p>
-      <program>
-fortuneCookie(14, false, 'm'');
-</program>
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
-        <statement>
+        <statement><p><c>'A'</c></p></statement>
+        <feedback>
           <p>
-            <c>An alien of some sort will be appearing to you shortly.</c>
+            Evaluate the conditions from top to bottom using the value 82.
           </p>
-        </statement>
-        <feedback><p>
-          <c>'m'</c> is NOT less than <c>'m'</c>, so you don't even enter the <c>if</c> block.
-        </p></feedback>
+        </feedback>
       </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>The fortune you seek is in another cookie.</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>'m'</c> is NOT less than <c>'m'</c>, so you don't even enter the <c>if</c> block.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>He who laughs at himself never runs out of things to laugh at.</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>if (b)</c> really means <c>if (b == true)</c>.
-        </p></feedback>
-      </choice>
+
       <choice correct="yes">
-        <statement>
+        <statement><p><c>'B'</c></p></statement>
+        <feedback>
           <p>
-            <c>You will be hungry again in one hour.</c>
+            This is the first branch whose condition is true.
           </p>
-        </statement>
-        <feedback><p>
-          <c>'m' &lt; 'r'</c> is true and <c>b == false</c>, so this is the fortune that will print.
-        </p></feedback>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
+        <statement><p><c>'C'</c></p></statement>
+        <feedback>
           <p>
-            <c>Fortune not found? Abort, retry, ignore.</c>
+            Check whether an earlier condition is already true.
           </p>
-        </statement>
-        <feedback><p>
-          <c>'m'</c> is less than <c>'r'</c> so you would enter the <c>else if</c> block, not the <c>else</c>.
-        </p></feedback>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p><c>'D'</c></p></statement>
+        <feedback>
+          <p>
+            The final <c>else</c> executes only if all previous conditions
+            are false.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="cond_rec_mc6">
     <statement>
-      <p>Suppose you have defined the following function:</p>
-      <program>void fortuneCookie(int a, bool b, char c) {
-    if (c &lt; 'm') {
-        if (a % 2 == 0) {
-            std::cout &lt;&lt; "An alien of some sort will be appearing to you shortly.";
+      <p>What will this function print?</p>
+
+      <program><![CDATA[
+void report_region(char first_initial, char last_initial) {
+    if (last_initial > 'M') {
+        if (first_initial > 'M') {
+            std::cout << "Back Left\n";
         }
         else {
-            std::cout &lt;&lt; "The fortune you seek is in another cookie.";
-        }
-    }
-    else if (c &lt; 'r') {
-        if (b) {
-            std::cout &lt;&lt; "He who laughs at himself never runs out of things to laugh at.";
-        }
-        else {
-            std::cout &lt;&lt; "You will be hungry again in one hour.";
+            std::cout << "Back Right\n";
         }
     }
     else {
-        std::cout &lt;&lt; "Fortune not found? Abort, retry, ignore.";
+        if (first_initial > 'M') {
+            std::cout << "Front Left\n";
+        }
+        else {
+            std::cout << "Front Right\n";
+        }
     }
-}</program>
-      <p>What will be your fortune if you run the following code?</p>
-      <program>
-fortuneCookie(22, true, 'b');
-</program>
+}
+
+report_region('M', 'Z');
+      ]]></program>
     </statement>
+
     <choices>
+      <choice>
+        <statement><p>Back Left</p></statement>
+        <feedback>
+          <p>
+            Trace the outer condition first, then compare the first initial.
+          </p>
+        </feedback>
+      </choice>
+
       <choice correct="yes">
-        <statement>
+        <statement><p>Back Right</p></statement>
+        <feedback>
           <p>
-            <c>An alien of some sort will be appearing to you shortly.</c>
+            The outer branch is chosen first; then the nested comparison
+            determines the side.
           </p>
-        </statement>
-        <feedback><p>
-          <c>'b' &lt; 'm'</c> and <c>22 % 2 == 0</c>, so this is the fortune that will print.
-        </p></feedback>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
+        <statement><p>Front Left</p></statement>
+        <feedback>
           <p>
-            <c>The fortune you seek is in another cookie.</c>
+            Check the comparison involving the last initial before entering
+            the front or back branch.
           </p>
-        </statement>
-        <feedback><p>
-          <c>22 % 2 == 0</c>, so you enter the <c>if</c> block, not the else.
-        </p></feedback>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
+        <statement><p>Front Right</p></statement>
+        <feedback>
           <p>
-            <c>He who laughs at himself never runs out of things to laugh at.</c>
+            Start with <c>last_initial &gt; 'M'</c>.
           </p>
-        </statement>
-        <feedback><p>
-          <c>'b'</c> is less than <c>'m'</c>, so you would enter the <c>if</c> block, not the <c>else if</c>.
-        </p></feedback>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
+        <statement><p>Error</p></statement>
+        <feedback>
           <p>
-            <c>You will be hungry again in one hour.</c>
+            Character values can be compared using relational operators.
           </p>
-        </statement>
-        <feedback><p>
-          <c>'b'</c> is less than <c>'m'</c>, so you would enter the <c>if</c> block, not the <c>else if</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>Fortune not found? Abort, retry, ignore.</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>'b'</c> is less than <c>'m'</c>, so you would enter the <c>if</c> block, not the <c>else</c>.
-        </p></feedback>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="cond_rec_mc7">
     <statement>
-      <p>Suppose you have defined the following function:</p>
-      <program>void theThing(int m, int n, bool b) {
-    if (b) {
-        if (m % 4 == 0) {
-            std::cout &lt;&lt; m;
-            return;
-        }
-        if ((m + n) &gt; 10) {
-            std::cout &lt;&lt; m + n;
-            return;
-        }
-    }
-    else if ((m &gt; n) == b) {
-        std::cout &lt;&lt; m - n;
-        return;
-    }
-    else {
-        if (n % 3 == 0) {
-            std::cout &lt;&lt; n;
-            return;
-        }
-    }
-    std::cout &lt;&lt; -1;
-}</program>
-      <p>What is printed when we run the following code?</p>
-      <program>
-theThing(5, 10, false);
-</program>
+      <p>
+        Which ordering correctly classifies scores into 90+, 80+, 70+,
+        and below 70?
+      </p>
     </statement>
+
     <choices>
-      <choice>
-        <statement>
-          <p>5</p>
-        </statement>
-        <feedback><p>
-          The outer <c>if</c> condition is not met, the block does not execute.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>15</p>
-        </statement>
-        <feedback><p>
-          The outer <c>if</c> condition is not met, the block does not execute.
-        </p></feedback>
-      </choice>
       <choice correct="yes">
         <statement>
-          <p>-5</p>
+          <p>
+            Test <c>&gt;= 90</c>, then <c>&gt;= 80</c>, then
+            <c>&gt;= 70</c>.
+          </p>
         </statement>
-        <feedback><p>
-          <c>m &gt; n</c> evaluates to false, so the <c>else if</c> block executes.
-        </p></feedback>
+        <feedback>
+          <p>
+            Overlapping thresholds should usually be checked from the most
+            restrictive to the least restrictive.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>10</p>
+          <p>
+            Test <c>&gt;= 70</c>, then <c>&gt;= 80</c>, then
+            <c>&gt;= 90</c>.
+          </p>
         </statement>
-        <feedback><p>
-          The condition for <c>else if</c> is met, so the function never enters the <c>else</c>.
-        </p></feedback>
+        <feedback>
+          <p>
+            Consider what happens to a score of 95 if the broadest
+            condition is checked first.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>-1</p>
+          <p>Use only <c>score &gt;= 90</c> and an <c>else</c>.</p>
         </statement>
-        <feedback><p>
-          The function has returned.
-        </p></feedback>
+        <feedback>
+          <p>
+            More than two categories require more than two branches.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>Use independent <c>if</c> statements in any order.</p>
+        </statement>
+        <feedback>
+          <p>
+            Independent conditions can allow multiple categories to execute.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="cond_rec_mc8">
     <statement>
-      <p>Suppose you have defined the following function:</p>
-      <program>void theThing(int m, int n, bool b) {
-    if (b) {
-        if (m % 4 == 0) {
-            std::cout &lt;&lt; m;
-            return;
-        }
-        if ((m + n) &gt; 10) {
-            std::cout &lt;&lt; m + n;
-            return;
-        }
-    }
-    else if ((m &gt; n) == b) {
-        std::cout &lt;&lt; m - n;
-        return;
-    }
-    else {
-        if (n % 3 == 0) {
-            std::cout &lt;&lt; n;
-            return;
-        }
-    }
-    std::cout &lt;&lt; -1;
-}</program>
-      <p>What is printed when we run the following code?</p>
-      <program>
-theThing(6, 4, true);
-</program>
+      <p>What will this code print?</p>
+
+      <program><![CDATA[
+int x = -3;
+
+if (x > 0) {
+    std::cout << "Positive\n";
+}
+else if (x == 0) {
+    std::cout << "Zero\n";
+}
+else {
+    std::cout << "Negative\n";
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
-        <statement>
-          <p>6</p>
-        </statement>
-        <feedback><p>
-          <c>5 % 4 != 0</c> in the <c>if</c> block, so the function doesn't print 6.
-        </p></feedback>
+        <statement><p>Positive</p></statement>
+        <feedback>
+          <p>
+            Evaluate the first comparison using -3.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>10</p>
-        </statement>
-        <feedback><p>
-          <c>m + n !&gt; 10</c> in the <c>if</c> block, so the function doesn't print 10.
-        </p></feedback>
+        <statement><p>Zero</p></statement>
+        <feedback>
+          <p>
+            Check whether -3 is equal to zero.
+          </p>
+        </feedback>
       </choice>
-      <choice>
-        <statement>
-          <p>2</p>
-        </statement>
-        <feedback><p>
-          The condition for <c>if</c> is met, so the function never enters the <c>else if</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>4</p>
-        </statement>
-        <feedback><p>
-          The condition for <c>if</c> is met, so the function never enters the <c>else</c>.
-        </p></feedback>
-      </choice>
+
       <choice correct="yes">
-        <statement>
-          <p>-1</p>
-        </statement>
-        <feedback><p>
-          None of the conditions were met, so we reach the default std::cout -1.
-        </p></feedback>
+        <statement><p>Negative</p></statement>
+        <feedback>
+          <p>
+            The final branch is reached after both earlier conditions are
+            false.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Nothing</p></statement>
+        <feedback>
+          <p>
+            A complete <c>if</c>/<c>else if</c>/<c>else</c> chain selects
+            one branch.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="cond_rec_mc9">
     <statement>
-      <p>Suppose you have defined the following function:</p>
-      <program>void moo(int m, int n) {
+      <p>
+        <em>Optional recursion:</em> How many times does <q>Moo!</q>
+        print?
+      </p>
+
+      <program><![CDATA[
+void report_moo(int m, int n) {
     if (m != n) {
         m += 2;
-        std::cout &lt;&lt; "Moo!";
-        moo(m, n);
+        std::cout << "Moo!";
+        report_moo(m, n);
     }
     else {
-        std::cout &lt;&lt; "Got Milk?";
+        std::cout << "Got Milk?";
     }
-}</program>
-      <p>How many times does <q>Moo!</q> print when we run the following?</p>
-      <program>
-moo(4, 8);
-</program>
+}
+
+report_moo(4, 8);
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
-        <statement>
-          <p>0</p>
-        </statement>
-        <feedback><p>
-          When we call the function <c>4 != 8</c>, so <q>Moo!</q> is printed at least once.
-        </p></feedback>
+        <statement><p>0</p></statement>
+        <feedback>
+          <p>
+            Evaluate whether the initial values are already equal.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>1</p>
-        </statement>
-        <feedback><p>
-          The function calls itself inside of the <c>if</c> loop, so <q>Moo!</q> is printed more
-            than once.
-        </p></feedback>
+        <statement><p>1</p></statement>
+        <feedback>
+          <p>
+            Trace the value of <c>m</c> after the recursive call.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
-        <statement>
-          <p>2</p>
-        </statement>
-        <feedback><p>
-          <c>m</c> is incremented by two each with each function call, so after two <c>m == n</c> and
-            the recursion stops.
-        </p></feedback>
+        <statement><p>2</p></statement>
+        <feedback>
+          <p>
+            Follow the sequence of values taken by <c>m</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>3</p>
-        </statement>
-        <feedback><p>
-          Take a look at how <c>m</c> is incremented with each function call.
-        </p></feedback>
+        <statement><p>3</p></statement>
+        <feedback>
+          <p>
+            Check when <c>m</c> first becomes equal to <c>n</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>infinite recursion</p>
-        </statement>
-        <feedback><p>
-          The function stops printing <q>Moo!</q> when <c>m == n</c>.
-        </p></feedback>
+        <statement><p>Infinite recursion</p></statement>
+        <feedback>
+          <p>
+            Determine whether repeatedly adding 2 eventually reaches 8.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="cond_rec_mc10">
     <statement>
-      <p>Suppose you have defined the following function:</p>
-      <program>void moo(int m, int n) {
+      <p>
+        <em>Optional recursion:</em> What happens when this function is
+        called?
+      </p>
+
+      <program><![CDATA[
+void report_moo(int m, int n) {
     if (m != n) {
         m += 2;
-        std::cout &lt;&lt; "Moo!";
-        moo(m, n);
+        std::cout << "Moo!";
+        report_moo(m, n);
     }
     else {
-        std::cout &lt;&lt; "Got Milk?";
+        std::cout << "Got Milk?";
     }
-}</program>
-      <p>How many times does <q>Moo!</q> print when we run the following?</p>
-      <program>
-moo(5, 10);
-</program>
+}
+
+report_moo(5, 10);
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
-        <statement>
-          <p>0</p>
-        </statement>
-        <feedback><p>
-          When we call the function <c>5 != 10</c>, so <q>Moo!</q> is printed at least once.
-        </p></feedback>
+        <statement><p>It prints Moo! once.</p></statement>
+        <feedback>
+          <p>
+            Trace more than one recursive call.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>1</p>
-        </statement>
-        <feedback><p>
-          The function calls itself inside of the <c>if</c> loop, so <q>Moo!</q> is printed more
-            than once.
-        </p></feedback>
+        <statement><p>It prints Moo! twice and stops.</p></statement>
+        <feedback>
+          <p>
+            Continue tracking the parity of <c>m</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
-        <statement>
-          <p>2</p>
-        </statement>
-        <feedback><p>
-          After two function calls, <c>m == 9</c> and <c>n == 10</c>. The function is not done printing.
-        </p></feedback>
+        <statement><p>It prints Moo! three times and stops.</p></statement>
+        <feedback>
+          <p>
+            Check whether repeatedly adding 2 to an odd value can ever
+            produce an even value.
+          </p>
+        </feedback>
       </choice>
-      <choice>
-        <statement>
-          <p>3</p>
-        </statement>
-        <feedback><p>
-          After three function calls, <c>m == 11</c> and <c>n == 10</c>. The function is not done printing
-        </p></feedback>
-      </choice>
+
       <choice correct="yes">
-        <statement>
-          <p>infinite recursion</p>
-        </statement>
-        <feedback><p>
-          The function stops printing <q>Moo!</q> when <c>m == n</c>, but since <c>m</c> is odd and <c>n</c>
-            is even, they will never be equal as long as we increment by two.
-        </p></feedback>
+        <statement><p>It continues recursively without reaching 10.</p></statement>
+        <feedback>
+          <p>
+            Adding 2 preserves parity, so the argument never becomes equal
+            to the even target value.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </exercises>

@@ -62,60 +62,83 @@ int main() {
         ]]></code>
     </program>
   </listing>
-  <exercise label="alt_execution_1">
-    <statement>
-      <p>What will be printed after <c>main</c> is executed?</p>
-      <program>#include &lt;iostream&gt;
+<exercise label="alt_execution_1">
+  <statement>
+    <p>What will be printed when <c>main</c> is executed?</p>
 
-void weather(int temp) {
-  if (temp &lt; 52) {
-    std::cout &lt;&lt; &quot;It is cold!&quot;;
-  }
-  else {
-    std::cout &lt;&lt; &quot;It is warm!&quot;;
-  }
-}
+    <program><![CDATA[
+#include <iostream>
+
+void report_weather_temperature(int temperature);
 
 int main() {
-  int degrees = 52;
-  weather(degrees);
-}</program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>It is cold!</p>
-        </statement>
-        <feedback><p>
-          That statement would print if degrees was less than 50.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>It is warm!</p>
-        </statement>
-        <feedback><p>
-          Correct!
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Nothing prints.</p>
-        </statement>
-        <feedback><p>
-          One of the statements is satisfied, so something does print.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Error message.</p>
-        </statement>
-        <feedback><p>
-          There is nothing in the code below that would generate an error.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
+    int degrees = 52;
+    report_weather_temperature(degrees);
+
+    return 0;
+}
+
+void report_weather_temperature(int temperature) {
+    if (temperature < 52) {
+        std::cout << "It is cold!\n";
+    }
+    else {
+        std::cout << "It is warm!\n";
+    }
+}
+    ]]></program>
+  </statement>
+
+  <choices>
+    <choice>
+      <statement>
+        <p>It is cold!</p>
+      </statement>
+      <feedback>
+        <p>
+          Check whether 52 satisfies the condition
+          <c>temperature &lt; 52</c>.
+        </p>
+      </feedback>
+    </choice>
+
+    <choice correct="yes">
+      <statement>
+        <p>It is warm!</p>
+      </statement>
+      <feedback>
+        <p>
+          Since the condition is false, execution follows the
+          <c>else</c> branch.
+        </p>
+      </feedback>
+    </choice>
+
+    <choice>
+      <statement>
+        <p>Nothing prints.</p>
+      </statement>
+      <feedback>
+        <p>
+          An <c>if</c>/<c>else</c> statement executes exactly one
+          of its two branches.
+        </p>
+      </feedback>
+    </choice>
+
+    <choice>
+      <statement>
+        <p>Error message.</p>
+      </statement>
+      <feedback>
+        <p>
+          Trace the argument into the parameter and then evaluate
+          the comparison.
+        </p>
+      </feedback>
+    </choice>
+  </choices>
+</exercise>
   <exercise label="alt_execution_2" adaptive="yes" indentation="hide">
     <statement>
       <p>Construct a block of code that correctly goes through alternative execution for pricing of

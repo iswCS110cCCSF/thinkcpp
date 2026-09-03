@@ -1,231 +1,334 @@
-<?xml version="1.0" ?><section xml:id="chapter4_nested-conditionals">
+<?xml version="1.0" ?>
+<section xml:id="chapter4_nested-conditionals">
   <title>Nested Conditionals</title>
-  <p>In addition to chaining, you can also nest one conditional within
-    another. We could have written the previous example as:</p>
+
+  <p>
+    A conditional can appear inside another conditional. This is called
+    a <term>nested conditional</term>. For example, the previous
+    positive/negative/zero classification can also be written using nesting.
+  </p>
+
   <listing label="nested_conditionals_AC_1">
     <title>
-      This program classifies a number (x) as positive, negative, or zero,
-        just like the program on the previous page. However, this time, we are
-        using nested conditionals.
+      This program classifies an integer as positive, negative, or zero
+      using nested conditionals.
     </title>
-    <program interactive="activecode" line-numbers="yes" label="nested_conditionals_AC_1_editor">
+
+    <program interactive="activecode"
+             line-numbers="yes"
+             label="nested_conditionals_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
 
+// Function declaration
+void report_number_sign(int number);
+
 int main() {
-    int x = 9;
-    if (x == 0) {
-        std::cout << "x is zero" << std::endl;
+    int value = 9;
+    report_number_sign(value);
+
+    return 0;
+}
+
+// Function definition
+void report_number_sign(int number) {
+    if (number == 0) {
+        std::cout << "The number is zero.\n";
     }
     else {
-        if (x > 0) {
-            std::cout << "x is positive" << std::endl;
+        if (number > 0) {
+            std::cout << "The number is positive.\n";
         }
         else {
-            std::cout << "x is negative" << std::endl;
+            std::cout << "The number is negative.\n";
         }
     }
-    return 0;
-
 }
         ]]></code>
     </program>
   </listing>
-  <p>There is now an outer conditional that contains two branches. The first
-    branch contains a simple output statement, but the second branch
-    contains another if statement, which has two branches of its own.
-    Fortunately, those two branches are both output statements, although
-    they could have been conditional statements as well.</p>
+
+  <p>
+    The outer conditional has two branches. If <c>number == 0</c> is true,
+    the first branch executes. Otherwise, execution enters the
+    <c>else</c> branch, which contains another <c>if</c>/<c>else</c>
+    statement.
+  </p>
+
   <note>
-    <p>There is not a limit to the number of times you can nest a conditional.
-      However, you should try to limit this number, as it will reduce the
-      complexity of your program structure.</p>
+    <p>
+      Nested conditionals can be useful when a second decision only makes
+      sense after an earlier condition has been resolved. However, deeply
+      nested code can become difficult to read, so avoid unnecessary levels
+      of nesting.
+    </p>
   </note>
-  <p>Notice again that indentation helps make the structure apparent, but
-    nevertheless, nested conditionals get difficult to read very quickly. In
-    general, it is a good idea to avoid them when you can.</p>
-  <p>On the other hand, this kind of <term>nested structure</term> is common, and we will see it
-    again, so you better get used to it.</p>
+
+  <p>
+    Indentation and braces help make nested structure visible. In some cases,
+    the same logic can be written more clearly as an
+    <c>if</c>/<c>else if</c>/<c>else</c> chain. Choose the structure that
+    makes the decision process easiest to understand.
+  </p>
+
   <exercise label="nested_conditionals_1">
     <statement>
-      <p>What will print?</p>
-      <program>#include &lt;iostream&gt;
+      <p>What will this program print?</p>
+
+      <program><![CDATA[
+#include <iostream>
+
+void report_message(int x);
 
 int main() {
-  int x = 0;
-  if (x == 0) {
-    std::cout &lt;&lt; &quot;Hey!&quot; &lt;&lt; std::endl;
-  }
-  else {
-    if (x &gt; 0) {
-      std::cout &lt;&lt; &quot;Hi!&quot; &lt;&lt; std::endl;
+    int value = 0;
+    report_message(value);
+
+    return 0;
+}
+
+void report_message(int x) {
+    if (x == 0) {
+        std::cout << "Hey!\n";
     }
     else {
-      std::cout &lt;&lt; &quot;Hello!&quot; &lt;&lt; std::endl;
+        if (x > 0) {
+            std::cout << "Hi!\n";
+        }
+        else {
+            std::cout << "Hello!\n";
+        }
     }
-  }
-  return 0;
-}</program>
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice correct="yes">
         <statement>
           <p>Hey!</p>
         </statement>
-        <feedback><p>
-          Correct!
-        </p></feedback>
+        <feedback>
+          <p>
+            Start with the outer condition and determine whether the
+            nested conditional is reached.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Hi!</p>
         </statement>
-        <feedback><p>
-          Remember that the program would only enter the &quot;else&quot; if x was not equal to 0.
-        </p></feedback>
+        <feedback>
+          <p>
+            The nested <c>if</c> is reached only when the outer condition
+            is false.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Hello!</p>
         </statement>
-        <feedback><p>
-          Remember that the program would only enter the &quot;else&quot; if x was not equal to 0.
-        </p></feedback>
+        <feedback>
+          <p>
+            Check whether execution enters the outer <c>else</c> branch.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Nothing will print.</p>
         </statement>
-        <feedback><p>
-          Only one of the condtionals will execute, but something will print, regardless of which
-            one it is.
-        </p></feedback>
+        <feedback>
+          <p>
+            Trace the outer condition first. One reachable branch contains
+            an output statement.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="nested_conditionals_2">
     <statement>
-      <p>What will print?</p>
-      <program>#include &lt;iostream&gt;
+      <p>What will this program print?</p>
+
+      <program><![CDATA[
+#include <iostream>
+
+void report_message(int x);
 
 int main() {
-  int x = -4;
-  if (x == 0) {
-    std::cout &lt;&lt; &quot;Hey!&quot; &lt;&lt; std::endl;
-  }
-  else {
-    if (x &gt; 0) {
-      std::cout &lt;&lt; &quot;Hi!&quot; &lt;&lt; std::endl;
+    int value = -4;
+    report_message(value);
+
+    return 0;
+}
+
+void report_message(int x) {
+    if (x == 0) {
+        std::cout << "Hey!\n";
     }
     else {
-      std::cout &lt;&lt; &quot;Hello!&quot; &lt;&lt; std::endl;
+        if (x > 0) {
+            std::cout << "Hi!\n";
+        }
+        else {
+            std::cout << "Hello!\n";
+        }
     }
-  }
-  return 0;
-}</program>
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>Hey!</p>
         </statement>
-        <feedback><p>
-          Remember that the program would only enter the first &quot;if&quot; if x was equal to 0.
-        </p></feedback>
+        <feedback>
+          <p>
+            Check whether <c>x == 0</c> is true for a value of -4.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Hi!</p>
         </statement>
-        <feedback><p>
-          Remember that the program would only enter the nested &quot;if&quot; if x was greater than 0.
-        </p></feedback>
+        <feedback>
+          <p>
+            After entering the outer <c>else</c>, evaluate the nested
+            condition <c>x &gt; 0</c>.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>Hello!</p>
         </statement>
-        <feedback><p>
-          Correct!
-        </p></feedback>
+        <feedback>
+          <p>
+            Follow the outer branch first, then evaluate the nested
+            conditional.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Nothing will print.</p>
         </statement>
-        <feedback><p>
-          Only one of the condtionals will execute, but something will print, regardless of which
-            one it is.
-        </p></feedback>
+        <feedback>
+          <p>
+            Both levels of the nested conditional lead to an output branch.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="nested_conditionals_3">
     <statement>
-      <p>Your school uses a system to arrange students in a large stadium using their initials. Look
-        at the function definition below. Where would a student with the initials <q>MZ</q> be
-        seated?</p>
-      <program>string seatingArrangement(char first, char last) {
-  if (last &gt; m) {
-    if (first &gt; m) {
-      return &quot;Back Left!&quot;;
+      <p>
+        A school uses student initials to choose one of four seating areas.
+        Where would a student with the initials <q>MZ</q> be seated?
+      </p>
+
+      <program><![CDATA[
+#include <string>
+
+std::string determine_seating_area(char first_initial,
+                                   char last_initial);
+
+std::string determine_seating_area(char first_initial,
+                                   char last_initial) {
+    if (last_initial > 'M') {
+        if (first_initial > 'M') {
+            return "Back Left!";
+        }
+        else {
+            return "Back Right!";
+        }
     }
     else {
-      return &quot;Back Right!&quot;;
+        if (first_initial > 'M') {
+            return "Front Left!";
+        }
+        else {
+            return "Front Right!";
+        }
     }
-  }
-  else {
-    if (first &gt; m) {
-      return &quot;Front Left!&quot;;
-    }
-    else {
-      return &quot;Front Right!&quot;;
-    }
-  }
-}</program>
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
         <statement>
           <p>Back Left!</p>
         </statement>
-        <feedback><p>
-          Remember that the &gt; opearator is not inclusive.
-        </p></feedback>
+        <feedback>
+          <p>
+            Evaluate the comparison involving the last initial first,
+            then the comparison involving the first initial.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
           <p>Back Right!</p>
         </statement>
-        <feedback><p>
-          z &gt; m is true, and m &gt; m is false, so a student with these initials would be
-            seated in the back right.
-        </p></feedback>
+        <feedback>
+          <p>
+            Character comparisons follow character ordering. Trace the
+            outer comparison before the nested one.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Front Left!</p>
         </statement>
-        <feedback><p>
-          z &gt; m is true because z comes after m. Also, the &gt; opearator is not inclusive.
-        </p></feedback>
+        <feedback>
+          <p>
+            Determine whether <c>'Z' &gt; 'M'</c> before entering the
+            front or back branch.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Front Right!</p>
         </statement>
-        <feedback><p>
-          z &gt; m is true because z comes after m.
-        </p></feedback>
+        <feedback>
+          <p>
+            Start with the outer comparison involving the last initial.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
           <p>Error!</p>
         </statement>
-        <feedback><p>
-          Character comparisons are legal, and useful in this case!
-        </p></feedback>
+        <feedback>
+          <p>
+            Character values can be compared with relational operators
+            such as <c>&gt;</c>.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </section>

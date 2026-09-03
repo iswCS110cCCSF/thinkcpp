@@ -101,6 +101,6 @@
     <calculator model="none" activecode="cpp" />
     <cross-references knowled="cross-page" />
     <!-- Set the base URL of where the online version is hosted to have links in other formats -->
-    <!-- <baseurl href="changetomywebsite.org"/> -->
+    <baseurl href="https://iswcs110cccsf.github.io/thinkcpp/"/>
   </html>
 </publication>

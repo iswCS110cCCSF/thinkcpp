@@ -1,172 +1,255 @@
-<?xml version="1.0" ?><section xml:id="chapter4_the-return-statement">
-  <title>The Return Statement</title>
-  <p>The <c>return</c> statement allows you to terminate the execution of a function before you reach the
-    end. One reason to use it is if you detect an error condition:</p>
+<?xml version="1.0" ?>
+<section xml:id="chapter4_the-return-statement">
+  <title>Return in Conditional Branches</title>
+
+  <p>
+    In Chapter 3, you learned that a <c>return</c> statement sends a value
+    back to the caller and ends the current function call. Conditional
+    statements allow a function to choose which value to return.
+  </p>
+
   <listing label="return_AC_1">
     <title>
-      This program will terminate with a return statement if the argument
-        provided is not positive. Try running the code as is. If you get
-        an error message, try changing the value of x.
+      This program returns a shipping cost based on the order total.
     </title>
-    <program interactive="activecode" line-numbers="yes" label="return_AC_1_editor">
+
+    <program interactive="activecode"
+             line-numbers="yes"
+             label="return_AC_1_editor">
       <code><![CDATA[
 #include <iostream>
-#include <cmath>
 
-void printLogarithm(double x) {
-    if (x <= 0.0) {
-        std::cout << "Positive numbers only, please." << std::endl;
-        return;
-    }
-    double result = log (x);
-    std::cout << "The log of x is " << result;
+// Function declaration
+double determine_shipping_cost(double order_total);
+
+int main() {
+    double order_total = 42.50;
+    double shipping_cost = determine_shipping_cost(order_total);
+
+    std::cout << "Shipping cost: $" << shipping_cost << '\n';
+
+    return 0;
 }
 
- int main() {
-     double y = -9.8;
-     printLogarithm(y);
-     return 0;
- }
+// Function definition
+double determine_shipping_cost(double order_total) {
+    if (order_total >= 50.0) {
+        return 0.0;
+    }
+    else {
+        return 5.99;
+    }
+}
         ]]></code>
     </program>
   </listing>
-  <p>This defines a function named <c>printLogarithm</c> that takes a <c>double</c> named x as a parameter. The first
-    thing it does is check whether x is less than or equal to zero, in which case it displays an
-    error message and then uses <c>return</c> to exit the function. The flow of execution immediately
-    returns to the caller and the remaining lines of the function are not executed.</p>
-  <p>I used a floating-point value on the right side of the condition because
-    there is a floating-point variable on the left.</p>
-  <p>Remember that any time you want to use one a function from the math library, you have to
-    include the header file <c>&lt;cmath&gt;</c>.</p>
-  <p>Putting <c>return 0;</c> in your code ends your program. Let's look back at a program from section 4.3.
-    How would your answer change?</p>
+
+  <p>
+    The function has two possible branches, and each branch returns a
+    value. Since exactly one branch of the <c>if</c>/<c>else</c> executes,
+    exactly one of these <c>return</c> statements is reached.
+  </p>
+
+  <p>
+    As soon as a <c>return</c> statement executes, the current function call
+    ends immediately and control returns to the caller. Statements that
+    appear later in that function are not executed during that call.
+  </p>
+
+  <p>
+    A <c>return</c> statement can also be used to leave a <c>void</c>
+    function early. In that case, no value follows the word <c>return</c>.
+  </p>
+
+  <listing label="return_AC_2">
+    <title>
+      This function returns early when it receives an invalid value.
+    </title>
+
+    <program interactive="activecode"
+             line-numbers="yes"
+             label="return_AC_2_editor">
+      <code><![CDATA[
+#include <cmath>
+#include <iostream>
+
+// Function declaration
+void report_logarithm(double number);
+
+int main() {
+    double value = -9.8;
+    report_logarithm(value);
+
+    return 0;
+}
+
+// Function definition
+void report_logarithm(double number) {
+    if (number <= 0.0) {
+        std::cout << "Positive numbers only, please.\n";
+        return;
+    }
+
+    double result = std::log(number);
+    std::cout << "The natural logarithm is " << result << '\n';
+}
+        ]]></code>
+    </program>
+  </listing>
+
+  <p>
+    If <c>number &lt;= 0.0</c> is true, the function prints the message
+    and then returns immediately. The calculation using <c>std::log</c>
+    is therefore skipped. If the condition is false, execution continues
+    with the statements after the <c>if</c>.
+  </p>
+
   <exercise label="return_1">
     <statement>
-      <p>What will print?</p>
-      <program>#include &lt;iostream&gt;
+      <p>What value does this function return when <c>score</c> is 84?</p>
 
-int main() {
-  int x = 8;
-  if (x &gt; 8) {
-    std::cout &lt;&lt; &quot;One! &quot;;
-  }
-  if (x &gt; 6) {
-    std::cout &lt;&lt; &quot;Two! &quot;;
-  }
-  if (x &gt; 3) {
-    std::cout &lt;&lt; &quot;Three!&quot; &lt;&lt; std::endl;
-  }
-  return 0;
-}</program>
+      <program><![CDATA[
+char determine_letter_grade(int score) {
+    if (score >= 90) {
+        return 'A';
+    }
+    else if (score >= 80) {
+        return 'B';
+    }
+    else if (score >= 70) {
+        return 'C';
+    }
+    else {
+        return 'D';
+    }
+}
+      ]]></program>
     </statement>
+
     <choices>
       <choice>
         <statement>
-          <p>One! Two! Three!</p>
+          <p><c>'A'</c></p>
         </statement>
-        <feedback><p>
-          Take a look at the first conditional statement more closely.
-        </p></feedback>
+        <feedback>
+          <p>
+            Evaluate the conditions from top to bottom and stop at the
+            first true branch.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>Two! Three!</p>
+          <p><c>'B'</c></p>
         </statement>
-        <feedback><p>
-          8 is not greater than 8, so it doesn't meet the first condition.
-        </p></feedback>
+        <feedback>
+          <p>
+            This is the first branch whose condition is true.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>Three!</p>
+          <p><c>'C'</c></p>
         </statement>
-        <feedback><p>
-          All of the following are &quot;if&quot; statements, with no return. There are no &quot;else&quot;
-            statements.
-        </p></feedback>
+        <feedback>
+          <p>
+            Check whether an earlier condition becomes true before this
+            branch is reached.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>Two!</p>
+          <p><c>'D'</c></p>
         </statement>
-        <feedback><p>
-          All of the following are &quot;if&quot; statements, with no return. There are no &quot;else&quot;
-            statements.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>One!</p>
-        </statement>
-        <feedback><p>
-          Take a look at the first conditional statement more closely.
-        </p></feedback>
+        <feedback>
+          <p>
+            The final <c>else</c> executes only when all earlier
+            conditions are false.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="return_2">
     <statement>
-      <p>What will print?</p>
-      <program>#include &lt;iostream&gt;
+      <p>What will this program print?</p>
+
+      <program><![CDATA[
+#include <iostream>
+
+void report_value(int number);
 
 int main() {
-  int x = 8;
-  if (x &gt; 8) {
-    std::cout &lt;&lt; &quot;One! &quot;;
+    report_value(-3);
+
     return 0;
-  }
-  if (x &gt; 6) {
-    std::cout &lt;&lt; &quot;Two! &quot;;
-    return 0;
-  }
-  if (x &gt; 3) {
-    std::cout &lt;&lt; &quot;Three!&quot; &lt;&lt; std::endl;
-    return 0;
-  }
-  return 0;
-}</program>
+}
+
+void report_value(int number) {
+    if (number < 0) {
+        std::cout << "Negative\n";
+        return;
+    }
+
+    std::cout << "Nonnegative\n";
+}
+      ]]></program>
     </statement>
+
     <choices>
-      <choice>
-        <statement>
-          <p>One! Two! Three!</p>
-        </statement>
-        <feedback><p>
-          Try again! 8 is not greater than 8, so the first condition will not be met.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Two! Three!</p>
-        </statement>
-        <feedback><p>
-          Try again! Remember what &quot;return 0&quot; is for!
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Three!</p>
-        </statement>
-        <feedback><p>
-          Try again! 8 is greater than 6!
-        </p></feedback>
-      </choice>
       <choice correct="yes">
         <statement>
-          <p>Two!</p>
+          <p>Negative</p>
         </statement>
-        <feedback><p>
-          Correct!
-        </p></feedback>
+        <feedback>
+          <p>
+            Once the <c>return</c> executes, the current function call
+            ends.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>One!</p>
+          <p>Nonnegative</p>
         </statement>
-        <feedback><p>
-          Take a look at the first conditional statement more closely.
-        </p></feedback>
+        <feedback>
+          <p>
+            Trace the condition first, and notice what happens immediately
+            after the first output statement.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>Negative followed by Nonnegative</p>
+        </statement>
+        <feedback>
+          <p>
+            Consider whether execution can continue to the later output
+            statement after <c>return</c> is reached.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>Nothing</p>
+        </statement>
+        <feedback>
+          <p>
+            Trace the body of <c>report_value</c> using the argument -3.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
 </section>

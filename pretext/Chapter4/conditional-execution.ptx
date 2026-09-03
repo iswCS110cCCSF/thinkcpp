@@ -1,117 +1,162 @@
-<?xml version="1.0" ?><section xml:id="chapter4_conditional-execution">
+<?xml version="1.0" ?>
+<section xml:id="chapter4_conditional-execution">
   <title>Conditional Execution</title>
-  <p>In order to write useful programs, we almost always need the ability to check certain
-    conditions and change the behavior of the program accordingly. <term>Conditional statements</term>
-    give us this ability. The simplest form is the if statement:</p>
-  <program>if (x &gt; 0) {
-  std::cout &lt;&lt; &quot;x is positive&quot; &lt;&lt; std::endl ;
-}</program>
-  <p>The expression in parentheses is called the condition. If it is true,
-    then the statements in brackets get executed. If the condition is not
-    true, nothing happens.</p>
-  <p>The condition can contain any of the <term>comparison operators</term>:</p>
-  <program>x == y               // x equals y
-x != y               // x is not equal to y
-x &gt; y                // x is greater than y
-x &lt; y                // x is less than y
-x &gt;= y               // x is greater than or equal to y
-x &lt;= y               // x is less than or equal to y</program>
-  <p>Although these operations are probably familiar to you, the syntax C++ uses is a little
-    different from mathematical symbols like <m>=</m>, <m>\neq</m>, and <m>\le</m>. A common error is
-    to use a single <c>=</c> instead of a double <c>==</c>. Remember that <c>=</c> is the assignment operator,
-    and <c>==</c> is a comparison operator. Also, there is no such thing as <c>=&lt;</c> or <c>=&gt;</c>.</p>
-  <p>Observe the conditional statement below.</p>
 
-  <listing label="composition_AC_31">
-    <title>
-      This program performs a calculation involving variables and assigns the result to a variable.
-    </title>
-    <program interactive="activecode" line-numbers="yes" label="composition_AC_31_editor">
-      <code><![CDATA[
-#include <iostream>
+  <p>
+    Useful programs often need to make decisions. A
+    <term>conditional statement</term> allows a program to execute code
+    only when a particular condition is true. The simplest form is an
+    <c>if</c> statement:
+  </p>
 
-int main() {
-    int minute = 3;
-    int percentage;
-    percentage = (minute * 100) / 60;
-    std::cout << percentage;
+  <program><![CDATA[
+if (x > 0) {
+    std::cout << "x is positive\n";
 }
-        ]]></code>
-    </program>
-  </listing>
+  ]]></program>
+
+  <p>
+    The expression inside the parentheses is called the
+    <term>condition</term>. It is evaluated as either <c>true</c> or
+    <c>false</c>. If the condition is true, the statements inside the
+    braces are executed. If the condition is false, those statements
+    are skipped and execution continues after the <c>if</c> statement.
+  </p>
+
+  <p>
+    Conditions often use <term>comparison operators</term>. A comparison
+    produces a Boolean value: either <c>true</c> or <c>false</c>.
+  </p>
+
+  <program><![CDATA[
+x == y    // x is equal to y
+x != y    // x is not equal to y
+x > y     // x is greater than y
+x < y     // x is less than y
+x >= y    // x is greater than or equal to y
+x <= y    // x is less than or equal to y
+  ]]></program>
+
+  <p>
+    The C++ syntax for comparison differs from ordinary mathematical
+    notation. In particular, <c>=</c> is the assignment operator, while
+    <c>==</c> tests whether two values are equal. The operators for
+    “less than or equal to” and “greater than or equal to” are
+    <c>&lt;=</c> and <c>&gt;=</c>, not <c>=&lt;</c> or <c>=&gt;</c>.
+  </p>
+
+<warning>
+  <p>
+    Accidentally writing <c>=</c> instead of <c>==</c> in a condition
+    may still produce valid C++ code. For example, <c>if (x = 5)</c>
+    assigns 5 to <c>x</c>. The assignment expression has the value 5,
+    which is nonzero and therefore interpreted as <c>true</c>.
+    In general, zero is interpreted as <c>false</c>, while a nonzero
+    value is interpreted as <c>true</c>.
+  </p>
+</warning>
 
   <listing label="conditional_execution_AC_1">
     <title>
-      This program shows how you can use conditional statements to
-        assess true/false situations.
+      This program uses several independent <c>if</c> statements.
     </title>
-    <program label="conditional_execution_AC_1_editor" interactive="activecode" line-numbers="yes">
+    <program label="conditional_execution_AC_1_editor"
+             interactive="activecode"
+             line-numbers="yes">
       <code><![CDATA[
 #include <iostream>
 
 int main() {
     int x = 12;
+
     if (x == 12) {
-        std::cout << "Equal!" << std::endl;
+        std::cout << "Equal!\n";
     }
+
     if (x != 13) {
-        std::cout << "Not equal!" << std::endl;
+        std::cout << "Not equal!\n";
     }
+
     if (x < 6) {
-        std::cout << "Bigger!" << std::endl;
+        std::cout << "Less than 6!\n";
     }
+
     return 0;
 }
         ]]></code>
     </program>
   </listing>
+
+  <p>
+    Each <c>if</c> statement above is checked independently. Since
+    <c>x</c> is 12, the first two conditions are true and their bodies
+    execute. The condition <c>x &lt; 6</c> is false, so that body is
+    skipped.
+  </p>
+
   <exercise label="conditional_execution_1">
     <statement>
-      <p>Observe the code above. <q>Bigger</q> doesn't print! How can you modify this so that all of
-        the statements print?</p>
+      <p>
+        Suppose <c>x</c> is 12. Which condition is true?
+      </p>
     </statement>
     <choices>
       <choice>
         <statement>
-          <p>Change the value of x to be anything less than 6.</p>
+          <p><c>x &lt; 6</c></p>
         </statement>
-        <feedback><p>
-          While &quot;Bigger&quot; would now print, the other two statements would not!
-        </p></feedback>
+        <feedback>
+          <p>
+            Compare 12 with 6 using the meaning of the less-than operator.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>Change the value of x to 13.</p>
+          <p><c>x == 13</c></p>
         </statement>
-        <feedback><p>
-          Now, none of the statements would print!
-        </p></feedback>
+        <feedback>
+          <p>
+            The equality operator tests whether the two values are the same.
+          </p>
+        </feedback>
       </choice>
+
       <choice correct="yes">
         <statement>
-          <p>Change the sign of the last conditional statement to x &gt; 6.</p>
+          <p><c>x != 13</c></p>
         </statement>
-        <feedback><p>
-          Now, all of the statements would print.
-        </p></feedback>
+        <feedback>
+          <p>
+            This comparison is true because the two values are different.
+          </p>
+        </feedback>
       </choice>
+
       <choice>
         <statement>
-          <p>Change the value of the return from 0 to &quot;Bigger!&quot;</p>
+          <p><c>x &gt; 20</c></p>
         </statement>
-        <feedback><p>
-          main returns an int, so trying to make it return a string will cause an error.
-        </p></feedback>
+        <feedback>
+          <p>
+            Compare the value of <c>x</c> with 20 before deciding whether
+            this condition is true.
+          </p>
+        </feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="conditional_execution_2">
     <statement>
-      <p>Match the operator to values of x and y that would return true.</p>
+      <p>Match each comparison operator with values that make it true.</p>
     </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
+    <feedback>
+      <p>
+        Read each comparison from left to right and compare the two values.
+      </p>
+    </feedback>
     <cardsort>
       <match>
         <premise order="1">x &gt; y</premise>
@@ -127,13 +172,16 @@ int main() {
       </match>
     </cardsort>
   </exercise>
+
   <exercise label="conditional_execution_3">
     <statement>
-      <p>Match the operator to values of x and y that would return true.</p>
+      <p>Match each comparison operator with values that make it true.</p>
     </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
+    <feedback>
+      <p>
+        Pay attention to whether equality is allowed by the operator.
+      </p>
+    </feedback>
     <cardsort>
       <match>
         <premise order="1">x == y</premise>
