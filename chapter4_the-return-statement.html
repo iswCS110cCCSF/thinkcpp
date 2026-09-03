@@ -14,7 +14,7 @@
 <!--******************************************-->
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TCPP2 The Return Statement</title>
+<title>TCPP2 Return in Conditional Branches</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -216,15 +216,15 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
 <ul class="structural toc-item-list contains-active" id="ptx-toc-group-conditionals">
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Modulus Operator</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Remainder Operator</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Alternative Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Chained Conditionals</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_nested-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Nested Conditionals</span></a></div></li>
-<li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">The Return Statement</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Infinite Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Stack Diagrams for Recursive Functions</span></a></div></li>
+<li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Return in Conditional Branches</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Optional: Introduction to Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Optional: Infinite Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Optional: Stack Diagrams for Recursive Functions</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter4_glossary.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Glossary</span></a></div>
 <ul id="ptx-toc-group-chapter4_glossary" class="structural toc-item-list">
@@ -538,90 +538,114 @@ eBookConfig.enable_chatcodes =  false;
 <main class="ptx-main"><div id="ptx-content" class="ptx-content">
 <section class="section" id="chapter4_the-return-statement">
 <h1 class="heading hide-type">
-<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The Return Statement</span>
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Return in Conditional Branches</span>
 </h1>
-<div class="para" id="chapter4_the-return-statement-2">The <code class="code-inline tex2jax_ignore">return</code> statement allows you to terminate the execution of a function before you reach the end. One reason to use it is if you detect an error condition:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_the-return-statement-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_the-return-statement-2">In Chapter 3, you learned that a <code class="code-inline tex2jax_ignore">return</code> statement sends a value back to the caller and ends the current function call. Conditional statements allow a function to choose which value to return.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_the-return-statement-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="return_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program will terminate with a return statement if the argument provided is not positive. Try running the code as is. If you get an error message, try changing the value of x.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.6.1: This program will terminate with a return statement if the argument provided is not positive. Try running the code as is. If you get an error message, try changing the value of x."><a tabindex="-1" href="#return_AC_1" title="Copy heading and permalink for Listing 4.6.1: This program will terminate with a return statement if the argument provided is not positive. Try running the code as is. If you get an error message, try changing the value of x." aria-label="Copy heading and permalink for Listing 4.6.1: This program will terminate with a return statement if the argument provided is not positive. Try running the code as is. If you get an error message, try changing the value of x.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-return_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
-#include &lt;cmath&gt;
+<figure class="listing figure-like" id="return_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program returns a shipping cost based on the order total.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.6.1: This program returns a shipping cost based on the order total."><a tabindex="-1" href="#return_AC_1" title="Copy heading and permalink for Listing 4.6.1: This program returns a shipping cost based on the order total." aria-label="Copy heading and permalink for Listing 4.6.1: This program returns a shipping cost based on the order total.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-return_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void printLogarithm(double x) {
-    if (x &lt;= 0.0) {
-        std::cout &lt;&lt; "Positive numbers only, please." &lt;&lt; std::endl;
-        return;
-    }
-    double result = log (x);
-    std::cout &lt;&lt; "The log of x is " &lt;&lt; result;
+// Function declaration
+double determine_shipping_cost(double order_total);
+
+int main() {
+    double order_total = 42.50;
+    double shipping_cost = determine_shipping_cost(order_total);
+
+    std::cout &lt;&lt; "Shipping cost: $" &lt;&lt; shipping_cost &lt;&lt; '\n';
+
+    return 0;
 }
 
- int main() {
-     double y = -9.8;
-     printLogarithm(y);
-     return 0;
- }
+// Function definition
+double determine_shipping_cost(double order_total) {
+    if (order_total &gt;= 50.0) {
+        return 0.0;
+    }
+    else {
+        return 5.99;
+    }
+}
 </code></pre></div>
 </figure>
-<div class="para" id="chapter4_the-return-statement-4">This defines a function named <code class="code-inline tex2jax_ignore">printLogarithm</code> that takes a <code class="code-inline tex2jax_ignore">double</code> named x as a parameter. The first thing it does is check whether x is less than or equal to zero, in which case it displays an error message and then uses <code class="code-inline tex2jax_ignore">return</code> to exit the function. The flow of execution immediately returns to the caller and the remaining lines of the function are not executed.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_the-return-statement-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_the-return-statement-4">The function has two possible branches, and each branch returns a value. Since exactly one branch of the <code class="code-inline tex2jax_ignore">if</code>/<code class="code-inline tex2jax_ignore">else</code> executes, exactly one of these <code class="code-inline tex2jax_ignore">return</code> statements is reached.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_the-return-statement-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter4_the-return-statement-5">I used a floating-point value on the right side of the condition because there is a floating-point variable on the left.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_the-return-statement-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_the-return-statement-5">As soon as a <code class="code-inline tex2jax_ignore">return</code> statement executes, the current function call ends immediately and control returns to the caller. Statements that appear later in that function are not executed during that call.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_the-return-statement-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter4_the-return-statement-6">Remember that any time you want to use one a function from the math library, you have to include the header file <code class="code-inline tex2jax_ignore">&lt;cmath&gt;</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_the-return-statement-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_the-return-statement-6">A <code class="code-inline tex2jax_ignore">return</code> statement can also be used to leave a <code class="code-inline tex2jax_ignore">void</code> function early. In that case, no value follows the word <code class="code-inline tex2jax_ignore">return</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_the-return-statement-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter4_the-return-statement-7">Putting <code class="code-inline tex2jax_ignore">return 0;</code> in your code ends your program. Let’s look back at a program from section 4.3. How would your answer change?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_the-return-statement-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<figure class="listing figure-like" id="return_AC_2"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This function returns early when it receives an invalid value.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.6.2: This function returns early when it receives an invalid value."><a tabindex="-1" href="#return_AC_2" title="Copy heading and permalink for Listing 4.6.2: This function returns early when it receives an invalid value." aria-label="Copy heading and permalink for Listing 4.6.2: This function returns early when it receives an invalid value.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-return_AC_2_editor" class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+
+// Function declaration
+void report_logarithm(double number);
+
+int main() {
+    double value = -9.8;
+    report_logarithm(value);
+
+    return 0;
+}
+
+// Function definition
+void report_logarithm(double number) {
+    if (number &lt;= 0.0) {
+        std::cout &lt;&lt; "Positive numbers only, please.\n";
+        return;
+    }
+
+    double result = std::log(number);
+    std::cout &lt;&lt; "The natural logarithm is " &lt;&lt; result &lt;&lt; '\n';
+}
+</code></pre></div>
+</figure>
+<div class="para" id="chapter4_the-return-statement-8">If <code class="code-inline tex2jax_ignore">number &lt;= 0.0</code> is true, the function prints the message and then returns immediately. The calculation using <code class="code-inline tex2jax_ignore">std::log</code> is therefore skipped. If the condition is false, execution continues with the statements after the <code class="code-inline tex2jax_ignore">if</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_the-return-statement-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="exercise exercise-like" id="return_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="return_1-1-1">What will print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#return_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
-
-int main() {
-  int x = 8;
-  if (x &gt; 8) {
-    std::cout &lt;&lt; "One! ";
-  }
-  if (x &gt; 6) {
-    std::cout &lt;&lt; "Two! ";
-  }
-  if (x &gt; 3) {
-    std::cout &lt;&lt; "Three!" &lt;&lt; std::endl;
-  }
-  return 0;
+<div class="para" id="return_1-1-1">What value does this function return when <code class="code-inline tex2jax_ignore">score</code> is 84?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#return_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">char determine_letter_grade(int score) {
+    if (score &gt;= 90) {
+        return 'A';
+    }
+    else if (score &gt;= 80) {
+        return 'B';
+    }
+    else if (score &gt;= 70) {
+        return 'C';
+    }
+    else {
+        return 'D';
+    }
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-return_1" data-multipleanswers="false">
 <li data-component="answer" id="rs-return_1_opt_a">
-<div class="para" id="return_1-2-1-1-1">One! Two! Three!</div>
+<div class="para" id="return_1-2-1-1-1"><code class="code-inline tex2jax_ignore">'A'</code></div>
 </li>
 <li data-component="feedback" id="rs-return_1_opt_a">
-<div class="para" id="return_1-2-1-2-1">Take a look at the first conditional statement more closely.</div>
+<div class="para" id="return_1-2-1-2-1">Evaluate the conditions from top to bottom and stop at the first true branch.</div>
 </li>
 <li data-component="answer" id="rs-return_1_opt_b" data-correct="">
-<div class="para" id="return_1-2-2-1-1">Two! Three!</div>
+<div class="para" id="return_1-2-2-1-1"><code class="code-inline tex2jax_ignore">'B'</code></div>
 </li>
 <li data-component="feedback" id="rs-return_1_opt_b">
-<div class="para" id="return_1-2-2-2-1">8 is not greater than 8, so it doesn’t meet the first condition.</div>
+<div class="para" id="return_1-2-2-2-1">This is the first branch whose condition is true.</div>
 </li>
 <li data-component="answer" id="rs-return_1_opt_c">
-<div class="para" id="return_1-2-3-1-1">Three!</div>
+<div class="para" id="return_1-2-3-1-1"><code class="code-inline tex2jax_ignore">'C'</code></div>
 </li>
 <li data-component="feedback" id="rs-return_1_opt_c">
-<div class="para" id="return_1-2-3-2-1">All of the following are "if" statements, with no return. There are no "else" statements.</div>
+<div class="para" id="return_1-2-3-2-1">Check whether an earlier condition becomes true before this branch is reached.</div>
 </li>
 <li data-component="answer" id="rs-return_1_opt_d">
-<div class="para" id="return_1-2-4-1-1">Two!</div>
+<div class="para" id="return_1-2-4-1-1"><code class="code-inline tex2jax_ignore">'D'</code></div>
 </li>
 <li data-component="feedback" id="rs-return_1_opt_d">
-<div class="para" id="return_1-2-4-2-1">All of the following are "if" statements, with no return. There are no "else" statements.</div>
-</li>
-<li data-component="answer" id="rs-return_1_opt_e">
-<div class="para" id="return_1-2-5-1-1">One!</div>
-</li>
-<li data-component="feedback" id="rs-return_1_opt_e">
-<div class="para" id="return_1-2-5-2-1">Take a look at the first conditional statement more closely.</div>
+<div class="para" id="return_1-2-4-2-1">The final <code class="code-inline tex2jax_ignore">else</code> executes only when all earlier conditions are false.</div>
 </li>
 </ul>
 </div></div>
@@ -632,62 +656,56 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="return_2-1-1">What will print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#return_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="return_2-1-1">What will this program print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#return_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
+void report_value(int number);
+
 int main() {
-  int x = 8;
-  if (x &gt; 8) {
-    std::cout &lt;&lt; "One! ";
+    report_value(-3);
+
     return 0;
-  }
-  if (x &gt; 6) {
-    std::cout &lt;&lt; "Two! ";
-    return 0;
-  }
-  if (x &gt; 3) {
-    std::cout &lt;&lt; "Three!" &lt;&lt; std::endl;
-    return 0;
-  }
-  return 0;
+}
+
+void report_value(int number) {
+    if (number &lt; 0) {
+        std::cout &lt;&lt; "Negative\n";
+        return;
+    }
+
+    std::cout &lt;&lt; "Nonnegative\n";
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-return_2" data-multipleanswers="false">
-<li data-component="answer" id="rs-return_2_opt_a">
-<div class="para" id="return_2-2-1-1-1">One! Two! Three!</div>
+<li data-component="answer" id="rs-return_2_opt_a" data-correct="">
+<div class="para" id="return_2-2-1-1-1">Negative</div>
 </li>
 <li data-component="feedback" id="rs-return_2_opt_a">
-<div class="para" id="return_2-2-1-2-1">Try again! 8 is not greater than 8, so the first condition will not be met.</div>
+<div class="para" id="return_2-2-1-2-1">Once the <code class="code-inline tex2jax_ignore">return</code> executes, the current function call ends.</div>
 </li>
 <li data-component="answer" id="rs-return_2_opt_b">
-<div class="para" id="return_2-2-2-1-1">Two! Three!</div>
+<div class="para" id="return_2-2-2-1-1">Nonnegative</div>
 </li>
 <li data-component="feedback" id="rs-return_2_opt_b">
-<div class="para" id="return_2-2-2-2-1">Try again! Remember what "return 0" is for!</div>
+<div class="para" id="return_2-2-2-2-1">Trace the condition first, and notice what happens immediately after the first output statement.</div>
 </li>
 <li data-component="answer" id="rs-return_2_opt_c">
-<div class="para" id="return_2-2-3-1-1">Three!</div>
+<div class="para" id="return_2-2-3-1-1">Negative followed by Nonnegative</div>
 </li>
 <li data-component="feedback" id="rs-return_2_opt_c">
-<div class="para" id="return_2-2-3-2-1">Try again! 8 is greater than 6!</div>
+<div class="para" id="return_2-2-3-2-1">Consider whether execution can continue to the later output statement after <code class="code-inline tex2jax_ignore">return</code> is reached.</div>
 </li>
-<li data-component="answer" id="rs-return_2_opt_d" data-correct="">
-<div class="para" id="return_2-2-4-1-1">Two!</div>
+<li data-component="answer" id="rs-return_2_opt_d">
+<div class="para" id="return_2-2-4-1-1">Nothing</div>
 </li>
 <li data-component="feedback" id="rs-return_2_opt_d">
-<div class="para" id="return_2-2-4-2-1">Correct!</div>
-</li>
-<li data-component="answer" id="rs-return_2_opt_e">
-<div class="para" id="return_2-2-5-1-1">One!</div>
-</li>
-<li data-component="feedback" id="rs-return_2_opt_e">
-<div class="para" id="return_2-2-5-2-1">Take a look at the first conditional statement more closely.</div>
+<div class="para" id="return_2-2-4-2-1">Trace the body of <code class="code-inline tex2jax_ignore">report_value</code> using the argument -3.</div>
 </li>
 </ul>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.6.2"><a tabindex="-1" href="#return_2" title="Copy heading and permalink for Checkpoint 4.6.2" aria-label="Copy heading and permalink for Checkpoint 4.6.2">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Section 4.6: The Return Statement"><a tabindex="-1" href="#chapter4_the-return-statement" title="Copy heading and permalink for Section 4.6: The Return Statement" aria-label="Copy heading and permalink for Section 4.6: The Return Statement">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Section 4.6: Return in Conditional Branches"><a tabindex="-1" href="#chapter4_the-return-statement" title="Copy heading and permalink for Section 4.6: Return in Conditional Branches" aria-label="Copy heading and permalink for Section 4.6: Return in Conditional Branches">🔗</a></div>
 </section>
 </div>
 <div id="ptx-content-footer" class="ptx-content-footer">

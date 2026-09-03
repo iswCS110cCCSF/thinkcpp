@@ -4866,8 +4866,8 @@ var ptx_lunr_docs = [
   "url": "chapter4_the-modulus-operator.html",
   "type": "Section",
   "number": "4.1",
-  "title": "The Modulus Operator",
-  "body": " The Modulus Operator  The modulus operator works on integers (and integer expressions) and yields the remainder when the first operand is divided by the second. In C++, the modulus operator is a percent sign, % . The syntax is exactly the same as for other operators:   This program shows the difference between the division operator and the modulus operator.   #include <iostream> int main() { int quotient = 7 \/ 3; int remainder = 7 % 3; std::cout << quotient << std::endl; std::cout << remainder << std::endl; return 0; }    The first operator, integer division, yields 2. The second operator yields 1. Thus, 7 divided by 3 is 2 with 1 left over.  The modulus operator turns out to be surprisingly useful. For example, you can check whether one number is divisible by another: if x % y is zero, then x is divisible by y.  Also, you can use the modulus operator to extract the rightmost digit or digits from a number. For example, x % 10 yields the rightmost digit of x (in base 10). Similarly x % 100 yields the last two digits.    How do you know whether the variable x is odd?      Use x % 2, and if the result is 0, it is odd.   If you divide a number by two and it has no remainder, that means it is an even number!     Use x % 2, and if the result is 1, it is odd.   If you divide a number by two and it has a remainder of one, that means it is an odd number!     Use x \/ 2, and if the result is 0, it is odd.   Dividing a number by two won't give us the information we want.     Use x \/ 2, and if the result is 1, it is odd.   Dividing a number by two won't give us the information we want.       Match the modulo expression to its result.   Try again!    3 % 2  1    2 % 3  2    6 % 2  0    9 % 6  3     "
+  "title": "The Remainder Operator",
+  "body": " The Remainder Operator  The remainder operator works on integer operands and yields the remainder when the first operand is divided by the second. In C++, the remainder operator is a percent sign, % . It is also commonly called the modulus or modulo operator.   This program shows the difference between integer division and the remainder operator.   #include <iostream> int main() { int quotient = 7 \/ 3; int remainder = 7 % 3; std::cout << quotient << '\\n'; std::cout << remainder << '\\n'; return 0; }    Integer division yields 2, while the remainder operator yields 1. Thus, 7 divided by 3 is 2 with 1 left over.  The remainder operator is useful for checking divisibility. If x % y is zero, then x is divisible by y , provided that y is not zero.  For nonnegative integers, the remainder operator can also be used to extract the rightmost digit or digits of a number. For example, x % 10 yields the rightmost decimal digit of x . Similarly, x % 100 yields the last two decimal digits.    Which expression correctly tests whether the integer variable x is odd?      x % 2 == 0    A remainder of zero when dividing by 2 indicates an even number.      x % 2 != 0    An odd integer has a nonzero remainder when divided by 2.      x \/ 2 == 0    Integer division gives a quotient, not the remainder needed to determine whether a number is odd.      x \/ 2 != 0    Integer division gives a quotient, not the remainder needed to determine whether a number is odd.        Match each remainder expression to its result.    Remember that % gives the remainder after integer division.     3 % 2  1    2 % 3  2    6 % 2  0    9 % 6  3     "
 },
 {
   "id": "chapter4_the-modulus-operator-2",
@@ -4876,7 +4876,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The modulus operator works on integers (and integer expressions) and yields the remainder when the first operand is divided by the second. In C++, the modulus operator is a percent sign, % . The syntax is exactly the same as for other operators: "
+  "body": "The remainder operator works on integer operands and yields the remainder when the first operand is divided by the second. In C++, the remainder operator is a percent sign, % . It is also commonly called the modulus or modulo operator. "
 },
 {
   "id": "mod_operator_AC_1",
@@ -4884,8 +4884,8 @@ var ptx_lunr_docs = [
   "url": "chapter4_the-modulus-operator.html#mod_operator_AC_1",
   "type": "Listing",
   "number": "4.1.1",
-  "title": "This program shows the difference between the division operator and the modulus operator.",
-  "body": " This program shows the difference between the division operator and the modulus operator.   #include <iostream> int main() { int quotient = 7 \/ 3; int remainder = 7 % 3; std::cout << quotient << std::endl; std::cout << remainder << std::endl; return 0; }   "
+  "title": "This program shows the difference between integer division and the remainder operator.",
+  "body": " This program shows the difference between integer division and the remainder operator.   #include <iostream> int main() { int quotient = 7 \/ 3; int remainder = 7 % 3; std::cout << quotient << '\\n'; std::cout << remainder << '\\n'; return 0; }   "
 },
 {
   "id": "chapter4_the-modulus-operator-4",
@@ -4894,7 +4894,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The first operator, integer division, yields 2. The second operator yields 1. Thus, 7 divided by 3 is 2 with 1 left over. "
+  "body": "Integer division yields 2, while the remainder operator yields 1. Thus, 7 divided by 3 is 2 with 1 left over. "
 },
 {
   "id": "chapter4_the-modulus-operator-5",
@@ -4903,7 +4903,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The modulus operator turns out to be surprisingly useful. For example, you can check whether one number is divisible by another: if x % y is zero, then x is divisible by y. "
+  "body": "The remainder operator is useful for checking divisibility. If x % y is zero, then x is divisible by y , provided that y is not zero. "
 },
 {
   "id": "chapter4_the-modulus-operator-6",
@@ -4912,7 +4912,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Also, you can use the modulus operator to extract the rightmost digit or digits from a number. For example, x % 10 yields the rightmost digit of x (in base 10). Similarly x % 100 yields the last two digits. "
+  "body": "For nonnegative integers, the remainder operator can also be used to extract the rightmost digit or digits of a number. For example, x % 10 yields the rightmost decimal digit of x . Similarly, x % 100 yields the last two decimal digits. "
 },
 {
   "id": "mod_operator_1",
@@ -4921,7 +4921,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.1.1",
   "title": "",
-  "body": "  How do you know whether the variable x is odd?      Use x % 2, and if the result is 0, it is odd.   If you divide a number by two and it has no remainder, that means it is an even number!     Use x % 2, and if the result is 1, it is odd.   If you divide a number by two and it has a remainder of one, that means it is an odd number!     Use x \/ 2, and if the result is 0, it is odd.   Dividing a number by two won't give us the information we want.     Use x \/ 2, and if the result is 1, it is odd.   Dividing a number by two won't give us the information we want.    "
+  "body": "  Which expression correctly tests whether the integer variable x is odd?      x % 2 == 0    A remainder of zero when dividing by 2 indicates an even number.      x % 2 != 0    An odd integer has a nonzero remainder when divided by 2.      x \/ 2 == 0    Integer division gives a quotient, not the remainder needed to determine whether a number is odd.      x \/ 2 != 0    Integer division gives a quotient, not the remainder needed to determine whether a number is odd.     "
 },
 {
   "id": "mod_operator_2",
@@ -4930,7 +4930,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.1.2",
   "title": "",
-  "body": "  Match the modulo expression to its result.   Try again!    3 % 2  1    2 % 3  2    6 % 2  0    9 % 6  3    "
+  "body": "  Match each remainder expression to its result.    Remember that % gives the remainder after integer division.     3 % 2  1    2 % 3  2    6 % 2  0    9 % 6  3    "
 },
 {
   "id": "chapter4_conditional-execution",
@@ -4939,7 +4939,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.2",
   "title": "Conditional Execution",
-  "body": " Conditional Execution  In order to write useful programs, we almost always need the ability to check certain conditions and change the behavior of the program accordingly. Conditional statements give us this ability. The simplest form is the if statement:  if (x > 0) { std::cout << \"x is positive\" << std::endl ; }  The expression in parentheses is called the condition. If it is true, then the statements in brackets get executed. If the condition is not true, nothing happens.  The condition can contain any of the comparison operators :  x == y \/\/ x equals y x != y \/\/ x is not equal to y x > y \/\/ x is greater than y x < y \/\/ x is less than y x >= y \/\/ x is greater than or equal to y x <= y \/\/ x is less than or equal to y  Although these operations are probably familiar to you, the syntax C++ uses is a little different from mathematical symbols like , , and . A common error is to use a single = instead of a double == . Remember that = is the assignment operator, and == is a comparison operator. Also, there is no such thing as =< or => .  Observe the conditional statement below.   This program performs a calculation involving variables and assigns the result to a variable.   #include <iostream> int main() { int minute = 3; int percentage; percentage = (minute * 100) \/ 60; std::cout << percentage; }     This program shows how you can use conditional statements to assess true\/false situations.   #include <iostream> int main() { int x = 12; if (x == 12) { std::cout << \"Equal!\" << std::endl; } if (x != 13) { std::cout << \"Not equal!\" << std::endl; } if (x < 6) { std::cout << \"Bigger!\" << std::endl; } return 0; }      Observe the code above. Bigger doesn't print! How can you modify this so that all of the statements print?      Change the value of x to be anything less than 6.   While \"Bigger\" would now print, the other two statements would not!     Change the value of x to 13.   Now, none of the statements would print!     Change the sign of the last conditional statement to x > 6.   Now, all of the statements would print.     Change the value of the return from 0 to \"Bigger!\"   main returns an int, so trying to make it return a string will cause an error.       Match the operator to values of x and y that would return true.   Try again!    x > y  x = 10, y = 2    x <= y  x = 5, y = 5    x < y  x = 2, y = 10       Match the operator to values of x and y that would return true.   Try again!    x == y  x = 3, y = 3    x >= y  x = 6, y = 2    x < y  x = 2, y = 6     "
+  "body": " Conditional Execution  Useful programs often need to make decisions. A conditional statement allows a program to execute code only when a particular condition is true. The simplest form is an if statement:  if (x > 0) { std::cout << \"x is positive\\n\"; }  The expression inside the parentheses is called the condition . It is evaluated as either true or false . If the condition is true, the statements inside the braces are executed. If the condition is false, those statements are skipped and execution continues after the if statement.  Conditions often use comparison operators . A comparison produces a Boolean value: either true or false .  x == y \/\/ x is equal to y x != y \/\/ x is not equal to y x > y \/\/ x is greater than y x < y \/\/ x is less than y x >= y \/\/ x is greater than or equal to y x <= y \/\/ x is less than or equal to y  The C++ syntax for comparison differs from ordinary mathematical notation. In particular, = is the assignment operator, while == tests whether two values are equal. The operators for “less than or equal to” and “greater than or equal to” are <= and >= , not =< or => .   Accidentally writing = instead of == in a condition may still produce valid C++ code. For example, if (x = 5) assigns 5 to x . The assignment expression has the value 5, which is nonzero and therefore interpreted as true . In general, zero is interpreted as false , while a nonzero value is interpreted as true .    This program uses several independent if statements.   #include <iostream> int main() { int x = 12; if (x == 12) { std::cout << \"Equal!\\n\"; } if (x != 13) { std::cout << \"Not equal!\\n\"; } if (x < 6) { std::cout << \"Less than 6!\\n\"; } return 0; }    Each if statement above is checked independently. Since x is 12, the first two conditions are true and their bodies execute. The condition x < 6 is false, so that body is skipped.    Suppose x is 12. Which condition is true?      x < 6    Compare 12 with 6 using the meaning of the less-than operator.      x == 13    The equality operator tests whether the two values are the same.      x != 13    This comparison is true because the two values are different.      x > 20    Compare the value of x with 20 before deciding whether this condition is true.        Match each comparison operator with values that make it true.    Read each comparison from left to right and compare the two values.     x > y  x = 10, y = 2    x <= y  x = 5, y = 5    x < y  x = 2, y = 10       Match each comparison operator with values that make it true.    Pay attention to whether equality is allowed by the operator.     x == y  x = 3, y = 3    x >= y  x = 6, y = 2    x < y  x = 2, y = 6     "
 },
 {
   "id": "chapter4_conditional-execution-2",
@@ -4948,7 +4948,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In order to write useful programs, we almost always need the ability to check certain conditions and change the behavior of the program accordingly. Conditional statements give us this ability. The simplest form is the if statement: "
+  "body": "Useful programs often need to make decisions. A conditional statement allows a program to execute code only when a particular condition is true. The simplest form is an if statement: "
 },
 {
   "id": "chapter4_conditional-execution-4",
@@ -4957,7 +4957,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The expression in parentheses is called the condition. If it is true, then the statements in brackets get executed. If the condition is not true, nothing happens. "
+  "body": "The expression inside the parentheses is called the condition . It is evaluated as either true or false . If the condition is true, the statements inside the braces are executed. If the condition is false, those statements are skipped and execution continues after the if statement. "
 },
 {
   "id": "chapter4_conditional-execution-5",
@@ -4966,7 +4966,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The condition can contain any of the comparison operators : "
+  "body": "Conditions often use comparison operators . A comparison produces a Boolean value: either true or false . "
 },
 {
   "id": "chapter4_conditional-execution-7",
@@ -4975,34 +4975,34 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Although these operations are probably familiar to you, the syntax C++ uses is a little different from mathematical symbols like , , and . A common error is to use a single = instead of a double == . Remember that = is the assignment operator, and == is a comparison operator. Also, there is no such thing as =< or => . "
+  "body": "The C++ syntax for comparison differs from ordinary mathematical notation. In particular, = is the assignment operator, while == tests whether two values are equal. The operators for “less than or equal to” and “greater than or equal to” are <= and >= , not =< or => . "
 },
 {
   "id": "chapter4_conditional-execution-8",
   "level": "2",
   "url": "chapter4_conditional-execution.html#chapter4_conditional-execution-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Observe the conditional statement below. "
-},
-{
-  "id": "composition_AC_31",
-  "level": "2",
-  "url": "chapter4_conditional-execution.html#composition_AC_31",
-  "type": "Listing",
+  "type": "Warning",
   "number": "4.2.1",
-  "title": "This program performs a calculation involving variables and assigns the result to a variable.",
-  "body": " This program performs a calculation involving variables and assigns the result to a variable.   #include <iostream> int main() { int minute = 3; int percentage; percentage = (minute * 100) \/ 60; std::cout << percentage; }   "
+  "title": "",
+  "body": " Accidentally writing = instead of == in a condition may still produce valid C++ code. For example, if (x = 5) assigns 5 to x . The assignment expression has the value 5, which is nonzero and therefore interpreted as true . In general, zero is interpreted as false , while a nonzero value is interpreted as true .  "
 },
 {
   "id": "conditional_execution_AC_1",
   "level": "2",
   "url": "chapter4_conditional-execution.html#conditional_execution_AC_1",
   "type": "Listing",
-  "number": "4.2.2",
-  "title": "This program shows how you can use conditional statements to assess true\/false situations.",
-  "body": " This program shows how you can use conditional statements to assess true\/false situations.   #include <iostream> int main() { int x = 12; if (x == 12) { std::cout << \"Equal!\" << std::endl; } if (x != 13) { std::cout << \"Not equal!\" << std::endl; } if (x < 6) { std::cout << \"Bigger!\" << std::endl; } return 0; }   "
+  "number": "4.2.1",
+  "title": "This program uses several independent <code class=\"code-inline tex2jax_ignore\">if<\/code> statements.",
+  "body": " This program uses several independent if statements.   #include <iostream> int main() { int x = 12; if (x == 12) { std::cout << \"Equal!\\n\"; } if (x != 13) { std::cout << \"Not equal!\\n\"; } if (x < 6) { std::cout << \"Less than 6!\\n\"; } return 0; }   "
+},
+{
+  "id": "chapter4_conditional-execution-10",
+  "level": "2",
+  "url": "chapter4_conditional-execution.html#chapter4_conditional-execution-10",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Each if statement above is checked independently. Since x is 12, the first two conditions are true and their bodies execute. The condition x < 6 is false, so that body is skipped. "
 },
 {
   "id": "conditional_execution_1",
@@ -5011,7 +5011,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.2.1",
   "title": "",
-  "body": "  Observe the code above. Bigger doesn't print! How can you modify this so that all of the statements print?      Change the value of x to be anything less than 6.   While \"Bigger\" would now print, the other two statements would not!     Change the value of x to 13.   Now, none of the statements would print!     Change the sign of the last conditional statement to x > 6.   Now, all of the statements would print.     Change the value of the return from 0 to \"Bigger!\"   main returns an int, so trying to make it return a string will cause an error.    "
+  "body": "  Suppose x is 12. Which condition is true?      x < 6    Compare 12 with 6 using the meaning of the less-than operator.      x == 13    The equality operator tests whether the two values are the same.      x != 13    This comparison is true because the two values are different.      x > 20    Compare the value of x with 20 before deciding whether this condition is true.     "
 },
 {
   "id": "conditional_execution_2",
@@ -5020,7 +5020,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.2.2",
   "title": "",
-  "body": "  Match the operator to values of x and y that would return true.   Try again!    x > y  x = 10, y = 2    x <= y  x = 5, y = 5    x < y  x = 2, y = 10    "
+  "body": "  Match each comparison operator with values that make it true.    Read each comparison from left to right and compare the two values.     x > y  x = 10, y = 2    x <= y  x = 5, y = 5    x < y  x = 2, y = 10    "
 },
 {
   "id": "conditional_execution_3",
@@ -5029,7 +5029,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.2.3",
   "title": "",
-  "body": "  Match the operator to values of x and y that would return true.   Try again!    x == y  x = 3, y = 3    x >= y  x = 6, y = 2    x < y  x = 2, y = 6    "
+  "body": "  Match each comparison operator with values that make it true.    Pay attention to whether equality is allowed by the operator.     x == y  x = 3, y = 3    x >= y  x = 6, y = 2    x < y  x = 2, y = 6    "
 },
 {
   "id": "chapter4_alternative-execution-alternative",
@@ -5038,7 +5038,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.3",
   "title": "Alternative Execution",
-  "body": " Alternative Execution  A second form of conditional execution is alternative execution, in which there are two possibilities, and the condition determines which one gets executed. The syntax looks like:  if (x % 2 == 0) { std::cout << \"x is even\" << std::endl ; } else { std::cout << \"x is odd\" << std::endl ; }  If the remainder when x is divided by 2 is zero, then we know that x is even, and this code displays a message to that effect. If the condition is false, the second set of statements is executed. Since the condition must be true or false, exactly one of the alternatives will be executed.  As an aside, if you think you might want to check the parity (evenness or oddness) of numbers often, you might want to wrap this code up in a function, as follows:  void printParity(int x) { if (x % 2 == 0) { std::cout << \"x is even\" << std::endl ; } else { std::cout << \"x is odd\" << std::endl ; } }  Now you have a function named printParity that will display an appropriate message for any integer you care to provide. In main you would call this function as follows:  printParity(17);  Always remember that when you call a function, you do not have to declare the types of the arguments you provide. C++ can figure out what type they are. You should resist the temptation to write things like:  int number = 17; printParity(int number); \/\/ WRONG!!!   This program shows you how the print parity function works. Feel free to modify the values of number and otherNumber to see how the output is changed.   #include <iostream> void printParity(int x) { if (x % 2 == 0) { std::cout << \"x is even\" << std::endl; } else { std::cout << \"x is odd\" << std::endl; } } int main() { int number = 17; printParity(number); int otherNumber = 18; printParity(otherNumber); return 0; }      What will be printed after main is executed?  #include <iostream> void weather(int temp) { if (temp < 52) { std::cout << \"It is cold!\"; } else { std::cout << \"It is warm!\"; } } int main() { int degrees = 52; weather(degrees); }      It is cold!   That statement would print if degrees was less than 50.     It is warm!   Correct!     Nothing prints.   One of the statements is satisfied, so something does print.     Error message.   There is nothing in the code below that would generate an error.       Construct a block of code that correctly goes through alternative execution for pricing of an entre at a nice restaurant. If the price is more than $30.00, print Expensive! . If the price is less than $30.00, print Inexpensive! You should by initializing the cost to $40.     int cost = 40;     if (cost > 30) {    if (cost > 30)     std::cout << \"Expensive!\";    } \/\/\"if\" bracket     else {    else if {      std::cout << \"Inexpensive!\";    std::cout << \"Inexpensive!\"     } \/\/\"else\" bracket     "
+  "body": " Alternative Execution  A second form of conditional execution is alternative execution, in which there are two possibilities, and the condition determines which one gets executed. The syntax looks like:  if (x % 2 == 0) { std::cout << \"x is even\" << std::endl ; } else { std::cout << \"x is odd\" << std::endl ; }  If the remainder when x is divided by 2 is zero, then we know that x is even, and this code displays a message to that effect. If the condition is false, the second set of statements is executed. Since the condition must be true or false, exactly one of the alternatives will be executed.  As an aside, if you think you might want to check the parity (evenness or oddness) of numbers often, you might want to wrap this code up in a function, as follows:  void printParity(int x) { if (x % 2 == 0) { std::cout << \"x is even\" << std::endl ; } else { std::cout << \"x is odd\" << std::endl ; } }  Now you have a function named printParity that will display an appropriate message for any integer you care to provide. In main you would call this function as follows:  printParity(17);  Always remember that when you call a function, you do not have to declare the types of the arguments you provide. C++ can figure out what type they are. You should resist the temptation to write things like:  int number = 17; printParity(int number); \/\/ WRONG!!!   This program shows you how the print parity function works. Feel free to modify the values of number and otherNumber to see how the output is changed.   #include <iostream> void printParity(int x) { if (x % 2 == 0) { std::cout << \"x is even\" << std::endl; } else { std::cout << \"x is odd\" << std::endl; } } int main() { int number = 17; printParity(number); int otherNumber = 18; printParity(otherNumber); return 0; }      What will be printed when main is executed?  #include <iostream> void report_weather_temperature(int temperature); int main() { int degrees = 52; report_weather_temperature(degrees); return 0; } void report_weather_temperature(int temperature) { if (temperature < 52) { std::cout << \"It is cold!\\n\"; } else { std::cout << \"It is warm!\\n\"; } }      It is cold!    Check whether 52 satisfies the condition temperature < 52 .      It is warm!    Since the condition is false, execution follows the else branch.      Nothing prints.    An if \/ else statement executes exactly one of its two branches.      Error message.    Trace the argument into the parameter and then evaluate the comparison.        Construct a block of code that correctly goes through alternative execution for pricing of an entre at a nice restaurant. If the price is more than $30.00, print Expensive! . If the price is less than $30.00, print Inexpensive! You should by initializing the cost to $40.     int cost = 40;     if (cost > 30) {    if (cost > 30)     std::cout << \"Expensive!\";    } \/\/\"if\" bracket     else {    else if {      std::cout << \"Inexpensive!\";    std::cout << \"Inexpensive!\"     } \/\/\"else\" bracket     "
 },
 {
   "id": "chapter4_alternative-execution-alternative-2",
@@ -5101,7 +5101,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.3.1",
   "title": "",
-  "body": "  What will be printed after main is executed?  #include <iostream> void weather(int temp) { if (temp < 52) { std::cout << \"It is cold!\"; } else { std::cout << \"It is warm!\"; } } int main() { int degrees = 52; weather(degrees); }      It is cold!   That statement would print if degrees was less than 50.     It is warm!   Correct!     Nothing prints.   One of the statements is satisfied, so something does print.     Error message.   There is nothing in the code below that would generate an error.    "
+  "body": "  What will be printed when main is executed?  #include <iostream> void report_weather_temperature(int temperature); int main() { int degrees = 52; report_weather_temperature(degrees); return 0; } void report_weather_temperature(int temperature) { if (temperature < 52) { std::cout << \"It is cold!\\n\"; } else { std::cout << \"It is warm!\\n\"; } }      It is cold!    Check whether 52 satisfies the condition temperature < 52 .      It is warm!    Since the condition is false, execution follows the else branch.      Nothing prints.    An if \/ else statement executes exactly one of its two branches.      Error message.    Trace the argument into the parameter and then evaluate the comparison.     "
 },
 {
   "id": "alt_execution_2",
@@ -5119,7 +5119,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.4",
   "title": "Chained Conditionals",
-  "body": " Chained Conditionals  Sometimes you want to check for a number of related conditions and choose one of several actions. One way to do this is by chaining a series of ifs and elses:   The following program classifies a number (x) as positive, negative, or zero. Feel free to change the value of x to make sure it works.   #include <iostream> int main() { int x = -4; if (x > 0) { std::cout << \"x is positive\" << std::endl; } else if (x < 0) { std::cout << \"x is negative\" << std::endl; } else { std::cout << \"x is zero\" << std::endl; } return 0; }    Try changing the value of x above to see how the output is impacted.   If you have a chain of if statements, the program will go through executing each conditional, regardless if the conditions are met. However, as soon as you add an else or even an else if statement, the program will stop executing the chained conditionals as soon as a condition is met.   These chains can be as long as you want, although they can be difficult to read if they get out of hand. One way to make them easier to read is to use standard indentation, as demonstrated in these examples. If you keep all the statements and squiggly-braces lined up, you are less likely to make syntax errors and you can find them more quickly if you do.    What will print after the following code is executed?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One! \"; } if (x > 6) { std::cout << \"Two! \"; } if (x > 3) { std::cout << \"Three!\" << std::endl; } return 0; }      Three!   Make note of the use of \"if\" instead of \"else if\" or \"else\".     One!   Make note of the use of \"if\" instead of \"else if\" or \"else\".     One! Two!   Make note of the use of \"if\" instead of \"else if\" or \"else\".     One! Two! Three!   When we have \"if\" statments, but no \"else if\" or \"else\", every condition will be checked.       What will print after the following code is executed?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One! \" ; } else if (x > 6) { std::cout << \"Two! \"; } else { std::cout << \"Three!\" << std::endl; } return 0; }      Three!   Remember that only one action will be completed in a chain of \"ifs\", \"else ifs\", and \"ifs\"     One!   The chain of \"ifs\", \"else ifs\", and \"elses\" results in only one action being completed.     One! Two!   Remember that a chain of \"ifs\", \"else ifs\", and \"elses\" will result in only one action being completed.     One! Two! Three!   Remember that a chain of \"ifs\", \"else ifs\", and \"elses\" will result in only one action being completed.       What will print after the following code is executed?  #include <iostream> int main() { int x = 7; if (x > 8) { std::cout << \"One! \" ; } if (x > 6) { std::cout << \"Two! \"; } if (x > 3) { std::cout << \"Three!\" << std::endl; } return 0; }      Two!   Make note of the use of \"if\" instead of \"else if\" or \"else\".     Two! Three!   When we have \"if\" statments, but no \"else if\" or \"else\", every condition will be checked.     One! Two!   The first statement will not be executed because x > 8 is not true. Also, make note of the use of \"if\" instead of \"else if\" or \"else\".     One! Two! Three!   The first statement will not be executed because x > 8 is not true.       What will print after the following code is executed?  #include <iostream> int main() { int x = 7; if (x > 8) { std::cout << \"One! \" ; } else if (x > 6) { std::cout << \"Two! \"; } else { std::cout << \"Three!\" << std::endl; } return 0; }      Two!   Only one action will is completed in a chain of \"ifs\", \"else ifs\", and \"ifs\";     Two! Three!   Remember that only one action will be completed in a chain of \"ifs\", \"else ifs\", and \"ifs\".     One! Two!   The first condition will not be satisfied. Also, a chain of \"ifs\", \"else ifs\", and \"elses\" will result in only one action being completed.     One! Two! Three!   hge first condition will not be satisfied. Also, a chain of \"ifs\", \"else ifs\", and \"elses\" will result in only one action being completed.     "
+  "body": " Chained Conditionals  Sometimes a program needs to choose one action from several related possibilities. One way to do this is with an if-else-if chain .   This program classifies an integer as positive, negative, or zero.   #include <iostream> \/\/ Function declaration void report_number_sign(int number); int main() { int value = -4; report_number_sign(value); return 0; } \/\/ Function definition void report_number_sign(int number) { if (number > 0) { std::cout << \"The number is positive.\\n\"; } else if (number < 0) { std::cout << \"The number is negative.\\n\"; } else { std::cout << \"The number is zero.\\n\"; } }    In an if \/ else if \/ else chain, conditions are checked from top to bottom. As soon as one condition is true, its branch executes and the rest of the chain is skipped. If none of the conditions are true, the final else branch executes.   Independent if statements behave differently. Each independent if condition is evaluated, so more than one body may execute. In a single if \/ else if \/ else chain, at most one branch executes.   Chained conditionals can contain several else if branches, but long chains can become difficult to read. Consistent indentation and braces make the structure easier to follow and help prevent mistakes.    What will this program print?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One! \"; } if (x > 6) { std::cout << \"Two! \"; } if (x > 3) { std::cout << \"Three!\\n\"; } return 0; }      Three!    These are three independent if statements. Check each condition separately.      One!    After the first if finishes, execution continues to the next independent if .      One! Two!    Be sure to evaluate the third independent condition as well.      One! Two! Three!    Each independent if condition is checked separately.        What will this program print?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One!\\n\"; } else if (x > 6) { std::cout << \"Two!\\n\"; } else { std::cout << \"Three!\\n\"; } return 0; }      Three!    Start at the top of the chain and evaluate the first condition.      One!    Once a true branch is found, the remaining branches are skipped.      One! Two!    This is one chained conditional, not two independent if statements.      One! Two! Three!    Only one branch of a single if \/ else if \/ else chain can execute.        What will this program print?  #include <iostream> void report_score_level(int score); int main() { int score = 82; report_score_level(score); return 0; } void report_score_level(int score) { if (score >= 90) { std::cout << \"Excellent\\n\"; } else if (score >= 80) { std::cout << \"Good\\n\"; } else if (score >= 70) { std::cout << \"Satisfactory\\n\"; } else { std::cout << \"Needs improvement\\n\"; } }      Excellent    Evaluate the conditions from top to bottom using the value 82.      Good    This is the first condition in the chain that is true.      Satisfactory    Do not skip an earlier branch that may already be true.      Good and Satisfactory    Once one branch executes, the remaining branches in the chain are skipped.        Which ordering correctly classifies scores using the ranges 90 or above, 80 or above, 70 or above, and below 70?      Test score >= 90 , then score >= 80 , then score >= 70 .    Testing from the most restrictive threshold downward allows each score to reach the appropriate first true branch.      Test score >= 70 , then score >= 80 , then score >= 90 .    Consider what happens to a score of 95 if the broadest condition is tested first.      Test only score >= 90 and use else for every other score.    More than two categories require additional conditions.      Use three independent if statements in any order.    Independent if statements can allow several bodies to execute for the same score.      "
 },
 {
   "id": "chapter4_chained-conditionals-2",
@@ -5128,7 +5128,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Sometimes you want to check for a number of related conditions and choose one of several actions. One way to do this is by chaining a series of ifs and elses: "
+  "body": "Sometimes a program needs to choose one action from several related possibilities. One way to do this is with an if-else-if chain . "
 },
 {
   "id": "chained_conditionals_AC_1",
@@ -5136,8 +5136,8 @@ var ptx_lunr_docs = [
   "url": "chapter4_chained-conditionals.html#chained_conditionals_AC_1",
   "type": "Listing",
   "number": "4.4.1",
-  "title": "The following program classifies a number (x) as positive, negative, or zero. Feel free to change the value of x to make sure it works.",
-  "body": " The following program classifies a number (x) as positive, negative, or zero. Feel free to change the value of x to make sure it works.   #include <iostream> int main() { int x = -4; if (x > 0) { std::cout << \"x is positive\" << std::endl; } else if (x < 0) { std::cout << \"x is negative\" << std::endl; } else { std::cout << \"x is zero\" << std::endl; } return 0; }   "
+  "title": "This program classifies an integer as positive, negative, or zero.",
+  "body": " This program classifies an integer as positive, negative, or zero.   #include <iostream> \/\/ Function declaration void report_number_sign(int number); int main() { int value = -4; report_number_sign(value); return 0; } \/\/ Function definition void report_number_sign(int number) { if (number > 0) { std::cout << \"The number is positive.\\n\"; } else if (number < 0) { std::cout << \"The number is negative.\\n\"; } else { std::cout << \"The number is zero.\\n\"; } }   "
 },
 {
   "id": "chapter4_chained-conditionals-4",
@@ -5146,7 +5146,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Try changing the value of x above to see how the output is impacted. "
+  "body": "In an if \/ else if \/ else chain, conditions are checked from top to bottom. As soon as one condition is true, its branch executes and the rest of the chain is skipped. If none of the conditions are true, the final else branch executes. "
 },
 {
   "id": "chapter4_chained-conditionals-5",
@@ -5155,7 +5155,7 @@ var ptx_lunr_docs = [
   "type": "Note",
   "number": "4.4.1",
   "title": "",
-  "body": " If you have a chain of if statements, the program will go through executing each conditional, regardless if the conditions are met. However, as soon as you add an else or even an else if statement, the program will stop executing the chained conditionals as soon as a condition is met.  "
+  "body": " Independent if statements behave differently. Each independent if condition is evaluated, so more than one body may execute. In a single if \/ else if \/ else chain, at most one branch executes.  "
 },
 {
   "id": "chapter4_chained-conditionals-6",
@@ -5164,7 +5164,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "These chains can be as long as you want, although they can be difficult to read if they get out of hand. One way to make them easier to read is to use standard indentation, as demonstrated in these examples. If you keep all the statements and squiggly-braces lined up, you are less likely to make syntax errors and you can find them more quickly if you do. "
+  "body": "Chained conditionals can contain several else if branches, but long chains can become difficult to read. Consistent indentation and braces make the structure easier to follow and help prevent mistakes. "
 },
 {
   "id": "chained_conditionals_1",
@@ -5173,7 +5173,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.4.1",
   "title": "",
-  "body": "  What will print after the following code is executed?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One! \"; } if (x > 6) { std::cout << \"Two! \"; } if (x > 3) { std::cout << \"Three!\" << std::endl; } return 0; }      Three!   Make note of the use of \"if\" instead of \"else if\" or \"else\".     One!   Make note of the use of \"if\" instead of \"else if\" or \"else\".     One! Two!   Make note of the use of \"if\" instead of \"else if\" or \"else\".     One! Two! Three!   When we have \"if\" statments, but no \"else if\" or \"else\", every condition will be checked.    "
+  "body": "  What will this program print?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One! \"; } if (x > 6) { std::cout << \"Two! \"; } if (x > 3) { std::cout << \"Three!\\n\"; } return 0; }      Three!    These are three independent if statements. Check each condition separately.      One!    After the first if finishes, execution continues to the next independent if .      One! Two!    Be sure to evaluate the third independent condition as well.      One! Two! Three!    Each independent if condition is checked separately.     "
 },
 {
   "id": "chained_conditionals_2",
@@ -5182,7 +5182,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.4.2",
   "title": "",
-  "body": "  What will print after the following code is executed?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One! \" ; } else if (x > 6) { std::cout << \"Two! \"; } else { std::cout << \"Three!\" << std::endl; } return 0; }      Three!   Remember that only one action will be completed in a chain of \"ifs\", \"else ifs\", and \"ifs\"     One!   The chain of \"ifs\", \"else ifs\", and \"elses\" results in only one action being completed.     One! Two!   Remember that a chain of \"ifs\", \"else ifs\", and \"elses\" will result in only one action being completed.     One! Two! Three!   Remember that a chain of \"ifs\", \"else ifs\", and \"elses\" will result in only one action being completed.    "
+  "body": "  What will this program print?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One!\\n\"; } else if (x > 6) { std::cout << \"Two!\\n\"; } else { std::cout << \"Three!\\n\"; } return 0; }      Three!    Start at the top of the chain and evaluate the first condition.      One!    Once a true branch is found, the remaining branches are skipped.      One! Two!    This is one chained conditional, not two independent if statements.      One! Two! Three!    Only one branch of a single if \/ else if \/ else chain can execute.     "
 },
 {
   "id": "chained_conditionals_3",
@@ -5191,7 +5191,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.4.3",
   "title": "",
-  "body": "  What will print after the following code is executed?  #include <iostream> int main() { int x = 7; if (x > 8) { std::cout << \"One! \" ; } if (x > 6) { std::cout << \"Two! \"; } if (x > 3) { std::cout << \"Three!\" << std::endl; } return 0; }      Two!   Make note of the use of \"if\" instead of \"else if\" or \"else\".     Two! Three!   When we have \"if\" statments, but no \"else if\" or \"else\", every condition will be checked.     One! Two!   The first statement will not be executed because x > 8 is not true. Also, make note of the use of \"if\" instead of \"else if\" or \"else\".     One! Two! Three!   The first statement will not be executed because x > 8 is not true.    "
+  "body": "  What will this program print?  #include <iostream> void report_score_level(int score); int main() { int score = 82; report_score_level(score); return 0; } void report_score_level(int score) { if (score >= 90) { std::cout << \"Excellent\\n\"; } else if (score >= 80) { std::cout << \"Good\\n\"; } else if (score >= 70) { std::cout << \"Satisfactory\\n\"; } else { std::cout << \"Needs improvement\\n\"; } }      Excellent    Evaluate the conditions from top to bottom using the value 82.      Good    This is the first condition in the chain that is true.      Satisfactory    Do not skip an earlier branch that may already be true.      Good and Satisfactory    Once one branch executes, the remaining branches in the chain are skipped.     "
 },
 {
   "id": "chained_conditionals_4",
@@ -5200,7 +5200,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.4.4",
   "title": "",
-  "body": "  What will print after the following code is executed?  #include <iostream> int main() { int x = 7; if (x > 8) { std::cout << \"One! \" ; } else if (x > 6) { std::cout << \"Two! \"; } else { std::cout << \"Three!\" << std::endl; } return 0; }      Two!   Only one action will is completed in a chain of \"ifs\", \"else ifs\", and \"ifs\";     Two! Three!   Remember that only one action will be completed in a chain of \"ifs\", \"else ifs\", and \"ifs\".     One! Two!   The first condition will not be satisfied. Also, a chain of \"ifs\", \"else ifs\", and \"elses\" will result in only one action being completed.     One! Two! Three!   hge first condition will not be satisfied. Also, a chain of \"ifs\", \"else ifs\", and \"elses\" will result in only one action being completed.    "
+  "body": "  Which ordering correctly classifies scores using the ranges 90 or above, 80 or above, 70 or above, and below 70?      Test score >= 90 , then score >= 80 , then score >= 70 .    Testing from the most restrictive threshold downward allows each score to reach the appropriate first true branch.      Test score >= 70 , then score >= 80 , then score >= 90 .    Consider what happens to a score of 95 if the broadest condition is tested first.      Test only score >= 90 and use else for every other score.    More than two categories require additional conditions.      Use three independent if statements in any order.    Independent if statements can allow several bodies to execute for the same score.     "
 },
 {
   "id": "chapter4_nested-conditionals",
@@ -5209,7 +5209,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.5",
   "title": "Nested Conditionals",
-  "body": " Nested Conditionals  In addition to chaining, you can also nest one conditional within another. We could have written the previous example as:   This program classifies a number (x) as positive, negative, or zero, just like the program on the previous page. However, this time, we are using nested conditionals.   #include <iostream> int main() { int x = 9; if (x == 0) { std::cout << \"x is zero\" << std::endl; } else { if (x > 0) { std::cout << \"x is positive\" << std::endl; } else { std::cout << \"x is negative\" << std::endl; } } return 0; }    There is now an outer conditional that contains two branches. The first branch contains a simple output statement, but the second branch contains another if statement, which has two branches of its own. Fortunately, those two branches are both output statements, although they could have been conditional statements as well.   There is not a limit to the number of times you can nest a conditional. However, you should try to limit this number, as it will reduce the complexity of your program structure.   Notice again that indentation helps make the structure apparent, but nevertheless, nested conditionals get difficult to read very quickly. In general, it is a good idea to avoid them when you can.  On the other hand, this kind of nested structure is common, and we will see it again, so you better get used to it.    What will print?  #include <iostream> int main() { int x = 0; if (x == 0) { std::cout << \"Hey!\" << std::endl; } else { if (x > 0) { std::cout << \"Hi!\" << std::endl; } else { std::cout << \"Hello!\" << std::endl; } } return 0; }      Hey!   Correct!     Hi!   Remember that the program would only enter the \"else\" if x was not equal to 0.     Hello!   Remember that the program would only enter the \"else\" if x was not equal to 0.     Nothing will print.   Only one of the condtionals will execute, but something will print, regardless of which one it is.       What will print?  #include <iostream> int main() { int x = -4; if (x == 0) { std::cout << \"Hey!\" << std::endl; } else { if (x > 0) { std::cout << \"Hi!\" << std::endl; } else { std::cout << \"Hello!\" << std::endl; } } return 0; }      Hey!   Remember that the program would only enter the first \"if\" if x was equal to 0.     Hi!   Remember that the program would only enter the nested \"if\" if x was greater than 0.     Hello!   Correct!     Nothing will print.   Only one of the condtionals will execute, but something will print, regardless of which one it is.       Your school uses a system to arrange students in a large stadium using their initials. Look at the function definition below. Where would a student with the initials MZ be seated?  string seatingArrangement(char first, char last) { if (last > m) { if (first > m) { return \"Back Left!\"; } else { return \"Back Right!\"; } } else { if (first > m) { return \"Front Left!\"; } else { return \"Front Right!\"; } } }      Back Left!   Remember that the > opearator is not inclusive.     Back Right!   z > m is true, and m > m is false, so a student with these initials would be seated in the back right.     Front Left!   z > m is true because z comes after m. Also, the > opearator is not inclusive.     Front Right!   z > m is true because z comes after m.     Error!   Character comparisons are legal, and useful in this case!     "
+  "body": " Nested Conditionals  A conditional can appear inside another conditional. This is called a nested conditional . For example, the previous positive\/negative\/zero classification can also be written using nesting.   This program classifies an integer as positive, negative, or zero using nested conditionals.   #include <iostream> \/\/ Function declaration void report_number_sign(int number); int main() { int value = 9; report_number_sign(value); return 0; } \/\/ Function definition void report_number_sign(int number) { if (number == 0) { std::cout << \"The number is zero.\\n\"; } else { if (number > 0) { std::cout << \"The number is positive.\\n\"; } else { std::cout << \"The number is negative.\\n\"; } } }    The outer conditional has two branches. If number == 0 is true, the first branch executes. Otherwise, execution enters the else branch, which contains another if \/ else statement.   Nested conditionals can be useful when a second decision only makes sense after an earlier condition has been resolved. However, deeply nested code can become difficult to read, so avoid unnecessary levels of nesting.   Indentation and braces help make nested structure visible. In some cases, the same logic can be written more clearly as an if \/ else if \/ else chain. Choose the structure that makes the decision process easiest to understand.    What will this program print?  #include <iostream> void report_message(int x); int main() { int value = 0; report_message(value); return 0; } void report_message(int x) { if (x == 0) { std::cout << \"Hey!\\n\"; } else { if (x > 0) { std::cout << \"Hi!\\n\"; } else { std::cout << \"Hello!\\n\"; } } }      Hey!    Start with the outer condition and determine whether the nested conditional is reached.      Hi!    The nested if is reached only when the outer condition is false.      Hello!    Check whether execution enters the outer else branch.      Nothing will print.    Trace the outer condition first. One reachable branch contains an output statement.        What will this program print?  #include <iostream> void report_message(int x); int main() { int value = -4; report_message(value); return 0; } void report_message(int x) { if (x == 0) { std::cout << \"Hey!\\n\"; } else { if (x > 0) { std::cout << \"Hi!\\n\"; } else { std::cout << \"Hello!\\n\"; } } }      Hey!    Check whether x == 0 is true for a value of -4.      Hi!    After entering the outer else , evaluate the nested condition x > 0 .      Hello!    Follow the outer branch first, then evaluate the nested conditional.      Nothing will print.    Both levels of the nested conditional lead to an output branch.        A school uses student initials to choose one of four seating areas. Where would a student with the initials MZ be seated?  #include <string> std::string determine_seating_area(char first_initial, char last_initial); std::string determine_seating_area(char first_initial, char last_initial) { if (last_initial > 'M') { if (first_initial > 'M') { return \"Back Left!\"; } else { return \"Back Right!\"; } } else { if (first_initial > 'M') { return \"Front Left!\"; } else { return \"Front Right!\"; } } }      Back Left!    Evaluate the comparison involving the last initial first, then the comparison involving the first initial.      Back Right!    Character comparisons follow character ordering. Trace the outer comparison before the nested one.      Front Left!    Determine whether 'Z' > 'M' before entering the front or back branch.      Front Right!    Start with the outer comparison involving the last initial.      Error!    Character values can be compared with relational operators such as > .      "
 },
 {
   "id": "chapter4_nested-conditionals-2",
@@ -5218,7 +5218,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In addition to chaining, you can also nest one conditional within another. We could have written the previous example as: "
+  "body": "A conditional can appear inside another conditional. This is called a nested conditional . For example, the previous positive\/negative\/zero classification can also be written using nesting. "
 },
 {
   "id": "nested_conditionals_AC_1",
@@ -5226,8 +5226,8 @@ var ptx_lunr_docs = [
   "url": "chapter4_nested-conditionals.html#nested_conditionals_AC_1",
   "type": "Listing",
   "number": "4.5.1",
-  "title": "This program classifies a number (x) as positive, negative, or zero, just like the program on the previous page. However, this time, we are using nested conditionals.",
-  "body": " This program classifies a number (x) as positive, negative, or zero, just like the program on the previous page. However, this time, we are using nested conditionals.   #include <iostream> int main() { int x = 9; if (x == 0) { std::cout << \"x is zero\" << std::endl; } else { if (x > 0) { std::cout << \"x is positive\" << std::endl; } else { std::cout << \"x is negative\" << std::endl; } } return 0; }   "
+  "title": "This program classifies an integer as positive, negative, or zero using nested conditionals.",
+  "body": " This program classifies an integer as positive, negative, or zero using nested conditionals.   #include <iostream> \/\/ Function declaration void report_number_sign(int number); int main() { int value = 9; report_number_sign(value); return 0; } \/\/ Function definition void report_number_sign(int number) { if (number == 0) { std::cout << \"The number is zero.\\n\"; } else { if (number > 0) { std::cout << \"The number is positive.\\n\"; } else { std::cout << \"The number is negative.\\n\"; } } }   "
 },
 {
   "id": "chapter4_nested-conditionals-4",
@@ -5236,7 +5236,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "There is now an outer conditional that contains two branches. The first branch contains a simple output statement, but the second branch contains another if statement, which has two branches of its own. Fortunately, those two branches are both output statements, although they could have been conditional statements as well. "
+  "body": "The outer conditional has two branches. If number == 0 is true, the first branch executes. Otherwise, execution enters the else branch, which contains another if \/ else statement. "
 },
 {
   "id": "chapter4_nested-conditionals-5",
@@ -5245,7 +5245,7 @@ var ptx_lunr_docs = [
   "type": "Note",
   "number": "4.5.1",
   "title": "",
-  "body": " There is not a limit to the number of times you can nest a conditional. However, you should try to limit this number, as it will reduce the complexity of your program structure.  "
+  "body": " Nested conditionals can be useful when a second decision only makes sense after an earlier condition has been resolved. However, deeply nested code can become difficult to read, so avoid unnecessary levels of nesting.  "
 },
 {
   "id": "chapter4_nested-conditionals-6",
@@ -5254,16 +5254,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Notice again that indentation helps make the structure apparent, but nevertheless, nested conditionals get difficult to read very quickly. In general, it is a good idea to avoid them when you can. "
-},
-{
-  "id": "chapter4_nested-conditionals-7",
-  "level": "2",
-  "url": "chapter4_nested-conditionals.html#chapter4_nested-conditionals-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "On the other hand, this kind of nested structure is common, and we will see it again, so you better get used to it. "
+  "body": "Indentation and braces help make nested structure visible. In some cases, the same logic can be written more clearly as an if \/ else if \/ else chain. Choose the structure that makes the decision process easiest to understand. "
 },
 {
   "id": "nested_conditionals_1",
@@ -5272,7 +5263,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.5.1",
   "title": "",
-  "body": "  What will print?  #include <iostream> int main() { int x = 0; if (x == 0) { std::cout << \"Hey!\" << std::endl; } else { if (x > 0) { std::cout << \"Hi!\" << std::endl; } else { std::cout << \"Hello!\" << std::endl; } } return 0; }      Hey!   Correct!     Hi!   Remember that the program would only enter the \"else\" if x was not equal to 0.     Hello!   Remember that the program would only enter the \"else\" if x was not equal to 0.     Nothing will print.   Only one of the condtionals will execute, but something will print, regardless of which one it is.    "
+  "body": "  What will this program print?  #include <iostream> void report_message(int x); int main() { int value = 0; report_message(value); return 0; } void report_message(int x) { if (x == 0) { std::cout << \"Hey!\\n\"; } else { if (x > 0) { std::cout << \"Hi!\\n\"; } else { std::cout << \"Hello!\\n\"; } } }      Hey!    Start with the outer condition and determine whether the nested conditional is reached.      Hi!    The nested if is reached only when the outer condition is false.      Hello!    Check whether execution enters the outer else branch.      Nothing will print.    Trace the outer condition first. One reachable branch contains an output statement.     "
 },
 {
   "id": "nested_conditionals_2",
@@ -5281,7 +5272,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.5.2",
   "title": "",
-  "body": "  What will print?  #include <iostream> int main() { int x = -4; if (x == 0) { std::cout << \"Hey!\" << std::endl; } else { if (x > 0) { std::cout << \"Hi!\" << std::endl; } else { std::cout << \"Hello!\" << std::endl; } } return 0; }      Hey!   Remember that the program would only enter the first \"if\" if x was equal to 0.     Hi!   Remember that the program would only enter the nested \"if\" if x was greater than 0.     Hello!   Correct!     Nothing will print.   Only one of the condtionals will execute, but something will print, regardless of which one it is.    "
+  "body": "  What will this program print?  #include <iostream> void report_message(int x); int main() { int value = -4; report_message(value); return 0; } void report_message(int x) { if (x == 0) { std::cout << \"Hey!\\n\"; } else { if (x > 0) { std::cout << \"Hi!\\n\"; } else { std::cout << \"Hello!\\n\"; } } }      Hey!    Check whether x == 0 is true for a value of -4.      Hi!    After entering the outer else , evaluate the nested condition x > 0 .      Hello!    Follow the outer branch first, then evaluate the nested conditional.      Nothing will print.    Both levels of the nested conditional lead to an output branch.     "
 },
 {
   "id": "nested_conditionals_3",
@@ -5290,7 +5281,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.5.3",
   "title": "",
-  "body": "  Your school uses a system to arrange students in a large stadium using their initials. Look at the function definition below. Where would a student with the initials MZ be seated?  string seatingArrangement(char first, char last) { if (last > m) { if (first > m) { return \"Back Left!\"; } else { return \"Back Right!\"; } } else { if (first > m) { return \"Front Left!\"; } else { return \"Front Right!\"; } } }      Back Left!   Remember that the > opearator is not inclusive.     Back Right!   z > m is true, and m > m is false, so a student with these initials would be seated in the back right.     Front Left!   z > m is true because z comes after m. Also, the > opearator is not inclusive.     Front Right!   z > m is true because z comes after m.     Error!   Character comparisons are legal, and useful in this case!    "
+  "body": "  A school uses student initials to choose one of four seating areas. Where would a student with the initials MZ be seated?  #include <string> std::string determine_seating_area(char first_initial, char last_initial); std::string determine_seating_area(char first_initial, char last_initial) { if (last_initial > 'M') { if (first_initial > 'M') { return \"Back Left!\"; } else { return \"Back Right!\"; } } else { if (first_initial > 'M') { return \"Front Left!\"; } else { return \"Front Right!\"; } } }      Back Left!    Evaluate the comparison involving the last initial first, then the comparison involving the first initial.      Back Right!    Character comparisons follow character ordering. Trace the outer comparison before the nested one.      Front Left!    Determine whether 'Z' > 'M' before entering the front or back branch.      Front Right!    Start with the outer comparison involving the last initial.      Error!    Character values can be compared with relational operators such as > .     "
 },
 {
   "id": "chapter4_the-return-statement",
@@ -5298,8 +5289,8 @@ var ptx_lunr_docs = [
   "url": "chapter4_the-return-statement.html",
   "type": "Section",
   "number": "4.6",
-  "title": "The Return Statement",
-  "body": " The Return Statement  The return statement allows you to terminate the execution of a function before you reach the end. One reason to use it is if you detect an error condition:   This program will terminate with a return statement if the argument provided is not positive. Try running the code as is. If you get an error message, try changing the value of x.   #include <iostream> #include <cmath> void printLogarithm(double x) { if (x <= 0.0) { std::cout << \"Positive numbers only, please.\" << std::endl; return; } double result = log (x); std::cout << \"The log of x is \" << result; } int main() { double y = -9.8; printLogarithm(y); return 0; }    This defines a function named printLogarithm that takes a double named x as a parameter. The first thing it does is check whether x is less than or equal to zero, in which case it displays an error message and then uses return to exit the function. The flow of execution immediately returns to the caller and the remaining lines of the function are not executed.  I used a floating-point value on the right side of the condition because there is a floating-point variable on the left.  Remember that any time you want to use one a function from the math library, you have to include the header file <cmath> .  Putting return 0; in your code ends your program. Let's look back at a program from section 4.3. How would your answer change?    What will print?  #include <iostream> int main() { int x = 8; if (x > 8) { std::cout << \"One! \"; } if (x > 6) { std::cout << \"Two! \"; } if (x > 3) { std::cout << \"Three!\" << std::endl; } return 0; }      One! Two! Three!   Take a look at the first conditional statement more closely.     Two! Three!   8 is not greater than 8, so it doesn't meet the first condition.     Three!   All of the following are \"if\" statements, with no return. There are no \"else\" statements.     Two!   All of the following are \"if\" statements, with no return. There are no \"else\" statements.     One!   Take a look at the first conditional statement more closely.       What will print?  #include <iostream> int main() { int x = 8; if (x > 8) { std::cout << \"One! \"; return 0; } if (x > 6) { std::cout << \"Two! \"; return 0; } if (x > 3) { std::cout << \"Three!\" << std::endl; return 0; } return 0; }      One! Two! Three!   Try again! 8 is not greater than 8, so the first condition will not be met.     Two! Three!   Try again! Remember what \"return 0\" is for!     Three!   Try again! 8 is greater than 6!     Two!   Correct!     One!   Take a look at the first conditional statement more closely.     "
+  "title": "Return in Conditional Branches",
+  "body": " Return in Conditional Branches  In Chapter 3, you learned that a return statement sends a value back to the caller and ends the current function call. Conditional statements allow a function to choose which value to return.   This program returns a shipping cost based on the order total.   #include <iostream> \/\/ Function declaration double determine_shipping_cost(double order_total); int main() { double order_total = 42.50; double shipping_cost = determine_shipping_cost(order_total); std::cout << \"Shipping cost: $\" << shipping_cost << '\\n'; return 0; } \/\/ Function definition double determine_shipping_cost(double order_total) { if (order_total >= 50.0) { return 0.0; } else { return 5.99; } }    The function has two possible branches, and each branch returns a value. Since exactly one branch of the if \/ else executes, exactly one of these return statements is reached.  As soon as a return statement executes, the current function call ends immediately and control returns to the caller. Statements that appear later in that function are not executed during that call.  A return statement can also be used to leave a void function early. In that case, no value follows the word return .   This function returns early when it receives an invalid value.   #include <cmath> #include <iostream> \/\/ Function declaration void report_logarithm(double number); int main() { double value = -9.8; report_logarithm(value); return 0; } \/\/ Function definition void report_logarithm(double number) { if (number <= 0.0) { std::cout << \"Positive numbers only, please.\\n\"; return; } double result = std::log(number); std::cout << \"The natural logarithm is \" << result << '\\n'; }    If number <= 0.0 is true, the function prints the message and then returns immediately. The calculation using std::log is therefore skipped. If the condition is false, execution continues with the statements after the if .    What value does this function return when score is 84?  char determine_letter_grade(int score) { if (score >= 90) { return 'A'; } else if (score >= 80) { return 'B'; } else if (score >= 70) { return 'C'; } else { return 'D'; } }      'A'    Evaluate the conditions from top to bottom and stop at the first true branch.      'B'    This is the first branch whose condition is true.      'C'    Check whether an earlier condition becomes true before this branch is reached.      'D'    The final else executes only when all earlier conditions are false.        What will this program print?  #include <iostream> void report_value(int number); int main() { report_value(-3); return 0; } void report_value(int number) { if (number < 0) { std::cout << \"Negative\\n\"; return; } std::cout << \"Nonnegative\\n\"; }      Negative    Once the return executes, the current function call ends.      Nonnegative    Trace the condition first, and notice what happens immediately after the first output statement.      Negative followed by Nonnegative    Consider whether execution can continue to the later output statement after return is reached.      Nothing    Trace the body of report_value using the argument -3.      "
 },
 {
   "id": "chapter4_the-return-statement-2",
@@ -5308,7 +5299,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The return statement allows you to terminate the execution of a function before you reach the end. One reason to use it is if you detect an error condition: "
+  "body": "In Chapter 3, you learned that a return statement sends a value back to the caller and ends the current function call. Conditional statements allow a function to choose which value to return. "
 },
 {
   "id": "return_AC_1",
@@ -5316,8 +5307,8 @@ var ptx_lunr_docs = [
   "url": "chapter4_the-return-statement.html#return_AC_1",
   "type": "Listing",
   "number": "4.6.1",
-  "title": "This program will terminate with a return statement if the argument provided is not positive. Try running the code as is. If you get an error message, try changing the value of x.",
-  "body": " This program will terminate with a return statement if the argument provided is not positive. Try running the code as is. If you get an error message, try changing the value of x.   #include <iostream> #include <cmath> void printLogarithm(double x) { if (x <= 0.0) { std::cout << \"Positive numbers only, please.\" << std::endl; return; } double result = log (x); std::cout << \"The log of x is \" << result; } int main() { double y = -9.8; printLogarithm(y); return 0; }   "
+  "title": "This program returns a shipping cost based on the order total.",
+  "body": " This program returns a shipping cost based on the order total.   #include <iostream> \/\/ Function declaration double determine_shipping_cost(double order_total); int main() { double order_total = 42.50; double shipping_cost = determine_shipping_cost(order_total); std::cout << \"Shipping cost: $\" << shipping_cost << '\\n'; return 0; } \/\/ Function definition double determine_shipping_cost(double order_total) { if (order_total >= 50.0) { return 0.0; } else { return 5.99; } }   "
 },
 {
   "id": "chapter4_the-return-statement-4",
@@ -5326,7 +5317,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This defines a function named printLogarithm that takes a double named x as a parameter. The first thing it does is check whether x is less than or equal to zero, in which case it displays an error message and then uses return to exit the function. The flow of execution immediately returns to the caller and the remaining lines of the function are not executed. "
+  "body": "The function has two possible branches, and each branch returns a value. Since exactly one branch of the if \/ else executes, exactly one of these return statements is reached. "
 },
 {
   "id": "chapter4_the-return-statement-5",
@@ -5335,7 +5326,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "I used a floating-point value on the right side of the condition because there is a floating-point variable on the left. "
+  "body": "As soon as a return statement executes, the current function call ends immediately and control returns to the caller. Statements that appear later in that function are not executed during that call. "
 },
 {
   "id": "chapter4_the-return-statement-6",
@@ -5344,16 +5335,25 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Remember that any time you want to use one a function from the math library, you have to include the header file <cmath> . "
+  "body": "A return statement can also be used to leave a void function early. In that case, no value follows the word return . "
 },
 {
-  "id": "chapter4_the-return-statement-7",
+  "id": "return_AC_2",
   "level": "2",
-  "url": "chapter4_the-return-statement.html#chapter4_the-return-statement-7",
+  "url": "chapter4_the-return-statement.html#return_AC_2",
+  "type": "Listing",
+  "number": "4.6.2",
+  "title": "This function returns early when it receives an invalid value.",
+  "body": " This function returns early when it receives an invalid value.   #include <cmath> #include <iostream> \/\/ Function declaration void report_logarithm(double number); int main() { double value = -9.8; report_logarithm(value); return 0; } \/\/ Function definition void report_logarithm(double number) { if (number <= 0.0) { std::cout << \"Positive numbers only, please.\\n\"; return; } double result = std::log(number); std::cout << \"The natural logarithm is \" << result << '\\n'; }   "
+},
+{
+  "id": "chapter4_the-return-statement-8",
+  "level": "2",
+  "url": "chapter4_the-return-statement.html#chapter4_the-return-statement-8",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Putting return 0; in your code ends your program. Let's look back at a program from section 4.3. How would your answer change? "
+  "body": "If number <= 0.0 is true, the function prints the message and then returns immediately. The calculation using std::log is therefore skipped. If the condition is false, execution continues with the statements after the if . "
 },
 {
   "id": "return_1",
@@ -5362,7 +5362,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.6.1",
   "title": "",
-  "body": "  What will print?  #include <iostream> int main() { int x = 8; if (x > 8) { std::cout << \"One! \"; } if (x > 6) { std::cout << \"Two! \"; } if (x > 3) { std::cout << \"Three!\" << std::endl; } return 0; }      One! Two! Three!   Take a look at the first conditional statement more closely.     Two! Three!   8 is not greater than 8, so it doesn't meet the first condition.     Three!   All of the following are \"if\" statements, with no return. There are no \"else\" statements.     Two!   All of the following are \"if\" statements, with no return. There are no \"else\" statements.     One!   Take a look at the first conditional statement more closely.    "
+  "body": "  What value does this function return when score is 84?  char determine_letter_grade(int score) { if (score >= 90) { return 'A'; } else if (score >= 80) { return 'B'; } else if (score >= 70) { return 'C'; } else { return 'D'; } }      'A'    Evaluate the conditions from top to bottom and stop at the first true branch.      'B'    This is the first branch whose condition is true.      'C'    Check whether an earlier condition becomes true before this branch is reached.      'D'    The final else executes only when all earlier conditions are false.     "
 },
 {
   "id": "return_2",
@@ -5371,7 +5371,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.6.2",
   "title": "",
-  "body": "  What will print?  #include <iostream> int main() { int x = 8; if (x > 8) { std::cout << \"One! \"; return 0; } if (x > 6) { std::cout << \"Two! \"; return 0; } if (x > 3) { std::cout << \"Three!\" << std::endl; return 0; } return 0; }      One! Two! Three!   Try again! 8 is not greater than 8, so the first condition will not be met.     Two! Three!   Try again! Remember what \"return 0\" is for!     Three!   Try again! 8 is greater than 6!     Two!   Correct!     One!   Take a look at the first conditional statement more closely.    "
+  "body": "  What will this program print?  #include <iostream> void report_value(int number); int main() { report_value(-3); return 0; } void report_value(int number) { if (number < 0) { std::cout << \"Negative\\n\"; return; } std::cout << \"Nonnegative\\n\"; }      Negative    Once the return executes, the current function call ends.      Nonnegative    Trace the condition first, and notice what happens immediately after the first output statement.      Negative followed by Nonnegative    Consider whether execution can continue to the later output statement after return is reached.      Nothing    Trace the body of report_value using the argument -3.     "
 },
 {
   "id": "chapter4_recursion",
@@ -5379,26 +5379,26 @@ var ptx_lunr_docs = [
   "url": "chapter4_recursion.html",
   "type": "Section",
   "number": "4.7",
-  "title": "Recursion",
-  "body": " Recursion  What mentioned in the last chapter is that it is legal for one function to call another, and we have seen several examples of that. I neglected to mention that it is also legal for a function to call itself. It may not be obvious why that is a good thing, but it turns out to be one of the most magical and interesting things a program can do.   The process of a function calling itself is called recursion , and such functions are said to be recursive .   For example, look at the following function:  void countdown(int n) { if (n == 0) { std::cout << \"Blastoff!\" << std::endl ; } else { std::cout << n << std::endl ; countdown(n - 1); } }  The name of the function is countdown and it takes a single integer as a parameter. If the parameter is zero, it outputs the word Blastoff. Otherwise, it outputs the parameter and then calls a function named countdown —itself— passing n - 1 as an argument.    Watch how the countdown function works when we start with a value of 3.   #include <iostream> #include <cmath> void countdown(int n) { if (n == 0) { std::cout << \"Blastoff!\" << std::endl; } else { std::cout << n << std::endl; countdown(n-1); } } int main() { countdown(3); return 0; }    What happens if we call countdown function like this:   The execution of countdown begins with n = 3 , and since n is not zero, it outputs the value 3, and then calls itself…   The execution of countdown begins with n = 2 , and since n is not zero, it outputs the value 2, and then calls itself…   The execution of countdown begins with n = 1 , and since n is not zero, it outputs the value 1, and then calls itself…   The execution of countdown begins with n = 0 , and since n is zero, it outputs the word Blastoff! and then returns.   The countdown that get n = 1 returns.   The countdown that get n = 2 returns.   The countdown that get n = 3 returns.   And then you're back in main (what a trip). So the total output looks like:  3 2 1 Blastoff!  As a second example, let's look again at the functions newLine and threeLine .  void newLine() { std::cout << std::endl ; } void threeLine() { newLine(); newLine(); newLine(); }  Although these work, they would not be much help if I wanted to output 2 newlines, or 4 newlines. A better alternative would be  void nLines(int n) { if (n > 0) { std::cout << std::endl ; nLines (n - 1); } }  This program is similar to countdown; as long as n is greater than zero, it outputs one newline, and then calls itself to output n-1 additional newlines. Thus, the total number of newlines is 1 + (n - 1) , which usually comes out to roughly n.   You can have a little bit of fun with recursion. Try this guessing game below!   #include <iostream> #include <cstdlib> #include <ctime> void guessTheNumber(int num) { std::cout << \"Enter your guess!\"; int guess; std::cin >> guess; std::cout << \"Your guess \" << guess << \". \"; if (guess == num) { std::cout << \"That's it!\"; } else if (guess > num) { std::cout << \"Too high! \" << std::endl; guessTheNumber(num); } else { std::cout << \"Too low! \" << std::endl; guessTheNumber(num); } } int main() { srand((unsigned) time(0)); int randomNumber = (rand() % 10) + 1; guessTheNumber(randomNumber); }  1 2 3 4 5 6 7 8 9 10      What will print?  #include <iostream> void exclamationPoint(int n) { if (n > 0) { std::cout << \"!\"; exclamationPoint (n-1); } } int main() { exclamationPoint(3); }      !   The function keeps executing while n is greater than 0.     !!   The function keeps executing while n is greater than 0.     !!!   Correct! First, the program enters the if statement within exclamationPoint because n is greater than 0. Then the function prints a \"!\" and calls itself again, but with n-1, which is 2. This repeats until n is 0, which is when the program exits the function.     !!!!   The function keeps executing while n is greater than 0. Therefore, when n is 0, it will not print a \"!\"       What will print?  #include <iostream> void exclamationPoint(int n) { if (n > 0) { std::cout << \"!\"; exclamationPoint (n-1); } } int main() { exclamationPoint(0); }      !!   If we start at zero, will the function ever call itself?     !   If we start at zero, will the function ever call itself?     0   The only output statement in this program prints a \"!\", therefore \"0\" would never print.     Nothing prints.   Correct! The program never enters the \"if\" statement within the function because n is never greater than 0.       A function that calls itself is said to be .       And the process by which a function calls itself is called recursion.    recusion  That is the process by which a function calls itself. What is used to describe the function itself?      "
+  "title": "Optional: Introduction to Recursion",
+  "body": " Optional: Introduction to Recursion   The next two sections introduce recursion, an important programming technique in which a function calls itself. Recursion is not needed for the material that follows immediately, so these sections may be treated as optional enrichment unless they are assigned.   You have already seen that one function can call another function. A function can also call itself. This process is called recursion , and a function that calls itself is called recursive .  A recursive function usually needs a condition that eventually stops the recursive calls. This stopping condition is called the base case .   This recursive function counts down from a positive integer.   #include <iostream> \/\/ Function declaration void count_down(int number); int main() { count_down(3); return 0; } \/\/ Function definition void count_down(int number) { if (number == 0) { std::cout << \"Blastoff!\\n\"; } else { std::cout << number << '\\n'; count_down(number - 1); } }    The function count_down has two cases. When number == 0 , the base case is reached and the function does not call itself again. Otherwise, the function prints the current value and calls itself with a smaller argument.  Calling count_down(3) produces the following sequence of function calls:  count_down(3) count_down(2) count_down(1) count_down(0)  The call with number == 0 reaches the base case and returns. Then each earlier call returns in reverse order until control returns to main .  The output is:  3 2 1 Blastoff!    Trace count_down(3) . Notice that each recursive call has its own parameter value and must finish before the previous call can finish.    Recursion can also be used when the same task must be repeated with a smaller input. For example, the following function prints a requested number of blank lines:   This recursive function prints a specified number of blank lines.   #include <iostream> \/\/ Function declaration void print_lines(int number_of_lines); int main() { print_lines(3); return 0; } \/\/ Function definition void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines - 1); } }    When number_of_lines is greater than zero, the function prints one newline and calls itself with a value that is one smaller. Eventually the argument becomes zero, the condition is false, and the recursion stops. For a positive argument n , the function prints exactly n newlines.    What will this program print?  #include <iostream> void print_exclamation_marks(int count); int main() { print_exclamation_marks(3); return 0; } void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count - 1); } }      !    Trace how the argument changes after each recursive call.      !!    Continue tracing until the condition count > 0 becomes false.      !!!    One exclamation mark is printed for each positive value of count .      !!!!    Check whether anything is printed when count reaches zero.        What will this program print?  #include <iostream> void print_exclamation_marks(int count); int main() { print_exclamation_marks(0); return 0; } void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count - 1); } }      !!    Evaluate the condition using the initial argument before looking for a recursive call.      !    Check whether the body of the if executes when count begins at zero.      0    Look at the program's output statement and identify what it is capable of printing.      Nothing prints.    The base case is reached immediately, so the recursive body does not execute.        The best technical term for a function that calls itself is .        The process is called recursion, while the function itself is described as recursive.     recursion   That term names the process. The question asks for the adjective that describes the function.       "
 },
 {
   "id": "chapter4_recursion-2",
   "level": "2",
   "url": "chapter4_recursion.html#chapter4_recursion-2",
-  "type": "Paragraph",
-  "number": "",
+  "type": "Note",
+  "number": "4.7.1",
   "title": "",
-  "body": "What mentioned in the last chapter is that it is legal for one function to call another, and we have seen several examples of that. I neglected to mention that it is also legal for a function to call itself. It may not be obvious why that is a good thing, but it turns out to be one of the most magical and interesting things a program can do. "
+  "body": " The next two sections introduce recursion, an important programming technique in which a function calls itself. Recursion is not needed for the material that follows immediately, so these sections may be treated as optional enrichment unless they are assigned.  "
 },
 {
   "id": "chapter4_recursion-3",
   "level": "2",
   "url": "chapter4_recursion.html#chapter4_recursion-3",
-  "type": "Note",
-  "number": "4.7.1",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": " The process of a function calling itself is called recursion , and such functions are said to be recursive .  "
+  "body": "You have already seen that one function can call another function. A function can also call itself. This process is called recursion , and a function that calls itself is called recursive . "
 },
 {
   "id": "chapter4_recursion-4",
@@ -5407,7 +5407,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "For example, look at the following function: "
+  "body": "A recursive function usually needs a condition that eventually stops the recursive calls. This stopping condition is called the base case . "
+},
+{
+  "id": "recursion_AC_1",
+  "level": "2",
+  "url": "chapter4_recursion.html#recursion_AC_1",
+  "type": "Listing",
+  "number": "4.7.1",
+  "title": "This recursive function counts down from a positive integer.",
+  "body": " This recursive function counts down from a positive integer.   #include <iostream> \/\/ Function declaration void count_down(int number); int main() { count_down(3); return 0; } \/\/ Function definition void count_down(int number) { if (number == 0) { std::cout << \"Blastoff!\\n\"; } else { std::cout << number << '\\n'; count_down(number - 1); } }   "
 },
 {
   "id": "chapter4_recursion-6",
@@ -5416,34 +5425,25 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The name of the function is countdown and it takes a single integer as a parameter. If the parameter is zero, it outputs the word Blastoff. Otherwise, it outputs the parameter and then calls a function named countdown —itself— passing n - 1 as an argument. "
+  "body": "The function count_down has two cases. When number == 0 , the base case is reached and the function does not call itself again. Otherwise, the function prints the current value and calls itself with a smaller argument. "
 },
 {
-  "id": "recursion_AC_1",
+  "id": "chapter4_recursion-7",
   "level": "2",
-  "url": "chapter4_recursion.html#recursion_AC_1",
-  "type": "Activity",
-  "number": "4.7.2",
-  "title": "",
-  "body": "  Watch how the countdown function works when we start with a value of 3.   #include <iostream> #include <cmath> void countdown(int n) { if (n == 0) { std::cout << \"Blastoff!\" << std::endl; } else { std::cout << n << std::endl; countdown(n-1); } } int main() { countdown(3); return 0; }   "
-},
-{
-  "id": "chapter4_recursion-8",
-  "level": "2",
-  "url": "chapter4_recursion.html#chapter4_recursion-8",
+  "url": "chapter4_recursion.html#chapter4_recursion-7",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "What happens if we call countdown function like this: "
+  "body": "Calling count_down(3) produces the following sequence of function calls: "
 },
 {
   "id": "chapter4_recursion-9",
   "level": "2",
   "url": "chapter4_recursion.html#chapter4_recursion-9",
-  "type": "Quotation",
+  "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": " The execution of countdown begins with n = 3 , and since n is not zero, it outputs the value 3, and then calls itself…   The execution of countdown begins with n = 2 , and since n is not zero, it outputs the value 2, and then calls itself…   The execution of countdown begins with n = 1 , and since n is not zero, it outputs the value 1, and then calls itself…   The execution of countdown begins with n = 0 , and since n is zero, it outputs the word Blastoff! and then returns.   The countdown that get n = 1 returns.   The countdown that get n = 2 returns.   The countdown that get n = 3 returns.  "
+  "body": "The call with number == 0 reaches the base case and returns. Then each earlier call returns in reverse order until control returns to main . "
 },
 {
   "id": "chapter4_recursion-10",
@@ -5452,43 +5452,43 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "And then you're back in main (what a trip). So the total output looks like: "
+  "body": "The output is: "
 },
 {
-  "id": "chapter4_recursion-12",
+  "id": "recursion_AC_1_trace",
   "level": "2",
-  "url": "chapter4_recursion.html#chapter4_recursion-12",
+  "url": "chapter4_recursion.html#recursion_AC_1_trace",
+  "type": "Activity",
+  "number": "4.7.2",
+  "title": "",
+  "body": "  Trace count_down(3) . Notice that each recursive call has its own parameter value and must finish before the previous call can finish.   "
+},
+{
+  "id": "chapter4_recursion-13",
+  "level": "2",
+  "url": "chapter4_recursion.html#chapter4_recursion-13",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "As a second example, let's look again at the functions newLine and threeLine . "
-},
-{
-  "id": "chapter4_recursion-14",
-  "level": "2",
-  "url": "chapter4_recursion.html#chapter4_recursion-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Although these work, they would not be much help if I wanted to output 2 newlines, or 4 newlines. A better alternative would be "
-},
-{
-  "id": "chapter4_recursion-16",
-  "level": "2",
-  "url": "chapter4_recursion.html#chapter4_recursion-16",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This program is similar to countdown; as long as n is greater than zero, it outputs one newline, and then calls itself to output n-1 additional newlines. Thus, the total number of newlines is 1 + (n - 1) , which usually comes out to roughly n. "
+  "body": "Recursion can also be used when the same task must be repeated with a smaller input. For example, the following function prints a requested number of blank lines: "
 },
 {
   "id": "recursion_AC_2",
   "level": "2",
   "url": "chapter4_recursion.html#recursion_AC_2",
   "type": "Listing",
-  "number": "4.7.1",
-  "title": "You can have a little bit of fun with recursion. Try this guessing game below!",
-  "body": " You can have a little bit of fun with recursion. Try this guessing game below!   #include <iostream> #include <cstdlib> #include <ctime> void guessTheNumber(int num) { std::cout << \"Enter your guess!\"; int guess; std::cin >> guess; std::cout << \"Your guess \" << guess << \". \"; if (guess == num) { std::cout << \"That's it!\"; } else if (guess > num) { std::cout << \"Too high! \" << std::endl; guessTheNumber(num); } else { std::cout << \"Too low! \" << std::endl; guessTheNumber(num); } } int main() { srand((unsigned) time(0)); int randomNumber = (rand() % 10) + 1; guessTheNumber(randomNumber); }  1 2 3 4 5 6 7 8 9 10   "
+  "number": "4.7.2",
+  "title": "This recursive function prints a specified number of blank lines.",
+  "body": " This recursive function prints a specified number of blank lines.   #include <iostream> \/\/ Function declaration void print_lines(int number_of_lines); int main() { print_lines(3); return 0; } \/\/ Function definition void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines - 1); } }   "
+},
+{
+  "id": "chapter4_recursion-15",
+  "level": "2",
+  "url": "chapter4_recursion.html#chapter4_recursion-15",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "When number_of_lines is greater than zero, the function prints one newline and calls itself with a value that is one smaller. Eventually the argument becomes zero, the condition is false, and the recursion stops. For a positive argument n , the function prints exactly n newlines. "
 },
 {
   "id": "recursion_1",
@@ -5497,7 +5497,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.7.1",
   "title": "",
-  "body": "  What will print?  #include <iostream> void exclamationPoint(int n) { if (n > 0) { std::cout << \"!\"; exclamationPoint (n-1); } } int main() { exclamationPoint(3); }      !   The function keeps executing while n is greater than 0.     !!   The function keeps executing while n is greater than 0.     !!!   Correct! First, the program enters the if statement within exclamationPoint because n is greater than 0. Then the function prints a \"!\" and calls itself again, but with n-1, which is 2. This repeats until n is 0, which is when the program exits the function.     !!!!   The function keeps executing while n is greater than 0. Therefore, when n is 0, it will not print a \"!\"    "
+  "body": "  What will this program print?  #include <iostream> void print_exclamation_marks(int count); int main() { print_exclamation_marks(3); return 0; } void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count - 1); } }      !    Trace how the argument changes after each recursive call.      !!    Continue tracing until the condition count > 0 becomes false.      !!!    One exclamation mark is printed for each positive value of count .      !!!!    Check whether anything is printed when count reaches zero.     "
 },
 {
   "id": "recursion_2",
@@ -5506,7 +5506,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.7.2",
   "title": "",
-  "body": "  What will print?  #include <iostream> void exclamationPoint(int n) { if (n > 0) { std::cout << \"!\"; exclamationPoint (n-1); } } int main() { exclamationPoint(0); }      !!   If we start at zero, will the function ever call itself?     !   If we start at zero, will the function ever call itself?     0   The only output statement in this program prints a \"!\", therefore \"0\" would never print.     Nothing prints.   Correct! The program never enters the \"if\" statement within the function because n is never greater than 0.    "
+  "body": "  What will this program print?  #include <iostream> void print_exclamation_marks(int count); int main() { print_exclamation_marks(0); return 0; } void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count - 1); } }      !!    Evaluate the condition using the initial argument before looking for a recursive call.      !    Check whether the body of the if executes when count begins at zero.      0    Look at the program's output statement and identify what it is capable of printing.      Nothing prints.    The base case is reached immediately, so the recursive body does not execute.     "
 },
 {
   "id": "recursion_3",
@@ -5515,7 +5515,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.7.3",
   "title": "",
-  "body": "  A function that calls itself is said to be .       And the process by which a function calls itself is called recursion.    recusion  That is the process by which a function calls itself. What is used to describe the function itself?     "
+  "body": "  The best technical term for a function that calls itself is .        The process is called recursion, while the function itself is described as recursive.     recursion   That term names the process. The question asks for the adjective that describes the function.      "
 },
 {
   "id": "chapter4_infinite-recursion",
@@ -5523,17 +5523,17 @@ var ptx_lunr_docs = [
   "url": "chapter4_infinite-recursion.html",
   "type": "Section",
   "number": "4.8",
-  "title": "Infinite Recursion",
-  "body": " Infinite Recursion  In the examples in the previous section, notice that each time the functions get called recursively, the argument gets smaller by one, so eventually it gets to zero. When the argument is zero, the function returns immediately, without making any recursive calls . This case—when the function completes without making a recursive call—is called the base case .  If a recursion never reaches a base case, it will go on making recursive calls forever and the program will never terminate. This is known as infinite recursion , and it is generally not considered a good idea.  In most programming environments, a program with an infinite recursion will not really run forever. Eventually, something will break and the program will report an error.   Infinite recursion is the first example we have seen of a run-time error (an error that does not appear until you run the program).   You should write a small program that recurses forever and run it to see what happens. Below is an example. The function adds to the number n instead of subtracting, which means it is always larger than 0. Therefore, the function executes forever. If you tried to run the program, it would run until it exhausted the available memory for its call stack and crashed. (If you run a infinitely recursive program in an Activecode in this book, it will be terminated automatically after a few seconds and you will get an error message.)  #include <iostream> #include <cmath> void nLines(int n) { if (n > 0) { std::cout << std::endl; nLines(n + 1); } } int main() { void nLines(10); }    If a recursive function never reaches its case, then the function will continue executing indefinitely. This is called recursion.                  Take a look at the code below. What will happen if you were to run it on your machine?  #include <iostream> void isNegative(int n) { if (n >= 0) { std::cout << \"Not Negative!\"; isNegative(n - 1); } std::cout << \"Negative!\"; } int main() { isNegative(-10); }      The function will print \"Not Negative!\"   The function will never print \"Not Negative!\" since we start with a negative number!     The function will print \"Not Negative!\" more than once. Then it will print \"Negative!\" and will stop executing.   The function will never print \"Not Negative!\" since we start with a negative number!     The function will print \"Negative!\"   We start with a negative number, so the function will reach the base case.     The function will never stop executing, there will be infinite recursion.   We start with a negative number, so the function will reach the base case.       isNegative is defined exactly as it was above, but we have changed the call to it in main . What will happen if we run the code with this input?  #include <iostream> void isNegative(int n) { if (n >= 0) { std::cout << \"Not Negative!\"; isNegative(n - 1); } std::cout << \"Negative!\"; } int main() { isNegative(10); }      The function will print \"Not Negative!\"   The function will print \"Not Negative!\", but it won't stop there!     The function will print \"Not Negative!\" more than once. Then it will print \"Negative!\" and will stop executing.   The function will print \"Not Negative!\" until it reaches a negative number.     The function will print \"Negative!\"   The function will eventually print \"Not Negative!\", but that's not all!     The function will never stop executing, there will be infinite recursion.   Since we decrement each time, the base case will be reached.       The isNegative function has been edited as shown below. What will happen now when we run the code?  #include <iostream> void isNegative(int n) { if (n >= 0) { std::cout << \"Not Negative!\"; isNegative(n + 1); } std::cout << \"Negative!\"; } int main() { isNegative(10); }      The function will print \"Not Negative!\"   The function will print \"Not Negative!\" but it won't stop there!     The function will print \"Not Negative!\" more than once. Then it will print \"Negative!\" and will stop executing.   The function will print \"Not Negative!\" more than once. But will it print \"Negative\"?     The function will print \"Negative!\"   We start with a positive number, so the function simply won't print \"Not Negative!\"     The function will never stop executing, there will be infinite recursion.   Our input is incremented with every recursive call, so if we start with a positive number, we will never reach the base case.     "
+  "title": "Optional: Infinite Recursion",
+  "body": " Optional: Infinite Recursion   This section continues the optional recursion material introduced in the previous section.   A recursive function must eventually reach a base case that stops the recursive calls. If the recursive calls continue without reaching a base case, the result is called infinite recursion .  Infinite recursion does not normally continue forever in practice. Each function call uses space for its own call frame. If recursive calls continue for too long, the program will usually exhaust the available call-stack space or be terminated by the execution environment.   Infinite recursion is a run-time error: the program may compile successfully, but a problem occurs while the program is running.    This function moves away from its base case instead of toward it.   #include <iostream> \/\/ Function declaration void print_lines(int number_of_lines); int main() { print_lines(10); return 0; } \/\/ Function definition void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines + 1); } }    The recursive call increases number_of_lines instead of decreasing it. Starting from 10, the argument moves farther away from the stopping condition rather than toward it, so the base case is never reached.    If a recursive function never reaches its case, then the recursive calls may continue until the program fails. This is called recursion.                  What will this program print?  #include <iostream> void report_sign(int number); int main() { report_sign(-10); return 0; } void report_sign(int number) { if (number >= 0) { std::cout << \"Not negative!\\n\"; report_sign(number - 1); } else { std::cout << \"Negative!\\n\"; } }      Not negative!    Evaluate the first condition using the initial argument.      Negative!    The initial argument already satisfies the stopping branch.      Not negative! followed by Negative!    Check whether the recursive branch is entered at all.      The function recurses indefinitely.    Determine whether a recursive call is made for the initial value.        What happens when this program runs?  #include <iostream> void report_count(int number); int main() { report_count(3); return 0; } void report_count(int number) { if (number > 0) { std::cout << number << '\\n'; report_count(number - 1); } }      It prints 3, 2, 1 and then stops.    Each recursive call moves the argument closer to the base case.      It prints 3 forever.    Trace how the argument changes in each recursive call.      It prints 3, 4, 5, ... until the program fails.    Check whether the recursive argument is increased or decreased.      Nothing prints.    Evaluate the condition using the initial value 3.        What happens when this program runs?  #include <iostream> void report_count(int number); int main() { report_count(3); return 0; } void report_count(int number) { if (number > 0) { std::cout << number << '\\n'; report_count(number + 1); } }      It prints only 3.    Check whether the function makes another recursive call.      It prints 3, 2, 1 and then stops.    Trace whether the argument moves toward or away from zero.      Nothing prints.    Evaluate the condition using the initial value 3.      It continues making recursive calls until the program is terminated or the call stack is exhausted.    The recursive argument moves farther away from the base case.      "
 },
 {
   "id": "chapter4_infinite-recursion-2",
   "level": "2",
   "url": "chapter4_infinite-recursion.html#chapter4_infinite-recursion-2",
-  "type": "Paragraph",
-  "number": "",
+  "type": "Note",
+  "number": "4.8.1",
   "title": "",
-  "body": "In the examples in the previous section, notice that each time the functions get called recursively, the argument gets smaller by one, so eventually it gets to zero. When the argument is zero, the function returns immediately, without making any recursive calls . This case—when the function completes without making a recursive call—is called the base case . "
+  "body": " This section continues the optional recursion material introduced in the previous section.  "
 },
 {
   "id": "chapter4_infinite-recursion-3",
@@ -5542,7 +5542,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "If a recursion never reaches a base case, it will go on making recursive calls forever and the program will never terminate. This is known as infinite recursion , and it is generally not considered a good idea. "
+  "body": "A recursive function must eventually reach a base case that stops the recursive calls. If the recursive calls continue without reaching a base case, the result is called infinite recursion . "
 },
 {
   "id": "chapter4_infinite-recursion-4",
@@ -5551,25 +5551,34 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In most programming environments, a program with an infinite recursion will not really run forever. Eventually, something will break and the program will report an error. "
+  "body": "Infinite recursion does not normally continue forever in practice. Each function call uses space for its own call frame. If recursive calls continue for too long, the program will usually exhaust the available call-stack space or be terminated by the execution environment. "
 },
 {
   "id": "chapter4_infinite-recursion-5",
   "level": "2",
   "url": "chapter4_infinite-recursion.html#chapter4_infinite-recursion-5",
   "type": "Warning",
-  "number": "4.8.1",
+  "number": "4.8.2",
   "title": "",
-  "body": " Infinite recursion is the first example we have seen of a run-time error (an error that does not appear until you run the program).  "
+  "body": " Infinite recursion is a run-time error: the program may compile successfully, but a problem occurs while the program is running.  "
 },
 {
-  "id": "chapter4_infinite-recursion-6",
+  "id": "unbounded_recursion_AC_1",
   "level": "2",
-  "url": "chapter4_infinite-recursion.html#chapter4_infinite-recursion-6",
+  "url": "chapter4_infinite-recursion.html#unbounded_recursion_AC_1",
+  "type": "Listing",
+  "number": "4.8.1",
+  "title": "This function moves away from its base case instead of toward it.",
+  "body": " This function moves away from its base case instead of toward it.   #include <iostream> \/\/ Function declaration void print_lines(int number_of_lines); int main() { print_lines(10); return 0; } \/\/ Function definition void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines + 1); } }   "
+},
+{
+  "id": "chapter4_infinite-recursion-7",
+  "level": "2",
+  "url": "chapter4_infinite-recursion.html#chapter4_infinite-recursion-7",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "You should write a small program that recurses forever and run it to see what happens. Below is an example. The function adds to the number n instead of subtracting, which means it is always larger than 0. Therefore, the function executes forever. If you tried to run the program, it would run until it exhausted the available memory for its call stack and crashed. (If you run a infinitely recursive program in an Activecode in this book, it will be terminated automatically after a few seconds and you will get an error message.) "
+  "body": "The recursive call increases number_of_lines instead of decreasing it. Starting from 10, the argument moves farther away from the stopping condition rather than toward it, so the base case is never reached. "
 },
 {
   "id": "unbounded_recursion_1",
@@ -5578,7 +5587,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.8.1",
   "title": "",
-  "body": "  If a recursive function never reaches its case, then the function will continue executing indefinitely. This is called recursion.               "
+  "body": "  If a recursive function never reaches its case, then the recursive calls may continue until the program fails. This is called recursion.               "
 },
 {
   "id": "unbounded_recursion_2",
@@ -5587,7 +5596,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.8.2",
   "title": "",
-  "body": "  Take a look at the code below. What will happen if you were to run it on your machine?  #include <iostream> void isNegative(int n) { if (n >= 0) { std::cout << \"Not Negative!\"; isNegative(n - 1); } std::cout << \"Negative!\"; } int main() { isNegative(-10); }      The function will print \"Not Negative!\"   The function will never print \"Not Negative!\" since we start with a negative number!     The function will print \"Not Negative!\" more than once. Then it will print \"Negative!\" and will stop executing.   The function will never print \"Not Negative!\" since we start with a negative number!     The function will print \"Negative!\"   We start with a negative number, so the function will reach the base case.     The function will never stop executing, there will be infinite recursion.   We start with a negative number, so the function will reach the base case.    "
+  "body": "  What will this program print?  #include <iostream> void report_sign(int number); int main() { report_sign(-10); return 0; } void report_sign(int number) { if (number >= 0) { std::cout << \"Not negative!\\n\"; report_sign(number - 1); } else { std::cout << \"Negative!\\n\"; } }      Not negative!    Evaluate the first condition using the initial argument.      Negative!    The initial argument already satisfies the stopping branch.      Not negative! followed by Negative!    Check whether the recursive branch is entered at all.      The function recurses indefinitely.    Determine whether a recursive call is made for the initial value.     "
 },
 {
   "id": "unbounded_recursion_3",
@@ -5596,7 +5605,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.8.3",
   "title": "",
-  "body": "  isNegative is defined exactly as it was above, but we have changed the call to it in main . What will happen if we run the code with this input?  #include <iostream> void isNegative(int n) { if (n >= 0) { std::cout << \"Not Negative!\"; isNegative(n - 1); } std::cout << \"Negative!\"; } int main() { isNegative(10); }      The function will print \"Not Negative!\"   The function will print \"Not Negative!\", but it won't stop there!     The function will print \"Not Negative!\" more than once. Then it will print \"Negative!\" and will stop executing.   The function will print \"Not Negative!\" until it reaches a negative number.     The function will print \"Negative!\"   The function will eventually print \"Not Negative!\", but that's not all!     The function will never stop executing, there will be infinite recursion.   Since we decrement each time, the base case will be reached.    "
+  "body": "  What happens when this program runs?  #include <iostream> void report_count(int number); int main() { report_count(3); return 0; } void report_count(int number) { if (number > 0) { std::cout << number << '\\n'; report_count(number - 1); } }      It prints 3, 2, 1 and then stops.    Each recursive call moves the argument closer to the base case.      It prints 3 forever.    Trace how the argument changes in each recursive call.      It prints 3, 4, 5, ... until the program fails.    Check whether the recursive argument is increased or decreased.      Nothing prints.    Evaluate the condition using the initial value 3.     "
 },
 {
   "id": "unbounded_recursion_4",
@@ -5605,7 +5614,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.8.4",
   "title": "",
-  "body": "  The isNegative function has been edited as shown below. What will happen now when we run the code?  #include <iostream> void isNegative(int n) { if (n >= 0) { std::cout << \"Not Negative!\"; isNegative(n + 1); } std::cout << \"Negative!\"; } int main() { isNegative(10); }      The function will print \"Not Negative!\"   The function will print \"Not Negative!\" but it won't stop there!     The function will print \"Not Negative!\" more than once. Then it will print \"Negative!\" and will stop executing.   The function will print \"Not Negative!\" more than once. But will it print \"Negative\"?     The function will print \"Negative!\"   We start with a positive number, so the function simply won't print \"Not Negative!\"     The function will never stop executing, there will be infinite recursion.   Our input is incremented with every recursive call, so if we start with a positive number, we will never reach the base case.    "
+  "body": "  What happens when this program runs?  #include <iostream> void report_count(int number); int main() { report_count(3); return 0; } void report_count(int number) { if (number > 0) { std::cout << number << '\\n'; report_count(number + 1); } }      It prints only 3.    Check whether the function makes another recursive call.      It prints 3, 2, 1 and then stops.    Trace whether the argument moves toward or away from zero.      Nothing prints.    Evaluate the condition using the initial value 3.      It continues making recursive calls until the program is terminated or the call stack is exhausted.    The recursive argument moves farther away from the base case.     "
 },
 {
   "id": "chapter4_stack-diagrams-for-recursive-functions",
@@ -5613,17 +5622,17 @@ var ptx_lunr_docs = [
   "url": "chapter4_stack-diagrams-for-recursive-functions.html",
   "type": "Section",
   "number": "4.9",
-  "title": "Stack Diagrams for Recursive Functions",
-  "body": " Stack Diagrams for Recursive Functions  In the previous chapter we used a stack diagram to represent the state of a program during a function call. The same kind of diagram can make it easier to interpret a recursive function.  Remember that every time a function gets called it creates a new instance that contains the function's local variables and parameters.  This figure shows a stack diagram for countdown , called with n = 3 :   Stack Diagram   A stack of 5 boxes. The top one is labeled main and is empty. The next four are all labeled 'countdown' and respectively contain n = 3, n = 2, n = 1, n = 0.    There is one instance of main and four instances of countdown , each with a different value for the parameter n . The bottom of the stack, countdown with n = 0 is the base case. It does not make a recursive call, so there are no more instances of countdown .  The instance of main is empty because main does not have any parameters or local variables. As an exercise, draw a stack diagram for nLines , invoked with the parameter n = 4.    Refer to the nLines function below. It is the same as the nLines function defined on the previous page. How many instances of nLines would there be in the stack diagram if we begin with n = 4?  void nLines(int n) { if (n > 0) { std::cout << std::endl ; nLines(n + 1); } }      3   If nLines could reach its base case, it cannot be done in 3 function calls.     4   If nLines could reach its base case, it cannot be done in 4 function calls.     5   If nLines could reach its base case, it could be done in 5 function calls, but does it ever reach the base case?     infinite   The nLines function never reaches its base case, so the stack diagram would be infinitely long.     "
+  "title": "Optional: Stack Diagrams for Recursive Functions",
+  "body": " Optional: Stack Diagrams for Recursive Functions   This section continues the optional recursion material by showing how recursive function calls can be represented with stack diagrams.   In Chapter 3, we used a stack diagram to represent the state of a program during function calls. The same kind of diagram is especially useful for understanding recursion.  Each time a function is called, that call has its own stack frame . The frame contains information associated with that particular function call, including its parameters and local variables.  A recursive function can therefore have several stack frames at the same time because each recursive call is a new function call.  This figure shows a stack diagram for count_down(3) :   Stack frames created by count_down(3)    A stack diagram containing one frame for main and four frames for count_down. The count_down frames contain parameter values 3, 2, 1, and 0.     There is one stack frame for main and four stack frames for calls to count_down . Each call has its own value for the parameter.  count_down(3) count_down(2) count_down(1) count_down(0)  The call count_down(0) reaches the base case and makes no additional recursive call. When that call returns, its stack frame is removed. The earlier calls then return one at a time in reverse order, and their stack frames are also removed.  This helps explain an important feature of recursion: although every call executes the same function definition, each call has its own parameter values and its own stack frame.    Consider the recursive function below. How many stack frames for print_lines exist when the deepest call has been reached after starting with print_lines(4) ?  #include <iostream> void print_lines(int number_of_lines); int main() { print_lines(4); return 0; } void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines - 1); } }      3    Trace the argument values beginning with 4 and continue until the base case is reached.      4    Remember that the call that reaches the base case also has its own stack frame.      5    There is one frame for each call with argument values 4, 3, 2, 1, and 0.      Infinitely many    Check whether each recursive call moves the argument toward or away from the base case.      "
 },
 {
   "id": "chapter4_stack-diagrams-for-recursive-functions-2",
   "level": "2",
   "url": "chapter4_stack-diagrams-for-recursive-functions.html#chapter4_stack-diagrams-for-recursive-functions-2",
-  "type": "Paragraph",
-  "number": "",
+  "type": "Note",
+  "number": "4.9.1",
   "title": "",
-  "body": "In the previous chapter we used a stack diagram to represent the state of a program during a function call. The same kind of diagram can make it easier to interpret a recursive function. "
+  "body": " This section continues the optional recursion material by showing how recursive function calls can be represented with stack diagrams.  "
 },
 {
   "id": "chapter4_stack-diagrams-for-recursive-functions-3",
@@ -5632,7 +5641,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Remember that every time a function gets called it creates a new instance that contains the function's local variables and parameters. "
+  "body": "In Chapter 3, we used a stack diagram to represent the state of a program during function calls. The same kind of diagram is especially useful for understanding recursion. "
 },
 {
   "id": "chapter4_stack-diagrams-for-recursive-functions-4",
@@ -5641,16 +5650,16 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This figure shows a stack diagram for countdown , called with n = 3 : "
+  "body": "Each time a function is called, that call has its own stack frame . The frame contains information associated with that particular function call, including its parameters and local variables. "
 },
 {
   "id": "chapter4_stack-diagrams-for-recursive-functions-5",
   "level": "2",
   "url": "chapter4_stack-diagrams-for-recursive-functions.html#chapter4_stack-diagrams-for-recursive-functions-5",
-  "type": "Figure",
-  "number": "4.9.1",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": " Stack Diagram   A stack of 5 boxes. The top one is labeled main and is empty. The next four are all labeled 'countdown' and respectively contain n = 3, n = 2, n = 1, n = 0.   "
+  "body": "A recursive function can therefore have several stack frames at the same time because each recursive call is a new function call. "
 },
 {
   "id": "chapter4_stack-diagrams-for-recursive-functions-6",
@@ -5659,16 +5668,43 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "There is one instance of main and four instances of countdown , each with a different value for the parameter n . The bottom of the stack, countdown with n = 0 is the base case. It does not make a recursive call, so there are no more instances of countdown . "
+  "body": "This figure shows a stack diagram for count_down(3) : "
 },
 {
   "id": "chapter4_stack-diagrams-for-recursive-functions-7",
   "level": "2",
   "url": "chapter4_stack-diagrams-for-recursive-functions.html#chapter4_stack-diagrams-for-recursive-functions-7",
+  "type": "Figure",
+  "number": "4.9.1",
+  "title": "",
+  "body": " Stack frames created by count_down(3)    A stack diagram containing one frame for main and four frames for count_down. The count_down frames contain parameter values 3, 2, 1, and 0.    "
+},
+{
+  "id": "chapter4_stack-diagrams-for-recursive-functions-8",
+  "level": "2",
+  "url": "chapter4_stack-diagrams-for-recursive-functions.html#chapter4_stack-diagrams-for-recursive-functions-8",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The instance of main is empty because main does not have any parameters or local variables. As an exercise, draw a stack diagram for nLines , invoked with the parameter n = 4. "
+  "body": "There is one stack frame for main and four stack frames for calls to count_down . Each call has its own value for the parameter. "
+},
+{
+  "id": "chapter4_stack-diagrams-for-recursive-functions-10",
+  "level": "2",
+  "url": "chapter4_stack-diagrams-for-recursive-functions.html#chapter4_stack-diagrams-for-recursive-functions-10",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The call count_down(0) reaches the base case and makes no additional recursive call. When that call returns, its stack frame is removed. The earlier calls then return one at a time in reverse order, and their stack frames are also removed. "
+},
+{
+  "id": "chapter4_stack-diagrams-for-recursive-functions-11",
+  "level": "2",
+  "url": "chapter4_stack-diagrams-for-recursive-functions.html#chapter4_stack-diagrams-for-recursive-functions-11",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "This helps explain an important feature of recursion: although every call executes the same function definition, each call has its own parameter values and its own stack frame. "
 },
 {
   "id": "stack_1",
@@ -5677,7 +5713,7 @@ var ptx_lunr_docs = [
   "type": "Checkpoint",
   "number": "4.9.1",
   "title": "",
-  "body": "  Refer to the nLines function below. It is the same as the nLines function defined on the previous page. How many instances of nLines would there be in the stack diagram if we begin with n = 4?  void nLines(int n) { if (n > 0) { std::cout << std::endl ; nLines(n + 1); } }      3   If nLines could reach its base case, it cannot be done in 3 function calls.     4   If nLines could reach its base case, it cannot be done in 4 function calls.     5   If nLines could reach its base case, it could be done in 5 function calls, but does it ever reach the base case?     infinite   The nLines function never reaches its base case, so the stack diagram would be infinitely long.    "
+  "body": "  Consider the recursive function below. How many stack frames for print_lines exist when the deepest call has been reached after starting with print_lines(4) ?  #include <iostream> void print_lines(int number_of_lines); int main() { print_lines(4); return 0; } void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines - 1); } }      3    Trace the argument values beginning with 4 and continue until the base case is reached.      4    Remember that the call that reaches the base case also has its own stack frame.      5    There is one frame for each call with argument values 4, 3, 2, 1, and 0.      Infinitely many    Check whether each recursive call moves the argument toward or away from the base case.     "
 },
 {
   "id": "chapter4_glossary",
@@ -5686,7 +5722,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "4.10",
   "title": "Glossary",
-  "body": " Glossary    modulus  An operator that works on integers and yields the remainder when one number is divided by another. In C++ it is denoted with a percent sign (%).    conditional  A block of statements that may or may not be executed depending on some condition.    chaining  A way of joining several conditional statements in sequence.    nesting  Putting a conditional statement inside one or both branches of another conditional statement.    recursion  The process of calling the same function you are currently executing.    infinite recursion  A function that calls itself recursively without every reaching the base case. Eventually an infinite recursion will cause a run-time error.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    modulus  An operator that works on integers and yields the remainder when one number is divided by another.    chaining  A way of joining several conditional statements in sequence.    nesting  Putting a conditional statement inside one or both branches of another conditional statement.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    conditional  A block of statements that may or may not be executed depending on some condition.    recursion  The process of calling the same function you are currently executing.    infinite recursion  The process of making recursive calls without every reaching the base case.      "
+  "body": " Glossary    remainder operator  The operator % , which works with integer operands and produces the remainder from integer division. It is also commonly called the modulus or modulo operator.    conditional statement  A statement that uses a condition to determine whether a particular branch of code should execute.    condition  An expression that is evaluated as either true or false and is used to control a conditional statement.    comparison operator  An operator, such as == , != , < , > , <= , or >= , that compares two values and produces a Boolean result.    branch  One possible path of execution within a conditional statement.    alternative execution  A conditional structure using if and else in which exactly one of two branches executes.    if-else-if chain  A conditional structure that checks related conditions from top to bottom and executes the first branch whose condition is true.    nested conditional  A conditional statement that appears inside a branch of another conditional statement.    recursion  The process in which a function calls itself.    recursive  Describes a function that calls itself.    base case  A case in a recursive function that stops the recursive calls by completing without making another recursive call.    infinite recursion  Recursion in which the program continues making recursive calls without reaching a base case. It will typically continue until the program is terminated or available call-stack space is exhausted.    stack frame  Information associated with one function call, including its parameters and local variables. Each recursive call has its own stack frame.       Match each term with its definition.    Review the vocabulary used for basic conditional execution.     remainder operator  The operator % that produces the remainder from integer division.    condition  An expression evaluated as true or false to control a conditional statement.    branch  One possible path of execution within a conditional statement.    alternative execution  An if\/else structure in which exactly one of two branches executes.       Match each term with its definition.    Think about how each structure organizes decisions in a program.     comparison operator  An operator that compares two values and produces a Boolean result.    conditional statement  A statement that uses a condition to determine whether a branch executes.    if-else-if chain  A structure that checks related conditions from top to bottom and executes the first true branch.    nested conditional  A conditional statement placed inside a branch of another conditional statement.       The following terms come from the optional recursion sections. Match each term with its definition.    Review how recursive calls stop and how individual function calls are represented.     recursion  The process in which a function calls itself.    recursive  Describes a function that calls itself.    base case  A case that stops further recursive calls.    infinite recursion  Recursive calls that continue without reaching a base case.    stack frame  Information associated with one function call, including its parameters and local variables.      "
 },
 {
   "id": "chapter4_glossary-2",
@@ -5695,7 +5731,7 @@ var ptx_lunr_docs = [
   "type": "Glossary",
   "number": "4.10",
   "title": "Glossary",
-  "body": "  modulus  An operator that works on integers and yields the remainder when one number is divided by another. In C++ it is denoted with a percent sign (%).    conditional  A block of statements that may or may not be executed depending on some condition.    chaining  A way of joining several conditional statements in sequence.    nesting  Putting a conditional statement inside one or both branches of another conditional statement.    recursion  The process of calling the same function you are currently executing.    infinite recursion  A function that calls itself recursively without every reaching the base case. Eventually an infinite recursion will cause a run-time error.   "
+  "body": "  remainder operator  The operator % , which works with integer operands and produces the remainder from integer division. It is also commonly called the modulus or modulo operator.    conditional statement  A statement that uses a condition to determine whether a particular branch of code should execute.    condition  An expression that is evaluated as either true or false and is used to control a conditional statement.    comparison operator  An operator, such as == , != , < , > , <= , or >= , that compares two values and produces a Boolean result.    branch  One possible path of execution within a conditional statement.    alternative execution  A conditional structure using if and else in which exactly one of two branches executes.    if-else-if chain  A conditional structure that checks related conditions from top to bottom and executes the first branch whose condition is true.    nested conditional  A conditional statement that appears inside a branch of another conditional statement.    recursion  The process in which a function calls itself.    recursive  Describes a function that calls itself.    base case  A case in a recursive function that stops the recursive calls by completing without making another recursive call.    infinite recursion  Recursion in which the program continues making recursive calls without reaching a base case. It will typically continue until the program is terminated or available call-stack space is exhausted.    stack frame  Information associated with one function call, including its parameters and local variables. Each recursive call has its own stack frame.   "
 },
 {
   "id": "chapter4_glossary-3",
@@ -5704,7 +5740,7 @@ var ptx_lunr_docs = [
   "type": "Reading Questions",
   "number": "4.10",
   "title": "Reading Questions",
-  "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    modulus  An operator that works on integers and yields the remainder when one number is divided by another.    chaining  A way of joining several conditional statements in sequence.    nesting  Putting a conditional statement inside one or both branches of another conditional statement.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    conditional  A block of statements that may or may not be executed depending on some condition.    recursion  The process of calling the same function you are currently executing.    infinite recursion  The process of making recursive calls without every reaching the base case.     "
+  "body": "   Match each term with its definition.    Review the vocabulary used for basic conditional execution.     remainder operator  The operator % that produces the remainder from integer division.    condition  An expression evaluated as true or false to control a conditional statement.    branch  One possible path of execution within a conditional statement.    alternative execution  An if\/else structure in which exactly one of two branches executes.       Match each term with its definition.    Think about how each structure organizes decisions in a program.     comparison operator  An operator that compares two values and produces a Boolean result.    conditional statement  A statement that uses a condition to determine whether a branch executes.    if-else-if chain  A structure that checks related conditions from top to bottom and executes the first true branch.    nested conditional  A conditional statement placed inside a branch of another conditional statement.       The following terms come from the optional recursion sections. Match each term with its definition.    Review how recursive calls stop and how individual function calls are represented.     recursion  The process in which a function calls itself.    recursive  Describes a function that calls itself.    base case  A case that stops further recursive calls.    infinite recursion  Recursive calls that continue without reaching a base case.    stack frame  Information associated with one function call, including its parameters and local variables.     "
 },
 {
   "id": "chapter4_multiple-choice-exercises",
@@ -5713,7 +5749,7 @@ var ptx_lunr_docs = [
   "type": "Exercises",
   "number": "4.11",
   "title": "Multiple Choice Exercises",
-  "body": " Multiple Choice Exercises  Answer the following Multiple Choice questions to assess what you have learned in this chapter.    Say you run the following code. What is the value of mod ?  int x = 4; int y = 7; int mod = y % x;      0   There is a remainder.     1   Incorrect!     2   Incorrect!     3   The remainder of 7 \/ 4 is 3.     4   We can't have a remainder of 4, since 4 is the divisor.       What is printed when the following code executes?  int x = 8; if (x % 3 == 2) { std::cout << \"hey!\" << std::endl ; } else if (x != 7) { std::cout << \"hi!\" << std::endl ; } else if (x % 2 == 0) { std::cout << \"hello!\" << std::endl ; } else { std::cout << \"bye!\" << std::endl ; }      hey!   Since the first conditon is met, the rest of the chained conditional does not execute.     hi!   It's true that 8 != 7 , but hi! is not printed here.     hi!   It's true that 8 % 2 == 0 , but hello! is not printed!     hey! hi! hello!   All of these conditons are met, but only one expression is printed!     bye!   At least one of the conditons is met, so the else will not execute!       What is printed when the following code executes?  int x = 34; if (32 < x) { std::cout << \"It's Freezing!\"; } if (x < 40) { std::cout << \"It's Cold!\"; } if (x > 65) { std::cout << \"It's Warm!\"' } else { std::cout << \"It's Hot!\"; }      It's Freezing!   Take a closer look at the conditions and the way they are written in the program.     It's Cold!   Take a closer look at the conditions and the way they are written in the program.     It's Freezing! It's Cold!   You've identified some of the conditons that are met! Take another look at the chain of conditionals at the end!     It's Freezing! It's Cold! It's Hot!   These statements are quite contradicting, but that's exactly what the output would be if we ran this code.     It's Hot!   Take a closer look at the conditions and the way they are written in the program.       Suppose you have defined the following function:  void practicingReturns(int a, int b) { if (a < b) { a += 2; } if (a > b) { return; } std::cout << a + b; }  What is printed when we run the following code?  int x = practicingReturns(2, 3);      5   This is what a + b would be before the first conditonal.     7   This is the value of a + b after the first conditional, but it doesn't print.     23   This is not the value of a + b .     Nothing.   The function exits with a return before anything is printed.       Suppose you have defined the following function:  void fortuneCookie(int a, bool b, char c) { if (c < 'm') { if (a % 2 == 0) { std::cout << \"An alien of some sort will be appearing to you shortly.\"; } else { std::cout << \"The fortune you seek is in another cookie.\"; } } else if (c < 'r') { if (b) { std::cout << \"He who laughs at himself never runs out of things to laugh at.\"; } else { std::cout << \"You will be hungry again in one hour.\"; } } else { std::cout << \"Fortune not found? Abort, retry, ignore.\"; } }  What will be your fortune if you run the following code?  fortuneCookie(14, false, 'm'');       An alien of some sort will be appearing to you shortly.     'm' is NOT less than 'm' , so you don't even enter the if block.      The fortune you seek is in another cookie.     'm' is NOT less than 'm' , so you don't even enter the if block.      He who laughs at himself never runs out of things to laugh at.     if (b) really means if (b == true) .      You will be hungry again in one hour.     'm' < 'r' is true and b == false , so this is the fortune that will print.      Fortune not found? Abort, retry, ignore.     'm' is less than 'r' so you would enter the else if block, not the else .       Suppose you have defined the following function:  void fortuneCookie(int a, bool b, char c) { if (c < 'm') { if (a % 2 == 0) { std::cout << \"An alien of some sort will be appearing to you shortly.\"; } else { std::cout << \"The fortune you seek is in another cookie.\"; } } else if (c < 'r') { if (b) { std::cout << \"He who laughs at himself never runs out of things to laugh at.\"; } else { std::cout << \"You will be hungry again in one hour.\"; } } else { std::cout << \"Fortune not found? Abort, retry, ignore.\"; } }  What will be your fortune if you run the following code?  fortuneCookie(22, true, 'b');       An alien of some sort will be appearing to you shortly.     'b' < 'm' and 22 % 2 == 0 , so this is the fortune that will print.      The fortune you seek is in another cookie.     22 % 2 == 0 , so you enter the if block, not the else.      He who laughs at himself never runs out of things to laugh at.     'b' is less than 'm' , so you would enter the if block, not the else if .      You will be hungry again in one hour.     'b' is less than 'm' , so you would enter the if block, not the else if .      Fortune not found? Abort, retry, ignore.     'b' is less than 'm' , so you would enter the if block, not the else .       Suppose you have defined the following function:  void theThing(int m, int n, bool b) { if (b) { if (m % 4 == 0) { std::cout << m; return; } if ((m + n) > 10) { std::cout << m + n; return; } } else if ((m > n) == b) { std::cout << m - n; return; } else { if (n % 3 == 0) { std::cout << n; return; } } std::cout << -1; }  What is printed when we run the following code?  theThing(5, 10, false);      5   The outer if condition is not met, the block does not execute.     15   The outer if condition is not met, the block does not execute.     -5    m > n evaluates to false, so the else if block executes.     10   The condition for else if is met, so the function never enters the else .     -1   The function has returned.       Suppose you have defined the following function:  void theThing(int m, int n, bool b) { if (b) { if (m % 4 == 0) { std::cout << m; return; } if ((m + n) > 10) { std::cout << m + n; return; } } else if ((m > n) == b) { std::cout << m - n; return; } else { if (n % 3 == 0) { std::cout << n; return; } } std::cout << -1; }  What is printed when we run the following code?  theThing(6, 4, true);      6    5 % 4 != 0 in the if block, so the function doesn't print 6.     10    m + n !> 10 in the if block, so the function doesn't print 10.     2   The condition for if is met, so the function never enters the else if .     4   The condition for if is met, so the function never enters the else .     -1   None of the conditions were met, so we reach the default std::cout -1.       Suppose you have defined the following function:  void moo(int m, int n) { if (m != n) { m += 2; std::cout << \"Moo!\"; moo(m, n); } else { std::cout << \"Got Milk?\"; } }  How many times does Moo! print when we run the following?  moo(4, 8);      0   When we call the function 4 != 8 , so Moo! is printed at least once.     1   The function calls itself inside of the if loop, so Moo! is printed more than once.     2    m is incremented by two each with each function call, so after two m == n and the recursion stops.     3   Take a look at how m is incremented with each function call.     infinite recursion   The function stops printing Moo! when m == n .       Suppose you have defined the following function:  void moo(int m, int n) { if (m != n) { m += 2; std::cout << \"Moo!\"; moo(m, n); } else { std::cout << \"Got Milk?\"; } }  How many times does Moo! print when we run the following?  moo(5, 10);      0   When we call the function 5 != 10 , so Moo! is printed at least once.     1   The function calls itself inside of the if loop, so Moo! is printed more than once.     2   After two function calls, m == 9 and n == 10 . The function is not done printing.     3   After three function calls, m == 11 and n == 10 . The function is not done printing     infinite recursion   The function stops printing Moo! when m == n , but since m is odd and n is even, they will never be equal as long as we increment by two.     "
+  "body": " Multiple Choice Exercises   Answer the following multiple-choice questions to assess what you have learned in this chapter.     What value is stored in remainder ?  int x = 4; int y = 7; int remainder = y % x;     0   Check whether 7 is evenly divisible by 4.     1   Think about how much is left after subtracting one complete group of 4 from 7.     2   Use integer division to determine the whole-number quotient, then find what remains.     3   The remainder operator produces the amount left after integer division.     4   A remainder must be smaller than the divisor.        What will this code print?  int x = 8; if (x % 3 == 2) { std::cout << \"hey!\\n\"; } else if (x != 7) { std::cout << \"hi!\\n\"; } else if (x % 2 == 0) { std::cout << \"hello!\\n\"; } else { std::cout << \"bye!\\n\"; }     hey!   In a chained conditional, once the first true branch is found, the rest of the chain is skipped.     hi!   Evaluate the first condition before moving to the else if .     hello!   Even if a later condition is true, it is not checked after an earlier branch has already executed.     hey! hi! hello!   This is one chained conditional, not three independent if statements.     bye!   The final else runs only if all earlier conditions are false.        What will this code print?  int temperature = 34; if (temperature > 32) { std::cout << \"Above freezing \"; } if (temperature < 40) { std::cout << \"Cold \"; } if (temperature > 65) { std::cout << \"Warm \"; } else { std::cout << \"Not warm \"; }     Above freezing   There is more than one independent if statement here.     Cold   Evaluate each independent if condition separately.      Above freezing Cold    Also trace the final if \/ else pair.      Above freezing Cold Not warm    The first two independent conditions are true, and the final else belongs only to the last if .     Not warm   Do not skip the earlier independent if statements.        What will this program print?  #include <iostream> void report_value(int a, int b); int main() { report_value(2, 3); return 0; } void report_value(int a, int b) { if (a < b) { a += 2; } if (a > b) { return; } std::cout << a + b << '\\n'; }     5   Trace how a changes before the second condition is evaluated.     7   Check whether execution reaches the output statement after the second if .     23   The expression uses integer addition, not digit concatenation.     Nothing   Once the return statement executes, the current function call ends immediately.        What will this function return for determine_category(82) ?  char determine_category(int score) { if (score >= 90) { return 'A'; } else if (score >= 80) { return 'B'; } else if (score >= 70) { return 'C'; } else { return 'D'; } }     'A'   Evaluate the conditions from top to bottom using the value 82.     'B'   This is the first branch whose condition is true.     'C'   Check whether an earlier condition is already true.     'D'   The final else executes only if all previous conditions are false.        What will this function print?  void report_region(char first_initial, char last_initial) { if (last_initial > 'M') { if (first_initial > 'M') { std::cout << \"Back Left\\n\"; } else { std::cout << \"Back Right\\n\"; } } else { if (first_initial > 'M') { std::cout << \"Front Left\\n\"; } else { std::cout << \"Front Right\\n\"; } } } report_region('M', 'Z');     Back Left   Trace the outer condition first, then compare the first initial.     Back Right   The outer branch is chosen first; then the nested comparison determines the side.     Front Left   Check the comparison involving the last initial before entering the front or back branch.     Front Right   Start with last_initial > 'M' .     Error   Character values can be compared using relational operators.        Which ordering correctly classifies scores into 90+, 80+, 70+, and below 70?      Test >= 90 , then >= 80 , then >= 70 .    Overlapping thresholds should usually be checked from the most restrictive to the least restrictive.      Test >= 70 , then >= 80 , then >= 90 .    Consider what happens to a score of 95 if the broadest condition is checked first.      Use only score >= 90 and an else .    More than two categories require more than two branches.      Use independent if statements in any order.    Independent conditions can allow multiple categories to execute.        What will this code print?  int x = -3; if (x > 0) { std::cout << \"Positive\\n\"; } else if (x == 0) { std::cout << \"Zero\\n\"; } else { std::cout << \"Negative\\n\"; }     Positive   Evaluate the first comparison using -3.     Zero   Check whether -3 is equal to zero.     Negative   The final branch is reached after both earlier conditions are false.     Nothing   A complete if \/ else if \/ else chain selects one branch.         Optional recursion: How many times does Moo! print?  void report_moo(int m, int n) { if (m != n) { m += 2; std::cout << \"Moo!\"; report_moo(m, n); } else { std::cout << \"Got Milk?\"; } } report_moo(4, 8);     0   Evaluate whether the initial values are already equal.     1   Trace the value of m after the recursive call.     2   Follow the sequence of values taken by m .     3   Check when m first becomes equal to n .     Infinite recursion   Determine whether repeatedly adding 2 eventually reaches 8.         Optional recursion: What happens when this function is called?  void report_moo(int m, int n) { if (m != n) { m += 2; std::cout << \"Moo!\"; report_moo(m, n); } else { std::cout << \"Got Milk?\"; } } report_moo(5, 10);     It prints Moo! once.   Trace more than one recursive call.     It prints Moo! twice and stops.   Continue tracking the parity of m .     It prints Moo! three times and stops.   Check whether repeatedly adding 2 to an odd value can ever produce an even value.     It continues recursively without reaching 10.   Adding 2 preserves parity, so the argument never becomes equal to the even target value.      "
 },
 {
   "id": "chapter4_multiple-choice-exercises-2-1",
@@ -5722,7 +5758,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Answer the following Multiple Choice questions to assess what you have learned in this chapter. "
+  "body": "Answer the following multiple-choice questions to assess what you have learned in this chapter. "
 },
 {
   "id": "cond_rec_mc1",
@@ -5731,7 +5767,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.11.1",
   "title": "",
-  "body": "  Say you run the following code. What is the value of mod ?  int x = 4; int y = 7; int mod = y % x;      0   There is a remainder.     1   Incorrect!     2   Incorrect!     3   The remainder of 7 \/ 4 is 3.     4   We can't have a remainder of 4, since 4 is the divisor.    "
+  "body": "  What value is stored in remainder ?  int x = 4; int y = 7; int remainder = y % x;     0   Check whether 7 is evenly divisible by 4.     1   Think about how much is left after subtracting one complete group of 4 from 7.     2   Use integer division to determine the whole-number quotient, then find what remains.     3   The remainder operator produces the amount left after integer division.     4   A remainder must be smaller than the divisor.     "
 },
 {
   "id": "cond_rec_mc2",
@@ -5740,7 +5776,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.11.2",
   "title": "",
-  "body": "  What is printed when the following code executes?  int x = 8; if (x % 3 == 2) { std::cout << \"hey!\" << std::endl ; } else if (x != 7) { std::cout << \"hi!\" << std::endl ; } else if (x % 2 == 0) { std::cout << \"hello!\" << std::endl ; } else { std::cout << \"bye!\" << std::endl ; }      hey!   Since the first conditon is met, the rest of the chained conditional does not execute.     hi!   It's true that 8 != 7 , but hi! is not printed here.     hi!   It's true that 8 % 2 == 0 , but hello! is not printed!     hey! hi! hello!   All of these conditons are met, but only one expression is printed!     bye!   At least one of the conditons is met, so the else will not execute!    "
+  "body": "  What will this code print?  int x = 8; if (x % 3 == 2) { std::cout << \"hey!\\n\"; } else if (x != 7) { std::cout << \"hi!\\n\"; } else if (x % 2 == 0) { std::cout << \"hello!\\n\"; } else { std::cout << \"bye!\\n\"; }     hey!   In a chained conditional, once the first true branch is found, the rest of the chain is skipped.     hi!   Evaluate the first condition before moving to the else if .     hello!   Even if a later condition is true, it is not checked after an earlier branch has already executed.     hey! hi! hello!   This is one chained conditional, not three independent if statements.     bye!   The final else runs only if all earlier conditions are false.     "
 },
 {
   "id": "cond_rec_mc3",
@@ -5749,7 +5785,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.11.3",
   "title": "",
-  "body": "  What is printed when the following code executes?  int x = 34; if (32 < x) { std::cout << \"It's Freezing!\"; } if (x < 40) { std::cout << \"It's Cold!\"; } if (x > 65) { std::cout << \"It's Warm!\"' } else { std::cout << \"It's Hot!\"; }      It's Freezing!   Take a closer look at the conditions and the way they are written in the program.     It's Cold!   Take a closer look at the conditions and the way they are written in the program.     It's Freezing! It's Cold!   You've identified some of the conditons that are met! Take another look at the chain of conditionals at the end!     It's Freezing! It's Cold! It's Hot!   These statements are quite contradicting, but that's exactly what the output would be if we ran this code.     It's Hot!   Take a closer look at the conditions and the way they are written in the program.    "
+  "body": "  What will this code print?  int temperature = 34; if (temperature > 32) { std::cout << \"Above freezing \"; } if (temperature < 40) { std::cout << \"Cold \"; } if (temperature > 65) { std::cout << \"Warm \"; } else { std::cout << \"Not warm \"; }     Above freezing   There is more than one independent if statement here.     Cold   Evaluate each independent if condition separately.      Above freezing Cold    Also trace the final if \/ else pair.      Above freezing Cold Not warm    The first two independent conditions are true, and the final else belongs only to the last if .     Not warm   Do not skip the earlier independent if statements.     "
 },
 {
   "id": "cond_rec_mc4",
@@ -5758,7 +5794,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.11.4",
   "title": "",
-  "body": "  Suppose you have defined the following function:  void practicingReturns(int a, int b) { if (a < b) { a += 2; } if (a > b) { return; } std::cout << a + b; }  What is printed when we run the following code?  int x = practicingReturns(2, 3);      5   This is what a + b would be before the first conditonal.     7   This is the value of a + b after the first conditional, but it doesn't print.     23   This is not the value of a + b .     Nothing.   The function exits with a return before anything is printed.    "
+  "body": "  What will this program print?  #include <iostream> void report_value(int a, int b); int main() { report_value(2, 3); return 0; } void report_value(int a, int b) { if (a < b) { a += 2; } if (a > b) { return; } std::cout << a + b << '\\n'; }     5   Trace how a changes before the second condition is evaluated.     7   Check whether execution reaches the output statement after the second if .     23   The expression uses integer addition, not digit concatenation.     Nothing   Once the return statement executes, the current function call ends immediately.     "
 },
 {
   "id": "cond_rec_mc5",
@@ -5767,7 +5803,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.11.5",
   "title": "",
-  "body": "  Suppose you have defined the following function:  void fortuneCookie(int a, bool b, char c) { if (c < 'm') { if (a % 2 == 0) { std::cout << \"An alien of some sort will be appearing to you shortly.\"; } else { std::cout << \"The fortune you seek is in another cookie.\"; } } else if (c < 'r') { if (b) { std::cout << \"He who laughs at himself never runs out of things to laugh at.\"; } else { std::cout << \"You will be hungry again in one hour.\"; } } else { std::cout << \"Fortune not found? Abort, retry, ignore.\"; } }  What will be your fortune if you run the following code?  fortuneCookie(14, false, 'm'');       An alien of some sort will be appearing to you shortly.     'm' is NOT less than 'm' , so you don't even enter the if block.      The fortune you seek is in another cookie.     'm' is NOT less than 'm' , so you don't even enter the if block.      He who laughs at himself never runs out of things to laugh at.     if (b) really means if (b == true) .      You will be hungry again in one hour.     'm' < 'r' is true and b == false , so this is the fortune that will print.      Fortune not found? Abort, retry, ignore.     'm' is less than 'r' so you would enter the else if block, not the else .    "
+  "body": "  What will this function return for determine_category(82) ?  char determine_category(int score) { if (score >= 90) { return 'A'; } else if (score >= 80) { return 'B'; } else if (score >= 70) { return 'C'; } else { return 'D'; } }     'A'   Evaluate the conditions from top to bottom using the value 82.     'B'   This is the first branch whose condition is true.     'C'   Check whether an earlier condition is already true.     'D'   The final else executes only if all previous conditions are false.     "
 },
 {
   "id": "cond_rec_mc6",
@@ -5776,7 +5812,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.11.6",
   "title": "",
-  "body": "  Suppose you have defined the following function:  void fortuneCookie(int a, bool b, char c) { if (c < 'm') { if (a % 2 == 0) { std::cout << \"An alien of some sort will be appearing to you shortly.\"; } else { std::cout << \"The fortune you seek is in another cookie.\"; } } else if (c < 'r') { if (b) { std::cout << \"He who laughs at himself never runs out of things to laugh at.\"; } else { std::cout << \"You will be hungry again in one hour.\"; } } else { std::cout << \"Fortune not found? Abort, retry, ignore.\"; } }  What will be your fortune if you run the following code?  fortuneCookie(22, true, 'b');       An alien of some sort will be appearing to you shortly.     'b' < 'm' and 22 % 2 == 0 , so this is the fortune that will print.      The fortune you seek is in another cookie.     22 % 2 == 0 , so you enter the if block, not the else.      He who laughs at himself never runs out of things to laugh at.     'b' is less than 'm' , so you would enter the if block, not the else if .      You will be hungry again in one hour.     'b' is less than 'm' , so you would enter the if block, not the else if .      Fortune not found? Abort, retry, ignore.     'b' is less than 'm' , so you would enter the if block, not the else .    "
+  "body": "  What will this function print?  void report_region(char first_initial, char last_initial) { if (last_initial > 'M') { if (first_initial > 'M') { std::cout << \"Back Left\\n\"; } else { std::cout << \"Back Right\\n\"; } } else { if (first_initial > 'M') { std::cout << \"Front Left\\n\"; } else { std::cout << \"Front Right\\n\"; } } } report_region('M', 'Z');     Back Left   Trace the outer condition first, then compare the first initial.     Back Right   The outer branch is chosen first; then the nested comparison determines the side.     Front Left   Check the comparison involving the last initial before entering the front or back branch.     Front Right   Start with last_initial > 'M' .     Error   Character values can be compared using relational operators.     "
 },
 {
   "id": "cond_rec_mc7",
@@ -5785,7 +5821,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.11.7",
   "title": "",
-  "body": "  Suppose you have defined the following function:  void theThing(int m, int n, bool b) { if (b) { if (m % 4 == 0) { std::cout << m; return; } if ((m + n) > 10) { std::cout << m + n; return; } } else if ((m > n) == b) { std::cout << m - n; return; } else { if (n % 3 == 0) { std::cout << n; return; } } std::cout << -1; }  What is printed when we run the following code?  theThing(5, 10, false);      5   The outer if condition is not met, the block does not execute.     15   The outer if condition is not met, the block does not execute.     -5    m > n evaluates to false, so the else if block executes.     10   The condition for else if is met, so the function never enters the else .     -1   The function has returned.    "
+  "body": "  Which ordering correctly classifies scores into 90+, 80+, 70+, and below 70?      Test >= 90 , then >= 80 , then >= 70 .    Overlapping thresholds should usually be checked from the most restrictive to the least restrictive.      Test >= 70 , then >= 80 , then >= 90 .    Consider what happens to a score of 95 if the broadest condition is checked first.      Use only score >= 90 and an else .    More than two categories require more than two branches.      Use independent if statements in any order.    Independent conditions can allow multiple categories to execute.     "
 },
 {
   "id": "cond_rec_mc8",
@@ -5794,7 +5830,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.11.8",
   "title": "",
-  "body": "  Suppose you have defined the following function:  void theThing(int m, int n, bool b) { if (b) { if (m % 4 == 0) { std::cout << m; return; } if ((m + n) > 10) { std::cout << m + n; return; } } else if ((m > n) == b) { std::cout << m - n; return; } else { if (n % 3 == 0) { std::cout << n; return; } } std::cout << -1; }  What is printed when we run the following code?  theThing(6, 4, true);      6    5 % 4 != 0 in the if block, so the function doesn't print 6.     10    m + n !> 10 in the if block, so the function doesn't print 10.     2   The condition for if is met, so the function never enters the else if .     4   The condition for if is met, so the function never enters the else .     -1   None of the conditions were met, so we reach the default std::cout -1.    "
+  "body": "  What will this code print?  int x = -3; if (x > 0) { std::cout << \"Positive\\n\"; } else if (x == 0) { std::cout << \"Zero\\n\"; } else { std::cout << \"Negative\\n\"; }     Positive   Evaluate the first comparison using -3.     Zero   Check whether -3 is equal to zero.     Negative   The final branch is reached after both earlier conditions are false.     Nothing   A complete if \/ else if \/ else chain selects one branch.     "
 },
 {
   "id": "cond_rec_mc9",
@@ -5803,7 +5839,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.11.9",
   "title": "",
-  "body": "  Suppose you have defined the following function:  void moo(int m, int n) { if (m != n) { m += 2; std::cout << \"Moo!\"; moo(m, n); } else { std::cout << \"Got Milk?\"; } }  How many times does Moo! print when we run the following?  moo(4, 8);      0   When we call the function 4 != 8 , so Moo! is printed at least once.     1   The function calls itself inside of the if loop, so Moo! is printed more than once.     2    m is incremented by two each with each function call, so after two m == n and the recursion stops.     3   Take a look at how m is incremented with each function call.     infinite recursion   The function stops printing Moo! when m == n .    "
+  "body": "   Optional recursion: How many times does Moo! print?  void report_moo(int m, int n) { if (m != n) { m += 2; std::cout << \"Moo!\"; report_moo(m, n); } else { std::cout << \"Got Milk?\"; } } report_moo(4, 8);     0   Evaluate whether the initial values are already equal.     1   Trace the value of m after the recursive call.     2   Follow the sequence of values taken by m .     3   Check when m first becomes equal to n .     Infinite recursion   Determine whether repeatedly adding 2 eventually reaches 8.     "
 },
 {
   "id": "cond_rec_mc10",
@@ -5812,7 +5848,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.11.10",
   "title": "",
-  "body": "  Suppose you have defined the following function:  void moo(int m, int n) { if (m != n) { m += 2; std::cout << \"Moo!\"; moo(m, n); } else { std::cout << \"Got Milk?\"; } }  How many times does Moo! print when we run the following?  moo(5, 10);      0   When we call the function 5 != 10 , so Moo! is printed at least once.     1   The function calls itself inside of the if loop, so Moo! is printed more than once.     2   After two function calls, m == 9 and n == 10 . The function is not done printing.     3   After three function calls, m == 11 and n == 10 . The function is not done printing     infinite recursion   The function stops printing Moo! when m == n , but since m is odd and n is even, they will never be equal as long as we increment by two.    "
+  "body": "   Optional recursion: What happens when this function is called?  void report_moo(int m, int n) { if (m != n) { m += 2; std::cout << \"Moo!\"; report_moo(m, n); } else { std::cout << \"Got Milk?\"; } } report_moo(5, 10);     It prints Moo! once.   Trace more than one recursive call.     It prints Moo! twice and stops.   Continue tracking the parity of m .     It prints Moo! three times and stops.   Check whether repeatedly adding 2 to an odd value can ever produce an even value.     It continues recursively without reaching 10.   Adding 2 preserves parity, so the argument never becomes equal to the even target value.     "
 },
 {
   "id": "chapter4_mixed-up-code-exercises",
@@ -5821,7 +5857,7 @@ var ptx_lunr_docs = [
   "type": "Exercises",
   "number": "4.12",
   "title": "Mixed-Up Code Exercises",
-  "body": " Mixed-Up Code Exercises   Answer the following Mixed-Up Code questions to assess what you have learned in this chapter.     Construct a block of code that prints the remainder of 18 when divided by 13.     int main() {    int x = 18;  int y = 13;     std::cout << x % y;    std::cout << y % x;     std::cout << y \/ x;    }       Construct a function that prints whether a number is true.      void is_true(int number) {    bool is_true(int number) {     if (number % 2 == 0) {    std::cout << true;  }    else {    std::cout << false;  }    }       Construct a function that prints the difference of a and b if the result would result in a positive number. Otherwise, prints -1.      void difference(int a, int b) {    int difference(int a, int b) {      if (a - b > 0) {    if (a - b < 0) {     std::cout << a - b;  }    else {    std::cout << -1;  }    }       Construct a function, matic , that takes as inputs 2 integers, x and y, and prints automatic if x is an odd number, systematic if x is greater than y, AND hydromatic if y is not equal to x. Check all 3 conditions.      void matic(int x, int y) {    int matic(int x, int y) {      if (x % 2 > 0) {    if (x % 2 == 0) {     std::cout << \"automatic\";  }     if (x > y) {    else if (x > y) {     std::cout << \"systematic\";  }     if (y != x) {    else {     std::cout << \"hydromatic\";  }    }       Construct a block of code that prints Pick me! if x is equal to y, Choose me! if x is less than y, OR Love me! if x + y is even.      if (x == y) {    if (x = y) {     std::cout << \"Pick me!\";  }     else if (y > x) {    if (x < y) {     std::cout << \"Choose me!\";  }     else if ((x + y) % 2 == 0) {    else (x + y % 2 == 0) {     else if (x + y % 2 == 0) {    std::cout << \"Love me!\"; }       Construct a function that prints your letter grade according to this scheme. [0, 70) = F, [70, 80) = C, [80, 90) = B, and [90, 100] = A.     void printLetterGrade(double grade) {    if (grade < 70) {    std::cout << \"F\";  }     else if (grade < 80) {    if (grade < 80) {     std::cout << \"C\";  }     else if (grade < 90) {    if (grade < 90) {     std::cout << \"B\";  }     else if (grade <= 100) {    else {     std::cout << \"A\";  }    }       According to a logic game, a knight is someone who cannot tell a lie, and a knave is someone who cannot tell the truth. Construct a function that takes two booleans: the truth value of the story, and the truth value told by the person. The function should print whether the person was a knight or a knave.     void knightKnave(bool truth, bool told) {    if (truth == true) {    if (told == true) {  std::cout << \"Knight\";  }    else {  std::cout << \"Knave\";  }  }    else {    if (told == true) {  std::cout << \"Knave\";  }    else {  std::cout << \"Knight\";  }  }    }       If a cat is in a good mood, it purrs; when it's in a bad mood, it meows. If a doog is in a good mood, it barks; when it's in a bad mood it woofs. Construct a function that accomplishes this.     void makeVocals(string animal, string mood) {    if (mood == \"bad\") {    if (animal == \"dog\") {  std::cout << \"Woof!\";  }    else {  std::cout << \"Meow!\";  }    else {    if (animal == \"dog\") {  std::cout << \"Bark!\";  }    } else {  std::cout << \"Purr!\";  }    }       Construct a recursive function that tells the user to enter a positive number. It should then output that number to the terminal. If the user enters a negative number or zero, prompt the user again.     void takeSum() {    std::cout << \"Input a positive number!\";    int num;  std::cin >> num;    if (num < 0) {    takeSum();    } \/\/ END \"if\"    std::cout << num;    }       In the table of ASCII characters, the lowercase alphabet consists of characters 97-122. The uppercase alphabet consists of characters 65-90, which is a 32 character shift back from the lowercase. Construct a recursive function that asks the user to input a LOWERCASE character, converts that character to UPPERCASE character and prints it. If the user enters a character outside of the range of the LOWERCASE alphabet, prompt the user again. Hint: || means or when used between two conditional statements.     void capitalize() {    std::cout << \"Input a lowercase character!\";    char let;  std::cin >> let;    if (int(let) < 97 || int(let) > 122) {    capitalize();  }    let = let - 32;    std::cout << char(let);    }     "
+  "body": " Mixed-Up Code Exercises   Arrange the code blocks to construct solutions using the conditional concepts from this chapter.     Construct a program that prints the remainder when 18 is divided by 13.     #include <iostream>    int main() {    int dividend = 18;  int divisor = 13;     std::cout << dividend % divisor << '\\n';    std::cout << divisor % dividend << '\\n';     return 0;    }    std::cout << dividend \/ divisor << '\\n';       Construct a function named report_parity that prints Even when an integer is even and Odd otherwise.     void report_parity(int number) {     if (number % 2 == 0) {    if (number % 2 != 0) {     std::cout << \"Even\\n\";    }  else {    std::cout << \"Odd\\n\";    }    }       Construct a function that prints a - b when the difference is positive. Otherwise, it prints -1.      void report_positive_difference(int a, int b) {    int report_positive_difference(int a, int b) {      if (a - b > 0) {    if (a - b < 0) {     std::cout << a - b << '\\n';    }  else {    std::cout << -1 << '\\n';    }    }       Construct a function that checks all three conditions independently. Print Odd if x is odd, Greater if x > y , and Different if x != y . More than one message may be printed.     void report_number_relationships(int x, int y) {     if (x % 2 != 0) {    if (x % 2 == 0) {     std::cout << \"Odd\\n\";  }     if (x > y) {    else if (x > y) {     std::cout << \"Greater\\n\";  }     if (x != y) {    else if (x != y) {     std::cout << \"Different\\n\";  }    }       Construct one chained conditional that prints Equal if x == y , Less if x < y , and Greater otherwise.      if (x == y) {    if (x = y) {     std::cout << \"Equal\\n\";    }  else if (x < y) {    std::cout << \"Less\\n\";    }  else {    std::cout << \"Greater\\n\";    }    if (x < y) {       Construct a function that prints a letter grade using these thresholds: 90 or above = A, 80 or above = B, 70 or above = C, and below 70 = F.     void report_letter_grade(double grade) {     if (grade >= 90.0) {    if (grade >= 70.0) {     std::cout << \"A\\n\";    }  else if (grade >= 80.0) {    std::cout << \"B\\n\";    }  else if (grade >= 70.0) {    std::cout << \"C\\n\";    }  else {    std::cout << \"F\\n\";    }    }       Construct a function that returns the larger of two integers. If the values are equal, return either value.      int determine_larger(int a, int b) {    void determine_larger(int a, int b) {     if (a > b) {     return a;    return b;     }  else {     return b;    return a;     }    }       Construct a function that uses nested conditionals to determine a seating area. A last initial after 'M' selects the back; otherwise it selects the front. Within either area, a first initial after 'M' selects the left; otherwise it selects the right.     void determine_seating_area(char first_initial, char last_initial) {    if (last_initial > 'M') {    if (first_initial > 'M') {  std::cout << \"Back Left\\n\";  }    else {  std::cout << \"Back Right\\n\";  }    }  else {    if (first_initial > 'M') {  std::cout << \"Front Left\\n\";  }    else {  std::cout << \"Front Right\\n\";  }    }    }    else if (last_initial > 'M') {        Optional recursion: Construct a recursive function that counts down from a positive integer and prints Blastoff! when it reaches zero.     void count_down(int number) {     if (number == 0) {    if (number > 0) {     std::cout << \"Blastoff!\\n\";    }  else {    std::cout << number << '\\n';     count_down(number - 1);    count_down(number + 1);     }    }        Optional recursion: Construct a recursive function that prints one exclamation mark for each positive value from count down to 1.     void print_exclamation_marks(int count) {     if (count > 0) {    if (count == 0) {     std::cout << \"!\";     print_exclamation_marks(count - 1);    print_exclamation_marks(count + 1);     }    }     "
 },
 {
   "id": "chapter4_mixed-up-code-exercises-2-1",
@@ -5830,7 +5866,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Answer the following Mixed-Up Code questions to assess what you have learned in this chapter. "
+  "body": "Arrange the code blocks to construct solutions using the conditional concepts from this chapter. "
 },
 {
   "id": "cond_recc_p1",
@@ -5839,7 +5875,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.12.yes",
   "title": "",
-  "body": "  Construct a block of code that prints the remainder of 18 when divided by 13.     int main() {    int x = 18;  int y = 13;     std::cout << x % y;    std::cout << y % x;     std::cout << y \/ x;    }    "
+  "body": "  Construct a program that prints the remainder when 18 is divided by 13.     #include <iostream>    int main() {    int dividend = 18;  int divisor = 13;     std::cout << dividend % divisor << '\\n';    std::cout << divisor % dividend << '\\n';     return 0;    }    std::cout << dividend \/ divisor << '\\n';    "
 },
 {
   "id": "cond_recc_p2",
@@ -5848,7 +5884,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.12.yes",
   "title": "",
-  "body": "  Construct a function that prints whether a number is true.      void is_true(int number) {    bool is_true(int number) {     if (number % 2 == 0) {    std::cout << true;  }    else {    std::cout << false;  }    }    "
+  "body": "  Construct a function named report_parity that prints Even when an integer is even and Odd otherwise.     void report_parity(int number) {     if (number % 2 == 0) {    if (number % 2 != 0) {     std::cout << \"Even\\n\";    }  else {    std::cout << \"Odd\\n\";    }    }    "
 },
 {
   "id": "cond_recc_p3",
@@ -5857,7 +5893,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.12.yes",
   "title": "",
-  "body": "  Construct a function that prints the difference of a and b if the result would result in a positive number. Otherwise, prints -1.      void difference(int a, int b) {    int difference(int a, int b) {      if (a - b > 0) {    if (a - b < 0) {     std::cout << a - b;  }    else {    std::cout << -1;  }    }    "
+  "body": "  Construct a function that prints a - b when the difference is positive. Otherwise, it prints -1.      void report_positive_difference(int a, int b) {    int report_positive_difference(int a, int b) {      if (a - b > 0) {    if (a - b < 0) {     std::cout << a - b << '\\n';    }  else {    std::cout << -1 << '\\n';    }    }    "
 },
 {
   "id": "cond_recc_p4",
@@ -5866,7 +5902,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.12.yes",
   "title": "",
-  "body": "  Construct a function, matic , that takes as inputs 2 integers, x and y, and prints automatic if x is an odd number, systematic if x is greater than y, AND hydromatic if y is not equal to x. Check all 3 conditions.      void matic(int x, int y) {    int matic(int x, int y) {      if (x % 2 > 0) {    if (x % 2 == 0) {     std::cout << \"automatic\";  }     if (x > y) {    else if (x > y) {     std::cout << \"systematic\";  }     if (y != x) {    else {     std::cout << \"hydromatic\";  }    }    "
+  "body": "  Construct a function that checks all three conditions independently. Print Odd if x is odd, Greater if x > y , and Different if x != y . More than one message may be printed.     void report_number_relationships(int x, int y) {     if (x % 2 != 0) {    if (x % 2 == 0) {     std::cout << \"Odd\\n\";  }     if (x > y) {    else if (x > y) {     std::cout << \"Greater\\n\";  }     if (x != y) {    else if (x != y) {     std::cout << \"Different\\n\";  }    }    "
 },
 {
   "id": "cond_recc_p5",
@@ -5875,7 +5911,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.12.yes",
   "title": "",
-  "body": "  Construct a block of code that prints Pick me! if x is equal to y, Choose me! if x is less than y, OR Love me! if x + y is even.      if (x == y) {    if (x = y) {     std::cout << \"Pick me!\";  }     else if (y > x) {    if (x < y) {     std::cout << \"Choose me!\";  }     else if ((x + y) % 2 == 0) {    else (x + y % 2 == 0) {     else if (x + y % 2 == 0) {    std::cout << \"Love me!\"; }    "
+  "body": "  Construct one chained conditional that prints Equal if x == y , Less if x < y , and Greater otherwise.      if (x == y) {    if (x = y) {     std::cout << \"Equal\\n\";    }  else if (x < y) {    std::cout << \"Less\\n\";    }  else {    std::cout << \"Greater\\n\";    }    if (x < y) {    "
 },
 {
   "id": "cond_recc_p6",
@@ -5884,7 +5920,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.12.yes",
   "title": "",
-  "body": "  Construct a function that prints your letter grade according to this scheme. [0, 70) = F, [70, 80) = C, [80, 90) = B, and [90, 100] = A.     void printLetterGrade(double grade) {    if (grade < 70) {    std::cout << \"F\";  }     else if (grade < 80) {    if (grade < 80) {     std::cout << \"C\";  }     else if (grade < 90) {    if (grade < 90) {     std::cout << \"B\";  }     else if (grade <= 100) {    else {     std::cout << \"A\";  }    }    "
+  "body": "  Construct a function that prints a letter grade using these thresholds: 90 or above = A, 80 or above = B, 70 or above = C, and below 70 = F.     void report_letter_grade(double grade) {     if (grade >= 90.0) {    if (grade >= 70.0) {     std::cout << \"A\\n\";    }  else if (grade >= 80.0) {    std::cout << \"B\\n\";    }  else if (grade >= 70.0) {    std::cout << \"C\\n\";    }  else {    std::cout << \"F\\n\";    }    }    "
 },
 {
   "id": "cond_recc_p7",
@@ -5893,7 +5929,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.12.yes",
   "title": "",
-  "body": "  According to a logic game, a knight is someone who cannot tell a lie, and a knave is someone who cannot tell the truth. Construct a function that takes two booleans: the truth value of the story, and the truth value told by the person. The function should print whether the person was a knight or a knave.     void knightKnave(bool truth, bool told) {    if (truth == true) {    if (told == true) {  std::cout << \"Knight\";  }    else {  std::cout << \"Knave\";  }  }    else {    if (told == true) {  std::cout << \"Knave\";  }    else {  std::cout << \"Knight\";  }  }    }    "
+  "body": "  Construct a function that returns the larger of two integers. If the values are equal, return either value.      int determine_larger(int a, int b) {    void determine_larger(int a, int b) {     if (a > b) {     return a;    return b;     }  else {     return b;    return a;     }    }    "
 },
 {
   "id": "cond_recc_p8",
@@ -5902,7 +5938,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.12.yes",
   "title": "",
-  "body": "  If a cat is in a good mood, it purrs; when it's in a bad mood, it meows. If a doog is in a good mood, it barks; when it's in a bad mood it woofs. Construct a function that accomplishes this.     void makeVocals(string animal, string mood) {    if (mood == \"bad\") {    if (animal == \"dog\") {  std::cout << \"Woof!\";  }    else {  std::cout << \"Meow!\";  }    else {    if (animal == \"dog\") {  std::cout << \"Bark!\";  }    } else {  std::cout << \"Purr!\";  }    }    "
+  "body": "  Construct a function that uses nested conditionals to determine a seating area. A last initial after 'M' selects the back; otherwise it selects the front. Within either area, a first initial after 'M' selects the left; otherwise it selects the right.     void determine_seating_area(char first_initial, char last_initial) {    if (last_initial > 'M') {    if (first_initial > 'M') {  std::cout << \"Back Left\\n\";  }    else {  std::cout << \"Back Right\\n\";  }    }  else {    if (first_initial > 'M') {  std::cout << \"Front Left\\n\";  }    else {  std::cout << \"Front Right\\n\";  }    }    }    else if (last_initial > 'M') {    "
 },
 {
   "id": "cond_recc_p9",
@@ -5911,7 +5947,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.12.yes",
   "title": "",
-  "body": "  Construct a recursive function that tells the user to enter a positive number. It should then output that number to the terminal. If the user enters a negative number or zero, prompt the user again.     void takeSum() {    std::cout << \"Input a positive number!\";    int num;  std::cin >> num;    if (num < 0) {    takeSum();    } \/\/ END \"if\"    std::cout << num;    }    "
+  "body": "   Optional recursion: Construct a recursive function that counts down from a positive integer and prints Blastoff! when it reaches zero.     void count_down(int number) {     if (number == 0) {    if (number > 0) {     std::cout << \"Blastoff!\\n\";    }  else {    std::cout << number << '\\n';     count_down(number - 1);    count_down(number + 1);     }    }    "
 },
 {
   "id": "cond_recc_p10",
@@ -5920,7 +5956,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.12.yes",
   "title": "",
-  "body": "  In the table of ASCII characters, the lowercase alphabet consists of characters 97-122. The uppercase alphabet consists of characters 65-90, which is a 32 character shift back from the lowercase. Construct a recursive function that asks the user to input a LOWERCASE character, converts that character to UPPERCASE character and prints it. If the user enters a character outside of the range of the LOWERCASE alphabet, prompt the user again. Hint: || means or when used between two conditional statements.     void capitalize() {    std::cout << \"Input a lowercase character!\";    char let;  std::cin >> let;    if (int(let) < 97 || int(let) > 122) {    capitalize();  }    let = let - 32;    std::cout << char(let);    }    "
+  "body": "   Optional recursion: Construct a recursive function that prints one exclamation mark for each positive value from count down to 1.     void print_exclamation_marks(int count) {     if (count > 0) {    if (count == 0) {     std::cout << \"!\";     print_exclamation_marks(count - 1);    print_exclamation_marks(count + 1);     }    }    "
 },
 {
   "id": "chapter4_activecode-exercises",
@@ -5929,7 +5965,7 @@ var ptx_lunr_docs = [
   "type": "Exercises",
   "number": "4.13",
   "title": "Activecode Exercises",
-  "body": " Activecode Exercises  Answer the following Activecode questions to assess what you have learned in this chapter.    Fix the code below so that it prints THE TEAM  THE TEAM  THE TEAM on three separate lines.   #include <iostream> int main() { int x = 8; int y = 8; if (x % 2 == 0) { std::cout << \"THE TEAM\"; } else if (x >= y) { std::cout << \"THE TEAM\"; } else if (y >= x) { std::cout << \"THE TEAM\"; } }    Below is one way to fix the program. Since we want THE TEAM to print three times, we must check all three conditons. this means changing the else if statements to if statements.   #include <iostream> int main() { int x = 8; int y = 8; if (x % 2 == 0) { std::cout << \"THE TEAM\" << std::endl; } if (x >= y) { std::cout << \"THE TEAM\" << std::endl; } if (y >= x) { std::cout <<< \"THE TEAM\" << std::endl; } }       You are part of a class where everyone passes, but it's very hard to pass with an A. Fix the function so it prints your letter grade according to this scheme. [0, 50) = C, [50, 95) = B, and [95, 100] = A.   #include <iostream> std::string whichDoor(double grade) { s = \"\"; if (grade < 50) { s = \"C\"; } if (grade < 85) { s = \"B\"; } if (grade >= 95) { s = \"A\"; } std::cout << s; }    You are part of a class where everyone passes, but it's very hard to pass with an A. Fix the function so it prints your letter grade according to this scheme. [0, 50) = C, [50, 95) = B, and [95, 100] = A. Use the lines to construct the code, then go back to complete the Activecode.      void whichDoor(double grade) {    string whichDoor(double grade) {      std::string s = \"\";    s = \"\";     if (grade < 50) {  s = \"C\";  }     if (grade < 95 && grade >= 50) {  s = \"B\";  }    if (grade < 95 || grade >= 50) {  s = \"B\";  }     if (grade >= 95) {  s = \"A\";  }    std::cout << s;  }         Fix the infinite recursion in the code below. The function should not count any numbers after 10 (the highest numbers that should print are 9 or 10). When it is done counting, the function should print that.   #include <iostream> void countBy2(int num) { if (num != 10) { std::cout << num; countBy2 (num + 2); } else { std::cout << num << std::endl; std::cout << \"Done counting!\"; } } int main() { countBy2(5); }    Below is one way to fix the program. The infinite recursion happens when we use an odd number as an argument. By checking that a number is less than 99, the highest numbers to recurse are 98 and 97. 98 + 2 == 100 and 97 + 2 == 99, so we never count past 100.  #include <iostream> void countBy2(int num) { if (num < 9) { std::cout << num; countBy2(num + 2); } else { std::cout << num << std::endl; std::cout << \"Done counting!\"; } } int main() { countBy2(5); }      Finish the is_even code below so that it prints true if x is even and false if x is odd.   #include <iostream> void is_even(int num) { if (num % 2 == 0) { std::cout << true; } } int main() { int x = 3; is_even(x); }    Finish the code below so that it prints true if x is even and false if x is odd. Use the lines to construct the code, then go back to complete the Activecode.     void is_even(int num) {     if (num % 2 == 0) {  std::cout << \"true\";  }    if (num % 2 == 0) {  std::cout << true;  }      else {  std::cout << \"false\";  }    else {  std::cout << false;  }     }         Finish the code below so that the function will continue to ask for input until the user guesses the word correctly.   #include <iostream> bool guessTheWord(std::string correct) { std::cout << \"Guess the word!\"; std::string guess; std::cin >> guess; if (guess == correct) { std::cout << \"That's it!\"; } }    Below is one way to complete the program.  #include <iostream> bool guessTheWord(std::string correct) { std::cout << \"Guess the word!\"; std::string guess; std::cin >> guess; if (guess == correct) { std::cout << \"That's it!\"; } else { guessTheWord(correct); } }      Write the function greaterThan that prints true if the first double argument is greater than the second double argument.   #include <iostream> void greaterThan(FIX ME) { }    Write the function greaterThan that prints true if the first double argument is greater than the second double argument. Be sure to include any necessary headers. Use the lines to construct the code, then go back to complete the Activecode.      void greaterThan(double a, double b) {    void greaterThan(int a , int b) {     if (a > b) {  std::cout << \"true\";  }    if (a < b) {  std::cout << true;  }    else {  std::cout << \"false\";  }    if (double a > double b) {  std::cout << true;  }    }         Write the function goodVibes that prints I'm having a mood day! depending on the value of mood . If mood is bad , then the function should not do anything since it's good vibes only. Be sure to include any necessary headers.   #include <iostream> void goodVibes(std::string mood) { }    Below is one way to write the program. The return allows the function to exit if there are bad vibes in the room. Otherise, the function prints as directed.  #include <iostream> void goodVibes(std::string mood) { if (mood == \"bad\") { return; } std::cout << \"I'm having a \" << mood << \" day\"; }      Write the function exclusiveOr that prints true If either a OR b is true, and prints false otherwise.   #include <iostream> void exclusiveOr(bool a, bool b) { }    Write the function exclusiveOr that prints true If either a OR b is true, and prints false otherwise. Be sure to include any necessary headers. Use the lines to construct the code, then go back to complete the Activecode.     void exclusiveOr(bool a, bool b) {     if (a == true || b == true) {  std::cout << \"true\";  }    if (a == true && b == true) {  std::cout << \"true\";  }     else {  std::cout << \"false\";  }    }         Write the function countdown that takes a positive integer and decrements it until eaching zero, printing the number at each step of the way. Once it reaches zero, it should print Blastoff!   #include <iostream> void countdown(int num) { }    Below is one way to write the program.  #include <iostream> void countdown(int num) { if (num != 0) { std::cout << num << std::endl; num -= 1; countdown (num); } else { std::cout << \"Blastoff!\"; } }      Write the function printNegativeNum that asks the user for a negative number. If the user does not provide a negative number, it should contine asking until the user provides one. It should then print the negative number.   #include <iostream> void printNegativeNum() { }    Write the function printNegativeNum that asks the user for a negative number. If the user does not provide a negative number, it should contine asking until the user provides one. It should then print the negative number. Use the lines to construct the code, then go back to complete the Activecode.     void printNegativeNum() {    int negative;    std::cout << \"Please provide a negative number.\" << std::endl ;    std::cin >> negative;     if (negative >= 0) {  printNegativeNum();  }    if (negative >= 0) {  std::cout << \"Please provide a negative nunber.\" << std::endl ;  }     std::cout << negative << std::endl ;    }       "
+  "body": " Activecode Exercises   Complete or fix the following programs using the conditional concepts from this chapter.     Fix the code so that THE TEAM prints three times on separate lines.   #include <iostream> int main() { int x = 8; int y = 8; if (x % 2 == 0) { std::cout << \"THE TEAM\\n\"; } else if (x >= y) { std::cout << \"THE TEAM\\n\"; } else if (y >= x) { std::cout << \"THE TEAM\\n\"; } return 0; }     All three conditions should be checked independently, so use three separate if statements.   #include <iostream> int main() { int x = 8; int y = 8; if (x % 2 == 0) { std::cout << \"THE TEAM\\n\"; } if (x >= y) { std::cout << \"THE TEAM\\n\"; } if (y >= x) { std::cout << \"THE TEAM\\n\"; } return 0; }       Fix the function so that it prints C for grades below 50, B for grades from 50 through 94, and A for grades 95 or higher.   #include <iostream> void report_letter_grade(double grade) { if (grade < 50.0) { std::cout << \"C\\n\"; } if (grade < 95.0) { std::cout << \"B\\n\"; } if (grade >= 95.0) { std::cout << \"A\\n\"; } } int main() { report_letter_grade(82.0); return 0; }     Only one letter grade should print. Use one chained conditional so that the first matching branch ends the decision.     #include <iostream> void report_letter_grade(double grade) { if (grade < 50.0) { std::cout << \"C\\n\"; } else if (grade < 95.0) { std::cout << \"B\\n\"; } else { std::cout << \"A\\n\"; } } int main() { report_letter_grade(82.0); return 0; }       Fix the function so that it prints Odd for odd integers and Even for even integers. It should work correctly for both positive and negative integers.   #include <iostream> void report_parity(int number) { if (number % 2 == 0) { std::cout << \"Even\\n\"; } } int main() { report_parity(-3); return 0; }      #include <iostream> void report_parity(int number) { if (number % 2 == 0) { std::cout << \"Even\\n\"; } else { std::cout << \"Odd\\n\"; } } int main() { report_parity(-3); return 0; }       Write the function determine_larger . It should return the larger of two integers. If they are equal, return either value.   #include <iostream> int determine_larger(int a, int b) { \/\/ Write your code here. } int main() { std::cout << determine_larger(7, 12) << '\\n'; return 0; }     Compare the two parameters, then return the appropriate value from each branch.     #include <iostream> int determine_larger(int a, int b) { if (a > b) { return a; } else { return b; } } int main() { std::cout << determine_larger(7, 12) << '\\n'; return 0; }       Write the function report_temperature . It should print Cold for temperatures below 50, Mild for temperatures from 50 through 74, and Warm for temperatures 75 or higher.   #include <iostream> void report_temperature(int temperature) { \/\/ Write your code here. } int main() { report_temperature(68); return 0; }     Use one if \/ else if \/ else chain. Check the thresholds in an order that gives each temperature exactly one category.     #include <iostream> void report_temperature(int temperature) { if (temperature < 50) { std::cout << \"Cold\\n\"; } else if (temperature < 75) { std::cout << \"Mild\\n\"; } else { std::cout << \"Warm\\n\"; } } int main() { report_temperature(68); return 0; }       Write the function report_comparison . It should print Greater if the first double is greater than the second, Less if it is smaller, and Equal otherwise.   #include <iostream> void report_comparison(double a, double b) { \/\/ Write your code here. } int main() { report_comparison(4.5, 7.2); return 0; }      #include <iostream> void report_comparison(double a, double b) { if (a > b) { std::cout << \"Greater\\n\"; } else if (a < b) { std::cout << \"Less\\n\"; } else { std::cout << \"Equal\\n\"; } } int main() { report_comparison(4.5, 7.2); return 0; }       Complete the function so that it returns immediately when temperature is below -100. Otherwise, it should print the temperature.   #include <iostream> void report_valid_temperature(int temperature) { \/\/ Write your code here. } int main() { report_valid_temperature(72); return 0; }     Use an if statement with an early return for the invalid case.     #include <iostream> void report_valid_temperature(int temperature) { if (temperature < -100) { return; } std::cout << temperature << '\\n'; } int main() { report_valid_temperature(72); return 0; }       Write the function determine_exclusive_or . It should return true when exactly one of its two Boolean arguments is true, and false otherwise.   #include <iostream> bool determine_exclusive_or(bool a, bool b) { \/\/ Write your code here. } int main() { std::cout << determine_exclusive_or(true, false) << '\\n'; return 0; }     Exclusive OR is true when the two Boolean values are different.     #include <iostream> bool determine_exclusive_or(bool a, bool b) { if (a != b) { return true; } else { return false; } } int main() { std::cout << determine_exclusive_or(true, false) << '\\n'; return 0; }        Optional recursion: Write the function count_down . It should print each positive integer down to 1 and then print Blastoff! .   #include <iostream> void count_down(int number) { \/\/ Write your code here. } int main() { count_down(5); return 0; }     Use zero as the base case. Otherwise, print the current value and make a recursive call with a smaller argument.     #include <iostream> void count_down(int number) { if (number == 0) { std::cout << \"Blastoff!\\n\"; } else { std::cout << number << '\\n'; count_down(number - 1); } } int main() { count_down(5); return 0; }        Optional recursion: Fix the recursive call so that this function eventually reaches its base case instead of recursing indefinitely.   #include <iostream> void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count + 1); } } int main() { print_exclamation_marks(4); return 0; }     Each recursive call should move the argument closer to the base case.     #include <iostream> void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count - 1); } } int main() { print_exclamation_marks(4); return 0; }     "
 },
 {
   "id": "chapter4_activecode-exercises-2-1",
@@ -5938,7 +5974,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Answer the following Activecode questions to assess what you have learned in this chapter. "
+  "body": "Complete or fix the following programs using the conditional concepts from this chapter. "
 },
 {
   "id": "cond_rec_a1",
@@ -5947,7 +5983,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.13.1",
   "title": "",
-  "body": "  Fix the code below so that it prints THE TEAM  THE TEAM  THE TEAM on three separate lines.   #include <iostream> int main() { int x = 8; int y = 8; if (x % 2 == 0) { std::cout << \"THE TEAM\"; } else if (x >= y) { std::cout << \"THE TEAM\"; } else if (y >= x) { std::cout << \"THE TEAM\"; } }    Below is one way to fix the program. Since we want THE TEAM to print three times, we must check all three conditons. this means changing the else if statements to if statements.   #include <iostream> int main() { int x = 8; int y = 8; if (x % 2 == 0) { std::cout << \"THE TEAM\" << std::endl; } if (x >= y) { std::cout << \"THE TEAM\" << std::endl; } if (y >= x) { std::cout <<< \"THE TEAM\" << std::endl; } }    "
+  "body": "  Fix the code so that THE TEAM prints three times on separate lines.   #include <iostream> int main() { int x = 8; int y = 8; if (x % 2 == 0) { std::cout << \"THE TEAM\\n\"; } else if (x >= y) { std::cout << \"THE TEAM\\n\"; } else if (y >= x) { std::cout << \"THE TEAM\\n\"; } return 0; }     All three conditions should be checked independently, so use three separate if statements.   #include <iostream> int main() { int x = 8; int y = 8; if (x % 2 == 0) { std::cout << \"THE TEAM\\n\"; } if (x >= y) { std::cout << \"THE TEAM\\n\"; } if (y >= x) { std::cout << \"THE TEAM\\n\"; } return 0; }    "
 },
 {
   "id": "cond_rec_a2",
@@ -5956,7 +5992,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.13.2",
   "title": "",
-  "body": "  You are part of a class where everyone passes, but it's very hard to pass with an A. Fix the function so it prints your letter grade according to this scheme. [0, 50) = C, [50, 95) = B, and [95, 100] = A.   #include <iostream> std::string whichDoor(double grade) { s = \"\"; if (grade < 50) { s = \"C\"; } if (grade < 85) { s = \"B\"; } if (grade >= 95) { s = \"A\"; } std::cout << s; }    You are part of a class where everyone passes, but it's very hard to pass with an A. Fix the function so it prints your letter grade according to this scheme. [0, 50) = C, [50, 95) = B, and [95, 100] = A. Use the lines to construct the code, then go back to complete the Activecode.      void whichDoor(double grade) {    string whichDoor(double grade) {      std::string s = \"\";    s = \"\";     if (grade < 50) {  s = \"C\";  }     if (grade < 95 && grade >= 50) {  s = \"B\";  }    if (grade < 95 || grade >= 50) {  s = \"B\";  }     if (grade >= 95) {  s = \"A\";  }    std::cout << s;  }      "
+  "body": "  Fix the function so that it prints C for grades below 50, B for grades from 50 through 94, and A for grades 95 or higher.   #include <iostream> void report_letter_grade(double grade) { if (grade < 50.0) { std::cout << \"C\\n\"; } if (grade < 95.0) { std::cout << \"B\\n\"; } if (grade >= 95.0) { std::cout << \"A\\n\"; } } int main() { report_letter_grade(82.0); return 0; }     Only one letter grade should print. Use one chained conditional so that the first matching branch ends the decision.     #include <iostream> void report_letter_grade(double grade) { if (grade < 50.0) { std::cout << \"C\\n\"; } else if (grade < 95.0) { std::cout << \"B\\n\"; } else { std::cout << \"A\\n\"; } } int main() { report_letter_grade(82.0); return 0; }    "
 },
 {
   "id": "cond_rec_a3",
@@ -5965,7 +6001,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.13.3",
   "title": "",
-  "body": "  Fix the infinite recursion in the code below. The function should not count any numbers after 10 (the highest numbers that should print are 9 or 10). When it is done counting, the function should print that.   #include <iostream> void countBy2(int num) { if (num != 10) { std::cout << num; countBy2 (num + 2); } else { std::cout << num << std::endl; std::cout << \"Done counting!\"; } } int main() { countBy2(5); }    Below is one way to fix the program. The infinite recursion happens when we use an odd number as an argument. By checking that a number is less than 99, the highest numbers to recurse are 98 and 97. 98 + 2 == 100 and 97 + 2 == 99, so we never count past 100.  #include <iostream> void countBy2(int num) { if (num < 9) { std::cout << num; countBy2(num + 2); } else { std::cout << num << std::endl; std::cout << \"Done counting!\"; } } int main() { countBy2(5); }   "
+  "body": "  Fix the function so that it prints Odd for odd integers and Even for even integers. It should work correctly for both positive and negative integers.   #include <iostream> void report_parity(int number) { if (number % 2 == 0) { std::cout << \"Even\\n\"; } } int main() { report_parity(-3); return 0; }      #include <iostream> void report_parity(int number) { if (number % 2 == 0) { std::cout << \"Even\\n\"; } else { std::cout << \"Odd\\n\"; } } int main() { report_parity(-3); return 0; }    "
 },
 {
   "id": "cond_rec_a4",
@@ -5974,7 +6010,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.13.4",
   "title": "",
-  "body": "  Finish the is_even code below so that it prints true if x is even and false if x is odd.   #include <iostream> void is_even(int num) { if (num % 2 == 0) { std::cout << true; } } int main() { int x = 3; is_even(x); }    Finish the code below so that it prints true if x is even and false if x is odd. Use the lines to construct the code, then go back to complete the Activecode.     void is_even(int num) {     if (num % 2 == 0) {  std::cout << \"true\";  }    if (num % 2 == 0) {  std::cout << true;  }      else {  std::cout << \"false\";  }    else {  std::cout << false;  }     }      "
+  "body": "  Write the function determine_larger . It should return the larger of two integers. If they are equal, return either value.   #include <iostream> int determine_larger(int a, int b) { \/\/ Write your code here. } int main() { std::cout << determine_larger(7, 12) << '\\n'; return 0; }     Compare the two parameters, then return the appropriate value from each branch.     #include <iostream> int determine_larger(int a, int b) { if (a > b) { return a; } else { return b; } } int main() { std::cout << determine_larger(7, 12) << '\\n'; return 0; }    "
 },
 {
   "id": "cond_rec_a5",
@@ -5983,7 +6019,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.13.5",
   "title": "",
-  "body": "  Finish the code below so that the function will continue to ask for input until the user guesses the word correctly.   #include <iostream> bool guessTheWord(std::string correct) { std::cout << \"Guess the word!\"; std::string guess; std::cin >> guess; if (guess == correct) { std::cout << \"That's it!\"; } }    Below is one way to complete the program.  #include <iostream> bool guessTheWord(std::string correct) { std::cout << \"Guess the word!\"; std::string guess; std::cin >> guess; if (guess == correct) { std::cout << \"That's it!\"; } else { guessTheWord(correct); } }   "
+  "body": "  Write the function report_temperature . It should print Cold for temperatures below 50, Mild for temperatures from 50 through 74, and Warm for temperatures 75 or higher.   #include <iostream> void report_temperature(int temperature) { \/\/ Write your code here. } int main() { report_temperature(68); return 0; }     Use one if \/ else if \/ else chain. Check the thresholds in an order that gives each temperature exactly one category.     #include <iostream> void report_temperature(int temperature) { if (temperature < 50) { std::cout << \"Cold\\n\"; } else if (temperature < 75) { std::cout << \"Mild\\n\"; } else { std::cout << \"Warm\\n\"; } } int main() { report_temperature(68); return 0; }    "
 },
 {
   "id": "cond_rec_a6",
@@ -5992,7 +6028,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.13.6",
   "title": "",
-  "body": "  Write the function greaterThan that prints true if the first double argument is greater than the second double argument.   #include <iostream> void greaterThan(FIX ME) { }    Write the function greaterThan that prints true if the first double argument is greater than the second double argument. Be sure to include any necessary headers. Use the lines to construct the code, then go back to complete the Activecode.      void greaterThan(double a, double b) {    void greaterThan(int a , int b) {     if (a > b) {  std::cout << \"true\";  }    if (a < b) {  std::cout << true;  }    else {  std::cout << \"false\";  }    if (double a > double b) {  std::cout << true;  }    }      "
+  "body": "  Write the function report_comparison . It should print Greater if the first double is greater than the second, Less if it is smaller, and Equal otherwise.   #include <iostream> void report_comparison(double a, double b) { \/\/ Write your code here. } int main() { report_comparison(4.5, 7.2); return 0; }      #include <iostream> void report_comparison(double a, double b) { if (a > b) { std::cout << \"Greater\\n\"; } else if (a < b) { std::cout << \"Less\\n\"; } else { std::cout << \"Equal\\n\"; } } int main() { report_comparison(4.5, 7.2); return 0; }    "
 },
 {
   "id": "cond_rec_a7",
@@ -6001,7 +6037,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.13.7",
   "title": "",
-  "body": "  Write the function goodVibes that prints I'm having a mood day! depending on the value of mood . If mood is bad , then the function should not do anything since it's good vibes only. Be sure to include any necessary headers.   #include <iostream> void goodVibes(std::string mood) { }    Below is one way to write the program. The return allows the function to exit if there are bad vibes in the room. Otherise, the function prints as directed.  #include <iostream> void goodVibes(std::string mood) { if (mood == \"bad\") { return; } std::cout << \"I'm having a \" << mood << \" day\"; }   "
+  "body": "  Complete the function so that it returns immediately when temperature is below -100. Otherwise, it should print the temperature.   #include <iostream> void report_valid_temperature(int temperature) { \/\/ Write your code here. } int main() { report_valid_temperature(72); return 0; }     Use an if statement with an early return for the invalid case.     #include <iostream> void report_valid_temperature(int temperature) { if (temperature < -100) { return; } std::cout << temperature << '\\n'; } int main() { report_valid_temperature(72); return 0; }    "
 },
 {
   "id": "cond_rec_a8",
@@ -6010,7 +6046,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.13.8",
   "title": "",
-  "body": "  Write the function exclusiveOr that prints true If either a OR b is true, and prints false otherwise.   #include <iostream> void exclusiveOr(bool a, bool b) { }    Write the function exclusiveOr that prints true If either a OR b is true, and prints false otherwise. Be sure to include any necessary headers. Use the lines to construct the code, then go back to complete the Activecode.     void exclusiveOr(bool a, bool b) {     if (a == true || b == true) {  std::cout << \"true\";  }    if (a == true && b == true) {  std::cout << \"true\";  }     else {  std::cout << \"false\";  }    }      "
+  "body": "  Write the function determine_exclusive_or . It should return true when exactly one of its two Boolean arguments is true, and false otherwise.   #include <iostream> bool determine_exclusive_or(bool a, bool b) { \/\/ Write your code here. } int main() { std::cout << determine_exclusive_or(true, false) << '\\n'; return 0; }     Exclusive OR is true when the two Boolean values are different.     #include <iostream> bool determine_exclusive_or(bool a, bool b) { if (a != b) { return true; } else { return false; } } int main() { std::cout << determine_exclusive_or(true, false) << '\\n'; return 0; }    "
 },
 {
   "id": "cond_rec_a9",
@@ -6019,7 +6055,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.13.9",
   "title": "",
-  "body": "  Write the function countdown that takes a positive integer and decrements it until eaching zero, printing the number at each step of the way. Once it reaches zero, it should print Blastoff!   #include <iostream> void countdown(int num) { }    Below is one way to write the program.  #include <iostream> void countdown(int num) { if (num != 0) { std::cout << num << std::endl; num -= 1; countdown (num); } else { std::cout << \"Blastoff!\"; } }   "
+  "body": "   Optional recursion: Write the function count_down . It should print each positive integer down to 1 and then print Blastoff! .   #include <iostream> void count_down(int number) { \/\/ Write your code here. } int main() { count_down(5); return 0; }     Use zero as the base case. Otherwise, print the current value and make a recursive call with a smaller argument.     #include <iostream> void count_down(int number) { if (number == 0) { std::cout << \"Blastoff!\\n\"; } else { std::cout << number << '\\n'; count_down(number - 1); } } int main() { count_down(5); return 0; }    "
 },
 {
   "id": "cond_rec_a10",
@@ -6028,7 +6064,7 @@ var ptx_lunr_docs = [
   "type": "Exercise",
   "number": "4.13.10",
   "title": "",
-  "body": "  Write the function printNegativeNum that asks the user for a negative number. If the user does not provide a negative number, it should contine asking until the user provides one. It should then print the negative number.   #include <iostream> void printNegativeNum() { }    Write the function printNegativeNum that asks the user for a negative number. If the user does not provide a negative number, it should contine asking until the user provides one. It should then print the negative number. Use the lines to construct the code, then go back to complete the Activecode.     void printNegativeNum() {    int negative;    std::cout << \"Please provide a negative number.\" << std::endl ;    std::cin >> negative;     if (negative >= 0) {  printNegativeNum();  }    if (negative >= 0) {  std::cout << \"Please provide a negative nunber.\" << std::endl ;  }     std::cout << negative << std::endl ;    }      "
+  "body": "   Optional recursion: Fix the recursive call so that this function eventually reaches its base case instead of recursing indefinitely.   #include <iostream> void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count + 1); } } int main() { print_exclamation_marks(4); return 0; }     Each recursive call should move the argument closer to the base case.     #include <iostream> void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count - 1); } } int main() { print_exclamation_marks(4); return 0; }    "
 },
 {
   "id": "chapter5_return-values",

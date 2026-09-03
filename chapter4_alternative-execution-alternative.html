@@ -216,15 +216,15 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
 <ul class="structural toc-item-list contains-active" id="ptx-toc-group-conditionals">
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Modulus Operator</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Remainder Operator</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
 <li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Alternative Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Chained Conditionals</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_nested-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Nested Conditionals</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">The Return Statement</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Infinite Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Stack Diagrams for Recursive Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Return in Conditional Branches</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Optional: Introduction to Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Optional: Infinite Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Optional: Stack Diagrams for Recursive Functions</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter4_glossary.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Glossary</span></a></div>
 <ul id="ptx-toc-group-chapter4_glossary" class="structural toc-item-list">
@@ -596,21 +596,25 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="alt_execution_1-1-1">What will be printed after <code class="code-inline tex2jax_ignore">main</code> is executed?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#alt_execution_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="alt_execution_1-1-1">What will be printed when <code class="code-inline tex2jax_ignore">main</code> is executed?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#alt_execution_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
-void weather(int temp) {
-  if (temp &lt; 52) {
-    std::cout &lt;&lt; "It is cold!";
-  }
-  else {
-    std::cout &lt;&lt; "It is warm!";
-  }
-}
+void report_weather_temperature(int temperature);
 
 int main() {
-  int degrees = 52;
-  weather(degrees);
+    int degrees = 52;
+    report_weather_temperature(degrees);
+
+    return 0;
+}
+
+void report_weather_temperature(int temperature) {
+    if (temperature &lt; 52) {
+        std::cout &lt;&lt; "It is cold!\n";
+    }
+    else {
+        std::cout &lt;&lt; "It is warm!\n";
+    }
 }
 </code></pre></div>
 </div>
@@ -619,25 +623,25 @@ int main() {
 <div class="para" id="alt_execution_1-2-1-1-1">It is cold!</div>
 </li>
 <li data-component="feedback" id="rs-alt_execution_1_opt_a">
-<div class="para" id="alt_execution_1-2-1-2-1">That statement would print if degrees was less than 50.</div>
+<div class="para" id="alt_execution_1-2-1-2-1">Check whether 52 satisfies the condition <code class="code-inline tex2jax_ignore">temperature &lt; 52</code>.</div>
 </li>
 <li data-component="answer" id="rs-alt_execution_1_opt_b" data-correct="">
 <div class="para" id="alt_execution_1-2-2-1-1">It is warm!</div>
 </li>
 <li data-component="feedback" id="rs-alt_execution_1_opt_b">
-<div class="para" id="alt_execution_1-2-2-2-1">Correct!</div>
+<div class="para" id="alt_execution_1-2-2-2-1">Since the condition is false, execution follows the <code class="code-inline tex2jax_ignore">else</code> branch.</div>
 </li>
 <li data-component="answer" id="rs-alt_execution_1_opt_c">
 <div class="para" id="alt_execution_1-2-3-1-1">Nothing prints.</div>
 </li>
 <li data-component="feedback" id="rs-alt_execution_1_opt_c">
-<div class="para" id="alt_execution_1-2-3-2-1">One of the statements is satisfied, so something does print.</div>
+<div class="para" id="alt_execution_1-2-3-2-1">An <code class="code-inline tex2jax_ignore">if</code>/<code class="code-inline tex2jax_ignore">else</code> statement executes exactly one of its two branches.</div>
 </li>
 <li data-component="answer" id="rs-alt_execution_1_opt_d">
 <div class="para" id="alt_execution_1-2-4-1-1">Error message.</div>
 </li>
 <li data-component="feedback" id="rs-alt_execution_1_opt_d">
-<div class="para" id="alt_execution_1-2-4-2-1">There is nothing in the code below that would generate an error.</div>
+<div class="para" id="alt_execution_1-2-4-2-1">Trace the argument into the parameter and then evaluate the comparison.</div>
 </li>
 </ul>
 </div></div>

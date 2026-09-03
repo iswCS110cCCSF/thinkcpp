@@ -216,15 +216,15 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
 <ul class="structural toc-item-list contains-active" id="ptx-toc-group-conditionals">
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Modulus Operator</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Remainder Operator</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Alternative Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Chained Conditionals</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_nested-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Nested Conditionals</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">The Return Statement</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Infinite Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Stack Diagrams for Recursive Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Return in Conditional Branches</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Optional: Introduction to Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Optional: Infinite Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Optional: Stack Diagrams for Recursive Functions</span></a></div></li>
 <li class="toc-item toc-section contains-active">
 <div class="toc-title-box"><a href="chapter4_glossary.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Glossary</span></a></div>
 <ul class="structural toc-item-list active" id="ptx-toc-group-chapter4_glossary">
@@ -545,40 +545,82 @@ eBookConfig.enable_chatcodes =  false;
 <span class="type">Glossary</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber"></span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Glossary</span>
 </h2>
 <dl class="glossary">
-<dt id="chapter4_glossary-2-1">modulus.<div class="autopermalink" aria-hidden="true" data-description="Term: modulus"><a tabindex="-1" href="#chapter4_glossary-2-1" title="Copy heading and permalink for Term: modulus" aria-label="Copy heading and permalink for Term: modulus">🔗</a></div>
+<dt id="chapter4_glossary-2-1">remainder operator.<div class="autopermalink" aria-hidden="true" data-description="Term: remainder operator"><a tabindex="-1" href="#chapter4_glossary-2-1" title="Copy heading and permalink for Term: remainder operator" aria-label="Copy heading and permalink for Term: remainder operator">🔗</a></div>
 </dt>
 <dd>
-<div class="para" id="chapter4_glossary-2-1-2">An operator that works on integers and yields the remainder when one number is divided by another. In C++ it is denoted with a percent sign (%).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-1-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_glossary-2-1-2">The operator <code class="code-inline tex2jax_ignore">%</code>, which works with integer operands and produces the remainder from integer division. It is also commonly called the modulus or modulo operator.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-1-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </dd>
-<dt id="chapter4_glossary-2-2">conditional.<div class="autopermalink" aria-hidden="true" data-description="Term: conditional"><a tabindex="-1" href="#chapter4_glossary-2-2" title="Copy heading and permalink for Term: conditional" aria-label="Copy heading and permalink for Term: conditional">🔗</a></div>
+<dt id="chapter4_glossary-2-2">conditional statement.<div class="autopermalink" aria-hidden="true" data-description="Term: conditional statement"><a tabindex="-1" href="#chapter4_glossary-2-2" title="Copy heading and permalink for Term: conditional statement" aria-label="Copy heading and permalink for Term: conditional statement">🔗</a></div>
 </dt>
 <dd>
-<div class="para" id="chapter4_glossary-2-2-2">A block of statements that may or may not be executed depending on some condition.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_glossary-2-2-2">A statement that uses a condition to determine whether a particular branch of code should execute.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </dd>
-<dt id="chapter4_glossary-2-3">chaining.<div class="autopermalink" aria-hidden="true" data-description="Term: chaining"><a tabindex="-1" href="#chapter4_glossary-2-3" title="Copy heading and permalink for Term: chaining" aria-label="Copy heading and permalink for Term: chaining">🔗</a></div>
+<dt id="chapter4_glossary-2-3">condition.<div class="autopermalink" aria-hidden="true" data-description="Term: condition"><a tabindex="-1" href="#chapter4_glossary-2-3" title="Copy heading and permalink for Term: condition" aria-label="Copy heading and permalink for Term: condition">🔗</a></div>
 </dt>
 <dd>
-<div class="para" id="chapter4_glossary-2-3-2">A way of joining several conditional statements in sequence.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_glossary-2-3-2">An expression that is evaluated as either <code class="code-inline tex2jax_ignore">true</code> or <code class="code-inline tex2jax_ignore">false</code> and is used to control a conditional statement.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </dd>
-<dt id="chapter4_glossary-2-4">nesting.<div class="autopermalink" aria-hidden="true" data-description="Term: nesting"><a tabindex="-1" href="#chapter4_glossary-2-4" title="Copy heading and permalink for Term: nesting" aria-label="Copy heading and permalink for Term: nesting">🔗</a></div>
+<dt id="chapter4_glossary-2-4">comparison operator.<div class="autopermalink" aria-hidden="true" data-description="Term: comparison operator"><a tabindex="-1" href="#chapter4_glossary-2-4" title="Copy heading and permalink for Term: comparison operator" aria-label="Copy heading and permalink for Term: comparison operator">🔗</a></div>
 </dt>
 <dd>
-<div class="para" id="chapter4_glossary-2-4-2">Putting a conditional statement inside one or both branches of another conditional statement.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_glossary-2-4-2">An operator, such as <code class="code-inline tex2jax_ignore">==</code>, <code class="code-inline tex2jax_ignore">!=</code>, <code class="code-inline tex2jax_ignore">&lt;</code>, <code class="code-inline tex2jax_ignore">&gt;</code>, <code class="code-inline tex2jax_ignore">&lt;=</code>, or <code class="code-inline tex2jax_ignore">&gt;=</code>, that compares two values and produces a Boolean result.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </dd>
-<dt id="chapter4_glossary-2-5">recursion.<div class="autopermalink" aria-hidden="true" data-description="Term: recursion"><a tabindex="-1" href="#chapter4_glossary-2-5" title="Copy heading and permalink for Term: recursion" aria-label="Copy heading and permalink for Term: recursion">🔗</a></div>
+<dt id="chapter4_glossary-2-5">branch.<div class="autopermalink" aria-hidden="true" data-description="Term: branch"><a tabindex="-1" href="#chapter4_glossary-2-5" title="Copy heading and permalink for Term: branch" aria-label="Copy heading and permalink for Term: branch">🔗</a></div>
 </dt>
 <dd>
-<div class="para" id="chapter4_glossary-2-5-2">The process of calling the same function you are currently executing.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_glossary-2-5-2">One possible path of execution within a conditional statement.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </dd>
-<dt id="chapter4_glossary-2-6">infinite recursion.<div class="autopermalink" aria-hidden="true" data-description="Term: infinite recursion"><a tabindex="-1" href="#chapter4_glossary-2-6" title="Copy heading and permalink for Term: infinite recursion" aria-label="Copy heading and permalink for Term: infinite recursion">🔗</a></div>
+<dt id="chapter4_glossary-2-6">alternative execution.<div class="autopermalink" aria-hidden="true" data-description="Term: alternative execution"><a tabindex="-1" href="#chapter4_glossary-2-6" title="Copy heading and permalink for Term: alternative execution" aria-label="Copy heading and permalink for Term: alternative execution">🔗</a></div>
 </dt>
 <dd>
-<div class="para" id="chapter4_glossary-2-6-2">A function that calls itself recursively without every reaching the base case. Eventually an infinite recursion will cause a run-time error.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-6-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_glossary-2-6-2">A conditional structure using <code class="code-inline tex2jax_ignore">if</code> and <code class="code-inline tex2jax_ignore">else</code> in which exactly one of two branches executes.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-6-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</dd>
+<dt id="chapter4_glossary-2-7">if-else-if chain.<div class="autopermalink" aria-hidden="true" data-description="Term: if-else-if chain"><a tabindex="-1" href="#chapter4_glossary-2-7" title="Copy heading and permalink for Term: if-else-if chain" aria-label="Copy heading and permalink for Term: if-else-if chain">🔗</a></div>
+</dt>
+<dd>
+<div class="para" id="chapter4_glossary-2-7-2">A conditional structure that checks related conditions from top to bottom and executes the first branch whose condition is true.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-7-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</dd>
+<dt id="chapter4_glossary-2-8">nested conditional.<div class="autopermalink" aria-hidden="true" data-description="Term: nested conditional"><a tabindex="-1" href="#chapter4_glossary-2-8" title="Copy heading and permalink for Term: nested conditional" aria-label="Copy heading and permalink for Term: nested conditional">🔗</a></div>
+</dt>
+<dd>
+<div class="para" id="chapter4_glossary-2-8-2">A conditional statement that appears inside a branch of another conditional statement.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-8-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</dd>
+<dt id="chapter4_glossary-2-9">recursion.<div class="autopermalink" aria-hidden="true" data-description="Term: recursion"><a tabindex="-1" href="#chapter4_glossary-2-9" title="Copy heading and permalink for Term: recursion" aria-label="Copy heading and permalink for Term: recursion">🔗</a></div>
+</dt>
+<dd>
+<div class="para" id="chapter4_glossary-2-9-2">The process in which a function calls itself.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-9-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</dd>
+<dt id="chapter4_glossary-2-10">recursive.<div class="autopermalink" aria-hidden="true" data-description="Term: recursive"><a tabindex="-1" href="#chapter4_glossary-2-10" title="Copy heading and permalink for Term: recursive" aria-label="Copy heading and permalink for Term: recursive">🔗</a></div>
+</dt>
+<dd>
+<div class="para" id="chapter4_glossary-2-10-2">Describes a function that calls itself.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-10-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</dd>
+<dt id="chapter4_glossary-2-11">base case.<div class="autopermalink" aria-hidden="true" data-description="Term: base case"><a tabindex="-1" href="#chapter4_glossary-2-11" title="Copy heading and permalink for Term: base case" aria-label="Copy heading and permalink for Term: base case">🔗</a></div>
+</dt>
+<dd>
+<div class="para" id="chapter4_glossary-2-11-2">A case in a recursive function that stops the recursive calls by completing without making another recursive call.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-11-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</dd>
+<dt id="chapter4_glossary-2-12">infinite recursion.<div class="autopermalink" aria-hidden="true" data-description="Term: infinite recursion"><a tabindex="-1" href="#chapter4_glossary-2-12" title="Copy heading and permalink for Term: infinite recursion" aria-label="Copy heading and permalink for Term: infinite recursion">🔗</a></div>
+</dt>
+<dd>
+<div class="para" id="chapter4_glossary-2-12-2">Recursion in which the program continues making recursive calls without reaching a base case. It will typically continue until the program is terminated or available call-stack space is exhausted.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-12-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</dd>
+<dt id="chapter4_glossary-2-13">stack frame.<div class="autopermalink" aria-hidden="true" data-description="Term: stack frame"><a tabindex="-1" href="#chapter4_glossary-2-13" title="Copy heading and permalink for Term: stack frame" aria-label="Copy heading and permalink for Term: stack frame">🔗</a></div>
+</dt>
+<dd>
+<div class="para" id="chapter4_glossary-2-13-2">Information associated with one function call, including its parameters and local variables. Each recursive call has its own stack frame.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_glossary-2-13-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </dd>
 </dl>
@@ -591,30 +633,52 @@ eBookConfig.enable_chatcodes =  false;
 <article class="exercise exercise-like" id="chapter_four_glossary_1"><h3 class="heading"><span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h3>
 <div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-chapter_four_glossary_1">
 <span data-subcomponent="question">
-<div class="para" id="chapter_four_glossary_1-1-1">Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter_four_glossary_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter_four_glossary_1-1-1">Match each term with its definition.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter_four_glossary_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></span><span data-subcomponent="feedback">
-<div class="para" id="chapter_four_glossary_1-2-1">Try again!</div></span><li data-subcomponent="draggable" id="rs-chapter_four_glossary_1_drag1" data-category="1">modulus</li>
-<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_1_drag1" data-category="1">An operator that works on integers and yields the remainder when one number is divided by another.</li>
-<li data-subcomponent="draggable" id="rs-chapter_four_glossary_1_drag2" data-category="2">chaining</li>
-<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_1_drag2" data-category="2">A way of joining several conditional statements in sequence.</li>
-<li data-subcomponent="draggable" id="rs-chapter_four_glossary_1_drag3" data-category="3">nesting</li>
-<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_1_drag3" data-category="3">Putting a conditional statement inside one or both branches of another conditional statement.</li>
+<div class="para" id="chapter_four_glossary_1-2-1">Review the vocabulary used for basic conditional execution.</div></span><li data-subcomponent="draggable" id="rs-chapter_four_glossary_1_drag1" data-category="1">remainder operator</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_1_drag1" data-category="1">The operator % that produces the remainder from integer division.</li>
+<li data-subcomponent="draggable" id="rs-chapter_four_glossary_1_drag2" data-category="2">condition</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_1_drag2" data-category="2">An expression evaluated as true or false to control a conditional statement.</li>
+<li data-subcomponent="draggable" id="rs-chapter_four_glossary_1_drag3" data-category="3">branch</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_1_drag3" data-category="3">One possible path of execution within a conditional statement.</li>
+<li data-subcomponent="draggable" id="rs-chapter_four_glossary_1_drag4" data-category="4">alternative execution</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_1_drag4" data-category="4">An if/else structure in which exactly one of two branches executes.</li>
 </ul></div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Reading Question 4.10.1"><a tabindex="-1" href="#chapter_four_glossary_1" title="Copy heading and permalink for Reading Question 4.10.1" aria-label="Copy heading and permalink for Reading Question 4.10.1">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="chapter_four_glossary_2"><h3 class="heading"><span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h3>
 <div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-chapter_four_glossary_2">
 <span data-subcomponent="question">
-<div class="para" id="chapter_four_glossary_2-1-1">Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter_four_glossary_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter_four_glossary_2-1-1">Match each term with its definition.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter_four_glossary_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></span><span data-subcomponent="feedback">
-<div class="para" id="chapter_four_glossary_2-2-1">Try again!</div></span><li data-subcomponent="draggable" id="rs-chapter_four_glossary_2_drag1" data-category="1">conditional</li>
-<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_2_drag1" data-category="1">A block of statements that may or may not be executed depending on some condition.</li>
-<li data-subcomponent="draggable" id="rs-chapter_four_glossary_2_drag2" data-category="2">recursion</li>
-<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_2_drag2" data-category="2">The process of calling the same function you are currently executing.</li>
-<li data-subcomponent="draggable" id="rs-chapter_four_glossary_2_drag3" data-category="3">infinite recursion</li>
-<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_2_drag3" data-category="3">The process of making recursive calls without every reaching the base case.</li>
+<div class="para" id="chapter_four_glossary_2-2-1">Think about how each structure organizes decisions in a program.</div></span><li data-subcomponent="draggable" id="rs-chapter_four_glossary_2_drag1" data-category="1">comparison operator</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_2_drag1" data-category="1">An operator that compares two values and produces a Boolean result.</li>
+<li data-subcomponent="draggable" id="rs-chapter_four_glossary_2_drag2" data-category="2">conditional statement</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_2_drag2" data-category="2">A statement that uses a condition to determine whether a branch executes.</li>
+<li data-subcomponent="draggable" id="rs-chapter_four_glossary_2_drag3" data-category="3">if-else-if chain</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_2_drag3" data-category="3">A structure that checks related conditions from top to bottom and executes the first true branch.</li>
+<li data-subcomponent="draggable" id="rs-chapter_four_glossary_2_drag4" data-category="4">nested conditional</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_2_drag4" data-category="4">A conditional statement placed inside a branch of another conditional statement.</li>
 </ul></div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Reading Question 4.10.2"><a tabindex="-1" href="#chapter_four_glossary_2" title="Copy heading and permalink for Reading Question 4.10.2" aria-label="Copy heading and permalink for Reading Question 4.10.2">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="chapter_four_glossary_3"><h3 class="heading"><span class="codenumber">3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h3>
+<div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-chapter_four_glossary_3">
+<span data-subcomponent="question">
+<div class="para" id="chapter_four_glossary_3-1-1">The following terms come from the optional recursion sections. Match each term with its definition.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter_four_glossary_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></span><span data-subcomponent="feedback">
+<div class="para" id="chapter_four_glossary_3-2-1">Review how recursive calls stop and how individual function calls are represented.</div></span><li data-subcomponent="draggable" id="rs-chapter_four_glossary_3_drag1" data-category="1">recursion</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_3_drag1" data-category="1">The process in which a function calls itself.</li>
+<li data-subcomponent="draggable" id="rs-chapter_four_glossary_3_drag2" data-category="2">recursive</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_3_drag2" data-category="2">Describes a function that calls itself.</li>
+<li data-subcomponent="draggable" id="rs-chapter_four_glossary_3_drag3" data-category="3">base case</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_3_drag3" data-category="3">A case that stops further recursive calls.</li>
+<li data-subcomponent="draggable" id="rs-chapter_four_glossary_3_drag4" data-category="4">infinite recursion</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_3_drag4" data-category="4">Recursive calls that continue without reaching a base case.</li>
+<li data-subcomponent="draggable" id="rs-chapter_four_glossary_3_drag5" data-category="5">stack frame</li>
+<li data-subcomponent="dropzone" for="rs-chapter_four_glossary_3_drag5" data-category="5">Information associated with one function call, including its parameters and local variables.</li>
+</ul></div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Reading Question 4.10.3"><a tabindex="-1" href="#chapter_four_glossary_3" title="Copy heading and permalink for Reading Question 4.10.3" aria-label="Copy heading and permalink for Reading Question 4.10.3">🔗</a></div>
 </article><div class="autopermalink" aria-hidden="true" data-description="Reading Questions 4.10"><a tabindex="-1" href="#chapter4_glossary-3" title="Copy heading and permalink for Reading Questions 4.10" aria-label="Copy heading and permalink for Reading Questions 4.10">🔗</a></div>
 </section><div class="autopermalink" aria-hidden="true" data-description="Section 4.10: Glossary"><a tabindex="-1" href="#chapter4_glossary" title="Copy heading and permalink for Section 4.10: Glossary" aria-label="Copy heading and permalink for Section 4.10: Glossary">🔗</a></div>
 </section>

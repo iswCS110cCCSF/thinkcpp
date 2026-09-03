@@ -14,7 +14,7 @@
 <!--******************************************-->
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TCPP2 Infinite Recursion</title>
+<title>TCPP2 Optional: Infinite Recursion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -216,15 +216,15 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
 <ul class="structural toc-item-list contains-active" id="ptx-toc-group-conditionals">
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Modulus Operator</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Remainder Operator</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Alternative Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Chained Conditionals</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_nested-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Nested Conditionals</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">The Return Statement</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Recursion</span></a></div></li>
-<li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Infinite Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Stack Diagrams for Recursive Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Return in Conditional Branches</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Optional: Introduction to Recursion</span></a></div></li>
+<li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Optional: Infinite Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Optional: Stack Diagrams for Recursive Functions</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter4_glossary.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Glossary</span></a></div>
 <ul id="ptx-toc-group-chapter4_glossary" class="structural toc-item-list">
@@ -538,43 +538,54 @@ eBookConfig.enable_chatcodes =  false;
 <main class="ptx-main"><div id="ptx-content" class="ptx-content">
 <section class="section" id="chapter4_infinite-recursion">
 <h1 class="heading hide-type">
-<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.8</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Infinite Recursion</span>
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.8</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Optional: Infinite Recursion</span>
 </h1>
-<div class="para" id="chapter4_infinite-recursion-2">In the examples in the previous section, notice that each time the functions get called recursively, the argument gets smaller by one, so eventually it gets to zero. When the argument is zero, the function returns immediately, <em class="emphasis">without making any recursive calls</em>. This case—when the function completes without making a recursive call—is called the <dfn class="terminology">base case</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_infinite-recursion-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="note remark-like" id="chapter4_infinite-recursion-2"><h2 class="heading">
+<span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.8.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="para" id="chapter4_infinite-recursion-2-1">This section continues the optional recursion material introduced in the previous section.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_infinite-recursion-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter4_infinite-recursion-3">If a recursion never reaches a base case, it will go on making recursive calls forever and the program will never terminate. This is known as <dfn class="terminology">infinite recursion</dfn>, and it is generally not considered a good idea.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_infinite-recursion-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Note 4.8.1"><a tabindex="-1" href="#chapter4_infinite-recursion-2" title="Copy heading and permalink for Note 4.8.1" aria-label="Copy heading and permalink for Note 4.8.1">🔗</a></div>
+</article>
+<div class="para" id="chapter4_infinite-recursion-3">A recursive function must eventually reach a <dfn class="terminology">base case</dfn> that stops the recursive calls. If the recursive calls continue without reaching a base case, the result is called <dfn class="terminology">infinite recursion</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_infinite-recursion-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter4_infinite-recursion-4">In most programming environments, a program with an infinite recursion will not really run forever. Eventually, something will break and the program will report an error.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_infinite-recursion-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_infinite-recursion-4">Infinite recursion does not normally continue forever in practice. Each function call uses space for its own call frame. If recursive calls continue for too long, the program will usually exhaust the available call-stack space or be terminated by the execution environment.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_infinite-recursion-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="warning remark-like" id="chapter4_infinite-recursion-5"><h2 class="heading">
-<span class="type">Warning</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.8.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Warning</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.8.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
-<div class="para" id="chapter4_infinite-recursion-5-1">Infinite recursion is the first example we have seen of a run-time error (an error that does not appear until you run the program).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_infinite-recursion-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_infinite-recursion-5-1">Infinite recursion is a run-time error: the program may compile successfully, but a problem occurs while the program is running.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_infinite-recursion-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Warning 4.8.1"><a tabindex="-1" href="#chapter4_infinite-recursion-5" title="Copy heading and permalink for Warning 4.8.1" aria-label="Copy heading and permalink for Warning 4.8.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Warning 4.8.2"><a tabindex="-1" href="#chapter4_infinite-recursion-5" title="Copy heading and permalink for Warning 4.8.2" aria-label="Copy heading and permalink for Warning 4.8.2">🔗</a></div>
 </article>
-<div class="para" id="chapter4_infinite-recursion-6">You should write a small program that recurses forever and run it to see what happens. Below is an example. The function adds to the number <dfn class="terminology">n</dfn> instead of subtracting, which means it is always larger than 0. Therefore, the function executes “forever.” If you tried to run the program, it would run until it exhausted the available memory for its call stack and crashed. (If you run a infinitely recursive program in an Activecode in this book, it will be terminated automatically after a few seconds and you will get an error message.)<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_infinite-recursion-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;cmath&gt;
+<figure class="listing figure-like" id="unbounded_recursion_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.8.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This function moves away from its base case instead of toward it.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.8.1: This function moves away from its base case instead of toward it."><a tabindex="-1" href="#unbounded_recursion_AC_1" title="Copy heading and permalink for Listing 4.8.1: This function moves away from its base case instead of toward it." aria-label="Copy heading and permalink for Listing 4.8.1: This function moves away from its base case instead of toward it.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-unbounded_recursion_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void nLines(int n) {
-  if (n &gt; 0) {
-    std::cout &lt;&lt; std::endl;
-    nLines(n + 1);
-  }
-}
+// Function declaration
+void print_lines(int number_of_lines);
 
 int main() {
-  void nLines(10);
+    print_lines(10);
+
+    return 0;
+}
+
+// Function definition
+void print_lines(int number_of_lines) {
+    if (number_of_lines &gt; 0) {
+        std::cout &lt;&lt; '\n';
+        print_lines(number_of_lines + 1);
+    }
 }
 </code></pre></div>
+</figure>
+<div class="para" id="chapter4_infinite-recursion-7">The recursive call increases <code class="code-inline tex2jax_ignore">number_of_lines</code> instead of decreasing it. Starting from 10, the argument moves farther away from the stopping condition rather than toward it, so the base case is never reached.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_infinite-recursion-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
 <article class="exercise exercise-like" id="unbounded_recursion_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.8.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-unbounded_recursion_1"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"unbounded_recursion_1-1-1\">If a recursive function never reaches its <input type=\"text\" id=\"unbounded_recursion_1-blank1\"\/> case, then the function will continue executing indefinitely. This is called <input type=\"text\" id=\"unbounded_recursion_1-blank2\"\/> recursion.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#unbounded_recursion_1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"unbounded_recursion_1-1-1\">If a recursive function never reaches its <input type=\"text\" id=\"unbounded_recursion_1-blank1\"\/> case, then the recursive calls may continue until the program fails. This is called <input type=\"text\" id=\"unbounded_recursion_1-blank2\"\/> recursion.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#unbounded_recursion_1-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0, "blank2": 1},
 "feedbackArray": [[{"regex": "^\\s*base\\s*$", "regexFlags": "i", "feedback": "Correct!"}, {"feedback": "Incorrect."}], [{"regex": "^\\s*infinite\\s*$", "regexFlags": "i", "feedback": "Correct!"}, {"feedback": "Incorrect."}]]
@@ -587,46 +598,52 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="unbounded_recursion_2-1-1">Take a look at the code below. What will happen if you were to run it on your machine?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#unbounded_recursion_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="unbounded_recursion_2-1-1">What will this program print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#unbounded_recursion_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
-void isNegative(int n) {
-  if (n &gt;= 0) {
-    std::cout &lt;&lt; "Not Negative!";
-    isNegative(n - 1);
-  }
-  std::cout &lt;&lt; "Negative!";
-}
+void report_sign(int number);
 
 int main() {
-  isNegative(-10);
+    report_sign(-10);
+
+    return 0;
+}
+
+void report_sign(int number) {
+    if (number &gt;= 0) {
+        std::cout &lt;&lt; "Not negative!\n";
+        report_sign(number - 1);
+    }
+    else {
+        std::cout &lt;&lt; "Negative!\n";
+    }
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-unbounded_recursion_2" data-multipleanswers="false">
 <li data-component="answer" id="rs-unbounded_recursion_2_opt_a">
-<div class="para" id="unbounded_recursion_2-2-1-1-1">The function will print "Not Negative!"</div>
+<div class="para" id="unbounded_recursion_2-2-1-1-1">Not negative!</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_2_opt_a">
-<div class="para" id="unbounded_recursion_2-2-1-2-1">The function will never print "Not Negative!" since we start with a negative number!</div>
+<div class="para" id="unbounded_recursion_2-2-1-2-1">Evaluate the first condition using the initial argument.</div>
 </li>
-<li data-component="answer" id="rs-unbounded_recursion_2_opt_b">
-<div class="para" id="unbounded_recursion_2-2-2-1-1">The function will print "Not Negative!" more than once. Then it will print "Negative!" and will stop executing.</div>
+<li data-component="answer" id="rs-unbounded_recursion_2_opt_b" data-correct="">
+<div class="para" id="unbounded_recursion_2-2-2-1-1">Negative!</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_2_opt_b">
-<div class="para" id="unbounded_recursion_2-2-2-2-1">The function will never print "Not Negative!" since we start with a negative number!</div>
+<div class="para" id="unbounded_recursion_2-2-2-2-1">The initial argument already satisfies the stopping branch.</div>
 </li>
-<li data-component="answer" id="rs-unbounded_recursion_2_opt_c" data-correct="">
-<div class="para" id="unbounded_recursion_2-2-3-1-1">The function will print "Negative!"</div>
+<li data-component="answer" id="rs-unbounded_recursion_2_opt_c">
+<div class="para" id="unbounded_recursion_2-2-3-1-1">Not negative! followed by Negative!</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_2_opt_c">
-<div class="para" id="unbounded_recursion_2-2-3-2-1">We start with a negative number, so the function will reach the base case.</div>
+<div class="para" id="unbounded_recursion_2-2-3-2-1">Check whether the recursive branch is entered at all.</div>
 </li>
 <li data-component="answer" id="rs-unbounded_recursion_2_opt_d">
-<div class="para" id="unbounded_recursion_2-2-4-1-1">The function will never stop executing, there will be infinite recursion.</div>
+<div class="para" id="unbounded_recursion_2-2-4-1-1">The function recurses indefinitely.</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_2_opt_d">
-<div class="para" id="unbounded_recursion_2-2-4-2-1">We start with a negative number, so the function will reach the base case.</div>
+<div class="para" id="unbounded_recursion_2-2-4-2-1">Determine whether a recursive call is made for the initial value.</div>
 </li>
 </ul>
 </div></div>
@@ -637,47 +654,49 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="unbounded_recursion_3-1-1">
-<code class="code-inline tex2jax_ignore">isNegative</code> is defined exactly as it was above, but we have changed the call to it in <code class="code-inline tex2jax_ignore">main</code>. What will happen if we run the code with this input?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#unbounded_recursion_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="unbounded_recursion_3-1-1">What happens when this program runs?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#unbounded_recursion_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
-void isNegative(int n) {
-  if (n &gt;= 0) {
-    std::cout &lt;&lt; "Not Negative!";
-    isNegative(n - 1);
-  }
-  std::cout &lt;&lt; "Negative!";
-}
+void report_count(int number);
 
 int main() {
-  isNegative(10);
+    report_count(3);
+
+    return 0;
+}
+
+void report_count(int number) {
+    if (number &gt; 0) {
+        std::cout &lt;&lt; number &lt;&lt; '\n';
+        report_count(number - 1);
+    }
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-unbounded_recursion_3" data-multipleanswers="false">
-<li data-component="answer" id="rs-unbounded_recursion_3_opt_a">
-<div class="para" id="unbounded_recursion_3-2-1-1-1">The function will print "Not Negative!"</div>
+<li data-component="answer" id="rs-unbounded_recursion_3_opt_a" data-correct="">
+<div class="para" id="unbounded_recursion_3-2-1-1-1">It prints 3, 2, 1 and then stops.</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_3_opt_a">
-<div class="para" id="unbounded_recursion_3-2-1-2-1">The function will print "Not Negative!", but it won’t stop there!</div>
+<div class="para" id="unbounded_recursion_3-2-1-2-1">Each recursive call moves the argument closer to the base case.</div>
 </li>
-<li data-component="answer" id="rs-unbounded_recursion_3_opt_b" data-correct="">
-<div class="para" id="unbounded_recursion_3-2-2-1-1">The function will print "Not Negative!" more than once. Then it will print "Negative!" and will stop executing.</div>
+<li data-component="answer" id="rs-unbounded_recursion_3_opt_b">
+<div class="para" id="unbounded_recursion_3-2-2-1-1">It prints 3 forever.</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_3_opt_b">
-<div class="para" id="unbounded_recursion_3-2-2-2-1">The function will print "Not Negative!" until it reaches a negative number.</div>
+<div class="para" id="unbounded_recursion_3-2-2-2-1">Trace how the argument changes in each recursive call.</div>
 </li>
 <li data-component="answer" id="rs-unbounded_recursion_3_opt_c">
-<div class="para" id="unbounded_recursion_3-2-3-1-1">The function will print "Negative!"</div>
+<div class="para" id="unbounded_recursion_3-2-3-1-1">It prints 3, 4, 5, ... until the program fails.</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_3_opt_c">
-<div class="para" id="unbounded_recursion_3-2-3-2-1">The function will eventually print "Not Negative!", but that’s not all!</div>
+<div class="para" id="unbounded_recursion_3-2-3-2-1">Check whether the recursive argument is increased or decreased.</div>
 </li>
 <li data-component="answer" id="rs-unbounded_recursion_3_opt_d">
-<div class="para" id="unbounded_recursion_3-2-4-1-1">The function will never stop executing, there will be infinite recursion.</div>
+<div class="para" id="unbounded_recursion_3-2-4-1-1">Nothing prints.</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_3_opt_d">
-<div class="para" id="unbounded_recursion_3-2-4-2-1">Since we decrement each time, the base case will be reached.</div>
+<div class="para" id="unbounded_recursion_3-2-4-2-1">Evaluate the condition using the initial value 3.</div>
 </li>
 </ul>
 </div></div>
@@ -688,51 +707,54 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="unbounded_recursion_4-1-1">The <code class="code-inline tex2jax_ignore">isNegative</code> function has been <dfn class="terminology">edited</dfn> as shown below. What will happen now when we run the code?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#unbounded_recursion_4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="unbounded_recursion_4-1-1">What happens when this program runs?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#unbounded_recursion_4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
-void isNegative(int n) {
-  if (n &gt;= 0) {
-    std::cout &lt;&lt; "Not Negative!";
-    isNegative(n + 1);
-  }
-  std::cout &lt;&lt; "Negative!";
-}
+void report_count(int number);
 
 int main() {
-  isNegative(10);
+    report_count(3);
+
+    return 0;
+}
+
+void report_count(int number) {
+    if (number &gt; 0) {
+        std::cout &lt;&lt; number &lt;&lt; '\n';
+        report_count(number + 1);
+    }
 }
 </code></pre></div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-unbounded_recursion_4" data-multipleanswers="false">
 <li data-component="answer" id="rs-unbounded_recursion_4_opt_a">
-<div class="para" id="unbounded_recursion_4-2-1-1-1">The function will print "Not Negative!"</div>
+<div class="para" id="unbounded_recursion_4-2-1-1-1">It prints only 3.</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_4_opt_a">
-<div class="para" id="unbounded_recursion_4-2-1-2-1">The function will print "Not Negative!" but it won’t stop there!</div>
+<div class="para" id="unbounded_recursion_4-2-1-2-1">Check whether the function makes another recursive call.</div>
 </li>
 <li data-component="answer" id="rs-unbounded_recursion_4_opt_b">
-<div class="para" id="unbounded_recursion_4-2-2-1-1">The function will print "Not Negative!" more than once. Then it will print "Negative!" and will stop executing.</div>
+<div class="para" id="unbounded_recursion_4-2-2-1-1">It prints 3, 2, 1 and then stops.</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_4_opt_b">
-<div class="para" id="unbounded_recursion_4-2-2-2-1">The function will print "Not Negative!" more than once. But will it print "Negative"?</div>
+<div class="para" id="unbounded_recursion_4-2-2-2-1">Trace whether the argument moves toward or away from zero.</div>
 </li>
 <li data-component="answer" id="rs-unbounded_recursion_4_opt_c">
-<div class="para" id="unbounded_recursion_4-2-3-1-1">The function will print "Negative!"</div>
+<div class="para" id="unbounded_recursion_4-2-3-1-1">Nothing prints.</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_4_opt_c">
-<div class="para" id="unbounded_recursion_4-2-3-2-1">We start with a positive number, so the function simply won’t print "Not Negative!"</div>
+<div class="para" id="unbounded_recursion_4-2-3-2-1">Evaluate the condition using the initial value 3.</div>
 </li>
 <li data-component="answer" id="rs-unbounded_recursion_4_opt_d" data-correct="">
-<div class="para" id="unbounded_recursion_4-2-4-1-1">The function will never stop executing, there will be infinite recursion.</div>
+<div class="para" id="unbounded_recursion_4-2-4-1-1">It continues making recursive calls until the program is terminated or the call stack is exhausted.</div>
 </li>
 <li data-component="feedback" id="rs-unbounded_recursion_4_opt_d">
-<div class="para" id="unbounded_recursion_4-2-4-2-1">Our input is incremented with every recursive call, so if we start with a positive number, we will never reach the base case.</div>
+<div class="para" id="unbounded_recursion_4-2-4-2-1">The recursive argument moves farther away from the base case.</div>
 </li>
 </ul>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.8.4"><a tabindex="-1" href="#unbounded_recursion_4" title="Copy heading and permalink for Checkpoint 4.8.4" aria-label="Copy heading and permalink for Checkpoint 4.8.4">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Section 4.8: Infinite Recursion"><a tabindex="-1" href="#chapter4_infinite-recursion" title="Copy heading and permalink for Section 4.8: Infinite Recursion" aria-label="Copy heading and permalink for Section 4.8: Infinite Recursion">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Section 4.8: Optional: Infinite Recursion"><a tabindex="-1" href="#chapter4_infinite-recursion" title="Copy heading and permalink for Section 4.8: Optional: Infinite Recursion" aria-label="Copy heading and permalink for Section 4.8: Optional: Infinite Recursion">🔗</a></div>
 </section>
 </div>
 <div id="ptx-content-footer" class="ptx-content-footer">

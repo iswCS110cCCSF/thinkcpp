@@ -216,15 +216,15 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
 <ul class="structural toc-item-list contains-active" id="ptx-toc-group-conditionals">
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Modulus Operator</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Remainder Operator</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Alternative Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Chained Conditionals</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_nested-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Nested Conditionals</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">The Return Statement</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Infinite Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Stack Diagrams for Recursive Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Return in Conditional Branches</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Optional: Introduction to Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Optional: Infinite Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Optional: Stack Diagrams for Recursive Functions</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter4_glossary.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Glossary</span></a></div>
 <ul id="ptx-toc-group-chapter4_glossary" class="structural toc-item-list">
@@ -541,46 +541,53 @@ eBookConfig.enable_chatcodes =  false;
 <span class="type">Exercises</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.13</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Activecode Exercises</span>
 </h1>
 <section class="introduction" id="chapter4_activecode-exercises-2">
-<div class="para" id="chapter4_activecode-exercises-2-1">Answer the following <dfn class="terminology">Activecode</dfn> questions to assess what you have learned in this chapter.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_activecode-exercises-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_activecode-exercises-2-1">Complete or fix the following programs using the conditional concepts from this chapter.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_activecode-exercises-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></section>
 <article class="exercise exercise-like" id="cond_rec_a1"><h2 class="heading"><span class="codenumber">1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
-<div class="para" id="cond_rec_a1-1-1">Fix the code below so that it prints “THE TEAM” “THE TEAM” “THE TEAM” on three separate lines.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a1-1-1">Fix the code so that “THE TEAM” prints three times on separate lines.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a1q_editor" class="language-cpp">#include &lt;iostream&gt;
 
 int main() {
-  int x = 8;
-  int y = 8;
+    int x = 8;
+    int y = 8;
 
-  if (x % 2 == 0) {
-      std::cout &lt;&lt; "THE TEAM";
-  }
-  else if (x &gt;= y) {
-      std::cout &lt;&lt; "THE TEAM";
-  }
-  else if (y &gt;= x) {
-      std::cout &lt;&lt; "THE TEAM";
-  }
+    if (x % 2 == 0) {
+        std::cout &lt;&lt; "THE TEAM\n";
+    }
+    else if (x &gt;= y) {
+        std::cout &lt;&lt; "THE TEAM\n";
+    }
+    else if (y &gt;= x) {
+        std::cout &lt;&lt; "THE TEAM\n";
+    }
+
+    return 0;
 }
 </code></pre>
 <div class="solutions">
 <details id="cond_rec_a1-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
 <div class="solution solution-like knowl__content">
-<div class="para" id="cond_rec_a1-2-1">Below is one way to fix the program. Since we want “THE TEAM” to print three times, we must check all three conditons. this means changing the else if statements to if statements.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a1-2-1">All three conditions should be checked independently, so use three separate <code class="code-inline tex2jax_ignore">if</code> statements.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a1-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a1_a_editor-1" class="language-cpp">#include &lt;iostream&gt;
-int main() {
-   int x = 8;
-   int y = 8;
+<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a1_a_editor" class="language-cpp">#include &lt;iostream&gt;
 
-   if (x % 2 == 0) {
-       std::cout &lt;&lt; "THE TEAM" &lt;&lt; std::endl;
-   }
-   if (x &gt;= y) {
-       std::cout &lt;&lt; "THE TEAM" &lt;&lt; std::endl;
-   }
-   if (y &gt;= x) {
-       std::cout &lt;&lt;&lt; "THE TEAM" &lt;&lt; std::endl;
-   }
+int main() {
+    int x = 8;
+    int y = 8;
+
+    if (x % 2 == 0) {
+        std::cout &lt;&lt; "THE TEAM\n";
+    }
+
+    if (x &gt;= y) {
+        std::cout &lt;&lt; "THE TEAM\n";
+    }
+
+    if (y &gt;= x) {
+        std::cout &lt;&lt; "THE TEAM\n";
+    }
+
+    return 0;
 }
 </code></pre>
 <div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.1.1"><a tabindex="-1" href="#cond_rec_a1-2" title="Copy heading and permalink for Solution 4.13.1.1" aria-label="Copy heading and permalink for Solution 4.13.1.1">🔗</a></div>
@@ -589,334 +596,418 @@ int main() {
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 4.13.1"><a tabindex="-1" href="#cond_rec_a1" title="Copy heading and permalink for Exercise 4.13.1" aria-label="Copy heading and permalink for Exercise 4.13.1">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="cond_rec_a2"><h2 class="heading"><span class="codenumber">2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
-<div class="para" id="cond_rec_a2-1-1">You are part of a class where everyone passes, but it’s very hard to pass with an A. Fix the function so it prints your letter grade according to this scheme. [0, 50) = C, [50, 95) = B, and [95, 100] = A.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a2-1-1">Fix the function so that it prints “C” for grades below 50, “B” for grades from 50 through 94, and “A” for grades 95 or higher.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a2_editor" class="language-cpp">#include &lt;iostream&gt;
 
-std::string whichDoor(double grade) {
-  s = "";
-  if (grade &lt; 50) {
-      s = "C";
-  }
-  if (grade &lt; 85) {
-      s = "B";
-  }
-  if (grade &gt;= 95) {
-      s = "A";
-  }
-  std::cout &lt;&lt; s;
+void report_letter_grade(double grade) {
+    if (grade &lt; 50.0) {
+        std::cout &lt;&lt; "C\n";
+    }
+
+    if (grade &lt; 95.0) {
+        std::cout &lt;&lt; "B\n";
+    }
+
+    if (grade &gt;= 95.0) {
+        std::cout &lt;&lt; "A\n";
+    }
+}
+
+int main() {
+    report_letter_grade(82.0);
+
+    return 0;
 }
 </code></pre>
 <div class="solutions">
 <details id="cond_rec_a2-2" class="hint solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Hint</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
 <div class="hint solution-like knowl__content">
-<div class="para" id="cond_rec_a2-2-1">You are part of a class where everyone passes, but it’s very hard to pass with an A. Fix the function so it prints your letter grade according to this scheme. [0, 50) = C, [50, 95) = B, and [95, 100] = A. Use the lines to construct the code, then go back to complete the Activecode.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a2-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a2-2-1">Only one letter grade should print. Use one chained conditional so that the first matching branch ends the decision.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a2-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="cond_rec_a2_pp"><h3 class="heading">
-<span class="type">Activity</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.13.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h3>void whichDoor(double grade) { 
----
-string whichDoor(double grade) {  #paired    std::string s = ""; 
----
-    s = "";  #paired     if (grade &lt; 50) {
-         s = "C";
-     }
-     if (grade &lt; 95 &amp;&amp; grade &gt;= 50) {
-        s = "B";
-    } 
----
-    if (grade &lt; 95 || grade &gt;= 50) { 
-        s = "B";
-    } #paired     if (grade &gt;= 95) {
-         s = "A";
-     }
-     std::cout &lt;&lt; s;
- }
-<div class="autopermalink" aria-hidden="true" data-description="Activity 4.13.1"><a tabindex="-1" href="#cond_rec_a2_pp" title="Copy heading and permalink for Activity 4.13.1" aria-label="Copy heading and permalink for Activity 4.13.1">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.2.1"><a tabindex="-1" href="#cond_rec_a2-2" title="Copy heading and permalink for Hint 4.13.2.1" aria-label="Copy heading and permalink for Hint 4.13.2.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.2.1"><a tabindex="-1" href="#cond_rec_a2-2" title="Copy heading and permalink for Hint 4.13.2.1" aria-label="Copy heading and permalink for Hint 4.13.2.1">🔗</a></div>
+</div></details>
+<details id="cond_rec_a2-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a2_solution" class="language-cpp">#include &lt;iostream&gt;
+
+void report_letter_grade(double grade) {
+    if (grade &lt; 50.0) {
+        std::cout &lt;&lt; "C\n";
+    }
+    else if (grade &lt; 95.0) {
+        std::cout &lt;&lt; "B\n";
+    }
+    else {
+        std::cout &lt;&lt; "A\n";
+    }
+}
+
+int main() {
+    report_letter_grade(82.0);
+
+    return 0;
+}
+</code></pre>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.2.1"><a tabindex="-1" href="#cond_rec_a2-3" title="Copy heading and permalink for Solution 4.13.2.1" aria-label="Copy heading and permalink for Solution 4.13.2.1">🔗</a></div>
 </div></details>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 4.13.2"><a tabindex="-1" href="#cond_rec_a2" title="Copy heading and permalink for Exercise 4.13.2" aria-label="Copy heading and permalink for Exercise 4.13.2">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="cond_rec_a3"><h2 class="heading"><span class="codenumber">3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
-<div class="para" id="cond_rec_a3-1-1">Fix the infinite recursion in the code below. The function should not count any numbers after 10 (the highest numbers that should print are 9 or 10). When it is done counting, the function should print that.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a3q_editor" class="language-cpp">#include &lt;iostream&gt;
+<div class="para" id="cond_rec_a3-1-1">Fix the function so that it prints “Odd” for odd integers and “Even” for even integers. It should work correctly for both positive and negative integers.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a3_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void countBy2(int num) {
-    if (num != 10) {
-        std::cout &lt;&lt; num;
-        countBy2 (num + 2);
-    }
-    else {
-        std::cout &lt;&lt; num &lt;&lt; std::endl;
-        std::cout &lt;&lt; "Done counting!";
+void report_parity(int number) {
+    if (number % 2 == 0) {
+        std::cout &lt;&lt; "Even\n";
     }
 }
 
 int main() {
-    countBy2(5);
+    report_parity(-3);
+
+    return 0;
 }
 </code></pre>
 <div class="solutions">
 <details id="cond_rec_a3-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
 <div class="solution solution-like knowl__content">
-<div class="para" id="cond_rec_a3-2-1">Below is one way to fix the program. The infinite recursion happens when we use an odd number as an argument. By checking that a number is less than 99, the highest numbers to recurse are 98 and 97. 98 + 2 == 100 and 97 + 2 == 99, so we never count past 100.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a3-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a3_a_editor" class="language-cpp">#include &lt;iostream&gt;
+<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a3_solution" class="language-cpp">#include &lt;iostream&gt;
 
-void countBy2(int num) {
-    if (num &lt; 9) {
-        std::cout &lt;&lt; num;
-        countBy2(num + 2);
+void report_parity(int number) {
+    if (number % 2 == 0) {
+        std::cout &lt;&lt; "Even\n";
     }
     else {
-        std::cout &lt;&lt; num &lt;&lt; std::endl;
-        std::cout &lt;&lt; "Done counting!";
+        std::cout &lt;&lt; "Odd\n";
     }
 }
 
 int main() {
-    countBy2(5);
+    report_parity(-3);
+
+    return 0;
 }
-</code></pre></div>
+</code></pre>
 <div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.3.1"><a tabindex="-1" href="#cond_rec_a3-2" title="Copy heading and permalink for Solution 4.13.3.1" aria-label="Copy heading and permalink for Solution 4.13.3.1">🔗</a></div>
 </div></details>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 4.13.3"><a tabindex="-1" href="#cond_rec_a3" title="Copy heading and permalink for Exercise 4.13.3" aria-label="Copy heading and permalink for Exercise 4.13.3">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="cond_rec_a4"><h2 class="heading"><span class="codenumber">4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
-<div class="para" id="cond_rec_a4-1-1">Finish the <code class="code-inline tex2jax_ignore">is_even</code>code below so that it prints true if <code class="code-inline tex2jax_ignore">x</code> is even and false if <code class="code-inline tex2jax_ignore">x</code> is odd.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a4-1-1">Write the function <code class="code-inline tex2jax_ignore">determine_larger</code>. It should return the larger of two integers. If they are equal, return either value.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a4_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void is_even(int num) {
-  if (num % 2 == 0) {
-      std::cout &lt;&lt; true;
-  }
+int determine_larger(int a, int b) {
+    // Write your code here.
 }
 
 int main() {
-  int x = 3;
-  is_even(x);
+    std::cout &lt;&lt; determine_larger(7, 12) &lt;&lt; '\n';
+
+    return 0;
 }
 </code></pre>
 <div class="solutions">
 <details id="cond_rec_a4-2" class="hint solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Hint</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
 <div class="hint solution-like knowl__content">
-<div class="para" id="cond_rec_a4-2-1">Finish the code below so that it prints true if <code class="code-inline tex2jax_ignore">x</code> is even and false if <code class="code-inline tex2jax_ignore">x</code> is odd. Use the lines to construct the code, then go back to complete the Activecode.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a4-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a4-2-1">Compare the two parameters, then return the appropriate value from each branch.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a4-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="cond_rec_a4_pp"><h3 class="heading">
-<span class="type">Activity</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.13.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h3>void is_even(int num) {
-     if (num % 2 == 0) {
-        std::cout &lt;&lt; "true";
-    } 
----
-    if (num % 2 == 0) { 
-        std::cout &lt;&lt; true;
-    } #paired     else {
-        std::cout &lt;&lt; "false";
-    } 
----
-    else { 
-        std::cout &lt;&lt; false;
-    } #paired }
-<div class="autopermalink" aria-hidden="true" data-description="Activity 4.13.2"><a tabindex="-1" href="#cond_rec_a4_pp" title="Copy heading and permalink for Activity 4.13.2" aria-label="Copy heading and permalink for Activity 4.13.2">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.4.1"><a tabindex="-1" href="#cond_rec_a4-2" title="Copy heading and permalink for Hint 4.13.4.1" aria-label="Copy heading and permalink for Hint 4.13.4.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.4.1"><a tabindex="-1" href="#cond_rec_a4-2" title="Copy heading and permalink for Hint 4.13.4.1" aria-label="Copy heading and permalink for Hint 4.13.4.1">🔗</a></div>
+</div></details>
+<details id="cond_rec_a4-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a4_solution" class="language-cpp">#include &lt;iostream&gt;
+
+int determine_larger(int a, int b) {
+    if (a &gt; b) {
+        return a;
+    }
+    else {
+        return b;
+    }
+}
+
+int main() {
+    std::cout &lt;&lt; determine_larger(7, 12) &lt;&lt; '\n';
+
+    return 0;
+}
+</code></pre>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.4.1"><a tabindex="-1" href="#cond_rec_a4-3" title="Copy heading and permalink for Solution 4.13.4.1" aria-label="Copy heading and permalink for Solution 4.13.4.1">🔗</a></div>
 </div></details>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 4.13.4"><a tabindex="-1" href="#cond_rec_a4" title="Copy heading and permalink for Exercise 4.13.4" aria-label="Copy heading and permalink for Exercise 4.13.4">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="cond_rec_a5"><h2 class="heading"><span class="codenumber">5<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
-<div class="para" id="cond_rec_a5-1-1">Finish the code below so that the function will continue to ask for input until the user guesses the word correctly.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a5q_editor" class="language-cpp">#include &lt;iostream&gt;
+<div class="para" id="cond_rec_a5-1-1">Write the function <code class="code-inline tex2jax_ignore">report_temperature</code>. It should print “Cold” for temperatures below 50, “Mild” for temperatures from 50 through 74, and “Warm” for temperatures 75 or higher.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a5_editor" class="language-cpp">#include &lt;iostream&gt;
 
-bool guessTheWord(std::string correct) {
-    std::cout &lt;&lt; "Guess the word!";
-    std::string guess;
-    std::cin &gt;&gt; guess;
-    if (guess == correct) {
-        std::cout &lt;&lt; "That's it!";
-    }
+void report_temperature(int temperature) {
+    // Write your code here.
+}
+
+int main() {
+    report_temperature(68);
+
+    return 0;
 }
 </code></pre>
 <div class="solutions">
-<details id="cond_rec_a5-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
-<div class="solution solution-like knowl__content">
-<div class="para" id="cond_rec_a5-2-1">Below is one way to complete the program.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a5-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<details id="cond_rec_a5-2" class="hint solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Hint</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="hint solution-like knowl__content">
+<div class="para" id="cond_rec_a5-2-1">Use one <code class="code-inline tex2jax_ignore">if</code>/<code class="code-inline tex2jax_ignore">else if</code>/<code class="code-inline tex2jax_ignore">else</code> chain. Check the thresholds in an order that gives each temperature exactly one category.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a5-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a5a_editor" class="language-cpp">#include &lt;iostream&gt;
+<div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.5.1"><a tabindex="-1" href="#cond_rec_a5-2" title="Copy heading and permalink for Hint 4.13.5.1" aria-label="Copy heading and permalink for Hint 4.13.5.1">🔗</a></div>
+</div></details>
+<details id="cond_rec_a5-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a5_solution" class="language-cpp">#include &lt;iostream&gt;
 
-bool guessTheWord(std::string correct) {
-    std::cout &lt;&lt; "Guess the word!";
-    std::string guess;
-    std::cin &gt;&gt; guess;
-    if (guess == correct) {
-        std::cout &lt;&lt; "That's it!";
+void report_temperature(int temperature) {
+    if (temperature &lt; 50) {
+        std::cout &lt;&lt; "Cold\n";
+    }
+    else if (temperature &lt; 75) {
+        std::cout &lt;&lt; "Mild\n";
     }
     else {
-        guessTheWord(correct);
+        std::cout &lt;&lt; "Warm\n";
     }
 }
-</code></pre></div>
-<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.5.1"><a tabindex="-1" href="#cond_rec_a5-2" title="Copy heading and permalink for Solution 4.13.5.1" aria-label="Copy heading and permalink for Solution 4.13.5.1">🔗</a></div>
+
+int main() {
+    report_temperature(68);
+
+    return 0;
+}
+</code></pre>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.5.1"><a tabindex="-1" href="#cond_rec_a5-3" title="Copy heading and permalink for Solution 4.13.5.1" aria-label="Copy heading and permalink for Solution 4.13.5.1">🔗</a></div>
 </div></details>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 4.13.5"><a tabindex="-1" href="#cond_rec_a5" title="Copy heading and permalink for Exercise 4.13.5" aria-label="Copy heading and permalink for Exercise 4.13.5">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="cond_rec_a6"><h2 class="heading"><span class="codenumber">6<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
-<div class="para" id="cond_rec_a6-1-1">Write the function <code class="code-inline tex2jax_ignore">greaterThan</code> that prints true if the first <code class="code-inline tex2jax_ignore">double</code> argument is greater than the second <code class="code-inline tex2jax_ignore">double</code> argument.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a6-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a6-1-1">Write the function <code class="code-inline tex2jax_ignore">report_comparison</code>. It should print “Greater” if the first <code class="code-inline tex2jax_ignore">double</code> is greater than the second, “Less” if it is smaller, and “Equal” otherwise.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a6-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a6_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void greaterThan(FIX ME) {
+void report_comparison(double a, double b) {
+    // Write your code here.
+}
 
+int main() {
+    report_comparison(4.5, 7.2);
+
+    return 0;
 }
 </code></pre>
 <div class="solutions">
-<details id="cond_rec_a6-2" class="hint solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Hint</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
-<div class="hint solution-like knowl__content">
-<div class="para" id="cond_rec_a6-2-1">Write the function <code class="code-inline tex2jax_ignore">greaterThan</code> that prints true if the first <code class="code-inline tex2jax_ignore">double</code> argument is greater than the second <code class="code-inline tex2jax_ignore">double</code> argument. Be sure to include any necessary headers. Use the lines to construct the code, then go back to complete the Activecode.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a6-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<article class="activity project-like" id="cond_rec_a6_pp"><h3 class="heading">
-<span class="type">Activity</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.13.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h3>void greaterThan(double a, double b) { 
----
-void greaterThan(int a , int b) {  #paired     if (a &gt; b) {
-         std::cout &lt;&lt; "true";
-     }
-     if (a &lt; b) {
-         std::cout &lt;&lt; true;
-     }
-     else {
-         std::cout &lt;&lt; "false";
-     }
-     if (double a &gt; double b) { 
-         std::cout &lt;&lt; true;
-     }
- }
-<div class="autopermalink" aria-hidden="true" data-description="Activity 4.13.3"><a tabindex="-1" href="#cond_rec_a6_pp" title="Copy heading and permalink for Activity 4.13.3" aria-label="Copy heading and permalink for Activity 4.13.3">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.6.1"><a tabindex="-1" href="#cond_rec_a6-2" title="Copy heading and permalink for Hint 4.13.6.1" aria-label="Copy heading and permalink for Hint 4.13.6.1">🔗</a></div>
+<details id="cond_rec_a6-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a6_solution" class="language-cpp">#include &lt;iostream&gt;
+
+void report_comparison(double a, double b) {
+    if (a &gt; b) {
+        std::cout &lt;&lt; "Greater\n";
+    }
+    else if (a &lt; b) {
+        std::cout &lt;&lt; "Less\n";
+    }
+    else {
+        std::cout &lt;&lt; "Equal\n";
+    }
+}
+
+int main() {
+    report_comparison(4.5, 7.2);
+
+    return 0;
+}
+</code></pre>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.6.1"><a tabindex="-1" href="#cond_rec_a6-2" title="Copy heading and permalink for Solution 4.13.6.1" aria-label="Copy heading and permalink for Solution 4.13.6.1">🔗</a></div>
 </div></details>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 4.13.6"><a tabindex="-1" href="#cond_rec_a6" title="Copy heading and permalink for Exercise 4.13.6" aria-label="Copy heading and permalink for Exercise 4.13.6">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="cond_rec_a7"><h2 class="heading"><span class="codenumber">7<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
-<div class="para" id="cond_rec_a7-1-1">Write the function <code class="code-inline tex2jax_ignore">goodVibes</code> that prints “I’m having a <code class="code-inline tex2jax_ignore">mood</code> day!” depending on the value of <code class="code-inline tex2jax_ignore">mood</code>. If <code class="code-inline tex2jax_ignore">mood</code> is “bad”, then the function should not do anything since it’s good vibes only. Be sure to include any necessary headers.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a7-1-1">Complete the function so that it returns immediately when <code class="code-inline tex2jax_ignore">temperature</code> is below -100. Otherwise, it should print the temperature.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a7q_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void goodVibes(std::string mood) {
+void report_valid_temperature(int temperature) {
+    // Write your code here.
+}
 
+int main() {
+    report_valid_temperature(72);
+
+    return 0;
 }
 </code></pre>
 <div class="solutions">
-<details id="cond_rec_a7-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
-<div class="solution solution-like knowl__content">
-<div class="para" id="cond_rec_a7-2-1">Below is one way to write the program. The return allows the function to exit if there are bad vibes in the room. Otherise, the function prints as directed.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a7-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<details id="cond_rec_a7-2" class="hint solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Hint</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="hint solution-like knowl__content">
+<div class="para" id="cond_rec_a7-2-1">Use an <code class="code-inline tex2jax_ignore">if</code> statement with an early <code class="code-inline tex2jax_ignore">return</code> for the invalid case.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a7-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a7a_editor" class="language-cpp">#include &lt;iostream&gt;
+<div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.7.1"><a tabindex="-1" href="#cond_rec_a7-2" title="Copy heading and permalink for Hint 4.13.7.1" aria-label="Copy heading and permalink for Hint 4.13.7.1">🔗</a></div>
+</div></details>
+<details id="cond_rec_a7-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a7_solution" class="language-cpp">#include &lt;iostream&gt;
 
-void goodVibes(std::string mood) {
-    if (mood == "bad") {
+void report_valid_temperature(int temperature) {
+    if (temperature &lt; -100) {
         return;
     }
-    std::cout &lt;&lt; "I'm having a " &lt;&lt; mood &lt;&lt; " day";
+
+    std::cout &lt;&lt; temperature &lt;&lt; '\n';
 }
-</code></pre></div>
-<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.7.1"><a tabindex="-1" href="#cond_rec_a7-2" title="Copy heading and permalink for Solution 4.13.7.1" aria-label="Copy heading and permalink for Solution 4.13.7.1">🔗</a></div>
+
+int main() {
+    report_valid_temperature(72);
+
+    return 0;
+}
+</code></pre>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.7.1"><a tabindex="-1" href="#cond_rec_a7-3" title="Copy heading and permalink for Solution 4.13.7.1" aria-label="Copy heading and permalink for Solution 4.13.7.1">🔗</a></div>
 </div></details>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 4.13.7"><a tabindex="-1" href="#cond_rec_a7" title="Copy heading and permalink for Exercise 4.13.7" aria-label="Copy heading and permalink for Exercise 4.13.7">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="cond_rec_a8"><h2 class="heading"><span class="codenumber">8<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
-<div class="para" id="cond_rec_a8-1-1">Write the function <code class="code-inline tex2jax_ignore">exclusiveOr</code> that prints true If either <code class="code-inline tex2jax_ignore">a</code> OR <code class="code-inline tex2jax_ignore">b</code> is true, and prints false otherwise.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a8-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a8-1-1">Write the function <code class="code-inline tex2jax_ignore">determine_exclusive_or</code>. It should return <code class="code-inline tex2jax_ignore">true</code> when exactly one of its two Boolean arguments is true, and <code class="code-inline tex2jax_ignore">false</code> otherwise.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a8-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a8_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void exclusiveOr(bool a, bool b) {
+bool determine_exclusive_or(bool a, bool b) {
+    // Write your code here.
+}
 
+int main() {
+    std::cout &lt;&lt; determine_exclusive_or(true, false) &lt;&lt; '\n';
+
+    return 0;
 }
 </code></pre>
 <div class="solutions">
 <details id="cond_rec_a8-2" class="hint solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Hint</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
 <div class="hint solution-like knowl__content">
-<div class="para" id="cond_rec_a8-2-1">Write the function <code class="code-inline tex2jax_ignore">exclusiveOr</code> that prints true If either <code class="code-inline tex2jax_ignore">a</code> OR <code class="code-inline tex2jax_ignore">b</code> is true, and prints false otherwise. Be sure to include any necessary headers. Use the lines to construct the code, then go back to complete the Activecode.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a8-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a8-2-1">Exclusive OR is true when the two Boolean values are different.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a8-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="cond_rec_a8_pp"><h3 class="heading">
-<span class="type">Activity</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.13.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h3>void exclusiveOr(bool a, bool b) {
-     if (a == true || b == true) {
-        std::cout &lt;&lt; "true";
-    } 
----
-    if (a == true &amp;&amp; b == true) { 
-        std::cout &lt;&lt; "true";
-    } #paired     else {
-         std::cout &lt;&lt; "false";
-     }
- }
-<div class="autopermalink" aria-hidden="true" data-description="Activity 4.13.4"><a tabindex="-1" href="#cond_rec_a8_pp" title="Copy heading and permalink for Activity 4.13.4" aria-label="Copy heading and permalink for Activity 4.13.4">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.8.1"><a tabindex="-1" href="#cond_rec_a8-2" title="Copy heading and permalink for Hint 4.13.8.1" aria-label="Copy heading and permalink for Hint 4.13.8.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.8.1"><a tabindex="-1" href="#cond_rec_a8-2" title="Copy heading and permalink for Hint 4.13.8.1" aria-label="Copy heading and permalink for Hint 4.13.8.1">🔗</a></div>
+</div></details>
+<details id="cond_rec_a8-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a8_solution" class="language-cpp">#include &lt;iostream&gt;
+
+bool determine_exclusive_or(bool a, bool b) {
+    if (a != b) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+int main() {
+    std::cout &lt;&lt; determine_exclusive_or(true, false) &lt;&lt; '\n';
+
+    return 0;
+}
+</code></pre>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.8.1"><a tabindex="-1" href="#cond_rec_a8-3" title="Copy heading and permalink for Solution 4.13.8.1" aria-label="Copy heading and permalink for Solution 4.13.8.1">🔗</a></div>
 </div></details>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 4.13.8"><a tabindex="-1" href="#cond_rec_a8" title="Copy heading and permalink for Exercise 4.13.8" aria-label="Copy heading and permalink for Exercise 4.13.8">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="cond_rec_a9"><h2 class="heading"><span class="codenumber">9<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
-<div class="para" id="cond_rec_a9-1-1">Write the function <code class="code-inline tex2jax_ignore">countdown</code> that takes a positive integer and decrements it until eaching zero, printing the number at each step of the way. Once it reaches zero, it should print “Blastoff!”<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a9-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a9-1-1">
+<em class="emphasis">Optional recursion:</em> Write the function <code class="code-inline tex2jax_ignore">count_down</code>. It should print each positive integer down to 1 and then print “Blastoff!”.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a9-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a9q_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void countdown(int num) {
+void count_down(int number) {
+    // Write your code here.
+}
 
+int main() {
+    count_down(5);
+
+    return 0;
 }
 </code></pre>
 <div class="solutions">
-<details id="cond_rec_a9-2" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
-<div class="solution solution-like knowl__content">
-<div class="para" id="cond_rec_a9-2-1">Below is one way to write the program.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a9-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<details id="cond_rec_a9-2" class="hint solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Hint</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="hint solution-like knowl__content">
+<div class="para" id="cond_rec_a9-2-1">Use zero as the base case. Otherwise, print the current value and make a recursive call with a smaller argument.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a9-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a9a_editor" class="language-cpp">#include &lt;iostream&gt;
+<div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.9.1"><a tabindex="-1" href="#cond_rec_a9-2" title="Copy heading and permalink for Hint 4.13.9.1" aria-label="Copy heading and permalink for Hint 4.13.9.1">🔗</a></div>
+</div></details>
+<details id="cond_rec_a9-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a9_solution" class="language-cpp">#include &lt;iostream&gt;
 
-void countdown(int num) {
-    if (num != 0) {
-        std::cout &lt;&lt; num &lt;&lt; std::endl;
-        num -= 1;
-        countdown (num);
+void count_down(int number) {
+    if (number == 0) {
+        std::cout &lt;&lt; "Blastoff!\n";
     }
     else {
-        std::cout &lt;&lt; "Blastoff!";
+        std::cout &lt;&lt; number &lt;&lt; '\n';
+        count_down(number - 1);
     }
 }
-</code></pre></div>
-<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.9.1"><a tabindex="-1" href="#cond_rec_a9-2" title="Copy heading and permalink for Solution 4.13.9.1" aria-label="Copy heading and permalink for Solution 4.13.9.1">🔗</a></div>
+
+int main() {
+    count_down(5);
+
+    return 0;
+}
+</code></pre>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.9.1"><a tabindex="-1" href="#cond_rec_a9-3" title="Copy heading and permalink for Solution 4.13.9.1" aria-label="Copy heading and permalink for Solution 4.13.9.1">🔗</a></div>
 </div></details>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 4.13.9"><a tabindex="-1" href="#cond_rec_a9" title="Copy heading and permalink for Exercise 4.13.9" aria-label="Copy heading and permalink for Exercise 4.13.9">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="cond_rec_a10"><h2 class="heading"><span class="codenumber">10<span class="period heading-divison-mark heading-divison-mark__period">.</span></span></h2>
-<div class="para" id="cond_rec_a10-1-1">Write the function <code class="code-inline tex2jax_ignore">printNegativeNum</code> that asks the user for a negative number. If the user does not provide a negative number, it should contine asking until the user provides one. It should then print the negative number.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a10-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a10-1-1">
+<em class="emphasis">Optional recursion:</em> Fix the recursive call so that this function eventually reaches its base case instead of recursing indefinitely.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a10-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a10_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void printNegativeNum() {
+void print_exclamation_marks(int count) {
+    if (count &gt; 0) {
+        std::cout &lt;&lt; "!";
+        print_exclamation_marks(count + 1);
+    }
+}
 
+int main() {
+    print_exclamation_marks(4);
+
+    return 0;
 }
 </code></pre>
 <div class="solutions">
 <details id="cond_rec_a10-2" class="hint solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Hint</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
 <div class="hint solution-like knowl__content">
-<div class="para" id="cond_rec_a10-2-1">Write the function <code class="code-inline tex2jax_ignore">printNegativeNum</code> that asks the user for a negative number. If the user does not provide a negative number, it should contine asking until the user provides one. It should then print the negative number. Use the lines to construct the code, then go back to complete the Activecode.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a10-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="cond_rec_a10-2-1">Each recursive call should move the argument closer to the base case.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#cond_rec_a10-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="cond_rec_a10_pp"><h3 class="heading">
-<span class="type">Activity</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.13.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h3>void printNegativeNum() {
-     int negative;
-     std::cout &lt;&lt; "Please provide a negative number." &lt;&lt; std::endl ;
-     std::cin &gt;&gt; negative;
-     if (negative &gt;= 0) {
-        printNegativeNum();
-    } 
----
-    if (negative &gt;= 0) { 
-        std::cout &lt;&lt; "Please provide a negative nunber." &lt;&lt; std::endl ;
-    } #paired     std::cout &lt;&lt; negative &lt;&lt; std::endl ;
- }
-<div class="autopermalink" aria-hidden="true" data-description="Activity 4.13.5"><a tabindex="-1" href="#cond_rec_a10_pp" title="Copy heading and permalink for Activity 4.13.5" aria-label="Copy heading and permalink for Activity 4.13.5">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.10.1"><a tabindex="-1" href="#cond_rec_a10-2" title="Copy heading and permalink for Hint 4.13.10.1" aria-label="Copy heading and permalink for Hint 4.13.10.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Hint 4.13.10.1"><a tabindex="-1" href="#cond_rec_a10-2" title="Copy heading and permalink for Hint 4.13.10.1" aria-label="Copy heading and permalink for Hint 4.13.10.1">🔗</a></div>
+</div></details>
+<details id="cond_rec_a10-3" class="solution solution-like born-hidden-knowl"><summary class="knowl__link"><span class="type">Solution</span><span class="period heading-divison-mark heading-divison-mark__period">.</span></summary>
+<div class="solution solution-like knowl__content">
+<pre class="program clipboardable line-numbers"><code id="rs-cond_rec_a10_solution" class="language-cpp">#include &lt;iostream&gt;
+
+void print_exclamation_marks(int count) {
+    if (count &gt; 0) {
+        std::cout &lt;&lt; "!";
+        print_exclamation_marks(count - 1);
+    }
+}
+
+int main() {
+    print_exclamation_marks(4);
+
+    return 0;
+}
+</code></pre>
+<div class="autopermalink" aria-hidden="true" data-description="Solution 4.13.10.1"><a tabindex="-1" href="#cond_rec_a10-3" title="Copy heading and permalink for Solution 4.13.10.1" aria-label="Copy heading and permalink for Solution 4.13.10.1">🔗</a></div>
 </div></details>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Exercise 4.13.10"><a tabindex="-1" href="#cond_rec_a10" title="Copy heading and permalink for Exercise 4.13.10" aria-label="Copy heading and permalink for Exercise 4.13.10">🔗</a></div>

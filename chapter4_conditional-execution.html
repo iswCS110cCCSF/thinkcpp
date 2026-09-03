@@ -216,15 +216,15 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
 <ul class="structural toc-item-list contains-active" id="ptx-toc-group-conditionals">
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Modulus Operator</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Remainder Operator</span></a></div></li>
 <li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Alternative Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Chained Conditionals</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_nested-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Nested Conditionals</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">The Return Statement</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Infinite Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Stack Diagrams for Recursive Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Return in Conditional Branches</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Optional: Introduction to Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Optional: Infinite Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Optional: Stack Diagrams for Recursive Functions</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter4_glossary.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Glossary</span></a></div>
 <ul id="ptx-toc-group-chapter4_glossary" class="structural toc-item-list">
@@ -540,86 +540,87 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Conditional Execution</span>
 </h1>
-<div class="para" id="chapter4_conditional-execution-2">In order to write useful programs, we almost always need the ability to check certain conditions and change the behavior of the program accordingly. <dfn class="terminology">Conditional statements</dfn> give us this ability. The simplest form is the if statement:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_conditional-execution-2">Useful programs often need to make decisions. A <dfn class="terminology">conditional statement</dfn> allows a program to execute code only when a particular condition is true. The simplest form is an <code class="code-inline tex2jax_ignore">if</code> statement:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">if (x &gt; 0) {
-  std::cout &lt;&lt; "x is positive" &lt;&lt; std::endl ;
+    std::cout &lt;&lt; "x is positive\n";
 }
 </code></pre></div>
-<div class="para" id="chapter4_conditional-execution-4">The expression in parentheses is called the condition. If it is true, then the statements in brackets get executed. If the condition is not true, nothing happens.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_conditional-execution-4">The expression inside the parentheses is called the <dfn class="terminology">condition</dfn>. It is evaluated as either <code class="code-inline tex2jax_ignore">true</code> or <code class="code-inline tex2jax_ignore">false</code>. If the condition is true, the statements inside the braces are executed. If the condition is false, those statements are skipped and execution continues after the <code class="code-inline tex2jax_ignore">if</code> statement.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter4_conditional-execution-5">The condition can contain any of the <dfn class="terminology">comparison operators</dfn>:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_conditional-execution-5">Conditions often use <dfn class="terminology">comparison operators</dfn>. A comparison produces a Boolean value: either <code class="code-inline tex2jax_ignore">true</code> or <code class="code-inline tex2jax_ignore">false</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">x == y               // x equals y
-x != y               // x is not equal to y
-x &gt; y                // x is greater than y
-x &lt; y                // x is less than y
-x &gt;= y               // x is greater than or equal to y
-x &lt;= y               // x is less than or equal to y
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">x == y    // x is equal to y
+x != y    // x is not equal to y
+x &gt; y     // x is greater than y
+x &lt; y     // x is less than y
+x &gt;= y    // x is greater than or equal to y
+x &lt;= y    // x is less than or equal to y
 </code></pre></div>
-<div class="para" id="chapter4_conditional-execution-7">Although these operations are probably familiar to you, the syntax C++ uses is a little different from mathematical symbols like <span class="process-math">\(=\text{,}\)</span> <span class="process-math">\(\neq\text{,}\)</span> and <span class="process-math">\(\le\text{.}\)</span> A common error is to use a single <code class="code-inline tex2jax_ignore">=</code> instead of a double <code class="code-inline tex2jax_ignore">==</code>. Remember that <code class="code-inline tex2jax_ignore">=</code> is the assignment operator, and <code class="code-inline tex2jax_ignore">==</code> is a comparison operator. Also, there is no such thing as <code class="code-inline tex2jax_ignore">=&lt;</code> or <code class="code-inline tex2jax_ignore">=&gt;</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_conditional-execution-7">The C++ syntax for comparison differs from ordinary mathematical notation. In particular, <code class="code-inline tex2jax_ignore">=</code> is the assignment operator, while <code class="code-inline tex2jax_ignore">==</code> tests whether two values are equal. The operators for “less than or equal to” and “greater than or equal to” are <code class="code-inline tex2jax_ignore">&lt;=</code> and <code class="code-inline tex2jax_ignore">&gt;=</code>, not <code class="code-inline tex2jax_ignore">=&lt;</code> or <code class="code-inline tex2jax_ignore">=&gt;</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter4_conditional-execution-8">Observe the conditional statement below.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="warning remark-like" id="chapter4_conditional-execution-8"><h2 class="heading">
+<span class="type">Warning</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="para" id="chapter4_conditional-execution-8-1">Accidentally writing <code class="code-inline tex2jax_ignore">=</code> instead of <code class="code-inline tex2jax_ignore">==</code> in a condition may still produce valid C++ code. For example, <code class="code-inline tex2jax_ignore">if (x = 5)</code> assigns 5 to <code class="code-inline tex2jax_ignore">x</code>. The assignment expression has the value 5, which is nonzero and therefore interpreted as <code class="code-inline tex2jax_ignore">true</code>. In general, zero is interpreted as <code class="code-inline tex2jax_ignore">false</code>, while a nonzero value is interpreted as <code class="code-inline tex2jax_ignore">true</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-8-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="composition_AC_31"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program performs a calculation involving variables and assigns the result to a variable.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.2.1: This program performs a calculation involving variables and assigns the result to a variable."><a tabindex="-1" href="#composition_AC_31" title="Copy heading and permalink for Listing 4.2.1: This program performs a calculation involving variables and assigns the result to a variable." aria-label="Copy heading and permalink for Listing 4.2.1: This program performs a calculation involving variables and assigns the result to a variable.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-composition_AC_31_editor" class="language-cpp">#include &lt;iostream&gt;
-
-int main() {
-    int minute = 3;
-    int percentage;
-    percentage = (minute * 100) / 60;
-    std::cout &lt;&lt; percentage;
-}
-</code></pre></div>
-</figure>
-<figure class="listing figure-like" id="conditional_execution_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program shows how you can use conditional statements to assess true/false situations.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.2.2: This program shows how you can use conditional statements to assess true/false situations."><a tabindex="-1" href="#conditional_execution_AC_1" title="Copy heading and permalink for Listing 4.2.2: This program shows how you can use conditional statements to assess true/false situations." aria-label="Copy heading and permalink for Listing 4.2.2: This program shows how you can use conditional statements to assess true/false situations.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-conditional_execution_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+<div class="autopermalink" aria-hidden="true" data-description="Warning 4.2.1"><a tabindex="-1" href="#chapter4_conditional-execution-8" title="Copy heading and permalink for Warning 4.2.1" aria-label="Copy heading and permalink for Warning 4.2.1">🔗</a></div>
+</article>
+<figure class="listing figure-like" id="conditional_execution_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program uses several independent <code class="code-inline tex2jax_ignore">if</code> statements.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.2.1: This program uses several independent if statements."><a tabindex="-1" href="#conditional_execution_AC_1" title="Copy heading and permalink for Listing 4.2.1: This program uses several independent if statements." aria-label="Copy heading and permalink for Listing 4.2.1: This program uses several independent if statements.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-conditional_execution_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
 
 int main() {
     int x = 12;
+
     if (x == 12) {
-        std::cout &lt;&lt; "Equal!" &lt;&lt; std::endl;
+        std::cout &lt;&lt; "Equal!\n";
     }
+
     if (x != 13) {
-        std::cout &lt;&lt; "Not equal!" &lt;&lt; std::endl;
+        std::cout &lt;&lt; "Not equal!\n";
     }
+
     if (x &lt; 6) {
-        std::cout &lt;&lt; "Bigger!" &lt;&lt; std::endl;
+        std::cout &lt;&lt; "Less than 6!\n";
     }
+
     return 0;
 }
 </code></pre></div>
 </figure>
+<div class="para" id="chapter4_conditional-execution-10">Each <code class="code-inline tex2jax_ignore">if</code> statement above is checked independently. Since <code class="code-inline tex2jax_ignore">x</code> is 12, the first two conditions are true and their bodies execute. The condition <code class="code-inline tex2jax_ignore">x &lt; 6</code> is false, so that body is skipped.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_conditional-execution-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
 <article class="exercise exercise-like" id="conditional_execution_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.2.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="conditional_execution_1-1-1">Observe the code above. “Bigger” doesn’t print! How can you modify this so that all of the statements print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#conditional_execution_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="conditional_execution_1-1-1">Suppose <code class="code-inline tex2jax_ignore">x</code> is 12. Which condition is true?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#conditional_execution_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-conditional_execution_1" data-multipleanswers="false">
 <li data-component="answer" id="rs-conditional_execution_1_opt_a">
-<div class="para" id="conditional_execution_1-2-1-1-1">Change the value of x to be anything less than 6.</div>
+<div class="para" id="conditional_execution_1-2-1-1-1"><code class="code-inline tex2jax_ignore">x &lt; 6</code></div>
 </li>
 <li data-component="feedback" id="rs-conditional_execution_1_opt_a">
-<div class="para" id="conditional_execution_1-2-1-2-1">While "Bigger" would now print, the other two statements would not!</div>
+<div class="para" id="conditional_execution_1-2-1-2-1">Compare 12 with 6 using the meaning of the less-than operator.</div>
 </li>
 <li data-component="answer" id="rs-conditional_execution_1_opt_b">
-<div class="para" id="conditional_execution_1-2-2-1-1">Change the value of x to 13.</div>
+<div class="para" id="conditional_execution_1-2-2-1-1"><code class="code-inline tex2jax_ignore">x == 13</code></div>
 </li>
 <li data-component="feedback" id="rs-conditional_execution_1_opt_b">
-<div class="para" id="conditional_execution_1-2-2-2-1">Now, none of the statements would print!</div>
+<div class="para" id="conditional_execution_1-2-2-2-1">The equality operator tests whether the two values are the same.</div>
 </li>
 <li data-component="answer" id="rs-conditional_execution_1_opt_c" data-correct="">
-<div class="para" id="conditional_execution_1-2-3-1-1">Change the sign of the last conditional statement to x &gt; 6.</div>
+<div class="para" id="conditional_execution_1-2-3-1-1"><code class="code-inline tex2jax_ignore">x != 13</code></div>
 </li>
 <li data-component="feedback" id="rs-conditional_execution_1_opt_c">
-<div class="para" id="conditional_execution_1-2-3-2-1">Now, all of the statements would print.</div>
+<div class="para" id="conditional_execution_1-2-3-2-1">This comparison is true because the two values are different.</div>
 </li>
 <li data-component="answer" id="rs-conditional_execution_1_opt_d">
-<div class="para" id="conditional_execution_1-2-4-1-1">Change the value of the return from 0 to "Bigger!"</div>
+<div class="para" id="conditional_execution_1-2-4-1-1"><code class="code-inline tex2jax_ignore">x &gt; 20</code></div>
 </li>
 <li data-component="feedback" id="rs-conditional_execution_1_opt_d">
-<div class="para" id="conditional_execution_1-2-4-2-1">main returns an int, so trying to make it return a string will cause an error.</div>
+<div class="para" id="conditional_execution_1-2-4-2-1">Compare the value of <code class="code-inline tex2jax_ignore">x</code> with 20 before deciding whether this condition is true.</div>
 </li>
 </ul>
 </div></div>
@@ -630,9 +631,9 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-conditional_execution_2">
 <span data-subcomponent="question">
-<div class="para" id="conditional_execution_2-1-1">Match the operator to values of x and y that would return true.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#conditional_execution_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="conditional_execution_2-1-1">Match each comparison operator with values that make it true.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#conditional_execution_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></span><span data-subcomponent="feedback">
-<div class="para" id="conditional_execution_2-2-1">Try again!</div></span><li data-subcomponent="draggable" id="rs-conditional_execution_2_drag1" data-category="1">x &gt; y</li>
+<div class="para" id="conditional_execution_2-2-1">Read each comparison from left to right and compare the two values.</div></span><li data-subcomponent="draggable" id="rs-conditional_execution_2_drag1" data-category="1">x &gt; y</li>
 <li data-subcomponent="dropzone" for="rs-conditional_execution_2_drag1" data-category="1">x = 10, y = 2</li>
 <li data-subcomponent="draggable" id="rs-conditional_execution_2_drag2" data-category="2">x &lt;= y</li>
 <li data-subcomponent="dropzone" for="rs-conditional_execution_2_drag2" data-category="2">x = 5, y = 5</li>
@@ -646,9 +647,9 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-conditional_execution_3">
 <span data-subcomponent="question">
-<div class="para" id="conditional_execution_3-1-1">Match the operator to values of x and y that would return true.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#conditional_execution_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="conditional_execution_3-1-1">Match each comparison operator with values that make it true.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#conditional_execution_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div></span><span data-subcomponent="feedback">
-<div class="para" id="conditional_execution_3-2-1">Try again!</div></span><li data-subcomponent="draggable" id="rs-conditional_execution_3_drag1" data-category="1">x == y</li>
+<div class="para" id="conditional_execution_3-2-1">Pay attention to whether equality is allowed by the operator.</div></span><li data-subcomponent="draggable" id="rs-conditional_execution_3_drag1" data-category="1">x == y</li>
 <li data-subcomponent="dropzone" for="rs-conditional_execution_3_drag1" data-category="1">x = 3, y = 3</li>
 <li data-subcomponent="draggable" id="rs-conditional_execution_3_drag2" data-category="2">x &gt;= y</li>
 <li data-subcomponent="dropzone" for="rs-conditional_execution_3_drag2" data-category="2">x = 6, y = 2</li>

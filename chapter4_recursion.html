@@ -14,7 +14,7 @@
 <!--******************************************-->
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TCPP2 Recursion</title>
+<title>TCPP2 Optional: Introduction to Recursion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -216,15 +216,15 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
 <ul class="structural toc-item-list contains-active" id="ptx-toc-group-conditionals">
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Modulus Operator</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Remainder Operator</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Alternative Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Chained Conditionals</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_nested-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Nested Conditionals</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">The Return Statement</span></a></div></li>
-<li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Infinite Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Stack Diagrams for Recursive Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Return in Conditional Branches</span></a></div></li>
+<li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Optional: Introduction to Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Optional: Infinite Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Optional: Stack Diagrams for Recursive Functions</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter4_glossary.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Glossary</span></a></div>
 <ul id="ptx-toc-group-chapter4_glossary" class="structural toc-item-list">
@@ -538,145 +538,112 @@ eBookConfig.enable_chatcodes =  false;
 <main class="ptx-main"><div id="ptx-content" class="ptx-content">
 <section class="section" id="chapter4_recursion">
 <h1 class="heading hide-type">
-<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.7</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Recursion</span>
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.7</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Optional: Introduction to Recursion</span>
 </h1>
-<div class="para" id="chapter4_recursion-2">What mentioned in the last chapter is that it is legal for one function to call another, and we have seen several examples of that. I neglected to mention that it is also legal for a function to call itself. It may not be obvious why that is a good thing, but it turns out to be one of the most magical and interesting things a program can do.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<article class="note remark-like" id="chapter4_recursion-3"><h2 class="heading">
+<article class="note remark-like" id="chapter4_recursion-2"><h2 class="heading">
 <span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.7.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
-<div class="para" id="chapter4_recursion-3-1">The process of a function calling itself is called <dfn class="terminology">recursion</dfn>, and such functions are said to be <dfn class="terminology">recursive</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_recursion-2-1">The next two sections introduce recursion, an important programming technique in which a function calls itself. Recursion is not needed for the material that follows immediately, so these sections may be treated as optional enrichment unless they are assigned.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Note 4.7.1"><a tabindex="-1" href="#chapter4_recursion-3" title="Copy heading and permalink for Note 4.7.1" aria-label="Copy heading and permalink for Note 4.7.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Note 4.7.1"><a tabindex="-1" href="#chapter4_recursion-2" title="Copy heading and permalink for Note 4.7.1" aria-label="Copy heading and permalink for Note 4.7.1">🔗</a></div>
 </article>
-<div class="para" id="chapter4_recursion-4">For example, look at the following function:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_recursion-3">You have already seen that one function can call another function. A function can also call itself. This process is called <dfn class="terminology">recursion</dfn>, and a function that calls itself is called <dfn class="terminology">recursive</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void countdown(int n) {
-  if (n == 0) {
-    std::cout &lt;&lt; "Blastoff!" &lt;&lt; std::endl ;
-  }
-  else {
-    std::cout &lt;&lt; n &lt;&lt; std::endl ;
-    countdown(n - 1);
-  }
+<div class="para" id="chapter4_recursion-4">A recursive function usually needs a condition that eventually stops the recursive calls. This stopping condition is called the <dfn class="terminology">base case</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="recursion_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.7.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This recursive function counts down from a positive integer.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.7.1: This recursive function counts down from a positive integer."><a tabindex="-1" href="#recursion_AC_1" title="Copy heading and permalink for Listing 4.7.1: This recursive function counts down from a positive integer." aria-label="Copy heading and permalink for Listing 4.7.1: This recursive function counts down from a positive integer.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-recursion_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+
+// Function declaration
+void count_down(int number);
+
+int main() {
+    count_down(3);
+
+    return 0;
+}
+
+// Function definition
+void count_down(int number) {
+    if (number == 0) {
+        std::cout &lt;&lt; "Blastoff!\n";
+    }
+    else {
+        std::cout &lt;&lt; number &lt;&lt; '\n';
+        count_down(number - 1);
+    }
 }
 </code></pre></div>
-<div class="para" id="chapter4_recursion-6">The name of the function is <code class="code-inline tex2jax_ignore">countdown</code> and it takes a single integer as a parameter. If the parameter is zero, it outputs the word “Blastoff.” Otherwise, it outputs the parameter and then calls a function named <code class="code-inline tex2jax_ignore">countdown</code> —itself— passing <code class="code-inline tex2jax_ignore">n - 1</code> as an argument.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</figure>
+<div class="para" id="chapter4_recursion-6">The function <code class="code-inline tex2jax_ignore">count_down</code> has two cases. When <code class="code-inline tex2jax_ignore">number == 0</code>, the base case is reached and the function does not call itself again. Otherwise, the function prints the current value and calls itself with a smaller argument.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<article class="activity project-like" id="recursion_AC_1"><h2 class="heading">
-<span class="type">Activity</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.7.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
-</h2>
-<div class="para" id="recursion_AC_1-1-1">Watch how the countdown function works when we start with a value of 3.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#recursion_AC_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="ptx-runestone-container"><div class="runestone codelens">
-<div class="cd_section" data-component="codelens" data-question_label=""><div class="pytutorVisualizer exercise-interactive" id="rs-recursion_AC_1_editor" data-params='{"embeddedMode": true, "lang": "cpp", "jumpToEnd": false}'></div></div>
-<script src="generated/trace/recursion_AC_1_editor.js"> </script>
-</div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Activity 4.7.2"><a tabindex="-1" href="#recursion_AC_1" title="Copy heading and permalink for Activity 4.7.2" aria-label="Copy heading and permalink for Activity 4.7.2">🔗</a></div>
-</article>
-<div class="para" id="chapter4_recursion-8">What happens if we call <code class="code-inline tex2jax_ignore">countdown</code> function like this:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_recursion-7">Calling <code class="code-inline tex2jax_ignore">count_down(3)</code> produces the following sequence of function calls:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<blockquote class="blockquote" id="chapter4_recursion-9">
-<div class="para" id="chapter4_recursion-9-1">The execution of <code class="code-inline tex2jax_ignore">countdown</code> begins with <code class="code-inline tex2jax_ignore">n = 3</code>, and since n is not zero, it outputs the value 3, and then calls itself…<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-9-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">count_down(3)
+    count_down(2)
+        count_down(1)
+            count_down(0)
+</code></pre></div>
+<div class="para" id="chapter4_recursion-9">The call with <code class="code-inline tex2jax_ignore">number == 0</code> reaches the base case and returns. Then each earlier call returns in reverse order until control returns to <code class="code-inline tex2jax_ignore">main</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<blockquote class="blockquote" id="chapter4_recursion-9-2">
-<div class="para" id="chapter4_recursion-9-2-1">The execution of <code class="code-inline tex2jax_ignore">countdown</code> begins with <code class="code-inline tex2jax_ignore">n = 2</code>, and since n is not zero, it outputs the value 2, and then calls itself…<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-9-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<blockquote class="blockquote" id="chapter4_recursion-9-2-2">
-<div class="para" id="chapter4_recursion-9-2-2-1">The execution of <code class="code-inline tex2jax_ignore">countdown</code> begins with <code class="code-inline tex2jax_ignore">n = 1</code>, and since n is not zero, it outputs the value 1, and then calls itself…<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-9-2-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<blockquote class="blockquote" id="chapter4_recursion-9-2-2-2">
-<div class="para" id="chapter4_recursion-9-2-2-2-1">The execution of <code class="code-inline tex2jax_ignore">countdown</code> begins with <code class="code-inline tex2jax_ignore">n = 0</code>, and since n is zero, it outputs the word “Blastoff!” and then returns.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-9-2-2-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" aria-hidden="true" data-description="Quotation"><a tabindex="-1" href="#chapter4_recursion-9-2-2-2" title="Copy heading and permalink for Quotation" aria-label="Copy heading and permalink for Quotation">🔗</a></div>
-</blockquote>
-<div class="para" id="chapter4_recursion-9-2-2-3">The <code class="code-inline tex2jax_ignore">countdown</code> that get <code class="code-inline tex2jax_ignore">n = 1</code> returns.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-9-2-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" aria-hidden="true" data-description="Quotation"><a tabindex="-1" href="#chapter4_recursion-9-2-2" title="Copy heading and permalink for Quotation" aria-label="Copy heading and permalink for Quotation">🔗</a></div>
-</blockquote>
-<div class="para" id="chapter4_recursion-9-2-3">The <code class="code-inline tex2jax_ignore">countdown</code> that get <code class="code-inline tex2jax_ignore">n = 2</code> returns.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-9-2-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" aria-hidden="true" data-description="Quotation"><a tabindex="-1" href="#chapter4_recursion-9-2" title="Copy heading and permalink for Quotation" aria-label="Copy heading and permalink for Quotation">🔗</a></div>
-</blockquote>
-<div class="para" id="chapter4_recursion-9-3">The <code class="code-inline tex2jax_ignore">countdown</code> that get <code class="code-inline tex2jax_ignore">n = 3</code> returns.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-9-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="autopermalink" aria-hidden="true" data-description="Quotation"><a tabindex="-1" href="#chapter4_recursion-9" title="Copy heading and permalink for Quotation" aria-label="Copy heading and permalink for Quotation">🔗</a></div>
-</blockquote>
-<div class="para" id="chapter4_recursion-10">And then you’re back in <code class="code-inline tex2jax_ignore">main</code> (what a trip). So the total output looks like:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_recursion-10">The output is:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">3
 2
 1
 Blastoff!
 </code></pre></div>
-<div class="para" id="chapter4_recursion-12">As a second example, let’s look again at the functions <code class="code-inline tex2jax_ignore">newLine</code> and <code class="code-inline tex2jax_ignore">threeLine</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-12" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<article class="activity project-like" id="recursion_AC_1_trace"><h2 class="heading">
+<span class="type">Activity</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.7.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="para" id="recursion_AC_1_trace-1-1">Trace <code class="code-inline tex2jax_ignore">count_down(3)</code>. Notice that each recursive call has its own parameter value and must finish before the previous call can finish.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#recursion_AC_1_trace-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void newLine() {
-  std::cout &lt;&lt; std::endl ;
-}
+<div class="autopermalink" aria-hidden="true" data-description="Activity 4.7.2"><a tabindex="-1" href="#recursion_AC_1_trace" title="Copy heading and permalink for Activity 4.7.2" aria-label="Copy heading and permalink for Activity 4.7.2">🔗</a></div>
+</article>
+<div class="para" id="chapter4_recursion-13">Recursion can also be used when the same task must be repeated with a smaller input. For example, the following function prints a requested number of blank lines:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="recursion_AC_2"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.7.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This recursive function prints a specified number of blank lines.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.7.2: This recursive function prints a specified number of blank lines."><a tabindex="-1" href="#recursion_AC_2" title="Copy heading and permalink for Listing 4.7.2: This recursive function prints a specified number of blank lines." aria-label="Copy heading and permalink for Listing 4.7.2: This recursive function prints a specified number of blank lines.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-recursion_AC_2_editor" class="language-cpp">#include &lt;iostream&gt;
 
-void threeLine() {
-  newLine();
-  newLine();
-  newLine();
-}
-</code></pre></div>
-<div class="para" id="chapter4_recursion-14">Although these work, they would not be much help if I wanted to output 2 newlines, or 4 newlines. A better alternative would be<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">void nLines(int n) {
-  if (n &gt; 0) {
-    std::cout &lt;&lt; std::endl ;
-    nLines (n - 1);
-  }
-}
-</code></pre></div>
-<div class="para" id="chapter4_recursion-16">This program is similar to countdown; as long as n is greater than zero, it outputs one newline, and then calls itself to output <code class="code-inline tex2jax_ignore">n-1</code> additional newlines. Thus, the total number of newlines is <code class="code-inline tex2jax_ignore">1 + (n - 1)</code>, which usually comes out to roughly n.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-16" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<figure class="listing figure-like" id="recursion_AC_2"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.7.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>You can have a little bit of fun with recursion. Try this guessing game below!<div class="autopermalink" aria-hidden="true" data-description="Listing 4.7.1: You can have a little bit of fun with recursion. Try this guessing game below!"><a tabindex="-1" href="#recursion_AC_2" title="Copy heading and permalink for Listing 4.7.1: You can have a little bit of fun with recursion. Try this guessing game below!" aria-label="Copy heading and permalink for Listing 4.7.1: You can have a little bit of fun with recursion. Try this guessing game below!">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-recursion_AC_2_editor" class="language-cpp">#include &lt;iostream&gt;
-#include &lt;cstdlib&gt;
-#include &lt;ctime&gt;
-
-void guessTheNumber(int num) {
-    std::cout &lt;&lt; "Enter your guess!";
-    int guess;
-    std::cin &gt;&gt; guess;
-    std::cout &lt;&lt; "Your guess " &lt;&lt; guess &lt;&lt; ". ";
-    if (guess == num) {
-        std::cout &lt;&lt; "That's it!";
-    }
-    else if (guess &gt; num) {
-        std::cout &lt;&lt; "Too high! " &lt;&lt; std::endl;
-        guessTheNumber(num);
-    }
-    else {
-        std::cout &lt;&lt; "Too low! " &lt;&lt; std::endl;
-        guessTheNumber(num);
-    }
-}
+// Function declaration
+void print_lines(int number_of_lines);
 
 int main() {
-    srand((unsigned) time(0));
-    int randomNumber = (rand() % 10) + 1;
-    guessTheNumber(randomNumber);
+    print_lines(3);
+
+    return 0;
+}
+
+// Function definition
+void print_lines(int number_of_lines) {
+    if (number_of_lines &gt; 0) {
+        std::cout &lt;&lt; '\n';
+        print_lines(number_of_lines - 1);
+    }
 }
 </code></pre></div>
 </figure>
+<div class="para" id="chapter4_recursion-15">When <code class="code-inline tex2jax_ignore">number_of_lines</code> is greater than zero, the function prints one newline and calls itself with a value that is one smaller. Eventually the argument becomes zero, the condition is false, and the recursion stops. For a positive argument <code class="code-inline tex2jax_ignore">n</code>, the function prints exactly <code class="code-inline tex2jax_ignore">n</code> newlines.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_recursion-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
 <article class="exercise exercise-like" id="recursion_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.7.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="recursion_1-1-1">What will print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#recursion_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="recursion_1-1-1">What will this program print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#recursion_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
-void exclamationPoint(int n) {
-  if (n &gt; 0) {
-    std::cout &lt;&lt; "!";
-    exclamationPoint (n-1);
-  }
-}
+void print_exclamation_marks(int count);
 
 int main() {
-  exclamationPoint(3);
+    print_exclamation_marks(3);
+
+    return 0;
+}
+
+void print_exclamation_marks(int count) {
+    if (count &gt; 0) {
+        std::cout &lt;&lt; "!";
+        print_exclamation_marks(count - 1);
+    }
 }
 </code></pre></div>
 </div>
@@ -685,25 +652,25 @@ int main() {
 <div class="para" id="recursion_1-2-1-1-1">!</div>
 </li>
 <li data-component="feedback" id="rs-recursion_1_opt_a">
-<div class="para" id="recursion_1-2-1-2-1">The function keeps executing while n is greater than 0.</div>
+<div class="para" id="recursion_1-2-1-2-1">Trace how the argument changes after each recursive call.</div>
 </li>
 <li data-component="answer" id="rs-recursion_1_opt_b">
 <div class="para" id="recursion_1-2-2-1-1">!!</div>
 </li>
 <li data-component="feedback" id="rs-recursion_1_opt_b">
-<div class="para" id="recursion_1-2-2-2-1">The function keeps executing while n is greater than 0.</div>
+<div class="para" id="recursion_1-2-2-2-1">Continue tracing until the condition <code class="code-inline tex2jax_ignore">count &gt; 0</code> becomes false.</div>
 </li>
 <li data-component="answer" id="rs-recursion_1_opt_c" data-correct="">
 <div class="para" id="recursion_1-2-3-1-1">!!!</div>
 </li>
 <li data-component="feedback" id="rs-recursion_1_opt_c">
-<div class="para" id="recursion_1-2-3-2-1">Correct! First, the program enters the if statement within exclamationPoint because n is greater than 0. Then the function prints a "!" and calls itself again, but with n-1, which is 2. This repeats until n is 0, which is when the program exits the function.</div>
+<div class="para" id="recursion_1-2-3-2-1">One exclamation mark is printed for each positive value of <code class="code-inline tex2jax_ignore">count</code>.</div>
 </li>
 <li data-component="answer" id="rs-recursion_1_opt_d">
 <div class="para" id="recursion_1-2-4-1-1">!!!!</div>
 </li>
 <li data-component="feedback" id="rs-recursion_1_opt_d">
-<div class="para" id="recursion_1-2-4-2-1">The function keeps executing while n is greater than 0. Therefore, when n is 0, it will not print a "!"</div>
+<div class="para" id="recursion_1-2-4-2-1">Check whether anything is printed when <code class="code-inline tex2jax_ignore">count</code> reaches zero.</div>
 </li>
 </ul>
 </div></div>
@@ -714,18 +681,22 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="recursion_2-1-1">What will print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#recursion_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="recursion_2-1-1">What will this program print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#recursion_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
-void exclamationPoint(int n) {
-  if (n &gt; 0) {
-    std::cout &lt;&lt; "!";
-    exclamationPoint (n-1);
-  }
-}
+void print_exclamation_marks(int count);
 
 int main() {
-  exclamationPoint(0);
+    print_exclamation_marks(0);
+
+    return 0;
+}
+
+void print_exclamation_marks(int count) {
+    if (count &gt; 0) {
+        std::cout &lt;&lt; "!";
+        print_exclamation_marks(count - 1);
+    }
 }
 </code></pre></div>
 </div>
@@ -734,25 +705,25 @@ int main() {
 <div class="para" id="recursion_2-2-1-1-1">!!</div>
 </li>
 <li data-component="feedback" id="rs-recursion_2_opt_a">
-<div class="para" id="recursion_2-2-1-2-1">If we start at zero, will the function ever call itself?</div>
+<div class="para" id="recursion_2-2-1-2-1">Evaluate the condition using the initial argument before looking for a recursive call.</div>
 </li>
 <li data-component="answer" id="rs-recursion_2_opt_b">
 <div class="para" id="recursion_2-2-2-1-1">!</div>
 </li>
 <li data-component="feedback" id="rs-recursion_2_opt_b">
-<div class="para" id="recursion_2-2-2-2-1">If we start at zero, will the function ever call itself?</div>
+<div class="para" id="recursion_2-2-2-2-1">Check whether the body of the <code class="code-inline tex2jax_ignore">if</code> executes when <code class="code-inline tex2jax_ignore">count</code> begins at zero.</div>
 </li>
 <li data-component="answer" id="rs-recursion_2_opt_c">
 <div class="para" id="recursion_2-2-3-1-1">0</div>
 </li>
 <li data-component="feedback" id="rs-recursion_2_opt_c">
-<div class="para" id="recursion_2-2-3-2-1">The only output statement in this program prints a "!", therefore "0" would never print.</div>
+<div class="para" id="recursion_2-2-3-2-1">Look at the program’s output statement and identify what it is capable of printing.</div>
 </li>
 <li data-component="answer" id="rs-recursion_2_opt_d" data-correct="">
 <div class="para" id="recursion_2-2-4-1-1">Nothing prints.</div>
 </li>
 <li data-component="feedback" id="rs-recursion_2_opt_d">
-<div class="para" id="recursion_2-2-4-2-1">Correct! The program never enters the "if" statement within the function because n is never greater than 0.</div>
+<div class="para" id="recursion_2-2-4-2-1">The base case is reached immediately, so the recursive body does not execute.</div>
 </li>
 </ul>
 </div></div>
@@ -763,14 +734,14 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-recursion_3"><script type="application/json">{
-"problemHtml": "\n<div class=\"para\" id=\"recursion_3-1-1\">A function that calls itself is said to be <input type=\"text\" id=\"recursion_3-blank1\"\/>.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#recursion_3-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"problemHtml": "\n<div class=\"para\" id=\"recursion_3-1-1\">The best technical term for a function that calls itself is <input type=\"text\" id=\"recursion_3-blank1\"\/>.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#recursion_3-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
 "solutionHtml": "",
 "blankNames": {"blank1": 0},
-"feedbackArray": [[{"regex": "^\\s*recursive\\s*$", "regexFlags": "i", "feedback": "And the process by which a function calls itself is called recursion."}, {"regex": "^\\s*recusion\\s*$", "regexFlags": "", "feedback": "That is the process by which a function calls itself. What is used to describe the function itself?"}, {"feedback": "Incorrect."}]]
+"feedbackArray": [[{"regex": "^\\s*recursive\\s*$", "regexFlags": "i", "feedback": "\n<div class=\"para\" id=\"recursion_3-2-1-1-2-1\">The process is called recursion, while the function itself is described as recursive.<\/div>"}, {"regex": "^\\s*recursion\\s*$", "regexFlags": "", "feedback": "\n<div class=\"para\" id=\"recursion_3-2-1-2-2-1\">That term names the process. The question asks for the adjective that describes the function.<\/div>"}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.7.3"><a tabindex="-1" href="#recursion_3" title="Copy heading and permalink for Checkpoint 4.7.3" aria-label="Copy heading and permalink for Checkpoint 4.7.3">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Section 4.7: Recursion"><a tabindex="-1" href="#chapter4_recursion" title="Copy heading and permalink for Section 4.7: Recursion" aria-label="Copy heading and permalink for Section 4.7: Recursion">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Section 4.7: Optional: Introduction to Recursion"><a tabindex="-1" href="#chapter4_recursion" title="Copy heading and permalink for Section 4.7: Optional: Introduction to Recursion" aria-label="Copy heading and permalink for Section 4.7: Optional: Introduction to Recursion">🔗</a></div>
 </section>
 </div>
 <div id="ptx-content-footer" class="ptx-content-footer">

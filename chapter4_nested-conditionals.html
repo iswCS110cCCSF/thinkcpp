@@ -216,15 +216,15 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
 <ul class="structural toc-item-list contains-active" id="ptx-toc-group-conditionals">
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Modulus Operator</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Remainder Operator</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Alternative Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Chained Conditionals</span></a></div></li>
 <li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter4_nested-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Nested Conditionals</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">The Return Statement</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Infinite Recursion</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Stack Diagrams for Recursive Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Return in Conditional Branches</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Optional: Introduction to Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Optional: Infinite Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Optional: Stack Diagrams for Recursive Functions</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter4_glossary.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Glossary</span></a></div>
 <ul id="ptx-toc-group-chapter4_glossary" class="structural toc-item-list">
@@ -540,63 +540,76 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Nested Conditionals</span>
 </h1>
-<div class="para" id="chapter4_nested-conditionals-2">In addition to chaining, you can also nest one conditional within another. We could have written the previous example as:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_nested-conditionals-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_nested-conditionals-2">A conditional can appear inside another conditional. This is called a <dfn class="terminology">nested conditional</dfn>. For example, the previous positive/negative/zero classification can also be written using nesting.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_nested-conditionals-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="nested_conditionals_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.5.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program classifies a number (x) as positive, negative, or zero, just like the program on the previous page. However, this time, we are using nested conditionals.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.5.1: This program classifies a number (x) as positive, negative, or zero, just like the program on the previous page. However, this time, we are using nested conditionals."><a tabindex="-1" href="#nested_conditionals_AC_1" title="Copy heading and permalink for Listing 4.5.1: This program classifies a number (x) as positive, negative, or zero, just like the program on the previous page. However, this time, we are using nested conditionals." aria-label="Copy heading and permalink for Listing 4.5.1: This program classifies a number (x) as positive, negative, or zero, just like the program on the previous page. However, this time, we are using nested conditionals.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-nested_conditionals_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+<figure class="listing figure-like" id="nested_conditionals_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.5.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program classifies an integer as positive, negative, or zero using nested conditionals.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.5.1: This program classifies an integer as positive, negative, or zero using nested conditionals."><a tabindex="-1" href="#nested_conditionals_AC_1" title="Copy heading and permalink for Listing 4.5.1: This program classifies an integer as positive, negative, or zero using nested conditionals." aria-label="Copy heading and permalink for Listing 4.5.1: This program classifies an integer as positive, negative, or zero using nested conditionals.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-nested_conditionals_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+
+// Function declaration
+void report_number_sign(int number);
 
 int main() {
-    int x = 9;
-    if (x == 0) {
-        std::cout &lt;&lt; "x is zero" &lt;&lt; std::endl;
+    int value = 9;
+    report_number_sign(value);
+
+    return 0;
+}
+
+// Function definition
+void report_number_sign(int number) {
+    if (number == 0) {
+        std::cout &lt;&lt; "The number is zero.\n";
     }
     else {
-        if (x &gt; 0) {
-            std::cout &lt;&lt; "x is positive" &lt;&lt; std::endl;
+        if (number &gt; 0) {
+            std::cout &lt;&lt; "The number is positive.\n";
         }
         else {
-            std::cout &lt;&lt; "x is negative" &lt;&lt; std::endl;
+            std::cout &lt;&lt; "The number is negative.\n";
         }
     }
-    return 0;
-
 }
 </code></pre></div>
 </figure>
-<div class="para" id="chapter4_nested-conditionals-4">There is now an outer conditional that contains two branches. The first branch contains a simple output statement, but the second branch contains another if statement, which has two branches of its own. Fortunately, those two branches are both output statements, although they could have been conditional statements as well.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_nested-conditionals-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_nested-conditionals-4">The outer conditional has two branches. If <code class="code-inline tex2jax_ignore">number == 0</code> is true, the first branch executes. Otherwise, execution enters the <code class="code-inline tex2jax_ignore">else</code> branch, which contains another <code class="code-inline tex2jax_ignore">if</code>/<code class="code-inline tex2jax_ignore">else</code> statement.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_nested-conditionals-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="note remark-like" id="chapter4_nested-conditionals-5"><h2 class="heading">
 <span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.5.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
-<div class="para" id="chapter4_nested-conditionals-5-1">There is not a limit to the number of times you can nest a conditional. However, you should try to limit this number, as it will reduce the complexity of your program structure.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_nested-conditionals-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_nested-conditionals-5-1">Nested conditionals can be useful when a second decision only makes sense after an earlier condition has been resolved. However, deeply nested code can become difficult to read, so avoid unnecessary levels of nesting.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_nested-conditionals-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Note 4.5.1"><a tabindex="-1" href="#chapter4_nested-conditionals-5" title="Copy heading and permalink for Note 4.5.1" aria-label="Copy heading and permalink for Note 4.5.1">🔗</a></div>
 </article>
-<div class="para" id="chapter4_nested-conditionals-6">Notice again that indentation helps make the structure apparent, but nevertheless, nested conditionals get difficult to read very quickly. In general, it is a good idea to avoid them when you can.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_nested-conditionals-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="chapter4_nested-conditionals-7">On the other hand, this kind of <dfn class="terminology">nested structure</dfn> is common, and we will see it again, so you better get used to it.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_nested-conditionals-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter4_nested-conditionals-6">Indentation and braces help make nested structure visible. In some cases, the same logic can be written more clearly as an <code class="code-inline tex2jax_ignore">if</code>/<code class="code-inline tex2jax_ignore">else if</code>/<code class="code-inline tex2jax_ignore">else</code> chain. Choose the structure that makes the decision process easiest to understand.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_nested-conditionals-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="exercise exercise-like" id="nested_conditionals_1"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.5.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="nested_conditionals_1-1-1">What will print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#nested_conditionals_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="nested_conditionals_1-1-1">What will this program print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#nested_conditionals_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
+void report_message(int x);
+
 int main() {
-  int x = 0;
-  if (x == 0) {
-    std::cout &lt;&lt; "Hey!" &lt;&lt; std::endl;
-  }
-  else {
-    if (x &gt; 0) {
-      std::cout &lt;&lt; "Hi!" &lt;&lt; std::endl;
+    int value = 0;
+    report_message(value);
+
+    return 0;
+}
+
+void report_message(int x) {
+    if (x == 0) {
+        std::cout &lt;&lt; "Hey!\n";
     }
     else {
-      std::cout &lt;&lt; "Hello!" &lt;&lt; std::endl;
+        if (x &gt; 0) {
+            std::cout &lt;&lt; "Hi!\n";
+        }
+        else {
+            std::cout &lt;&lt; "Hello!\n";
+        }
     }
-  }
-  return 0;
 }
 </code></pre></div>
 </div>
@@ -605,25 +618,25 @@ int main() {
 <div class="para" id="nested_conditionals_1-2-1-1-1">Hey!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_1_opt_a">
-<div class="para" id="nested_conditionals_1-2-1-2-1">Correct!</div>
+<div class="para" id="nested_conditionals_1-2-1-2-1">Start with the outer condition and determine whether the nested conditional is reached.</div>
 </li>
 <li data-component="answer" id="rs-nested_conditionals_1_opt_b">
 <div class="para" id="nested_conditionals_1-2-2-1-1">Hi!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_1_opt_b">
-<div class="para" id="nested_conditionals_1-2-2-2-1">Remember that the program would only enter the "else" if x was not equal to 0.</div>
+<div class="para" id="nested_conditionals_1-2-2-2-1">The nested <code class="code-inline tex2jax_ignore">if</code> is reached only when the outer condition is false.</div>
 </li>
 <li data-component="answer" id="rs-nested_conditionals_1_opt_c">
 <div class="para" id="nested_conditionals_1-2-3-1-1">Hello!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_1_opt_c">
-<div class="para" id="nested_conditionals_1-2-3-2-1">Remember that the program would only enter the "else" if x was not equal to 0.</div>
+<div class="para" id="nested_conditionals_1-2-3-2-1">Check whether execution enters the outer <code class="code-inline tex2jax_ignore">else</code> branch.</div>
 </li>
 <li data-component="answer" id="rs-nested_conditionals_1_opt_d">
 <div class="para" id="nested_conditionals_1-2-4-1-1">Nothing will print.</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_1_opt_d">
-<div class="para" id="nested_conditionals_1-2-4-2-1">Only one of the condtionals will execute, but something will print, regardless of which one it is.</div>
+<div class="para" id="nested_conditionals_1-2-4-2-1">Trace the outer condition first. One reachable branch contains an output statement.</div>
 </li>
 </ul>
 </div></div>
@@ -634,23 +647,30 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="nested_conditionals_2-1-1">What will print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#nested_conditionals_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="nested_conditionals_2-1-1">What will this program print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#nested_conditionals_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
 
+void report_message(int x);
+
 int main() {
-  int x = -4;
-  if (x == 0) {
-    std::cout &lt;&lt; "Hey!" &lt;&lt; std::endl;
-  }
-  else {
-    if (x &gt; 0) {
-      std::cout &lt;&lt; "Hi!" &lt;&lt; std::endl;
+    int value = -4;
+    report_message(value);
+
+    return 0;
+}
+
+void report_message(int x) {
+    if (x == 0) {
+        std::cout &lt;&lt; "Hey!\n";
     }
     else {
-      std::cout &lt;&lt; "Hello!" &lt;&lt; std::endl;
+        if (x &gt; 0) {
+            std::cout &lt;&lt; "Hi!\n";
+        }
+        else {
+            std::cout &lt;&lt; "Hello!\n";
+        }
     }
-  }
-  return 0;
 }
 </code></pre></div>
 </div>
@@ -659,25 +679,25 @@ int main() {
 <div class="para" id="nested_conditionals_2-2-1-1-1">Hey!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_2_opt_a">
-<div class="para" id="nested_conditionals_2-2-1-2-1">Remember that the program would only enter the first "if" if x was equal to 0.</div>
+<div class="para" id="nested_conditionals_2-2-1-2-1">Check whether <code class="code-inline tex2jax_ignore">x == 0</code> is true for a value of -4.</div>
 </li>
 <li data-component="answer" id="rs-nested_conditionals_2_opt_b">
 <div class="para" id="nested_conditionals_2-2-2-1-1">Hi!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_2_opt_b">
-<div class="para" id="nested_conditionals_2-2-2-2-1">Remember that the program would only enter the nested "if" if x was greater than 0.</div>
+<div class="para" id="nested_conditionals_2-2-2-2-1">After entering the outer <code class="code-inline tex2jax_ignore">else</code>, evaluate the nested condition <code class="code-inline tex2jax_ignore">x &gt; 0</code>.</div>
 </li>
 <li data-component="answer" id="rs-nested_conditionals_2_opt_c" data-correct="">
 <div class="para" id="nested_conditionals_2-2-3-1-1">Hello!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_2_opt_c">
-<div class="para" id="nested_conditionals_2-2-3-2-1">Correct!</div>
+<div class="para" id="nested_conditionals_2-2-3-2-1">Follow the outer branch first, then evaluate the nested conditional.</div>
 </li>
 <li data-component="answer" id="rs-nested_conditionals_2_opt_d">
 <div class="para" id="nested_conditionals_2-2-4-1-1">Nothing will print.</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_2_opt_d">
-<div class="para" id="nested_conditionals_2-2-4-2-1">Only one of the condtionals will execute, but something will print, regardless of which one it is.</div>
+<div class="para" id="nested_conditionals_2-2-4-2-1">Both levels of the nested conditional lead to an output branch.</div>
 </li>
 </ul>
 </div></div>
@@ -688,24 +708,30 @@ int main() {
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
-<div class="para" id="nested_conditionals_3-1-1">Your school uses a system to arrange students in a large stadium using their initials. Look at the function definition below. Where would a student with the initials “MZ” be seated?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#nested_conditionals_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">string seatingArrangement(char first, char last) {
-  if (last &gt; m) {
-    if (first &gt; m) {
-      return "Back Left!";
+<div class="para" id="nested_conditionals_3-1-1">A school uses student initials to choose one of four seating areas. Where would a student with the initials “MZ” be seated?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#nested_conditionals_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;string&gt;
+
+std::string determine_seating_area(char first_initial,
+                                   char last_initial);
+
+std::string determine_seating_area(char first_initial,
+                                   char last_initial) {
+    if (last_initial &gt; 'M') {
+        if (first_initial &gt; 'M') {
+            return "Back Left!";
+        }
+        else {
+            return "Back Right!";
+        }
     }
     else {
-      return "Back Right!";
+        if (first_initial &gt; 'M') {
+            return "Front Left!";
+        }
+        else {
+            return "Front Right!";
+        }
     }
-  }
-  else {
-    if (first &gt; m) {
-      return "Front Left!";
-    }
-    else {
-      return "Front Right!";
-    }
-  }
 }
 </code></pre></div>
 </div>
@@ -714,31 +740,31 @@ int main() {
 <div class="para" id="nested_conditionals_3-2-1-1-1">Back Left!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_3_opt_a">
-<div class="para" id="nested_conditionals_3-2-1-2-1">Remember that the &gt; opearator is not inclusive.</div>
+<div class="para" id="nested_conditionals_3-2-1-2-1">Evaluate the comparison involving the last initial first, then the comparison involving the first initial.</div>
 </li>
 <li data-component="answer" id="rs-nested_conditionals_3_opt_b" data-correct="">
 <div class="para" id="nested_conditionals_3-2-2-1-1">Back Right!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_3_opt_b">
-<div class="para" id="nested_conditionals_3-2-2-2-1">z &gt; m is true, and m &gt; m is false, so a student with these initials would be seated in the back right.</div>
+<div class="para" id="nested_conditionals_3-2-2-2-1">Character comparisons follow character ordering. Trace the outer comparison before the nested one.</div>
 </li>
 <li data-component="answer" id="rs-nested_conditionals_3_opt_c">
 <div class="para" id="nested_conditionals_3-2-3-1-1">Front Left!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_3_opt_c">
-<div class="para" id="nested_conditionals_3-2-3-2-1">z &gt; m is true because z comes after m. Also, the &gt; opearator is not inclusive.</div>
+<div class="para" id="nested_conditionals_3-2-3-2-1">Determine whether <code class="code-inline tex2jax_ignore">'Z' &gt; 'M'</code> before entering the front or back branch.</div>
 </li>
 <li data-component="answer" id="rs-nested_conditionals_3_opt_d">
 <div class="para" id="nested_conditionals_3-2-4-1-1">Front Right!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_3_opt_d">
-<div class="para" id="nested_conditionals_3-2-4-2-1">z &gt; m is true because z comes after m.</div>
+<div class="para" id="nested_conditionals_3-2-4-2-1">Start with the outer comparison involving the last initial.</div>
 </li>
 <li data-component="answer" id="rs-nested_conditionals_3_opt_e">
 <div class="para" id="nested_conditionals_3-2-5-1-1">Error!</div>
 </li>
 <li data-component="feedback" id="rs-nested_conditionals_3_opt_e">
-<div class="para" id="nested_conditionals_3-2-5-2-1">Character comparisons are legal, and useful in this case!</div>
+<div class="para" id="nested_conditionals_3-2-5-2-1">Character values can be compared with relational operators such as <code class="code-inline tex2jax_ignore">&gt;</code>.</div>
 </li>
 </ul>
 </div></div>
