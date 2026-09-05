@@ -9,6 +9,9 @@
     </p>
   </introduction>
 
+
+  <!-- Remainder Operator and Conditional Execution -->
+
   <exercise label="cond_rec_a1">
     <statement>
       <p>
@@ -78,6 +81,186 @@ int main() {
   </exercise>
 
 
+  <!-- Logical Operators -->
+
+  <exercise label="cond_rec_logical_a1">
+    <statement>
+      <p>
+        Complete <c>report_temperature_comfort</c> so that it prints
+        <q>Comfortable</q> when the temperature is from 60 through 80,
+        inclusive, and <q>Uncomfortable</q> otherwise.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_logical_a1_editor">
+        <code><![CDATA[
+#include <iostream>
+
+void report_temperature_comfort(int temperature) {
+    // Write your code here.
+}
+
+int main() {
+    report_temperature_comfort(72);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </statement>
+
+    <hint>
+      <p>
+        The temperature must satisfy both the lower and upper limits.
+        Combine two complete comparisons with a logical operator.
+      </p>
+    </hint>
+
+    <solution>
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_logical_a1_solution">
+        <code><![CDATA[
+#include <iostream>
+
+void report_temperature_comfort(int temperature) {
+    if (temperature >= 60 && temperature <= 80) {
+        std::cout << "Comfortable\n";
+    }
+    else {
+        std::cout << "Uncomfortable\n";
+    }
+}
+
+int main() {
+    report_temperature_comfort(72);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </solution>
+  </exercise>
+
+
+  <exercise label="cond_rec_a8">
+    <statement>
+      <p>
+        Write the function <c>determine_exclusive_or</c>. It should return
+        <c>true</c> when exactly one of its two Boolean arguments is true,
+        and <c>false</c> otherwise. Use logical operators in the return
+        expression.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a8_editor">
+        <code><![CDATA[
+#include <iostream>
+
+bool determine_exclusive_or(bool a, bool b) {
+    // Write your code here.
+}
+
+int main() {
+    std::cout << determine_exclusive_or(true, false) << '\n';
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </statement>
+
+    <hint>
+      <p>
+        Exactly one value is true when at least one is true but they are
+        not both true.
+      </p>
+    </hint>
+
+    <solution>
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a8_solution">
+        <code><![CDATA[
+#include <iostream>
+
+bool determine_exclusive_or(bool a, bool b) {
+    return (a || b) && !(a && b);
+}
+
+int main() {
+    std::cout << determine_exclusive_or(true, false) << '\n';
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </solution>
+  </exercise>
+
+
+  <!-- Alternative Execution -->
+
+  <exercise label="cond_rec_a3">
+    <statement>
+      <p>
+        Fix the function so that it prints <q>Odd</q> for odd integers and
+        <q>Even</q> for even integers. It should work correctly for both
+        positive and negative integers.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a3_editor">
+        <code><![CDATA[
+#include <iostream>
+
+void report_parity(int number) {
+    if (number % 2 == 0) {
+        std::cout << "Even\n";
+    }
+}
+
+int main() {
+    report_parity(-3);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </statement>
+
+    <solution>
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a3_solution">
+        <code><![CDATA[
+#include <iostream>
+
+void report_parity(int number) {
+    if (number % 2 == 0) {
+        std::cout << "Even\n";
+    }
+    else {
+        std::cout << "Odd\n";
+    }
+}
+
+int main() {
+    report_parity(-3);
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </solution>
+  </exercise>
+
+
+  <!-- Chained Conditionals -->
+
   <exercise label="cond_rec_a2">
     <statement>
       <p>
@@ -143,122 +326,6 @@ void report_letter_grade(double grade) {
 
 int main() {
     report_letter_grade(82.0);
-
-    return 0;
-}
-        ]]></code>
-      </program>
-    </solution>
-  </exercise>
-
-
-  <exercise label="cond_rec_a3">
-    <statement>
-      <p>
-        Fix the function so that it prints <q>Odd</q> for odd integers and
-        <q>Even</q> for even integers. It should work correctly for both
-        positive and negative integers.
-      </p>
-
-      <program interactive="activecode"
-               line-numbers="yes"
-               label="cond_rec_a3_editor">
-        <code><![CDATA[
-#include <iostream>
-
-void report_parity(int number) {
-    if (number % 2 == 0) {
-        std::cout << "Even\n";
-    }
-}
-
-int main() {
-    report_parity(-3);
-
-    return 0;
-}
-        ]]></code>
-      </program>
-    </statement>
-
-    <solution>
-      <program interactive="activecode"
-               line-numbers="yes"
-               label="cond_rec_a3_solution">
-        <code><![CDATA[
-#include <iostream>
-
-void report_parity(int number) {
-    if (number % 2 == 0) {
-        std::cout << "Even\n";
-    }
-    else {
-        std::cout << "Odd\n";
-    }
-}
-
-int main() {
-    report_parity(-3);
-
-    return 0;
-}
-        ]]></code>
-      </program>
-    </solution>
-  </exercise>
-
-
-  <exercise label="cond_rec_a4">
-    <statement>
-      <p>
-        Write the function <c>determine_larger</c>. It should return the
-        larger of two integers. If they are equal, return either value.
-      </p>
-
-      <program interactive="activecode"
-               line-numbers="yes"
-               label="cond_rec_a4_editor">
-        <code><![CDATA[
-#include <iostream>
-
-int determine_larger(int a, int b) {
-    // Write your code here.
-}
-
-int main() {
-    std::cout << determine_larger(7, 12) << '\n';
-
-    return 0;
-}
-        ]]></code>
-      </program>
-    </statement>
-
-    <hint>
-      <p>
-        Compare the two parameters, then return the appropriate value from
-        each branch.
-      </p>
-    </hint>
-
-    <solution>
-      <program interactive="activecode"
-               line-numbers="yes"
-               label="cond_rec_a4_solution">
-        <code><![CDATA[
-#include <iostream>
-
-int determine_larger(int a, int b) {
-    if (a > b) {
-        return a;
-    }
-    else {
-        return b;
-    }
-}
-
-int main() {
-    std::cout << determine_larger(7, 12) << '\n';
 
     return 0;
 }
@@ -391,6 +458,143 @@ int main() {
   </exercise>
 
 
+  <!-- Switch Statements -->
+
+  <exercise label="cond_rec_switch_a1">
+    <statement>
+      <p>
+        Complete <c>report_menu_choice</c> using a <c>switch</c>
+        statement. Print <q>Add</q> for <c>'A'</c>, <q>Delete</q> for
+        <c>'D'</c>, <q>Quit</q> for <c>'Q'</c>, and <q>Unknown</q>
+        for any other choice.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_switch_a1_editor">
+        <code><![CDATA[
+#include <iostream>
+
+void report_menu_choice(char choice) {
+    // Write your switch statement here.
+}
+
+int main() {
+    report_menu_choice('D');
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </statement>
+
+    <hint>
+      <p>
+        Use one <c>case</c> for each recognized character. End each of
+        those branches with <c>break</c>, and use <c>default</c> for any
+        other value.
+      </p>
+    </hint>
+
+    <solution>
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_switch_a1_solution">
+        <code><![CDATA[
+#include <iostream>
+
+void report_menu_choice(char choice) {
+    switch (choice) {
+        case 'A':
+            std::cout << "Add\n";
+            break;
+
+        case 'D':
+            std::cout << "Delete\n";
+            break;
+
+        case 'Q':
+            std::cout << "Quit\n";
+            break;
+
+        default:
+            std::cout << "Unknown\n";
+    }
+}
+
+int main() {
+    report_menu_choice('D');
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </solution>
+  </exercise>
+
+
+  <!-- Return in Conditional Branches -->
+
+  <exercise label="cond_rec_a4">
+    <statement>
+      <p>
+        Write the function <c>determine_larger</c>. It should return the
+        larger of two integers. If they are equal, return either value.
+      </p>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a4_editor">
+        <code><![CDATA[
+#include <iostream>
+
+int determine_larger(int a, int b) {
+    // Write your code here.
+}
+
+int main() {
+    std::cout << determine_larger(7, 12) << '\n';
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </statement>
+
+    <hint>
+      <p>
+        Compare the two parameters, then return the appropriate value from
+        each branch.
+      </p>
+    </hint>
+
+    <solution>
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="cond_rec_a4_solution">
+        <code><![CDATA[
+#include <iostream>
+
+int determine_larger(int a, int b) {
+    if (a > b) {
+        return a;
+    }
+    else {
+        return b;
+    }
+}
+
+int main() {
+    std::cout << determine_larger(7, 12) << '\n';
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </solution>
+  </exercise>
+
+
   <exercise label="cond_rec_a7">
     <statement>
       <p>
@@ -451,65 +655,7 @@ int main() {
   </exercise>
 
 
-  <exercise label="cond_rec_a8">
-    <statement>
-      <p>
-        Write the function <c>determine_exclusive_or</c>. It should return
-        <c>true</c> when exactly one of its two Boolean arguments is true,
-        and <c>false</c> otherwise.
-      </p>
-
-      <program interactive="activecode"
-               line-numbers="yes"
-               label="cond_rec_a8_editor">
-        <code><![CDATA[
-#include <iostream>
-
-bool determine_exclusive_or(bool a, bool b) {
-    // Write your code here.
-}
-
-int main() {
-    std::cout << determine_exclusive_or(true, false) << '\n';
-
-    return 0;
-}
-        ]]></code>
-      </program>
-    </statement>
-
-    <hint>
-      <p>
-        Exclusive OR is true when the two Boolean values are different.
-      </p>
-    </hint>
-
-    <solution>
-      <program interactive="activecode"
-               line-numbers="yes"
-               label="cond_rec_a8_solution">
-        <code><![CDATA[
-#include <iostream>
-
-bool determine_exclusive_or(bool a, bool b) {
-    if (a != b) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-int main() {
-    std::cout << determine_exclusive_or(true, false) << '\n';
-
-    return 0;
-}
-        ]]></code>
-      </program>
-    </solution>
-  </exercise>
-
+  <!-- Optional Recursion -->
 
   <exercise label="cond_rec_a9">
     <statement>

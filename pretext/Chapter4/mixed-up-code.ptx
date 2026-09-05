@@ -9,6 +9,9 @@
     </p>
   </introduction>
 
+
+  <!-- Remainder Operator -->
+
   <exercise label="cond_recc_p1"
             number="yes"
             adaptive="yes"
@@ -57,6 +60,133 @@
     </blocks>
   </exercise>
 
+
+  <!-- Conditional Execution -->
+
+  <exercise label="cond_recc_p4"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
+    <statement>
+      <p>
+        Construct a function that checks all three conditions independently.
+        Print <q>Odd</q> if <c>x</c> is odd, <q>Greater</q> if
+        <c>x &gt; y</c>, and <q>Different</q> if <c>x != y</c>.
+        More than one message may be printed.
+      </p>
+    </statement>
+
+    <blocks>
+      <block order="1">
+        <cline>void report_number_relationships(int x, int y) {</cline>
+      </block>
+
+      <block order="2">
+        <choice correct="yes">
+          <cline>    if (x % 2 != 0) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    if (x % 2 == 0) {</cline>
+        </choice>
+      </block>
+
+      <block order="3">
+        <cline><![CDATA[        std::cout << "Odd\n";]]></cline>
+        <cline>    }</cline>
+      </block>
+
+      <block order="4">
+        <choice correct="yes">
+          <cline>    if (x &gt; y) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    else if (x &gt; y) {</cline>
+        </choice>
+      </block>
+
+      <block order="5">
+        <cline><![CDATA[        std::cout << "Greater\n";]]></cline>
+        <cline>    }</cline>
+      </block>
+
+      <block order="6">
+        <choice correct="yes">
+          <cline>    if (x != y) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    else if (x != y) {</cline>
+        </choice>
+      </block>
+
+      <block order="7">
+        <cline><![CDATA[        std::cout << "Different\n";]]></cline>
+        <cline>    }</cline>
+      </block>
+
+      <block order="8">
+        <cline>}</cline>
+      </block>
+    </blocks>
+  </exercise>
+
+
+  <!-- Logical Operators -->
+
+  <exercise label="cond_recc_logical_p1"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
+    <statement>
+      <p>
+        Construct a function that prints <q>Comfortable</q> when
+        <c>temperature</c> is between 60 and 80, inclusive. Otherwise,
+        it prints <q>Uncomfortable</q>.
+      </p>
+    </statement>
+
+    <blocks>
+      <block order="1">
+        <cline>void report_temperature_comfort(int temperature) {</cline>
+      </block>
+
+      <block order="2">
+        <choice correct="yes">
+          <cline>    if (temperature &gt;= 60 &amp;&amp; temperature &lt;= 80) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>    if (temperature &gt;= 60 || temperature &lt;= 80) {</cline>
+        </choice>
+      </block>
+
+      <block order="3">
+        <cline><![CDATA[        std::cout << "Comfortable\n";]]></cline>
+      </block>
+
+      <block order="4">
+        <cline>    }</cline>
+        <cline>    else {</cline>
+      </block>
+
+      <block order="5">
+        <cline><![CDATA[        std::cout << "Uncomfortable\n";]]></cline>
+      </block>
+
+      <block order="6">
+        <cline>    }</cline>
+      </block>
+
+      <block order="7">
+        <cline>}</cline>
+      </block>
+
+      <block correct="no">
+        <cline>    if (temperature &gt;= 60 &amp;&amp; &lt;= 80) {</cline>
+      </block>
+    </blocks>
+  </exercise>
+
+
+  <!-- Alternative Execution -->
 
   <exercise label="cond_recc_p2"
             number="yes"
@@ -161,72 +291,7 @@
   </exercise>
 
 
-  <exercise label="cond_recc_p4"
-            number="yes"
-            adaptive="yes"
-            indentation="hide">
-    <statement>
-      <p>
-        Construct a function that checks all three conditions independently.
-        Print <q>Odd</q> if <c>x</c> is odd, <q>Greater</q> if
-        <c>x &gt; y</c>, and <q>Different</q> if <c>x != y</c>.
-        More than one message may be printed.
-      </p>
-    </statement>
-
-    <blocks>
-      <block order="1">
-        <cline>void report_number_relationships(int x, int y) {</cline>
-      </block>
-
-      <block order="2">
-        <choice correct="yes">
-          <cline>    if (x % 2 != 0) {</cline>
-        </choice>
-        <choice correct="no">
-          <cline>    if (x % 2 == 0) {</cline>
-        </choice>
-      </block>
-
-      <block order="3">
-        <cline><![CDATA[        std::cout << "Odd\n";]]></cline>
-        <cline>    }</cline>
-      </block>
-
-      <block order="4">
-        <choice correct="yes">
-          <cline>    if (x &gt; y) {</cline>
-        </choice>
-        <choice correct="no">
-          <cline>    else if (x &gt; y) {</cline>
-        </choice>
-      </block>
-
-      <block order="5">
-        <cline><![CDATA[        std::cout << "Greater\n";]]></cline>
-        <cline>    }</cline>
-      </block>
-
-      <block order="6">
-        <choice correct="yes">
-          <cline>    if (x != y) {</cline>
-        </choice>
-        <choice correct="no">
-          <cline>    else if (x != y) {</cline>
-        </choice>
-      </block>
-
-      <block order="7">
-        <cline><![CDATA[        std::cout << "Different\n";]]></cline>
-        <cline>    }</cline>
-      </block>
-
-      <block order="8">
-        <cline>}</cline>
-      </block>
-    </blocks>
-  </exercise>
-
+  <!-- Chained Conditionals -->
 
   <exercise label="cond_recc_p5"
             number="yes"
@@ -351,64 +416,81 @@
   </exercise>
 
 
-  <exercise label="cond_recc_p7"
+  <!-- Switch Statements -->
+
+  <exercise label="cond_recc_switch_p1"
             number="yes"
             adaptive="yes"
             indentation="hide">
     <statement>
       <p>
-        Construct a function that returns the larger of two integers.
-        If the values are equal, return either value.
+        Construct a function that uses a <c>switch</c> statement to print
+        <q>Add</q> for choice <c>'A'</c>, <q>Delete</q> for choice
+        <c>'D'</c>, and <q>Unknown</q> for any other choice.
       </p>
     </statement>
 
     <blocks>
       <block order="1">
-        <choice correct="yes">
-          <cline>int determine_larger(int a, int b) {</cline>
-        </choice>
-        <choice correct="no">
-          <cline>void determine_larger(int a, int b) {</cline>
-        </choice>
+        <cline>void report_menu_choice(char choice) {</cline>
       </block>
 
       <block order="2">
-        <cline>    if (a &gt; b) {</cline>
+        <cline>    switch (choice) {</cline>
       </block>
 
       <block order="3">
         <choice correct="yes">
-          <cline>        return a;</cline>
+          <cline>        case 'A':</cline>
         </choice>
         <choice correct="no">
-          <cline>        return b;</cline>
+          <cline>        case choice == 'A':</cline>
         </choice>
       </block>
 
       <block order="4">
-        <cline>    }</cline>
-        <cline>    else {</cline>
+        <cline><![CDATA[            std::cout << "Add\n";]]></cline>
+        <cline>            break;</cline>
       </block>
 
       <block order="5">
-        <choice correct="yes">
-          <cline>        return b;</cline>
-        </choice>
-        <choice correct="no">
-          <cline>        return a;</cline>
-        </choice>
+        <cline>        case 'D':</cline>
       </block>
 
       <block order="6">
-        <cline>    }</cline>
+        <cline><![CDATA[            std::cout << "Delete\n";]]></cline>
+        <cline>            break;</cline>
       </block>
 
       <block order="7">
+        <choice correct="yes">
+          <cline>        default:</cline>
+        </choice>
+        <choice correct="no">
+          <cline>        else:</cline>
+        </choice>
+      </block>
+
+      <block order="8">
+        <cline><![CDATA[            std::cout << "Unknown\n";]]></cline>
+      </block>
+
+      <block order="9">
+        <cline>    }</cline>
+      </block>
+
+      <block order="10">
         <cline>}</cline>
+      </block>
+
+      <block correct="no">
+        <cline>            continue;</cline>
       </block>
     </blocks>
   </exercise>
 
+
+  <!-- Nested Conditionals -->
 
   <exercise label="cond_recc_p8"
             number="yes"
@@ -475,6 +557,69 @@
     </blocks>
   </exercise>
 
+
+  <!-- Return in Conditional Branches -->
+
+  <exercise label="cond_recc_p7"
+            number="yes"
+            adaptive="yes"
+            indentation="hide">
+    <statement>
+      <p>
+        Construct a function that returns the larger of two integers.
+        If the values are equal, return either value.
+      </p>
+    </statement>
+
+    <blocks>
+      <block order="1">
+        <choice correct="yes">
+          <cline>int determine_larger(int a, int b) {</cline>
+        </choice>
+        <choice correct="no">
+          <cline>void determine_larger(int a, int b) {</cline>
+        </choice>
+      </block>
+
+      <block order="2">
+        <cline>    if (a &gt; b) {</cline>
+      </block>
+
+      <block order="3">
+        <choice correct="yes">
+          <cline>        return a;</cline>
+        </choice>
+        <choice correct="no">
+          <cline>        return b;</cline>
+        </choice>
+      </block>
+
+      <block order="4">
+        <cline>    }</cline>
+        <cline>    else {</cline>
+      </block>
+
+      <block order="5">
+        <choice correct="yes">
+          <cline>        return b;</cline>
+        </choice>
+        <choice correct="no">
+          <cline>        return a;</cline>
+        </choice>
+      </block>
+
+      <block order="6">
+        <cline>    }</cline>
+      </block>
+
+      <block order="7">
+        <cline>}</cline>
+      </block>
+    </blocks>
+  </exercise>
+
+
+  <!-- Optional Recursion -->
 
   <exercise label="cond_recc_p9"
             number="yes"

@@ -5,8 +5,10 @@
   <title>Conditionals and recursion</title>
   <xi:include href='./the-modulus-operator.ptx'/>
   <xi:include href='./conditional-execution.ptx'/>
-  <xi:include href='./alternative-execution.ptx'/>
+  <xi:include href='./logical-operators.ptx'/> 
+  <xi:include href='./alternative-execution.ptx'/> 
   <xi:include href='./chained-conditionals.ptx'/>
+  <xi:include href='./switch-statements.ptx'/>
   <xi:include href='./nested-conditionals.ptx'/>
   <xi:include href='./the-return-statement.ptx'/>
   <xi:include href='./recursion.ptx'/>

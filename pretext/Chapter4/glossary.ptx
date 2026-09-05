@@ -3,6 +3,9 @@
   <title>Glossary</title>
 
   <glossary>
+
+    <!-- 4.1 Remainder Operator -->
+
     <gi>
       <title>remainder operator</title>
       <p>
@@ -11,6 +14,9 @@
         called the modulus or modulo operator.
       </p>
     </gi>
+
+
+    <!-- 4.2 Conditional Execution -->
 
     <gi>
       <title>conditional statement</title>
@@ -44,6 +50,55 @@
       </p>
     </gi>
 
+
+    <!-- 4.3 Logical Operators -->
+
+    <gi>
+      <title>logical operator</title>
+      <p>
+        An operator that combines or reverses Boolean expressions. In C++,
+        the logical operators are <c>!</c>, <c>&amp;&amp;</c>, and
+        <c>||</c>.
+      </p>
+    </gi>
+
+    <gi>
+      <title>logical NOT</title>
+      <p>
+        The operator <c>!</c>, which reverses a Boolean value.
+      </p>
+    </gi>
+
+    <gi>
+      <title>logical AND</title>
+      <p>
+        The operator <c>&amp;&amp;</c>, which produces <c>true</c> only
+        when both Boolean expressions are true.
+      </p>
+    </gi>
+
+    <gi>
+      <title>logical OR</title>
+      <p>
+        The operator <c>||</c>, which produces <c>true</c> when at least
+        one of the Boolean expressions is true.
+      </p>
+    </gi>
+
+    <gi>
+      <title>short-circuit evaluation</title>
+      <p>
+        Evaluation in which C++ skips part of a logical expression when
+        the result is already known. With <c>&amp;&amp;</c>, the right
+        expression is skipped when the left expression is false. With
+        <c>||</c>, the right expression is skipped when the left expression
+        is true.
+      </p>
+    </gi>
+
+
+    <!-- 4.4 Alternative Execution -->
+
     <gi>
       <title>alternative execution</title>
       <p>
@@ -51,6 +106,9 @@
         exactly one of two branches executes.
       </p>
     </gi>
+
+
+    <!-- 4.5 Chained Conditionals -->
 
     <gi>
       <title>if-else-if chain</title>
@@ -60,6 +118,53 @@
       </p>
     </gi>
 
+
+    <!-- 4.6 Switch Statements -->
+
+    <gi>
+      <title>switch statement</title>
+      <p>
+        A selection statement that evaluates one expression and begins
+        execution at the <c>case</c> whose constant value matches.
+      </p>
+    </gi>
+
+    <gi>
+      <title>case</title>
+      <p>
+        A labeled branch inside a <c>switch</c> statement associated with
+        a particular constant value.
+      </p>
+    </gi>
+
+    <gi>
+      <title>break</title>
+      <p>
+        A statement that ends the current <c>switch</c> branch and
+        continues execution after the <c>switch</c>.
+      </p>
+    </gi>
+
+    <gi>
+      <title>default case</title>
+      <p>
+        The optional branch of a <c>switch</c> statement that executes
+        when none of the listed <c>case</c> values match.
+      </p>
+    </gi>
+
+    <gi>
+      <title>fall-through</title>
+      <p>
+        The behavior in a <c>switch</c> statement in which execution
+        continues into a following case because no <c>break</c> was
+        reached.
+      </p>
+    </gi>
+
+
+    <!-- 4.7 Nested Conditionals -->
+
     <gi>
       <title>nested conditional</title>
       <p>
@@ -67,6 +172,9 @@
         conditional statement.
       </p>
     </gi>
+
+
+    <!-- Optional Recursion Sections -->
 
     <gi>
       <title>recursion</title>
@@ -107,9 +215,13 @@
         stack frame.
       </p>
     </gi>
+
   </glossary>
 
+
   <reading-questions>
+
+    <!-- Remainder and Basic Conditional Execution -->
 
     <exercise label="chapter_four_glossary_1">
       <statement>
@@ -120,7 +232,8 @@
 
       <feedback>
         <p>
-          Review the vocabulary used for basic conditional execution.
+          Review the vocabulary introduced with the remainder operator and
+          basic conditional execution.
         </p>
       </feedback>
 
@@ -133,50 +246,6 @@
         </match>
 
         <match>
-          <premise order="2">condition</premise>
-          <response>
-            An expression evaluated as true or false to control a conditional statement.
-          </response>
-        </match>
-
-        <match>
-          <premise order="3">branch</premise>
-          <response>
-            One possible path of execution within a conditional statement.
-          </response>
-        </match>
-
-        <match>
-          <premise order="4">alternative execution</premise>
-          <response>
-            An if/else structure in which exactly one of two branches executes.
-          </response>
-        </match>
-      </cardsort>
-    </exercise>
-
-    <exercise label="chapter_four_glossary_2">
-      <statement>
-        <p>
-          Match each term with its definition.
-        </p>
-      </statement>
-
-      <feedback>
-        <p>
-          Think about how each structure organizes decisions in a program.
-        </p>
-      </feedback>
-
-      <cardsort>
-        <match>
-          <premise order="1">comparison operator</premise>
-          <response>
-            An operator that compares two values and produces a Boolean result.
-          </response>
-        </match>
-
-        <match>
           <premise order="2">conditional statement</premise>
           <response>
             A statement that uses a condition to determine whether a branch executes.
@@ -184,14 +253,189 @@
         </match>
 
         <match>
-          <premise order="3">if-else-if chain</premise>
+          <premise order="3">condition</premise>
           <response>
-            A structure that checks related conditions from top to bottom and executes the first true branch.
+            An expression evaluated as true or false to control a conditional statement.
           </response>
         </match>
 
         <match>
-          <premise order="4">nested conditional</premise>
+          <premise order="4">comparison operator</premise>
+          <response>
+            An operator that compares two values and produces a Boolean result.
+          </response>
+        </match>
+
+        <match>
+          <premise order="5">branch</premise>
+          <response>
+            One possible path of execution within a conditional statement.
+          </response>
+        </match>
+      </cardsort>
+    </exercise>
+
+
+    <!-- Logical Operators -->
+
+    <exercise label="chapter_four_glossary_2">
+      <statement>
+        <p>
+          Match each logical-operator term with its definition.
+        </p>
+      </statement>
+
+      <feedback>
+        <p>
+          Review how C++ combines and reverses Boolean expressions.
+        </p>
+      </feedback>
+
+      <cardsort>
+        <match>
+          <premise order="1">logical operator</premise>
+          <response>
+            An operator that combines or reverses Boolean expressions.
+          </response>
+        </match>
+
+        <match>
+          <premise order="2">logical NOT</premise>
+          <response>
+            Reverses a Boolean value.
+          </response>
+        </match>
+
+        <match>
+          <premise order="3">logical AND</premise>
+          <response>
+            Produces true only when both Boolean expressions are true.
+          </response>
+        </match>
+
+        <match>
+          <premise order="4">logical OR</premise>
+          <response>
+            Produces true when at least one Boolean expression is true.
+          </response>
+        </match>
+
+        <match>
+          <premise order="5">short-circuit evaluation</premise>
+          <response>
+            Skips part of a logical expression when its result is already known.
+          </response>
+        </match>
+      </cardsort>
+    </exercise>
+
+
+    <!-- Alternative Execution and Chained Conditionals -->
+
+    <exercise label="chapter_four_glossary_3">
+      <statement>
+        <p>
+          Match each conditional-structure term with its definition.
+        </p>
+      </statement>
+
+      <feedback>
+        <p>
+          Think about how each structure controls which branch executes.
+        </p>
+      </feedback>
+
+      <cardsort>
+        <match>
+          <premise order="1">alternative execution</premise>
+          <response>
+            An if/else structure in which exactly one of two branches executes.
+          </response>
+        </match>
+
+        <match>
+          <premise order="2">if-else-if chain</premise>
+          <response>
+            A structure that checks related conditions from top to bottom and executes the first true branch.
+          </response>
+        </match>
+      </cardsort>
+    </exercise>
+
+
+    <!-- Switch Statements -->
+
+    <exercise label="chapter_four_glossary_4">
+      <statement>
+        <p>
+          Match each <c>switch</c> statement term with its definition.
+        </p>
+      </statement>
+
+      <feedback>
+        <p>
+          Review how cases are selected and how execution leaves or
+          continues through a <c>switch</c>.
+        </p>
+      </feedback>
+
+      <cardsort>
+        <match>
+          <premise order="1">switch statement</premise>
+          <response>
+            A selection statement that compares one expression with several constant case values.
+          </response>
+        </match>
+
+        <match>
+          <premise order="2">case</premise>
+          <response>
+            A labeled branch associated with a particular constant value.
+          </response>
+        </match>
+
+        <match>
+          <premise order="3">break</premise>
+          <response>
+            Ends the current switch branch and continues after the switch.
+          </response>
+        </match>
+
+        <match>
+          <premise order="4">default case</premise>
+          <response>
+            Executes when none of the listed case values match.
+          </response>
+        </match>
+
+        <match>
+          <premise order="5">fall-through</premise>
+          <response>
+            Continues execution into a following case when no break is reached.
+          </response>
+        </match>
+      </cardsort>
+    </exercise>
+
+
+    <!-- Nested Conditionals -->
+
+    <exercise label="chapter_four_glossary_5">
+      <statement>
+        <p>
+          Match the term with its definition.
+        </p>
+      </statement>
+
+      <feedback>
+        <p>
+          Review how one conditional can appear inside another.
+        </p>
+      </feedback>
+
+      <cardsort>
+        <match>
+          <premise order="1">nested conditional</premise>
           <response>
             A conditional statement placed inside a branch of another conditional statement.
           </response>
@@ -199,7 +443,10 @@
       </cardsort>
     </exercise>
 
-    <exercise label="chapter_four_glossary_3">
+
+    <!-- Optional Recursion -->
+
+    <exercise label="chapter_four_glossary_6">
       <statement>
         <p>
           The following terms come from the optional recursion sections.
@@ -209,8 +456,8 @@
 
       <feedback>
         <p>
-          Review how recursive calls stop and how individual function calls
-          are represented.
+          Review how recursive calls are made, how they stop, and how
+          individual function calls are represented.
         </p>
       </feedback>
 

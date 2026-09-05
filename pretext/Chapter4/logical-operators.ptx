@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<section xml:id="chapter4_logical-operators">
+  <title>Logical Operators</title>
+
+  <p>
+    Comparison operators let you ask one question at a time. Sometimes a
+    decision depends on more than one condition. C++ provides three
+    <term>logical operators</term> that combine or reverse Boolean expressions.
+  </p>
+
+  <table>
+    <title>Logical Operators</title>
+    <tabular>
+      <row>
+        <cell><c>!</c></cell>
+        <cell>logical NOT</cell>
+        <cell>reverses a Boolean value</cell>
+      </row>
+      <row>
+        <cell><c>&amp;&amp;</c></cell>
+        <cell>logical AND</cell>
+        <cell>true only when both expressions are true</cell>
+      </row>
+      <row>
+        <cell><c>||</c></cell>
+        <cell>logical OR</cell>
+        <cell>true when at least one expression is true</cell>
+      </row>
+    </tabular>
+  </table>
+
+  <subsection>
+    <title>Logical AND</title>
+
+    <p>
+      The operator <c>&amp;&amp;</c> combines two Boolean expressions. The
+      complete expression is true only when both parts are true.
+    </p>
+
+    <listing label="logical_AC_1">
+      <title>
+        This function reports whether a temperature is in a comfortable range.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="logical_AC_1_editor">
+        <code><![CDATA[
+#include <iostream>
+
+// Function declaration
+void report_comfortable_temperature(int temperature);
+
+int main() {
+    int temperature = 72;
+
+    report_comfortable_temperature(temperature);
+
+    return 0;
+}
+
+// Function definition
+void report_comfortable_temperature(int temperature) {
+    if (temperature >= 60 && temperature <= 80) {
+        std::cout << "Comfortable\n";
+    }
+}
+        ]]></code>
+      </program>
+    </listing>
+
+    <p>
+      For the message to print, both comparisons must be true:
+      <c>temperature &gt;= 60</c> and <c>temperature &lt;= 80</c>.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Logical OR</title>
+
+    <p>
+      The operator <c>||</c> combines two Boolean expressions. The complete
+      expression is true when either expression is true, or when both are true.
+    </p>
+
+    <listing label="logical_AC_2">
+      <title>
+        This function checks whether a character represents a weekend day.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="logical_AC_2_editor">
+        <code><![CDATA[
+#include <iostream>
+
+// Function declaration
+void report_weekend(char day_code);
+
+int main() {
+    char day_code = 'S';
+
+    report_weekend(day_code);
+
+    return 0;
+}
+
+// Function definition
+void report_weekend(char day_code) {
+    if (day_code == 'S' || day_code == 'U') {
+        std::cout << "Weekend\n";
+    }
+}
+        ]]></code>
+      </program>
+    </listing>
+
+    <p>
+      Here, either comparison can make the condition true.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Logical NOT</title>
+
+    <p>
+      The operator <c>!</c> reverses a Boolean value. If an expression is
+      true, applying <c>!</c> makes it false. If it is false, applying
+      <c>!</c> makes it true.
+    </p>
+
+    <listing label="logical_AC_3">
+      <title>
+        This function reports when a process is not ready.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="logical_AC_3_editor">
+        <code><![CDATA[
+#include <iostream>
+
+// Function declaration
+void report_readiness(bool is_ready);
+
+int main() {
+    bool is_ready = false;
+
+    report_readiness(is_ready);
+
+    return 0;
+}
+
+// Function definition
+void report_readiness(bool is_ready) {
+    if (!is_ready) {
+        std::cout << "Not ready\n";
+    }
+}
+        ]]></code>
+      </program>
+    </listing>
+  </subsection>
+
+  <subsection>
+    <title>Combining Logical Operators</title>
+
+    <p>
+      Logical operators can be combined in the same condition. Parentheses
+      can make the intended logic easier to read.
+    </p>
+
+    <program><![CDATA[
+if ((age >= 13 && age <= 19) || has_permission) {
+    std::cout << "Access allowed\n";
+}
+    ]]></program>
+
+    <p>
+      C++ evaluates <c>!</c> before <c>&amp;&amp;</c>, and
+      <c>&amp;&amp;</c> before <c>||</c>. Even when parentheses are not
+      required, they can improve readability.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Short-Circuit Evaluation</title>
+
+    <p>
+      C++ uses <term>short-circuit evaluation</term> with
+      <c>&amp;&amp;</c> and <c>||</c>.
+    </p>
+
+    <p>
+      With <c>&amp;&amp;</c>, if the left expression is false, the right
+      expression does not need to be evaluated. With <c>||</c>, if the left
+      expression is true, the right expression does not need to be evaluated.
+    </p>
+
+    <program><![CDATA[
+if (divisor != 0 && value / divisor > 5) {
+    std::cout << "Condition met\n";
+}
+    ]]></program>
+
+    <p>
+      If <c>divisor != 0</c> is false, C++ does not evaluate
+      <c>value / divisor &gt; 5</c>. This prevents division by zero in this
+      condition.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Common Mistakes</title>
+
+    <p>
+      Each comparison must be written completely. For example, this is
+      incorrect:
+    </p>
+
+    <program><![CDATA[
+if (choice == 1 || 2) {
+    // Incorrect
+}
+    ]]></program>
+
+    <p>The correct form is:</p>
+
+    <program><![CDATA[
+if (choice == 1 || choice == 2) {
+    // Correct
+}
+    ]]></program>
+
+    <p>
+      C++ also does not support mathematical-style chained comparisons such as:
+    </p>
+
+    <program><![CDATA[
+if (0 < value < 10) {
+    // Incorrect in C++
+}
+    ]]></program>
+
+    <p>Write both comparisons explicitly:</p>
+
+    <program><![CDATA[
+if (0 < value && value < 10) {
+    // Correct
+}
+    ]]></program>
+  </subsection>
+
+  <exercise label="logical_1">
+    <statement>
+      <p>
+        What is the value of the following expression when
+        <c>x = 7</c>?
+      </p>
+
+      <program><![CDATA[
+x > 5 && x < 10
+      ]]></program>
+    </statement>
+
+    <choices>
+      <choice correct="yes">
+        <statement><p><c>true</c></p></statement>
+        <feedback>
+          <p>
+            Both comparisons are true, so the AND expression is true.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p><c>false</c></p></statement>
+        <feedback>
+          <p>
+            Evaluate each comparison separately before applying
+            <c>&amp;&amp;</c>.
+          </p>
+        </feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="logical_2">
+    <statement>
+      <p>
+        Which condition correctly checks whether <c>choice</c> is either
+        <c>'A'</c> or <c>'B'</c>?
+      </p>
+    </statement>
+
+    <choices>
+      <choice correct="yes">
+        <statement>
+          <p><c>choice == 'A' || choice == 'B'</c></p>
+        </statement>
+        <feedback>
+          <p>
+            Each comparison is written completely and the results are joined
+            with logical OR.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>choice == 'A' || 'B'</c></p>
+        </statement>
+        <feedback>
+          <p>
+            The second comparison must also include <c>choice ==</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>choice == 'A' &amp;&amp; choice == 'B'</c></p>
+        </statement>
+        <feedback>
+          <p>
+            A single character cannot be both values at the same time.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>choice = 'A' || choice = 'B'</c></p>
+        </statement>
+        <feedback>
+          <p>
+            Review the difference between assignment and comparison.
+          </p>
+        </feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="logical_3">
+    <statement>
+      <p>
+        What will this program print?
+      </p>
+
+      <program><![CDATA[
+#include <iostream>
+
+int main() {
+    int value = 12;
+
+    if (value >= 10 && value <= 20) {
+        std::cout << "Inside\n";
+    }
+    else {
+        std::cout << "Outside\n";
+    }
+
+    return 0;
+}
+      ]]></program>
+    </statement>
+
+    <choices>
+      <choice correct="yes">
+        <statement><p>Inside</p></statement>
+        <feedback>
+          <p>
+            The value satisfies both comparisons.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Outside</p></statement>
+        <feedback>
+          <p>
+            Check both comparisons using the value 12.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Nothing</p></statement>
+        <feedback>
+          <p>
+            One branch of an <c>if</c>/<c>else</c> must execute.
+          </p>
+        </feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+</section>

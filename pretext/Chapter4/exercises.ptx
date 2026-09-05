@@ -9,6 +9,9 @@
     </p>
   </introduction>
 
+
+  <!-- Remainder Operator -->
+
   <exercise label="cond_rec_mc1">
     <statement>
       <p>What value is stored in <c>remainder</c>?</p>
@@ -71,7 +74,274 @@ int remainder = y % x;
     </choices>
   </exercise>
 
+
+  <!-- Conditional Execution -->
+
   <exercise label="cond_rec_mc2">
+    <statement>
+      <p>What will this code print?</p>
+
+      <program><![CDATA[
+int temperature = 34;
+
+if (temperature > 32) {
+    std::cout << "Above freezing ";
+}
+
+if (temperature < 40) {
+    std::cout << "Cold ";
+}
+
+if (temperature > 65) {
+    std::cout << "Warm ";
+}
+else {
+    std::cout << "Not warm ";
+}
+      ]]></program>
+    </statement>
+
+    <choices>
+      <choice>
+        <statement><p>Above freezing</p></statement>
+        <feedback>
+          <p>
+            There is more than one independent <c>if</c> statement here.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Cold</p></statement>
+        <feedback>
+          <p>
+            Evaluate each independent <c>if</c> condition separately.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Above freezing Cold</p></statement>
+        <feedback>
+          <p>
+            Also trace the final <c>if</c>/<c>else</c> pair.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice correct="yes">
+        <statement><p>Above freezing Cold Not warm</p></statement>
+        <feedback>
+          <p>
+            The first two independent conditions are true, and the final
+            <c>else</c> belongs only to the last <c>if</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Not warm</p></statement>
+        <feedback>
+          <p>
+            Do not skip the earlier independent <c>if</c> statements.
+          </p>
+        </feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+
+  <!-- Logical Operators -->
+
+  <exercise label="cond_rec_mc3">
+    <statement>
+      <p>What is the value of the following Boolean expression?</p>
+
+      <program><![CDATA[
+int temperature = 72;
+
+temperature >= 60 && temperature <= 80
+      ]]></program>
+    </statement>
+
+    <choices>
+      <choice correct="yes">
+        <statement><p><c>true</c></p></statement>
+        <feedback>
+          <p>
+            Both comparisons are true, so the logical AND expression is
+            true.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p><c>false</c></p></statement>
+        <feedback>
+          <p>
+            Evaluate each comparison separately before applying
+            <c>&amp;&amp;</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>60</p></statement>
+        <feedback>
+          <p>
+            Comparison and logical operators produce Boolean values.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>72</p></statement>
+        <feedback>
+          <p>
+            The expression evaluates conditions involving 72 rather than
+            returning the original integer.
+          </p>
+        </feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+
+  <exercise label="cond_rec_mc4">
+    <statement>
+      <p>
+        Which condition correctly checks whether <c>choice</c> is either
+        <c>'A'</c> or <c>'B'</c>?
+      </p>
+    </statement>
+
+    <choices>
+      <choice correct="yes">
+        <statement>
+          <p><c>choice == 'A' || choice == 'B'</c></p>
+        </statement>
+        <feedback>
+          <p>
+            Each comparison is written completely, and logical OR joins
+            the two results.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>choice == 'A' || 'B'</c></p>
+        </statement>
+        <feedback>
+          <p>
+            The second comparison must also state what is being compared
+            with <c>'B'</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>choice == 'A' &amp;&amp; choice == 'B'</c></p>
+        </statement>
+        <feedback>
+          <p>
+            Logical AND would require both comparisons to be true at the
+            same time.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>choice = 'A' || choice = 'B'</c></p>
+        </statement>
+        <feedback>
+          <p>
+            Review the difference between assignment and equality
+            comparison.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p><c>choice != 'A' || choice != 'B'</c></p>
+        </statement>
+        <feedback>
+          <p>
+            Trace this expression for <c>'A'</c> and notice whether the
+            complete OR expression becomes false.
+          </p>
+        </feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+
+  <!-- Alternative Execution -->
+
+  <exercise label="cond_rec_mc5">
+    <statement>
+      <p>What will this code print?</p>
+
+      <program><![CDATA[
+int number = 7;
+
+if (number % 2 == 0) {
+    std::cout << "Even\n";
+}
+else {
+    std::cout << "Odd\n";
+}
+      ]]></program>
+    </statement>
+
+    <choices>
+      <choice>
+        <statement><p>Even</p></statement>
+        <feedback>
+          <p>
+            Check the remainder when 7 is divided by 2.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice correct="yes">
+        <statement><p>Odd</p></statement>
+        <feedback>
+          <p>
+            The condition is false, so the <c>else</c> branch executes.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Even Odd</p></statement>
+        <feedback>
+          <p>
+            An <c>if</c>/<c>else</c> structure executes exactly one of its
+            two branches.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Nothing</p></statement>
+        <feedback>
+          <p>
+            If the <c>if</c> condition is false, the <c>else</c> branch
+            executes.
+          </p>
+        </feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+
+  <!-- Chained Conditionals -->
+
+  <exercise label="cond_rec_mc6">
     <statement>
       <p>What will this code print?</p>
 
@@ -146,217 +416,249 @@ else {
     </choices>
   </exercise>
 
-  <exercise label="cond_rec_mc3">
+
+  <exercise label="cond_rec_mc7">
     <statement>
-      <p>What will this code print?</p>
-
-      <program><![CDATA[
-int temperature = 34;
-
-if (temperature > 32) {
-    std::cout << "Above freezing ";
-}
-
-if (temperature < 40) {
-    std::cout << "Cold ";
-}
-
-if (temperature > 65) {
-    std::cout << "Warm ";
-}
-else {
-    std::cout << "Not warm ";
-}
-      ]]></program>
+      <p>
+        Which ordering correctly classifies scores into 90+, 80+, 70+,
+        and below 70 using one <c>if</c>/<c>else if</c> chain?
+      </p>
     </statement>
 
     <choices>
-      <choice>
-        <statement><p>Above freezing</p></statement>
-        <feedback>
-          <p>
-            There is more than one independent <c>if</c> statement here.
-          </p>
-        </feedback>
-      </choice>
-
-      <choice>
-        <statement><p>Cold</p></statement>
-        <feedback>
-          <p>
-            Evaluate each independent <c>if</c> condition separately.
-          </p>
-        </feedback>
-      </choice>
-
-      <choice>
-        <statement>
-          <p>Above freezing Cold</p>
-        </statement>
-        <feedback>
-          <p>
-            Also trace the final <c>if</c>/<c>else</c> pair.
-          </p>
-        </feedback>
-      </choice>
-
       <choice correct="yes">
         <statement>
-          <p>Above freezing Cold Not warm</p>
+          <p>
+            Test <c>&gt;= 90</c>, then <c>&gt;= 80</c>, then
+            <c>&gt;= 70</c>.
+          </p>
         </statement>
         <feedback>
           <p>
-            The first two independent conditions are true, and the final
-            <c>else</c> belongs only to the last <c>if</c>.
+            Overlapping thresholds should be checked from the most
+            restrictive to the least restrictive.
           </p>
         </feedback>
       </choice>
 
       <choice>
-        <statement><p>Not warm</p></statement>
+        <statement>
+          <p>
+            Test <c>&gt;= 70</c>, then <c>&gt;= 80</c>, then
+            <c>&gt;= 90</c>.
+          </p>
+        </statement>
         <feedback>
           <p>
-            Do not skip the earlier independent <c>if</c> statements.
+            Consider what happens to a score of 95 if the broadest
+            condition is checked first.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>
+            Use only <c>score &gt;= 90</c> and an <c>else</c>.
+          </p>
+        </statement>
+        <feedback>
+          <p>
+            More than two categories require more than two branches.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement>
+          <p>
+            Use independent <c>if</c> statements in any order.
+          </p>
+        </statement>
+        <feedback>
+          <p>
+            Independent conditions can allow multiple categories to
+            execute.
           </p>
         </feedback>
       </choice>
     </choices>
   </exercise>
 
-  <exercise label="cond_rec_mc4">
+
+  <!-- Switch Statements -->
+
+  <exercise label="cond_rec_mc8">
     <statement>
       <p>What will this program print?</p>
 
       <program><![CDATA[
 #include <iostream>
 
-void report_value(int a, int b);
-
 int main() {
-    report_value(2, 3);
+    char choice = 'D';
+
+    switch (choice) {
+        case 'A':
+            std::cout << "Add\n";
+            break;
+
+        case 'D':
+            std::cout << "Delete\n";
+            break;
+
+        case 'Q':
+            std::cout << "Quit\n";
+            break;
+
+        default:
+            std::cout << "Unknown\n";
+    }
 
     return 0;
 }
-
-void report_value(int a, int b) {
-    if (a < b) {
-        a += 2;
-    }
-
-    if (a > b) {
-        return;
-    }
-
-    std::cout << a + b << '\n';
-}
       ]]></program>
     </statement>
 
     <choices>
       <choice>
-        <statement><p>5</p></statement>
+        <statement><p>Add</p></statement>
         <feedback>
           <p>
-            Trace how <c>a</c> changes before the second condition is
-            evaluated.
-          </p>
-        </feedback>
-      </choice>
-
-      <choice>
-        <statement><p>7</p></statement>
-        <feedback>
-          <p>
-            Check whether execution reaches the output statement after the
-            second <c>if</c>.
-          </p>
-        </feedback>
-      </choice>
-
-      <choice>
-        <statement><p>23</p></statement>
-        <feedback>
-          <p>
-            The expression uses integer addition, not digit concatenation.
+            Compare the value of <c>choice</c> with the case labels.
           </p>
         </feedback>
       </choice>
 
       <choice correct="yes">
-        <statement><p>Nothing</p></statement>
+        <statement><p>Delete</p></statement>
         <feedback>
           <p>
-            Once the <c>return</c> statement executes, the current function
-            call ends immediately.
+            <c>'D'</c> matches <c>case 'D'</c>, and <c>break</c> then
+            exits the switch.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Quit</p></statement>
+        <feedback>
+          <p>
+            Execution begins at the case whose value matches
+            <c>choice</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Unknown</p></statement>
+        <feedback>
+          <p>
+            The <c>default</c> case is used only when none of the case
+            values match.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Delete Quit</p></statement>
+        <feedback>
+          <p>
+            Check whether a <c>break</c> is reached after printing
+            <q>Delete</q>.
           </p>
         </feedback>
       </choice>
     </choices>
   </exercise>
 
-  <exercise label="cond_rec_mc5">
+
+  <exercise label="cond_rec_mc9">
     <statement>
-      <p>What will this function return for <c>determine_category(82)</c>?</p>
+      <p>What will this program print?</p>
 
       <program><![CDATA[
-char determine_category(int score) {
-    if (score >= 90) {
-        return 'A';
+#include <iostream>
+
+int main() {
+    int option = 2;
+
+    switch (option) {
+        case 1:
+            std::cout << "One ";
+
+        case 2:
+            std::cout << "Two ";
+
+        case 3:
+            std::cout << "Three ";
+            break;
+
+        default:
+            std::cout << "Other ";
     }
-    else if (score >= 80) {
-        return 'B';
-    }
-    else if (score >= 70) {
-        return 'C';
-    }
-    else {
-        return 'D';
-    }
+
+    return 0;
 }
       ]]></program>
     </statement>
 
     <choices>
       <choice>
-        <statement><p><c>'A'</c></p></statement>
+        <statement><p>Two</p></statement>
         <feedback>
           <p>
-            Evaluate the conditions from top to bottom using the value 82.
+            Check whether a <c>break</c> appears after <c>case 2</c>.
           </p>
         </feedback>
       </choice>
 
       <choice correct="yes">
-        <statement><p><c>'B'</c></p></statement>
+        <statement><p>Two Three</p></statement>
         <feedback>
           <p>
-            This is the first branch whose condition is true.
+            Execution begins at <c>case 2</c> and falls through into
+            <c>case 3</c> before reaching <c>break</c>.
           </p>
         </feedback>
       </choice>
 
       <choice>
-        <statement><p><c>'C'</c></p></statement>
+        <statement><p>One Two Three</p></statement>
         <feedback>
           <p>
-            Check whether an earlier condition is already true.
+            Execution does not begin at cases that appear before the
+            matching case.
           </p>
         </feedback>
       </choice>
 
       <choice>
-        <statement><p><c>'D'</c></p></statement>
+        <statement><p>Three</p></statement>
         <feedback>
           <p>
-            The final <c>else</c> executes only if all previous conditions
-            are false.
+            The matching <c>case 2</c> executes before fall-through reaches
+            <c>case 3</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>Other</p></statement>
+        <feedback>
+          <p>
+            A matching case exists, so execution begins there rather than
+            at <c>default</c>.
           </p>
         </feedback>
       </choice>
     </choices>
   </exercise>
 
-  <exercise label="cond_rec_mc6">
+
+  <!-- Nested Conditionals -->
+
+  <exercise label="cond_rec_mc10">
     <statement>
       <p>What will this function print?</p>
 
@@ -434,130 +736,152 @@ report_region('M', 'Z');
     </choices>
   </exercise>
 
-  <exercise label="cond_rec_mc7">
+
+  <!-- Return in Conditional Branches -->
+
+  <exercise label="cond_rec_mc11">
     <statement>
-      <p>
-        Which ordering correctly classifies scores into 90+, 80+, 70+,
-        and below 70?
-      </p>
-    </statement>
-
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>
-            Test <c>&gt;= 90</c>, then <c>&gt;= 80</c>, then
-            <c>&gt;= 70</c>.
-          </p>
-        </statement>
-        <feedback>
-          <p>
-            Overlapping thresholds should usually be checked from the most
-            restrictive to the least restrictive.
-          </p>
-        </feedback>
-      </choice>
-
-      <choice>
-        <statement>
-          <p>
-            Test <c>&gt;= 70</c>, then <c>&gt;= 80</c>, then
-            <c>&gt;= 90</c>.
-          </p>
-        </statement>
-        <feedback>
-          <p>
-            Consider what happens to a score of 95 if the broadest
-            condition is checked first.
-          </p>
-        </feedback>
-      </choice>
-
-      <choice>
-        <statement>
-          <p>Use only <c>score &gt;= 90</c> and an <c>else</c>.</p>
-        </statement>
-        <feedback>
-          <p>
-            More than two categories require more than two branches.
-          </p>
-        </feedback>
-      </choice>
-
-      <choice>
-        <statement>
-          <p>Use independent <c>if</c> statements in any order.</p>
-        </statement>
-        <feedback>
-          <p>
-            Independent conditions can allow multiple categories to execute.
-          </p>
-        </feedback>
-      </choice>
-    </choices>
-  </exercise>
-
-  <exercise label="cond_rec_mc8">
-    <statement>
-      <p>What will this code print?</p>
+      <p>What will this program print?</p>
 
       <program><![CDATA[
-int x = -3;
+#include <iostream>
 
-if (x > 0) {
-    std::cout << "Positive\n";
+void report_value(int a, int b);
+
+int main() {
+    report_value(2, 3);
+
+    return 0;
 }
-else if (x == 0) {
-    std::cout << "Zero\n";
-}
-else {
-    std::cout << "Negative\n";
+
+void report_value(int a, int b) {
+    if (a < b) {
+        a += 2;
+    }
+
+    if (a > b) {
+        return;
+    }
+
+    std::cout << a + b << '\n';
 }
       ]]></program>
     </statement>
 
     <choices>
       <choice>
-        <statement><p>Positive</p></statement>
+        <statement><p>5</p></statement>
         <feedback>
           <p>
-            Evaluate the first comparison using -3.
+            Trace how <c>a</c> changes before the second condition is
+            evaluated.
           </p>
         </feedback>
       </choice>
 
       <choice>
-        <statement><p>Zero</p></statement>
+        <statement><p>7</p></statement>
         <feedback>
           <p>
-            Check whether -3 is equal to zero.
+            Check whether execution reaches the output statement after the
+            second <c>if</c>.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p>23</p></statement>
+        <feedback>
+          <p>
+            The expression uses integer addition, not digit concatenation.
           </p>
         </feedback>
       </choice>
 
       <choice correct="yes">
-        <statement><p>Negative</p></statement>
-        <feedback>
-          <p>
-            The final branch is reached after both earlier conditions are
-            false.
-          </p>
-        </feedback>
-      </choice>
-
-      <choice>
         <statement><p>Nothing</p></statement>
         <feedback>
           <p>
-            A complete <c>if</c>/<c>else if</c>/<c>else</c> chain selects
-            one branch.
+            Once the <c>return</c> statement executes, the current function
+            call ends immediately.
           </p>
         </feedback>
       </choice>
     </choices>
   </exercise>
 
-  <exercise label="cond_rec_mc9">
+
+  <exercise label="cond_rec_mc12">
+    <statement>
+      <p>
+        What will this function return for
+        <c>determine_category(82)</c>?
+      </p>
+
+      <program><![CDATA[
+char determine_category(int score) {
+    if (score >= 90) {
+        return 'A';
+    }
+    else if (score >= 80) {
+        return 'B';
+    }
+    else if (score >= 70) {
+        return 'C';
+    }
+    else {
+        return 'D';
+    }
+}
+      ]]></program>
+    </statement>
+
+    <choices>
+      <choice>
+        <statement><p><c>'A'</c></p></statement>
+        <feedback>
+          <p>
+            Evaluate the conditions from top to bottom using the value 82.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice correct="yes">
+        <statement><p><c>'B'</c></p></statement>
+        <feedback>
+          <p>
+            This is the first branch whose condition is true, so that value
+            is returned immediately.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p><c>'C'</c></p></statement>
+        <feedback>
+          <p>
+            Check whether an earlier condition becomes true before this
+            branch is reached.
+          </p>
+        </feedback>
+      </choice>
+
+      <choice>
+        <statement><p><c>'D'</c></p></statement>
+        <feedback>
+          <p>
+            The final <c>else</c> executes only if all previous conditions
+            are false.
+          </p>
+        </feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+
+  <!-- Optional Recursion -->
+
+  <exercise label="cond_rec_mc13">
     <statement>
       <p>
         <em>Optional recursion:</em> How many times does <q>Moo!</q>
@@ -628,7 +952,8 @@ report_moo(4, 8);
     </choices>
   </exercise>
 
-  <exercise label="cond_rec_mc10">
+
+  <exercise label="cond_rec_mc14">
     <statement>
       <p>
         <em>Optional recursion:</em> What happens when this function is
@@ -681,7 +1006,9 @@ report_moo(5, 10);
       </choice>
 
       <choice correct="yes">
-        <statement><p>It continues recursively without reaching 10.</p></statement>
+        <statement>
+          <p>It continues recursively without reaching 10.</p>
+        </statement>
         <feedback>
           <p>
             Adding 2 preserves parity, so the argument never becomes equal

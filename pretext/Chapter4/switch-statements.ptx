@@ -1,0 +1,487 @@
+<?xml version="1.0"?>
+<section xml:id="chapter4_switch-statements">
+  <title>Switch Statements</title>
+
+  <introduction>
+    <p>
+      A long <c>if</c>/<c>else if</c> chain can become repetitive when one
+      expression is compared against several specific constant values. In
+      these situations, a <term>switch statement</term> can provide a clearer
+      alternative.
+    </p>
+
+    <p>
+      A <c>switch</c> statement evaluates one expression and compares its value
+      with a series of <c>case</c> labels.
+    </p>
+
+    <listing label="chapter4_switch_AC_1">
+      <title>
+        This function reports an action based on a menu choice.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="chapter4_switch_AC_1_editor">
+        <code><![CDATA[
+#include <iostream>
+
+// Function declaration
+void report_menu_choice(char choice);
+
+int main() {
+    char choice = 'A';
+
+    report_menu_choice(choice);
+
+    return 0;
+}
+
+// Function definition
+void report_menu_choice(char choice) {
+    switch (choice) {
+        case 'A':
+            std::cout << "Add\n";
+            break;
+
+        case 'D':
+            std::cout << "Delete\n";
+            break;
+
+        case 'Q':
+            std::cout << "Quit\n";
+            break;
+
+        default:
+            std::cout << "Unknown choice\n";
+    }
+}
+        ]]></code>
+      </program>
+    </listing>
+
+    <p>
+      The expression inside <c>switch</c> is evaluated once. C++ then looks
+      for a matching <c>case</c>. When a match is found, execution begins at
+      that case.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>The break Statement</title>
+
+    <p>
+      A <c>break</c> statement ends the current <c>switch</c> branch and
+      continues execution after the <c>switch</c>.
+    </p>
+
+    <p>
+      If <c>break</c> is omitted, execution continues into the following
+      case. This behavior is called <term>fall-through</term>.
+    </p>
+
+    <listing label="chapter4_switch_AC_2">
+      <title>
+        Omitting <c>break</c> causes execution to continue into the next case.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="chapter4_switch_AC_2_editor">
+        <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int option = 2;
+
+    switch (option) {
+        case 1:
+            std::cout << "One\n";
+
+        case 2:
+            std::cout << "Two\n";
+
+        case 3:
+            std::cout << "Three\n";
+            break;
+
+        default:
+            std::cout << "Other\n";
+    }
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </listing>
+
+    <p>
+      Since <c>option</c> is 2, execution begins at <c>case 2</c>. Because
+      there is no <c>break</c> after that case, the program also executes
+      <c>case 3</c>. Therefore, the output is:
+    </p>
+
+    <program><![CDATA[
+Two
+Three
+    ]]></program>
+
+    <warning>
+      <p>
+        Forgetting <c>break</c> is a common source of errors. Unless
+        fall-through is intentional, end each case with <c>break</c>.
+      </p>
+    </warning>
+  </subsection>
+
+
+  <subsection>
+    <title>The default Case</title>
+
+    <p>
+      The optional <c>default</c> case executes when none of the listed
+      cases match.
+    </p>
+
+    <program><![CDATA[
+switch (choice) {
+    case 'Y':
+        std::cout << "Yes\n";
+        break;
+
+    case 'N':
+        std::cout << "No\n";
+        break;
+
+    default:
+        std::cout << "Invalid choice\n";
+}
+    ]]></program>
+
+    <p>
+      The <c>default</c> case plays a role similar to the final
+      <c>else</c> in an <c>if</c>/<c>else if</c>/<c>else</c> chain.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>When to Use switch</title>
+
+    <p>
+      A <c>switch</c> statement is useful when the same expression is
+      compared against several distinct constant values.
+    </p>
+
+    <p>For example:</p>
+
+    <program><![CDATA[
+switch (day_number) {
+    case 1:
+        std::cout << "Monday\n";
+        break;
+
+    case 2:
+        std::cout << "Tuesday\n";
+        break;
+
+    case 3:
+        std::cout << "Wednesday\n";
+        break;
+
+    default:
+        std::cout << "Another day\n";
+}
+    ]]></program>
+
+    <p>
+      A chained conditional can express the same idea:
+    </p>
+
+    <program><![CDATA[
+if (day_number == 1) {
+    std::cout << "Monday\n";
+}
+else if (day_number == 2) {
+    std::cout << "Tuesday\n";
+}
+else if (day_number == 3) {
+    std::cout << "Wednesday\n";
+}
+else {
+    std::cout << "Another day\n";
+}
+    ]]></program>
+
+    <p>
+      Neither form is always better. Use the form that makes the decision
+      easiest to understand.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>When switch Is Not Appropriate</title>
+
+    <p>
+      A <c>switch</c> statement is not designed for general range tests such
+      as:
+    </p>
+
+    <program><![CDATA[
+score >= 90
+    ]]></program>
+
+    <p>
+      For ranges and more complex Boolean conditions, use
+      <c>if</c>/<c>else if</c>/<c>else</c>.
+    </p>
+
+    <program><![CDATA[
+if (score >= 90) {
+    std::cout << "A\n";
+}
+else if (score >= 80) {
+    std::cout << "B\n";
+}
+else {
+    std::cout << "Below B\n";
+}
+    ]]></program>
+  </subsection>
+
+
+  <subsection>
+    <title>Check Your Understanding</title>
+
+    <exercise label="chapter4_switch_1">
+      <statement>
+        <p>What will this program print?</p>
+
+        <program><![CDATA[
+#include <iostream>
+
+int main() {
+    int option = 2;
+
+    switch (option) {
+        case 1:
+            std::cout << "A\n";
+            break;
+
+        case 2:
+            std::cout << "B\n";
+            break;
+
+        case 3:
+            std::cout << "C\n";
+            break;
+
+        default:
+            std::cout << "D\n";
+    }
+
+    return 0;
+}
+        ]]></program>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement><p>A</p></statement>
+          <feedback>
+            <p>
+              Compare the value of <c>option</c> with each case label.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement><p>B</p></statement>
+          <feedback>
+            <p>
+              <c>option</c> matches <c>case 2</c>, and <c>break</c> ends the
+              switch branch.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p>C</p></statement>
+          <feedback>
+            <p>
+              Execution begins at the case whose value matches
+              <c>option</c>.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p>D</p></statement>
+          <feedback>
+            <p>
+              The <c>default</c> case executes only when no case matches.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter4_switch_2">
+      <statement>
+        <p>What will this program print?</p>
+
+        <program><![CDATA[
+#include <iostream>
+
+int main() {
+    char grade = 'B';
+
+    switch (grade) {
+        case 'A':
+            std::cout << "Excellent\n";
+
+        case 'B':
+            std::cout << "Good\n";
+
+        case 'C':
+            std::cout << "Satisfactory\n";
+            break;
+
+        default:
+            std::cout << "Other\n";
+    }
+
+    return 0;
+}
+        ]]></program>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>Good</p>
+          </statement>
+          <feedback>
+            <p>
+              Check whether execution stops after <c>case 'B'</c>.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              Good, followed by Satisfactory on the next line
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Execution starts at <c>case 'B'</c> and falls through until a
+              <c>break</c> is reached.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Excellent, followed by Good and Satisfactory
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Execution does not begin at cases that appear before the
+              matching case.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>Other</p>
+          </statement>
+          <feedback>
+            <p>
+              A matching case exists, so <c>default</c> is not the starting
+              point.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter4_switch_3">
+      <statement>
+        <p>
+          Which situation is best suited for a <c>switch</c> statement?
+        </p>
+      </statement>
+
+      <choices>
+        <choice correct="yes">
+          <statement>
+            <p>
+              Choosing an action based on whether a menu option is
+              <c>'A'</c>, <c>'D'</c>, or <c>'Q'</c>.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              A <c>switch</c> works well when one expression is compared
+              against several distinct constant values.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Determining whether a temperature is between 60 and 80.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Range conditions are generally clearer with an <c>if</c>
+              statement.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Determining whether a year is divisible by 4 and not divisible
+              by 100.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              This decision combines Boolean expressions rather than comparing
+              one value with several constants.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Checking whether two measurements are both positive.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              This requires a compound Boolean condition rather than a
+              multi-case selection.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+  </subsection>
+
+</section>
