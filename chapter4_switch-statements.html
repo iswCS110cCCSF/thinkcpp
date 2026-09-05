@@ -14,7 +14,7 @@
 <!--******************************************-->
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TCPP2 Pure functions</title>
+<title>TCPP2 Switch Statements</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -114,7 +114,7 @@ eBookConfig.enable_chatcodes =  false;
 <legend>Assistive technologies</legend>
 <label for="ptx-readability-accessible-permalinks"><input type="checkbox" id="ptx-readability-accessible-permalinks"><span>🔗</span><span>Expose permalinks</span></label>
 </fieldset>
-<div class="ptx-readability-options-group"><button type="button" class="ptx-readability-reset-button button" id="ptx-readability-reset-button"><span class="icon material-symbols-outlined" aria-hidden="true">&#xf053;</span><span class="name">Reset All</span></button></div></dialog></span><span class="treebuttons"><a class="previous-button button" href="chapter9_functions-for-objects.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="more-structures.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="chapter9_const-parameters.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+<div class="ptx-readability-options-group"><button type="button" class="ptx-readability-reset-button button" id="ptx-readability-reset-button"><span class="icon material-symbols-outlined" aria-hidden="true">&#xf053;</span><span class="name">Reset All</span></button></div></dialog></span><span class="treebuttons"><a class="previous-button button" href="chapter4_chained-conditionals.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="conditionals.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="chapter4_nested-conditionals.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
 </div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(
 \newcommand{\lt}{&lt;}
 \newcommand{\gt}{&gt;}
@@ -213,9 +213,9 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter3_activecode-exercises.html" class="internal"><span class="codenumber">3.16</span> <span class="title">Activecode Exercises</span></a></div></li>
 </ul>
 </li>
-<li class="toc-item toc-chapter">
+<li class="toc-item toc-chapter contains-active">
 <div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
-<ul id="ptx-toc-group-conditionals" class="structural toc-item-list">
+<ul class="structural toc-item-list contains-active" id="ptx-toc-group-conditionals">
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Remainder Operator</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
 <li class="toc-item toc-section">
@@ -231,9 +231,9 @@ eBookConfig.enable_chatcodes =  false;
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Alternative Execution</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Chained Conditionals</span></a></div></li>
-<li class="toc-item toc-section">
+<li class="toc-item toc-section contains-active">
 <div class="toc-title-box"><a href="chapter4_switch-statements.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Switch Statements</span></a></div>
-<ul id="ptx-toc-group-chapter4_switch-statements" class="structural toc-item-list">
+<ul class="structural toc-item-list active" id="ptx-toc-group-chapter4_switch-statements">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_switch-statements.html#chapter4_switch-statements-3" class="internal"><span class="codenumber">4.6.1</span> <span class="title">The break Statement</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_switch-statements.html#chapter4_switch-statements-4" class="internal"><span class="codenumber">4.6.2</span> <span class="title">The default Case</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_switch-statements.html#chapter4_switch-statements-5" class="internal"><span class="codenumber">4.6.3</span> <span class="title">When to Use switch</span></a></div></li>
@@ -366,16 +366,16 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter8_coding-practice.html" class="internal"><span class="codenumber">8.15</span> <span class="title">Coding Practice</span></a></div></li>
 </ul>
 </li>
-<li class="toc-item toc-chapter contains-active">
+<li class="toc-item toc-chapter">
 <div class="toc-title-box"><a href="more-structures.html" class="internal"><span class="codenumber">9</span> <span class="title">More structures</span></a></div>
-<ul class="structural toc-item-list contains-active" id="ptx-toc-group-more-structures">
+<ul id="ptx-toc-group-more-structures" class="structural toc-item-list">
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter9_time.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Time</span></a></div>
 <ul id="ptx-toc-group-chapter9_time" class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter9_time.html#chapter9_time-12" class="internal"><span class="codenumber">9.1</span> <span class="title">Exercises</span></a></div></li></ul>
 </li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_printtime.html" class="internal"><span class="codenumber">9.2</span> <span class="title"><code class="code-inline tex2jax_ignore">printTime</code></span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_functions-for-objects.html" class="internal"><span class="codenumber">9.3</span> <span class="title">Functions for objects</span></a></div></li>
-<li class="toc-item toc-section active"><div class="toc-title-box"><a href="chapter9_pure-functions.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Pure functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_pure-functions.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Pure functions</span></a></div></li>
 <li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter9_const-parameters.html" class="internal"><span class="codenumber">9.5</span> <span class="title"><code class="code-inline tex2jax_ignore">const</code> parameters</span></a></div></li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter9_modifiers.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Modifiers</span></a></div>
@@ -557,143 +557,352 @@ eBookConfig.enable_chatcodes =  false;
 </li>
 </ul></nav></div>
 <main class="ptx-main"><div id="ptx-content" class="ptx-content">
-<section class="section" id="chapter9_pure-functions">
+<section class="section" id="chapter4_switch-statements">
 <h1 class="heading hide-type">
-<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Pure functions</span>
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Switch Statements</span>
 </h1>
-<div class="para" id="chapter9_pure-functions-2">A function is considered a pure function if the result depends only on the arguments, and it has no side effects like modifying an argument or outputting something. The only result of calling a pure function is the return value.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pure-functions-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<section class="introduction" id="chapter4_switch-statements-2">
+<div class="para" id="chapter4_switch-statements-2-1">A long <code class="code-inline tex2jax_ignore">if</code>/<code class="code-inline tex2jax_ignore">else if</code> chain can become repetitive when one expression is compared against several specific constant values. In these situations, a <dfn class="terminology">switch statement</dfn> can provide a clearer alternative.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="pure_function_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.4.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>One example is the function <code class="code-inline tex2jax_ignore">after</code>, which compares two <code class="code-inline tex2jax_ignore">Time</code>s and returns a <code class="code-inline tex2jax_ignore">bool</code> that indicates whether the first operand comes after the second. Take a look at this active code.<div class="autopermalink" aria-hidden="true" data-description="Listing 9.4.1: One example is the function after, which compares two Times and returns a bool that indicates whether the first operand comes after the second. Take a look at this active code."><a tabindex="-1" href="#pure_function_AC_1" title="Copy heading and permalink for Listing 9.4.1: One example is the function after, which compares two Times and returns a bool that indicates whether the first operand comes after the second. Take a look at this active code." aria-label="Copy heading and permalink for Listing 9.4.1: One example is the function after, which compares two Times and returns a bool that indicates whether the first operand comes after the second. Take a look at this active code.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-pure_function_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
+<div class="para" id="chapter4_switch-statements-2-2">A <code class="code-inline tex2jax_ignore">switch</code> statement evaluates one expression and compares its value with a series of <code class="code-inline tex2jax_ignore">case</code> labels.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-2-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="chapter4_switch_AC_1"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This function reports an action based on a menu choice.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.6.1: This function reports an action based on a menu choice."><a tabindex="-1" href="#chapter4_switch_AC_1" title="Copy heading and permalink for Listing 4.6.1: This function reports an action based on a menu choice." aria-label="Copy heading and permalink for Listing 4.6.1: This function reports an action based on a menu choice.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-chapter4_switch_AC_1_editor" class="language-cpp">#include &lt;iostream&gt;
 
-struct Time {
-    int hour, minute;
-    double second;
-};
-
-bool after(Time&amp; time1, Time&amp; time2) {
-    if (time1.hour &gt; time2.hour) { return true; }
-    if (time1.hour &lt; time2.hour) { return false; }
-    if (time1.minute &gt; time2.minute) { return true; }
-    if (time1.minute &lt; time2.minute) { return false; }
-    if (time1.second &gt; time2.second) { return true; }
-    return false;
-}
+// Function declaration
+void report_menu_choice(char choice);
 
 int main() {
-    Time time = { 11, 59, 3.14159 };
-    Time time2 = { 1, 50, 3.14159 };
-    std::cout &lt;&lt; after(time, time2);
-}
-</code></pre></div>
-</figure>
-<div class="para" id="chapter9_pure-functions-4">What is the result of this function if the two times are equal? Does that seem like the appropriate result for this function? If you were writing the documentation for this function, would you mention that case specifically?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pure-functions-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="chapter9_pure-functions-5">A second example is <code class="code-inline tex2jax_ignore">addTime</code>, which calculates the sum of two times. For example, if it is <code class="code-inline tex2jax_ignore">9:14:30</code>, and your breadmaker takes 3 hours and 35 minutes, you could use <code class="code-inline tex2jax_ignore">addTime</code> to figure out when the bread will be done.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pure-functions-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="chapter9_pure-functions-6">Here is a rough draft of this function that is not quite right:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pure-functions-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">Time addTime(Time&amp; t1, Time&amp; t2) {
-  Time sum;
-  sum.hour = t1.hour + t2.hour;
-  sum.minute = t1.minute + t2.minute;
-  sum.second = t1.second + t2.second;
-  return sum;
-}
-</code></pre></div>
-<figure class="listing figure-like" id="pure_function_AC_2"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.4.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Take a look at this active code. If <code class="code-inline tex2jax_ignore">currentTime</code> contains the current time and <code class="code-inline tex2jax_ignore">breadTime</code> contains the amount of time it takes for your breadmaker to make bread, then you could use <code class="code-inline tex2jax_ignore">addTime</code> to figure out when the bread will be done.<div class="autopermalink" aria-hidden="true" data-description="Listing 9.4.2: Take a look at this active code. If currentTime contains the current time and breadTime contains the amount of time it takes for your breadmaker to make bread, then you could use addTime to figure out when the bread will be done."><a tabindex="-1" href="#pure_function_AC_2" title="Copy heading and permalink for Listing 9.4.2: Take a look at this active code. If currentTime contains the current time and breadTime contains the amount of time it takes for your breadmaker to make bread, then you could use addTime to figure out when the bread will be done." aria-label="Copy heading and permalink for Listing 9.4.2: Take a look at this active code. If currentTime contains the current time and breadTime contains the amount of time it takes for your breadmaker to make bread, then you could use addTime to figure out when the bread will be done.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-pure_function_AC_2_editor" class="language-cpp">#include &lt;iostream&gt;
+    char choice = 'A';
 
-struct Time {
-    int hour, minute;
-    double second;
-};
+    report_menu_choice(choice);
 
-void printTime(Time&amp; t) {
-    std::cout &lt;&lt; t.hour &lt;&lt; ":" &lt;&lt; t.minute &lt;&lt; ":" &lt;&lt; t.second &lt;&lt; std::endl;
+    return 0;
 }
 
-Time addTime(Time&amp; t1, Time&amp; t2) {
-    Time sum;
-    sum.hour = t1.hour + t2.hour;
-    sum.minute = t1.minute + t2.minute;
-    sum.second = t1.second + t2.second;
-    return sum;
-}
+// Function definition
+void report_menu_choice(char choice) {
+    switch (choice) {
+        case 'A':
+            std::cout &lt;&lt; "Add\n";
+            break;
 
-int main() {
-    Time currentTime = { 9, 14, 30.0 };
-    Time breadTime = { 3, 35, 0.0 };
-    Time doneTime = addTime(currentTime, breadTime);
-    printTime(doneTime);
-}
-</code></pre></div>
-</figure>
-<div class="para" id="chapter9_pure-functions-9">The output of this program is <code class="code-inline tex2jax_ignore">12:49:30</code>, which is correct. On the other hand, there are cases where the result is not correct. Can you think of one?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pure-functions-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="chapter9_pure-functions-10">The problem is that this function does not deal with cases where the number of seconds or minutes adds up to more than 60. When that happens we have to “carry” the extra seconds into the minutes column, or extra minutes into the hours column.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pure-functions-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="chapter9_pure-functions-11">Here’s a second, corrected version of this function.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pure-functions-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<figure class="listing figure-like" id="pure_function_AC_3"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.4.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This active code is the corrected version of <code class="code-inline tex2jax_ignore">addTime</code>.<div class="autopermalink" aria-hidden="true" data-description="Listing 9.4.3: This active code is the corrected version of addTime."><a tabindex="-1" href="#pure_function_AC_3" title="Copy heading and permalink for Listing 9.4.3: This active code is the corrected version of addTime." aria-label="Copy heading and permalink for Listing 9.4.3: This active code is the corrected version of addTime.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-pure_function_AC_3_editor" class="language-cpp">#include &lt;iostream&gt;
+        case 'D':
+            std::cout &lt;&lt; "Delete\n";
+            break;
 
-struct Time {
-    int hour, minute;
-    double second;
-};
+        case 'Q':
+            std::cout &lt;&lt; "Quit\n";
+            break;
 
-void printTime(Time&amp; t) {
-    std::cout &lt;&lt; t.hour &lt;&lt; ":" &lt;&lt; t.minute &lt;&lt; ":" &lt;&lt; t.second &lt;&lt; std::endl;
-}
-
-Time addTime(Time&amp; t1, Time&amp; t2) {
-    Time sum;
-    sum.hour = t1.hour + t2.hour;
-    sum.minute = t1.minute + t2.minute;
-    sum.second = t1.second + t2.second;
-    if (sum.second &gt;= 60.0) {
-        sum.second -= 60.0;
-        sum.minute += 1;
+        default:
+            std::cout &lt;&lt; "Unknown choice\n";
     }
-    if (sum.minute &gt;= 60) {
-        sum.minute -= 60;
-        sum.hour += 1;
-    }
-    return sum;
-}
-
-int main() {
-    Time currentTime = { 9, 14, 30.0 };
-    Time breadTime = { 3, 35, 0.0 };
-    Time doneTime = addTime(currentTime, breadTime);
-    printTime(doneTime);
 }
 </code></pre></div>
 </figure>
-<div class="para" id="chapter9_pure-functions-13">Although it’s correct, it’s starting to get big. Later, I will suggest an alternate approach to this problem that will be much shorter.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pure-functions-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<div class="para" id="chapter9_pure-functions-14">This code demonstrates two operators we have not seen before, <code class="code-inline tex2jax_ignore">+=</code> and <code class="code-inline tex2jax_ignore">-=</code>. These operators provide a concise way to increment and decrement variables. For example, the statement <code class="code-inline tex2jax_ignore">sum.second -= 60.0;</code> is equivalent to <code class="code-inline tex2jax_ignore">sum.second = sum.second - 60;</code><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pure-functions-14" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div>
-<article class="exercise exercise-like" id="pure_functions_1"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.4.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<div class="para" id="chapter4_switch-statements-2-4">The expression inside <code class="code-inline tex2jax_ignore">switch</code> is evaluated once. C++ then looks for a matching <code class="code-inline tex2jax_ignore">case</code>. When a match is found, execution begins at that case.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-2-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section>
+<section class="subsection" id="chapter4_switch-statements-3">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The break Statement</span>
 </h2>
-<div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-pure_functions_1">
-<span data-subcomponent="question">
-<div class="para" id="pure_functions_1-1-1">Match the statement to its equivalent.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#pure_functions_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
-</div></span><span data-subcomponent="feedback">
-<div class="para" id="pure_functions_1-2-1">Try again.</div></span><li data-subcomponent="draggable" id="rs-pure_functions_1_drag1" data-category="1">x.dollar += 2;</li>
-<li data-subcomponent="dropzone" for="rs-pure_functions_1_drag1" data-category="1">x.dollar = x.dollar + 2;</li>
-<li data-subcomponent="draggable" id="rs-pure_functions_1_drag2" data-category="2">x.dollar -= 2;</li>
-<li data-subcomponent="dropzone" for="rs-pure_functions_1_drag2" data-category="2">x.dollar = x.dollar - 2;</li>
-<li data-subcomponent="draggable" id="rs-pure_functions_1_drag3" data-category="3">x.cents -= 2;</li>
-<li data-subcomponent="dropzone" for="rs-pure_functions_1_drag3" data-category="3">x.cents = x.cents - 2;</li>
-<li data-subcomponent="draggable" id="rs-pure_functions_1_drag4" data-category="4">x.cents += 2;</li>
-<li data-subcomponent="dropzone" for="rs-pure_functions_1_drag4" data-category="4">x.cents = x.cents + 2;</li>
-</ul></div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.4.1"><a tabindex="-1" href="#pure_functions_1" title="Copy heading and permalink for Checkpoint 9.4.1" aria-label="Copy heading and permalink for Checkpoint 9.4.1">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Section 9.4: Pure functions"><a tabindex="-1" href="#chapter9_pure-functions" title="Copy heading and permalink for Section 9.4: Pure functions" aria-label="Copy heading and permalink for Section 9.4: Pure functions">🔗</a></div>
+<div class="para" id="chapter4_switch-statements-3-2">A <code class="code-inline tex2jax_ignore">break</code> statement ends the current <code class="code-inline tex2jax_ignore">switch</code> branch and continues execution after the <code class="code-inline tex2jax_ignore">switch</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-3-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter4_switch-statements-3-3">If <code class="code-inline tex2jax_ignore">break</code> is omitted, execution continues into the following case. This behavior is called <dfn class="terminology">fall-through</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-3-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="chapter4_switch_AC_2"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Omitting <code class="code-inline tex2jax_ignore">break</code> causes execution to continue into the next case.<div class="autopermalink" aria-hidden="true" data-description="Listing 4.6.2: Omitting break causes execution to continue into the next case."><a tabindex="-1" href="#chapter4_switch_AC_2" title="Copy heading and permalink for Listing 4.6.2: Omitting break causes execution to continue into the next case." aria-label="Copy heading and permalink for Listing 4.6.2: Omitting break causes execution to continue into the next case.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-chapter4_switch_AC_2_editor" class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    int option = 2;
+
+    switch (option) {
+        case 1:
+            std::cout &lt;&lt; "One\n";
+
+        case 2:
+            std::cout &lt;&lt; "Two\n";
+
+        case 3:
+            std::cout &lt;&lt; "Three\n";
+            break;
+
+        default:
+            std::cout &lt;&lt; "Other\n";
+    }
+
+    return 0;
+}
+</code></pre></div>
+</figure>
+<div class="para" id="chapter4_switch-statements-3-5">Since <code class="code-inline tex2jax_ignore">option</code> is 2, execution begins at <code class="code-inline tex2jax_ignore">case 2</code>. Because there is no <code class="code-inline tex2jax_ignore">break</code> after that case, the program also executes <code class="code-inline tex2jax_ignore">case 3</code>. Therefore, the output is:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-3-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">Two
+Three
+</code></pre></div>
+<article class="warning remark-like" id="chapter4_switch-statements-3-7"><h3 class="heading">
+<span class="type">Warning</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3>
+<div class="para" id="chapter4_switch-statements-3-7-1">Forgetting <code class="code-inline tex2jax_ignore">break</code> is a common source of errors. Unless fall-through is intentional, end each case with <code class="code-inline tex2jax_ignore">break</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-3-7-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Warning 4.6.1"><a tabindex="-1" href="#chapter4_switch-statements-3-7" title="Copy heading and permalink for Warning 4.6.1" aria-label="Copy heading and permalink for Warning 4.6.1">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Subsection 4.6.1: The break Statement"><a tabindex="-1" href="#chapter4_switch-statements-3" title="Copy heading and permalink for Subsection 4.6.1: The break Statement" aria-label="Copy heading and permalink for Subsection 4.6.1: The break Statement">🔗</a></div>
+</section>
+<section class="subsection" id="chapter4_switch-statements-4">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The default Case</span>
+</h2>
+<div class="para" id="chapter4_switch-statements-4-2">The optional <code class="code-inline tex2jax_ignore">default</code> case executes when none of the listed cases match.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-4-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">switch (choice) {
+    case 'Y':
+        std::cout &lt;&lt; "Yes\n";
+        break;
+
+    case 'N':
+        std::cout &lt;&lt; "No\n";
+        break;
+
+    default:
+        std::cout &lt;&lt; "Invalid choice\n";
+}
+</code></pre></div>
+<div class="para" id="chapter4_switch-statements-4-4">The <code class="code-inline tex2jax_ignore">default</code> case plays a role similar to the final <code class="code-inline tex2jax_ignore">else</code> in an <code class="code-inline tex2jax_ignore">if</code>/<code class="code-inline tex2jax_ignore">else if</code>/<code class="code-inline tex2jax_ignore">else</code> chain.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-4-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 4.6.2: The default Case"><a tabindex="-1" href="#chapter4_switch-statements-4" title="Copy heading and permalink for Subsection 4.6.2: The default Case" aria-label="Copy heading and permalink for Subsection 4.6.2: The default Case">🔗</a></div>
+</section>
+<section class="subsection" id="chapter4_switch-statements-5">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">When to Use switch</span>
+</h2>
+<div class="para" id="chapter4_switch-statements-5-2">A <code class="code-inline tex2jax_ignore">switch</code> statement is useful when the same expression is compared against several distinct constant values.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-5-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter4_switch-statements-5-3">For example:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-5-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">switch (day_number) {
+    case 1:
+        std::cout &lt;&lt; "Monday\n";
+        break;
+
+    case 2:
+        std::cout &lt;&lt; "Tuesday\n";
+        break;
+
+    case 3:
+        std::cout &lt;&lt; "Wednesday\n";
+        break;
+
+    default:
+        std::cout &lt;&lt; "Another day\n";
+}
+</code></pre></div>
+<div class="para" id="chapter4_switch-statements-5-5">A chained conditional can express the same idea:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-5-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">if (day_number == 1) {
+    std::cout &lt;&lt; "Monday\n";
+}
+else if (day_number == 2) {
+    std::cout &lt;&lt; "Tuesday\n";
+}
+else if (day_number == 3) {
+    std::cout &lt;&lt; "Wednesday\n";
+}
+else {
+    std::cout &lt;&lt; "Another day\n";
+}
+</code></pre></div>
+<div class="para" id="chapter4_switch-statements-5-7">Neither form is always better. Use the form that makes the decision easiest to understand.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-5-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 4.6.3: When to Use switch"><a tabindex="-1" href="#chapter4_switch-statements-5" title="Copy heading and permalink for Subsection 4.6.3: When to Use switch" aria-label="Copy heading and permalink for Subsection 4.6.3: When to Use switch">🔗</a></div>
+</section>
+<section class="subsection" id="chapter4_switch-statements-6">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">When switch Is Not Appropriate</span>
+</h2>
+<div class="para" id="chapter4_switch-statements-6-2">A <code class="code-inline tex2jax_ignore">switch</code> statement is not designed for general range tests such as:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-6-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">score &gt;= 90
+</code></pre></div>
+<div class="para" id="chapter4_switch-statements-6-4">For ranges and more complex Boolean conditions, use <code class="code-inline tex2jax_ignore">if</code>/<code class="code-inline tex2jax_ignore">else if</code>/<code class="code-inline tex2jax_ignore">else</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch-statements-6-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code class="language-cpp">if (score &gt;= 90) {
+    std::cout &lt;&lt; "A\n";
+}
+else if (score &gt;= 80) {
+    std::cout &lt;&lt; "B\n";
+}
+else {
+    std::cout &lt;&lt; "Below B\n";
+}
+</code></pre></div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 4.6.4: When switch Is Not Appropriate"><a tabindex="-1" href="#chapter4_switch-statements-6" title="Copy heading and permalink for Subsection 4.6.4: When switch Is Not Appropriate" aria-label="Copy heading and permalink for Subsection 4.6.4: When switch Is Not Appropriate">🔗</a></div>
+</section>
+<section class="subsection" id="chapter4_switch-statements-7">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Check Your Understanding</span>
+</h2>
+<article class="exercise exercise-like" id="chapter4_switch_1"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="chapter4_switch_1-1-1">What will this program print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch_1-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    int option = 2;
+
+    switch (option) {
+        case 1:
+            std::cout &lt;&lt; "A\n";
+            break;
+
+        case 2:
+            std::cout &lt;&lt; "B\n";
+            break;
+
+        case 3:
+            std::cout &lt;&lt; "C\n";
+            break;
+
+        default:
+            std::cout &lt;&lt; "D\n";
+    }
+
+    return 0;
+}
+</code></pre></div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-chapter4_switch_1" data-multipleanswers="false">
+<li data-component="answer" id="rs-chapter4_switch_1_opt_a">
+<div class="para" id="chapter4_switch_1-2-1-1-1">A</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_1_opt_a">
+<div class="para" id="chapter4_switch_1-2-1-2-1">Compare the value of <code class="code-inline tex2jax_ignore">option</code> with each case label.</div>
+</li>
+<li data-component="answer" id="rs-chapter4_switch_1_opt_b" data-correct="">
+<div class="para" id="chapter4_switch_1-2-2-1-1">B</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_1_opt_b">
+<div class="para" id="chapter4_switch_1-2-2-2-1">
+<code class="code-inline tex2jax_ignore">option</code> matches <code class="code-inline tex2jax_ignore">case 2</code>, and <code class="code-inline tex2jax_ignore">break</code> ends the switch branch.</div>
+</li>
+<li data-component="answer" id="rs-chapter4_switch_1_opt_c">
+<div class="para" id="chapter4_switch_1-2-3-1-1">C</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_1_opt_c">
+<div class="para" id="chapter4_switch_1-2-3-2-1">Execution begins at the case whose value matches <code class="code-inline tex2jax_ignore">option</code>.</div>
+</li>
+<li data-component="answer" id="rs-chapter4_switch_1_opt_d">
+<div class="para" id="chapter4_switch_1-2-4-1-1">D</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_1_opt_d">
+<div class="para" id="chapter4_switch_1-2-4-2-1">The <code class="code-inline tex2jax_ignore">default</code> case executes only when no case matches.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.6.1"><a tabindex="-1" href="#chapter4_switch_1" title="Copy heading and permalink for Checkpoint 4.6.1" aria-label="Copy heading and permalink for Checkpoint 4.6.1">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="chapter4_switch_2"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="chapter4_switch_2-1-1">What will this program print?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch_2-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div> <div class="code-box"><pre class="program clipboardable"><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    char grade = 'B';
+
+    switch (grade) {
+        case 'A':
+            std::cout &lt;&lt; "Excellent\n";
+
+        case 'B':
+            std::cout &lt;&lt; "Good\n";
+
+        case 'C':
+            std::cout &lt;&lt; "Satisfactory\n";
+            break;
+
+        default:
+            std::cout &lt;&lt; "Other\n";
+    }
+
+    return 0;
+}
+</code></pre></div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-chapter4_switch_2" data-multipleanswers="false">
+<li data-component="answer" id="rs-chapter4_switch_2_opt_a">
+<div class="para" id="chapter4_switch_2-2-1-1-1">Good</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_2_opt_a">
+<div class="para" id="chapter4_switch_2-2-1-2-1">Check whether execution stops after <code class="code-inline tex2jax_ignore">case 'B'</code>.</div>
+</li>
+<li data-component="answer" id="rs-chapter4_switch_2_opt_b" data-correct="">
+<div class="para" id="chapter4_switch_2-2-2-1-1">Good, followed by Satisfactory on the next line</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_2_opt_b">
+<div class="para" id="chapter4_switch_2-2-2-2-1">Execution starts at <code class="code-inline tex2jax_ignore">case 'B'</code> and falls through until a <code class="code-inline tex2jax_ignore">break</code> is reached.</div>
+</li>
+<li data-component="answer" id="rs-chapter4_switch_2_opt_c">
+<div class="para" id="chapter4_switch_2-2-3-1-1">Excellent, followed by Good and Satisfactory</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_2_opt_c">
+<div class="para" id="chapter4_switch_2-2-3-2-1">Execution does not begin at cases that appear before the matching case.</div>
+</li>
+<li data-component="answer" id="rs-chapter4_switch_2_opt_d">
+<div class="para" id="chapter4_switch_2-2-4-1-1">Other</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_2_opt_d">
+<div class="para" id="chapter4_switch_2-2-4-2-1">A matching case exists, so <code class="code-inline tex2jax_ignore">default</code> is not the starting point.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.6.2"><a tabindex="-1" href="#chapter4_switch_2" title="Copy heading and permalink for Checkpoint 4.6.2" aria-label="Copy heading and permalink for Checkpoint 4.6.2">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="chapter4_switch_3"><h3 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">4.6.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="chapter4_switch_3-1-1">Which situation is best suited for a <code class="code-inline tex2jax_ignore">switch</code> statement?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter4_switch_3-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-chapter4_switch_3" data-multipleanswers="false">
+<li data-component="answer" id="rs-chapter4_switch_3_opt_a" data-correct="">
+<div class="para" id="chapter4_switch_3-2-1-1-1">Choosing an action based on whether a menu option is <code class="code-inline tex2jax_ignore">'A'</code>, <code class="code-inline tex2jax_ignore">'D'</code>, or <code class="code-inline tex2jax_ignore">'Q'</code>.</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_3_opt_a">
+<div class="para" id="chapter4_switch_3-2-1-2-1">A <code class="code-inline tex2jax_ignore">switch</code> works well when one expression is compared against several distinct constant values.</div>
+</li>
+<li data-component="answer" id="rs-chapter4_switch_3_opt_b">
+<div class="para" id="chapter4_switch_3-2-2-1-1">Determining whether a temperature is between 60 and 80.</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_3_opt_b">
+<div class="para" id="chapter4_switch_3-2-2-2-1">Range conditions are generally clearer with an <code class="code-inline tex2jax_ignore">if</code> statement.</div>
+</li>
+<li data-component="answer" id="rs-chapter4_switch_3_opt_c">
+<div class="para" id="chapter4_switch_3-2-3-1-1">Determining whether a year is divisible by 4 and not divisible by 100.</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_3_opt_c">
+<div class="para" id="chapter4_switch_3-2-3-2-1">This decision combines Boolean expressions rather than comparing one value with several constants.</div>
+</li>
+<li data-component="answer" id="rs-chapter4_switch_3_opt_d">
+<div class="para" id="chapter4_switch_3-2-4-1-1">Checking whether two measurements are both positive.</div>
+</li>
+<li data-component="feedback" id="rs-chapter4_switch_3_opt_d">
+<div class="para" id="chapter4_switch_3-2-4-2-1">This requires a compound Boolean condition rather than a multi-case selection.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 4.6.3"><a tabindex="-1" href="#chapter4_switch_3" title="Copy heading and permalink for Checkpoint 4.6.3" aria-label="Copy heading and permalink for Checkpoint 4.6.3">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Subsection 4.6.5: Check Your Understanding"><a tabindex="-1" href="#chapter4_switch-statements-7" title="Copy heading and permalink for Subsection 4.6.5: Check Your Understanding" aria-label="Copy heading and permalink for Subsection 4.6.5: Check Your Understanding">🔗</a></div>
+</section><div class="autopermalink" aria-hidden="true" data-description="Section 4.6: Switch Statements"><a tabindex="-1" href="#chapter4_switch-statements" title="Copy heading and permalink for Section 4.6: Switch Statements" aria-label="Copy heading and permalink for Section 4.6: Switch Statements">🔗</a></div>
 </section>
 </div>
 <div id="ptx-content-footer" class="ptx-content-footer">
-<a class="previous-button button" href="chapter9_functions-for-objects.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="chapter9_const-parameters.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+<a class="previous-button button" href="chapter4_chained-conditionals.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="chapter4_nested-conditionals.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>
 </div>
 <div id="ptx-page-footer" class="ptx-page-footer">
