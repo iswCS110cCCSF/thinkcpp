@@ -3,7 +3,7 @@ if (allTraceData === undefined) {
     var allTraceData = {};
 }
 (function() { // IIFE to avoid variable collision
-    let codelensID = "rs-state_of_mind_ed";  //fallback
+    let codelensID = "thinkcpp2_ptx_state_of_mind_ed";  //fallback
     let partnerCodelens = document.currentScript.parentElement.querySelector(".pytutorVisualizer");
     if (partnerCodelens) {
         codelensID = partnerCodelens.id;

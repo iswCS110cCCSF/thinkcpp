@@ -3,7 +3,7 @@ if (allTraceData === undefined) {
     var allTraceData = {};
 }
 (function() { // IIFE to avoid variable collision
-    let codelensID = "rs-multiple_functions_AC_1_editor";  //fallback
+    let codelensID = "thinkcpp2_ptx_multiple_functions_AC_1_editor";  //fallback
     let partnerCodelens = document.currentScript.parentElement.querySelector(".pytutorVisualizer");
     if (partnerCodelens) {
         codelensID = partnerCodelens.id;

@@ -7,8 +7,8 @@
 	</js>
 	<css type="list">
 		<item type="str">prefix-926.229729d09512acc9.css</item>
-		<item type="str">prefix-runestone.efe427683fc41f98.css</item>
+		<item type="str">prefix-runestone.b8b41abee2fe6343.css</item>
 	</css>
 	<cdn-url type="str">https://runestone.academy/cdn/runestone/</cdn-url>
-	<version type="str">8.2.10</version>
+	<version type="str">8.2.11</version>
 </all>
