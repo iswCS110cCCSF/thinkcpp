@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter5_constructors">
+  <title>Constructors</title>
+
+  <introduction>
+    <p>
+      In the previous section, a <c>Rectangle</c> object first received
+      default values and then used <c>set_dimensions</c> to establish useful
+      dimensions.
+    </p>
+
+    <program><![CDATA[
+Rectangle room;
+room.set_dimensions(12.0, 8.0);
+    ]]></program>
+
+    <p>
+      It would be better if an object could receive its intended starting
+      state at the moment it is created.
+    </p>
+
+    <p>
+      C++ provides a special member function for this purpose: a
+      <term>constructor</term>.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>What Is a Constructor?</title>
+
+    <p>
+      A constructor is a special member function that is called automatically
+      when an object is created.
+    </p>
+
+    <p>
+      A constructor has the same name as its class and has no return type.
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    Rectangle(double initial_length, double initial_width);
+
+private:
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      The declaration
+    </p>
+
+    <program><![CDATA[
+Rectangle(double initial_length, double initial_width);
+    ]]></program>
+
+    <p>
+      declares a constructor for <c>Rectangle</c>. Notice that there is no
+      return type, not even <c>void</c>.
+    </p>
+
+    <p>
+      When an object is created with matching arguments, C++ calls the
+      constructor automatically:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+    ]]></program>
+
+    <p>
+      Here, <c>12.0</c> and <c>8.0</c> are passed to the constructor as
+      <c>initial_length</c> and <c>initial_width</c>.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Defining a Constructor</title>
+
+    <p>
+      Like other member functions, a constructor can be declared inside the
+      class and defined later.
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    Rectangle(double initial_length, double initial_width);
+
+private:
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      The definition uses the scope resolution operator:
+    </p>
+
+    <program><![CDATA[
+Rectangle::Rectangle(double initial_length, double initial_width) {
+    length = initial_length;
+    width = initial_width;
+}
+    ]]></program>
+
+    <p>
+      The name appears twice:
+    </p>
+
+    <program><![CDATA[
+Rectangle::Rectangle
+    ]]></program>
+
+    <p>
+      The first <c>Rectangle</c> identifies the class whose member is being
+      defined. The second <c>Rectangle</c> is the name of the constructor.
+    </p>
+
+    <p>
+      A constructor does not return an object with a <c>return</c> statement.
+      C++ creates the object and then runs the constructor to initialize it.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Member Initializer Lists</title>
+
+    <p>
+      C++ provides a preferred syntax for initializing data members in a
+      constructor: a <term>member initializer list</term>.
+    </p>
+
+    <program><![CDATA[
+Rectangle::Rectangle(double initial_length, double initial_width)
+    : length(initial_length), width(initial_width) {
+}
+    ]]></program>
+
+    <p>
+      The initializer list appears after the constructor's parameter list and
+      before the constructor body.
+    </p>
+
+    <p>
+      In this example:
+    </p>
+
+    <program><![CDATA[
+length(initial_length)
+width(initial_width)
+    ]]></program>
+
+    <p>
+      initialize the data members <c>length</c> and <c>width</c> from the
+      constructor parameters.
+    </p>
+
+    <p>
+      For straightforward member initialization, prefer an initializer list
+      rather than first creating the members and then assigning values inside
+      the constructor body.
+    </p>
+
+    <p>
+      The parameter names <c>initial_length</c> and <c>initial_width</c> also
+      make it clear which names are parameters and which names are data
+      members.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Calling a Constructor</title>
+
+    <p>
+      We can create a <c>Rectangle</c> and pass constructor arguments using
+      braces:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+Rectangle table{6.0, 3.0};
+    ]]></program>
+
+    <p>
+      Each statement creates a separate object and invokes the constructor for
+      that object.
+    </p>
+
+    <p>
+      Parentheses can also be used for this kind of construction:
+    </p>
+
+    <program><![CDATA[
+Rectangle room(12.0, 8.0);
+    ]]></program>
+
+    <p>
+      In this book, we will generally prefer brace initialization:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+    ]]></program>
+
+    <p>
+      Earlier, braces were used to initialize simple structures directly.
+      Once a class provides constructors, braces can also be used to select
+      and call a matching constructor.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>A Default Constructor</title>
+
+    <p>
+      A constructor that can be called with no arguments is called a
+      <term>default constructor</term>.
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    Rectangle();
+    Rectangle(double initial_length, double initial_width);
+
+private:
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      We can define the default constructor so that a newly created rectangle
+      begins as a 1-by-1 rectangle:
+    </p>
+
+    <program><![CDATA[
+Rectangle::Rectangle()
+    : length(1.0), width(1.0) {
+}
+    ]]></program>
+
+    <p>
+      Now this declaration calls the default constructor:
+    </p>
+
+    <program><![CDATA[
+Rectangle unit_square;
+    ]]></program>
+
+    <p>
+      Braces may also be written explicitly:
+    </p>
+
+    <program><![CDATA[
+Rectangle unit_square{};
+    ]]></program>
+
+    <p>
+      Both forms create a <c>Rectangle</c> using the no-argument constructor.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Constructor Overloading</title>
+
+    <p>
+      A class can have more than one constructor as long as the parameter
+      lists allow C++ to determine which constructor to call.
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    Rectangle();
+    Rectangle(double initial_length, double initial_width);
+
+private:
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      These two constructors have the same name but different parameter lists.
+      This is called <term>constructor overloading</term>.
+    </p>
+
+    <p>
+      The arguments used when an object is created determine which constructor
+      is selected:
+    </p>
+
+    <program><![CDATA[
+Rectangle unit_square;        // calls Rectangle()
+Rectangle room{12.0, 8.0};    // calls Rectangle(double, double)
+    ]]></program>
+
+    <p>
+      Constructor overloading is one example of the more general idea of
+      <term>function overloading</term>. We will study function overloading in
+      more detail later in the book. For now, the important idea is that a
+      class may provide more than one sensible way to create an object.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Constructors and Object State</title>
+
+    <p>
+      A constructor gives a class control over the state an object has when it
+      first comes into existence.
+    </p>
+
+    <p>
+      For example, the default constructor below creates a sensible 1-by-1
+      rectangle:
+    </p>
+
+    <program><![CDATA[
+Rectangle::Rectangle()
+    : length(1.0), width(1.0) {
+}
+    ]]></program>
+
+    <p>
+      For the constructor that receives dimensions, we can also decide what
+      should happen if the requested values are not valid for our model.
+    </p>
+
+    <program><![CDATA[
+Rectangle::Rectangle(double initial_length, double initial_width)
+    : length(1.0), width(1.0) {
+    if (initial_length > 0.0 && initial_width > 0.0) {
+        length = initial_length;
+        width = initial_width;
+    }
+}
+    ]]></program>
+
+    <p>
+      This version begins with a valid 1-by-1 rectangle. If both requested
+      dimensions are positive, the constructor replaces those defaults with
+      the requested values. Otherwise, the object remains 1 by 1.
+    </p>
+
+    <p>
+      This is one possible design policy. Different classes may choose
+      different policies for invalid construction requests. We will return to
+      those design decisions when we discuss an object's interface and
+      behavior.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>A Complete Example</title>
+
+    <p>
+      The following program shows constructor declarations inside the class,
+      object creation in <c>main</c>, and constructor definitions after
+      <c>main</c>.
+    </p>
+
+    <listing label="chapter5_constructors_AC_1">
+      <title>
+        Two overloaded constructors provide two ways to create a
+        <c>Rectangle</c>.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="chapter5_constructors_AC_1_editor">
+        <code><![CDATA[
+#include <iostream>
+
+class Rectangle {
+public:
+    Rectangle();
+    Rectangle(double initial_length, double initial_width);
+
+    double calculate_area() const;
+
+private:
+    double length;
+    double width;
+};
+
+int main() {
+    Rectangle unit_square;
+    Rectangle room{12.0, 8.0};
+
+    std::cout << unit_square.calculate_area() << '\n';
+    std::cout << room.calculate_area() << '\n';
+
+    return 0;
+}
+
+Rectangle::Rectangle()
+    : length(1.0), width(1.0) {
+}
+
+Rectangle::Rectangle(double initial_length, double initial_width)
+    : length(1.0), width(1.0) {
+    if (initial_length > 0.0 && initial_width > 0.0) {
+        length = initial_length;
+        width = initial_width;
+    }
+}
+
+double Rectangle::calculate_area() const {
+    return length * width;
+}
+        ]]></code>
+      </program>
+    </listing>
+
+    <p>
+      The first object uses the default constructor, so its area is
+      <c>1.0</c>. The second object uses the two-parameter constructor, so its
+      area is <c>96.0</c>.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Check Your Understanding</title>
+
+    <exercise label="chapter5_constructors_1">
+      <statement>
+        <p>
+          Which declaration correctly declares a constructor for a class named
+          <c>Book</c>?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement><p><c>void Book();</c></p></statement>
+          <feedback>
+            <p>
+              A constructor has no return type, not even <c>void</c>.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement><p><c>Book();</c></p></statement>
+          <feedback>
+            <p>
+              A constructor has the same name as the class and no return type.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>book();</c></p></statement>
+          <feedback>
+            <p>
+              Constructor names must match the class name exactly.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>Book Book();</c></p></statement>
+          <feedback>
+            <p>
+              A constructor does not specify a return type.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_constructors_2">
+      <statement>
+        <p>
+          Given these constructor declarations, which constructor is called by
+          <c>Rectangle room{12.0, 8.0};</c>?
+        </p>
+
+        <program><![CDATA[
+Rectangle();
+Rectangle(double initial_length, double initial_width);
+        ]]></program>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement><p><c>Rectangle()</c></p></statement>
+          <feedback>
+            <p>
+              The no-argument constructor does not match the two arguments
+              supplied when <c>room</c> is created.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p><c>Rectangle(double initial_length, double initial_width)</c></p>
+          </statement>
+          <feedback>
+            <p>
+              The two supplied <c>double</c> values match the two-parameter
+              constructor.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p>Both constructors</p></statement>
+          <feedback>
+            <p>
+              One matching constructor is selected for the construction.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_constructors_3">
+      <statement>
+        <p>
+          What is the purpose of the initializer list in this constructor?
+        </p>
+
+        <program><![CDATA[
+Book::Book(const std::string& initial_title, int initial_year)
+    : title(initial_title), year(initial_year) {
+}
+        ]]></program>
+      </statement>
+
+      <choices>
+        <choice correct="yes">
+          <statement>
+            <p>
+              It initializes the data members from the constructor arguments.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              The initializer list initializes <c>title</c> and <c>year</c>
+              as the object is constructed.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              It declares two new local variables named <c>title</c> and
+              <c>year</c>.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              <c>title</c> and <c>year</c> are data members of the object.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              It returns the completed <c>Book</c> object.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Constructors do not return objects with a return statement.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_constructors_4"
+              number="yes"
+              adaptive="yes"
+              indentation="hide">
+      <statement>
+        <p>
+          Arrange the blocks to define the two-parameter constructor for
+          <c>Book</c> outside the class using a member initializer list.
+        </p>
+
+        <program><![CDATA[
+class Book {
+public:
+    Book(const std::string& initial_title, int initial_year);
+
+private:
+    std::string title;
+    int year;
+};
+        ]]></program>
+      </statement>
+
+      <blocks>
+        <block order="1">
+          <cline>Book::Book(const std::string&amp; initial_title, int initial_year)</cline>
+        </block>
+
+        <block order="2">
+          <cline>    : title(initial_title), year(initial_year) {</cline>
+        </block>
+
+        <block order="3">
+          <cline>}</cline>
+        </block>
+
+        <block correct="no">
+          <cline>void Book::Book(const std::string&amp; initial_title, int initial_year)</cline>
+        </block>
+
+        <block correct="no">
+          <cline>    return Book;</cline>
+        </block>
+      </blocks>
+    </exercise>
+
+
+    <exercise label="chapter5_constructors_5">
+      <statement>
+        <p>
+          Complete the two constructor definitions for <c>Book</c>. The
+          default constructor should create an untitled book from year 0. The
+          second constructor should initialize the object from its arguments.
+        </p>
+
+        <program interactive="activecode"
+                 line-numbers="yes"
+                 label="chapter5_constructors_5_editor">
+          <code><![CDATA[
+#include <iostream>
+#include <string>
+
+class Book {
+public:
+    Book();
+    Book(const std::string& initial_title, int initial_year);
+
+    void report() const;
+
+private:
+    std::string title;
+    int year;
+};
+
+int main() {
+    Book unknown;
+    Book novel{"The Left Hand of Darkness", 1969};
+
+    unknown.report();
+    novel.report();
+
+    return 0;
+}
+
+Book::Book()
+    // Complete the initializer list.
+{
+}
+
+Book::Book(const std::string& initial_title, int initial_year)
+    // Complete the initializer list.
+{
+}
+
+void Book::report() const {
+    std::cout << title << " (" << year << ")\n";
+}
+          ]]></code>
+        </program>
+      </statement>
+
+      <hint>
+        <p>
+          Initialize <c>title</c> and <c>year</c> after a colon and before the
+          constructor body.
+        </p>
+      </hint>
+
+      <solution>
+        <program><![CDATA[
+Book::Book()
+    : title("Untitled"), year(0) {
+}
+
+Book::Book(const std::string& initial_title, int initial_year)
+    : title(initial_title), year(initial_year) {
+}
+        ]]></program>
+      </solution>
+    </exercise>
+
+  </subsection>
+
+</section>

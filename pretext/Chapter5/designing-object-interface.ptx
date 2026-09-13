@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter5_designing-object-interface">
+  <title>Designing an Object's Interface and Behavior</title>
+
+  <introduction>
+    <p>
+      A class is more than a collection of private data members. Its public
+      member functions describe how other code is allowed to interact with its
+      objects.
+    </p>
+
+    <p>
+      The public part of a class forms its <term>interface</term>. The
+      operations provided by that interface describe the object's
+      <term>behavior</term>.
+    </p>
+
+    <p>
+      Good class design therefore asks two related questions:
+    </p>
+
+    <ul>
+      <li>
+        <p>What should code outside the class be allowed to do?</p>
+      </li>
+      <li>
+        <p>Which operations naturally belong to the object itself?</p>
+      </li>
+    </ul>
+  </introduction>
+
+
+  <subsection>
+    <title>The Public Interface</title>
+
+    <p>
+      Consider a simple <c>Thermostat</c> class:
+    </p>
+
+    <program><![CDATA[
+class Thermostat {
+public:
+    Thermostat(double initial_temperature);
+
+    double get_temperature() const;
+    bool set_temperature(double new_temperature);
+
+private:
+    double temperature;
+};
+    ]]></program>
+
+    <p>
+      Code outside the class can see and use the public constructor and member
+      functions. It cannot directly access <c>temperature</c>.
+    </p>
+
+    <p>
+      This means the public interface communicates the intended ways to use a
+      <c>Thermostat</c>:
+    </p>
+
+    <program><![CDATA[
+Thermostat room{21.0};
+
+double current = room.get_temperature();
+bool changed = room.set_temperature(23.0);
+    ]]></program>
+
+    <p>
+      The private representation is an implementation detail. Code using the
+      class should depend on the public interface rather than on how the object
+      stores its state.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Observer Functions</title>
+
+    <p>
+      A member function that reports information about an object without
+      changing it is often called an <term>observer</term>.
+    </p>
+
+    <program><![CDATA[
+double Thermostat::get_temperature() const {
+    return temperature;
+}
+    ]]></program>
+
+    <p>
+      Because this function only observes the object, it is declared
+      <c>const</c>.
+    </p>
+
+    <p>
+      A function whose main purpose is to return one particular data value is
+      often called a <term>getter</term> or <term>accessor</term>. The name
+      <c>get_temperature</c> makes that purpose clear.
+    </p>
+
+    <p>
+      However, private data does not mean that every data member automatically
+      needs a getter. A public operation should exist because outside code has
+      a meaningful reason to use it.
+    </p>
+
+    <p>
+      Sometimes an observer reports information derived from the object's
+      state instead of returning a stored value directly:
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    double calculate_area() const;
+
+private:
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      Here, <c>calculate_area()</c> is part of the useful interface even
+      though there is no data member named <c>area</c>.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>State-Changing Functions</title>
+
+    <p>
+      Other member functions intentionally change an object's state. These
+      functions do not have a trailing <c>const</c>.
+    </p>
+
+    <program><![CDATA[
+bool Thermostat::set_temperature(double new_temperature) {
+    if (new_temperature < 10.0 || new_temperature > 30.0) {
+        return false;
+    }
+
+    temperature = new_temperature;
+    return true;
+}
+    ]]></program>
+
+    <p>
+      In this example, our <c>Thermostat</c> model accepts settings from
+      10 through 30 degrees. The member function checks the requested value
+      before changing the private data.
+    </p>
+
+    <p>
+      The return value tells the caller whether the requested change
+      succeeded:
+    </p>
+
+    <program><![CDATA[
+bool changed = room.set_temperature(35.0);
+    ]]></program>
+
+    <p>
+      Since <c>35.0</c> is outside the range chosen for this model,
+      <c>changed</c> is <c>false</c> and the object's previous temperature is
+      preserved.
+    </p>
+
+    <p>
+      A state-changing member function may be called a <term>mutator</term>.
+      As with getters, the important design question is not whether a setter
+      can be written, but whether the operation belongs in the object's public
+      interface.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Prefer Meaningful Behavior When Possible</title>
+
+    <p>
+      A public interface often becomes clearer when its member functions
+      describe meaningful actions rather than simply exposing every piece of
+      stored data.
+    </p>
+
+    <p>
+      For example, suppose a <c>BankAccount</c> stores a balance. A design
+      could provide:
+    </p>
+
+    <program><![CDATA[
+bool set_balance(double new_balance);
+    ]]></program>
+
+    <p>
+      But an interface based on the actions that accounts actually perform may
+      communicate the design better:
+    </p>
+
+    <program><![CDATA[
+void deposit(double amount);
+bool withdraw(double amount);
+double get_balance() const;
+    ]]></program>
+
+    <p>
+      The second design describes behavior: money can be deposited or
+      withdrawn, and the balance can be observed. Outside code does not need
+      permission to replace the balance with an arbitrary value.
+    </p>
+
+    <p>
+      This does not mean that setter functions are always wrong. A setter is
+      useful when directly replacing a property is itself a meaningful
+      operation. The goal is to make the interface express the intended use of
+      the object.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Keep the Interface Focused</title>
+
+    <p>
+      Making a member function public means that other code is invited to
+      depend on it. A good interface therefore provides the operations that
+      users of the object need without exposing unnecessary details.
+    </p>
+
+    <p>
+      Compare these two designs:
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    double get_length() const;
+    double get_width() const;
+    void set_length(double new_length);
+    void set_width(double new_width);
+    double calculate_area() const;
+
+private:
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      and:
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    bool set_dimensions(double new_length, double new_width);
+    double calculate_area() const;
+
+private:
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      Neither interface is automatically correct for every program. If outside
+      code genuinely needs to inspect or replace each dimension separately,
+      the first design may be appropriate. If dimensions should normally be
+      changed together, the second interface may better express that design.
+    </p>
+
+    <p>
+      The important idea is that public functions should be chosen
+      deliberately rather than generated mechanically for every private data
+      member.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Member Function or Free Function?</title>
+
+    <p>
+      Not every useful operation involving an object needs to be a member
+      function. Free functions remain an important part of C++.
+    </p>
+
+    <p>
+      A useful question is:
+    </p>
+
+    <blockquote>
+      <p>
+        Does this operation naturally belong to this object?
+      </p>
+    </blockquote>
+
+    <p>
+      An operation is often a good member function when it:
+    </p>
+
+    <ul>
+      <li>
+        <p>observes the state of one object,</p>
+      </li>
+      <li>
+        <p>changes the state of one object, or</p>
+      </li>
+      <li>
+        <p>represents behavior that is naturally associated with that type.</p>
+      </li>
+    </ul>
+
+    <p>
+      For example:
+    </p>
+
+    <program><![CDATA[
+room.calculate_area();
+account.deposit(50.0);
+thermostat.set_temperature(22.0);
+    ]]></program>
+
+    <p>
+      A free function can be a better choice when the operation is more
+      general and does not naturally belong to one particular object.
+    </p>
+
+    <program><![CDATA[
+double calculate_distance(const Point& first, const Point& second);
+    ]]></program>
+
+    <p>
+      The distance describes a relationship between two points. It does not
+      need to be treated as a behavior owned by either point.
+    </p>
+
+    <p>
+      These are design guidelines rather than rigid rules. As programs become
+      larger, choosing clear responsibilities becomes an important part of
+      program design.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>A Complete Example</title>
+
+    <p>
+      The following program combines a constructor, an observer, and a
+      state-changing member function in one small interface.
+    </p>
+
+    <listing label="chapter5_designing_interface_AC_1">
+      <title>
+        A <c>Thermostat</c> controls access to its temperature setting.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="chapter5_designing_interface_AC_1_editor">
+        <code><![CDATA[
+#include <iostream>
+
+class Thermostat {
+public:
+    Thermostat(double initial_temperature);
+
+    double get_temperature() const;
+    bool set_temperature(double new_temperature);
+
+private:
+    double temperature;
+};
+
+int main() {
+    Thermostat room{21.0};
+
+    std::cout << "Initial: "
+              << room.get_temperature() << '\n';
+
+    if (room.set_temperature(23.5)) {
+        std::cout << "Updated: "
+                  << room.get_temperature() << '\n';
+    }
+
+    if (!room.set_temperature(35.0)) {
+        std::cout << "Invalid setting rejected.\n";
+    }
+
+    std::cout << "Final: "
+              << room.get_temperature() << '\n';
+
+    return 0;
+}
+
+Thermostat::Thermostat(double initial_temperature)
+    : temperature(20.0) {
+    if (initial_temperature >= 10.0 &&
+        initial_temperature <= 30.0) {
+        temperature = initial_temperature;
+    }
+}
+
+double Thermostat::get_temperature() const {
+    return temperature;
+}
+
+bool Thermostat::set_temperature(double new_temperature) {
+    if (new_temperature < 10.0 || new_temperature > 30.0) {
+        return false;
+    }
+
+    temperature = new_temperature;
+    return true;
+}
+        ]]></code>
+      </program>
+    </listing>
+
+    <p>
+      The class controls its own state. Outside code can observe the
+      temperature and request a change, but it cannot directly assign to the
+      private data member.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Check Your Understanding</title>
+
+    <exercise label="chapter5_designing_interface_1">
+      <statement>
+        <p>
+          Which member function should normally be declared <c>const</c>?
+        </p>
+      </statement>
+
+      <choices>
+        <choice correct="yes">
+          <statement><p><c>double get_temperature() const;</c></p></statement>
+          <feedback>
+            <p>
+              This function observes the object without changing its state.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>bool set_temperature(double new_temperature);</c></p></statement>
+          <feedback>
+            <p>
+              This function may change the object's state, so it should not be
+              a <c>const</c> member function.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>void deposit(double amount);</c></p></statement>
+          <feedback>
+            <p>
+              A deposit changes the account's state.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_designing_interface_2">
+      <statement>
+        <p>
+          Which interface best expresses the behavior of a bank account?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              Only <c>set_balance(double new_balance)</c>
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Replacing the balance directly does not express the usual
+              actions performed on an account.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              <c>deposit</c>, <c>withdraw</c>, and
+              <c>get_balance</c>
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              These operations describe meaningful account behavior while
+              keeping direct control of the stored balance inside the class.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Make <c>balance</c> public and provide no member functions.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              That gives outside code unrestricted access instead of defining a
+              controlled interface.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_designing_interface_3">
+      <statement>
+        <p>
+          Which operation is a strong candidate for a free function rather
+          than a member function?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement><p>Depositing money into one <c>BankAccount</c></p></statement>
+          <feedback>
+            <p>
+              A deposit changes the state of one account and naturally belongs
+              to that object.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p>Reading one <c>Thermostat</c>'s temperature</p></statement>
+          <feedback>
+            <p>
+              Observing the state of one thermostat naturally fits its public
+              interface.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>Calculating the distance between two <c>Point</c> objects</p>
+          </statement>
+          <feedback>
+            <p>
+              Distance describes a relationship between two points and does
+              not have to belong to either point.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_designing_interface_4">
+      <statement>
+        <p>
+          Why should a class not automatically provide a getter and setter for
+          every private data member?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              Because C++ does not allow getters and setters for private data.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Public member functions can read or modify private data members.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              The public interface should expose operations that are meaningful
+              for using the object, rather than exposing internal state
+              mechanically.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              A focused interface communicates how the object is intended to be
+              used.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Because every private data member must remain permanently
+              unchanged.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Private members can be changed by the class's own
+              state-changing member functions.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_designing_interface_5"
+              number="yes"
+              adaptive="yes"
+              indentation="hide">
+      <statement>
+        <p>
+          Arrange the declarations to create a focused public interface for a
+          <c>Counter</c>. Outside code should be able to increase the count,
+          reset it, and observe the current count, but should not directly
+          modify the stored value.
+        </p>
+      </statement>
+
+      <blocks>
+        <block order="1">
+          <cline>class Counter {</cline>
+        </block>
+
+        <block order="2">
+          <cline>public:</cline>
+        </block>
+
+        <block order="3">
+          <cline>    void increment();</cline>
+          <cline>    void reset();</cline>
+          <cline>    int get_count() const;</cline>
+        </block>
+
+        <block order="4">
+          <cline>private:</cline>
+        </block>
+
+        <block order="5">
+          <cline>    int count = 0;</cline>
+        </block>
+
+        <block order="6">
+          <cline>};</cline>
+        </block>
+
+        <block correct="no">
+          <cline>public: int count = 0;</cline>
+        </block>
+
+        <block correct="no">
+          <cline>    int get_count();</cline>
+        </block>
+      </blocks>
+    </exercise>
+
+  </subsection>
+
+</section>

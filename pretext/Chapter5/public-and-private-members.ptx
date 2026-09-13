@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter5_public-and-private-members">
+  <title>Public and Private Members</title>
+
+  <introduction>
+    <p>
+      In the previous section, you saw that a class can provide an
+      <term>abstraction</term>: outside code can focus on what an object can do
+      without needing to know every detail of how the object stores and manages
+      its state.
+    </p>
+
+    <p>
+      One important tool for creating this abstraction is controlling which
+      members are available outside the class.
+    </p>
+
+    <p>
+      C++ provides access labels such as <c>public:</c> and <c>private:</c>
+      for this purpose.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>Public Members</title>
+
+    <p>
+      A <term>public member</term> can be accessed by code outside the class.
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    double length;
+    double width;
+
+    double calculate_area() const;
+};
+    ]]></program>
+
+    <p>
+      Because <c>length</c> and <c>width</c> are public, outside code can
+      access them directly:
+    </p>
+
+    <program><![CDATA[
+Rectangle room;
+
+room.length = 12.0;
+room.width = 8.0;
+    ]]></program>
+
+    <p>
+      The member function is also public, so it can be called from outside the
+      class:
+    </p>
+
+    <program><![CDATA[
+double area = room.calculate_area();
+    ]]></program>
+
+    <p>
+      Public members form part of the way other code interacts with an object.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>The Problem with Public Data</title>
+
+    <p>
+      Making all data public gives outside code complete freedom to modify the
+      object's state.
+    </p>
+
+    <p>
+      For example:
+    </p>
+
+    <program><![CDATA[
+Rectangle room;
+
+room.length = -12.0;
+room.width = 8.0;
+    ]]></program>
+
+    <p>
+      A negative length may not make sense for the rectangle that our program
+      is modeling, but nothing prevents outside code from assigning that value
+      when the data member is public.
+    </p>
+
+    <p>
+      As programs become larger, allowing any part of the program to change an
+      object's internal data directly can make it difficult to guarantee that
+      the object remains in a sensible state.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Private Members</title>
+
+    <p>
+      A <term>private member</term> can be accessed directly by member
+      functions of the class, but not by ordinary code outside the class.
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+private:
+    double length = 0.0;
+    double width = 0.0;
+
+public:
+    double calculate_area() const;
+};
+    ]]></program>
+
+    <p>
+      Now outside code cannot directly write:
+    </p>
+
+    <program><![CDATA[
+Rectangle room;
+
+room.length = 12.0;   // error: length is private
+    ]]></program>
+
+    <p>
+      However, a member function of <c>Rectangle</c> can access the private
+      members:
+    </p>
+
+    <program><![CDATA[
+double Rectangle::calculate_area() const {
+    return length * width;
+}
+    ]]></program>
+
+    <p>
+      The data members are hidden from outside code, but they are still
+      available to the class's own member functions.
+    </p>
+
+    <p>
+      Notice that the data members above have initial values:
+    </p>
+
+    <program><![CDATA[
+double length = 0.0;
+double width = 0.0;
+    ]]></program>
+
+    <p>
+      These are called default member initializers. They give each newly
+      created <c>Rectangle</c> an initial state until we provide a better way
+      to initialize objects in the next section.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Providing a Public Interface</title>
+
+    <p>
+      If the data is private, outside code needs some public operations for
+      working with the object.
+    </p>
+
+    <p>
+      For example, we can provide a member function that changes both
+      dimensions only when the new values are valid:
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+private:
+    double length = 0.0;
+    double width = 0.0;
+
+public:
+    bool set_dimensions(double new_length, double new_width);
+    double calculate_area() const;
+};
+    ]]></program>
+
+    <p>
+      The implementation of <c>set_dimensions</c> can check the values before
+      changing the object's state:
+    </p>
+
+    <program><![CDATA[
+bool Rectangle::set_dimensions(double new_length, double new_width) {
+    if (new_length <= 0.0 || new_width <= 0.0) {
+        return false;
+    }
+
+    length = new_length;
+    width = new_width;
+
+    return true;
+}
+    ]]></program>
+
+    <p>
+      Outside code now asks the object to update itself:
+    </p>
+
+    <program><![CDATA[
+Rectangle room;
+
+room.set_dimensions(12.0, 8.0);
+    ]]></program>
+
+    <p>
+      rather than changing the internal data directly:
+    </p>
+
+    <program><![CDATA[
+room.length = 12.0;   // not allowed
+room.width = 8.0;     // not allowed
+    ]]></program>
+
+    <p>
+      This gives the class an opportunity to enforce rules whenever its state
+      changes.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>The Public Interface and Private Implementation</title>
+
+    <p>
+      The public members of a class form its <term>public interface</term>.
+      They describe the operations that outside code is allowed to perform on
+      objects of that class.
+    </p>
+
+    <p>
+      The private members are part of the object's internal
+      <term>implementation</term>. Outside code does not need direct access to
+      those details.
+    </p>
+
+    <p>
+      For our <c>Rectangle</c> class:
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+private:
+    double length = 0.0;
+    double width = 0.0;
+
+public:
+    bool set_dimensions(double new_length, double new_width);
+    double calculate_area() const;
+};
+    ]]></program>
+
+    <p>
+      outside code can see and use:
+    </p>
+
+    <program><![CDATA[
+room.set_dimensions(12.0, 8.0);
+room.calculate_area();
+    ]]></program>
+
+    <p>
+      but outside code does not directly manage:
+    </p>
+
+    <program><![CDATA[
+length
+width
+    ]]></program>
+
+    <p>
+      We can visualize the class as having a public boundary:
+    </p>
+
+    <program><![CDATA[
+              Rectangle object
+     +--------------------------------+
+     |       public interface         |
+     |                                |
+     |  set_dimensions(...)           |
+     |  calculate_area()              |
+     |                                |
+     |  ----------------------------  |
+     |       private state            |
+     |                                |
+     |  length                        |
+     |  width                         |
+     +--------------------------------+
+    ]]></program>
+
+    <p>
+      Code outside the class works through the public interface rather than
+      directly manipulating the private state.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Encapsulation</title>
+
+    <p>
+      Combining data with the operations that manage that data, while
+      controlling access to the internal state, is called
+      <term>encapsulation</term>.
+    </p>
+
+    <p>
+      Encapsulation helps a class protect its own state.
+    </p>
+
+    <p>
+      For example, because <c>length</c> and <c>width</c> are private, outside
+      code cannot bypass <c>set_dimensions</c> and directly assign negative
+      dimensions.
+    </p>
+
+    <program><![CDATA[
+room.set_dimensions(-5.0, 8.0);
+    ]]></program>
+
+    <p>
+      The member function can reject that request and leave the object
+      unchanged.
+    </p>
+
+    <p>
+      This also supports abstraction. Code using a <c>Rectangle</c> can focus
+      on operations such as:
+    </p>
+
+    <program><![CDATA[
+room.set_dimensions(12.0, 8.0);
+double area = room.calculate_area();
+    ]]></program>
+
+    <p>
+      without needing to manage the object's internal representation directly.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Why Keep Data Private?</title>
+
+    <p>
+      Keeping data private provides several useful benefits.
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          The class can control how its state changes.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Invalid values can be rejected before they become part of the
+          object's state.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Code outside the class depends on the public interface rather than
+          on the exact way the data is stored.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The internal implementation can sometimes change without requiring
+          every part of the program to change.
+        </p>
+      </li>
+    </ul>
+
+    <p>
+      For classes that manage their own state, a good general design guideline
+      is to keep data members private unless there is a clear reason to expose
+      them directly.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>A Complete Example</title>
+
+    <listing label="chapter5_public_private_AC_1">
+      <title>
+        This class protects its dimensions and provides a public interface.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="chapter5_public_private_AC_1_editor">
+        <code><![CDATA[
+#include <iostream>
+
+class Rectangle {
+private:
+    double length = 0.0;
+    double width = 0.0;
+
+public:
+    bool set_dimensions(double new_length, double new_width);
+    double calculate_area() const;
+};
+
+int main() {
+    Rectangle room;
+
+    bool updated = room.set_dimensions(12.0, 8.0);
+
+    if (updated) {
+        std::cout << "Area: "
+                  << room.calculate_area() << '\n';
+    }
+    else {
+        std::cout << "Invalid dimensions\n";
+    }
+
+    return 0;
+}
+
+bool Rectangle::set_dimensions(double new_length, double new_width) {
+    if (new_length <= 0.0 || new_width <= 0.0) {
+        return false;
+    }
+
+    length = new_length;
+    width = new_width;
+
+    return true;
+}
+
+double Rectangle::calculate_area() const {
+    return length * width;
+}
+        ]]></code>
+      </program>
+    </listing>
+
+    <p>
+      The program can call the public member functions, but it cannot directly
+      access <c>length</c> or <c>width</c>.
+    </p>
+
+    <p>
+      The class therefore controls how its internal state is changed.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Looking Ahead: Creating Valid Objects</title>
+
+    <p>
+      Our <c>Rectangle</c> now protects its private data, but there is still
+      something slightly awkward about the way we create and initialize an
+      object:
+    </p>
+
+    <program><![CDATA[
+Rectangle room;
+
+room.set_dimensions(12.0, 8.0);
+    ]]></program>
+
+    <p>
+      The object is created first, and then a separate member-function call is
+      used to give it the desired dimensions.
+    </p>
+
+    <p>
+      It would be more convenient if we could create the object with the
+      correct starting state in one step.
+    </p>
+
+    <program><![CDATA[
+Rectangle room(12.0, 8.0);
+    ]]></program>
+
+    <p>
+      C++ provides special member functions called
+      <term>constructors</term> for this purpose. We will study constructors
+      in the next section.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Check Your Understanding</title>
+
+    <exercise label="chapter5_public_private_1">
+      <statement>
+        <p>
+          Which code can directly access a private data member of a class?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>Any function in the program</p>
+          </statement>
+          <feedback>
+            <p>
+              Private members are not directly available to ordinary outside
+              functions.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>A member function of the class</p>
+          </statement>
+          <feedback>
+            <p>
+              Member functions of the class can directly access its private
+              members.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>Any function that receives the object by reference</p>
+          </statement>
+          <feedback>
+            <p>
+              Passing an object by reference does not bypass the class's access
+              controls.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_public_private_2">
+      <statement>
+        <p>
+          What is the main purpose of this public function?
+        </p>
+
+        <program><![CDATA[
+bool set_dimensions(double new_length, double new_width);
+        ]]></program>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              To make the private members public.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              The data remains private. The function provides controlled
+              access to changing it.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              To provide a controlled way to change the object's state.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              A public member function can validate new values before changing
+              private data.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              To create a copy of the object.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              This member function changes the state of the existing object.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_public_private_3">
+      <statement>
+        <p>
+          Which statement best describes a class's public interface?
+        </p>
+      </statement>
+
+      <choices>
+        <choice correct="yes">
+          <statement>
+            <p>
+              The public operations through which outside code uses the
+              object.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              The public interface defines how other code interacts with the
+              object.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Every variable declared anywhere in the program.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              The public interface consists of the class's publicly accessible
+              members.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Only the private data members of the class.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Private data belongs to the internal implementation, not the
+              public interface.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_public_private_4">
+      <statement>
+        <p>
+          Why is keeping a class's data private often useful?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              It prevents member functions from accessing the data.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Member functions can directly access private members.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              It allows the class to control how its internal state is changed.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Controlled access helps protect the object from invalid or
+              unintended changes.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              It makes the object unable to change after creation.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Public state-changing member functions can still modify private
+              data.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_public_private_5">
+      <statement>
+        <p>
+          Assume <c>room</c> starts with dimensions <c>0.0</c> by
+          <c>0.0</c>. What is the final area after these calls?
+        </p>
+
+        <program><![CDATA[
+room.set_dimensions(12.0, 8.0);
+room.set_dimensions(-5.0, 6.0);
+double area = room.calculate_area();
+        ]]></program>
+
+        <p>
+          Recall that <c>set_dimensions</c> rejects nonpositive dimensions and
+          leaves the object unchanged when it rejects them.
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement><p><c>-30.0</c></p></statement>
+          <feedback>
+            <p>
+              The second call is rejected, so the negative length is never
+              stored in the object.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>0.0</c></p></statement>
+          <feedback>
+            <p>
+              The first call succeeds and changes the dimensions before the
+              invalid second call is attempted.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement><p><c>96.0</c></p></statement>
+          <feedback>
+            <p>
+              The first call stores 12 by 8. The second call is rejected and
+              leaves those dimensions unchanged.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_public_private_6"
+              number="yes"
+              adaptive="yes"
+              indentation="hide">
+      <statement>
+        <p>
+          Arrange the blocks to define a <c>Room</c> class whose dimensions are
+          private and whose public interface lets outside code calculate the
+          volume. The member function should not modify the object.
+        </p>
+      </statement>
+
+      <blocks>
+        <block order="1">
+          <cline>class Room {</cline>
+        </block>
+
+        <block order="2">
+          <cline>private:</cline>
+        </block>
+
+        <block order="3">
+          <cline>    double length = 0.0;</cline>
+          <cline>    double width = 0.0;</cline>
+          <cline>    double height = 0.0;</cline>
+        </block>
+
+        <block order="4">
+          <cline>public:</cline>
+        </block>
+
+        <block order="5">
+          <cline>    double calculate_volume() const;</cline>
+        </block>
+
+        <block order="6">
+          <cline>};</cline>
+        </block>
+
+        <block correct="no">
+          <cline>public: double length;</cline>
+        </block>
+
+        <block correct="no">
+          <cline>    double calculate_volume();</cline>
+        </block>
+      </blocks>
+    </exercise>
+
+  </subsection>
+
+</section>

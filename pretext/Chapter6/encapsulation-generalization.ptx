@@ -2,8 +2,8 @@
 <section xml:id="chapter6_encapsulation-and-generalization">
   <title>Encapsulation and generalization</title>
   <p>Encapsulation usually means taking a piece of code and wrapping it up in a function, allowing
-    you to take advantage of all the things functions are good for. We have seen two examples of
-    encapsulation, when we wrote <c>printParity</c> in <xref ref="chapter4_alternative-execution-alternative"/> and <c>isSingleDigit</c> in <xref ref="chapter5_bool-functions-bool"/>.</p>
+    you to take advantage of all the things functions are good for. We have seen an example of
+    encapsulation, when we wrote <c>print_parity</c> in <xref ref="chapter4_alternative-execution-alternative"/>.</p>
   <p>Generalization means taking something specific, like printing multiples
     of 2, and making it more general, like printing the multiples of any
     integer.</p>

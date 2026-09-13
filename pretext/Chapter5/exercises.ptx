@@ -1,667 +1,282 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <exercises xml:id="chapter5_multiple-choice-exercises">
   <title>Multiple Choice Exercises</title>
+
   <exercise label="mce_5_1">
     <statement>
-      <p>What should be the return type of the function <c>convertToCelsius</c>?</p>
-      <program line-numbers="yes">
-        <code>
-______ convertToCelsius(double fahrenheit) {
-  double celsius;
-  celsius = (fahrenheit - 32) * 5 / 9;
-  return celsius;
-}
-</code>
+      <p>What does the declaration below create?</p>
+      <program>
+        <code><![CDATA[
+struct Point {
+    double x;
+    double y;
+};
+        ]]></code>
       </program>
     </statement>
     <choices>
       <choice>
-        <statement>
-          <p>
-            <c>int</c>
-          </p>
-        </statement>
-        <feedback><p>
-          What variable are we returning in the function, and what is the variable's type?
-        </p></feedback>
+        <statement><p>One <c>Point</c> object named <c>x</c></p></statement>
+        <feedback><p>The declaration defines a type; it does not create an object named <c>x</c>.</p></feedback>
       </choice>
       <choice correct="yes">
-        <statement>
-          <p>
-            <c>double</c>
-          </p>
-        </statement>
-        <feedback><p>
-          The function returns <c>celsius</c>, which is a <c>double</c>.
-        </p></feedback>
+        <statement><p>A user-defined type named <c>Point</c> with two data members</p></statement>
+        <feedback><p>Correct. The definition describes the members that each <c>Point</c> object will contain.</p></feedback>
       </choice>
       <choice>
-        <statement>
-          <p>
-            <c>string</c>
-          </p>
-        </statement>
-        <feedback><p>
-          What variable are we returning in the function, and what is the variable's type?
-        </p></feedback>
+        <statement><p>Two variables named <c>x</c> and <c>y</c> in <c>main</c></p></statement>
+        <feedback><p>The members belong to future <c>Point</c> objects; they are not local variables in <c>main</c>.</p></feedback>
       </choice>
       <choice>
-        <statement>
-          <p>
-            <c>void</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Since we are returning something in the function, the function is not <c>void</c>.
-        </p></feedback>
+        <statement><p>A function that returns a <c>Point</c></p></statement>
+        <feedback><p>This code defines a structure, not a function.</p></feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="mce_5_2">
     <statement>
-      <p>What would be returned by <c>secretFunction</c> if the input was 14?</p>
-      <program line-numbers="yes">
-        <code>
-int secretFunction(int input) {
-  if (input % 2 == 0) {
-    return 3 * input - 2;
-  }
-  else {
-    if (input % 7 == 0) {
-      return input;
-    }
-    return 2 * input + 9;
-  }
-  return input + 4;
-}
-</code>
-      </program>
+      <p>Which statement correctly creates a <c>Point</c> object using aggregate initialization?</p>
     </statement>
     <choices>
       <choice>
-        <statement>
-          <p>14</p>
-        </statement>
-        <feedback><p>
-          Although 14 is divisible by 7, take another look at the conditionals.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>18</p>
-        </statement>
-        <feedback><p>
-          The flow of code would never reach the last return statement.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>36</p>
-        </statement>
-        <feedback><p>
-          Check your order of operations!
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>37</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the conditional statements.
-        </p></feedback>
+        <statement><p><c>Point{ } point;</c></p></statement>
+        <feedback><p>This places the type name after the braces; use the type followed by the object name.</p></feedback>
       </choice>
       <choice correct="yes">
-        <statement>
-          <p>40</p>
-        </statement>
-        <feedback><p>
-          Since 14 is divisible by 2, the function returns two less than three times 14.
-        </p></feedback>
+        <statement><p><c>Point point{3.0, 4.0};</c></p></statement>
+        <feedback><p>Correct. The values initialize <c>x</c> and <c>y</c> in declaration order.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>point Point{3.0, 4.0};</c></p></statement>
+        <feedback><p>The type must come before the object name.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>Point = {3.0, 4.0};</c></p></statement>
+        <feedback><p>An object name is needed; a type name cannot be assigned this way.</p></feedback>
       </choice>
     </choices>
   </exercise>
+
   <exercise label="mce_5_3">
     <statement>
-      <p>If we wanted to create a boolean function called <c>isPrime</c>, which takes an <c>int input</c> as a
-        parameter, which of the following would be the correct function header?</p>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>
-            <c>boolean isPrime(int input) {</c>
-          </p>
-        </statement>
-        <feedback><p>
-          In C++, use the <c>bool</c> keyword for a boolean.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>bool isPrime (input) {</c>
-          </p>
-        </statement>
-        <feedback><p>
-          In a function header, the type of each variable must be specified in the parameter
-            list.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>bool isPrime(int input) {</c>
-          </p>
-        </statement>
-        <feedback><p>
-          This is the correct function header for the function.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>int isPrime(bool input) {</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Take a closer look at what the return type is.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_5_4">
-    <statement>
-      <p>If we wrote the following function, which of the other functions below can we also legally
-        write
-        and add to the program?</p>
-      <program line-numbers="yes">
-        <code>
-int func(double x, bool y);
-</code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>
-            <c>int func(double a, bool b);</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Since this function has the same name and parameter types as the given function, it is
-            not allowed.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>int foo(double x, bool y);</c>
-          </p>
-        </statement>
-        <feedback><p>
-          This function has a different name from the given function, so it is allowed.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>int func(double x);</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Although this function has the same name as the given function, it has a different
-            number of parameters, so it is allowed.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>void func(double x, bool y);</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Although this function has a different return type, its parameter list is the same as
-            the given function, so it is not allowed.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>int func(bool y, double x);</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Although this function has the same name as the given function, its parameter list is
-            in a different order, so it is allowed.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_5_5">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program line-numbers="yes">
+      <p>What is printed by this program?</p>
+      <program>
         <code><![CDATA[
-int main() {
-  bool x = 2 < 3;
-  std::cout << x;
-  std::cout << false;
-  std::cout << ((1 + 4) * 4 > 24);
-  std::cout << (23 == (32 + 2 - 11));
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>1001</p>
-        </statement>
-        <feedback><p>
-          Since the first and last statements are true and the middle two are false, this is the
-            correct output.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>truefalsefalsetrue</p>
-        </statement>
-        <feedback><p>
-          In C++, boolean values are outputted as 0 or 1.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>1false01</p>
-        </statement>
-        <feedback><p>
-          Since the second <c>cout</c> statement doesn't have quotes around the word <q>false</q>,
-            the value of 0 is outputted.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>0110</p>
-        </statement>
-        <feedback><p>
-          Remember that if a boolean expression is true, it has a value of 1.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_5_6">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program line-numbers="yes">
-        <code><![CDATA[
-int main() {
-  bool w = !(2 * 3 == 6 || 4 - 3 > 8);
-  bool x = true || 4 > 6;
-  bool y = 3 != 6 - 3 && 23 >= 23;
-  bool z = (4 + 9 < 15 && 3 != 4) || 2 + 5 == 7;
-  std::cout << w << x << y << z;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>0101</p>
-        </statement>
-        <feedback><p>
-          Since the expressions are false, true, false, and true, the output is 0101.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>1010</p>
-        </statement>
-        <feedback><p>
-          Remember that <c>true</c> outputs to 1 and <c>false</c> outputs to 0.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>1101</p>
-        </statement>
-        <feedback><p>
-          Remember the NOT operator (!) inverts the value of a boolean.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>0100</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the order of operations.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>0110</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the expressions.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_5_7">
-    <statement>
-      <p>Are there any issues with the code below?</p>
-      <program line-numbers="yes">
-        <code>
-bool isEven(int num) {
-  if (num % 2 == 0) {
-    return true;
-  }
-}
-</code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Yes, we have to return either 0 or 1.</p>
-        </statement>
-        <feedback><p>
-          Returning a 0 or 1 would be returning an <c>int</c>, even though booleans evaluate to 0 or
-            1.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Yes, we cannot pass an <c>int</c> into a <c>bool</c> function.</p>
-        </statement>
-        <feedback><p>
-          The type of variables in the parameter list do not affect the return type.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Yes, there is no case for odd numbers.</p>
-        </statement>
-        <feedback><p>
-          Since we never established an else clause, if the input was an odd number, the function
-            would not return anything despite not being a void function.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>There are no issues with the code.</p>
-        </statement>
-        <feedback><p>
-          There is an issue with the code. Can you find it?
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_5_8">
-    <statement>
-      <p>Are there any issues with the code below?</p>
-      <program line-numbers="yes">
-        <code><![CDATA[
-double Free_time(int day) {
-  if (day == 1 || day == 2 || day == 3 || day == 4) {
-    std::cout << "Better study on weekday!" << std::endl ;
-    return day*0.25;
-  }
-  else{
-    std::cout << "Happy weekend" << std::endl ;
-    return day;
-  }
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Yes, we might not return anything.</p>
-        </statement>
-        <feedback><p>
-          We have an else clause in which we return a value.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Yes, we cannot return an entire expression like <c>day*0.25</c>.</p>
-        </statement>
-        <feedback><p>
-          If the result of the expression is compatible with the return type we can return it.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Yes, we are returning an <c>int</c> (in the <c>else</c> block) where as the return type is <c>double</c>
-            .</p>
-        </statement>
-        <feedback><p>
-          Implicit conversion from an int to double is ok in c++!
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>There are no issues with the code.</p>
-        </statement>
-        <feedback><p>
-          Correct! implicit conversion from int to double are ok!
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_5_9">
-    <statement>
-      <p>Are there any issues with the code below?</p>
-      <program line-numbers="yes">
-        <code><![CDATA[
-void moonWeight(double earth) {
-  double moon = 0.165 * earth;
-  std::cout << "You would weigh " << moon << " pounds on the moon." << std::endl ;
-  return moon;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Yes, we cannot have <c>cout</c> statements in a function.</p>
-        </statement>
-        <feedback><p>
-          We are allowed to use <c>cout</c> statements in a function.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Yes, we cannot return anything.</p>
-        </statement>
-        <feedback><p>
-          <c>void</c> functions do not have return values, so we cannot return <c>moon</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Yes, we need to return the output statement.</p>
-        </statement>
-        <feedback><p>
-          <c>void</c> functions do not have return values.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>There are no issues with the code.</p>
-        </statement>
-        <feedback><p>
-          There is an issue with the code. Can you find it?
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_5_10">
-    <statement>
-      <p>What is the return type of main?</p>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>
-            <c>void</c>
-          </p>
-        </statement>
-        <feedback><p>
-          What keyword do we use before <c>main()</c> in every program?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>bool</c>
-          </p>
-        </statement>
-        <feedback><p>
-          What keyword do we use before <c>main()</c> in every program?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>double</c>
-          </p>
-        </statement>
-        <feedback><p>
-          What keyword do we use before <c>main()</c> in every program?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>int</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Yes, <c>main</c> is supposed to return an integer, which is why programmers often return 0
-            at the end of <c>main</c>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_5_11">
-    <statement>
-      <p>What is the base case of the <c>factorial</c> recursive function?</p>
-      <program line-numbers="yes">
-        <code>
-int factorial(int n) {
-  if (n == 0) {
-    return 1;
-  }
-  else {
-    int recurse = factorial(n-1);
-    int result = n * recurse;
-    return result;
-  }
-}
-</code>
-      </program>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>n = 0</c>
-          </p>
-        </statement>
-        <feedback><p>
-          When <c>n</c> is 0, the function returns the value 1 without making a recursive call.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>n = 1</c>
-          </p>
-        </statement>
-        <feedback><p>
-          When <c>n</c> is 1, the function makes a recursive call in the else statement.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>n = -1</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>n</c> never becomes -1.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>There is no base case.</p>
-        </statement>
-        <feedback><p>
-          If there was no base case, the function would recurse infinitely.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_5_12">
-    <statement>
-      <p>What is printed?</p>
-      <program line-numbers="yes">
-        <code><![CDATA[
-void print_sequence(int n) {
-  if (n == 0) {
-     std::cout << 1;
-     return;
-     //we can have an empty return to a void function
-  }
-  else {
-    std::cout << n << " ";
-    print_sequence(n - 1);
-  }
+#include <iostream>
+
+struct Rectangle {
+    double length;
+    double width;
+};
+
+double calculate_area(const Rectangle& rectangle) {
+    return rectangle.length * rectangle.width;
 }
 
 int main() {
-    int val=6;
-    print_sequence(val);
+    Rectangle rectangle{5.0, 2.0};
+    std::cout << calculate_area(rectangle) << '\n';
 }
-]]></code>
+        ]]></code>
       </program>
     </statement>
     <choices>
       <choice>
-        <statement>
-          <p>6 5 4 3 2 1 0</p>
-        </statement>
-        <feedback><p>
-          Check what the base case prints.
-        </p></feedback>
+        <statement><p><c>5.0</c></p></statement>
+        <feedback><p>The function multiplies both members; it does not return only the length.</p></feedback>
       </choice>
       <choice>
-        <statement>
-          <p>6 6 6 6 6 6 1</p>
-        </statement>
-        <feedback><p>
-          What value do we give the recursive call?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>6 5 4 3 2 1</p>
-        </statement>
-        <feedback><p>
-          The base case prints something!
-        </p></feedback>
+        <statement><p><c>2.0</c></p></statement>
+        <feedback><p>The function multiplies both members; it does not return only the width.</p></feedback>
       </choice>
       <choice correct="yes">
-        <statement>
-          <p>6 5 4 3 2 1 1</p>
-        </statement>
-        <feedback><p>
-          We print a number and decrement it till we reach 0 then we print 1.
-        </p></feedback>
+        <statement><p><c>10.0</c></p></statement>
+        <feedback><p>Correct. The area is <c>5.0 * 2.0</c>.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>25.0</c></p></statement>
+        <feedback><p>The expression multiplies length by width, not length by itself.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="mce_5_4">
+    <statement>
+      <p>Which parameter form is most appropriate for a function that only reads a large object?</p>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p><c>Rectangle rectangle</c></p></statement>
+        <feedback><p>This passes a copy, which may be unnecessary when the function only reads the object.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>Rectangle&amp; rectangle</c></p></statement>
+        <feedback><p>A non-const reference allows modification, which is not needed for a read-only function.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p><c>const Rectangle&amp; rectangle</c></p></statement>
+        <feedback><p>Correct. This avoids a copy and prevents the function from modifying the argument.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>const Rectangle rectangle&amp;</c></p></statement>
+        <feedback><p>The ampersand belongs before the parameter name: <c>const Rectangle&amp; rectangle</c>.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="mce_5_5">
+    <statement>
+      <p>Which statement about a member function is true?</p>
+    </statement>
+    <choices>
+      <choice correct="yes">
+        <statement><p>It is declared as part of a structure or class and can be called on an object of that type.</p></statement>
+        <feedback><p>Correct. The object appears before the dot when the function is called.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>It must always receive the current object as an explicit parameter.</p></statement>
+        <feedback><p>The current object is an implicit part of a member-function call.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>It can only read data members and cannot modify them.</p></statement>
+        <feedback><p>Non-const member functions can modify the current object's data members.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>It cannot be defined outside the class or structure definition.</p></statement>
+        <feedback><p>A member function can be defined outside using the scope resolution operator.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="mce_5_6">
+    <statement>
+      <p>What does <c>const</c> at the end of this member-function declaration mean?</p>
+      <program>
+        <code><![CDATA[
+double get_balance() const;
+        ]]></code>
+      </program>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p>The return value cannot be a <c>double</c>.</p></statement>
+        <feedback><p>The return type is still <c>double</c>; the trailing <c>const</c> applies to the member function.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>The function promises not to change the object's state.</p></statement>
+        <feedback><p>Correct. A const member function can observe the object but cannot normally modify its data members.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>The function can only be called from inside the class.</p></statement>
+        <feedback><p><c>const</c> does not control public or private access.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>The object must be declared with the keyword <c>const</c>.</p></statement>
+        <feedback><p>Const objects require const member functions, but a const member function can also be called on a non-const object.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="mce_5_7">
+    <statement>
+      <p>Which statement correctly describes the default access of a <c>struct</c> and a <c>class</c>?</p>
+    </statement>
+    <choices>
+      <choice correct="yes">
+        <statement><p>Struct members are public by default; class members are private by default.</p></statement>
+        <feedback><p>Correct. Either type can change its access explicitly with an access specifier.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>Struct members are private by default; class members are public by default.</p></statement>
+        <feedback><p>The defaults are reversed: structs begin public and classes begin private.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>Structs can have data members, but classes cannot.</p></statement>
+        <feedback><p>Both structs and classes can have data members.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>Classes can have constructors, but structs cannot.</p></statement>
+        <feedback><p>Both structs and classes can have constructors, including overloaded constructors.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="mce_5_8">
+    <statement>
+      <p>What is the main purpose of making a class data member private?</p>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p>To prevent the data member from ever changing</p></statement>
+        <feedback><p>Private data can still be changed by appropriate member functions.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>To control how outside code accesses and changes the object's state</p></statement>
+        <feedback><p>Correct. This supports encapsulation and helps protect the object's invariants.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>To prevent member functions of the same class from using it</p></statement>
+        <feedback><p>Member functions can directly access private members of their own class.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>To make the data member shared by every object</p></statement>
+        <feedback><p>Access control does not determine whether a member is shared.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="mce_5_9">
+    <statement>
+      <p>Which line is a valid constructor declaration for <c>Book</c>?</p>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p><c>void Book();</c></p></statement>
+        <feedback><p>A constructor has no return type, including <c>void</c>.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p><c>Book(std::string initial_title);</c></p></statement>
+        <feedback><p>Correct. The constructor has the class name and no return type.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>book(std::string initial_title);</c></p></statement>
+        <feedback><p>The constructor name must match the class name, including capitalization.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>Book Book(std::string initial_title);</c></p></statement>
+        <feedback><p>A constructor does not have a return type before its name.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="mce_5_10">
+    <statement>
+      <p>What is the purpose of the scope resolution operator in this definition?</p>
+      <program>
+        <code><![CDATA[
+double Rectangle::calculate_area() const {
+    return length * width;
+}
+        ]]></code>
+      </program>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p>It makes <c>calculate_area</c> a free function.</p></statement>
+        <feedback><p>The operator identifies <c>Rectangle</c> as the class that owns the member function.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>It identifies <c>calculate_area</c> as a member function of <c>Rectangle</c>.</p></statement>
+        <feedback><p>Correct. The <c>::</c> operator connects the function definition to its class.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>It gives <c>length</c> and <c>width</c> public access.</p></statement>
+        <feedback><p>Access is controlled by <c>public</c> and <c>private</c>, not by <c>::</c>.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>It calls the function immediately.</p></statement>
+        <feedback><p>The definition declares what the function does; a call requires an object and parentheses.</p></feedback>
       </choice>
     </choices>
   </exercise>

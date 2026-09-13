@@ -14,10 +14,18 @@
     out of bounds. So you are not literally sending a subset of the deck; you are really sending the
     whole deck. But as long as the recipient plays by the rules, it makes sense to think of it,
     abstractly, as a subdeck.</p>
-  <p>There is one other example of this kind of abstraction that you might have noticed in <xref ref="chapter9_functions-for-objects"/>, when I referred
-    to an <q>empty</q> data structure. The reason I put <q>empty</q> in quotation marks was to
-    suggest that it is not literally accurate. All variables have values all the time. When you
-    create them, they are given default values. So there is no such thing as an empty object.</p>
+  <p>
+  There is one other example of this kind of abstraction that you may have
+  noticed in <xref ref="chapter5_creating-structure-objects"/>. When we write
+  empty braces while creating a structure object, such as
+  <c>Point origin{}</c>, no member values are written explicitly.
+  </p>
+  <p>
+  However, the object is not literally empty. Its data members still have
+  values because empty-brace initialization value-initializes them. We use the
+  idea of an “empty” object only as an abstraction to mean that no meaningful
+  value has been supplied yet.
+  </p>
   <p>But if the program guarantees that the current value of a variable is never read before it is
     written, then the current value is irrelevant. Abstractly, it makes sense to think of such a
     variable as <q>empty.</q></p>

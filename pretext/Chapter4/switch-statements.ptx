@@ -173,8 +173,20 @@ switch (choice) {
       A <c>switch</c> statement is useful when the same expression is
       compared against several distinct constant values.
     </p>
+	<p>
+      The expression in a <c>switch</c> statement must use an integral or
+      enumeration type. For now, common examples are <c>int</c> and
+      <c>char</c>. Floating-point types such as <c>double</c> and
+      <c>std::string</c> cannot be used directly in a <c>switch</c>.
+    </p>
 
-    <p>For example:</p>
+    <p>
+      You will learn about enumeration types, or <term>enums</term>, later in
+      the book. Enums also work well with <c>switch</c> statements because
+      they represent a fixed set of named choices.
+    </p>
+
+    <p>Here is an example:</p>
 
     <program><![CDATA[
 switch (day_number) {
@@ -236,6 +248,12 @@ score >= 90
     <p>
       For ranges and more complex Boolean conditions, use
       <c>if</c>/<c>else if</c>/<c>else</c>.
+    </p>
+	
+	<p>
+      Also use <c>if</c>/<c>else if</c> when comparing values that
+      <c>switch</c> cannot use directly, such as <c>std::string</c> or
+      floating-point values.
     </p>
 
     <program><![CDATA[

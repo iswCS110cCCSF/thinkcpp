@@ -1,0 +1,130 @@
+<?xml version="1.0" ?><section xml:id="chapter5_glossary">
+    <title>Glossary</title>
+    <glossary>
+        <gi>
+            <title>return type</title>
+            <p>The type of value a function returns.</p>
+        </gi>
+        <gi>
+            <title>return value</title>
+            <p>The value provided as the result of a function call.</p>
+        </gi>
+        <gi>
+            <title>dead code</title>
+            <p>Part of a program that can never be executed, often because it
+            appears after a return statement.</p>
+        </gi>
+        <gi>
+            <title>scaffolding</title>
+            <p>Code that is used during program development but is not part of the
+            final version.</p>
+        </gi>
+        <gi>
+            <title>void</title>
+            <p>A special return type that indicates a void function; that is, one
+            that does not return a value.</p>
+        </gi>
+        <gi>
+            <title>overloading</title>
+            <p>Having more than one function with the same name but different
+            parameters. When you call an overloaded function, C++ knows which
+            version to use by looking at the arguments you provide.</p>
+        </gi>
+        <gi>
+            <title>boolean</title>
+            <p>A value or variable that can take on one of two states, often called <m>true</m> and <m>
+            false</m>. In C++, boolean values can be stored in a variable type called bool.</p>
+        </gi>
+        <gi>
+            <title>flag</title>
+            <p>A variable (usually type bool) that records a condition or status
+            information.</p>
+        </gi>
+        <gi>
+            <title>comparison operator</title>
+            <p>An operator that compares two values and produces a boolean that
+            indicates the relationship between the operands.</p>
+        </gi>
+        <gi>
+            <title>logical operator</title>
+            <p>An operator that combines boolean values in order to test compound
+            conditions.</p>
+        </gi>
+    </glossary>
+    <reading-questions>
+  <exercise label="chapter_five_glossary_1">
+    <statement>
+      <p>Match each phrase with the corresponding definition by dragging the phrase into the
+        appropriate box.</p>
+    </statement>
+    <feedback><p>
+      Try again!
+    </p></feedback>
+    <cardsort>
+      <match>
+        <premise order="1">return type</premise>
+        <response>The type of value a function returns.</response>
+      </match>
+      <match>
+        <premise order="2">return value</premise>
+        <response>The value provided as the result of a function call.</response>
+      </match>
+      <match>
+        <premise order="3">comparison operator</premise>
+        <response>An operator that compares two values and produces a boolean.</response>
+      </match>
+      <match>
+        <premise order="4">logical operator</premise>
+        <response>An operator that combines boolean values in order to test compound conditions.</response>
+      </match>
+    </cardsort>
+  </exercise>
+  <exercise label="chapter_five_glossary_2">
+    <statement>
+      <p>Match each phrase with the corresponding definition by dragging the phrase into the
+        appropriate box.</p>
+    </statement>
+    <feedback><p>
+      Try again!
+    </p></feedback>
+    <cardsort>
+      <match>
+        <premise order="1">dead code</premise>
+        <response>Part of a program that can never be executed.</response>
+      </match>
+      <match>
+        <premise order="2">scaffolding</premise>
+        <response>Code used during program development but not part of the final version.</response>
+      </match>
+      <match>
+        <premise order="3">overloading</premise>
+        <response>Having more than one function with the same name but different parameters.</response>
+      </match>
+    </cardsort>
+  </exercise>
+  <exercise label="chapter_five_glossary_3">
+    <statement>
+      <p>Match each phrase with the corresponding definition by dragging the phrase into the
+        appropriate box.</p>
+    </statement>
+    <feedback><p>
+      Try again!
+    </p></feedback>
+    <cardsort>
+      <match>
+        <premise order="1">boolean</premise>
+        <response>A value or variable that can take on one of two states, often called true and
+          false.</response>
+      </match>
+      <match>
+        <premise order="2">flag</premise>
+        <response>A variable that records a condition or status information.</response>
+      </match>
+      <match>
+        <premise order="3">void</premise>
+        <response>A special return type that does not return a value.</response>
+      </match>
+    </cardsort>
+  </exercise>
+    </reading-questions>
+</section>

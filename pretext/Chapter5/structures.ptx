@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter5_structures">
+  <title>Structures</title>
+
+  <introduction>
+    <p>
+      So far, variables have usually represented individual pieces of data.
+      Sometimes several values naturally belong together. For example, a point
+      on a coordinate plane has both an <c>x</c>-coordinate and a
+      <c>y</c>-coordinate.
+    </p>
+
+    <p>
+      We could store those values in separate variables:
+    </p>
+
+    <program><![CDATA[
+double x = 3.0;
+double y = 4.0;
+    ]]></program>
+
+    <p>
+      However, the two values describe one conceptual object: a point.
+      C++ provides <term>structures</term> so related values can be grouped
+      into a single user-defined type.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>Defining a Structure</title>
+
+    <p>
+      A structure is defined using the <c>struct</c> keyword. The following
+      definition creates a new type named <c>Point</c>:
+    </p>
+
+    <program><![CDATA[
+struct Point {
+    double x;
+    double y;
+};
+    ]]></program>
+
+    <p>
+      The variables declared inside the structure are called
+      <term>data members</term>. A <c>Point</c> has two data members:
+      <c>x</c> and <c>y</c>.
+    </p>
+
+    <p>
+      Notice the semicolon after the closing brace. A structure definition
+      must end with a semicolon.
+    </p>
+
+    <p>
+      Defining <c>Point</c> creates a new type. It does not yet create a
+      particular point object.
+    </p>
+
+    <p>
+      We can think of the structure definition as describing the layout of
+      every <c>Point</c> object:
+    </p>
+
+    <program><![CDATA[
+Point
++----------------+
+| x : double     |
+| y : double     |
++----------------+
+    ]]></program>
+	
+<p>
+  A structure type must be defined before it is used to create objects or in
+  function declarations. In the complete single-file programs in this book,
+  structure definitions therefore appear near the top of the file, after the
+  <c>#include</c> directives and before function declarations and
+  <c>main</c>.
+</p>
+	
+  </subsection>
+
+<subsection xml:id="chapter5_creating-structure-objects">
+    <title>Creating Structure Objects</title>
+
+    <p>
+      Once a structure type has been defined, we can create objects of that
+      type in much the same way that we create variables of built-in types.
+    </p>
+
+    <program><![CDATA[
+Point location;
+    ]]></program>
+
+    <p>
+      Here, <c>location</c> is an object whose type is <c>Point</c>.
+      It contains its own <c>x</c> and <c>y</c> data members.
+    </p>
+
+    <p>
+      Fundamental-type data members should not be left uninitialized.
+      One safe way to create a structure object is to use empty braces:
+    </p>
+
+    <program><![CDATA[
+Point origin{};
+    ]]></program>
+
+    <p>
+      With this form, the numeric data members are value-initialized.
+      For this <c>Point</c>, both <c>x</c> and <c>y</c> become
+      <c>0.0</c>.
+    </p>
+
+    <program><![CDATA[
+origin
++----------------+
+| x : 0.0        |
+| y : 0.0        |
++----------------+
+    ]]></program>
+	
+	<p>
+      Here is the complete program.
+    </p>
+	<program><![CDATA[
+#include <iostream>
+
+struct Point {
+    double x;
+    double y;
+};
+
+int main() {
+    Point origin{};;
+
+    return 0;
+}
+]]></program>
+	
+  </subsection>
+
+
+  <subsection>
+    <title>Aggregate Initialization</title>
+
+    <p>
+      We can also provide initial values when an object is created.
+    </p>
+
+    <program><![CDATA[
+Point location{3.0, 4.0};
+    ]]></program>
+
+    <p>
+      The values are assigned to the data members in the order in which
+      the members appear in the structure definition.
+    </p>
+
+    <program><![CDATA[
+location
++----------------+
+| x : 3.0        |
+| y : 4.0        |
++----------------+
+    ]]></program>
+
+    <p>
+      This form is called <term>aggregate initialization</term>.
+    </p>
+
+    <p>
+      For another structure:
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      the statement:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+    ]]></program>
+
+    <p>
+      initializes <c>length</c> to <c>12.0</c> and <c>width</c> to
+      <c>8.0</c>.
+    </p>
+
+    <program><![CDATA[
+room
++------------------+
+| length : 12.0    |
+| width  : 8.0     |
++------------------+
+    ]]></program>
+  </subsection>
+
+
+  <subsection>
+    <title>Accessing Data Members</title>
+
+    <p>
+      Use the dot operator, <c>.</c>, to access a data member of a structure
+      object.
+    </p>
+
+    <program><![CDATA[
+Point location{3.0, 4.0};
+
+std::cout << location.x << '\n';
+std::cout << location.y << '\n';
+    ]]></program>
+
+    <p>
+      The expression <c>location.x</c> means the <c>x</c> data member
+      belonging to the object named <c>location</c>.
+    </p>
+
+    <p>
+      Similarly:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+
+std::cout << room.length << '\n';
+std::cout << room.width << '\n';
+    ]]></program>
+
+    <p>
+      Data members can also be changed using the dot operator:
+    </p>
+
+    <program><![CDATA[
+room.length = 15.0;
+room.width = 10.0;
+    ]]></program>
+
+    <p>
+      After these assignments, the state of <c>room</c> is:
+    </p>
+
+    <program><![CDATA[
+room
++------------------+
+| length : 15.0    |
+| width  : 10.0    |
++------------------+
+    ]]></program>
+  </subsection>
+
+
+  <subsection>
+    <title>Each Object Has Its Own Data</title>
+
+    <p>
+      Different objects of the same structure type have their own copies of
+      the data members.
+    </p>
+
+    <program><![CDATA[
+Point first{2.0, 5.0};
+Point second{8.0, 1.0};
+    ]]></program>
+
+    <p>
+      These are two separate <c>Point</c> objects:
+    </p>
+
+    <program><![CDATA[
+first                     second
++--------------+          +--------------+
+| x : 2.0      |          | x : 8.0      |
+| y : 5.0      |          | y : 1.0      |
++--------------+          +--------------+
+    ]]></program>
+
+    <p>
+      Changing <c>first.x</c> does not change <c>second.x</c>.
+    </p>
+
+    <program><![CDATA[
+first.x = 10.0;
+    ]]></program>
+
+    <p>
+      Now the objects contain:
+    </p>
+
+    <program><![CDATA[
+first                     second
++--------------+          +--------------+
+| x : 10.0     |          | x : 8.0      |
+| y : 5.0      |          | y : 1.0      |
++--------------+          +--------------+
+    ]]></program>
+  </subsection>
+
+
+  <subsection>
+    <title>Copying Structure Objects</title>
+
+    <p>
+      An object of a structure type can be copied to another object of the
+      same type.
+    </p>
+
+    <program><![CDATA[
+Point first{3.0, 4.0};
+Point second = first;
+    ]]></program>
+
+    <p>
+      The values of <c>first</c>'s data members are copied into
+      <c>second</c>.
+    </p>
+
+    <program><![CDATA[
+first                     second
++--------------+          +--------------+
+| x : 3.0      |          | x : 3.0      |
+| y : 4.0      |          | y : 4.0      |
++--------------+          +--------------+
+    ]]></program>
+
+    <p>
+      The objects are still independent. Changing one object afterward does
+      not automatically change the other.
+    </p>
+
+    <program><![CDATA[
+second.x = 9.0;
+    ]]></program>
+
+    <p>
+      Now:
+    </p>
+
+    <program><![CDATA[
+first                     second
++--------------+          +--------------+
+| x : 3.0      |          | x : 9.0      |
+| y : 4.0      |          | y : 4.0      |
++--------------+          +--------------+
+    ]]></program>
+
+    <p>
+      This copying behavior will become important in the next section when
+      we pass structure objects to functions.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>A Complete Example</title>
+
+    <listing label="chapter5_structures_AC_1">
+      <title>
+        This program creates and uses two <c>Rectangle</c> objects.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="chapter5_structures_AC_1_editor">
+        <code><![CDATA[
+#include <iostream>
+
+struct Rectangle {
+    double length;
+    double width;
+};
+
+int main() {
+    Rectangle room{12.0, 8.0};
+    Rectangle table{6.0, 3.0};
+
+    std::cout << "Room length: " << room.length << '\n';
+    std::cout << "Room width: " << room.width << '\n';
+
+    std::cout << "Table length: " << table.length << '\n';
+    std::cout << "Table width: " << table.width << '\n';
+
+    return 0;
+}
+        ]]></code>
+      </program>
+    </listing>
+
+    <p>
+      Both <c>room</c> and <c>table</c> have type <c>Rectangle</c>, but each
+      object stores its own <c>length</c> and <c>width</c>.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Check Your Understanding</title>
+
+    <exercise label="chapter5_structures_1">
+      <statement>
+        <p>
+          In the following structure definition, which names are data members?
+        </p>
+
+        <program><![CDATA[
+struct Temperature {
+    double high;
+    double low;
+};
+        ]]></program>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p><c>Temperature</c> only</p>
+          </statement>
+          <feedback>
+            <p>
+              <c>Temperature</c> is the name of the structure type.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p><c>high</c> and <c>low</c></p>
+          </statement>
+          <feedback>
+            <p>
+              The variables declared inside the structure are its data members.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p><c>double</c> and <c>Temperature</c></p>
+          </statement>
+          <feedback>
+            <p>
+              <c>double</c> is a type, and <c>Temperature</c> is the
+              user-defined structure type.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_structures_2">
+      <statement>
+        <p>
+          Given:
+        </p>
+
+        <program><![CDATA[
+Point location{7.0, 2.0};
+        ]]></program>
+
+        <p>
+          which expression accesses the <c>y</c> data member of
+          <c>location</c>?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement><p><c>Point.y</c></p></statement>
+          <feedback>
+            <p>
+              Use the object name before the dot operator.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>location-y</c></p></statement>
+          <feedback>
+            <p>
+              Structure members are accessed using the dot operator.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement><p><c>location.y</c></p></statement>
+          <feedback>
+            <p>
+              The dot operator accesses a data member belonging to an object.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>y.location</c></p></statement>
+          <feedback>
+            <p>
+              The object name appears before the dot, followed by the member
+              name.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_structures_3">
+      <statement>
+        <p>Consider:</p>
+
+        <program><![CDATA[
+Point first{3.0, 4.0};
+Point second = first;
+
+second.x = 10.0;
+        ]]></program>
+
+        <p>
+          What is the value of <c>first.x</c> after these statements?
+        </p>
+      </statement>
+
+      <choices>
+        <choice correct="yes">
+          <statement><p><c>3.0</c></p></statement>
+          <feedback>
+            <p>
+              <c>second</c> received a copy. Changing <c>second.x</c>
+              does not change <c>first.x</c>.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>4.0</c></p></statement>
+          <feedback>
+            <p>
+              <c>4.0</c> is the value of <c>first.y</c>.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>10.0</c></p></statement>
+          <feedback>
+            <p>
+              The assignment changes <c>second.x</c>, not
+              <c>first.x</c>.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_structures_4">
+      <statement>
+        <p>
+          Which structure definition is written correctly?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <program><![CDATA[
+struct Robot {
+    int battery_level;
+    double speed;
+}
+            ]]></program>
+          </statement>
+          <feedback>
+            <p>
+              A structure definition must end with a semicolon after the
+              closing brace.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <program><![CDATA[
+struct Robot {
+    int battery_level;
+    double speed;
+};
+            ]]></program>
+          </statement>
+          <feedback>
+            <p>
+              The data members are declared inside the braces, and the
+              structure definition ends with a semicolon.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <program><![CDATA[
+struct Robot;
+{
+    int battery_level;
+    double speed;
+}
+            ]]></program>
+          </statement>
+          <feedback>
+            <p>
+              The opening brace belongs immediately after the structure
+              name in this definition.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_structures_5"
+              number="yes"
+              adaptive="yes"
+              indentation="hide">
+      <statement>
+        <p>
+          Arrange the blocks to define a <c>Robot</c> structure with an
+          integer <c>battery_level</c> and a <c>double</c>
+          <c>speed</c>.
+        </p>
+      </statement>
+
+      <blocks>
+        <block order="1">
+          <cline>struct Robot {</cline>
+        </block>
+
+        <block order="2">
+          <cline>    int battery_level;</cline>
+        </block>
+
+        <block order="3">
+          <cline>    double speed;</cline>
+        </block>
+
+        <block order="4">
+          <cline>};</cline>
+        </block>
+
+        <block correct="no">
+          <cline>Robot {</cline>
+        </block>
+
+        <block correct="no">
+          <cline>    speed double;</cline>
+        </block>
+      </blocks>
+    </exercise>
+
+  </subsection>
+
+</section>

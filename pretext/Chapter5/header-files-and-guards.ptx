@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter5_header-files">
+  <title>Header Files and Header Guards</title>
+
+  <introduction>
+    <p>
+      So far, our complete examples have placed a class definition, <c>main</c>,
+      and the member-function definitions in one source file. That works well
+      for small programs, but larger programs are easier to organize when a
+      type's interface is separated from its implementation.
+    </p>
+
+    <p>
+      A common C++ organization uses three files:
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          a <term>header file</term> containing the class definition and member
+          function declarations,
+        </p>
+      </li>
+      <li>
+        <p>
+          an <term>implementation file</term> containing the member-function
+          definitions, and
+        </p>
+      </li>
+      <li>
+        <p>
+          a source file containing <c>main</c> and the code that uses the class.
+        </p>
+      </li>
+    </ul>
+
+    <p>
+      We will use the <c>Rectangle</c> class from the previous sections to see
+      how these pieces fit together.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>The Header File</title>
+
+    <p>
+      The header file describes the class interface that other source files
+      need to know about. A header commonly uses the same base name as the
+      class, followed by <c>.h</c>.
+    </p>
+
+    <p>
+      For <c>Rectangle</c>, we can create a file named <c>Rectangle.h</c>:
+    </p>
+
+    <program><![CDATA[
+#ifndef RECTANGLE_H_INCLUDED
+#define RECTANGLE_H_INCLUDED
+
+class Rectangle {
+public:
+    Rectangle();
+    Rectangle(double initial_length, double initial_width);
+
+    double calculate_area() const;
+
+private:
+    double length;
+    double width;
+};
+
+#endif
+    ]]></program>
+
+    <p>
+      The class definition belongs in the header because code that creates or
+      uses a <c>Rectangle</c> needs to know what a <c>Rectangle</c> is and what
+      public operations are available.
+    </p>
+
+    <p>
+      The member-function bodies do not need to appear here. The declarations
+      tell the compiler what operations exist; their definitions can be placed
+      in a separate implementation file.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Header Guards</title>
+
+    <p>
+      The three preprocessor lines surrounding the class definition form a
+      <term>header guard</term>:
+    </p>
+
+    <program><![CDATA[
+#ifndef RECTANGLE_H_INCLUDED
+#define RECTANGLE_H_INCLUDED
+
+// contents of Rectangle.h
+
+#endif
+    ]]></program>
+
+    <p>
+      A header can sometimes be reached more than once while the compiler is
+      processing a source file. Without protection, that could cause the same
+      class definition to be seen repeatedly.
+    </p>
+
+    <p>
+      The guard works by defining a unique preprocessor name the first time the
+      header is included:
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          <c>#ifndef RECTANGLE_H_INCLUDED</c> asks whether that name has
+          <em>not</em> already been defined.
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>#define RECTANGLE_H_INCLUDED</c> defines the name the first time
+          the header is processed.
+        </p>
+      </li>
+      <li>
+        <p>
+          <c>#endif</c> marks the end of the protected contents.
+        </p>
+      </li>
+    </ul>
+
+    <p>
+      If the same header is encountered again while compiling that source
+      file, the protected contents are skipped.
+    </p>
+
+    <note>
+      <p>
+        The guard name should be unique within the project. A descriptive name
+        such as <c>RECTANGLE_H_INCLUDED</c> makes accidental collisions less
+        likely.
+      </p>
+    </note>
+
+    <p>
+      Many compilers also support
+    </p>
+
+    <program><![CDATA[
+#pragma once
+    ]]></program>
+
+    <p>
+      as a convenient alternative. It is widely supported, but traditional
+      header guards are part of long-established portable C++ practice, so we
+      will use them in this book.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>The Implementation File</title>
+
+    <p>
+      The member-function definitions can be placed in
+      <c>Rectangle.cpp</c>. The implementation file includes its own header so
+      the compiler sees the class definition before the member-function
+      definitions.
+    </p>
+
+    <program><![CDATA[
+#include "Rectangle.h"
+
+Rectangle::Rectangle()
+    : length(1.0), width(1.0) {
+}
+
+Rectangle::Rectangle(double initial_length, double initial_width)
+    : length(1.0), width(1.0) {
+    if (initial_length > 0.0 && initial_width > 0.0) {
+        length = initial_length;
+        width = initial_width;
+    }
+}
+
+double Rectangle::calculate_area() const {
+    return length * width;
+}
+    ]]></program>
+
+    <p>
+      Because these definitions appear outside the class definition, the scope
+      resolution operator <c>::</c> is required, just as it was in the
+      previous sections.
+    </p>
+
+    <p>
+      Notice that <c>Rectangle.cpp</c> does not repeat the class definition.
+      It includes <c>Rectangle.h</c> and supplies the definitions promised by
+      the declarations in that header.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>The File Containing main</title>
+
+    <p>
+      A source file that wants to use <c>Rectangle</c> also includes the
+      header. For example, <c>main.cpp</c> could contain:
+    </p>
+
+    <program><![CDATA[
+#include <iostream>
+
+#include "Rectangle.h"
+
+int main() {
+    Rectangle unit_square;
+    Rectangle room{12.0, 8.0};
+
+    std::cout << unit_square.calculate_area() << '\n';
+    std::cout << room.calculate_area() << '\n';
+
+    return 0;
+}
+    ]]></program>
+
+    <p>
+      <c>main.cpp</c> needs the class declaration so that the compiler knows
+      how objects such as <c>room</c> can be created and which public member
+      functions may be called.
+    </p>
+
+    <p>
+      The complete project now has this organization:
+    </p>
+
+    <program><![CDATA[
+Rectangle.h      class definition and member-function declarations
+Rectangle.cpp    member-function definitions
+main.cpp         program that uses Rectangle
+    ]]></program>
+  </subsection>
+
+
+  <subsection>
+    <title>Quotes and Angle Brackets in include Directives</title>
+
+    <p>
+      We have already used standard-library headers such as
+      <c>&lt;iostream&gt;</c>. Our own header uses quotation marks instead:
+    </p>
+
+    <program><![CDATA[
+#include <iostream>
+#include "Rectangle.h"
+    ]]></program>
+
+    <p>
+      As a practical rule:
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          use angle brackets for standard-library and other installed library
+          headers, such as <c>&lt;iostream&gt;</c> and
+          <c>&lt;string&gt;</c>;
+        </p>
+      </li>
+      <li>
+        <p>
+          use quotation marks for headers that are part of your own project,
+          such as <c>"Rectangle.h"</c>.
+        </p>
+      </li>
+    </ul>
+
+    <p>
+      The exact search rules are controlled by the compiler and its options,
+      but this convention communicates whether a header belongs to the project
+      or to an installed library.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>A Header Should Include What It Needs</title>
+
+    <p>
+      A header should include the standard-library headers required by the
+      declarations it contains. For example, suppose a class stores and
+      exposes a <c>std::string</c>:
+    </p>
+
+    <program><![CDATA[
+#ifndef BOOK_H_INCLUDED
+#define BOOK_H_INCLUDED
+
+#include <string>
+
+class Book {
+public:
+    Book(const std::string& initial_title);
+
+private:
+    std::string title;
+};
+
+#endif
+    ]]></program>
+
+    <p>
+      <c>Book.h</c> uses <c>std::string</c>, so <c>Book.h</c> itself includes
+      <c>&lt;string&gt;</c>. It should not depend on some other source file
+      happening to include <c>&lt;string&gt;</c> first.
+    </p>
+
+    <p>
+      This is another application of the rule <q>include what you use</q>.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Compiling Multiple Source Files</title>
+
+    <p>
+      The header file is included by the source files, but it is normally not
+      listed as a separate source file in the compile command. To build this
+      three-file project with <c>g++</c>, compile the two <c>.cpp</c> files
+      together:
+    </p>
+
+    <program><![CDATA[
+g++ -std=c++17 -Wall -Wextra -pedantic Rectangle.cpp main.cpp -o rectangle_program
+    ]]></program>
+
+    <p>
+      The compiler processes the source files and the linker combines the
+      compiled pieces into one executable program.
+    </p>
+
+    <p>
+      On Windows, the resulting executable may be run as:
+    </p>
+
+    <program><![CDATA[
+.\rectangle_program.exe
+    ]]></program>
+
+    <p>
+      On Linux or macOS, it may be run as:
+    </p>
+
+    <program><![CDATA[
+./rectangle_program
+    ]]></program>
+
+    <p>
+      Development tools and IDEs can perform these compile and link steps for
+      you, but understanding that a project can contain several source files is
+      an important part of understanding C++ programs.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Why Separate the Files?</title>
+
+    <p>
+      Splitting a small program into three files may initially seem like extra
+      work. The benefits become more important as programs grow.
+    </p>
+
+    <dl>
+      <li>
+        <title>Clear interface</title>
+        <p>
+          The header shows what other code needs to know about the type without
+          requiring readers to inspect every implementation detail.
+        </p>
+      </li>
+
+      <li>
+        <title>Organization</title>
+        <p>
+          The class implementation can be developed separately from the code
+          that uses the class.
+        </p>
+      </li>
+
+      <li>
+        <title>Reuse</title>
+        <p>
+          Several source files or programs can include the same class
+          declaration and use the same implementation.
+        </p>
+      </li>
+
+      <li>
+        <title>Separate compilation</title>
+        <p>
+          In larger projects, source files can be compiled separately and
+          linked together. Build tools can avoid recompiling source files that
+          have not changed.
+        </p>
+      </li>
+    </dl>
+
+    <p>
+      This separation also reinforces an idea from the previous sections:
+      code that uses an object should depend primarily on its public interface,
+      while the implementation details can remain elsewhere.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Check Your Understanding</title>
+
+    <exercise label="chapter5_header_files_1">
+      <statement>
+        <p>
+          Which file normally contains the <c>Rectangle</c> class definition
+          and its member-function declarations?
+        </p>
+      </statement>
+
+      <choices>
+        <choice correct="yes">
+          <statement><p><c>Rectangle.h</c></p></statement>
+          <feedback>
+            <p>
+              The header provides the class definition and declarations needed
+              by source files that use <c>Rectangle</c>.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>Rectangle.cpp</c></p></statement>
+          <feedback>
+            <p>
+              The implementation file normally contains the member-function
+              definitions.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>main.cpp</c></p></statement>
+          <feedback>
+            <p>
+              <c>main.cpp</c> can use the class by including its header, but
+              the class definition belongs in the header in this organization.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_header_files_2">
+      <statement>
+        <p>
+          Which directive is the usual way to include a header that belongs to
+          your own project?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement><p><c>#include &lt;Rectangle.h&gt;</c></p></statement>
+          <feedback>
+            <p>
+              Angle brackets are normally used for standard-library and other
+              installed library headers.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement><p><c>#include "Rectangle.h"</c></p></statement>
+          <feedback>
+            <p>
+              Quotation marks are the usual form for a header that belongs to
+              the current project.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>#include Rectangle.h</c></p></statement>
+          <feedback>
+            <p>
+              The header name must be enclosed in quotation marks or angle
+              brackets.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_header_files_3">
+      <statement>
+        <p>
+          What is the main purpose of a header guard?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              It prevents other source files from using the class.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              A header is intended to be shared by source files that need its
+              declarations.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              It prevents the protected header contents from being processed
+              repeatedly when the same header is encountered more than once
+              while compiling a source file.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              The guard allows the header contents to be processed once for
+              that compilation and skipped on later encounters.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              It automatically makes all class data private.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Access control is determined by <c>public:</c>,
+              <c>private:</c>, and the type's default access rules.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_header_files_4"
+              number="yes"
+              adaptive="yes"
+              indentation="hide">
+      <statement>
+        <p>
+          Arrange the blocks to create the basic protected contents of
+          <c>Robot.h</c>.
+        </p>
+      </statement>
+
+      <blocks>
+        <block order="1">
+          <cline>#ifndef ROBOT_H_INCLUDED</cline>
+        </block>
+
+        <block order="2">
+          <cline>#define ROBOT_H_INCLUDED</cline>
+        </block>
+
+        <block order="3">
+          <cline>class Robot {</cline>
+          <cline>public:</cline>
+          <cline>    Robot();</cline>
+          <cline>private:</cline>
+          <cline>    int battery_level;</cline>
+          <cline>};</cline>
+        </block>
+
+        <block order="4">
+          <cline>#endif</cline>
+        </block>
+
+        <block correct="no">
+          <cline>#include ROBOT_H_INCLUDED</cline>
+        </block>
+
+        <block correct="no">
+          <cline>#ifndef "Robot.h"</cline>
+        </block>
+      </blocks>
+    </exercise>
+
+
+    <exercise label="chapter5_header_files_5">
+      <statement>
+        <p>
+          A file named <c>Book.h</c> contains this declaration:
+        </p>
+
+        <program><![CDATA[
+class Book {
+public:
+    Book(const std::string& initial_title);
+
+private:
+    std::string title;
+};
+        ]]></program>
+
+        <p>
+          Which standard-library header should <c>Book.h</c> include itself?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement><p><c>&lt;iostream&gt;</c></p></statement>
+          <feedback>
+            <p>
+              The declarations shown do not use stream types or
+              <c>std::cout</c>.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement><p><c>&lt;string&gt;</c></p></statement>
+          <feedback>
+            <p>
+              The header directly uses <c>std::string</c>, so it should include
+              <c>&lt;string&gt;</c> itself.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p>No header is needed.</p></statement>
+          <feedback>
+            <p>
+              A header should include the declarations required by the types it
+              uses rather than depending on another file to include them first.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+  </subsection>
+
+</section>

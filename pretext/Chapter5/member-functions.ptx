@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter5_member-functions">
+  <title>Member Functions</title>
+
+  <introduction>
+    <p>
+      A function name by itself does not always tell us enough about the object
+      performing the action. For example, the action of <c>cook()</c> is very
+      general and may be even ambiguous without knowing a speccific cooking instrument(object).
+    </p>
+
+    <program><![CDATA[
+cook(); // Too general
+    ]]></program>
+
+    <p>
+      But different objects can perform that action in different ways. These
+      expressions provide more context:
+    </p>
+
+    <program><![CDATA[
+oven.cook();
+grill.cook();
+stove.cook();
+    ]]></program>
+
+    <p>
+      The function name is the same, but the object before the dot tells us
+      which object is performing the behavior.
+    </p>
+
+    <p>
+      In C++, functions that belong to an object are called
+      <term>member functions</term>. Member functions let us associate
+      behavior with the type of object that naturally performs that behavior.
+    </p>
+
+    <p>
+      In the previous section, functions operated on structure objects by
+      receiving those objects as parameters.
+    </p>
+
+    <p>
+      For example, a function could read a <c>Rectangle</c> without modifying
+      it:
+    </p>
+
+    <program><![CDATA[
+double calculate_area(const Rectangle& rectangle) {
+    return rectangle.length * rectangle.width;
+}
+    ]]></program>
+
+    <p>
+      Or a function could modify the original object by receiving it by
+      reference:
+    </p>
+
+    <program><![CDATA[
+void double_size(Rectangle& rectangle) {
+    rectangle.length *= 2.0;
+    rectangle.width *= 2.0;
+}
+    ]]></program>
+
+    <p>
+      These are <term>free functions</term>: they exist separately from the
+      structure definition, and the object is supplied as an argument.
+    </p>
+
+    <p>
+      We can now move behavior that naturally belongs to a
+      <c>Rectangle</c> into the structure itself.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>Adding Behavior to a Structure</title>
+
+    <p>
+      Consider the familiar <c>Rectangle</c> structure:
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      We can place a function inside the structure definition:
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+
+    double calculate_area() const {
+        return length * width;
+    }
+};
+    ]]></program>
+
+    <p>
+      The function <c>calculate_area</c> is now a member function of
+      <c>Rectangle</c>.
+    </p>
+
+    <p>
+      We call it using the dot operator:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+
+double area = room.calculate_area();
+    ]]></program>
+
+    <p>
+      Compare the two forms:
+    </p>
+
+    <program><![CDATA[
+calculate_area(room);      // free function
+
+room.calculate_area();     // member function
+    ]]></program>
+
+    <p>
+      In the free-function version, the <c>Rectangle</c> object is supplied
+      as an argument. In the member-function version, the object before the
+      dot provides the context for the operation.
+    </p>
+
+    <p>
+      This does not mean that member functions are always better than free
+      functions. The member-function form is useful when the operation
+      naturally belongs to the object.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Accessing Data Members Inside a Member Function</title>
+
+    <p>
+      A member function can directly access the data members of the object on
+      which it was called.
+    </p>
+
+    <program><![CDATA[
+double calculate_area() const {
+    return length * width;
+}
+    ]]></program>
+
+    <p>
+      We do not write <c>room.length</c> or <c>room.width</c> inside the
+      member function. The member function must work for every
+      <c>Rectangle</c> object, not only for an object named <c>room</c>.
+    </p>
+
+    <p>
+      For example:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+Rectangle table{6.0, 3.0};
+
+double room_area = room.calculate_area();
+double table_area = table.calculate_area();
+    ]]></program>
+
+    <p>
+      When <c>room.calculate_area()</c> runs, <c>length</c> and
+      <c>width</c> refer to the data members of <c>room</c>.
+      When <c>table.calculate_area()</c> runs, they refer to the data
+      members of <c>table</c>.
+    </p>
+
+    <program><![CDATA[
+room.calculate_area()
+
+room
++------------------+
+| length : 12.0    |
+| width  : 8.0     |
++------------------+
+
+calculate_area uses:
+length -> 12.0
+width  -> 8.0
+    ]]></program>
+
+    <p>
+      The object that calls a member function determines which object's data
+      members the function uses.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Member Functions That Modify an Object</title>
+
+    <p>
+      A member function can also change the state of the object on which it
+      is called.
+    </p>
+
+    <p>
+      In the previous section, we used a free function:
+    </p>
+
+    <program><![CDATA[
+void double_size(Rectangle& rectangle) {
+    rectangle.length *= 2.0;
+    rectangle.width *= 2.0;
+}
+    ]]></program>
+
+    <p>
+      As a member function, the same behavior can be written:
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+
+    void double_size() {
+        length *= 2.0;
+        width *= 2.0;
+    }
+};
+    ]]></program>
+
+    <p>
+      Then:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+
+room.double_size();
+    ]]></program>
+
+    <p>
+      changes the state of <c>room</c>:
+    </p>
+
+    <program><![CDATA[
+before                         after
+room                           room
++------------------+           +------------------+
+| length : 12.0    |           | length : 24.0    |
+| width  : 8.0     |           | width  : 16.0    |
++------------------+           +------------------+
+    ]]></program>
+
+    <p>
+      Notice that the member function does not need a
+      <c>Rectangle&amp;</c> parameter. The object before the dot is already
+      the object being modified.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>const Member Functions</title>
+
+    <p>
+      In the previous section, you used <c>const</c> references to indicate
+      that a function should read an object without modifying it:
+    </p>
+
+    <program><![CDATA[
+double calculate_area(const Rectangle& rectangle);
+    ]]></program>
+
+    <p>
+      Member functions can make a similar promise.
+    </p>
+
+    <program><![CDATA[
+double calculate_area() const;
+    ]]></program>
+
+    <p>
+      The <c>const</c> after the parentheses means that the member function
+      promises not to modify the object on which it is called.
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+
+    double calculate_area() const {
+        return length * width;
+    }
+};
+    ]]></program>
+
+    <p>
+      Because <c>calculate_area</c> only reads <c>length</c> and
+      <c>width</c>, marking it <c>const</c> expresses the function's intent.
+    </p>
+
+    <p>
+      A <c>const</c> member function cannot modify the object's data members.
+      For example, this would not compile:
+    </p>
+
+    <program><![CDATA[
+double calculate_area() const {
+    length = 20.0;   // error
+    return length * width;
+}
+    ]]></program>
+
+    <p>
+      By contrast, <c>double_size</c> changes the object, so it is not marked
+      <c>const</c>:
+    </p>
+
+    <program><![CDATA[
+void double_size() {
+    length *= 2.0;
+    width *= 2.0;
+}
+    ]]></program>
+
+    <p>
+      A useful way to think about the difference is:
+    </p>
+
+    <table>
+      <title>Reading and Changing Object State</title>
+      <tabular>
+        <row>
+          <cell><b>Member function</b></cell>
+          <cell><b>Changes the object?</b></cell>
+          <cell><b>Trailing const?</b></cell>
+        </row>
+
+        <row>
+          <cell><c>calculate_area()</c></cell>
+          <cell>No</cell>
+          <cell>Yes</cell>
+        </row>
+
+        <row>
+          <cell><c>calculate_perimeter()</c></cell>
+          <cell>No</cell>
+          <cell>Yes</cell>
+        </row>
+
+        <row>
+          <cell><c>double_size()</c></cell>
+          <cell>Yes</cell>
+          <cell>No</cell>
+        </row>
+      </tabular>
+    </table>
+  </subsection>
+
+
+  <subsection>
+    <title>More Than One Member Function</title>
+
+    <p>
+      A structure can contain both data and several related behaviors.
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+
+    double calculate_area() const {
+        return length * width;
+    }
+
+    double calculate_perimeter() const {
+        return 2.0 * (length + width);
+    }
+
+    void double_size() {
+        length *= 2.0;
+        width *= 2.0;
+    }
+};
+    ]]></program>
+
+    <p>
+      The structure now groups together:
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          state: <c>length</c> and <c>width</c>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          behavior that observes the state:
+          <c>calculate_area()</c> and <c>calculate_perimeter()</c>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          behavior that changes the state: <c>double_size()</c>
+        </p>
+      </li>
+    </ul>
+
+    <p>
+      This is an important idea in C++: a structure can contain both data and
+      functions that naturally operate on that data.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Defining Member Functions Outside the Structure</title>
+
+    <p>
+      Small member functions can be defined directly inside a structure, as
+      we have done so far. Member functions can also be declared inside the
+      structure and defined later.
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+
+    double calculate_area() const;
+    double calculate_perimeter() const;
+    void double_size();
+};
+    ]]></program>
+
+    <p>
+      The definitions can appear later in the file:
+    </p>
+
+    <program><![CDATA[
+double Rectangle::calculate_area() const {
+    return length * width;
+}
+
+double Rectangle::calculate_perimeter() const {
+    return 2.0 * (length + width);
+}
+
+void Rectangle::double_size() {
+    length *= 2.0;
+    width *= 2.0;
+}
+    ]]></program>
+
+    <p>
+      The <c>Rectangle::</c> before each function name tells C++ that the
+      function belongs to the <c>Rectangle</c> type.
+    </p>
+
+    <p>
+      The <c>::</c> operator is called the
+      <term>scope resolution operator</term>.
+    </p>
+
+    <p>
+      In the complete single-file examples in this book, we will usually place
+      structure definitions and member-function declarations before
+      <c>main</c>, and place the member-function definitions after
+      <c>main</c>.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>A Complete Example</title>
+
+    <listing label="chapter5_member_functions_AC_1">
+      <title>
+        This program uses both observing and state-changing member functions.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="chapter5_member_functions_AC_1_editor">
+        <code><![CDATA[
+#include <iostream>
+
+struct Rectangle {
+    double length;
+    double width;
+
+    double calculate_area() const;
+    double calculate_perimeter() const;
+    void double_size();
+};
+
+int main() {
+    Rectangle room{12.0, 8.0};
+
+    std::cout << "Area: "
+              << room.calculate_area() << '\n';
+
+    std::cout << "Perimeter: "
+              << room.calculate_perimeter() << '\n';
+
+    room.double_size();
+
+    std::cout << "New area: "
+              << room.calculate_area() << '\n';
+
+    return 0;
+}
+
+double Rectangle::calculate_area() const {
+    return length * width;
+}
+
+double Rectangle::calculate_perimeter() const {
+    return 2.0 * (length + width);
+}
+
+void Rectangle::double_size() {
+    length *= 2.0;
+    width *= 2.0;
+}
+        ]]></code>
+      </program>
+    </listing>
+
+    <p>
+      The object before the dot determines which <c>Rectangle</c> the member
+      function operates on.
+    </p>
+
+    <p>
+      The observing member functions are marked <c>const</c>, while
+      <c>double_size</c> is not because it modifies the object's state.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Free Function or Member Function?</title>
+
+    <p>
+      Member functions are useful when an operation naturally belongs to a
+      particular object.
+    </p>
+
+    <p>
+      The real-world example from the beginning showed this idea:
+    </p>
+
+    <program><![CDATA[
+oven.cook();
+grill.cook();
+    ]]></program>
+
+    <p>
+      The object gives the behavior additional context. Similarly:
+    </p>
+
+    <program><![CDATA[
+room.calculate_area();
+room.double_size();
+    ]]></program>
+
+    <p>
+      clearly associate those operations with <c>room</c>.
+    </p>
+
+    <p>
+      This does not mean that every function should become a member function.
+      Free functions are still useful, especially when an operation does not
+      naturally belong to one particular object.
+    </p>
+
+    <p>
+      A useful design question is:
+    </p>
+
+    <blockquote>
+      <p>
+        Does this operation naturally belong to this object?
+      </p>
+    </blockquote>
+
+    <p>
+      We will return to this question later in the chapter as we design
+      classes and their interfaces.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Check Your Understanding</title>
+
+    <exercise label="chapter5_member_functions_1">
+      <statement>
+        <p>
+          Which expression correctly calls the <c>calculate_area</c> member
+          function on an object named <c>room</c>?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p><c>calculate_area(room)</c></p>
+          </statement>
+          <feedback>
+            <p>
+              That is the syntax for the earlier free-function version.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p><c>room.calculate_area()</c></p>
+          </statement>
+          <feedback>
+            <p>
+              Member functions are called using the object, the dot operator,
+              and the member-function name.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p><c>Rectangle.calculate_area(room)</c></p>
+          </statement>
+          <feedback>
+            <p>
+              The member function is called on a specific object.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_member_functions_2">
+      <statement>
+        <p>
+          Why can <c>calculate_area()</c> use <c>length</c> and
+          <c>width</c> without receiving a <c>Rectangle</c> parameter?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              All <c>Rectangle</c> objects share the same <c>length</c> and
+              <c>width</c>.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Each <c>Rectangle</c> object has its own data members.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              A member function operates in the context of the object on which
+              it was called.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              The calling object determines which data members the member
+              function uses.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              The data members automatically become global variables.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Data members belong to individual objects; they are not global
+              variables.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_member_functions_3">
+      <statement>
+        <p>
+          Which member function should normally be marked with trailing
+          <c>const</c>?
+        </p>
+      </statement>
+
+      <choices>
+        <choice correct="yes">
+          <statement>
+            <p>
+              A function that calculates and returns an object's area without
+              changing the object.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              A member function that only observes object state can promise
+              not to modify the object by using trailing <c>const</c>.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              A function that doubles the object's length and width.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              A state-changing member function cannot make the same read-only
+              promise.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Every member function, whether it changes the object or not.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Trailing <c>const</c> is appropriate when the member function
+              does not modify the object.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_member_functions_4">
+      <statement>
+        <p>
+          What does <c>Rectangle::</c> mean in this definition?
+        </p>
+
+        <program><![CDATA[
+double Rectangle::calculate_area() const {
+    return length * width;
+}
+        ]]></program>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              It creates a new <c>Rectangle</c> object.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              No object is being created in this function definition.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              It identifies <c>calculate_area</c> as a member function of
+              <c>Rectangle</c>.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              The scope resolution operator associates the definition with the
+              <c>Rectangle</c> type.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              It passes a <c>Rectangle</c> to the function by reference.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              <c>::</c> is the scope resolution operator; it is not reference
+              syntax.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_member_functions_5">
+      <statement>
+        <p>
+          In the member-function definition below, what do <c>length</c> and
+          <c>width</c> refer to?
+        </p>
+
+        <program><![CDATA[
+double Rectangle::calculate_area() const {
+    return length * width;
+}
+        ]]></program>
+      </statement>
+
+      <choices>
+        <choice correct="yes">
+          <statement>
+            <p>
+              The data members of the <c>Rectangle</c> object on which
+              <c>calculate_area()</c> was called.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Inside a member function, data members of the calling object can
+              be accessed directly without writing the object's name.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Global variables named <c>length</c> and <c>width</c>.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              These names refer to data members of the calling object, not
+              global variables.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Function parameters that C++ creates automatically.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              They are not parameters. They are data members of the calling
+              object.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_member_functions_6"
+              number="yes"
+              adaptive="yes"
+              indentation="hide">
+      <statement>
+        <p>
+          Arrange the blocks to define <c>Robot::needs_recharge()</c> outside
+          the structure. The function should return <c>true</c> when the
+          battery level is below 20 and should not modify the object.
+        </p>
+
+        <program><![CDATA[
+struct Robot {
+    int battery_level;
+    bool needs_recharge() const;
+};
+        ]]></program>
+      </statement>
+
+      <blocks>
+        <block order="1">
+          <cline>bool Robot::needs_recharge() const {</cline>
+        </block>
+
+        <block order="2">
+          <cline>    return battery_level &lt; 20;</cline>
+        </block>
+
+        <block order="3">
+          <cline>}</cline>
+        </block>
+
+        <block correct="no">
+          <cline>bool needs_recharge(Robot robot) {</cline>
+        </block>
+
+        <block correct="no">
+          <cline>    return robot.battery_level &lt; 20;</cline>
+        </block>
+      </blocks>
+    </exercise>
+
+  </subsection>
+
+</section>

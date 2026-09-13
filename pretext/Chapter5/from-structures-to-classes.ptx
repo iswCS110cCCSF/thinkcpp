@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter5_from-structures-to-classes">
+  <title>From Structures to Classes</title>
+
+  <introduction>
+    <p>
+      In the previous sections, you used <c>struct</c> to group related data
+      and behavior into one type.
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+
+    double calculate_area() const;
+    void double_size();
+};
+    ]]></program>
+
+    <p>
+      C++ also provides another user-defined type called a <term>class</term>.
+      A class can also contain data members and member functions.
+    </p>
+
+    <p>
+      In fact, <c>struct</c> and <c>class</c> are very closely related in C++.
+      One important difference is the default access given to their members.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>Classes and Objects</title>
+
+    <p>
+      A <term>class</term> is a user-defined type that describes a category of
+      objects. The class specifies the data those objects contain and the
+      operations they can perform.
+    </p>
+
+    <p>
+      A useful analogy is to think of a class as a blueprint. The blueprint
+      describes how objects of that class are organized, while each object is a
+      separate instance created from that description.
+    </p>
+
+    <p>
+      For example, a <c>Rectangle</c> class can describe the data and behavior
+      shared by all rectangle objects:
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    double length;
+    double width;
+
+    double calculate_area() const;
+};
+    ]]></program>
+
+    <p>
+      We can then create different objects of the same class:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+Rectangle table{6.0, 3.0};
+    ]]></program>
+
+    <p>
+      Both <c>room</c> and <c>table</c> are objects of the
+      <c>Rectangle</c> class. They have the same kinds of data and behavior,
+      but each object has its own state.
+    </p>
+
+    <p>
+      An object created from a class is also called an
+      <term>instance</term> of that class.
+    </p>
+
+    <p>
+      The class describes what all objects of that type have in common; each
+      object stores its own values for its data members.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>A Struct and a Class Can Look Very Similar</title>
+
+    <p>
+      Consider the familiar <c>Rectangle</c> structure:
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+
+    double calculate_area() const;
+};
+    ]]></program>
+
+    <p>
+      We can write a very similar type using <c>class</c>:
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    double length;
+    double width;
+
+    double calculate_area() const;
+};
+    ]]></program>
+
+    <p>
+      The keyword <c>public</c> means that code outside the class may access
+      these members.
+    </p>
+
+    <p>
+      With <c>public:</c> written explicitly, this class can be used in much
+      the same way as the earlier structure:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+
+std::cout << room.length << '\n';
+std::cout << room.calculate_area() << '\n';
+    ]]></program>
+
+    <p>
+      Both <c>struct</c> and <c>class</c> can therefore contain:
+    </p>
+
+    <ul>
+      <li>
+        <p>data members</p>
+      </li>
+
+      <li>
+        <p>member functions</p>
+      </li>
+    </ul>
+  </subsection>
+
+
+  <subsection>
+    <title>Default Access</title>
+
+    <p>
+      The main difference we need to know right now is the default access of
+      members.
+    </p>
+
+    <p>
+      Members of a <c>struct</c> are <term>public</term> by default.
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      This means that code outside the structure may access the members:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+
+room.length = 15.0;
+room.width = 10.0;
+    ]]></program>
+
+    <p>
+      Members of a <c>class</c>, however, are
+      <term>private</term> by default.
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      In this version, code outside the class cannot directly access
+      <c>length</c> or <c>width</c>.
+    </p>
+
+    <program><![CDATA[
+Rectangle room;
+
+room.length = 15.0;   // error
+    ]]></program>
+
+    <p>
+      We will study public and private members in more detail in the next
+      section.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Making Class Members Public</title>
+
+    <p>
+      If we want class members to be accessible from outside the class, we can
+      use the <c>public:</c> access label.
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      Now the data members can be accessed using the dot operator:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+
+room.length = 15.0;
+room.width = 10.0;
+    ]]></program>
+
+    <p>
+      The <c>public:</c> label applies to the members that follow it until
+      another access label appears or the class definition ends.
+    </p>
+
+    <p>
+      For example:
+    </p>
+
+    <program><![CDATA[
+class Rectangle {
+public:
+    double length;
+    double width;
+
+    double calculate_area() const;
+};
+    ]]></program>
+
+    <p>
+      Here, both data members and the member function are public.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Why Use a Class?</title>
+
+    <p>
+      If structures can already contain both data and member functions, why
+      would we use a class?
+    </p>
+
+    <p>
+      One important reason is that a class can control how code outside the
+      class accesses and changes its data.
+    </p>
+
+    <p>
+      Consider a rectangle whose dimensions should never be negative. If the
+      data members are public, any part of the program can write:
+    </p>
+
+    <program><![CDATA[
+room.length = -5.0;
+    ]]></program>
+
+    <p>
+      The object now contains a value that may not make sense for the problem
+      being modeled.
+    </p>
+
+    <p>
+      A class can hide some data from outside code and provide member functions
+      that control how the object's state is changed.
+    </p>
+
+    <p>
+      This idea is called <term>encapsulation</term>. We will begin exploring
+      it in the next section.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>struct or class?</title>
+
+    <p>
+      In C++, both <c>struct</c> and <c>class</c> are capable of representing
+      objects with state and behavior.
+    </p>
+
+    <p>
+      A useful beginner guideline is:
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          Use a <c>struct</c> when the type is primarily a simple collection
+          of related data and direct access to that data is appropriate.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Use a <c>class</c> when the type should control access to its internal
+          state and provide a public interface for using the object.
+        </p>
+      </li>
+    </ul>
+
+    <p>
+      These are design guidelines rather than strict language rules. C++ allows
+      both structures and classes to contain data members and member functions.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Classes as Abstractions</title>
+
+    <p>
+    A class can provide more than a way to group data and functions. It can
+    also define a clear boundary between how an object is used and how it is
+    implemented internally.
+  </p>
+
+  <p>
+    Code outside the class can work through a set of public operations, while
+    some of the object's internal data can remain hidden.
+  </p>
+
+  <p>
+    This creates an <term>abstraction</term>: users of the class can focus on
+    what the object can do without needing to know every detail of how it
+    stores and manages its state.
+  </p>
+
+  <p>
+    Keeping data private is an important part of this design because it allows
+    the class to control how its state is changed. In the next section, we
+    will examine public and private members in detail.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Check Your Understanding</title>
+
+    <exercise label="chapter5_from_structures_to_classes_1">
+      <statement>
+        <p>
+          Which statement about C++ structures and classes is true?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              Only classes can contain member functions.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Both structures and classes can contain member functions.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              Both structures and classes can contain data members and member
+              functions.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              In C++, both can represent objects with state and behavior.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Structures can contain data, while classes can contain only
+              functions.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Both structures and classes can contain data and functions.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_from_structures_to_classes_2">
+      <statement>
+        <p>
+          What is the default access for members of a <c>struct</c>?
+        </p>
+      </statement>
+
+      <choices>
+        <choice correct="yes">
+          <statement><p><c>public</c></p></statement>
+          <feedback>
+            <p>
+              Members of a structure are public by default.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>private</c></p></statement>
+          <feedback>
+            <p>
+              Members of a class are private by default.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>const</c></p></statement>
+          <feedback>
+            <p>
+              <c>const</c> describes whether something may be modified; it is
+              not an access level.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_from_structures_to_classes_3">
+      <statement>
+        <p>
+          What is the default access for members of a <c>class</c>?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement><p><c>public</c></p></statement>
+          <feedback>
+            <p>
+              Public is the default for a structure, not a class.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement><p><c>private</c></p></statement>
+          <feedback>
+            <p>
+              Members of a class are private by default.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>protected</c></p></statement>
+          <feedback>
+            <p>
+              <c>protected</c> is another access level, but it is not the
+              default for a class.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_from_structures_to_classes_4">
+      <statement>
+        <p>
+          Why might a programmer choose a class instead of exposing all data
+          members publicly?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              Because structures cannot contain functions.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Structures can contain member functions in C++.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              To control how outside code accesses and changes the object's
+              state.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Controlling access to internal state is an important reason for
+              using classes.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Because class objects do not contain data members.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Classes can contain data members just like structures.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_from_structures_to_classes_5">
+      <statement>
+        <p>
+          Which type is the stronger candidate for a <c>class</c> according to
+          the design guideline in this section?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              A <c>Point</c> that simply stores public <c>x</c> and <c>y</c>
+              coordinates.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              A small type whose purpose is primarily to group related data is
+              often a reasonable use of a <c>struct</c>.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              A <c>Thermostat</c> that should control how its temperature
+              setting is changed.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              A class is a natural choice when the type should provide
+              operations that control access to its internal state.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              Any type that contains at least one member function.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Structures can contain member functions too, so the presence of
+              a member function alone does not require a class.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_from_structures_to_classes_6">
+      <statement>
+        <p>
+          What does it mean to say that a class provides an
+          <term>abstraction</term>?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>
+              Every detail of the object's representation must be visible to
+              code that uses it.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Abstraction allows users of a type to work through its interface
+              without depending on every implementation detail.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>
+              Outside code can focus on what the object can do without needing
+              to know every detail of how its state is stored.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              The public operations describe how to use the object while
+              implementation details can remain hidden.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>
+              All objects of the class share one copy of their data.
+            </p>
+          </statement>
+          <feedback>
+            <p>
+              Each object has its own state. Abstraction concerns the boundary
+              between how an object is used and how it is implemented.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+  </subsection>
+
+</section>

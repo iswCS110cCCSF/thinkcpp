@@ -1,0 +1,784 @@
+<section xml:id="chapter5_designing-a-simple-class">
+    <title>Designing a Simple Class</title>
+
+    <p>
+        A class combines data and the functions that operate on that data.
+        Designing a class means deciding what information an object should
+        store, what operations it should provide, and which parts should be
+        accessible from outside the class.
+    </p>
+
+    <subsection xml:id="subsection_counter_class">
+        <title>Designing a <c>Counter</c> Class</title>
+
+        <p>
+            Suppose we want to represent a counter. A counter should store a
+            number and provide operations for increasing, decreasing, and
+            reading that number.
+        </p>
+
+        <program xml:id="program_simple_counter"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Counter {
+private:
+    int count = 0;
+
+public:
+    void increase_count() {
+        ++count;
+    }
+
+    void decrease_count() {
+        --count;
+    }
+
+    int get_count() const {
+        return count;
+    }
+};
+
+int main() {
+    Counter counter;
+
+    counter.increase_count();
+    counter.increase_count();
+    counter.decrease_count();
+
+    std::cout << counter.get_count() << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The <c>Counter</c> object owns its <c>count</c> data. Code outside
+            the class cannot directly modify <c>count</c> because it is
+            <c>private</c>. Instead, outside code uses the public member
+            functions.
+        </p>
+    </subsection>
+
+    <subsection xml:id="subsection_access_specifiers">
+        <title>Access Specifiers</title>
+
+        <p>
+            An access specifier determines which parts of a class can be used
+            from outside the class.
+        </p>
+
+        <dl>
+            <li>
+                <title><c>private</c></title>
+                <p>
+                    Private members can be accessed only by member functions
+                    of the same class.
+                </p>
+            </li>
+
+            <li>
+                <title><c>public</c></title>
+                <p>
+                    Public members can be accessed by code outside the class.
+                </p>
+            </li>
+        </dl>
+
+        <p>
+            A class usually keeps its data members private and makes selected
+            operations public. This is an example of
+            <term>encapsulation</term>.
+        </p>
+
+        <p>
+            Encapsulation means keeping an object's data and the operations
+            that manage that data together while controlling access to the
+            data.
+        </p>
+    </subsection>
+
+    <subsection xml:id="subsection_class_constructors">
+        <title>Constructors</title>
+
+        <p>
+            A constructor is a special member function that runs automatically
+            when an object is created. A constructor has the same name as its
+            class and has no return type.
+        </p>
+
+        <program xml:id="program_counter_constructor"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Counter {
+private:
+    int count;
+
+public:
+    Counter() : count{0} {
+    }
+
+    void increase_count() {
+        ++count;
+    }
+
+    int get_count() const {
+        return count;
+    }
+};
+
+int main() {
+    Counter counter;
+
+    counter.increase_count();
+
+    std::cout << counter.get_count() << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            When <c>Counter counter;</c> executes, C++ automatically calls
+            <c>Counter()</c>, which initializes <c>count</c> to zero.
+        </p>
+    </subsection>
+
+    <subsection xml:id="subsection_constructor_parameters">
+        <title>Constructors with Parameters</title>
+
+        <p>
+            A constructor can accept arguments so that objects begin with
+            different values.
+        </p>
+
+        <program xml:id="program_counter_parameter_constructor"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Counter {
+private:
+    int count;
+
+public:
+    Counter(int starting_count)
+        : count{starting_count} {
+    }
+
+    void increase_count() {
+        ++count;
+    }
+
+    int get_count() const {
+        return count;
+    }
+};
+
+int main() {
+    Counter first_counter{0};
+    Counter second_counter{10};
+
+    first_counter.increase_count();
+
+    std::cout << first_counter.get_count() << '\n';
+    std::cout << second_counter.get_count() << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="subsection_member_initializer_lists">
+        <title>Member-Initializer Lists</title>
+
+        <p>
+            The part after a constructor's parameter list and before its body
+            is called a <term>member-initializer list</term>.
+        </p>
+
+        <program xml:id="program_member_initializer_list"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+class Counter {
+private:
+    int count;
+
+public:
+    Counter(int starting_count)
+        : count{starting_count} {
+    }
+};
+            ]]></code>
+        </program>
+
+        <p>
+            The member-initializer list directly initializes data members
+            before the constructor body runs. It is the preferred way to
+            initialize data members in a constructor.
+        </p>
+
+        <p>
+            Member-initializer lists are especially important for
+            <c>const</c> data members, reference data members, and data
+            members that do not have a default constructor.
+        </p>
+    </subsection>
+
+    <subsection xml:id="subsection_default_member_initializers">
+        <title>Default Member Initializers</title>
+
+        <p>
+            A data member can specify a default member initializer directly in
+            the class definition.
+        </p>
+
+        <program xml:id="program_default_member_initializer"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Counter {
+private:
+    int count = 0;
+
+public:
+    Counter() = default;
+
+    Counter(int starting_count)
+        : count{starting_count} {
+    }
+
+    int get_count() const {
+        return count;
+    }
+};
+
+int main() {
+    Counter first_counter;
+    Counter second_counter{25};
+
+    std::cout << first_counter.get_count() << '\n';
+    std::cout << second_counter.get_count() << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The default member initializer supplies a value when another
+            constructor does not provide one. A constructor's
+            member-initializer takes precedence over the default member
+            initializer.
+        </p>
+    </subsection>
+
+    <subsection xml:id="subsection_rectangle_class">
+        <title>A Class with Several Operations</title>
+
+        <p>
+            Consider a class that represents a rectangle. A rectangle has a
+            width and height, and it can calculate its area and perimeter.
+        </p>
+
+        <program xml:id="program_rectangle_class"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Rectangle {
+private:
+    double width;
+    double height;
+
+public:
+    Rectangle(double rectangle_width, double rectangle_height)
+        : width{rectangle_width}, height{rectangle_height} {
+    }
+
+    double calculate_area() const {
+        return width * height;
+    }
+
+    double calculate_perimeter() const {
+        return 2 * (width + height);
+    }
+};
+
+int main() {
+    Rectangle rectangle{4.0, 3.0};
+
+    std::cout << rectangle.calculate_area() << '\n';
+    std::cout << rectangle.calculate_perimeter() << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="subsection_protecting_invariants">
+        <title>Keeping an Object Valid</title>
+
+        <p>
+            A class can protect rules about valid data. For example, a
+            rectangle should not have a negative width or height. Such a rule
+            is called an <term>invariant</term>.
+        </p>
+
+        <program xml:id="program_rectangle_invariant"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+class Rectangle {
+private:
+    double width;
+    double height;
+
+public:
+    Rectangle(double rectangle_width, double rectangle_height)
+        : width{rectangle_width}, height{rectangle_height} {
+        if (width < 0 || height < 0) {
+            throw std::invalid_argument(
+                "Rectangle dimensions cannot be negative"
+            );
+        }
+    }
+
+    double calculate_area() const {
+        return width * height;
+    }
+};
+
+int main() {
+    try {
+        Rectangle rectangle{4.0, 3.0};
+
+        std::cout << rectangle.calculate_area() << '\n';
+    }
+    catch (const std::invalid_argument& error) {
+        std::cout << error.what() << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="subsection_struct_and_class">
+        <title><c>struct</c> and <c>class</c></title>
+
+        <p>
+            C++ provides two common ways to define a user-defined type:
+            <c>struct</c> and <c>class</c>.
+        </p>
+
+        <p>
+            These two forms have almost the same capabilities. The important
+            default difference is access.
+        </p>
+
+        <program xml:id="program_struct_default_access"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+struct ExampleStruct {
+    int value;  // public by default
+};
+
+class ExampleClass {
+    int value;  // private by default
+};
+            ]]></code>
+        </program>
+
+        <p>
+            Both types can have data members, constructors, overloaded
+            constructors, default member initializers, member functions,
+            access specifiers, and member-initializer lists.
+        </p>
+
+        <itemizedlist>
+            <listitem>
+                <p>
+                    A <c>struct</c> has public member access by default.
+                </p>
+            </listitem>
+
+            <listitem>
+                <p>
+                    A <c>class</c> has private member access by default.
+                </p>
+            </listitem>
+
+            <listitem>
+                <p>
+                    A <c>struct</c> also defaults to public inheritance.
+                </p>
+            </listitem>
+
+            <listitem>
+                <p>
+                    A <c>class</c> defaults to private inheritance.
+                </p>
+            </listitem>
+        </itemizedlist>
+
+        <p>
+            The inheritance default is important when inheritance is studied
+            later. For the simple classes in this chapter, the primary
+            practical difference is the default member access.
+        </p>
+    </subsection>
+
+    <subsection xml:id="subsection_struct_constructor">
+        <title>Structs Can Have Constructors and Member Functions</title>
+
+        <p>
+            A <c>struct</c> is not limited to storing data. It can have
+            constructors and member functions just like a class.
+        </p>
+
+        <program xml:id="program_struct_constructor"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+struct Point {
+    int x;
+    int y;
+
+    Point(int point_x, int point_y)
+        : x{point_x}, y{point_y} {
+    }
+
+    void move_right() {
+        ++x;
+    }
+};
+
+int main() {
+    Point point{3, 4};
+
+    point.move_right();
+
+    std::cout << point.x << '\n';
+    std::cout << point.y << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="subsection_struct_overloaded_constructors">
+        <title>Structs Can Have Overloaded Constructors</title>
+
+        <program xml:id="program_struct_overloaded_constructors"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+struct Point {
+    int x = 0;
+    int y = 0;
+
+    Point() = default;
+
+    Point(int point_x, int point_y)
+        : x{point_x}, y{point_y} {
+    }
+};
+
+int main() {
+    Point origin;
+    Point point{3, 4};
+
+    std::cout << origin.x << ", " << origin.y << '\n';
+    std::cout << point.x << ", " << point.y << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="subsection_struct_private_members">
+        <title>Structs Can Have Private Members</title>
+
+        <p>
+            A struct can use <c>public</c>, <c>private</c>, and
+            <c>protected</c> access specifiers just like a class.
+        </p>
+
+        <program xml:id="program_struct_private_members"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+struct Temperature {
+private:
+    double celsius;
+
+public:
+    Temperature(double starting_celsius)
+        : celsius{starting_celsius} {
+    }
+
+    double get_celsius() const {
+        return celsius;
+    }
+};
+
+int main() {
+    Temperature temperature{22.5};
+
+    std::cout << temperature.get_celsius() << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="subsection_struct_class_design_choice">
+        <title>Choosing Between <c>struct</c> and <c>class</c></title>
+
+        <p>
+            In C++, <c>struct</c> and <c>class</c> have nearly the same
+            capabilities. The choice is primarily a design and communication
+            decision.
+        </p>
+
+        <p>
+            A <c>struct</c> often communicates that a type is a simple
+            collection of related values and that public access is appropriate.
+        </p>
+
+        <program xml:id="program_data_oriented_struct"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+struct StudentRecord {
+    std::string name;
+    int student_id;
+};
+
+int main() {
+    StudentRecord student{"Amina", 1042};
+
+    std::cout << student.name << '\n';
+    std::cout << student.student_id << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            A <c>class</c> often communicates that a type should protect its
+            data and provide operations through member functions.
+        </p>
+
+        <program xml:id="program_encapsulated_class"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class StudentAccount {
+private:
+    double balance = 0.0;
+
+public:
+    void deposit_money(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    double get_balance() const {
+        return balance;
+    }
+};
+
+int main() {
+    StudentAccount account;
+
+    account.deposit_money(100.00);
+    account.deposit_money(25.50);
+
+    std::cout << account.get_balance() << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            This is a convention, not a restriction. A struct can be complex
+            and encapsulated, and a class can contain public data.
+        </p>
+
+        <p>
+            Use a <c>struct</c> when the type is mainly a group of related
+            values and public access is part of the intended interface. Use a
+            <c>class</c> when the type should protect its data, enforce
+            invariants, or provide behavior through member functions.
+        </p>
+    </subsection>
+
+    <subsection xml:id="subsection_struct_class_summary">
+        <title>Summary of <c>struct</c> and <c>class</c></title>
+
+        <p>
+            The following table summarizes the relationship between
+            <c>struct</c> and <c>class</c>.
+        </p>
+
+        <table xml:id="table_struct_class_comparison">
+            <title><c>struct</c> and <c>class</c> comparison</title>
+
+            <tabular>
+                <row>
+                    <cell>Feature</cell>
+                    <cell><c>struct</c></cell>
+                    <cell><c>class</c></cell>
+                </row>
+
+                <row>
+                    <cell>Default member access</cell>
+                    <cell><c>public</c></cell>
+                    <cell><c>private</c></cell>
+                </row>
+
+                <row>
+                    <cell>Data members</cell>
+                    <cell>Yes</cell>
+                    <cell>Yes</cell>
+                </row>
+
+                <row>
+                    <cell>Constructors</cell>
+                    <cell>Yes</cell>
+                    <cell>Yes</cell>
+                </row>
+
+                <row>
+                    <cell>Overloaded constructors</cell>
+                    <cell>Yes</cell>
+                    <cell>Yes</cell>
+                </row>
+
+                <row>
+                    <cell>Default member initializers</cell>
+                    <cell>Yes</cell>
+                    <cell>Yes</cell>
+                </row>
+
+                <row>
+                    <cell>Member functions</cell>
+                    <cell>Yes</cell>
+                    <cell>Yes</cell>
+                </row>
+
+                <row>
+                    <cell>Access specifiers</cell>
+                    <cell>Yes</cell>
+                    <cell>Yes</cell>
+                </row>
+
+                <row>
+                    <cell>Member-initializer lists</cell>
+                    <cell>Yes</cell>
+                    <cell>Yes</cell>
+                </row>
+
+                <row>
+                    <cell>Inheritance</cell>
+                    <cell>Yes</cell>
+                    <cell>Yes</cell>
+                </row>
+
+                <row>
+                    <cell>Default inheritance access</cell>
+                    <cell><c>public</c></cell>
+                    <cell><c>private</c></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The main language difference between a struct and a class is their
+            default access. The broader choice is mainly about communicating
+            design intent to other programmers.
+        </p>
+    </subsection>
+
+    <subsection xml:id="subsection_designing_class_summary">
+        <title>Summary</title>
+
+        <ul>
+            <li>
+                A class combines data and operations into a user-defined type.
+            </li>
+            <li>
+                Constructors initialize objects when they are created.
+            </li>
+            <li>
+                Constructors can receive arguments and can be overloaded.
+            </li>
+            <li>
+                A member-initializer list directly initializes data members.
+            </li>
+            <li>
+                Default member initializers provide fallback values.
+            </li>
+            <li>
+                Private members protect an object's internal data.
+            </li>
+            <li>
+                Public member functions define how outside code interacts with
+                an object.
+            </li>
+            <li>
+                Both structs and classes can have constructors, overloaded
+                constructors, default member initializers, member functions,
+                access specifiers, and member-initializer lists.
+            </li>
+            <li>
+                Structs default to public member access.
+            </li>
+            <li>
+                Classes default to private member access.
+            </li>
+            <li>
+                Choosing <c>struct</c> or <c>class</c> is mainly a design and
+                communication decision.
+            </li>
+        </ul>
+    </subsection>
+</section>

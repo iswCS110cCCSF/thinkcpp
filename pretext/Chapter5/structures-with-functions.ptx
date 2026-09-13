@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter5_structures-with-functions">
+  <title>Using Structures with Functions</title>
+
+  <introduction>
+    <p>
+      Structure objects can be passed to functions and returned from functions
+      just like values of other types.
+    </p>
+
+    <p>
+      In the previous section, you saw that copying one structure object creates
+      another independent object. Passing a structure <em>by value</em> works in
+      a similar way: the function receives its own copy.
+    </p>
+
+    <p>
+      Sometimes making a copy is appropriate. Other times, a function should
+      work directly with the caller's object. C++ references give us that
+      choice.
+    </p>
+  </introduction>
+
+
+  <subsection>
+    <title>Passing a Structure by Value</title>
+
+    <p>
+      Consider this structure:
+    </p>
+
+    <program><![CDATA[
+struct Rectangle {
+    double length;
+    double width;
+};
+    ]]></program>
+
+    <p>
+      A structure can be used as a parameter type:
+    </p>
+
+    <program><![CDATA[
+double calculate_area(Rectangle rectangle) {
+    return rectangle.length * rectangle.width;
+}
+    ]]></program>
+
+    <p>
+      Here, <c>rectangle</c> is passed <term>by value</term>. The function
+      receives a copy of the object supplied by the caller.
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+
+double area = calculate_area(room);
+    ]]></program>
+
+    <p>
+      Conceptually, the function call creates its own parameter object:
+    </p>
+
+    <program><![CDATA[
+caller                         calculate_area
+room                           rectangle
++------------------+           +------------------+
+| length : 12.0    |  copy     | length : 12.0    |
+| width  : 8.0     | ------->  | width  : 8.0     |
++------------------+           +------------------+
+    ]]></program>
+
+    <p>
+      Because the function has its own copy, changing the parameter would not
+      change <c>room</c>.
+    </p>
+
+    <program><![CDATA[
+void change_length(Rectangle rectangle) {
+    rectangle.length = 20.0;
+}
+    ]]></program>
+
+    <p>
+      After:
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+
+change_length(room);
+    ]]></program>
+
+    <p>
+      <c>room.length</c> is still <c>12.0</c>. Only the temporary parameter
+      object was changed.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Passing a Structure by Reference</title>
+
+    <p>
+      Sometimes a function should change the original object supplied by the
+      caller. In that case, the parameter can be a reference.
+    </p>
+
+    <program><![CDATA[
+void double_size(Rectangle& rectangle) {
+    rectangle.length *= 2.0;
+    rectangle.width *= 2.0;
+}
+    ]]></program>
+
+    <p>
+      The ampersand, <c>&amp;</c>, means that <c>rectangle</c> refers to the
+      caller's original object rather than a copy.
+    </p>
+
+    <program><![CDATA[
+Rectangle room{12.0, 8.0};
+
+double_size(room);
+    ]]></program>
+
+    <p>
+      After the function call, <c>room</c> has changed:
+    </p>
+
+    <program><![CDATA[
+before                         after
+room                           room
++------------------+           +------------------+
+| length : 12.0    |           | length : 24.0    |
+| width  : 8.0     |           | width  : 16.0    |
++------------------+           +------------------+
+    ]]></program>
+
+    <p>
+      Pass by reference is useful when modifying the caller's object is part
+      of the function's purpose.
+    </p>
+
+    <warning>
+      <p>
+        A non-<c>const</c> reference gives the function permission to modify
+        the caller's object. Use it when that modification is intentional.
+      </p>
+    </warning>
+  </subsection>
+
+
+  <subsection>
+    <title>Passing a Structure by const Reference</title>
+
+    <p>
+      Suppose a function only needs to examine a structure object:
+    </p>
+
+    <program><![CDATA[
+double calculate_area(Rectangle& rectangle) {
+    return rectangle.length * rectangle.width;
+}
+    ]]></program>
+
+    <p>
+      Passing by reference avoids making a copy, but this parameter also gives
+      the function permission to modify the caller's object even though
+      <c>calculate_area</c> has no reason to do so.
+    </p>
+
+    <p>
+      We can make the reference read-only by adding <c>const</c>:
+    </p>
+
+    <program><![CDATA[
+double calculate_area(const Rectangle& rectangle) {
+    return rectangle.length * rectangle.width;
+}
+    ]]></program>
+
+    <p>
+      The parameter:
+    </p>
+
+    <program><![CDATA[
+const Rectangle& rectangle
+    ]]></program>
+
+    <p>
+      has two useful properties:
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          The function works with the caller's object without making a copy.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The function cannot modify that object through the parameter.
+        </p>
+      </li>
+    </ul>
+
+    <p>
+      For example, this would not compile:
+    </p>
+
+    <program><![CDATA[
+double calculate_area(const Rectangle& rectangle) {
+    rectangle.length = 20.0;   // error
+    return rectangle.length * rectangle.width;
+}
+    ]]></program>
+
+    <p>
+      The <c>const</c> keyword protects the caller's object from accidental
+      modification inside the function.
+    </p>
+
+    <p>
+      For many object types, if a function only needs to read the object
+      without making a copy, passing by <c>const</c> reference is often a good
+      choice. This applies to structures and also to types such as
+      <c>std::string</c>, <c>std::vector</c>, and class objects that you will
+      use later in the book. Small built-in types such as <c>int</c> and
+      <c>double</c> are usually passed by value because copying is cheap,
+      while arrays are handled differently in function parameters and will be
+      discussed later.
+    </p>
+	
+	
+  </subsection>
+
+
+  <subsection>
+    <title>Comparing the Three Parameter Forms</title>
+
+    <p>
+      The parameter declaration tells us whether the function receives a copy,
+      may change the caller's object, or may only observe it.
+    </p>
+
+    <table>
+      <title>Ways to Pass a Structure to a Function</title>
+      <tabular>
+        <row>
+          <cell><b>Parameter</b></cell>
+          <cell><b>Makes a copy?</b></cell>
+          <cell><b>Can change caller's object?</b></cell>
+          <cell><b>Typical purpose</b></cell>
+        </row>
+
+        <row>
+          <cell><c>Rectangle rectangle</c></cell>
+          <cell>Yes</cell>
+          <cell>No</cell>
+          <cell>Work with an independent copy</cell>
+        </row>
+
+        <row>
+          <cell><c>Rectangle&amp; rectangle</c></cell>
+          <cell>No</cell>
+          <cell>Yes</cell>
+          <cell>Modify the original object</cell>
+        </row>
+
+        <row>
+          <cell><c>const Rectangle&amp; rectangle</c></cell>
+          <cell>No</cell>
+          <cell>No</cell>
+          <cell>Read the original object safely</cell>
+        </row>
+      </tabular>
+    </table>
+
+    <p>
+      Choosing among these forms is part of designing a function's interface.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>Returning a Structure from a Function</title>
+
+    <p>
+      A structure type can also be the return type of a function.
+    </p>
+
+    <p>
+      Consider a <c>Point</c> structure:
+    </p>
+
+    <program><![CDATA[
+struct Point {
+    double x;
+    double y;
+};
+    ]]></program>
+
+    <p>
+      The following function creates and returns the midpoint between two
+      points:
+    </p>
+
+    <program><![CDATA[
+Point create_midpoint(const Point& first, const Point& second) {
+    Point midpoint{
+        (first.x + second.x) / 2.0,
+        (first.y + second.y) / 2.0
+    };
+
+    return midpoint;
+}
+    ]]></program>
+
+    <p>
+      The two input points are passed by <c>const</c> reference because the
+      function only needs to read them. The function then returns a new
+      <c>Point</c>.
+    </p>
+
+    <program><![CDATA[
+Point first{2.0, 4.0};
+Point second{8.0, 10.0};
+
+Point middle = create_midpoint(first, second);
+    ]]></program>
+
+    <p>
+      After the call, <c>middle.x</c> is <c>5.0</c> and
+      <c>middle.y</c> is <c>7.0</c>.
+    </p>
+
+    <p>
+      Returning a structure is useful when a function computes a result that
+      naturally contains several related values.
+    </p>
+  </subsection>
+
+
+  <subsection>
+    <title>A Complete Example</title>
+
+    <listing label="chapter5_structures_functions_AC_1">
+      <title>
+        This program reads information from structure objects, modifies one
+        object by reference, and returns a structure from a function.
+      </title>
+
+      <program interactive="activecode"
+               line-numbers="yes"
+               label="chapter5_structures_functions_AC_1_editor">
+        <code><![CDATA[
+#include <iostream>
+
+struct Rectangle {
+    double length;
+    double width;
+};
+
+struct Point {
+    double x;
+    double y;
+};
+
+// Function declarations
+double calculate_area(const Rectangle& rectangle);
+void double_size(Rectangle& rectangle);
+Point create_midpoint(const Point& first, const Point& second);
+
+int main() {
+    Rectangle room{12.0, 8.0};
+
+    std::cout << "Original area: "
+              << calculate_area(room) << '\n';
+
+    double_size(room);
+
+    std::cout << "New area: "
+              << calculate_area(room) << '\n';
+
+    Point first{2.0, 4.0};
+    Point second{8.0, 10.0};
+
+    Point middle = create_midpoint(first, second);
+
+    std::cout << "Midpoint: ("
+              << middle.x << ", "
+              << middle.y << ")\n";
+
+    return 0;
+}
+
+// Function definitions
+double calculate_area(const Rectangle& rectangle) {
+    return rectangle.length * rectangle.width;
+}
+
+void double_size(Rectangle& rectangle) {
+    rectangle.length *= 2.0;
+    rectangle.width *= 2.0;
+}
+
+Point create_midpoint(const Point& first, const Point& second) {
+    Point midpoint{
+        (first.x + second.x) / 2.0,
+        (first.y + second.y) / 2.0
+    };
+
+    return midpoint;
+}
+        ]]></code>
+      </program>
+    </listing>
+
+    <p>
+      Notice that the three functions use structure objects in different ways:
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          <c>calculate_area</c> observes a <c>Rectangle</c> through a
+          <c>const</c> reference.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <c>double_size</c> modifies a <c>Rectangle</c> through a reference.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <c>create_midpoint</c> observes two <c>Point</c> objects and returns
+          a new <c>Point</c>.
+        </p>
+      </li>
+    </ul>
+  </subsection>
+
+
+  <subsection>
+    <title>Looking Ahead: Behavior That Belongs to an Object</title>
+
+    <p>
+      So far, functions that operate on structures have been separate from the
+      structure definitions themselves.
+    </p>
+
+    <p>
+      For example:
+    </p>
+
+    <program><![CDATA[
+double calculate_area(const Rectangle& rectangle);
+void double_size(Rectangle& rectangle);
+    ]]></program>
+
+    <p>
+      These are called <term>free functions</term>. The structure object is
+      supplied as an argument.
+    </p>
+
+    <p>
+      But both operations are closely related to a <c>Rectangle</c>. C++ also
+      allows functions to become part of the structure itself. Such functions
+      are called <term>member functions</term>.
+    </p>
+
+    <p>
+      In the next section, we will see how:
+    </p>
+
+    <program><![CDATA[
+calculate_area(room);
+    ]]></program>
+
+    <p>
+      can become:
+    </p>
+
+    <program><![CDATA[
+room.calculate_area();
+    ]]></program>
+
+    <p>
+      and how:
+    </p>
+
+    <program><![CDATA[
+double_size(room);
+    ]]></program>
+
+    <p>
+      can become:
+    </p>
+
+    <program><![CDATA[
+room.double_size();
+    ]]></program>
+  </subsection>
+
+
+  <subsection>
+    <title>Check Your Understanding</title>
+
+    <exercise label="chapter5_structures_functions_1">
+      <statement>
+        <p>
+          Consider:
+        </p>
+
+        <program><![CDATA[
+void change_width(Rectangle rectangle) {
+    rectangle.width = 20.0;
+}
+
+Rectangle room{12.0, 8.0};
+change_width(room);
+        ]]></program>
+
+        <p>
+          What is the value of <c>room.width</c> after the function call?
+        </p>
+      </statement>
+
+      <choices>
+        <choice correct="yes">
+          <statement><p><c>8.0</c></p></statement>
+          <feedback>
+            <p>
+              <c>rectangle</c> is passed by value, so the function changes
+              only its copy.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>12.0</c></p></statement>
+          <feedback>
+            <p>
+              <c>12.0</c> is the value of <c>room.length</c>.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>20.0</c></p></statement>
+          <feedback>
+            <p>
+              The parameter is a copy. Changing the parameter does not change
+              <c>room</c>.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_structures_functions_2">
+      <statement>
+        <p>
+          Which parameter should be used when a function needs to modify the
+          caller's <c>Rectangle</c>?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p><c>Rectangle rectangle</c></p>
+          </statement>
+          <feedback>
+            <p>
+              This passes the structure by value, so the function receives a
+              copy.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p><c>Rectangle&amp; rectangle</c></p>
+          </statement>
+          <feedback>
+            <p>
+              A non-<c>const</c> reference allows the function to modify the
+              caller's object.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p><c>const Rectangle&amp; rectangle</c></p>
+          </statement>
+          <feedback>
+            <p>
+              A <c>const</c> reference allows reading the object but prevents
+              modification through that parameter.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_structures_functions_3">
+      <statement>
+        <p>
+          Which parameter is most appropriate when a function only needs to
+          read a <c>Rectangle</c> without making a copy?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p><c>Rectangle rectangle</c></p>
+          </statement>
+          <feedback>
+            <p>
+              This makes a copy of the structure.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p><c>Rectangle&amp; rectangle</c></p>
+          </statement>
+          <feedback>
+            <p>
+              This avoids a copy, but it also allows the function to modify
+              the caller's object.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p><c>const Rectangle&amp; rectangle</c></p>
+          </statement>
+          <feedback>
+            <p>
+              A <c>const</c> reference avoids the copy and prevents accidental
+              modification through the parameter.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_structures_functions_4">
+      <statement>
+        <p>
+          What does the return type tell us about this function?
+        </p>
+
+        <program><![CDATA[
+Point create_midpoint(const Point& first, const Point& second);
+        ]]></program>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement>
+            <p>The function modifies both arguments.</p>
+          </statement>
+          <feedback>
+            <p>
+              Both parameters are <c>const</c> references, so the function
+              cannot modify them through those parameters.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement>
+            <p>The function returns a <c>Point</c> object.</p>
+          </statement>
+          <feedback>
+            <p>
+              The type before the function name is the function's return type.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement>
+            <p>The function returns a reference to <c>first</c>.</p>
+          </statement>
+          <feedback>
+            <p>
+              The return type is <c>Point</c>, not <c>Point&amp;</c>.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_structures_functions_5">
+      <statement>
+        <p>
+          Consider the following structure and function:
+        </p>
+
+        <program><![CDATA[
+struct Robot {
+    int battery_level;
+    double speed;
+};
+
+void recharge_robot(Robot& robot) {
+    robot.battery_level = 100;
+}
+
+Robot helper{35, 2.5};
+recharge_robot(helper);
+        ]]></program>
+
+        <p>
+          What is the value of <c>helper.battery_level</c> after the function
+          call?
+        </p>
+      </statement>
+
+      <choices>
+        <choice>
+          <statement><p><c>35</c></p></statement>
+          <feedback>
+            <p>
+              The parameter is a non-<c>const</c> reference, so the function
+              can modify the caller's object.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice correct="yes">
+          <statement><p><c>100</c></p></statement>
+          <feedback>
+            <p>
+              <c>robot</c> refers to <c>helper</c>, so changing
+              <c>robot.battery_level</c> changes the original object.
+            </p>
+          </feedback>
+        </choice>
+
+        <choice>
+          <statement><p><c>2.5</c></p></statement>
+          <feedback>
+            <p>
+              <c>2.5</c> is the value of <c>helper.speed</c>.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+
+    <exercise label="chapter5_structures_functions_6">
+      <statement>
+        <p>
+          Complete the two function declarations so that
+          <c>report_robot_data</c> can read a <c>Robot</c> without copying or
+          modifying it, while <c>recharge_robot</c> can modify the caller's
+          object.
+        </p>
+
+        <program interactive="activecode"
+                 line-numbers="yes"
+                 label="chapter5_structures_functions_6_editor">
+          <code><![CDATA[
+#include <iostream>
+
+struct Robot {
+    int battery_level;
+    double speed;
+};
+
+// Complete these two function declarations.
+void report_robot_data(/* parameter */);
+void recharge_robot(/* parameter */);
+
+int main() {
+    Robot helper{35, 2.5};
+
+    report_robot_data(helper);
+    recharge_robot(helper);
+    report_robot_data(helper);
+
+    return 0;
+}
+
+void report_robot_data(const Robot& robot) {
+    std::cout << "Battery: " << robot.battery_level << '\n';
+    std::cout << "Speed: " << robot.speed << '\n';
+}
+
+void recharge_robot(Robot& robot) {
+    robot.battery_level = 100;
+}
+          ]]></code>
+        </program>
+      </statement>
+
+      <hint>
+        <p>
+          A read-only object parameter can use <c>const Robot&amp;</c>.
+          A function that intentionally changes the caller's object can use
+          <c>Robot&amp;</c>.
+        </p>
+      </hint>
+
+      <solution>
+        <program><![CDATA[
+void report_robot_data(const Robot& robot);
+void recharge_robot(Robot& robot);
+        ]]></program>
+      </solution>
+    </exercise>
+
+  </subsection>
+
+</section>

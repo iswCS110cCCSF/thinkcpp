@@ -1,0 +1,7 @@
+.ptx-toc.focused .toc-item > .toc-title-box > .toc-expander > .icon::before {
+    content: "▶" !important;
+}
+
+.ptx-toc.focused .toc-item.expanded > .toc-title-box > .toc-expander > .icon::before {
+    content: "▼" !important;
+}

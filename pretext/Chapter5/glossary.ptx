@@ -1,130 +1,214 @@
-<?xml version="1.0" ?><section xml:id="chapter5_glossary">
-    <title>Glossary</title>
-    <glossary>
-        <gi>
-            <title>return type</title>
-            <p>The type of value a function returns.</p>
-        </gi>
-        <gi>
-            <title>return value</title>
-            <p>The value provided as the result of a function call.</p>
-        </gi>
-        <gi>
-            <title>dead code</title>
-            <p>Part of a program that can never be executed, often because it
-            appears after a return statement.</p>
-        </gi>
-        <gi>
-            <title>scaffolding</title>
-            <p>Code that is used during program development but is not part of the
-            final version.</p>
-        </gi>
-        <gi>
-            <title>void</title>
-            <p>A special return type that indicates a void function; that is, one
-            that does not return a value.</p>
-        </gi>
-        <gi>
-            <title>overloading</title>
-            <p>Having more than one function with the same name but different
-            parameters. When you call an overloaded function, C++ knows which
-            version to use by looking at the arguments you provide.</p>
-        </gi>
-        <gi>
-            <title>boolean</title>
-            <p>A value or variable that can take on one of two states, often called <m>true</m> and <m>
-            false</m>. In C++, boolean values can be stored in a variable type called bool.</p>
-        </gi>
-        <gi>
-            <title>flag</title>
-            <p>A variable (usually type bool) that records a condition or status
-            information.</p>
-        </gi>
-        <gi>
-            <title>comparison operator</title>
-            <p>An operator that compares two values and produces a boolean that
-            indicates the relationship between the operands.</p>
-        </gi>
-        <gi>
-            <title>logical operator</title>
-            <p>An operator that combines boolean values in order to test compound
-            conditions.</p>
-        </gi>
-    </glossary>
-    <reading-questions>
-  <exercise label="chapter_five_glossary_1">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">return type</premise>
-        <response>The type of value a function returns.</response>
-      </match>
-      <match>
-        <premise order="2">return value</premise>
-        <response>The value provided as the result of a function call.</response>
-      </match>
-      <match>
-        <premise order="3">comparison operator</premise>
-        <response>An operator that compares two values and produces a boolean.</response>
-      </match>
-      <match>
-        <premise order="4">logical operator</premise>
-        <response>An operator that combines boolean values in order to test compound conditions.</response>
-      </match>
-    </cardsort>
-  </exercise>
-  <exercise label="chapter_five_glossary_2">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">dead code</premise>
-        <response>Part of a program that can never be executed.</response>
-      </match>
-      <match>
-        <premise order="2">scaffolding</premise>
-        <response>Code used during program development but not part of the final version.</response>
-      </match>
-      <match>
-        <premise order="3">overloading</premise>
-        <response>Having more than one function with the same name but different parameters.</response>
-      </match>
-    </cardsort>
-  </exercise>
-  <exercise label="chapter_five_glossary_3">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">boolean</premise>
-        <response>A value or variable that can take on one of two states, often called true and
-          false.</response>
-      </match>
-      <match>
-        <premise order="2">flag</premise>
-        <response>A variable that records a condition or status information.</response>
-      </match>
-      <match>
-        <premise order="3">void</premise>
-        <response>A special return type that does not return a value.</response>
-      </match>
-    </cardsort>
-  </exercise>
-    </reading-questions>
-</section>
+<?xml version="1.0" encoding="utf-8"?>
+<glossary xml:id="chapter5_glossary">
+  <title>Chapter 5 Glossary</title>
+
+  <gi xml:id="glossary_abstraction">
+    <title>abstraction</title>
+    <p>
+      A way of focusing on what an object or operation does while hiding
+      implementation details that are not needed by its users.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_accessor">
+    <title>accessor</title>
+    <p>
+      A member function that reports information about an object's state
+      without changing that state. An accessor is also called a getter or an
+      observer function.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_aggregate_initialization">
+    <title>aggregate initialization</title>
+    <p>
+      Initializing the public data members of a structure or other aggregate
+      directly, in their declaration order, using a braced initializer list.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_behavior">
+    <title>behavior</title>
+    <p>
+      The operations an object can perform, usually provided by its member
+      functions.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_by_value">
+    <title>by value</title>
+    <p>
+      A parameter-passing method in which a function receives a copy of the
+      argument. Changes to the parameter do not change the original argument.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_class">
+    <title>class</title>
+    <p>
+      A user-defined type that can combine data and operations. Members of a
+      class are private by default.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_constructor">
+    <title>constructor</title>
+    <p>
+      A special member function that runs automatically when an object is
+      created and initializes the object's data members.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_constructor_overloading">
+    <title>constructor overloading</title>
+    <p>
+      Defining multiple constructors for one type with different parameter
+      lists.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_data_member">
+    <title>data member</title>
+    <p>
+      A variable declared inside a structure or class. Each object has its
+      own set of non-static data members.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_default_constructor">
+    <title>default constructor</title>
+    <p>
+      A constructor that can be called without arguments. It may be written
+      explicitly or generated with <c>default</c> when appropriate.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_encapsulation">
+    <title>encapsulation</title>
+    <p>
+      Keeping an object's data and the operations that manage that data
+      together while controlling access to the data.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_free_function">
+    <title>free function</title>
+    <p>
+      A function that is defined outside a structure or class and is not a
+      member function of a type.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_function_overloading">
+    <title>function overloading</title>
+    <p>
+      Defining multiple functions with the same name but different parameter
+      lists.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_header_file">
+    <title>header file</title>
+    <p>
+      A file, commonly ending in <c>.h</c> or <c>.hpp</c>, that contains
+      declarations such as class definitions and function prototypes for use
+      by other source files.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_implementation_file">
+    <title>implementation file</title>
+    <p>
+      A source file, commonly ending in <c>.cpp</c>, that contains function
+      or member-function definitions.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_instance">
+    <title>instance</title>
+    <p>
+      An object created from a class or structure. The object is an instance
+      of that user-defined type.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_interface">
+    <title>interface</title>
+    <p>
+      The public operations and information that a type makes available to
+      code outside the type.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_member_function">
+    <title>member function</title>
+    <p>
+      A function declared as part of a structure or class. It can be called
+      on an object of that type and can directly access the object's members.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_member_initializer_list">
+    <title>member-initializer list</title>
+    <p>
+      The part of a constructor definition that directly initializes data
+      members before the constructor body executes.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_mutator">
+    <title>mutator</title>
+    <p>
+      A member function that changes an object's state. A mutator is also
+      called a state-changing member function.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_observer">
+    <title>observer</title>
+    <p>
+      A member function that examines an object's state without changing it.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_private">
+    <title>private</title>
+    <p>
+      An access level that permits direct access only from member functions
+      and other permitted members of the same class or structure.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_public">
+    <title>public</title>
+    <p>
+      An access level that permits code outside a class or structure to use a
+      member, subject to the member's declaration.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_public_interface">
+    <title>public interface</title>
+    <p>
+      The public members of a class that define how outside code can interact
+      with its objects.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_scope_resolution_operator">
+    <title>scope resolution operator</title>
+    <p>
+      The <c>::</c> operator, used to specify the scope to which a name
+      belongs, such as the class that owns a member-function definition.
+    </p>
+  </gi>
+
+  <gi xml:id="glossary_structure">
+    <title>structure</title>
+    <p>
+      A user-defined type introduced with <c>struct</c>. A structure can have
+      data members, constructors, member functions, and access specifiers;
+      its members are public by default.
+    </p>
+  </gi>
+</glossary>

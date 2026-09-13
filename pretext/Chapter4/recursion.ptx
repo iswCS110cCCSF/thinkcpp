@@ -3,12 +3,13 @@
   <title>Optional: Introduction to Recursion</title>
 
   <note>
-    <p>
-      The next two sections introduce recursion, an important programming
-      technique in which a function calls itself. Recursion is not needed
-      for the material that follows immediately, so these sections may be
-      treated as optional enrichment unless they are assigned.
-    </p>
+  <p>
+    This section and the next two sections introduce recursion, an
+    important programming technique in which a function calls itself.
+    Recursion is not needed for the material that follows immediately,
+    so these sections may be treated as optional enrichment unless they
+    are assigned.
+  </p>
   </note>
 
   <p>

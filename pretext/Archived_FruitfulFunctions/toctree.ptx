@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:lang="en-US"
+         xml:id="fruitful-functions">
+  <title>Fruitful functions</title>
+  <xi:include href='./return-values.ptx'/>
+  <xi:include href='./program-development.ptx'/>
+  <xi:include href='./composition.ptx'/>
+  <xi:include href='./overloading.ptx'/>
+  <xi:include href='./boolean-values.ptx'/>
+  <xi:include href='./boolean-variables.ptx'/>
+  <xi:include href='./logical-operators.ptx'/>
+  <xi:include href='./bool-functions.ptx'/>
+  <xi:include href='./returning-from-main.ptx'/>
+  <xi:include href='./more-recursion.ptx'/>
+  <xi:include href='./leap-of-faith.ptx'/>
+  <xi:include href='./one-more-example.ptx'/>
+  <xi:include href='./glossary.ptx'/>
+  <xi:include href='./exercises.ptx'/>
+  <xi:include href='./mixed-up-code.ptx'/>
+  <xi:include href='./coding-practice.ptx'/>
+</chapter>

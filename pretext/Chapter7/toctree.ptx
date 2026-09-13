@@ -9,7 +9,9 @@
   <xi:include href='./length.ptx'/>
   <xi:include href='./traversal.ptx'/>
   <xi:include href='./runtime-error.ptx'/>
-  <xi:include href='./find-function.ptx'/>
+  <!-- removed as unnecessory dependancey and early exposure of overloading.
+  <xi:include href='./find-function.ptx'/> 
+  -->
   <xi:include href='./own-version-find.ptx'/>
   <xi:include href='./looping-and-counting.ptx'/>
   <xi:include href='./increment-decrement.ptx'/>
