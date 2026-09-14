@@ -170,7 +170,7 @@ bool changed = room.set_temperature(35.0);
     </p>
 
     <p>
-      A state-changing member function may be called a <term>mutator</term>.
+      A state-changing member function is often called a <term>setter</term> or <term>mutator</term>.
       As with getters, the important design question is not whether a setter
       can be written, but whether the operation belongs in the object's public
       interface.
