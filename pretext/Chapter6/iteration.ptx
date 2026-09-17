@@ -9,3 +9,17 @@
     features that make it easier to write iterative programs.</p>
   <p>The two features we are going to look at are the <c>while</c> statement and the <c>for</c> statement.</p>
 </section>
+
+<exercise label="iteration_1">
+  <statement>
+    <p>When a program repetitively runs code it is called <fillin answer="iteration"/>.
+    </p>
+  </statement>
+  <evaluation>
+    <evaluate>
+      <test correct="yes">
+        <strcmp use-answer="yes" strip="no" case="insensitive"/>
+      </test>
+    </evaluate>
+  </evaluation>
+</exercise>

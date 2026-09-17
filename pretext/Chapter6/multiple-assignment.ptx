@@ -210,3 +210,69 @@ int main() {
     </choices>
   </exercise>
 </section>
+ <exercise label="mult-ass-1"
+            number="yes"
+            adaptive="yes"
+            indentation="show">
+    <statement>
+      <p>
+        Construct a function that increases the variable "print_counter" and then prints it. 
+        Then call that function in main
+      </p>
+    </statement>
+
+    <blocks>
+      <block order="1">
+        <cline>#include &lt;iostream&gt;</cline>
+      </block>
+      <block order="2">
+        <choice correct="yes">
+          <cline>void print_counter(int& counter);</cline>
+        </choice>
+        <choice correct="no">
+          <cline>void print_counter(int counter);</cline>
+        </choice>
+      </block>
+      <block order="3">
+          <cline>int main() {</cline>
+      </block>
+
+      <block order="4">
+        <choice correct="yes">
+          <cline>int times_printed = 0;</cline>
+        </choice>
+        <choice correct="no">
+          <cline>int& times_printed = 0;</cline>
+        </choice>
+      </block>
+
+      <block order="5">
+        <choice correct="yes">
+          <cline>void print_counter(times_printed);</cline>
+        </choice>
+        <choice correct="no">
+          <cline>void print_counter(int& times_printed);</cline>
+        </choice>
+        <choice correct="no">
+          <cline>void print_counter(int times_printed);</cline>
+        </choice>
+      </block>
+      <block order="6">
+        <cline>} //main</cline>
+      </block>
+      <block order="7">
+        <choice correct="yes">
+          <cline>void print_counter(int& counter){</cline>
+        </choice>
+        <choice correct="no">
+          <cline>void print_counter(int counter){</cline>
+        </choice>
+      </block>
+      <block order="8">
+        <cline>counter = counter + 1;</cline>
+        <cline>std::cout << counter << “\n”;</cline>
+      </block>
+        <cline>} //print_counter</cline>
+      </block>
+    </blocks>
+  </exercise>
