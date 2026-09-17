@@ -15,10 +15,10 @@
 
 void countdown(int n) {
     while (n > 0) {
-        std::cout << n << std::endl;
+        std::cout << n << "\n";
         n = n - 1;
     }
-    std::cout << "Blastoff!" << std::endl;
+    std::cout << "Blastoff!" << "\n";
 }
 
 int main() {
@@ -53,7 +53,7 @@ int main() {
   <p>The body of the loop should change the value of one or more variables so that, eventually, the
     condition becomes false and the loop terminates. Otherwise the loop will repeat forever, which
     is called an <term>infinite
-      loop</term>. An std::endl ess source of amusement for computer scientists is the observation that
+      loop</term>. An endless source of amusement for computer scientists is the observation that
     the directions on shampoo, <q>Lather, rinse, repeat,</q> are an infinite loop.</p>
   <warning>
     <p>Make sure your while loops don't loop forever! If they are
@@ -66,7 +66,7 @@ int main() {
     cases it is not so easy to tell:</p>
   <program>void sequence(int n) {
   while (n != 1) {
-    std::cout &lt;&lt; n &lt;&lt; std::endl ;
+    std::cout &lt;&lt; n &lt;&lt; "\n";
     if (n % 2 == 0) {           // n is even
       n = n / 2;
     }
@@ -184,17 +184,17 @@ cout << answer;
         order for the code to run successfully.</p>
       <program>int n = 0;
   while (_____) {    // while statement condition
-  std::cout &lt;&lt; n &lt;&lt; std::endl ;
+  std::cout &lt;&lt; n &lt;&lt; "\n";
   _______;           // iteration of the variable
 }</program>
     </statement>
     <choices>
       <choice>
         <statement>
-          <p><c><![CDATA[n % 2 = 0 && n <= 20]]></c> and <c>n = n + 1</c></p>
+          <p><c><![CDATA[n % 2 == 0 && n <= 20]]></c> and <c>n = n + 1</c></p>
         </statement>
         <feedback><p>
-          A single equal sign is the assignment operator, not comparison.
+          Adding by one will print only 0 as 1 is not an even number and the increment is inside the while statement.
         </p></feedback>
       </choice>
       <choice>
@@ -207,10 +207,10 @@ cout << answer;
       </choice>
       <choice correct="yes">
         <statement>
-          <p><c><![CDATA[n % 2 == 0 && n <= 20]]></c> and <c>n = n + 1</c></p>
+          <p><c><![CDATA[n % 2 == 0 && n <= 20]]></c> and <c>n = n + 2</c></p>
         </statement>
         <feedback><p>
-          The condition checks whether a number is even and increments the variable <c>n</c>
+          The condition checks whether a number is even and adds two to the variable.<c>n</c>
         </p></feedback>
       </choice>
       <choice>
@@ -272,4 +272,48 @@ cout << x;
       </choice>
     </choices>
   </exercise>
+  <exercise label="while_statement_5"
+            number="yes"
+            adaptive="yes"
+            indentation="show">
+    <statement>
+      <p>the code above that prints all even numbers between 0 and 20 works but it isn't very general. Write a function
+      that prints the next 10 even numbers starting at the input</p>
+    </statement>
+    <blocks>
+      <block order="6">
+        <cline>}</cline>
+      </block>
+      <block order="2">
+        <cline>int finish = start + 20;</cline>
+      </block>
+      <block order="3">
+        <choice correct="yes">
+        <cline>while (start &lt; finish) { </cline>
+        </choice>
+        <choice correct="no">
+        <cline>while (start &lt; start + 20) { </cline>
+      </block>
+      <block order="1">
+        <cline>void next_10_even(int start) {</cline>
+      </block>
+      <block order="7">
+        <cline>start = start - 1</cline>
+      </block>
+      <block order="5">
+        <cline>std::cout &lt;&lt; start &lt;&lt; "\n";</cline>
+      </block>
+      <block order="8">
+        <cline>}</cline>
+      </block>
+      <block order="9">
+        <cline>   }</cline>
+      </block>
+      <block order="4">
+        <cline>if (start % 2 == 0) {</cline>
+      </block>
+    </blocks>
+  </exercise>
 </section>
+
+

@@ -69,7 +69,7 @@ int main() {
   <m>\log_2 x = \frac {log_e x}{log_e 2}</m></p>
   <p>Changing the output statement to</p>
   <program>
-cout &lt;&lt; x &lt;&lt; "\t" &lt;&lt; log(x) / log(2.0) &lt;&lt; std::endl ;
+cout &lt;&lt; x &lt;&lt; "\t" &lt;&lt; log(x) / log(2.0) &lt;&lt; "\n";
 </program>
   <p>yields</p>
   <console>
@@ -101,7 +101,7 @@ cout &lt;&lt; x &lt;&lt; "\t" &lt;&lt; log(x) / log(2.0) &lt;&lt; std::endl ;
 int main() {
     double x = 1.0;
     while (x < 100.0) {
-        std::cout << x << "\t" << log(x) / log(2.0) << std::endl;
+        std::cout << x << "\t" << log(x) / log(2.0) << "\n";
         x = x * 2.0;
     }
 }
@@ -140,7 +140,7 @@ int main() {
 int main() {
     double x = 1.0;
     while (x < 100.0) {
-        std::cout << x << "\t" << log(x) / log(2.0) << std::endl;
+        std::cout << x << "\t" << log(x) / log(2.0) << "\n";
         x = x * 2.0;
     }
 }
@@ -171,10 +171,10 @@ int main() {
         </block>
         <block order="6">
           <choice correct="yes">
-            <cline><![CDATA[      std::cout << x << "\t" << pow(2, x) << std::endl ;]]></cline>
+            <cline><![CDATA[      std::cout << x << "\t" << pow(2, x) << "\n";]]></cline>
           </choice>
           <choice>
-            <cline><![CDATA[      std::cout << x << "\t" << pow(x, 2) << std::endl ;                        ]]></cline>
+            <cline><![CDATA[      std::cout << x << "\t" << pow(x, 2) << "\n";                        ]]></cline>
           </choice>
         </block>
         <block order="1">
@@ -221,7 +221,7 @@ int main() {
 int main() {
   int x = 1;
   while (x < 11) {
-    std::cout << x << "\t" << pow(x, 2) << std::endl ;
+    std::cout << x << "\t" << pow(x, 2) << "\n";
     x = x + 1;
   }
 }
@@ -266,3 +266,76 @@ int main() {
     </choices>
   </exercise>
 </section>
+
+<exercise label="tables_5">
+    <statement>
+      <p>In a similar but less practical use of while statements we can create drawings in the terminal. 
+      How can we modify the function below to correctly draw a pyramid in the terminal.</p>
+      <program line-numbers="yes">
+        <code><![CDATA[
+void draw_a_pyramid(int height) {
+  int original_height = height;
+  int exterior_spaces;
+  int interior_spaces;
+  while(height > 0) {
+
+    exterior_spaces = height - 1;
+
+    while (exterior_spaces > 0) {
+      std::cout << " ";
+      exterior_spaces = exterior_spaces - 1;
+    }
+
+    std::cout << "/";
+    interior_spaces = original_height - height;
+
+    while (interior_spaces >= 0) {
+      std::cout << "-";
+      interior_spaces = interior_spaces - 1;
+    }
+
+    std::cout << "\\\n";
+    height = height - 1;
+  }
+}
+]]></code>
+      </program>
+    </statement>
+    <choices>
+      <choice>
+        <statement>
+          <p>Change <c>"\\\n"</c> to <c>"\\n"</c> and change <c>original_height - height</c> to <c>(original_height - height) * 2</c>.</p>
+        </statement>
+        <feedback><p>
+          since c++ uses <c>\</c> to signify the way that it signifies "\" is actually with <c>\\</c>.
+        </p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement>
+          <p>Change <c>while (interior_spaces >= 0) {</c> to <c>while (interior_spaces > 0) {</c> and change <c>original_height - height</c> to <c>(original_height - height) * 2</c>.</p>
+        </statement>
+        <feedback><p>
+          This draws a nice looking pyramid! How would you change the code to draw the pyramid from a birds-eye view?
+        </p></feedback>
+      </choice>
+      <choice>
+        <statement>
+          <p>Change <c>while (interior_spaces >= 0) {</c> to <c>while (interior_spaces > 0) {</c> and change <c>original_height - height</c> to <c>original_height - height * 2</c>.</p>
+        </statement>
+        <feedback><p>
+          Remember multiplication has higher precedance than subtraction so this will lead to not enough space 
+          inside our pyramid.
+        </p></feedback>
+      </choice>
+      <choice>
+        <statement>
+          <p>Change <c>original_height - height</c> to <c>(original_height - height) * 2</c>.</p>
+        </statement>
+        <feedback><p>
+        Unfortunately it looks like the top of our period was cut off with this answer.
+        </p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+</section>
+
