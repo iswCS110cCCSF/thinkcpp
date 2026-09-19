@@ -7,6 +7,21 @@
         <c>true</c>. The condition is checked before each pass through the body.
     </p>
 
+    <p>The general syntax is:</p>
+
+    <program xml:id="program_while_syntax" language="cpp">
+        <code><![CDATA[
+while (condition) {
+    statements_to_repeat;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        Replace <c>condition</c> with a Boolean expression and place the
+        statements to repeat inside the braces.
+    </p>
+
     <program xml:id="program_while_countdown"
              language="cpp"
              interactive="yes">

@@ -6,40 +6,49 @@
         Many everyday activities involve repeating an action. For example,
         imagine packing groceries into a reusable grocery bag. You place one
         item into the bag, check whether another item fits safely, and continue
-        until no more items fit safely.
+        while there are still items to pack and another item fits safely.
     </p>
 
     <p>
         In this situation, the number of repetitions is not known in advance.
-        The process is controlled by a condition: continue <q>until</q> the bag
-        is full enough to stop packing. This is the kind of repetition commonly
-        expressed with a <c>while</c> statement.
+        The process stops when either no items remain or the next item does not
+        fit safely. This is the kind of repetition commonly expressed with a
+        <c>while</c> statement.
     </p>
 
-    <program xml:id="program_iteration_until_condition"
-             language="cpp">
+    <program xml:id="program_iteration_until_condition">
         <code><![CDATA[
-while (another_item_fits_safely) {
-    place_one_item_in_bag();
-}
+while more_items_to_pack and another_item_fits_safely:
+    place_next_item_in_bag
         ]]></code>
     </program>
 
     <p>
-        Now imagine counting 100 items in a shipment. You know that the count
-        should begin at 1, increase by 1 each time, and stop after reaching 100.
-        This is the kind of repetition commonly expressed with a <c>for</c>
-        statement.
+        For a second example, imagine a soap company preparing products for
+        shipment. Each small pack contains 16 soap pieces, and each large
+        shipping box contains 100 small packs. The company repeats one process
+        inside another process:
     </p>
 
-    <program xml:id="program_iteration_known_count"
-             language="cpp">
+    <program xml:id="program_iteration_nested_packing">
         <code><![CDATA[
-for (int count = 1; count <= 100; ++count) {
-    std::cout << count << '\n';
-}
+        repeat 100 times:                 // packs in one shipping box
+            start a new soap pack
+            repeat 16 times:               // soap pieces in one pack
+                place one soap piece in the pack
+            seal the soap pack
+            place the soap pack in the shipping box
+        seal the shipping box
         ]]></code>
     </program>
+
+    <p>
+        The number of repetitions is known: 16 soap pieces per pack and 100
+        packs per shipping box. This is the kind of repetition commonly
+        expressed with <c>for</c> statements. Because one repetition occurs
+        inside another, this is also an example of <term>nested iteration</term>.
+        We will translate this idea into C++ later.
+    </p>
 
     <p>
         Words in a problem statement can provide useful clues about the kind of
@@ -48,8 +57,8 @@ for (int count = 1; count <= 100; ++count) {
 
     <table xml:id="table_iteration_vocabulary">
         <title>Vocabulary that describes repetition</title>
-        <tabular>
-            <row>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <row header="yes">
                 <cell>Words or phrases</cell>
                 <cell>What they suggest</cell>
             </row>

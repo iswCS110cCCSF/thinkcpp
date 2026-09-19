@@ -4,8 +4,20 @@
 
     <p>
         A <c>for</c> statement is useful when a loop has a clear starting value,
-        continuation condition, and update step. The three parts appear in one
-        line:
+        continuation condition, and update step. Its general syntax is:
+    </p>
+
+    <program xml:id="program_for_syntax" language="cpp">
+        <code><![CDATA[
+for (initialization; condition; update) {
+    statements_to_repeat;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The initialization runs once at the beginning. The condition is checked
+        before each iteration, and the update runs after each iteration.
     </p>
 
     <program xml:id="program_for_count_to_100"
@@ -26,8 +38,8 @@ int main() {
 
     <table xml:id="table_for_statement_parts">
         <title>The parts of a <c>for</c> statement</title>
-        <tabular>
-            <row>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <row header="yes">
                 <cell>Part</cell>
                 <cell>Purpose</cell>
             </row>
