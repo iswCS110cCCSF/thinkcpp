@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter6_arrays-of-structures-and-objects">
+    <title>Arrays of Structures and Objects</title>
+
+    <p>
+        An array can store objects created from a structure or class. This lets
+        a program process several related objects with the same loop pattern.
+    </p>
+
+    <p>
+        The following example uses the <c>Point</c> structure from Chapter 5.
+        The range-based <c>for</c> loop visits each point and accesses its public
+        data members.
+    </p>
+
+    <program xml:id="program_array_of_points"
+             language="cpp"
+             interactive="yes">
+        <code><![CDATA[
+#include <array>
+#include <iostream>
+
+struct Point {
+    double x;
+    double y;
+};
+
+int main() {
+    const std::array<Point, 3> points{
+        Point{1.0, 2.0},
+        Point{3.0, 4.0},
+        Point{5.0, 6.0}
+    };
+
+    for (const Point& point : points) {
+        std::cout << '(' << point.x << ", " << point.y << ")\n";
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The declaration <c>const Point&amp; point</c> gives the loop a read-only
+        reference to each object. The loop does not need to copy the point, and
+        it cannot modify the array's objects through that reference.
+    </p>
+
+    <p>
+        The same idea works with class objects. Instead of accessing public data,
+        the loop can call a public member function on each object.
+    </p>
+
+    <program xml:id="program_array_of_rectangles"
+             language="cpp"
+             interactive="yes">
+        <code><![CDATA[
+#include <array>
+#include <iostream>
+
+class Rectangle {
+private:
+    double width;
+    double height;
+
+public:
+    Rectangle(double rectangle_width, double rectangle_height)
+        : width{rectangle_width}, height{rectangle_height} {
+    }
+
+    double calculate_area() const {
+        return width * height;
+    }
+};
+
+int main() {
+    const std::array<Rectangle, 2> rectangles{
+        Rectangle{4.0, 3.0},
+        Rectangle{5.0, 2.0}
+    };
+
+    for (const Rectangle& rectangle : rectangles) {
+        std::cout << rectangle.calculate_area() << '\n';
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The phrase <q>for each object</q> is a useful clue that a range-based
+        loop may be appropriate. The type of the object determines whether the
+        loop accesses data members or calls member functions.
+    </p>
+</section>

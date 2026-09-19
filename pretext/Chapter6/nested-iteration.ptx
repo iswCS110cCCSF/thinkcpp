@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter6_nested-iteration">
+    <title>Nested Iteration</title>
+
+    <p>
+        A loop can contain another loop. This is called <term>nested
+        iteration</term>. The inner loop completes all of its repetitions for
+        each repetition of the outer loop.
+    </p>
+
+    <p>
+        For example, the following program prints a simple pattern. The outer
+        loop chooses the row, and the inner loop prints the required number of
+        symbols in that row.
+    </p>
+
+    <program xml:id="program_nested_triangle"
+             language="cpp"
+             interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+
+int main() {
+    for (int row = 1; row <= 4; ++row) {
+        for (int symbol = 1; symbol <= row; ++symbol) {
+            std::cout << '*';
+        }
+
+        std::cout << '\n';
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <console>
+        <output>*
+**
+***
+****</output>
+    </console>
+
+    <p>
+        The vocabulary <q>for each row</q> and <q>for each symbol in that row</q>
+        describes the two levels of repetition. Nested iteration does not
+        require a two-dimensional array. It is useful whenever one repeated
+        task must be completed inside another repeated task.
+    </p>
+
+    <subsection xml:id="chapter6_nested-iteration_comparing-pairs">
+        <title>Comparing Pairs</title>
+        <p>
+            Nested loops can also examine pairs of values. The outer loop chooses
+            the first value, and the inner loop chooses the second value. This
+            pattern is useful for comparing every item with other items.
+        </p>
+
+        <program xml:id="program_nested_compare_pairs"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <iostream>
+
+int main() {
+    const std::array<int, 3> values{2, 4, 6};
+
+    for (int first : values) {
+        for (int second : values) {
+            std::cout << first << ", " << second << '\n';
+        }
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+</section>

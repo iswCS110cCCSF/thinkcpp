@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter6_fixed-size-arrays">
+    <title>Fixed-Size Arrays</title>
+
+    <p>
+        A program often needs to process several values of the same type. A
+        fixed-size array stores those values under one name. In this chapter, we
+        use the standard-library type <c>std::array</c>.
+    </p>
+
+    <program xml:id="program_create_std_array"
+             language="cpp"
+             interactive="yes">
+        <code><![CDATA[
+#include <array>
+#include <iostream>
+
+int main() {
+    const std::array<int, 5> scores{82, 91, 76, 88, 95};
+
+    for (int score : scores) {
+        std::cout << score << '\n';
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The type <c>std::array&lt;int, 5&gt;</c> means that <c>scores</c> stores
+        five <c>int</c> values. Its size is fixed when the array is created. The
+        member function <c>size()</c> reports the number of elements.
+    </p>
+
+    <subsection xml:id="chapter6_fixed-size-arrays_range-based-loop">
+        <title>Range-Based <c>for</c> Loops</title>
+        <p>
+            The phrase <q>for each score</q> describes a range-based
+            <c>for</c> loop. The loop visits each element in order, so a separate
+            index is not needed when only the value matters.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter6_fixed-size-arrays_indexing">
+        <title>Accessing Elements by Index</title>
+        <p>
+            Each array element has an <term>index</term>, which identifies its
+            position. The first element has index 0, not index 1. Indexed
+            iteration is useful when a program needs to work with a position or
+            compare neighboring elements.
+        </p>
+
+        <program xml:id="program_index_std_array"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <cstddef>
+#include <iostream>
+
+int main() {
+    const std::array<int, 5> scores{82, 91, 76, 88, 95};
+
+    for (std::size_t index = 0; index < scores.size(); ++index) {
+        std::cout << "Score " << index + 1 << ": "
+                  << scores[index] << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            Notice the difference between the array index and the displayed
+            score number. The index begins at 0, while the human-friendly label
+            begins at 1.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter6_fixed-size-arrays_search-summarize">
+        <title>Searching and Summarizing Values</title>
+        <p>
+            A loop can inspect every element to search for a value, count values
+            that meet a condition, or calculate a total. These tasks combine
+            iteration with the counters and accumulators from the previous
+            section.
+        </p>
+
+        <program xml:id="program_summarize_scores"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <iostream>
+
+int main() {
+    const std::array<int, 5> scores{82, 91, 76, 88, 95};
+    int total = 0;
+    int high_score_count = 0;
+
+    for (int score : scores) {
+        total += score;
+
+        if (score >= 90) {
+            ++high_score_count;
+        }
+    }
+
+    std::cout << "Total: " << total << '\n';
+    std::cout << "High scores: " << high_score_count << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+</section>

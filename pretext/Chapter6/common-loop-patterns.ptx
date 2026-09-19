@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter6_common-loop-patterns">
+    <title>Common Loop Patterns</title>
+
+    <p>
+        Many loop problems use a small number of recurring patterns. The wording
+        of a problem often provides clues about which pattern is needed.
+    </p>
+
+    <subsection xml:id="chapter6_common-loop-patterns_counter">
+        <title>Counting</title>
+        <p>
+            Words such as <q>how many</q> or <q>count</q> often suggest a
+            <term>counter</term>. A counter records how many times an event has
+            occurred.
+        </p>
+        <program xml:id="program_count_even_values"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int even_count = 0;
+
+    for (int value = 1; value <= 10; ++value) {
+        if (value % 2 == 0) {
+            ++even_count;
+        }
+    }
+
+    std::cout << even_count << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter6_common-loop-patterns_accumulator">
+        <title>Accumulating</title>
+        <p>
+            Words such as <q>total</q>, <q>sum</q>, or <q>average</q> often
+            suggest an <term>accumulator</term>. An accumulator combines values
+            as the loop processes them.
+        </p>
+        <program xml:id="program_sum_values"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int total = 0;
+
+    for (int value = 1; value <= 4; ++value) {
+        total += value;
+    }
+
+    std::cout << total << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter6_common-loop-patterns_sentinel">
+        <title>Stopping at a Sentinel Value</title>
+        <p>
+            Sometimes a problem says to continue <q>until</q> a special value
+            appears. That special value is called a <term>sentinel value</term>.
+        </p>
+        <program xml:id="program_read_until_zero"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int value = 0;
+    std::cin >> value;
+
+    while (value != 0) {
+        std::cout << value << '\n';
+        std::cin >> value;
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+</section>

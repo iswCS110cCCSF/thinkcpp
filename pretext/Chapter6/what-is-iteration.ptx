@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter6_what-is-iteration">
+    <title>What Iteration Means</title>
+
+    <p>
+        Many everyday activities involve repeating an action. For example,
+        imagine packing groceries into a reusable grocery bag. You place one
+        item into the bag, check whether another item fits safely, and continue
+        until no more items fit safely.
+    </p>
+
+    <p>
+        In this situation, the number of repetitions is not known in advance.
+        The process is controlled by a condition: continue <q>until</q> the bag
+        is full enough to stop packing. This is the kind of repetition commonly
+        expressed with a <c>while</c> statement.
+    </p>
+
+    <program xml:id="program_iteration_until_condition"
+             language="cpp">
+        <code><![CDATA[
+while (another_item_fits_safely) {
+    place_one_item_in_bag();
+}
+        ]]></code>
+    </program>
+
+    <p>
+        Now imagine counting 100 items in a shipment. You know that the count
+        should begin at 1, increase by 1 each time, and stop after reaching 100.
+        This is the kind of repetition commonly expressed with a <c>for</c>
+        statement.
+    </p>
+
+    <program xml:id="program_iteration_known_count"
+             language="cpp">
+        <code><![CDATA[
+for (int count = 1; count <= 100; ++count) {
+    std::cout << count << '\n';
+}
+        ]]></code>
+    </program>
+
+    <p>
+        Words in a problem statement can provide useful clues about the kind of
+        repetition that is needed.
+    </p>
+
+    <table xml:id="table_iteration_vocabulary">
+        <title>Vocabulary that describes repetition</title>
+        <tabular>
+            <row>
+                <cell>Words or phrases</cell>
+                <cell>What they suggest</cell>
+            </row>
+            <row>
+                <cell><q>until</q> or <q>as long as</q></cell>
+                <cell>Continue while a condition is true.</cell>
+            </row>
+            <row>
+                <cell><q>exactly 100 times</q></cell>
+                <cell>Repeat a known number of times.</cell>
+            </row>
+            <row>
+                <cell><q>from 1 through 100</q></cell>
+                <cell>Count through a known range.</cell>
+            </row>
+            <row>
+                <cell><q>for each item</q></cell>
+                <cell>Process every value in a collection.</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        These words are clues, not automatic rules. Before choosing a loop, ask
+        what action must be repeated and what event should end the repetition.
+        This type of repetition is called <term>iteration</term>.
+    </p>
+</section>

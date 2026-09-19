@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter6_for-statement">
+    <title>The <c>for</c> Statement</title>
+
+    <p>
+        A <c>for</c> statement is useful when a loop has a clear starting value,
+        continuation condition, and update step. The three parts appear in one
+        line:
+    </p>
+
+    <program xml:id="program_for_count_to_100"
+             language="cpp"
+             interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+
+int main() {
+    for (int count = 1; count <= 100; ++count) {
+        std::cout << count << '\n';
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <table xml:id="table_for_statement_parts">
+        <title>The parts of a <c>for</c> statement</title>
+        <tabular>
+            <row>
+                <cell>Part</cell>
+                <cell>Purpose</cell>
+            </row>
+            <row>
+                <cell><c>int count = 1</c></cell>
+                <cell>Initialize the loop variable.</cell>
+            </row>
+            <row>
+                <cell><c>count &lt;= 100</c></cell>
+                <cell>Continue while the condition is true.</cell>
+            </row>
+            <row>
+                <cell><c>++count</c></cell>
+                <cell>Update the loop variable after each iteration.</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        The loop above prints the numbers from 1 through 100. The phrase
+        <q>from 1 through 100</q> is a useful clue that a counted loop is needed.
+    </p>
+
+    <p>
+        The update can move in different directions. For example, this loop
+        counts down from 5 to 1:
+    </p>
+
+    <program xml:id="program_for_count_down"
+             language="cpp">
+        <code><![CDATA[
+for (int count = 5; count >= 1; --count) {
+    std::cout << count << '\n';
+}
+        ]]></code>
+    </program>
+
+    <p>
+        A <c>for</c> loop can be rewritten as a <c>while</c> loop. The compact
+        form is especially helpful when the initialization, condition, and
+        update belong together.
+    </p>
+</section>

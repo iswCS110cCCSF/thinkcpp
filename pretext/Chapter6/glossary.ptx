@@ -1,119 +1,69 @@
-<?xml version="1.0" ?><section xml:id="chapter6_glossary">
-    <title>Glossary</title>
-    <glossary>
-        <gi>
-            <title>loop</title>
-            <p>A statement that executes repeatedly while a condition is true or
-            until some condition is satisfied.</p>
-        </gi>
-        <gi>
-            <title>infinite loop</title>
-            <p>A loop whose condition is always true.</p>
-        </gi>
-        <gi>
-            <title>body</title>
-            <p>The statements inside the loop.</p>
-        </gi>
-        <gi>
-            <title>iteration</title>
-            <p>One pass through (execution of) the body of the loop, including the
-            evaluation of the condition.</p>
-        </gi>
-        <gi>
-            <title>tab</title>
-            <p>A special character, written as <c>\t</c> in C++, that causes the cursor to move to the next
-            tab stop on the current line.</p>
-        </gi>
-        <gi>
-            <title>encapsulate</title>
-            <p>To divide a large complex program into components (like functions)
-            and isolate the components from each other (for example, by using
-            local variables).</p>
-        </gi>
-        <gi>
-            <title>local variable</title>
-            <p>A variable that is declared inside a function and that exists only
-            within that function. Local variables cannot be accessed from outside
-            their home function, and do not interfere with any other functions.</p>
-        </gi>
-        <gi>
-            <title>generalize</title>
-            <p>To replace something unnecessarily specific (like a constant value)
-            with something appropriately general (like a variable or parameter).
-            Generalization makes code more versatile, more likely to be reused,
-            and sometimes even easier to write.</p>
-        </gi>
-        <gi>
-            <title>development plan</title>
-            <p>A process for developing a program. In this chapter, I demonstrated a
-            style of development based on developing code to do simple, specific
-            things, and then encapsulating and generalizing.</p>
-        </gi>
-    </glossary>
-    <reading-questions>
-  <exercise label="chapter_six_glossary_one">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">loop</premise>
-        <response>A statement that executes repeatedly while a condition is true or some condition
-          is satisfied.</response>
-      </match>
-      <match>
-        <premise order="2">infinite loop</premise>
-        <response>A loop whose condition is always true.</response>
-      </match>
-      <match>
-        <premise order="3">body</premise>
-        <response>The statements inside the loop.</response>
-      </match>
-      <match>
-        <premise order="4">iteration</premise>
-        <response>One pass through (execution of) the body of the loop, including the valuation of
-          the condition.</response>
-      </match>
-      <match>
-        <premise order="5">tab</premise>
-        <response>A special character, written as \t in C++, that causes the cursor to move to the
-          next tab stop on the current line.</response>
-      </match>
-    </cardsort>
-  </exercise>
-  <exercise label="chapter_six_glossary_two">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">encapsulate</premise>
-        <response>To divide a large complex program into components (like functions) and isolate the
-          components from each other (for example, by using local variables).</response>
-      </match>
-      <match>
-        <premise order="2">local variable</premise>
-        <response>A variable that is declared inside a function and that exists only within that
-          function. Local variables cannot be accessed from outside their home function, and do not
-          interfere with any other functions.</response>
-      </match>
-      <match>
-        <premise order="3">generalize</premise>
-        <response>To replace something unnecessarily specific (like a constant value) with something
-          appropriately general (like a variable or parameter).</response>
-      </match>
-      <match>
-        <premise order="4">development plan</premise>
-        <response>A process for developing a program.</response>
-      </match>
-    </cardsort>
-  </exercise></reading-questions>
-</section>
+<?xml version="1.0" encoding="UTF-8"?>
+<glossary xml:id="chapter6_glossary">
+    <title>Chapter 6 Glossary</title>
+
+    <gi xml:id="chapter6_glossary_iteration">
+        <title>iteration</title>
+        <p>One repetition of a loop body, or the process of repeating an action.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_loop">
+        <title>loop</title>
+        <p>A programming statement that repeats a group of statements.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_loop-body">
+        <title>loop body</title>
+        <p>The statements that execute during each iteration of a loop.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_loop-condition">
+        <title>loop condition</title>
+        <p>A Boolean expression that determines whether a loop continues.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_infinite-loop">
+        <title>infinite loop</title>
+        <p>A loop that does not stop because its condition never becomes false.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_counter">
+        <title>counter</title>
+        <p>A variable that records how many times an event has occurred.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_accumulator">
+        <title>accumulator</title>
+        <p>A variable that combines values as a loop processes them.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_sentinel-value">
+        <title>sentinel value</title>
+        <p>A special value that tells a loop to stop processing input.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_fixed-size-array">
+        <title>fixed-size array</title>
+        <p>A collection whose number of elements is set when the array is created.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_index">
+        <title>index</title>
+        <p>A number that identifies an element's position in an array. The first index is 0.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_range-based-for-loop">
+        <title>range-based <c>for</c> loop</title>
+        <p>A <c>for</c> loop that visits each element in a collection.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_nested-iteration">
+        <title>nested iteration</title>
+        <p>Iteration in which one loop is placed inside another loop.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_std-array">
+        <title><c>std::array</c></title>
+        <p>A C++ standard-library type that represents a fixed-size array.</p>
+    </gi>
+</glossary>

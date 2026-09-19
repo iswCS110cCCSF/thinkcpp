@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter6_while-statement">
+    <title>The <c>while</c> Statement</title>
+
+    <p>
+        A <c>while</c> statement repeats its body as long as its condition is
+        <c>true</c>. The condition is checked before each pass through the body.
+    </p>
+
+    <program xml:id="program_while_countdown"
+             language="cpp"
+             interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int count = 5;
+
+    while (count > 0) {
+        std::cout << count << '\n';
+        --count;
+    }
+
+    std::cout << "Done\n";
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        You can read the loop in English as: <q>while <c>count</c> is greater
+        than zero, display the count and then reduce it by one.</q> The variable
+        that controls the condition must change so that the loop can eventually
+        stop.
+    </p>
+
+    <ol>
+        <li>
+            <p>Evaluate the condition.</p>
+        </li>
+        <li>
+            <p>If the condition is false, leave the loop.</p>
+        </li>
+        <li>
+            <p>If the condition is true, execute the body and check again.</p>
+        </li>
+    </ol>
+
+    <p>
+        If the condition is false before the first check, the body does not run
+        at all. If the condition never becomes false, the program has an
+        <term>infinite loop</term>.
+    </p>
+
+    <warning>
+        <p>
+            Check that every terminating <c>while</c> loop changes something
+            related to its condition. A counter that never changes can cause an
+            infinite loop.
+        </p>
+    </warning>
+</section>

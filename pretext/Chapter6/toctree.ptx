@@ -2,19 +2,18 @@
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude"
          xml:lang="en-US"
          xml:id="iteration">
-  <title>Iteration</title>
-  <xi:include href='./multiple-assignment.ptx'/>
-  <xi:include href='./iteration.ptx'/>
-  <xi:include href='./the-while-statement.ptx'/>
-  <xi:include href='./tables.ptx'/>
-  <xi:include href='./two-dimensional-tables.ptx'/>
-  <xi:include href='./encapsulation-generalization.ptx'/>
-  <xi:include href='./functions.ptx'/>
-  <xi:include href='./more-encapsulation.ptx'/>
-  <xi:include href='./local-variables.ptx'/>
-  <xi:include href='./more-generalization.ptx'/>
-  <xi:include href='./glossary.ptx'/>
-  <xi:include href='./exercises.ptx'/>
-  <xi:include href='./mixed-up-code.ptx'/>
-  <xi:include href='./coding-practice.ptx'/>
+    <title>Iteration</title>
+
+    <xi:include href="./what-is-iteration.ptx"/>
+    <xi:include href="./while-statement.ptx"/>
+    <xi:include href="./for-statement.ptx"/>
+    <xi:include href="./common-loop-patterns.ptx"/>
+    <xi:include href="./fixed-size-arrays.ptx"/>
+    <xi:include href="./nested-iteration.ptx"/>
+    <xi:include href="./arrays-of-structures-and-objects.ptx"/>
+
+    <xi:include href="./glossary.ptx"/>
+    <xi:include href="./exercises.ptx"/>
+    <xi:include href="./mixed-up-code.ptx"/>
+    <xi:include href="./coding-practice.ptx"/>
 </chapter>
