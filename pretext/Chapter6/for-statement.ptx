@@ -87,9 +87,16 @@ for (int count = 5; count >= 1; --count) {
         <statement>
             <p>
                 In a <c>for</c> statement, the part that runs once before the
-                first iteration is the <fillin answer="initialization" mode="string"/>.
+                first iteration is the <fillin width="18" answer="initialization" mode="string"/>.
             </p>
         </statement>
+        <evaluation>
+            <evaluate>
+                <test correct="yes">
+                    <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+            </evaluate>
+        </evaluation>
     </exercise>
 
     <exercise label="chapter6_for_organization">

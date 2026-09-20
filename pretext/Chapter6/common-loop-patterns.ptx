@@ -94,9 +94,16 @@ int main() {
         <statement>
             <p>
                 A variable that combines values as a loop processes them is
-                called an <fillin answer="accumulator" mode="string"/>.
+                called an <fillin width="16" answer="accumulator" mode="string"/>.
             </p>
         </statement>
+        <evaluation>
+            <evaluate>
+                <test correct="yes">
+                    <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+            </evaluate>
+        </evaluation>
     </exercise>
 
     <exercise label="chapter6_common-patterns_organization">

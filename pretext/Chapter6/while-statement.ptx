@@ -79,9 +79,16 @@ int main() {
         <statement>
             <p>
                 In the syntax shown above, the Boolean expression that is tested
-                before each iteration is the loop <fillin answer="condition" mode="string"/>.
+                before each iteration is the loop <fillin width="14" answer="condition" mode="string"/>.
             </p>
         </statement>
+        <evaluation>
+            <evaluate>
+                <test correct="yes">
+                    <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+            </evaluate>
+        </evaluation>
     </exercise>
 
     <exercise label="chapter6_while_organization">

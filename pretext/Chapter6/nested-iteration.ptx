@@ -82,9 +82,16 @@ int main() {
         <statement>
             <p>
                 In nested iteration, the inner loop completes its repetitions
-                for each repetition of the <fillin answer="outer" mode="string"/> loop.
+                for each repetition of the <fillin width="10" answer="outer" mode="string"/> loop.
             </p>
         </statement>
+        <evaluation>
+            <evaluate>
+                <test correct="yes">
+                    <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+            </evaluate>
+        </evaluation>
     </exercise>
 
     <exercise label="chapter6_nested-iteration_organization">

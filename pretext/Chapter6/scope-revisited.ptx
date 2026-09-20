@@ -25,7 +25,7 @@
             <row>
                 <cell>Block scope</cell>
                 <cell>Braces belonging to a statement or standalone block</cell>
-                <cell><c>if</c>, ><c>switch</c>, <c>while</c>, <c>for</c>, and standalone braces</cell>
+                <cell><c>if</c>, <c>switch</c>, <c>while</c>, <c>for</c>, and standalone braces</cell>
             </row>
             <row>
                 <cell>Scoped enums, class and struct scope</cell>
@@ -111,15 +111,21 @@ int main() {
     </subsection>
 
     <subsection xml:id="chapter6_scope-revisited_class-struct-scope">
-        <title>Class and Struct Scope</title>
+        <title>Scoped enums, class and struct scope</title>
 
         <p>
-            The braces in a class or structure definition create a different kind
-            of scope. Names declared there belong to the type. They are not
+            The braces in a class or structure definition or enum class or enum struct 
+			create a different kind of scope. Names declared there belong to the type. They are not
             temporary variables belonging to one execution of an <c>if</c> or
             loop block.
         </p>
-
+	  <note>
+		<p>
+		 Unscoped Enums (Traditional enum) do not have their own isolated scope. Their members leak
+		 directly into the surrounding enclosing scope.We will cover enums (enumerated types) in an 
+		 upcoming section.
+		</p>
+	  </note>
         <program xml:id="program_scope_struct"
                  language="cpp"
                  interactive="yes">
@@ -218,7 +224,7 @@ int main() {
 		in the global scope. Items in the global scope can be accessed from anywhere in that 
 		file without any prefix or special operator.</p>
 
-        <program xml:id="program_scope_namespace"
+        <program xml:id="program_scope_global_scope"
                  language="cpp"
                  interactive="yes">
             <code><![CDATA[

@@ -91,9 +91,16 @@ while more_items_to_pack and another_item_fits_safely:
         <statement>
             <p>
                 The statements that are repeated by a loop are called the loop
-                <fillin answer="body" mode="string"/>.
+                <fillin width="12" answer="body" mode="string"/>.
             </p>
         </statement>
+        <evaluation>
+            <evaluate>
+                <test correct="yes">
+                    <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+            </evaluate>
+        </evaluation>
     </exercise>
 
     <exercise label="chapter6_what-iteration_organization">
