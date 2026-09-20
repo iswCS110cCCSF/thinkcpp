@@ -115,4 +115,36 @@ int main() {
             ]]></code>
         </program>
     </subsection>
+
+    <exercise label="chapter6_fixed-arrays_short-answer">
+        <statement>
+            <p>
+                The first element of a fixed-size array has index
+                <fillin answer="0" mode="number"/>.
+            </p>
+        </statement>
+    </exercise>
+
+    <exercise label="chapter6_fixed-arrays_organization">
+        <statement>
+            <p>
+                Which loop correctly visits every element of
+                <c>std::array&lt;int, 4&gt; values</c> by index?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>for (std::size_t index = 0; index &lt; values.size(); ++index)</c></p></statement>
+                <feedback><p>The index begins at 0 and stops before <c>values.size()</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>for (std::size_t index = 0; index &lt;= values.size(); ++index)</c></p></statement>
+                <feedback><p>The final valid index is one less than <c>values.size()</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>for (std::size_t index = 1; index &lt; values.size(); ++index)</c></p></statement>
+                <feedback><p>This skips the element at index 0.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
 </section>

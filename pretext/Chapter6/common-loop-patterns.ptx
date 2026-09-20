@@ -89,4 +89,52 @@ int main() {
             ]]></code>
         </program>
     </subsection>
+
+    <exercise label="chapter6_common-patterns_short-answer">
+        <statement>
+            <p>
+                A variable that combines values as a loop processes them is
+                called an <fillin answer="accumulator" mode="string"/>.
+            </p>
+        </statement>
+    </exercise>
+
+    <exercise label="chapter6_common-patterns_organization">
+        <statement>
+            <p>
+                Which organization correctly counts the even values from 1
+                through 10?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement>
+                    <p>
+                        Initialize <c>even_count</c> to 0 before the loop, add 1
+                        inside the <c>if</c> for an even value, and print it after
+                        the loop.
+                    </p>
+                </statement>
+                <feedback><p>A counter records how many qualifying values have been found.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>
+                        Initialize <c>even_count</c> to 0 inside the loop and
+                        print it before the loop.
+                    </p>
+                </statement>
+                <feedback><p>The counter must keep its value across iterations.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>
+                        Add every value to <c>even_count</c>, whether or not it is
+                        even.
+                    </p>
+                </statement>
+                <feedback><p>A counting pattern increments only when the condition is satisfied.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
 </section>

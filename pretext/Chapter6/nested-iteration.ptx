@@ -77,4 +77,49 @@ int main() {
             ]]></code>
         </program>
     </subsection>
+
+    <exercise label="chapter6_nested-iteration_short-answer">
+        <statement>
+            <p>
+                In nested iteration, the inner loop completes its repetitions
+                for each repetition of the <fillin answer="outer" mode="string"/> loop.
+            </p>
+        </statement>
+    </exercise>
+
+    <exercise label="chapter6_nested-iteration_organization">
+        <statement>
+            <p>
+                Which organization prints three rows with two stars in each row?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement>
+                    <p>
+                        An outer loop that runs for rows 1 through 3 and an inner
+                        loop that runs for symbols 1 through 2.
+                    </p>
+                </statement>
+                <feedback><p>The outer loop controls rows and the inner loop controls symbols in a row.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>
+                        An outer loop that runs for symbols 1 through 2 and an
+                        inner loop that runs for rows 1 through 3.
+                    </p>
+                </statement>
+                <feedback><p>This reverses the roles of the two loops.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>
+                        One loop that runs six times and no separate row operation.
+                    </p>
+                </statement>
+                <feedback><p>That would not organize the output into three rows.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
 </section>

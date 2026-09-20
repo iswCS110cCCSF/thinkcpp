@@ -94,4 +94,52 @@ int main() {
         loop may be appropriate. The type of the object determines whether the
         loop accesses data members or calls member functions.
     </p>
+
+    <exercise label="chapter6_object-arrays_short-answer">
+        <statement>
+            <p>
+                A function that belongs to a class and is called through an
+                object is a <fillin answer="member function" mode="string"/>.
+            </p>
+        </statement>
+    </exercise>
+
+    <exercise label="chapter6_object-arrays_organization">
+        <statement>
+            <p>
+                Which loop organization correctly processes every
+                <c>Rectangle</c> object in the array while preserving
+                encapsulation?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement>
+                    <p>
+                        Use a range-based loop and call the public member function
+                        <c>rectangle.calculate_area()</c> for each object.
+                    </p>
+                </statement>
+                <feedback><p>The class controls access to its private data through its public operation.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>
+                        Use a loop that accesses <c>rectangle.width</c> directly
+                        from <c>main</c>.
+                    </p>
+                </statement>
+                <feedback><p><c>width</c> is private, so outside code should use a public member function.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>
+                        Create a new <c>Rectangle</c> class inside every loop
+                        iteration.
+                    </p>
+                </statement>
+                <feedback><p>The array already contains the objects to process.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
 </section>

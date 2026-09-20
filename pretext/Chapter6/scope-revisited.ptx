@@ -25,7 +25,7 @@
             <row>
                 <cell>Block scope</cell>
                 <cell>Braces belonging to a statement or standalone block</cell>
-                <cell><c>if</c>, <c>while</c>, <c>for</c>, and standalone braces</cell>
+                <cell><c>if</c>, ><c>switch</c>, <c>while</c>, <c>for</c>, and standalone braces</cell>
             </row>
             <row>
                 <cell>Class or struct scope</cell>
@@ -158,6 +158,11 @@ int main() {
         <title>Namespace Scope</title>
 
         <p>
+		In C++, namespaces act as virtual containers or "folders" for your identifiers (classes, structs, functions, variables,
+		and    enums). The primary benefit of writing your own namespaces is avoiding name collisions and organizing large 
+		codebases into distinct, logical modules for better organization.
+        </p>
+		<p>
             Names declared outside functions and classes can belong to a
             namespace. A namespace groups related names and helps prevent naming
             conflicts between different parts of a program.

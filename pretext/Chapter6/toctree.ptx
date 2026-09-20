@@ -7,7 +7,7 @@
     <xi:include href="./what-is-iteration.ptx"/>
     <xi:include href="./while-statement.ptx"/>
     <xi:include href="./for-statement.ptx"/>
-	<xi:include href="./scope-revisited.ptx"/>
+    <xi:include href="./scope-revisited.ptx"/>
     <xi:include href="./common-loop-patterns.ptx"/>
     <xi:include href="./fixed-size-arrays.ptx"/>
     <xi:include href="./nested-iteration.ptx"/>

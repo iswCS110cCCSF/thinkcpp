@@ -86,4 +86,65 @@ while more_items_to_pack and another_item_fits_safely:
         what action must be repeated and what event should end the repetition.
         This type of repetition is called <term>iteration</term>.
     </p>
+
+    <exercise label="chapter6_what-iteration_short-answer">
+        <statement>
+            <p>
+                The statements that are repeated by a loop are called the loop
+                <fillin answer="body" mode="string"/>.
+            </p>
+        </statement>
+    </exercise>
+
+    <exercise label="chapter6_what-iteration_organization">
+        <statement>
+            <p>
+                Which organization best matches the soap-packing process in this
+                section?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement>
+                    <p>
+                        An outer repetition for 100 packs, with an inner
+                        repetition for 16 soap pieces in each pack.
+                    </p>
+                </statement>
+                <feedback>
+                    <p>
+                        The outer task makes the packs for one shipping box, and
+                        the inner task fills one pack.
+                    </p>
+                </feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>
+                        One repetition for 116 soap pieces, with no separate
+                        pack operation.
+                    </p>
+                </statement>
+                <feedback>
+                    <p>
+                        The two quantities describe two different levels of the
+                        process.
+                    </p>
+                </feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>
+                        An outer repetition for 16 shipping boxes, with an inner
+                        repetition for 100 soap pieces.
+                    </p>
+                </statement>
+                <feedback>
+                    <p>
+                        The numbers are assigned to the wrong tasks.
+                    </p>
+                </feedback>
+            </choice>
+        </choices>
+    </exercise>
 </section>

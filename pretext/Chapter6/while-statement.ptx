@@ -74,4 +74,58 @@ int main() {
             infinite loop.
         </p>
     </warning>
+
+    <exercise label="chapter6_while_short-answer">
+        <statement>
+            <p>
+                In the syntax shown above, the Boolean expression that is tested
+                before each iteration is the loop <fillin answer="condition" mode="string"/>.
+            </p>
+        </statement>
+    </exercise>
+
+    <exercise label="chapter6_while_organization">
+        <statement>
+            <p>
+                Which organization makes this countdown loop terminate?
+            </p>
+            <program language="cpp">
+                <code><![CDATA[
+int count = 3;
+while (count > 0) {
+    std::cout << count << '\n';
+    // missing statement
+}
+                ]]></code>
+            </program>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>--count;</c> inside the loop body</p></statement>
+                <feedback>
+                    <p>
+                        The update makes <c>count</c> smaller until the condition
+                        becomes false.
+                    </p>
+                </feedback>
+            </choice>
+            <choice>
+                <statement><p><c>int count = 0;</c> inside the loop body</p></statement>
+                <feedback>
+                    <p>
+                        Declaring another variable does not update the controlling
+                        variable in the loop condition.
+                    </p>
+                </feedback>
+            </choice>
+            <choice>
+                <statement><p><c>std::cout &lt;&lt; count;</c> again inside the loop body</p></statement>
+                <feedback>
+                    <p>
+                        Output does not change the value used by the condition.
+                    </p>
+                </feedback>
+            </choice>
+        </choices>
+    </exercise>
 </section>

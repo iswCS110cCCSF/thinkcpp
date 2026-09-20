@@ -82,4 +82,40 @@ for (int count = 5; count >= 1; --count) {
         form is especially helpful when the initialization, condition, and
         update belong together.
     </p>
+
+    <exercise label="chapter6_for_short-answer">
+        <statement>
+            <p>
+                In a <c>for</c> statement, the part that runs once before the
+                first iteration is the <fillin answer="initialization" mode="string"/>.
+            </p>
+        </statement>
+    </exercise>
+
+    <exercise label="chapter6_for_organization">
+        <statement>
+            <p>
+                Which <c>for</c> statement correctly prints the integers from 1
+                through 5?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>for (int count = 1; count &lt;= 5; ++count)</c></p></statement>
+                <feedback><p>The initialization, condition, and update match the requested range.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>for (int count = 0; count &lt;= 5; ++count)</c></p></statement>
+                <feedback><p>This includes 0, which is outside the requested range.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>for (int count = 1; count &lt; 5; ++count)</c></p></statement>
+                <feedback><p>The condition stops the loop before it prints 5.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>for (int count = 5; count &gt;= 1; ++count)</c></p></statement>
+                <feedback><p>The update moves upward while the condition expects a downward count.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
 </section>
