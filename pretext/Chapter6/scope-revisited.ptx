@@ -10,8 +10,8 @@
     </p>
 
     <p>
-        C++ programs commonly use three kinds of scope that we have already
-        encountered: block scope, class or struct scope, and namespace scope.
+        C++ programs commonly use four kinds of scope that we have already
+        encountered: block scope,  Type Scope (Scoped Enums, Classes, and Structs), namespace scope and Global Scope (File Scope).
     </p>
 
     <table xml:id="table_scope_kinds">
@@ -28,14 +28,20 @@
                 <cell><c>if</c>, ><c>switch</c>, <c>while</c>, <c>for</c>, and standalone braces</cell>
             </row>
             <row>
-                <cell>Class or struct scope</cell>
-                <cell>Braces belonging to a class or structure definition</cell>
+                <cell>Scoped enums, class and struct scope</cell>
+                <cell>Braces belonging to a Scoped enum(an enum class or an enum struct), a class or structure definition</cell>
                 <cell>Data members and member functions</cell>
             </row>
             <row>
                 <cell>Namespace scope</cell>
-                <cell>Declarations outside functions and classes</cell>
+                <cell>Braces belonging to a namespace definition.</cell>
                 <cell>Functions, types, and variables in a namespace</cell>
+            </row>
+			
+			<row>
+                <cell>Global Scope (File Scope)</cell>
+                <cell>Entire source file (or translation unit) outside of any braces</cell>
+                <cell>Any entity outside of all the rest of the scopes</cell>
             </row>
         </tabular>
     </table>
@@ -158,14 +164,11 @@ int main() {
         <title>Namespace Scope</title>
 
         <p>
-		In C++, namespaces act as virtual containers or "folders" for your identifiers (classes, structs, functions, variables,
-		and    enums). The primary benefit of writing your own namespaces is avoiding name collisions and organizing large 
-		codebases into distinct, logical modules for better organization.
-        </p>
-		<p>
-            Names declared outside functions and classes can belong to a
-            namespace. A namespace groups related names and helps prevent naming
-            conflicts between different parts of a program.
+		In C++, namespaces act as virtual containers or "folders" for your identifiers (classes, 
+		structs, functions, variables, 		and    enums). A namespace groups related names and 
+		helps prevent naming conflicts between different parts of a program. The primary benefit 
+		of writing your own namespaces is avoiding name collisions and organizing large codebases
+		into distinct, logical modules for better organization.
         </p>
 
         <program xml:id="program_scope_namespace"
@@ -202,17 +205,54 @@ int main() {
             <c>std::string</c>.
         </p>
     </subsection>
+	
+	<subsection xml:id="chapter6_scope-revisited_global_scope">
+	<title>Global Scope (File Scope)</title>
+
+        <p>
+		Global scope is spanned by the entire source file (or translation unit) outside of 
+		any braces. Unlike the other three scopes, global scope does not have starting or 
+		ending curly braces { }. It is the default "catch-all" area of your code. 
+		Any variable, function, class, or struct declared at the topmost level of your 
+		file—completely outside of any functions, namespaces, or classes—is automatically 
+		in the global scope. Items in the global scope can be accessed from anywhere in that 
+		file without any prefix or special operator.</p>
+
+        <program xml:id="program_scope_namespace"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+constexpr int days_per_week = 7; 
+
+int main() {
+    std::cout << days_per_week << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The constant <c>days_per_week</c> belongs to the global namespace. All other inner scopes can see and access <c>days_per_week</c>.
+        </p>
+    </subsection>
+
 
     <subsection xml:id="chapter6_scope-revisited_summary">
         <title>Choosing the Right Scope</title>
-
+		<p>
+			Any inner scope in C++ can hide (or "shadow") an outer scope variable 
+			if they share the exact same name. This rule applies globally across 
+			all blocks, namespaces, and classes.
+        </p>
         <p>
             When deciding where to declare a name, keep its scope as small as
             practical. A temporary calculation usually belongs in a block. Data
             and operations that describe an object belong in a class or struct.
             A function or type that is shared by several parts of a program can
-            belong to a namespace.
-        </p>
+            belong to a namespace. 
+		</p>
 
         <p>
             Remember that scope describes where a name can be used. It is related
