@@ -159,33 +159,39 @@ int main() {
         </table>
 
         <p>
-            A <c>do-while</c> statement is useful for menu systems and input
-            validation because the program must ask for input at least once.
+            A <c>do-while</c> statement is useful whenever an action must happen
+            at least once before the program decides whether to repeat it. Menu
+            systems and input validation are common examples; we will revisit
+            those applications after learning how to read input. For now, we
+            can demonstrate the same idea with a function parameter.
         </p>
 
-        <program xml:id="program_do-while_input_validation"
+        <program xml:id="program_do-while_function_parameters"
                  language="cpp"
                  interactive="yes">
             <code><![CDATA[
 #include <iostream>
 
-int main() {
-    int menu_choice;
+void print_countdown(int starting_count) {
+    int count = starting_count;
 
     do {
-        std::cout << "Enter 1, 2, or 3: ";
-        std::cin >> menu_choice;
-    } while (menu_choice < 1 || menu_choice > 3);
+        std::cout << count << '\n';
+        --count;
+    } while (count > 0);
+}
 
-    std::cout << "You selected " << menu_choice << '\n';
+int main() {
+    print_countdown(3);
     return 0;
 }
             ]]></code>
         </program>
 
         <p>
-            The prompt appears at least once. If the user enters a value outside
-            the valid range, the loop repeats and asks again.
+            The function receives its starting value through a parameter. Even if
+            <c>print_countdown(0)</c> were called, the function would print
+            <c>0</c> once before the condition stopped the loop.
         </p>
     </subsection>
 
