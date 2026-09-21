@@ -7957,1255 +7957,976 @@ var ptx_lunr_docs = [
   "body": "  Define a Temperature class with a private Celsius value. Add a constructor, a const accessor named get_celsius , and a mutator named set_celsius that accepts values from -273.15 upward. Ignore an attempted assignment below absolute zero.   #include <iostream> class Temperature { \/\/ Define the class. }; int main() { Temperature temperature{20.0}; temperature.set_celsius(25.5); temperature.set_celsius(-300.0); std::cout << temperature.get_celsius() << '\\n'; return 0; }      #include <iostream> class Temperature { private: double celsius; public: Temperature(double starting_celsius) : celsius{starting_celsius} { } double get_celsius() const { return celsius; } void set_celsius(double new_celsius) { if (new_celsius >= -273.15) { celsius = new_celsius; } } }; int main() { Temperature temperature{20.0}; temperature.set_celsius(25.5); temperature.set_celsius(-300.0); std::cout << temperature.get_celsius() << '\\n'; return 0; }    "
 },
 {
-  "id": "chapter6_multiple-assignment",
+  "id": "chapter6_what-is-iteration",
   "level": "1",
-  "url": "chapter6_multiple-assignment.html",
+  "url": "chapter6_what-is-iteration.html",
   "type": "Section",
   "number": "6.1",
-  "title": "Multiple assignment",
-  "body": " Multiple assignment  I haven't said much about it, but it is legal in C++ to make more than one assignment to the same variable. The effect of the second assignment is to replace the old value of the variable with a new value.   This active code reassigns fred from 5 to 7 and prints both values out.   #include <iostream> int main() { int fred = 5; std::cout << fred; fred = 7; std::cout << fred; return 0; }    The output of this program is 57 , because the first time we print fred his value is 5, and the second time his value is 7.   This active code reassigns fred from 5 to 7 without printing out the initial value.   #include <iostream> int main() { int fred = 5; fred = 7; std::cout << fred; return 0; }    However, if we do not print fred the first time, the output is only 7 because the value of fred is just 7 when it is printed.  This kind of multiple assignment is the reason I described variables as a container for values. When you assign a value to a variable, you change the contents of the container, as shown in the figure:   Changing a value   An assignment of 'fred = 7' changing the existing value of 'fred'.\"    When there are multiple assignments to a variable, it is especially important to distinguish between an assignment statement and a statement of equality. Because C++ uses the = symbol for assignment, it is tempting to interpret a statement like a = b as a statement of equality. It is not!   An assignment statement uses a single = symbol. For example, x = 3 assigns the value of 3 to the variable x . On the other hand, an equality statement uses two = symbols. For example, x == 3 is a boolean that evaluates to true if x is equal to 3 and evaluates to false otherwise.   First of all, equality is commutative, and assignment is not. For example, in mathematics if then . But in C++ the statement a = 7; is legal, and 7 = a; is not.  Furthermore, in mathematics, a statement of equality is true for all time. If now, then will always equal . In C++, an assignment statement can make two variables equal, but they don't have to stay that way!  int a = 5; int b = a; \/\/ a and b are now equal a = 3; \/\/ a and b are no longer equal  The third line changes the value of a but it does not change the value of b , and so they are no longer equal. In many programming languages an alternate symbol is used for assignment, such as <- or := , in order to avoid confusion.  Although multiple assignment is frequently useful, you should use it with caution. If the values of variables are changing constantly in different parts of the program, it can make the code difficult to read and debug.    Match the expression to the statement that best describes it.   Try again!    4=a  Illegal    a==b  Checking if a is equal to b    a=b  Assigning a to the value of b    a=4  Setting the value of a to 4       What will print?   #include <iostream> int main() { int x = 10; std::cout << x << \"!\"; x = 1; std::cout << x << \"!\"; return 0; }       10!1!   There are no spaces between the numbers.     10 ! 1 !   Remember, in C++ spaces must be printed.     10 ! 10 !   Carefully look at the values being assigned.     1!1!   Carefully look at the values being assigned.       What is the correct output?   #include <iostream> int main() { int x = 0; x = 5; int y = x; y = 5; bool z = x == y; std::cout << z; }       True   Remember that printing a boolean results in either 0 or 1.     False   Remember that printing a boolean results in either 0 or 1.     0   Is x equal to y?     1   x is equal to y, so the output is 1.     "
+  "title": "What Iteration Means",
+  "body": " What Iteration Means  Many everyday activities involve repeating an action. For example, imagine packing groceries into a reusable grocery bag. You place one item into the bag, check whether another item fits safely, and continue while there are still items to pack and another item fits safely.  In this situation, the number of repetitions is not known in advance. The process stops when either no items remain or the next item does not fit safely. This is the kind of repetition commonly expressed with a while statement.   while more_items_to_pack and another_item_fits_safely: place_next_item_in_bag   For a second example, imagine a soap company preparing products for shipment. Each small pack contains 16 soap pieces, and each large shipping box contains 100 small packs. The company repeats one process inside another process:   repeat 100 times: \/\/ packs in one shipping box start a new soap pack repeat 16 times: \/\/ soap pieces in one pack place one soap piece in the pack seal the soap pack place the soap pack in the shipping box seal the shipping box   The number of repetitions is known: 16 soap pieces per pack and 100 packs per shipping box. This is the kind of repetition commonly expressed with for statements. Because one repetition occurs inside another, this is also an example of nested iteration . We will translate this idea into C++ later.  Words in a problem statement can provide useful clues about the kind of repetition that is needed.   Vocabulary that describes repetition    Words or phrases  What they suggest    until or as long as  Continue while a condition is true.    exactly 100 times  Repeat a known number of times.    from 1 through 100  Count through a known range.    for each item  Process every value in a collection.     These words are clues, not automatic rules. Before choosing a loop, ask what action must be repeated and what event should end the repetition. This type of repetition is called iteration .    The statements that are repeated by a loop are called the loop .             Which organization best matches the soap-packing process in this section?      An outer repetition for 100 packs, with an inner repetition for 16 soap pieces in each pack.    The outer task makes the packs for one shipping box, and the inner task fills one pack.      One repetition for 116 soap pieces, with no separate pack operation.    The two quantities describe two different levels of the process.      An outer repetition for 16 shipping boxes, with an inner repetition for 100 soap pieces.    The numbers are assigned to the wrong tasks.      "
 },
 {
-  "id": "chapter6_multiple-assignment-2",
+  "id": "chapter6_what-is-iteration-2",
   "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-2",
+  "url": "chapter6_what-is-iteration.html#chapter6_what-is-iteration-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "I haven't said much about it, but it is legal in C++ to make more than one assignment to the same variable. The effect of the second assignment is to replace the old value of the variable with a new value. "
+  "body": "Many everyday activities involve repeating an action. For example, imagine packing groceries into a reusable grocery bag. You place one item into the bag, check whether another item fits safely, and continue while there are still items to pack and another item fits safely. "
 },
 {
-  "id": "multiple_assignment_AC_1",
+  "id": "chapter6_what-is-iteration-3",
   "level": "2",
-  "url": "chapter6_multiple-assignment.html#multiple_assignment_AC_1",
-  "type": "Listing",
+  "url": "chapter6_what-is-iteration.html#chapter6_what-is-iteration-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In this situation, the number of repetitions is not known in advance. The process stops when either no items remain or the next item does not fit safely. This is the kind of repetition commonly expressed with a while statement. "
+},
+{
+  "id": "chapter6_what-is-iteration-5",
+  "level": "2",
+  "url": "chapter6_what-is-iteration.html#chapter6_what-is-iteration-5",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "For a second example, imagine a soap company preparing products for shipment. Each small pack contains 16 soap pieces, and each large shipping box contains 100 small packs. The company repeats one process inside another process: "
+},
+{
+  "id": "chapter6_what-is-iteration-7",
+  "level": "2",
+  "url": "chapter6_what-is-iteration.html#chapter6_what-is-iteration-7",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The number of repetitions is known: 16 soap pieces per pack and 100 packs per shipping box. This is the kind of repetition commonly expressed with for statements. Because one repetition occurs inside another, this is also an example of nested iteration . We will translate this idea into C++ later. "
+},
+{
+  "id": "chapter6_what-is-iteration-8",
+  "level": "2",
+  "url": "chapter6_what-is-iteration.html#chapter6_what-is-iteration-8",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Words in a problem statement can provide useful clues about the kind of repetition that is needed. "
+},
+{
+  "id": "table_iteration_vocabulary",
+  "level": "2",
+  "url": "chapter6_what-is-iteration.html#table_iteration_vocabulary",
+  "type": "Table",
   "number": "6.1.1",
-  "title": "This active code reassigns <code class=\"code-inline tex2jax_ignore\">fred<\/code> from 5 to 7 and prints both values out.",
-  "body": " This active code reassigns fred from 5 to 7 and prints both values out.   #include <iostream> int main() { int fred = 5; std::cout << fred; fred = 7; std::cout << fred; return 0; }   "
+  "title": "Vocabulary that describes repetition",
+  "body": " Vocabulary that describes repetition    Words or phrases  What they suggest    until or as long as  Continue while a condition is true.    exactly 100 times  Repeat a known number of times.    from 1 through 100  Count through a known range.    for each item  Process every value in a collection.    "
 },
 {
-  "id": "chapter6_multiple-assignment-4",
+  "id": "chapter6_what-is-iteration-10",
   "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-4",
+  "url": "chapter6_what-is-iteration.html#chapter6_what-is-iteration-10",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The output of this program is 57 , because the first time we print fred his value is 5, and the second time his value is 7. "
+  "body": "These words are clues, not automatic rules. Before choosing a loop, ask what action must be repeated and what event should end the repetition. This type of repetition is called iteration . "
 },
 {
-  "id": "multiple_assignment_AC_2",
+  "id": "chapter6_what-iteration_short-answer",
   "level": "2",
-  "url": "chapter6_multiple-assignment.html#multiple_assignment_AC_2",
-  "type": "Listing",
-  "number": "6.1.2",
-  "title": "This active code reassigns <code class=\"code-inline tex2jax_ignore\">fred<\/code> from 5 to 7 without printing out the initial value.",
-  "body": " This active code reassigns fred from 5 to 7 without printing out the initial value.   #include <iostream> int main() { int fred = 5; fred = 7; std::cout << fred; return 0; }   "
-},
-{
-  "id": "chapter6_multiple-assignment-6",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "However, if we do not print fred the first time, the output is only 7 because the value of fred is just 7 when it is printed. "
-},
-{
-  "id": "chapter6_multiple-assignment-7",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This kind of multiple assignment is the reason I described variables as a container for values. When you assign a value to a variable, you change the contents of the container, as shown in the figure: "
-},
-{
-  "id": "chapter6_multiple-assignment-8",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-8",
-  "type": "Figure",
-  "number": "6.1.3",
-  "title": "",
-  "body": " Changing a value   An assignment of 'fred = 7' changing the existing value of 'fred'.\"   "
-},
-{
-  "id": "chapter6_multiple-assignment-9",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "When there are multiple assignments to a variable, it is especially important to distinguish between an assignment statement and a statement of equality. Because C++ uses the = symbol for assignment, it is tempting to interpret a statement like a = b as a statement of equality. It is not! "
-},
-{
-  "id": "chapter6_multiple-assignment-10",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-10",
-  "type": "Warning",
-  "number": "6.1.1",
-  "title": "",
-  "body": " An assignment statement uses a single = symbol. For example, x = 3 assigns the value of 3 to the variable x . On the other hand, an equality statement uses two = symbols. For example, x == 3 is a boolean that evaluates to true if x is equal to 3 and evaluates to false otherwise.  "
-},
-{
-  "id": "chapter6_multiple-assignment-11",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "First of all, equality is commutative, and assignment is not. For example, in mathematics if then . But in C++ the statement a = 7; is legal, and 7 = a; is not. "
-},
-{
-  "id": "chapter6_multiple-assignment-12",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Furthermore, in mathematics, a statement of equality is true for all time. If now, then will always equal . In C++, an assignment statement can make two variables equal, but they don't have to stay that way! "
-},
-{
-  "id": "chapter6_multiple-assignment-14",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The third line changes the value of a but it does not change the value of b , and so they are no longer equal. In many programming languages an alternate symbol is used for assignment, such as <- or := , in order to avoid confusion. "
-},
-{
-  "id": "chapter6_multiple-assignment-15",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#chapter6_multiple-assignment-15",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Although multiple assignment is frequently useful, you should use it with caution. If the values of variables are changing constantly in different parts of the program, it can make the code difficult to read and debug. "
-},
-{
-  "id": "multiple_assignment_1",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#multiple_assignment_1",
+  "url": "chapter6_what-is-iteration.html#chapter6_what-iteration_short-answer",
   "type": "Checkpoint",
   "number": "6.1.1",
   "title": "",
-  "body": "  Match the expression to the statement that best describes it.   Try again!    4=a  Illegal    a==b  Checking if a is equal to b    a=b  Assigning a to the value of b    a=4  Setting the value of a to 4    "
+  "body": "  The statements that are repeated by a loop are called the loop .          "
 },
 {
-  "id": "multiple_assignment_2",
+  "id": "chapter6_what-iteration_organization",
   "level": "2",
-  "url": "chapter6_multiple-assignment.html#multiple_assignment_2",
+  "url": "chapter6_what-is-iteration.html#chapter6_what-iteration_organization",
   "type": "Checkpoint",
   "number": "6.1.2",
   "title": "",
-  "body": "  What will print?   #include <iostream> int main() { int x = 10; std::cout << x << \"!\"; x = 1; std::cout << x << \"!\"; return 0; }       10!1!   There are no spaces between the numbers.     10 ! 1 !   Remember, in C++ spaces must be printed.     10 ! 10 !   Carefully look at the values being assigned.     1!1!   Carefully look at the values being assigned.    "
+  "body": "  Which organization best matches the soap-packing process in this section?      An outer repetition for 100 packs, with an inner repetition for 16 soap pieces in each pack.    The outer task makes the packs for one shipping box, and the inner task fills one pack.      One repetition for 116 soap pieces, with no separate pack operation.    The two quantities describe two different levels of the process.      An outer repetition for 16 shipping boxes, with an inner repetition for 100 soap pieces.    The numbers are assigned to the wrong tasks.     "
 },
 {
-  "id": "multiple_assignment_3",
-  "level": "2",
-  "url": "chapter6_multiple-assignment.html#multiple_assignment_3",
-  "type": "Checkpoint",
-  "number": "6.1.3",
-  "title": "",
-  "body": "  What is the correct output?   #include <iostream> int main() { int x = 0; x = 5; int y = x; y = 5; bool z = x == y; std::cout << z; }       True   Remember that printing a boolean results in either 0 or 1.     False   Remember that printing a boolean results in either 0 or 1.     0   Is x equal to y?     1   x is equal to y, so the output is 1.    "
-},
-{
-  "id": "chapter6_iteration",
+  "id": "chapter6_while-statement",
   "level": "1",
-  "url": "chapter6_iteration.html",
+  "url": "chapter6_while-statement.html",
   "type": "Section",
   "number": "6.2",
-  "title": "Iteration",
-  "body": " Iteration  One of the things computers are often used for is the automation of repetitive tasks. Repeating identical or similar tasks without making errors is something that computers do well and people do poorly.  We have seen programs that use recursion to perform repetition, such as nLines and countdown . This type of repetition is called iteration , and C++ provides several language features that make it easier to write iterative programs.  The two features we are going to look at are the while statement and the for statement.  "
+  "title": "The <code class=\"code-inline tex2jax_ignore\">while<\/code> and <code class=\"code-inline tex2jax_ignore\">do-while<\/code> Statements",
+  "body": " The while and do-while Statements  A while statement repeats its body as long as its condition is true . The condition is checked before each pass through the body.  The general syntax is:   while (condition) { statements_to_repeat; }   Replace condition with a Boolean expression and place the statements to repeat inside the braces.   #include <iostream> int main() { int count = 5; while (count > 0) { std::cout << count << '\\n'; --count; } std::cout << \"Done\\n\"; return 0; }   You can read the loop in English as: while count is greater than zero, display the count and then reduce it by one. The variable that controls the condition must change so that the loop can eventually stop.    Evaluate the condition.    If the condition is false, leave the loop.    If the condition is true, execute the body and check again.    If the condition is false before the first check, the body does not run at all. If the condition never becomes false, the program has an infinite loop .   Check that every terminating while loop changes something related to its condition. A counter that never changes can cause an infinite loop.    The do-while Statement  A do-while statement also repeats a body while a condition is true. Its difference is the order of execution: the body runs first, and the condition is checked afterward.  The general syntax is:   do { statements_to_repeat; } while (condition);   Notice the semicolon after the closing parenthesis. The body of a do-while statement always executes at least once, even when the condition is initially false.   #include <iostream> int main() { int count = 0; while (count > 0) { std::cout << \"while body\\n\"; } do { std::cout << \"do-while body\\n\"; } while (count > 0); return 0; }    do-while body   The while body does not run because its condition is false before the first test. The do-while body runs once before its condition is tested.   Comparing while and do-while    Feature  while  do-while    When is the condition checked?  Before the body  After the body    Minimum body executions  Zero  One    Typical use  Repeat only when the condition is initially true  Perform an action once, then decide whether to repeat     A do-while statement is useful whenever an action must happen at least once before the program decides whether to repeat it. Menu systems and input validation are common examples; we will revisit those applications after learning how to read input. For now, we can demonstrate the same idea with a function parameter.   #include <iostream> void print_countdown(int starting_count) { int count = starting_count; do { std::cout << count << '\\n'; --count; } while (count > 0); } int main() { print_countdown(3); return 0; }   The function receives its starting value through a parameter. Even if print_countdown(0) were called, the function would print 0 once before the condition stopped the loop.     In the syntax shown above, the Boolean expression that is tested before each iteration is the loop .             Which organization makes this countdown loop terminate?   int count = 3; while (count > 0) { std::cout << count << '\\n'; \/\/ missing statement }      --count; inside the loop body   The update makes count smaller until the condition becomes false.     int count = 0; inside the loop body   Declaring another variable does not update the controlling variable in the loop condition.     std::cout << count; again inside the loop body   Output does not change the value used by the condition.        The loop statement whose body executes before its condition is checked is the statement.             Which loop is usually the better choice for a menu that must be displayed at least once and then repeated until the user enters a valid choice?     do-while  The menu body must execute before the first condition check.    while  A while loop may be appropriate in other situations, but it can skip the body when its initial condition is false.    Neither loop can validate input.  Both loops can validate input; the required first display makes do-while especially suitable here.       How many times does the following body execute?   int count = 0; do { ++count; } while (count < 0);      Once  The do-while body executes before the false condition is checked.    Zero times  That would describe a while loop whose initial condition is false.    Forever  After one execution, count is 1 and the condition is false.     "
 },
 {
-  "id": "chapter6_iteration-2",
+  "id": "chapter6_while-statement-2",
   "level": "2",
-  "url": "chapter6_iteration.html#chapter6_iteration-2",
+  "url": "chapter6_while-statement.html#chapter6_while-statement-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "One of the things computers are often used for is the automation of repetitive tasks. Repeating identical or similar tasks without making errors is something that computers do well and people do poorly. "
+  "body": "A while statement repeats its body as long as its condition is true . The condition is checked before each pass through the body. "
 },
 {
-  "id": "chapter6_iteration-3",
+  "id": "chapter6_while-statement-3",
   "level": "2",
-  "url": "chapter6_iteration.html#chapter6_iteration-3",
+  "url": "chapter6_while-statement.html#chapter6_while-statement-3",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "We have seen programs that use recursion to perform repetition, such as nLines and countdown . This type of repetition is called iteration , and C++ provides several language features that make it easier to write iterative programs. "
+  "body": "The general syntax is: "
 },
 {
-  "id": "chapter6_iteration-4",
+  "id": "chapter6_while-statement-5",
   "level": "2",
-  "url": "chapter6_iteration.html#chapter6_iteration-4",
+  "url": "chapter6_while-statement.html#chapter6_while-statement-5",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The two features we are going to look at are the while statement and the for statement. "
+  "body": "Replace condition with a Boolean expression and place the statements to repeat inside the braces. "
 },
 {
-  "id": "chapter6_the-while-statement",
+  "id": "chapter6_while-statement-7",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_while-statement-7",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "You can read the loop in English as: while count is greater than zero, display the count and then reduce it by one. The variable that controls the condition must change so that the loop can eventually stop. "
+},
+{
+  "id": "chapter6_while-statement-8-1-1",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_while-statement-8-1-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Evaluate the condition. "
+},
+{
+  "id": "chapter6_while-statement-8-2-1",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_while-statement-8-2-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "If the condition is false, leave the loop. "
+},
+{
+  "id": "chapter6_while-statement-8-3-1",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_while-statement-8-3-1",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "If the condition is true, execute the body and check again. "
+},
+{
+  "id": "chapter6_while-statement-9",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_while-statement-9",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "If the condition is false before the first check, the body does not run at all. If the condition never becomes false, the program has an infinite loop . "
+},
+{
+  "id": "chapter6_while-statement-10",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_while-statement-10",
+  "type": "Warning",
+  "number": "6.2.1",
+  "title": "",
+  "body": " Check that every terminating while loop changes something related to its condition. A counter that never changes can cause an infinite loop.  "
+},
+{
+  "id": "chapter6_while-statement_do-while",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_while-statement_do-while",
+  "type": "Subsection",
+  "number": "6.2.1",
+  "title": "The <code class=\"code-inline tex2jax_ignore\">do-while<\/code> Statement",
+  "body": " The do-while Statement  A do-while statement also repeats a body while a condition is true. Its difference is the order of execution: the body runs first, and the condition is checked afterward.  The general syntax is:   do { statements_to_repeat; } while (condition);   Notice the semicolon after the closing parenthesis. The body of a do-while statement always executes at least once, even when the condition is initially false.   #include <iostream> int main() { int count = 0; while (count > 0) { std::cout << \"while body\\n\"; } do { std::cout << \"do-while body\\n\"; } while (count > 0); return 0; }    do-while body   The while body does not run because its condition is false before the first test. The do-while body runs once before its condition is tested.   Comparing while and do-while    Feature  while  do-while    When is the condition checked?  Before the body  After the body    Minimum body executions  Zero  One    Typical use  Repeat only when the condition is initially true  Perform an action once, then decide whether to repeat     A do-while statement is useful whenever an action must happen at least once before the program decides whether to repeat it. Menu systems and input validation are common examples; we will revisit those applications after learning how to read input. For now, we can demonstrate the same idea with a function parameter.   #include <iostream> void print_countdown(int starting_count) { int count = starting_count; do { std::cout << count << '\\n'; --count; } while (count > 0); } int main() { print_countdown(3); return 0; }   The function receives its starting value through a parameter. Even if print_countdown(0) were called, the function would print 0 once before the condition stopped the loop.  "
+},
+{
+  "id": "chapter6_while_short-answer",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_while_short-answer",
+  "type": "Checkpoint",
+  "number": "6.2.1",
+  "title": "",
+  "body": "  In the syntax shown above, the Boolean expression that is tested before each iteration is the loop .          "
+},
+{
+  "id": "chapter6_while_organization",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_while_organization",
+  "type": "Checkpoint",
+  "number": "6.2.2",
+  "title": "",
+  "body": "  Which organization makes this countdown loop terminate?   int count = 3; while (count > 0) { std::cout << count << '\\n'; \/\/ missing statement }      --count; inside the loop body   The update makes count smaller until the condition becomes false.     int count = 0; inside the loop body   Declaring another variable does not update the controlling variable in the loop condition.     std::cout << count; again inside the loop body   Output does not change the value used by the condition.     "
+},
+{
+  "id": "chapter6_do-while_short-answer",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_do-while_short-answer",
+  "type": "Checkpoint",
+  "number": "6.2.3",
+  "title": "",
+  "body": "  The loop statement whose body executes before its condition is checked is the statement.          "
+},
+{
+  "id": "chapter6_do-while_usage",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_do-while_usage",
+  "type": "Checkpoint",
+  "number": "6.2.4",
+  "title": "",
+  "body": "  Which loop is usually the better choice for a menu that must be displayed at least once and then repeated until the user enters a valid choice?     do-while  The menu body must execute before the first condition check.    while  A while loop may be appropriate in other situations, but it can skip the body when its initial condition is false.    Neither loop can validate input.  Both loops can validate input; the required first display makes do-while especially suitable here.    "
+},
+{
+  "id": "chapter6_do-while_execution",
+  "level": "2",
+  "url": "chapter6_while-statement.html#chapter6_do-while_execution",
+  "type": "Checkpoint",
+  "number": "6.2.5",
+  "title": "",
+  "body": "  How many times does the following body execute?   int count = 0; do { ++count; } while (count < 0);      Once  The do-while body executes before the false condition is checked.    Zero times  That would describe a while loop whose initial condition is false.    Forever  After one execution, count is 1 and the condition is false.    "
+},
+{
+  "id": "chapter6_for-statement",
   "level": "1",
-  "url": "chapter6_the-while-statement.html",
+  "url": "chapter6_for-statement.html",
   "type": "Section",
   "number": "6.3",
-  "title": "The while statement",
-  "body": " The while statement  Using a while statement, we can rewrite countdown :   Try running this active code! Afterwards, try changing 9 to a different integer to see how the function works!   #include <iostream> void countdown(int n) { while (n > 0) { std::cout << n << std::endl; n = n - 1; } std::cout << \"Blastoff!\" << std::endl; } int main() { countdown (9); }    You can almost read a while statement as if it were English. What this means is, While n is greater than zero, continue displaying the value of n and then reducing the value of n by 1. When you get to zero, output the word ‘Blastoff!'  More formally, the flow of execution for a while statement is as follows:     Evaluate the condition in parentheses, yielding true or false .    If the condition is false, exit the while statement and continue execution at the next statement.    If the condition is true, execute each of the statements between the squiggly-braces, and then go back to step 1.     This type of flow is called a loop because the third step loops back around to the top. Notice that if the condition is false the first time through the loop, the statements inside the loop are never executed. The statements inside the loop are called the body of the loop.  The body of the loop should change the value of one or more variables so that, eventually, the condition becomes false and the loop terminates. Otherwise the loop will repeat forever, which is called an infinite loop . An std::endl ess source of amusement for computer scientists is the observation that the directions on shampoo, Lather, rinse, repeat, are an infinite loop.   Make sure your while loops don't loop forever! If they are meant to terminate, make sure to change the value of a variable, like incrementing or decrementing a counter.   In the case of countdown , we can prove that the loop will terminate because we know that the value of n is finite, and we can see that the value of n gets smaller each time through the loop (each iteration ), so eventually we have to get to zero. In other cases it is not so easy to tell:  void sequence(int n) { while (n != 1) { std::cout << n << std::endl ; if (n % 2 == 0) { \/\/ n is even n = n \/ 2; } else { \/\/ n is odd n = n * 3 + 1; } } }  The condition for this loop is n != 1 , so the loop will continue until n is 1, which will make the condition false.  At each iteration, the program outputs the value of n and then checks whether it is even or odd. If it is even, the value of n is divided by two. If it is odd, the value is replaced by . For example, if the starting value (the argument passed to sequence ) is 3, the resulting sequence is 3, 10, 5, 16, 8, 4, 2, 1.  Since n sometimes increases and sometimes decreases, there is no obvious proof that n will ever reach 1, or that the program will terminate. For some particular values of n , we can prove termination. For example, if the starting value is a power of two, then the value of n will be even every time through the loop, until we get to 1. The previous example ends with such a sequence, starting with 16.  Particular values aside, the interesting question is whether we can prove that this program terminates for all values of n. So far, no one has been able to prove it or disprove it!    Which of the following is NOT a valid condition for a while statement?      n = 2   A single equal sign is the assignment operator, not comparison.     n != 0   This would be valid because it means the loop would run while n is not equal to 0.     n % 2 == 1   This would be valid because it mean the loop would run until n was an even number.       The following code contains an infinite loop. Which is the best explanation for why the loop does not terminate?   int n = 10; int answer = 1; while (n > 0) { answer = answer + n; n = n + 1; } cout << answer;       n starts at 10 and is incremented by 1 each time through the loop, so it will always be positive.   The loop will run as long as n is positive. In this case, we can see that n will never become non-positive as the while statement condition will never be met.     The answer starts at 1 and is incremented by n each time, so it will always be positive.   While it is true that answer will always be positive, answer is not considered in the loop condition.     You cannot compare n to 0 in while loop. You must compare it to another variable.   It is perfectly valid to compare n to 0. Though indirectly, this is what causes the infinite loop.     In the while loop body, we must set n to False, and this code does not do that.   The loop condition must become False for the loop to terminate, but n by itself is not the condition in this case.       The following code is a program to print the even numbers from 0 to 20 . The code contains blanks. What is the correct while statement condition and iteration needed in order for the code to run successfully.  int n = 0; while (_____) { \/\/ while statement condition std::cout << n << std::endl ; _______; \/\/ iteration of the variable }      n % 2 = 0 && n <= 20 and n = n + 1   A single equal sign is the assignment operator, not comparison.     n % 2 != 0 && n <= 20 and n = n + 1   The code is meant to print the even numbers from 0-20     n % 2 == 0 && n <= 20 and n = n + 1   The condition checks whether a number is even and increments the variable n      n == \"even\" && n <= 20 and n = n + 2    n is an int and here you are comparing it to a string .       What is printed by this code?   int n = 1; int x = 2; while (n < 5) { n = n + 1; x = x + 1; n = n + 2; x = x + n; } cout << n; cout << x;       4 7   Setting a variable so the loop condition would be false in the middle of the loop body does not keep the variable from actually being set.     5 7   Setting a variable so the loop condition would be false in the middle of the loop body does not stop execution of statements in the rest of the loop body.     7 15   After n becomes 5 and the test would be False, but the test does not actually come until after the end of the loop - only then stopping execution of the repetition of the loop.     "
+  "title": "The <code class=\"code-inline tex2jax_ignore\">for<\/code> Statement",
+  "body": " The for Statement  A for statement is useful when a loop has a clear starting value, continuation condition, and update step. Its general syntax is:   for (initialization; condition; update) { statements_to_repeat; }   The initialization runs once at the beginning. The condition is checked before each iteration, and the update runs after each iteration.   #include <iostream> int main() { for (int count = 1; count <= 100; ++count) { std::cout << count << '\\n'; } return 0; }    The parts of a for statement    Part  Purpose    int count = 1  Initialize the loop variable.    count <= 100  Continue while the condition is true.    ++count  Update the loop variable after each iteration.     The loop above prints the numbers from 1 through 100. The phrase from 1 through 100 is a useful clue that a counted loop is needed.  The update can move in different directions. For example, this loop counts down from 5 to 1:   for (int count = 5; count >= 1; --count) { std::cout << count << '\\n'; }   A for loop can be rewritten as a while loop. The compact form is especially helpful when the initialization, condition, and update belong together.    In a for statement, the part that runs once before the first iteration is the .             Which for statement correctly prints the integers from 1 through 5?     for (int count = 1; count <= 5; ++count)  The initialization, condition, and update match the requested range.    for (int count = 0; count <= 5; ++count)  This includes 0, which is outside the requested range.    for (int count = 1; count < 5; ++count)  The condition stops the loop before it prints 5.    for (int count = 5; count >= 1; ++count)  The update moves upward while the condition expects a downward count.     "
 },
 {
-  "id": "chapter6_the-while-statement-2",
+  "id": "chapter6_for-statement-2",
   "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-2",
+  "url": "chapter6_for-statement.html#chapter6_for-statement-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Using a while statement, we can rewrite countdown : "
+  "body": "A for statement is useful when a loop has a clear starting value, continuation condition, and update step. Its general syntax is: "
 },
 {
-  "id": "the_while_statement_AC_1",
+  "id": "chapter6_for-statement-4",
   "level": "2",
-  "url": "chapter6_the-while-statement.html#the_while_statement_AC_1",
-  "type": "Listing",
+  "url": "chapter6_for-statement.html#chapter6_for-statement-4",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The initialization runs once at the beginning. The condition is checked before each iteration, and the update runs after each iteration. "
+},
+{
+  "id": "table_for_statement_parts",
+  "level": "2",
+  "url": "chapter6_for-statement.html#table_for_statement_parts",
+  "type": "Table",
   "number": "6.3.1",
-  "title": "Try running this active code! Afterwards, try changing 9 to a different integer to see how the function works!",
-  "body": " Try running this active code! Afterwards, try changing 9 to a different integer to see how the function works!   #include <iostream> void countdown(int n) { while (n > 0) { std::cout << n << std::endl; n = n - 1; } std::cout << \"Blastoff!\" << std::endl; } int main() { countdown (9); }   "
+  "title": "The parts of a <code class=\"code-inline tex2jax_ignore\">for<\/code> statement",
+  "body": " The parts of a for statement    Part  Purpose    int count = 1  Initialize the loop variable.    count <= 100  Continue while the condition is true.    ++count  Update the loop variable after each iteration.    "
 },
 {
-  "id": "chapter6_the-while-statement-4",
+  "id": "chapter6_for-statement-7",
   "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-4",
+  "url": "chapter6_for-statement.html#chapter6_for-statement-7",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "You can almost read a while statement as if it were English. What this means is, While n is greater than zero, continue displaying the value of n and then reducing the value of n by 1. When you get to zero, output the word ‘Blastoff!' "
+  "body": "The loop above prints the numbers from 1 through 100. The phrase from 1 through 100 is a useful clue that a counted loop is needed. "
 },
 {
-  "id": "chapter6_the-while-statement-5",
+  "id": "chapter6_for-statement-8",
   "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-5",
+  "url": "chapter6_for-statement.html#chapter6_for-statement-8",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "More formally, the flow of execution for a while statement is as follows: "
+  "body": "The update can move in different directions. For example, this loop counts down from 5 to 1: "
 },
 {
-  "id": "chapter6_the-while-statement-6",
+  "id": "chapter6_for-statement-10",
   "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-6",
+  "url": "chapter6_for-statement.html#chapter6_for-statement-10",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "   Evaluate the condition in parentheses, yielding true or false .    If the condition is false, exit the while statement and continue execution at the next statement.    If the condition is true, execute each of the statements between the squiggly-braces, and then go back to step 1.    "
+  "body": "A for loop can be rewritten as a while loop. The compact form is especially helpful when the initialization, condition, and update belong together. "
 },
 {
-  "id": "chapter6_the-while-statement-7",
+  "id": "chapter6_for_short-answer",
   "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This type of flow is called a loop because the third step loops back around to the top. Notice that if the condition is false the first time through the loop, the statements inside the loop are never executed. The statements inside the loop are called the body of the loop. "
-},
-{
-  "id": "chapter6_the-while-statement-8",
-  "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The body of the loop should change the value of one or more variables so that, eventually, the condition becomes false and the loop terminates. Otherwise the loop will repeat forever, which is called an infinite loop . An std::endl ess source of amusement for computer scientists is the observation that the directions on shampoo, Lather, rinse, repeat, are an infinite loop. "
-},
-{
-  "id": "chapter6_the-while-statement-9",
-  "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-9",
-  "type": "Warning",
-  "number": "6.3.1",
-  "title": "",
-  "body": " Make sure your while loops don't loop forever! If they are meant to terminate, make sure to change the value of a variable, like incrementing or decrementing a counter.  "
-},
-{
-  "id": "chapter6_the-while-statement-10",
-  "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In the case of countdown , we can prove that the loop will terminate because we know that the value of n is finite, and we can see that the value of n gets smaller each time through the loop (each iteration ), so eventually we have to get to zero. In other cases it is not so easy to tell: "
-},
-{
-  "id": "chapter6_the-while-statement-12",
-  "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The condition for this loop is n != 1 , so the loop will continue until n is 1, which will make the condition false. "
-},
-{
-  "id": "chapter6_the-while-statement-13",
-  "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "At each iteration, the program outputs the value of n and then checks whether it is even or odd. If it is even, the value of n is divided by two. If it is odd, the value is replaced by . For example, if the starting value (the argument passed to sequence ) is 3, the resulting sequence is 3, 10, 5, 16, 8, 4, 2, 1. "
-},
-{
-  "id": "chapter6_the-while-statement-14",
-  "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Since n sometimes increases and sometimes decreases, there is no obvious proof that n will ever reach 1, or that the program will terminate. For some particular values of n , we can prove termination. For example, if the starting value is a power of two, then the value of n will be even every time through the loop, until we get to 1. The previous example ends with such a sequence, starting with 16. "
-},
-{
-  "id": "chapter6_the-while-statement-15",
-  "level": "2",
-  "url": "chapter6_the-while-statement.html#chapter6_the-while-statement-15",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Particular values aside, the interesting question is whether we can prove that this program terminates for all values of n. So far, no one has been able to prove it or disprove it! "
-},
-{
-  "id": "while_statement_1",
-  "level": "2",
-  "url": "chapter6_the-while-statement.html#while_statement_1",
+  "url": "chapter6_for-statement.html#chapter6_for_short-answer",
   "type": "Checkpoint",
   "number": "6.3.1",
   "title": "",
-  "body": "  Which of the following is NOT a valid condition for a while statement?      n = 2   A single equal sign is the assignment operator, not comparison.     n != 0   This would be valid because it means the loop would run while n is not equal to 0.     n % 2 == 1   This would be valid because it mean the loop would run until n was an even number.    "
+  "body": "  In a for statement, the part that runs once before the first iteration is the .          "
 },
 {
-  "id": "while_statement_2",
+  "id": "chapter6_for_organization",
   "level": "2",
-  "url": "chapter6_the-while-statement.html#while_statement_2",
+  "url": "chapter6_for-statement.html#chapter6_for_organization",
   "type": "Checkpoint",
   "number": "6.3.2",
   "title": "",
-  "body": "  The following code contains an infinite loop. Which is the best explanation for why the loop does not terminate?   int n = 10; int answer = 1; while (n > 0) { answer = answer + n; n = n + 1; } cout << answer;       n starts at 10 and is incremented by 1 each time through the loop, so it will always be positive.   The loop will run as long as n is positive. In this case, we can see that n will never become non-positive as the while statement condition will never be met.     The answer starts at 1 and is incremented by n each time, so it will always be positive.   While it is true that answer will always be positive, answer is not considered in the loop condition.     You cannot compare n to 0 in while loop. You must compare it to another variable.   It is perfectly valid to compare n to 0. Though indirectly, this is what causes the infinite loop.     In the while loop body, we must set n to False, and this code does not do that.   The loop condition must become False for the loop to terminate, but n by itself is not the condition in this case.    "
+  "body": "  Which for statement correctly prints the integers from 1 through 5?     for (int count = 1; count <= 5; ++count)  The initialization, condition, and update match the requested range.    for (int count = 0; count <= 5; ++count)  This includes 0, which is outside the requested range.    for (int count = 1; count < 5; ++count)  The condition stops the loop before it prints 5.    for (int count = 5; count >= 1; ++count)  The update moves upward while the condition expects a downward count.    "
 },
 {
-  "id": "while_statement_3",
-  "level": "2",
-  "url": "chapter6_the-while-statement.html#while_statement_3",
-  "type": "Checkpoint",
-  "number": "6.3.3",
-  "title": "",
-  "body": "  The following code is a program to print the even numbers from 0 to 20 . The code contains blanks. What is the correct while statement condition and iteration needed in order for the code to run successfully.  int n = 0; while (_____) { \/\/ while statement condition std::cout << n << std::endl ; _______; \/\/ iteration of the variable }      n % 2 = 0 && n <= 20 and n = n + 1   A single equal sign is the assignment operator, not comparison.     n % 2 != 0 && n <= 20 and n = n + 1   The code is meant to print the even numbers from 0-20     n % 2 == 0 && n <= 20 and n = n + 1   The condition checks whether a number is even and increments the variable n      n == \"even\" && n <= 20 and n = n + 2    n is an int and here you are comparing it to a string .    "
-},
-{
-  "id": "while_statement_4",
-  "level": "2",
-  "url": "chapter6_the-while-statement.html#while_statement_4",
-  "type": "Checkpoint",
-  "number": "6.3.4",
-  "title": "",
-  "body": "  What is printed by this code?   int n = 1; int x = 2; while (n < 5) { n = n + 1; x = x + 1; n = n + 2; x = x + n; } cout << n; cout << x;       4 7   Setting a variable so the loop condition would be false in the middle of the loop body does not keep the variable from actually being set.     5 7   Setting a variable so the loop condition would be false in the middle of the loop body does not stop execution of statements in the rest of the loop body.     7 15   After n becomes 5 and the test would be False, but the test does not actually come until after the end of the loop - only then stopping execution of the repetition of the loop.    "
-},
-{
-  "id": "chapter6_tables",
+  "id": "chapter6_scope-revisited",
   "level": "1",
-  "url": "chapter6_tables.html",
+  "url": "chapter6_scope-revisited.html",
   "type": "Section",
   "number": "6.4",
-  "title": "Tables",
-  "body": " Tables  One of the things loops are good for is generating tabular data. For example, before computers were readily available, people had to calculate logarithms, sines and cosines, and other common mathematical functions by hand. To make that easier, there were books containing long tables where you could find the values of various functions. Creating these tables was slow and boring, and the result tended to be full of errors.  When computers appeared on the scene, one of the initial reactions was, This is great! We can use the computers to generate the tables, so there will be no errors. That turned out to be true (mostly), but shortsighted. Soon thereafter computers and calculators were so pervasive that the tables became obsolete.  Well, almost. It turns out that for some operations, computers use tables of values to get an approximate answer, and then perform computations to improve the approximation. In some cases, there have been errors in the underlying tables, most famously in the table the original Intel Pentium used to perform floating-point division.  Although a log table is not as useful as it once was, it still makes a good example of iteration.   This active code outputs a sequence of values in the left column and their logarithms in the right column.   #include <iostream> #include <cmath> int main() { double x = 1.0; while (x < 10.0) { std::cout << x << \"\\t\" << log(x) << \"\\n\"; x = x + 1.0; } return 0; }    The sequence \\t represents a tab character. The sequence \\n represents a newline character. These sequences can be included anywhere in a string, although in these examples the sequence is the whole string.  A tab character causes the cursor to shift to the right until it reaches one of the tab stops , which are normally every eight characters. As we will see in a minute, tabs are useful for making columns of text line up.  A newline character has exactly the same effect as endl ; it causes the cursor to move on to the next line. Usually if a newline character appears by itself, I use endl , but if it appears as part of a string, I use \\n .  The output of this program is   1 0 2 0.693147 3 1.09861 4 1.38629 5 1.60944 6 1.79176 7 1.94591 8 2.07944 9 2.19722   If these values seem odd, remember that the log function uses base . Since powers of two are so important in computer science, we often want to find logarithms with respect to base 2. To do that, we can use the following formula:  Changing the output statement to  cout << x << \"\\t\" << log(x) \/ log(2.0) << std::endl ;  yields   1 0 2 1 3 1.58496 4 2 5 2.32193 6 2.58496 7 2.80735 8 3 9 3.16993   We can see that 1, 2, 4 and 8 are powers of two, because their logarithms base 2 are round numbers. If we wanted to find the logarithms of other powers of two, we could modify the program like this:   If we wanted to find the logarithms of other powers of two, we could modify the program like this. Run this active code.   #include <iostream> #include <cmath> int main() { double x = 1.0; while (x < 100.0) { std::cout << x << \"\\t\" << log(x) \/ log(2.0) << std::endl; x = x * 2.0; } }    Now instead of adding something to x each time through the loop, which yields an arithmetic sequence, we multiply x by something, yielding a geometric sequence. The result is:   1 0 2 1 4 2 8 3 16 4 32 5 64 6   Because we are using tab characters between the columns, the position of the second column does not depend on the number of digits in the first column.  Log tables may not be useful any more, but for computer scientists, knowing the powers of two is! As an exercise, modify this program so that it outputs the powers of two up to 65536 (that's ). Print it out and memorize it.    Modify this active code so that it outputs the power of two up to 65536, which is . If you get stuck, you can reveal the hint below the problem for help.   #include <iostream> #include <cmath> int main() { double x = 1.0; while (x < 100.0) { std::cout << x << \"\\t\" << log(x) \/ log(2.0) << std::endl; x = x * 2.0; } }      Let's write the code that prints out the powers of two.     int main() {    int x = 1;     while (x < 17) {    while (x < 16) {      std::cout << x << \"\\t\" << pow(2, x) << std::endl ;    std::cout << x << \"\\t\" << pow(x, 2) << std::endl ;     x++;  }  }         What is the equivalent of std::endl , and typically used at the end of a string?              How would you write a tab character?              How can we modify the code below to print out a table of the first five odd numbers and their perfect cubes?   int main() { int x = 1; while (x < 11) { std::cout << x << \"\\t\" << pow(x, 2) << std::endl ; x = x + 1; } }       Change pow(x,2) to pow(3,x) and change x = x + 1 to x = x + 2 .   Check the order of the pow function!     Change pow(x,2) to pow(x,3) .   This will print out the first ten perfect cubes.     Change pow(x,2) to pow(x,3) and change x = x + 1 to x = x + 2 .   Changing both the pow function and the increment in this way gives us the right answer.     Change x < 11 to x < 6 and change pow(x,2) to pow(x,3) .   This will print out the first five perfect cubes, but not the first five odd perfect cubes.     "
+  "title": "Scope Revisited",
+  "body": " Scope Revisited  In earlier chapters, we used names for variables, functions, structures, classes, and objects. A name is not automatically available everywhere in a program. Its scope is the part of the program where that name can be used.  C++ programs commonly use four kinds of scope that we have already encountered: block scope, Type Scope (Scoped Enums, Classes, and Structs), namespace scope and Global Scope (File Scope).   Three kinds of scope    Scope  Created by  Examples    Block scope  Braces belonging to a statement or standalone block  if , switch , while , for , and standalone braces    Scoped enums, class and struct scope  Braces belonging to a Scoped enum(an enum class or an enum struct), a class or structure definition  Data members and member functions    Namespace scope  Braces belonging to a namespace definition.  Functions, types, and variables in a namespace    Global Scope (File Scope)  Entire source file (or translation unit) outside of any braces  Any entity outside of all the rest of the scopes      Block Scope  A pair of braces creates a block. A name declared inside that block can be used from its declaration to the closing brace, but not outside the block.   #include <iostream> int main() { int outside_value = 10; { int inside_value = 20; std::cout << outside_value << '\\n'; std::cout << inside_value << '\\n'; } \/\/ inside_value is not accessible here. std::cout << outside_value << '\\n'; return 0; }   The body of an if , while , or for statement is also a block. This is why a variable declared inside a loop body is not available after the loop.   #include <iostream> int main() { for (int count = 1; count <= 3; ++count) { int square = count * count; std::cout << square << '\\n'; } \/\/ count and square are not accessible here. return 0; }   The variable count is declared in the for statement, so its scope covers that entire for statement. The variable square is declared inside the loop body, so its scope ends at the closing brace of the body.    Scoped enums, class and struct scope  The braces in a class or structure definition or enum class or enum struct create a different kind of scope. Names declared there belong to the type. They are not temporary variables belonging to one execution of an if or loop block.   Unscoped Enums (Traditional enums) do not have their own isolated scope. Their members leak directly into the surrounding enclosing scope. We will cover enums (enumerated types) in an upcoming section.    #include <iostream> struct Point { double x; double y; void print_point() const { std::cout << '(' << x << \", \" << y << \")\\n\"; } }; int main() { Point point{3.0, 4.0}; std::cout << point.x << '\\n'; point.print_point(); return 0; }   Outside the structure, public members are accessed through an object, such as point.x . Inside a member function, the members of the current object can be referred to directly, such as x and y .  A class also has class scope. The difference between a class and a struct is not the existence of scope; both have it. Their default member access is different: struct members are public by default, while class members are private by default.    Namespace Scope  In C++, namespaces act as virtual containers or \"folders\" for your identifiers (classes, structs, functions, variables, and enums). A namespace groups related names and helps prevent naming conflicts between different parts of a program. The primary benefit of writing your own namespaces is avoiding name collisions and organizing large codebases into distinct, logical modules for better organization.   #include <iostream> namespace measurement { double convert_meters_to_centimeters(double meters) { return meters * 100.0; } } int main() { double centimeters = measurement::convert_meters_to_centimeters(2.5); std::cout << centimeters << '\\n'; return 0; }   The function belongs to the measurement namespace. The scope-resolution operator :: tells C++ to look for the function in that namespace.  The standard library uses the namespace named std . This is why we write names such as std::cout , std::array , and std::string .    Global Scope (File Scope)  Global scope is spanned by the entire source file (or translation unit) outside of any braces. Unlike the other three scopes, global scope does not have starting or ending curly braces { }. It is the default \"catch-all\" area of your code. Any variable, function, class, or struct declared at the topmost level of your file—completely outside of any functions, namespaces, or classes—is automatically in the global scope. Items in the global scope can be accessed from anywhere in that file without any prefix or special operator.   #include <iostream> constexpr int days_per_week = 7; int main() { std::cout << days_per_week << '\\n'; return 0; }   The constant days_per_week belongs to the global namespace. All other inner scopes can see and access days_per_week .    Choosing the Right Scope  Any inner scope in C++ can hide (or \"shadow\") an outer scope variable if they share the exact same name. This rule applies globally across all blocks, namespaces, and classes.  When deciding where to declare a name, keep its scope as small as practical. A temporary calculation usually belongs in a block. Data and operations that describe an object belong in a class or struct. A function or type that is shared by several parts of a program can belong to a namespace.  Remember that scope describes where a name can be used. It is related to, but not identical to, an object's lifetime, which describes how long the object exists while the program runs.   "
 },
 {
-  "id": "chapter6_tables-2",
+  "id": "chapter6_scope-revisited-2",
   "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-2",
+  "url": "chapter6_scope-revisited.html#chapter6_scope-revisited-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "One of the things loops are good for is generating tabular data. For example, before computers were readily available, people had to calculate logarithms, sines and cosines, and other common mathematical functions by hand. To make that easier, there were books containing long tables where you could find the values of various functions. Creating these tables was slow and boring, and the result tended to be full of errors. "
+  "body": "In earlier chapters, we used names for variables, functions, structures, classes, and objects. A name is not automatically available everywhere in a program. Its scope is the part of the program where that name can be used. "
 },
 {
-  "id": "chapter6_tables-3",
+  "id": "chapter6_scope-revisited-3",
   "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-3",
+  "url": "chapter6_scope-revisited.html#chapter6_scope-revisited-3",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "When computers appeared on the scene, one of the initial reactions was, This is great! We can use the computers to generate the tables, so there will be no errors. That turned out to be true (mostly), but shortsighted. Soon thereafter computers and calculators were so pervasive that the tables became obsolete. "
+  "body": "C++ programs commonly use four kinds of scope that we have already encountered: block scope, Type Scope (Scoped Enums, Classes, and Structs), namespace scope and Global Scope (File Scope). "
 },
 {
-  "id": "chapter6_tables-4",
+  "id": "table_scope_kinds",
   "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Well, almost. It turns out that for some operations, computers use tables of values to get an approximate answer, and then perform computations to improve the approximation. In some cases, there have been errors in the underlying tables, most famously in the table the original Intel Pentium used to perform floating-point division. "
-},
-{
-  "id": "chapter6_tables-5",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Although a log table is not as useful as it once was, it still makes a good example of iteration. "
-},
-{
-  "id": "tables_AC_1",
-  "level": "2",
-  "url": "chapter6_tables.html#tables_AC_1",
-  "type": "Listing",
+  "url": "chapter6_scope-revisited.html#table_scope_kinds",
+  "type": "Table",
   "number": "6.4.1",
-  "title": "This active code outputs a sequence of values in the left column and their logarithms in the right column.",
-  "body": " This active code outputs a sequence of values in the left column and their logarithms in the right column.   #include <iostream> #include <cmath> int main() { double x = 1.0; while (x < 10.0) { std::cout << x << \"\\t\" << log(x) << \"\\n\"; x = x + 1.0; } return 0; }   "
+  "title": "Three kinds of scope",
+  "body": " Three kinds of scope    Scope  Created by  Examples    Block scope  Braces belonging to a statement or standalone block  if , switch , while , for , and standalone braces    Scoped enums, class and struct scope  Braces belonging to a Scoped enum(an enum class or an enum struct), a class or structure definition  Data members and member functions    Namespace scope  Braces belonging to a namespace definition.  Functions, types, and variables in a namespace    Global Scope (File Scope)  Entire source file (or translation unit) outside of any braces  Any entity outside of all the rest of the scopes    "
 },
 {
-  "id": "chapter6_tables-7",
+  "id": "chapter6_scope-revisited_block-scope",
   "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The sequence \\t represents a tab character. The sequence \\n represents a newline character. These sequences can be included anywhere in a string, although in these examples the sequence is the whole string. "
-},
-{
-  "id": "chapter6_tables-8",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A tab character causes the cursor to shift to the right until it reaches one of the tab stops , which are normally every eight characters. As we will see in a minute, tabs are useful for making columns of text line up. "
-},
-{
-  "id": "chapter6_tables-9",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A newline character has exactly the same effect as endl ; it causes the cursor to move on to the next line. Usually if a newline character appears by itself, I use endl , but if it appears as part of a string, I use \\n . "
-},
-{
-  "id": "chapter6_tables-10",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The output of this program is "
-},
-{
-  "id": "chapter6_tables-12",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If these values seem odd, remember that the log function uses base . Since powers of two are so important in computer science, we often want to find logarithms with respect to base 2. To do that, we can use the following formula: "
-},
-{
-  "id": "chapter6_tables-13",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Changing the output statement to "
-},
-{
-  "id": "chapter6_tables-15",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-15",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "yields "
-},
-{
-  "id": "chapter6_tables-17",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-17",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "We can see that 1, 2, 4 and 8 are powers of two, because their logarithms base 2 are round numbers. If we wanted to find the logarithms of other powers of two, we could modify the program like this: "
-},
-{
-  "id": "tables_AC_2",
-  "level": "2",
-  "url": "chapter6_tables.html#tables_AC_2",
-  "type": "Listing",
-  "number": "6.4.2",
-  "title": "If we wanted to find the logarithms of other powers of two, we could modify the program like this. Run this active code.",
-  "body": " If we wanted to find the logarithms of other powers of two, we could modify the program like this. Run this active code.   #include <iostream> #include <cmath> int main() { double x = 1.0; while (x < 100.0) { std::cout << x << \"\\t\" << log(x) \/ log(2.0) << std::endl; x = x * 2.0; } }   "
-},
-{
-  "id": "chapter6_tables-19",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-19",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Now instead of adding something to x each time through the loop, which yields an arithmetic sequence, we multiply x by something, yielding a geometric sequence. The result is: "
-},
-{
-  "id": "chapter6_tables-21",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-21",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Because we are using tab characters between the columns, the position of the second column does not depend on the number of digits in the first column. "
-},
-{
-  "id": "chapter6_tables-22",
-  "level": "2",
-  "url": "chapter6_tables.html#chapter6_tables-22",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Log tables may not be useful any more, but for computer scientists, knowing the powers of two is! As an exercise, modify this program so that it outputs the powers of two up to 65536 (that's ). Print it out and memorize it. "
-},
-{
-  "id": "tables_AC_3",
-  "level": "2",
-  "url": "chapter6_tables.html#tables_AC_3",
-  "type": "Checkpoint",
+  "url": "chapter6_scope-revisited.html#chapter6_scope-revisited_block-scope",
+  "type": "Subsection",
   "number": "6.4.1",
-  "title": "",
-  "body": "  Modify this active code so that it outputs the power of two up to 65536, which is . If you get stuck, you can reveal the hint below the problem for help.   #include <iostream> #include <cmath> int main() { double x = 1.0; while (x < 100.0) { std::cout << x << \"\\t\" << log(x) \/ log(2.0) << std::endl; x = x * 2.0; } }      Let's write the code that prints out the powers of two.     int main() {    int x = 1;     while (x < 17) {    while (x < 16) {      std::cout << x << \"\\t\" << pow(2, x) << std::endl ;    std::cout << x << \"\\t\" << pow(x, 2) << std::endl ;     x++;  }  }      "
+  "title": "Block Scope",
+  "body": " Block Scope  A pair of braces creates a block. A name declared inside that block can be used from its declaration to the closing brace, but not outside the block.   #include <iostream> int main() { int outside_value = 10; { int inside_value = 20; std::cout << outside_value << '\\n'; std::cout << inside_value << '\\n'; } \/\/ inside_value is not accessible here. std::cout << outside_value << '\\n'; return 0; }   The body of an if , while , or for statement is also a block. This is why a variable declared inside a loop body is not available after the loop.   #include <iostream> int main() { for (int count = 1; count <= 3; ++count) { int square = count * count; std::cout << square << '\\n'; } \/\/ count and square are not accessible here. return 0; }   The variable count is declared in the for statement, so its scope covers that entire for statement. The variable square is declared inside the loop body, so its scope ends at the closing brace of the body.  "
 },
 {
-  "id": "tables_2",
+  "id": "chapter6_scope-revisited_class-struct-scope",
   "level": "2",
-  "url": "chapter6_tables.html#tables_2",
-  "type": "Checkpoint",
+  "url": "chapter6_scope-revisited.html#chapter6_scope-revisited_class-struct-scope",
+  "type": "Subsection",
   "number": "6.4.2",
-  "title": "",
-  "body": "  What is the equivalent of std::endl , and typically used at the end of a string?           "
+  "title": "Scoped enums, class and struct scope",
+  "body": " Scoped enums, class and struct scope  The braces in a class or structure definition or enum class or enum struct create a different kind of scope. Names declared there belong to the type. They are not temporary variables belonging to one execution of an if or loop block.   Unscoped Enums (Traditional enums) do not have their own isolated scope. Their members leak directly into the surrounding enclosing scope. We will cover enums (enumerated types) in an upcoming section.    #include <iostream> struct Point { double x; double y; void print_point() const { std::cout << '(' << x << \", \" << y << \")\\n\"; } }; int main() { Point point{3.0, 4.0}; std::cout << point.x << '\\n'; point.print_point(); return 0; }   Outside the structure, public members are accessed through an object, such as point.x . Inside a member function, the members of the current object can be referred to directly, such as x and y .  A class also has class scope. The difference between a class and a struct is not the existence of scope; both have it. Their default member access is different: struct members are public by default, while class members are private by default.  "
 },
 {
-  "id": "tables_3",
+  "id": "chapter6_scope-revisited_namespace-scope",
   "level": "2",
-  "url": "chapter6_tables.html#tables_3",
-  "type": "Checkpoint",
+  "url": "chapter6_scope-revisited.html#chapter6_scope-revisited_namespace-scope",
+  "type": "Subsection",
   "number": "6.4.3",
-  "title": "",
-  "body": "  How would you write a tab character?           "
+  "title": "Namespace Scope",
+  "body": " Namespace Scope  In C++, namespaces act as virtual containers or \"folders\" for your identifiers (classes, structs, functions, variables, and enums). A namespace groups related names and helps prevent naming conflicts between different parts of a program. The primary benefit of writing your own namespaces is avoiding name collisions and organizing large codebases into distinct, logical modules for better organization.   #include <iostream> namespace measurement { double convert_meters_to_centimeters(double meters) { return meters * 100.0; } } int main() { double centimeters = measurement::convert_meters_to_centimeters(2.5); std::cout << centimeters << '\\n'; return 0; }   The function belongs to the measurement namespace. The scope-resolution operator :: tells C++ to look for the function in that namespace.  The standard library uses the namespace named std . This is why we write names such as std::cout , std::array , and std::string .  "
 },
 {
-  "id": "tables_4",
+  "id": "chapter6_scope-revisited_global_scope",
   "level": "2",
-  "url": "chapter6_tables.html#tables_4",
-  "type": "Checkpoint",
+  "url": "chapter6_scope-revisited.html#chapter6_scope-revisited_global_scope",
+  "type": "Subsection",
   "number": "6.4.4",
-  "title": "",
-  "body": "  How can we modify the code below to print out a table of the first five odd numbers and their perfect cubes?   int main() { int x = 1; while (x < 11) { std::cout << x << \"\\t\" << pow(x, 2) << std::endl ; x = x + 1; } }       Change pow(x,2) to pow(3,x) and change x = x + 1 to x = x + 2 .   Check the order of the pow function!     Change pow(x,2) to pow(x,3) .   This will print out the first ten perfect cubes.     Change pow(x,2) to pow(x,3) and change x = x + 1 to x = x + 2 .   Changing both the pow function and the increment in this way gives us the right answer.     Change x < 11 to x < 6 and change pow(x,2) to pow(x,3) .   This will print out the first five perfect cubes, but not the first five odd perfect cubes.    "
+  "title": "Global Scope (File Scope)",
+  "body": " Global Scope (File Scope)  Global scope is spanned by the entire source file (or translation unit) outside of any braces. Unlike the other three scopes, global scope does not have starting or ending curly braces { }. It is the default \"catch-all\" area of your code. Any variable, function, class, or struct declared at the topmost level of your file—completely outside of any functions, namespaces, or classes—is automatically in the global scope. Items in the global scope can be accessed from anywhere in that file without any prefix or special operator.   #include <iostream> constexpr int days_per_week = 7; int main() { std::cout << days_per_week << '\\n'; return 0; }   The constant days_per_week belongs to the global namespace. All other inner scopes can see and access days_per_week .  "
 },
 {
-  "id": "chapter6_two-dimensional-tables",
+  "id": "chapter6_scope-revisited_summary",
+  "level": "2",
+  "url": "chapter6_scope-revisited.html#chapter6_scope-revisited_summary",
+  "type": "Subsection",
+  "number": "6.4.5",
+  "title": "Choosing the Right Scope",
+  "body": " Choosing the Right Scope  Any inner scope in C++ can hide (or \"shadow\") an outer scope variable if they share the exact same name. This rule applies globally across all blocks, namespaces, and classes.  When deciding where to declare a name, keep its scope as small as practical. A temporary calculation usually belongs in a block. Data and operations that describe an object belong in a class or struct. A function or type that is shared by several parts of a program can belong to a namespace.  Remember that scope describes where a name can be used. It is related to, but not identical to, an object's lifetime, which describes how long the object exists while the program runs.  "
+},
+{
+  "id": "chapter6_common-loop-patterns",
   "level": "1",
-  "url": "chapter6_two-dimensional-tables.html",
+  "url": "chapter6_common-loop-patterns.html",
   "type": "Section",
   "number": "6.5",
-  "title": "Two-dimensional tables",
-  "body": " Two-dimensional tables  A two-dimensional table is a table where you choose a row and a column and read the value at the intersection. A multiplication table is a good example. Let's say you wanted to print a multiplication table for the values from 1 to 6.  A good way to start is to write a simple loop that prints the multiples of 2, all on one line.   Run this active code, which uses a simple loop that prints the multiples of 2, all on one line.   #include <iostream> int main() { int i = 1; while (i <= 6) { std::cout << 2 * i << \" \"; i = i + 1; } std::cout << std::endl; return 0; }    The first line initializes a variable named i , which is going to act as a counter, or loop variable . As the loop executes, the value of i increases from 1 to 6, and then when i is 7, the loop terminates. Each time through the loop, we print the value 2*i followed by three spaces. By omitting the endl from the first output statement, we get all the output on a single line.  The output of this program is:  2 4 6 8 10 12  So far, so good. The next step is to encapsulate and generalize .    What is a good name for the variable x, found in the code block below?   #include <iostream> int main() { int x = 1; while (x <= 6) { std::cout << 3 * x << \" \"; x = x + 1; } std::cout << std::endl; return 0; }       counter   Try again!     loop variable   Try again!     Both a and b   Correct!     None of the above   Try again!       Currently, the code below prints all of the multiples of three on one line. How can you change the output so that each multiple prints on its own line?   #include <iostream> int main() { int x = 1; while (x <= 6) { std::cout << 3 * x << \" \"; x = x + 1; } std::cout << std::endl; return 0; }       Change the first output statement to say std::cout << 3 * x << std::endl ;   The addition of the std::endl will print the multiples of three on separate lines.     Change the first output statement to say std::cout << 3 * x << \\n;   A newline character must be used in conjunction with a string. In this case, we are outputting an integer. To use a newline character in this scenario you must use quotes around it. (ex. \"\\n\")     Change the second output statement to say std::cout << std::endl << std::endl ;   This would simply print out two new lines after all of the multiples have already printed on one line.     This code already prints each multiple on its own line.   This code prints all multiples out on one line.     "
+  "title": "Common Loop Patterns",
+  "body": " Common Loop Patterns  Many loop problems use a small number of recurring patterns. The wording of a problem often provides clues about which pattern is needed.   Counting  Words such as how many or count often suggest a counter . A counter records how many times an event has occurred.   #include <iostream> int main() { int even_count = 0; for (int value = 1; value <= 10; ++value) { if (value % 2 == 0) { ++even_count; } } std::cout << even_count << '\\n'; return 0; }     Accumulating  Words such as total , sum , or average often suggest an accumulator . An accumulator combines values as the loop processes them.   #include <iostream> int main() { int total = 0; for (int value = 1; value <= 4; ++value) { total += value; } std::cout << total << '\\n'; return 0; }     Stopping at a Sentinel Value  Sometimes a problem says to continue until a special value appears. That special value is called a sentinel value .   #include <iostream> int main() { int value = 0; std::cin >> value; while (value != 0) { std::cout << value << '\\n'; std::cin >> value; } return 0; }      A variable that combines values as a loop processes them is called an .             Which organization correctly counts the even values from 1 through 10?      Initialize even_count to 0 before the loop, add 1 inside the if for an even value, and print it after the loop.   A counter records how many qualifying values have been found.     Initialize even_count to 0 inside the loop and print it before the loop.   The counter must keep its value across iterations.     Add every value to even_count , whether or not it is even.   A counting pattern increments only when the condition is satisfied.     "
 },
 {
-  "id": "chapter6_two-dimensional-tables-2",
+  "id": "chapter6_common-loop-patterns-2",
   "level": "2",
-  "url": "chapter6_two-dimensional-tables.html#chapter6_two-dimensional-tables-2",
+  "url": "chapter6_common-loop-patterns.html#chapter6_common-loop-patterns-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "A two-dimensional table is a table where you choose a row and a column and read the value at the intersection. A multiplication table is a good example. Let's say you wanted to print a multiplication table for the values from 1 to 6. "
+  "body": "Many loop problems use a small number of recurring patterns. The wording of a problem often provides clues about which pattern is needed. "
 },
 {
-  "id": "chapter6_two-dimensional-tables-3",
+  "id": "chapter6_common-loop-patterns_counter",
   "level": "2",
-  "url": "chapter6_two-dimensional-tables.html#chapter6_two-dimensional-tables-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A good way to start is to write a simple loop that prints the multiples of 2, all on one line. "
-},
-{
-  "id": "TwoD_tables_AC_1",
-  "level": "2",
-  "url": "chapter6_two-dimensional-tables.html#TwoD_tables_AC_1",
-  "type": "Listing",
+  "url": "chapter6_common-loop-patterns.html#chapter6_common-loop-patterns_counter",
+  "type": "Subsection",
   "number": "6.5.1",
-  "title": "Run this active code, which uses a simple loop that prints the multiples of 2, all on one line.",
-  "body": " Run this active code, which uses a simple loop that prints the multiples of 2, all on one line.   #include <iostream> int main() { int i = 1; while (i <= 6) { std::cout << 2 * i << \" \"; i = i + 1; } std::cout << std::endl; return 0; }   "
+  "title": "Counting",
+  "body": " Counting  Words such as how many or count often suggest a counter . A counter records how many times an event has occurred.   #include <iostream> int main() { int even_count = 0; for (int value = 1; value <= 10; ++value) { if (value % 2 == 0) { ++even_count; } } std::cout << even_count << '\\n'; return 0; }   "
 },
 {
-  "id": "chapter6_two-dimensional-tables-5",
+  "id": "chapter6_common-loop-patterns_accumulator",
   "level": "2",
-  "url": "chapter6_two-dimensional-tables.html#chapter6_two-dimensional-tables-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The first line initializes a variable named i , which is going to act as a counter, or loop variable . As the loop executes, the value of i increases from 1 to 6, and then when i is 7, the loop terminates. Each time through the loop, we print the value 2*i followed by three spaces. By omitting the endl from the first output statement, we get all the output on a single line. "
+  "url": "chapter6_common-loop-patterns.html#chapter6_common-loop-patterns_accumulator",
+  "type": "Subsection",
+  "number": "6.5.2",
+  "title": "Accumulating",
+  "body": " Accumulating  Words such as total , sum , or average often suggest an accumulator . An accumulator combines values as the loop processes them.   #include <iostream> int main() { int total = 0; for (int value = 1; value <= 4; ++value) { total += value; } std::cout << total << '\\n'; return 0; }   "
 },
 {
-  "id": "chapter6_two-dimensional-tables-6",
+  "id": "chapter6_common-loop-patterns_sentinel",
   "level": "2",
-  "url": "chapter6_two-dimensional-tables.html#chapter6_two-dimensional-tables-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The output of this program is: "
+  "url": "chapter6_common-loop-patterns.html#chapter6_common-loop-patterns_sentinel",
+  "type": "Subsection",
+  "number": "6.5.3",
+  "title": "Stopping at a Sentinel Value",
+  "body": " Stopping at a Sentinel Value  Sometimes a problem says to continue until a special value appears. That special value is called a sentinel value .   #include <iostream> int main() { int value = 0; std::cin >> value; while (value != 0) { std::cout << value << '\\n'; std::cin >> value; } return 0; }   "
 },
 {
-  "id": "chapter6_two-dimensional-tables-8",
+  "id": "chapter6_common-patterns_short-answer",
   "level": "2",
-  "url": "chapter6_two-dimensional-tables.html#chapter6_two-dimensional-tables-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "So far, so good. The next step is to encapsulate and generalize . "
-},
-{
-  "id": "2D_tables_1",
-  "level": "2",
-  "url": "chapter6_two-dimensional-tables.html#2D_tables_1",
+  "url": "chapter6_common-loop-patterns.html#chapter6_common-patterns_short-answer",
   "type": "Checkpoint",
   "number": "6.5.1",
   "title": "",
-  "body": "  What is a good name for the variable x, found in the code block below?   #include <iostream> int main() { int x = 1; while (x <= 6) { std::cout << 3 * x << \" \"; x = x + 1; } std::cout << std::endl; return 0; }       counter   Try again!     loop variable   Try again!     Both a and b   Correct!     None of the above   Try again!    "
+  "body": "  A variable that combines values as a loop processes them is called an .          "
 },
 {
-  "id": "2D_tables_2",
+  "id": "chapter6_common-patterns_organization",
   "level": "2",
-  "url": "chapter6_two-dimensional-tables.html#2D_tables_2",
+  "url": "chapter6_common-loop-patterns.html#chapter6_common-patterns_organization",
   "type": "Checkpoint",
   "number": "6.5.2",
   "title": "",
-  "body": "  Currently, the code below prints all of the multiples of three on one line. How can you change the output so that each multiple prints on its own line?   #include <iostream> int main() { int x = 1; while (x <= 6) { std::cout << 3 * x << \" \"; x = x + 1; } std::cout << std::endl; return 0; }       Change the first output statement to say std::cout << 3 * x << std::endl ;   The addition of the std::endl will print the multiples of three on separate lines.     Change the first output statement to say std::cout << 3 * x << \\n;   A newline character must be used in conjunction with a string. In this case, we are outputting an integer. To use a newline character in this scenario you must use quotes around it. (ex. \"\\n\")     Change the second output statement to say std::cout << std::endl << std::endl ;   This would simply print out two new lines after all of the multiples have already printed on one line.     This code already prints each multiple on its own line.   This code prints all multiples out on one line.    "
+  "body": "  Which organization correctly counts the even values from 1 through 10?      Initialize even_count to 0 before the loop, add 1 inside the if for an even value, and print it after the loop.   A counter records how many qualifying values have been found.     Initialize even_count to 0 inside the loop and print it before the loop.   The counter must keep its value across iterations.     Add every value to even_count , whether or not it is even.   A counting pattern increments only when the condition is satisfied.    "
 },
 {
-  "id": "chapter6_encapsulation-and-generalization",
+  "id": "chapter6_arrays",
   "level": "1",
-  "url": "chapter6_encapsulation-and-generalization.html",
+  "url": "chapter6_arrays.html",
   "type": "Section",
   "number": "6.6",
-  "title": "Encapsulation and generalization",
-  "body": " Encapsulation and generalization  Encapsulation usually means taking a piece of code and wrapping it up in a function, allowing you to take advantage of all the things functions are good for. We have seen an example of encapsulation, when we wrote print_parity in .  Generalization means taking something specific, like printing multiples of 2, and making it more general, like printing the multiples of any integer.  Here's a function that encapsulates the loop from the previous section and generalizes it to print multiples of n .  void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << \" \"; i = i + 1; } std::cout << std::endl ; }  To encapsulate, all I had to do was add the first line, which declares the name, parameter, and return type. To generalize, all I had to do was replace the value 2 with the parameter n .  If we call this function with the argument 2, we get the same output as before. With argument 3, the output is:  3 6 9 12 15 18  and with argument 4, the output is  4 8 12 16 20 24  By now you can probably guess how we are going to print a multiplication table: we'll call printMultiples repeatedly with different arguments. In fact, we are going to use another loop to iterate through the rows.  int i = 1; while (i <= 6) { printMultiples(i); i = i + 1; }  First of all, notice how similar this loop is to the one inside printMultiples . All I did was replace the print statement with a function call.   Try running this active code, which uses printMultiples .   #include <iostream> void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << \" \"; i = i + 1; } std::cout << std::endl; } int main() { int i = 1; while (i <= 6) { printMultiples(i); i = i + 1; } }    The output of this program is  1 2 3 4 5 6 2 4 6 8 10 12 3 6 9 12 15 18 4 8 12 16 20 24 5 10 15 20 25 30 6 12 18 24 30 36  which is a (slightly sloppy) multiplication table. If the sloppiness bothers you, you can also use tab characters, like below.   This active code uses tab characters to make the table neater.   #include <iostream> void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << '\\t'; i = i + 1; } std::cout << std::endl; } int main() { int i = 1; while (i <= 6) { printMultiples(i); i = i + 1; } }      What is the purpose of generalization?      Replacing integers with parameters.   This may be a possible way to generalize, but not the purpose.     Using a parameter that exists in several different functions.   This is not the purpose of generalization.     Taking a very specific task and making it more applicable to other situations.   This makes your code more versatile.     Creating two functions with the same purpose but different names.   This is not the purpose of generalization.       Create a function called powersOfTwo which prints out a table with the powers of two up to .     void powersOfTwo() {    int x = 1;    while (x <= 5) {     std::cout << x << \"\\t\" << pow(2, x) << std::endl ;    std::cout << x << \"\\t\" << pow(x, 2) << std::endl ;     x++;  }  }       Now let's generalize the function to print out the powers of a parameter n up to . Create a function called powersOfn which takes an int n as a parameter.      void powersOfn(int n) {    void powersOfn(string n) {     int x = 1;    while (x <= 5) {     std::cout << x << \"\\t\" << pow(n, x) << std::endl ;    std::cout << x << \"\\t\" << pow(5, x) << std::endl ;     x++;  }  }     "
+  "title": "Arrays",
+  "body": " Arrays  In Chapter 5, we learned that a structure can combine related values into one object. For example, a Point structure combines an x coordinate and a y coordinate.   struct Point { double x; double y; }; Point point{3.0, 4.0};   A structure describes one object. What if a program needs to process 1,000 points? Creating 1,000 separately named variables would be inconvenient and difficult to process with a loop. We need a container that can store many objects under one name.  The standard-library type std::array provides such a container when the number of elements is fixed. The structure defines what one element contains; the array organizes many elements.   #include <array> #include <cstddef> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; for (std::size_t index = 0; index < scores.size(); ++index) { std::cout << scores[index] << '\\n'; } return 0; }   The type std::array<int, 5> means that scores stores five int values. Its size is fixed when the array is created. The member function size() reports the number of elements.   Accessing Elements by Index  Each array element has an index , which identifies its position. The first element has index 0, not index 1. Indexed iteration is useful when a program needs to work with a position or compare neighboring elements.   #include <array> #include <cstddef> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; for (std::size_t index = 0; index < scores.size(); ++index) { std::cout << \"Score \" << index + 1 << \": \" << scores[index] << '\\n'; } return 0; }   Notice the difference between the array index and the displayed score number. The index begins at 0, while the human-friendly label begins at 1.    Passing Arrays to Functions  An array can be passed to a function just like other values. Because std::array includes its element type and size in its type, the parameter also shows those details.   Ways to pass a std::array to a function    Parameter  Effect  Use when    std::array<int, 5> values  The function receives a copy.  The function needs an independent copy.    const std::array<int, 5>& values  No copy is made, and the function cannot modify the array.  The function only needs to inspect the array.    std::array<int, 5>& values  No copy is made, and the function can modify the original array.  The function must change the caller's array.     When a function only reads an array, a const reference is usually the appropriate choice. It avoids copying the array and documents that the function will not change it. When a function must update the caller's array, use a non- const reference.   For a potentially large array, avoid passing by value unless the function intentionally needs an independent copy. Prefer a const reference for read-only access and a non- const reference when the function is supposed to modify the caller's array.    #include <array> #include <cstddef> #include <iostream> void print_scores(const std::array<int, 5>& scores) { for (std::size_t index = 0; index < scores.size(); ++index) { std::cout << scores[index] << ' '; } std::cout << '\\n'; } void add_bonus_points(std::array<int, 5>& scores, int bonus_points) { for (std::size_t index = 0; index < scores.size(); ++index) { scores[index] += bonus_points; } } int main() { std::array<int, 5> scores{82, 91, 76, 88, 95}; print_scores(scores); add_bonus_points(scores, 5); print_scores(scores); return 0; }   The function print_scores() receives a read-only reference, while add_bonus_points() receives a modifiable reference. Both functions work with the original array without making a copy.  The size is part of the std::array type. Therefore, a function expecting std::array<int, 5> cannot receive an array of three integers. General-purpose functions that accept many different array sizes require additional techniques that we will study later.    Searching and Summarizing Values  A loop can inspect every element to search for a value, count values that meet a condition, or calculate a total. These tasks combine indexed iteration with the counters and accumulators from the previous section.   #include <array> #include <cstddef> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; int total = 0; int high_score_count = 0; for (std::size_t index = 0; index < scores.size(); ++index) { total += scores[index]; if (scores[index] >= 90) { ++high_score_count; } } std::cout << \"Total: \" << total << '\\n'; std::cout << \"High scores: \" << high_score_count << '\\n'; return 0; }      The first element of a fixed-size array has index .             Which loop correctly visits every element of std::array<int, 4> values by index?     for (std::size_t index = 0; index < values.size(); ++index)  The index begins at 0 and stops before values.size() .    for (std::size_t index = 0; index <= values.size(); ++index)  The final valid index is one less than values.size() .    for (std::size_t index = 1; index < values.size(); ++index)  This skips the element at index 0.       A function only needs to inspect a std::array<int, 5> . Which parameter avoids a copy and prevents the function from modifying the caller's array?     const std::array<int, 5>& values  A const reference avoids copying and provides read-only access.    std::array<int, 5> values  This parameter receives a copy of the entire array.    std::array<int, 5>& values  This permits modification, which the function does not need.       A function must add 5 to every element of the caller's std::array<int, 5> . Which parameter is appropriate?     std::array<int, 5>& values  A non-const reference lets the function modify the original array.    const std::array<int, 5>& values  Const references cannot be used to modify the elements.    std::array<int, 5> values  This changes only a copy, so the caller's array remains unchanged.     "
 },
 {
-  "id": "chapter6_encapsulation-and-generalization-2",
+  "id": "chapter6_arrays-2",
   "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#chapter6_encapsulation-and-generalization-2",
+  "url": "chapter6_arrays.html#chapter6_arrays-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Encapsulation usually means taking a piece of code and wrapping it up in a function, allowing you to take advantage of all the things functions are good for. We have seen an example of encapsulation, when we wrote print_parity in . "
+  "body": "In Chapter 5, we learned that a structure can combine related values into one object. For example, a Point structure combines an x coordinate and a y coordinate. "
 },
 {
-  "id": "chapter6_encapsulation-and-generalization-3",
+  "id": "chapter6_arrays-4",
   "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#chapter6_encapsulation-and-generalization-3",
+  "url": "chapter6_arrays.html#chapter6_arrays-4",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Generalization means taking something specific, like printing multiples of 2, and making it more general, like printing the multiples of any integer. "
+  "body": "A structure describes one object. What if a program needs to process 1,000 points? Creating 1,000 separately named variables would be inconvenient and difficult to process with a loop. We need a container that can store many objects under one name. "
 },
 {
-  "id": "chapter6_encapsulation-and-generalization-4",
+  "id": "chapter6_arrays-5",
   "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#chapter6_encapsulation-and-generalization-4",
+  "url": "chapter6_arrays.html#chapter6_arrays-5",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Here's a function that encapsulates the loop from the previous section and generalizes it to print multiples of n . "
+  "body": "The standard-library type std::array provides such a container when the number of elements is fixed. The structure defines what one element contains; the array organizes many elements. "
 },
 {
-  "id": "chapter6_encapsulation-and-generalization-6",
+  "id": "chapter6_arrays-7",
   "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#chapter6_encapsulation-and-generalization-6",
+  "url": "chapter6_arrays.html#chapter6_arrays-7",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "To encapsulate, all I had to do was add the first line, which declares the name, parameter, and return type. To generalize, all I had to do was replace the value 2 with the parameter n . "
+  "body": "The type std::array<int, 5> means that scores stores five int values. Its size is fixed when the array is created. The member function size() reports the number of elements. "
 },
 {
-  "id": "chapter6_encapsulation-and-generalization-7",
+  "id": "chapter6_arrays_indexing",
   "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#chapter6_encapsulation-and-generalization-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If we call this function with the argument 2, we get the same output as before. With argument 3, the output is: "
-},
-{
-  "id": "chapter6_encapsulation-and-generalization-9",
-  "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#chapter6_encapsulation-and-generalization-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "and with argument 4, the output is "
-},
-{
-  "id": "chapter6_encapsulation-and-generalization-11",
-  "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#chapter6_encapsulation-and-generalization-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "By now you can probably guess how we are going to print a multiplication table: we'll call printMultiples repeatedly with different arguments. In fact, we are going to use another loop to iterate through the rows. "
-},
-{
-  "id": "chapter6_encapsulation-and-generalization-13",
-  "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#chapter6_encapsulation-and-generalization-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "First of all, notice how similar this loop is to the one inside printMultiples . All I did was replace the print statement with a function call. "
-},
-{
-  "id": "encapsulation_generalization_AC_1",
-  "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#encapsulation_generalization_AC_1",
-  "type": "Listing",
+  "url": "chapter6_arrays.html#chapter6_arrays_indexing",
+  "type": "Subsection",
   "number": "6.6.1",
-  "title": "Try running this active code, which uses <code class=\"code-inline tex2jax_ignore\">printMultiples<\/code>.",
-  "body": " Try running this active code, which uses printMultiples .   #include <iostream> void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << \" \"; i = i + 1; } std::cout << std::endl; } int main() { int i = 1; while (i <= 6) { printMultiples(i); i = i + 1; } }   "
+  "title": "Accessing Elements by Index",
+  "body": " Accessing Elements by Index  Each array element has an index , which identifies its position. The first element has index 0, not index 1. Indexed iteration is useful when a program needs to work with a position or compare neighboring elements.   #include <array> #include <cstddef> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; for (std::size_t index = 0; index < scores.size(); ++index) { std::cout << \"Score \" << index + 1 << \": \" << scores[index] << '\\n'; } return 0; }   Notice the difference between the array index and the displayed score number. The index begins at 0, while the human-friendly label begins at 1.  "
 },
 {
-  "id": "chapter6_encapsulation-and-generalization-15",
+  "id": "chapter6_arrays_passing-to-functions",
   "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#chapter6_encapsulation-and-generalization-15",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The output of this program is "
-},
-{
-  "id": "chapter6_encapsulation-and-generalization-17",
-  "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#chapter6_encapsulation-and-generalization-17",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "which is a (slightly sloppy) multiplication table. If the sloppiness bothers you, you can also use tab characters, like below. "
-},
-{
-  "id": "encapsulation_generalization_AC_2",
-  "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#encapsulation_generalization_AC_2",
-  "type": "Listing",
+  "url": "chapter6_arrays.html#chapter6_arrays_passing-to-functions",
+  "type": "Subsection",
   "number": "6.6.2",
-  "title": "This active code uses tab characters to make the table neater.",
-  "body": " This active code uses tab characters to make the table neater.   #include <iostream> void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << '\\t'; i = i + 1; } std::cout << std::endl; } int main() { int i = 1; while (i <= 6) { printMultiples(i); i = i + 1; } }   "
+  "title": "Passing Arrays to Functions",
+  "body": " Passing Arrays to Functions  An array can be passed to a function just like other values. Because std::array includes its element type and size in its type, the parameter also shows those details.   Ways to pass a std::array to a function    Parameter  Effect  Use when    std::array<int, 5> values  The function receives a copy.  The function needs an independent copy.    const std::array<int, 5>& values  No copy is made, and the function cannot modify the array.  The function only needs to inspect the array.    std::array<int, 5>& values  No copy is made, and the function can modify the original array.  The function must change the caller's array.     When a function only reads an array, a const reference is usually the appropriate choice. It avoids copying the array and documents that the function will not change it. When a function must update the caller's array, use a non- const reference.   For a potentially large array, avoid passing by value unless the function intentionally needs an independent copy. Prefer a const reference for read-only access and a non- const reference when the function is supposed to modify the caller's array.    #include <array> #include <cstddef> #include <iostream> void print_scores(const std::array<int, 5>& scores) { for (std::size_t index = 0; index < scores.size(); ++index) { std::cout << scores[index] << ' '; } std::cout << '\\n'; } void add_bonus_points(std::array<int, 5>& scores, int bonus_points) { for (std::size_t index = 0; index < scores.size(); ++index) { scores[index] += bonus_points; } } int main() { std::array<int, 5> scores{82, 91, 76, 88, 95}; print_scores(scores); add_bonus_points(scores, 5); print_scores(scores); return 0; }   The function print_scores() receives a read-only reference, while add_bonus_points() receives a modifiable reference. Both functions work with the original array without making a copy.  The size is part of the std::array type. Therefore, a function expecting std::array<int, 5> cannot receive an array of three integers. General-purpose functions that accept many different array sizes require additional techniques that we will study later.  "
 },
 {
-  "id": "encapsulation_generalization_1",
+  "id": "chapter6_arrays_search-summarize",
   "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#encapsulation_generalization_1",
+  "url": "chapter6_arrays.html#chapter6_arrays_search-summarize",
+  "type": "Subsection",
+  "number": "6.6.3",
+  "title": "Searching and Summarizing Values",
+  "body": " Searching and Summarizing Values  A loop can inspect every element to search for a value, count values that meet a condition, or calculate a total. These tasks combine indexed iteration with the counters and accumulators from the previous section.   #include <array> #include <cstddef> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; int total = 0; int high_score_count = 0; for (std::size_t index = 0; index < scores.size(); ++index) { total += scores[index]; if (scores[index] >= 90) { ++high_score_count; } } std::cout << \"Total: \" << total << '\\n'; std::cout << \"High scores: \" << high_score_count << '\\n'; return 0; }   "
+},
+{
+  "id": "chapter6_arrays_index-short-answer",
+  "level": "2",
+  "url": "chapter6_arrays.html#chapter6_arrays_index-short-answer",
   "type": "Checkpoint",
   "number": "6.6.1",
   "title": "",
-  "body": "  What is the purpose of generalization?      Replacing integers with parameters.   This may be a possible way to generalize, but not the purpose.     Using a parameter that exists in several different functions.   This is not the purpose of generalization.     Taking a very specific task and making it more applicable to other situations.   This makes your code more versatile.     Creating two functions with the same purpose but different names.   This is not the purpose of generalization.    "
+  "body": "  The first element of a fixed-size array has index .          "
 },
 {
-  "id": "encapsulation_generalization_2",
+  "id": "chapter6_arrays_index-organization",
   "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#encapsulation_generalization_2",
+  "url": "chapter6_arrays.html#chapter6_arrays_index-organization",
   "type": "Checkpoint",
   "number": "6.6.2",
   "title": "",
-  "body": "  Create a function called powersOfTwo which prints out a table with the powers of two up to .     void powersOfTwo() {    int x = 1;    while (x <= 5) {     std::cout << x << \"\\t\" << pow(2, x) << std::endl ;    std::cout << x << \"\\t\" << pow(x, 2) << std::endl ;     x++;  }  }    "
+  "body": "  Which loop correctly visits every element of std::array<int, 4> values by index?     for (std::size_t index = 0; index < values.size(); ++index)  The index begins at 0 and stops before values.size() .    for (std::size_t index = 0; index <= values.size(); ++index)  The final valid index is one less than values.size() .    for (std::size_t index = 1; index < values.size(); ++index)  This skips the element at index 0.    "
 },
 {
-  "id": "encapsulation_generalization_3",
+  "id": "chapter6_arrays_const-reference-parameter",
   "level": "2",
-  "url": "chapter6_encapsulation-and-generalization.html#encapsulation_generalization_3",
+  "url": "chapter6_arrays.html#chapter6_arrays_const-reference-parameter",
   "type": "Checkpoint",
   "number": "6.6.3",
   "title": "",
-  "body": "  Now let's generalize the function to print out the powers of a parameter n up to . Create a function called powersOfn which takes an int n as a parameter.      void powersOfn(int n) {    void powersOfn(string n) {     int x = 1;    while (x <= 5) {     std::cout << x << \"\\t\" << pow(n, x) << std::endl ;    std::cout << x << \"\\t\" << pow(5, x) << std::endl ;     x++;  }  }    "
+  "body": "  A function only needs to inspect a std::array<int, 5> . Which parameter avoids a copy and prevents the function from modifying the caller's array?     const std::array<int, 5>& values  A const reference avoids copying and provides read-only access.    std::array<int, 5> values  This parameter receives a copy of the entire array.    std::array<int, 5>& values  This permits modification, which the function does not need.    "
 },
 {
-  "id": "chapter6_functions",
+  "id": "chapter6_arrays_modify-reference-parameter",
+  "level": "2",
+  "url": "chapter6_arrays.html#chapter6_arrays_modify-reference-parameter",
+  "type": "Checkpoint",
+  "number": "6.6.4",
+  "title": "",
+  "body": "  A function must add 5 to every element of the caller's std::array<int, 5> . Which parameter is appropriate?     std::array<int, 5>& values  A non-const reference lets the function modify the original array.    const std::array<int, 5>& values  Const references cannot be used to modify the elements.    std::array<int, 5> values  This changes only a copy, so the caller's array remains unchanged.    "
+},
+{
+  "id": "chapter6_range-based-for-loops",
   "level": "1",
-  "url": "chapter6_functions.html",
+  "url": "chapter6_range-based-for-loops.html",
   "type": "Section",
   "number": "6.7",
-  "title": "Functions",
-  "body": " Functions  In the last section I mentioned all the things functions are good for. About this time, you might be wondering what exactly those things are. Here are some of the reasons functions are useful:  7     By giving a name to a sequence of statements, you make your program easier to read and debug.    Dividing a long program into functions allows you to separate parts of the program, debug them in isolation, and then compose them into a whole.    Functions facilitate both recursion and iteration.    Well-designed functions are often useful for many programs. Once you write and debug one, you can reuse it.     For example, instead of writing the 53 lines of code below…   #include <iostream> int main() { int x = 4; x = x * 2; x = x \/ 2; x = x + 2; x = x - 2; std::cout << x << std::endl; x = 13; x = x * 2; x = x \/ 2; x = x + 2; x = x - 2; std::cout << x << std::endl; x = 100; x = x * 2; x = x \/ 2; x = x + 2; x = x - 2; std::cout << x << std::endl; x = 22; x = x * 2; x = x \/ 2; x = x + 2; x = x - 2; std::cout << x << std::endl; x = 220; x = x * 2; x = x \/ 2; x = x + 2; x = x - 2; std::cout << x << std::endl; x = 0; x = x * 2; x = x \/ 2; x = x + 2; x = x - 2; std::cout << x << std::endl; x = 1000; x = x * 2; x = x \/ 2; x = x + 2; x = x - 2; std::cout << x << std::endl; x = 254; x = x * 2; x = x \/ 2; x = x + 2; x = x - 2; std::cout << x << std::endl; }   ..you would reduce it to the 21 lines of code below, making it easier to read, debug, and use the function many times with rewriting it each time.   #include <iostream> void all_operators(int x) { x = x * 2; x = x \/ 2; x = x + 2; x = x - 2; std::cout << x << std::endl; } int main() { all_operators(4); all_operators(13); all_operators(100); all_operators(22); all_operators(220); all_operators(0); all_operators(1000); all_operators(254); }     What is a function in C++?      A named sequence\/group of statements that perform a particular task.   Yes, a function is a named sequence of statements.     Any sequence of statements.   While functions contain sequences of statements, not all sequences of statements are considered functions.     A mathematical expression that calculates a value.   While some functions do calculate values, the python idea of a function is slightly different from the mathematical idea of a function in that not all functions calculate values. Consider, for example, the turtle functions in this section. They made the turtle draw a specific shape, rather than calculating a value.     A statement of the form x = 5 + 4.   This statement is called an assignment statement. It assigns the value on the right (9), to the name on the left (x).       Create a function called absoluteValue , which returns the absolute value of a parameter num . Assume you do not have access to #include <cmath> .     int absoluteValue(int num) {    void absoluteValue(int num) {    int absoluteValue(int num)    void absoluteValue(int num)    if (num > 0) {    return num;  }    else {    int absNum = -(num);    return absNum;  }  }       What is of these is NOT a reason that functions are useful?      Once you write and debug a function, you can reuse it.   The reusability of functions is very useful.     Makes your program easier to read and debug.   By abstracting blocks of code, functions make your code easier to read and understand.     Functions facilitate both recursion and iteration.   Recursive functions and iterative functions are useful.     None of the above.   All of the choices above are reasons for why functions are useful.     "
+  "title": "Range-Based <code class=\"code-inline tex2jax_ignore\">for<\/code> Loops",
+  "body": " Range-Based for Loops  Indexed iteration is useful when a program needs an element's position. Often, however, a program only needs to process every element. A range-based for loop visits each element directly, without requiring the programmer to manage an index.  The general syntax is:   for (element_declaration : collection) { statements_to_repeat; }   The collection is the range to visit. During each iteration, the loop variable refers to one element in that collection.   #include <array> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; for (int score : scores) { std::cout << score << '\\n'; } return 0; }   The loop above reads as for each score in scores . The loop visits the elements in order, but the program does not need to write an index or use the subscript operator.   Copies and References  The declaration of the loop variable determines how each element is handled. A plain variable receives a copy of the element. A reference can refer directly to the element in the collection.   Loop-variable declarations    Declaration  Meaning    int value  Work with a copy of each value.    const int& value  Read the original value without modifying it.    int& value  Refer to the original value and allow modification.     For small types such as int , copying is usually simple. For larger structures and class objects, a const reference can avoid unnecessary copies while preserving read-only access.   #include <array> #include <iostream> #include <string> int main() { const std::array<std::string, 3> names{\"Amina\", \"Luis\", \"Maya\"}; for (const std::string& name : names) { std::cout << name << '\\n'; } return 0; }   A non- const reference allows the loop to change the original elements.   #include <array> #include <iostream> int main() { std::array<int, 3> scores{70, 80, 90}; for (int& score : scores) { score += 5; } for (int score : scores) { std::cout << score << '\\n'; } return 0; }     Arrays of Structures  A range-based loop can visit structures just as it visits simple values. The loop variable has the structure type, so the program can access the structure's members.   #include <array> #include <iostream> struct Point { double x; double y; }; int main() { const std::array<Point, 3> points{ Point{1.0, 2.0}, Point{3.0, 4.0}, Point{5.0, 6.0} }; for (const Point& point : points) { std::cout << '(' << point.x << \", \" << point.y << \")\\n\"; } return 0; }   The declaration const Point& point gives the loop a read-only reference to each point. The loop does not copy each structure, and it cannot modify the array's points through that reference.    Arrays of Class Objects  The same idea works with class objects. Instead of accessing public data, the loop can call a public member function on each object.   #include <array> #include <iostream> class Rectangle { private: double width; double height; public: Rectangle(double rectangle_width, double rectangle_height) : width{rectangle_width}, height{rectangle_height} { } double calculate_area() const { return width * height; } }; int main() { const std::array<Rectangle, 2> rectangles{ Rectangle{4.0, 3.0}, Rectangle{5.0, 2.0} }; for (const Rectangle& rectangle : rectangles) { std::cout << rectangle.calculate_area() << '\\n'; } return 0; }   The phrase for each object is a useful clue that a range-based loop may be appropriate. The type of the object determines whether the loop accesses data members or calls member functions.     Enter the complete term used for a loop that visits each element of a collection directly: .             Which loop variable declaration is most appropriate for reading each large object without copying it or modifying it?     const Rectangle& rectangle  A const reference avoids a copy and prevents modification through the loop variable.    Rectangle rectangle  This declaration creates a copy of each object.    Rectangle& rectangle  This reference allows modification, which is not needed for a read-only traversal.       Which declaration allows a range-based loop to modify each original integer in the array?     int& value  A non-const reference refers to the original array element.    int value  This loop variable receives a copy, so changing it does not change the array.    const int& value  The const qualifier prevents modification through the reference.       A function that belongs to a class and is called through an object is a .             Which loop organization correctly processes every Rectangle object while preserving encapsulation?      Use const Rectangle& rectangle and call the public member function rectangle.calculate_area() .   The class controls access to its private data through its public operation.    Access rectangle.width directly from main .  width is private, so outside code should use a public member function.    Create a new Rectangle class inside every loop iteration.  The array already contains the objects to process.     "
 },
 {
-  "id": "chapter6_functions-2",
+  "id": "chapter6_range-based-for-loops-2",
   "level": "2",
-  "url": "chapter6_functions.html#chapter6_functions-2",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In the last section I mentioned all the things functions are good for. About this time, you might be wondering what exactly those things are. Here are some of the reasons functions are useful: "
+  "body": "Indexed iteration is useful when a program needs an element's position. Often, however, a program only needs to process every element. A range-based for loop visits each element directly, without requiring the programmer to manage an index. "
 },
 {
-  "id": "chapter6_functions-3",
+  "id": "chapter6_range-based-for-loops-3",
   "level": "2",
-  "url": "chapter6_functions.html#chapter6_functions-3",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops-3",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "7 "
+  "body": "The general syntax is: "
 },
 {
-  "id": "chapter6_functions-4",
+  "id": "chapter6_range-based-for-loops-5",
   "level": "2",
-  "url": "chapter6_functions.html#chapter6_functions-4",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops-5",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "   By giving a name to a sequence of statements, you make your program easier to read and debug.    Dividing a long program into functions allows you to separate parts of the program, debug them in isolation, and then compose them into a whole.    Functions facilitate both recursion and iteration.    Well-designed functions are often useful for many programs. Once you write and debug one, you can reuse it.    "
+  "body": "The collection is the range to visit. During each iteration, the loop variable refers to one element in that collection. "
 },
 {
-  "id": "chapter6_functions-5",
+  "id": "chapter6_range-based-for-loops-7",
   "level": "2",
-  "url": "chapter6_functions.html#chapter6_functions-5",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops-7",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "For example, instead of writing the 53 lines of code below… "
+  "body": "The loop above reads as for each score in scores . The loop visits the elements in order, but the program does not need to write an index or use the subscript operator. "
 },
 {
-  "id": "chapter6_functions-7",
+  "id": "chapter6_range-based-for-loops_references",
   "level": "2",
-  "url": "chapter6_functions.html#chapter6_functions-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "..you would reduce it to the 21 lines of code below, making it easier to read, debug, and use the function many times with rewriting it each time. "
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_references",
+  "type": "Subsection",
+  "number": "6.7.1",
+  "title": "Copies and References",
+  "body": " Copies and References  The declaration of the loop variable determines how each element is handled. A plain variable receives a copy of the element. A reference can refer directly to the element in the collection.   Loop-variable declarations    Declaration  Meaning    int value  Work with a copy of each value.    const int& value  Read the original value without modifying it.    int& value  Refer to the original value and allow modification.     For small types such as int , copying is usually simple. For larger structures and class objects, a const reference can avoid unnecessary copies while preserving read-only access.   #include <array> #include <iostream> #include <string> int main() { const std::array<std::string, 3> names{\"Amina\", \"Luis\", \"Maya\"}; for (const std::string& name : names) { std::cout << name << '\\n'; } return 0; }   A non- const reference allows the loop to change the original elements.   #include <array> #include <iostream> int main() { std::array<int, 3> scores{70, 80, 90}; for (int& score : scores) { score += 5; } for (int score : scores) { std::cout << score << '\\n'; } return 0; }   "
 },
 {
-  "id": "functions_1",
+  "id": "chapter6_range-based-for-loops_structures",
   "level": "2",
-  "url": "chapter6_functions.html#functions_1",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_structures",
+  "type": "Subsection",
+  "number": "6.7.2",
+  "title": "Arrays of Structures",
+  "body": " Arrays of Structures  A range-based loop can visit structures just as it visits simple values. The loop variable has the structure type, so the program can access the structure's members.   #include <array> #include <iostream> struct Point { double x; double y; }; int main() { const std::array<Point, 3> points{ Point{1.0, 2.0}, Point{3.0, 4.0}, Point{5.0, 6.0} }; for (const Point& point : points) { std::cout << '(' << point.x << \", \" << point.y << \")\\n\"; } return 0; }   The declaration const Point& point gives the loop a read-only reference to each point. The loop does not copy each structure, and it cannot modify the array's points through that reference.  "
+},
+{
+  "id": "chapter6_range-based-for-loops_classes",
+  "level": "2",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_classes",
+  "type": "Subsection",
+  "number": "6.7.3",
+  "title": "Arrays of Class Objects",
+  "body": " Arrays of Class Objects  The same idea works with class objects. Instead of accessing public data, the loop can call a public member function on each object.   #include <array> #include <iostream> class Rectangle { private: double width; double height; public: Rectangle(double rectangle_width, double rectangle_height) : width{rectangle_width}, height{rectangle_height} { } double calculate_area() const { return width * height; } }; int main() { const std::array<Rectangle, 2> rectangles{ Rectangle{4.0, 3.0}, Rectangle{5.0, 2.0} }; for (const Rectangle& rectangle : rectangles) { std::cout << rectangle.calculate_area() << '\\n'; } return 0; }   The phrase for each object is a useful clue that a range-based loop may be appropriate. The type of the object determines whether the loop accesses data members or calls member functions.  "
+},
+{
+  "id": "chapter6_range-based-for-loops_term",
+  "level": "2",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_term",
   "type": "Checkpoint",
   "number": "6.7.1",
   "title": "",
-  "body": "  What is a function in C++?      A named sequence\/group of statements that perform a particular task.   Yes, a function is a named sequence of statements.     Any sequence of statements.   While functions contain sequences of statements, not all sequences of statements are considered functions.     A mathematical expression that calculates a value.   While some functions do calculate values, the python idea of a function is slightly different from the mathematical idea of a function in that not all functions calculate values. Consider, for example, the turtle functions in this section. They made the turtle draw a specific shape, rather than calculating a value.     A statement of the form x = 5 + 4.   This statement is called an assignment statement. It assigns the value on the right (9), to the name on the left (x).    "
+  "body": "  Enter the complete term used for a loop that visits each element of a collection directly: .          "
 },
 {
-  "id": "functions_2",
+  "id": "chapter6_range-based-for-loops_const-reference",
   "level": "2",
-  "url": "chapter6_functions.html#functions_2",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_const-reference",
   "type": "Checkpoint",
   "number": "6.7.2",
   "title": "",
-  "body": "  Create a function called absoluteValue , which returns the absolute value of a parameter num . Assume you do not have access to #include <cmath> .     int absoluteValue(int num) {    void absoluteValue(int num) {    int absoluteValue(int num)    void absoluteValue(int num)    if (num > 0) {    return num;  }    else {    int absNum = -(num);    return absNum;  }  }    "
+  "body": "  Which loop variable declaration is most appropriate for reading each large object without copying it or modifying it?     const Rectangle& rectangle  A const reference avoids a copy and prevents modification through the loop variable.    Rectangle rectangle  This declaration creates a copy of each object.    Rectangle& rectangle  This reference allows modification, which is not needed for a read-only traversal.    "
 },
 {
-  "id": "functions_3",
+  "id": "chapter6_range-based-for-loops_modify",
   "level": "2",
-  "url": "chapter6_functions.html#functions_3",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_modify",
   "type": "Checkpoint",
   "number": "6.7.3",
   "title": "",
-  "body": "  What is of these is NOT a reason that functions are useful?      Once you write and debug a function, you can reuse it.   The reusability of functions is very useful.     Makes your program easier to read and debug.   By abstracting blocks of code, functions make your code easier to read and understand.     Functions facilitate both recursion and iteration.   Recursive functions and iterative functions are useful.     None of the above.   All of the choices above are reasons for why functions are useful.    "
+  "body": "  Which declaration allows a range-based loop to modify each original integer in the array?     int& value  A non-const reference refers to the original array element.    int value  This loop variable receives a copy, so changing it does not change the array.    const int& value  The const qualifier prevents modification through the reference.    "
 },
 {
-  "id": "chapter6_more-encapsulation",
+  "id": "chapter6_range-based-for-loops_member-function",
+  "level": "2",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_member-function",
+  "type": "Checkpoint",
+  "number": "6.7.4",
+  "title": "",
+  "body": "  A function that belongs to a class and is called through an object is a .          "
+},
+{
+  "id": "chapter6_range-based-for-loops_encapsulation",
+  "level": "2",
+  "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_encapsulation",
+  "type": "Checkpoint",
+  "number": "6.7.5",
+  "title": "",
+  "body": "  Which loop organization correctly processes every Rectangle object while preserving encapsulation?      Use const Rectangle& rectangle and call the public member function rectangle.calculate_area() .   The class controls access to its private data through its public operation.    Access rectangle.width directly from main .  width is private, so outside code should use a public member function.    Create a new Rectangle class inside every loop iteration.  The array already contains the objects to process.    "
+},
+{
+  "id": "chapter6_nested-iteration",
   "level": "1",
-  "url": "chapter6_more-encapsulation.html",
+  "url": "chapter6_nested-iteration.html",
   "type": "Section",
   "number": "6.8",
-  "title": "More encapsulation",
-  "body": " More encapsulation  To demonstrate encapsulation again, I'll take the code from the previous section and wrap it up in a function:  void printMultTable() { int i = 1; while (i <= 6) { printMultiples(i); i = i + 1; } }  The process I am demonstrating is a common development plan. You develop code gradually by adding lines to main or someplace else, and then when you get it working, you extract it and wrap it up in a function.  The reason this is useful is that you sometimes don't know when you start writing exactly how to divide the program into functions. This approach lets you design as you go along.   This active code uses the printMultTable function. Run the active code to see what happens!   #include <iostream> void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << '\\t'; i = i + 1; } std::cout << std::endl; } void printMultTable() { int i = 1; while (i <= 6) { printMultiples(i); i = i + 1; } } int main() { printMultTable(); }    "
+  "title": "Nested Iteration",
+  "body": " Nested Iteration  A loop can contain another loop. This is called nested iteration . The inner loop completes all of its repetitions for each repetition of the outer loop.  For example, the following program prints a simple pattern. The outer loop chooses the row, and the inner loop prints the required number of symbols in that row.   #include <iostream> int main() { for (int row = 1; row <= 4; ++row) { for (int symbol = 1; symbol <= row; ++symbol) { std::cout << '*'; } std::cout << '\\n'; } return 0; }    * ** *** ****   The vocabulary for each row and for each symbol in that row describes the two levels of repetition. Nested iteration does not require a two-dimensional array. It is useful whenever one repeated task must be completed inside another repeated task.   Comparing Pairs  Nested loops can also examine pairs of values. The outer loop chooses the first value, and the inner loop chooses the second value. This pattern is useful for comparing every item with other items.   #include <array> #include <iostream> int main() { const std::array<int, 3> values{2, 4, 6}; for (int first : values) { for (int second : values) { std::cout << first << \", \" << second << '\\n'; } } return 0; }      In nested iteration, the inner loop completes its repetitions for each repetition of the loop.             Which organization prints three rows with two stars in each row?      An outer loop that runs for rows 1 through 3 and an inner loop that runs for symbols 1 through 2.   The outer loop controls rows and the inner loop controls symbols in a row.     An outer loop that runs for symbols 1 through 2 and an inner loop that runs for rows 1 through 3.   This reverses the roles of the two loops.     One loop that runs six times and no separate row operation.   That would not organize the output into three rows.     "
 },
 {
-  "id": "chapter6_more-encapsulation-2",
+  "id": "chapter6_nested-iteration-2",
   "level": "2",
-  "url": "chapter6_more-encapsulation.html#chapter6_more-encapsulation-2",
+  "url": "chapter6_nested-iteration.html#chapter6_nested-iteration-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "To demonstrate encapsulation again, I'll take the code from the previous section and wrap it up in a function: "
+  "body": "A loop can contain another loop. This is called nested iteration . The inner loop completes all of its repetitions for each repetition of the outer loop. "
 },
 {
-  "id": "chapter6_more-encapsulation-4",
+  "id": "chapter6_nested-iteration-3",
   "level": "2",
-  "url": "chapter6_more-encapsulation.html#chapter6_more-encapsulation-4",
+  "url": "chapter6_nested-iteration.html#chapter6_nested-iteration-3",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The process I am demonstrating is a common development plan. You develop code gradually by adding lines to main or someplace else, and then when you get it working, you extract it and wrap it up in a function. "
+  "body": "For example, the following program prints a simple pattern. The outer loop chooses the row, and the inner loop prints the required number of symbols in that row. "
 },
 {
-  "id": "chapter6_more-encapsulation-5",
+  "id": "chapter6_nested-iteration-6",
   "level": "2",
-  "url": "chapter6_more-encapsulation.html#chapter6_more-encapsulation-5",
+  "url": "chapter6_nested-iteration.html#chapter6_nested-iteration-6",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The reason this is useful is that you sometimes don't know when you start writing exactly how to divide the program into functions. This approach lets you design as you go along. "
+  "body": "The vocabulary for each row and for each symbol in that row describes the two levels of repetition. Nested iteration does not require a two-dimensional array. It is useful whenever one repeated task must be completed inside another repeated task. "
 },
 {
-  "id": "more_encapsulation_AC_1",
+  "id": "chapter6_nested-iteration_comparing-pairs",
   "level": "2",
-  "url": "chapter6_more-encapsulation.html#more_encapsulation_AC_1",
-  "type": "Listing",
+  "url": "chapter6_nested-iteration.html#chapter6_nested-iteration_comparing-pairs",
+  "type": "Subsection",
   "number": "6.8.1",
-  "title": "This active code uses the <code class=\"code-inline tex2jax_ignore\">printMultTable<\/code> function. Run the active code to see what happens!",
-  "body": " This active code uses the printMultTable function. Run the active code to see what happens!   #include <iostream> void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << '\\t'; i = i + 1; } std::cout << std::endl; } void printMultTable() { int i = 1; while (i <= 6) { printMultiples(i); i = i + 1; } } int main() { printMultTable(); }   "
+  "title": "Comparing Pairs",
+  "body": " Comparing Pairs  Nested loops can also examine pairs of values. The outer loop chooses the first value, and the inner loop chooses the second value. This pattern is useful for comparing every item with other items.   #include <array> #include <iostream> int main() { const std::array<int, 3> values{2, 4, 6}; for (int first : values) { for (int second : values) { std::cout << first << \", \" << second << '\\n'; } } return 0; }   "
 },
 {
-  "id": "chapter6_local-variables",
-  "level": "1",
-  "url": "chapter6_local-variables.html",
-  "type": "Section",
-  "number": "6.9",
-  "title": "Local variables",
-  "body": " Local variables  About this time, you might be wondering how we can use the same variable i in both printMultiples and printMultTable . Didn't I say that you can only declare a variable once? And doesn't it cause problems when one of the functions changes the value of the variable?  The answer to both questions is no, because the i in printMultiples and the i in printMultTable are not the same variable . They have the same name, but they do not refer to the same storage location, and changing the value of one of them has no effect on the other.   Remember that variables that are declared inside a function definition are local. You cannot access a local variable from outside its home function, and you are free to have multiple variables with the same name, as long as they are not in the same function scope.   The stack diagram for this program shows clearly that the two variables named i are not in the same storage location. They can have different values, and changing one does not affect the other.   Stack Diagram   A stack of three boxes. The top one is 'main' and is empty. The next is 'printMultTable' and contains 'i = 1'. The next is 'printMultiples' and contains n=1, i = 3'.\"    Notice that the value of the parameter n in printMultiples has to be the same as the value of i in printMultTable . On the other hand, the value of i in printMultiples goes from 1 up to n . In the diagram, it happens to be 3. The next time through the loop it will be 4.  It is often a good idea to use different variable names in different functions, to avoid confusion, but there are good reasons to reuse names. For example, it is common to use the names i , j and k as loop variables. If you avoid using them in one function just because you used them somewhere else, you will probably make the program harder to read.    Are there any issues with the code below?   #include <iostream> int main() { std::cout << \"Let's print the multiples of 2.\" << std::endl; int i = 1; while (i < 10) { int j = i * 2; std::cout << i << \": \" << j << std::endl; i++; } i = 10; j = 20; std::cout << i << \": \" << j << \"!\"; }       Yes, we cannot output the value of j outside of the loop.   The scope of i is restricted to the loop, so we cannot change the value of i outside of the loop.     Yes, we cannot output anything before the loop.   This is allowed.     Yes, we cannot reassign j to 20 outside of the loop.   The scope of i is restricted to the loop, so we cannot output the value of i outside of the loop.     Yes, we cannot let i start at 1 in the loop.   We are allowed to initialize i to any value.     No, there are no issues with the code below.   There are issues with the code. Can you find them?       Take a look at the code below. Is the i in printMultiples the same variable as the i in printMultTable ?   #include <iostream> void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << '\\t'; i = i + 1; } std::cout << std::endl; } void printMultTable() { int i = 1; while (i <= 6) { printMultiples(i); i = i + 1; } } int main() { printMultTable(); }       Yes   They are two different variables in two different scopes, but they do have the same name.     No   Correct! They are not the same variable.       Take a look at the code below. Is the variable j accessible in the function printMultiples ?   #include <iostream> void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << '\\t'; i = i + 1; } std::cout << std::endl; } void printMultTable() { int j = 1; while (j <= 6) { printMultiples(j); j = j + 1; } } int main() { printMultTable(); }       Yes   The scope of j does not include printMultiples function.     No   Correct! j is not accessable as the value is merely passes from one function to another. We cannot have a statement such as j++; in printMultiples as it is out of the scope of printMultTable      "
-},
-{
-  "id": "chapter6_local-variables-2",
+  "id": "chapter6_nested-iteration_short-answer",
   "level": "2",
-  "url": "chapter6_local-variables.html#chapter6_local-variables-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "About this time, you might be wondering how we can use the same variable i in both printMultiples and printMultTable . Didn't I say that you can only declare a variable once? And doesn't it cause problems when one of the functions changes the value of the variable? "
-},
-{
-  "id": "chapter6_local-variables-3",
-  "level": "2",
-  "url": "chapter6_local-variables.html#chapter6_local-variables-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The answer to both questions is no, because the i in printMultiples and the i in printMultTable are not the same variable . They have the same name, but they do not refer to the same storage location, and changing the value of one of them has no effect on the other. "
-},
-{
-  "id": "chapter6_local-variables-4",
-  "level": "2",
-  "url": "chapter6_local-variables.html#chapter6_local-variables-4",
-  "type": "Note",
-  "number": "6.9.1",
-  "title": "",
-  "body": " Remember that variables that are declared inside a function definition are local. You cannot access a local variable from outside its home function, and you are free to have multiple variables with the same name, as long as they are not in the same function scope.  "
-},
-{
-  "id": "chapter6_local-variables-5",
-  "level": "2",
-  "url": "chapter6_local-variables.html#chapter6_local-variables-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The stack diagram for this program shows clearly that the two variables named i are not in the same storage location. They can have different values, and changing one does not affect the other. "
-},
-{
-  "id": "chapter6_local-variables-6",
-  "level": "2",
-  "url": "chapter6_local-variables.html#chapter6_local-variables-6",
-  "type": "Figure",
-  "number": "6.9.1",
-  "title": "",
-  "body": " Stack Diagram   A stack of three boxes. The top one is 'main' and is empty. The next is 'printMultTable' and contains 'i = 1'. The next is 'printMultiples' and contains n=1, i = 3'.\"   "
-},
-{
-  "id": "chapter6_local-variables-7",
-  "level": "2",
-  "url": "chapter6_local-variables.html#chapter6_local-variables-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Notice that the value of the parameter n in printMultiples has to be the same as the value of i in printMultTable . On the other hand, the value of i in printMultiples goes from 1 up to n . In the diagram, it happens to be 3. The next time through the loop it will be 4. "
-},
-{
-  "id": "chapter6_local-variables-8",
-  "level": "2",
-  "url": "chapter6_local-variables.html#chapter6_local-variables-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "It is often a good idea to use different variable names in different functions, to avoid confusion, but there are good reasons to reuse names. For example, it is common to use the names i , j and k as loop variables. If you avoid using them in one function just because you used them somewhere else, you will probably make the program harder to read. "
-},
-{
-  "id": "local_variables_1",
-  "level": "2",
-  "url": "chapter6_local-variables.html#local_variables_1",
+  "url": "chapter6_nested-iteration.html#chapter6_nested-iteration_short-answer",
   "type": "Checkpoint",
-  "number": "6.9.1",
+  "number": "6.8.1",
   "title": "",
-  "body": "  Are there any issues with the code below?   #include <iostream> int main() { std::cout << \"Let's print the multiples of 2.\" << std::endl; int i = 1; while (i < 10) { int j = i * 2; std::cout << i << \": \" << j << std::endl; i++; } i = 10; j = 20; std::cout << i << \": \" << j << \"!\"; }       Yes, we cannot output the value of j outside of the loop.   The scope of i is restricted to the loop, so we cannot change the value of i outside of the loop.     Yes, we cannot output anything before the loop.   This is allowed.     Yes, we cannot reassign j to 20 outside of the loop.   The scope of i is restricted to the loop, so we cannot output the value of i outside of the loop.     Yes, we cannot let i start at 1 in the loop.   We are allowed to initialize i to any value.     No, there are no issues with the code below.   There are issues with the code. Can you find them?    "
+  "body": "  In nested iteration, the inner loop completes its repetitions for each repetition of the loop.          "
 },
 {
-  "id": "local_variables_2",
+  "id": "chapter6_nested-iteration_organization",
   "level": "2",
-  "url": "chapter6_local-variables.html#local_variables_2",
+  "url": "chapter6_nested-iteration.html#chapter6_nested-iteration_organization",
   "type": "Checkpoint",
-  "number": "6.9.2",
+  "number": "6.8.2",
   "title": "",
-  "body": "  Take a look at the code below. Is the i in printMultiples the same variable as the i in printMultTable ?   #include <iostream> void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << '\\t'; i = i + 1; } std::cout << std::endl; } void printMultTable() { int i = 1; while (i <= 6) { printMultiples(i); i = i + 1; } } int main() { printMultTable(); }       Yes   They are two different variables in two different scopes, but they do have the same name.     No   Correct! They are not the same variable.    "
-},
-{
-  "id": "local_variables_3",
-  "level": "2",
-  "url": "chapter6_local-variables.html#local_variables_3",
-  "type": "Checkpoint",
-  "number": "6.9.3",
-  "title": "",
-  "body": "  Take a look at the code below. Is the variable j accessible in the function printMultiples ?   #include <iostream> void printMultiples(int n) { int i = 1; while (i <= 6) { std::cout << n * i << '\\t'; i = i + 1; } std::cout << std::endl; } void printMultTable() { int j = 1; while (j <= 6) { printMultiples(j); j = j + 1; } } int main() { printMultTable(); }       Yes   The scope of j does not include printMultiples function.     No   Correct! j is not accessable as the value is merely passes from one function to another. We cannot have a statement such as j++; in printMultiples as it is out of the scope of printMultTable     "
-},
-{
-  "id": "chapter6_more-generalization",
-  "level": "1",
-  "url": "chapter6_more-generalization.html",
-  "type": "Section",
-  "number": "6.10",
-  "title": "More generalization",
-  "body": " More generalization  As another example of generalization, imagine you wanted a program that would print a multiplication table of any size, not just the 6x6 table. You could add a parameter to printMultTable :  void printMultTable(int high) { int i = 1; while (i <= high) { printMultiples(i); i = i + 1; } }  I replaced the value 6 with the parameter high . If I call printMultTable with the argument 7, I get  1 2 3 4 5 6 2 4 6 8 10 12 3 6 9 12 15 18 4 8 12 16 20 24 5 10 15 20 25 30 6 12 18 24 30 36 7 14 21 28 35 42  which is fine, except that I probably want the table to be square (same number of rows and columns), which means I have to add another parameter to printMultiples , to specify how many columns the table should have.  Just to be annoying, I will also call this parameter high , demonstrating that different functions can have parameters with the same name (just like local variables):  void printMultiples(int n, int high) { int i = 1; while (i <= high) { std::cout << n * i << \" \"; i = i + 1; } std::cout << std::endl ; } void printMultTable(int high) { int i = 1; while (i <= high) { printMultiples(i, high); i = i + 1; } }  Notice that when I added a new parameter, I had to change the first line of the function (the interface or prototype), and I also had to change the place where the function is called in printMultTable . As expected, this program generates a square 7x7 table:  1 2 3 4 5 6 7 2 4 6 8 10 12 14 3 6 9 12 15 18 21 4 8 12 16 20 24 28 5 10 15 20 25 30 35 6 12 18 24 30 36 42 7 14 21 28 35 42 49   This active code uses the updated printMultTable function. Notice that with generalization, we can create multiplication tables of multiple sizes by simply changing the parameter passed into printMultTable . Run the active code to see what happens!   #include <iostream> void printMultiples(int n, int high) { int i = 1; while (i <= high) { std::cout << n * i << \"\\t\"; i = i + 1; } std::cout << std::endl; } void printMultTable(int high) { int i = 1; while (i <= high) { printMultiples(i, high); i = i + 1; } } int main() { printMultTable(7); }    When you generalize a function appropriately, you often find that the resulting program has capabilities you did not intend. For example, you might notice that the multiplication table is symmetric, because , so all the entries in the table appear twice. You could save ink by printing only half the table. To do that, you only have to change one line of printMultTable . Change  printMultiples(i, high);  to  printMultiples(i, i);  and you get  1 2 4 3 6 9 4 8 12 16 5 10 15 20 25 6 12 18 24 30 36 7 14 21 28 35 42 49  I'll leave it up to you to figure out how it works.   This active code prints half the multiplication table. We can achieve this by replacing the printMultiples(i, high) in printMultTable with printMultiples(i, i) . Run the active code to see what happens!   #include <iostream> void printMultiples(int n, int high) { int i = 1; while (i <= high) { std::cout << n * i << \"\\t\"; i = i + 1; } std::cout << std::endl; } void printMultTable(int high) { int i = 1; while (i <= high) { printMultiples(i, i); i = i + 1; } } int main() { printMultTable(7); }    "
-},
-{
-  "id": "chapter6_more-generalization-2",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#chapter6_more-generalization-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "As another example of generalization, imagine you wanted a program that would print a multiplication table of any size, not just the 6x6 table. You could add a parameter to printMultTable : "
-},
-{
-  "id": "chapter6_more-generalization-4",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#chapter6_more-generalization-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "I replaced the value 6 with the parameter high . If I call printMultTable with the argument 7, I get "
-},
-{
-  "id": "chapter6_more-generalization-6",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#chapter6_more-generalization-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "which is fine, except that I probably want the table to be square (same number of rows and columns), which means I have to add another parameter to printMultiples , to specify how many columns the table should have. "
-},
-{
-  "id": "chapter6_more-generalization-7",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#chapter6_more-generalization-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Just to be annoying, I will also call this parameter high , demonstrating that different functions can have parameters with the same name (just like local variables): "
-},
-{
-  "id": "chapter6_more-generalization-9",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#chapter6_more-generalization-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Notice that when I added a new parameter, I had to change the first line of the function (the interface or prototype), and I also had to change the place where the function is called in printMultTable . As expected, this program generates a square 7x7 table: "
-},
-{
-  "id": "more_generalization_AC_1",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#more_generalization_AC_1",
-  "type": "Listing",
-  "number": "6.10.1",
-  "title": "This active code uses the updated <code class=\"code-inline tex2jax_ignore\">printMultTable<\/code> function. Notice that with generalization, we can create multiplication tables of multiple sizes by simply changing the parameter passed into <code class=\"code-inline tex2jax_ignore\">printMultTable<\/code>. Run the active code to see what happens!",
-  "body": " This active code uses the updated printMultTable function. Notice that with generalization, we can create multiplication tables of multiple sizes by simply changing the parameter passed into printMultTable . Run the active code to see what happens!   #include <iostream> void printMultiples(int n, int high) { int i = 1; while (i <= high) { std::cout << n * i << \"\\t\"; i = i + 1; } std::cout << std::endl; } void printMultTable(int high) { int i = 1; while (i <= high) { printMultiples(i, high); i = i + 1; } } int main() { printMultTable(7); }   "
-},
-{
-  "id": "chapter6_more-generalization-12",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#chapter6_more-generalization-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "When you generalize a function appropriately, you often find that the resulting program has capabilities you did not intend. For example, you might notice that the multiplication table is symmetric, because , so all the entries in the table appear twice. You could save ink by printing only half the table. To do that, you only have to change one line of printMultTable . Change "
-},
-{
-  "id": "chapter6_more-generalization-14",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#chapter6_more-generalization-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "to "
-},
-{
-  "id": "chapter6_more-generalization-16",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#chapter6_more-generalization-16",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "and you get "
-},
-{
-  "id": "chapter6_more-generalization-18",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#chapter6_more-generalization-18",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "I'll leave it up to you to figure out how it works. "
-},
-{
-  "id": "more_generalization_AC_2",
-  "level": "2",
-  "url": "chapter6_more-generalization.html#more_generalization_AC_2",
-  "type": "Listing",
-  "number": "6.10.2",
-  "title": "This active code prints half the multiplication table. We can achieve this by replacing the <code class=\"code-inline tex2jax_ignore\">printMultiples(i, high)<\/code> in <code class=\"code-inline tex2jax_ignore\">printMultTable<\/code> with <code class=\"code-inline tex2jax_ignore\">printMultiples(i, i)<\/code>. Run the active code to see what happens!",
-  "body": " This active code prints half the multiplication table. We can achieve this by replacing the printMultiples(i, high) in printMultTable with printMultiples(i, i) . Run the active code to see what happens!   #include <iostream> void printMultiples(int n, int high) { int i = 1; while (i <= high) { std::cout << n * i << \"\\t\"; i = i + 1; } std::cout << std::endl; } void printMultTable(int high) { int i = 1; while (i <= high) { printMultiples(i, i); i = i + 1; } } int main() { printMultTable(7); }   "
+  "body": "  Which organization prints three rows with two stars in each row?      An outer loop that runs for rows 1 through 3 and an inner loop that runs for symbols 1 through 2.   The outer loop controls rows and the inner loop controls symbols in a row.     An outer loop that runs for symbols 1 through 2 and an inner loop that runs for rows 1 through 3.   This reverses the roles of the two loops.     One loop that runs six times and no separate row operation.   That would not organize the output into three rows.    "
 },
 {
   "id": "chapter6_glossary",
   "level": "1",
   "url": "chapter6_glossary.html",
-  "type": "Section",
-  "number": "6.11",
-  "title": "Glossary",
-  "body": " Glossary    loop  A statement that executes repeatedly while a condition is true or until some condition is satisfied.    infinite loop  A loop whose condition is always true.    body  The statements inside the loop.    iteration  One pass through (execution of) the body of the loop, including the evaluation of the condition.    tab  A special character, written as \\t in C++, that causes the cursor to move to the next tab stop on the current line.    encapsulate  To divide a large complex program into components (like functions) and isolate the components from each other (for example, by using local variables).    local variable  A variable that is declared inside a function and that exists only within that function. Local variables cannot be accessed from outside their home function, and do not interfere with any other functions.    generalize  To replace something unnecessarily specific (like a constant value) with something appropriately general (like a variable or parameter). Generalization makes code more versatile, more likely to be reused, and sometimes even easier to write.    development plan  A process for developing a program. In this chapter, I demonstrated a style of development based on developing code to do simple, specific things, and then encapsulating and generalizing.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    loop  A statement that executes repeatedly while a condition is true or some condition is satisfied.    infinite loop  A loop whose condition is always true.    body  The statements inside the loop.    iteration  One pass through (execution of) the body of the loop, including the valuation of the condition.    tab  A special character, written as \\t in C++, that causes the cursor to move to the next tab stop on the current line.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    encapsulate  To divide a large complex program into components (like functions) and isolate the components from each other (for example, by using local variables).    local variable  A variable that is declared inside a function and that exists only within that function. Local variables cannot be accessed from outside their home function, and do not interfere with any other functions.    generalize  To replace something unnecessarily specific (like a constant value) with something appropriately general (like a variable or parameter).    development plan  A process for developing a program.     "
-},
-{
-  "id": "chapter6_glossary-2",
-  "level": "2",
-  "url": "chapter6_glossary.html#chapter6_glossary-2",
   "type": "Glossary",
-  "number": "6.11",
-  "title": "Glossary",
-  "body": "  loop  A statement that executes repeatedly while a condition is true or until some condition is satisfied.    infinite loop  A loop whose condition is always true.    body  The statements inside the loop.    iteration  One pass through (execution of) the body of the loop, including the evaluation of the condition.    tab  A special character, written as \\t in C++, that causes the cursor to move to the next tab stop on the current line.    encapsulate  To divide a large complex program into components (like functions) and isolate the components from each other (for example, by using local variables).    local variable  A variable that is declared inside a function and that exists only within that function. Local variables cannot be accessed from outside their home function, and do not interfere with any other functions.    generalize  To replace something unnecessarily specific (like a constant value) with something appropriately general (like a variable or parameter). Generalization makes code more versatile, more likely to be reused, and sometimes even easier to write.    development plan  A process for developing a program. In this chapter, I demonstrated a style of development based on developing code to do simple, specific things, and then encapsulating and generalizing.   "
+  "number": "6.9",
+  "title": "Chapter 6 Glossary",
+  "body": " Chapter 6 Glossary   iteration  One repetition of a loop body, or the process of repeating an action.    loop  A programming statement that repeats a group of statements.    loop body  The statements that execute during each iteration of a loop.    loop condition  A Boolean expression that determines whether a loop continues.    infinite loop  A loop that does not stop because its condition never becomes false.    counter  A variable that records how many times an event has occurred.    accumulator  A variable that combines values as a loop processes them.    sentinel value  A special value that tells a loop to stop processing input.    fixed-size array  A collection whose number of elements is set when the array is created.    index  A number that identifies an element's position in an array. The first index is 0.    range-based for loop  A for loop that visits each element in a collection.    nested iteration  Iteration in which one loop is placed inside another loop.    std::array  A C++ standard-library type that represents a fixed-size array.   "
 },
 {
-  "id": "chapter6_glossary-3",
+  "id": "chapter6_glossary_iteration-2",
   "level": "2",
-  "url": "chapter6_glossary.html#chapter6_glossary-3",
-  "type": "Reading Questions",
-  "number": "6.11",
-  "title": "Reading Questions",
-  "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    loop  A statement that executes repeatedly while a condition is true or some condition is satisfied.    infinite loop  A loop whose condition is always true.    body  The statements inside the loop.    iteration  One pass through (execution of) the body of the loop, including the valuation of the condition.    tab  A special character, written as \\t in C++, that causes the cursor to move to the next tab stop on the current line.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    encapsulate  To divide a large complex program into components (like functions) and isolate the components from each other (for example, by using local variables).    local variable  A variable that is declared inside a function and that exists only within that function. Local variables cannot be accessed from outside their home function, and do not interfere with any other functions.    generalize  To replace something unnecessarily specific (like a constant value) with something appropriately general (like a variable or parameter).    development plan  A process for developing a program.    "
+  "url": "chapter6_glossary.html#chapter6_glossary_iteration-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "One repetition of a loop body, or the process of repeating an action. "
 },
 {
-  "id": "chapter6_multiple-choice-exercises",
+  "id": "chapter6_glossary_loop-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_loop-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A programming statement that repeats a group of statements. "
+},
+{
+  "id": "chapter6_glossary_loop-body-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_loop-body-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The statements that execute during each iteration of a loop. "
+},
+{
+  "id": "chapter6_glossary_loop-condition-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_loop-condition-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A Boolean expression that determines whether a loop continues. "
+},
+{
+  "id": "chapter6_glossary_infinite-loop-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_infinite-loop-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A loop that does not stop because its condition never becomes false. "
+},
+{
+  "id": "chapter6_glossary_counter-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_counter-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A variable that records how many times an event has occurred. "
+},
+{
+  "id": "chapter6_glossary_accumulator-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_accumulator-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A variable that combines values as a loop processes them. "
+},
+{
+  "id": "chapter6_glossary_sentinel-value-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_sentinel-value-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A special value that tells a loop to stop processing input. "
+},
+{
+  "id": "chapter6_glossary_fixed-size-array-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_fixed-size-array-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A collection whose number of elements is set when the array is created. "
+},
+{
+  "id": "chapter6_glossary_index-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_index-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A number that identifies an element's position in an array. The first index is 0. "
+},
+{
+  "id": "chapter6_glossary_range-based-for-loop-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_range-based-for-loop-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A for loop that visits each element in a collection. "
+},
+{
+  "id": "chapter6_glossary_nested-iteration-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_nested-iteration-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Iteration in which one loop is placed inside another loop. "
+},
+{
+  "id": "chapter6_glossary_std-array-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_std-array-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A C++ standard-library type that represents a fixed-size array. "
+},
+{
+  "id": "chapter6_exercises",
   "level": "1",
-  "url": "chapter6_multiple-choice-exercises.html",
+  "url": "chapter6_exercises.html",
   "type": "Exercises",
-  "number": "6.12",
-  "title": "Multiple Choice Exercises",
-  "body": " Multiple Choice Exercises    What is the output of the code below?   int main() { int x = 0; int i = 1; while (i < 10) { x = i; i++; } std::cout << x; }       0    x is initialized to 0, but it's value is reassigned in the while loop. Can you figure out what the final value assigned to x is?     1   When i is 1, x is assigned the value of i , so x is 1. However, the while loop continuously increments i, so the final value of x is not 1.     9    x is assigned the value of 9 during the last iteration of the while loop, and thus 9 is the output of the program.     10    i is incremented to a value of 10, but since i < 10 is false, the contents of the while loop is not executed, so x is never assigned the value of 10.       What is the final value of i when the code finished running?   int main() { int x = 0; int i = 1; while (i < 10) { x = i; i++; } std::cout << x; }       0    i is initialized with a value of 1 and is incremented, so it will never have a value of 0.     1    i is initialized with a value of 1 but it is incremented during the while loop.     9   This is the final value of x when the code is finished running.     10   In order for the while loop to terminate, the condition i < 10 must be false, and this is achieved when i is incremented to 10.       How many times does the following while loop run?   int main() { int i = 6; while (i > 2) { i = i + 4; if (i > 8) { i = i - 5; } }       1   Take a closer look at the while loop and conditional.     3   Take a closer look at the while loop and conditional.     5   Take a closer look at the while loop and conditional.     The loop will run infinitely.   The value of i will always be greater than 2, resulting in an infinite loop.       What is the output of the code below?   int main() { int j = 6; int i = j + 4; std::cout << \"People \"; i = i % 2; i = i - 1; while (i < 3) { std::cout << \"really \"; if (i > 0) { std::cout << \"really \"; } i += 2; } std::cout << \"like Joe's Pizza.\" << std::endl ; }       People really like Joe's Pizza.   Take a closer look at the while loop condition.     People really really really like Joe's Pizza.   The code will print out three really s, two from evaluating the while loop condition and one from evaluating the if condition before printing out like Joe's Pizza      People really really really really really like Joe's Pizza.   Take a closer look at the while loop condition.     The loop will run infinetly.   Take a closer look at the while loop condition and reassignment of i        What is the output of the code below?   int main() { int n = 10; \/\/ std::cout << \"Da \"; std::cout << \"na \"; while (n != 3) { std::cout << \"na \"; n--; } std::cout << \"Batman!\"; }       na na na na na na na na Batman!   The code prints out eight na s before printing out Batman!      na na na na na na na Batman!   Look over the code carefully. There are output statements before the while loop.     Da na na na na na na na na Batman!   Will Da ever be printed?     It will result in an infinite loop.   Since we repeatedly decrement n inside the while loop, it will eventually be equal to 3 and the while loop will terminate.       What is the output of the code below?   int main() { int n = 10; std::cout << \"Da \"; std::cout << \"na \"; while (n != 3) { std::cout << \"na \"; } std::cout << \"Batman!\"; }       Batman!   Take a closer look at the while loop.     Da Batman!   Take a closer look at the while loop.     Da na na na na na na na na Batman!   Take a closer look at the while loop.     It will result in an infinite loop.   Since we never change the value of n , 10 will never equal 3 so the code will run forever.       What is the output of the code below?   int main() { int x = 1; while (x < 6) { std::cout << x << \"\\t\" << pow (x, 5) \/ pow (x, 3) << std::endl ; x++; } }       The first six perfect fifths.   Take a closer look at the while loop and what x was initialized to.     The first six perfect squares.   Take a closer look at the while loop and what x was initialized to.     The first five perfect squares.   Dividing x to the power of 5 by x to the power of 3 effectively results in perfect squares.     The first five perfect cubes.   Take a closer look at the mathematical expression inside the while loop.       Why are we allowed to use the variable x in both main and in the function definition of superSecretFunction ?   int superSecretFunction(int n) { int x = 0; return (2 + (n * n) - 5 * n \/ 7) * x; } int main() { int x = 1; std::cout << \"After using the super secret function, we get \" << superSecretFunction (x); }       We're using the same variable, but just reassigning the value from 0 to 1.   We are actually using two different variables that happen to have the same name.     Although the name of both variables is x , they represent different locations in memory, and thus are different variables.   One x is a local variable of superSecretFunction while the other is a local variable of main .     We can assign them different values but not the same value. Thus, if both were initialized to 0, then we'd get an error.   Since they are not in the same storage location, they can store any value, including the same value.     We're not allowed to do this. The code will result in an error.   The code does not produce an error.       What is the output of the code below?   int loopFive(int n) { while (n % 5 != 0) { n = n + 3; } return n; } int main() { std::cout << loopFive (2); std::cout << loopFive (3); std::cout << loopFive (4); }       51510    n is repeatedly incremented by 3 until it is divisible by 5, and this happens when n is 5, 15, and 10 for the inputs of 2, 3, and 4 respectively.     234   Although the function returns n , n might not be its original value.     5 15 10   Take a closer look at the output statements.     567   Take a closer look at the while loop in the function.       The super evil villian RePete wants to annoy the city by hacking into the city's helper robots and making them repeat everything they say 5 times. However, there's an error in his code and now the robots won't stop repeating! Can you find the error?   void repeatBot(string input) { int n = 0; while (n < 5) { std::cout << input << \" \"; n--; } } int main() { repeatBot (\"Hello, how may I help you?\"); }       repeatBot can only take one word as an argument.   A string is any number of characters or words surrounded by double quotes, not just one word.     n is declared to be 0 and 0 is always less than 5.   The code doesn't loop infinitely because of the value n was declared to be.     Every time the while loop runs, n is reset to 0, so it will always be less than 5.   The initialization of n occurs outside the while loop, so the value of n does not get reset to 0.     n is declared to be 0 and we continuously decrement n so it will always be less than 5.   Since n starts at 0 and gets smaller, the conditional for the while loop will always be true, and thus the code runs forever.       After making some changes to his code, RePete tries again. This time, however, the robots don't repeat anything! Can you find the new error?   void repeatBot(string input) { int n = 0; while (n > 5) { std::cout << input << \" \"; n++; } } int main() { repeatBot (\"Hello, how may I help you?\"); }       n > 5 is not a valid conditional, so the while loop doesn't execute.    n > 5 is a boolean statement and thus is a valid conditional.     The value of n never gets modified in the while loop.    n is incremented in the while loop after the cout statement.     In the cout statement, only spaces are printed.    input is also printed.     The conditional for the while loop is not met.   Since n is declared to be 0, 0 is not greater than 5, so the while loop does not execute.     "
+  "number": "6.10",
+  "title": "Exercises",
+  "body": " Exercises    What does a while loop do when its condition is false before the first iteration?     It skips the loop body.  The condition is checked before the body runs.    It runs the body once and then stops.  That behavior belongs to a different loop form. A while loop checks first.    It repeats forever.  A false condition prevents the body from running.    It changes the condition to true.  The loop does not change the condition automatically.       Why does this loop never terminate?  int count = 1; while (count <= 3) { std::cout << count << '\\n'; }     count never changes, so the condition remains true.  Look for a statement that changes the variable in the condition.    The value 3 cannot be used in a loop condition.  Constant limits are common in loops.    std::cout causes an infinite loop.  Output does not determine whether this condition changes.    The loop needs a for statement instead.  A while loop can terminate when its controlling value is updated.       What does this program print?  for (int number = 1; number <= 3; ++number) { std::cout << number << ' '; }    1 2 3 The loop starts at 1 and stops after printing 3.  0 1 2 Check the initialization expression.  1 2 3 4 The condition must still be true before an iteration begins.  3 2 1 The update expression increases the loop variable.      Which part of a for statement normally changes the loop variable after each iteration?    The initialization expression Initialization occurs before the first iteration.  The condition The condition decides whether another iteration may begin.  The update expression The update expression runs after the loop body.  The loop body declaration The three parts of the header have specific roles.      Which variable is the counter in this code?  int even_count = 0; for (int value = 1; value <= 10; ++value) { if (value % 2 == 0) { ++even_count; } }    value value visits the range of numbers.  even_count This variable records how many qualifying values were found.  The expression value % 2 This expression tests whether a value is even.  The condition value <= 10 The condition controls continuation but does not count qualifying values.      Which variable is the accumulator?  int total = 0; for (int value = 1; value <= 4; ++value) { total += value; }    total total combines values during the loop.  value value is the loop variable.  4 The number 4 is the upper limit, not a variable.  += += updates the accumulator.      Which expression accesses the first element of values ?  std::array<int, 3> values{10, 20, 30};    values[0] Array indexing begins at 0.  values[1] This accesses the second element.  values.first() That is not the syntax used here.  values[3] For three elements, valid indexes are 0, 1, and 2.      How many asterisks does this program print?  for (int row = 1; row <= 3; ++row) { for (int symbol = 1; symbol <= 2; ++symbol) { std::cout << '*'; } }    3 Count the inner-loop repetitions for every outer-loop iteration.  5 Each outer iteration runs the complete inner loop.  6 The inner loop prints 2 symbols for each of 3 rows.  9 Multiply the number of outer and inner repetitions.      Which phrase best describes this loop?  std::array<Rectangle, 2> rectangles{ Rectangle{4.0, 3.0}, Rectangle{5.0, 2.0} }; for (const Rectangle& rectangle : rectangles) { std::cout << rectangle.calculate_area() << '\\n'; }    It calls a member function for each object. The loop visits each Rectangle and calls its public operation.  It changes the class definition. The class definition is not changed by the loop.  It accesses a private data member directly. The loop uses the public member function instead.  It creates a new class for every iteration. The objects were created before the loop began.    "
 },
 {
-  "id": "mce_6_1",
+  "id": "chapter6_exercise_while_condition",
   "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_1",
+  "url": "chapter6_exercises.html#chapter6_exercise_while_condition",
   "type": "Exercise",
-  "number": "6.12.1",
+  "number": "6.10.1",
   "title": "",
-  "body": "  What is the output of the code below?   int main() { int x = 0; int i = 1; while (i < 10) { x = i; i++; } std::cout << x; }       0    x is initialized to 0, but it's value is reassigned in the while loop. Can you figure out what the final value assigned to x is?     1   When i is 1, x is assigned the value of i , so x is 1. However, the while loop continuously increments i, so the final value of x is not 1.     9    x is assigned the value of 9 during the last iteration of the while loop, and thus 9 is the output of the program.     10    i is incremented to a value of 10, but since i < 10 is false, the contents of the while loop is not executed, so x is never assigned the value of 10.    "
+  "body": "  What does a while loop do when its condition is false before the first iteration?     It skips the loop body.  The condition is checked before the body runs.    It runs the body once and then stops.  That behavior belongs to a different loop form. A while loop checks first.    It repeats forever.  A false condition prevents the body from running.    It changes the condition to true.  The loop does not change the condition automatically.    "
 },
 {
-  "id": "mce_6_2",
+  "id": "chapter6_exercise_while_update",
   "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_2",
+  "url": "chapter6_exercises.html#chapter6_exercise_while_update",
   "type": "Exercise",
-  "number": "6.12.2",
+  "number": "6.10.2",
   "title": "",
-  "body": "  What is the final value of i when the code finished running?   int main() { int x = 0; int i = 1; while (i < 10) { x = i; i++; } std::cout << x; }       0    i is initialized with a value of 1 and is incremented, so it will never have a value of 0.     1    i is initialized with a value of 1 but it is incremented during the while loop.     9   This is the final value of x when the code is finished running.     10   In order for the while loop to terminate, the condition i < 10 must be false, and this is achieved when i is incremented to 10.    "
+  "body": "  Why does this loop never terminate?  int count = 1; while (count <= 3) { std::cout << count << '\\n'; }     count never changes, so the condition remains true.  Look for a statement that changes the variable in the condition.    The value 3 cannot be used in a loop condition.  Constant limits are common in loops.    std::cout causes an infinite loop.  Output does not determine whether this condition changes.    The loop needs a for statement instead.  A while loop can terminate when its controlling value is updated.    "
 },
 {
-  "id": "mce_6_3",
+  "id": "chapter6_exercise_for_output",
   "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_3",
+  "url": "chapter6_exercises.html#chapter6_exercise_for_output",
   "type": "Exercise",
-  "number": "6.12.3",
+  "number": "6.10.3",
   "title": "",
-  "body": "  How many times does the following while loop run?   int main() { int i = 6; while (i > 2) { i = i + 4; if (i > 8) { i = i - 5; } }       1   Take a closer look at the while loop and conditional.     3   Take a closer look at the while loop and conditional.     5   Take a closer look at the while loop and conditional.     The loop will run infinitely.   The value of i will always be greater than 2, resulting in an infinite loop.    "
+  "body": "  What does this program print?  for (int number = 1; number <= 3; ++number) { std::cout << number << ' '; }    1 2 3 The loop starts at 1 and stops after printing 3.  0 1 2 Check the initialization expression.  1 2 3 4 The condition must still be true before an iteration begins.  3 2 1 The update expression increases the loop variable.   "
 },
 {
-  "id": "mce_6_4",
+  "id": "chapter6_exercise_for_parts",
   "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_4",
+  "url": "chapter6_exercises.html#chapter6_exercise_for_parts",
   "type": "Exercise",
-  "number": "6.12.4",
+  "number": "6.10.4",
   "title": "",
-  "body": "  What is the output of the code below?   int main() { int j = 6; int i = j + 4; std::cout << \"People \"; i = i % 2; i = i - 1; while (i < 3) { std::cout << \"really \"; if (i > 0) { std::cout << \"really \"; } i += 2; } std::cout << \"like Joe's Pizza.\" << std::endl ; }       People really like Joe's Pizza.   Take a closer look at the while loop condition.     People really really really like Joe's Pizza.   The code will print out three really s, two from evaluating the while loop condition and one from evaluating the if condition before printing out like Joe's Pizza      People really really really really really like Joe's Pizza.   Take a closer look at the while loop condition.     The loop will run infinetly.   Take a closer look at the while loop condition and reassignment of i     "
+  "body": "  Which part of a for statement normally changes the loop variable after each iteration?    The initialization expression Initialization occurs before the first iteration.  The condition The condition decides whether another iteration may begin.  The update expression The update expression runs after the loop body.  The loop body declaration The three parts of the header have specific roles.   "
 },
 {
-  "id": "mce_6_5",
+  "id": "chapter6_exercise_counter",
   "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_5",
+  "url": "chapter6_exercises.html#chapter6_exercise_counter",
   "type": "Exercise",
-  "number": "6.12.5",
+  "number": "6.10.5",
   "title": "",
-  "body": "  What is the output of the code below?   int main() { int n = 10; \/\/ std::cout << \"Da \"; std::cout << \"na \"; while (n != 3) { std::cout << \"na \"; n--; } std::cout << \"Batman!\"; }       na na na na na na na na Batman!   The code prints out eight na s before printing out Batman!      na na na na na na na Batman!   Look over the code carefully. There are output statements before the while loop.     Da na na na na na na na na Batman!   Will Da ever be printed?     It will result in an infinite loop.   Since we repeatedly decrement n inside the while loop, it will eventually be equal to 3 and the while loop will terminate.    "
+  "body": "  Which variable is the counter in this code?  int even_count = 0; for (int value = 1; value <= 10; ++value) { if (value % 2 == 0) { ++even_count; } }    value value visits the range of numbers.  even_count This variable records how many qualifying values were found.  The expression value % 2 This expression tests whether a value is even.  The condition value <= 10 The condition controls continuation but does not count qualifying values.   "
 },
 {
-  "id": "mce_6_6",
+  "id": "chapter6_exercise_accumulator",
   "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_6",
+  "url": "chapter6_exercises.html#chapter6_exercise_accumulator",
   "type": "Exercise",
-  "number": "6.12.6",
+  "number": "6.10.6",
   "title": "",
-  "body": "  What is the output of the code below?   int main() { int n = 10; std::cout << \"Da \"; std::cout << \"na \"; while (n != 3) { std::cout << \"na \"; } std::cout << \"Batman!\"; }       Batman!   Take a closer look at the while loop.     Da Batman!   Take a closer look at the while loop.     Da na na na na na na na na Batman!   Take a closer look at the while loop.     It will result in an infinite loop.   Since we never change the value of n , 10 will never equal 3 so the code will run forever.    "
+  "body": "  Which variable is the accumulator?  int total = 0; for (int value = 1; value <= 4; ++value) { total += value; }    total total combines values during the loop.  value value is the loop variable.  4 The number 4 is the upper limit, not a variable.  += += updates the accumulator.   "
 },
 {
-  "id": "mce_6_7",
+  "id": "chapter6_exercise_array_index",
   "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_7",
+  "url": "chapter6_exercises.html#chapter6_exercise_array_index",
   "type": "Exercise",
-  "number": "6.12.7",
+  "number": "6.10.7",
   "title": "",
-  "body": "  What is the output of the code below?   int main() { int x = 1; while (x < 6) { std::cout << x << \"\\t\" << pow (x, 5) \/ pow (x, 3) << std::endl ; x++; } }       The first six perfect fifths.   Take a closer look at the while loop and what x was initialized to.     The first six perfect squares.   Take a closer look at the while loop and what x was initialized to.     The first five perfect squares.   Dividing x to the power of 5 by x to the power of 3 effectively results in perfect squares.     The first five perfect cubes.   Take a closer look at the mathematical expression inside the while loop.    "
+  "body": "  Which expression accesses the first element of values ?  std::array<int, 3> values{10, 20, 30};    values[0] Array indexing begins at 0.  values[1] This accesses the second element.  values.first() That is not the syntax used here.  values[3] For three elements, valid indexes are 0, 1, and 2.   "
 },
 {
-  "id": "mce_6_8",
+  "id": "chapter6_exercise_nested_loops",
   "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_8",
+  "url": "chapter6_exercises.html#chapter6_exercise_nested_loops",
   "type": "Exercise",
-  "number": "6.12.8",
+  "number": "6.10.8",
   "title": "",
-  "body": "  Why are we allowed to use the variable x in both main and in the function definition of superSecretFunction ?   int superSecretFunction(int n) { int x = 0; return (2 + (n * n) - 5 * n \/ 7) * x; } int main() { int x = 1; std::cout << \"After using the super secret function, we get \" << superSecretFunction (x); }       We're using the same variable, but just reassigning the value from 0 to 1.   We are actually using two different variables that happen to have the same name.     Although the name of both variables is x , they represent different locations in memory, and thus are different variables.   One x is a local variable of superSecretFunction while the other is a local variable of main .     We can assign them different values but not the same value. Thus, if both were initialized to 0, then we'd get an error.   Since they are not in the same storage location, they can store any value, including the same value.     We're not allowed to do this. The code will result in an error.   The code does not produce an error.    "
+  "body": "  How many asterisks does this program print?  for (int row = 1; row <= 3; ++row) { for (int symbol = 1; symbol <= 2; ++symbol) { std::cout << '*'; } }    3 Count the inner-loop repetitions for every outer-loop iteration.  5 Each outer iteration runs the complete inner loop.  6 The inner loop prints 2 symbols for each of 3 rows.  9 Multiply the number of outer and inner repetitions.   "
 },
 {
-  "id": "mce_6_9",
+  "id": "chapter6_exercise_object_array",
   "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_9",
+  "url": "chapter6_exercises.html#chapter6_exercise_object_array",
   "type": "Exercise",
-  "number": "6.12.9",
+  "number": "6.10.9",
   "title": "",
-  "body": "  What is the output of the code below?   int loopFive(int n) { while (n % 5 != 0) { n = n + 3; } return n; } int main() { std::cout << loopFive (2); std::cout << loopFive (3); std::cout << loopFive (4); }       51510    n is repeatedly incremented by 3 until it is divisible by 5, and this happens when n is 5, 15, and 10 for the inputs of 2, 3, and 4 respectively.     234   Although the function returns n , n might not be its original value.     5 15 10   Take a closer look at the output statements.     567   Take a closer look at the while loop in the function.    "
-},
-{
-  "id": "mce_6_10",
-  "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_10",
-  "type": "Exercise",
-  "number": "6.12.10",
-  "title": "",
-  "body": "  The super evil villian RePete wants to annoy the city by hacking into the city's helper robots and making them repeat everything they say 5 times. However, there's an error in his code and now the robots won't stop repeating! Can you find the error?   void repeatBot(string input) { int n = 0; while (n < 5) { std::cout << input << \" \"; n--; } } int main() { repeatBot (\"Hello, how may I help you?\"); }       repeatBot can only take one word as an argument.   A string is any number of characters or words surrounded by double quotes, not just one word.     n is declared to be 0 and 0 is always less than 5.   The code doesn't loop infinitely because of the value n was declared to be.     Every time the while loop runs, n is reset to 0, so it will always be less than 5.   The initialization of n occurs outside the while loop, so the value of n does not get reset to 0.     n is declared to be 0 and we continuously decrement n so it will always be less than 5.   Since n starts at 0 and gets smaller, the conditional for the while loop will always be true, and thus the code runs forever.    "
-},
-{
-  "id": "mce_6_11",
-  "level": "2",
-  "url": "chapter6_multiple-choice-exercises.html#mce_6_11",
-  "type": "Exercise",
-  "number": "6.12.11",
-  "title": "",
-  "body": "  After making some changes to his code, RePete tries again. This time, however, the robots don't repeat anything! Can you find the new error?   void repeatBot(string input) { int n = 0; while (n > 5) { std::cout << input << \" \"; n++; } } int main() { repeatBot (\"Hello, how may I help you?\"); }       n > 5 is not a valid conditional, so the while loop doesn't execute.    n > 5 is a boolean statement and thus is a valid conditional.     The value of n never gets modified in the while loop.    n is incremented in the while loop after the cout statement.     In the cout statement, only spaces are printed.    input is also printed.     The conditional for the while loop is not met.   Since n is declared to be 0, 0 is not greater than 5, so the while loop does not execute.    "
+  "body": "  Which phrase best describes this loop?  std::array<Rectangle, 2> rectangles{ Rectangle{4.0, 3.0}, Rectangle{5.0, 2.0} }; for (const Rectangle& rectangle : rectangles) { std::cout << rectangle.calculate_area() << '\\n'; }    It calls a member function for each object. The loop visits each Rectangle and calls its public operation.  It changes the class definition. The class definition is not changed by the loop.  It accesses a private data member directly. The loop uses the public member function instead.  It creates a new class for every iteration. The objects were created before the loop began.   "
 },
 {
   "id": "chapter6_mixed-up-code-exercises",
   "level": "1",
   "url": "chapter6_mixed-up-code-exercises.html",
   "type": "Exercises",
-  "number": "6.13",
+  "number": "6.11",
   "title": "Mixed-Up Code Exercises",
-  "body": " Mixed-Up Code Exercises  Answer the following Mixed-Up Code or Activecode questions to assess what you have learned in this chapter.     The program below should print out the even numbers between 20 and 40, inclusive, but the code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.      int main() {    main(int) {     int n = 20;    int n = 0;     while (n <= 40) {    while (n < 40) {     std::cout << n << std::endl ;    n = n + 2;    n++;    n = n * 2;    }    }       The program below should count down from 100 to 0 in decrements of 10 but the code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.     int main() {    int n = 100;    int n = 10;    while (n >= 0) {    while (n < 0) {    while (n > 0) {    std::cout << n << std::endl ;    n -= 10;    n += 10;    }    }       The program below should find the sum of the first 10 natural numbers, but the code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.     int main() {    int n = 1;    int n = 10;    int sum = 0;    int sum = n;    while (n <= 10) {    while (n < 100) {    while (n <= 9) {    std::cout << n << std::endl ;    sum = sum + n;    n++;    }    }       Let's write the code for the repeatHello function. repeatHello should be a void function that takes no arguments and uses a while loop to print out hello three times.      void repeatHello() {    repeatHello() {      int n = 0;    int n = 0      while (n < 3) {    while (n > 3) {     std::cout << \"hello\" << std::endl ;     n++;  }    --n;  }     }       Now let's generalize the repeatHello function so that it repeats a given string three times. Let's write the code for the repeatString function, which takes input as a parameter and uses a while loop to print out the string three times.      void repeatString(string input) {    void repeatString() {     int n = 0;     while (n < 3) {    while (3 > n) {      std::cout << input << std::endl ;    std::cout << string << std::endl ;     n++;  }    }       We can further generalize repeatString so that it repeats a given string a given number of times. Let's write the code for the new repeatString function, which takes input and x as parameters and uses a while loop to print out the string x number of times.      void repeatString(string input, int x) {    void repeatString(string input, string x) {      int n = 0;    int n = x;      while (n < x) {    while (x < n) {     std::cout << input << std::endl ;     n = n + 1;  }    x++;  }     }       On the last day of every year, we count down the seconds before the new year arrives. Write the function newYearCountdown , which prints out a countdown from 10 and then prints out Happy New Year! .      void newYearCountdown() {    void newYearCountdown(string input) {      int n = 10;    int n = 0;      while (n > 0) {    while (n != 10) {     std::cout << n << \" \";     n--;  }    n++;  }     std::cout << \"Happy New Year!\" << std::endl ;  }       Help Goku reach power levels of over 9000! Write the function powerUp which takes powerLevel as a parameter. powerUp checks to see if powerLevel is over 9000. If it isn't, it repeatedly prints More power! and increments powerLevel by 1000 until powerLevel is over 9000. Then powerUp prints It's over 9000! . Put the necessary blocks in the correct order.      void powerUp(int powerLevel) {    void powerUp() {     int n = 0;     while (powerLevel < 9000) {    while (powerLevel > 9000) {     std::cout << \"More power!\" << std::endl ;     powerLevel = powerLevel + 1000;    powerLevel++;     n++;    }    if (powerLevel < 9000) {    std::cout << \"It's over 9000!\" << std::endl ;  }       Write the function summation which takes two parameters, start and end. summation adds all the integers from start to end, inclusive, together and returns the sum. Put the necessary blocks in the correct order.     int summation(int start, int end) {    void summation(int start, int end) {    int summation() {    int n = start;    int sum = 0;    int sum = start;     while (n <= end) {    while (n < end) {     sum = sum + n;    n++;    }    return sum;    return n;    }       Write the function reverseNumber which takes num as a parameter and returns num but with its digits reversed. For example, reverseNumber (1324) returns 4231. Put the necessary blocks in the correct order, with reverse declared first, then temp, and lastly remainder.     int reverseNumber(int num) {    void reverseNumber(int num) {    int reverse = 0;    int reverse = 0    int temp = num;    int remainder = 0;    int remainder;    while (temp > 0) {    remainder = temp % 10;    reverse = reverse * 10 + remainder;    temp = temp \/ 10;    }    return reverse;    return temp;    }     "
+  "body": " Mixed-Up Code Exercises   Arrange the blocks to create complete C++ programs. Pay attention to initialization, the loop condition, the loop body, and the update.     Arrange the blocks to print the numbers from 5 down to 1.    #include <iostream>  int main() {  int count = 5;  while (count > 0) {  std::cout << count << '\\n';  --count;  }  return 0;  }  ++count;      Arrange the blocks to print the numbers from 1 through 5 using a for loop.    #include <iostream>  int main() {  for (int number = 1; number <= 5; ++number) {  std::cout << number << '\\n';  }  return 0;  }  for (int number = 0; number < 5; ++number) {      Arrange the blocks to calculate and print the total of the array values.    #include <array>  #include <iostream>  int main() {  const std::array<int, 4> values{3, 7, 2, 8};  int total = 0;  for (int value : values) {  total += value;  }  std::cout << total << '\\n';  return 0;  }  total = value;      Arrange the blocks to print a four-row increasing triangle of asterisks.    #include <iostream>  int main() {  for (int row = 1; row <= 4; ++row) {  for (int symbol = 1; symbol <= row; ++symbol) {  std::cout << '*';  }  std::cout << '\\n';  }  return 0;  }  for (int symbol = 1; symbol <= 4; ++symbol) {      Arrange the loop that reports the area of every rectangle.    for (const Rectangle& rectangle : rectangles) {  std::cout << rectangle.calculate_area() << '\\n';  }  for (Rectangle rectangle : calculate_area) {    "
 },
 {
   "id": "chapter6_mixed-up-code-exercises-2-1",
@@ -9214,196 +8935,106 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Answer the following Mixed-Up Code or Activecode questions to assess what you have learned in this chapter. "
+  "body": "Arrange the blocks to create complete C++ programs. Pay attention to initialization, the loop condition, the loop body, and the update. "
 },
 {
-  "id": "mucp_6_1",
+  "id": "chapter6_mixed_while_countdown",
   "level": "2",
-  "url": "chapter6_mixed-up-code-exercises.html#mucp_6_1",
+  "url": "chapter6_mixed-up-code-exercises.html#chapter6_mixed_while_countdown",
   "type": "Exercise",
-  "number": "6.13.yes",
+  "number": "6.11.yes",
   "title": "",
-  "body": "  The program below should print out the even numbers between 20 and 40, inclusive, but the code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.      int main() {    main(int) {     int n = 20;    int n = 0;     while (n <= 40) {    while (n < 40) {     std::cout << n << std::endl ;    n = n + 2;    n++;    n = n * 2;    }    }    "
+  "body": "  Arrange the blocks to print the numbers from 5 down to 1.    #include <iostream>  int main() {  int count = 5;  while (count > 0) {  std::cout << count << '\\n';  --count;  }  return 0;  }  ++count;   "
 },
 {
-  "id": "mucp_6_2",
+  "id": "chapter6_mixed_for_count",
   "level": "2",
-  "url": "chapter6_mixed-up-code-exercises.html#mucp_6_2",
+  "url": "chapter6_mixed-up-code-exercises.html#chapter6_mixed_for_count",
   "type": "Exercise",
-  "number": "6.13.yes",
+  "number": "6.11.yes",
   "title": "",
-  "body": "  The program below should count down from 100 to 0 in decrements of 10 but the code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.     int main() {    int n = 100;    int n = 10;    while (n >= 0) {    while (n < 0) {    while (n > 0) {    std::cout << n << std::endl ;    n -= 10;    n += 10;    }    }    "
+  "body": "  Arrange the blocks to print the numbers from 1 through 5 using a for loop.    #include <iostream>  int main() {  for (int number = 1; number <= 5; ++number) {  std::cout << number << '\\n';  }  return 0;  }  for (int number = 0; number < 5; ++number) {   "
 },
 {
-  "id": "mucp_6_3",
+  "id": "chapter6_mixed_array_sum",
   "level": "2",
-  "url": "chapter6_mixed-up-code-exercises.html#mucp_6_3",
+  "url": "chapter6_mixed-up-code-exercises.html#chapter6_mixed_array_sum",
   "type": "Exercise",
-  "number": "6.13.yes",
+  "number": "6.11.yes",
   "title": "",
-  "body": "  The program below should find the sum of the first 10 natural numbers, but the code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.     int main() {    int n = 1;    int n = 10;    int sum = 0;    int sum = n;    while (n <= 10) {    while (n < 100) {    while (n <= 9) {    std::cout << n << std::endl ;    sum = sum + n;    n++;    }    }    "
+  "body": "  Arrange the blocks to calculate and print the total of the array values.    #include <array>  #include <iostream>  int main() {  const std::array<int, 4> values{3, 7, 2, 8};  int total = 0;  for (int value : values) {  total += value;  }  std::cout << total << '\\n';  return 0;  }  total = value;   "
 },
 {
-  "id": "mucp_6_4",
+  "id": "chapter6_mixed_nested_pattern",
   "level": "2",
-  "url": "chapter6_mixed-up-code-exercises.html#mucp_6_4",
+  "url": "chapter6_mixed-up-code-exercises.html#chapter6_mixed_nested_pattern",
   "type": "Exercise",
-  "number": "6.13.yes",
+  "number": "6.11.yes",
   "title": "",
-  "body": "  Let's write the code for the repeatHello function. repeatHello should be a void function that takes no arguments and uses a while loop to print out hello three times.      void repeatHello() {    repeatHello() {      int n = 0;    int n = 0      while (n < 3) {    while (n > 3) {     std::cout << \"hello\" << std::endl ;     n++;  }    --n;  }     }    "
+  "body": "  Arrange the blocks to print a four-row increasing triangle of asterisks.    #include <iostream>  int main() {  for (int row = 1; row <= 4; ++row) {  for (int symbol = 1; symbol <= row; ++symbol) {  std::cout << '*';  }  std::cout << '\\n';  }  return 0;  }  for (int symbol = 1; symbol <= 4; ++symbol) {   "
 },
 {
-  "id": "mucp_6_5",
+  "id": "chapter6_mixed_object_array",
   "level": "2",
-  "url": "chapter6_mixed-up-code-exercises.html#mucp_6_5",
+  "url": "chapter6_mixed-up-code-exercises.html#chapter6_mixed_object_array",
   "type": "Exercise",
-  "number": "6.13.yes",
+  "number": "6.11.yes",
   "title": "",
-  "body": "  Now let's generalize the repeatHello function so that it repeats a given string three times. Let's write the code for the repeatString function, which takes input as a parameter and uses a while loop to print out the string three times.      void repeatString(string input) {    void repeatString() {     int n = 0;     while (n < 3) {    while (3 > n) {      std::cout << input << std::endl ;    std::cout << string << std::endl ;     n++;  }    }    "
-},
-{
-  "id": "mucp_6_6",
-  "level": "2",
-  "url": "chapter6_mixed-up-code-exercises.html#mucp_6_6",
-  "type": "Exercise",
-  "number": "6.13.yes",
-  "title": "",
-  "body": "  We can further generalize repeatString so that it repeats a given string a given number of times. Let's write the code for the new repeatString function, which takes input and x as parameters and uses a while loop to print out the string x number of times.      void repeatString(string input, int x) {    void repeatString(string input, string x) {      int n = 0;    int n = x;      while (n < x) {    while (x < n) {     std::cout << input << std::endl ;     n = n + 1;  }    x++;  }     }    "
-},
-{
-  "id": "mucp_6_7",
-  "level": "2",
-  "url": "chapter6_mixed-up-code-exercises.html#mucp_6_7",
-  "type": "Exercise",
-  "number": "6.13.yes",
-  "title": "",
-  "body": "  On the last day of every year, we count down the seconds before the new year arrives. Write the function newYearCountdown , which prints out a countdown from 10 and then prints out Happy New Year! .      void newYearCountdown() {    void newYearCountdown(string input) {      int n = 10;    int n = 0;      while (n > 0) {    while (n != 10) {     std::cout << n << \" \";     n--;  }    n++;  }     std::cout << \"Happy New Year!\" << std::endl ;  }    "
-},
-{
-  "id": "mucp_6_8",
-  "level": "2",
-  "url": "chapter6_mixed-up-code-exercises.html#mucp_6_8",
-  "type": "Exercise",
-  "number": "6.13.yes",
-  "title": "",
-  "body": "  Help Goku reach power levels of over 9000! Write the function powerUp which takes powerLevel as a parameter. powerUp checks to see if powerLevel is over 9000. If it isn't, it repeatedly prints More power! and increments powerLevel by 1000 until powerLevel is over 9000. Then powerUp prints It's over 9000! . Put the necessary blocks in the correct order.      void powerUp(int powerLevel) {    void powerUp() {     int n = 0;     while (powerLevel < 9000) {    while (powerLevel > 9000) {     std::cout << \"More power!\" << std::endl ;     powerLevel = powerLevel + 1000;    powerLevel++;     n++;    }    if (powerLevel < 9000) {    std::cout << \"It's over 9000!\" << std::endl ;  }    "
-},
-{
-  "id": "mucp_6_9",
-  "level": "2",
-  "url": "chapter6_mixed-up-code-exercises.html#mucp_6_9",
-  "type": "Exercise",
-  "number": "6.13.yes",
-  "title": "",
-  "body": "  Write the function summation which takes two parameters, start and end. summation adds all the integers from start to end, inclusive, together and returns the sum. Put the necessary blocks in the correct order.     int summation(int start, int end) {    void summation(int start, int end) {    int summation() {    int n = start;    int sum = 0;    int sum = start;     while (n <= end) {    while (n < end) {     sum = sum + n;    n++;    }    return sum;    return n;    }    "
-},
-{
-  "id": "mucp_6_10",
-  "level": "2",
-  "url": "chapter6_mixed-up-code-exercises.html#mucp_6_10",
-  "type": "Exercise",
-  "number": "6.13.yes",
-  "title": "",
-  "body": "  Write the function reverseNumber which takes num as a parameter and returns num but with its digits reversed. For example, reverseNumber (1324) returns 4231. Put the necessary blocks in the correct order, with reverse declared first, then temp, and lastly remainder.     int reverseNumber(int num) {    void reverseNumber(int num) {    int reverse = 0;    int reverse = 0    int temp = num;    int remainder = 0;    int remainder;    while (temp > 0) {    remainder = temp % 10;    reverse = reverse * 10 + remainder;    temp = temp \/ 10;    }    return reverse;    return temp;    }    "
+  "body": "  Arrange the loop that reports the area of every rectangle.    for (const Rectangle& rectangle : rectangles) {  std::cout << rectangle.calculate_area() << '\\n';  }  for (Rectangle rectangle : calculate_area) {   "
 },
 {
   "id": "chapter6_coding-practice",
   "level": "1",
   "url": "chapter6_coding-practice.html",
   "type": "Exercises",
-  "number": "6.14",
+  "number": "6.12",
   "title": "Coding Practice",
-  "body": " Coding Practice    Write a program that prints out a 5x5 triangle using asterisks. An example is shown below. Your code should use while loops.   * ** *** **** *****   #include <iostream> int main() { \/\/ Write your implementation here. }   Below is one way to implement the program. We use nested loops similar to the last version of the printMultTable function to print out the triangular shape.  #include <iostream> int main() { int row = 0; while (row < 5) { int col = 0; while (col <= row) { std::cout << \"*\"; col++; } std::cout << std::endl; row++; } }      Encapsulate the triangle printing program into a function called printTriangle . Generalize it so that it takes a parameter int n to generate a nxn triangle. Check the hint below for help with the construction of the code. Call your function in main with an input of 4, which should result in the following output:   * ** *** ****    #include <iostream> void printTriangle(int n) { \/\/ Write your implementation here. } int main() { \/\/ Write your implementation here. }      Encapsulate the triangle printing program into a function called printTriangle . Generalize it so that it takes a parameter int n to generate a nxn triangle. Use the lines to construct the code, then go back to complete the Activecode. Call your function in main with an input of 4, which should result in the following output:   * ** *** ****      \/\/ Create function  void printTriangle(int n) {     int row = 0;    int row = 4;     while (row < n) {     int col = 0;    int col = 4;      while (col <= row) {    while (col <= n) {     std::cout << \"*\";  col++;    }    std::cout << std::endl ;  row++;    }  }         Write a function called printPyramid that prints out an n by n pyramid using asterisks. An example is shown below with n equal to 5. Your code should use while loops.   * ** *** **** *****   #include <iostream> void printPyramid (int n) { \/\/ Write your implementation here. } int main() { printPyramid (5); }   Below is one way to implement the program. We use multiple while loops to print out spaces and asterisks. The outer loop creates the number of rows, and within the outer loop, the two inner loops print out the correct number of spaces and asterisks.  #include <iostream> void printPyramid(int n) { int space, numAsterisks; int count = 1; while (count <= n) { space = n - count; while (space > 0) { std::cout << \" \"; space--; } numAsterisks = 2 * count - 1; while (numAsterisks > 0) { std::cout << \"*\"; numAsterisks--; } std::cout << std::endl; count++; } } int main() { printPyramid (5); }      Write a function called printNumPyramid that prints out an n x n number pyramid. An example is shown below with n equal to 5. Your code should use while loops. Check the hint below for help with the construction of the code. (Hint: similar to the previous question, if you want the output to look nice, using conditionals that print different amounts of spaces.)   1 222 33333 4444444 555555555    #include <iostream> void printNumPyramid(int n) { \/\/ Write your implementation here. } int main() { printNumPyramid (5); }      Write a function called printNumPyramid that prints out an n x n number pyramid. An example is shown below with n equal to 5. Your code should use while loops. Use the lines to construct the code, then go back to complete the Activecode. (Hint: similar to the previous question, if you want the output to look nice, using conditionals that print different amounts of spaces.)   1 222 33333 4444444 555555555      void printNumPyramid(int n) {     int space;  int numPrinted;  int count = 1;  int sub = 4;    int space;  int numPrinted = 5;  int count = 1;  int sub = 1;     while (count <= n) {  space = n - count;    while (space > 0) {  std::cout << \" \";  space --  }    numprinted = 2 * count - 1;    while (numPrinted > 0) {  std::cout << n - sub;  numPrinted--;  }     std::cout << std::endl ;  count ++;  sub--;    std::cout << std::endl ; ;  count++;  sub++;     }  }         A common coding interview question that's also a popular children's game used to teach division is FizzBuzz.  Write a program that uses a while loop and prints the numbers 1 through 100, but every multiple of 3 is replaced with the word \"Fizz\" every multiple of 5 is replaced with the word \"Buzz\" and every multiple of both 3 and 5 is replaced with \"FizzBuzz.\" Your output should be the following:   1 2 Fizz 4 Buzz ... 14 FizzBuzz 16 ... 98 Fizz Buzz   #include <iostream> void printPyramid (int n) { \/\/ Write your implementation here. } int main() { printPyramid (5); }   Below is one way to implement the FizzBuzz program. We use conditionals with modulus operators in a while loop to categorize every number and print the correct output. Feel free to search up on the FizzBuzz coding interview problem if you are interested in other ways to code this program!  #include <iostream> int main() { int n = 1; while (n <= 100) { if (n % 3 == 0 && n % 5 == 0) { std::cout << \"FizzBuzz\" << std::endl; } else if (n % 3 == 0) { std::cout << \"Fizz\" << std::endl; } else if (n % 5 == 0) { std::cout << \"Buzz\" << std::endl; } else { std::cout << n << std::endl; } n++; } }      Write the function printAddTable which takes an int n as a parameter and prints out a nxn addition table. Call your function in main with 10 as the argument. Check the hint below for help with the construction of the code. Your output should look like this:   0 1 2 3 4 5 6 7 8 9 10 1 2 3 4 5 6 7 8 9 10 11 2 3 4 5 6 7 8 9 10 11 12 3 4 5 6 7 8 9 10 11 12 13 4 5 6 7 8 9 10 11 12 13 14 5 6 7 8 9 10 11 12 13 14 15 6 7 8 9 10 11 12 13 14 15 16 7 8 9 10 11 12 13 14 15 16 17 8 9 10 11 12 13 14 15 16 17 18 9 10 11 12 13 14 15 16 17 18 19 10 11 12 13 14 15 16 17 18 19 20    #include <iostream> void printAddTable(int n) { \/\/ Write your implementation here. } int main() { \/\/ Call your function here. }      Write the function printAddTable which takes an int n as a parameter and prints out a nxn addition table. Call your function in main with 10 as the argument. Use the lines to construct the code, then go back to complete the Activecode. Your output should look like this:   0 1 2 3 4 5 6 7 8 9 10 1 2 3 4 5 6 7 8 9 10 11 2 3 4 5 6 7 8 9 10 11 12 3 4 5 6 7 8 9 10 11 12 13 4 5 6 7 8 9 10 11 12 13 14 5 6 7 8 9 10 11 12 13 14 15 6 7 8 9 10 11 12 13 14 15 16 7 8 9 10 11 12 13 14 15 16 17 8 9 10 11 12 13 14 15 16 17 18 9 10 11 12 13 14 15 16 17 18 19 10 11 12 13 14 15 16 17 18 19 20      void printAddTable(int n) {     for (int i = 0; i <= n; i++) {    for (int i = 0; i < n; i++) {     for (int j = 0; j <= n; j++) {    for (int j = 0; j < n; j++) {    std::cout << i + j << '\\t';    }    std::cout << '\\n';    }  }         A number is a prime number if its only factors are 1 and itself.  Write the function isPrime , which takes an int num as a parameters. isPrime is a boolean function that returns true if num is a prime number and returns false otherwise. Run and test your code!   #include <iostream> bool isPrime (int num) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"isPrime function\") { CHECK_FALSE(isPrime (1)); CHECK(isPrime (13)); CHECK_FALSE(isPrime (24)); } TEST_CASE(\"isPrime for 0\") { CHECK_FALSE(isPrime (0)); }    Below is one way to implement the isPrime function. First, we check to see if num is less than or equal to 1, and return false if that is the case. Next, we use a while loop to continuously check if a factor n divides num evenly. If it does, we return false . If no value of n divides num evenly, then we return true . Notice the while loop only goes up to num \/ 2 because if 2 doesn't divide evenly, then there isn't a smaller factor.  #include <iostream> bool isPrime(int num) { if (num <= 1) { return false; } int n = 2; while (n < num \/ 2) { if (num % n == 0) { return false; } n++; } return true; } #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"isPrime function\") { CHECK_FALSE(isPrime (1)); CHECK(isPrime (13), 1); CHECK_FALSE(isPrime (24)); } TEST_CASE(\"isPrime for 0\") { CHECK_FALSE(isPrime (0)); }      Write a program that uses a while loop to print out the alphabet from a to z . Check the hint below for help with the construction of the code.   #include <iostream> int main() { \/\/ Write your implementation here. }      Write a program that uses a while loop to print out the alphabet from ‘a' to ‘z'. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    char letter = 'a';     while (letter <= 'z') {    while (letter != 'z') {     std::cout << letter << std::endl ;    letter++;    }  }         The Fibonacci sequence is a sequence of numbers such that each successive number is the sum of the two previous numbers. This sequence is as follows: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, and so on.  Write a program that prints the first 20 Fibonacci numbers.   #include <iostream> int main() { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"isPrime function\") { CHECK(isPrime (0) == 0); CHECK(isPrime (1) == 0); CHECK(isPrime (13) == 1); CHECK(isPrime (24) == 0); }   Below is one way to implement the program. First, we check to see if num is less than or equal to 1, and return false if that is the case. Next, we use a while loop to continuously check if a factor n divides num evenly. If it does, we return false . If no value of n divides num evenly, then we return true . Notice the while loop only goes up to num \/ 2 because if 2 doesn't divide evenly, then there isn't a smaller factor.  #include <iostream> int main() { int first = 0; int second = 1; int third; int n = 2; std::cout << first << \" \" << second << \" \"; while (n < 20) { third = first + second; std::cout << third << \" \"; first = second; second = third; n++; } }      Write a function called factorial which takes an int n as a parameter and returns n factorial. Remembers that a factorial(denoted by !) is the product of all positive integers less than or equal to n , so 4! is 24. Use a while loop. Run and test your code! Check the hint below for help with the construction of the code.   #include <iostream> int factorial(int n) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"factorial function\") { CHECK(factorial(4) == 24); CHECK(factorial(6) == 720); CHECK(factorial(9) == 362880); }      Write a function called factorial which takes an int n as a parameter and returns n factorial. Remembers that a factorial(denoted by !) is the product of all positive integers less than or equal to n , so 4! is 24. Use a while loop. Run and test your code! Use the lines to construct the code, then go back to complete the Activecode.     int factorial(int n) {     int fact = 1;    int fact = 0;     int i = n;  while (n \/ i != n) {     fact *= i;    fact = n * (n - 1);     i--;  }    return fact;  }       "
+  "body": " Coding Practice    Write a program that prints the integers from 1 through 100, one per line. Use a for loop.   #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { for (int number = 1; number <= 100; ++number) { std::cout << number << '\\n'; } return 0; }       Write a program that reads nonnegative integers and prints their total. The value 0 is the sentinel value and should stop the loop, but it should not be added to the total.   #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { int value = 0; int total = 0; std::cin >> value; while (value != 0) { total += value; std::cin >> value; } std::cout << total << '\\n'; return 0; }       Given the scores below, use a range-based for loop to calculate and print the total and the number of scores that are at least 90.   #include <array> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; \/\/ Write your solution here. }      #include <array> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; int total = 0; int high_score_count = 0; for (int score : scores) { total += score; if (score >= 90) { ++high_score_count; } } std::cout << \"Total: \" << total << '\\n'; std::cout << \"High scores: \" << high_score_count << '\\n'; return 0; }       Write a program that prints a triangle with five rows. Row 1 should contain one asterisk, row 2 should contain two asterisks, and so on. Use nested for loops.   * ** *** **** *****    #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { for (int row = 1; row <= 5; ++row) { for (int symbol = 1; symbol <= row; ++symbol) { std::cout << '*'; } std::cout << '\\n'; } return 0; }       Define the Point structure shown below. Create an array containing three points and use a range-based loop to print each point in the form (x, y) .   #include <array> #include <iostream> struct Point { double x; double y; }; int main() { \/\/ Create the array and write the loop here. }      #include <array> #include <iostream> struct Point { double x; double y; }; int main() { const std::array<Point, 3> points{ Point{1.0, 2.0}, Point{3.0, 4.0}, Point{5.0, 6.0} }; for (const Point& point : points) { std::cout << '(' << point.x << \", \" << point.y << \")\\n\"; } return 0; }     "
 },
 {
-  "id": "cp_6_AC_1",
+  "id": "chapter6_coding_count_to_100",
   "level": "2",
-  "url": "chapter6_coding-practice.html#cp_6_AC_1",
+  "url": "chapter6_coding-practice.html#chapter6_coding_count_to_100",
   "type": "Exercise",
-  "number": "6.14.1",
+  "number": "6.12.1",
   "title": "",
-  "body": "  Write a program that prints out a 5x5 triangle using asterisks. An example is shown below. Your code should use while loops.   * ** *** **** *****   #include <iostream> int main() { \/\/ Write your implementation here. }   Below is one way to implement the program. We use nested loops similar to the last version of the printMultTable function to print out the triangular shape.  #include <iostream> int main() { int row = 0; while (row < 5) { int col = 0; while (col <= row) { std::cout << \"*\"; col++; } std::cout << std::endl; row++; } }   "
+  "body": "  Write a program that prints the integers from 1 through 100, one per line. Use a for loop.   #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { for (int number = 1; number <= 100; ++number) { std::cout << number << '\\n'; } return 0; }    "
 },
 {
-  "id": "cp_6_AC_2",
+  "id": "chapter6_coding_sum_until_zero",
   "level": "2",
-  "url": "chapter6_coding-practice.html#cp_6_AC_2",
+  "url": "chapter6_coding-practice.html#chapter6_coding_sum_until_zero",
   "type": "Exercise",
-  "number": "6.14.2",
+  "number": "6.12.2",
   "title": "",
-  "body": "  Encapsulate the triangle printing program into a function called printTriangle . Generalize it so that it takes a parameter int n to generate a nxn triangle. Check the hint below for help with the construction of the code. Call your function in main with an input of 4, which should result in the following output:   * ** *** ****    #include <iostream> void printTriangle(int n) { \/\/ Write your implementation here. } int main() { \/\/ Write your implementation here. }      Encapsulate the triangle printing program into a function called printTriangle . Generalize it so that it takes a parameter int n to generate a nxn triangle. Use the lines to construct the code, then go back to complete the Activecode. Call your function in main with an input of 4, which should result in the following output:   * ** *** ****      \/\/ Create function  void printTriangle(int n) {     int row = 0;    int row = 4;     while (row < n) {     int col = 0;    int col = 4;      while (col <= row) {    while (col <= n) {     std::cout << \"*\";  col++;    }    std::cout << std::endl ;  row++;    }  }      "
+  "body": "  Write a program that reads nonnegative integers and prints their total. The value 0 is the sentinel value and should stop the loop, but it should not be added to the total.   #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { int value = 0; int total = 0; std::cin >> value; while (value != 0) { total += value; std::cin >> value; } std::cout << total << '\\n'; return 0; }    "
 },
 {
-  "id": "cp_6_AC_3",
+  "id": "chapter6_coding_array_summary",
   "level": "2",
-  "url": "chapter6_coding-practice.html#cp_6_AC_3",
+  "url": "chapter6_coding-practice.html#chapter6_coding_array_summary",
   "type": "Exercise",
-  "number": "6.14.3",
+  "number": "6.12.3",
   "title": "",
-  "body": "  Write a function called printPyramid that prints out an n by n pyramid using asterisks. An example is shown below with n equal to 5. Your code should use while loops.   * ** *** **** *****   #include <iostream> void printPyramid (int n) { \/\/ Write your implementation here. } int main() { printPyramid (5); }   Below is one way to implement the program. We use multiple while loops to print out spaces and asterisks. The outer loop creates the number of rows, and within the outer loop, the two inner loops print out the correct number of spaces and asterisks.  #include <iostream> void printPyramid(int n) { int space, numAsterisks; int count = 1; while (count <= n) { space = n - count; while (space > 0) { std::cout << \" \"; space--; } numAsterisks = 2 * count - 1; while (numAsterisks > 0) { std::cout << \"*\"; numAsterisks--; } std::cout << std::endl; count++; } } int main() { printPyramid (5); }   "
+  "body": "  Given the scores below, use a range-based for loop to calculate and print the total and the number of scores that are at least 90.   #include <array> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; \/\/ Write your solution here. }      #include <array> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; int total = 0; int high_score_count = 0; for (int score : scores) { total += score; if (score >= 90) { ++high_score_count; } } std::cout << \"Total: \" << total << '\\n'; std::cout << \"High scores: \" << high_score_count << '\\n'; return 0; }    "
 },
 {
-  "id": "cp_6_AC_4",
+  "id": "chapter6_coding_nested_triangle",
   "level": "2",
-  "url": "chapter6_coding-practice.html#cp_6_AC_4",
+  "url": "chapter6_coding-practice.html#chapter6_coding_nested_triangle",
   "type": "Exercise",
-  "number": "6.14.4",
+  "number": "6.12.4",
   "title": "",
-  "body": "  Write a function called printNumPyramid that prints out an n x n number pyramid. An example is shown below with n equal to 5. Your code should use while loops. Check the hint below for help with the construction of the code. (Hint: similar to the previous question, if you want the output to look nice, using conditionals that print different amounts of spaces.)   1 222 33333 4444444 555555555    #include <iostream> void printNumPyramid(int n) { \/\/ Write your implementation here. } int main() { printNumPyramid (5); }      Write a function called printNumPyramid that prints out an n x n number pyramid. An example is shown below with n equal to 5. Your code should use while loops. Use the lines to construct the code, then go back to complete the Activecode. (Hint: similar to the previous question, if you want the output to look nice, using conditionals that print different amounts of spaces.)   1 222 33333 4444444 555555555      void printNumPyramid(int n) {     int space;  int numPrinted;  int count = 1;  int sub = 4;    int space;  int numPrinted = 5;  int count = 1;  int sub = 1;     while (count <= n) {  space = n - count;    while (space > 0) {  std::cout << \" \";  space --  }    numprinted = 2 * count - 1;    while (numPrinted > 0) {  std::cout << n - sub;  numPrinted--;  }     std::cout << std::endl ;  count ++;  sub--;    std::cout << std::endl ; ;  count++;  sub++;     }  }      "
+  "body": "  Write a program that prints a triangle with five rows. Row 1 should contain one asterisk, row 2 should contain two asterisks, and so on. Use nested for loops.   * ** *** **** *****    #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { for (int row = 1; row <= 5; ++row) { for (int symbol = 1; symbol <= row; ++symbol) { std::cout << '*'; } std::cout << '\\n'; } return 0; }    "
 },
 {
-  "id": "cp_6_AC_5",
+  "id": "chapter6_coding_array_of_points",
   "level": "2",
-  "url": "chapter6_coding-practice.html#cp_6_AC_5",
+  "url": "chapter6_coding-practice.html#chapter6_coding_array_of_points",
   "type": "Exercise",
-  "number": "6.14.5",
+  "number": "6.12.5",
   "title": "",
-  "body": "  A common coding interview question that's also a popular children's game used to teach division is FizzBuzz.  Write a program that uses a while loop and prints the numbers 1 through 100, but every multiple of 3 is replaced with the word \"Fizz\" every multiple of 5 is replaced with the word \"Buzz\" and every multiple of both 3 and 5 is replaced with \"FizzBuzz.\" Your output should be the following:   1 2 Fizz 4 Buzz ... 14 FizzBuzz 16 ... 98 Fizz Buzz   #include <iostream> void printPyramid (int n) { \/\/ Write your implementation here. } int main() { printPyramid (5); }   Below is one way to implement the FizzBuzz program. We use conditionals with modulus operators in a while loop to categorize every number and print the correct output. Feel free to search up on the FizzBuzz coding interview problem if you are interested in other ways to code this program!  #include <iostream> int main() { int n = 1; while (n <= 100) { if (n % 3 == 0 && n % 5 == 0) { std::cout << \"FizzBuzz\" << std::endl; } else if (n % 3 == 0) { std::cout << \"Fizz\" << std::endl; } else if (n % 5 == 0) { std::cout << \"Buzz\" << std::endl; } else { std::cout << n << std::endl; } n++; } }   "
-},
-{
-  "id": "cp_6_AC_6",
-  "level": "2",
-  "url": "chapter6_coding-practice.html#cp_6_AC_6",
-  "type": "Exercise",
-  "number": "6.14.6",
-  "title": "",
-  "body": "  Write the function printAddTable which takes an int n as a parameter and prints out a nxn addition table. Call your function in main with 10 as the argument. Check the hint below for help with the construction of the code. Your output should look like this:   0 1 2 3 4 5 6 7 8 9 10 1 2 3 4 5 6 7 8 9 10 11 2 3 4 5 6 7 8 9 10 11 12 3 4 5 6 7 8 9 10 11 12 13 4 5 6 7 8 9 10 11 12 13 14 5 6 7 8 9 10 11 12 13 14 15 6 7 8 9 10 11 12 13 14 15 16 7 8 9 10 11 12 13 14 15 16 17 8 9 10 11 12 13 14 15 16 17 18 9 10 11 12 13 14 15 16 17 18 19 10 11 12 13 14 15 16 17 18 19 20    #include <iostream> void printAddTable(int n) { \/\/ Write your implementation here. } int main() { \/\/ Call your function here. }      Write the function printAddTable which takes an int n as a parameter and prints out a nxn addition table. Call your function in main with 10 as the argument. Use the lines to construct the code, then go back to complete the Activecode. Your output should look like this:   0 1 2 3 4 5 6 7 8 9 10 1 2 3 4 5 6 7 8 9 10 11 2 3 4 5 6 7 8 9 10 11 12 3 4 5 6 7 8 9 10 11 12 13 4 5 6 7 8 9 10 11 12 13 14 5 6 7 8 9 10 11 12 13 14 15 6 7 8 9 10 11 12 13 14 15 16 7 8 9 10 11 12 13 14 15 16 17 8 9 10 11 12 13 14 15 16 17 18 9 10 11 12 13 14 15 16 17 18 19 10 11 12 13 14 15 16 17 18 19 20      void printAddTable(int n) {     for (int i = 0; i <= n; i++) {    for (int i = 0; i < n; i++) {     for (int j = 0; j <= n; j++) {    for (int j = 0; j < n; j++) {    std::cout << i + j << '\\t';    }    std::cout << '\\n';    }  }      "
-},
-{
-  "id": "cp_6_AC_7",
-  "level": "2",
-  "url": "chapter6_coding-practice.html#cp_6_AC_7",
-  "type": "Exercise",
-  "number": "6.14.7",
-  "title": "",
-  "body": "  A number is a prime number if its only factors are 1 and itself.  Write the function isPrime , which takes an int num as a parameters. isPrime is a boolean function that returns true if num is a prime number and returns false otherwise. Run and test your code!   #include <iostream> bool isPrime (int num) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"isPrime function\") { CHECK_FALSE(isPrime (1)); CHECK(isPrime (13)); CHECK_FALSE(isPrime (24)); } TEST_CASE(\"isPrime for 0\") { CHECK_FALSE(isPrime (0)); }    Below is one way to implement the isPrime function. First, we check to see if num is less than or equal to 1, and return false if that is the case. Next, we use a while loop to continuously check if a factor n divides num evenly. If it does, we return false . If no value of n divides num evenly, then we return true . Notice the while loop only goes up to num \/ 2 because if 2 doesn't divide evenly, then there isn't a smaller factor.  #include <iostream> bool isPrime(int num) { if (num <= 1) { return false; } int n = 2; while (n < num \/ 2) { if (num % n == 0) { return false; } n++; } return true; } #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"isPrime function\") { CHECK_FALSE(isPrime (1)); CHECK(isPrime (13), 1); CHECK_FALSE(isPrime (24)); } TEST_CASE(\"isPrime for 0\") { CHECK_FALSE(isPrime (0)); }   "
-},
-{
-  "id": "cp_6_AC_8",
-  "level": "2",
-  "url": "chapter6_coding-practice.html#cp_6_AC_8",
-  "type": "Exercise",
-  "number": "6.14.8",
-  "title": "",
-  "body": "  Write a program that uses a while loop to print out the alphabet from a to z . Check the hint below for help with the construction of the code.   #include <iostream> int main() { \/\/ Write your implementation here. }      Write a program that uses a while loop to print out the alphabet from ‘a' to ‘z'. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    char letter = 'a';     while (letter <= 'z') {    while (letter != 'z') {     std::cout << letter << std::endl ;    letter++;    }  }      "
-},
-{
-  "id": "cp_6_AC_9",
-  "level": "2",
-  "url": "chapter6_coding-practice.html#cp_6_AC_9",
-  "type": "Exercise",
-  "number": "6.14.9",
-  "title": "",
-  "body": "  The Fibonacci sequence is a sequence of numbers such that each successive number is the sum of the two previous numbers. This sequence is as follows: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, and so on.  Write a program that prints the first 20 Fibonacci numbers.   #include <iostream> int main() { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"isPrime function\") { CHECK(isPrime (0) == 0); CHECK(isPrime (1) == 0); CHECK(isPrime (13) == 1); CHECK(isPrime (24) == 0); }   Below is one way to implement the program. First, we check to see if num is less than or equal to 1, and return false if that is the case. Next, we use a while loop to continuously check if a factor n divides num evenly. If it does, we return false . If no value of n divides num evenly, then we return true . Notice the while loop only goes up to num \/ 2 because if 2 doesn't divide evenly, then there isn't a smaller factor.  #include <iostream> int main() { int first = 0; int second = 1; int third; int n = 2; std::cout << first << \" \" << second << \" \"; while (n < 20) { third = first + second; std::cout << third << \" \"; first = second; second = third; n++; } }   "
-},
-{
-  "id": "cp_6_AC_10",
-  "level": "2",
-  "url": "chapter6_coding-practice.html#cp_6_AC_10",
-  "type": "Exercise",
-  "number": "6.14.10",
-  "title": "",
-  "body": "  Write a function called factorial which takes an int n as a parameter and returns n factorial. Remembers that a factorial(denoted by !) is the product of all positive integers less than or equal to n , so 4! is 24. Use a while loop. Run and test your code! Check the hint below for help with the construction of the code.   #include <iostream> int factorial(int n) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"factorial function\") { CHECK(factorial(4) == 24); CHECK(factorial(6) == 720); CHECK(factorial(9) == 362880); }      Write a function called factorial which takes an int n as a parameter and returns n factorial. Remembers that a factorial(denoted by !) is the product of all positive integers less than or equal to n , so 4! is 24. Use a while loop. Run and test your code! Use the lines to construct the code, then go back to complete the Activecode.     int factorial(int n) {     int fact = 1;    int fact = 0;     int i = n;  while (n \/ i != n) {     fact *= i;    fact = n * (n - 1);     i--;  }    return fact;  }      "
+  "body": "  Define the Point structure shown below. Create an array containing three points and use a range-based loop to print each point in the form (x, y) .   #include <array> #include <iostream> struct Point { double x; double y; }; int main() { \/\/ Create the array and write the loop here. }      #include <array> #include <iostream> struct Point { double x; double y; }; int main() { const std::array<Point, 3> points{ Point{1.0, 2.0}, Point{3.0, 4.0}, Point{5.0, 6.0} }; for (const Point& point : points) { std::cout << '(' << point.x << \", \" << point.y << \")\\n\"; } return 0; }    "
 },
 {
   "id": "chapter7_containers-for-strings",
