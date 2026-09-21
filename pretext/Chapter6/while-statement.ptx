@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="chapter6_while-statement">
-    <title>The <c>while</c> Statement</title>
+    <title>The <c>while</c> and <c>do-while</c> Statements</title>
 
     <p>
         A <c>while</c> statement repeats its body as long as its condition is
@@ -75,6 +75,120 @@ int main() {
         </p>
     </warning>
 
+    <subsection xml:id="chapter6_while-statement_do-while">
+        <title>The <c>do-while</c> Statement</title>
+
+        <p>
+            A <c>do-while</c> statement also repeats a body while a condition is
+            true. Its difference is the order of execution: the body runs first,
+            and the condition is checked afterward.
+        </p>
+
+        <p>The general syntax is:</p>
+
+        <program xml:id="program_do-while_syntax" language="cpp">
+            <code><![CDATA[
+do {
+    statements_to_repeat;
+} while (condition);
+            ]]></code>
+        </program>
+
+        <p>
+            Notice the semicolon after the closing parenthesis. The body of a
+            <c>do-while</c> statement always executes at least once, even when
+            the condition is initially false.
+        </p>
+
+        <program xml:id="program_while_do-while_difference"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int count = 0;
+
+    while (count > 0) {
+        std::cout << "while body\n";
+    }
+
+    do {
+        std::cout << "do-while body\n";
+    } while (count > 0);
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <console>
+            <output>do-while body</output>
+        </console>
+
+        <p>
+            The <c>while</c> body does not run because its condition is false
+            before the first test. The <c>do-while</c> body runs once before its
+            condition is tested.
+        </p>
+
+        <table xml:id="table_while_do-while_comparison">
+            <title>Comparing <c>while</c> and <c>do-while</c></title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <row header="yes">
+                    <cell>Feature</cell>
+                    <cell><c>while</c></cell>
+                    <cell><c>do-while</c></cell>
+                </row>
+                <row>
+                    <cell>When is the condition checked?</cell>
+                    <cell>Before the body</cell>
+                    <cell>After the body</cell>
+                </row>
+                <row>
+                    <cell>Minimum body executions</cell>
+                    <cell>Zero</cell>
+                    <cell>One</cell>
+                </row>
+                <row>
+                    <cell>Typical use</cell>
+                    <cell>Repeat only when the condition is initially true</cell>
+                    <cell>Perform an action once, then decide whether to repeat</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            A <c>do-while</c> statement is useful for menu systems and input
+            validation because the program must ask for input at least once.
+        </p>
+
+        <program xml:id="program_do-while_input_validation"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int menu_choice;
+
+    do {
+        std::cout << "Enter 1, 2, or 3: ";
+        std::cin >> menu_choice;
+    } while (menu_choice < 1 || menu_choice > 3);
+
+    std::cout << "You selected " << menu_choice << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The prompt appears at least once. If the user enters a value outside
+            the valid range, the loop repeats and asks again.
+        </p>
+    </subsection>
+
     <exercise label="chapter6_while_short-answer">
         <statement>
             <p>
@@ -132,6 +246,75 @@ while (count > 0) {
                         Output does not change the value used by the condition.
                     </p>
                 </feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_do-while_short-answer">
+        <statement>
+            <p>
+                The loop statement whose body executes before its condition is
+                checked is the <fillin width="12" answer="do-while" mode="string"/> statement.
+            </p>
+        </statement>
+        <evaluation>
+            <evaluate>
+                <test correct="yes">
+                    <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+            </evaluate>
+        </evaluation>
+    </exercise>
+
+    <exercise label="chapter6_do-while_usage">
+        <statement>
+            <p>
+                Which loop is usually the better choice for a menu that must be
+                displayed at least once and then repeated until the user enters
+                a valid choice?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>do-while</c></p></statement>
+                <feedback><p>The menu body must execute before the first condition check.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>while</c></p></statement>
+                <feedback><p>A while loop may be appropriate in other situations, but it can skip the body when its initial condition is false.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Neither loop can validate input.</p></statement>
+                <feedback><p>Both loops can validate input; the required first display makes do-while especially suitable here.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_do-while_execution">
+        <statement>
+            <p>How many times does the following body execute?</p>
+            <program language="cpp">
+                <code><![CDATA[
+int count = 0;
+
+do {
+    ++count;
+} while (count < 0);
+                ]]></code>
+            </program>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>Once</p></statement>
+                <feedback><p>The do-while body executes before the false condition is checked.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Zero times</p></statement>
+                <feedback><p>That would describe a while loop whose initial condition is false.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Forever</p></statement>
+                <feedback><p>After one execution, count is 1 and the condition is false.</p></feedback>
             </choice>
         </choices>
     </exercise>
