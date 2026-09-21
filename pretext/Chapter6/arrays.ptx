@@ -96,6 +96,106 @@ int main() {
         </p>
     </subsection>
 
+    <subsection xml:id="chapter6_arrays_passing-to-functions">
+        <title>Passing Arrays to Functions</title>
+
+        <p>
+            An array can be passed to a function just like other values. Because
+            <c>std::array</c> includes its element type and size in its type, the
+            parameter also shows those details.
+        </p>
+
+        <table xml:id="table_arrays_function_parameters">
+            <title>Ways to pass a <c>std::array</c> to a function</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <row header="yes">
+                    <cell>Parameter</cell>
+                    <cell>Effect</cell>
+                    <cell>Use when</cell>
+                </row>
+                <row>
+                    <cell><c>std::array&lt;int, 5&gt; values</c></cell>
+                    <cell>The function receives a copy.</cell>
+                    <cell>The function needs an independent copy.</cell>
+                </row>
+                <row>
+                    <cell><c>const std::array&lt;int, 5&gt;&amp; values</c></cell>
+                    <cell>No copy is made, and the function cannot modify the array.</cell>
+                    <cell>The function only needs to inspect the array.</cell>
+                </row>
+                <row>
+                    <cell><c>std::array&lt;int, 5&gt;&amp; values</c></cell>
+                    <cell>No copy is made, and the function can modify the original array.</cell>
+                    <cell>The function must change the caller's array.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            When a function only reads an array, a <c>const</c> reference is
+            usually the appropriate choice. It avoids copying the array and
+            documents that the function will not change it. When a function must
+            update the caller's array, use a non-<c>const</c> reference.
+        </p>
+
+        <note>
+            <p>
+                For a potentially large array, avoid passing by value unless the
+                function intentionally needs an independent copy. Prefer a
+                <c>const</c> reference for read-only access and a non-
+                <c>const</c> reference when the function is supposed to modify
+                the caller's array.
+            </p>
+        </note>
+
+        <program xml:id="program_pass_array_to_functions"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <cstddef>
+#include <iostream>
+
+void print_scores(const std::array<int, 5>& scores) {
+    for (std::size_t index = 0; index < scores.size(); ++index) {
+        std::cout << scores[index] << ' ';
+    }
+    std::cout << '\n';
+}
+
+void add_bonus_points(std::array<int, 5>& scores, int bonus_points) {
+    for (std::size_t index = 0; index < scores.size(); ++index) {
+        scores[index] += bonus_points;
+    }
+}
+
+int main() {
+    std::array<int, 5> scores{82, 91, 76, 88, 95};
+
+    print_scores(scores);
+    add_bonus_points(scores, 5);
+    print_scores(scores);
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The function <c>print_scores()</c> receives a read-only reference,
+            while <c>add_bonus_points()</c> receives a modifiable reference.
+            Both functions work with the original array without making a copy.
+        </p>
+
+        <p>
+            The size is part of the <c>std::array</c> type. Therefore, a
+            function expecting <c>std::array&lt;int, 5&gt;</c> cannot receive an
+            array of three integers. General-purpose functions that accept many
+            different array sizes require additional techniques that we will
+            study later.
+        </p>
+    </subsection>
+
     <subsection xml:id="chapter6_arrays_search-summarize">
         <title>Searching and Summarizing Values</title>
 
@@ -170,6 +270,53 @@ int main() {
             <choice>
                 <statement><p><c>for (std::size_t index = 1; index &lt; values.size(); ++index)</c></p></statement>
                 <feedback><p>This skips the element at index 0.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_arrays_const-reference-parameter">
+        <statement>
+            <p>
+                A function only needs to inspect a
+                <c>std::array&lt;int, 5&gt;</c>. Which parameter avoids a copy and
+                prevents the function from modifying the caller's array?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>const std::array&lt;int, 5&gt;&amp; values</c></p></statement>
+                <feedback><p>A const reference avoids copying and provides read-only access.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>std::array&lt;int, 5&gt; values</c></p></statement>
+                <feedback><p>This parameter receives a copy of the entire array.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>std::array&lt;int, 5&gt;&amp; values</c></p></statement>
+                <feedback><p>This permits modification, which the function does not need.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_arrays_modify-reference-parameter">
+        <statement>
+            <p>
+                A function must add 5 to every element of the caller's
+                <c>std::array&lt;int, 5&gt;</c>. Which parameter is appropriate?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>std::array&lt;int, 5&gt;&amp; values</c></p></statement>
+                <feedback><p>A non-const reference lets the function modify the original array.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>const std::array&lt;int, 5&gt;&amp; values</c></p></statement>
+                <feedback><p>Const references cannot be used to modify the elements.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>std::array&lt;int, 5&gt; values</c></p></statement>
+                <feedback><p>This changes only a copy, so the caller's array remains unchanged.</p></feedback>
             </choice>
         </choices>
     </exercise>
