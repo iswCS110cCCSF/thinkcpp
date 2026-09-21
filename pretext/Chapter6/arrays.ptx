@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter6_arrays">
+    <title>Arrays</title>
+
+    <p>
+        In Chapter 5, we learned that a structure can combine related values
+        into one object. For example, a <c>Point</c> structure combines an
+        <c>x</c> coordinate and a <c>y</c> coordinate.
+    </p>
+
+    <program xml:id="program_one_point_before_array" language="cpp">
+        <code><![CDATA[
+struct Point {
+    double x;
+    double y;
+};
+
+Point point{3.0, 4.0};
+        ]]></code>
+    </program>
+
+    <p>
+        A structure describes one object. What if a program needs to process
+        1,000 points? Creating 1,000 separately named variables would be
+        inconvenient and difficult to process with a loop. We need a container
+        that can store many objects under one name.
+    </p>
+
+    <p>
+        The standard-library type <c>std::array</c> provides such a container
+        when the number of elements is fixed. The structure defines what one
+        element contains; the array organizes many elements.
+    </p>
+
+    <program xml:id="program_create_std_array"
+             language="cpp"
+             interactive="yes">
+        <code><![CDATA[
+#include <array>
+#include <cstddef>
+#include <iostream>
+
+int main() {
+    const std::array<int, 5> scores{82, 91, 76, 88, 95};
+
+    for (std::size_t index = 0; index < scores.size(); ++index) {
+        std::cout << scores[index] << '\n';
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The type <c>std::array&lt;int, 5&gt;</c> means that <c>scores</c> stores
+        five <c>int</c> values. Its size is fixed when the array is created. The
+        member function <c>size()</c> reports the number of elements.
+    </p>
+
+    <subsection xml:id="chapter6_arrays_indexing">
+        <title>Accessing Elements by Index</title>
+
+        <p>
+            Each array element has an <term>index</term>, which identifies its
+            position. The first element has index 0, not index 1. Indexed
+            iteration is useful when a program needs to work with a position or
+            compare neighboring elements.
+        </p>
+
+        <program xml:id="program_index_std_array"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <cstddef>
+#include <iostream>
+
+int main() {
+    const std::array<int, 5> scores{82, 91, 76, 88, 95};
+
+    for (std::size_t index = 0; index < scores.size(); ++index) {
+        std::cout << "Score " << index + 1 << ": "
+                  << scores[index] << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            Notice the difference between the array index and the displayed
+            score number. The index begins at 0, while the human-friendly label
+            begins at 1.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter6_arrays_search-summarize">
+        <title>Searching and Summarizing Values</title>
+
+        <p>
+            A loop can inspect every element to search for a value, count values
+            that meet a condition, or calculate a total. These tasks combine
+            indexed iteration with the counters and accumulators from the
+            previous section.
+        </p>
+
+        <program xml:id="program_summarize_scores"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <cstddef>
+#include <iostream>
+
+int main() {
+    const std::array<int, 5> scores{82, 91, 76, 88, 95};
+    int total = 0;
+    int high_score_count = 0;
+
+    for (std::size_t index = 0; index < scores.size(); ++index) {
+        total += scores[index];
+
+        if (scores[index] >= 90) {
+            ++high_score_count;
+        }
+    }
+
+    std::cout << "Total: " << total << '\n';
+    std::cout << "High scores: " << high_score_count << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <exercise label="chapter6_arrays_index-short-answer">
+        <statement>
+            <p>
+                The first element of a fixed-size array has index
+                <fillin width="4" answer="0" mode="number"/>.
+            </p>
+        </statement>
+        <evaluation>
+            <evaluate>
+                <test correct="yes">
+                    <numcmp use-answer="yes"/>
+                </test>
+            </evaluate>
+        </evaluation>
+    </exercise>
+
+    <exercise label="chapter6_arrays_index-organization">
+        <statement>
+            <p>
+                Which loop correctly visits every element of
+                <c>std::array&lt;int, 4&gt; values</c> by index?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>for (std::size_t index = 0; index &lt; values.size(); ++index)</c></p></statement>
+                <feedback><p>The index begins at 0 and stops before <c>values.size()</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>for (std::size_t index = 0; index &lt;= values.size(); ++index)</c></p></statement>
+                <feedback><p>The final valid index is one less than <c>values.size()</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>for (std::size_t index = 1; index &lt; values.size(); ++index)</c></p></statement>
+                <feedback><p>This skips the element at index 0.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

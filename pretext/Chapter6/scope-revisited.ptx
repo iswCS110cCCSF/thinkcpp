@@ -121,8 +121,8 @@ int main() {
         </p>
 	  <note>
 		<p>
-		 Unscoped Enums (Traditional enum) do not have their own isolated scope. Their members leak
-		 directly into the surrounding enclosing scope.We will cover enums (enumerated types) in an 
+		 Unscoped Enums (Traditional enums) do not have their own isolated scope. Their members leak
+		 directly into the surrounding enclosing scope. We will cover enums (enumerated types) in an 
 		 upcoming section.
 		</p>
 	  </note>

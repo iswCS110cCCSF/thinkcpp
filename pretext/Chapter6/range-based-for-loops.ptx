@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter6_range-based-for-loops">
+    <title>Range-Based <c>for</c> Loops</title>
+
+    <p>
+        Indexed iteration is useful when a program needs an element's position.
+        Often, however, a program only needs to process every element. A
+        <term>range-based <c>for</c> loop</term> visits each element directly,
+        without requiring the programmer to manage an index.
+    </p>
+
+    <p>The general syntax is:</p>
+
+    <program xml:id="program_range_based_for_syntax" language="cpp">
+        <code><![CDATA[
+for (element_declaration : collection) {
+    statements_to_repeat;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The collection is the range to visit. During each iteration, the loop
+        variable refers to one element in that collection.
+    </p>
+
+    <program xml:id="program_range_based_for_scores"
+             language="cpp"
+             interactive="yes">
+        <code><![CDATA[
+#include <array>
+#include <iostream>
+
+int main() {
+    const std::array<int, 5> scores{82, 91, 76, 88, 95};
+
+    for (int score : scores) {
+        std::cout << score << '\n';
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The loop above reads as <q>for each score in scores</q>. The loop visits
+        the elements in order, but the program does not need to write an index
+        or use the subscript operator.
+    </p>
+
+    <subsection xml:id="chapter6_range-based-for-loops_references">
+        <title>Copies and References</title>
+
+        <p>
+            The declaration of the loop variable determines how each element is
+            handled. A plain variable receives a copy of the element. A
+            reference can refer directly to the element in the collection.
+        </p>
+
+        <table xml:id="table_range_based_for_references">
+            <title>Loop-variable declarations</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <row header="yes">
+                    <cell>Declaration</cell>
+                    <cell>Meaning</cell>
+                </row>
+                <row>
+                    <cell><c>int value</c></cell>
+                    <cell>Work with a copy of each value.</cell>
+                </row>
+                <row>
+                    <cell><c>const int&amp; value</c></cell>
+                    <cell>Read the original value without modifying it.</cell>
+                </row>
+                <row>
+                    <cell><c>int&amp; value</c></cell>
+                    <cell>Refer to the original value and allow modification.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            For small types such as <c>int</c>, copying is usually simple. For
+            larger structures and class objects, a <c>const</c> reference can
+            avoid unnecessary copies while preserving read-only access.
+        </p>
+
+        <program xml:id="program_range_based_for_const_reference"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <iostream>
+#include <string>
+
+int main() {
+    const std::array<std::string, 3> names{"Amina", "Luis", "Maya"};
+
+    for (const std::string& name : names) {
+        std::cout << name << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            A non-<c>const</c> reference allows the loop to change the original
+            elements.
+        </p>
+
+        <program xml:id="program_range_based_for_modify"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <iostream>
+
+int main() {
+    std::array<int, 3> scores{70, 80, 90};
+
+    for (int& score : scores) {
+        score += 5;
+    }
+
+    for (int score : scores) {
+        std::cout << score << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter6_range-based-for-loops_structures">
+        <title>Arrays of Structures</title>
+
+        <p>
+            A range-based loop can visit structures just as it visits simple
+            values. The loop variable has the structure type, so the program
+            can access the structure's members.
+        </p>
+
+        <program xml:id="program_range_based_for_points"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <iostream>
+
+struct Point {
+    double x;
+    double y;
+};
+
+int main() {
+    const std::array<Point, 3> points{
+        Point{1.0, 2.0},
+        Point{3.0, 4.0},
+        Point{5.0, 6.0}
+    };
+
+    for (const Point& point : points) {
+        std::cout << '(' << point.x << ", " << point.y << ")\n";
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The declaration <c>const Point&amp; point</c> gives the loop a
+            read-only reference to each point. The loop does not copy each
+            structure, and it cannot modify the array's points through that
+            reference.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter6_range-based-for-loops_classes">
+        <title>Arrays of Class Objects</title>
+
+        <p>
+            The same idea works with class objects. Instead of accessing public
+            data, the loop can call a public member function on each object.
+        </p>
+
+        <program xml:id="program_range_based_for_rectangles"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <iostream>
+
+class Rectangle {
+private:
+    double width;
+    double height;
+
+public:
+    Rectangle(double rectangle_width, double rectangle_height)
+        : width{rectangle_width}, height{rectangle_height} {
+    }
+
+    double calculate_area() const {
+        return width * height;
+    }
+};
+
+int main() {
+    const std::array<Rectangle, 2> rectangles{
+        Rectangle{4.0, 3.0},
+        Rectangle{5.0, 2.0}
+    };
+
+    for (const Rectangle& rectangle : rectangles) {
+        std::cout << rectangle.calculate_area() << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The phrase <q>for each object</q> is a useful clue that a
+            range-based loop may be appropriate. The type of the object
+            determines whether the loop accesses data members or calls member
+            functions.
+        </p>
+    </subsection>
+
+    <exercise label="chapter6_range-based-for-loops_term">
+        <statement>
+            <p>
+                Enter the complete term used for a loop that visits each element
+                of a collection directly: <fillin width="24" answer="range-based for loop" mode="string"/>.
+            </p>
+        </statement>
+        <evaluation>
+            <evaluate>
+                <test correct="yes">
+                    <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+            </evaluate>
+        </evaluation>
+    </exercise>
+
+    <exercise label="chapter6_range-based-for-loops_const-reference">
+        <statement>
+            <p>
+                Which loop variable declaration is most appropriate for reading
+                each large object without copying it or modifying it?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>const Rectangle&amp; rectangle</c></p></statement>
+                <feedback><p>A const reference avoids a copy and prevents modification through the loop variable.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>Rectangle rectangle</c></p></statement>
+                <feedback><p>This declaration creates a copy of each object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>Rectangle&amp; rectangle</c></p></statement>
+                <feedback><p>This reference allows modification, which is not needed for a read-only traversal.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_range-based-for-loops_modify">
+        <statement>
+            <p>
+                Which declaration allows a range-based loop to modify each
+                original integer in the array?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>int&amp; value</c></p></statement>
+                <feedback><p>A non-const reference refers to the original array element.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>int value</c></p></statement>
+                <feedback><p>This loop variable receives a copy, so changing it does not change the array.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>const int&amp; value</c></p></statement>
+                <feedback><p>The const qualifier prevents modification through the reference.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_range-based-for-loops_member-function">
+        <statement>
+            <p>
+                A function that belongs to a class and is called through an
+                object is a <fillin width="20" answer="member function" mode="string"/>.
+            </p>
+        </statement>
+        <evaluation>
+            <evaluate>
+                <test correct="yes">
+                    <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+            </evaluate>
+        </evaluation>
+    </exercise>
+
+    <exercise label="chapter6_range-based-for-loops_encapsulation">
+        <statement>
+            <p>
+                Which loop organization correctly processes every
+                <c>Rectangle</c> object while preserving encapsulation?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement>
+                    <p>
+                        Use <c>const Rectangle&amp; rectangle</c> and call the
+                        public member function
+                        <c>rectangle.calculate_area()</c>.
+                    </p>
+                </statement>
+                <feedback><p>The class controls access to its private data through its public operation.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Access <c>rectangle.width</c> directly from <c>main</c>.</p></statement>
+                <feedback><p><c>width</c> is private, so outside code should use a public member function.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Create a new <c>Rectangle</c> class inside every loop iteration.</p></statement>
+                <feedback><p>The array already contains the objects to process.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

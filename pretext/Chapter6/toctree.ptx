@@ -9,7 +9,8 @@
     <xi:include href="./for-statement.ptx"/>
     <xi:include href="./scope-revisited.ptx"/>
     <xi:include href="./common-loop-patterns.ptx"/>
-    <xi:include href="./arrays-of-objects.ptx"/>
+    <xi:include href="./arrays.ptx"/>
+    <xi:include href="./range-based-for-loops.ptx"/>
     <xi:include href="./nested-iteration.ptx"/>
 
     <xi:include href="./glossary.ptx"/>
