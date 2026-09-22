@@ -58,6 +58,83 @@ int main() {
         member function <c>size()</c> reports the number of elements.
     </p>
 
+    <subsection xml:id="chapter6_arrays_initialization">
+        <title>Initializing Every Element</title>
+
+        <p>
+            An empty pair of braces after an array name has an important meaning.
+            In <c>std::array&lt;int, 5&gt; scores{};</c>, the braces request
+            <term>value-initialization</term>. Because each element is an
+            <c>int</c>, every element is initialized to <c>0</c>.
+        </p>
+
+        <program xml:id="program_value_initialize_std_array"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <cstddef>
+#include <iostream>
+
+int main() {
+    std::array<int, 5> scores{};
+
+    for (std::size_t index = 0; index < scores.size(); ++index) {
+        std::cout << "scores[" << index << "] = "
+                  << scores[index] << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The array contains five initialized element objects. Conceptually,
+            its values are:
+        </p>
+
+        <table xml:id="table_array_value_initialization">
+            <title>Values after <c>std::array&lt;int, 5&gt; scores{}</c></title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <row header="yes">
+                    <cell>Index</cell>
+                    <cell>0</cell>
+                    <cell>1</cell>
+                    <cell>2</cell>
+                    <cell>3</cell>
+                    <cell>4</cell>
+                </row>
+                <row>
+                    <cell>Value</cell>
+                    <cell>0</cell>
+                    <cell>0</cell>
+                    <cell>0</cell>
+                    <cell>0</cell>
+                    <cell>0</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The braces do not mean that the array is left empty or that its
+            storage is ignored. They initialize all five elements before the
+            program uses them. For an array of <c>double</c> values, the elements
+            would be initialized to <c>0.0</c>. For an array of <c>bool</c>
+            values, they would be initialized to <c>false</c>.
+        </p>
+
+        <p>
+            If an initializer provides only some values, the remaining elements
+            are also value-initialized. For example,
+            <c>std::array&lt;int, 5&gt; scores{10, 20};</c> produces the values
+            <c>10, 20, 0, 0, 0</c>. Writing a local integer array without an
+            initializer, such as <c>std::array&lt;int, 5&gt; scores;</c>, does not
+            initialize its <c>int</c> elements to useful values. Using <c>{}</c>
+            is a safe way to begin with known values.
+        </p>
+    </subsection>
+
     <subsection xml:id="chapter6_arrays_indexing">
         <title>Accessing Elements by Index</title>
 
