@@ -426,17 +426,19 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-section contains-active">
 <div class="toc-title-box"><a href="chapter6_arrays.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Arrays</span></a></div>
 <ul class="structural toc-item-list active" id="ptx-toc-group-chapter6_arrays">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_indexing" class="internal"><span class="codenumber">6.6.1</span> <span class="title">Accessing Elements by Index</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_passing-to-functions" class="internal"><span class="codenumber">6.6.2</span> <span class="title">Passing Arrays to Functions</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_search-summarize" class="internal"><span class="codenumber">6.6.3</span> <span class="title">Searching and Summarizing Values</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_initialization" class="internal"><span class="codenumber">6.6.1</span> <span class="title">Initializing Every Element</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_indexing" class="internal"><span class="codenumber">6.6.2</span> <span class="title">Accessing Elements by Index</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_passing-to-functions" class="internal"><span class="codenumber">6.6.3</span> <span class="title">Passing Arrays to Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_search-summarize" class="internal"><span class="codenumber">6.6.4</span> <span class="title">Searching and Summarizing Values</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter6_range-based-for-loops.html" class="internal"><span class="codenumber">6.7</span> <span class="title">Range-Based <code class="code-inline tex2jax_ignore">for</code> Loops</span></a></div>
 <ul id="ptx-toc-group-chapter6_range-based-for-loops" class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_references" class="internal"><span class="codenumber">6.7.1</span> <span class="title">Copies and References</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_structures" class="internal"><span class="codenumber">6.7.2</span> <span class="title">Arrays of Structures</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_classes" class="internal"><span class="codenumber">6.7.3</span> <span class="title">Arrays of Class Objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_auto" class="internal"><span class="codenumber">6.7.1</span> <span class="title">The <code class="code-inline tex2jax_ignore">auto</code> Keyword</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_references" class="internal"><span class="codenumber">6.7.2</span> <span class="title">Copies and References</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_structures" class="internal"><span class="codenumber">6.7.3</span> <span class="title">Arrays of Structures</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_classes" class="internal"><span class="codenumber">6.7.4</span> <span class="title">Arrays of Class Objects</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -617,9 +619,57 @@ int main() {
 </code></pre></div>
 <div class="para" id="chapter6_arrays-7">The type <code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt;</code> means that <code class="code-inline tex2jax_ignore">scores</code> stores five <code class="code-inline tex2jax_ignore">int</code> values. Its size is fixed when the array is created. The member function <code class="code-inline tex2jax_ignore">size()</code> reports the number of elements.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<section class="subsection" id="chapter6_arrays_initialization">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Initializing Every Element</span>
+</h2>
+<div class="para" id="chapter6_arrays_initialization-2">An empty pair of braces after an array name has an important meaning. In <code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt; scores{};</code>, the braces request <dfn class="terminology">value-initialization</dfn>. Because each element is an <code class="code-inline tex2jax_ignore">int</code>, every element is initialized to <code class="code-inline tex2jax_ignore">0</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_initialization-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_value_initialize_std_array" class="language-cpp">#include &lt;array&gt;
+#include &lt;cstddef&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    std::array&lt;int, 5&gt; scores{};
+
+    for (std::size_t index = 0; index &lt; scores.size(); ++index) {
+        std::cout &lt;&lt; "scores[" &lt;&lt; index &lt;&lt; "] = "
+                  &lt;&lt; scores[index] &lt;&lt; '\n';
+    }
+
+    return 0;
+}
+</code></pre></div>
+<div class="para" id="chapter6_arrays_initialization-4">The array contains five initialized element objects. Conceptually, its values are:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_initialization-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="table table-like" id="table_array_value_initialization"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Values after <code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt; scores{}</code><div class="autopermalink" aria-hidden="true" data-description="Table 6.6.1: Values after std::array&lt;int, 5&gt; scores{}"><a tabindex="-1" href="#table_array_value_initialization" title="Copy heading and permalink for Table 6.6.1: Values after std::array&lt;int, 5&gt; scores{}" aria-label="Copy heading and permalink for Table 6.6.1: Values after std::array&lt;int, 5&gt; scores{}">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b3 r3 l3 t3 lines">Index</th>
+<th scope="col" class="l m b3 r3 l0 t3 lines">0</th>
+<th scope="col" class="l m b3 r3 l0 t3 lines">1</th>
+<th scope="col" class="l m b3 r3 l0 t3 lines">2</th>
+<th scope="col" class="l m b3 r3 l0 t3 lines">3</th>
+<th scope="col" class="l m b3 r3 l0 t3 lines">4</th>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0 lines">Value</td>
+<td class="l m b3 r3 l0 t0 lines">0</td>
+<td class="l m b3 r3 l0 t0 lines">0</td>
+<td class="l m b3 r3 l0 t0 lines">0</td>
+<td class="l m b3 r3 l0 t0 lines">0</td>
+<td class="l m b3 r3 l0 t0 lines">0</td>
+</tr>
+</table></div>
+</figure>
+<div class="para" id="chapter6_arrays_initialization-6">The braces do not mean that the array is left empty or that its storage is ignored. They initialize all five elements before the program uses them. For an array of <code class="code-inline tex2jax_ignore">double</code> values, the elements would be initialized to <code class="code-inline tex2jax_ignore">0.0</code>. For an array of <code class="code-inline tex2jax_ignore">bool</code> values, they would be initialized to <code class="code-inline tex2jax_ignore">false</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_initialization-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_arrays_initialization-7">If an initializer provides only some values, the remaining elements are also value-initialized. For example, <code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt; scores{10, 20};</code> produces the values <code class="code-inline tex2jax_ignore">10, 20, 0, 0, 0</code>. Writing a local integer array without an initializer, such as <code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt; scores;</code>, does not initialize its <code class="code-inline tex2jax_ignore">int</code> elements to useful values. Using <code class="code-inline tex2jax_ignore">{}</code> is a safe way to begin with known values.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_initialization-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.6.1: Initializing Every Element"><a tabindex="-1" href="#chapter6_arrays_initialization" title="Copy heading and permalink for Subsection 6.6.1: Initializing Every Element" aria-label="Copy heading and permalink for Subsection 6.6.1: Initializing Every Element">🔗</a></div>
+</section>
 <section class="subsection" id="chapter6_arrays_indexing">
 <h2 class="heading hide-type">
-<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Accessing Elements by Index</span>
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Accessing Elements by Index</span>
 </h2>
 <div class="para" id="chapter6_arrays_indexing-2">Each array element has an <dfn class="terminology">index</dfn>, which identifies its position. The first element has index 0, not index 1. Indexed iteration is useful when a program needs to work with a position or compare neighboring elements.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_indexing-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -640,15 +690,15 @@ int main() {
 </code></pre></div>
 <div class="para" id="chapter6_arrays_indexing-4">Notice the difference between the array index and the displayed score number. The index begins at 0, while the human-friendly label begins at 1.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_indexing-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.6.1: Accessing Elements by Index"><a tabindex="-1" href="#chapter6_arrays_indexing" title="Copy heading and permalink for Subsection 6.6.1: Accessing Elements by Index" aria-label="Copy heading and permalink for Subsection 6.6.1: Accessing Elements by Index">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.6.2: Accessing Elements by Index"><a tabindex="-1" href="#chapter6_arrays_indexing" title="Copy heading and permalink for Subsection 6.6.2: Accessing Elements by Index" aria-label="Copy heading and permalink for Subsection 6.6.2: Accessing Elements by Index">🔗</a></div>
 </section>
 <section class="subsection" id="chapter6_arrays_passing-to-functions">
 <h2 class="heading hide-type">
-<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Passing Arrays to Functions</span>
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Passing Arrays to Functions</span>
 </h2>
 <div class="para" id="chapter6_arrays_passing-to-functions-2">An array can be passed to a function just like other values. Because <code class="code-inline tex2jax_ignore">std::array</code> includes its element type and size in its type, the parameter also shows those details.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_passing-to-functions-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="table table-like" id="table_arrays_function_parameters"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Ways to pass a <code class="code-inline tex2jax_ignore">std::array</code> to a function<div class="autopermalink" aria-hidden="true" data-description="Table 6.6.1: Ways to pass a std::array to a function"><a tabindex="-1" href="#table_arrays_function_parameters" title="Copy heading and permalink for Table 6.6.1: Ways to pass a std::array to a function" aria-label="Copy heading and permalink for Table 6.6.1: Ways to pass a std::array to a function">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<figure class="table table-like" id="table_arrays_function_parameters"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Ways to pass a <code class="code-inline tex2jax_ignore">std::array</code> to a function<div class="autopermalink" aria-hidden="true" data-description="Table 6.6.2: Ways to pass a std::array to a function"><a tabindex="-1" href="#table_arrays_function_parameters" title="Copy heading and permalink for Table 6.6.2: Ways to pass a std::array to a function" aria-label="Copy heading and permalink for Table 6.6.2: Ways to pass a std::array to a function">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="l m b3 r3 l3 t3 lines">Parameter</th>
 <th scope="col" class="l m b3 r3 l0 t3 lines">Effect</th>
@@ -710,11 +760,11 @@ int main() {
 </div>
 <div class="para" id="chapter6_arrays_passing-to-functions-8">The size is part of the <code class="code-inline tex2jax_ignore">std::array</code> type. Therefore, a function expecting <code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt;</code> cannot receive an array of three integers. General-purpose functions that accept many different array sizes require additional techniques that we will study later.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_passing-to-functions-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.6.2: Passing Arrays to Functions"><a tabindex="-1" href="#chapter6_arrays_passing-to-functions" title="Copy heading and permalink for Subsection 6.6.2: Passing Arrays to Functions" aria-label="Copy heading and permalink for Subsection 6.6.2: Passing Arrays to Functions">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.6.3: Passing Arrays to Functions"><a tabindex="-1" href="#chapter6_arrays_passing-to-functions" title="Copy heading and permalink for Subsection 6.6.3: Passing Arrays to Functions" aria-label="Copy heading and permalink for Subsection 6.6.3: Passing Arrays to Functions">🔗</a></div>
 </section>
 <section class="subsection" id="chapter6_arrays_search-summarize">
 <h2 class="heading hide-type">
-<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Searching and Summarizing Values</span>
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Searching and Summarizing Values</span>
 </h2>
 <div class="para" id="chapter6_arrays_search-summarize-2">A loop can inspect every element to search for a value, count values that meet a condition, or calculate a total. These tasks combine indexed iteration with the counters and accumulators from the previous section.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_search-summarize-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -740,7 +790,7 @@ int main() {
     return 0;
 }
 </code></pre></div>
-<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.6.3: Searching and Summarizing Values"><a tabindex="-1" href="#chapter6_arrays_search-summarize" title="Copy heading and permalink for Subsection 6.6.3: Searching and Summarizing Values" aria-label="Copy heading and permalink for Subsection 6.6.3: Searching and Summarizing Values">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.6.4: Searching and Summarizing Values"><a tabindex="-1" href="#chapter6_arrays_search-summarize" title="Copy heading and permalink for Subsection 6.6.4: Searching and Summarizing Values" aria-label="Copy heading and permalink for Subsection 6.6.4: Searching and Summarizing Values">🔗</a></div>
 </section>
 <article class="exercise exercise-like" id="chapter6_arrays_index-short-answer"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>

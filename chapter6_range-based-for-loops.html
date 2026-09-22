@@ -426,17 +426,19 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-section">
 <div class="toc-title-box"><a href="chapter6_arrays.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Arrays</span></a></div>
 <ul id="ptx-toc-group-chapter6_arrays" class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_indexing" class="internal"><span class="codenumber">6.6.1</span> <span class="title">Accessing Elements by Index</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_passing-to-functions" class="internal"><span class="codenumber">6.6.2</span> <span class="title">Passing Arrays to Functions</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_search-summarize" class="internal"><span class="codenumber">6.6.3</span> <span class="title">Searching and Summarizing Values</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_initialization" class="internal"><span class="codenumber">6.6.1</span> <span class="title">Initializing Every Element</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_indexing" class="internal"><span class="codenumber">6.6.2</span> <span class="title">Accessing Elements by Index</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_passing-to-functions" class="internal"><span class="codenumber">6.6.3</span> <span class="title">Passing Arrays to Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_search-summarize" class="internal"><span class="codenumber">6.6.4</span> <span class="title">Searching and Summarizing Values</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section contains-active">
 <div class="toc-title-box"><a href="chapter6_range-based-for-loops.html" class="internal"><span class="codenumber">6.7</span> <span class="title">Range-Based <code class="code-inline tex2jax_ignore">for</code> Loops</span></a></div>
 <ul class="structural toc-item-list active" id="ptx-toc-group-chapter6_range-based-for-loops">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_references" class="internal"><span class="codenumber">6.7.1</span> <span class="title">Copies and References</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_structures" class="internal"><span class="codenumber">6.7.2</span> <span class="title">Arrays of Structures</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_classes" class="internal"><span class="codenumber">6.7.3</span> <span class="title">Arrays of Class Objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_auto" class="internal"><span class="codenumber">6.7.1</span> <span class="title">The <code class="code-inline tex2jax_ignore">auto</code> Keyword</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_references" class="internal"><span class="codenumber">6.7.2</span> <span class="title">Copies and References</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_structures" class="internal"><span class="codenumber">6.7.3</span> <span class="title">Arrays of Structures</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_classes" class="internal"><span class="codenumber">6.7.4</span> <span class="title">Arrays of Class Objects</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -598,28 +600,75 @@ eBookConfig.enable_chatcodes =  false;
 </code></pre></div>
 <div class="para" id="chapter6_range-based-for-loops-5">The collection is the range to visit. During each iteration, the loop variable refers to one element in that collection.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code id="rs-program_range_based_for_scores" class="language-cpp">#include &lt;array&gt;
+<section class="subsection" id="chapter6_range-based-for-loops_auto">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The <code class="code-inline tex2jax_ignore">auto</code> Keyword</span>
+</h2>
+<div class="para" id="chapter6_range-based-for-loops_auto-2">The keyword <code class="code-inline tex2jax_ignore">auto</code> asks the compiler to deduce a variable’s type from the initializer. In a range-based loop, the collection tells the compiler the type of each element. For example, if <code class="code-inline tex2jax_ignore">scores</code> is a <code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt;</code>, then <code class="code-inline tex2jax_ignore">auto score</code> is deduced as <code class="code-inline tex2jax_ignore">int score</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops_auto-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_range_based_for_auto" class="language-cpp">#include &lt;array&gt;
 #include &lt;iostream&gt;
 
 int main() {
     const std::array&lt;int, 5&gt; scores{82, 91, 76, 88, 95};
 
-    for (int score : scores) {
+    for (auto score : scores) {
         std::cout &lt;&lt; score &lt;&lt; '\n';
     }
 
     return 0;
 }
 </code></pre></div>
-<div class="para" id="chapter6_range-based-for-loops-7">The loop above reads as “for each score in scores”. The loop visits the elements in order, but the program does not need to write an index or use the subscript operator.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter6_range-based-for-loops_auto-4">In this example, <code class="code-inline tex2jax_ignore">auto</code> does not make the program dynamically typed. The compiler still chooses a specific type at compile time; <code class="code-inline tex2jax_ignore">auto</code> simply avoids repeating a type that is already clear from the collection.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops_auto-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="table table-like" id="table_range-based-for-loops_auto_recommendations"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Recommended loop-variable declarations<div class="autopermalink" aria-hidden="true" data-description="Table 6.7.1: Recommended loop-variable declarations"><a tabindex="-1" href="#table_range-based-for-loops_auto_recommendations" title="Copy heading and permalink for Table 6.7.1: Recommended loop-variable declarations" aria-label="Copy heading and permalink for Table 6.7.1: Recommended loop-variable declarations">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b3 r3 l3 t3 lines">Declaration</th>
+<th scope="col" class="l m b3 r3 l0 t3 lines">Effect</th>
+<th scope="col" class="l m b3 r3 l0 t3 lines">Recommended use</th>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0 lines"><code class="code-inline tex2jax_ignore">auto element</code></td>
+<td class="l m b3 r3 l0 t0 lines">Copies each element.</td>
+<td class="l m b3 r3 l0 t0 lines">Small values when a copy is acceptable.</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0 lines"><code class="code-inline tex2jax_ignore">const auto&amp; element</code></td>
+<td class="l m b3 r3 l0 t0 lines">Reads the original element without copying or modifying it.</td>
+<td class="l m b3 r3 l0 t0 lines">Read-only access, especially for large structures or class objects.</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0 lines"><code class="code-inline tex2jax_ignore">auto&amp; element</code></td>
+<td class="l m b3 r3 l0 t0 lines">Refers to the original element and allows modification.</td>
+<td class="l m b3 r3 l0 t0 lines">When the loop must change the elements in the collection.</td>
+</tr>
+</table></div>
+</figure>
+<div class="para" id="chapter6_range-based-for-loops_auto-6">A useful recommendation is to start with <code class="code-inline tex2jax_ignore">const auto&amp;</code> when reading a collection of potentially large objects. Use plain <code class="code-inline tex2jax_ignore">auto</code> when copying a small value is appropriate, and use <code class="code-inline tex2jax_ignore">auto&amp;</code> only when the loop must modify the original elements. An explicit type remains appropriate when it makes the intended type especially clear or when the lesson is emphasizing that type.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops_auto-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.7.1: The auto Keyword"><a tabindex="-1" href="#chapter6_range-based-for-loops_auto" title="Copy heading and permalink for Subsection 6.7.1: The auto Keyword" aria-label="Copy heading and permalink for Subsection 6.7.1: The auto Keyword">🔗</a></div>
+</section><div class="code-box"><pre class="program clipboardable"><code id="rs-program_range_based_for_scores" class="language-cpp">#include &lt;array&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    const std::array&lt;int, 5&gt; scores{82, 91, 76, 88, 95};
+
+    for (auto score : scores) {
+        std::cout &lt;&lt; score &lt;&lt; '\n';
+    }
+
+    return 0;
+}
+</code></pre></div>
+<div class="para" id="chapter6_range-based-for-loops-8">The loop above reads as “for each score in scores”. The loop visits the elements in order, but the program does not need to write an index or use the subscript operator.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <section class="subsection" id="chapter6_range-based-for-loops_references">
 <h2 class="heading hide-type">
-<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Copies and References</span>
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Copies and References</span>
 </h2>
 <div class="para" id="chapter6_range-based-for-loops_references-2">The declaration of the loop variable determines how each element is handled. A plain variable receives a copy of the element. A reference can refer directly to the element in the collection.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops_references-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="table table-like" id="table_range_based_for_references"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Loop-variable declarations<div class="autopermalink" aria-hidden="true" data-description="Table 6.7.1: Loop-variable declarations"><a tabindex="-1" href="#table_range_based_for_references" title="Copy heading and permalink for Table 6.7.1: Loop-variable declarations" aria-label="Copy heading and permalink for Table 6.7.1: Loop-variable declarations">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<figure class="table table-like" id="table_range_based_for_references"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Loop-variable declarations<div class="autopermalink" aria-hidden="true" data-description="Table 6.7.2: Loop-variable declarations"><a tabindex="-1" href="#table_range_based_for_references" title="Copy heading and permalink for Table 6.7.2: Loop-variable declarations" aria-label="Copy heading and permalink for Table 6.7.2: Loop-variable declarations">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="l m b3 r3 l3 t3 lines">Declaration</th>
 <th scope="col" class="l m b3 r3 l0 t3 lines">Meaning</th>
@@ -647,7 +696,7 @@ int main() {
 int main() {
     const std::array&lt;std::string, 3&gt; names{"Amina", "Luis", "Maya"};
 
-    for (const std::string&amp; name : names) {
+    for (const auto&amp; name : names) {
         std::cout &lt;&lt; name &lt;&lt; '\n';
     }
 
@@ -662,7 +711,7 @@ int main() {
 int main() {
     std::array&lt;int, 3&gt; scores{70, 80, 90};
 
-    for (int&amp; score : scores) {
+    for (auto&amp; score : scores) {
         score += 5;
     }
 
@@ -673,11 +722,11 @@ int main() {
     return 0;
 }
 </code></pre></div>
-<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.7.1: Copies and References"><a tabindex="-1" href="#chapter6_range-based-for-loops_references" title="Copy heading and permalink for Subsection 6.7.1: Copies and References" aria-label="Copy heading and permalink for Subsection 6.7.1: Copies and References">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.7.2: Copies and References"><a tabindex="-1" href="#chapter6_range-based-for-loops_references" title="Copy heading and permalink for Subsection 6.7.2: Copies and References" aria-label="Copy heading and permalink for Subsection 6.7.2: Copies and References">🔗</a></div>
 </section>
 <section class="subsection" id="chapter6_range-based-for-loops_structures">
 <h2 class="heading hide-type">
-<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Arrays of Structures</span>
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Arrays of Structures</span>
 </h2>
 <div class="para" id="chapter6_range-based-for-loops_structures-2">A range-based loop can visit structures just as it visits simple values. The loop variable has the structure type, so the program can access the structure’s members.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops_structures-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -696,7 +745,7 @@ int main() {
         Point{5.0, 6.0}
     };
 
-    for (const Point&amp; point : points) {
+    for (const auto&amp; point : points) {
         std::cout &lt;&lt; '(' &lt;&lt; point.x &lt;&lt; ", " &lt;&lt; point.y &lt;&lt; ")\n";
     }
 
@@ -705,11 +754,11 @@ int main() {
 </code></pre></div>
 <div class="para" id="chapter6_range-based-for-loops_structures-4">The declaration <code class="code-inline tex2jax_ignore">const Point&amp; point</code> gives the loop a read-only reference to each point. The loop does not copy each structure, and it cannot modify the array’s points through that reference.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops_structures-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.7.2: Arrays of Structures"><a tabindex="-1" href="#chapter6_range-based-for-loops_structures" title="Copy heading and permalink for Subsection 6.7.2: Arrays of Structures" aria-label="Copy heading and permalink for Subsection 6.7.2: Arrays of Structures">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.7.3: Arrays of Structures"><a tabindex="-1" href="#chapter6_range-based-for-loops_structures" title="Copy heading and permalink for Subsection 6.7.3: Arrays of Structures" aria-label="Copy heading and permalink for Subsection 6.7.3: Arrays of Structures">🔗</a></div>
 </section>
 <section class="subsection" id="chapter6_range-based-for-loops_classes">
 <h2 class="heading hide-type">
-<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Arrays of Class Objects</span>
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Arrays of Class Objects</span>
 </h2>
 <div class="para" id="chapter6_range-based-for-loops_classes-2">The same idea works with class objects. Instead of accessing public data, the loop can call a public member function on each object.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops_classes-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -737,7 +786,7 @@ int main() {
         Rectangle{5.0, 2.0}
     };
 
-    for (const Rectangle&amp; rectangle : rectangles) {
+    for (const auto&amp; rectangle : rectangles) {
         std::cout &lt;&lt; rectangle.calculate_area() &lt;&lt; '\n';
     }
 
@@ -746,7 +795,7 @@ int main() {
 </code></pre></div>
 <div class="para" id="chapter6_range-based-for-loops_classes-4">The phrase “for each object” is a useful clue that a range-based loop may be appropriate. The type of the object determines whether the loop accesses data members or calls member functions.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops_classes-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.7.3: Arrays of Class Objects"><a tabindex="-1" href="#chapter6_range-based-for-loops_classes" title="Copy heading and permalink for Subsection 6.7.3: Arrays of Class Objects" aria-label="Copy heading and permalink for Subsection 6.7.3: Arrays of Class Objects">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.7.4: Arrays of Class Objects"><a tabindex="-1" href="#chapter6_range-based-for-loops_classes" title="Copy heading and permalink for Subsection 6.7.4: Arrays of Class Objects" aria-label="Copy heading and permalink for Subsection 6.7.4: Arrays of Class Objects">🔗</a></div>
 </section>
 <article class="exercise exercise-like" id="chapter6_range-based-for-loops_term"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
@@ -761,8 +810,39 @@ int main() {
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.7.1"><a tabindex="-1" href="#chapter6_range-based-for-loops_term" title="Copy heading and permalink for Checkpoint 6.7.1" aria-label="Copy heading and permalink for Checkpoint 6.7.1">🔗</a></div>
 </article>
-<article class="exercise exercise-like" id="chapter6_range-based-for-loops_const-reference"><h2 class="heading">
+<article class="exercise exercise-like" id="chapter6_range-based-for-loops_auto-recommendation"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="chapter6_range-based-for-loops_auto-recommendation-1-1">Which declaration uses <code class="code-inline tex2jax_ignore">auto</code> to read each potentially large object without copying it or modifying it?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops_auto-recommendation-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-chapter6_range-based-for-loops_auto-recommendation" data-multipleanswers="false">
+<li data-component="answer" id="rs-chapter6_range-based-for-loops_auto-recommendation_opt_a" data-correct="">
+<div class="para" id="chapter6_range-based-for-loops_auto-recommendation-2-1-1-1"><code class="code-inline tex2jax_ignore">const auto&amp; object</code></div>
+</li>
+<li data-component="feedback" id="rs-chapter6_range-based-for-loops_auto-recommendation_opt_a">
+<div class="para" id="chapter6_range-based-for-loops_auto-recommendation-2-1-2-1">A const reference avoids a copy and prevents modification through the loop variable.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_range-based-for-loops_auto-recommendation_opt_b">
+<div class="para" id="chapter6_range-based-for-loops_auto-recommendation-2-2-1-1"><code class="code-inline tex2jax_ignore">auto object</code></div>
+</li>
+<li data-component="feedback" id="rs-chapter6_range-based-for-loops_auto-recommendation_opt_b">
+<div class="para" id="chapter6_range-based-for-loops_auto-recommendation-2-2-2-1">This declaration normally copies each object.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_range-based-for-loops_auto-recommendation_opt_c">
+<div class="para" id="chapter6_range-based-for-loops_auto-recommendation-2-3-1-1"><code class="code-inline tex2jax_ignore">auto&amp; object</code></div>
+</li>
+<li data-component="feedback" id="rs-chapter6_range-based-for-loops_auto-recommendation_opt_c">
+<div class="para" id="chapter6_range-based-for-loops_auto-recommendation-2-3-2-1">This declaration allows modification, which the question does not require.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.7.2"><a tabindex="-1" href="#chapter6_range-based-for-loops_auto-recommendation" title="Copy heading and permalink for Checkpoint 6.7.2" aria-label="Copy heading and permalink for Checkpoint 6.7.2">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="chapter6_range-based-for-loops_const-reference"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
@@ -790,10 +870,10 @@ int main() {
 </li>
 </ul>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.7.2"><a tabindex="-1" href="#chapter6_range-based-for-loops_const-reference" title="Copy heading and permalink for Checkpoint 6.7.2" aria-label="Copy heading and permalink for Checkpoint 6.7.2">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.7.3"><a tabindex="-1" href="#chapter6_range-based-for-loops_const-reference" title="Copy heading and permalink for Checkpoint 6.7.3" aria-label="Copy heading and permalink for Checkpoint 6.7.3">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="chapter6_range-based-for-loops_modify"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
@@ -821,10 +901,10 @@ int main() {
 </li>
 </ul>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.7.3"><a tabindex="-1" href="#chapter6_range-based-for-loops_modify" title="Copy heading and permalink for Checkpoint 6.7.3" aria-label="Copy heading and permalink for Checkpoint 6.7.3">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.7.4"><a tabindex="-1" href="#chapter6_range-based-for-loops_modify" title="Copy heading and permalink for Checkpoint 6.7.4" aria-label="Copy heading and permalink for Checkpoint 6.7.4">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="chapter6_range-based-for-loops_member-function"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-chapter6_range-based-for-loops_member-function"><script type="application/json">{
@@ -834,10 +914,10 @@ int main() {
 "feedbackArray": [[{"regex": "^\\s*member function\\s*$", "regexFlags": "i", "feedback": "Correct!"}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.7.4"><a tabindex="-1" href="#chapter6_range-based-for-loops_member-function" title="Copy heading and permalink for Checkpoint 6.7.4" aria-label="Copy heading and permalink for Checkpoint 6.7.4">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.7.5"><a tabindex="-1" href="#chapter6_range-based-for-loops_member-function" title="Copy heading and permalink for Checkpoint 6.7.5" aria-label="Copy heading and permalink for Checkpoint 6.7.5">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="chapter6_range-based-for-loops_encapsulation"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
@@ -866,7 +946,7 @@ int main() {
 </li>
 </ul>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.7.5"><a tabindex="-1" href="#chapter6_range-based-for-loops_encapsulation" title="Copy heading and permalink for Checkpoint 6.7.5" aria-label="Copy heading and permalink for Checkpoint 6.7.5">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.7.6"><a tabindex="-1" href="#chapter6_range-based-for-loops_encapsulation" title="Copy heading and permalink for Checkpoint 6.7.6" aria-label="Copy heading and permalink for Checkpoint 6.7.6">🔗</a></div>
 </article><div class="autopermalink" aria-hidden="true" data-description="Section 6.7: Range-Based for Loops"><a tabindex="-1" href="#chapter6_range-based-for-loops" title="Copy heading and permalink for Section 6.7: Range-Based for Loops" aria-label="Copy heading and permalink for Section 6.7: Range-Based for Loops">🔗</a></div>
 </section>
 </div>
