@@ -5,15 +5,15 @@
     <p>
         Indexed iteration is useful when a program needs an element's position.
         Often, however, a program only needs to process every element. A
-        <term>range-based <c>for</c> loop</term> visits each element directly,
-        without requiring the programmer to manage an index.
+        <term>range-based <c>for</c> loop</term> visits each element directly 
+		from an iterable container, without requiring the programmer to manage an index.
     </p>
 
     <p>The general syntax is:</p>
 
     <program xml:id="program_range_based_for_syntax" language="cpp">
         <code><![CDATA[
-for (element_declaration : collection) {
+for (element_declaration : iterable_collection) {
     statements_to_repeat;
 }
         ]]></code>
