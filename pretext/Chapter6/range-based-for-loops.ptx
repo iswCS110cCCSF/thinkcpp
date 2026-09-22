@@ -24,6 +24,79 @@ for (element_declaration : collection) {
         variable refers to one element in that collection.
     </p>
 
+    <subsection xml:id="chapter6_range-based-for-loops_auto">
+        <title>The <c>auto</c> Keyword</title>
+
+        <p>
+            The keyword <c>auto</c> asks the compiler to deduce a variable's
+            type from the initializer. In a range-based loop, the collection
+            tells the compiler the type of each element. For example, if
+            <c>scores</c> is a <c>std::array&lt;int, 5&gt;</c>, then
+            <c>auto score</c> is deduced as <c>int score</c>.
+        </p>
+
+        <program xml:id="program_range_based_for_auto"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <iostream>
+
+int main() {
+    const std::array<int, 5> scores{82, 91, 76, 88, 95};
+
+    for (auto score : scores) {
+        std::cout << score << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            In this example, <c>auto</c> does not make the program dynamically
+            typed. The compiler still chooses a specific type at compile time;
+            <c>auto</c> simply avoids repeating a type that is already clear
+            from the collection.
+        </p>
+
+        <table xml:id="table_range-based-for-loops_auto_recommendations">
+            <title>Recommended loop-variable declarations</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <row header="yes">
+                    <cell>Declaration</cell>
+                    <cell>Effect</cell>
+                    <cell>Recommended use</cell>
+                </row>
+                <row>
+                    <cell><c>auto element</c></cell>
+                    <cell>Copies each element.</cell>
+                    <cell>Small values when a copy is acceptable.</cell>
+                </row>
+                <row>
+                    <cell><c>const auto&amp; element</c></cell>
+                    <cell>Reads the original element without copying or modifying it.</cell>
+                    <cell>Read-only access, especially for large structures or class objects.</cell>
+                </row>
+                <row>
+                    <cell><c>auto&amp; element</c></cell>
+                    <cell>Refers to the original element and allows modification.</cell>
+                    <cell>When the loop must change the elements in the collection.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            A useful recommendation is to start with <c>const auto&amp;</c> when
+            reading a collection of potentially large objects. Use plain
+            <c>auto</c> when copying a small value is appropriate, and use
+            <c>auto&amp;</c> only when the loop must modify the original elements.
+            An explicit type remains appropriate when it makes the intended type
+            especially clear or when the lesson is emphasizing that type.
+        </p>
+    </subsection>
+
     <program xml:id="program_range_based_for_scores"
              language="cpp"
              interactive="yes">
@@ -34,7 +107,7 @@ for (element_declaration : collection) {
 int main() {
     const std::array<int, 5> scores{82, 91, 76, 88, 95};
 
-    for (int score : scores) {
+    for (auto score : scores) {
         std::cout << score << '\n';
     }
 
@@ -97,7 +170,7 @@ int main() {
 int main() {
     const std::array<std::string, 3> names{"Amina", "Luis", "Maya"};
 
-    for (const std::string& name : names) {
+    for (const auto& name : names) {
         std::cout << name << '\n';
     }
 
@@ -121,7 +194,7 @@ int main() {
 int main() {
     std::array<int, 3> scores{70, 80, 90};
 
-    for (int& score : scores) {
+    for (auto& score : scores) {
         score += 5;
     }
 
@@ -163,7 +236,7 @@ int main() {
         Point{5.0, 6.0}
     };
 
-    for (const Point& point : points) {
+    for (const auto& point : points) {
         std::cout << '(' << point.x << ", " << point.y << ")\n";
     }
 
@@ -216,7 +289,7 @@ int main() {
         Rectangle{5.0, 2.0}
     };
 
-    for (const Rectangle& rectangle : rectangles) {
+    for (const auto& rectangle : rectangles) {
         std::cout << rectangle.calculate_area() << '\n';
     }
 
@@ -247,6 +320,29 @@ int main() {
                 </test>
             </evaluate>
         </evaluation>
+    </exercise>
+
+    <exercise label="chapter6_range-based-for-loops_auto-recommendation">
+        <statement>
+            <p>
+                Which declaration uses <c>auto</c> to read each potentially large
+                object without copying it or modifying it?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>const auto&amp; object</c></p></statement>
+                <feedback><p>A const reference avoids a copy and prevents modification through the loop variable.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>auto object</c></p></statement>
+                <feedback><p>This declaration normally copies each object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>auto&amp; object</c></p></statement>
+                <feedback><p>This declaration allows modification, which the question does not require.</p></feedback>
+            </choice>
+        </choices>
     </exercise>
 
     <exercise label="chapter6_range-based-for-loops_const-reference">
