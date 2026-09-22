@@ -590,11 +590,11 @@ eBookConfig.enable_chatcodes =  false;
 <h1 class="heading hide-type">
 <span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.7</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Range-Based <code class="code-inline tex2jax_ignore">for</code> Loops</span>
 </h1>
-<div class="para" id="chapter6_range-based-for-loops-2">Indexed iteration is useful when a program needs an element’s position. Often, however, a program only needs to process every element. A <dfn class="terminology">range-based <code class="code-inline tex2jax_ignore">for</code> loop</dfn> visits each element directly, without requiring the programmer to manage an index.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter6_range-based-for-loops-2">Indexed iteration is useful when a program needs an element’s position. Often, however, a program only needs to process every element. A <dfn class="terminology">range-based <code class="code-inline tex2jax_ignore">for</code> loop</dfn> visits each element directly from an iterable container, without requiring the programmer to manage an index.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="chapter6_range-based-for-loops-3">The general syntax is:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_range-based-for-loops-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code id="rs-program_range_based_for_syntax" class="language-cpp">for (element_declaration : collection) {
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_range_based_for_syntax" class="language-cpp">for (element_declaration : iterable_collection) {
     statements_to_repeat;
 }
 </code></pre></div>
