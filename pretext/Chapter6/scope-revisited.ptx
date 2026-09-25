@@ -11,7 +11,7 @@
 
     <p>
         C++ programs commonly use four kinds of scope that we have already
-        encountered: block scope,  Type Scope (Scoped Enums, Classes, and Structs), namespace scope (Ex: iostream, and cmath), and Global Scope (File Scope).
+        encountered: block scope,  Type Scope (Scoped Enums, Classes, and Structs), namespace scope and Global Scope (File Scope).
     </p>
 
     <table xml:id="table_scope_kinds">
