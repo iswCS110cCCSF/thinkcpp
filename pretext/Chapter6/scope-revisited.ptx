@@ -15,7 +15,7 @@
     </p>
 
     <table xml:id="table_scope_kinds">
-        <title>Three kinds of scope</title>
+        <title>Four kinds of scope</title>
         <tabular top="major" left="major" bottom="major" right="major">
             <row header="yes">
                 <cell>Scope</cell>
@@ -79,7 +79,7 @@ int main() {
         </program>
 
         <p>
-            The body of an <c>if</c>, <c>while</c>, or <c>for</c> statement is
+            The body of a function, an <c>if</c>, <c>while</c>, or <c>for</c> statement is
             also a block. This is why a variable declared inside a loop body is
             not available after the loop.
         </p>
