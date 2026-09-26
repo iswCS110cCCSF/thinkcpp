@@ -11,7 +11,8 @@
 
     <p>
         C++ programs commonly use four kinds of scope that we have already
-        encountered: block scope,  Type Scope (Scoped Enums, Classes, and Structs), namespace scope and Global Scope (File Scope).
+        encountered: block scope,  Type Scope (Scoped Enums, Classes, and Structs), namespace(Ex. std)
+		scope and Global Scope (File Scope).
     </p>
 
     <table xml:id="table_scope_kinds">
@@ -25,12 +26,12 @@
             <row>
                 <cell>Block scope</cell>
                 <cell>Braces belonging to a statement or standalone block</cell>
-                <cell><c>if</c>, <c>switch</c>, <c>while</c>, <c>for</c>, and standalone braces</cell>
+                <cell>Function or method body, <c>if</c>, <c>switch</c>, <c>while</c>, <c>for</c>, and standalone braces</cell>
             </row>
             <row>
                 <cell>Scoped enums, class and struct scope</cell>
                 <cell>Braces belonging to a Scoped enum(an enum class or an enum struct), a class or structure definition</cell>
-                <cell>Data members and member functions</cell>
+                <cell>Data members and member functions inside the class, enum or structure</cell>
             </row>
             <row>
                 <cell>Namespace scope</cell>
@@ -50,9 +51,8 @@
         <title>Block Scope</title>
 
         <p>
-            A pair of braces creates a block. A name declared inside that block
-            can be used from its declaration to the closing brace, but not
-            outside the block.
+			A pair of braces creates a block. A name declared inside that block can be used 
+			from its declaration to the closing brace, but not outside the block.
         </p>
 
         <program xml:id="program_scope_standalone_block"
@@ -79,9 +79,12 @@ int main() {
         </program>
 
         <p>
-            The body of a function, an <c>if</c>, <c>while</c>, or <c>for</c> statement is
-            also a block. This is why a variable declared inside a loop body is
-            not available after the loop.
+		    A pair of braces of a function or method, <c>if</c>, <c>switch</c>, loop(for, while and 
+			do-while) statement, also creates a block. A name declared inside a block
+            can be used from its declaration to the closing brace, but not
+            outside the block. For example, a variable declared inside a loop body is
+            not available outside of the loop.
+            
         </p>
 
         <program xml:id="program_scope_loop_body"
