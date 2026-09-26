@@ -592,7 +592,7 @@ eBookConfig.enable_chatcodes =  false;
 </h1>
 <div class="para" id="chapter6_scope-revisited-2">In earlier chapters, we used names for variables, functions, structures, classes, and objects. A name is not automatically available everywhere in a program. Its <dfn class="terminology">scope</dfn> is the part of the program where that name can be used.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_scope-revisited-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter6_scope-revisited-3">C++ programs commonly use four kinds of scope that we have already encountered: block scope,  Type Scope (Scoped Enums, Classes, and Structs), namespace scope and Global Scope (File Scope).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_scope-revisited-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter6_scope-revisited-3">C++ programs commonly use four kinds of scope that we have already encountered: block scope,  Type Scope (Scoped Enums, Classes, and Structs), namespace(Ex. std) scope and Global Scope (File Scope).<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_scope-revisited-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <figure class="table table-like" id="table_scope_kinds"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.4.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Four kinds of scope<div class="autopermalink" aria-hidden="true" data-description="Table 6.4.1: Four kinds of scope"><a tabindex="-1" href="#table_scope_kinds" title="Copy heading and permalink for Table 6.4.1: Four kinds of scope" aria-label="Copy heading and permalink for Table 6.4.1: Four kinds of scope">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr class="header-horizontal">
@@ -603,13 +603,12 @@ eBookConfig.enable_chatcodes =  false;
 <tr>
 <td class="l m b3 r3 l3 t0 lines">Block scope</td>
 <td class="l m b3 r3 l0 t0 lines">Braces belonging to a statement or standalone block</td>
-<td class="l m b3 r3 l0 t0 lines">
-<code class="code-inline tex2jax_ignore">if</code>, <code class="code-inline tex2jax_ignore">switch</code>, <code class="code-inline tex2jax_ignore">while</code>, <code class="code-inline tex2jax_ignore">for</code>, and standalone braces</td>
+<td class="l m b3 r3 l0 t0 lines">Function or method body, <code class="code-inline tex2jax_ignore">if</code>, <code class="code-inline tex2jax_ignore">switch</code>, <code class="code-inline tex2jax_ignore">while</code>, <code class="code-inline tex2jax_ignore">for</code>, and standalone braces</td>
 </tr>
 <tr>
 <td class="l m b3 r3 l3 t0 lines">Scoped enums, class and struct scope</td>
 <td class="l m b3 r3 l0 t0 lines">Braces belonging to a Scoped enum(an enum class or an enum struct), a class or structure definition</td>
-<td class="l m b3 r3 l0 t0 lines">Data members and member functions</td>
+<td class="l m b3 r3 l0 t0 lines">Data members and member functions inside the class, enum or structure</td>
 </tr>
 <tr>
 <td class="l m b3 r3 l3 t0 lines">Namespace scope</td>
@@ -646,7 +645,7 @@ int main() {
     return 0;
 }
 </code></pre></div>
-<div class="para" id="chapter6_scope-revisited_block-scope-4">The body of a function, an <code class="code-inline tex2jax_ignore">if</code>, <code class="code-inline tex2jax_ignore">while</code>, or <code class="code-inline tex2jax_ignore">for</code> statement is also a block. This is why a variable declared inside a loop body is not available after the loop.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_scope-revisited_block-scope-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter6_scope-revisited_block-scope-4">A pair of braces of a function or method, <code class="code-inline tex2jax_ignore">if</code>, <code class="code-inline tex2jax_ignore">switch</code>, loop(for, while and do-while) statement, also creates a block. A name declared inside a block can be used from its declaration to the closing brace, but not outside the block. For example, a variable declared inside a loop body is not available outside of the loop.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_scope-revisited_block-scope-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code id="rs-program_scope_loop_body" class="language-cpp">#include &lt;iostream&gt;
 
