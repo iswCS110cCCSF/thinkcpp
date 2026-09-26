@@ -604,13 +604,12 @@ Point point{3.0, 4.0};
 <div class="para" id="chapter6_arrays-5">The standard-library type <code class="code-inline tex2jax_ignore">std::array</code> provides such a container when the number of elements is fixed. The structure defines what one element contains; the array organizes many elements.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code id="rs-program_create_std_array" class="language-cpp">#include &lt;array&gt;
-#include &lt;cstddef&gt;
 #include &lt;iostream&gt;
 
 int main() {
     const std::array&lt;int, 5&gt; scores{82, 91, 76, 88, 95};
 
-    for (std::size_t index = 0; index &lt; scores.size(); ++index) {
+    for (int index = 0; index &lt; scores.size(); ++index) {
         std::cout &lt;&lt; scores[index] &lt;&lt; '\n';
     }
 
@@ -626,13 +625,12 @@ int main() {
 <div class="para" id="chapter6_arrays_initialization-2">An empty pair of braces after an array name has an important meaning. In <code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt; scores{};</code>, the braces request <dfn class="terminology">value-initialization</dfn>. Because each element is an <code class="code-inline tex2jax_ignore">int</code>, every element is initialized to <code class="code-inline tex2jax_ignore">0</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_initialization-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code id="rs-program_value_initialize_std_array" class="language-cpp">#include &lt;array&gt;
-#include &lt;cstddef&gt;
 #include &lt;iostream&gt;
 
 int main() {
     std::array&lt;int, 5&gt; scores{};
 
-    for (std::size_t index = 0; index &lt; scores.size(); ++index) {
+    for (int index = 0; index &lt; scores.size(); ++index) {
         std::cout &lt;&lt; "scores[" &lt;&lt; index &lt;&lt; "] = "
                   &lt;&lt; scores[index] &lt;&lt; '\n';
     }
@@ -674,13 +672,12 @@ int main() {
 <div class="para" id="chapter6_arrays_indexing-2">Each array element has an <dfn class="terminology">index</dfn>, which identifies its position. The first element has index 0, not index 1. Indexed iteration is useful when a program needs to work with a position or compare neighboring elements.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_indexing-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code id="rs-program_index_std_array" class="language-cpp">#include &lt;array&gt;
-#include &lt;cstddef&gt;
 #include &lt;iostream&gt;
 
 int main() {
     const std::array&lt;int, 5&gt; scores{82, 91, 76, 88, 95};
 
-    for (std::size_t index = 0; index &lt; scores.size(); ++index) {
+    for (int index = 0; index &lt; scores.size(); ++index) {
         std::cout &lt;&lt; "Score " &lt;&lt; index + 1 &lt;&lt; ": "
                   &lt;&lt; scores[index] &lt;&lt; '\n';
     }
@@ -730,18 +727,17 @@ int main() {
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Note 6.6.1"><a tabindex="-1" href="#chapter6_arrays_passing-to-functions-5" title="Copy heading and permalink for Note 6.6.1" aria-label="Copy heading and permalink for Note 6.6.1">🔗</a></div>
 </article><div class="code-box"><pre class="program clipboardable"><code id="rs-program_pass_array_to_functions" class="language-cpp">#include &lt;array&gt;
-#include &lt;cstddef&gt;
 #include &lt;iostream&gt;
 
 void print_scores(const std::array&lt;int, 5&gt;&amp; scores) {
-    for (std::size_t index = 0; index &lt; scores.size(); ++index) {
+    for (int index = 0; index &lt; scores.size(); ++index) {
         std::cout &lt;&lt; scores[index] &lt;&lt; ' ';
     }
     std::cout &lt;&lt; '\n';
 }
 
 void add_bonus_points(std::array&lt;int, 5&gt;&amp; scores, int bonus_points) {
-    for (std::size_t index = 0; index &lt; scores.size(); ++index) {
+    for (int index = 0; index &lt; scores.size(); ++index) {
         scores[index] += bonus_points;
     }
 }
@@ -769,7 +765,6 @@ int main() {
 <div class="para" id="chapter6_arrays_search-summarize-2">A loop can inspect every element to search for a value, count values that meet a condition, or calculate a total. These tasks combine indexed iteration with the counters and accumulators from the previous section.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_search-summarize-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code id="rs-program_summarize_scores" class="language-cpp">#include &lt;array&gt;
-#include &lt;cstddef&gt;
 #include &lt;iostream&gt;
 
 int main() {
@@ -777,7 +772,7 @@ int main() {
     int total = 0;
     int high_score_count = 0;
 
-    for (std::size_t index = 0; index &lt; scores.size(); ++index) {
+    for (int index = 0; index &lt; scores.size(); ++index) {
         total += scores[index];
 
         if (scores[index] &gt;= 90) {
@@ -815,19 +810,19 @@ int main() {
 </div>
 <ul data-component="multiplechoice" class="exercise-interactives" id="rs-chapter6_arrays_index-organization" data-multipleanswers="false">
 <li data-component="answer" id="rs-chapter6_arrays_index-organization_opt_a" data-correct="">
-<div class="para" id="chapter6_arrays_index-organization-2-1-1-1"><code class="code-inline tex2jax_ignore">for (std::size_t index = 0; index &lt; values.size(); ++index)</code></div>
+<div class="para" id="chapter6_arrays_index-organization-2-1-1-1"><code class="code-inline tex2jax_ignore">for (int index = 0; index &lt; values.size(); ++index)</code></div>
 </li>
 <li data-component="feedback" id="rs-chapter6_arrays_index-organization_opt_a">
 <div class="para" id="chapter6_arrays_index-organization-2-1-2-1">The index begins at 0 and stops before <code class="code-inline tex2jax_ignore">values.size()</code>.</div>
 </li>
 <li data-component="answer" id="rs-chapter6_arrays_index-organization_opt_b">
-<div class="para" id="chapter6_arrays_index-organization-2-2-1-1"><code class="code-inline tex2jax_ignore">for (std::size_t index = 0; index &lt;= values.size(); ++index)</code></div>
+<div class="para" id="chapter6_arrays_index-organization-2-2-1-1"><code class="code-inline tex2jax_ignore">for (int index = 0; index &lt;= values.size(); ++index)</code></div>
 </li>
 <li data-component="feedback" id="rs-chapter6_arrays_index-organization_opt_b">
 <div class="para" id="chapter6_arrays_index-organization-2-2-2-1">The final valid index is one less than <code class="code-inline tex2jax_ignore">values.size()</code>.</div>
 </li>
 <li data-component="answer" id="rs-chapter6_arrays_index-organization_opt_c">
-<div class="para" id="chapter6_arrays_index-organization-2-3-1-1"><code class="code-inline tex2jax_ignore">for (std::size_t index = 1; index &lt; values.size(); ++index)</code></div>
+<div class="para" id="chapter6_arrays_index-organization-2-3-1-1"><code class="code-inline tex2jax_ignore">for (int index = 1; index &lt; values.size(); ++index)</code></div>
 </li>
 <li data-component="feedback" id="rs-chapter6_arrays_index-organization_opt_c">
 <div class="para" id="chapter6_arrays_index-organization-2-3-2-1">This skips the element at index 0.</div>
