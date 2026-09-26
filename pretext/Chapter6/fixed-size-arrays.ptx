@@ -56,13 +56,12 @@ int main() {
                  interactive="yes">
             <code><![CDATA[
 #include <array>
-#include <cstddef>
 #include <iostream>
 
 int main() {
     const std::array<int, 5> scores{82, 91, 76, 88, 95};
 
-    for (std::size_t index = 0; index < scores.size(); ++index) {
+    for (int index = 0; index < scores.size(); ++index) {
         std::cout << "Score " << index + 1 << ": "
                   << scores[index] << '\n';
     }
