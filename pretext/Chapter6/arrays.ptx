@@ -27,16 +27,18 @@ Point point{3.0, 4.0};
     </p>
 
     <p>
-        The standard-library type <c>std::array</c> provides such a container
+        The standard-library type <c>std::array</c> defined in <c>array.h</c> file provides such a container
         when the number of elements is fixed. The structure defines what one
-        element contains; the array organizes many elements.
+        object contains; the array organizes many objects of same type into a single entity(container). 
+		A single object inside the array is called an element. An c>std::array</c> is always stored in 
+		a contiguous, sequential block of memory. 
     </p>
 
     <program xml:id="program_create_std_array"
              language="cpp"
              interactive="yes">
         <code><![CDATA[
-#include <array>
+#include <array> // std::array is defined in array.h
 #include <iostream>
 
 int main() {
