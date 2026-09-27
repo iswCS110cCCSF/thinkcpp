@@ -38,13 +38,18 @@ Point point{3.0, 4.0};
              language="cpp"
              interactive="yes">
         <code><![CDATA[
+<<<<<<< HEAD
 #include <array> // std::array is defined in array.h
+=======
+#include <array>
+#include <cstddef>
+>>>>>>> parent of 076c498 (removed #include <cstddef>)
 #include <iostream>
 
 int main() {
     const std::array<int, 5> scores{82, 91, 76, 88, 95};
 
-    for (int index = 0; index < scores.size(); ++index) {
+    for (std::size_t index = 0; index < scores.size(); ++index) {
         std::cout << scores[index] << '\n';
     }
 
@@ -74,12 +79,13 @@ int main() {
                  interactive="yes">
             <code><![CDATA[
 #include <array>
+#include <cstddef>
 #include <iostream>
 
 int main() {
     std::array<int, 5> scores{};
 
-    for (int index = 0; index < scores.size(); ++index) {
+    for (std::size_t index = 0; index < scores.size(); ++index) {
         std::cout << "scores[" << index << "] = "
                   << scores[index] << '\n';
     }
@@ -150,12 +156,13 @@ int main() {
                  interactive="yes">
             <code><![CDATA[
 #include <array>
+#include <cstddef>
 #include <iostream>
 
 int main() {
     const std::array<int, 5> scores{82, 91, 76, 88, 95};
 
-    for (int index = 0; index < scores.size(); ++index) {
+    for (std::size_t index = 0; index < scores.size(); ++index) {
         std::cout << "Score " << index + 1 << ": "
                   << scores[index] << '\n';
     }
@@ -229,17 +236,18 @@ int main() {
                  interactive="yes">
             <code><![CDATA[
 #include <array>
+#include <cstddef>
 #include <iostream>
 
 void print_scores(const std::array<int, 5>& scores) {
-    for (int index = 0; index < scores.size(); ++index) {
+    for (std::size_t index = 0; index < scores.size(); ++index) {
         std::cout << scores[index] << ' ';
     }
     std::cout << '\n';
 }
 
 void add_bonus_points(std::array<int, 5>& scores, int bonus_points) {
-    for (int index = 0; index < scores.size(); ++index) {
+    for (std::size_t index = 0; index < scores.size(); ++index) {
         scores[index] += bonus_points;
     }
 }
@@ -286,6 +294,7 @@ int main() {
                  interactive="yes">
             <code><![CDATA[
 #include <array>
+#include <cstddef>
 #include <iostream>
 
 int main() {
@@ -293,7 +302,7 @@ int main() {
     int total = 0;
     int high_score_count = 0;
 
-    for (int index = 0; index < scores.size(); ++index) {
+    for (std::size_t index = 0; index < scores.size(); ++index) {
         total += scores[index];
 
         if (scores[index] >= 90) {
@@ -334,15 +343,15 @@ int main() {
         </statement>
         <choices>
             <choice correct="yes">
-                <statement><p><c>for (int index = 0; index &lt; values.size(); ++index)</c></p></statement>
+                <statement><p><c>for (std::size_t index = 0; index &lt; values.size(); ++index)</c></p></statement>
                 <feedback><p>The index begins at 0 and stops before <c>values.size()</c>.</p></feedback>
             </choice>
             <choice>
-                <statement><p><c>for (int index = 0; index &lt;= values.size(); ++index)</c></p></statement>
+                <statement><p><c>for (std::size_t index = 0; index &lt;= values.size(); ++index)</c></p></statement>
                 <feedback><p>The final valid index is one less than <c>values.size()</c>.</p></feedback>
             </choice>
             <choice>
-                <statement><p><c>for (int index = 1; index &lt; values.size(); ++index)</c></p></statement>
+                <statement><p><c>for (std::size_t index = 1; index &lt; values.size(); ++index)</c></p></statement>
                 <feedback><p>This skips the element at index 0.</p></feedback>
             </choice>
         </choices>
