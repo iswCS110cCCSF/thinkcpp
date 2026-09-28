@@ -657,10 +657,10 @@ int main() {
 <h2 class="heading hide-type">
 <span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Accessing Elements by Index</span>
 </h2>
-<div class="para" id="chapter6_arrays_indexing-2">Each array element has an <dfn class="terminology">index</dfn>, which identifies its position. The first element has index 0, not index 1. Indexed iteration is useful when a program needs to work with a position or compare neighboring elements.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_indexing-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter6_arrays_indexing-2">Each array element has an <dfn class="terminology">index</dfn>, which identifies its position. The first element has index 0, not index 1. Indexed iteration is useful when a program needs to work with a position or compare neighboring elements. Indexes are integers. More specifically they are unsigned integers. In C++ the best suitable data type for array indexing is <code class="code-inline tex2jax_ignore">std::size_t </code> data type which is an unsigned integer defined in <code class="code-inline tex2jax_ignore">cstddef.h</code> file.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_indexing-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code id="rs-program_index_std_array" class="language-cpp">#include &lt;array&gt;
-#include &lt;cstddef&gt;
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_index_std_array" class="language-cpp">#include &lt;array&gt; // defines std::array
+#include &lt;cstddef&gt; // provides std::size_t
 #include &lt;iostream&gt;
 
 int main() {
