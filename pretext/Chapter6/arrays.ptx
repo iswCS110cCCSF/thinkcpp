@@ -129,15 +129,18 @@ int main() {
             Each array element has an <term>index</term>, which identifies its
             position. The first element has index 0, not index 1. Indexed
             iteration is useful when a program needs to work with a position or
-            compare neighboring elements.
+            compare neighboring elements. Indexes are integers. More specifically they 
+			are unsigned integers. In C++ the best suitable data type for array 
+			indexing is <c>std::size_t </c> data type which is an unsigned integer 
+			defined in <c>cstddef.h</c> file.
         </p>
 
         <program xml:id="program_index_std_array"
                  language="cpp"
                  interactive="yes">
             <code><![CDATA[
-#include <array>
-#include <cstddef>
+#include <array> // defines std::array
+#include <cstddef> // provides std::size_t
 #include <iostream>
 
 int main() {
