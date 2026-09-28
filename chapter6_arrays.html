@@ -606,19 +606,9 @@ Point point{3.0, 4.0};
 <div class="code-box"><pre class="program clipboardable"><code id="rs-program_array_syntax" class="language-cpp">std::array&lt;Type, N&gt; array_name{}; OR
 std::array&lt;Type, N&gt; array_name{item 0, item 1, ...., item N-2, item N-1};
 </code></pre></div>
-<div class="para" id="chapter6_arrays-7">where <code class="code-inline tex2jax_ignore">Type</code> is the data type of the content elements and <code class="code-inline tex2jax_ignore">N</code> is the number of elements—the length of the array.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter6_arrays-7">where <code class="code-inline tex2jax_ignore">Type</code> is the data type of the elements and <code class="code-inline tex2jax_ignore">N</code> is the number of elements—the length of the array.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code id="rs-program_create_std_array" class="language-cpp">#include &lt;array&gt; // std::array is defined in array.h
-#include &lt;cstddef&gt;
-#include &lt;iostream&gt;
-
-int main() {
-    const std::array&lt;int, 5&gt; scores{82, 91, 76, 88, 95};
-
-    return 0;
-}
-</code></pre></div>
-<div class="para" id="chapter6_arrays-9">The type <code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt;</code> means that <code class="code-inline tex2jax_ignore">scores</code> stores five <code class="code-inline tex2jax_ignore">int</code> values. Its size is fixed when the array is created. The member function <code class="code-inline tex2jax_ignore">size()</code> reports the number of elements.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays-9" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter6_arrays-8">For example <code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt;</code> means that <code class="code-inline tex2jax_ignore">scores</code> stores five <code class="code-inline tex2jax_ignore">int</code> values. Its size is fixed when the array is created. The member function <code class="code-inline tex2jax_ignore">size()</code> reports the number of elements.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <section class="subsection" id="chapter6_arrays_initialization">
 <h2 class="heading hide-type">
@@ -686,6 +676,28 @@ int main() {
 </code></pre></div>
 <div class="para" id="chapter6_arrays_indexing-4">Notice the difference between the array index and the displayed score number. The index begins at 0, while the human-friendly label begins at 1.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_indexing-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<div class="para" id="chapter6_arrays_indexing-5">Trying to access an <code class="code-inline tex2jax_ignore">std::array</code> element outside of its range may cause undefined behaviors. The outcome may vary based on version of the compiler and the level of optimization set for the compilation command. The better alternatives are the range based for loops or use <code class="code-inline tex2jax_ignore">at</code> method as shown in the example below replacing the index based for loop. Try changing <code class="code-inline tex2jax_ignore">index &lt; scores.size()</code> into <code class="code-inline tex2jax_ignore">index &lt;= scores.size()</code>  in both for loops to investigate the deference.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_arrays_indexing-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_at_std_array" class="language-cpp">#include &lt;array&gt;
+#include &lt;cstddef&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    const std::array&lt;int, 5&gt; scores{82, 91, 76, 88, 95};
+
+    for (std::size_t index = 0; index &lt; scores.size(); ++index) {
+        std::cout &lt;&lt; "Score " &lt;&lt; index + 1 &lt;&lt; ": "
+                  &lt;&lt; scores[index] &lt;&lt; '\n'; 
+    }
+    std::cout &lt;&lt; '\n';
+    for (std::size_t index = 0; index &lt; scores.size(); ++index) {
+        std::cout &lt;&lt; "Score " &lt;&lt; index + 1 &lt;&lt; ": "
+                  &lt;&lt; scores.at(index) &lt;&lt; '\n';
+    }
+
+    return 0;
+}
+</code></pre></div>
 <div class="autopermalink" aria-hidden="true" data-description="Subsection 6.6.2: Accessing Elements by Index"><a tabindex="-1" href="#chapter6_arrays_indexing" title="Copy heading and permalink for Subsection 6.6.2: Accessing Elements by Index" aria-label="Copy heading and permalink for Subsection 6.6.2: Accessing Elements by Index">🔗</a></div>
 </section>
 <section class="subsection" id="chapter6_arrays_passing-to-functions">
@@ -696,24 +708,59 @@ int main() {
 </div>
 <figure class="table table-like" id="table_arrays_function_parameters"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.6.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Ways to pass a <code class="code-inline tex2jax_ignore">std::array</code> to a function<div class="autopermalink" aria-hidden="true" data-description="Table 6.6.2: Ways to pass a std::array to a function"><a tabindex="-1" href="#table_arrays_function_parameters" title="Copy heading and permalink for Table 6.6.2: Ways to pass a std::array to a function" aria-label="Copy heading and permalink for Table 6.6.2: Ways to pass a std::array to a function">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr class="header-horizontal">
-<th scope="col" class="l m b3 r3 l3 t3 lines">Parameter</th>
-<th scope="col" class="l m b3 r3 l0 t3 lines">Effect</th>
-<th scope="col" class="l m b3 r3 l0 t3 lines">Use when</th>
+<th scope="col" class="l m b3 r3 l3 t3" style="max-width:216px;">
+<div class="para" id="table_arrays_function_parameters-2-4-1-1">Parameter<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</th>
+<th scope="col" class="l m b3 r3 l0 t3" style="max-width:192px;">
+<div class="para" id="table_arrays_function_parameters-2-4-2-1">Effect<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-4-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</th>
+<th scope="col" class="l m b3 r3 l0 t3" style="max-width:192px;">
+<div class="para" id="table_arrays_function_parameters-2-4-3-1">Use when<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-4-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</th>
 </tr>
 <tr>
-<td class="l m b3 r3 l3 t0 lines"><code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt; values</code></td>
-<td class="l m b3 r3 l0 t0 lines">The function receives a copy.</td>
-<td class="l m b3 r3 l0 t0 lines">The function needs an independent copy.</td>
+<td class="l m b3 r3 l3 t0" style="max-width:216px;">
+<div class="para" id="table_arrays_function_parameters-2-5-1-1">
+<code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt; values</code><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:192px;">
+<div class="para" id="table_arrays_function_parameters-2-5-2-1">The function receives a copy.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-5-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:192px;">
+<div class="para" id="table_arrays_function_parameters-2-5-3-1">The function needs an independent copy.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-5-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="l m b3 r3 l3 t0 lines"><code class="code-inline tex2jax_ignore">const std::array&lt;int, 5&gt;&amp; values</code></td>
-<td class="l m b3 r3 l0 t0 lines">No copy is made, and the function cannot modify the array.</td>
-<td class="l m b3 r3 l0 t0 lines">The function only needs to inspect the array.</td>
+<td class="l m b3 r3 l0 t0" style="max-width:192px;">
+<div class="para" id="table_arrays_function_parameters-2-6-2-1">No copy is made, and the function cannot modify the array.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-6-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:192px;">
+<div class="para" id="table_arrays_function_parameters-2-6-3-1">The function only needs to inspect the array.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-6-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
 </tr>
 <tr>
-<td class="l m b3 r3 l3 t0 lines"><code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt;&amp; values</code></td>
-<td class="l m b3 r3 l0 t0 lines">No copy is made, and the function can modify the original array.</td>
-<td class="l m b3 r3 l0 t0 lines">The function must change the caller’s array.</td>
+<td class="l m b3 r3 l3 t0" style="max-width:216px;">
+<div class="para" id="table_arrays_function_parameters-2-7-1-1">
+<code class="code-inline tex2jax_ignore">std::array&lt;int, 5&gt;&amp; values</code><div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:192px;">
+<div class="para" id="table_arrays_function_parameters-2-7-2-1">No copy is made, and the function can modify the original array.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-7-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:192px;">
+<div class="para" id="table_arrays_function_parameters-2-7-3-1">The function must change the caller’s array.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_arrays_function_parameters-2-7-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
 </tr>
 </table></div>
 </figure>
