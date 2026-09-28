@@ -31,35 +31,21 @@ Point point{3.0, 4.0};
         when the number of elements is fixed. The structure defines what one
         object contains; the array organizes many objects of same type into a single entity(container). 
 		A single object inside the array is called an element. An <c>std::array</c> is always stored in 
-		a contiguous, sequential block of memory. 
+		a contiguous, sequential block of memory. The general <c>std::array</c> declaration syntax is: 
     </p>
-
-    <program xml:id="program_create_std_array"
-             language="cpp"
-             interactive="yes">
+	<program xml:id="program_array_syntax" language="cpp" interactive="yes">
         <code><![CDATA[
-<<<<<<< HEAD
-#include <array> // std::array is defined in array.h
-=======
-#include <array>
-#include <cstddef>
->>>>>>> parent of 076c498 (removed #include <cstddef>)
-#include <iostream>
-
-int main() {
-    const std::array<int, 5> scores{82, 91, 76, 88, 95};
-
-    for (std::size_t index = 0; index < scores.size(); ++index) {
-        std::cout << scores[index] << '\n';
-    }
-
-    return 0;
-}
+		std::array<Type, N> array_name{}; OR
+		std::array<Type, N> array_name{item 0, item 1, ...., item N-2, item N-1};
         ]]></code>
     </program>
+	 <p>
+	    where <c>Type</c> is the data type of the elements and <c>N</c> is the number of 
+		elements—the length of the array.
+	</p>
 
     <p>
-        The type <c>std::array&lt;int, 5&gt;</c> means that <c>scores</c> stores
+        For example <c>std::array&lt;int, 5&gt;</c> means that <c>scores</c> stores
         five <c>int</c> values. Its size is fixed when the array is created. The
         member function <c>size()</c> reports the number of elements.
     </p>
@@ -84,11 +70,6 @@ int main() {
 
 int main() {
     std::array<int, 5> scores{};
-
-    for (std::size_t index = 0; index < scores.size(); ++index) {
-        std::cout << "scores[" << index << "] = "
-                  << scores[index] << '\n';
-    }
 
     return 0;
 }
@@ -177,6 +158,41 @@ int main() {
             score number. The index begins at 0, while the human-friendly label
             begins at 1.
         </p>
+        <p>
+            Trying to access an <c>std::array</c> element outside of its range may cause 
+			undefined behaviors. The outcome may vary based on version of the compiler and 
+			the level of optimization set for the compilation command. The better alternatives 
+			are the range based for loops or use <c>at</c> method as shown in the example below 
+			replacing the index based for loop. Try changing <c>index &lt; scores.size()</c> 
+			into <c>index &lt;= scores.size()</c>  in both for loops to investigate the deference.
+	     </p>
+		<program xml:id="program_at_std_array"
+			 language="cpp"
+			 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <cstddef>
+#include <iostream>
+
+int main() {
+    const std::array<int, 5> scores{82, 91, 76, 88, 95};
+
+    for (std::size_t index = 0; index < scores.size(); ++index) {
+        std::cout << "Score " << index + 1 << ": "
+                  << scores[index] << '\n'; 
+    }
+    std::cout << '\n';
+    for (std::size_t index = 0; index < scores.size(); ++index) {
+        std::cout << "Score " << index + 1 << ": "
+                  << scores.at(index) << '\n';
+    }
+
+    return 0;
+}
+						]]></code>
+					</program>
+			
+ 
     </subsection>
 
     <subsection xml:id="chapter6_arrays_passing-to-functions">
@@ -188,31 +204,72 @@ int main() {
             parameter also shows those details.
         </p>
 
-        <table xml:id="table_arrays_function_parameters">
-            <title>Ways to pass a <c>std::array</c> to a function</title>
-            <tabular top="major" left="major" bottom="major" right="major">
-                <row header="yes">
-                    <cell>Parameter</cell>
-                    <cell>Effect</cell>
-                    <cell>Use when</cell>
-                </row>
-                <row>
-                    <cell><c>std::array&lt;int, 5&gt; values</c></cell>
-                    <cell>The function receives a copy.</cell>
-                    <cell>The function needs an independent copy.</cell>
-                </row>
-                <row>
-                    <cell><c>const std::array&lt;int, 5&gt;&amp; values</c></cell>
-                    <cell>No copy is made, and the function cannot modify the array.</cell>
-                    <cell>The function only needs to inspect the array.</cell>
-                </row>
-                <row>
-                    <cell><c>std::array&lt;int, 5&gt;&amp; values</c></cell>
-                    <cell>No copy is made, and the function can modify the original array.</cell>
-                    <cell>The function must change the caller's array.</cell>
-                </row>
-            </tabular>
-        </table>
+		<table xml:id="table_arrays_function_parameters">
+			<title>Ways to pass a <c>std::array</c> to a function</title>
+
+			<tabular top="major" left="major" bottom="major" right="major">
+				<col width="36%"/>
+				<col width="32%"/>
+				<col width="32%"/>
+
+				<row header="yes">
+					<cell><p>Parameter</p></cell>
+					<cell><p>Effect</p></cell>
+					<cell><p>Use when</p></cell>
+				</row>
+
+				<row>
+					<cell>
+						<p>
+							<c>std::array&lt;int, 5&gt; values</c>
+						</p>
+					</cell>
+					<cell>
+						<p>The function receives a copy.</p>
+					</cell>
+					<cell>
+						<p>The function needs an independent copy.</p>
+					</cell>
+				</row>
+
+				<row>
+					<cell>
+						
+							<c>const std::array&lt;int, 5&gt;&amp; values</c>
+						
+					</cell>
+					<cell>
+						<p>
+							No copy is made, and the function cannot modify the array.
+						</p>
+					</cell>
+					<cell>
+						<p>
+							The function only needs to inspect the array.
+						</p>
+					</cell>
+				</row>
+
+				<row>
+					<cell>
+						<p>
+							<c>std::array&lt;int, 5&gt;&amp; values</c>
+						</p>
+					</cell>
+					<cell>
+						<p>
+							No copy is made, and the function can modify the original
+							array.
+						</p>
+					</cell>
+					<cell>
+						<p>
+							The function must change the caller's array.
+						</p>
+					</cell>
+				</row>
+			</tabular>
+		</table>
 
         <p>
             When a function only reads an array, a <c>const</c> reference is
