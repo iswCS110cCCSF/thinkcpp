@@ -49,11 +49,6 @@ while more_items_to_pack and another_item_fits_safely:
         We will translate this idea into C++ later.
     </p>
     <p>
-        In both of these cases we use loops to repeat a specific task the is <term>loop body</term>. You can think of
-        this similarly to functions, while functions are used to repeat a task in different circumstances loops are used to 
-        repeat code in very similar circumstances.
-    </p>
-    <p>
         Words in a problem statement can provide useful clues about the kind of
         repetition that is needed.
     </p>
@@ -89,22 +84,6 @@ while more_items_to_pack and another_item_fits_safely:
         what action must be repeated and what event should end the repetition.
         This type of repetition is called <term>iteration</term>.
     </p>
-
-    <exercise label="chapter6_what-iteration_short-answer">
-        <statement>
-            <p>
-                The statements that are repeated by a loop are called the loop
-                <fillin width="12" answer="body" mode="string"/>.
-            </p>
-        </statement>
-        <evaluation>
-            <evaluate>
-                <test correct="yes">
-                    <strcmp use-answer="yes" case="insensitive"/>
-                </test>
-            </evaluate>
-        </evaluation>
-    </exercise>
 
     <exercise label="chapter6_what-iteration_organization">
         <statement>
@@ -156,5 +135,54 @@ while more_items_to_pack and another_item_fits_safely:
                 </feedback>
             </choice>
         </choices>
+    </exercise>
+       <exercise label="chapter6_what-iteration_organization_exercise_2">
+      <statement>
+        <p>
+          Match each example with the type of iteration they suggest.
+        </p>
+      </statement>
+      <feedback>
+        <p>
+          Review the iteration types and try again!
+        </p>
+      </feedback>
+
+      <cardsort>
+        <match>
+          <premise order="1">Checking for each apple from a shipment of unknown quantities check if the apple is good.</premise>
+          <response>
+            Process every value in a collection.
+          </response>
+        </match>
+
+        <match>
+          <premise order="2">Check how many apples are bad out of a sub-group of 20 randomly chosen apples.</premise>
+          <response>
+            Count through a known range.
+          </response>
+        </match>
+
+        <match>
+          <premise order="3">Peel 30 apples.</premise>
+          <response>
+            Repeat a known number of times.
+          </response>
+        </match>
+
+        <match>
+          <premise order="4">Eat apples until you are full.</premise>
+          <response>
+            Continue while a condition is true.
+          </response>
+        </match>
+
+        <match>
+          <premise order="5">Sort each apple into a "good apple" and "bad apple" pile.</premise>
+          <response>
+            Nested conditional statement inside a loop.
+          </response>
+        </match>
+      </cardsort>
     </exercise>
 </section>
