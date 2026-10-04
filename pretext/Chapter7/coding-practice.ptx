@@ -1,676 +1,176 @@
-<?xml version="1.0" ?><exercises xml:id="chapter7_coding-practice">
-  <title>Coding Practice</title>
-  <exercise label="cp_7_AC_1">
-    <statement>
-      <p>A palindrome is a word, phrase, or sentence that reads the same forwards and backwards.</p>
-      <p>Write a function <c>isPalindrome</c> that takes a <c>string input</c> as a parameter and returns a boolean that is
-        true if the input is a palindrome and false otherwise. Run and test your code!</p>
-    <program interactive="activecode" label="cp_7_AC_1_editor">
-      <code><![CDATA[
-#include <iostream>
-#include <cctype>
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="chapter7_coding-practice">
+    <title>Coding Practice</title>
 
-bool isPalindrome(std::string input) {
-    // Write your implementation here.
-}
-]]></code>
-      <tests><![CDATA[
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
-
-TEST_CASE("factorial function") {
-    CHECK(isPalindrome("racecar"));
-    CHECK(isPalindrome("no lemon, no melon"));
-    CHECK_FALSE(isPalindrome("kangaroo"));
-}
-]]></tests>
-      </program></statement>
-    <solution>
-      <p>Below is one way to implement the program. We use the <c>isalpha</c> function to ignore the non
-        alphabetical characters. Then we continuously check to see if the letters in the front are
-        equal to the ones in the back until we reach the middle of the string.</p>
-      <program xml:id="cp_7_AC_1a" line-numbers="yes"><code><![CDATA[
-#include <iostream>
-#include <cctype>
-
-bool isPalindrome(std::string input) {
-    size_t front = 0;
-    size_t back = input.length() - 1;
-    while (front < back) {
-        while (!isalpha(input[front])) {
-            front++;
-        }
-        while (!isalpha(input[back])) {
-            back--;
-        }
-        if (input[front] != input[back]) {
-            return false;
-        }
-        front++;
-        back--;
-    }
-    return true;
-}
-        ]]></code></program>
-    </solution>
-  </exercise>
-
-  <exercise label="cp_7_AC_2q">
-    <statement>
-      <p>How much does Bubba love shrimp? Probably a lot. But how many times does the word <q>shrimp</q>
-        come up in his monologue? Write a function <c>countWord</c> that counts the number of times a given
-        word appears in a given string. <c>countWord</c> should take two strings <c>input</c> and <c>word</c> as
-        parameters and return an <c>int</c>. Feel free to use the <c>stringToLower</c> function we wrote earlier.
-        Check the hint below for help with the construction of the code.</p>
-    <program interactive="activecode" line-numbers="yes" label="cp_7_AC_2q_editor">
-          <code><![CDATA[
-#include <iostream>
-#include "ctype.h"
-
-void stringToLower(std::string &input) {
-    size_t i = 0;
-    while (i < input.length()) {
-        if (isalpha(input[i]) && isupper(input[i])) {
-            input[i] = tolower(input[i]);
-        }
-        i++;
-    }
-}
-
-int countWord(std::string input, std::string word) {
-    // Write your implementation here.
-}
-
-int main() {
-    std::string quote =
-        "Anyway, like I was sayin', shrimp is the fruit of the sea. You can "
-        "barbecue it, boil it, broil it, bake it, saute it. Dey's uh, "
-        "shrimp-kabobs, shrimp creole, shrimp gumbo. Pan fried, deep fried, "
-        "stir-fried. There's pineapple shrimp, lemon shrimp, coconut shrimp, "
-        "pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and "
-        "potatoes, shrimp burger, shrimp sandwich. That- that's about "
-        "it.";
-    std::cout << "Your output: " << countWord(quote, "shrimp") << ", Correct output: 14" << std::endl;
-}
-        ]]></code>
-        </program></statement>
-    <hint>
-      <activity label="cp_7_AC_2q_pp" number="yes" adaptive="yes" indentation="hide">
+    <exercise label="chapter7_coding_count_vowels">
         <statement>
-          <p>How much does Bubba love shrimp? Probably a lot. But how many times does the word <q>
-            shrimp</q> come up in his monologue? Write a function <c>countWord</c> that counts the number of
-            times a given word appears in a given string. <c>countWord</c> should take two strings <c>input</c>
-            and <c>word</c> as parameters and return an <c>int</c>. Feel free to use the <c>stringToLower</c> function
-            we wrote earlier. Use the lines to construct the code, then go back to complete the
-            Activecode.</p>
-        </statement>
-        <blocks>
-          <block order="2">
-            <cline>int countWord(string input, string word) {</cline>
-          </block>
-          <block order="6">
-            <cline>    int count = 0;</cline>
-          </block>
-          <block order="4">
-            <choice correct="yes">
-              <cline><![CDATA[    for (size_t i = 0; i < input.length() - 1; i++) {]]></cline>
-              <cline>        size_t j = 0;</cline>
-              <cline>        size_t k = i;</cline>
-            </choice>
-            <choice>
-              <cline><![CDATA[    for (size_t i = 0; i < input.length(); i++) { ]]></cline>
-              <cline>        size_t j = 0;</cline>
-              <cline>        size_t k = i;</cline>
-            </choice>
-          </block>
-          <block order="8">
-            <cline><![CDATA[        for (size_t l = 0; l < word.length(); l++) {]]></cline>
-          </block>
-          <block order="1">
-            <cline>            if (input[k] == word[l]) {</cline>
-            <cline>                j++;</cline>
-            <cline>            }</cline>
-            <cline>            k++;</cline>
-          </block>
-          <block order="3">
-            <cline>            if (j == word.length()) {</cline>
-            <cline>                count++</cline>
-            <cline>            }</cline>
-          </block>
-          <block order="5">
-            <cline>        }</cline>
-            <cline>    }</cline>
-            <cline>    return count;</cline>
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
-  </exercise>
-
-  <exercise label="cp_7_AC_3">
-    <statement><p> Write a void function <c>censorWord</c> that censors a given word from a given string and
-      prints out the new string. <c>censorWord</c> should take two strings <c>input</c> and <c>word</c> as parameters
-      and prints out <c>input</c> with every occurence of <c>word</c> censored with asterisks. For example, <c>censorWord(&quot;I really, really, really, really, really, really like
-      you&quot;, &quot;really&quot;)</c>
-      results in the following output:</p><console>
-<output>I ******, ******, ******, ******, ******, ****** like you</output>
-</console>
-    <program interactive="activecode" label="cp_7_AC_3_editor">
-      <code><![CDATA[
-           #include <iostream>
-
-           void censorWord(std::string input, std::string word) {
-               // Write your implementation here.
-           }
-
-           int main() {
-               censorWord("I really, really, really, really, really, really like you", "really");
-           }
-]]></code>
-    </program></statement>
-    <solution>
-      <p>Below
-        is one way to implement the program. We use a while loop to
-        repeatedly search for instances of word in input. Once found, we replace
-        the length of the word with asterisks.</p>
-      <program xml:id="cp_7_AC_3a" line-numbers="yes"><code><![CDATA[
-#include <iostream>
-
-void censorWord(std::string input, std::string word) {
-    size_t length = word.length();
-    while (input.find(word) != std::string::npos) {{
-        int index = input.find(word);
-        size_t i = 0;
-        while (i < length) {
-            input[index + i] = '*';
-            i++;
-        }
-    }
-    std::cout << input;
-}
-
-int main() {
-    censorWord("I really, really, really, really, really, really like you", "really");
-}
-        ]]></code></program>
-    </solution>
-  </exercise>
-
-  <exercise label="cp_7_AC_4q">
-    <statement>
-      <p>Write a void function <c>removeWord</c> that removes a given word from a given string and prints out
-        the new string. <c>removeWord</c> should take two strings <c>input</c> and <c>word</c> as parameters and prints
-        out <c>input</c> with every occurence of <c>word</c> removed. Use string concatenation and the C++
-       std::string function <c>substr</c>. <c>substr</c> takes two parameters, a starting index and a length. For
-        example, if <c>string greeting = &quot;hello world&quot;</c>, then <c>greeting.substr(6, 5)</c> returns the string <c>&quot;world&quot;</c>. Test your function in main.
-        Check the hint below for help with the construction of the code. The output should be:</p>
-      <console>
-        <output>Gucci , Gucci , Gucci , Gucci</output>
-      </console>
-    <program interactive="activecode" line-numbers="yes" label="cp_7_AC_4q_editor">
-      <code><![CDATA[
+            <p>
+                Write a function named <c>count_vowels</c> that takes a
+                <c>const std::string&amp;</c> and returns the number of lowercase
+                vowels it contains. Test it with <c>"iteration"</c>.
+            </p>
+            <program interactive="activecode" language="cpp" label="chapter7_coding_count_vowels_editor">
+                <code><![CDATA[
+#include <cstddef>
 #include <iostream>
 #include <string>
 
-void removeWord(std::string input, std::string word) {
-    // Write your implementation here.
+std::size_t count_vowels(const std::string& text) {
+    // Write your solution here.
 }
 
 int main() {
-    removeWord("Gucci gang, Gucci gang, Gucci gang, Gucci gang", "gang");
+    std::cout << count_vowels("iteration") << '\n';
+    return 0;
 }
-    ]]></code>
-    </program></statement>
-    <hint>
-      <activity label="cp_7_AC_4q_pp" number="yes" adaptive="yes" indentation="hide">
-        <statement>
-          <p>Write a void function <c>removeWord</c> that removes a given word from a given string and prints
-            out the new string. <c>removeWord</c> should take two strings <c>input</c> and <c>word</c> as parameters
-            and prints out <c>input</c> with every occurence of <c>word</c> removed. Use string concatenation
-            and the C++ string function <c>substr</c>. <c>substr</c> takes two parameters, a starting index and
-            a length. For example, if <c>string greeting = &quot;hello world&quot;</c>, then <c>greeting.substr(6, 5)</c> returns the string <c>&quot;world&quot;</c>. Test your
-            function in main. Use the lines to construct the code, then go back to complete the
-            Activecode. The output should be:</p>
-          <console>
-            <output>Gucci , Gucci , Gucci , Gucci</output>
-          </console>
+                ]]></code>
+            </program>
         </statement>
-        <blocks>
-          <block order="2">
-            <cline>void removeWord(string input, string word) {</cline>
-          </block>
-          <block order="5">
-            <choice correct="yes">
-              <cline><![CDATA[    for (size_t i = 0; i < word.length(); i++) {]]></cline>
-            </choice>
-            <choice>
-              <cline><![CDATA[    for (size_t i = 0; i < input.length(); i++) { ]]></cline>
-            </choice>
-          </block>
-          <block order="8">
-            <cline>        size_t pos = input.find(word);</cline>
-          </block>
-          <block order="6">
-            <choice correct="yes">
-              <cline>        if (pos != string::npos) {</cline>
-            </choice>
-            <choice>
-              <cline>        if (pos == input.length()) { </cline>
-            </choice>
-          </block>
-          <block order="7">
-            <cline>            input.erase(pos, word.length());</cline>
-          </block>
-          <block order="4">
-            <cline>        }</cline>
-            <cline>    }</cline>
-            <cline>    std::cout &lt;&lt; input;</cline>
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
-  </exercise>
+        <solution>
+            <program language="cpp"><code><![CDATA[
+std::size_t count_vowels(const std::string& text) {
+    std::size_t count = 0;
 
-  <exercise label="cp_7_AC_5">
-    <statement>
-      <p>ROT13 is a simple letter substitution cipher that shifts every letter forward by 13,
-        looping around if necessary. For example, the letter 'a', 1st in the alphabet, becomes
-        the letter 'n', 14th in the alphabet. The letter 'r', 18th in the alphabet, becomes the
-        letter 'e', 5th in the alphabet. Since the alphabet has 26 letters and 13 is exactly half,
-        a message encrypted using ROT13 can be decrypted by calling ROT13 on the encrypted message.</p>
-      <p>Write the function <c>ROT13</c> , which takes a <c>string input</c> as a parameter and returns an encrypted <c>string</c>
-        . Test your function in <c>main</c> .</p>
-    <program interactive="activecode" label="cp_7_AC_5_editor">
-      <code><![CDATA[
-          #include <iostream>
-          #include <cctype>
-
-          std::string ROT13 (std::string input) {
-              // Write your implementation here.
-          }
-
-          int main() {
-              std::string original = "Encrypt me then decrypt me!";
-              std::string encrypted = ROT13 (original);
-              std::string decrypted = ROT13 (encrypted);
-              std::cout << "Original std::string: " << original << std::endl;
-              std::cout << "Encrypted std::string: " << encrypted << std::endl;
-              std::cout << "Decrypted std::string: " << decrypted << std::endl;
-
-              // Uncomment and run the code below once your function works!
-              // std::string secretMessage = "Pbatenghyngvbaf! Lbh'ir fhpprffshyyl vzcyrzragrq EBG13 naq qrpbqrq gur frperg zrffntr :)";
-              // std::cout << ROT13 (secretMessage) << std::endl;
-          }
-]]></code>
-    </program></statement>
-    <solution>
-      <p>Below is one way to implement the <c>ROT13</c> function. We use a <c>while</c> loop to go through all
-        the letters in the <c>string</c>. If the letter is between ‘a' and ‘n' or ‘A'
-        and ‘N', we use character operations to add 13 to each letter. Otherwise, we subtract
-        13 from each letter. We return the encrypted message at the end.</p>
-      <program xml:id="cp_7_AC_5a" line-numbers="yes"><code><![CDATA[
-#include <iostream>
-#include <cctype>
-
-std::string ROT13(std::string input) {
-    size_t n = 0;
-    while (n < input.length()) {
-        if (isalpha(input[n])) {
-            if ((input[n] >= 'a' && input[n] < 'n') || (input[n] >= 'A' && input[n] < 'N')) {
-                input[n] = input[n] + 13;
-            }
-            else {
-                input[n] = input[n] - 13;
-            }
+    for (const char character : text) {
+        if (character == 'a' || character == 'e' || character == 'i'
+            || character == 'o' || character == 'u') {
+            ++count;
         }
-        n++;
     }
-    return input;
+
+    return count;
 }
+            ]]></code></program>
+        </solution>
+    </exercise>
 
-int main() {
-    std::string original = "Encrypt me then decrypt me!";
-    std::string encrypted = ROT13 (original);
-    std::string decrypted = ROT13 (encrypted);
-    std::cout << "Original std::string: " << original << std::endl;
-    std::cout << "Encrypted std::string: " << encrypted << std::endl;
-    std::cout << "Decrypted std::string: " << decrypted << std::endl;
-
-    // Uncomment and run the code below once your function works!
-    // std::string secretMessage = "Pbatenghyngvbaf! Lbh'ir fhpprffshyyl vzcyrzragrq EBG13 naq qrpbqrq gur frperg zrffntr :)";
-    // std::cout << ROT13 (secretMessage) << std::endl;
-}
-        ]]></code></program>
-    </solution>
-  </exercise>
-
-  <exercise label="cp_7_AC_6q">
-    <statement>
-      <p>Write the function <c>reverseWord</c> which takes a <c>string input</c>, reverses it, and returns the reversed <c>string</c>.
-        Run and test your code! Check the hint below for help with the construction of the
-        code.</p>
-    <program interactive="activecode" line-numbers="yes" label="cp_7_AC_6q_editor">
-      <code><![CDATA[
-#include <iostream>
-
-std::string reverseWord(std::string input) {
-    // Write your implementation here.
-}
-]]></code>
-      <tests><![CDATA[
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
-
-TEST_CASE("reverseWord function") {
-    CHECK_EQ(reverseWord("hello"), "olleh"); 
-    CHECK_EQ(reverseWord("world"), "dlrow"); 
-    CHECK_EQ(reverseWord("racecar"), "racecar"); 
-}
-]]></tests>
-      </program></statement>
-    <hint>
-      <activity label="cp_7_AC_6q_pp" number="yes" adaptive="yes" indentation="hide">
+    <exercise label="chapter7_coding_replace_spaces">
         <statement>
-          <p>Write the function <c>reverseString</c> which takes a <c>string input</c>, reverses it, and returns the reversed <c>string</c>.
-            Use the lines to construct the code, then go back to complete the Activecode.</p>
-        </statement>
-        <blocks>
-          <block order="8">
-            <cline>string reverseWord(string input) {</cline>
-          </block>
-          <block order="7">
-            <cline>    size_t len = input.length();</cline>
-          </block>
-          <block order="1">
-            <cline>   std::string reverse;</cline>
-          </block>
-          <block order="4">
-            <choice correct="yes">
-              <cline>    for (size_t i = len - 1; i != string::npos; i--) {</cline>
-            </choice>
-            <choice>
-              <cline>    for (size_t i = len; i != string::npos; i--) { </cline>
-            </choice>
-          </block>
-          <block order="2">
-            <cline>        reverse.push_back(input[i]);</cline>
-          </block>
-          <block order="5">
-            <cline>    }</cline>
-          </block>
-          <block order="6">
-            <cline>    return reverse;</cline>
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
-  </exercise>
-
-  <exercise label="cp_7_AC_7">
-    <statement>
-      <p>Write the function <c>capitalize</c> , which takes a <c>string input</c> as a parameter. <c>capitalize</c> capitalizes the
-        first letter of every word, and returns the new <c>string</c> .</p>
-    <program interactive="activecode" label="cp_7_AC_7_editor">
-      <code><![CDATA[
-          #include <iostream>
-          #include <cctype>
-
-          std::string capitalize(std::string input) {
-              // Write your implementation here.
-          }
-
-          int main() {
-              std::cout << capitalize("every word in this std::string should be capitalized!") << std::endl;
-              std::cout << capitalize("this String As well") << std::endl;
-          }
-]]></code>
-    </program></statement>
-    <solution>
-      <p>Below is one way to implement the <c>capitalize</c> function. We use a <c>while</c> loop to go through all
-        the <c>char</c>s in the <c>string</c>. We capitalize the first character and all characters following
-        a space using <c>toupper</c>. At the end, we return the <c>string</c>.</p>
-      <program xml:id="cp_7_AC_7a" line-numbers="yes"><code><![CDATA[
-#include <iostream>
-#include <cctype>
-
-std::string capitalize(std::string input) {
-    size_t n = 0;
-    while (n < input.length()) {
-        if (n == 0) {
-            input[n] = toupper(input[n]);
-        }
-        else if (input[n-1] == ' ') {
-            input[n] = toupper(input[n]);
-        }
-        n++;
-    }
-    return input;
-}
-
-int main() {
-    std::cout << capitalize ("every word in this std::string should be capitalized!") << std::endl;
-    std::cout << capitalize ("this String As well") << std::endl;
-}
-]]></code></program>
-    </solution>
-  </exercise>
-
-  <exercise label="cp_7_AC_8q">
-    <statement>
-      <p>Write the function <c>countVowels</c> which takes a <c>string input</c> and returns the number of vowels in the <c>string</c>.
-        Remember, ‘a', ‘e', ‘i', ‘o', and ‘u' are vowels. Run and
-        test your code! Check the hint below for help with the construction of the code.</p>
-    <program interactive="activecode" line-numbers="yes" label="cp_7_AC_8q_editor">
-      <code><![CDATA[
-#include <iostream>
-
-int countVowels(std::string input) {
-    // Write your implementation here.
-}
-]]></code>
-      <tests><![CDATA[
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
-
-TEST_CASE("countVowels function") {
-    CHECK_EQ(countVowels("onomatopoeia"), 8); 
-    CHECK_EQ(countVowels("cysts"), 0); 
-    CHECK_EQ(countVowels("vowels"), 2); 
-}
-]]></tests>
-      </program></statement>
-    <hint>
-      <activity label="cp_7_AC_8q_pp" number="yes" adaptive="yes" indentation="hide">
-        <statement>
-          <p>Write the function <c>countVowels</c> which takes a <c>string input</c> and returns the number of vowels in
-            the <c>string</c>. Remember, ‘a', ‘e', ‘i', ‘o', and ‘u'
-            are vowels. Use the lines to construct the code, then go back to complete the Activecode.</p>
-        </statement>
-        <blocks>
-          <block order="5">
-            <cline>int countVowels(string input) {</cline>
-          </block>
-          <block order="1">
-            <cline>    int count = 0;</cline>
-          </block>
-          <block order="9">
-            <cline><![CDATA[    for (size_t i = 0; i < input.length; i++) {]]></cline>
-          </block>
-          <block order="3">
-            <choice correct="yes">
-              <cline>        if (input[i] == 'a' || input[i] == 'e' || input[i] == 'i' || input[i] == 'o' || input[i] == 'u') {</cline>
-            </choice>
-            <choice>
-              <cline>        if (input[i] == 'a' &amp;&amp; input[i] == 'e' &amp;&amp; input[i] == 'i' &amp;&amp; input[i] == 'o' &amp;&amp; input[i] == 'u') { </cline>
-            </choice>
-          </block>
-          <block order="6">
-            <cline>            count++;</cline>
-          </block>
-          <block order="7">
-            <cline>        }</cline>
-          </block>
-          <block order="4">
-            <cline>    }</cline>
-          </block>
-          <block order="2">
-            <cline>    return count;</cline>
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
-  </exercise>
-
-
-  <exercise label="cp_7_AC_9">
-    <statement>
-      <p>Write the function <c>longestWord</c> , which takes a <c>string input</c> as a parameter. <c>longestWord</c> returns the
-        words with the most letters in <c>input</c> . If there's a tie, return the first word. Use the <c>substr</c>
-        function. Run and test your code!</p>
-    <program interactive="activecode" label="cp_7_AC_9_editor">
-      <code><![CDATA[
-          #include <iostream>
-
-          std::string longestWord (std::string input) {
-              // Write your implementation here.
-          }
-]]></code>
-      <tests><![CDATA[
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
-
-TEST_CASE("longestWord function") {
-    CHECK_EQ(longestWord("what is the longest word in this std::string"), "longest");
-    CHECK_EQ(longestWord("these words are very close in size"), "these");
-    CHECK_EQ(longestWord("vowels"), "vowels");
-}
-]]></tests>
-</program></statement>
-    <solution>
-      <p>Below is one way to implement the <c>longestWord</c> function. We use a <c>while</c> loop to go through all
-        the <c>char</c>s in the <c>string</c>. We use variables to keep track of the longest word, the longest
-        amount of letters, and the length of the current word. We can determine the length of a word
-        by counting the number of <c>char</c>s between spaces. If the length is greater than the max,
-        length becomes the new max and we update the longest word. This keeps repeating until we
-        reach the end of the string, and the longest word is returned.</p>
-      <program xml:id="cp_7_AC_9a" line-numbers="yes"><code><![CDATA[
-#include <iostream>
-
-std::string longestWord(std::string input) {
-    size_t n = 0;
-    size_t maxLength = 0;
-    while (n < input.length()) {
-        size_t wordLength = 0;
-        while (input[n] != ' ' && n < input.length()) {
-            wordLength++;
-            n++;
-        }
-        if (wordLength > maxLength) {
-            maxLength = wordLength;
-            longest = input.substr(n - maxLength, maxLength);
-        }
-        n++;
-    }
-    return longest;
-}
-]]></code></program>
-    </solution>
-  </exercise>
-
-  <exercise label="cp_7_AC_10q">
-    <statement>
-      <p>Camel case is the practice of writing phrases without spaces or punctuation, indicating the
-        separation of words using capital letter. For example, <q>camel case</q> in camel case is <q>
-        camelCase</q>. Snake case is the practice of writing phrases where each space is replaced by
-        an underscore. For example, <q>snake case</q> in snake case is <q>snake_case</q>. Write the
-        functions <c>snakeToCamel</c> and <c>camelToSnake</c>. Each function takes a <c>string input</c> and returns the input using the
-        other stylization. Feel free to use any <c>string</c> functions you'd like. Run and test your
-        code! Check the hint below for help with the construction of the code.</p>
-    <program interactive="activecode" line-numbers="yes" label="cp_7_AC_10q_editor">
-      <code><![CDATA[
+            <p>
+                Write a function named <c>replace_spaces</c> that takes a
+                <c>std::string&amp;</c> and replaces every space with an
+                underscore. Use indexed traversal because the function changes
+                the original string.
+            </p>
+            <program interactive="activecode" language="cpp" label="chapter7_coding_replace_spaces_editor">
+                <code><![CDATA[
 #include <iostream>
 #include <string>
-#include "ctype.h"
 
-std::string snakeToCamel(std::string input) {
-    // Write your implementation here.
+void replace_spaces(std::string& text) {
+    // Write your solution here.
 }
 
-std::string camelToSnake(std::string input) {
-    // Write your implementation here.
+int main() {
+    std::string message{"hello world"};
+    replace_spaces(message);
+    std::cout << message << '\n';
+    return 0;
 }
-    ]]></code>
-      <tests><![CDATA[
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
-
-TEST_CASE("snakeToCamel function") {
-    CHECK_EQ(snakeToCamel("turn_this_into_camel_case"), "turnThisIntoCamelCase"); 
-    CHECK_EQ(snakeToCamel("hello_world"), "helloWorld"); 
-    CHECK_EQ(snakeToCamel("code"), "code"); 
-}
-
-TEST_CASE("camelToSnake function") {
-    CHECK_EQ(camelToSnake("turnThisIntoSnakeCase"), "turn_this_into_snake_case"); 
-    CHECK_EQ(camelToSnake("helloWorld"), "hello_world"); 
-    CHECK_EQ(camelToSnake("code"), "code"); 
-}
-]]></tests>
-      </program></statement>
-    <hint>
-      <activity label="cp_7_AC_10q_pp" number="yes" adaptive="yes" indentation="hide">
-        <statement>
-          <p>Camel case is the practice of writing phrases without spaces or punctuation, indicating
-            the separation of words using capital letter. For example, <q>camel case</q> in camel
-            case is <q>camelCase</q>. Snake case is the practice of writing phrases where each space
-            is replaced by an underscore. For example, <q>snake case</q> in snake case is <q>
-            snake_case</q>. Write the functions <c>snakeToCamel</c> and <c>camelToSnake</c>. Each function takes a <c>string input</c>
-            and returns the input using the other stylization. Feel free to use any <c>string</c>
-            functions you'd like. Use the lines to construct the code, then go back to complete the
-            Activecode.</p>
+                ]]></code>
+            </program>
         </statement>
-        <blocks>
-          <block order="3">
-            <cline>// snakeToCamel function</cline>
-            <cline>string snakeToCamel(string input) {</cline>
-            <cline>    size_t len = input.length();</cline>
-            <cline><![CDATA[    for (size_t i = 0; i < len; i++) {]]></cline>
-          </block>
-          <block order="10">
-            <cline>        if (input[i] == '_') {</cline>
-            <cline>            input[i+1] = toupper(input[i+1]);</cline>
-            <cline>            input.erase(i,1);</cline>
-            <cline>        }</cline>
-          </block>
-          <block order="1">
-            <cline>    }</cline>
-            <cline>    return input;</cline>
-            <cline>}</cline>
-          </block>
-          <block order="6">
-            <cline>// camelToSnake function</cline>
-            <cline>string camelToSnake(string input) {</cline>
-            <cline>    size_t len = input.length();</cline>
-            <cline><![CDATA[    for (size_t i = 0; i < len; i++) {]]></cline>
-          </block>
-          <block order="4">
-            <cline>        if (isupper(input.at(i))) {</cline>
-            <cline>            input.at(i) = tolower(input.at(i));</cline>
-            <cline>            input.insert(i, &quot;_&quot;);</cline>
-            <cline>        }</cline>
-          </block>
-          <block order="8">
-            <cline>    }</cline>
-            <cline>    return input;</cline>
-            <cline>}</cline>
-          </block>
-        </blocks>
-      </activity>
-    </hint>
-  </exercise>
+        <solution>
+            <program language="cpp"><code><![CDATA[
+void replace_spaces(std::string& text) {
+    for (std::size_t index = 0; index < text.size(); ++index) {
+        if (text[index] == ' ') {
+            text[index] = '_';
+        }
+    }
+}
+            ]]></code></program>
+        </solution>
+    </exercise>
 
+    <exercise label="chapter7_coding_first_occurrence">
+        <statement>
+            <p>
+                Write a function named <c>describe_search</c> that takes a
+                string and a target substring. It should print the first index
+                when the substring is found and print <c>Not found</c> otherwise.
+            </p>
+            <program interactive="activecode" language="cpp" label="chapter7_coding_first_occurrence_editor">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+
+void describe_search(const std::string& text,
+                     const std::string& target) {
+    // Write your solution here.
+}
+
+int main() {
+    describe_search("The sea is calm.", "sea");
+    describe_search("The sea is calm.", "storm");
+    return 0;
+}
+                ]]></code>
+            </program>
+        </statement>
+        <solution>
+            <program language="cpp"><code><![CDATA[
+void describe_search(const std::string& text,
+                     const std::string& target) {
+    std::size_t index = text.find(target);
+
+    if (index == std::string::npos) {
+        std::cout << "Not found\n";
+    } else {
+        std::cout << "Found at index " << index << '\n';
+    }
+}
+            ]]></code></program>
+        </solution>
+    </exercise>
+
+    <exercise label="chapter7_coding_to_string">
+        <statement>
+            <p>
+                Define a <c>Book</c> class with a private title and page count.
+                Add a constructor and a <c>to_string()</c> member function that
+                returns text such as <c>Book{title=Iteration, pages=240}</c>.
+            </p>
+            <program interactive="activecode" language="cpp" label="chapter7_coding_to_string_editor">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+
+class Book {
+private:
+    std::string title;
+    int pages;
+
+public:
+    Book(std::string book_title, int page_count)
+        : title{book_title}, pages{page_count} {
+    }
+
+    std::string to_string() const {
+        // Replace this placeholder with your implementation.
+        return "";
+    }
+};
+
+int main() {
+    Book book{"Iteration", 240};
+    std::cout << book.to_string() << '\n';
+    return 0;
+}
+                ]]></code>
+            </program>
+        </statement>
+        <solution>
+            <program language="cpp"><code><![CDATA[
+    Book(std::string book_title, int page_count)
+        : title{book_title}, pages{page_count} {
+    }
+
+    std::string to_string() const {
+        return "Book{title=" + title
+            + ", pages=" + std::to_string(pages) + "}";
+    }
+            ]]></code></program>
+        </solution>
+    </exercise>
 </exercises>

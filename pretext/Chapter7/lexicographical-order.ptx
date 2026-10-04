@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter7_lexicographical-order">
+    <title>Comparison</title>
+
+    <p>
+        Strings, arrays and few other containers support the comparison operators <c>==</c>, <c>!=</c>,
+        <c>&lt;</c>, <c>&gt;</c>, <c>&lt;=</c>, and <c>&gt;=</c>. These
+        comparisons use <term>lexicographical order</term>: elements are
+        compared from left to right until a difference is found or one sequence
+        ends.
+    </p>
+
+    <subsection xml:id="chapter7_character-values">
+        <title>Character Values and Code Units</title>
+
+        <p>
+            A <c>char</c> has an integer value in the character set used by the
+            program. When two ordinary C++ strings are compared, C++ compares
+            their <c>char</c> elements in sequence. For the ASCII characters
+            used in our examples, these values correspond to familiar ASCII
+            code-point values.
+        </p>
+
+        <p>
+            The important ordering for ordinary ASCII text is that decimal
+            digits come before uppercase letters, and uppercase letters come
+            before lowercase letters. Therefore, character-value ordering is
+            case-sensitive.
+        </p>
+
+        <table xml:id="table_string_character-values">
+            <title>Common ASCII character-value ranges</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <row header="yes">
+                    <cell>Characters</cell>
+                    <cell>Common ASCII values</cell>
+                    <cell>Ordering idea</cell>
+                </row>
+                <row>
+                    <cell><c>'0'</c> through <c>'9'</c></cell>
+                    <cell>48 through 57</cell>
+                    <cell>Digits come before letters.</cell>
+                </row>
+                <row>
+                    <cell><c>'A'</c> through <c>'Z'</c></cell>
+                    <cell>65 through 90</cell>
+                    <cell>Uppercase letters come before lowercase letters.</cell>
+                </row>
+                <row>
+                    <cell><c>'a'</c> through <c>'z'</c></cell>
+                    <cell>97 through 122</cell>
+                    <cell>Lowercase letters come after uppercase letters.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The exact numeric values of an implementation's character set are
+            not the main lesson here. The lesson is that C++ compares the
+            element values; it does not ask whether two words would appear in
+            the same order in a human dictionary.
+        </p>
+
+        <program xml:id="program_compare_character-values"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int main() {
+    if ('A' < 'a') {
+        std::cout << "Uppercase A has a smaller value.\n";
+    }
+
+    std::cout << static_cast<int>('A') << '\n';
+    std::cout << static_cast<int>('a') << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            A <term>code point</term> is a numeric identifier for an abstract
+            character in a character repertoire such as Unicode. In a
+            <c>std::string</c>, a <c>char</c> represents one stored code unit.
+            For the basic ASCII examples in this section, the code unit and
+            character value correspond directly to the ASCII value. General
+            Unicode text can use multiple UTF-8 code units for one abstract
+            character, so ordinary <c>std::string</c> comparison is not a
+            complete Unicode or language-aware collation system.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter7_lexicographical-algorithm">
+        <title>The Comparison Algorithm</title>
+
+        <p>
+            Lexicographical comparison follows a small, repeatable algorithm.
+            Compare corresponding elements from the beginning, stop at the first
+            difference, and use that difference to decide the ordering.
+        </p>
+
+        <table xml:id="table_lexicographical-steps">
+            <title>Steps in lexicographical comparison</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <row header="yes">
+                    <cell>Situation</cell>
+                    <cell>Result</cell>
+                </row>
+                <row>
+                    <cell>The first unequal pair of elements is found.</cell>
+                    <cell>The sequence with the smaller element comes first.</cell>
+                </row>
+                <row>
+                    <cell>All compared elements match, but one sequence ends.</cell>
+                    <cell>The shorter sequence comes first.</cell>
+                </row>
+                <row>
+                    <cell>Both sequences end at the same time after matching.</cell>
+                    <cell>The sequences compare equal.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            When one sequence matches the beginning of another, it is called a
+            <term>proper prefix</term> of the longer sequence. A proper prefix
+            comes before the sequence that extends it.
+        </p>
+
+        <table xml:id="table_lexicographical-examples">
+            <title>Examples of lexicographical comparison</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <row header="yes">
+                    <cell>Comparison</cell>
+                    <cell>Result</cell>
+                    <cell>Reason</cell>
+                </row>
+                <row>
+                    <cell><c>"cat" &lt; "car"</c></cell>
+                    <cell><c>false</c></cell>
+                    <cell>The first difference is <c>'t'</c> versus <c>'r'</c>, and <c>'t'</c> is larger.</cell>
+                </row>
+                <row>
+                    <cell><c>"cat" &lt; "catfish"</c></cell>
+                    <cell><c>true</c></cell>
+                    <cell><c>"cat"</c> is a proper prefix of <c>"catfish"</c>.</cell>
+                </row>
+                <row>
+                    <cell><c>"cat" == "cat"</c></cell>
+                    <cell><c>true</c></cell>
+                    <cell>All elements match and both sequences have the same length.</cell>
+                </row>
+                <row>
+                    <cell><c>"" &lt; "cat"</c></cell>
+                    <cell><c>true</c></cell>
+                    <cell>An empty sequence is shorter than every nonempty sequence.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <program xml:id="program_lexicographical_comparison"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string first{"Dog"};
+    std::string second{"Doghouse"};
+
+    if (first < second) {
+        std::cout << first << " comes first.\n";
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter7_string-comparison-case">
+        <title>Case-Sensitive Comparison</title>
+
+        <p>
+            String comparison is case-sensitive. On an ASCII-based system,
+            uppercase letters have smaller values than lowercase letters. Thus,
+            <c>"Zebra" &lt; "banana"</c> can be true even though a human reader
+            might expect a dictionary to ignore case.
+        </p>
+
+        <program xml:id="program_case-sensitive-string-comparison"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string first{"Zebra"};
+    std::string second{"banana"};
+
+    std::cout << std::boolalpha << (first < second) << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            A case-insensitive ordering requires an additional policy. A program
+            might create lowercase copies before comparing, but that changes the
+            values being compared; it is not the behavior of the built-in string
+            comparison itself.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter7_array-lexicographical-comparison">
+        <title>Comparing <c>std::array</c> Objects</title>
+
+        <p>
+            Lexicographical comparison is not limited to strings. In C++17,
+            relational operators for two <c>std::array</c> objects compare their
+            corresponding elements in order. The element type must support the
+            comparison being requested, and the arrays must have the same
+            element type and size for the built-in array operators.
+        </p>
+
+        <program xml:id="program_array_lexicographical_comparison"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <iostream>
+
+int main() {
+    std::array<int, 3> first{1, 4, 9};
+    std::array<int, 3> second{1, 5, 0};
+
+    if (first < second) {
+        std::cout << "first comes first.\n";
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The first elements are both <c>1</c>, so comparison continues. The
+            second elements are <c>4</c> and <c>5</c>. Because <c>4 &lt; 5</c>,
+            the comparison is decided there; the final elements are never needed
+            to determine the result.
+        </p>
+
+        <p>
+            For arrays with different sizes, use the general algorithm
+            <c>std::lexicographical_compare</c> with the two ranges. It applies
+            the same first-difference and shorter-prefix rules, even when the
+            ranges have different lengths.
+        </p>
+
+        <program xml:id="program_compare_different_array-sizes"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <algorithm>
+#include <array>
+#include <iostream>
+
+int main() {
+    std::array<int, 2> short_values{1, 2};
+    std::array<int, 3> long_values{1, 2, 0};
+
+    bool short_first = std::lexicographical_compare(
+        short_values.begin(), short_values.end(),
+        long_values.begin(), long_values.end()
+    );
+
+    std::cout << std::boolalpha << short_first << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter7_sequence-container-comparison">
+        <title>One Rule for Many Sequences</title>
+
+        <p>
+            The same idea is useful for many sequence-like types. Dynamic sequences like 
+			<c>std::vector</c>, <c>std::deque</c>, and <c>std::string</c> provide built-in 
+			comparison operators that evaluate their elements lexicographically. If the 
+			first elements differ, later elements do not affect the result. If all shared 
+			elements match, the length decides the result.
+        </p>
+
+        <p>
+            While fixed-size <c>std::array</c> objects can only be compared using built-in operators 
+			if they share the exact same type and size, you can still apply this exact same 
+			behavior across different sizes and container types by using the general algorithm 
+			<c>std::lexicographical_compare</c> with iterator ranges.
+        </p>
+
+        <warning>
+            <p>
+                Lexicographical order is not automatically alphabetical order,
+                case-insensitive order, or language-aware dictionary order. It
+                is an element-by-element ordering based on the comparison of the
+                stored values.
+            </p>
+        </warning>
+    </subsection>
+</section>

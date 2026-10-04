@@ -25,7 +25,7 @@ int convertToInt(const std::string&amp; s)
   return atoi(digitString);
 }</program>
   <p>The variable <c>digitString</c> is an example of an <term>accumulator</term>. It is similar to the counter
-    we saw in <xref ref="chapter7_looping-and-counting-loopcount"/>, except that
+    we saw in <xref ref="chapter7_counting-string-characters"/>, except that
     instead of getting incremented, it gets accumulates one new character at a time, using string
     concatentation.</p>
   <p>The expression</p>

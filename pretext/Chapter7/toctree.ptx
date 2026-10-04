@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude"
          xml:lang="en-US"
-         xml:id="strings">
-  <title>Strings and things</title>
-  <xi:include href='./containers-and-strings.ptx'/>
-  <xi:include href='./string-variables.ptx'/>
-  <xi:include href='./extracting-characters.ptx'/>
-  <xi:include href='./length.ptx'/>
-  <xi:include href='./traversal.ptx'/>
-  <xi:include href='./runtime-error.ptx'/>
-  <!-- removed as unnecessory dependancey and early exposure of overloading.
-  <xi:include href='./find-function.ptx'/> 
-  -->
-  <xi:include href='./own-version-find.ptx'/>
-  <xi:include href='./looping-and-counting.ptx'/>
-  <xi:include href='./increment-decrement.ptx'/>
-  <xi:include href='./string-concatenation.ptx'/>
-  <xi:include href='./strings-are-mutable.ptx'/>
-  <xi:include href='./strings-are-comparable.ptx'/>
-  <xi:include href='./character-classification.ptx'/>
-  <xi:include href='./other-string-functions.ptx'/>
-  <xi:include href='./glossary.ptx'/>
-  <xi:include href='./exercises.ptx'/>
-  <xi:include href='./mixed-up-code.ptx'/>
-  <xi:include href='./coding-practice.ptx'/>
+         xml:id="strings-and-things">
+    <title>Strings and Things</title>
+
+    <xi:include href="./string-variables-and-mutability.ptx"/>
+    <xi:include href="./string-operations.ptx"/>
+    <xi:include href="./traversing-strings.ptx"/>
+    <xi:include href="./character-classification.ptx"/>
+    <xi:include href="./string-input-and-object-text.ptx"/>
+    <xi:include href="./lexicographical-order.ptx"/>
+
+    <xi:include href="./glossary.ptx"/>
+    <xi:include href="./exercises.ptx"/>
+    <xi:include href="./mixed-up-code.ptx"/>
+    <xi:include href="./coding-practice.ptx"/>
 </chapter>

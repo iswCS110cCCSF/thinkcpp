@@ -8,7 +8,7 @@
   <p>Also, it is not always obvious what sort of things are easy to write,
     but a good approach is to look for subproblems that fit a pattern you
     have seen before.</p>
-  <p>Back in <xref ref="chapter7_looping-and-counting-loopcount"/> we looked at a
+  <p>Back in <xref ref="chapter7_counting-string-characters"/> we looked at a
     loop that traversed a string and counted the number of times a given letter appeared. You can
     think of this program as an example of a pattern called <q>traverse and count.</q> The elements
     of this pattern are:</p>

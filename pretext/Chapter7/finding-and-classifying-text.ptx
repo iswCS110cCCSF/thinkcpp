@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter7_finding-and-classifying-text">
+    <title>Finding and Classifying Text</title>
+
+    <p>
+        The <c>find()</c> member function searches for a character or a
+        substring. It returns the index of the first match.
+    </p>
+
+    <program xml:id="program_string_find"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string sentence{"The sea is calm."};
+    std::size_t index = sentence.find("sea");
+
+    if (index != std::string::npos) {
+        std::cout << "Found at index " << index << '\n';
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        If no match exists, <c>find()</c> returns the special value
+        <c>std::string::npos</c>. Test for that value before using the result as
+        an index. Searches are case-sensitive: <c>"Sea"</c> and <c>"sea"</c>
+        are different strings.
+    </p>
+
+    <subsection xml:id="chapter7_character-classification">
+        <title>Character Classification</title>
+
+        <p>
+            The <c>&lt;cctype&gt;</c> header provides functions that classify
+            individual characters. For example, <c>std::isalpha</c> tests for a
+            letter, <c>std::isdigit</c> tests for a decimal digit, and
+            <c>std::isspace</c> tests for whitespace.
+        </p>
+
+        <program xml:id="program_character_classification"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <cctype>
+#include <iostream>
+
+int main() {
+    char character{'7'};
+
+    if (std::isdigit(static_cast<unsigned char>(character))) {
+        std::cout << "The character is a digit.\n";
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The conversion functions <c>std::toupper</c> and
+            <c>std::tolower</c> return an uppercase or lowercase version when
+            a conversion is available. In a larger text-processing program,
+            combine these functions with a traversal loop.
+        </p>
+    </subsection>
+</section>

@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<section xml:id="chapter7_other-string-functions">
-  <title>Other <c>string</c> functions</title>
-  <p>This chapter does not cover all the <c>string</c> functions. An additional one, <c>substr</c>,
-    is covered in <xref ref="chapter15_parsing-input-parsing"/>.</p>
-</section>

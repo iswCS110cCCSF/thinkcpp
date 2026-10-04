@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter7_traversing-strings">
+    <title>Traversing Strings</title>
+
+    <p>
+        To <term>traverse</term> a string means to visit its characters in
+        sequence. Chapter 6 introduced several loop forms. Strings give us a
+        useful setting for practicing all three of the main traversal patterns.
+    </p>
+
+    <subsection xml:id="chapter7_indexed-string-traversal">
+        <title>Indexed <c>for</c> Loops</title>
+
+        <p>
+            Use an indexed <c>for</c> loop when the program needs both a
+            character and its position.
+        </p>
+
+        <program xml:id="program_indexed_string_traversal"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string word{"C++"};
+
+    for (std::size_t index = 0; index < word.size(); ++index) {
+        std::cout << index << ": " << word[index] << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+		
+	        <warning>
+            <p>
+			Avoid using standard signed <c>int</c> types when dealing with container indexing and size. 
+			Instead, use <c>size_t</c> or, even better, use the C++17 <c>auto</c> keyword to let the 
+			compiler automatically deduce the perfect, safe matching type for you.
+            </p>
+        </warning>
+    </subsection>
+
+    <subsection xml:id="chapter7_range-string-traversal">
+        <title>Range-Based <c>for</c> Loops</title>
+
+        <p>
+            Use a range-based <c>for</c> loop when the program needs each
+            character but does not need its index. A reference lets the loop
+            modify the original characters; a <c>const</c> reference avoids
+            copying and prevents modification.
+        </p>
+
+        <program xml:id="program_range_string_traversal"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    const std::string word{"C++"};
+
+    for (const char character : word) {
+        std::cout << character << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter7_while-string-traversal">
+        <title><c>while</c> Loops</title>
+
+        <p>
+            A <c>while</c> loop is useful when traversal is controlled by a
+            condition that may be expressed directly. The index must be updated
+            so that the loop eventually stops.
+        </p>
+
+        <program xml:id="program_while_string_traversal"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string word{"banana"};
+    std::size_t index = 0;
+
+    while (index < word.size()) {
+        std::cout << word[index] << '\n';
+        ++index;
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter7_counting-string-characters">
+        <title>Counting Characters</title>
+
+        <p>
+            A counter can record how often a character appears. The function
+            below uses a <c>const</c> reference because it only reads the
+            caller's string.
+        </p>
+
+        <program xml:id="program_count_character"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <cstddef>
+#include <iostream>
+#include <string>
+
+std::size_t count_character(const std::string& text, char target) {
+    std::size_t count = 0;
+
+    for (const char character : text) {
+        if (character == target) {
+            ++count;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    std::cout << count_character("banana", 'a') << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+</section>

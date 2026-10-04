@@ -12,7 +12,7 @@
     <xi:include href="./arrays.ptx"/>
     <xi:include href="./range-based-for-loops.ptx"/>
     <xi:include href="./nested-iteration.ptx"/>
-
+    <xi:include href="./generating-random-numbers.ptx"/>
     <xi:include href="./glossary.ptx"/>
     <xi:include href="./exercises.ptx"/>
     <xi:include href="./mixed-up-code.ptx"/>
