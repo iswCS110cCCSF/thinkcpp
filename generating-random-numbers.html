@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: salem                          *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TCPP2 Generating Random Numbers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<script type="module">import { startMathJax } from './_static/pretext/js/dist/mathjax_startup.js';
+startMathJax({
+hasWebworkReps: false,
+hasSage: false,
+isReact: false,
+htmlPresentation: false,
+lang: "en-US",
+});
+</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta name="twitter:title" content="How To Think Like a Computer Scientist C++ Edition: The Pretext Interactive Version">
+<meta property="og:title" content="How To Think Like a Computer Scientist C++ Edition: The Pretext Interactive Version">
+<meta property="book:title" content="How To Think Like a Computer Scientist C++ Edition: The Pretext Interactive Version">
+<meta name="twitter:description" content="Based on the original open source book by Allen Downey, Think C++: How to Think Like a Computer Scientist. This book is an introduction to computer science using C++.">
+<meta property="og:description" content="Based on the original open source book by Allen Downey, Think C++: How to Think Like a Computer Scientist. This book is an introduction to computer science using C++.">
+<meta name="twitter:card" content="summary">
+<script src="_static/pretext/js/jquery.min.js"></script><script src="_static/pretext/js/dist/pretext-core.js?v=2.51"></script><script src="_static/pretext/js/dist/pretext-read-aloud.js?v=2.51"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '8.3.3';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.dd07797f77620576.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.11d27cdc38930c2c.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.347e2ecdeacfed99.css">
+<script src="_static/pretext/js/dist/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/dist/pretext_search.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="thinkcpp2" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead" role="banner"><div class="ptx-banner"><div class="title-container">
+<div class="heading ptx-banner-heading"><a href="book.html"><span class="title">How To Think Like a Computer Scientist C++ Edition</span> <span class="subtitle">The Pretext Interactive Version</span></a></div>
+<p class="byline">Barbara Ericson, Allen B. Downey, Jason L. Wright (Editor)</p>
+</div></div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button id="ptx-toc-toggle" type="button" aria-controls="ptx-sidebar" class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="ptx-search-box">
+<div class="ptx-search-widget"><button id="ptx-search-button" type="button" class="ptx-search-button button" title="Search Book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<dialog id="ptx-search-dialog" class="ptx-dialog ptx-search-dialog"><div class="ptx-search-dialog-controls">
+<input aria-label="Search term" id="ptx-search-terms" class="ptx-search-terms" type="text" name="terms" placeholder="Search terms"><button aria-label="Close" id="ptx-search-close" class="ptx-search-close"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cd;</span></button>
+</div>
+<div id="ptx-search-status" class="ptx-search-status" aria-live="polite" aria-atomic="true"></div>
+<h2 class="heading ptx-search-results-heading">Search Results: </h2>
+<div id="ptx-search-empty" class="ptx-search-empty"><span>No results.</span></div>
+<ol id="ptx-search-results" class="ptx-search-results"></ol></dialog>
+</div>
+<span class="nav-other-controls"><button id="ptx-read-aloud-button" class="ptx-read-aloud-button button" title="Read aloud" aria-expanded="false"><span class="icon material-symbols-outlined" aria-hidden="true">&#xf1bc;</span><span class="name">Read aloud</span></button><div id="ptx-read-aloud-player" class="ptx-read-aloud-player" hidden="hidden" role="group" aria-label="Read aloud">
+<button id="ptx-read-aloud-prev" class="button" title="Previous sentence"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe045;</span></button><button id="ptx-read-aloud-toggle" class="ptx-read-aloud-toggle button" title="Play"><span class="ptx-read-aloud-icon-play"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe037;</span></span><span class="ptx-read-aloud-icon-pause"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe034;</span></span></button><button id="ptx-read-aloud-next" class="button" title="Next sentence"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe044;</span></button><a id="ptx-read-aloud-continue" class="ptx-read-aloud-continue button" hidden="hidden">Continue<span class="icon material-symbols-outlined" aria-hidden="true">&#xe037;</span></a><button id="ptx-read-aloud-settings-button" class="ptx-read-aloud-settings-button button" title="Reading settings"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe429;</span></button>
+</div>
+<dialog class="ptx-dialog ptx-read-aloud-settings-popup" id="ptx-read-aloud-settings-popup"><div class="ptx-readability-options-popup-controls">
+<h2 class="heading">Read aloud settings</h2>
+<button class="ptx-read-aloud-settings-close-button button" id="ptx-read-aloud-settings-close-button" title="Close"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cd;</span></button>
+</div>
+<div class="ptx-readability-options-group">
+<label for="ptx-read-aloud-voice"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe91f;</span><span>Voice</span></label><select id="ptx-read-aloud-voice"></select><label class="ptx-readability-slider-label" for="ptx-read-aloud-rate"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe9e4;</span><span>Reading speed</span><output id="ptx-read-aloud-rate-value" for="ptx-read-aloud-rate">1×</output></label><input type="range" id="ptx-read-aloud-rate" min="0.5" max="2" step="0.1" value="1"><label for="ptx-read-aloud-asides"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d7;</span><span>Collapsed content</span></label><select id="ptx-read-aloud-asides"><option value="skip">Announce, do not read</option>
+<option value="read">Read automatically</option></select><label for="ptx-read-aloud-autoscroll"><input type="checkbox" id="ptx-read-aloud-autoscroll" checked><span>Follow along (auto-scroll)</span></label><label for="ptx-read-aloud-autocontinue"><input type="checkbox" id="ptx-read-aloud-autocontinue"><span>Continue to the next page automatically</span></label>
+</div></dialog><button id="ptx-readability-options-button" class="ptx-readability-options-button button" title="Readability settings"><span class="icon material-symbols-outlined" aria-hidden="true">&#xf6f1;</span><span class="name">Readability settings</span></button><dialog class="ptx-dialog ptx-readability-options-popup" id="ptx-readability-options-popup"><div class="ptx-readability-options-popup-controls">
+<h2 class="heading">Readability settings</h2>
+<button class="ptx-readability-options-close-button button" id="ptx-readability-options-close-button" title="Close"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cd;</span></button>
+</div>
+<div class="ptx-readability-options-group">
+<label class="ptx-readability-slider-label" for="ptx-readability-line-height"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe240;</span><span>Line height</span><output id="ptx-readability-line-height-value" for="ptx-readability-line-height">1.35</output></label><input type="range" id="ptx-readability-line-height" min="1.10" max="3" step="0.05" value="1.35">
+</div>
+<div class="ptx-readability-options-group">
+<label class="ptx-readability-slider-label" for="ptx-readability-font-size"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe245;</span><span>Content font size</span><output id="ptx-readability-font-size-value" for="ptx-readability-font-size">100%</output></label><input type="range" id="ptx-readability-font-size" min="0.8" max="1.5" step="0.05" value="1">
+</div>
+<fieldset class="ptx-readability-options-group ptx-readability-options-group-theme">
+<legend>Theme</legend>
+<label for="ptx-readability-theme-system"><input type="radio" name="ptx-readability-theme" id="ptx-readability-theme-system" value="system"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe1ab;</span><span>System</span></label><label for="ptx-readability-theme-light"><input type="radio" name="ptx-readability-theme" id="ptx-readability-theme-light" value="light"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe518;</span><span>Light</span></label><label for="ptx-readability-theme-dark"><input type="radio" name="ptx-readability-theme" id="ptx-readability-theme-dark" value="dark"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span>Dark</span></label>
+</fieldset>
+<fieldset class="ptx-readability-options-group">
+<legend>Assistive technologies</legend>
+<label for="ptx-readability-accessible-permalinks"><input type="checkbox" id="ptx-readability-accessible-permalinks"><span>🔗</span><span>Expose permalinks</span></label>
+</fieldset>
+<div class="ptx-readability-options-group"><button type="button" class="ptx-readability-reset-button button" id="ptx-readability-reset-button"><span class="icon material-symbols-outlined" aria-hidden="true">&#xf053;</span><span class="name">Reset All</span></button></div></dialog></span><span class="treebuttons"><a class="previous-button button" href="chapter6_nested-iteration.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="iteration.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="chapter6_glossary.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" role="complementary" class="ptx-sidebar"><nav id="ptx-toc" tabindex="-1" aria-label="Contents" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">About this book</span></a></div>
+<ul id="ptx-toc-group-frontmatter" class="structural toc-item-list">
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="front-colophon.html" class="internal"><span class="title">License</span></a></div></li>
+<li class="toc-item toc-acknowledgement"><div class="toc-title-box"><a href="acknowledgement.html" class="internal"><span class="title">Acknowledgements</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="way-of-the-program.html" class="internal"><span class="codenumber">1</span> <span class="title">The way of the program</span></a></div>
+<ul id="ptx-toc-group-way-of-the-program" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter1_the-way-of-the-program.html" class="internal"><span class="codenumber">1.1</span> <span class="title">The Way of the Program</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter1_what-is-a-programming-language.html" class="internal"><span class="codenumber">1.2</span> <span class="title">What is a Programming Language?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter1_what-is-a-program.html" class="internal"><span class="codenumber">1.3</span> <span class="title">What is a Program?</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter1_what-is-debugging.html" class="internal"><span class="codenumber">1.4</span> <span class="title">What is Debugging?</span></a></div>
+<ul id="ptx-toc-group-chapter1_what-is-debugging" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter1_what-is-debugging.html#chapter1_compile-time-errors" class="internal"><span class="codenumber">1.4.1</span> <span class="title">Compile-time errors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter1_what-is-debugging.html#chapter1_run-time-errors-run-time" class="internal"><span class="codenumber">1.4.2</span> <span class="title">Run-time errors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter1_what-is-debugging.html#chapter1_logic-errors-and-semantics" class="internal"><span class="codenumber">1.4.3</span> <span class="title">Logic errors and semantics</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter1_what-is-debugging.html#chapter1_experimental-debugging" class="internal"><span class="codenumber">1.4.4</span> <span class="title">Experimental debugging</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter1_formal-and-natural-languages-formal.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Formal and Natural Languages</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter1_the-first-program-hello.html" class="internal"><span class="codenumber">1.6</span> <span class="title">The First Program</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter1_glossary.html" class="internal"><span class="codenumber">1.7</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter1_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter1_glossary.html#chapter1_glossary-2" class="internal"><span class="codenumber">1.7</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter1_glossary.html#chapter1_glossary-3" class="internal"><span class="codenumber">1.7</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter1_multiple-choice-exercises.html" class="internal"><span class="codenumber">1.8</span> <span class="title">Chapter Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="variables-types.html" class="internal"><span class="codenumber">2</span> <span class="title">Variables and Types</span></a></div>
+<ul id="ptx-toc-group-variables-types" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_more-output.html" class="internal"><span class="codenumber">2.1</span> <span class="title">More Output</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_values.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_variables.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Variables</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_assignment.html" class="internal"><span class="codenumber">2.4</span> <span class="title">Assignment</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_outputting-variables.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Outputting Variables</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_keywords.html" class="internal"><span class="codenumber">2.6</span> <span class="title">Keywords</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_operators.html" class="internal"><span class="codenumber">2.7</span> <span class="title">Operators</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_order-of-operations.html" class="internal"><span class="codenumber">2.8</span> <span class="title">Order of Operations</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter2_operators-for-characters.html" class="internal"><span class="codenumber">2.9</span> <span class="title">Operators for Characters</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter2_composition.html" class="internal"><span class="codenumber">2.10</span> <span class="title">Composition</span></a></div>
+<ul id="ptx-toc-group-chapter2_composition" class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter2_composition.html#chapter2_composition-10" class="internal"><span class="codenumber">2.10.1</span> <span class="title">Newlines with <code class="code-inline tex2jax_ignore">'\n'</code></span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter2_glossary.html" class="internal"><span class="codenumber">2.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter2_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter2_glossary.html#chapter2_glossary-2" class="internal"><span class="codenumber">2.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter2_glossary.html#chapter2_glossary-3" class="internal"><span class="codenumber">2.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter2_multiple-choice-exercises.html" class="internal"><span class="codenumber">2.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter2_mixed-up-code-exercises-1.html" class="internal"><span class="codenumber">2.13</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter2_activecode-exercises.html" class="internal"><span class="codenumber">2.14</span> <span class="title">Activecode Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="functions.html" class="internal"><span class="codenumber">3</span> <span class="title">Functions</span></a></div>
+<ul id="ptx-toc-group-functions" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_floating-point.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Floating-point</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_converting-from-double-to-int.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Converting from <code class="code-inline tex2jax_ignore">double</code> to <code class="code-inline tex2jax_ignore">int</code></span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_math-functions.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Math Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_composition.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Composition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_adding-new-functions.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Adding New Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_definitions-and-uses.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Definitions and Uses</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_programs-with-multiple-functions.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Programs with Multiple Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_parameters-and-arguments.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Parameters and Arguments</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_parameters-and-variables-are-local.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Parameters and Variables are Local</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_functions-with-multiple-parameters.html" class="internal"><span class="codenumber">3.10</span> <span class="title">Functions with Multiple Parameters</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_functions-with-results.html" class="internal"><span class="codenumber">3.11</span> <span class="title">Functions with Results</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter3_pass-by-reference.html" class="internal"><span class="codenumber">3.12</span> <span class="title">Pass by Value and Pass by Reference</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter3_glossary.html" class="internal"><span class="codenumber">3.13</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter3_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter3_glossary.html#chapter3_glossary-2" class="internal"><span class="codenumber">3.13</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter3_glossary.html#chapter3_glossary-3" class="internal"><span class="codenumber">3.13</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter3_multiple-choice-exercises.html" class="internal"><span class="codenumber">3.14</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter3_mixed-up-code-exercises.html" class="internal"><span class="codenumber">3.15</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter3_activecode-exercises.html" class="internal"><span class="codenumber">3.16</span> <span class="title">Activecode Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="conditionals.html" class="internal"><span class="codenumber">4</span> <span class="title">Conditionals and recursion</span></a></div>
+<ul id="ptx-toc-group-conditionals" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-modulus-operator.html" class="internal"><span class="codenumber">4.1</span> <span class="title">The Remainder Operator</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_conditional-execution.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Conditional Execution</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter4_logical-operators.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Logical Operators</span></a></div>
+<ul id="ptx-toc-group-chapter4_logical-operators" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_logical-operators.html#chapter4_logical-operators-4" class="internal"><span class="codenumber">4.3.1</span> <span class="title">Logical AND</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_logical-operators.html#chapter4_logical-operators-5" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Logical OR</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_logical-operators.html#chapter4_logical-operators-6" class="internal"><span class="codenumber">4.3.3</span> <span class="title">Logical NOT</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_logical-operators.html#chapter4_logical-operators-7" class="internal"><span class="codenumber">4.3.4</span> <span class="title">Combining Logical Operators</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_logical-operators.html#chapter4_logical-operators-8" class="internal"><span class="codenumber">4.3.5</span> <span class="title">Short-Circuit Evaluation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_logical-operators.html#chapter4_logical-operators-9" class="internal"><span class="codenumber">4.3.6</span> <span class="title">Common Mistakes</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_alternative-execution-alternative.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Alternative Execution</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_chained-conditionals.html" class="internal"><span class="codenumber">4.5</span> <span class="title">Chained Conditionals</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter4_switch-statements.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Switch Statements</span></a></div>
+<ul id="ptx-toc-group-chapter4_switch-statements" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_switch-statements.html#chapter4_switch-statements-3" class="internal"><span class="codenumber">4.6.1</span> <span class="title">The break Statement</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_switch-statements.html#chapter4_switch-statements-4" class="internal"><span class="codenumber">4.6.2</span> <span class="title">The default Case</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_switch-statements.html#chapter4_switch-statements-5" class="internal"><span class="codenumber">4.6.3</span> <span class="title">When to Use switch</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_switch-statements.html#chapter4_switch-statements-6" class="internal"><span class="codenumber">4.6.4</span> <span class="title">When switch Is Not Appropriate</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter4_switch-statements.html#chapter4_switch-statements-7" class="internal"><span class="codenumber">4.6.5</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_nested-conditionals.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Nested Conditionals</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_the-return-statement.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Return in Conditional Branches</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_recursion.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Optional: Introduction to Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_infinite-recursion.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Optional: Infinite Recursion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter4_stack-diagrams-for-recursive-functions.html" class="internal"><span class="codenumber">4.11</span> <span class="title">Optional: Stack Diagrams for Recursive Functions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter4_glossary.html" class="internal"><span class="codenumber">4.12</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter4_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter4_glossary.html#chapter4_glossary-2" class="internal"><span class="codenumber">4.12</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter4_glossary.html#chapter4_glossary-3" class="internal"><span class="codenumber">4.12</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter4_multiple-choice-exercises.html" class="internal"><span class="codenumber">4.13</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter4_mixed-up-code-exercises.html" class="internal"><span class="codenumber">4.14</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter4_activecode-exercises.html" class="internal"><span class="codenumber">4.15</span> <span class="title">Activecode Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="structures-and-classes.html" class="internal"><span class="codenumber">5</span> <span class="title">Structures and Classes</span></a></div>
+<ul id="ptx-toc-group-structures-and-classes" class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter5_structures.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Structures</span></a></div>
+<ul id="ptx-toc-group-chapter5_structures" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures.html#chapter5_structures-3" class="internal"><span class="codenumber">5.1.1</span> <span class="title">Defining a Structure</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures.html#chapter5_creating-structure-objects" class="internal"><span class="codenumber">5.1.2</span> <span class="title">Creating Structure Objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures.html#chapter5_structures-5" class="internal"><span class="codenumber">5.1.3</span> <span class="title">Aggregate Initialization</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures.html#chapter5_structures-6" class="internal"><span class="codenumber">5.1.4</span> <span class="title">Accessing Data Members</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures.html#chapter5_structures-7" class="internal"><span class="codenumber">5.1.5</span> <span class="title">Each Object Has Its Own Data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures.html#chapter5_structures-8" class="internal"><span class="codenumber">5.1.6</span> <span class="title">Copying Structure Objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures.html#chapter5_structures-9" class="internal"><span class="codenumber">5.1.7</span> <span class="title">A Complete Example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures.html#chapter5_structures-10" class="internal"><span class="codenumber">5.1.8</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter5_structures-with-functions.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Using Structures with Functions</span></a></div>
+<ul id="ptx-toc-group-chapter5_structures-with-functions" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures-with-functions.html#chapter5_structures-with-functions-3" class="internal"><span class="codenumber">5.2.1</span> <span class="title">Passing a Structure by Value</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures-with-functions.html#chapter5_structures-with-functions-4" class="internal"><span class="codenumber">5.2.2</span> <span class="title">Passing a Structure by Reference</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures-with-functions.html#chapter5_structures-with-functions-5" class="internal"><span class="codenumber">5.2.3</span> <span class="title">Passing a Structure by const Reference</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures-with-functions.html#chapter5_structures-with-functions-6" class="internal"><span class="codenumber">5.2.4</span> <span class="title">Comparing the Three Parameter Forms</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures-with-functions.html#chapter5_structures-with-functions-7" class="internal"><span class="codenumber">5.2.5</span> <span class="title">Returning a Structure from a Function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures-with-functions.html#chapter5_structures-with-functions-8" class="internal"><span class="codenumber">5.2.6</span> <span class="title">A Complete Example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures-with-functions.html#chapter5_structures-with-functions-9" class="internal"><span class="codenumber">5.2.7</span> <span class="title">Looking Ahead: Behavior That Belongs to an Object</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_structures-with-functions.html#chapter5_structures-with-functions-10" class="internal"><span class="codenumber">5.2.8</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter5_member-functions.html" class="internal"><span class="codenumber">5.3</span> <span class="title">Member Functions</span></a></div>
+<ul id="ptx-toc-group-chapter5_member-functions" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_member-functions.html#chapter5_member-functions-3" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Adding Behavior to a Structure</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_member-functions.html#chapter5_member-functions-4" class="internal"><span class="codenumber">5.3.2</span> <span class="title">Accessing Data Members Inside a Member Function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_member-functions.html#chapter5_member-functions-5" class="internal"><span class="codenumber">5.3.3</span> <span class="title">Member Functions That Modify an Object</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_member-functions.html#chapter5_member-functions-6" class="internal"><span class="codenumber">5.3.4</span> <span class="title">const Member Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_member-functions.html#chapter5_member-functions-7" class="internal"><span class="codenumber">5.3.5</span> <span class="title">More Than One Member Function</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_member-functions.html#chapter5_member-functions-8" class="internal"><span class="codenumber">5.3.6</span> <span class="title">Defining Member Functions Outside the Structure</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_member-functions.html#chapter5_member-functions-9" class="internal"><span class="codenumber">5.3.7</span> <span class="title">A Complete Example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_member-functions.html#chapter5_member-functions-10" class="internal"><span class="codenumber">5.3.8</span> <span class="title">Free Function or Member Function?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_member-functions.html#chapter5_member-functions-11" class="internal"><span class="codenumber">5.3.9</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter5_from-structures-to-classes.html" class="internal"><span class="codenumber">5.4</span> <span class="title">From Structures to Classes</span></a></div>
+<ul id="ptx-toc-group-chapter5_from-structures-to-classes" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_from-structures-to-classes.html#chapter5_from-structures-to-classes-3" class="internal"><span class="codenumber">5.4.1</span> <span class="title">Classes and Objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_from-structures-to-classes.html#chapter5_from-structures-to-classes-4" class="internal"><span class="codenumber">5.4.2</span> <span class="title">A Struct and a Class Can Look Very Similar</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_from-structures-to-classes.html#chapter5_from-structures-to-classes-5" class="internal"><span class="codenumber">5.4.3</span> <span class="title">Default Access</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_from-structures-to-classes.html#chapter5_from-structures-to-classes-6" class="internal"><span class="codenumber">5.4.4</span> <span class="title">Making Class Members Public</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_from-structures-to-classes.html#chapter5_from-structures-to-classes-7" class="internal"><span class="codenumber">5.4.5</span> <span class="title">Why Use a Class?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_from-structures-to-classes.html#chapter5_from-structures-to-classes-8" class="internal"><span class="codenumber">5.4.6</span> <span class="title">struct or class?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_from-structures-to-classes.html#chapter5_from-structures-to-classes-9" class="internal"><span class="codenumber">5.4.7</span> <span class="title">Classes as Abstractions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_from-structures-to-classes.html#chapter5_from-structures-to-classes-10" class="internal"><span class="codenumber">5.4.8</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter5_public-and-private-members.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Public and Private Members</span></a></div>
+<ul id="ptx-toc-group-chapter5_public-and-private-members" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_public-and-private-members.html#chapter5_public-and-private-members-3" class="internal"><span class="codenumber">5.5.1</span> <span class="title">Public Members</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_public-and-private-members.html#chapter5_public-and-private-members-4" class="internal"><span class="codenumber">5.5.2</span> <span class="title">The Problem with Public Data</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_public-and-private-members.html#chapter5_public-and-private-members-5" class="internal"><span class="codenumber">5.5.3</span> <span class="title">Private Members</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_public-and-private-members.html#chapter5_public-and-private-members-6" class="internal"><span class="codenumber">5.5.4</span> <span class="title">Providing a Public Interface</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_public-and-private-members.html#chapter5_public-and-private-members-7" class="internal"><span class="codenumber">5.5.5</span> <span class="title">The Public Interface and Private Implementation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_public-and-private-members.html#chapter5_public-and-private-members-8" class="internal"><span class="codenumber">5.5.6</span> <span class="title">Encapsulation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_public-and-private-members.html#chapter5_public-and-private-members-9" class="internal"><span class="codenumber">5.5.7</span> <span class="title">Why Keep Data Private?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_public-and-private-members.html#chapter5_public-and-private-members-10" class="internal"><span class="codenumber">5.5.8</span> <span class="title">A Complete Example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_public-and-private-members.html#chapter5_public-and-private-members-11" class="internal"><span class="codenumber">5.5.9</span> <span class="title">Looking Ahead: Creating Valid Objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_public-and-private-members.html#chapter5_public-and-private-members-12" class="internal"><span class="codenumber">5.5.10</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter5_constructors.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Constructors</span></a></div>
+<ul id="ptx-toc-group-chapter5_constructors" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_constructors.html#chapter5_constructors-3" class="internal"><span class="codenumber">5.6.1</span> <span class="title">What Is a Constructor?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_constructors.html#chapter5_constructors-4" class="internal"><span class="codenumber">5.6.2</span> <span class="title">Defining a Constructor</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_constructors.html#chapter5_constructors-5" class="internal"><span class="codenumber">5.6.3</span> <span class="title">Member Initializer Lists</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_constructors.html#chapter5_constructors-6" class="internal"><span class="codenumber">5.6.4</span> <span class="title">Calling a Constructor</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_constructors.html#chapter5_constructors-7" class="internal"><span class="codenumber">5.6.5</span> <span class="title">A Default Constructor</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_constructors.html#chapter5_constructors-8" class="internal"><span class="codenumber">5.6.6</span> <span class="title">Constructor Overloading</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_constructors.html#chapter5_constructors-9" class="internal"><span class="codenumber">5.6.7</span> <span class="title">Constructors and Object State</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_constructors.html#chapter5_constructors-10" class="internal"><span class="codenumber">5.6.8</span> <span class="title">A Complete Example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_constructors.html#chapter5_constructors-11" class="internal"><span class="codenumber">5.6.9</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter5_header-files.html" class="internal"><span class="codenumber">5.7</span> <span class="title">Header Files and Header Guards</span></a></div>
+<ul id="ptx-toc-group-chapter5_header-files" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_header-files.html#chapter5_header-files-3" class="internal"><span class="codenumber">5.7.1</span> <span class="title">The Header File</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_header-files.html#chapter5_header-files-4" class="internal"><span class="codenumber">5.7.2</span> <span class="title">Header Guards</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_header-files.html#chapter5_header-files-5" class="internal"><span class="codenumber">5.7.3</span> <span class="title">The Implementation File</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_header-files.html#chapter5_header-files-6" class="internal"><span class="codenumber">5.7.4</span> <span class="title">The File Containing main</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_header-files.html#chapter5_header-files-7" class="internal"><span class="codenumber">5.7.5</span> <span class="title">Quotes and Angle Brackets in include Directives</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_header-files.html#chapter5_header-files-8" class="internal"><span class="codenumber">5.7.6</span> <span class="title">A Header Should Include What It Needs</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_header-files.html#chapter5_header-files-9" class="internal"><span class="codenumber">5.7.7</span> <span class="title">Compiling Multiple Source Files</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_header-files.html#chapter5_header-files-10" class="internal"><span class="codenumber">5.7.8</span> <span class="title">Why Separate the Files?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_header-files.html#chapter5_header-files-11" class="internal"><span class="codenumber">5.7.9</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter5_designing-object-interface.html" class="internal"><span class="codenumber">5.8</span> <span class="title">Designing an Object’s Interface and Behavior</span></a></div>
+<ul id="ptx-toc-group-chapter5_designing-object-interface" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-object-interface.html#chapter5_designing-object-interface-3" class="internal"><span class="codenumber">5.8.1</span> <span class="title">The Public Interface</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-object-interface.html#chapter5_designing-object-interface-4" class="internal"><span class="codenumber">5.8.2</span> <span class="title">Observer Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-object-interface.html#chapter5_designing-object-interface-5" class="internal"><span class="codenumber">5.8.3</span> <span class="title">State-Changing Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-object-interface.html#chapter5_designing-object-interface-6" class="internal"><span class="codenumber">5.8.4</span> <span class="title">Prefer Meaningful Behavior When Possible</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-object-interface.html#chapter5_designing-object-interface-7" class="internal"><span class="codenumber">5.8.5</span> <span class="title">Keep the Interface Focused</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-object-interface.html#chapter5_designing-object-interface-8" class="internal"><span class="codenumber">5.8.6</span> <span class="title">Member Function or Free Function?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-object-interface.html#chapter5_designing-object-interface-9" class="internal"><span class="codenumber">5.8.7</span> <span class="title">A Complete Example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-object-interface.html#chapter5_designing-object-interface-10" class="internal"><span class="codenumber">5.8.8</span> <span class="title">Check Your Understanding</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html" class="internal"><span class="codenumber">5.9</span> <span class="title">Designing a Simple Class</span></a></div>
+<ul id="ptx-toc-group-chapter5_designing-a-simple-class" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_counter_class" class="internal"><span class="codenumber">5.9.1</span> <span class="title">Designing a <code class="code-inline tex2jax_ignore">Counter</code> Class</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_access_specifiers" class="internal"><span class="codenumber">5.9.2</span> <span class="title">Access Specifiers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_class_constructors" class="internal"><span class="codenumber">5.9.3</span> <span class="title">Constructors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_constructor_parameters" class="internal"><span class="codenumber">5.9.4</span> <span class="title">Constructors with Parameters</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_member_initializer_lists" class="internal"><span class="codenumber">5.9.5</span> <span class="title">Member-Initializer Lists</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_default_member_initializers" class="internal"><span class="codenumber">5.9.6</span> <span class="title">Default Member Initializers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_rectangle_class" class="internal"><span class="codenumber">5.9.7</span> <span class="title">A Class with Several Operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_protecting_invariants" class="internal"><span class="codenumber">5.9.8</span> <span class="title">Keeping an Object Valid</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_struct_and_class" class="internal"><span class="codenumber">5.9.9</span> <span class="title"><code class="code-inline tex2jax_ignore">struct</code> and <code class="code-inline tex2jax_ignore">class</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_struct_constructor" class="internal"><span class="codenumber">5.9.10</span> <span class="title">Structs Can Have Constructors and Member Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_struct_overloaded_constructors" class="internal"><span class="codenumber">5.9.11</span> <span class="title">Structs Can Have Overloaded Constructors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_struct_private_members" class="internal"><span class="codenumber">5.9.12</span> <span class="title">Structs Can Have Private Members</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_struct_class_design_choice" class="internal"><span class="codenumber">5.9.13</span> <span class="title">Choosing Between <code class="code-inline tex2jax_ignore">struct</code> and <code class="code-inline tex2jax_ignore">class</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_struct_class_summary" class="internal"><span class="codenumber">5.9.14</span> <span class="title">Summary of <code class="code-inline tex2jax_ignore">struct</code> and <code class="code-inline tex2jax_ignore">class</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter5_designing-a-simple-class.html#subsection_designing_class_summary" class="internal"><span class="codenumber">5.9.15</span> <span class="title">Summary</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter5_glossary.html" class="internal"><span class="codenumber">5.10</span> <span class="title">Chapter 5 Glossary</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter5_multiple-choice-exercises.html" class="internal"><span class="codenumber">5.11</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter5_mixed-up-code-practice.html" class="internal"><span class="codenumber">5.12</span> <span class="title">Mixed-Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter5_coding-practice.html" class="internal"><span class="codenumber">5.13</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="iteration.html" class="internal"><span class="codenumber">6</span> <span class="title">Iteration</span></a></div>
+<ul class="structural toc-item-list contains-active" id="ptx-toc-group-iteration">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_what-is-iteration.html" class="internal"><span class="codenumber">6.1</span> <span class="title">What Iteration Means</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter6_while-statement.html" class="internal"><span class="codenumber">6.2</span> <span class="title">The <code class="code-inline tex2jax_ignore">while</code> and <code class="code-inline tex2jax_ignore">do-while</code> Statements</span></a></div>
+<ul id="ptx-toc-group-chapter6_while-statement" class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_while-statement.html#chapter6_while-statement_do-while" class="internal"><span class="codenumber">6.2.1</span> <span class="title">The <code class="code-inline tex2jax_ignore">do-while</code> Statement</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter6_for-statement.html" class="internal"><span class="codenumber">6.3</span> <span class="title">The <code class="code-inline tex2jax_ignore">for</code> Statement</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter6_scope-revisited.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Scope Revisited</span></a></div>
+<ul id="ptx-toc-group-chapter6_scope-revisited" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_scope-revisited.html#chapter6_scope-revisited_block-scope" class="internal"><span class="codenumber">6.4.1</span> <span class="title">Block Scope</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_scope-revisited.html#chapter6_scope-revisited_class-struct-scope" class="internal"><span class="codenumber">6.4.2</span> <span class="title">Scoped enums, class and struct scope</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_scope-revisited.html#chapter6_scope-revisited_namespace-scope" class="internal"><span class="codenumber">6.4.3</span> <span class="title">Namespace Scope</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_scope-revisited.html#chapter6_scope-revisited_global_scope" class="internal"><span class="codenumber">6.4.4</span> <span class="title">Global Scope (File Scope)</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_scope-revisited.html#chapter6_scope-revisited_summary" class="internal"><span class="codenumber">6.4.5</span> <span class="title">Choosing the Right Scope</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter6_common-loop-patterns.html" class="internal"><span class="codenumber">6.5</span> <span class="title">Common Loop Patterns</span></a></div>
+<ul id="ptx-toc-group-chapter6_common-loop-patterns" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_common-loop-patterns.html#chapter6_common-loop-patterns_counter" class="internal"><span class="codenumber">6.5.1</span> <span class="title">Counting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_common-loop-patterns.html#chapter6_common-loop-patterns_accumulator" class="internal"><span class="codenumber">6.5.2</span> <span class="title">Accumulating</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_common-loop-patterns.html#chapter6_common-loop-patterns_sentinel" class="internal"><span class="codenumber">6.5.3</span> <span class="title">Stopping at a Sentinel Value</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter6_arrays.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Arrays</span></a></div>
+<ul id="ptx-toc-group-chapter6_arrays" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_initialization" class="internal"><span class="codenumber">6.6.1</span> <span class="title">Initializing Every Element</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_indexing" class="internal"><span class="codenumber">6.6.2</span> <span class="title">Accessing Elements by Index</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_passing-to-functions" class="internal"><span class="codenumber">6.6.3</span> <span class="title">Passing Arrays to Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_arrays.html#chapter6_arrays_search-summarize" class="internal"><span class="codenumber">6.6.4</span> <span class="title">Searching and Summarizing Values</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter6_range-based-for-loops.html" class="internal"><span class="codenumber">6.7</span> <span class="title">Range-Based <code class="code-inline tex2jax_ignore">for</code> Loops</span></a></div>
+<ul id="ptx-toc-group-chapter6_range-based-for-loops" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_auto" class="internal"><span class="codenumber">6.7.1</span> <span class="title">The <code class="code-inline tex2jax_ignore">auto</code> Keyword</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_references" class="internal"><span class="codenumber">6.7.2</span> <span class="title">Copies and References</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_structures" class="internal"><span class="codenumber">6.7.3</span> <span class="title">Arrays of Structures</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_classes" class="internal"><span class="codenumber">6.7.4</span> <span class="title">Arrays of Class Objects</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter6_nested-iteration.html" class="internal"><span class="codenumber">6.8</span> <span class="title">Nested Iteration</span></a></div>
+<ul id="ptx-toc-group-chapter6_nested-iteration" class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_nested-iteration.html#chapter6_nested-iteration_comparing-pairs" class="internal"><span class="codenumber">6.8.1</span> <span class="title">Comparing Pairs</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="generating-random-numbers.html" class="internal"><span class="codenumber">6.9</span> <span class="title">Generating Random Numbers</span></a></div>
+<ul class="structural toc-item-list active" id="ptx-toc-group-generating-random-numbers">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_why-randomness" class="internal"><span class="codenumber">6.9.1</span> <span class="title">Why Programs Use Randomness</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_random-and-pseudorandom" class="internal"><span class="codenumber">6.9.2</span> <span class="title">Random and Pseudorandom Numbers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_generator-mechanism" class="internal"><span class="codenumber">6.9.3</span> <span class="title">How a Pseudorandom Generator Works</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_seeds" class="internal"><span class="codenumber">6.9.4</span> <span class="title">Seeds and Repeatable Sequences</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_mersenne-twister" class="internal"><span class="codenumber">6.9.5</span> <span class="title">The Mersenne Twister</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_distributions" class="internal"><span class="codenumber">6.9.6</span> <span class="title">Probability Distributions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_die-class" class="internal"><span class="codenumber">6.9.7</span> <span class="title">A Die Class</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_simulation" class="internal"><span class="codenumber">6.9.8</span> <span class="title">Simulation and Probabilistic Systems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_security" class="internal"><span class="codenumber">6.9.9</span> <span class="title">Randomness and Security</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter6_glossary.html" class="internal"><span class="codenumber">6.10</span> <span class="title">Chapter 6 Glossary</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_exercises.html" class="internal"><span class="codenumber">6.11</span> <span class="title">Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_mixed-up-code-exercises.html" class="internal"><span class="codenumber">6.12</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_coding-practice.html" class="internal"><span class="codenumber">6.13</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="strings-and-things.html" class="internal"><span class="codenumber">7</span> <span class="title">Strings and Things</span></a></div>
+<ul id="ptx-toc-group-strings-and-things" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_string-variables-and-mutability.html" class="internal"><span class="codenumber">7.1</span> <span class="title"><code class="code-inline tex2jax_ignore">std::string</code> Variables and Mutability</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter7_string-operations.html" class="internal"><span class="codenumber">7.2</span> <span class="title"><code class="code-inline tex2jax_ignore">std::string</code> Operations</span></a></div>
+<ul id="ptx-toc-group-chapter7_string-operations" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_string-operations.html#chapter7_string-concatenation" class="internal"><span class="codenumber">7.2.1</span> <span class="title">Concatenation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_string-operations.html#chapter7_string-number-conversion" class="internal"><span class="codenumber">7.2.2</span> <span class="title">Converting Numbers to Strings</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_string-operations.html#chapter7_string-find" class="internal"><span class="codenumber">7.2.3</span> <span class="title">Finding Characters and Substrings</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter7_traversing-strings.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Traversing Strings</span></a></div>
+<ul id="ptx-toc-group-chapter7_traversing-strings" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_traversing-strings.html#chapter7_indexed-string-traversal" class="internal"><span class="codenumber">7.3.1</span> <span class="title">Indexed <code class="code-inline tex2jax_ignore">for</code> Loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_traversing-strings.html#chapter7_range-string-traversal" class="internal"><span class="codenumber">7.3.2</span> <span class="title">Range-Based <code class="code-inline tex2jax_ignore">for</code> Loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_traversing-strings.html#chapter7_while-string-traversal" class="internal"><span class="codenumber">7.3.3</span> <span class="title"><code class="code-inline tex2jax_ignore">while</code> Loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_traversing-strings.html#chapter7_counting-string-characters" class="internal"><span class="codenumber">7.3.4</span> <span class="title">Counting Characters</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_character-classification.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Character Classification</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="string-input-and-object-text.html" class="internal"><span class="codenumber">7.5</span> <span class="title">Keyboard Input and Text Representation</span></a></div>
+<ul id="ptx-toc-group-string-input-and-object-text" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="string-input-and-object-text.html#chapter7_keyboard-input-words" class="internal"><span class="codenumber">7.5.1</span> <span class="title">Reading Words with <code class="code-inline tex2jax_ignore">std::cin</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="string-input-and-object-text.html#chapter7_keyboard-input-lines" class="internal"><span class="codenumber">7.5.2</span> <span class="title">Reading Complete Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="string-input-and-object-text.html#chapter7_mixing-input-operations" class="internal"><span class="codenumber">7.5.3</span> <span class="title">Mixing Word and Line Input</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="string-input-and-object-text.html#chapter7_input-boundary" class="internal"><span class="codenumber">7.5.4</span> <span class="title">Keep Input at the Program Boundary</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="string-input-and-object-text.html#chapter7_object-to-string" class="internal"><span class="codenumber">7.5.5</span> <span class="title">Representing Objects as Text</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter7_lexicographical-order.html" class="internal"><span class="codenumber">7.6</span> <span class="title">Comparison</span></a></div>
+<ul id="ptx-toc-group-chapter7_lexicographical-order" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_lexicographical-order.html#chapter7_character-values" class="internal"><span class="codenumber">7.6.1</span> <span class="title">Character Values and Code Units</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_lexicographical-order.html#chapter7_lexicographical-algorithm" class="internal"><span class="codenumber">7.6.2</span> <span class="title">The Comparison Algorithm</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_lexicographical-order.html#chapter7_string-comparison-case" class="internal"><span class="codenumber">7.6.3</span> <span class="title">Case-Sensitive Comparison</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_lexicographical-order.html#chapter7_array-lexicographical-comparison" class="internal"><span class="codenumber">7.6.4</span> <span class="title">Comparing <code class="code-inline tex2jax_ignore">std::array</code> Objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_lexicographical-order.html#chapter7_sequence-container-comparison" class="internal"><span class="codenumber">7.6.5</span> <span class="title">One Rule for Many Sequences</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter7_glossary.html" class="internal"><span class="codenumber">7.7</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_exercises.html" class="internal"><span class="codenumber">7.8</span> <span class="title">Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_mixed-up-code.html" class="internal"><span class="codenumber">7.9</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_coding-practice.html" class="internal"><span class="codenumber">7.10</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="vectors.html" class="internal"><span class="codenumber">8</span> <span class="title">Vectors</span></a></div>
+<ul id="ptx-toc-group-vectors" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_vectors.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Vectors</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_accessing-elements.html" class="internal"><span class="codenumber">8.2</span> <span class="title">Accessing elements</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_copying-vectors.html" class="internal"><span class="codenumber">8.3</span> <span class="title">Copying vectors</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_for-loops.html" class="internal"><span class="codenumber">8.4</span> <span class="title"><code class="code-inline tex2jax_ignore">for</code> loops</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_vector-size.html" class="internal"><span class="codenumber">8.5</span> <span class="title">Vector size</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_vector-functions.html" class="internal"><span class="codenumber">8.6</span> <span class="title">Vector functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_random-numbers-random.html" class="internal"><span class="codenumber">8.7</span> <span class="title">Random numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_statistics.html" class="internal"><span class="codenumber">8.8</span> <span class="title">Statistics</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_vector-of-random-numbers.html" class="internal"><span class="codenumber">8.9</span> <span class="title">Vector of random numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_counting.html" class="internal"><span class="codenumber">8.10</span> <span class="title">Counting</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_checking-the-other-values.html" class="internal"><span class="codenumber">8.11</span> <span class="title">Checking the other values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_a-histogram.html" class="internal"><span class="codenumber">8.12</span> <span class="title">A histogram</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_a-single-pass-solution.html" class="internal"><span class="codenumber">8.13</span> <span class="title">A single-pass solution</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter10_random-seeds.html" class="internal"><span class="codenumber">8.14</span> <span class="title">Random seeds</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter10_glossary.html" class="internal"><span class="codenumber">8.15</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter10_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter10_glossary.html#chapter10_glossary-2" class="internal"><span class="codenumber">8.15</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter10_glossary.html#chapter10_glossary-3" class="internal"><span class="codenumber">8.15</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter10_multiple-choice-exercises.html" class="internal"><span class="codenumber">8.16</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter10_mixed-up-code-exercises-1.html" class="internal"><span class="codenumber">8.17</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter10_activecode-exercises.html" class="internal"><span class="codenumber">8.18</span> <span class="title">Activecode Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="vectors-of-objects.html" class="internal"><span class="codenumber">9</span> <span class="title">Vectors of Objects</span></a></div>
+<ul id="ptx-toc-group-vectors-of-objects" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_composition.html" class="internal"><span class="codenumber">9.1</span> <span class="title">Composition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_card-objects.html" class="internal"><span class="codenumber">9.2</span> <span class="title"><code class="code-inline tex2jax_ignore">Card</code> objects</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_the-printcard-function.html" class="internal"><span class="codenumber">9.3</span> <span class="title">The <code class="code-inline tex2jax_ignore">printCard</code> function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_the-equals-function.html" class="internal"><span class="codenumber">9.4</span> <span class="title">The <code class="code-inline tex2jax_ignore">equals</code> function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_the-isgreater-function.html" class="internal"><span class="codenumber">9.5</span> <span class="title">The <code class="code-inline tex2jax_ignore">isGreater</code> function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_vectors-of-cards.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Vectors of cards</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_the-printdeck-function-printdeck.html" class="internal"><span class="codenumber">9.7</span> <span class="title">The <code class="code-inline tex2jax_ignore">printDeck</code> function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_searching-find.html" class="internal"><span class="codenumber">9.8</span> <span class="title">Searching</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_bisection-search.html" class="internal"><span class="codenumber">9.9</span> <span class="title">Bisection search</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter12_decks-and-subdecks.html" class="internal"><span class="codenumber">9.10</span> <span class="title">Decks and subdecks</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter12_glossary.html" class="internal"><span class="codenumber">9.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter12_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter12_glossary.html#chapter12_glossary-2" class="internal"><span class="codenumber">9.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter12_glossary.html#chapter12_glossary-3" class="internal"><span class="codenumber">9.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter12_multiple-choice-exercises.html" class="internal"><span class="codenumber">9.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter12_mixed-up-code-practice.html" class="internal"><span class="codenumber">9.13</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter12_coding-practice.html" class="internal"><span class="codenumber">9.14</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="objects-of-vectors.html" class="internal"><span class="codenumber">10</span> <span class="title">Objects of Vectors</span></a></div>
+<ul id="ptx-toc-group-objects-of-vectors" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_enumerated-types.html" class="internal"><span class="codenumber">10.1</span> <span class="title">Enumerated types</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_switch-statement.html" class="internal"><span class="codenumber">10.2</span> <span class="title"><code class="code-inline tex2jax_ignore">switch</code> statement</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_decks.html" class="internal"><span class="codenumber">10.3</span> <span class="title">Decks</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_another-constructor.html" class="internal"><span class="codenumber">10.4</span> <span class="title">Another constructor</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_deck-member-functions.html" class="internal"><span class="codenumber">10.5</span> <span class="title"><code class="code-inline tex2jax_ignore">Deck</code> member functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_shuffling.html" class="internal"><span class="codenumber">10.6</span> <span class="title">Shuffling</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_sorting.html" class="internal"><span class="codenumber">10.7</span> <span class="title">Sorting</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_subdecks.html" class="internal"><span class="codenumber">10.8</span> <span class="title">Subdecks</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_shuffling-and-dealing.html" class="internal"><span class="codenumber">10.9</span> <span class="title">Shuffling and dealing</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter13_mergesort.html" class="internal"><span class="codenumber">10.10</span> <span class="title">Mergesort</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_glossary.html" class="internal"><span class="codenumber">10.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter13_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter13_glossary.html#chapter13_glossary-2" class="internal"><span class="codenumber">10.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter13_glossary.html#chapter13_glossary-3" class="internal"><span class="codenumber">10.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_multiple-choice-exercises.html" class="internal"><span class="codenumber">10.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_mixed-up-code-practice.html" class="internal"><span class="codenumber">10.13</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_coding-practice.html" class="internal"><span class="codenumber">10.14</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="file-io.html" class="internal"><span class="codenumber">11</span> <span class="title">File Input/Output and matrixes</span></a></div>
+<ul id="ptx-toc-group-file-io" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_file-input-output-and-matrixes.html" class="internal"><span class="codenumber">11.1</span> <span class="title">File Input/Output and <code class="code-inline tex2jax_ignore">matrix</code>es</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_streams.html" class="internal"><span class="codenumber">11.2</span> <span class="title">Streams</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_file-input-finput.html" class="internal"><span class="codenumber">11.3</span> <span class="title">File input</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_file-output.html" class="internal"><span class="codenumber">11.4</span> <span class="title">File output</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_parsing-input-parsing.html" class="internal"><span class="codenumber">11.5</span> <span class="title">Parsing input</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_parsing-numbers.html" class="internal"><span class="codenumber">11.6</span> <span class="title">Parsing numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_the-set-data-structure.html" class="internal"><span class="codenumber">11.7</span> <span class="title">The <code class="code-inline tex2jax_ignore">Set</code> data structure</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_matrix.html" class="internal"><span class="codenumber">11.8</span> <span class="title"><code class="code-inline tex2jax_ignore">matrix</code></span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_a-distance-matrix.html" class="internal"><span class="codenumber">11.9</span> <span class="title">A distance matrix</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter15_a-proper-distance-matrix.html" class="internal"><span class="codenumber">11.10</span> <span class="title">A proper distance matrix</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter15_glossary.html" class="internal"><span class="codenumber">11.11</span> <span class="title">Glossary</span></a></div>
+<ul id="ptx-toc-group-chapter15_glossary" class="structural toc-item-list">
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter15_glossary.html#chapter15_glossary-2" class="internal"><span class="codenumber">11.11</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter15_glossary.html#chapter15_glossary-3" class="internal"><span class="codenumber">11.11</span> <span class="title">Reading Questions</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter15_multiple-choice-exercises.html" class="internal"><span class="codenumber">11.12</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter15_mixed-up-code-practice.html" class="internal"><span class="codenumber">11.13</span> <span class="title">Mixed Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter15_coding-practice.html" class="internal"><span class="codenumber">11.14</span> <span class="title">Coding Practice</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content">
+<section class="section" id="generating-random-numbers">
+<h1 class="heading hide-type">
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Generating Random Numbers</span>
+</h1>
+<div class="para" id="generating-random-numbers-2">Iteration repeats a process. Random-number generation gives a repeated process different possible inputs or outcomes. Together, iteration and random numbers allow a program to simulate events, study probabilities, and explore systems with many possible outcomes.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#generating-random-numbers-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<section class="subsection" id="chapter6_generating-random-numbers_why-randomness">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Why Programs Use Randomness</span>
+</h2>
+<div class="para" id="chapter6_generating-random-numbers_why-randomness-2">Many programs are <dfn class="terminology">deterministic</dfn>: when they receive the same input, they produce the same output. Determinism is useful for calculations, testing, and debugging. Other programs need to model situations in which the next outcome cannot be known in advance.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_why-randomness-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_why-randomness-3">Random numbers are useful for:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_why-randomness-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<ul class="disc" id="chapter6_generating-random-numbers_why-randomness-4">
+<li id="chapter6_generating-random-numbers_why-randomness-4-1">
+<div class="para" id="p-derived-chapter6_generating-random-numbers_why-randomness-4-1">creating games and simulations;</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter6_generating-random-numbers_why-randomness-4-1" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="chapter6_generating-random-numbers_why-randomness-4-2">
+<div class="para" id="p-derived-chapter6_generating-random-numbers_why-randomness-4-2">testing programs with varied inputs;</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter6_generating-random-numbers_why-randomness-4-2" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="chapter6_generating-random-numbers_why-randomness-4-3">
+<div class="para" id="p-derived-chapter6_generating-random-numbers_why-randomness-4-3">modeling traffic, insurance claims, or customer arrivals;</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter6_generating-random-numbers_why-randomness-4-3" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="chapter6_generating-random-numbers_why-randomness-4-4">
+<div class="para" id="p-derived-chapter6_generating-random-numbers_why-randomness-4-4">studying scientific systems such as molecules and proteins;</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter6_generating-random-numbers_why-randomness-4-4" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="chapter6_generating-random-numbers_why-randomness-4-5">
+<div class="para" id="p-derived-chapter6_generating-random-numbers_why-randomness-4-5">estimating risk in systems such as financial markets; and</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter6_generating-random-numbers_why-randomness-4-5" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="chapter6_generating-random-numbers_why-randomness-4-6">
+<div class="para" id="p-derived-chapter6_generating-random-numbers_why-randomness-4-6">selecting or arranging items unpredictably.</div>
+<div class="autopermalink" aria-hidden="true" data-description="Item"><a tabindex="-1" href="#chapter6_generating-random-numbers_why-randomness-4-6" title="Copy heading and permalink for Item" aria-label="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="para" id="chapter6_generating-random-numbers_why-randomness-5">A program cannot predict the exact future price of a stock or the exact shape a protein will take. It can, however, simulate many possible situations and summarize the resulting patterns. This is the central purpose of random-number generation in simulation.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_why-randomness-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.9.1: Why Programs Use Randomness"><a tabindex="-1" href="#chapter6_generating-random-numbers_why-randomness" title="Copy heading and permalink for Subsection 6.9.1: Why Programs Use Randomness" aria-label="Copy heading and permalink for Subsection 6.9.1: Why Programs Use Randomness">🔗</a></div>
+</section>
+<section class="subsection" id="chapter6_generating-random-numbers_random-and-pseudorandom">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Random and Pseudorandom Numbers</span>
+</h2>
+<div class="para" id="chapter6_generating-random-numbers_random-and-pseudorandom-2">A truly random event is not determined by a predictable algorithm. Examples may come from physical processes or other sources of environmental noise. A computer program, however, normally follows an algorithm. It can therefore generate numbers that appear random while actually following a deterministic process.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_random-and-pseudorandom-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_random-and-pseudorandom-3">A number produced by a deterministic algorithm is called <dfn class="terminology">pseudorandom</dfn>. The prefix “pseudo-” means “imitation” or “apparently, but not completely, real”. A pseudorandom sequence can look random, but the same starting state produces the same sequence again.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_random-and-pseudorandom-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_random-and-pseudorandom-4">This apparent contradiction is useful. A program can produce different-looking trials while still allowing a programmer to repeat exactly the same trials during debugging.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_random-and-pseudorandom-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="table table-like" id="table_randomness_comparison"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Types of random-number sources<div class="autopermalink" aria-hidden="true" data-description="Table 6.9.1: Types of random-number sources"><a tabindex="-1" href="#table_randomness_comparison" title="Copy heading and permalink for Table 6.9.1: Types of random-number sources" aria-label="Copy heading and permalink for Table 6.9.1: Types of random-number sources">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b3 r3 l3 t3" style="max-width:180px;">
+<div class="para" id="table_randomness_comparison-2-4-1-1">Source<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</th>
+<th scope="col" class="l m b3 r3 l0 t3" style="max-width:210px;">
+<div class="para" id="table_randomness_comparison-2-4-2-1">Main idea<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-4-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</th>
+<th scope="col" class="l m b3 r3 l0 t3" style="max-width:210px;">
+<div class="para" id="table_randomness_comparison-2-4-3-1">Typical use<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-4-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</th>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0" style="max-width:180px;">
+<div class="para" id="table_randomness_comparison-2-5-1-1">General-purpose pseudorandom generator<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_randomness_comparison-2-5-2-1">A deterministic algorithm produces a sequence that appears random.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-5-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_randomness_comparison-2-5-3-1">Simulation, games, and testing<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-5-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0" style="max-width:180px;">
+<div class="para" id="table_randomness_comparison-2-6-1-1">System or physical source<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-6-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_randomness_comparison-2-6-2-1">Values come from an external source of entropy when available.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-6-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_randomness_comparison-2-6-3-1">Providing seed material<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-6-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0" style="max-width:180px;">
+<div class="para" id="table_randomness_comparison-2-7-1-1">Cryptographically secure generator<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_randomness_comparison-2-7-2-1">The output is designed to be difficult to predict.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-7-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_randomness_comparison-2-7-3-1">Passwords, keys, and authentication tokens<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_randomness_comparison-2-7-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+</tr>
+</table></div>
+</figure><div class="autopermalink" aria-hidden="true" data-description="Subsection 6.9.2: Random and Pseudorandom Numbers"><a tabindex="-1" href="#chapter6_generating-random-numbers_random-and-pseudorandom" title="Copy heading and permalink for Subsection 6.9.2: Random and Pseudorandom Numbers" aria-label="Copy heading and permalink for Subsection 6.9.2: Random and Pseudorandom Numbers">🔗</a></div>
+</section>
+<section class="subsection" id="chapter6_generating-random-numbers_generator-mechanism">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">How a Pseudorandom Generator Works</span>
+</h2>
+<div class="para" id="chapter6_generating-random-numbers_generator-mechanism-2">A pseudorandom generator keeps an internal <dfn class="terminology">state</dfn>. The state records enough information for the generator to calculate its next state and its next output.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_generator-mechanism-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_generator-mechanism-3">Conceptually, the process looks like this:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_generator-mechanism-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_pseudorandom_generator_model" class="language-none">starting state
+      |
+      v
+state transformation
+      |
+      v
+next state and output
+      |
+      +---- repeat
+</code></pre></div>
+<div class="para" id="chapter6_generating-random-numbers_generator-mechanism-5">A <dfn class="terminology">seed</dfn> supplies the initial state. The generator then repeatedly applies its state-transition algorithm. Because the transition is deterministic, two generators with the same algorithm and the same seed produce the same sequence.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_generator-mechanism-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_generator-mechanism-6">Different generator algorithms make different trade-offs involving speed, memory, sequence length, statistical quality, and suitability for parallel computation. Chapter 6 focuses on the general idea rather than the bit-level details of those algorithms.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_generator-mechanism-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.9.3: How a Pseudorandom Generator Works"><a tabindex="-1" href="#chapter6_generating-random-numbers_generator-mechanism" title="Copy heading and permalink for Subsection 6.9.3: How a Pseudorandom Generator Works" aria-label="Copy heading and permalink for Subsection 6.9.3: How a Pseudorandom Generator Works">🔗</a></div>
+</section>
+<section class="subsection" id="chapter6_generating-random-numbers_seeds">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Seeds and Repeatable Sequences</span>
+</h2>
+<div class="para" id="chapter6_generating-random-numbers_seeds-2">A seed determines the starting state of a pseudorandom generator. Using the same seed gives the generator the same starting point. Therefore, the program produces the same sequence of pseudorandom values.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_seeds-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_fixed_random_seed" class="language-cpp">#include &lt;iostream&gt;
+#include &lt;random&gt;
+
+int main() {
+    std::mt19937 generator{24680};
+
+    for (int value_number = 1; value_number &lt;= 4; ++value_number) {
+        std::cout &lt;&lt; generator() &lt;&lt; '\n';
+    }
+
+    return 0;
+}
+</code></pre></div>
+<div class="para" id="chapter6_generating-random-numbers_seeds-4">Running this program again with the same seed produces the same sequence. This is useful when a programmer wants to reproduce a particular test or investigate a problem.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_seeds-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_seeds-5">A program can also ask for seed material from <code class="code-inline tex2jax_ignore">std::random_device</code>:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_seeds-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_random_device_seed" class="language-cpp">#include &lt;iostream&gt;
+#include &lt;random&gt;
+
+int main() {
+    std::random_device seed_source;
+    std::mt19937 generator{seed_source()};
+
+    for (int value_number = 1; value_number &lt;= 4; ++value_number) {
+        std::cout &lt;&lt; generator() &lt;&lt; '\n';
+    }
+
+    return 0;
+}
+</code></pre></div>
+<div class="para" id="chapter6_generating-random-numbers_seeds-7">This usually gives the generator a different starting point on different runs. The C++ standard does not guarantee that every implementation has access to a nondeterministic physical source, so <code class="code-inline tex2jax_ignore">std::random_device</code> should be described as a source of seed material rather than as a guaranteed source of true randomness.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_seeds-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_seeds-8">A default-constructed <code class="code-inline tex2jax_ignore">std::mt19937</code> uses its standard default seed. It does not automatically use the system clock. An explicit seed makes the programmer’s intention clearer. The particular seed value is not special; any suitable seed value could be used.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_seeds-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.9.4: Seeds and Repeatable Sequences"><a tabindex="-1" href="#chapter6_generating-random-numbers_seeds" title="Copy heading and permalink for Subsection 6.9.4: Seeds and Repeatable Sequences" aria-label="Copy heading and permalink for Subsection 6.9.4: Seeds and Repeatable Sequences">🔗</a></div>
+</section>
+<section class="subsection" id="chapter6_generating-random-numbers_mersenne-twister">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">The Mersenne Twister</span>
+</h2>
+<div class="para" id="chapter6_generating-random-numbers_mersenne-twister-2">The C++ type <code class="code-inline tex2jax_ignore">std::mt19937</code> is a commonly used implementation of the <dfn class="terminology">Mersenne Twister</dfn> pseudorandom-generation algorithm. The algorithm was developed by Makoto Matsumoto and Takuji Nishimura in 1996 and 1997 and published in 1998.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_mersenne-twister-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_mersenne-twister-3">The name “Mersenne” honors Marin Mersenne, a French mathematician and philosopher who lived from 1588 to 1648. Mersenne studied numbers of the form <span class="process-math">\(2^p - 1\text{,}\)</span> now called <dfn class="terminology">Mersenne numbers</dfn>. The MT19937 algorithm uses the Mersenne-prime period <span class="process-math">\(2^{19937} - 1\text{.}\)</span> The superscript is important: this means “2 raised to the 19,937th power, minus 1”. The digits in the exponent should not be written on the same baseline as the 2.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_mersenne-twister-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_mersenne-twister-4">The Mersenne Twister keeps a large internal state. It repeatedly transforms that state and applies an output transformation to produce the next value. Students do not need to implement those transformations. The important ideas are that the generator has a state, a seed initializes the state, and the algorithm advances the state one step at a time.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_mersenne-twister-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_mersenne-twister-5">The Mersenne Twister is fast and has useful statistical behavior for simulations, games, and testing. It is not cryptographically secure because an attacker who learns enough about its state may be able to predict future values.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_mersenne-twister-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.9.5: The Mersenne Twister"><a tabindex="-1" href="#chapter6_generating-random-numbers_mersenne-twister" title="Copy heading and permalink for Subsection 6.9.5: The Mersenne Twister" aria-label="Copy heading and permalink for Subsection 6.9.5: The Mersenne Twister">🔗</a></div>
+</section>
+<section class="subsection" id="chapter6_generating-random-numbers_distributions">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.6</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Probability Distributions</span>
+</h2>
+<div class="para" id="chapter6_generating-random-numbers_distributions-2">A generator produces a sequence of pseudorandom values. A <dfn class="terminology">probability distribution</dfn> describes how likely the possible outcomes should be. The C++ random library separates these responsibilities: an engine generates values, and a distribution shapes them for a particular purpose.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_distributions-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="table table-like" id="table_random_distributions"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Examples of probability distributions<div class="autopermalink" aria-hidden="true" data-description="Table 6.9.2: Examples of probability distributions"><a tabindex="-1" href="#table_random_distributions" title="Copy heading and permalink for Table 6.9.2: Examples of probability distributions" aria-label="Copy heading and permalink for Table 6.9.2: Examples of probability distributions">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b3 r3 l3 t3" style="max-width:168px;">
+<div class="para" id="table_random_distributions-2-4-1-1">Distribution<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-4-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</th>
+<th scope="col" class="l m b3 r3 l0 t3" style="max-width:222px;">
+<div class="para" id="table_random_distributions-2-4-2-1">Conceptual meaning<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-4-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</th>
+<th scope="col" class="l m b3 r3 l0 t3" style="max-width:210px;">
+<div class="para" id="table_random_distributions-2-4-3-1">Example<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-4-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</th>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0" style="max-width:168px;">
+<div class="para" id="table_random_distributions-2-5-1-1">Uniform<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-5-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:222px;">
+<div class="para" id="table_random_distributions-2-5-2-1">Values in a range are equally likely.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-5-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_random_distributions-2-5-3-1">A fair die<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-5-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0" style="max-width:168px;">
+<div class="para" id="table_random_distributions-2-6-1-1">Bernoulli<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-6-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:222px;">
+<div class="para" id="table_random_distributions-2-6-2-1">One yes-or-no event.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-6-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_random_distributions-2-6-3-1">Whether a machine fails<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-6-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0" style="max-width:168px;">
+<div class="para" id="table_random_distributions-2-7-1-1">Binomial<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-7-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:222px;">
+<div class="para" id="table_random_distributions-2-7-2-1">Counts successes across fixed trials.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-7-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_random_distributions-2-7-3-1">Defective items in a batch<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-7-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0" style="max-width:168px;">
+<div class="para" id="table_random_distributions-2-8-1-1">Normal or Gaussian<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-8-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:222px;">
+<div class="para" id="table_random_distributions-2-8-2-1">Values cluster around an average.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-8-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_random_distributions-2-8-3-1">Measurement error<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-8-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0" style="max-width:168px;">
+<div class="para" id="table_random_distributions-2-9-1-1">Poisson<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-9-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:222px;">
+<div class="para" id="table_random_distributions-2-9-2-1">Counts events in a fixed interval.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-9-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_random_distributions-2-9-3-1">Customer arrivals<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-9-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0" style="max-width:168px;">
+<div class="para" id="table_random_distributions-2-10-1-1">Discrete weighted<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-10-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:222px;">
+<div class="para" id="table_random_distributions-2-10-2-1">Outcomes have different probabilities.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-10-2-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+<td class="l m b3 r3 l0 t0" style="max-width:210px;">
+<div class="para" id="table_random_distributions-2-10-3-1">Weighted game outcomes<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#table_random_distributions-2-10-3-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</td>
+</tr>
+</table></div>
+</figure>
+<div class="para" id="chapter6_generating-random-numbers_distributions-4">The C++ library provides types such as <code class="code-inline tex2jax_ignore">std::uniform_int_distribution</code>, <code class="code-inline tex2jax_ignore">std::normal_distribution</code>, <code class="code-inline tex2jax_ignore">std::poisson_distribution</code>, and <code class="code-inline tex2jax_ignore">std::discrete_distribution</code>. In this chapter, we use the uniform distributions in complete programs and discuss the other distributions conceptually.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_distributions-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="note remark-like" id="chapter6_generating-random-numbers_distributions-5"><h3 class="heading">
+<span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3>
+<div class="para" id="chapter6_generating-random-numbers_distributions-5-1">Older C++ examples sometimes use <code class="code-inline tex2jax_ignore">random()</code> or <code class="code-inline tex2jax_ignore">std::rand()</code>. These are legacy interfaces. The function <code class="code-inline tex2jax_ignore">random()</code> is a POSIX-style function and is not portable standard C++, while standard <code class="code-inline tex2jax_ignore">&lt;cstdlib&gt;</code> provides <code class="code-inline tex2jax_ignore">std::rand()</code> and <code class="code-inline tex2jax_ignore">std::srand()</code>. New C++17 programs should use the engine-and-distribution design from <code class="code-inline tex2jax_ignore">&lt;random&gt;</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_distributions-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Note 6.9.1"><a tabindex="-1" href="#chapter6_generating-random-numbers_distributions-5" title="Copy heading and permalink for Note 6.9.1" aria-label="Copy heading and permalink for Note 6.9.1">🔗</a></div>
+</article><div class="code-box"><pre class="program clipboardable"><code id="rs-program_engine_and_distribution" class="language-cpp">#include &lt;iostream&gt;
+#include &lt;random&gt;
+
+int main() {
+    std::mt19937 generator{13579};
+    std::uniform_int_distribution&lt;int&gt; roll_die{1, 6};
+
+    for (int roll_number = 1; roll_number &lt;= 5; ++roll_number) {
+        std::cout &lt;&lt; roll_die(generator) &lt;&lt; '\n';
+    }
+
+    return 0;
+}
+</code></pre></div>
+<div class="para" id="chapter6_generating-random-numbers_distributions-7">The expression <code class="code-inline tex2jax_ignore">roll_die(generator)</code> asks the distribution to use the generator and produce one integer from 1 through 6. The generator does not know that the values represent die rolls. The distribution supplies that interpretation.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_distributions-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.9.6: Probability Distributions"><a tabindex="-1" href="#chapter6_generating-random-numbers_distributions" title="Copy heading and permalink for Subsection 6.9.6: Probability Distributions" aria-label="Copy heading and permalink for Subsection 6.9.6: Probability Distributions">🔗</a></div>
+</section>
+<section class="subsection" id="chapter6_generating-random-numbers_die-class">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.7</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">A Die Class</span>
+</h2>
+<div class="para" id="chapter6_generating-random-numbers_die-class-2">A class can hide the details of random-number generation behind a simple interface. The following <code class="code-inline tex2jax_ignore">Die</code> class stores the engine and distribution as private data. Its public member function <code class="code-inline tex2jax_ignore">roll()</code> gives outside code one value from 1 through 6.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_die-class-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_die_class" class="language-cpp">#include &lt;iostream&gt;
+#include &lt;random&gt;
+
+class Die {
+private:
+    std::mt19937 generator;
+    std::uniform_int_distribution&lt;int&gt; roll_distribution{1, 6};
+
+public:
+    Die(unsigned int seed)
+        : generator{seed} {
+    }
+
+    int roll() {
+        return roll_distribution(generator);
+    }
+};
+
+int main() {
+    Die die{86420};
+
+    for (int roll_number = 1; roll_number &lt;= 10; ++roll_number) {
+        std::cout &lt;&lt; die.roll() &lt;&lt; '\n';
+    }
+
+    return 0;
+}
+</code></pre></div>
+<div class="para" id="chapter6_generating-random-numbers_die-class-4">Each call to <code class="code-inline tex2jax_ignore">die.roll()</code> advances the generator and returns a new result. Therefore, repeated calls on the same <code class="code-inline tex2jax_ignore">Die</code> object normally produce a changing sequence of values. The caller does not need to know which engine or distribution the class uses. This is an example of <dfn class="terminology">encapsulation</dfn>: the class protects its implementation details while providing a useful public operation.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_die-class-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_die-class-5">The seed still matters. Two <code class="code-inline tex2jax_ignore">Die</code> objects initialized with the same seed produce matching sequences: the first rolls match, the second rolls match, and so on. The two objects do not return the same value forever; each object advances its own generator after every call.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_die-class-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_die_same_seed" class="language-cpp">#include &lt;iostream&gt;
+#include &lt;random&gt;
+
+class Die {
+private:
+    std::mt19937 generator;
+    std::uniform_int_distribution&lt;int&gt; roll_distribution{1, 6};
+
+public:
+    Die(unsigned int seed)
+        : generator{seed} {
+    }
+
+    int roll() {
+        return roll_distribution(generator);
+    }
+};
+
+int main() {
+    Die first_die{2468};
+    Die second_die{2468};
+
+    for (int roll_number = 1; roll_number &lt;= 5; ++roll_number) {
+        std::cout &lt;&lt; first_die.roll() &lt;&lt; ' '
+                  &lt;&lt; second_die.roll() &lt;&lt; '\n';
+    }
+
+    return 0;
+}
+</code></pre></div>
+<div class="para" id="chapter6_generating-random-numbers_die-class-7">To obtain a sequence that normally differs from one run to the next, give the class seed material from <code class="code-inline tex2jax_ignore">std::random_device</code>:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_die-class-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_die-class-8">A different seed can be supplied without changing the class:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_die-class-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_die_random_seed" class="language-cpp">std::random_device seed_source;
+Die die{seed_source()};
+</code></pre></div>
+<div class="para" id="chapter6_generating-random-numbers_die-class-10">Using an explicit seed such as <code class="code-inline tex2jax_ignore">Die die{86420};</code> is useful for repeatable testing. Using <code class="code-inline tex2jax_ignore">std::random_device</code> as a seed source is useful when a program usually should behave differently each time it runs.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_die-class-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.9.7: A Die Class"><a tabindex="-1" href="#chapter6_generating-random-numbers_die-class" title="Copy heading and permalink for Subsection 6.9.7: A Die Class" aria-label="Copy heading and permalink for Subsection 6.9.7: A Die Class">🔗</a></div>
+</section>
+<section class="subsection" id="chapter6_generating-random-numbers_simulation">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.8</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Simulation and Probabilistic Systems</span>
+</h2>
+<div class="para" id="chapter6_generating-random-numbers_simulation-2">A <dfn class="terminology">simulation</dfn> uses a program to imitate a process or system. When a system has many possible outcomes, a program can generate many trials and summarize what happens. This approach is often called a <dfn class="terminology">Monte Carlo simulation</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_simulation-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_simulation-3">For example, the following program simulates 1,000 die rolls and stores the frequency of each result. The array is initialized with zero counters, and each roll increases one counter.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_simulation-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_die_roll_histogram" class="language-cpp">#include &lt;array&gt;
+#include &lt;iostream&gt;
+#include &lt;random&gt;
+
+int main() {
+    std::mt19937 generator{314159};
+    std::uniform_int_distribution&lt;int&gt; roll_die{1, 6};
+    std::array&lt;int, 6&gt; counts{};
+
+    for (int trial = 1; trial &lt;= 1000; ++trial) {
+        int roll = roll_die(generator);
+        ++counts[roll - 1];
+    }
+
+    for (int side = 1; side &lt;= 6; ++side) {
+        std::cout &lt;&lt; side &lt;&lt; ": " &lt;&lt; counts[side - 1] &lt;&lt; '\n';
+    }
+
+    return 0;
+}
+</code></pre></div>
+<div class="para" id="chapter6_generating-random-numbers_simulation-5">The array of counts is a simple <dfn class="terminology">histogram</dfn>. With a fair die, the six counts will not be exactly equal. As the number of trials becomes larger, however, the proportions generally become closer to the expected proportions. This is one way the <dfn class="terminology">law of large numbers</dfn> appears in a program.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_simulation-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_simulation-6">The same general idea can model stock-market scenarios, insurance claims, traffic, customer arrivals, protein configurations, or properties of atoms. A simulation does not predict one exact future outcome. It estimates patterns across many possible outcomes.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_simulation-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_simulation-7">Randomness can also be used to rearrange an existing collection. For example, <code class="code-inline tex2jax_ignore">std::shuffle</code> can randomize the order of an array. It is declared in <code class="code-inline tex2jax_ignore">&lt;algorithm&gt;</code> and uses a random-number engine supplied by the program.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_simulation-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_shuffle_array" class="language-cpp">#include &lt;algorithm&gt;
+#include &lt;array&gt;
+#include &lt;iostream&gt;
+#include &lt;random&gt;
+
+int main() {
+    std::array&lt;int, 5&gt; values{1, 2, 3, 4, 5};
+    std::mt19937 generator{98765};
+
+    std::shuffle(values.begin(), values.end(), generator);
+
+    for (int value : values) {
+        std::cout &lt;&lt; value &lt;&lt; ' ';
+    }
+
+    std::cout &lt;&lt; '\n';
+
+    return 0;
+}
+</code></pre></div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 6.9.8: Simulation and Probabilistic Systems"><a tabindex="-1" href="#chapter6_generating-random-numbers_simulation" title="Copy heading and permalink for Subsection 6.9.8: Simulation and Probabilistic Systems" aria-label="Copy heading and permalink for Subsection 6.9.8: Simulation and Probabilistic Systems">🔗</a></div>
+</section>
+<section class="subsection" id="chapter6_generating-random-numbers_security">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.9</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Randomness and Security</span>
+</h2>
+<div class="para" id="chapter6_generating-random-numbers_security-2">Cryptographic systems also use randomness. They may need random values for passwords, encryption keys, authentication tokens, salts, nonces, and other security-related data.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_security-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_security-3">The ordinary C++ <code class="code-inline tex2jax_ignore">&lt;random&gt;</code> engines, including <code class="code-inline tex2jax_ignore">std::mt19937</code>, are designed for general-purpose simulation and testing. They are not cryptographically secure. A predictable sequence may be acceptable for a die-roll simulation but dangerous when it protects a secret.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_security-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter6_generating-random-numbers_security-4">Security-sensitive programs should use a trusted cryptographic library or an operating-system security facility that provides a cryptographically secure pseudorandom number generator. A program should not design its own cryptographic generator.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_security-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="warning remark-like" id="chapter6_generating-random-numbers_security-5"><h3 class="heading">
+<span class="type">Warning</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h3>
+<div class="para" id="chapter6_generating-random-numbers_security-5-1">Use ordinary pseudorandom generators for simulation, games, and testing. Use trusted cryptographic facilities for passwords, keys, authentication tokens, and other secrets.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_generating-random-numbers_security-5-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Warning 6.9.2"><a tabindex="-1" href="#chapter6_generating-random-numbers_security-5" title="Copy heading and permalink for Warning 6.9.2" aria-label="Copy heading and permalink for Warning 6.9.2">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Subsection 6.9.9: Randomness and Security"><a tabindex="-1" href="#chapter6_generating-random-numbers_security" title="Copy heading and permalink for Subsection 6.9.9: Randomness and Security" aria-label="Copy heading and permalink for Subsection 6.9.9: Randomness and Security">🔗</a></div>
+</section>
+<article class="exercise exercise-like" id="chapter6_random-numbers_pseudorandom"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone">
+<div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-chapter6_random-numbers_pseudorandom"><script type="application/json">{
+"problemHtml": "\n<div class=\"para\" id=\"chapter6_random-numbers_pseudorandom-1-1\">A number produced by a deterministic algorithm that appears random is called <input type=\"text\" id=\"chapter6_random-numbers_pseudorandom-blank1\" size=\"16\"\/>.<div class=\"autopermalink\" aria-hidden=\"true\" data-description=\"Paragraph\"><a tabindex=\"-1\" href=\"#chapter6_random-numbers_pseudorandom-1-1\" title=\"Copy heading and permalink for Paragraph\" aria-label=\"Copy heading and permalink for Paragraph\">🔗<\/a><\/div><\/div>",
+"solutionHtml": "",
+"blankNames": {"blank1": 0},
+"feedbackArray": [[{"regex": "^\\s*pseudorandom\\s*$", "regexFlags": "i", "feedback": "Correct!"}, {"feedback": "Incorrect."}]]
+}</script></div>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.9.1"><a tabindex="-1" href="#chapter6_random-numbers_pseudorandom" title="Copy heading and permalink for Checkpoint 6.9.1" aria-label="Copy heading and permalink for Checkpoint 6.9.1">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="chapter6_random-numbers_seed-purpose"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="chapter6_random-numbers_seed-purpose-1-1">What does a seed determine in a pseudorandom generator?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_random-numbers_seed-purpose-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-chapter6_random-numbers_seed-purpose" data-multipleanswers="false">
+<li data-component="answer" id="rs-chapter6_random-numbers_seed-purpose_opt_a" data-correct="">
+<div class="para" id="chapter6_random-numbers_seed-purpose-2-1-1-1">The generator’s initial state.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_seed-purpose_opt_a">
+<div class="para" id="chapter6_random-numbers_seed-purpose-2-1-2-1">Correct. The initial state determines the sequence that follows.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_seed-purpose_opt_b">
+<div class="para" id="chapter6_random-numbers_seed-purpose-2-2-1-1">The number of values the program must generate.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_seed-purpose_opt_b">
+<div class="para" id="chapter6_random-numbers_seed-purpose-2-2-2-1">A seed initializes the generator; a loop controls how many values are generated.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_seed-purpose_opt_c">
+<div class="para" id="chapter6_random-numbers_seed-purpose-2-3-1-1">The largest value allowed by every distribution.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_seed-purpose_opt_c">
+<div class="para" id="chapter6_random-numbers_seed-purpose-2-3-2-1">The distribution, not the seed, determines the desired range.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_seed-purpose_opt_d">
+<div class="para" id="chapter6_random-numbers_seed-purpose-2-4-1-1">Whether the program uses a loop.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_seed-purpose_opt_d">
+<div class="para" id="chapter6_random-numbers_seed-purpose-2-4-2-1">The seed affects the sequence, not the program’s control structure.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.9.2"><a tabindex="-1" href="#chapter6_random-numbers_seed-purpose" title="Copy heading and permalink for Checkpoint 6.9.2" aria-label="Copy heading and permalink for Checkpoint 6.9.2">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="chapter6_random-numbers_distribution-purpose"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="chapter6_random-numbers_distribution-purpose-1-1">What is the purpose of a probability distribution such as <code class="code-inline tex2jax_ignore">std::uniform_int_distribution&lt;int&gt;</code>?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_random-numbers_distribution-purpose-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-chapter6_random-numbers_distribution-purpose" data-multipleanswers="false">
+<li data-component="answer" id="rs-chapter6_random-numbers_distribution-purpose_opt_a" data-correct="">
+<div class="para" id="chapter6_random-numbers_distribution-purpose-2-1-1-1">It shapes generator output according to a desired probability pattern.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_distribution-purpose_opt_a">
+<div class="para" id="chapter6_random-numbers_distribution-purpose-2-1-2-1">Correct. The engine generates values, and the distribution gives them a useful pattern.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_distribution-purpose_opt_b">
+<div class="para" id="chapter6_random-numbers_distribution-purpose-2-2-1-1">It stores every value produced by the generator.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_distribution-purpose_opt_b">
+<div class="para" id="chapter6_random-numbers_distribution-purpose-2-2-2-1">Storage is handled by a variable or container.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_distribution-purpose_opt_c">
+<div class="para" id="chapter6_random-numbers_distribution-purpose-2-3-1-1">It guarantees cryptographic security.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_distribution-purpose_opt_c">
+<div class="para" id="chapter6_random-numbers_distribution-purpose-2-3-2-1">A distribution controls probabilities; it does not provide cryptographic security.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_distribution-purpose_opt_d">
+<div class="para" id="chapter6_random-numbers_distribution-purpose-2-4-1-1">It replaces the random-number engine.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_distribution-purpose_opt_d">
+<div class="para" id="chapter6_random-numbers_distribution-purpose-2-4-2-1">The distribution and engine work together.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.9.3"><a tabindex="-1" href="#chapter6_random-numbers_distribution-purpose" title="Copy heading and permalink for Checkpoint 6.9.3" aria-label="Copy heading and permalink for Checkpoint 6.9.3">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="chapter6_random-numbers_die-class"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="chapter6_random-numbers_die-class-1-1">In the <code class="code-inline tex2jax_ignore">Die</code> class, why are the generator and distribution private data members?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_random-numbers_die-class-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-chapter6_random-numbers_die-class" data-multipleanswers="false">
+<li data-component="answer" id="rs-chapter6_random-numbers_die-class_opt_a" data-correct="">
+<div class="para" id="chapter6_random-numbers_die-class-2-1-1-1">They are implementation details hidden behind the public <code class="code-inline tex2jax_ignore">roll()</code> operation.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_die-class_opt_a">
+<div class="para" id="chapter6_random-numbers_die-class-2-1-2-1">Correct. This is encapsulation.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_die-class_opt_b">
+<div class="para" id="chapter6_random-numbers_die-class-2-2-1-1">Private data members cannot store objects from library classes.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_die-class_opt_b">
+<div class="para" id="chapter6_random-numbers_die-class-2-2-2-1">Private members can store objects. Their access is restricted to the class.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_die-class_opt_c">
+<div class="para" id="chapter6_random-numbers_die-class-2-3-1-1">The program must create a new generator for every roll.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_die-class_opt_c">
+<div class="para" id="chapter6_random-numbers_die-class-2-3-2-1">The same generator should produce successive values.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_die-class_opt_d">
+<div class="para" id="chapter6_random-numbers_die-class-2-4-1-1">The distribution must be initialized inside <code class="code-inline tex2jax_ignore">main()</code>.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_die-class_opt_d">
+<div class="para" id="chapter6_random-numbers_die-class-2-4-2-1">The class can initialize its own private distribution.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.9.4"><a tabindex="-1" href="#chapter6_random-numbers_die-class" title="Copy heading and permalink for Checkpoint 6.9.4" aria-label="Copy heading and permalink for Checkpoint 6.9.4">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="chapter6_random-numbers_security"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">6.9.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="chapter6_random-numbers_security-1-1">Which is the most appropriate use for <code class="code-inline tex2jax_ignore">std::mt19937</code>?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter6_random-numbers_security-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-chapter6_random-numbers_security" data-multipleanswers="false">
+<li data-component="answer" id="rs-chapter6_random-numbers_security_opt_a" data-correct="">
+<div class="para" id="chapter6_random-numbers_security-2-1-1-1">Simulating die rolls and testing a program with varied inputs.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_security_opt_a">
+<div class="para" id="chapter6_random-numbers_security-2-1-2-1">Correct. It is a general-purpose pseudorandom engine.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_security_opt_b">
+<div class="para" id="chapter6_random-numbers_security-2-2-1-1">Generating an encryption key for a banking application.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_security_opt_b">
+<div class="para" id="chapter6_random-numbers_security-2-2-2-1">Security-sensitive values require a trusted cryptographic facility.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_security_opt_c">
+<div class="para" id="chapter6_random-numbers_security-2-3-1-1">Generating a password-reset token for a website.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_security_opt_c">
+<div class="para" id="chapter6_random-numbers_security-2-3-2-1">Password-reset tokens must be generated with security-specific randomness.</div>
+</li>
+<li data-component="answer" id="rs-chapter6_random-numbers_security_opt_d">
+<div class="para" id="chapter6_random-numbers_security-2-4-1-1">Creating a secret authentication value.</div>
+</li>
+<li data-component="feedback" id="rs-chapter6_random-numbers_security_opt_d">
+<div class="para" id="chapter6_random-numbers_security-2-4-2-1">Authentication values require a cryptographically secure generator.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 6.9.5"><a tabindex="-1" href="#chapter6_random-numbers_security" title="Copy heading and permalink for Checkpoint 6.9.5" aria-label="Copy heading and permalink for Checkpoint 6.9.5">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Section 6.9: Generating Random Numbers"><a tabindex="-1" href="#generating-random-numbers" title="Copy heading and permalink for Section 6.9: Generating Random Numbers" aria-label="Copy heading and permalink for Section 6.9: Generating Random Numbers">🔗</a></div>
+</section>
+</div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="chapter6_nested-iteration.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="chapter6_glossary.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

@@ -8740,13 +8740,157 @@ var ptx_lunr_docs = [
   "body": "  Which organization prints three rows with two stars in each row?      An outer loop that runs for rows 1 through 3 and an inner loop that runs for symbols 1 through 2.   The outer loop controls rows and the inner loop controls symbols in a row.     An outer loop that runs for symbols 1 through 2 and an inner loop that runs for rows 1 through 3.   This reverses the roles of the two loops.     One loop that runs six times and no separate row operation.   That would not organize the output into three rows.    "
 },
 {
+  "id": "generating-random-numbers",
+  "level": "1",
+  "url": "generating-random-numbers.html",
+  "type": "Section",
+  "number": "6.9",
+  "title": "Generating Random Numbers",
+  "body": " Generating Random Numbers  Iteration repeats a process. Random-number generation gives a repeated process different possible inputs or outcomes. Together, iteration and random numbers allow a program to simulate events, study probabilities, and explore systems with many possible outcomes.   Why Programs Use Randomness  Many programs are deterministic : when they receive the same input, they produce the same output. Determinism is useful for calculations, testing, and debugging. Other programs need to model situations in which the next outcome cannot be known in advance.  Random numbers are useful for:   creating games and simulations;  testing programs with varied inputs;  modeling traffic, insurance claims, or customer arrivals;  studying scientific systems such as molecules and proteins;  estimating risk in systems such as financial markets; and  selecting or arranging items unpredictably.   A program cannot predict the exact future price of a stock or the exact shape a protein will take. It can, however, simulate many possible situations and summarize the resulting patterns. This is the central purpose of random-number generation in simulation.    Random and Pseudorandom Numbers  A truly random event is not determined by a predictable algorithm. Examples may come from physical processes or other sources of environmental noise. A computer program, however, normally follows an algorithm. It can therefore generate numbers that appear random while actually following a deterministic process.  A number produced by a deterministic algorithm is called pseudorandom . The prefix pseudo- means imitation or apparently, but not completely, real . A pseudorandom sequence can look random, but the same starting state produces the same sequence again.  This apparent contradiction is useful. A program can produce different-looking trials while still allowing a programmer to repeat exactly the same trials during debugging.   Types of random-number sources       Source  Main idea  Typical use    General-purpose pseudorandom generator  A deterministic algorithm produces a sequence that appears random.  Simulation, games, and testing    System or physical source  Values come from an external source of entropy when available.  Providing seed material    Cryptographically secure generator  The output is designed to be difficult to predict.  Passwords, keys, and authentication tokens       How a Pseudorandom Generator Works  A pseudorandom generator keeps an internal state . The state records enough information for the generator to calculate its next state and its next output.  Conceptually, the process looks like this:   starting state | v state transformation | v next state and output | +---- repeat   A seed supplies the initial state. The generator then repeatedly applies its state-transition algorithm. Because the transition is deterministic, two generators with the same algorithm and the same seed produce the same sequence.  Different generator algorithms make different trade-offs involving speed, memory, sequence length, statistical quality, and suitability for parallel computation. Chapter 6 focuses on the general idea rather than the bit-level details of those algorithms.    Seeds and Repeatable Sequences  A seed determines the starting state of a pseudorandom generator. Using the same seed gives the generator the same starting point. Therefore, the program produces the same sequence of pseudorandom values.   #include <iostream> #include <random> int main() { std::mt19937 generator{24680}; for (int value_number = 1; value_number <= 4; ++value_number) { std::cout << generator() << '\\n'; } return 0; }   Running this program again with the same seed produces the same sequence. This is useful when a programmer wants to reproduce a particular test or investigate a problem.  A program can also ask for seed material from std::random_device :   #include <iostream> #include <random> int main() { std::random_device seed_source; std::mt19937 generator{seed_source()}; for (int value_number = 1; value_number <= 4; ++value_number) { std::cout << generator() << '\\n'; } return 0; }   This usually gives the generator a different starting point on different runs. The C++ standard does not guarantee that every implementation has access to a nondeterministic physical source, so std::random_device should be described as a source of seed material rather than as a guaranteed source of true randomness.  A default-constructed std::mt19937 uses its standard default seed. It does not automatically use the system clock. An explicit seed makes the programmer's intention clearer. The particular seed value is not special; any suitable seed value could be used.    The Mersenne Twister  The C++ type std::mt19937 is a commonly used implementation of the Mersenne Twister pseudorandom-generation algorithm. The algorithm was developed by Makoto Matsumoto and Takuji Nishimura in 1996 and 1997 and published in 1998.  The name Mersenne honors Marin Mersenne, a French mathematician and philosopher who lived from 1588 to 1648. Mersenne studied numbers of the form , now called Mersenne numbers . The MT19937 algorithm uses the Mersenne-prime period . The superscript is important: this means 2 raised to the 19,937th power, minus 1 . The digits in the exponent should not be written on the same baseline as the 2.  The Mersenne Twister keeps a large internal state. It repeatedly transforms that state and applies an output transformation to produce the next value. Students do not need to implement those transformations. The important ideas are that the generator has a state, a seed initializes the state, and the algorithm advances the state one step at a time.  The Mersenne Twister is fast and has useful statistical behavior for simulations, games, and testing. It is not cryptographically secure because an attacker who learns enough about its state may be able to predict future values.    Probability Distributions  A generator produces a sequence of pseudorandom values. A probability distribution describes how likely the possible outcomes should be. The C++ random library separates these responsibilities: an engine generates values, and a distribution shapes them for a particular purpose.   Examples of probability distributions       Distribution  Conceptual meaning  Example    Uniform  Values in a range are equally likely.  A fair die    Bernoulli  One yes-or-no event.  Whether a machine fails    Binomial  Counts successes across fixed trials.  Defective items in a batch    Normal or Gaussian  Values cluster around an average.  Measurement error    Poisson  Counts events in a fixed interval.  Customer arrivals    Discrete weighted  Outcomes have different probabilities.  Weighted game outcomes     The C++ library provides types such as std::uniform_int_distribution , std::normal_distribution , std::poisson_distribution , and std::discrete_distribution . In this chapter, we use the uniform distributions in complete programs and discuss the other distributions conceptually.   Older C++ examples sometimes use random() or std::rand() . These are legacy interfaces. The function random() is a POSIX-style function and is not portable standard C++, while standard <cstdlib> provides std::rand() and std::srand() . New C++17 programs should use the engine-and-distribution design from <random> .    #include <iostream> #include <random> int main() { std::mt19937 generator{13579}; std::uniform_int_distribution<int> roll_die{1, 6}; for (int roll_number = 1; roll_number <= 5; ++roll_number) { std::cout << roll_die(generator) << '\\n'; } return 0; }   The expression roll_die(generator) asks the distribution to use the generator and produce one integer from 1 through 6. The generator does not know that the values represent die rolls. The distribution supplies that interpretation.    A Die Class  A class can hide the details of random-number generation behind a simple interface. The following Die class stores the engine and distribution as private data. Its public member function roll() gives outside code one value from 1 through 6.   #include <iostream> #include <random> class Die { private: std::mt19937 generator; std::uniform_int_distribution<int> roll_distribution{1, 6}; public: Die(unsigned int seed) : generator{seed} { } int roll() { return roll_distribution(generator); } }; int main() { Die die{86420}; for (int roll_number = 1; roll_number <= 10; ++roll_number) { std::cout << die.roll() << '\\n'; } return 0; }   Each call to die.roll() advances the generator and returns a new result. Therefore, repeated calls on the same Die object normally produce a changing sequence of values. The caller does not need to know which engine or distribution the class uses. This is an example of encapsulation : the class protects its implementation details while providing a useful public operation.  The seed still matters. Two Die objects initialized with the same seed produce matching sequences: the first rolls match, the second rolls match, and so on. The two objects do not return the same value forever; each object advances its own generator after every call.   #include <iostream> #include <random> class Die { private: std::mt19937 generator; std::uniform_int_distribution<int> roll_distribution{1, 6}; public: Die(unsigned int seed) : generator{seed} { } int roll() { return roll_distribution(generator); } }; int main() { Die first_die{2468}; Die second_die{2468}; for (int roll_number = 1; roll_number <= 5; ++roll_number) { std::cout << first_die.roll() << ' ' << second_die.roll() << '\\n'; } return 0; }   To obtain a sequence that normally differs from one run to the next, give the class seed material from std::random_device :  A different seed can be supplied without changing the class:   std::random_device seed_source; Die die{seed_source()};   Using an explicit seed such as Die die{86420}; is useful for repeatable testing. Using std::random_device as a seed source is useful when a program usually should behave differently each time it runs.    Simulation and Probabilistic Systems  A simulation uses a program to imitate a process or system. When a system has many possible outcomes, a program can generate many trials and summarize what happens. This approach is often called a Monte Carlo simulation .  For example, the following program simulates 1,000 die rolls and stores the frequency of each result. The array is initialized with zero counters, and each roll increases one counter.   #include <array> #include <iostream> #include <random> int main() { std::mt19937 generator{314159}; std::uniform_int_distribution<int> roll_die{1, 6}; std::array<int, 6> counts{}; for (int trial = 1; trial <= 1000; ++trial) { int roll = roll_die(generator); ++counts[roll - 1]; } for (int side = 1; side <= 6; ++side) { std::cout << side << \": \" << counts[side - 1] << '\\n'; } return 0; }   The array of counts is a simple histogram . With a fair die, the six counts will not be exactly equal. As the number of trials becomes larger, however, the proportions generally become closer to the expected proportions. This is one way the law of large numbers appears in a program.  The same general idea can model stock-market scenarios, insurance claims, traffic, customer arrivals, protein configurations, or properties of atoms. A simulation does not predict one exact future outcome. It estimates patterns across many possible outcomes.  Randomness can also be used to rearrange an existing collection. For example, std::shuffle can randomize the order of an array. It is declared in <algorithm> and uses a random-number engine supplied by the program.   #include <algorithm> #include <array> #include <iostream> #include <random> int main() { std::array<int, 5> values{1, 2, 3, 4, 5}; std::mt19937 generator{98765}; std::shuffle(values.begin(), values.end(), generator); for (int value : values) { std::cout << value << ' '; } std::cout << '\\n'; return 0; }     Randomness and Security  Cryptographic systems also use randomness. They may need random values for passwords, encryption keys, authentication tokens, salts, nonces, and other security-related data.  The ordinary C++ <random> engines, including std::mt19937 , are designed for general-purpose simulation and testing. They are not cryptographically secure. A predictable sequence may be acceptable for a die-roll simulation but dangerous when it protects a secret.  Security-sensitive programs should use a trusted cryptographic library or an operating-system security facility that provides a cryptographically secure pseudorandom number generator. A program should not design its own cryptographic generator.   Use ordinary pseudorandom generators for simulation, games, and testing. Use trusted cryptographic facilities for passwords, keys, authentication tokens, and other secrets.      A number produced by a deterministic algorithm that appears random is called .             What does a seed determine in a pseudorandom generator?      The generator's initial state.   Correct. The initial state determines the sequence that follows.     The number of values the program must generate.   A seed initializes the generator; a loop controls how many values are generated.     The largest value allowed by every distribution.   The distribution, not the seed, determines the desired range.     Whether the program uses a loop.   The seed affects the sequence, not the program's control structure.       What is the purpose of a probability distribution such as std::uniform_int_distribution<int> ?      It shapes generator output according to a desired probability pattern.   Correct. The engine generates values, and the distribution gives them a useful pattern.     It stores every value produced by the generator.   Storage is handled by a variable or container.     It guarantees cryptographic security.   A distribution controls probabilities; it does not provide cryptographic security.     It replaces the random-number engine.   The distribution and engine work together.       In the Die class, why are the generator and distribution private data members?      They are implementation details hidden behind the public roll() operation.   Correct. This is encapsulation.     Private data members cannot store objects from library classes.   Private members can store objects. Their access is restricted to the class.     The program must create a new generator for every roll.   The same generator should produce successive values.     The distribution must be initialized inside main() .   The class can initialize its own private distribution.       Which is the most appropriate use for std::mt19937 ?      Simulating die rolls and testing a program with varied inputs.   Correct. It is a general-purpose pseudorandom engine.     Generating an encryption key for a banking application.   Security-sensitive values require a trusted cryptographic facility.     Generating a password-reset token for a website.   Password-reset tokens must be generated with security-specific randomness.     Creating a secret authentication value.   Authentication values require a cryptographically secure generator.     "
+},
+{
+  "id": "generating-random-numbers-2",
+  "level": "2",
+  "url": "generating-random-numbers.html#generating-random-numbers-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Iteration repeats a process. Random-number generation gives a repeated process different possible inputs or outcomes. Together, iteration and random numbers allow a program to simulate events, study probabilities, and explore systems with many possible outcomes. "
+},
+{
+  "id": "chapter6_generating-random-numbers_why-randomness",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_generating-random-numbers_why-randomness",
+  "type": "Subsection",
+  "number": "6.9.1",
+  "title": "Why Programs Use Randomness",
+  "body": " Why Programs Use Randomness  Many programs are deterministic : when they receive the same input, they produce the same output. Determinism is useful for calculations, testing, and debugging. Other programs need to model situations in which the next outcome cannot be known in advance.  Random numbers are useful for:   creating games and simulations;  testing programs with varied inputs;  modeling traffic, insurance claims, or customer arrivals;  studying scientific systems such as molecules and proteins;  estimating risk in systems such as financial markets; and  selecting or arranging items unpredictably.   A program cannot predict the exact future price of a stock or the exact shape a protein will take. It can, however, simulate many possible situations and summarize the resulting patterns. This is the central purpose of random-number generation in simulation.  "
+},
+{
+  "id": "chapter6_generating-random-numbers_random-and-pseudorandom",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_generating-random-numbers_random-and-pseudorandom",
+  "type": "Subsection",
+  "number": "6.9.2",
+  "title": "Random and Pseudorandom Numbers",
+  "body": " Random and Pseudorandom Numbers  A truly random event is not determined by a predictable algorithm. Examples may come from physical processes or other sources of environmental noise. A computer program, however, normally follows an algorithm. It can therefore generate numbers that appear random while actually following a deterministic process.  A number produced by a deterministic algorithm is called pseudorandom . The prefix pseudo- means imitation or apparently, but not completely, real . A pseudorandom sequence can look random, but the same starting state produces the same sequence again.  This apparent contradiction is useful. A program can produce different-looking trials while still allowing a programmer to repeat exactly the same trials during debugging.   Types of random-number sources       Source  Main idea  Typical use    General-purpose pseudorandom generator  A deterministic algorithm produces a sequence that appears random.  Simulation, games, and testing    System or physical source  Values come from an external source of entropy when available.  Providing seed material    Cryptographically secure generator  The output is designed to be difficult to predict.  Passwords, keys, and authentication tokens     "
+},
+{
+  "id": "chapter6_generating-random-numbers_generator-mechanism",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_generating-random-numbers_generator-mechanism",
+  "type": "Subsection",
+  "number": "6.9.3",
+  "title": "How a Pseudorandom Generator Works",
+  "body": " How a Pseudorandom Generator Works  A pseudorandom generator keeps an internal state . The state records enough information for the generator to calculate its next state and its next output.  Conceptually, the process looks like this:   starting state | v state transformation | v next state and output | +---- repeat   A seed supplies the initial state. The generator then repeatedly applies its state-transition algorithm. Because the transition is deterministic, two generators with the same algorithm and the same seed produce the same sequence.  Different generator algorithms make different trade-offs involving speed, memory, sequence length, statistical quality, and suitability for parallel computation. Chapter 6 focuses on the general idea rather than the bit-level details of those algorithms.  "
+},
+{
+  "id": "chapter6_generating-random-numbers_seeds",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_generating-random-numbers_seeds",
+  "type": "Subsection",
+  "number": "6.9.4",
+  "title": "Seeds and Repeatable Sequences",
+  "body": " Seeds and Repeatable Sequences  A seed determines the starting state of a pseudorandom generator. Using the same seed gives the generator the same starting point. Therefore, the program produces the same sequence of pseudorandom values.   #include <iostream> #include <random> int main() { std::mt19937 generator{24680}; for (int value_number = 1; value_number <= 4; ++value_number) { std::cout << generator() << '\\n'; } return 0; }   Running this program again with the same seed produces the same sequence. This is useful when a programmer wants to reproduce a particular test or investigate a problem.  A program can also ask for seed material from std::random_device :   #include <iostream> #include <random> int main() { std::random_device seed_source; std::mt19937 generator{seed_source()}; for (int value_number = 1; value_number <= 4; ++value_number) { std::cout << generator() << '\\n'; } return 0; }   This usually gives the generator a different starting point on different runs. The C++ standard does not guarantee that every implementation has access to a nondeterministic physical source, so std::random_device should be described as a source of seed material rather than as a guaranteed source of true randomness.  A default-constructed std::mt19937 uses its standard default seed. It does not automatically use the system clock. An explicit seed makes the programmer's intention clearer. The particular seed value is not special; any suitable seed value could be used.  "
+},
+{
+  "id": "chapter6_generating-random-numbers_mersenne-twister",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_generating-random-numbers_mersenne-twister",
+  "type": "Subsection",
+  "number": "6.9.5",
+  "title": "The Mersenne Twister",
+  "body": " The Mersenne Twister  The C++ type std::mt19937 is a commonly used implementation of the Mersenne Twister pseudorandom-generation algorithm. The algorithm was developed by Makoto Matsumoto and Takuji Nishimura in 1996 and 1997 and published in 1998.  The name Mersenne honors Marin Mersenne, a French mathematician and philosopher who lived from 1588 to 1648. Mersenne studied numbers of the form , now called Mersenne numbers . The MT19937 algorithm uses the Mersenne-prime period . The superscript is important: this means 2 raised to the 19,937th power, minus 1 . The digits in the exponent should not be written on the same baseline as the 2.  The Mersenne Twister keeps a large internal state. It repeatedly transforms that state and applies an output transformation to produce the next value. Students do not need to implement those transformations. The important ideas are that the generator has a state, a seed initializes the state, and the algorithm advances the state one step at a time.  The Mersenne Twister is fast and has useful statistical behavior for simulations, games, and testing. It is not cryptographically secure because an attacker who learns enough about its state may be able to predict future values.  "
+},
+{
+  "id": "chapter6_generating-random-numbers_distributions",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_generating-random-numbers_distributions",
+  "type": "Subsection",
+  "number": "6.9.6",
+  "title": "Probability Distributions",
+  "body": " Probability Distributions  A generator produces a sequence of pseudorandom values. A probability distribution describes how likely the possible outcomes should be. The C++ random library separates these responsibilities: an engine generates values, and a distribution shapes them for a particular purpose.   Examples of probability distributions       Distribution  Conceptual meaning  Example    Uniform  Values in a range are equally likely.  A fair die    Bernoulli  One yes-or-no event.  Whether a machine fails    Binomial  Counts successes across fixed trials.  Defective items in a batch    Normal or Gaussian  Values cluster around an average.  Measurement error    Poisson  Counts events in a fixed interval.  Customer arrivals    Discrete weighted  Outcomes have different probabilities.  Weighted game outcomes     The C++ library provides types such as std::uniform_int_distribution , std::normal_distribution , std::poisson_distribution , and std::discrete_distribution . In this chapter, we use the uniform distributions in complete programs and discuss the other distributions conceptually.   Older C++ examples sometimes use random() or std::rand() . These are legacy interfaces. The function random() is a POSIX-style function and is not portable standard C++, while standard <cstdlib> provides std::rand() and std::srand() . New C++17 programs should use the engine-and-distribution design from <random> .    #include <iostream> #include <random> int main() { std::mt19937 generator{13579}; std::uniform_int_distribution<int> roll_die{1, 6}; for (int roll_number = 1; roll_number <= 5; ++roll_number) { std::cout << roll_die(generator) << '\\n'; } return 0; }   The expression roll_die(generator) asks the distribution to use the generator and produce one integer from 1 through 6. The generator does not know that the values represent die rolls. The distribution supplies that interpretation.  "
+},
+{
+  "id": "chapter6_generating-random-numbers_die-class",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_generating-random-numbers_die-class",
+  "type": "Subsection",
+  "number": "6.9.7",
+  "title": "A Die Class",
+  "body": " A Die Class  A class can hide the details of random-number generation behind a simple interface. The following Die class stores the engine and distribution as private data. Its public member function roll() gives outside code one value from 1 through 6.   #include <iostream> #include <random> class Die { private: std::mt19937 generator; std::uniform_int_distribution<int> roll_distribution{1, 6}; public: Die(unsigned int seed) : generator{seed} { } int roll() { return roll_distribution(generator); } }; int main() { Die die{86420}; for (int roll_number = 1; roll_number <= 10; ++roll_number) { std::cout << die.roll() << '\\n'; } return 0; }   Each call to die.roll() advances the generator and returns a new result. Therefore, repeated calls on the same Die object normally produce a changing sequence of values. The caller does not need to know which engine or distribution the class uses. This is an example of encapsulation : the class protects its implementation details while providing a useful public operation.  The seed still matters. Two Die objects initialized with the same seed produce matching sequences: the first rolls match, the second rolls match, and so on. The two objects do not return the same value forever; each object advances its own generator after every call.   #include <iostream> #include <random> class Die { private: std::mt19937 generator; std::uniform_int_distribution<int> roll_distribution{1, 6}; public: Die(unsigned int seed) : generator{seed} { } int roll() { return roll_distribution(generator); } }; int main() { Die first_die{2468}; Die second_die{2468}; for (int roll_number = 1; roll_number <= 5; ++roll_number) { std::cout << first_die.roll() << ' ' << second_die.roll() << '\\n'; } return 0; }   To obtain a sequence that normally differs from one run to the next, give the class seed material from std::random_device :  A different seed can be supplied without changing the class:   std::random_device seed_source; Die die{seed_source()};   Using an explicit seed such as Die die{86420}; is useful for repeatable testing. Using std::random_device as a seed source is useful when a program usually should behave differently each time it runs.  "
+},
+{
+  "id": "chapter6_generating-random-numbers_simulation",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_generating-random-numbers_simulation",
+  "type": "Subsection",
+  "number": "6.9.8",
+  "title": "Simulation and Probabilistic Systems",
+  "body": " Simulation and Probabilistic Systems  A simulation uses a program to imitate a process or system. When a system has many possible outcomes, a program can generate many trials and summarize what happens. This approach is often called a Monte Carlo simulation .  For example, the following program simulates 1,000 die rolls and stores the frequency of each result. The array is initialized with zero counters, and each roll increases one counter.   #include <array> #include <iostream> #include <random> int main() { std::mt19937 generator{314159}; std::uniform_int_distribution<int> roll_die{1, 6}; std::array<int, 6> counts{}; for (int trial = 1; trial <= 1000; ++trial) { int roll = roll_die(generator); ++counts[roll - 1]; } for (int side = 1; side <= 6; ++side) { std::cout << side << \": \" << counts[side - 1] << '\\n'; } return 0; }   The array of counts is a simple histogram . With a fair die, the six counts will not be exactly equal. As the number of trials becomes larger, however, the proportions generally become closer to the expected proportions. This is one way the law of large numbers appears in a program.  The same general idea can model stock-market scenarios, insurance claims, traffic, customer arrivals, protein configurations, or properties of atoms. A simulation does not predict one exact future outcome. It estimates patterns across many possible outcomes.  Randomness can also be used to rearrange an existing collection. For example, std::shuffle can randomize the order of an array. It is declared in <algorithm> and uses a random-number engine supplied by the program.   #include <algorithm> #include <array> #include <iostream> #include <random> int main() { std::array<int, 5> values{1, 2, 3, 4, 5}; std::mt19937 generator{98765}; std::shuffle(values.begin(), values.end(), generator); for (int value : values) { std::cout << value << ' '; } std::cout << '\\n'; return 0; }   "
+},
+{
+  "id": "chapter6_generating-random-numbers_security",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_generating-random-numbers_security",
+  "type": "Subsection",
+  "number": "6.9.9",
+  "title": "Randomness and Security",
+  "body": " Randomness and Security  Cryptographic systems also use randomness. They may need random values for passwords, encryption keys, authentication tokens, salts, nonces, and other security-related data.  The ordinary C++ <random> engines, including std::mt19937 , are designed for general-purpose simulation and testing. They are not cryptographically secure. A predictable sequence may be acceptable for a die-roll simulation but dangerous when it protects a secret.  Security-sensitive programs should use a trusted cryptographic library or an operating-system security facility that provides a cryptographically secure pseudorandom number generator. A program should not design its own cryptographic generator.   Use ordinary pseudorandom generators for simulation, games, and testing. Use trusted cryptographic facilities for passwords, keys, authentication tokens, and other secrets.   "
+},
+{
+  "id": "chapter6_random-numbers_pseudorandom",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_random-numbers_pseudorandom",
+  "type": "Checkpoint",
+  "number": "6.9.1",
+  "title": "",
+  "body": "  A number produced by a deterministic algorithm that appears random is called .          "
+},
+{
+  "id": "chapter6_random-numbers_seed-purpose",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_random-numbers_seed-purpose",
+  "type": "Checkpoint",
+  "number": "6.9.2",
+  "title": "",
+  "body": "  What does a seed determine in a pseudorandom generator?      The generator's initial state.   Correct. The initial state determines the sequence that follows.     The number of values the program must generate.   A seed initializes the generator; a loop controls how many values are generated.     The largest value allowed by every distribution.   The distribution, not the seed, determines the desired range.     Whether the program uses a loop.   The seed affects the sequence, not the program's control structure.    "
+},
+{
+  "id": "chapter6_random-numbers_distribution-purpose",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_random-numbers_distribution-purpose",
+  "type": "Checkpoint",
+  "number": "6.9.3",
+  "title": "",
+  "body": "  What is the purpose of a probability distribution such as std::uniform_int_distribution<int> ?      It shapes generator output according to a desired probability pattern.   Correct. The engine generates values, and the distribution gives them a useful pattern.     It stores every value produced by the generator.   Storage is handled by a variable or container.     It guarantees cryptographic security.   A distribution controls probabilities; it does not provide cryptographic security.     It replaces the random-number engine.   The distribution and engine work together.    "
+},
+{
+  "id": "chapter6_random-numbers_die-class",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_random-numbers_die-class",
+  "type": "Checkpoint",
+  "number": "6.9.4",
+  "title": "",
+  "body": "  In the Die class, why are the generator and distribution private data members?      They are implementation details hidden behind the public roll() operation.   Correct. This is encapsulation.     Private data members cannot store objects from library classes.   Private members can store objects. Their access is restricted to the class.     The program must create a new generator for every roll.   The same generator should produce successive values.     The distribution must be initialized inside main() .   The class can initialize its own private distribution.    "
+},
+{
+  "id": "chapter6_random-numbers_security",
+  "level": "2",
+  "url": "generating-random-numbers.html#chapter6_random-numbers_security",
+  "type": "Checkpoint",
+  "number": "6.9.5",
+  "title": "",
+  "body": "  Which is the most appropriate use for std::mt19937 ?      Simulating die rolls and testing a program with varied inputs.   Correct. It is a general-purpose pseudorandom engine.     Generating an encryption key for a banking application.   Security-sensitive values require a trusted cryptographic facility.     Generating a password-reset token for a website.   Password-reset tokens must be generated with security-specific randomness.     Creating a secret authentication value.   Authentication values require a cryptographically secure generator.    "
+},
+{
   "id": "chapter6_glossary",
   "level": "1",
   "url": "chapter6_glossary.html",
   "type": "Glossary",
-  "number": "6.9",
+  "number": "6.10",
   "title": "Chapter 6 Glossary",
-  "body": " Chapter 6 Glossary   iteration  One repetition of a loop body, or the process of repeating an action.    loop  A programming statement that repeats a group of statements.    loop body  The statements that execute during each iteration of a loop.    loop condition  A Boolean expression that determines whether a loop continues.    infinite loop  A loop that does not stop because its condition never becomes false.    counter  A variable that records how many times an event has occurred.    accumulator  A variable that combines values as a loop processes them.    sentinel value  A special value that tells a loop to stop processing input.    fixed-size array  A collection whose number of elements is set when the array is created.    index  A number that identifies an element's position in an array. The first index is 0.    range-based for loop  A for loop that visits each element in a collection.    nested iteration  Iteration in which one loop is placed inside another loop.    std::array  A C++ standard-library type that represents a fixed-size array.   "
+  "body": " Chapter 6 Glossary   iteration  One repetition of a loop body, or the process of repeating an action.    loop  A programming statement that repeats a group of statements.    loop body  The statements that execute during each iteration of a loop.    loop condition  A Boolean expression that determines whether a loop continues.    infinite loop  A loop that does not stop because its condition never becomes false.    counter  A variable that records how many times an event has occurred.    accumulator  A variable that combines values as a loop processes them.    sentinel value  A special value that tells a loop to stop processing input.    fixed-size array  A collection whose number of elements is set when the array is created.    index  A number that identifies an element's position in an array. The first index is 0.    range-based for loop  A for loop that visits each element in a collection.    nested iteration  Iteration in which one loop is placed inside another loop.    std::array  A C++ standard-library type that represents a fixed-size array.    deterministic  Producing the same result when given the same starting conditions and input.    pseudorandom  Produced by a deterministic algorithm but appearing random enough for a particular purpose.    state  The internal information a pseudorandom engine uses to calculate its next state and output.    seed  The initial value or state used to begin a pseudorandom sequence.    random-number engine  A generator that advances internal state and produces a sequence of pseudorandom values.    probability distribution  A rule describing how likely the possible outcomes of a random process are.    Mersenne Twister  A family of fast pseudorandom algorithms. std::mt19937 is a commonly used 32-bit version.    std::random_device  A standard-library source that can provide seed material, often from an implementation's available environmental or hardware source.    uniform distribution  A distribution in which outcomes in the selected range have equal probability, according to the distribution's type.    simulation  A program-based model of a process or system used to study possible outcomes.    Monte Carlo simulation  A simulation that uses repeated random trials to estimate patterns or quantities.    histogram  A collection of counts showing how often values fall into categories or intervals.    law of large numbers  The tendency for observed proportions to approach expected probabilities as the number of trials increases.    cryptographically secure generator  A generator designed to make its output difficult to predict and suitable for security-sensitive values.   "
 },
 {
   "id": "chapter6_glossary_iteration-2",
@@ -8866,20 +9010,146 @@ var ptx_lunr_docs = [
   "body": "A C++ standard-library type that represents a fixed-size array. "
 },
 {
+  "id": "chapter6_glossary_deterministic-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_deterministic-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Producing the same result when given the same starting conditions and input. "
+},
+{
+  "id": "chapter6_glossary_pseudorandom-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_pseudorandom-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Produced by a deterministic algorithm but appearing random enough for a particular purpose. "
+},
+{
+  "id": "chapter6_glossary_random-state-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_random-state-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The internal information a pseudorandom engine uses to calculate its next state and output. "
+},
+{
+  "id": "chapter6_glossary_seed-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_seed-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The initial value or state used to begin a pseudorandom sequence. "
+},
+{
+  "id": "chapter6_glossary_random-engine-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_random-engine-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A generator that advances internal state and produces a sequence of pseudorandom values. "
+},
+{
+  "id": "chapter6_glossary_probability-distribution-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_probability-distribution-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A rule describing how likely the possible outcomes of a random process are. "
+},
+{
+  "id": "chapter6_glossary_mersenne-twister-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_mersenne-twister-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A family of fast pseudorandom algorithms. std::mt19937 is a commonly used 32-bit version. "
+},
+{
+  "id": "chapter6_glossary_random-device-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_random-device-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A standard-library source that can provide seed material, often from an implementation's available environmental or hardware source. "
+},
+{
+  "id": "chapter6_glossary_uniform-distribution-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_uniform-distribution-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A distribution in which outcomes in the selected range have equal probability, according to the distribution's type. "
+},
+{
+  "id": "chapter6_glossary_simulation-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_simulation-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A program-based model of a process or system used to study possible outcomes. "
+},
+{
+  "id": "chapter6_glossary_monte-carlo-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_monte-carlo-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A simulation that uses repeated random trials to estimate patterns or quantities. "
+},
+{
+  "id": "chapter6_glossary_histogram-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_histogram-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A collection of counts showing how often values fall into categories or intervals. "
+},
+{
+  "id": "chapter6_glossary_law-of-large-numbers-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_law-of-large-numbers-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The tendency for observed proportions to approach expected probabilities as the number of trials increases. "
+},
+{
+  "id": "chapter6_glossary_cryptographically-secure-2",
+  "level": "2",
+  "url": "chapter6_glossary.html#chapter6_glossary_cryptographically-secure-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A generator designed to make its output difficult to predict and suitable for security-sensitive values. "
+},
+{
   "id": "chapter6_exercises",
   "level": "1",
   "url": "chapter6_exercises.html",
   "type": "Exercises",
-  "number": "6.10",
+  "number": "6.11",
   "title": "Exercises",
-  "body": " Exercises    What does a while loop do when its condition is false before the first iteration?     It skips the loop body.  The condition is checked before the body runs.    It runs the body once and then stops.  That behavior belongs to a different loop form. A while loop checks first.    It repeats forever.  A false condition prevents the body from running.    It changes the condition to true.  The loop does not change the condition automatically.       Why does this loop never terminate?  int count = 1; while (count <= 3) { std::cout << count << '\\n'; }     count never changes, so the condition remains true.  Look for a statement that changes the variable in the condition.    The value 3 cannot be used in a loop condition.  Constant limits are common in loops.    std::cout causes an infinite loop.  Output does not determine whether this condition changes.    The loop needs a for statement instead.  A while loop can terminate when its controlling value is updated.       What does this program print?  for (int number = 1; number <= 3; ++number) { std::cout << number << ' '; }    1 2 3 The loop starts at 1 and stops after printing 3.  0 1 2 Check the initialization expression.  1 2 3 4 The condition must still be true before an iteration begins.  3 2 1 The update expression increases the loop variable.      Which part of a for statement normally changes the loop variable after each iteration?    The initialization expression Initialization occurs before the first iteration.  The condition The condition decides whether another iteration may begin.  The update expression The update expression runs after the loop body.  The loop body declaration The three parts of the header have specific roles.      Which variable is the counter in this code?  int even_count = 0; for (int value = 1; value <= 10; ++value) { if (value % 2 == 0) { ++even_count; } }    value value visits the range of numbers.  even_count This variable records how many qualifying values were found.  The expression value % 2 This expression tests whether a value is even.  The condition value <= 10 The condition controls continuation but does not count qualifying values.      Which variable is the accumulator?  int total = 0; for (int value = 1; value <= 4; ++value) { total += value; }    total total combines values during the loop.  value value is the loop variable.  4 The number 4 is the upper limit, not a variable.  += += updates the accumulator.      Which expression accesses the first element of values ?  std::array<int, 3> values{10, 20, 30};    values[0] Array indexing begins at 0.  values[1] This accesses the second element.  values.first() That is not the syntax used here.  values[3] For three elements, valid indexes are 0, 1, and 2.      How many asterisks does this program print?  for (int row = 1; row <= 3; ++row) { for (int symbol = 1; symbol <= 2; ++symbol) { std::cout << '*'; } }    3 Count the inner-loop repetitions for every outer-loop iteration.  5 Each outer iteration runs the complete inner loop.  6 The inner loop prints 2 symbols for each of 3 rows.  9 Multiply the number of outer and inner repetitions.      Which phrase best describes this loop?  std::array<Rectangle, 2> rectangles{ Rectangle{4.0, 3.0}, Rectangle{5.0, 2.0} }; for (const Rectangle& rectangle : rectangles) { std::cout << rectangle.calculate_area() << '\\n'; }    It calls a member function for each object. The loop visits each Rectangle and calls its public operation.  It changes the class definition. The class definition is not changed by the loop.  It accesses a private data member directly. The loop uses the public member function instead.  It creates a new class for every iteration. The objects were created before the loop began.    "
+  "body": " Exercises    What does a while loop do when its condition is false before the first iteration?     It skips the loop body.  The condition is checked before the body runs.    It runs the body once and then stops.  That behavior belongs to a different loop form. A while loop checks first.    It repeats forever.  A false condition prevents the body from running.    It changes the condition to true.  The loop does not change the condition automatically.       Why does this loop never terminate?  int count = 1; while (count <= 3) { std::cout << count << '\\n'; }     count never changes, so the condition remains true.  Look for a statement that changes the variable in the condition.    The value 3 cannot be used in a loop condition.  Constant limits are common in loops.    std::cout causes an infinite loop.  Output does not determine whether this condition changes.    The loop needs a for statement instead.  A while loop can terminate when its controlling value is updated.       What does this program print?  for (int number = 1; number <= 3; ++number) { std::cout << number << ' '; }    1 2 3 The loop starts at 1 and stops after printing 3.  0 1 2 Check the initialization expression.  1 2 3 4 The condition must still be true before an iteration begins.  3 2 1 The update expression increases the loop variable.      Which part of a for statement normally changes the loop variable after each iteration?    The initialization expression Initialization occurs before the first iteration.  The condition The condition decides whether another iteration may begin.  The update expression The update expression runs after the loop body.  The loop body declaration The three parts of the header have specific roles.      Which variable is the counter in this code?  int even_count = 0; for (int value = 1; value <= 10; ++value) { if (value % 2 == 0) { ++even_count; } }    value value visits the range of numbers.  even_count This variable records how many qualifying values were found.  The expression value % 2 This expression tests whether a value is even.  The condition value <= 10 The condition controls continuation but does not count qualifying values.      Which variable is the accumulator?  int total = 0; for (int value = 1; value <= 4; ++value) { total += value; }    total total combines values during the loop.  value value is the loop variable.  4 The number 4 is the upper limit, not a variable.  += += updates the accumulator.      Which expression accesses the first element of values ?  std::array<int, 3> values{10, 20, 30};    values[0] Array indexing begins at 0.  values[1] This accesses the second element.  values.first() That is not the syntax used here.  values[3] For three elements, valid indexes are 0, 1, and 2.      How many asterisks does this program print?  for (int row = 1; row <= 3; ++row) { for (int symbol = 1; symbol <= 2; ++symbol) { std::cout << '*'; } }    3 Count the inner-loop repetitions for every outer-loop iteration.  5 Each outer iteration runs the complete inner loop.  6 The inner loop prints 2 symbols for each of 3 rows.  9 Multiply the number of outer and inner repetitions.      Which phrase best describes this loop?  std::array<Rectangle, 2> rectangles{ Rectangle{4.0, 3.0}, Rectangle{5.0, 2.0} }; for (const Rectangle& rectangle : rectangles) { std::cout << rectangle.calculate_area() << '\\n'; }    It calls a member function for each object. The loop visits each Rectangle and calls its public operation.  It changes the class definition. The class definition is not changed by the loop.  It accesses a private data member directly. The loop uses the public member function instead.  It creates a new class for every iteration. The objects were created before the loop began.      What relationship should we expect between the two sequences?  std::mt19937 first_generator{2468}; std::mt19937 second_generator{2468}; for (int count = 1; count <= 3; ++count) { std::cout << first_generator() << ' ' << second_generator() << '\\n'; }    The first values match, the second values match, and the third values match. The same engine and same seed create the same deterministic sequence.  Every value is 2468. The seed initializes the generator; it is not the output for every call.  The first sequence is always larger. Neither generator is given an ordering advantage.  The program cannot compile because two engines are created. A program may create multiple independent engines.     What is the most accurate description of std::random_device in this chapter?   It can provide seed material for a pseudorandom engine. It is commonly used to help choose a starting point for another generator.  It guarantees cryptographically secure passwords on every implementation. The standard does not make that security guarantee.  It is a distribution that chooses values from 1 through 6. A distribution shapes engine output; random_device is a seed source.  It always returns the current time in seconds. Its implementation may use an environmental or hardware source; it is not defined as the system clock.      What kind of values does this distribution request?  std::uniform_real_distribution<double> choose_fraction{0.0, 1.0}; double fraction = choose_fraction(generator);    Floating-point values from 0.0 up to, but not including, 1.0. uniform_real_distribution produces real values over the specified interval.  Only the integers 0 and 1. Use an integer distribution for whole-number outcomes.  Any value from negative infinity to positive infinity. The constructor bounds define the interval.  Only the value 1.0. The distribution produces a range of possible real values.      Why does the die-roll simulation use counts[roll - 1] ?  std::array<int, 6> counts{}; int roll = roll_die(generator); \/\/ 1 through 6 ++counts[roll - 1];    It maps die results 1 through 6 to array indexes 0 through 5. The die labels begin at 1, while array indexes begin at 0.  It makes every roll equal to zero. The expression is used as an array index, not as a replacement for the roll.  It creates seven counters. The array still contains six elements.  It converts a die roll into a Boolean value. The expression performs integer subtraction.     Which distribution is the best conceptual match for counting customer arrivals during a fixed time interval?   Uniform real distribution This models real-valued outcomes across an interval.  Poisson distribution Poisson models counts of events in a fixed interval.  Normal distribution Normal models values clustered around an average.  Uniform integer distribution Uniform integer makes selected whole-number outcomes equally likely.     Why can a simulation of a complex system run many trials instead of predicting one exact future?   Repeated trials can reveal patterns and estimate probabilities across many possible outcomes. Simulation studies distributions of outcomes rather than claiming certainty about one outcome.  Random numbers make every trial identical. Pseudorandom trials can differ while following a chosen distribution.  A simulation removes all uncertainty from the real system. A model helps study uncertainty; it does not eliminate it.  Only one trial is needed when a model uses a loop. Monte Carlo reasoning depends on repeated trials.    "
 },
 {
   "id": "chapter6_exercise_while_condition",
   "level": "2",
   "url": "chapter6_exercises.html#chapter6_exercise_while_condition",
   "type": "Exercise",
-  "number": "6.10.1",
+  "number": "6.11.1",
   "title": "",
   "body": "  What does a while loop do when its condition is false before the first iteration?     It skips the loop body.  The condition is checked before the body runs.    It runs the body once and then stops.  That behavior belongs to a different loop form. A while loop checks first.    It repeats forever.  A false condition prevents the body from running.    It changes the condition to true.  The loop does not change the condition automatically.    "
 },
@@ -8888,7 +9158,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_exercises.html#chapter6_exercise_while_update",
   "type": "Exercise",
-  "number": "6.10.2",
+  "number": "6.11.2",
   "title": "",
   "body": "  Why does this loop never terminate?  int count = 1; while (count <= 3) { std::cout << count << '\\n'; }     count never changes, so the condition remains true.  Look for a statement that changes the variable in the condition.    The value 3 cannot be used in a loop condition.  Constant limits are common in loops.    std::cout causes an infinite loop.  Output does not determine whether this condition changes.    The loop needs a for statement instead.  A while loop can terminate when its controlling value is updated.    "
 },
@@ -8897,7 +9167,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_exercises.html#chapter6_exercise_for_output",
   "type": "Exercise",
-  "number": "6.10.3",
+  "number": "6.11.3",
   "title": "",
   "body": "  What does this program print?  for (int number = 1; number <= 3; ++number) { std::cout << number << ' '; }    1 2 3 The loop starts at 1 and stops after printing 3.  0 1 2 Check the initialization expression.  1 2 3 4 The condition must still be true before an iteration begins.  3 2 1 The update expression increases the loop variable.   "
 },
@@ -8906,7 +9176,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_exercises.html#chapter6_exercise_for_parts",
   "type": "Exercise",
-  "number": "6.10.4",
+  "number": "6.11.4",
   "title": "",
   "body": "  Which part of a for statement normally changes the loop variable after each iteration?    The initialization expression Initialization occurs before the first iteration.  The condition The condition decides whether another iteration may begin.  The update expression The update expression runs after the loop body.  The loop body declaration The three parts of the header have specific roles.   "
 },
@@ -8915,7 +9185,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_exercises.html#chapter6_exercise_counter",
   "type": "Exercise",
-  "number": "6.10.5",
+  "number": "6.11.5",
   "title": "",
   "body": "  Which variable is the counter in this code?  int even_count = 0; for (int value = 1; value <= 10; ++value) { if (value % 2 == 0) { ++even_count; } }    value value visits the range of numbers.  even_count This variable records how many qualifying values were found.  The expression value % 2 This expression tests whether a value is even.  The condition value <= 10 The condition controls continuation but does not count qualifying values.   "
 },
@@ -8924,7 +9194,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_exercises.html#chapter6_exercise_accumulator",
   "type": "Exercise",
-  "number": "6.10.6",
+  "number": "6.11.6",
   "title": "",
   "body": "  Which variable is the accumulator?  int total = 0; for (int value = 1; value <= 4; ++value) { total += value; }    total total combines values during the loop.  value value is the loop variable.  4 The number 4 is the upper limit, not a variable.  += += updates the accumulator.   "
 },
@@ -8933,7 +9203,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_exercises.html#chapter6_exercise_array_index",
   "type": "Exercise",
-  "number": "6.10.7",
+  "number": "6.11.7",
   "title": "",
   "body": "  Which expression accesses the first element of values ?  std::array<int, 3> values{10, 20, 30};    values[0] Array indexing begins at 0.  values[1] This accesses the second element.  values.first() That is not the syntax used here.  values[3] For three elements, valid indexes are 0, 1, and 2.   "
 },
@@ -8942,7 +9212,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_exercises.html#chapter6_exercise_nested_loops",
   "type": "Exercise",
-  "number": "6.10.8",
+  "number": "6.11.8",
   "title": "",
   "body": "  How many asterisks does this program print?  for (int row = 1; row <= 3; ++row) { for (int symbol = 1; symbol <= 2; ++symbol) { std::cout << '*'; } }    3 Count the inner-loop repetitions for every outer-loop iteration.  5 Each outer iteration runs the complete inner loop.  6 The inner loop prints 2 symbols for each of 3 rows.  9 Multiply the number of outer and inner repetitions.   "
 },
@@ -8951,16 +9221,70 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_exercises.html#chapter6_exercise_object_array",
   "type": "Exercise",
-  "number": "6.10.9",
+  "number": "6.11.9",
   "title": "",
   "body": "  Which phrase best describes this loop?  std::array<Rectangle, 2> rectangles{ Rectangle{4.0, 3.0}, Rectangle{5.0, 2.0} }; for (const Rectangle& rectangle : rectangles) { std::cout << rectangle.calculate_area() << '\\n'; }    It calls a member function for each object. The loop visits each Rectangle and calls its public operation.  It changes the class definition. The class definition is not changed by the loop.  It accesses a private data member directly. The loop uses the public member function instead.  It creates a new class for every iteration. The objects were created before the loop began.   "
+},
+{
+  "id": "chapter6_exercise_random_same_seed",
+  "level": "2",
+  "url": "chapter6_exercises.html#chapter6_exercise_random_same_seed",
+  "type": "Exercise",
+  "number": "6.11.10",
+  "title": "",
+  "body": "  What relationship should we expect between the two sequences?  std::mt19937 first_generator{2468}; std::mt19937 second_generator{2468}; for (int count = 1; count <= 3; ++count) { std::cout << first_generator() << ' ' << second_generator() << '\\n'; }    The first values match, the second values match, and the third values match. The same engine and same seed create the same deterministic sequence.  Every value is 2468. The seed initializes the generator; it is not the output for every call.  The first sequence is always larger. Neither generator is given an ordering advantage.  The program cannot compile because two engines are created. A program may create multiple independent engines.   "
+},
+{
+  "id": "chapter6_exercise_random_device",
+  "level": "2",
+  "url": "chapter6_exercises.html#chapter6_exercise_random_device",
+  "type": "Exercise",
+  "number": "6.11.11",
+  "title": "",
+  "body": " What is the most accurate description of std::random_device in this chapter?   It can provide seed material for a pseudorandom engine. It is commonly used to help choose a starting point for another generator.  It guarantees cryptographically secure passwords on every implementation. The standard does not make that security guarantee.  It is a distribution that chooses values from 1 through 6. A distribution shapes engine output; random_device is a seed source.  It always returns the current time in seconds. Its implementation may use an environmental or hardware source; it is not defined as the system clock.   "
+},
+{
+  "id": "chapter6_exercise_random_distribution_range",
+  "level": "2",
+  "url": "chapter6_exercises.html#chapter6_exercise_random_distribution_range",
+  "type": "Exercise",
+  "number": "6.11.12",
+  "title": "",
+  "body": "  What kind of values does this distribution request?  std::uniform_real_distribution<double> choose_fraction{0.0, 1.0}; double fraction = choose_fraction(generator);    Floating-point values from 0.0 up to, but not including, 1.0. uniform_real_distribution produces real values over the specified interval.  Only the integers 0 and 1. Use an integer distribution for whole-number outcomes.  Any value from negative infinity to positive infinity. The constructor bounds define the interval.  Only the value 1.0. The distribution produces a range of possible real values.   "
+},
+{
+  "id": "chapter6_exercise_histogram_index",
+  "level": "2",
+  "url": "chapter6_exercises.html#chapter6_exercise_histogram_index",
+  "type": "Exercise",
+  "number": "6.11.13",
+  "title": "",
+  "body": "  Why does the die-roll simulation use counts[roll - 1] ?  std::array<int, 6> counts{}; int roll = roll_die(generator); \/\/ 1 through 6 ++counts[roll - 1];    It maps die results 1 through 6 to array indexes 0 through 5. The die labels begin at 1, while array indexes begin at 0.  It makes every roll equal to zero. The expression is used as an array index, not as a replacement for the roll.  It creates seven counters. The array still contains six elements.  It converts a die roll into a Boolean value. The expression performs integer subtraction.   "
+},
+{
+  "id": "chapter6_exercise_random_distribution_choice",
+  "level": "2",
+  "url": "chapter6_exercises.html#chapter6_exercise_random_distribution_choice",
+  "type": "Exercise",
+  "number": "6.11.14",
+  "title": "",
+  "body": " Which distribution is the best conceptual match for counting customer arrivals during a fixed time interval?   Uniform real distribution This models real-valued outcomes across an interval.  Poisson distribution Poisson models counts of events in a fixed interval.  Normal distribution Normal models values clustered around an average.  Uniform integer distribution Uniform integer makes selected whole-number outcomes equally likely.   "
+},
+{
+  "id": "chapter6_exercise_random_simulation",
+  "level": "2",
+  "url": "chapter6_exercises.html#chapter6_exercise_random_simulation",
+  "type": "Exercise",
+  "number": "6.11.15",
+  "title": "",
+  "body": " Why can a simulation of a complex system run many trials instead of predicting one exact future?   Repeated trials can reveal patterns and estimate probabilities across many possible outcomes. Simulation studies distributions of outcomes rather than claiming certainty about one outcome.  Random numbers make every trial identical. Pseudorandom trials can differ while following a chosen distribution.  A simulation removes all uncertainty from the real system. A model helps study uncertainty; it does not eliminate it.  Only one trial is needed when a model uses a loop. Monte Carlo reasoning depends on repeated trials.   "
 },
 {
   "id": "chapter6_mixed-up-code-exercises",
   "level": "1",
   "url": "chapter6_mixed-up-code-exercises.html",
   "type": "Exercises",
-  "number": "6.11",
+  "number": "6.12",
   "title": "Mixed-Up Code Exercises",
   "body": " Mixed-Up Code Exercises   Arrange the blocks to create complete C++ programs. Pay attention to initialization, the loop condition, the loop body, and the update.     Arrange the blocks to print the numbers from 5 down to 1.    #include <iostream>  int main() {  int count = 5;  while (count > 0) {  std::cout << count << '\\n';  --count;  }  return 0;  }  ++count;      Arrange the blocks to print the numbers from 1 through 5 using a for loop.    #include <iostream>  int main() {  for (int number = 1; number <= 5; ++number) {  std::cout << number << '\\n';  }  return 0;  }  for (int number = 0; number < 5; ++number) {      Arrange the blocks to calculate and print the total of the array values.    #include <array>  #include <iostream>  int main() {  const std::array<int, 4> values{3, 7, 2, 8};  int total = 0;  for (int value : values) {  total += value;  }  std::cout << total << '\\n';  return 0;  }  total = value;      Arrange the blocks to print a four-row increasing triangle of asterisks.    #include <iostream>  int main() {  for (int row = 1; row <= 4; ++row) {  for (int symbol = 1; symbol <= row; ++symbol) {  std::cout << '*';  }  std::cout << '\\n';  }  return 0;  }  for (int symbol = 1; symbol <= 4; ++symbol) {      Arrange the loop that reports the area of every rectangle.    for (const Rectangle& rectangle : rectangles) {  std::cout << rectangle.calculate_area() << '\\n';  }  for (Rectangle rectangle : calculate_area) {    "
 },
@@ -8978,7 +9302,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_mixed-up-code-exercises.html#chapter6_mixed_while_countdown",
   "type": "Exercise",
-  "number": "6.11.yes",
+  "number": "6.12.yes",
   "title": "",
   "body": "  Arrange the blocks to print the numbers from 5 down to 1.    #include <iostream>  int main() {  int count = 5;  while (count > 0) {  std::cout << count << '\\n';  --count;  }  return 0;  }  ++count;   "
 },
@@ -8987,7 +9311,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_mixed-up-code-exercises.html#chapter6_mixed_for_count",
   "type": "Exercise",
-  "number": "6.11.yes",
+  "number": "6.12.yes",
   "title": "",
   "body": "  Arrange the blocks to print the numbers from 1 through 5 using a for loop.    #include <iostream>  int main() {  for (int number = 1; number <= 5; ++number) {  std::cout << number << '\\n';  }  return 0;  }  for (int number = 0; number < 5; ++number) {   "
 },
@@ -8996,7 +9320,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_mixed-up-code-exercises.html#chapter6_mixed_array_sum",
   "type": "Exercise",
-  "number": "6.11.yes",
+  "number": "6.12.yes",
   "title": "",
   "body": "  Arrange the blocks to calculate and print the total of the array values.    #include <array>  #include <iostream>  int main() {  const std::array<int, 4> values{3, 7, 2, 8};  int total = 0;  for (int value : values) {  total += value;  }  std::cout << total << '\\n';  return 0;  }  total = value;   "
 },
@@ -9005,7 +9329,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_mixed-up-code-exercises.html#chapter6_mixed_nested_pattern",
   "type": "Exercise",
-  "number": "6.11.yes",
+  "number": "6.12.yes",
   "title": "",
   "body": "  Arrange the blocks to print a four-row increasing triangle of asterisks.    #include <iostream>  int main() {  for (int row = 1; row <= 4; ++row) {  for (int symbol = 1; symbol <= row; ++symbol) {  std::cout << '*';  }  std::cout << '\\n';  }  return 0;  }  for (int symbol = 1; symbol <= 4; ++symbol) {   "
 },
@@ -9014,7 +9338,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_mixed-up-code-exercises.html#chapter6_mixed_object_array",
   "type": "Exercise",
-  "number": "6.11.yes",
+  "number": "6.12.yes",
   "title": "",
   "body": "  Arrange the loop that reports the area of every rectangle.    for (const Rectangle& rectangle : rectangles) {  std::cout << rectangle.calculate_area() << '\\n';  }  for (Rectangle rectangle : calculate_area) {   "
 },
@@ -9023,7 +9347,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter6_coding-practice.html",
   "type": "Exercises",
-  "number": "6.12",
+  "number": "6.13",
   "title": "Coding Practice",
   "body": " Coding Practice    Write a program that prints the integers from 1 through 100, one per line. Use a for loop.   #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { for (int number = 1; number <= 100; ++number) { std::cout << number << '\\n'; } return 0; }       Write a program that reads nonnegative integers and prints their total. The value 0 is the sentinel value and should stop the loop, but it should not be added to the total.   #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { int value = 0; int total = 0; std::cin >> value; while (value != 0) { total += value; std::cin >> value; } std::cout << total << '\\n'; return 0; }       Given the scores below, use a range-based for loop to calculate and print the total and the number of scores that are at least 90.   #include <array> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; \/\/ Write your solution here. }      #include <array> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; int total = 0; int high_score_count = 0; for (int score : scores) { total += score; if (score >= 90) { ++high_score_count; } } std::cout << \"Total: \" << total << '\\n'; std::cout << \"High scores: \" << high_score_count << '\\n'; return 0; }       Write a program that prints a triangle with five rows. Row 1 should contain one asterisk, row 2 should contain two asterisks, and so on. Use nested for loops.   * ** *** **** *****    #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { for (int row = 1; row <= 5; ++row) { for (int symbol = 1; symbol <= row; ++symbol) { std::cout << '*'; } std::cout << '\\n'; } return 0; }       Define the Point structure shown below. Create an array containing three points and use a range-based loop to print each point in the form (x, y) .   #include <array> #include <iostream> struct Point { double x; double y; }; int main() { \/\/ Create the array and write the loop here. }      #include <array> #include <iostream> struct Point { double x; double y; }; int main() { const std::array<Point, 3> points{ Point{1.0, 2.0}, Point{3.0, 4.0}, Point{5.0, 6.0} }; for (const Point& point : points) { std::cout << '(' << point.x << \", \" << point.y << \")\\n\"; } return 0; }     "
 },
@@ -9032,7 +9356,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_coding-practice.html#chapter6_coding_count_to_100",
   "type": "Exercise",
-  "number": "6.12.1",
+  "number": "6.13.1",
   "title": "",
   "body": "  Write a program that prints the integers from 1 through 100, one per line. Use a for loop.   #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { for (int number = 1; number <= 100; ++number) { std::cout << number << '\\n'; } return 0; }    "
 },
@@ -9041,7 +9365,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_coding-practice.html#chapter6_coding_sum_until_zero",
   "type": "Exercise",
-  "number": "6.12.2",
+  "number": "6.13.2",
   "title": "",
   "body": "  Write a program that reads nonnegative integers and prints their total. The value 0 is the sentinel value and should stop the loop, but it should not be added to the total.   #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { int value = 0; int total = 0; std::cin >> value; while (value != 0) { total += value; std::cin >> value; } std::cout << total << '\\n'; return 0; }    "
 },
@@ -9050,7 +9374,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_coding-practice.html#chapter6_coding_array_summary",
   "type": "Exercise",
-  "number": "6.12.3",
+  "number": "6.13.3",
   "title": "",
   "body": "  Given the scores below, use a range-based for loop to calculate and print the total and the number of scores that are at least 90.   #include <array> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; \/\/ Write your solution here. }      #include <array> #include <iostream> int main() { const std::array<int, 5> scores{82, 91, 76, 88, 95}; int total = 0; int high_score_count = 0; for (int score : scores) { total += score; if (score >= 90) { ++high_score_count; } } std::cout << \"Total: \" << total << '\\n'; std::cout << \"High scores: \" << high_score_count << '\\n'; return 0; }    "
 },
@@ -9059,7 +9383,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_coding-practice.html#chapter6_coding_nested_triangle",
   "type": "Exercise",
-  "number": "6.12.4",
+  "number": "6.13.4",
   "title": "",
   "body": "  Write a program that prints a triangle with five rows. Row 1 should contain one asterisk, row 2 should contain two asterisks, and so on. Use nested for loops.   * ** *** **** *****    #include <iostream> int main() { \/\/ Write your solution here. }      #include <iostream> int main() { for (int row = 1; row <= 5; ++row) { for (int symbol = 1; symbol <= row; ++symbol) { std::cout << '*'; } std::cout << '\\n'; } return 0; }    "
 },
@@ -9068,1062 +9392,198 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_coding-practice.html#chapter6_coding_array_of_points",
   "type": "Exercise",
-  "number": "6.12.5",
+  "number": "6.13.5",
   "title": "",
   "body": "  Define the Point structure shown below. Create an array containing three points and use a range-based loop to print each point in the form (x, y) .   #include <array> #include <iostream> struct Point { double x; double y; }; int main() { \/\/ Create the array and write the loop here. }      #include <array> #include <iostream> struct Point { double x; double y; }; int main() { const std::array<Point, 3> points{ Point{1.0, 2.0}, Point{3.0, 4.0}, Point{5.0, 6.0} }; for (const Point& point : points) { std::cout << '(' << point.x << \", \" << point.y << \")\\n\"; } return 0; }    "
 },
 {
-  "id": "chapter7_containers-for-strings",
+  "id": "chapter7_string-variables-and-mutability",
   "level": "1",
-  "url": "chapter7_containers-for-strings.html",
+  "url": "chapter7_string-variables-and-mutability.html",
   "type": "Section",
   "number": "7.1",
-  "title": "Containers for strings",
-  "body": " Containers for strings  We have seen five types of values—booleans, characters, integers, floating-point numbers and strings—but only four types of variables— bool , char , int and double . So far we have no way to store a string in a variable or perform operations on strings.  In fact, there are several kinds of variables in C++ that can store strings. One is a basic type that is part of the C++ language, sometimes called a native C string. The syntax for C strings is a bit ugly, and using them requires some concepts we have not covered yet, so for the most part we are going to avoid them.  The string type we are going to use is called string , which is one of the classes that belong to the C++ Standard Library.  Unfortunately, it is not possible to avoid C strings altogether. In a few places in this chapter I will warn you about some problems you might run into using string s instead of C strings.  "
+  "title": "<code class=\"code-inline tex2jax_ignore\">std::string<\/code> Variables and Mutability",
+  "body": " std::string Variables and Mutability  A std::string object stores a sequence of characters. It is part of the C++ Standard Library, so programs that use it should include the <string> header.   #include <iostream> #include <string> int main() { std::string first; first = \"Hello, \"; std::string second{\"world!\"}; std::cout << first << second << '\\n'; return 0; }   The declaration std::string first; creates a string object. The assignment first = \"Hello, \"; gives an existing object a new value. The expression std::string second{\"world!\"}; declares and initializes an object in one statement.  C++ std::string objects are mutable unless they are declared const . We can replace one character by using its index on the left side of an assignment.   #include <iostream> #include <string> int main() { std::string greeting{\"Hello, world!\"}; greeting[0] = 'J'; std::cout << greeting << '\\n'; return 0; }   This program prints Jello, world! . Indexing begins at zero, so greeting[0] refers to the first character. A character literal uses single quotation marks, such as 'J' ; a string literal uses double quotation marks, such as \"J\" .  A const std::string can be inspected, but its characters cannot be changed after initialization.   #include <string> int main() { const std::string course{\"CS110B\"}; \/\/ course[0] = 'X'; \/\/ Not allowed: course is const. return 0; }   "
 },
 {
-  "id": "chapter7_containers-for-strings-2",
+  "id": "chapter7_string-variables-and-mutability-2",
   "level": "2",
-  "url": "chapter7_containers-for-strings.html#chapter7_containers-for-strings-2",
+  "url": "chapter7_string-variables-and-mutability.html#chapter7_string-variables-and-mutability-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "We have seen five types of values—booleans, characters, integers, floating-point numbers and strings—but only four types of variables— bool , char , int and double . So far we have no way to store a string in a variable or perform operations on strings. "
+  "body": "A std::string object stores a sequence of characters. It is part of the C++ Standard Library, so programs that use it should include the <string> header. "
 },
 {
-  "id": "chapter7_containers-for-strings-3",
+  "id": "chapter7_string-variables-and-mutability-4",
   "level": "2",
-  "url": "chapter7_containers-for-strings.html#chapter7_containers-for-strings-3",
+  "url": "chapter7_string-variables-and-mutability.html#chapter7_string-variables-and-mutability-4",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In fact, there are several kinds of variables in C++ that can store strings. One is a basic type that is part of the C++ language, sometimes called a native C string. The syntax for C strings is a bit ugly, and using them requires some concepts we have not covered yet, so for the most part we are going to avoid them. "
+  "body": "The declaration std::string first; creates a string object. The assignment first = \"Hello, \"; gives an existing object a new value. The expression std::string second{\"world!\"}; declares and initializes an object in one statement. "
 },
 {
-  "id": "chapter7_containers-for-strings-4",
+  "id": "chapter7_string-variables-and-mutability-5",
   "level": "2",
-  "url": "chapter7_containers-for-strings.html#chapter7_containers-for-strings-4",
+  "url": "chapter7_string-variables-and-mutability.html#chapter7_string-variables-and-mutability-5",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The string type we are going to use is called string , which is one of the classes that belong to the C++ Standard Library. "
+  "body": "C++ std::string objects are mutable unless they are declared const . We can replace one character by using its index on the left side of an assignment. "
 },
 {
-  "id": "chapter7_containers-for-strings-5",
+  "id": "chapter7_string-variables-and-mutability-7",
   "level": "2",
-  "url": "chapter7_containers-for-strings.html#chapter7_containers-for-strings-5",
+  "url": "chapter7_string-variables-and-mutability.html#chapter7_string-variables-and-mutability-7",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Unfortunately, it is not possible to avoid C strings altogether. In a few places in this chapter I will warn you about some problems you might run into using string s instead of C strings. "
+  "body": "This program prints Jello, world! . Indexing begins at zero, so greeting[0] refers to the first character. A character literal uses single quotation marks, such as 'J' ; a string literal uses double quotation marks, such as \"J\" . "
 },
 {
-  "id": "chapter7_string-variables",
+  "id": "chapter7_string-variables-and-mutability-8",
+  "level": "2",
+  "url": "chapter7_string-variables-and-mutability.html#chapter7_string-variables-and-mutability-8",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A const std::string can be inspected, but its characters cannot be changed after initialization. "
+},
+{
+  "id": "chapter7_string-operations",
   "level": "1",
-  "url": "chapter7_string-variables.html",
+  "url": "chapter7_string-operations.html",
   "type": "Section",
   "number": "7.2",
-  "title": "<code class=\"code-inline tex2jax_ignore\">string<\/code> variables",
-  "body": " string variables  You can create a variable with type string in the usual ways.   In this active code, the first line creates a string without giving it a value. The second line assigns it the string value \"Hello,\" . The third line is a combined declaration and assignment, also called an initialization.   #include <iostream> #include <string> int main() { std::string first; first = \"Hello, \"; std::string second = \"world.\"; }    Normally when string values like \"Hello, \" or \"world.\" appear, they are treated as C strings. In this case, when we assign them to an string variable, they are converted automatically to string values.  We can output strings in the usual way:  cout << first << second << std::endl ;  In order to compile this code, you will have to include the header file for the string class. If you are already including iostream , you may get away with not explicitly including string . In some environments, iostream will include string for you. But it is best to explicitly include string if your code relies on it.   Run this active code!   #include <iostream> #include <string> int main() { std::string first; first = \"Hello, \"; std::string second = \"world.\"; std::cout << first << second << std::endl; }      Construct a block of code that correctly prints out a string variable.     string x;     x = \"It is cold outside!\";    x = It is cold outside;     cout << x << std::endl ;       How would you initialize a string?      string x = \"Hello\";   This is the correct way to initialize a string.     x = \"Hello\";   This is an assignment.     string x;   This is a declaration.       Click on each spot where a string assignment occurs.    def main() {   string fruit;   fruit = \"apple\";   fruit = \"pear\";   string flavor;   flavor = \"vanilla\";  }    "
+  "title": "<code class=\"code-inline tex2jax_ignore\">std::string<\/code> Operations",
+  "body": " std::string Operations  A string object provides operations for asking about its contents and creating new strings. The member functions size() and length() both report the number of characters. In this book we will usually use size() .   #include <iostream> #include <string> int main() { std::string fruit{\"banana\"}; std::cout << fruit.size() << '\\n'; std::cout << fruit.length() << '\\n'; return 0; }    Common std::string operations       Operation  Function or expression  Return value    Find the number of characters  text.size() or text.length()  std::string::size_type , the number of characters    Test whether the string is empty  text.empty()  bool    Access a character without a bounds check  text[index]  A reference to the character, which can be modified when text is non- const    Access a character with a bounds check  text.at(index)  A reference to the character; throws std::out_of_range for an invalid index    Find the first matching character or substring  text.find(target)  The first matching index, or std::string::npos    Create part of a string  text.substr(start, count)  A new std::string    Concatenate strings  first + second  A new std::string    Append text  text.append(other)  std::string& referring to the modified text    Append text with an assignment operator  text += other  std::string& referring to the modified text    Remove characters  text.erase(start, count)  std::string& referring to the modified text     The table shows simplified forms. Many of these functions have additional overloads, but these forms cover the most common beginner uses. Functions that modify a string usually return a reference to the same string, while functions that inspect or search a string return information about it or create a new result.  The valid indices of a nonempty string range from zero through text.size() - 1 . The expression text[text.size()] is past the last character and must not be used as a character index.   Concatenation   Concatenation means joining strings end to end. The + operator creates a new string, while += adds text to an existing string.   #include <iostream> #include <string> int main() { std::string fruit{\"banana\"}; std::string baked_good{\" nut bread\"}; std::string dessert = fruit + baked_good; dessert += \"!\"; std::cout << dessert << '\\n'; return 0; }   The output is banana nut bread! . Concatenation does not add a space automatically; include spaces in a string when they are part of the desired result. The member function append() is another way to add text to an existing string.    Converting Numbers to Strings  The library function std::to_string converts a number to a std::string . This is useful when text must include a computed value.   #include <iostream> #include <string> int main() { int score{95}; std::string message = \"Score: \" + std::to_string(score); std::cout << message << '\\n'; return 0; }     Finding Characters and Substrings  The find() member function searches for a character or a substring. It returns the index of the first match as an std::string::size_type , an alias of std::size_t .   #include <iostream> #include <string> int main() { std::string sentence{\"The sea is calm.\"}; std::size_t index = sentence.find(\"sea\"); if (index != std::string::npos) { std::cout << \"Found at index \" << index << '\\n'; } return 0; }   If no match exists, find() returns the special value std::string::npos not false . Test for that value before using the result as an index. Searches are case-sensitive: \"Sea\" and \"sea\" are different strings.   "
 },
 {
-  "id": "chapter7_string-variables-2",
+  "id": "chapter7_string-operations-2",
   "level": "2",
-  "url": "chapter7_string-variables.html#chapter7_string-variables-2",
+  "url": "chapter7_string-operations.html#chapter7_string-operations-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "You can create a variable with type string in the usual ways. "
+  "body": "A string object provides operations for asking about its contents and creating new strings. The member functions size() and length() both report the number of characters. In this book we will usually use size() . "
 },
 {
-  "id": "string_variables_AC_1",
+  "id": "table_common-string-operations",
   "level": "2",
-  "url": "chapter7_string-variables.html#string_variables_AC_1",
-  "type": "Listing",
+  "url": "chapter7_string-operations.html#table_common-string-operations",
+  "type": "Table",
   "number": "7.2.1",
-  "title": "In this active code, the first line creates a <code class=\"code-inline tex2jax_ignore\">string<\/code> without giving it a value. The second line assigns it the string value <code class=\"code-inline tex2jax_ignore\">\"Hello,\"<\/code>. The third line is a combined declaration and assignment, also called an initialization.",
-  "body": " In this active code, the first line creates a string without giving it a value. The second line assigns it the string value \"Hello,\" . The third line is a combined declaration and assignment, also called an initialization.   #include <iostream> #include <string> int main() { std::string first; first = \"Hello, \"; std::string second = \"world.\"; }   "
+  "title": "Common <code class=\"code-inline tex2jax_ignore\">std::string<\/code> operations",
+  "body": " Common std::string operations       Operation  Function or expression  Return value    Find the number of characters  text.size() or text.length()  std::string::size_type , the number of characters    Test whether the string is empty  text.empty()  bool    Access a character without a bounds check  text[index]  A reference to the character, which can be modified when text is non- const    Access a character with a bounds check  text.at(index)  A reference to the character; throws std::out_of_range for an invalid index    Find the first matching character or substring  text.find(target)  The first matching index, or std::string::npos    Create part of a string  text.substr(start, count)  A new std::string    Concatenate strings  first + second  A new std::string    Append text  text.append(other)  std::string& referring to the modified text    Append text with an assignment operator  text += other  std::string& referring to the modified text    Remove characters  text.erase(start, count)  std::string& referring to the modified text    "
 },
 {
-  "id": "chapter7_string-variables-4",
+  "id": "chapter7_string-operations-5",
   "level": "2",
-  "url": "chapter7_string-variables.html#chapter7_string-variables-4",
+  "url": "chapter7_string-operations.html#chapter7_string-operations-5",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Normally when string values like \"Hello, \" or \"world.\" appear, they are treated as C strings. In this case, when we assign them to an string variable, they are converted automatically to string values. "
+  "body": "The table shows simplified forms. Many of these functions have additional overloads, but these forms cover the most common beginner uses. Functions that modify a string usually return a reference to the same string, while functions that inspect or search a string return information about it or create a new result. "
 },
 {
-  "id": "chapter7_string-variables-5",
+  "id": "chapter7_string-operations-6",
   "level": "2",
-  "url": "chapter7_string-variables.html#chapter7_string-variables-5",
+  "url": "chapter7_string-operations.html#chapter7_string-operations-6",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "We can output strings in the usual way: "
-},
-{
-  "id": "chapter7_string-variables-7",
-  "level": "2",
-  "url": "chapter7_string-variables.html#chapter7_string-variables-7",
-  "type": "Note",
-  "number": "7.2.1",
-  "title": "",
-  "body": "In order to compile this code, you will have to include the header file for the string class. If you are already including iostream , you may get away with not explicitly including string . In some environments, iostream will include string for you. But it is best to explicitly include string if your code relies on it. "
-},
-{
-  "id": "string_variables_AC_2",
-  "level": "2",
-  "url": "chapter7_string-variables.html#string_variables_AC_2",
-  "type": "Listing",
-  "number": "7.2.2",
-  "title": "Run this active code!",
-  "body": " Run this active code!   #include <iostream> #include <string> int main() { std::string first; first = \"Hello, \"; std::string second = \"world.\"; std::cout << first << second << std::endl; }   "
-},
-{
-  "id": "string_variables_1",
-  "level": "2",
-  "url": "chapter7_string-variables.html#string_variables_1",
-  "type": "Checkpoint",
-  "number": "7.2.1",
-  "title": "",
-  "body": "  Construct a block of code that correctly prints out a string variable.     string x;     x = \"It is cold outside!\";    x = It is cold outside;     cout << x << std::endl ;    "
-},
-{
-  "id": "string_variables_2",
-  "level": "2",
-  "url": "chapter7_string-variables.html#string_variables_2",
-  "type": "Checkpoint",
-  "number": "7.2.2",
-  "title": "",
-  "body": "  How would you initialize a string?      string x = \"Hello\";   This is the correct way to initialize a string.     x = \"Hello\";   This is an assignment.     string x;   This is a declaration.    "
-},
-{
-  "id": "string_variables_3",
-  "level": "2",
-  "url": "chapter7_string-variables.html#string_variables_3",
-  "type": "Checkpoint",
-  "number": "7.2.3",
-  "title": "",
-  "body": "  Click on each spot where a string assignment occurs.    def main() {   string fruit;   fruit = \"apple\";   fruit = \"pear\";   string flavor;   flavor = \"vanilla\";  }   "
-},
-{
-  "id": "chapter7_extracting-characters-from-a-string",
-  "level": "1",
-  "url": "chapter7_extracting-characters-from-a-string.html",
-  "type": "Section",
-  "number": "7.3",
-  "title": "Extracting characters from a string",
-  "body": " Extracting characters from a string  Strings are called strings because they are made up of a sequence, or string, of characters. The first operation we are going to perform on a string is to extract one of the characters. C++ uses square brackets ( [ and ] ) for this operation.   Take a look at this active code. We extract the character at index 1 from string fruit using [ and ] .   #include <iostream> int main() { std::string fruit = \"banana\"; char letter = fruit[1]; std::cout << letter << std::endl; }    The expression fruit[1] indicates that I want character number 1 from the string named fruit . The result is stored in a char named letter . When I output the value of letter , I get a surprise:  a  a is not the first letter of \"banana\" . Unless you are a computer scientist. For perverse reasons, computer scientists always start counting from zero. The 0th letter ( zeroeth ) of \"banana\" is b . The 1th letter ( oneth ) is a and the 2th ( twoeth ) letter is n .   In C++, indexing begins at 0!   If you want the the zereoth letter of a string, you have to put zero in the square brackets.   This active code accesses the first character in string fruit .   #include <iostream> int main() { std::string fruit = \"banana\"; char letter = fruit[0]; std::cout << letter << std::endl; }      What would replace the ? in order to access the letter b in the string below?   #include <iostream> int main() { std::string bake = \"bake a cake!\"; char letter = bake[?]; }       1   Don't forget that computer scientists do not start counting at 1!     0   Yes, this would access the letter \"b\".     2   This would access the letter \"k\".       What is printed when the code below is run?   #include <iostream> int main() { std::string lunch = \"hello\"; std::string person = \"deejay\"; lunch[0] = lunch[3]; std::cout << lunch; }       lunch    When we cout a string we print its content not its name.      jello   Carefully check which string(s) we are indexing into.     lello   Correct! We copy the 'l' from position 3 of \"hello\" to position 0.     heljo   Consider which string(s) we are indexing into.       Click on each spot where a character in a string is accessed.   Remember, square brackets [] are used to access a character in a string.   def main() {  string fruit = \"apple\";  char letter = fruit[2];  cout << fruit << std::endl ;  std::cout << fruit[4] << std::endl ;  }      Construct a block of code that correctly prints the letter a .     string x;     x = \"It is warm outside!\";    x = \"It is warm outside\"      cout << x[7] << std::endl ;    cout << x[8] << std::endl ;      "
-},
-{
-  "id": "chapter7_extracting-characters-from-a-string-2",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#chapter7_extracting-characters-from-a-string-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Strings are called strings because they are made up of a sequence, or string, of characters. The first operation we are going to perform on a string is to extract one of the characters. C++ uses square brackets ( [ and ] ) for this operation. "
-},
-{
-  "id": "extracting_characters_AC_1",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#extracting_characters_AC_1",
-  "type": "Listing",
-  "number": "7.3.1",
-  "title": "Take a look at this active code. We extract the character at index 1 from string <code class=\"code-inline tex2jax_ignore\">fruit<\/code> using <code class=\"code-inline tex2jax_ignore\">[<\/code> and <code class=\"code-inline tex2jax_ignore\">]<\/code>.",
-  "body": " Take a look at this active code. We extract the character at index 1 from string fruit using [ and ] .   #include <iostream> int main() { std::string fruit = \"banana\"; char letter = fruit[1]; std::cout << letter << std::endl; }   "
-},
-{
-  "id": "chapter7_extracting-characters-from-a-string-4",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#chapter7_extracting-characters-from-a-string-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The expression fruit[1] indicates that I want character number 1 from the string named fruit . The result is stored in a char named letter . When I output the value of letter , I get a surprise: "
-},
-{
-  "id": "chapter7_extracting-characters-from-a-string-6",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#chapter7_extracting-characters-from-a-string-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "a is not the first letter of \"banana\" . Unless you are a computer scientist. For perverse reasons, computer scientists always start counting from zero. The 0th letter ( zeroeth ) of \"banana\" is b . The 1th letter ( oneth ) is a and the 2th ( twoeth ) letter is n . "
-},
-{
-  "id": "chapter7_extracting-characters-from-a-string-7",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#chapter7_extracting-characters-from-a-string-7",
-  "type": "Note",
-  "number": "7.3.1",
-  "title": "",
-  "body": " In C++, indexing begins at 0!  "
-},
-{
-  "id": "chapter7_extracting-characters-from-a-string-8",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#chapter7_extracting-characters-from-a-string-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If you want the the zereoth letter of a string, you have to put zero in the square brackets. "
-},
-{
-  "id": "extracting_characters_AC_2",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#extracting_characters_AC_2",
-  "type": "Listing",
-  "number": "7.3.2",
-  "title": "This active code accesses the first character in string <code class=\"code-inline tex2jax_ignore\">fruit<\/code>.",
-  "body": " This active code accesses the first character in string fruit .   #include <iostream> int main() { std::string fruit = \"banana\"; char letter = fruit[0]; std::cout << letter << std::endl; }   "
-},
-{
-  "id": "extracting_characters_1",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#extracting_characters_1",
-  "type": "Checkpoint",
-  "number": "7.3.1",
-  "title": "",
-  "body": "  What would replace the ? in order to access the letter b in the string below?   #include <iostream> int main() { std::string bake = \"bake a cake!\"; char letter = bake[?]; }       1   Don't forget that computer scientists do not start counting at 1!     0   Yes, this would access the letter \"b\".     2   This would access the letter \"k\".    "
-},
-{
-  "id": "extracting_characters_2",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#extracting_characters_2",
-  "type": "Checkpoint",
-  "number": "7.3.2",
-  "title": "",
-  "body": "  What is printed when the code below is run?   #include <iostream> int main() { std::string lunch = \"hello\"; std::string person = \"deejay\"; lunch[0] = lunch[3]; std::cout << lunch; }       lunch    When we cout a string we print its content not its name.      jello   Carefully check which string(s) we are indexing into.     lello   Correct! We copy the 'l' from position 3 of \"hello\" to position 0.     heljo   Consider which string(s) we are indexing into.    "
-},
-{
-  "id": "extracting_characters_3",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#extracting_characters_3",
-  "type": "Checkpoint",
-  "number": "7.3.3",
-  "title": "",
-  "body": "  Click on each spot where a character in a string is accessed.   Remember, square brackets [] are used to access a character in a string.   def main() {  string fruit = \"apple\";  char letter = fruit[2];  cout << fruit << std::endl ;  std::cout << fruit[4] << std::endl ;  }   "
-},
-{
-  "id": "extracting_characters_4",
-  "level": "2",
-  "url": "chapter7_extracting-characters-from-a-string.html#extracting_characters_4",
-  "type": "Checkpoint",
-  "number": "7.3.4",
-  "title": "",
-  "body": "  Construct a block of code that correctly prints the letter a .     string x;     x = \"It is warm outside!\";    x = \"It is warm outside\"      cout << x[7] << std::endl ;    cout << x[8] << std::endl ;     "
-},
-{
-  "id": "chapter7_length",
-  "level": "1",
-  "url": "chapter7_length.html",
-  "type": "Section",
-  "number": "7.4",
-  "title": "Length",
-  "body": " Length  To find the length of a string (number of characters), we can use the length function. The syntax for calling this function is a little different from what we've seen before.   This active code outputs the length of string fruit .   #include <iostream> int main() { std::string fruit = \"Watermelon\"; size_t length; length = fruit.length(); std::cout << length << std::endl; }    To describe this function call, we would say that we are invoking the length function on the string named fruit . This vocabulary may seem strange, but we will see many more examples where we invoke a function on an object. The syntax for function invocation is called dot notation, because the dot (period) separates the name of the object, fruit , from the name of the function, length .  length takes no arguments, as indicated by the empty parentheses () . The return value is an integer, in this case 6. Notice that it is legal to have a variable with the same name as a function.  To find the last letter of a string, you might be tempted to try something like  int length = fruit.length(); char last = fruit[length]; \/\/ WRONG!!  That won't work. The reason is that there is no 6th letter in \"banana\" . Since we started counting at 0, the 6 letters are numbered from 0 to 5. To get the last character, you have to subtract 1 from length .   A common source of error involving strings and other arrays is indexing out of bounds. This is usually the result of forgetting to subtract 1 from length .    This active code outputs the last character in string fruit using the length function.   #include <iostream> int main() { std::string fruit = \"Watermelon\"; size_t length = fruit.length(); char last = fruit[length-1]; std::cout << last; }      What is printed by the following statements?   string s = \"coding rocks\"; cout << s.length() << std::endl ;       11   The space counts as a character.     12   Yes, there are 12 characters in the string.       What is printed by the following statements?   string s = \"coding rocks\"; cout << (s[s.length()-5]) << std::endl ;       o   Take a look at the index calculation again, s.length()-5.     r   Yes, s.length() is 12 and 12-5 is 7. Use 7 as index and remember to start counting with 0.     s   s is at index 11.     Error, s.length() is 12 and there is no index 12.   You subtract 5 before using the index operator so it will work.       Construct a block of code that correctly implements the accumulator pattern, with course being the first variable initialized.     int main() {    string course = \"Programming\";    size_t num_chars;    string num_chars;     num_chars = course.length();   num_chars = length(course);    std::cout << num_chars << std::endl ;    }     "
-},
-{
-  "id": "chapter7_length-2",
-  "level": "2",
-  "url": "chapter7_length.html#chapter7_length-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To find the length of a string (number of characters), we can use the length function. The syntax for calling this function is a little different from what we've seen before. "
-},
-{
-  "id": "length_AC_1",
-  "level": "2",
-  "url": "chapter7_length.html#length_AC_1",
-  "type": "Listing",
-  "number": "7.4.1",
-  "title": "This active code outputs the length of string <code class=\"code-inline tex2jax_ignore\">fruit<\/code>.",
-  "body": " This active code outputs the length of string fruit .   #include <iostream> int main() { std::string fruit = \"Watermelon\"; size_t length; length = fruit.length(); std::cout << length << std::endl; }   "
-},
-{
-  "id": "chapter7_length-4",
-  "level": "2",
-  "url": "chapter7_length.html#chapter7_length-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To describe this function call, we would say that we are invoking the length function on the string named fruit . This vocabulary may seem strange, but we will see many more examples where we invoke a function on an object. The syntax for function invocation is called dot notation, because the dot (period) separates the name of the object, fruit , from the name of the function, length . "
-},
-{
-  "id": "chapter7_length-5",
-  "level": "2",
-  "url": "chapter7_length.html#chapter7_length-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "length takes no arguments, as indicated by the empty parentheses () . The return value is an integer, in this case 6. Notice that it is legal to have a variable with the same name as a function. "
-},
-{
-  "id": "chapter7_length-6",
-  "level": "2",
-  "url": "chapter7_length.html#chapter7_length-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To find the last letter of a string, you might be tempted to try something like "
-},
-{
-  "id": "chapter7_length-8",
-  "level": "2",
-  "url": "chapter7_length.html#chapter7_length-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "That won't work. The reason is that there is no 6th letter in \"banana\" . Since we started counting at 0, the 6 letters are numbered from 0 to 5. To get the last character, you have to subtract 1 from length . "
-},
-{
-  "id": "chapter7_length-9",
-  "level": "2",
-  "url": "chapter7_length.html#chapter7_length-9",
-  "type": "Warning",
-  "number": "7.4.1",
-  "title": "",
-  "body": " A common source of error involving strings and other arrays is indexing out of bounds. This is usually the result of forgetting to subtract 1 from length .  "
-},
-{
-  "id": "length_AC_2",
-  "level": "2",
-  "url": "chapter7_length.html#length_AC_2",
-  "type": "Listing",
-  "number": "7.4.2",
-  "title": "This active code outputs the last character in string <code class=\"code-inline tex2jax_ignore\">fruit<\/code> using the <code class=\"code-inline tex2jax_ignore\">length<\/code> function.",
-  "body": " This active code outputs the last character in string fruit using the length function.   #include <iostream> int main() { std::string fruit = \"Watermelon\"; size_t length = fruit.length(); char last = fruit[length-1]; std::cout << last; }   "
-},
-{
-  "id": "length_1",
-  "level": "2",
-  "url": "chapter7_length.html#length_1",
-  "type": "Checkpoint",
-  "number": "7.4.1",
-  "title": "",
-  "body": "  What is printed by the following statements?   string s = \"coding rocks\"; cout << s.length() << std::endl ;       11   The space counts as a character.     12   Yes, there are 12 characters in the string.    "
-},
-{
-  "id": "length_2",
-  "level": "2",
-  "url": "chapter7_length.html#length_2",
-  "type": "Checkpoint",
-  "number": "7.4.2",
-  "title": "",
-  "body": "  What is printed by the following statements?   string s = \"coding rocks\"; cout << (s[s.length()-5]) << std::endl ;       o   Take a look at the index calculation again, s.length()-5.     r   Yes, s.length() is 12 and 12-5 is 7. Use 7 as index and remember to start counting with 0.     s   s is at index 11.     Error, s.length() is 12 and there is no index 12.   You subtract 5 before using the index operator so it will work.    "
-},
-{
-  "id": "length_3",
-  "level": "2",
-  "url": "chapter7_length.html#length_3",
-  "type": "Checkpoint",
-  "number": "7.4.3",
-  "title": "",
-  "body": "  Construct a block of code that correctly implements the accumulator pattern, with course being the first variable initialized.     int main() {    string course = \"Programming\";    size_t num_chars;    string num_chars;     num_chars = course.length();   num_chars = length(course);    std::cout << num_chars << std::endl ;    }    "
-},
-{
-  "id": "chapter7_traversal",
-  "level": "1",
-  "url": "chapter7_traversal.html",
-  "type": "Section",
-  "number": "7.5",
-  "title": "Traversal",
-  "body": " Traversal  A common thing to do with a string is start at the beginning, select each character in turn, do something to it, and continue until the end. This pattern of processing is called a traversal . A natural way to encode a traversal is with a while statement.   On some machines, comparing an int to the output from length will generate a type error. This is because the length function returns an unsigned integer type. To keep the variable type consistent, you should use size_t rather than int for the type of the counter you use to keep track of the current index in the string.    This active code outputs each letter of string fruit using a while loop.   #include <string> #include <iostream> int main() { std::string fruit = \"apple\"; size_t index = 0; while (index < fruit.lenght()) { char letter = fruit[index]; std::cout << letter << std::endl; index = index + 1; } }    This loop traverses the string and outputs each letter on a line by itself. Notice that the condition is index < lengthfruit , which means that when index is equal to the length of the string, the condition is false and the body of the loop is not executed. The last character we access is the one with the index fruit.length()-1 .  The name of the loop variable is index . An index is a variable or value used to specify one member of an ordered set, in this case the set of characters in the string. The index indicates (hence the name) which one you want. The set has to be ordered so that each letter has an index and each index refers to a single character.  As an exercise, write a function that takes an string as an argument and that outputs the letters backwards, all on one line.   Try writing the reverseWord function in the commented section of this active code. If done correctly, the program should output hello backwards. If you get stuck, you can reveal the hint below for help.   #include <iostream> void reverseWord(std::string word) { \/\/ 'reverseWord' should take the letters of 'word' \/\/ and output them in std::reverse. } int main() { reverseWord(\"hello\"); }      Let's write the code for the reverseWord function. reverseWord should take a string as a parameter and output the letters backwards.     void reverseWord(string input) {     size_t count = 0;  size_t index = input.length() - 1;    size_t count = 0;  size_t index = input.length();      while (count < input.length()) {    while (count <= input.length() ) {     std::cout << input[index];    index = index - 1;  count = count + 1;  }  }    index = index + 1;  count = count + 1;  }  }         How many times is the letter o printed by the following statements?   string s = \"coding rocks\"; size_t i = 1; while (i < s.length()) { std::cout << s[i] << std::endl ; i = i + 2; }       0   i goes through the odd numbers starting at 1.     1   Yes, i goes through the odd numbers starting at 1. o is at position 1 and 8.     2   There are 2 o characters but idx does not take on the correct index values for both.       What is printed when the code is run?   string truth = \"engr101\"; size_t index = 0; int counter = 0; while (index < truth.length()) { std::cout << truth[index] << \" \"; index = index + counter; counter = counter + 1; }       e e n r 1   Correct! the values of index are 0 0 1 3 6. After this while loop ends.     e e e e e    We are updating the value of of index . Not doing so would make it an infinte loop!      e e n r    Recalculate the values of index at each stage and consider which ones are &lt 7.      "
-},
-{
-  "id": "chapter7_traversal-2",
-  "level": "2",
-  "url": "chapter7_traversal.html#chapter7_traversal-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A common thing to do with a string is start at the beginning, select each character in turn, do something to it, and continue until the end. This pattern of processing is called a traversal . A natural way to encode a traversal is with a while statement. "
-},
-{
-  "id": "chapter7_traversal-3",
-  "level": "2",
-  "url": "chapter7_traversal.html#chapter7_traversal-3",
-  "type": "Note",
-  "number": "7.5.1",
-  "title": "",
-  "body": " On some machines, comparing an int to the output from length will generate a type error. This is because the length function returns an unsigned integer type. To keep the variable type consistent, you should use size_t rather than int for the type of the counter you use to keep track of the current index in the string.  "
-},
-{
-  "id": "traversal_AC_1",
-  "level": "2",
-  "url": "chapter7_traversal.html#traversal_AC_1",
-  "type": "Listing",
-  "number": "7.5.1",
-  "title": "This active code outputs each letter of string <code class=\"code-inline tex2jax_ignore\">fruit<\/code> using a while loop.",
-  "body": " This active code outputs each letter of string fruit using a while loop.   #include <string> #include <iostream> int main() { std::string fruit = \"apple\"; size_t index = 0; while (index < fruit.lenght()) { char letter = fruit[index]; std::cout << letter << std::endl; index = index + 1; } }   "
-},
-{
-  "id": "chapter7_traversal-5",
-  "level": "2",
-  "url": "chapter7_traversal.html#chapter7_traversal-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This loop traverses the string and outputs each letter on a line by itself. Notice that the condition is index < lengthfruit , which means that when index is equal to the length of the string, the condition is false and the body of the loop is not executed. The last character we access is the one with the index fruit.length()-1 . "
-},
-{
-  "id": "chapter7_traversal-6",
-  "level": "2",
-  "url": "chapter7_traversal.html#chapter7_traversal-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The name of the loop variable is index . An index is a variable or value used to specify one member of an ordered set, in this case the set of characters in the string. The index indicates (hence the name) which one you want. The set has to be ordered so that each letter has an index and each index refers to a single character. "
-},
-{
-  "id": "chapter7_traversal-7",
-  "level": "2",
-  "url": "chapter7_traversal.html#chapter7_traversal-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "As an exercise, write a function that takes an string as an argument and that outputs the letters backwards, all on one line. "
-},
-{
-  "id": "traversal_1",
-  "level": "2",
-  "url": "chapter7_traversal.html#traversal_1",
-  "type": "Checkpoint",
-  "number": "7.5.1",
-  "title": "",
-  "body": " Try writing the reverseWord function in the commented section of this active code. If done correctly, the program should output hello backwards. If you get stuck, you can reveal the hint below for help.   #include <iostream> void reverseWord(std::string word) { \/\/ 'reverseWord' should take the letters of 'word' \/\/ and output them in std::reverse. } int main() { reverseWord(\"hello\"); }      Let's write the code for the reverseWord function. reverseWord should take a string as a parameter and output the letters backwards.     void reverseWord(string input) {     size_t count = 0;  size_t index = input.length() - 1;    size_t count = 0;  size_t index = input.length();      while (count < input.length()) {    while (count <= input.length() ) {     std::cout << input[index];    index = index - 1;  count = count + 1;  }  }    index = index + 1;  count = count + 1;  }  }      "
-},
-{
-  "id": "traversal_2",
-  "level": "2",
-  "url": "chapter7_traversal.html#traversal_2",
-  "type": "Checkpoint",
-  "number": "7.5.2",
-  "title": "",
-  "body": "  How many times is the letter o printed by the following statements?   string s = \"coding rocks\"; size_t i = 1; while (i < s.length()) { std::cout << s[i] << std::endl ; i = i + 2; }       0   i goes through the odd numbers starting at 1.     1   Yes, i goes through the odd numbers starting at 1. o is at position 1 and 8.     2   There are 2 o characters but idx does not take on the correct index values for both.    "
-},
-{
-  "id": "traversal_3",
-  "level": "2",
-  "url": "chapter7_traversal.html#traversal_3",
-  "type": "Checkpoint",
-  "number": "7.5.3",
-  "title": "",
-  "body": "  What is printed when the code is run?   string truth = \"engr101\"; size_t index = 0; int counter = 0; while (index < truth.length()) { std::cout << truth[index] << \" \"; index = index + counter; counter = counter + 1; }       e e n r 1   Correct! the values of index are 0 0 1 3 6. After this while loop ends.     e e e e e    We are updating the value of of index . Not doing so would make it an infinte loop!      e e n r    Recalculate the values of index at each stage and consider which ones are &lt 7.     "
-},
-{
-  "id": "chapter7_a-run-time-error",
-  "level": "1",
-  "url": "chapter7_a-run-time-error.html",
-  "type": "Section",
-  "number": "7.6",
-  "title": "A run-time error",
-  "body": " A run-time error  Way back in I talked about run-time errors, which are errors that don't appear until a program has started running.  So far, you probably haven't seen many run-time errors, because we haven't been doing many things that can cause one. Well, now we are. If you use the [] operator and you provide an index that is negative or greater than length-1 , you will get a run-time error and a message something like this:   index out of range: 6, string: banana   Try it in your development environment and see how it looks.   Running this active code will result in a runtime error. Can you fix it so that we print out the first letter and last letter of string greeting instead of indexing out of range?   #include <iostream> int main() { std::string greeting = \"Hello world\"; std::cout << \"The first letter is \" << greeting[-1] << std::endl; std::cout << \"The last letter is \" << greeting[greeting.length()] << std::endl; }      Click on each spot that would cause a runtime error.   Remember, an index that is negative or greater than the length of the string - 1 will give a run-time error.   int main() {   string fruit = \"apple\";  char letter = fruit[0];  char letter = fruit[9];  std::cout << fruit << std::endl ;  std::cout << fruit[-4] << std::endl ;  std::cout << fruit[4] << std::endl ;  }      Construct a block of code that correctly changes the string to say cat in the hat instead of cat on the mat , then print it. Change the necessary characters in order from index 0 to the end of the string.     int main() {  string sentence = \"cat on the mat\";    sentence[4] = \"i\";    sentence[5] = \"i\";    sentence[3] = \"i\";    sentence[11] = \"h\";    sentence [12] = \"h\";    sentence[10] = \"h\";    cout << sentence << std::endl ;  }     "
-},
-{
-  "id": "chapter7_a-run-time-error-2",
-  "level": "2",
-  "url": "chapter7_a-run-time-error.html#chapter7_a-run-time-error-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Way back in I talked about run-time errors, which are errors that don't appear until a program has started running. "
-},
-{
-  "id": "chapter7_a-run-time-error-3",
-  "level": "2",
-  "url": "chapter7_a-run-time-error.html#chapter7_a-run-time-error-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "So far, you probably haven't seen many run-time errors, because we haven't been doing many things that can cause one. Well, now we are. If you use the [] operator and you provide an index that is negative or greater than length-1 , you will get a run-time error and a message something like this: "
-},
-{
-  "id": "chapter7_a-run-time-error-5",
-  "level": "2",
-  "url": "chapter7_a-run-time-error.html#chapter7_a-run-time-error-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Try it in your development environment and see how it looks. "
-},
-{
-  "id": "runtime_error_AC_1",
-  "level": "2",
-  "url": "chapter7_a-run-time-error.html#runtime_error_AC_1",
-  "type": "Listing",
-  "number": "7.6.1",
-  "title": "Running this active code will result in a runtime error. Can you fix it so that we print out the first letter and last letter of string <code class=\"code-inline tex2jax_ignore\">greeting<\/code> instead of indexing out of range?",
-  "body": " Running this active code will result in a runtime error. Can you fix it so that we print out the first letter and last letter of string greeting instead of indexing out of range?   #include <iostream> int main() { std::string greeting = \"Hello world\"; std::cout << \"The first letter is \" << greeting[-1] << std::endl; std::cout << \"The last letter is \" << greeting[greeting.length()] << std::endl; }   "
-},
-{
-  "id": "runtime_error_1",
-  "level": "2",
-  "url": "chapter7_a-run-time-error.html#runtime_error_1",
-  "type": "Checkpoint",
-  "number": "7.6.1",
-  "title": "",
-  "body": "  Click on each spot that would cause a runtime error.   Remember, an index that is negative or greater than the length of the string - 1 will give a run-time error.   int main() {   string fruit = \"apple\";  char letter = fruit[0];  char letter = fruit[9];  std::cout << fruit << std::endl ;  std::cout << fruit[-4] << std::endl ;  std::cout << fruit[4] << std::endl ;  }   "
-},
-{
-  "id": "runtime_error_2",
-  "level": "2",
-  "url": "chapter7_a-run-time-error.html#runtime_error_2",
-  "type": "Checkpoint",
-  "number": "7.6.2",
-  "title": "",
-  "body": "  Construct a block of code that correctly changes the string to say cat in the hat instead of cat on the mat , then print it. Change the necessary characters in order from index 0 to the end of the string.     int main() {  string sentence = \"cat on the mat\";    sentence[4] = \"i\";    sentence[5] = \"i\";    sentence[3] = \"i\";    sentence[11] = \"h\";    sentence [12] = \"h\";    sentence[10] = \"h\";    cout << sentence << std::endl ;  }    "
-},
-{
-  "id": "chapter7_our-own-version-of-find",
-  "level": "1",
-  "url": "chapter7_our-own-version-of-find.html",
-  "type": "Section",
-  "number": "7.7",
-  "title": "Our own version of <code class=\"code-inline tex2jax_ignore\">find<\/code>",
-  "body": " Our own version of find  If we are looking for a letter in a string , we may not want to start at the beginning of the string. One way to generalize the find function is to write a version that takes an additional parameter—the index where we should start looking. Here is an implementation of this function.  size_t find(string s, char c, size_t i) { while (i < s.length()) { if (s[i] == c) return i; i = i + 1; } return string::npos; }  Instead of invoking this function on an string , like the first version of find , we have to pass the string as the first argument. The other arguments are the character we are looking for and the index where we should start.   In this active code , we are finding the number of 'e' characters in the Shepard part of German Shepard using our function. Then we use the built-in find function to demonstrate how they work differentlsssy.   #include <iostream> size_t find(std::string s, char c, size_t i) { size_t length = s.length(); while (i < length) { if (s[i] == c) { return i; } i = i + 1; } return std::string::npos; } int main() { std::string dog = \"German Shepard\"; size_t start_shepard = 7; std::cout << find(dog, 'e', start_shepard) << std::endl; std::cout << dog.find('e') << std::endl; }      What is the correct output of the code below?   int main() { std::string quote = \"The way to get started is to quit talking and begin doing.\"; std::cout << find(quote, 't', 11) << \", \" << find(quote, 't', 42) << \", \" << quote.find('t'); }       13, string::npos , 8   Notice how the built-in find function works differently from ours.     13, 0, 7   Remember that when a character isn't found, the function returns string::npos .     13, string::npos , 0   Keep in mind that the find function is case sensitive, so ‘A' is different from ‘a'.     14, string::npos , 9   Remember that indexing begins at 0 for C++.     "
-},
-{
-  "id": "chapter7_our-own-version-of-find-2",
-  "level": "2",
-  "url": "chapter7_our-own-version-of-find.html#chapter7_our-own-version-of-find-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If we are looking for a letter in a string , we may not want to start at the beginning of the string. One way to generalize the find function is to write a version that takes an additional parameter—the index where we should start looking. Here is an implementation of this function. "
-},
-{
-  "id": "chapter7_our-own-version-of-find-4",
-  "level": "2",
-  "url": "chapter7_our-own-version-of-find.html#chapter7_our-own-version-of-find-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Instead of invoking this function on an string , like the first version of find , we have to pass the string as the first argument. The other arguments are the character we are looking for and the index where we should start. "
-},
-{
-  "id": "own_version_find_AC_1",
-  "level": "2",
-  "url": "chapter7_our-own-version-of-find.html#own_version_find_AC_1",
-  "type": "Listing",
-  "number": "7.7.1",
-  "title": "In this active code , we are finding the number of <code class=\"code-inline tex2jax_ignore\">'e'<\/code> characters in the “Shepard” part of “German Shepard” using our function. Then we use the built-in <code class=\"code-inline tex2jax_ignore\">find<\/code> function to demonstrate how they work differentlsssy.",
-  "body": " In this active code , we are finding the number of 'e' characters in the Shepard part of German Shepard using our function. Then we use the built-in find function to demonstrate how they work differentlsssy.   #include <iostream> size_t find(std::string s, char c, size_t i) { size_t length = s.length(); while (i < length) { if (s[i] == c) { return i; } i = i + 1; } return std::string::npos; } int main() { std::string dog = \"German Shepard\"; size_t start_shepard = 7; std::cout << find(dog, 'e', start_shepard) << std::endl; std::cout << dog.find('e') << std::endl; }   "
-},
-{
-  "id": "own_version_find_1",
-  "level": "2",
-  "url": "chapter7_our-own-version-of-find.html#own_version_find_1",
-  "type": "Checkpoint",
-  "number": "7.7.1",
-  "title": "",
-  "body": "  What is the correct output of the code below?   int main() { std::string quote = \"The way to get started is to quit talking and begin doing.\"; std::cout << find(quote, 't', 11) << \", \" << find(quote, 't', 42) << \", \" << quote.find('t'); }       13, string::npos , 8   Notice how the built-in find function works differently from ours.     13, 0, 7   Remember that when a character isn't found, the function returns string::npos .     13, string::npos , 0   Keep in mind that the find function is case sensitive, so ‘A' is different from ‘a'.     14, string::npos , 9   Remember that indexing begins at 0 for C++.    "
-},
-{
-  "id": "chapter7_looping-and-counting-loopcount",
-  "level": "1",
-  "url": "chapter7_looping-and-counting-loopcount.html",
-  "type": "Section",
-  "number": "7.8",
-  "title": "Looping and counting",
-  "body": " Looping and counting   This active code counts the number of times the letter 'a' appears in a string fruit .   #include <iostream> int main() { std::string fruit = \"banana\"; size_t count = 0; size_t index = 0; while (index < fruit.length()) { if (fruit[index] == 'a') { count = count + 1; } index = index + 1; } std::cout << count << std::endl; }    This program demonstrates a common idiom, called a counter . The variable count is initialized to zero and then incremented each time we find an 'a' . (To increment is to increase by one; it is the opposite of decrement , and unrelated to excrement , which is a noun.) When we exit the loop, count contains the result: the total number of a's.    What does the following code print?   int x = -5; while (x < 0) { x = x + 1; std::cout << x << \" \"; }       5 4 3 2 1   Notice that x is negative.     -5 -4 -3 -2 -1   Notice that the value of x is incremented before it is printed.     -4 -3 -2 -1 0   The value of x is incremented before it is printed so the first value printed is -4.       As an exercise, encapsulate this code in a function named countLetters , and generalize it so that it accepts the string and the letter as arguments. In the function, declare length , count , and index in that order. Within the main function, declare city and letter in that order.     size_t countLetters(string s, char letter) {    size_t length = s.length();  size_t count = 0;  size_t index = 0;    while (index < length) {    if (s[index] == letter) {    count = count + 1;  }    index = index + 1;  }    return count;  }    int main() {    string city = \"New Baltimore\";  char letter = \"e\";    cout << countLetters(city, letter);  }       The following is the correct code for printing the even numbers from 0 to 10, but it also includes some extra code that you won't need. Drag the needed blocks from the left and put them in the correct order on the right.     x = x + 1;    x = 0;    while (x <= 10) {    while (x < 10) {    cout << x << std::endl ;    x = x + 2;  }       What is the value of counter right before main returns 0?   string word_1 = \"understand\"; string word_2 = \"underwaa\"; size_t end_1 = word_1.length(); size_t end_2 = word_2.length(); if ( end_2 < end_1 ) { end_1 = end_2; } size_t index = 0; size_t counter = 0; while ( index < end_1 ) { if ( word_1[index] == word_2[index] ) { counter = counter + 1; } else { counter = counter - 1; } index = index + 1; } return 0;       The code dosen't reach return 0 because we index out of bounds in word_2 .   We set end_1 to be the smaller of the two lengths so we don't index out of bounds.     2   Not all the letters after index 4 differ in the two words.     3   We decrement the value of counter when we don't have matching letters.     4   Correct! we have 6 matching letters and 2 differing letters upto the length of word_2 .     "
-},
-{
-  "id": "looping_and_counting_AC_1",
-  "level": "2",
-  "url": "chapter7_looping-and-counting-loopcount.html#looping_and_counting_AC_1",
-  "type": "Listing",
-  "number": "7.8.1",
-  "title": "This active code counts the number of times the letter <code class=\"code-inline tex2jax_ignore\">'a'<\/code> appears in a string <code class=\"code-inline tex2jax_ignore\">fruit<\/code> .",
-  "body": " This active code counts the number of times the letter 'a' appears in a string fruit .   #include <iostream> int main() { std::string fruit = \"banana\"; size_t count = 0; size_t index = 0; while (index < fruit.length()) { if (fruit[index] == 'a') { count = count + 1; } index = index + 1; } std::cout << count << std::endl; }   "
-},
-{
-  "id": "chapter7_looping-and-counting-loopcount-3",
-  "level": "2",
-  "url": "chapter7_looping-and-counting-loopcount.html#chapter7_looping-and-counting-loopcount-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This program demonstrates a common idiom, called a counter . The variable count is initialized to zero and then incremented each time we find an 'a' . (To increment is to increase by one; it is the opposite of decrement , and unrelated to excrement , which is a noun.) When we exit the loop, count contains the result: the total number of a's. "
-},
-{
-  "id": "looping_counting_1",
-  "level": "2",
-  "url": "chapter7_looping-and-counting-loopcount.html#looping_counting_1",
-  "type": "Checkpoint",
-  "number": "7.8.1",
-  "title": "",
-  "body": "  What does the following code print?   int x = -5; while (x < 0) { x = x + 1; std::cout << x << \" \"; }       5 4 3 2 1   Notice that x is negative.     -5 -4 -3 -2 -1   Notice that the value of x is incremented before it is printed.     -4 -3 -2 -1 0   The value of x is incremented before it is printed so the first value printed is -4.    "
-},
-{
-  "id": "looping_counting_2",
-  "level": "2",
-  "url": "chapter7_looping-and-counting-loopcount.html#looping_counting_2",
-  "type": "Checkpoint",
-  "number": "7.8.2",
-  "title": "",
-  "body": "  As an exercise, encapsulate this code in a function named countLetters , and generalize it so that it accepts the string and the letter as arguments. In the function, declare length , count , and index in that order. Within the main function, declare city and letter in that order.     size_t countLetters(string s, char letter) {    size_t length = s.length();  size_t count = 0;  size_t index = 0;    while (index < length) {    if (s[index] == letter) {    count = count + 1;  }    index = index + 1;  }    return count;  }    int main() {    string city = \"New Baltimore\";  char letter = \"e\";    cout << countLetters(city, letter);  }    "
-},
-{
-  "id": "looping_counting_3",
-  "level": "2",
-  "url": "chapter7_looping-and-counting-loopcount.html#looping_counting_3",
-  "type": "Checkpoint",
-  "number": "7.8.3",
-  "title": "",
-  "body": "  The following is the correct code for printing the even numbers from 0 to 10, but it also includes some extra code that you won't need. Drag the needed blocks from the left and put them in the correct order on the right.     x = x + 1;    x = 0;    while (x <= 10) {    while (x < 10) {    cout << x << std::endl ;    x = x + 2;  }    "
-},
-{
-  "id": "looping_counting_4",
-  "level": "2",
-  "url": "chapter7_looping-and-counting-loopcount.html#looping_counting_4",
-  "type": "Checkpoint",
-  "number": "7.8.4",
-  "title": "",
-  "body": "  What is the value of counter right before main returns 0?   string word_1 = \"understand\"; string word_2 = \"underwaa\"; size_t end_1 = word_1.length(); size_t end_2 = word_2.length(); if ( end_2 < end_1 ) { end_1 = end_2; } size_t index = 0; size_t counter = 0; while ( index < end_1 ) { if ( word_1[index] == word_2[index] ) { counter = counter + 1; } else { counter = counter - 1; } index = index + 1; } return 0;       The code dosen't reach return 0 because we index out of bounds in word_2 .   We set end_1 to be the smaller of the two lengths so we don't index out of bounds.     2   Not all the letters after index 4 differ in the two words.     3   We decrement the value of counter when we don't have matching letters.     4   Correct! we have 6 matching letters and 2 differing letters upto the length of word_2 .    "
-},
-{
-  "id": "chapter7_increment-and-decrement-operators",
-  "level": "1",
-  "url": "chapter7_increment-and-decrement-operators.html",
-  "type": "Section",
-  "number": "7.9",
-  "title": "Increment and decrement operators",
-  "body": " Increment and decrement operators  Incrementing and decrementing are such common operations that C++ provides special operators for them. The ++ operator adds one to the current value of an int , char or double , and – subtracts one. Neither operator works on string s, and neither should be used on bool s.  Technically, it is legal to increment a variable and use it in an expression at the same time. For example, you might see something like:  cout << i++ << std::endl ;  Looking at this, it is not clear whether the increment will take effect before or after the value is displayed. Because expressions like this tend to be confusing, I would discourage you from using them. In fact, to discourage you even more, I'm not going to tell you what the result is. If you really want to know, you can try it.   The active code demonstrates how using increment operators with cout statements can be confusing.   #include <iostream> int main() { int x = 0; \/\/ We incremented x, so it should print out 1 now std::right? std::cout << x++ << std::endl; \/\/ Weird, x is still 0? }    If you're curious about this, feel free to search up about prefix and postfix increment operators. But for now, just avoid incrementing a variable and using it in an expression at the same time.  Using the increment operators, we can rewrite the letter-counter:  int index = 0; while (index < length) { if (fruit[index] == 'a') { count++; } index++; }   This active code adds increment operators to our old letter-counter.   #include <iostream> int main() { std::string fruit = \"banana\"; int count = 0; size_t index = 0; while (index < fruit.length()) { if (fruit[index] == 'a') { count++; } index++; } std::cout << count << std::endl; }    It is a common error to write something like  index = index++; \/\/ WRONG!!  Unfortunately, this is syntactically legal, so the compiler will not warn you. The effect of this statement is to leave the value of index unchanged. This is often a difficult bug to track down.   Remember, you can write index = index + 1; , or you can write index++; , but you shouldn't mix them.     Click on the incorrect or not suggested increment statements.   Re-read the text above and try again.   count = count + 1;  index++;  count = count++;  cout << x++ << std::endl ;  count--;      What does the following code print?   int x = -5; while (x < 0) { x++; std::cout << x << \" \"; }       5 4 3 2 1   Notice that x is negative.     -5 -4 -3 -2 -1   Notice that the value of x is incremented before it is printed.     -4 -3 -2 -1 0   The value of x is incremented before it is printed so the first value printed is -4.       Print every number from 1-10 in this format: Number 1 . Each number should be on its own line.     int x = 1;    x = 1;    while (x <= 10) {    cout << \"Number \" << x << std::endl ;    cout << \"Number \" << x;    ++x;    x++;  }     "
-},
-{
-  "id": "chapter7_increment-and-decrement-operators-2",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#chapter7_increment-and-decrement-operators-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Incrementing and decrementing are such common operations that C++ provides special operators for them. The ++ operator adds one to the current value of an int , char or double , and – subtracts one. Neither operator works on string s, and neither should be used on bool s. "
-},
-{
-  "id": "chapter7_increment-and-decrement-operators-3",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#chapter7_increment-and-decrement-operators-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Technically, it is legal to increment a variable and use it in an expression at the same time. For example, you might see something like: "
-},
-{
-  "id": "chapter7_increment-and-decrement-operators-5",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#chapter7_increment-and-decrement-operators-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Looking at this, it is not clear whether the increment will take effect before or after the value is displayed. Because expressions like this tend to be confusing, I would discourage you from using them. In fact, to discourage you even more, I'm not going to tell you what the result is. If you really want to know, you can try it. "
-},
-{
-  "id": "increment_decrement_AC_1",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#increment_decrement_AC_1",
-  "type": "Listing",
-  "number": "7.9.1",
-  "title": "The active code demonstrates how using increment operators with <code class=\"code-inline tex2jax_ignore\">cout<\/code> statements can be confusing.",
-  "body": " The active code demonstrates how using increment operators with cout statements can be confusing.   #include <iostream> int main() { int x = 0; \/\/ We incremented x, so it should print out 1 now std::right? std::cout << x++ << std::endl; \/\/ Weird, x is still 0? }   "
-},
-{
-  "id": "chapter7_increment-and-decrement-operators-7",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#chapter7_increment-and-decrement-operators-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If you're curious about this, feel free to search up about prefix and postfix increment operators. But for now, just avoid incrementing a variable and using it in an expression at the same time. "
-},
-{
-  "id": "chapter7_increment-and-decrement-operators-8",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#chapter7_increment-and-decrement-operators-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Using the increment operators, we can rewrite the letter-counter: "
-},
-{
-  "id": "increment_decrement_AC_2",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#increment_decrement_AC_2",
-  "type": "Listing",
-  "number": "7.9.2",
-  "title": "This active code adds increment operators to our old letter-counter.",
-  "body": " This active code adds increment operators to our old letter-counter.   #include <iostream> int main() { std::string fruit = \"banana\"; int count = 0; size_t index = 0; while (index < fruit.length()) { if (fruit[index] == 'a') { count++; } index++; } std::cout << count << std::endl; }   "
-},
-{
-  "id": "chapter7_increment-and-decrement-operators-11",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#chapter7_increment-and-decrement-operators-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "It is a common error to write something like "
-},
-{
-  "id": "chapter7_increment-and-decrement-operators-13",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#chapter7_increment-and-decrement-operators-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Unfortunately, this is syntactically legal, so the compiler will not warn you. The effect of this statement is to leave the value of index unchanged. This is often a difficult bug to track down. "
-},
-{
-  "id": "chapter7_increment-and-decrement-operators-14",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#chapter7_increment-and-decrement-operators-14",
-  "type": "Warning",
-  "number": "7.9.1",
-  "title": "",
-  "body": " Remember, you can write index = index + 1; , or you can write index++; , but you shouldn't mix them.  "
-},
-{
-  "id": "increment_decrement_1",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#increment_decrement_1",
-  "type": "Checkpoint",
-  "number": "7.9.1",
-  "title": "",
-  "body": "  Click on the incorrect or not suggested increment statements.   Re-read the text above and try again.   count = count + 1;  index++;  count = count++;  cout << x++ << std::endl ;  count--;   "
-},
-{
-  "id": "increment_decrement_2",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#increment_decrement_2",
-  "type": "Checkpoint",
-  "number": "7.9.2",
-  "title": "",
-  "body": "  What does the following code print?   int x = -5; while (x < 0) { x++; std::cout << x << \" \"; }       5 4 3 2 1   Notice that x is negative.     -5 -4 -3 -2 -1   Notice that the value of x is incremented before it is printed.     -4 -3 -2 -1 0   The value of x is incremented before it is printed so the first value printed is -4.    "
-},
-{
-  "id": "increment_decrement_3",
-  "level": "2",
-  "url": "chapter7_increment-and-decrement-operators.html#increment_decrement_3",
-  "type": "Checkpoint",
-  "number": "7.9.3",
-  "title": "",
-  "body": "  Print every number from 1-10 in this format: Number 1 . Each number should be on its own line.     int x = 1;    x = 1;    while (x <= 10) {    cout << \"Number \" << x << std::endl ;    cout << \"Number \" << x;    ++x;    x++;  }    "
+  "body": "The valid indices of a nonempty string range from zero through text.size() - 1 . The expression text[text.size()] is past the last character and must not be used as a character index. "
 },
 {
   "id": "chapter7_string-concatenation",
+  "level": "2",
+  "url": "chapter7_string-operations.html#chapter7_string-concatenation",
+  "type": "Subsection",
+  "number": "7.2.1",
+  "title": "Concatenation",
+  "body": " Concatenation   Concatenation means joining strings end to end. The + operator creates a new string, while += adds text to an existing string.   #include <iostream> #include <string> int main() { std::string fruit{\"banana\"}; std::string baked_good{\" nut bread\"}; std::string dessert = fruit + baked_good; dessert += \"!\"; std::cout << dessert << '\\n'; return 0; }   The output is banana nut bread! . Concatenation does not add a space automatically; include spaces in a string when they are part of the desired result. The member function append() is another way to add text to an existing string.  "
+},
+{
+  "id": "chapter7_string-number-conversion",
+  "level": "2",
+  "url": "chapter7_string-operations.html#chapter7_string-number-conversion",
+  "type": "Subsection",
+  "number": "7.2.2",
+  "title": "Converting Numbers to Strings",
+  "body": " Converting Numbers to Strings  The library function std::to_string converts a number to a std::string . This is useful when text must include a computed value.   #include <iostream> #include <string> int main() { int score{95}; std::string message = \"Score: \" + std::to_string(score); std::cout << message << '\\n'; return 0; }   "
+},
+{
+  "id": "chapter7_string-find",
+  "level": "2",
+  "url": "chapter7_string-operations.html#chapter7_string-find",
+  "type": "Subsection",
+  "number": "7.2.3",
+  "title": "Finding Characters and Substrings",
+  "body": " Finding Characters and Substrings  The find() member function searches for a character or a substring. It returns the index of the first match as an std::string::size_type , an alias of std::size_t .   #include <iostream> #include <string> int main() { std::string sentence{\"The sea is calm.\"}; std::size_t index = sentence.find(\"sea\"); if (index != std::string::npos) { std::cout << \"Found at index \" << index << '\\n'; } return 0; }   If no match exists, find() returns the special value std::string::npos not false . Test for that value before using the result as an index. Searches are case-sensitive: \"Sea\" and \"sea\" are different strings.  "
+},
+{
+  "id": "chapter7_traversing-strings",
   "level": "1",
-  "url": "chapter7_string-concatenation.html",
+  "url": "chapter7_traversing-strings.html",
   "type": "Section",
-  "number": "7.10",
-  "title": "String concatenation",
-  "body": " String concatenation  Interestingly, the + operator can be used on strings; it performs string concatenation . To concatenate means to join the two operands end to end.   In this active code, we use the + operator to concatenate fruit with bakedGood to create dessert .   #include <iostream> int main() { std::string fruit = \"banana\"; std::string bakedGood = \" nut bread\"; std::string dessert = fruit + bakedGood; std::cout << dessert << std::endl; }    The output of this program is banana nut bread .   Unfortunately, the + operator does not work on native C strings.   Thus, you cannot write something like  string dessert = \"banana\" + \" nut bread\";  because both operands are C strings. As long as one of the operands is a string , though, C++ will automatically convert the other.  It is also possible to concatenate a character onto the beginning or end of an string . In the following example, we will use concatenation and character arithmetic to output an abecedarian series.  Abecedarian refers to a series or list in which the elements appear in alphabetical order. For example, in Robert McCloskey's book Make Way for Ducklings , the names of the ducklings are Jack, Kack, Lack, Mack, Nack, Ouack, Pack and Quack. Here is a loop that outputs these names in order:   This active code outputs the ducklings names in alphabetical order.   #include <iostream> int main() { std::string suffix = \"ack\"; std::string u = \"u\"; char letter = 'J'; while (letter <= 'Q') { if (letter == 'O' || letter == 'Q') { std::cout << letter + u + suffix << std::endl; } else { std::cout << letter + suffix << std::endl; } letter++; } }    The output of this program is:  Jack Kack Lack Mack Nack Ouack Pack Quack  Again, be careful to use string concatenation only with string s and not with native C strings. Unfortunately, an expression like letter + \"ack\" is syntactically legal in C++, although it produces a very strange result, at least in my development environment.    What is printed by the following statements?   string s = \"C++\"; string t = \"rocks\"; cout << s + t << std::endl ;       C++ rocks   Concatenation does not automatically add a space.     C++   The expression s+t is evaluated first, then the resulting string is printed.     C++rocks   Yes, the two strings are glued end to end.     Error, you cannot add two strings together.   The + operator has different meanings depending on the operands, in this case, two strings.       As an exercise, put together the code below so that it prints C++ is so fun!     int main() {    std::string language = \"C++\";  std::string action = \" is so \";  std::string adjective = \"fun!\";    std::string language = \"C++\";  std::string action = \"is so\";  std::string adjective = \"fun!\";    std::cout << language + action + adjective << std::endl ;    std::cout << \"language\" + \"action\" + \"adjective\" << std::endl ;    }       Put together the code below to creater a function greeter that adds hello and goodbye behind and ahead of a message respectively and then prints the new message. Example: greeter(\"ssup\") will print hello ssup goodbye     void greeter(string message) {    string greeter(string message) {     std::string beginning = \"hello \";  std::string end = \" goodbye\";    std::string beginning = \"hello\";  std::string end = \"goodbye\";      std::string new_Word = beginning + message;  new_Word = new_Word + end;    std::string new_Word = message + beginning;  new_Word = message + end;     std::cout << \"new_Word\";    std::cout << new_Word;    }     "
+  "number": "7.3",
+  "title": "Traversing Strings",
+  "body": " Traversing Strings  To traverse a string means to visit its characters in sequence. Chapter 6 introduced several loop forms. Strings give us a useful setting for practicing all three of the main traversal patterns.   Indexed for Loops  Use an indexed for loop when the program needs both a character and its position.   #include <iostream> #include <string> int main() { std::string word{\"C++\"}; for (std::size_t index = 0; index < word.size(); ++index) { std::cout << index << \": \" << word[index] << '\\n'; } return 0; }    Avoid using standard signed int types when dealing with container indexing and size. Instead, use size_t or, even better, use the C++17 auto keyword to let the compiler automatically deduce the perfect, safe matching type for you.     Range-Based for Loops  Use a range-based for loop when the program needs each character but does not need its index. A reference lets the loop modify the original characters; a const reference avoids copying and prevents modification.   #include <iostream> #include <string> int main() { const std::string word{\"C++\"}; for (const char character : word) { std::cout << character << '\\n'; } return 0; }     while Loops  A while loop is useful when traversal is controlled by a condition that may be expressed directly. The index must be updated so that the loop eventually stops.   #include <iostream> #include <string> int main() { std::string word{\"banana\"}; std::size_t index = 0; while (index < word.size()) { std::cout << word[index] << '\\n'; ++index; } return 0; }     Counting Characters  A counter can record how often a character appears. The function below uses a const reference because it only reads the caller's string.   #include <cstddef> #include <iostream> #include <string> std::size_t count_character(const std::string& text, char target) { std::size_t count = 0; for (const char character : text) { if (character == target) { ++count; } } return count; } int main() { std::cout << count_character(\"banana\", 'a') << '\\n'; return 0; }    "
 },
 {
-  "id": "chapter7_string-concatenation-2",
+  "id": "chapter7_traversing-strings-2",
   "level": "2",
-  "url": "chapter7_string-concatenation.html#chapter7_string-concatenation-2",
+  "url": "chapter7_traversing-strings.html#chapter7_traversing-strings-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Interestingly, the + operator can be used on strings; it performs string concatenation . To concatenate means to join the two operands end to end. "
+  "body": "To traverse a string means to visit its characters in sequence. Chapter 6 introduced several loop forms. Strings give us a useful setting for practicing all three of the main traversal patterns. "
 },
 {
-  "id": "string_concatenation_AC_1",
+  "id": "chapter7_indexed-string-traversal",
   "level": "2",
-  "url": "chapter7_string-concatenation.html#string_concatenation_AC_1",
-  "type": "Listing",
-  "number": "7.10.1",
-  "title": "In this active code, we use the <code class=\"code-inline tex2jax_ignore\">+<\/code> operator to concatenate <code class=\"code-inline tex2jax_ignore\">fruit<\/code> with <code class=\"code-inline tex2jax_ignore\">bakedGood<\/code> to create <code class=\"code-inline tex2jax_ignore\">dessert<\/code>.",
-  "body": " In this active code, we use the + operator to concatenate fruit with bakedGood to create dessert .   #include <iostream> int main() { std::string fruit = \"banana\"; std::string bakedGood = \" nut bread\"; std::string dessert = fruit + bakedGood; std::cout << dessert << std::endl; }   "
+  "url": "chapter7_traversing-strings.html#chapter7_indexed-string-traversal",
+  "type": "Subsection",
+  "number": "7.3.1",
+  "title": "Indexed <code class=\"code-inline tex2jax_ignore\">for<\/code> Loops",
+  "body": " Indexed for Loops  Use an indexed for loop when the program needs both a character and its position.   #include <iostream> #include <string> int main() { std::string word{\"C++\"}; for (std::size_t index = 0; index < word.size(); ++index) { std::cout << index << \": \" << word[index] << '\\n'; } return 0; }    Avoid using standard signed int types when dealing with container indexing and size. Instead, use size_t or, even better, use the C++17 auto keyword to let the compiler automatically deduce the perfect, safe matching type for you.   "
 },
 {
-  "id": "chapter7_string-concatenation-4",
+  "id": "chapter7_range-string-traversal",
   "level": "2",
-  "url": "chapter7_string-concatenation.html#chapter7_string-concatenation-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The output of this program is banana nut bread . "
+  "url": "chapter7_traversing-strings.html#chapter7_range-string-traversal",
+  "type": "Subsection",
+  "number": "7.3.2",
+  "title": "Range-Based <code class=\"code-inline tex2jax_ignore\">for<\/code> Loops",
+  "body": " Range-Based for Loops  Use a range-based for loop when the program needs each character but does not need its index. A reference lets the loop modify the original characters; a const reference avoids copying and prevents modification.   #include <iostream> #include <string> int main() { const std::string word{\"C++\"}; for (const char character : word) { std::cout << character << '\\n'; } return 0; }   "
 },
 {
-  "id": "chapter7_string-concatenation-5",
+  "id": "chapter7_while-string-traversal",
   "level": "2",
-  "url": "chapter7_string-concatenation.html#chapter7_string-concatenation-5",
-  "type": "Warning",
-  "number": "7.10.1",
-  "title": "",
-  "body": " Unfortunately, the + operator does not work on native C strings.  "
+  "url": "chapter7_traversing-strings.html#chapter7_while-string-traversal",
+  "type": "Subsection",
+  "number": "7.3.3",
+  "title": "<code class=\"code-inline tex2jax_ignore\">while<\/code> Loops",
+  "body": " while Loops  A while loop is useful when traversal is controlled by a condition that may be expressed directly. The index must be updated so that the loop eventually stops.   #include <iostream> #include <string> int main() { std::string word{\"banana\"}; std::size_t index = 0; while (index < word.size()) { std::cout << word[index] << '\\n'; ++index; } return 0; }   "
 },
 {
-  "id": "chapter7_string-concatenation-6",
+  "id": "chapter7_counting-string-characters",
   "level": "2",
-  "url": "chapter7_string-concatenation.html#chapter7_string-concatenation-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Thus, you cannot write something like "
-},
-{
-  "id": "chapter7_string-concatenation-8",
-  "level": "2",
-  "url": "chapter7_string-concatenation.html#chapter7_string-concatenation-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "because both operands are C strings. As long as one of the operands is a string , though, C++ will automatically convert the other. "
-},
-{
-  "id": "chapter7_string-concatenation-9",
-  "level": "2",
-  "url": "chapter7_string-concatenation.html#chapter7_string-concatenation-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "It is also possible to concatenate a character onto the beginning or end of an string . In the following example, we will use concatenation and character arithmetic to output an abecedarian series. "
-},
-{
-  "id": "chapter7_string-concatenation-10",
-  "level": "2",
-  "url": "chapter7_string-concatenation.html#chapter7_string-concatenation-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Abecedarian refers to a series or list in which the elements appear in alphabetical order. For example, in Robert McCloskey's book Make Way for Ducklings , the names of the ducklings are Jack, Kack, Lack, Mack, Nack, Ouack, Pack and Quack. Here is a loop that outputs these names in order: "
-},
-{
-  "id": "string_concatenation_AC_2",
-  "level": "2",
-  "url": "chapter7_string-concatenation.html#string_concatenation_AC_2",
-  "type": "Listing",
-  "number": "7.10.2",
-  "title": "This active code outputs the ducklings names in alphabetical order.",
-  "body": " This active code outputs the ducklings names in alphabetical order.   #include <iostream> int main() { std::string suffix = \"ack\"; std::string u = \"u\"; char letter = 'J'; while (letter <= 'Q') { if (letter == 'O' || letter == 'Q') { std::cout << letter + u + suffix << std::endl; } else { std::cout << letter + suffix << std::endl; } letter++; } }   "
-},
-{
-  "id": "chapter7_string-concatenation-12",
-  "level": "2",
-  "url": "chapter7_string-concatenation.html#chapter7_string-concatenation-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The output of this program is: "
-},
-{
-  "id": "chapter7_string-concatenation-14",
-  "level": "2",
-  "url": "chapter7_string-concatenation.html#chapter7_string-concatenation-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Again, be careful to use string concatenation only with string s and not with native C strings. Unfortunately, an expression like letter + \"ack\" is syntactically legal in C++, although it produces a very strange result, at least in my development environment. "
-},
-{
-  "id": "string_concatenation_1",
-  "level": "2",
-  "url": "chapter7_string-concatenation.html#string_concatenation_1",
-  "type": "Checkpoint",
-  "number": "7.10.1",
-  "title": "",
-  "body": "  What is printed by the following statements?   string s = \"C++\"; string t = \"rocks\"; cout << s + t << std::endl ;       C++ rocks   Concatenation does not automatically add a space.     C++   The expression s+t is evaluated first, then the resulting string is printed.     C++rocks   Yes, the two strings are glued end to end.     Error, you cannot add two strings together.   The + operator has different meanings depending on the operands, in this case, two strings.    "
-},
-{
-  "id": "string_concatenation_2",
-  "level": "2",
-  "url": "chapter7_string-concatenation.html#string_concatenation_2",
-  "type": "Checkpoint",
-  "number": "7.10.2",
-  "title": "",
-  "body": "  As an exercise, put together the code below so that it prints C++ is so fun!     int main() {    std::string language = \"C++\";  std::string action = \" is so \";  std::string adjective = \"fun!\";    std::string language = \"C++\";  std::string action = \"is so\";  std::string adjective = \"fun!\";    std::cout << language + action + adjective << std::endl ;    std::cout << \"language\" + \"action\" + \"adjective\" << std::endl ;    }    "
-},
-{
-  "id": "string_concatenation_3",
-  "level": "2",
-  "url": "chapter7_string-concatenation.html#string_concatenation_3",
-  "type": "Checkpoint",
-  "number": "7.10.3",
-  "title": "",
-  "body": "  Put together the code below to creater a function greeter that adds hello and goodbye behind and ahead of a message respectively and then prints the new message. Example: greeter(\"ssup\") will print hello ssup goodbye     void greeter(string message) {    string greeter(string message) {     std::string beginning = \"hello \";  std::string end = \" goodbye\";    std::string beginning = \"hello\";  std::string end = \"goodbye\";      std::string new_Word = beginning + message;  new_Word = new_Word + end;    std::string new_Word = message + beginning;  new_Word = message + end;     std::cout << \"new_Word\";    std::cout << new_Word;    }    "
-},
-{
-  "id": "chapter7_strings-are-mutable",
-  "level": "1",
-  "url": "chapter7_strings-are-mutable.html",
-  "type": "Section",
-  "number": "7.11",
-  "title": "<code class=\"code-inline tex2jax_ignore\">string<\/code>s are mutable",
-  "body": " string s are mutable  You can change the letters in an string one at a time using the [] operator on the left side of an assignment.   This active code changes the first letter in greeting to be 'J' .   #include <iostream> int main() { std::string greeting = \"Hello, world!\"; greeting[0] = 'J'; std::cout << greeting << std::endl; }    This produces the output Jello, world! .   What is printed by the following statements?   string fav_food = \"ice cream\"; fav_food[3] = \"d\"; cout << fav_food << std::endl ;      icd cream   Remember that indexing begins at 0, not 1.     icedcream   Index 3 was a space and now it is \"d\".     ice cream   The character at index 3 should be changed to \"d\".     iced   The character at index 3 should be changed to \"d\", and the rest stays the same.       How can we fix the message to be You're a wizard Harry ?   string message = \"You're a lizard Harry\";       message[9] = \"w\";   Since \"l\" is at index 9, replacing it with \"w\" fixes the message.     message[10] = \"w\";   Remember indexing starts at 0.     \"w\" = message[9];   In order to change a letter in a string, the ``[]`` operator must be on the left of the assignment.     message[8] = \"w\";   Remember indexing starts at 0.       Put together the code below to create a function mixer that takes in two strings and replaces every even index of the first string by the corresponding index of the second. It returns the modified first string. Example: string_a = \"food\" and string_b = \"summer\" . mixer(string_a ,string_b ) makes string_a become somd .  Assume second string is greater than first.      string mixer(string s1,string s2) {    void mixer(string s1,string s2) {      size_t size = s1.length();    size_t size = s2.length();     size_t i = 0;  while (i &lt size) {    size_t i = size - 1;  while (i &lt size) {     if( (i % 2) == 0) {  s1[i] = s2[i];  }    if( (i % 2) == 1) {  s1[i] = s2[i];  }     i++;    }     return s1;    return s2;     }     "
-},
-{
-  "id": "chapter7_strings-are-mutable-2",
-  "level": "2",
-  "url": "chapter7_strings-are-mutable.html#chapter7_strings-are-mutable-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "You can change the letters in an string one at a time using the [] operator on the left side of an assignment. "
-},
-{
-  "id": "strings_are_mutable_AC_1",
-  "level": "2",
-  "url": "chapter7_strings-are-mutable.html#strings_are_mutable_AC_1",
-  "type": "Listing",
-  "number": "7.11.1",
-  "title": "This active code changes the first letter in <code class=\"code-inline tex2jax_ignore\">greeting<\/code> to be <code class=\"code-inline tex2jax_ignore\">'J'<\/code>.",
-  "body": " This active code changes the first letter in greeting to be 'J' .   #include <iostream> int main() { std::string greeting = \"Hello, world!\"; greeting[0] = 'J'; std::cout << greeting << std::endl; }   "
-},
-{
-  "id": "chapter7_strings-are-mutable-4",
-  "level": "2",
-  "url": "chapter7_strings-are-mutable.html#chapter7_strings-are-mutable-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This produces the output Jello, world! . "
-},
-{
-  "id": "string_mutable_1",
-  "level": "2",
-  "url": "chapter7_strings-are-mutable.html#string_mutable_1",
-  "type": "Checkpoint",
-  "number": "7.11.1",
-  "title": "",
-  "body": " What is printed by the following statements?   string fav_food = \"ice cream\"; fav_food[3] = \"d\"; cout << fav_food << std::endl ;      icd cream   Remember that indexing begins at 0, not 1.     icedcream   Index 3 was a space and now it is \"d\".     ice cream   The character at index 3 should be changed to \"d\".     iced   The character at index 3 should be changed to \"d\", and the rest stays the same.    "
-},
-{
-  "id": "string_mutable_2",
-  "level": "2",
-  "url": "chapter7_strings-are-mutable.html#string_mutable_2",
-  "type": "Checkpoint",
-  "number": "7.11.2",
-  "title": "",
-  "body": "  How can we fix the message to be You're a wizard Harry ?   string message = \"You're a lizard Harry\";       message[9] = \"w\";   Since \"l\" is at index 9, replacing it with \"w\" fixes the message.     message[10] = \"w\";   Remember indexing starts at 0.     \"w\" = message[9];   In order to change a letter in a string, the ``[]`` operator must be on the left of the assignment.     message[8] = \"w\";   Remember indexing starts at 0.    "
-},
-{
-  "id": "string_mutable_3",
-  "level": "2",
-  "url": "chapter7_strings-are-mutable.html#string_mutable_3",
-  "type": "Checkpoint",
-  "number": "7.11.3",
-  "title": "",
-  "body": "  Put together the code below to create a function mixer that takes in two strings and replaces every even index of the first string by the corresponding index of the second. It returns the modified first string. Example: string_a = \"food\" and string_b = \"summer\" . mixer(string_a ,string_b ) makes string_a become somd .  Assume second string is greater than first.      string mixer(string s1,string s2) {    void mixer(string s1,string s2) {      size_t size = s1.length();    size_t size = s2.length();     size_t i = 0;  while (i &lt size) {    size_t i = size - 1;  while (i &lt size) {     if( (i % 2) == 0) {  s1[i] = s2[i];  }    if( (i % 2) == 1) {  s1[i] = s2[i];  }     i++;    }     return s1;    return s2;     }    "
-},
-{
-  "id": "chapter7_strings-are-comparable",
-  "level": "1",
-  "url": "chapter7_strings-are-comparable.html",
-  "type": "Section",
-  "number": "7.12",
-  "title": "<code class=\"code-inline tex2jax_ignore\">string<\/code>s are comparable",
-  "body": " string s are comparable  All the comparison operators that work on int s and double s also work on strings .   This active code checks to see if word is equal to \"banana\" .   #include <iostream> int main() { std::string word = \"banana\"; if (word == \"banana\") { std::cout << \"Yes, we have no bananas!\" << std::endl; } return 0; }    The other comparison operations are useful for putting words in alphabetical order.   This active code uses comparison operators to determine the ordering of word relative to \"banana\" .   #include <iostream> int main() { std::string word = \"Zebra\"; if (word < \"banana\") { std::cout << \"Your word, \" << word << \", comes before banana.\" << std::endl; } else if (word > \"banana\") { std::cout << \"Your word, \" << word << \", comes after banana.\" << std::endl; } else { std::cout << \"Yes, we have no bananas!\" << std::endl; } }    You should be aware, though, that the string class does not handle upper and lower case letters the same way that people do. All the upper case letters come before all the lower case letters. As a result,  Your word, Zebra, comes before banana.  A common way to address this problem is to convert strings to a standard format, like all lower-case, before performing the comparison. The next sections explains how. I will not address the more difficult problem, which is making the program realize that zebras are not fruit.  For the following questions, remember that in C++ 1 means true and 0 means false.    What would the result of the following comparison be? Where 1 means true and 0 means false.   \"Dog\" < \"Doghouse\";       1   Both match up to the g but Dog is shorter than Doghouse so it comes first in the dictionary.     0   Strings are compared character by character.       What would the result of the following comparison be? Where 1 means true and 0 means false.   \"dog\" < \"Dog\";       1   d is greater than D     0   Yes, upper case is less than lower case according to the ordinal values of the characters.     They are the same word   C++ is case sensitive meaning that upper case and lower case characters are different.       What would the result of the following comparison be? Where 1 means true and 0 means false.   \"dog\" < \"Doghouse\";       1   d is greater than D.     0   The length does not matter. Lower case d is greater than upper case D.       What would the result of the following comparison be? Where 1 means true and 0 means false.   \"bread\" < \"bread\";       1   They are equal so one can't be greater than the other.     0   Correct! because they are equal. They are equal because all characters match.     "
-},
-{
-  "id": "chapter7_strings-are-comparable-2",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#chapter7_strings-are-comparable-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "All the comparison operators that work on int s and double s also work on strings . "
-},
-{
-  "id": "strings_comparable_AC_1",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#strings_comparable_AC_1",
-  "type": "Listing",
-  "number": "7.12.1",
-  "title": "This active code checks to see if <code class=\"code-inline tex2jax_ignore\">word<\/code> is equal to <code class=\"code-inline tex2jax_ignore\">\"banana\"<\/code>.",
-  "body": " This active code checks to see if word is equal to \"banana\" .   #include <iostream> int main() { std::string word = \"banana\"; if (word == \"banana\") { std::cout << \"Yes, we have no bananas!\" << std::endl; } return 0; }   "
-},
-{
-  "id": "chapter7_strings-are-comparable-4",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#chapter7_strings-are-comparable-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The other comparison operations are useful for putting words in alphabetical order. "
-},
-{
-  "id": "strings_comparable_AC_2",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#strings_comparable_AC_2",
-  "type": "Listing",
-  "number": "7.12.2",
-  "title": "This active code uses comparison operators to determine the ordering of <code class=\"code-inline tex2jax_ignore\">word<\/code> relative to <code class=\"code-inline tex2jax_ignore\">\"banana\"<\/code>.",
-  "body": " This active code uses comparison operators to determine the ordering of word relative to \"banana\" .   #include <iostream> int main() { std::string word = \"Zebra\"; if (word < \"banana\") { std::cout << \"Your word, \" << word << \", comes before banana.\" << std::endl; } else if (word > \"banana\") { std::cout << \"Your word, \" << word << \", comes after banana.\" << std::endl; } else { std::cout << \"Yes, we have no bananas!\" << std::endl; } }   "
-},
-{
-  "id": "chapter7_strings-are-comparable-6",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#chapter7_strings-are-comparable-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "You should be aware, though, that the string class does not handle upper and lower case letters the same way that people do. All the upper case letters come before all the lower case letters. As a result, "
-},
-{
-  "id": "chapter7_strings-are-comparable-8",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#chapter7_strings-are-comparable-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A common way to address this problem is to convert strings to a standard format, like all lower-case, before performing the comparison. The next sections explains how. I will not address the more difficult problem, which is making the program realize that zebras are not fruit. "
-},
-{
-  "id": "chapter7_strings-are-comparable-9",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#chapter7_strings-are-comparable-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For the following questions, remember that in C++ 1 means true and 0 means false. "
-},
-{
-  "id": "strings_comparable_1",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#strings_comparable_1",
-  "type": "Checkpoint",
-  "number": "7.12.1",
-  "title": "",
-  "body": "  What would the result of the following comparison be? Where 1 means true and 0 means false.   \"Dog\" < \"Doghouse\";       1   Both match up to the g but Dog is shorter than Doghouse so it comes first in the dictionary.     0   Strings are compared character by character.    "
-},
-{
-  "id": "strings_comparable_2",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#strings_comparable_2",
-  "type": "Checkpoint",
-  "number": "7.12.2",
-  "title": "",
-  "body": "  What would the result of the following comparison be? Where 1 means true and 0 means false.   \"dog\" < \"Dog\";       1   d is greater than D     0   Yes, upper case is less than lower case according to the ordinal values of the characters.     They are the same word   C++ is case sensitive meaning that upper case and lower case characters are different.    "
-},
-{
-  "id": "strings_comparable_3",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#strings_comparable_3",
-  "type": "Checkpoint",
-  "number": "7.12.3",
-  "title": "",
-  "body": "  What would the result of the following comparison be? Where 1 means true and 0 means false.   \"dog\" < \"Doghouse\";       1   d is greater than D.     0   The length does not matter. Lower case d is greater than upper case D.    "
-},
-{
-  "id": "strings_comparable_4",
-  "level": "2",
-  "url": "chapter7_strings-are-comparable.html#strings_comparable_4",
-  "type": "Checkpoint",
-  "number": "7.12.4",
-  "title": "",
-  "body": "  What would the result of the following comparison be? Where 1 means true and 0 means false.   \"bread\" < \"bread\";       1   They are equal so one can't be greater than the other.     0   Correct! because they are equal. They are equal because all characters match.    "
+  "url": "chapter7_traversing-strings.html#chapter7_counting-string-characters",
+  "type": "Subsection",
+  "number": "7.3.4",
+  "title": "Counting Characters",
+  "body": " Counting Characters  A counter can record how often a character appears. The function below uses a const reference because it only reads the caller's string.   #include <cstddef> #include <iostream> #include <string> std::size_t count_character(const std::string& text, char target) { std::size_t count = 0; for (const char character : text) { if (character == target) { ++count; } } return count; } int main() { std::cout << count_character(\"banana\", 'a') << '\\n'; return 0; }   "
 },
 {
   "id": "chapter7_character-classification",
   "level": "1",
   "url": "chapter7_character-classification.html",
   "type": "Section",
-  "number": "7.13",
-  "title": "Character classification",
-  "body": " Character classification  It is often useful to examine a character and test whether it is upper or lower case, or whether it is a character or a digit. C++ provides a library of functions that perform this kind of character classification. In order to use these functions, you have to include the header file cctype .  char letter = 'a'; if (isalpha(letter)) { std::cout << \"The character \" << letter << \" is a letter.\" << std::endl ; }  You might expect the return value from isalpha to be a bool , but for reasons I don't even want to think about, it is actually an integer that is 0 if the argument is not a letter, and some non-zero value if it is.  This oddity is not as inconvenient as it seems, because it is legal to use this kind of integer in a conditional, as shown in the example. The value 0 is treated as false , and all non-zero values are treated as true .  Technically, this sort of thing should not be allowed—integers are not the same thing as boolean values. Nevertheless, the C++ habit of converting automatically between types can be useful.  Other character classification functions include isdigit , which identifies the digits 0 through 9, and isspace , which identifies all kinds of white space, including spaces, tabs, newlines, and a few others. There are also isupper and islower , which distinguish upper and lower case letters.  Finally, there are two functions that convert letters from one case to the other, called toupper and tolower . Both take a single character as a parameter and return a (possibly converted) character.  char letter = 'a'; letter = toupper (letter); cout << letter << std::endl ;  The output of this code is A .  As an exercise, use the character classification and conversion library to write functions named stringToUpper and stringToLower that take a single string as a parameter, and return a string with all the characters converted to upper or lower case. The return type should be string .    Try writing the stringToUpper and stringToLower functions in the commented sections of the active code below. Both functions take a single string as a parameter and have return type void . stringToUpper should convert the string to uppercase, and stringToLower should convert the string to lowercase. Some functions that you might find useful include isalpha , isupper , islower , toupper , and tolower . If you get stuck, you can reveal the hint after the problem for help.   #include <iostream> #include <cctype> std::string stringToUpper(std::string input) { \/\/ ``stringToUpper`` should convert a std::string to uppercase and \/\/ and return it. Write your implementation here. } std::string stringToLower(std::string input) { \/\/ ``stringToLower`` should convert a std::string to lowercase and \/\/ and return it. Write your implementation here. } int main() { std::string upper = \"This String Should Be Converted To Uppercase!\"; upper = stringToUpper (upper); std::cout << upper << std::endl; std::string lower = \"This String Should Be Converted To Lowercase!\"; stringToLower (lower); std::cout << lower << std::endl; }      Let's write the code for the stringToUpper function. stringToUpper should convert a string to uppercase.      string stringToUpper(string input) {    void stringToUpper(string input) {     size_t i = 0;     while (i < input.length()) {    while (i > input.length()) {      if (isalpha(input[i]) && islower(input[i])) {    if (isalpha(input[i]) || islower(input[i])) {     input[i] = toupper(input[i]));    }  i++;  }    return result;    }         Let's write the code for the stringToLower function. stringToLower should convert a string to lowercase.      string stringToLower(string input) {    void stringToLower(string input) {     size_t i = 0;     while (i < input.length()) {    while (i > input.length()) {      if (isalpha(input[i]) && isupper(input[i])) {    if (isalpha(input[i]) && isupper(input[i])) {     input[i] = tolower(input[i]);    }  i++;  }    return input;    }       "
+  "number": "7.4",
+  "title": "Character Classification",
+  "body": " Character Classification  The <cctype> header provides functions that classify individual characters. For example, std::isalpha tests for a letter, std::isdigit tests for a decimal digit, and std::isspace tests for whitespace.   #include <cctype> #include <iostream> int main() { char character{'7'}; if (std::isdigit(static_cast<unsigned char>(character))) { std::cout << \"The character is a digit.\\n\"; } return 0; }   The conversion functions std::toupper and std::tolower return an uppercase or lowercase version when a conversion is available. In a larger text-processing program, combine these functions with a traversal loop.  "
 },
 {
   "id": "chapter7_character-classification-2",
@@ -10132,7 +9592,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "It is often useful to examine a character and test whether it is upper or lower case, or whether it is a character or a digit. C++ provides a library of functions that perform this kind of character classification. In order to use these functions, you have to include the header file cctype . "
+  "body": "The <cctype> header provides functions that classify individual characters. For example, std::isalpha tests for a letter, std::isdigit tests for a decimal digit, and std::isspace tests for whitespace. "
 },
 {
   "id": "chapter7_character-classification-4",
@@ -10141,466 +9601,493 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "You might expect the return value from isalpha to be a bool , but for reasons I don't even want to think about, it is actually an integer that is 0 if the argument is not a letter, and some non-zero value if it is. "
+  "body": "The conversion functions std::toupper and std::tolower return an uppercase or lowercase version when a conversion is available. In a larger text-processing program, combine these functions with a traversal loop. "
 },
 {
-  "id": "chapter7_character-classification-5",
-  "level": "2",
-  "url": "chapter7_character-classification.html#chapter7_character-classification-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This oddity is not as inconvenient as it seems, because it is legal to use this kind of integer in a conditional, as shown in the example. The value 0 is treated as false , and all non-zero values are treated as true . "
-},
-{
-  "id": "chapter7_character-classification-6",
-  "level": "2",
-  "url": "chapter7_character-classification.html#chapter7_character-classification-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Technically, this sort of thing should not be allowed—integers are not the same thing as boolean values. Nevertheless, the C++ habit of converting automatically between types can be useful. "
-},
-{
-  "id": "chapter7_character-classification-7",
-  "level": "2",
-  "url": "chapter7_character-classification.html#chapter7_character-classification-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Other character classification functions include isdigit , which identifies the digits 0 through 9, and isspace , which identifies all kinds of white space, including spaces, tabs, newlines, and a few others. There are also isupper and islower , which distinguish upper and lower case letters. "
-},
-{
-  "id": "chapter7_character-classification-8",
-  "level": "2",
-  "url": "chapter7_character-classification.html#chapter7_character-classification-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Finally, there are two functions that convert letters from one case to the other, called toupper and tolower . Both take a single character as a parameter and return a (possibly converted) character. "
-},
-{
-  "id": "chapter7_character-classification-10",
-  "level": "2",
-  "url": "chapter7_character-classification.html#chapter7_character-classification-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The output of this code is A . "
-},
-{
-  "id": "chapter7_character-classification-11",
-  "level": "2",
-  "url": "chapter7_character-classification.html#chapter7_character-classification-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "As an exercise, use the character classification and conversion library to write functions named stringToUpper and stringToLower that take a single string as a parameter, and return a string with all the characters converted to upper or lower case. The return type should be string . "
-},
-{
-  "id": "character_classification_AC_1",
-  "level": "2",
-  "url": "chapter7_character-classification.html#character_classification_AC_1",
-  "type": "Checkpoint",
-  "number": "7.13.1",
-  "title": "",
-  "body": "  Try writing the stringToUpper and stringToLower functions in the commented sections of the active code below. Both functions take a single string as a parameter and have return type void . stringToUpper should convert the string to uppercase, and stringToLower should convert the string to lowercase. Some functions that you might find useful include isalpha , isupper , islower , toupper , and tolower . If you get stuck, you can reveal the hint after the problem for help.   #include <iostream> #include <cctype> std::string stringToUpper(std::string input) { \/\/ ``stringToUpper`` should convert a std::string to uppercase and \/\/ and return it. Write your implementation here. } std::string stringToLower(std::string input) { \/\/ ``stringToLower`` should convert a std::string to lowercase and \/\/ and return it. Write your implementation here. } int main() { std::string upper = \"This String Should Be Converted To Uppercase!\"; upper = stringToUpper (upper); std::cout << upper << std::endl; std::string lower = \"This String Should Be Converted To Lowercase!\"; stringToLower (lower); std::cout << lower << std::endl; }      Let's write the code for the stringToUpper function. stringToUpper should convert a string to uppercase.      string stringToUpper(string input) {    void stringToUpper(string input) {     size_t i = 0;     while (i < input.length()) {    while (i > input.length()) {      if (isalpha(input[i]) && islower(input[i])) {    if (isalpha(input[i]) || islower(input[i])) {     input[i] = toupper(input[i]));    }  i++;  }    return result;    }         Let's write the code for the stringToLower function. stringToLower should convert a string to lowercase.      string stringToLower(string input) {    void stringToLower(string input) {     size_t i = 0;     while (i < input.length()) {    while (i > input.length()) {      if (isalpha(input[i]) && isupper(input[i])) {    if (isalpha(input[i]) && isupper(input[i])) {     input[i] = tolower(input[i]);    }  i++;  }    return input;    }      "
-},
-{
-  "id": "chapter7_other-string-functions",
+  "id": "string-input-and-object-text",
   "level": "1",
-  "url": "chapter7_other-string-functions.html",
+  "url": "string-input-and-object-text.html",
   "type": "Section",
-  "number": "7.14",
-  "title": "Other <code class=\"code-inline tex2jax_ignore\">string<\/code> functions",
-  "body": " Other string functions  This chapter does not cover all the string functions. An additional one, substr , is covered in .  "
+  "number": "7.5",
+  "title": "Keyboard Input and Text Representation",
+  "body": " Keyboard Input and Text Representation  A program often needs to receive text typed by a user. In C++, keyboard input is read through std::cin , an input stream provided by the <iostream> header. The extraction operator >> reads formatted values from that stream.   Reading Words with std::cin  When std::cin reads a std::string with >> , it skips leading whitespace and stops at the next whitespace character. Therefore, it reads one word or token rather than an entire line.   #include <iostream> #include <string> int main() { std::string first_name; int age; std::cout << \"Enter your first name and age: \"; std::cin >> first_name >> age; std::cout << first_name << \" is \" << age << \" years old.\\n\"; return 0; }   If the user types Amina twenty , the integer input would not succeed because age expects a number. At this stage, we focus on providing input in the type and order the program expects. More detailed stream-state recovery will be studied later.    Reading Complete Lines  Use std::getline when the input may contain spaces and the program should read through the end of the line.   #include <iostream> #include <string> int main() { std::string full_name; std::cout << \"Enter your full name: \"; std::getline(std::cin, full_name); std::cout << \"Hello, \" << full_name << \"!\\n\"; return 0; }   The expression std::cin >> name reads one word, while std::getline(std::cin, name) reads a complete line. Choosing between them depends on whether spaces belong to the input value.    Mixing Word and Line Input  The extraction operator leaves the newline produced by the user's Enter key in the input stream. If std::getline is called immediately afterward, it may read that leftover newline and return an empty string.   #include <iostream> #include <string> int main() { int age; std::string full_name; std::cin >> age; std::cin.ignore(); std::getline(std::cin, full_name); std::cout << full_name << \" is \" << age << \" years old.\\n\"; return 0; }   In this simple example, std::cin.ignore() removes the leftover newline before std::getline reads the name. This form assumes that the user enters only the expected integer before pressing Enter. Programs that must recover from invalid or extra input require additional stream-handling techniques.    Keep Input at the Program Boundary  A common beginner mistake is to treat std::cin as the ultimate source of data and read from it inside every function. A better design keeps keyboard input near the program boundary, usually in main() or in a function whose specific job is to collect input.  Ordinary processing functions should receive data through parameters and return results. This makes them easier to test, reuse, and call with data from another source, such as a file or a test case.   #include <iostream> int calculate_sum(int first_number, int second_number) { return first_number + second_number; } int main() { int first_number; int second_number; std::cin >> first_number >> second_number; std::cout << calculate_sum(first_number, second_number) << '\\n'; return 0; }   The function calculate_sum does not know or care where its arguments came from. The function is responsible for processing; main() is responsible for collecting keyboard input and displaying the result.   A dedicated input function, such as read_full_name() , may use std::cin when reading input is that function's explicit responsibility. The guideline is to avoid hidden keyboard-input dependencies in ordinary calculation and processing functions.     Representing Objects as Text  Input brings data into a program. A program also needs ways to turn values and objects into text for output. The standard function std::to_string converts a numeric value to a std::string .  A user-defined object cannot automatically be sent to std::cout . For example, std::cout << account; produces an error unless a suitable output operation has been defined. A simple first design is to give the class a to_string() member function that returns a std::string .   #include <iostream> #include <string> class Score { private: int points; public: Score(int starting_points) : points{starting_points} { } std::string to_string() const { return \"Score{points=\" + std::to_string(points) + \"}\"; } }; int main() { Score score{95}; std::cout << score.to_string() << '\\n'; return 0; }   Later, when operator overloading is studied, we can define operator<< so that std::cout << score; works directly. For now, to_string() makes the conversion explicit.   "
 },
 {
-  "id": "chapter7_other-string-functions-2",
+  "id": "string-input-and-object-text-2",
   "level": "2",
-  "url": "chapter7_other-string-functions.html#chapter7_other-string-functions-2",
+  "url": "string-input-and-object-text.html#string-input-and-object-text-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "This chapter does not cover all the string functions. An additional one, substr , is covered in . "
+  "body": "A program often needs to receive text typed by a user. In C++, keyboard input is read through std::cin , an input stream provided by the <iostream> header. The extraction operator >> reads formatted values from that stream. "
+},
+{
+  "id": "chapter7_keyboard-input-words",
+  "level": "2",
+  "url": "string-input-and-object-text.html#chapter7_keyboard-input-words",
+  "type": "Subsection",
+  "number": "7.5.1",
+  "title": "Reading Words with <code class=\"code-inline tex2jax_ignore\">std::cin<\/code>",
+  "body": " Reading Words with std::cin  When std::cin reads a std::string with >> , it skips leading whitespace and stops at the next whitespace character. Therefore, it reads one word or token rather than an entire line.   #include <iostream> #include <string> int main() { std::string first_name; int age; std::cout << \"Enter your first name and age: \"; std::cin >> first_name >> age; std::cout << first_name << \" is \" << age << \" years old.\\n\"; return 0; }   If the user types Amina twenty , the integer input would not succeed because age expects a number. At this stage, we focus on providing input in the type and order the program expects. More detailed stream-state recovery will be studied later.  "
+},
+{
+  "id": "chapter7_keyboard-input-lines",
+  "level": "2",
+  "url": "string-input-and-object-text.html#chapter7_keyboard-input-lines",
+  "type": "Subsection",
+  "number": "7.5.2",
+  "title": "Reading Complete Lines",
+  "body": " Reading Complete Lines  Use std::getline when the input may contain spaces and the program should read through the end of the line.   #include <iostream> #include <string> int main() { std::string full_name; std::cout << \"Enter your full name: \"; std::getline(std::cin, full_name); std::cout << \"Hello, \" << full_name << \"!\\n\"; return 0; }   The expression std::cin >> name reads one word, while std::getline(std::cin, name) reads a complete line. Choosing between them depends on whether spaces belong to the input value.  "
+},
+{
+  "id": "chapter7_mixing-input-operations",
+  "level": "2",
+  "url": "string-input-and-object-text.html#chapter7_mixing-input-operations",
+  "type": "Subsection",
+  "number": "7.5.3",
+  "title": "Mixing Word and Line Input",
+  "body": " Mixing Word and Line Input  The extraction operator leaves the newline produced by the user's Enter key in the input stream. If std::getline is called immediately afterward, it may read that leftover newline and return an empty string.   #include <iostream> #include <string> int main() { int age; std::string full_name; std::cin >> age; std::cin.ignore(); std::getline(std::cin, full_name); std::cout << full_name << \" is \" << age << \" years old.\\n\"; return 0; }   In this simple example, std::cin.ignore() removes the leftover newline before std::getline reads the name. This form assumes that the user enters only the expected integer before pressing Enter. Programs that must recover from invalid or extra input require additional stream-handling techniques.  "
+},
+{
+  "id": "chapter7_input-boundary",
+  "level": "2",
+  "url": "string-input-and-object-text.html#chapter7_input-boundary",
+  "type": "Subsection",
+  "number": "7.5.4",
+  "title": "Keep Input at the Program Boundary",
+  "body": " Keep Input at the Program Boundary  A common beginner mistake is to treat std::cin as the ultimate source of data and read from it inside every function. A better design keeps keyboard input near the program boundary, usually in main() or in a function whose specific job is to collect input.  Ordinary processing functions should receive data through parameters and return results. This makes them easier to test, reuse, and call with data from another source, such as a file or a test case.   #include <iostream> int calculate_sum(int first_number, int second_number) { return first_number + second_number; } int main() { int first_number; int second_number; std::cin >> first_number >> second_number; std::cout << calculate_sum(first_number, second_number) << '\\n'; return 0; }   The function calculate_sum does not know or care where its arguments came from. The function is responsible for processing; main() is responsible for collecting keyboard input and displaying the result.   A dedicated input function, such as read_full_name() , may use std::cin when reading input is that function's explicit responsibility. The guideline is to avoid hidden keyboard-input dependencies in ordinary calculation and processing functions.   "
+},
+{
+  "id": "chapter7_object-to-string",
+  "level": "2",
+  "url": "string-input-and-object-text.html#chapter7_object-to-string",
+  "type": "Subsection",
+  "number": "7.5.5",
+  "title": "Representing Objects as Text",
+  "body": " Representing Objects as Text  Input brings data into a program. A program also needs ways to turn values and objects into text for output. The standard function std::to_string converts a numeric value to a std::string .  A user-defined object cannot automatically be sent to std::cout . For example, std::cout << account; produces an error unless a suitable output operation has been defined. A simple first design is to give the class a to_string() member function that returns a std::string .   #include <iostream> #include <string> class Score { private: int points; public: Score(int starting_points) : points{starting_points} { } std::string to_string() const { return \"Score{points=\" + std::to_string(points) + \"}\"; } }; int main() { Score score{95}; std::cout << score.to_string() << '\\n'; return 0; }   Later, when operator overloading is studied, we can define operator<< so that std::cout << score; works directly. For now, to_string() makes the conversion explicit.  "
+},
+{
+  "id": "chapter7_lexicographical-order",
+  "level": "1",
+  "url": "chapter7_lexicographical-order.html",
+  "type": "Section",
+  "number": "7.6",
+  "title": "Comparison",
+  "body": " Comparison  Strings, arrays and few other containers support the comparison operators == , != , < , > , <= , and >= . These comparisons use lexicographical order : elements are compared from left to right until a difference is found or one sequence ends.   Character Values and Code Units  A char has an integer value in the character set used by the program. When two ordinary C++ strings are compared, C++ compares their char elements in sequence. For the ASCII characters used in our examples, these values correspond to familiar ASCII code-point values.  The important ordering for ordinary ASCII text is that decimal digits come before uppercase letters, and uppercase letters come before lowercase letters. Therefore, character-value ordering is case-sensitive.   Common ASCII character-value ranges    Characters  Common ASCII values  Ordering idea    '0' through '9'  48 through 57  Digits come before letters.    'A' through 'Z'  65 through 90  Uppercase letters come before lowercase letters.    'a' through 'z'  97 through 122  Lowercase letters come after uppercase letters.     The exact numeric values of an implementation's character set are not the main lesson here. The lesson is that C++ compares the element values; it does not ask whether two words would appear in the same order in a human dictionary.   #include <iostream> int main() { if ('A' < 'a') { std::cout << \"Uppercase A has a smaller value.\\n\"; } std::cout << static_cast<int>('A') << '\\n'; std::cout << static_cast<int>('a') << '\\n'; return 0; }   A code point is a numeric identifier for an abstract character in a character repertoire such as Unicode. In a std::string , a char represents one stored code unit. For the basic ASCII examples in this section, the code unit and character value correspond directly to the ASCII value. General Unicode text can use multiple UTF-8 code units for one abstract character, so ordinary std::string comparison is not a complete Unicode or language-aware collation system.    The Comparison Algorithm  Lexicographical comparison follows a small, repeatable algorithm. Compare corresponding elements from the beginning, stop at the first difference, and use that difference to decide the ordering.   Steps in lexicographical comparison    Situation  Result    The first unequal pair of elements is found.  The sequence with the smaller element comes first.    All compared elements match, but one sequence ends.  The shorter sequence comes first.    Both sequences end at the same time after matching.  The sequences compare equal.     When one sequence matches the beginning of another, it is called a proper prefix of the longer sequence. A proper prefix comes before the sequence that extends it.   Examples of lexicographical comparison    Comparison  Result  Reason    \"cat\" < \"car\"  false  The first difference is 't' versus 'r' , and 't' is larger.    \"cat\" < \"catfish\"  true  \"cat\" is a proper prefix of \"catfish\" .    \"cat\" == \"cat\"  true  All elements match and both sequences have the same length.    \"\" < \"cat\"  true  An empty sequence is shorter than every nonempty sequence.      #include <iostream> #include <string> int main() { std::string first{\"Dog\"}; std::string second{\"Doghouse\"}; if (first < second) { std::cout << first << \" comes first.\\n\"; } return 0; }     Case-Sensitive Comparison  String comparison is case-sensitive. On an ASCII-based system, uppercase letters have smaller values than lowercase letters. Thus, \"Zebra\" < \"banana\" can be true even though a human reader might expect a dictionary to ignore case.   #include <iostream> #include <string> int main() { std::string first{\"Zebra\"}; std::string second{\"banana\"}; std::cout << std::boolalpha << (first < second) << '\\n'; return 0; }   A case-insensitive ordering requires an additional policy. A program might create lowercase copies before comparing, but that changes the values being compared; it is not the behavior of the built-in string comparison itself.    Comparing std::array Objects  Lexicographical comparison is not limited to strings. In C++17, relational operators for two std::array objects compare their corresponding elements in order. The element type must support the comparison being requested, and the arrays must have the same element type and size for the built-in array operators.   #include <array> #include <iostream> int main() { std::array<int, 3> first{1, 4, 9}; std::array<int, 3> second{1, 5, 0}; if (first < second) { std::cout << \"first comes first.\\n\"; } return 0; }   The first elements are both 1 , so comparison continues. The second elements are 4 and 5 . Because 4 < 5 , the comparison is decided there; the final elements are never needed to determine the result.  For arrays with different sizes, use the general algorithm std::lexicographical_compare with the two ranges. It applies the same first-difference and shorter-prefix rules, even when the ranges have different lengths.   #include <algorithm> #include <array> #include <iostream> int main() { std::array<int, 2> short_values{1, 2}; std::array<int, 3> long_values{1, 2, 0}; bool short_first = std::lexicographical_compare( short_values.begin(), short_values.end(), long_values.begin(), long_values.end() ); std::cout << std::boolalpha << short_first << '\\n'; return 0; }     One Rule for Many Sequences  The same idea is useful for many sequence-like types. Dynamic sequences like std::vector , std::deque , and std::string provide built-in comparison operators that evaluate their elements lexicographically. If the first elements differ, later elements do not affect the result. If all shared elements match, the length decides the result.  While fixed-size std::array objects can only be compared using built-in operators if they share the exact same type and size, you can still apply this exact same behavior across different sizes and container types by using the general algorithm std::lexicographical_compare with iterator ranges.   Lexicographical order is not automatically alphabetical order, case-insensitive order, or language-aware dictionary order. It is an element-by-element ordering based on the comparison of the stored values.    "
+},
+{
+  "id": "chapter7_lexicographical-order-2",
+  "level": "2",
+  "url": "chapter7_lexicographical-order.html#chapter7_lexicographical-order-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Strings, arrays and few other containers support the comparison operators == , != , < , > , <= , and >= . These comparisons use lexicographical order : elements are compared from left to right until a difference is found or one sequence ends. "
+},
+{
+  "id": "chapter7_character-values",
+  "level": "2",
+  "url": "chapter7_lexicographical-order.html#chapter7_character-values",
+  "type": "Subsection",
+  "number": "7.6.1",
+  "title": "Character Values and Code Units",
+  "body": " Character Values and Code Units  A char has an integer value in the character set used by the program. When two ordinary C++ strings are compared, C++ compares their char elements in sequence. For the ASCII characters used in our examples, these values correspond to familiar ASCII code-point values.  The important ordering for ordinary ASCII text is that decimal digits come before uppercase letters, and uppercase letters come before lowercase letters. Therefore, character-value ordering is case-sensitive.   Common ASCII character-value ranges    Characters  Common ASCII values  Ordering idea    '0' through '9'  48 through 57  Digits come before letters.    'A' through 'Z'  65 through 90  Uppercase letters come before lowercase letters.    'a' through 'z'  97 through 122  Lowercase letters come after uppercase letters.     The exact numeric values of an implementation's character set are not the main lesson here. The lesson is that C++ compares the element values; it does not ask whether two words would appear in the same order in a human dictionary.   #include <iostream> int main() { if ('A' < 'a') { std::cout << \"Uppercase A has a smaller value.\\n\"; } std::cout << static_cast<int>('A') << '\\n'; std::cout << static_cast<int>('a') << '\\n'; return 0; }   A code point is a numeric identifier for an abstract character in a character repertoire such as Unicode. In a std::string , a char represents one stored code unit. For the basic ASCII examples in this section, the code unit and character value correspond directly to the ASCII value. General Unicode text can use multiple UTF-8 code units for one abstract character, so ordinary std::string comparison is not a complete Unicode or language-aware collation system.  "
+},
+{
+  "id": "chapter7_lexicographical-algorithm",
+  "level": "2",
+  "url": "chapter7_lexicographical-order.html#chapter7_lexicographical-algorithm",
+  "type": "Subsection",
+  "number": "7.6.2",
+  "title": "The Comparison Algorithm",
+  "body": " The Comparison Algorithm  Lexicographical comparison follows a small, repeatable algorithm. Compare corresponding elements from the beginning, stop at the first difference, and use that difference to decide the ordering.   Steps in lexicographical comparison    Situation  Result    The first unequal pair of elements is found.  The sequence with the smaller element comes first.    All compared elements match, but one sequence ends.  The shorter sequence comes first.    Both sequences end at the same time after matching.  The sequences compare equal.     When one sequence matches the beginning of another, it is called a proper prefix of the longer sequence. A proper prefix comes before the sequence that extends it.   Examples of lexicographical comparison    Comparison  Result  Reason    \"cat\" < \"car\"  false  The first difference is 't' versus 'r' , and 't' is larger.    \"cat\" < \"catfish\"  true  \"cat\" is a proper prefix of \"catfish\" .    \"cat\" == \"cat\"  true  All elements match and both sequences have the same length.    \"\" < \"cat\"  true  An empty sequence is shorter than every nonempty sequence.      #include <iostream> #include <string> int main() { std::string first{\"Dog\"}; std::string second{\"Doghouse\"}; if (first < second) { std::cout << first << \" comes first.\\n\"; } return 0; }   "
+},
+{
+  "id": "chapter7_string-comparison-case",
+  "level": "2",
+  "url": "chapter7_lexicographical-order.html#chapter7_string-comparison-case",
+  "type": "Subsection",
+  "number": "7.6.3",
+  "title": "Case-Sensitive Comparison",
+  "body": " Case-Sensitive Comparison  String comparison is case-sensitive. On an ASCII-based system, uppercase letters have smaller values than lowercase letters. Thus, \"Zebra\" < \"banana\" can be true even though a human reader might expect a dictionary to ignore case.   #include <iostream> #include <string> int main() { std::string first{\"Zebra\"}; std::string second{\"banana\"}; std::cout << std::boolalpha << (first < second) << '\\n'; return 0; }   A case-insensitive ordering requires an additional policy. A program might create lowercase copies before comparing, but that changes the values being compared; it is not the behavior of the built-in string comparison itself.  "
+},
+{
+  "id": "chapter7_array-lexicographical-comparison",
+  "level": "2",
+  "url": "chapter7_lexicographical-order.html#chapter7_array-lexicographical-comparison",
+  "type": "Subsection",
+  "number": "7.6.4",
+  "title": "Comparing <code class=\"code-inline tex2jax_ignore\">std::array<\/code> Objects",
+  "body": " Comparing std::array Objects  Lexicographical comparison is not limited to strings. In C++17, relational operators for two std::array objects compare their corresponding elements in order. The element type must support the comparison being requested, and the arrays must have the same element type and size for the built-in array operators.   #include <array> #include <iostream> int main() { std::array<int, 3> first{1, 4, 9}; std::array<int, 3> second{1, 5, 0}; if (first < second) { std::cout << \"first comes first.\\n\"; } return 0; }   The first elements are both 1 , so comparison continues. The second elements are 4 and 5 . Because 4 < 5 , the comparison is decided there; the final elements are never needed to determine the result.  For arrays with different sizes, use the general algorithm std::lexicographical_compare with the two ranges. It applies the same first-difference and shorter-prefix rules, even when the ranges have different lengths.   #include <algorithm> #include <array> #include <iostream> int main() { std::array<int, 2> short_values{1, 2}; std::array<int, 3> long_values{1, 2, 0}; bool short_first = std::lexicographical_compare( short_values.begin(), short_values.end(), long_values.begin(), long_values.end() ); std::cout << std::boolalpha << short_first << '\\n'; return 0; }   "
+},
+{
+  "id": "chapter7_sequence-container-comparison",
+  "level": "2",
+  "url": "chapter7_lexicographical-order.html#chapter7_sequence-container-comparison",
+  "type": "Subsection",
+  "number": "7.6.5",
+  "title": "One Rule for Many Sequences",
+  "body": " One Rule for Many Sequences  The same idea is useful for many sequence-like types. Dynamic sequences like std::vector , std::deque , and std::string provide built-in comparison operators that evaluate their elements lexicographically. If the first elements differ, later elements do not affect the result. If all shared elements match, the length decides the result.  While fixed-size std::array objects can only be compared using built-in operators if they share the exact same type and size, you can still apply this exact same behavior across different sizes and container types by using the general algorithm std::lexicographical_compare with iterator ranges.   Lexicographical order is not automatically alphabetical order, case-insensitive order, or language-aware dictionary order. It is an element-by-element ordering based on the comparison of the stored values.   "
 },
 {
   "id": "chapter7_glossary",
   "level": "1",
   "url": "chapter7_glossary.html",
-  "type": "Section",
-  "number": "7.15",
-  "title": "Glossary",
-  "body": " Glossary    object  A collection of related data that comes with a set of functions that operate on it. The objects we have used so far are the cout object provided by the system, and string s.    index  A variable or value used to select one of the members of an ordered set, like a character from a string.    traverse  To iterate through all the elements of a set performing a similar operation on each.    counter  A variable used to count something, usually initialized to zero and then incremented.    increment  Increase the value of a variable by one. The increment operator in C++ is ++ . In fact, that's why C++ is called C++, because it is meant to be one better than C.    decrement  Decrease the value of a variable by one. The decrement operator in C++ is – .    concatenate  To join two operands end-to-end.       Match the definition to the term.   Try again!    object  A collection of related data that comes with a set of functions that operate on it.    index  A variable or value used to select one of the members of an ordered set, like a character from a string.    traverse  To iterate through all the elements of a set performing a similar operation on each.    counter  A variable used to count something.    increment  Increase the value of a variable by one.    decrement  Decrease the value of a variable by one.    concatenate  To join two operands end-to-end.      "
-},
-{
-  "id": "chapter7_glossary-2",
-  "level": "2",
-  "url": "chapter7_glossary.html#chapter7_glossary-2",
   "type": "Glossary",
-  "number": "7.15",
+  "number": "7.7",
   "title": "Glossary",
-  "body": "  object  A collection of related data that comes with a set of functions that operate on it. The objects we have used so far are the cout object provided by the system, and string s.    index  A variable or value used to select one of the members of an ordered set, like a character from a string.    traverse  To iterate through all the elements of a set performing a similar operation on each.    counter  A variable used to count something, usually initialized to zero and then incremented.    increment  Increase the value of a variable by one. The increment operator in C++ is ++ . In fact, that's why C++ is called C++, because it is meant to be one better than C.    decrement  Decrease the value of a variable by one. The decrement operator in C++ is – .    concatenate  To join two operands end-to-end.   "
+  "body": " Glossary   concatenation  Joining strings end to end.    character literal  A single character written in single quotation marks, such as 'A' .    string literal  A sequence of characters written in double quotation marks, such as \"Hello\" .    mutable  Capable of being changed after it is created.    index  A zero-based position used to access an element of a string.    traverse  To visit the characters of a string in sequence.    counter  A variable that records how many times an event occurs.    substring  A sequence of characters contained within a larger string.    find()  A std::string member function that returns the index of the first matching character or substring.    std::string::npos  A special value returned by a string search when no match is found.    character classification  Testing a character to determine whether it is a letter, digit, whitespace character, or another category.    lexicographical order  An ordering that compares strings from left to right, character by character.    to_string()  A function that represents a value as text. std::to_string converts numeric values; a class can also provide its own member function with this name.    whitespace  Spaces, tabs, and newline characters that separate visible text.   "
 },
 {
-  "id": "chapter7_glossary-3",
+  "id": "glossary_ch7_concatenation-2",
   "level": "2",
-  "url": "chapter7_glossary.html#chapter7_glossary-3",
-  "type": "Reading Questions",
-  "number": "7.15",
-  "title": "Reading Questions",
-  "body": "   Match the definition to the term.   Try again!    object  A collection of related data that comes with a set of functions that operate on it.    index  A variable or value used to select one of the members of an ordered set, like a character from a string.    traverse  To iterate through all the elements of a set performing a similar operation on each.    counter  A variable used to count something.    increment  Increase the value of a variable by one.    decrement  Decrease the value of a variable by one.    concatenate  To join two operands end-to-end.     "
-},
-{
-  "id": "chapter7_multiple-choice-exercises",
-  "level": "1",
-  "url": "chapter7_multiple-choice-exercises.html",
-  "type": "Exercises",
-  "number": "7.16",
-  "title": "Multiple Choice Exercises",
-  "body": " Multiple Choice Exercises    Which variables below is declared as a string type?   int main() { int x = 0; double y = 4.5; std::string word = \"hello\"; std::string letter = \"a\"; char c = 'c'; bool isPrime = 1; }        x     x is an int .      y     y is a double .      word     word is a string .      \"hello\"     hello is not a variable.      letter     letter is a string .      c     c is a char .      isPrime     isPrime is a bool .       What value should replace the question mark to output the character ‘p'?   int main() { std::string quote = \"Not my tempo.\"; std::cout << quote[?]; }       11   Remember that indexing begins at 0 in C++.     10   ‘p' is located at index 10 in quote.     4   The character ‘m' is located at index 4.     0   The character N is located at index 0.       What is the output of the code below?   int main() { std::string quote = \"I love you 3000.\"; int x = 3; int y = 3 * x; int z = 1; if (y > 12) { z = z + x + y; } else { z = z + y - x; } std::cout << quote[z]; }       I   The value of z is not 0.     0   The value of z is not greater than 11.     o   The value of z is not 3.     y   The final value of z is 7, and ‘y' is at index 7 of quote .       What is the output of the code below?   int main() { std::string quote = \"Look at me. I'm the captain now.\"; int x = quote.length(); std::cout << quote[x]; }       -1   -1 is not in quote .     w    x is not the index value of the character ‘w'.     .    x is not the index value of the last period.     ‘ ‘   It might be logical to think that memory outside of the string is empty space, but there could be leftover junk values.     Error, we are indexing out of bounds.    x has a value of 32 and there is no index 32 in quote .       What is the output of the code below?   int main() { std::string quote = \"With great power comes great responsiblity.\"; size_t n = 0; while (n < quote.length()) { if (n % 5 == 0) { std::cout << quote[n]; } n++; } }       teeest   Remember that indexing begins at 0 in C++.     Wg reeest   If we print out every fifth character, including the first, this is the answer.     ith reatpowe coms grat rsponibliy.   This is what we would get if we removed every fifth character.     With great power comes great responsiblity.   Take a look at the conditional in the while loop.       What is the output of the code below?   int main() { std::string quote = \"Why so serious?\"; size_t index = quote.find(\"a\"); std::cout << index; }        string::npos    Since ‘a' is not found in quote , the find function returns string::npos .     0   The character at index 0 is ‘W'.     8   The character at index 8 is ‘e'.     15   There is no index 15 in quote.       What is the output of the code below?   int main() { std::string quote = \"How much wood could a woodchuck chuck if a woodchuck could chuck wood?\"; size_t index = quote.find(\"wood\"); std::cout << index; }       4   Although wood appears four times in the string , that is not what the find function returns.     9   The index of ‘w' in the first wood is at index 9.     10   Remember indexing begins at 0 in C++.     12   The find function returns the index of the first character of the found string.     22   The find function returns the index of the first character of the found string.       What is the output of the code below?   int main() { std::string quote = \"How much wood could a woodchuck chuck if a woodchuck could chuck wood?\"; size_t index = quote.find('w', quote.find(\"wood\") + 1); std::cout << index; }       9   Take a closer look at the starting index for where we should start looking.     22   After the first ‘w', the second ‘w' appears at index 22.     43   Take a closer look at the find function and its arguments.     65   Take a closer look at the find function and its arguments.       What is the output of the code below?   int main() { std::string quote = \"Life is like a box of chocolates. You never know what you're gonna get.\"; size_t i = 0; size_t count = 0; while (i < quote.length()) { if (quote[i] == 'e') { count++; } i++; } std::cout << count; }       0   Are there any occurences of the letter ‘e' in quote ?     6   Count the number of ‘e's in quote .     7   There are 7 occurences of the letter ‘e' in quote .     12   Count the number of ‘e's in quote .       What is the output of the code below?   int main() { std::string call = \"Marco!\"; std::string response = \"Polo!\"; std::string output = \"call\" + \"response\"; std::cout << output; }       Marco! Polo!   Take a closer look at the initialization of output .     Marco!Polo!   Take a closer look at the initialization of output .     call response   Can we concatenate call and response ?     callresponse   Can we concatenate call and response ?     Error!   We cannot concatenate native C strings like call and response , so this code results in an error.       An error occured while delivering a message. All instances of the letter ‘s' got replaced by ‘X's. Can you complete the code below to fix this error by selecting the correct line of code to replace the question marks?   int main() { std::string question = \"Honey? Where'X my Xuper Xuit?\"; size_t i = 0; while (i < question.length()) { if (question[i] == 'X') { ????? } i++; } std::cout << question; }        question['X'] = 's';    The argument in the [] operator should be a position in the string.      's' = question[i];    Check the order of your assignment.      'X' = 's';    We cannot assign the value of ‘s' to ‘X'.      question[i] = 's';    This will successfully replace all instances of ‘X' with ‘s'.       What is the output of the code below?   int main() { std::cout << (\"butter\" < \"butterfly\"); }       butterbutterfly   The operator between butter and butterfly is the < operator, not << .     0   Does butter come before or after butterfly ?     1    butter comes before butterfly in the dictionary.     False   In C++, boolean values are outputted as either a 0 or 1.     True   In C++, boolean values are outputted as either a 0 or 1.       What is the output of the code below?   int main() { std::string quote = \"Suffering builds character\"; size_t count = 0; size_t index = 17; while ( index != quote.length() ) { if ( quote[index] == 'a' || quote[index] == 'e' ) { count = count + index; } index = index + 1; } std::cout << count << std::endl ; }       3   The code is not counting the number of a's or e's after position 17. Rather adding up their indices.     4   The code is not counting the number of a's or e's. Rather adding up their indices.     64   Correct! the occurences of ‘a' are 19 and 21, while that of ‘e' is 24 (after index 17). The total is 64.     68   The first occurence of ‘e' is at index 4 so it is not counted.       What is the output of the code below?   int main() { std::string quote = \"Its Bond, James Bond\"; size_t index = 1; while( index < quote.length() ) { quote[index] = 'M'; index = index * 2; } std::cout << quote << std::endl ; }        IMM MondM James Mond    Correct! We change indices 1,2,4,8,16 to M before index becomes >  quote.length() .      IMMMMMMMMMMMMMMMMMMM    We are not increasing index by 1, instead we are doubling it.      MMM MondM James Mond    We don't start at position 0 this time.      IMsMBMnM,MJMmMsMBMnM    we are not increasing index by 2, instead we are doubling it.     "
-},
-{
-  "id": "mce_7_1",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_1",
-  "type": "Exercise",
-  "number": "7.16.1",
-  "title": "",
-  "body": "  Which variables below is declared as a string type?   int main() { int x = 0; double y = 4.5; std::string word = \"hello\"; std::string letter = \"a\"; char c = 'c'; bool isPrime = 1; }        x     x is an int .      y     y is a double .      word     word is a string .      \"hello\"     hello is not a variable.      letter     letter is a string .      c     c is a char .      isPrime     isPrime is a bool .    "
-},
-{
-  "id": "mce_7_2",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_2",
-  "type": "Exercise",
-  "number": "7.16.2",
-  "title": "",
-  "body": "  What value should replace the question mark to output the character ‘p'?   int main() { std::string quote = \"Not my tempo.\"; std::cout << quote[?]; }       11   Remember that indexing begins at 0 in C++.     10   ‘p' is located at index 10 in quote.     4   The character ‘m' is located at index 4.     0   The character N is located at index 0.    "
-},
-{
-  "id": "mce_7_3",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_3",
-  "type": "Exercise",
-  "number": "7.16.3",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string quote = \"I love you 3000.\"; int x = 3; int y = 3 * x; int z = 1; if (y > 12) { z = z + x + y; } else { z = z + y - x; } std::cout << quote[z]; }       I   The value of z is not 0.     0   The value of z is not greater than 11.     o   The value of z is not 3.     y   The final value of z is 7, and ‘y' is at index 7 of quote .    "
-},
-{
-  "id": "mce_7_4",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_4",
-  "type": "Exercise",
-  "number": "7.16.4",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string quote = \"Look at me. I'm the captain now.\"; int x = quote.length(); std::cout << quote[x]; }       -1   -1 is not in quote .     w    x is not the index value of the character ‘w'.     .    x is not the index value of the last period.     ‘ ‘   It might be logical to think that memory outside of the string is empty space, but there could be leftover junk values.     Error, we are indexing out of bounds.    x has a value of 32 and there is no index 32 in quote .    "
-},
-{
-  "id": "mce_7_5",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_5",
-  "type": "Exercise",
-  "number": "7.16.5",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string quote = \"With great power comes great responsiblity.\"; size_t n = 0; while (n < quote.length()) { if (n % 5 == 0) { std::cout << quote[n]; } n++; } }       teeest   Remember that indexing begins at 0 in C++.     Wg reeest   If we print out every fifth character, including the first, this is the answer.     ith reatpowe coms grat rsponibliy.   This is what we would get if we removed every fifth character.     With great power comes great responsiblity.   Take a look at the conditional in the while loop.    "
-},
-{
-  "id": "mce_7_6",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_6",
-  "type": "Exercise",
-  "number": "7.16.6",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string quote = \"Why so serious?\"; size_t index = quote.find(\"a\"); std::cout << index; }        string::npos    Since ‘a' is not found in quote , the find function returns string::npos .     0   The character at index 0 is ‘W'.     8   The character at index 8 is ‘e'.     15   There is no index 15 in quote.    "
-},
-{
-  "id": "mce_7_7",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_7",
-  "type": "Exercise",
-  "number": "7.16.7",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string quote = \"How much wood could a woodchuck chuck if a woodchuck could chuck wood?\"; size_t index = quote.find(\"wood\"); std::cout << index; }       4   Although wood appears four times in the string , that is not what the find function returns.     9   The index of ‘w' in the first wood is at index 9.     10   Remember indexing begins at 0 in C++.     12   The find function returns the index of the first character of the found string.     22   The find function returns the index of the first character of the found string.    "
-},
-{
-  "id": "mce_7_8",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_8",
-  "type": "Exercise",
-  "number": "7.16.8",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string quote = \"How much wood could a woodchuck chuck if a woodchuck could chuck wood?\"; size_t index = quote.find('w', quote.find(\"wood\") + 1); std::cout << index; }       9   Take a closer look at the starting index for where we should start looking.     22   After the first ‘w', the second ‘w' appears at index 22.     43   Take a closer look at the find function and its arguments.     65   Take a closer look at the find function and its arguments.    "
-},
-{
-  "id": "mce_7_9",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_9",
-  "type": "Exercise",
-  "number": "7.16.9",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string quote = \"Life is like a box of chocolates. You never know what you're gonna get.\"; size_t i = 0; size_t count = 0; while (i < quote.length()) { if (quote[i] == 'e') { count++; } i++; } std::cout << count; }       0   Are there any occurences of the letter ‘e' in quote ?     6   Count the number of ‘e's in quote .     7   There are 7 occurences of the letter ‘e' in quote .     12   Count the number of ‘e's in quote .    "
-},
-{
-  "id": "mce_7_10",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_10",
-  "type": "Exercise",
-  "number": "7.16.10",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string call = \"Marco!\"; std::string response = \"Polo!\"; std::string output = \"call\" + \"response\"; std::cout << output; }       Marco! Polo!   Take a closer look at the initialization of output .     Marco!Polo!   Take a closer look at the initialization of output .     call response   Can we concatenate call and response ?     callresponse   Can we concatenate call and response ?     Error!   We cannot concatenate native C strings like call and response , so this code results in an error.    "
-},
-{
-  "id": "mce_7_11",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_11",
-  "type": "Exercise",
-  "number": "7.16.11",
-  "title": "",
-  "body": "  An error occured while delivering a message. All instances of the letter ‘s' got replaced by ‘X's. Can you complete the code below to fix this error by selecting the correct line of code to replace the question marks?   int main() { std::string question = \"Honey? Where'X my Xuper Xuit?\"; size_t i = 0; while (i < question.length()) { if (question[i] == 'X') { ????? } i++; } std::cout << question; }        question['X'] = 's';    The argument in the [] operator should be a position in the string.      's' = question[i];    Check the order of your assignment.      'X' = 's';    We cannot assign the value of ‘s' to ‘X'.      question[i] = 's';    This will successfully replace all instances of ‘X' with ‘s'.    "
-},
-{
-  "id": "mce_7_12",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_12",
-  "type": "Exercise",
-  "number": "7.16.12",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::cout << (\"butter\" < \"butterfly\"); }       butterbutterfly   The operator between butter and butterfly is the < operator, not << .     0   Does butter come before or after butterfly ?     1    butter comes before butterfly in the dictionary.     False   In C++, boolean values are outputted as either a 0 or 1.     True   In C++, boolean values are outputted as either a 0 or 1.    "
-},
-{
-  "id": "mce_7_13",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_13",
-  "type": "Exercise",
-  "number": "7.16.13",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string quote = \"Suffering builds character\"; size_t count = 0; size_t index = 17; while ( index != quote.length() ) { if ( quote[index] == 'a' || quote[index] == 'e' ) { count = count + index; } index = index + 1; } std::cout << count << std::endl ; }       3   The code is not counting the number of a's or e's after position 17. Rather adding up their indices.     4   The code is not counting the number of a's or e's. Rather adding up their indices.     64   Correct! the occurences of ‘a' are 19 and 21, while that of ‘e' is 24 (after index 17). The total is 64.     68   The first occurence of ‘e' is at index 4 so it is not counted.    "
-},
-{
-  "id": "mce_7_14",
-  "level": "2",
-  "url": "chapter7_multiple-choice-exercises.html#mce_7_14",
-  "type": "Exercise",
-  "number": "7.16.14",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string quote = \"Its Bond, James Bond\"; size_t index = 1; while( index < quote.length() ) { quote[index] = 'M'; index = index * 2; } std::cout << quote << std::endl ; }        IMM MondM James Mond    Correct! We change indices 1,2,4,8,16 to M before index becomes >  quote.length() .      IMMMMMMMMMMMMMMMMMMM    We are not increasing index by 1, instead we are doubling it.      MMM MondM James Mond    We don't start at position 0 this time.      IMsMBMnM,MJMmMsMBMnM    we are not increasing index by 2, instead we are doubling it.    "
-},
-{
-  "id": "chapter7_mixed-up-code-exercises",
-  "level": "1",
-  "url": "chapter7_mixed-up-code-exercises.html",
-  "type": "Exercises",
-  "number": "7.17",
-  "title": "Mixed-Up Code Exercises",
-  "body": " Mixed-Up Code Exercises   Answer the following Mixed-Up Code questions to assess what you have learned in this chapter.     Write a program that prints the 4th character of word, and finds and replaces all instances of ‘i' with ‘e'. Finally, print out the string. Put the necessary blocks in the correct order.     int main() {    std::string word = \"irritating\";    std::cout << word[3] << std::endl ;    std::cout << irritating[3] << std::endl ;    std::cout << word.at(4) << std::endl ;    std::cout << word[4] << std::endl ;    while (word.find('i') != string::npos) {    while (word.find('E') != string::npos) {    while (word.find('i')) {    word[word.find('i')] = 'e';    word[word.find('e')] = 'i';    }    std::cout << word << std::endl ;    }       An anagram is a play on words by rearranging the letters of the original words to form new words. For example, the letters in listen can be rearranged to make silent . Write a program that rearranges night into thing and prints the anagram. Put the necessary blocks in the correct order.     int main() {     std::string original = \"night\";    std::string original = \"thing\";     std::string anagram = original;    anagram[0] = original[original.find('t')];    anagram[1] = original[original.find('h')];    anagram[2] = original[original.find('i')];    anagram[3] = original[original.find('n')];    anagram[4] = original[original.find('g')];    std::cout << anagram;    }       Let's write the function longerString, which takes two parameters, first and second. If first has more letters than second, longerString prints first is longer than second , and vice versa. If they have the same number of letters, longerString prints first and second are the same length . Put the necessary blocks in the correct order.      void longerString(string first, string second) {    string longerString(string first, string second) {      if (first.length() > second.length()) {    if (first.length() >= second.length()) {     std::cout << first << \" is longer than \" << second << std::endl ;    }    else if (first.length() < second.length()) {     std::cout << second << \" is longer than \" << first << std::endl ;    std::cout << second << \" is longer than \" << second << std::endl ;     }    else {    else (first.length() == second.length()) {    std::cout << first << \" and \" << second << \" are the same length\" << std::endl ;    }    }       Let's write the code for the cipherText function. cipherText should be a void function that takes input as a parameter, increases the value of each character by 1 (i.e. bad turns into cbe ), and prints the encrypted string.      void cipherText(string input) {    string cipherText(string input) {     size_t i = 0;     while (i < input.length()) {    while (i < input.length() - 1) {      input[i] = input[i] + 1;    input[i] = input[i] - 1;     i++;    }     std::cout << input;    return input;     }       The program below should print out the number of occurences of the character ‘t' in the string tongue_twister but the code is mixed up. Put the necessary blocks in the correct order, with declaration in the order of tongue_twister, count, and i.     int main() {    std::string tongue_twister = \"twelve twins twirled twelve twigs\";     int count = 0;    int count = 1;     size_t i = 0;    while (i < tongue_twister.length()) {     if (tongue_twister[i] == 't') {    if (tongue_twister[i] = 't') {     count++;    }    i++;    }    std::cout << count;    }       The program below should print out the index of the second instance of the character ‘i' but the code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.     int main() {    std::string quote = \"Your time is limited, so don't waste it living someone else's life.\";    size_t i = 0;    while (i < quote.length()) {    size_t first = quote.find(\"i\");     size_t index = find(quote, 'i', first + 1);    size_t index = find(quote, 'i', first);      std::cout << index;    std::cout << first;     }       Deep in the forest live the 7 dwarves named Sorty, Torty, Vorty, Worty, Xorty, Yorty, and Zorty. The program below should print out each of their names but the code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.     int main() {    std::string name = 'Sorty';    std::string suffix = \"orty\";    char letter = 'S';    while (letter <= 'Z') {     if (letter != 'U') {    if (letter == 'U') {     std::cout << letter + suffix << std::endl ;    }     letter++;    suffix++;     }    }       On the strange planet of Noes, there's a law that prohibits the usage of the letter e . As a result, they hired you to write a function called censorE that replaces all occurences of the letter e in a string with an asterisk and returns the censored string. For example, if the input is hello world , the function returns h*llo world .      string censorE(string input) {    void censorE(string input) {     std::string copy = input;    size_t i = 0;     while (i < input.length()) {    while (i < input.length() - 1) {      if (input[i] == 'e') {    if (input[i] = 'e') {      input[i] = '*';    '*' = input[i];     }    i++;    }    return input;    }       Your work for the planet of Noes impressed the nearby planets of Noas, Nois, Noos, and Nous. They want you to write different functions that censor out each planet's corresponding forbidden letter. However, your galaxy brain knows better than to write a different function for each planet. Using generalization, write the function censorLetter which takes input and a char to censor as parameters and returns a censored string. For example, censorLetter( Bye world , ‘o') returns the string Bye w*rld .      string censorLetter(string input, char letter) {    string censorLetter(string input) {      size_t i = 0;    size_t i = 1;     while (i < input.length()) {     if (input[i] == letter) {    if (input[i] == \"letter\") {      input[i] = '*';    '*' = input[i];     }    i++;    }    return input;    }       Let's write a function called alphaCombine which takes two strings, first and second, and returns a string which concatenates first and second in alphabetical order. For example, alphabetizer ( zebra, mega ) returns the string megazebra since mega comes before zebra in the alphabet. Put the necessary blocks in the correct order.      string alphaCombine(string first, string second) {    void alphaCombine(string first, string second) {      if (first > second) {    if (\"first\" > \"second\") {      return second + first;  }    std::cout << second << first;  }     else {     return first + second;  }    std::cout << first << second;  }     }       Let's write a function called ispalindrome which takes a string named input and returns a bool The function returns true if the string is a palindrome and false if not. palindromes are symmetrical strings. That is a string that reads the same backwards is palindrome. palindromes: hih , i , bob , tenet , soos , madam . not palindromes: join , hat , frat , supper , rhythm . The code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.      bool ispalindrome(string input) {    string ispalindrome(bool input) {      size_t front = 0 , back = input.length() - 1;    size_t front = 0 , back = input.length();      while ( front &lt back) {    while ( front &gt back) {     if( input[back] != input[front] ) {    else {    return false;  }    front = front + 1;    back = back - 1;    }    return true;    }     "
-},
-{
-  "id": "chapter7_mixed-up-code-exercises-2-1",
-  "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#chapter7_mixed-up-code-exercises-2-1",
+  "url": "chapter7_glossary.html#glossary_ch7_concatenation-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Answer the following Mixed-Up Code questions to assess what you have learned in this chapter. "
+  "body": "Joining strings end to end. "
 },
 {
-  "id": "mucp_7_1",
+  "id": "glossary_ch7_character-literal-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_1",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_character-literal-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  Write a program that prints the 4th character of word, and finds and replaces all instances of ‘i' with ‘e'. Finally, print out the string. Put the necessary blocks in the correct order.     int main() {    std::string word = \"irritating\";    std::cout << word[3] << std::endl ;    std::cout << irritating[3] << std::endl ;    std::cout << word.at(4) << std::endl ;    std::cout << word[4] << std::endl ;    while (word.find('i') != string::npos) {    while (word.find('E') != string::npos) {    while (word.find('i')) {    word[word.find('i')] = 'e';    word[word.find('e')] = 'i';    }    std::cout << word << std::endl ;    }    "
+  "body": "A single character written in single quotation marks, such as 'A' . "
 },
 {
-  "id": "mucp_7_2",
+  "id": "glossary_ch7_string-literal-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_2",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_string-literal-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  An anagram is a play on words by rearranging the letters of the original words to form new words. For example, the letters in listen can be rearranged to make silent . Write a program that rearranges night into thing and prints the anagram. Put the necessary blocks in the correct order.     int main() {     std::string original = \"night\";    std::string original = \"thing\";     std::string anagram = original;    anagram[0] = original[original.find('t')];    anagram[1] = original[original.find('h')];    anagram[2] = original[original.find('i')];    anagram[3] = original[original.find('n')];    anagram[4] = original[original.find('g')];    std::cout << anagram;    }    "
+  "body": "A sequence of characters written in double quotation marks, such as \"Hello\" . "
 },
 {
-  "id": "mucp_7_3",
+  "id": "glossary_ch7_mutable-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_3",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_mutable-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  Let's write the function longerString, which takes two parameters, first and second. If first has more letters than second, longerString prints first is longer than second , and vice versa. If they have the same number of letters, longerString prints first and second are the same length . Put the necessary blocks in the correct order.      void longerString(string first, string second) {    string longerString(string first, string second) {      if (first.length() > second.length()) {    if (first.length() >= second.length()) {     std::cout << first << \" is longer than \" << second << std::endl ;    }    else if (first.length() < second.length()) {     std::cout << second << \" is longer than \" << first << std::endl ;    std::cout << second << \" is longer than \" << second << std::endl ;     }    else {    else (first.length() == second.length()) {    std::cout << first << \" and \" << second << \" are the same length\" << std::endl ;    }    }    "
+  "body": "Capable of being changed after it is created. "
 },
 {
-  "id": "mucp_7_4",
+  "id": "glossary_ch7_index-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_4",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_index-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  Let's write the code for the cipherText function. cipherText should be a void function that takes input as a parameter, increases the value of each character by 1 (i.e. bad turns into cbe ), and prints the encrypted string.      void cipherText(string input) {    string cipherText(string input) {     size_t i = 0;     while (i < input.length()) {    while (i < input.length() - 1) {      input[i] = input[i] + 1;    input[i] = input[i] - 1;     i++;    }     std::cout << input;    return input;     }    "
+  "body": "A zero-based position used to access an element of a string. "
 },
 {
-  "id": "mucp_7_5",
+  "id": "glossary_ch7_traverse-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_5",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_traverse-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  The program below should print out the number of occurences of the character ‘t' in the string tongue_twister but the code is mixed up. Put the necessary blocks in the correct order, with declaration in the order of tongue_twister, count, and i.     int main() {    std::string tongue_twister = \"twelve twins twirled twelve twigs\";     int count = 0;    int count = 1;     size_t i = 0;    while (i < tongue_twister.length()) {     if (tongue_twister[i] == 't') {    if (tongue_twister[i] = 't') {     count++;    }    i++;    }    std::cout << count;    }    "
+  "body": "To visit the characters of a string in sequence. "
 },
 {
-  "id": "mucp_7_6",
+  "id": "glossary_ch7_counter-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_6",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_counter-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  The program below should print out the index of the second instance of the character ‘i' but the code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.     int main() {    std::string quote = \"Your time is limited, so don't waste it living someone else's life.\";    size_t i = 0;    while (i < quote.length()) {    size_t first = quote.find(\"i\");     size_t index = find(quote, 'i', first + 1);    size_t index = find(quote, 'i', first);      std::cout << index;    std::cout << first;     }    "
+  "body": "A variable that records how many times an event occurs. "
 },
 {
-  "id": "mucp_7_7",
+  "id": "glossary_ch7_substring-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_7",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_substring-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  Deep in the forest live the 7 dwarves named Sorty, Torty, Vorty, Worty, Xorty, Yorty, and Zorty. The program below should print out each of their names but the code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.     int main() {    std::string name = 'Sorty';    std::string suffix = \"orty\";    char letter = 'S';    while (letter <= 'Z') {     if (letter != 'U') {    if (letter == 'U') {     std::cout << letter + suffix << std::endl ;    }     letter++;    suffix++;     }    }    "
+  "body": "A sequence of characters contained within a larger string. "
 },
 {
-  "id": "mucp_7_8",
+  "id": "glossary_ch7_find-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_8",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_find-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  On the strange planet of Noes, there's a law that prohibits the usage of the letter e . As a result, they hired you to write a function called censorE that replaces all occurences of the letter e in a string with an asterisk and returns the censored string. For example, if the input is hello world , the function returns h*llo world .      string censorE(string input) {    void censorE(string input) {     std::string copy = input;    size_t i = 0;     while (i < input.length()) {    while (i < input.length() - 1) {      if (input[i] == 'e') {    if (input[i] = 'e') {      input[i] = '*';    '*' = input[i];     }    i++;    }    return input;    }    "
+  "body": "A std::string member function that returns the index of the first matching character or substring. "
 },
 {
-  "id": "mucp_7_9",
+  "id": "glossary_ch7_npos-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_9",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_npos-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  Your work for the planet of Noes impressed the nearby planets of Noas, Nois, Noos, and Nous. They want you to write different functions that censor out each planet's corresponding forbidden letter. However, your galaxy brain knows better than to write a different function for each planet. Using generalization, write the function censorLetter which takes input and a char to censor as parameters and returns a censored string. For example, censorLetter( Bye world , ‘o') returns the string Bye w*rld .      string censorLetter(string input, char letter) {    string censorLetter(string input) {      size_t i = 0;    size_t i = 1;     while (i < input.length()) {     if (input[i] == letter) {    if (input[i] == \"letter\") {      input[i] = '*';    '*' = input[i];     }    i++;    }    return input;    }    "
+  "body": "A special value returned by a string search when no match is found. "
 },
 {
-  "id": "mucp_7_10",
+  "id": "glossary_ch7_classification-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_10",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_classification-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  Let's write a function called alphaCombine which takes two strings, first and second, and returns a string which concatenates first and second in alphabetical order. For example, alphabetizer ( zebra, mega ) returns the string megazebra since mega comes before zebra in the alphabet. Put the necessary blocks in the correct order.      string alphaCombine(string first, string second) {    void alphaCombine(string first, string second) {      if (first > second) {    if (\"first\" > \"second\") {      return second + first;  }    std::cout << second << first;  }     else {     return first + second;  }    std::cout << first << second;  }     }    "
+  "body": "Testing a character to determine whether it is a letter, digit, whitespace character, or another category. "
 },
 {
-  "id": "mucp_7_11",
+  "id": "glossary_ch7_lexicographical-2",
   "level": "2",
-  "url": "chapter7_mixed-up-code-exercises.html#mucp_7_11",
-  "type": "Exercise",
-  "number": "7.17.yes",
+  "url": "chapter7_glossary.html#glossary_ch7_lexicographical-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  Let's write a function called ispalindrome which takes a string named input and returns a bool The function returns true if the string is a palindrome and false if not. palindromes are symmetrical strings. That is a string that reads the same backwards is palindrome. palindromes: hih , i , bob , tenet , soos , madam . not palindromes: join , hat , frat , supper , rhythm . The code is mixed up and contains extra blocks. Put the necessary blocks in the correct order.      bool ispalindrome(string input) {    string ispalindrome(bool input) {      size_t front = 0 , back = input.length() - 1;    size_t front = 0 , back = input.length();      while ( front &lt back) {    while ( front &gt back) {     if( input[back] != input[front] ) {    else {    return false;  }    front = front + 1;    back = back - 1;    }    return true;    }    "
+  "body": "An ordering that compares strings from left to right, character by character. "
+},
+{
+  "id": "glossary_ch7_to-string-2",
+  "level": "2",
+  "url": "chapter7_glossary.html#glossary_ch7_to-string-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A function that represents a value as text. std::to_string converts numeric values; a class can also provide its own member function with this name. "
+},
+{
+  "id": "glossary_ch7_whitespace-2",
+  "level": "2",
+  "url": "chapter7_glossary.html#glossary_ch7_whitespace-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Spaces, tabs, and newline characters that separate visible text. "
+},
+{
+  "id": "chapter7_exercises",
+  "level": "1",
+  "url": "chapter7_exercises.html",
+  "type": "Exercises",
+  "number": "7.8",
+  "title": "Exercises",
+  "body": " Exercises   Which line declares and initializes a std::string ?   std::string word{\"hello\"}; The type, name, and initial value appear in one declaration.  word = \"hello\"; This assigns a value to an object that must already exist.  std::string word; This declares an object but does not provide this initial text.  std::string = \"hello\"; A declaration needs a variable name.      What does this program print?  #include <iostream> #include <string> int main() { std::string word{\"cold\"}; word[0] = 'g'; std::cout << word << '\\n'; }    gold Index 0 identifies the first character.  cold The string is mutable, so its first character changes.  g Only one character changes; the rest of the string remains.  Compilation error Assigning a character through a non-const string index is valid.      What value does word.size() produce for \"banana\" ?    5 Count every character, including the final a .  6 banana contains six characters.  7 The terminating null character is not counted by std::string::size() .  0 The string is not empty.      What does the following statement print?  std::string first{\"C++\"}; std::string second{\"rocks\"}; std::cout << first + second << '\\n';    C++ rocks The plus operator does not insert a space.  C++rocks The strings are joined end to end.  C++ The result of concatenation includes both operands.  Compilation error std::string supports concatenation with + .     Which expression converts the integer 42 to a std::string ?   std::to_string(42) std::to_string converts a numeric value to text.  std::string(42) This is not the intended numeric-to-text conversion.  42.to_string() An integer literal does not provide this member function.  std::convert(42) There is no standard function with this name.      Which loop prints every character without using an index?    for (std::size_t index = 0; index < word.size(); ++index) This is indexed traversal.  for (const char character : word) This is range-based traversal.  if (word.size() > 0) An if statement does not visit every character.  std::cout << word.size() This prints the length, not each character.      What does this program print?  std::size_t count = 0; for (const char character : std::string{\"banana\"}) { if (character == 'a') { ++count; } } std::cout << count << '\\n';    1 There is more than one a .  3 The string contains three occurrences of a .  6 The counter changes only when the character is a .  0 The loop visits the characters and finds three matches.      What does text.find(\"cat\") return when text is \"concatenate\" ?    std::string::npos The substring does occur.  3 The first c of cat is at index 3.  4 Remember that indexing begins at zero.  10 find() returns the first matching index.     What should a program test to determine whether a search failed?   index == std::string::npos npos represents “not found.”  index == -1 Do not assume that the result is represented by ordinary integer -1.  index == 0 Index 0 is a valid match.  index > text.size() Use the documented special value.      What is the result of std::string{\"Dog\"} < std::string{\"Doghouse\"} ?    true The strings match until the shorter string ends, so the shorter one comes first.  false Prefix strings are ordered before their longer extensions.  Compilation error std::string supports relational comparisons.     Why can \"Zebra\" < \"banana\" be true in ordinary string comparison?   The comparison is case-sensitive, and uppercase characters are ordered before lowercase characters. Lexicographical comparison follows character ordering, not a complete dictionary rule.  Because every word beginning with Z comes before every word beginning with b. That is the opposite of the relevant character ordering.  Because strings are compared by length only. Characters are compared from left to right.  Because < means “contains.” The operator performs ordering, not substring testing.     What is the result of std::string{\"cat\"} < std::string{\"car\"} ?   true Compare the first pair of characters that differs.  false 't' has a greater character value than 'r' in the comparison.  They compare equal. The final characters are different.  It depends only on the lengths. The first difference is found before length becomes relevant.      What does this program print?  std::array<int, 3> first{1, 4, 9}; std::array<int, 3> second{1, 5, 0}; std::cout << std::boolalpha << (first < second) << '\\n';    true The first elements match, and 4 is less than 5 at the first difference.  false The final values are not considered after the second elements decide the result.  Compilation error because arrays cannot be compared. C++17 provides relational operators for same-type, same-size std::array objects.  1 4 9 1 5 0 The program prints one Boolean result.      Why does std::lexicographical_compare report that {1, 2} comes before {1, 2, 0} ?    The first range is a proper prefix of the second range. When all shared elements match, the shorter range comes first.  The value 0 is always smaller than every other value. The final 0 is not reached as a first difference.  The algorithm compares only the first elements. It continues while corresponding elements match.  Different-sized arrays cannot be compared in any way. The built-in array relational operators have restrictions, but the general range algorithm supports different lengths.    "
+},
+{
+  "id": "chapter7_exercise_declaration",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_declaration",
+  "type": "Exercise",
+  "number": "7.8.1",
+  "title": "",
+  "body": " Which line declares and initializes a std::string ?   std::string word{\"hello\"}; The type, name, and initial value appear in one declaration.  word = \"hello\"; This assigns a value to an object that must already exist.  std::string word; This declares an object but does not provide this initial text.  std::string = \"hello\"; A declaration needs a variable name.   "
+},
+{
+  "id": "chapter7_exercise_mutation",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_mutation",
+  "type": "Exercise",
+  "number": "7.8.2",
+  "title": "",
+  "body": "  What does this program print?  #include <iostream> #include <string> int main() { std::string word{\"cold\"}; word[0] = 'g'; std::cout << word << '\\n'; }    gold Index 0 identifies the first character.  cold The string is mutable, so its first character changes.  g Only one character changes; the rest of the string remains.  Compilation error Assigning a character through a non-const string index is valid.   "
+},
+{
+  "id": "chapter7_exercise_size",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_size",
+  "type": "Exercise",
+  "number": "7.8.3",
+  "title": "",
+  "body": "  What value does word.size() produce for \"banana\" ?    5 Count every character, including the final a .  6 banana contains six characters.  7 The terminating null character is not counted by std::string::size() .  0 The string is not empty.   "
+},
+{
+  "id": "chapter7_exercise_concatenation",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_concatenation",
+  "type": "Exercise",
+  "number": "7.8.4",
+  "title": "",
+  "body": "  What does the following statement print?  std::string first{\"C++\"}; std::string second{\"rocks\"}; std::cout << first + second << '\\n';    C++ rocks The plus operator does not insert a space.  C++rocks The strings are joined end to end.  C++ The result of concatenation includes both operands.  Compilation error std::string supports concatenation with + .   "
+},
+{
+  "id": "chapter7_exercise_to_string",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_to_string",
+  "type": "Exercise",
+  "number": "7.8.5",
+  "title": "",
+  "body": " Which expression converts the integer 42 to a std::string ?   std::to_string(42) std::to_string converts a numeric value to text.  std::string(42) This is not the intended numeric-to-text conversion.  42.to_string() An integer literal does not provide this member function.  std::convert(42) There is no standard function with this name.   "
+},
+{
+  "id": "chapter7_exercise_traversal",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_traversal",
+  "type": "Exercise",
+  "number": "7.8.6",
+  "title": "",
+  "body": "  Which loop prints every character without using an index?    for (std::size_t index = 0; index < word.size(); ++index) This is indexed traversal.  for (const char character : word) This is range-based traversal.  if (word.size() > 0) An if statement does not visit every character.  std::cout << word.size() This prints the length, not each character.   "
+},
+{
+  "id": "chapter7_exercise_count",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_count",
+  "type": "Exercise",
+  "number": "7.8.7",
+  "title": "",
+  "body": "  What does this program print?  std::size_t count = 0; for (const char character : std::string{\"banana\"}) { if (character == 'a') { ++count; } } std::cout << count << '\\n';    1 There is more than one a .  3 The string contains three occurrences of a .  6 The counter changes only when the character is a .  0 The loop visits the characters and finds three matches.   "
+},
+{
+  "id": "chapter7_exercise_find",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_find",
+  "type": "Exercise",
+  "number": "7.8.8",
+  "title": "",
+  "body": "  What does text.find(\"cat\") return when text is \"concatenate\" ?    std::string::npos The substring does occur.  3 The first c of cat is at index 3.  4 Remember that indexing begins at zero.  10 find() returns the first matching index.   "
+},
+{
+  "id": "chapter7_exercise_find_not_found",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_find_not_found",
+  "type": "Exercise",
+  "number": "7.8.9",
+  "title": "",
+  "body": " What should a program test to determine whether a search failed?   index == std::string::npos npos represents “not found.”  index == -1 Do not assume that the result is represented by ordinary integer -1.  index == 0 Index 0 is a valid match.  index > text.size() Use the documented special value.   "
+},
+{
+  "id": "chapter7_exercise_lexicographical",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_lexicographical",
+  "type": "Exercise",
+  "number": "7.8.10",
+  "title": "",
+  "body": "  What is the result of std::string{\"Dog\"} < std::string{\"Doghouse\"} ?    true The strings match until the shorter string ends, so the shorter one comes first.  false Prefix strings are ordered before their longer extensions.  Compilation error std::string supports relational comparisons.   "
+},
+{
+  "id": "chapter7_exercise_case",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_case",
+  "type": "Exercise",
+  "number": "7.8.11",
+  "title": "",
+  "body": " Why can \"Zebra\" < \"banana\" be true in ordinary string comparison?   The comparison is case-sensitive, and uppercase characters are ordered before lowercase characters. Lexicographical comparison follows character ordering, not a complete dictionary rule.  Because every word beginning with Z comes before every word beginning with b. That is the opposite of the relevant character ordering.  Because strings are compared by length only. Characters are compared from left to right.  Because < means “contains.” The operator performs ordering, not substring testing.   "
+},
+{
+  "id": "chapter7_exercise_first_difference",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_first_difference",
+  "type": "Exercise",
+  "number": "7.8.12",
+  "title": "",
+  "body": " What is the result of std::string{\"cat\"} < std::string{\"car\"} ?   true Compare the first pair of characters that differs.  false 't' has a greater character value than 'r' in the comparison.  They compare equal. The final characters are different.  It depends only on the lengths. The first difference is found before length becomes relevant.   "
+},
+{
+  "id": "chapter7_exercise_array_comparison",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_array_comparison",
+  "type": "Exercise",
+  "number": "7.8.13",
+  "title": "",
+  "body": "  What does this program print?  std::array<int, 3> first{1, 4, 9}; std::array<int, 3> second{1, 5, 0}; std::cout << std::boolalpha << (first < second) << '\\n';    true The first elements match, and 4 is less than 5 at the first difference.  false The final values are not considered after the second elements decide the result.  Compilation error because arrays cannot be compared. C++17 provides relational operators for same-type, same-size std::array objects.  1 4 9 1 5 0 The program prints one Boolean result.   "
+},
+{
+  "id": "chapter7_exercise_array_prefix",
+  "level": "2",
+  "url": "chapter7_exercises.html#chapter7_exercise_array_prefix",
+  "type": "Exercise",
+  "number": "7.8.14",
+  "title": "",
+  "body": "  Why does std::lexicographical_compare report that {1, 2} comes before {1, 2, 0} ?    The first range is a proper prefix of the second range. When all shared elements match, the shorter range comes first.  The value 0 is always smaller than every other value. The final 0 is not reached as a first difference.  The algorithm compares only the first elements. It continues while corresponding elements match.  Different-sized arrays cannot be compared in any way. The built-in array relational operators have restrictions, but the general range algorithm supports different lengths.   "
+},
+{
+  "id": "chapter7_mixed-up-code",
+  "level": "1",
+  "url": "chapter7_mixed-up-code.html",
+  "type": "Exercises",
+  "number": "7.9",
+  "title": "Mixed-Up Code Exercises",
+  "body": " Mixed-Up Code Exercises    Arrange the blocks to replace the first character of word and print the result.    #include <iostream> #include <string>  int main() {  std::string word{\"cold\"};  word[0] = 'g';  std::cout << word << '\\n';  return 0; }      Arrange the blocks to define count_character , which returns how many times a target appears.    std::size_t count_character(const std::string& text, char target) {  std::size_t count = 0;  for (const char character : text) {  if (character == target) {  ++count; } }  return count; }      Arrange the blocks to find the first occurrence of \"sea\" and report whether it was found.    std::string sentence{\"The sea is calm.\"};  std::size_t index = sentence.find(\"sea\");  if (index != std::string::npos) {  std::cout << index << '\\n'; }      Arrange the blocks to implement to_string() for the class.    std::string to_string() const {  return \"Score: \" + std::to_string(points);  }    "
+},
+{
+  "id": "chapter7_mixed_up_mutate",
+  "level": "2",
+  "url": "chapter7_mixed-up-code.html#chapter7_mixed_up_mutate",
+  "type": "Exercise",
+  "number": "7.9.yes",
+  "title": "",
+  "body": "  Arrange the blocks to replace the first character of word and print the result.    #include <iostream> #include <string>  int main() {  std::string word{\"cold\"};  word[0] = 'g';  std::cout << word << '\\n';  return 0; }   "
+},
+{
+  "id": "chapter7_mixed_up_count",
+  "level": "2",
+  "url": "chapter7_mixed-up-code.html#chapter7_mixed_up_count",
+  "type": "Exercise",
+  "number": "7.9.yes",
+  "title": "",
+  "body": "  Arrange the blocks to define count_character , which returns how many times a target appears.    std::size_t count_character(const std::string& text, char target) {  std::size_t count = 0;  for (const char character : text) {  if (character == target) {  ++count; } }  return count; }   "
+},
+{
+  "id": "chapter7_mixed_up_find",
+  "level": "2",
+  "url": "chapter7_mixed-up-code.html#chapter7_mixed_up_find",
+  "type": "Exercise",
+  "number": "7.9.yes",
+  "title": "",
+  "body": "  Arrange the blocks to find the first occurrence of \"sea\" and report whether it was found.    std::string sentence{\"The sea is calm.\"};  std::size_t index = sentence.find(\"sea\");  if (index != std::string::npos) {  std::cout << index << '\\n'; }   "
+},
+{
+  "id": "chapter7_mixed_up_to_string",
+  "level": "2",
+  "url": "chapter7_mixed-up-code.html#chapter7_mixed_up_to_string",
+  "type": "Exercise",
+  "number": "7.9.yes",
+  "title": "",
+  "body": "  Arrange the blocks to implement to_string() for the class.    std::string to_string() const {  return \"Score: \" + std::to_string(points);  }   "
 },
 {
   "id": "chapter7_coding-practice",
   "level": "1",
   "url": "chapter7_coding-practice.html",
   "type": "Exercises",
-  "number": "7.18",
+  "number": "7.10",
   "title": "Coding Practice",
-  "body": " Coding Practice    A palindrome is a word, phrase, or sentence that reads the same forwards and backwards.  Write a function isPalindrome that takes a string input as a parameter and returns a boolean that is true if the input is a palindrome and false otherwise. Run and test your code!   #include <iostream> #include <cctype> bool isPalindrome(std::string input) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"factorial function\") { CHECK(isPalindrome(\"racecar\")); CHECK(isPalindrome(\"no lemon, no melon\")); CHECK_FALSE(isPalindrome(\"kangaroo\")); }    Below is one way to implement the program. We use the isalpha function to ignore the non alphabetical characters. Then we continuously check to see if the letters in the front are equal to the ones in the back until we reach the middle of the string.  #include <iostream> #include <cctype> bool isPalindrome(std::string input) { size_t front = 0; size_t back = input.length() - 1; while (front < back) { while (!isalpha(input[front])) { front++; } while (!isalpha(input[back])) { back--; } if (input[front] != input[back]) { return false; } front++; back--; } return true; }      How much does Bubba love shrimp? Probably a lot. But how many times does the word shrimp come up in his monologue? Write a function countWord that counts the number of times a given word appears in a given string. countWord should take two strings input and word as parameters and return an int . Feel free to use the stringToLower function we wrote earlier. Check the hint below for help with the construction of the code.   #include <iostream> #include \"ctype.h\" void stringToLower(std::string &input) { size_t i = 0; while (i < input.length()) { if (isalpha(input[i]) && isupper(input[i])) { input[i] = tolower(input[i]); } i++; } } int countWord(std::string input, std::string word) { \/\/ Write your implementation here. } int main() { std::string quote = \"Anyway, like I was sayin', shrimp is the fruit of the sea. You can \" \"barbecue it, boil it, broil it, bake it, saute it. Dey's uh, \" \"shrimp-kabobs, shrimp creole, shrimp gumbo. Pan fried, deep fried, \" \"stir-fried. There's pineapple shrimp, lemon shrimp, coconut shrimp, \" \"pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and \" \"potatoes, shrimp burger, shrimp sandwich. That- that's about \" \"it.\"; std::cout << \"Your output: \" << countWord(quote, \"shrimp\") << \", Correct output: 14\" << std::endl; }      How much does Bubba love shrimp? Probably a lot. But how many times does the word shrimp come up in his monologue? Write a function countWord that counts the number of times a given word appears in a given string. countWord should take two strings input and word as parameters and return an int . Feel free to use the stringToLower function we wrote earlier. Use the lines to construct the code, then go back to complete the Activecode.     int countWord(string input, string word) {    int count = 0;     for (size_t i = 0; i < input.length() - 1; i++) {  size_t j = 0;  size_t k = i;    for (size_t i = 0; i < input.length(); i++) {  size_t j = 0;  size_t k = i;     for (size_t l = 0; l < word.length(); l++) {    if (input[k] == word[l]) {  j++;  }  k++;    if (j == word.length()) {  count++  }    }  }  return count;  }        Write a void function censorWord that censors a given word from a given string and prints out the new string. censorWord should take two strings input and word as parameters and prints out input with every occurence of word censored with asterisks. For example, censorWord(\"I really, really, really, really, really, really like you\", \"really\") results in the following output:  I ******, ******, ******, ******, ******, ****** like you    #include <iostream> void censorWord(std::string input, std::string word) { \/\/ Write your implementation here. } int main() { censorWord(\"I really, really, really, really, really, really like you\", \"really\"); }    Below is one way to implement the program. We use a while loop to repeatedly search for instances of word in input. Once found, we replace the length of the word with asterisks.  #include <iostream> void censorWord(std::string input, std::string word) { size_t length = word.length(); while (input.find(word) != std::string::npos) {{ int index = input.find(word); size_t i = 0; while (i < length) { input[index + i] = '*'; i++; } } std::cout << input; } int main() { censorWord(\"I really, really, really, really, really, really like you\", \"really\"); }      Write a void function removeWord that removes a given word from a given string and prints out the new string. removeWord should take two strings input and word as parameters and prints out input with every occurence of word removed. Use string concatenation and the C++ std::string function substr . substr takes two parameters, a starting index and a length. For example, if string greeting = \"hello world\" , then greeting.substr(6, 5) returns the string \"world\" . Test your function in main. Check the hint below for help with the construction of the code. The output should be:   Gucci , Gucci , Gucci , Gucci    #include <iostream> #include <string> void removeWord(std::string input, std::string word) { \/\/ Write your implementation here. } int main() { removeWord(\"Gucci gang, Gucci gang, Gucci gang, Gucci gang\", \"gang\"); }      Write a void function removeWord that removes a given word from a given string and prints out the new string. removeWord should take two strings input and word as parameters and prints out input with every occurence of word removed. Use string concatenation and the C++ string function substr . substr takes two parameters, a starting index and a length. For example, if string greeting = \"hello world\" , then greeting.substr(6, 5) returns the string \"world\" . Test your function in main. Use the lines to construct the code, then go back to complete the Activecode. The output should be:   Gucci , Gucci , Gucci , Gucci      void removeWord(string input, string word) {     for (size_t i = 0; i < word.length(); i++) {    for (size_t i = 0; i < input.length(); i++) {     size_t pos = input.find(word);     if (pos != string::npos) {    if (pos == input.length()) {     input.erase(pos, word.length());    }  }  std::cout << input;  }         ROT13 is a simple letter substitution cipher that shifts every letter forward by 13, looping around if necessary. For example, the letter 'a', 1st in the alphabet, becomes the letter 'n', 14th in the alphabet. The letter 'r', 18th in the alphabet, becomes the letter 'e', 5th in the alphabet. Since the alphabet has 26 letters and 13 is exactly half, a message encrypted using ROT13 can be decrypted by calling ROT13 on the encrypted message.  Write the function ROT13 , which takes a string input as a parameter and returns an encrypted string . Test your function in main .   #include <iostream> #include <cctype> std::string ROT13 (std::string input) { \/\/ Write your implementation here. } int main() { std::string original = \"Encrypt me then decrypt me!\"; std::string encrypted = ROT13 (original); std::string decrypted = ROT13 (encrypted); std::cout << \"Original std::string: \" << original << std::endl; std::cout << \"Encrypted std::string: \" << encrypted << std::endl; std::cout << \"Decrypted std::string: \" << decrypted << std::endl; \/\/ Uncomment and run the code below once your function works! \/\/ std::string secretMessage = \"Pbatenghyngvbaf! Lbh'ir fhpprffshyyl vzcyrzragrq EBG13 naq qrpbqrq gur frperg zrffntr :)\"; \/\/ std::cout << ROT13 (secretMessage) << std::endl; }    Below is one way to implement the ROT13 function. We use a while loop to go through all the letters in the string . If the letter is between ‘a' and ‘n' or ‘A' and ‘N', we use character operations to add 13 to each letter. Otherwise, we subtract 13 from each letter. We return the encrypted message at the end.  #include <iostream> #include <cctype> std::string ROT13(std::string input) { size_t n = 0; while (n < input.length()) { if (isalpha(input[n])) { if ((input[n] >= 'a' && input[n] < 'n') || (input[n] >= 'A' && input[n] < 'N')) { input[n] = input[n] + 13; } else { input[n] = input[n] - 13; } } n++; } return input; } int main() { std::string original = \"Encrypt me then decrypt me!\"; std::string encrypted = ROT13 (original); std::string decrypted = ROT13 (encrypted); std::cout << \"Original std::string: \" << original << std::endl; std::cout << \"Encrypted std::string: \" << encrypted << std::endl; std::cout << \"Decrypted std::string: \" << decrypted << std::endl; \/\/ Uncomment and run the code below once your function works! \/\/ std::string secretMessage = \"Pbatenghyngvbaf! Lbh'ir fhpprffshyyl vzcyrzragrq EBG13 naq qrpbqrq gur frperg zrffntr :)\"; \/\/ std::cout << ROT13 (secretMessage) << std::endl; }      Write the function reverseWord which takes a string input , reverses it, and returns the reversed string . Run and test your code! Check the hint below for help with the construction of the code.   #include <iostream> std::string reverseWord(std::string input) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"reverseWord function\") { CHECK_EQ(reverseWord(\"hello\"), \"olleh\"); CHECK_EQ(reverseWord(\"world\"), \"dlrow\"); CHECK_EQ(reverseWord(\"racecar\"), \"racecar\"); }      Write the function reverseString which takes a string input , reverses it, and returns the reversed string . Use the lines to construct the code, then go back to complete the Activecode.     string reverseWord(string input) {    size_t len = input.length();    std::string reverse;     for (size_t i = len - 1; i != string::npos; i--) {    for (size_t i = len; i != string::npos; i--) {     reverse.push_back(input[i]);    }    return reverse;  }         Write the function capitalize , which takes a string input as a parameter. capitalize capitalizes the first letter of every word, and returns the new string .   #include <iostream> #include <cctype> std::string capitalize(std::string input) { \/\/ Write your implementation here. } int main() { std::cout << capitalize(\"every word in this std::string should be capitalized!\") << std::endl; std::cout << capitalize(\"this String As well\") << std::endl; }    Below is one way to implement the capitalize function. We use a while loop to go through all the char s in the string . We capitalize the first character and all characters following a space using toupper . At the end, we return the string .  #include <iostream> #include <cctype> std::string capitalize(std::string input) { size_t n = 0; while (n < input.length()) { if (n == 0) { input[n] = toupper(input[n]); } else if (input[n-1] == ' ') { input[n] = toupper(input[n]); } n++; } return input; } int main() { std::cout << capitalize (\"every word in this std::string should be capitalized!\") << std::endl; std::cout << capitalize (\"this String As well\") << std::endl; }      Write the function countVowels which takes a string input and returns the number of vowels in the string . Remember, ‘a', ‘e', ‘i', ‘o', and ‘u' are vowels. Run and test your code! Check the hint below for help with the construction of the code.   #include <iostream> int countVowels(std::string input) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"countVowels function\") { CHECK_EQ(countVowels(\"onomatopoeia\"), 8); CHECK_EQ(countVowels(\"cysts\"), 0); CHECK_EQ(countVowels(\"vowels\"), 2); }      Write the function countVowels which takes a string input and returns the number of vowels in the string . Remember, ‘a', ‘e', ‘i', ‘o', and ‘u' are vowels. Use the lines to construct the code, then go back to complete the Activecode.     int countVowels(string input) {    int count = 0;    for (size_t i = 0; i < input.length; i++) {     if (input[i] == 'a' || input[i] == 'e' || input[i] == 'i' || input[i] == 'o' || input[i] == 'u') {    if (input[i] == 'a' && input[i] == 'e' && input[i] == 'i' && input[i] == 'o' && input[i] == 'u') {     count++;    }    }    return count;  }         Write the function longestWord , which takes a string input as a parameter. longestWord returns the words with the most letters in input . If there's a tie, return the first word. Use the substr function. Run and test your code!   #include <iostream> std::string longestWord (std::string input) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"longestWord function\") { CHECK_EQ(longestWord(\"what is the longest word in this std::string\"), \"longest\"); CHECK_EQ(longestWord(\"these words are very close in size\"), \"these\"); CHECK_EQ(longestWord(\"vowels\"), \"vowels\"); }    Below is one way to implement the longestWord function. We use a while loop to go through all the char s in the string . We use variables to keep track of the longest word, the longest amount of letters, and the length of the current word. We can determine the length of a word by counting the number of char s between spaces. If the length is greater than the max, length becomes the new max and we update the longest word. This keeps repeating until we reach the end of the string, and the longest word is returned.  #include <iostream> std::string longestWord(std::string input) { size_t n = 0; size_t maxLength = 0; while (n < input.length()) { size_t wordLength = 0; while (input[n] != ' ' && n < input.length()) { wordLength++; n++; } if (wordLength > maxLength) { maxLength = wordLength; longest = input.substr(n - maxLength, maxLength); } n++; } return longest; }      Camel case is the practice of writing phrases without spaces or punctuation, indicating the separation of words using capital letter. For example, camel case in camel case is camelCase . Snake case is the practice of writing phrases where each space is replaced by an underscore. For example, snake case in snake case is snake_case . Write the functions snakeToCamel and camelToSnake . Each function takes a string input and returns the input using the other stylization. Feel free to use any string functions you'd like. Run and test your code! Check the hint below for help with the construction of the code.   #include <iostream> #include <string> #include \"ctype.h\" std::string snakeToCamel(std::string input) { \/\/ Write your implementation here. } std::string camelToSnake(std::string input) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"snakeToCamel function\") { CHECK_EQ(snakeToCamel(\"turn_this_into_camel_case\"), \"turnThisIntoCamelCase\"); CHECK_EQ(snakeToCamel(\"hello_world\"), \"helloWorld\"); CHECK_EQ(snakeToCamel(\"code\"), \"code\"); } TEST_CASE(\"camelToSnake function\") { CHECK_EQ(camelToSnake(\"turnThisIntoSnakeCase\"), \"turn_this_into_snake_case\"); CHECK_EQ(camelToSnake(\"helloWorld\"), \"hello_world\"); CHECK_EQ(camelToSnake(\"code\"), \"code\"); }      Camel case is the practice of writing phrases without spaces or punctuation, indicating the separation of words using capital letter. For example, camel case in camel case is camelCase . Snake case is the practice of writing phrases where each space is replaced by an underscore. For example, snake case in snake case is snake_case . Write the functions snakeToCamel and camelToSnake . Each function takes a string input and returns the input using the other stylization. Feel free to use any string functions you'd like. Use the lines to construct the code, then go back to complete the Activecode.     \/\/ snakeToCamel function  string snakeToCamel(string input) {  size_t len = input.length();  for (size_t i = 0; i < len; i++) {    if (input[i] == '_') {  input[i+1] = toupper(input[i+1]);  input.erase(i,1);  }    }  return input;  }    \/\/ camelToSnake function  string camelToSnake(string input) {  size_t len = input.length();  for (size_t i = 0; i < len; i++) {    if (isupper(input.at(i))) {  input.at(i) = tolower(input.at(i));  input.insert(i, \"_\");  }    }  return input;  }       "
+  "body": " Coding Practice    Write a function named count_vowels that takes a const std::string& and returns the number of lowercase vowels it contains. Test it with \"iteration\" .   #include <cstddef> #include <iostream> #include <string> std::size_t count_vowels(const std::string& text) { \/\/ Write your solution here. } int main() { std::cout << count_vowels(\"iteration\") << '\\n'; return 0; }     std::size_t count_vowels(const std::string& text) { std::size_t count = 0; for (const char character : text) { if (character == 'a' || character == 'e' || character == 'i' || character == 'o' || character == 'u') { ++count; } } return count; }      Write a function named replace_spaces that takes a std::string& and replaces every space with an underscore. Use indexed traversal because the function changes the original string.   #include <iostream> #include <string> void replace_spaces(std::string& text) { \/\/ Write your solution here. } int main() { std::string message{\"hello world\"}; replace_spaces(message); std::cout << message << '\\n'; return 0; }     void replace_spaces(std::string& text) { for (std::size_t index = 0; index < text.size(); ++index) { if (text[index] == ' ') { text[index] = '_'; } } }      Write a function named describe_search that takes a string and a target substring. It should print the first index when the substring is found and print Not found otherwise.   #include <iostream> #include <string> void describe_search(const std::string& text, const std::string& target) { \/\/ Write your solution here. } int main() { describe_search(\"The sea is calm.\", \"sea\"); describe_search(\"The sea is calm.\", \"storm\"); return 0; }     void describe_search(const std::string& text, const std::string& target) { std::size_t index = text.find(target); if (index == std::string::npos) { std::cout << \"Not found\\n\"; } else { std::cout << \"Found at index \" << index << '\\n'; } }      Define a Book class with a private title and page count. Add a constructor and a to_string() member function that returns text such as Book{title=Iteration, pages=240} .   #include <iostream> #include <string> class Book { private: std::string title; int pages; public: Book(std::string book_title, int page_count) : title{book_title}, pages{page_count} { } std::string to_string() const { \/\/ Replace this placeholder with your implementation. return \"\"; } }; int main() { Book book{\"Iteration\", 240}; std::cout << book.to_string() << '\\n'; return 0; }     Book(std::string book_title, int page_count) : title{book_title}, pages{page_count} { } std::string to_string() const { return \"Book{title=\" + title + \", pages=\" + std::to_string(pages) + \"}\"; }    "
 },
 {
-  "id": "cp_7_AC_1",
+  "id": "chapter7_coding_count_vowels",
   "level": "2",
-  "url": "chapter7_coding-practice.html#cp_7_AC_1",
+  "url": "chapter7_coding-practice.html#chapter7_coding_count_vowels",
   "type": "Exercise",
-  "number": "7.18.1",
+  "number": "7.10.1",
   "title": "",
-  "body": "  A palindrome is a word, phrase, or sentence that reads the same forwards and backwards.  Write a function isPalindrome that takes a string input as a parameter and returns a boolean that is true if the input is a palindrome and false otherwise. Run and test your code!   #include <iostream> #include <cctype> bool isPalindrome(std::string input) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"factorial function\") { CHECK(isPalindrome(\"racecar\")); CHECK(isPalindrome(\"no lemon, no melon\")); CHECK_FALSE(isPalindrome(\"kangaroo\")); }    Below is one way to implement the program. We use the isalpha function to ignore the non alphabetical characters. Then we continuously check to see if the letters in the front are equal to the ones in the back until we reach the middle of the string.  #include <iostream> #include <cctype> bool isPalindrome(std::string input) { size_t front = 0; size_t back = input.length() - 1; while (front < back) { while (!isalpha(input[front])) { front++; } while (!isalpha(input[back])) { back--; } if (input[front] != input[back]) { return false; } front++; back--; } return true; }   "
+  "body": "  Write a function named count_vowels that takes a const std::string& and returns the number of lowercase vowels it contains. Test it with \"iteration\" .   #include <cstddef> #include <iostream> #include <string> std::size_t count_vowels(const std::string& text) { \/\/ Write your solution here. } int main() { std::cout << count_vowels(\"iteration\") << '\\n'; return 0; }     std::size_t count_vowels(const std::string& text) { std::size_t count = 0; for (const char character : text) { if (character == 'a' || character == 'e' || character == 'i' || character == 'o' || character == 'u') { ++count; } } return count; }   "
 },
 {
-  "id": "cp_7_AC_2q",
+  "id": "chapter7_coding_replace_spaces",
   "level": "2",
-  "url": "chapter7_coding-practice.html#cp_7_AC_2q",
+  "url": "chapter7_coding-practice.html#chapter7_coding_replace_spaces",
   "type": "Exercise",
-  "number": "7.18.2",
+  "number": "7.10.2",
   "title": "",
-  "body": "  How much does Bubba love shrimp? Probably a lot. But how many times does the word shrimp come up in his monologue? Write a function countWord that counts the number of times a given word appears in a given string. countWord should take two strings input and word as parameters and return an int . Feel free to use the stringToLower function we wrote earlier. Check the hint below for help with the construction of the code.   #include <iostream> #include \"ctype.h\" void stringToLower(std::string &input) { size_t i = 0; while (i < input.length()) { if (isalpha(input[i]) && isupper(input[i])) { input[i] = tolower(input[i]); } i++; } } int countWord(std::string input, std::string word) { \/\/ Write your implementation here. } int main() { std::string quote = \"Anyway, like I was sayin', shrimp is the fruit of the sea. You can \" \"barbecue it, boil it, broil it, bake it, saute it. Dey's uh, \" \"shrimp-kabobs, shrimp creole, shrimp gumbo. Pan fried, deep fried, \" \"stir-fried. There's pineapple shrimp, lemon shrimp, coconut shrimp, \" \"pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and \" \"potatoes, shrimp burger, shrimp sandwich. That- that's about \" \"it.\"; std::cout << \"Your output: \" << countWord(quote, \"shrimp\") << \", Correct output: 14\" << std::endl; }      How much does Bubba love shrimp? Probably a lot. But how many times does the word shrimp come up in his monologue? Write a function countWord that counts the number of times a given word appears in a given string. countWord should take two strings input and word as parameters and return an int . Feel free to use the stringToLower function we wrote earlier. Use the lines to construct the code, then go back to complete the Activecode.     int countWord(string input, string word) {    int count = 0;     for (size_t i = 0; i < input.length() - 1; i++) {  size_t j = 0;  size_t k = i;    for (size_t i = 0; i < input.length(); i++) {  size_t j = 0;  size_t k = i;     for (size_t l = 0; l < word.length(); l++) {    if (input[k] == word[l]) {  j++;  }  k++;    if (j == word.length()) {  count++  }    }  }  return count;  }      "
+  "body": "  Write a function named replace_spaces that takes a std::string& and replaces every space with an underscore. Use indexed traversal because the function changes the original string.   #include <iostream> #include <string> void replace_spaces(std::string& text) { \/\/ Write your solution here. } int main() { std::string message{\"hello world\"}; replace_spaces(message); std::cout << message << '\\n'; return 0; }     void replace_spaces(std::string& text) { for (std::size_t index = 0; index < text.size(); ++index) { if (text[index] == ' ') { text[index] = '_'; } } }   "
 },
 {
-  "id": "cp_7_AC_3",
+  "id": "chapter7_coding_first_occurrence",
   "level": "2",
-  "url": "chapter7_coding-practice.html#cp_7_AC_3",
+  "url": "chapter7_coding-practice.html#chapter7_coding_first_occurrence",
   "type": "Exercise",
-  "number": "7.18.3",
+  "number": "7.10.3",
   "title": "",
-  "body": " Write a void function censorWord that censors a given word from a given string and prints out the new string. censorWord should take two strings input and word as parameters and prints out input with every occurence of word censored with asterisks. For example, censorWord(\"I really, really, really, really, really, really like you\", \"really\") results in the following output:  I ******, ******, ******, ******, ******, ****** like you    #include <iostream> void censorWord(std::string input, std::string word) { \/\/ Write your implementation here. } int main() { censorWord(\"I really, really, really, really, really, really like you\", \"really\"); }    Below is one way to implement the program. We use a while loop to repeatedly search for instances of word in input. Once found, we replace the length of the word with asterisks.  #include <iostream> void censorWord(std::string input, std::string word) { size_t length = word.length(); while (input.find(word) != std::string::npos) {{ int index = input.find(word); size_t i = 0; while (i < length) { input[index + i] = '*'; i++; } } std::cout << input; } int main() { censorWord(\"I really, really, really, really, really, really like you\", \"really\"); }   "
+  "body": "  Write a function named describe_search that takes a string and a target substring. It should print the first index when the substring is found and print Not found otherwise.   #include <iostream> #include <string> void describe_search(const std::string& text, const std::string& target) { \/\/ Write your solution here. } int main() { describe_search(\"The sea is calm.\", \"sea\"); describe_search(\"The sea is calm.\", \"storm\"); return 0; }     void describe_search(const std::string& text, const std::string& target) { std::size_t index = text.find(target); if (index == std::string::npos) { std::cout << \"Not found\\n\"; } else { std::cout << \"Found at index \" << index << '\\n'; } }   "
 },
 {
-  "id": "cp_7_AC_4q",
+  "id": "chapter7_coding_to_string",
   "level": "2",
-  "url": "chapter7_coding-practice.html#cp_7_AC_4q",
+  "url": "chapter7_coding-practice.html#chapter7_coding_to_string",
   "type": "Exercise",
-  "number": "7.18.4",
+  "number": "7.10.4",
   "title": "",
-  "body": "  Write a void function removeWord that removes a given word from a given string and prints out the new string. removeWord should take two strings input and word as parameters and prints out input with every occurence of word removed. Use string concatenation and the C++ std::string function substr . substr takes two parameters, a starting index and a length. For example, if string greeting = \"hello world\" , then greeting.substr(6, 5) returns the string \"world\" . Test your function in main. Check the hint below for help with the construction of the code. The output should be:   Gucci , Gucci , Gucci , Gucci    #include <iostream> #include <string> void removeWord(std::string input, std::string word) { \/\/ Write your implementation here. } int main() { removeWord(\"Gucci gang, Gucci gang, Gucci gang, Gucci gang\", \"gang\"); }      Write a void function removeWord that removes a given word from a given string and prints out the new string. removeWord should take two strings input and word as parameters and prints out input with every occurence of word removed. Use string concatenation and the C++ string function substr . substr takes two parameters, a starting index and a length. For example, if string greeting = \"hello world\" , then greeting.substr(6, 5) returns the string \"world\" . Test your function in main. Use the lines to construct the code, then go back to complete the Activecode. The output should be:   Gucci , Gucci , Gucci , Gucci      void removeWord(string input, string word) {     for (size_t i = 0; i < word.length(); i++) {    for (size_t i = 0; i < input.length(); i++) {     size_t pos = input.find(word);     if (pos != string::npos) {    if (pos == input.length()) {     input.erase(pos, word.length());    }  }  std::cout << input;  }      "
-},
-{
-  "id": "cp_7_AC_5",
-  "level": "2",
-  "url": "chapter7_coding-practice.html#cp_7_AC_5",
-  "type": "Exercise",
-  "number": "7.18.5",
-  "title": "",
-  "body": "  ROT13 is a simple letter substitution cipher that shifts every letter forward by 13, looping around if necessary. For example, the letter 'a', 1st in the alphabet, becomes the letter 'n', 14th in the alphabet. The letter 'r', 18th in the alphabet, becomes the letter 'e', 5th in the alphabet. Since the alphabet has 26 letters and 13 is exactly half, a message encrypted using ROT13 can be decrypted by calling ROT13 on the encrypted message.  Write the function ROT13 , which takes a string input as a parameter and returns an encrypted string . Test your function in main .   #include <iostream> #include <cctype> std::string ROT13 (std::string input) { \/\/ Write your implementation here. } int main() { std::string original = \"Encrypt me then decrypt me!\"; std::string encrypted = ROT13 (original); std::string decrypted = ROT13 (encrypted); std::cout << \"Original std::string: \" << original << std::endl; std::cout << \"Encrypted std::string: \" << encrypted << std::endl; std::cout << \"Decrypted std::string: \" << decrypted << std::endl; \/\/ Uncomment and run the code below once your function works! \/\/ std::string secretMessage = \"Pbatenghyngvbaf! Lbh'ir fhpprffshyyl vzcyrzragrq EBG13 naq qrpbqrq gur frperg zrffntr :)\"; \/\/ std::cout << ROT13 (secretMessage) << std::endl; }    Below is one way to implement the ROT13 function. We use a while loop to go through all the letters in the string . If the letter is between ‘a' and ‘n' or ‘A' and ‘N', we use character operations to add 13 to each letter. Otherwise, we subtract 13 from each letter. We return the encrypted message at the end.  #include <iostream> #include <cctype> std::string ROT13(std::string input) { size_t n = 0; while (n < input.length()) { if (isalpha(input[n])) { if ((input[n] >= 'a' && input[n] < 'n') || (input[n] >= 'A' && input[n] < 'N')) { input[n] = input[n] + 13; } else { input[n] = input[n] - 13; } } n++; } return input; } int main() { std::string original = \"Encrypt me then decrypt me!\"; std::string encrypted = ROT13 (original); std::string decrypted = ROT13 (encrypted); std::cout << \"Original std::string: \" << original << std::endl; std::cout << \"Encrypted std::string: \" << encrypted << std::endl; std::cout << \"Decrypted std::string: \" << decrypted << std::endl; \/\/ Uncomment and run the code below once your function works! \/\/ std::string secretMessage = \"Pbatenghyngvbaf! Lbh'ir fhpprffshyyl vzcyrzragrq EBG13 naq qrpbqrq gur frperg zrffntr :)\"; \/\/ std::cout << ROT13 (secretMessage) << std::endl; }   "
-},
-{
-  "id": "cp_7_AC_6q",
-  "level": "2",
-  "url": "chapter7_coding-practice.html#cp_7_AC_6q",
-  "type": "Exercise",
-  "number": "7.18.6",
-  "title": "",
-  "body": "  Write the function reverseWord which takes a string input , reverses it, and returns the reversed string . Run and test your code! Check the hint below for help with the construction of the code.   #include <iostream> std::string reverseWord(std::string input) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"reverseWord function\") { CHECK_EQ(reverseWord(\"hello\"), \"olleh\"); CHECK_EQ(reverseWord(\"world\"), \"dlrow\"); CHECK_EQ(reverseWord(\"racecar\"), \"racecar\"); }      Write the function reverseString which takes a string input , reverses it, and returns the reversed string . Use the lines to construct the code, then go back to complete the Activecode.     string reverseWord(string input) {    size_t len = input.length();    std::string reverse;     for (size_t i = len - 1; i != string::npos; i--) {    for (size_t i = len; i != string::npos; i--) {     reverse.push_back(input[i]);    }    return reverse;  }      "
-},
-{
-  "id": "cp_7_AC_7",
-  "level": "2",
-  "url": "chapter7_coding-practice.html#cp_7_AC_7",
-  "type": "Exercise",
-  "number": "7.18.7",
-  "title": "",
-  "body": "  Write the function capitalize , which takes a string input as a parameter. capitalize capitalizes the first letter of every word, and returns the new string .   #include <iostream> #include <cctype> std::string capitalize(std::string input) { \/\/ Write your implementation here. } int main() { std::cout << capitalize(\"every word in this std::string should be capitalized!\") << std::endl; std::cout << capitalize(\"this String As well\") << std::endl; }    Below is one way to implement the capitalize function. We use a while loop to go through all the char s in the string . We capitalize the first character and all characters following a space using toupper . At the end, we return the string .  #include <iostream> #include <cctype> std::string capitalize(std::string input) { size_t n = 0; while (n < input.length()) { if (n == 0) { input[n] = toupper(input[n]); } else if (input[n-1] == ' ') { input[n] = toupper(input[n]); } n++; } return input; } int main() { std::cout << capitalize (\"every word in this std::string should be capitalized!\") << std::endl; std::cout << capitalize (\"this String As well\") << std::endl; }   "
-},
-{
-  "id": "cp_7_AC_8q",
-  "level": "2",
-  "url": "chapter7_coding-practice.html#cp_7_AC_8q",
-  "type": "Exercise",
-  "number": "7.18.8",
-  "title": "",
-  "body": "  Write the function countVowels which takes a string input and returns the number of vowels in the string . Remember, ‘a', ‘e', ‘i', ‘o', and ‘u' are vowels. Run and test your code! Check the hint below for help with the construction of the code.   #include <iostream> int countVowels(std::string input) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"countVowels function\") { CHECK_EQ(countVowels(\"onomatopoeia\"), 8); CHECK_EQ(countVowels(\"cysts\"), 0); CHECK_EQ(countVowels(\"vowels\"), 2); }      Write the function countVowels which takes a string input and returns the number of vowels in the string . Remember, ‘a', ‘e', ‘i', ‘o', and ‘u' are vowels. Use the lines to construct the code, then go back to complete the Activecode.     int countVowels(string input) {    int count = 0;    for (size_t i = 0; i < input.length; i++) {     if (input[i] == 'a' || input[i] == 'e' || input[i] == 'i' || input[i] == 'o' || input[i] == 'u') {    if (input[i] == 'a' && input[i] == 'e' && input[i] == 'i' && input[i] == 'o' && input[i] == 'u') {     count++;    }    }    return count;  }      "
-},
-{
-  "id": "cp_7_AC_9",
-  "level": "2",
-  "url": "chapter7_coding-practice.html#cp_7_AC_9",
-  "type": "Exercise",
-  "number": "7.18.9",
-  "title": "",
-  "body": "  Write the function longestWord , which takes a string input as a parameter. longestWord returns the words with the most letters in input . If there's a tie, return the first word. Use the substr function. Run and test your code!   #include <iostream> std::string longestWord (std::string input) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"longestWord function\") { CHECK_EQ(longestWord(\"what is the longest word in this std::string\"), \"longest\"); CHECK_EQ(longestWord(\"these words are very close in size\"), \"these\"); CHECK_EQ(longestWord(\"vowels\"), \"vowels\"); }    Below is one way to implement the longestWord function. We use a while loop to go through all the char s in the string . We use variables to keep track of the longest word, the longest amount of letters, and the length of the current word. We can determine the length of a word by counting the number of char s between spaces. If the length is greater than the max, length becomes the new max and we update the longest word. This keeps repeating until we reach the end of the string, and the longest word is returned.  #include <iostream> std::string longestWord(std::string input) { size_t n = 0; size_t maxLength = 0; while (n < input.length()) { size_t wordLength = 0; while (input[n] != ' ' && n < input.length()) { wordLength++; n++; } if (wordLength > maxLength) { maxLength = wordLength; longest = input.substr(n - maxLength, maxLength); } n++; } return longest; }   "
-},
-{
-  "id": "cp_7_AC_10q",
-  "level": "2",
-  "url": "chapter7_coding-practice.html#cp_7_AC_10q",
-  "type": "Exercise",
-  "number": "7.18.10",
-  "title": "",
-  "body": "  Camel case is the practice of writing phrases without spaces or punctuation, indicating the separation of words using capital letter. For example, camel case in camel case is camelCase . Snake case is the practice of writing phrases where each space is replaced by an underscore. For example, snake case in snake case is snake_case . Write the functions snakeToCamel and camelToSnake . Each function takes a string input and returns the input using the other stylization. Feel free to use any string functions you'd like. Run and test your code! Check the hint below for help with the construction of the code.   #include <iostream> #include <string> #include \"ctype.h\" std::string snakeToCamel(std::string input) { \/\/ Write your implementation here. } std::string camelToSnake(std::string input) { \/\/ Write your implementation here. }  #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN #include \"doctest.h\" TEST_CASE(\"snakeToCamel function\") { CHECK_EQ(snakeToCamel(\"turn_this_into_camel_case\"), \"turnThisIntoCamelCase\"); CHECK_EQ(snakeToCamel(\"hello_world\"), \"helloWorld\"); CHECK_EQ(snakeToCamel(\"code\"), \"code\"); } TEST_CASE(\"camelToSnake function\") { CHECK_EQ(camelToSnake(\"turnThisIntoSnakeCase\"), \"turn_this_into_snake_case\"); CHECK_EQ(camelToSnake(\"helloWorld\"), \"hello_world\"); CHECK_EQ(camelToSnake(\"code\"), \"code\"); }      Camel case is the practice of writing phrases without spaces or punctuation, indicating the separation of words using capital letter. For example, camel case in camel case is camelCase . Snake case is the practice of writing phrases where each space is replaced by an underscore. For example, snake case in snake case is snake_case . Write the functions snakeToCamel and camelToSnake . Each function takes a string input and returns the input using the other stylization. Feel free to use any string functions you'd like. Use the lines to construct the code, then go back to complete the Activecode.     \/\/ snakeToCamel function  string snakeToCamel(string input) {  size_t len = input.length();  for (size_t i = 0; i < len; i++) {    if (input[i] == '_') {  input[i+1] = toupper(input[i+1]);  input.erase(i,1);  }    }  return input;  }    \/\/ camelToSnake function  string camelToSnake(string input) {  size_t len = input.length();  for (size_t i = 0; i < len; i++) {    if (isupper(input.at(i))) {  input.at(i) = tolower(input.at(i));  input.insert(i, \"_\");  }    }  return input;  }      "
+  "body": "  Define a Book class with a private title and page count. Add a constructor and a to_string() member function that returns text such as Book{title=Iteration, pages=240} .   #include <iostream> #include <string> class Book { private: std::string title; int pages; public: Book(std::string book_title, int page_count) : title{book_title}, pages{page_count} { } std::string to_string() const { \/\/ Replace this placeholder with your implementation. return \"\"; } }; int main() { Book book{\"Iteration\", 240}; std::cout << book.to_string() << '\\n'; return 0; }     Book(std::string book_title, int page_count) : title{book_title}, pages{page_count} { } std::string to_string() const { return \"Book{title=\" + title + \", pages=\" + std::to_string(pages) + \"}\"; }   "
 },
 {
   "id": "chapter10_vectors",

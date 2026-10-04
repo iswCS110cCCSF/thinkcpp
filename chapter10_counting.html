@@ -59,14 +59,14 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '8.3.2';
+eBookConfig.runestone_version = '8.3.3';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.6ad113829064d43a.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.02090e9f6a81e70e.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
+<script src="_static/prefix-runtime.dd07797f77620576.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.11d27cdc38930c2c.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
 <link rel="stylesheet" type="text/css" href="_static/prefix-runestone.347e2ecdeacfed99.css">
 <script src="_static/pretext/js/dist/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/dist/pretext_search.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
@@ -445,39 +445,72 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="chapter6_nested-iteration.html" class="internal"><span class="codenumber">6.8</span> <span class="title">Nested Iteration</span></a></div>
 <ul id="ptx-toc-group-chapter6_nested-iteration" class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter6_nested-iteration.html#chapter6_nested-iteration_comparing-pairs" class="internal"><span class="codenumber">6.8.1</span> <span class="title">Comparing Pairs</span></a></div></li></ul>
 </li>
-<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter6_glossary.html" class="internal"><span class="codenumber">6.9</span> <span class="title">Chapter 6 Glossary</span></a></div></li>
-<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_exercises.html" class="internal"><span class="codenumber">6.10</span> <span class="title">Exercises</span></a></div></li>
-<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_mixed-up-code-exercises.html" class="internal"><span class="codenumber">6.11</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
-<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_coding-practice.html" class="internal"><span class="codenumber">6.12</span> <span class="title">Coding Practice</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="generating-random-numbers.html" class="internal"><span class="codenumber">6.9</span> <span class="title">Generating Random Numbers</span></a></div>
+<ul id="ptx-toc-group-generating-random-numbers" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_why-randomness" class="internal"><span class="codenumber">6.9.1</span> <span class="title">Why Programs Use Randomness</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_random-and-pseudorandom" class="internal"><span class="codenumber">6.9.2</span> <span class="title">Random and Pseudorandom Numbers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_generator-mechanism" class="internal"><span class="codenumber">6.9.3</span> <span class="title">How a Pseudorandom Generator Works</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_seeds" class="internal"><span class="codenumber">6.9.4</span> <span class="title">Seeds and Repeatable Sequences</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_mersenne-twister" class="internal"><span class="codenumber">6.9.5</span> <span class="title">The Mersenne Twister</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_distributions" class="internal"><span class="codenumber">6.9.6</span> <span class="title">Probability Distributions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_die-class" class="internal"><span class="codenumber">6.9.7</span> <span class="title">A Die Class</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_simulation" class="internal"><span class="codenumber">6.9.8</span> <span class="title">Simulation and Probabilistic Systems</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="generating-random-numbers.html#chapter6_generating-random-numbers_security" class="internal"><span class="codenumber">6.9.9</span> <span class="title">Randomness and Security</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter6_glossary.html" class="internal"><span class="codenumber">6.10</span> <span class="title">Chapter 6 Glossary</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_exercises.html" class="internal"><span class="codenumber">6.11</span> <span class="title">Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_mixed-up-code-exercises.html" class="internal"><span class="codenumber">6.12</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter6_coding-practice.html" class="internal"><span class="codenumber">6.13</span> <span class="title">Coding Practice</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-chapter">
-<div class="toc-title-box"><a href="strings.html" class="internal"><span class="codenumber">7</span> <span class="title">Strings and things</span></a></div>
-<ul id="ptx-toc-group-strings" class="structural toc-item-list">
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_containers-for-strings.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Containers for strings</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_string-variables.html" class="internal"><span class="codenumber">7.2</span> <span class="title"><code class="code-inline tex2jax_ignore">string</code> variables</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_extracting-characters-from-a-string.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Extracting characters from a string</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_length.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Length</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_traversal.html" class="internal"><span class="codenumber">7.5</span> <span class="title">Traversal</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_a-run-time-error.html" class="internal"><span class="codenumber">7.6</span> <span class="title">A run-time error</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_our-own-version-of-find.html" class="internal"><span class="codenumber">7.7</span> <span class="title">Our own version of <code class="code-inline tex2jax_ignore">find</code></span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_looping-and-counting-loopcount.html" class="internal"><span class="codenumber">7.8</span> <span class="title">Looping and counting</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_increment-and-decrement-operators.html" class="internal"><span class="codenumber">7.9</span> <span class="title">Increment and decrement operators</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_string-concatenation.html" class="internal"><span class="codenumber">7.10</span> <span class="title">String concatenation</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_strings-are-mutable.html" class="internal"><span class="codenumber">7.11</span> <span class="title"><code class="code-inline tex2jax_ignore">string</code>s are mutable</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_strings-are-comparable.html" class="internal"><span class="codenumber">7.12</span> <span class="title"><code class="code-inline tex2jax_ignore">string</code>s are comparable</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_character-classification.html" class="internal"><span class="codenumber">7.13</span> <span class="title">Character classification</span></a></div></li>
-<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_other-string-functions.html" class="internal"><span class="codenumber">7.14</span> <span class="title">Other <code class="code-inline tex2jax_ignore">string</code> functions</span></a></div></li>
+<div class="toc-title-box"><a href="strings-and-things.html" class="internal"><span class="codenumber">7</span> <span class="title">Strings and Things</span></a></div>
+<ul id="ptx-toc-group-strings-and-things" class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_string-variables-and-mutability.html" class="internal"><span class="codenumber">7.1</span> <span class="title"><code class="code-inline tex2jax_ignore">std::string</code> Variables and Mutability</span></a></div></li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="chapter7_glossary.html" class="internal"><span class="codenumber">7.15</span> <span class="title">Glossary</span></a></div>
-<ul id="ptx-toc-group-chapter7_glossary" class="structural toc-item-list">
-<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter7_glossary.html#chapter7_glossary-2" class="internal"><span class="codenumber">7.15</span> <span class="title">Glossary</span></a></div></li>
-<li class="toc-item toc-reading-questions"><div class="toc-title-box"><a href="chapter7_glossary.html#chapter7_glossary-3" class="internal"><span class="codenumber">7.15</span> <span class="title">Reading Questions</span></a></div></li>
+<div class="toc-title-box"><a href="chapter7_string-operations.html" class="internal"><span class="codenumber">7.2</span> <span class="title"><code class="code-inline tex2jax_ignore">std::string</code> Operations</span></a></div>
+<ul id="ptx-toc-group-chapter7_string-operations" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_string-operations.html#chapter7_string-concatenation" class="internal"><span class="codenumber">7.2.1</span> <span class="title">Concatenation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_string-operations.html#chapter7_string-number-conversion" class="internal"><span class="codenumber">7.2.2</span> <span class="title">Converting Numbers to Strings</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_string-operations.html#chapter7_string-find" class="internal"><span class="codenumber">7.2.3</span> <span class="title">Finding Characters and Substrings</span></a></div></li>
 </ul>
 </li>
-<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_multiple-choice-exercises.html" class="internal"><span class="codenumber">7.16</span> <span class="title">Multiple Choice Exercises</span></a></div></li>
-<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_mixed-up-code-exercises.html" class="internal"><span class="codenumber">7.17</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
-<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_coding-practice.html" class="internal"><span class="codenumber">7.18</span> <span class="title">Coding Practice</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter7_traversing-strings.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Traversing Strings</span></a></div>
+<ul id="ptx-toc-group-chapter7_traversing-strings" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_traversing-strings.html#chapter7_indexed-string-traversal" class="internal"><span class="codenumber">7.3.1</span> <span class="title">Indexed <code class="code-inline tex2jax_ignore">for</code> Loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_traversing-strings.html#chapter7_range-string-traversal" class="internal"><span class="codenumber">7.3.2</span> <span class="title">Range-Based <code class="code-inline tex2jax_ignore">for</code> Loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_traversing-strings.html#chapter7_while-string-traversal" class="internal"><span class="codenumber">7.3.3</span> <span class="title"><code class="code-inline tex2jax_ignore">while</code> Loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_traversing-strings.html#chapter7_counting-string-characters" class="internal"><span class="codenumber">7.3.4</span> <span class="title">Counting Characters</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="chapter7_character-classification.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Character Classification</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="string-input-and-object-text.html" class="internal"><span class="codenumber">7.5</span> <span class="title">Keyboard Input and Text Representation</span></a></div>
+<ul id="ptx-toc-group-string-input-and-object-text" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="string-input-and-object-text.html#chapter7_keyboard-input-words" class="internal"><span class="codenumber">7.5.1</span> <span class="title">Reading Words with <code class="code-inline tex2jax_ignore">std::cin</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="string-input-and-object-text.html#chapter7_keyboard-input-lines" class="internal"><span class="codenumber">7.5.2</span> <span class="title">Reading Complete Lines</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="string-input-and-object-text.html#chapter7_mixing-input-operations" class="internal"><span class="codenumber">7.5.3</span> <span class="title">Mixing Word and Line Input</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="string-input-and-object-text.html#chapter7_input-boundary" class="internal"><span class="codenumber">7.5.4</span> <span class="title">Keep Input at the Program Boundary</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="string-input-and-object-text.html#chapter7_object-to-string" class="internal"><span class="codenumber">7.5.5</span> <span class="title">Representing Objects as Text</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter7_lexicographical-order.html" class="internal"><span class="codenumber">7.6</span> <span class="title">Comparison</span></a></div>
+<ul id="ptx-toc-group-chapter7_lexicographical-order" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_lexicographical-order.html#chapter7_character-values" class="internal"><span class="codenumber">7.6.1</span> <span class="title">Character Values and Code Units</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_lexicographical-order.html#chapter7_lexicographical-algorithm" class="internal"><span class="codenumber">7.6.2</span> <span class="title">The Comparison Algorithm</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_lexicographical-order.html#chapter7_string-comparison-case" class="internal"><span class="codenumber">7.6.3</span> <span class="title">Case-Sensitive Comparison</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_lexicographical-order.html#chapter7_array-lexicographical-comparison" class="internal"><span class="codenumber">7.6.4</span> <span class="title">Comparing <code class="code-inline tex2jax_ignore">std::array</code> Objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter7_lexicographical-order.html#chapter7_sequence-container-comparison" class="internal"><span class="codenumber">7.6.5</span> <span class="title">One Rule for Many Sequences</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter7_glossary.html" class="internal"><span class="codenumber">7.7</span> <span class="title">Glossary</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_exercises.html" class="internal"><span class="codenumber">7.8</span> <span class="title">Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_mixed-up-code.html" class="internal"><span class="codenumber">7.9</span> <span class="title">Mixed-Up Code Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter7_coding-practice.html" class="internal"><span class="codenumber">7.10</span> <span class="title">Coding Practice</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-chapter contains-active">
@@ -594,7 +627,7 @@ eBookConfig.enable_chatcodes =  false;
 </div>
 <div class="para" id="chapter10_counting-3">Also, it is not always obvious what sort of things are easy to write, but a good approach is to look for subproblems that fit a pattern you have seen before.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_counting-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter10_counting-4">Back in <a href="chapter7_looping-and-counting-loopcount.html" class="internal" title="Section 7.8: Looping and counting">Section 7.8</a> we looked at a loop that traversed a string and counted the number of times a given letter appeared. You can think of this program as an example of a pattern called “traverse and count.” The elements of this pattern are:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_counting-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter10_counting-4">Back in <a href="chapter7_traversing-strings.html#chapter7_counting-string-characters" class="internal" title="Subsection 7.3.4: Counting Characters">Subsection 7.3.4</a> we looked at a loop that traversed a string and counted the number of times a given letter appeared. You can think of this program as an example of a pattern called “traverse and count.” The elements of this pattern are:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_counting-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para logical" id="chapter10_counting-5">
 <ul class="disc" id="chapter10_counting-5-1">
