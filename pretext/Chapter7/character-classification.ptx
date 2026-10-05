@@ -18,7 +18,7 @@
 int main() {
     char character{'7'};
 
-    if (std::isdigit(static_cast<unsigned char>(character))) {
+    if (std::isdigit(character)) {
         std::cout << "The character is a digit.\n";
     }
 
