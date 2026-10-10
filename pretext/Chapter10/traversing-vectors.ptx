@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter8_traversing-vectors">
+    <title>Traversing Vectors</title>
+
+    <p>
+        To <term>traverse</term> a vector means to visit its elements in a
+        systematic order. A loop is usually the best tool for traversal. The
+        choice of loop depends on whether the program needs an index or only the
+        elements themselves.
+    </p>
+
+    <subsection xml:id="chapter8_traversing-vectors_indexed">
+        <title>Indexed Traversal</title>
+
+        <p>
+            Use an indexed <c>for</c> loop when the program needs the element's
+            position or must change elements by index.
+        </p>
+
+        <program xml:id="program_indexed_vector_traversal"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> scores{72, 88, 91};
+
+    for (std::size_t index = 0; index < scores.size(); ++index) {
+        std::cout << "Score " << index << ": " << scores[index] << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The condition uses <c>index &lt; scores.size()</c>, not
+            <c>index &lt;= scores.size()</c>. The latter would attempt to use an
+            index one past the last element.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter8_traversing-vectors_range-based">
+        <title>Range-Based Traversal</title>
+
+        <p>
+            Use a range-based <c>for</c> loop when the program needs each element
+            but does not need its index.
+        </p>
+
+        <program xml:id="program_range_based_vector_traversal"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> scores{72, 88, 91};
+
+    for (const int score : scores) {
+        std::cout << score << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The <c>const</c> tells the loop that this traversal only inspects
+            each value. To modify the original elements, use a reference:
+            <c>for (int&amp; score : scores)</c>.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter8_traversing-vectors_while">
+        <title>Traversal with a <c>while</c> Loop</title>
+
+        <p>
+            A <c>while</c> loop can traverse a vector when the program's
+            repetition is naturally controlled by a condition other than the
+            loop's usual counting structure. The index must be updated manually.
+        </p>
+
+        <program xml:id="program_while_vector_traversal"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> values{4, 8, 12, 16};
+    std::size_t index = 0;
+
+    while (index < values.size() && values[index] < 10) {
+        std::cout << values[index] << '\n';
+        ++index;
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            This loop stops either when it reaches the end or when it finds a
+            value that is not less than 10. A range-based loop is usually clearer
+            when every element should be visited.
+        </p>
+    </subsection>
+
+    <exercise label="chapter8_traversing-vectors_exercise_loop">
+        <statement>
+            <p>
+                Which traversal is most appropriate when a program needs to
+                print each vector element but does not need an index?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>A range-based <c>for</c> loop</p></statement><feedback><p>It visits each element directly without requiring an index variable.</p></feedback></choice>
+            <choice><statement><p>An indexed loop using <c>index &lt;= values.size()</c></p></statement><feedback><p>The condition would allow an invalid one-past-the-end index.</p></feedback></choice>
+            <choice><statement><p>An <c>if</c> statement</p></statement><feedback><p>An <c>if</c> statement does not repeat for every element.</p></feedback></choice>
+            <choice><statement><p>A loop that never changes its index</p></statement><feedback><p>That loop could fail to terminate.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

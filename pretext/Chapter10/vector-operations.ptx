@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter8_vector-operations">
+    <title>Vector Operations</title>
+
+    <p>
+        A vector supports operations for inspecting, modifying, adding, and
+        removing elements. These operations change the vector's contents and may
+        change its size. They do not all affect capacity in the same way.
+    </p>
+
+    <table xml:id="table_vector_operations">
+        <title>Common vector operations</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="25%"/>
+            <col width="35%"/>
+            <col width="40%"/>
+            <row header="yes">
+                <cell>Operation</cell>
+                <cell>Expression</cell>
+                <cell>Effect</cell>
+            </row>
+            <row>
+                <cell>Inspect the number of elements</cell>
+                <cell><c>values.size()</c></cell>
+                <cell>Returns the current size.</cell>
+            </row>
+            <row>
+                <cell>Test for no elements</cell>
+                <cell><c>values.empty()</c></cell>
+                <cell>Returns <c>true</c> when the vector is empty.</cell>
+            </row>
+            <row>
+                <cell>Add at the end</cell>
+                <cell><c>values.push_back(value)</c></cell>
+                <cell>Constructs a new last element and increases size.</cell>
+            </row>
+            <row>
+                <cell>Remove the last element</cell>
+                <cell><c>values.pop_back()</c></cell>
+                <cell>Destroys the last element and decreases size.</cell>
+            </row>
+            <row>
+                <cell>Insert an element</cell>
+                <cell><c>values.insert(position, value)</c></cell>
+                <cell>Places a value at a position and shifts later elements.</cell>
+            </row>
+            <row>
+                <cell>Erase an element</cell>
+                <cell><c>values.erase(position)</c></cell>
+                <cell>Removes an element and shifts later elements.</cell>
+            </row>
+            <row>
+                <cell>Remove all elements</cell>
+                <cell><c>values.clear()</c></cell>
+                <cell>Makes the size zero; capacity may remain available.</cell>
+            </row>
+            <row>
+                <cell>Change the size</cell>
+                <cell><c>values.resize(count)</c></cell>
+                <cell>Adds value-initialized elements or removes elements.</cell>
+            </row>
+            <row>
+                <cell>Request storage</cell>
+                <cell><c>values.reserve(count)</c></cell>
+                <cell>Requests capacity for at least the specified number of elements.</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        The position arguments in <c>insert()</c> and <c>erase()</c> use vector
+        iterators. For example, <c>values.begin() + 2</c> identifies the
+        position whose index is 2. We will use these expressions in simple cases;
+        the important idea is that insertion and erasure can shift later
+        elements.
+    </p>
+
+    <program xml:id="program_vector_operations"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> values{10, 20, 30};
+
+    values[1] = 25;
+    values.push_back(40);
+    values.insert(values.begin() + 1, 15);
+    values.erase(values.begin() + 2);
+
+    for (const int value : values) {
+        std::cout << value << ' ';
+    }
+    std::cout << '\n';
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The program first changes an existing element, adds an element at the
+        end, inserts 15 before the element at index 1, and erases the element at
+        index 2. After an operation changes the size, code should not assume
+        that old indices still identify the same values.
+    </p>
+
+    <subsection xml:id="chapter8_vector-operations_capacity">
+        <title>Operations and Capacity</title>
+
+        <p>
+            <c>push_back()</c>, <c>insert()</c>, and <c>resize()</c> may require
+            additional storage. If the requested size fits within the current
+            capacity, no reallocation is needed. If it does not fit, the vector
+            may reallocate as described in the first section.
+        </p>
+
+        <p>
+            <c>pop_back()</c>, <c>erase()</c>, and <c>clear()</c> reduce the
+            number of elements. They normally do not reduce capacity
+            automatically. This behavior can make later additions efficient,
+            because the vector may reuse its existing storage.
+        </p>
+    </subsection>
+
+    <exercise label="chapter8_vector-operations_exercise_push-back">
+        <statement>
+            <p>
+                What happens when <c>values.push_back(42)</c> is called?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>A new element with value 42 is added at the end.</p></statement><feedback><p><c>push_back()</c> adds one element after the current last element.</p></feedback></choice>
+            <choice><statement><p>The first element is replaced by 42.</p></statement><feedback><p>Use an index assignment to replace an existing element.</p></feedback></choice>
+            <choice><statement><p>The vector is cleared before 42 is added.</p></statement><feedback><p><c>push_back()</c> preserves the existing elements.</p></feedback></choice>
+            <choice><statement><p>The vector's capacity is guaranteed to increase by exactly one.</p></statement><feedback><p>Capacity growth is implementation-dependent.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

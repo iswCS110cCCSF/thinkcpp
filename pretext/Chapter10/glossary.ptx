@@ -1,120 +1,61 @@
-<?xml version="1.0" ?><section xml:id="chapter10_glossary">
+<?xml version="1.0" encoding="UTF-8"?>
+<glossary xml:id="chapter8_glossary">
     <title>Glossary</title>
-    <glossary>
-        <gi>
-            <title>vector:</title>
-            <p>A named collection of values, where all the values have the same
-            type, and each value is identified by an index.</p>
-        </gi>
-        <gi>
-            <title>element:</title>
-            <p>One of the values in a vector. The <c>[]</c> operator selects elements of a vector.</p>
-        </gi>
-        <gi>
-            <title>index:</title>
-            <p>An integer variable or value used to indicate an element of a vector.</p>
-        </gi>
-        <gi>
-            <title>constructor:</title>
-            <p>A special function that creates a new object and initializes its
-            instance variables.</p>
-        </gi>
-        <gi>
-            <title>deterministic:</title>
-            <p>A program that does the same thing every time it is run.</p>
-        </gi>
-        <gi>
-            <title>pseudorandom:</title>
-            <p>A sequence of numbers that appear to be random, but which are
-            actually the product of a deterministic computation.</p>
-        </gi>
-        <gi>
-            <title>seed:</title>
-            <p>A value used to initialize a random number sequence. Using the same
-            seed should yield the same sequence of values.</p>
-        </gi>
-        <gi>
-            <title>bottom-up design:</title>
-            <p>A method of program development that starts by writing small, useful
-            functions and then assembling them into larger solutions.</p>
-        </gi>
-        <gi>
-            <title>histogram:</title>
-            <p>A vector of integers where each integer counts the number of values
-            that fall into a certain range.</p>
-        </gi>
-    </glossary>
-    <reading-questions>
-  <exercise label="glossary_1">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">vector</premise>
-        <response>A named collection of values, where all the values have the same type, and each
-          value is identified by an index.</response>
-      </match>
-      <match>
-        <premise order="2">element</premise>
-        <response>One of the values in a vector.</response>
-      </match>
-      <match>
-        <premise order="3">index</premise>
-        <response>An integer variable or value used to indicate an element of a vector.</response>
-      </match>
-    </cardsort>
-  </exercise>
-  <exercise label="glossary_2">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <cardsort>
-      <match>
-        <premise order="1">constructor</premise>
-        <response>A special function that creates a new object and initializes its instance
-          variables.</response>
-      </match>
-      <match>
-        <premise order="2">pseudorandom</premise>
-        <response>A sequence of numbers that appear to be random, but which are actually the product
-          of a deterministic computation.</response>
-      </match>
-      <match>
-        <premise order="3">seed</premise>
-        <response>A value used to initialize a random number sequence.</response>
-      </match>
-    </cardsort>
-  </exercise>
-  <exercise label="glossary_3">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">deterministic</premise>
-        <response>A program that does the same thing every time it is run.</response>
-      </match>
-      <match>
-        <premise order="2">bottom-up design</premise>
-        <response>A method of program development that starts by writing small, useful functions and
-          then assembling them into larger solutions.</response>
-      </match>
-      <match>
-        <premise order="3">histogram</premise>
-        <response>A vector of integers where each integer counts the number of values that fall into
-          a certain range.</response>
-      </match>
-    </cardsort>
-  </exercise>
-    </reading-questions>
-</section>
+
+    <gi xml:id="glossary_ch8_vector">
+        <title>vector</title>
+        <p>A container that stores a sequence of elements of the same type and can change size during program execution.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_element">
+        <title>element</title>
+        <p>One value or object stored in a container.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_size">
+        <title>size</title>
+        <p>The number of elements currently stored in a vector.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_capacity">
+        <title>capacity</title>
+        <p>The number of elements that can fit in a vector's current storage before more storage is needed.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_contiguous-storage">
+        <title>contiguous storage</title>
+        <p>Storage in which elements occupy consecutive positions.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_reallocation">
+        <title>reallocation</title>
+        <p>The process of obtaining a larger storage block and moving or copying vector elements into it.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_initializer-list">
+        <title>initializer list</title>
+        <p>A brace-enclosed list of values used to initialize an object, such as <c>{1, 2, 3}</c>.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_traverse">
+        <title>traverse</title>
+        <p>To visit the elements of a collection in a systematic order.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_iterator">
+        <title>iterator</title>
+        <p>An object that identifies a position in a container and can be used by operations such as <c>insert()</c> and <c>erase()</c>.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_reallocation-invalidation">
+        <title>invalidation</title>
+        <p>The condition in which a pointer, reference, or iterator no longer safely identifies an element after a container operation.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_composition">
+        <title>composition</title>
+        <p>A design in which an object is built from other objects or data members, such as a class containing a vector.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_linear-search">
+        <title>linear search</title>
+        <p>A search that examines elements in order from the beginning until a target is found or the collection ends.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_const-reference">
+        <title>constant reference</title>
+        <p>A reference parameter that avoids copying an object while preventing the function from modifying that object through the parameter.</p>
+    </gi>
+    <gi xml:id="glossary_ch8_invariant">
+        <title>invariant</title>
+        <p>A rule that should remain true for a valid object, such as a rule about the elements stored in a class's private vector.</p>
+    </gi>
+</glossary>

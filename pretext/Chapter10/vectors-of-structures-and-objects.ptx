@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter8_vectors-of-structures-and-objects">
+    <title>Vectors of Structures and Objects</title>
+
+    <p>
+        A vector can store objects of a structure or class type. This allows a
+        program to represent a collection in which each element combines related
+        data and behavior.
+    </p>
+
+    <program xml:id="program_vector_of_structures"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <string>
+#include <vector>
+
+struct Student {
+    std::string name;
+    int score;
+};
+
+int main() {
+    std::vector<Student> students{
+        {"Amina", 92},
+        {"Luis", 85},
+        {"Mei", 97}
+    };
+
+    for (const Student& student : students) {
+        std::cout << student.name << ": " << student.score << '\n';
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The vector's element type is <c>Student</c>. During traversal,
+        <c>student.name</c> and <c>student.score</c> access members of the
+        current object. The vector manages the collection, while each
+        <c>Student</c> object manages its own data members.
+    </p>
+
+    <subsection xml:id="chapter8_vectors-of-structures-and-objects_modifying">
+        <title>Modifying Objects in a Vector</title>
+
+        <p>
+            Use a non-constant reference when a function or loop must modify the
+            objects stored in the original vector.
+        </p>
+
+        <program xml:id="program_modify_objects_in_vector"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+#include <vector>
+
+struct Product {
+    std::string name;
+    double price;
+};
+
+void apply_discount(std::vector<Product>& products, double rate) {
+    for (Product& product : products) {
+        product.price *= (1.0 - rate);
+    }
+}
+
+int main() {
+    std::vector<Product> products{
+        {"Notebook", 6.00},
+        {"Pen", 2.00}
+    };
+
+    apply_discount(products, 0.10);
+
+    for (const Product& product : products) {
+        std::cout << product.name << ": " << product.price << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The function receives the vector by reference and each element by
+            reference. Therefore, changing <c>product.price</c> changes the
+            objects stored in the caller's vector.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter8_vectors-of-structures-and-objects_member-functions">
+        <title>Vectors of Class Objects</title>
+
+        <p>
+            A vector can also contain class objects. The class defines the
+            operations available for each element.
+        </p>
+
+        <program xml:id="program_vector_of_class_objects"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+class Counter {
+private:
+    int count = 0;
+
+public:
+    Counter(int starting_count)
+        : count{starting_count} {
+    }
+
+    void increase() {
+        ++count;
+    }
+
+    int get_count() const {
+        return count;
+    }
+};
+
+int main() {
+    std::vector<Counter> counters{
+        Counter{1},
+        Counter{4}
+    };
+
+    counters[0].increase();
+
+    for (const Counter& counter : counters) {
+        std::cout << counter.get_count() << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <exercise label="chapter8_vectors-of-structures-and-objects_exercise_element-type">
+        <statement>
+            <p>
+                In <c>std::vector&lt;Student&gt; students</c>, what is the type of
+                each element?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>Student</c></p></statement><feedback><p>The type between the angle brackets is the vector's element type.</p></feedback></choice>
+            <choice><statement><p><c>std::vector</c></p></statement><feedback><p><c>std::vector</c> is the container type, not the element type.</p></feedback></choice>
+            <choice><statement><p><c>int</c></p></statement><feedback><p>The declaration does not specify a vector of integers.</p></feedback></choice>
+            <choice><statement><p><c>students</c></p></statement><feedback><p><c>students</c> is the object name.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

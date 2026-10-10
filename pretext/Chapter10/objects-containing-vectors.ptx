@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter8_objects-containing-vectors">
+    <title>Objects Containing Vectors</title>
+
+    <p>
+        A class can contain a vector as a data member. This design is called
+        <term>composition</term>: one object is built from other objects or
+        containers. The class can control how outside code adds, removes, and
+        inspects the elements.
+    </p>
+
+    <program xml:id="program_deck_contains_vector"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <string>
+#include <vector>
+
+struct Card {
+    std::string rank;
+    std::string suit;
+};
+
+class Deck {
+private:
+    std::vector<Card> cards;
+
+public:
+    void add_card(const Card& card) {
+        cards.push_back(card);
+    }
+
+    int get_card_count() const {
+        return static_cast<int>(cards.size());
+    }
+
+    const Card& get_card(int index) const {
+        return cards.at(index);
+    }
+};
+
+int main() {
+    Deck deck;
+    deck.add_card({"Ace", "Spades"});
+    deck.add_card({"King", "Hearts"});
+
+    std::cout << deck.get_card_count() << '\n';
+    std::cout << deck.get_card(0).rank << '\n';
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The vector is private, so code in <c>main()</c> cannot manipulate it
+        directly. The public member functions define the class interface. This
+        allows the class to add validation or other rules later without changing
+        how client code uses a <c>Deck</c> object.
+    </p>
+
+    <subsection xml:id="chapter8_objects-containing-vectors_invariants">
+        <title>Protecting the Collection</title>
+
+        <p>
+            A class containing a vector can protect invariants about the
+            collection. For example, a class could reject an invalid card,
+            prevent duplicate identifiers, or limit the number of elements.
+            Keeping the vector private gives the class a place to enforce those
+            rules.
+        </p>
+
+        <p>
+            The class does not remove the vector's ordinary behavior. Instead,
+            it provides carefully chosen operations that express the rules of the
+            larger object. A <c>Deck</c> can expose <c>add_card()</c> and
+            <c>get_card()</c> without exposing every detail of its internal
+            storage.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter8_objects-containing-vectors_vector-copying">
+        <title>Copying an Object That Contains a Vector</title>
+
+        <p>
+            The vector data member participates in the normal copy behavior of
+            the containing object. Copying a <c>Deck</c> creates a separate deck
+            with a separate copy of the vector's elements, unless the class
+            explicitly defines a different design.
+        </p>
+
+        <exercise label="chapter8_objects-containing-vectors_exercise_composition">
+            <statement>
+                <p>
+                    Why is <c>cards</c> declared private in the <c>Deck</c>
+                    example?
+                </p>
+            </statement>
+            <choices>
+                <choice correct="yes"><statement><p>To make the class control how its collection is accessed and modified.</p></statement><feedback><p>Private data supports encapsulation and protects class rules.</p></feedback></choice>
+                <choice><statement><p>Because vectors cannot be public data members.</p></statement><feedback><p>A vector can be public, although private data is often better design.</p></feedback></choice>
+                <choice><statement><p>To prevent the vector from storing objects.</p></statement><feedback><p>A vector can store objects regardless of its access level.</p></feedback></choice>
+                <choice><statement><p>Because a private vector cannot change size.</p></statement><feedback><p>Private data can still be modified by the class's member functions.</p></feedback></choice>
+            </choices>
+        </exercise>
+    </subsection>
+</section>

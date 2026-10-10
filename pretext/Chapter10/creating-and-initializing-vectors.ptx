@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter8_creating-and-initializing-vectors">
+    <title>Creating and Initializing Vectors</title>
+
+    <p>
+        A vector is a class template. The type inside the angle brackets tells
+        C++ what type every element will have.
+    </p>
+
+    <program xml:id="program_vector_declarations"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <string>
+#include <vector>
+
+int main() {
+    std::vector<int> scores;
+    std::vector<std::string> names{"Amina", "Luis", "Mei"};
+
+    scores.push_back(91);
+    scores.push_back(87);
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The first declaration creates an empty vector of integers. The second
+        creates a vector of strings with three initial elements. All elements in
+        one vector have the same element type.
+    </p>
+
+    <subsection xml:id="chapter8_creating-and-initializing-vectors_initializers">
+        <title>Initializer Lists and Size-Based Construction</title>
+
+        <p>
+            Braces can provide the initial elements directly. Parentheses can
+            specify a number of elements or a repeated initial value.
+        </p>
+
+        <program xml:id="program_vector_initialization_forms"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> readings{3, 6, 9};
+    std::vector<int> zeros(4);
+    std::vector<int> ones(4, 1);
+    std::vector<int> one_element{4};
+
+    std::cout << readings.size() << '\n';
+    std::cout << zeros.size() << '\n';
+    std::cout << ones[2] << '\n';
+    std::cout << one_element[0] << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The expression <c>std::vector&lt;int&gt; zeros(4)</c> creates four
+            value-initialized integers, which are zero. The expression
+            <c>std::vector&lt;int&gt; ones(4, 1)</c> creates four integers, each
+            initialized to 1. The expression
+            <c>std::vector&lt;int&gt; one_element{4}</c> creates one element whose
+            value is 4. These forms should not be confused.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter8_creating-and-initializing-vectors_copying">
+        <title>Copying a Vector</title>
+
+        <p>
+            Assigning one vector to another copies its elements. After the
+            assignment, the two vectors contain equal values but remain separate
+            vector objects.
+        </p>
+
+        <program xml:id="program_copy_vector"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> original{10, 20, 30};
+    std::vector<int> copy = original;
+
+    copy[0] = 99;
+
+    std::cout << original[0] << '\n';
+    std::cout << copy[0] << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The program prints 10 and then 99. Changing <c>copy</c> does not
+            change <c>original</c> because the assignment created an independent
+            vector with its own elements.
+        </p>
+    </subsection>
+
+    <exercise label="chapter8_creating-and-initializing-vectors_exercise_forms">
+        <statement>
+            <p>
+                Which declaration creates five integers, each initialized to zero?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>std::vector&lt;int&gt; values(5);</c></p></statement><feedback><p>Parentheses with one size argument create that many value-initialized elements.</p></feedback></choice>
+            <choice><statement><p><c>std::vector&lt;int&gt; values{5};</c></p></statement><feedback><p>Braces with one integer create one element whose value is 5.</p></feedback></choice>
+            <choice><statement><p><c>std::vector&lt;int&gt; values(0, 5);</c></p></statement><feedback><p>This requests zero elements, not five zero elements.</p></feedback></choice>
+            <choice><statement><p><c>std::vector&lt;int&gt; values;</c></p></statement><feedback><p>This creates an empty vector.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>
