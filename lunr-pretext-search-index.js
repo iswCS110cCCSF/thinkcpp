@@ -9529,7 +9529,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "7.3",
   "title": "Traversing Strings",
-  "body": " Traversing Strings  To traverse a string means to visit its characters in sequence. Chapter 6 introduced several loop forms. Strings give us a useful setting for practicing all three of the main traversal patterns.   Indexed for Loops  Use an indexed for loop when the program needs both a character and its position.   #include <iostream> #include <string> int main() { std::string word{\"C++\"}; for (std::size_t index = 0; index < word.size(); ++index) { std::cout << index << \": \" << word[index] << '\\n'; } return 0; }    Avoid using standard signed int types when dealing with container indexing and size. Instead, use size_t or, even better, use the C++17 auto keyword to let the compiler automatically deduce the perfect, safe matching type for you.     Range-Based for Loops  Use a range-based for loop when the program needs each character but does not need its index. A reference lets the loop modify the original characters; a const reference avoids copying and prevents modification.   #include <iostream> #include <string> int main() { const std::string word{\"C++\"}; for (const char character : word) { std::cout << character << '\\n'; } return 0; }     while Loops  A while loop is useful when traversal is controlled by a condition that may be expressed directly. The index must be updated so that the loop eventually stops.   #include <iostream> #include <string> int main() { std::string word{\"banana\"}; std::size_t index = 0; while (index < word.size()) { std::cout << word[index] << '\\n'; ++index; } return 0; }     Counting Characters  A counter can record how often a character appears. The function below uses a const reference because it only reads the caller's string.   #include <cstddef> #include <iostream> #include <string> std::size_t count_character(const std::string& text, char target) { std::size_t count = 0; for (const char character : text) { if (character == target) { ++count; } } return count; } int main() { std::cout << count_character(\"banana\", 'a') << '\\n'; return 0; }    "
+  "body": " Traversing Strings  To traverse a string means to visit its characters in sequence. Chapter 6 introduced several loop forms. Strings give us a useful setting for practicing all three of the main traversal patterns.   Indexed for Loops  Use an indexed for loop when the program needs both a character and its position.   #include <iostream> #include <string> int main() { std::string word{\"C++\"}; for (std::size_t index = 0; index < word.size(); ++index) { std::cout << index << \": \" << word[index] << '\\n'; } return 0; }    Avoid using standard signed int types when dealing with container indexing and size. Instead, use size_t or, even better, use the C++17 auto keyword to let the compiler automatically deduce the perfect, safe matching type for you.     Range-Based for Loops  Use a range-based for loop when the program needs each character but does not need its index. A reference lets the loop modify the original characters; a const reference avoids copying and prevents modification.   #include <iostream> #include <string> int main() { std::string word{\"C++\"}; for (const char character : word) { std::cout << character << '\\n'; } for (auto &character : word) { character = '_'; \/\/ } std::cout << word << '\\n'; return 0; }     while Loops  A while loop is useful when traversal is controlled by a condition that may be expressed directly. The index must be updated so that the loop eventually stops.   #include <iostream> #include <string> int main() { std::string word{\"banana\"}; std::size_t index = 0; while (index < word.size()) { std::cout << word[index] << '\\n'; ++index; } return 0; }     Counting Characters  A counter can record how often a character appears. The function below uses a const reference because it only reads the caller's string.   #include <cstddef> #include <iostream> #include <string> std::size_t count_character(const std::string& text, char target) { std::size_t count = 0; for (const char character : text) { if (character == target) { ++count; } } return count; } int main() { std::cout << count_character(\"banana\", 'a') << '\\n'; return 0; }    "
 },
 {
   "id": "chapter7_traversing-strings-2",
@@ -9556,7 +9556,7 @@ var ptx_lunr_docs = [
   "type": "Subsection",
   "number": "7.3.2",
   "title": "Range-Based <code class=\"code-inline tex2jax_ignore\">for<\/code> Loops",
-  "body": " Range-Based for Loops  Use a range-based for loop when the program needs each character but does not need its index. A reference lets the loop modify the original characters; a const reference avoids copying and prevents modification.   #include <iostream> #include <string> int main() { const std::string word{\"C++\"}; for (const char character : word) { std::cout << character << '\\n'; } return 0; }   "
+  "body": " Range-Based for Loops  Use a range-based for loop when the program needs each character but does not need its index. A reference lets the loop modify the original characters; a const reference avoids copying and prevents modification.   #include <iostream> #include <string> int main() { std::string word{\"C++\"}; for (const char character : word) { std::cout << character << '\\n'; } for (auto &character : word) { character = '_'; \/\/ } std::cout << word << '\\n'; return 0; }   "
 },
 {
   "id": "chapter7_while-string-traversal",
@@ -9583,7 +9583,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "7.4",
   "title": "Character Classification",
-  "body": " Character Classification  The <cctype> header provides functions that classify individual characters. For example, std::isalpha tests for a letter, std::isdigit tests for a decimal digit, and std::isspace tests for whitespace.   #include <cctype> #include <iostream> int main() { char character{'7'}; if (std::isdigit(static_cast<unsigned char>(character))) { std::cout << \"The character is a digit.\\n\"; } return 0; }   The conversion functions std::toupper and std::tolower return an uppercase or lowercase version when a conversion is available. In a larger text-processing program, combine these functions with a traversal loop.  "
+  "body": " Character Classification  The <cctype> header provides functions that classify individual characters. For example, std::isalpha tests for a letter, std::isdigit tests for a decimal digit, and std::isspace tests for whitespace.   #include <cctype> #include <iostream> int main() { char character{'7'}; if (std::isdigit(character)) { std::cout << \"The character is a digit.\\n\"; } return 0; }   The conversion functions std::toupper and std::tolower return an uppercase or lowercase version when a conversion is available. In a larger text-processing program, combine these functions with a traversal loop.  "
 },
 {
   "id": "chapter7_character-classification-2",
@@ -10090,4529 +10090,866 @@ var ptx_lunr_docs = [
   "body": "  Define a Book class with a private title and page count. Add a constructor and a to_string() member function that returns text such as Book{title=Iteration, pages=240} .   #include <iostream> #include <string> class Book { private: std::string title; int pages; public: Book(std::string book_title, int page_count) : title{book_title}, pages{page_count} { } std::string to_string() const { \/\/ Replace this placeholder with your implementation. return \"\"; } }; int main() { Book book{\"Iteration\", 240}; std::cout << book.to_string() << '\\n'; return 0; }     Book(std::string book_title, int page_count) : title{book_title}, pages{page_count} { } std::string to_string() const { return \"Book{title=\" + title + \", pages=\" + std::to_string(pages) + \"}\"; }   "
 },
 {
-  "id": "chapter10_vectors",
+  "id": "chapter8_what-is-a-vector",
   "level": "1",
-  "url": "chapter10_vectors.html",
+  "url": "chapter8_what-is-a-vector.html",
   "type": "Section",
   "number": "8.1",
-  "title": "Vectors",
-  "body": " Vectors  A std::vector is a set of values where each value is identified by a number (called an index). An string is similar to a vector, since it is made up of an indexed set of characters. The nice thing about vectors is that they can be made up of any type of element, including basic types like int s and double s, and user-defined types like Point and Time .   All elements of a vector must have the same type.   The std::vector type is defined in the C++ Standard Template Library (STL). In order to use it, you have to include the header file std::vector ; again, the details of how to do that depend on your programming environment.  You can create a vector the same way you create other variable types:  std::vector<int> count; std::vector<double> doubleVector;  The type that makes up the vector appears in angle brackets ( < and > ). The first line creates a vector of integers named count ; the second creates a vector of double s. Although these statements are legal, they are not very useful because they create vectors that have no elements (their size is zero). It is more common to specify the size of the vector in parentheses:  std::vector<int> count (4);  The syntax here is a little odd; it looks like a combination of a variable declarations and a function call. In fact, that's exactly what it is. The function we are invoking is an std::vector constructor. A constructor is a special function that creates new objects and initializes their instance variables. In this case, the constructor takes a single argument, which is the size of the new vector.  The following figure shows how vectors are represented in state diagrams:   Representation of std::vector   'count' names a box. In it is a row of 4 boxes labeled 0 through 3. Each numbered box has 0 inside.'    The large numbers inside the boxes are the elements of the vector. The small numbers outside the boxes are the indices used to identify each box. When you allocate a new vector, the elements are not initialized. They could contain any values.  There is another constructor for std::vector s that takes two parameters; the second is a fill value, the value that will be assigned to each of the elements.  std::vector<int> count (4, 0);  This statement creates a vector of four elements and initializes all of them to zero.    How would you create a vector of five words and initialize all of them to empty strings?       std::vector<string> words (\"\", 5);    Incorrect! Vector parameters are in the wrong order.      std::vector<string> words (5);    Correct! Vector elements are default constructed to empty strings.      std::vector<string> words (5, \"\");    Correct! We made a vector of strings with 5 elements, initialized to empty strings.      std::vector<char> words (5, '');    Incorrect! words should be a vector of strings.       Multiple Response Which of the following could be an element of words ?      1   Incorrect! This is an integer, not a string.     \"a\"   Correct!     'a'   Incorrect! This is a character, not a string.     \"word\"   Correct!     \"1\"   Correct!       What do you call a function that creates an instance of a new object and initializes its instance variables?      initializer   Incorrect! Go back and read to find the answer!     constructor   Correct!     creator   Incorrect! Go back and read to find the answer!     instance function   Incorrect! Go back and read to find the answer!       What are the values of number 's elements after this declaration?  std::vector<int> numbers(6);      undefined (we don't know the values)   Integers are default constructed to a known value.     0   Integers are default constructed to a zero value.     6   6 is the size we want the vector to be.     "
+  "title": "What Is a <code class=\"code-inline tex2jax_ignore\">std::vector<\/code>?",
+  "body": " What Is a std::vector ?  A std::vector is a container that stores a sequence of values of the same type. A vector is useful when a program needs to work with a collection whose number of elements may change while the program runs.  A vector has two related parts. The vector object keeps track of the collection, while separately managed storage holds the elements. The elements are stored contiguously, which means that each element is next to the previous element in the sequence.   #include <iostream> #include <vector> int main() { std::vector<int> scores; scores.push_back(88); scores.push_back(94); std::cout << \"Number of scores: \" << scores.size() << '\\n'; std::cout << \"First score: \" << scores[0] << '\\n'; return 0; }   The expression scores.size() reports the number of elements currently stored. The expression scores.capacity() reports how many elements can fit in the current storage before the vector must obtain a larger block. Capacity is usually greater than or equal to size.   Important vector memory terms       Term  Meaning  Related expression    Size  The number of elements currently stored.  values.size()    Capacity  The number of elements the current storage can hold.  values.capacity()    Reallocation  Obtaining new storage and moving the elements into it.  May occur during push_back()    Contiguous storage  Elements occupy consecutive positions in the sequence.  values[index]      Size and Capacity  Size describes the vector's current contents. Capacity describes the storage reserved for possible contents. For example, a vector might contain three elements while having room for eight elements. The exact capacity chosen automatically is implementation-dependent, so programs should not depend on a particular growth amount.   #include <iostream> #include <vector> int main() { std::vector<int> values; values.reserve(4); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; values.push_back(10); values.push_back(20); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; return 0; }   Here, reserve(4) requests storage for at least four elements. It does not add four elements to the vector. The size is still zero until values are inserted.    What Happens as a Vector Grows?  When a new element fits in unused capacity, the vector can construct that element in its existing storage. When the storage is full, the vector obtains a larger block, moves or copies the existing elements into the new block, releases the old storage, and then adds the new element.  This process is called reallocation . Reallocation is managed automatically, but it has two consequences worth knowing:   Adding an element can occasionally require more work than usual.  Pointers, references, and iterators to elements may become invalid.   Removing elements normally decreases the size but does not automatically release the vector's capacity. This allows a program to remove elements and later add more without necessarily requesting new storage each time. The details of storage management are handled by the vector; programmers mainly need to understand size, capacity, and the possibility of reallocation.     A vector has size 4 and capacity 10. What does this tell us?     It contains four elements and has room for at least six more without reallocating.  Size counts current elements; capacity describes available storage.    It contains ten elements, four of which are initialized.  Capacity is not the number of current elements.    It can never contain more than ten elements.  A vector can obtain larger storage when necessary.    It contains six uninitialized elements.  Unused capacity is storage, not additional vector elements.     "
 },
 {
-  "id": "chapter10_vectors-2",
+  "id": "chapter8_what-is-a-vector-2",
   "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-2",
+  "url": "chapter8_what-is-a-vector.html#chapter8_what-is-a-vector-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "A std::vector is a set of values where each value is identified by a number (called an index). An string is similar to a vector, since it is made up of an indexed set of characters. The nice thing about vectors is that they can be made up of any type of element, including basic types like int s and double s, and user-defined types like Point and Time . "
+  "body": "A std::vector is a container that stores a sequence of values of the same type. A vector is useful when a program needs to work with a collection whose number of elements may change while the program runs. "
 },
 {
-  "id": "chapter10_vectors-3",
+  "id": "chapter8_what-is-a-vector-3",
   "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-3",
-  "type": "Note",
+  "url": "chapter8_what-is-a-vector.html#chapter8_what-is-a-vector-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A vector has two related parts. The vector object keeps track of the collection, while separately managed storage holds the elements. The elements are stored contiguously, which means that each element is next to the previous element in the sequence. "
+},
+{
+  "id": "chapter8_what-is-a-vector-5",
+  "level": "2",
+  "url": "chapter8_what-is-a-vector.html#chapter8_what-is-a-vector-5",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The expression scores.size() reports the number of elements currently stored. The expression scores.capacity() reports how many elements can fit in the current storage before the vector must obtain a larger block. Capacity is usually greater than or equal to size. "
+},
+{
+  "id": "table_vector_memory_terms",
+  "level": "2",
+  "url": "chapter8_what-is-a-vector.html#table_vector_memory_terms",
+  "type": "Table",
   "number": "8.1.1",
-  "title": "",
-  "body": " All elements of a vector must have the same type.  "
+  "title": "Important vector memory terms",
+  "body": " Important vector memory terms       Term  Meaning  Related expression    Size  The number of elements currently stored.  values.size()    Capacity  The number of elements the current storage can hold.  values.capacity()    Reallocation  Obtaining new storage and moving the elements into it.  May occur during push_back()    Contiguous storage  Elements occupy consecutive positions in the sequence.  values[index]    "
 },
 {
-  "id": "chapter10_vectors-4",
+  "id": "chapter8_what-is-a-vector_size-and-capacity",
   "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The std::vector type is defined in the C++ Standard Template Library (STL). In order to use it, you have to include the header file std::vector ; again, the details of how to do that depend on your programming environment. "
-},
-{
-  "id": "chapter10_vectors-5",
-  "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "You can create a vector the same way you create other variable types: "
-},
-{
-  "id": "chapter10_vectors-7",
-  "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The type that makes up the vector appears in angle brackets ( < and > ). The first line creates a vector of integers named count ; the second creates a vector of double s. Although these statements are legal, they are not very useful because they create vectors that have no elements (their size is zero). It is more common to specify the size of the vector in parentheses: "
-},
-{
-  "id": "chapter10_vectors-9",
-  "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The syntax here is a little odd; it looks like a combination of a variable declarations and a function call. In fact, that's exactly what it is. The function we are invoking is an std::vector constructor. A constructor is a special function that creates new objects and initializes their instance variables. In this case, the constructor takes a single argument, which is the size of the new vector. "
-},
-{
-  "id": "chapter10_vectors-10",
-  "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The following figure shows how vectors are represented in state diagrams: "
-},
-{
-  "id": "chapter10_vectors-11",
-  "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-11",
-  "type": "Figure",
+  "url": "chapter8_what-is-a-vector.html#chapter8_what-is-a-vector_size-and-capacity",
+  "type": "Subsection",
   "number": "8.1.1",
-  "title": "",
-  "body": " Representation of std::vector   'count' names a box. In it is a row of 4 boxes labeled 0 through 3. Each numbered box has 0 inside.'   "
+  "title": "Size and Capacity",
+  "body": " Size and Capacity  Size describes the vector's current contents. Capacity describes the storage reserved for possible contents. For example, a vector might contain three elements while having room for eight elements. The exact capacity chosen automatically is implementation-dependent, so programs should not depend on a particular growth amount.   #include <iostream> #include <vector> int main() { std::vector<int> values; values.reserve(4); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; values.push_back(10); values.push_back(20); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; return 0; }   Here, reserve(4) requests storage for at least four elements. It does not add four elements to the vector. The size is still zero until values are inserted.  "
 },
 {
-  "id": "chapter10_vectors-12",
+  "id": "chapter8_what-is-a-vector_growth",
   "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The large numbers inside the boxes are the elements of the vector. The small numbers outside the boxes are the indices used to identify each box. When you allocate a new vector, the elements are not initialized. They could contain any values. "
-},
-{
-  "id": "chapter10_vectors-13",
-  "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "There is another constructor for std::vector s that takes two parameters; the second is a fill value, the value that will be assigned to each of the elements. "
-},
-{
-  "id": "chapter10_vectors-15",
-  "level": "2",
-  "url": "chapter10_vectors.html#chapter10_vectors-15",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This statement creates a vector of four elements and initializes all of them to zero. "
-},
-{
-  "id": "vectors_1",
-  "level": "2",
-  "url": "chapter10_vectors.html#vectors_1",
-  "type": "Checkpoint",
-  "number": "8.1.1",
-  "title": "",
-  "body": "  How would you create a vector of five words and initialize all of them to empty strings?       std::vector<string> words (\"\", 5);    Incorrect! Vector parameters are in the wrong order.      std::vector<string> words (5);    Correct! Vector elements are default constructed to empty strings.      std::vector<string> words (5, \"\");    Correct! We made a vector of strings with 5 elements, initialized to empty strings.      std::vector<char> words (5, '');    Incorrect! words should be a vector of strings.    "
-},
-{
-  "id": "vectors_2",
-  "level": "2",
-  "url": "chapter10_vectors.html#vectors_2",
-  "type": "Checkpoint",
+  "url": "chapter8_what-is-a-vector.html#chapter8_what-is-a-vector_growth",
+  "type": "Subsection",
   "number": "8.1.2",
-  "title": "",
-  "body": "  Multiple Response Which of the following could be an element of words ?      1   Incorrect! This is an integer, not a string.     \"a\"   Correct!     'a'   Incorrect! This is a character, not a string.     \"word\"   Correct!     \"1\"   Correct!    "
+  "title": "What Happens as a Vector Grows?",
+  "body": " What Happens as a Vector Grows?  When a new element fits in unused capacity, the vector can construct that element in its existing storage. When the storage is full, the vector obtains a larger block, moves or copies the existing elements into the new block, releases the old storage, and then adds the new element.  This process is called reallocation . Reallocation is managed automatically, but it has two consequences worth knowing:   Adding an element can occasionally require more work than usual.  Pointers, references, and iterators to elements may become invalid.   Removing elements normally decreases the size but does not automatically release the vector's capacity. This allows a program to remove elements and later add more without necessarily requesting new storage each time. The details of storage management are handled by the vector; programmers mainly need to understand size, capacity, and the possibility of reallocation.  "
 },
 {
-  "id": "vectors_3",
+  "id": "chapter8_what-is-a-vector_exercise_size-capacity",
   "level": "2",
-  "url": "chapter10_vectors.html#vectors_3",
+  "url": "chapter8_what-is-a-vector.html#chapter8_what-is-a-vector_exercise_size-capacity",
   "type": "Checkpoint",
-  "number": "8.1.3",
+  "number": "8.1.1",
   "title": "",
-  "body": "  What do you call a function that creates an instance of a new object and initializes its instance variables?      initializer   Incorrect! Go back and read to find the answer!     constructor   Correct!     creator   Incorrect! Go back and read to find the answer!     instance function   Incorrect! Go back and read to find the answer!    "
+  "body": "  A vector has size 4 and capacity 10. What does this tell us?     It contains four elements and has room for at least six more without reallocating.  Size counts current elements; capacity describes available storage.    It contains ten elements, four of which are initialized.  Capacity is not the number of current elements.    It can never contain more than ten elements.  A vector can obtain larger storage when necessary.    It contains six uninitialized elements.  Unused capacity is storage, not additional vector elements.    "
 },
 {
-  "id": "vectors_4",
-  "level": "2",
-  "url": "chapter10_vectors.html#vectors_4",
-  "type": "Checkpoint",
-  "number": "8.1.4",
-  "title": "",
-  "body": "  What are the values of number 's elements after this declaration?  std::vector<int> numbers(6);      undefined (we don't know the values)   Integers are default constructed to a known value.     0   Integers are default constructed to a zero value.     6   6 is the size we want the vector to be.    "
-},
-{
-  "id": "chapter10_accessing-elements",
+  "id": "chapter8_creating-and-initializing-vectors",
   "level": "1",
-  "url": "chapter10_accessing-elements.html",
+  "url": "chapter8_creating-and-initializing-vectors.html",
   "type": "Section",
   "number": "8.2",
-  "title": "Accessing elements",
-  "body": " Accessing elements  The [] operator reads and writes the elements of a vector in much the same way it accesses the characters in an string . This is called vector indexing . As with string s, the indices start at zero, so count[0] refers to the zeroeth element of the vector, and count[1] refers to the oneth element. You can use the [] operator anywhere in an expression:  count[0] = 7; count[1] = count[0] * 2; count[2]++; count[3] -= 60;  All of these are legal assignment statements. Here is the effect of this code fragment:   Acessing elements   'count' names a box. In it is a row of 4 boxes labeled 0 through 3. Each numbered box has 0 inside.'     Since elements of this vector are numbered from 0 to 3, there is no element with the index 4. It is a common error to go beyond the bounds of a vector, which causes a run-time error. The program outputs an error message like Illegal vector index , and then quits.   You can use any expression as an index , as long as it has type int . One of the most common ways to index a vector is with a loop variable. For example:  int i = 0; while (i < 4) { std::cout << count[i] << std::endl ; i++; }  This while loop counts from 0 to 4; when the loop variable i is 4, the condition fails and the loop terminates. Thus, the body of the loop is only executed when i is 0, 1, 2 and 3.  Each time through the loop we use i as an index into the vector, outputting the i th element. This type of vector traversal is very common. Vectors and loops go together like fava beans and a nice Chianti.   Take a look at this active code. We can modify the vectors by accessing its elements.   #include <iostream> #include <vector> void print_vec(std::vector<int> vec) { std::cout << \"[\"; for (size_t i = 0; i < vec.size() - 1; ++i) { std::cout << vec[i] << \",\"; } std::cout << vec[vec.size()-1]; std::cout << \"]\" << std::endl; } int main() { std::vector<int> count = {1,2,3,4}; std::cout << \"Before we make any changes, count = \"; print_vec(count); count[0] = 7; count[1] = count[0] * 2; count[2]++; count[3] -= 60; std::cout << \"After we made the above changes, count = \"; print_vec(count); }      Multiple Response How would you increment the third element of std::vector<int> vec by one?       vec[3] = vec[3]++;    Incorrect! This is actually incrementing the 4th element of vec , since vectors are zero indexed.      vec(3) = vec(3) + 1;    Incorrect! This is not proper syntax.      vec[2]++;     vec[2] is the third element and we increment it by using the ++ operator.      vec(2) = vec(2)++;    This is not proper syntax.      vec[2] = vec[2] + 1     vec[2] is the third element and we increment it by adding 1.       What is the highest index reached by while(i < 7) ?           The loop runs 7 times, but vectors are zero indexed, so the loop never reaches the 7th index!      "
+  "title": "Creating and Initializing Vectors",
+  "body": " Creating and Initializing Vectors  A vector is a class template. The type inside the angle brackets tells C++ what type every element will have.   #include <string> #include <vector> int main() { std::vector<int> scores; std::vector<std::string> names{\"Amina\", \"Luis\", \"Mei\"}; scores.push_back(91); scores.push_back(87); return 0; }   The first declaration creates an empty vector of integers. The second creates a vector of strings with three initial elements. All elements in one vector have the same element type.   Initializer Lists and Size-Based Construction  Braces can provide the initial elements directly. Parentheses can specify a number of elements or a repeated initial value.   #include <iostream> #include <vector> int main() { std::vector<int> readings{3, 6, 9}; std::vector<int> zeros(4); std::vector<int> ones(4, 1); std::vector<int> one_element{4}; std::cout << readings.size() << '\\n'; std::cout << zeros.size() << '\\n'; std::cout << ones[2] << '\\n'; std::cout << one_element[0] << '\\n'; return 0; }   The expression std::vector<int> zeros(4) creates four value-initialized integers, which are zero. The expression std::vector<int> ones(4, 1) creates four integers, each initialized to 1. The expression std::vector<int> one_element{4} creates one element whose value is 4. These forms should not be confused.    Copying a Vector  Assigning one vector to another copies its elements. After the assignment, the two vectors contain equal values but remain separate vector objects.   #include <iostream> #include <vector> int main() { std::vector<int> original{10, 20, 30}; std::vector<int> copy = original; copy[0] = 99; std::cout << original[0] << '\\n'; std::cout << copy[0] << '\\n'; return 0; }   The program prints 10 and then 99. Changing copy does not change original because the assignment created an independent vector with its own elements.     Which declaration creates five integers, each initialized to zero?    std::vector<int> values(5); Parentheses with one size argument create that many value-initialized elements.  std::vector<int> values{5}; Braces with one integer create one element whose value is 5.  std::vector<int> values(0, 5); This requests zero elements, not five zero elements.  std::vector<int> values; This creates an empty vector.    "
 },
 {
-  "id": "chapter10_accessing-elements-2",
+  "id": "chapter8_creating-and-initializing-vectors-2",
   "level": "2",
-  "url": "chapter10_accessing-elements.html#chapter10_accessing-elements-2",
+  "url": "chapter8_creating-and-initializing-vectors.html#chapter8_creating-and-initializing-vectors-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The [] operator reads and writes the elements of a vector in much the same way it accesses the characters in an string . This is called vector indexing . As with string s, the indices start at zero, so count[0] refers to the zeroeth element of the vector, and count[1] refers to the oneth element. You can use the [] operator anywhere in an expression: "
+  "body": "A vector is a class template. The type inside the angle brackets tells C++ what type every element will have. "
 },
 {
-  "id": "chapter10_accessing-elements-4",
+  "id": "chapter8_creating-and-initializing-vectors-4",
   "level": "2",
-  "url": "chapter10_accessing-elements.html#chapter10_accessing-elements-4",
+  "url": "chapter8_creating-and-initializing-vectors.html#chapter8_creating-and-initializing-vectors-4",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "All of these are legal assignment statements. Here is the effect of this code fragment: "
+  "body": "The first declaration creates an empty vector of integers. The second creates a vector of strings with three initial elements. All elements in one vector have the same element type. "
 },
 {
-  "id": "chapter10_accessing-elements-5",
+  "id": "chapter8_creating-and-initializing-vectors_initializers",
   "level": "2",
-  "url": "chapter10_accessing-elements.html#chapter10_accessing-elements-5",
-  "type": "Figure",
+  "url": "chapter8_creating-and-initializing-vectors.html#chapter8_creating-and-initializing-vectors_initializers",
+  "type": "Subsection",
   "number": "8.2.1",
-  "title": "",
-  "body": " Acessing elements   'count' names a box. In it is a row of 4 boxes labeled 0 through 3. Each numbered box has 0 inside.'   "
+  "title": "Initializer Lists and Size-Based Construction",
+  "body": " Initializer Lists and Size-Based Construction  Braces can provide the initial elements directly. Parentheses can specify a number of elements or a repeated initial value.   #include <iostream> #include <vector> int main() { std::vector<int> readings{3, 6, 9}; std::vector<int> zeros(4); std::vector<int> ones(4, 1); std::vector<int> one_element{4}; std::cout << readings.size() << '\\n'; std::cout << zeros.size() << '\\n'; std::cout << ones[2] << '\\n'; std::cout << one_element[0] << '\\n'; return 0; }   The expression std::vector<int> zeros(4) creates four value-initialized integers, which are zero. The expression std::vector<int> ones(4, 1) creates four integers, each initialized to 1. The expression std::vector<int> one_element{4} creates one element whose value is 4. These forms should not be confused.  "
 },
 {
-  "id": "chapter10_accessing-elements-6",
+  "id": "chapter8_creating-and-initializing-vectors_copying",
   "level": "2",
-  "url": "chapter10_accessing-elements.html#chapter10_accessing-elements-6",
-  "type": "Warning",
-  "number": "8.2.1",
-  "title": "",
-  "body": " Since elements of this vector are numbered from 0 to 3, there is no element with the index 4. It is a common error to go beyond the bounds of a vector, which causes a run-time error. The program outputs an error message like Illegal vector index , and then quits.  "
-},
-{
-  "id": "chapter10_accessing-elements-7",
-  "level": "2",
-  "url": "chapter10_accessing-elements.html#chapter10_accessing-elements-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "You can use any expression as an index , as long as it has type int . One of the most common ways to index a vector is with a loop variable. For example: "
-},
-{
-  "id": "chapter10_accessing-elements-9",
-  "level": "2",
-  "url": "chapter10_accessing-elements.html#chapter10_accessing-elements-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This while loop counts from 0 to 4; when the loop variable i is 4, the condition fails and the loop terminates. Thus, the body of the loop is only executed when i is 0, 1, 2 and 3. "
-},
-{
-  "id": "chapter10_accessing-elements-10",
-  "level": "2",
-  "url": "chapter10_accessing-elements.html#chapter10_accessing-elements-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Each time through the loop we use i as an index into the vector, outputting the i th element. This type of vector traversal is very common. Vectors and loops go together like fava beans and a nice Chianti. "
-},
-{
-  "id": "accessing_elements_AC_1",
-  "level": "2",
-  "url": "chapter10_accessing-elements.html#accessing_elements_AC_1",
-  "type": "Listing",
+  "url": "chapter8_creating-and-initializing-vectors.html#chapter8_creating-and-initializing-vectors_copying",
+  "type": "Subsection",
   "number": "8.2.2",
-  "title": "Take a look at this active code. We can modify the vectors by accessing its elements.",
-  "body": " Take a look at this active code. We can modify the vectors by accessing its elements.   #include <iostream> #include <vector> void print_vec(std::vector<int> vec) { std::cout << \"[\"; for (size_t i = 0; i < vec.size() - 1; ++i) { std::cout << vec[i] << \",\"; } std::cout << vec[vec.size()-1]; std::cout << \"]\" << std::endl; } int main() { std::vector<int> count = {1,2,3,4}; std::cout << \"Before we make any changes, count = \"; print_vec(count); count[0] = 7; count[1] = count[0] * 2; count[2]++; count[3] -= 60; std::cout << \"After we made the above changes, count = \"; print_vec(count); }   "
+  "title": "Copying a Vector",
+  "body": " Copying a Vector  Assigning one vector to another copies its elements. After the assignment, the two vectors contain equal values but remain separate vector objects.   #include <iostream> #include <vector> int main() { std::vector<int> original{10, 20, 30}; std::vector<int> copy = original; copy[0] = 99; std::cout << original[0] << '\\n'; std::cout << copy[0] << '\\n'; return 0; }   The program prints 10 and then 99. Changing copy does not change original because the assignment created an independent vector with its own elements.  "
 },
 {
-  "id": "accessing_elements_1",
+  "id": "chapter8_creating-and-initializing-vectors_exercise_forms",
   "level": "2",
-  "url": "chapter10_accessing-elements.html#accessing_elements_1",
+  "url": "chapter8_creating-and-initializing-vectors.html#chapter8_creating-and-initializing-vectors_exercise_forms",
   "type": "Checkpoint",
   "number": "8.2.1",
   "title": "",
-  "body": "  Multiple Response How would you increment the third element of std::vector<int> vec by one?       vec[3] = vec[3]++;    Incorrect! This is actually incrementing the 4th element of vec , since vectors are zero indexed.      vec(3) = vec(3) + 1;    Incorrect! This is not proper syntax.      vec[2]++;     vec[2] is the third element and we increment it by using the ++ operator.      vec(2) = vec(2)++;    This is not proper syntax.      vec[2] = vec[2] + 1     vec[2] is the third element and we increment it by adding 1.    "
+  "body": "  Which declaration creates five integers, each initialized to zero?    std::vector<int> values(5); Parentheses with one size argument create that many value-initialized elements.  std::vector<int> values{5}; Braces with one integer create one element whose value is 5.  std::vector<int> values(0, 5); This requests zero elements, not five zero elements.  std::vector<int> values; This creates an empty vector.   "
 },
 {
-  "id": "accessing_elements_2",
-  "level": "2",
-  "url": "chapter10_accessing-elements.html#accessing_elements_2",
-  "type": "Checkpoint",
-  "number": "8.2.2",
-  "title": "",
-  "body": "  What is the highest index reached by while(i < 7) ?           The loop runs 7 times, but vectors are zero indexed, so the loop never reaches the 7th index!     "
-},
-{
-  "id": "chapter10_copying-vectors",
+  "id": "chapter8_accessing-vector-elements",
   "level": "1",
-  "url": "chapter10_copying-vectors.html",
+  "url": "chapter8_accessing-vector-elements.html",
   "type": "Section",
   "number": "8.3",
-  "title": "Copying vectors",
-  "body": " Copying vectors  There is one more constructor for vector s, which is called a copy constructor because it takes one vector as an argument and creates a new vector that is the same size, with the same elements.  std::vector<int> countCopy(count);  Although this syntax is legal, it is almost never used for vector s because there is a better alternative:  std::vector<int> countCopy = count;  The = operator works on vector s in pretty much the way you would expect.   Take a look at this active code, which uses the copy constructor.   #include <iostream> #include <vector> void print_vec(std::vector<int> vec); int main() { std::vector<int> count = {1,2,3,4}; std::cout << \"count = \"; print_vec(count); std::vector<int> copy_1(count); std::vector<int> copy_2 = count; std::cout << \"copy_1 = \"; print_vec(copy_1); std::cout << \"copy_2 = \"; print_vec(copy_2); std::cout << \"We just made two copies of count. As you can see, both methods work the same!\" << std::endl; }  void print_vec(std::vector<int> vec) { size_t i = 0; std::cout << \"[\"; while (i < vec.size()-1) { std::cout << vec[i] << \",\"; i++; } std::cout << vec[vec.size()-1]; std::cout << \"]\" << std::endl; }      Multiple Response How would you make a copy of std::vector<double> decimals called nums ?       std::vector<double> nums = decimals;    This is one way to make a copy.      std::vector<double> decimals = nums;    This makes a copy of nums called decimals.      std::vector<double> nums (decimals);    This is one way to make a copy.      std::vector<double> decimals (nums);    This makes a copy of nums called decimals.       What is the name of the function that takes a vector as an argument, and creates a new vector of the same size and with the same elements?            "
+  "title": "Accessing Vector Elements",
+  "body": " Accessing Vector Elements  Vector indices begin at zero. If a vector has size() elements, its valid indices range from zero through size() - 1 . A vector with no elements has no valid index.   #include <iostream> #include <vector> int main() { std::vector<int> temperatures{18, 21, 24}; std::cout << temperatures[0] << '\\n'; std::cout << temperatures.at(1) << '\\n'; std::cout << temperatures.front() << '\\n'; std::cout << temperatures.back() << '\\n'; temperatures[2] = 25; std::cout << temperatures[2] << '\\n'; return 0; }    Ways to access vector elements       Expression  Purpose  Important behavior    values[index]  Access an element by index.  Does not perform a bounds check.    values.at(index)  Access an element by index.  Checks the index and reports an invalid access by throwing an exception.    values.front()  Access the first element.  The vector must not be empty.    values.back()  Access the last element.  The vector must not be empty.     Use [] when the program has already established that the index is valid or when the surrounding logic guarantees it. Use at() when a bounds check is useful. Neither form makes an empty vector safe to access; the program must check empty() before using front() or back() .    What is the last valid index of a vector whose size is 7?    6 Indices begin at zero, so the last index is size minus one.  7 Index 7 would be one past the last valid index.  8 Count seven positions beginning with index zero.  0 Zero identifies the first element, not the last.    "
 },
 {
-  "id": "chapter10_copying-vectors-2",
+  "id": "chapter8_accessing-vector-elements-2",
   "level": "2",
-  "url": "chapter10_copying-vectors.html#chapter10_copying-vectors-2",
+  "url": "chapter8_accessing-vector-elements.html#chapter8_accessing-vector-elements-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "There is one more constructor for vector s, which is called a copy constructor because it takes one vector as an argument and creates a new vector that is the same size, with the same elements. "
+  "body": "Vector indices begin at zero. If a vector has size() elements, its valid indices range from zero through size() - 1 . A vector with no elements has no valid index. "
 },
 {
-  "id": "chapter10_copying-vectors-4",
+  "id": "table_vector_element_access",
   "level": "2",
-  "url": "chapter10_copying-vectors.html#chapter10_copying-vectors-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Although this syntax is legal, it is almost never used for vector s because there is a better alternative: "
-},
-{
-  "id": "chapter10_copying-vectors-6",
-  "level": "2",
-  "url": "chapter10_copying-vectors.html#chapter10_copying-vectors-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The = operator works on vector s in pretty much the way you would expect. "
-},
-{
-  "id": "copying_vectors_AC_1",
-  "level": "2",
-  "url": "chapter10_copying-vectors.html#copying_vectors_AC_1",
-  "type": "Listing",
+  "url": "chapter8_accessing-vector-elements.html#table_vector_element_access",
+  "type": "Table",
   "number": "8.3.1",
-  "title": "Take a look at this active code, which uses the copy constructor.",
-  "body": " Take a look at this active code, which uses the copy constructor.   #include <iostream> #include <vector> void print_vec(std::vector<int> vec); int main() { std::vector<int> count = {1,2,3,4}; std::cout << \"count = \"; print_vec(count); std::vector<int> copy_1(count); std::vector<int> copy_2 = count; std::cout << \"copy_1 = \"; print_vec(copy_1); std::cout << \"copy_2 = \"; print_vec(copy_2); std::cout << \"We just made two copies of count. As you can see, both methods work the same!\" << std::endl; }  void print_vec(std::vector<int> vec) { size_t i = 0; std::cout << \"[\"; while (i < vec.size()-1) { std::cout << vec[i] << \",\"; i++; } std::cout << vec[vec.size()-1]; std::cout << \"]\" << std::endl; }   "
+  "title": "Ways to access vector elements",
+  "body": " Ways to access vector elements       Expression  Purpose  Important behavior    values[index]  Access an element by index.  Does not perform a bounds check.    values.at(index)  Access an element by index.  Checks the index and reports an invalid access by throwing an exception.    values.front()  Access the first element.  The vector must not be empty.    values.back()  Access the last element.  The vector must not be empty.    "
 },
 {
-  "id": "copying_vectors_1",
+  "id": "chapter8_accessing-vector-elements-5",
   "level": "2",
-  "url": "chapter10_copying-vectors.html#copying_vectors_1",
+  "url": "chapter8_accessing-vector-elements.html#chapter8_accessing-vector-elements-5",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Use [] when the program has already established that the index is valid or when the surrounding logic guarantees it. Use at() when a bounds check is useful. Neither form makes an empty vector safe to access; the program must check empty() before using front() or back() . "
+},
+{
+  "id": "chapter8_accessing-vector-elements_exercise_index",
+  "level": "2",
+  "url": "chapter8_accessing-vector-elements.html#chapter8_accessing-vector-elements_exercise_index",
   "type": "Checkpoint",
   "number": "8.3.1",
   "title": "",
-  "body": "  Multiple Response How would you make a copy of std::vector<double> decimals called nums ?       std::vector<double> nums = decimals;    This is one way to make a copy.      std::vector<double> decimals = nums;    This makes a copy of nums called decimals.      std::vector<double> nums (decimals);    This is one way to make a copy.      std::vector<double> decimals (nums);    This makes a copy of nums called decimals.    "
+  "body": "  What is the last valid index of a vector whose size is 7?    6 Indices begin at zero, so the last index is size minus one.  7 Index 7 would be one past the last valid index.  8 Count seven positions beginning with index zero.  0 Zero identifies the first element, not the last.   "
 },
 {
-  "id": "copying_vectors_2",
-  "level": "2",
-  "url": "chapter10_copying-vectors.html#copying_vectors_2",
-  "type": "Checkpoint",
-  "number": "8.3.2",
-  "title": "",
-  "body": "  What is the name of the function that takes a vector as an argument, and creates a new vector of the same size and with the same elements?           "
-},
-{
-  "id": "chapter10_for-loops",
+  "id": "chapter8_traversing-vectors",
   "level": "1",
-  "url": "chapter10_for-loops.html",
+  "url": "chapter8_traversing-vectors.html",
   "type": "Section",
   "number": "8.4",
-  "title": "<code class=\"code-inline tex2jax_ignore\">for<\/code> loops",
-  "body": " for loops  The loops we have written so far have a number of elements in common. All of them start by initializing a variable; they have a test, or condition, that depends on that variable; and inside the loop they do something to that variable, like increment it.  This type of loop is so common that there is an alternate loop statement, called for , that expresses it more concisely. The general syntax looks like this:  for (INITIALIZER; CONDITION; INCREMENTOR) { BODY }  This statement is exactly equivalent to  INITIALIZER; while (CONDITION) { BODY INCREMENTOR }  except that it is more concise and, since it puts all the loop-related statements in one place, it is easier to read. For example:  int i; for (i = 0; i < 4; i++) { std::cout << count[i] << std::endl ; }  is equivalent to  int i = 0; while (i < 4) { std::cout << count[i] << std::endl ; i++; }   Run this active code, which uses a for loop.   #include <iostream> #include <vector> int main() { std::vector<int> count = {1,2,3,4}; int i; for (i = 0; i < 4; i++) { std::cout << count[i] << std::endl; } }     Run this active code, which uses a while loop.   #include <iostream> #include <vector> int main() { std::vector<int> count = {1,2,3,4}; int i = 0; while (i < 4) { std::cout << count[i] << std::endl; i++; } }    The INCREMENTOR does not have to do ++ to a variable. It can be any statement you like, but it should do something to modify the looping variable. If you want to count down, you could use i-- as your INCREMENTOR .   Run this active code, which uses a for loop with a negative change in the INCREMENTOR .   #include <iostream> #include <vector> int main() { std::vector<int> count = {1,2,3,4}; int i; for (i = 3; i > -1; i--) { std::cout << count[i] << std::endl; } }      How many times would the following loop execute? for (int i = 1; i < 4; i++)            Incorrect! The loop does not execute when i = 4.        Where are the incrementors in for loops and while ?      in the BODIES of both loops   Incorrect!     in the BODY of a for loop, and in the statement of a while loop   Incorrect!     in the statement of a for loop, and in the BODY of a while loop   Correct!     in the statements of both loops   Incorrect!       Construct the half_life() function that prints the first num half lives of the initial amount.      void half_life(int initial_amount, int num) {    int half_life(int initial_amount, int num) {     int new_amount = initial_amount;     for (int i = 0; i < num; i++) {    for (int i = 0; i <= num; i++) {      new_amount = new_amount \/ 2;    new_amount \/ 2;     std::cout << new_amount << std::endl ;    return new_amount;    }  }     "
+  "title": "Traversing Vectors",
+  "body": " Traversing Vectors  To traverse a vector means to visit its elements in a systematic order. A loop is usually the best tool for traversal. The choice of loop depends on whether the program needs an index or only the elements themselves.   Indexed Traversal  Use an indexed for loop when the program needs the element's position or must change elements by index.   #include <iostream> #include <vector> int main() { std::vector<int> scores{72, 88, 91}; for (std::size_t index = 0; index < scores.size(); ++index) { std::cout << \"Score \" << index << \": \" << scores[index] << '\\n'; } return 0; }   The condition uses index < scores.size() , not index <= scores.size() . The latter would attempt to use an index one past the last element.    Range-Based Traversal  Use a range-based for loop when the program needs each element but does not need its index.   #include <iostream> #include <vector> int main() { std::vector<int> scores{72, 88, 91}; for (const int score : scores) { std::cout << score << '\\n'; } return 0; }   The const tells the loop that this traversal only inspects each value. To modify the original elements, use a reference: for (int& score : scores) .    Traversal with a while Loop  A while loop can traverse a vector when the program's repetition is naturally controlled by a condition other than the loop's usual counting structure. The index must be updated manually.   #include <iostream> #include <vector> int main() { std::vector<int> values{4, 8, 12, 16}; std::size_t index = 0; while (index < values.size() && values[index] < 10) { std::cout << values[index] << '\\n'; ++index; } return 0; }   This loop stops either when it reaches the end or when it finds a value that is not less than 10. A range-based loop is usually clearer when every element should be visited.     Which traversal is most appropriate when a program needs to print each vector element but does not need an index?    A range-based for loop It visits each element directly without requiring an index variable.  An indexed loop using index <= values.size() The condition would allow an invalid one-past-the-end index.  An if statement An if statement does not repeat for every element.  A loop that never changes its index That loop could fail to terminate.    "
 },
 {
-  "id": "chapter10_for-loops-2",
+  "id": "chapter8_traversing-vectors-2",
   "level": "2",
-  "url": "chapter10_for-loops.html#chapter10_for-loops-2",
+  "url": "chapter8_traversing-vectors.html#chapter8_traversing-vectors-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The loops we have written so far have a number of elements in common. All of them start by initializing a variable; they have a test, or condition, that depends on that variable; and inside the loop they do something to that variable, like increment it. "
+  "body": "To traverse a vector means to visit its elements in a systematic order. A loop is usually the best tool for traversal. The choice of loop depends on whether the program needs an index or only the elements themselves. "
 },
 {
-  "id": "chapter10_for-loops-3",
+  "id": "chapter8_traversing-vectors_indexed",
   "level": "2",
-  "url": "chapter10_for-loops.html#chapter10_for-loops-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This type of loop is so common that there is an alternate loop statement, called for , that expresses it more concisely. The general syntax looks like this: "
-},
-{
-  "id": "chapter10_for-loops-5",
-  "level": "2",
-  "url": "chapter10_for-loops.html#chapter10_for-loops-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This statement is exactly equivalent to "
-},
-{
-  "id": "chapter10_for-loops-7",
-  "level": "2",
-  "url": "chapter10_for-loops.html#chapter10_for-loops-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "except that it is more concise and, since it puts all the loop-related statements in one place, it is easier to read. For example: "
-},
-{
-  "id": "chapter10_for-loops-9",
-  "level": "2",
-  "url": "chapter10_for-loops.html#chapter10_for-loops-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "is equivalent to "
-},
-{
-  "id": "for_loops_AC_1",
-  "level": "2",
-  "url": "chapter10_for-loops.html#for_loops_AC_1",
-  "type": "Listing",
+  "url": "chapter8_traversing-vectors.html#chapter8_traversing-vectors_indexed",
+  "type": "Subsection",
   "number": "8.4.1",
-  "title": "Run this active code, which uses a <code class=\"code-inline tex2jax_ignore\">for<\/code> loop.",
-  "body": " Run this active code, which uses a for loop.   #include <iostream> #include <vector> int main() { std::vector<int> count = {1,2,3,4}; int i; for (i = 0; i < 4; i++) { std::cout << count[i] << std::endl; } }   "
+  "title": "Indexed Traversal",
+  "body": " Indexed Traversal  Use an indexed for loop when the program needs the element's position or must change elements by index.   #include <iostream> #include <vector> int main() { std::vector<int> scores{72, 88, 91}; for (std::size_t index = 0; index < scores.size(); ++index) { std::cout << \"Score \" << index << \": \" << scores[index] << '\\n'; } return 0; }   The condition uses index < scores.size() , not index <= scores.size() . The latter would attempt to use an index one past the last element.  "
 },
 {
-  "id": "for_loops_AC_2",
+  "id": "chapter8_traversing-vectors_range-based",
   "level": "2",
-  "url": "chapter10_for-loops.html#for_loops_AC_2",
-  "type": "Listing",
+  "url": "chapter8_traversing-vectors.html#chapter8_traversing-vectors_range-based",
+  "type": "Subsection",
   "number": "8.4.2",
-  "title": "Run this active code, which uses a <code class=\"code-inline tex2jax_ignore\">while<\/code> loop.",
-  "body": " Run this active code, which uses a while loop.   #include <iostream> #include <vector> int main() { std::vector<int> count = {1,2,3,4}; int i = 0; while (i < 4) { std::cout << count[i] << std::endl; i++; } }   "
+  "title": "Range-Based Traversal",
+  "body": " Range-Based Traversal  Use a range-based for loop when the program needs each element but does not need its index.   #include <iostream> #include <vector> int main() { std::vector<int> scores{72, 88, 91}; for (const int score : scores) { std::cout << score << '\\n'; } return 0; }   The const tells the loop that this traversal only inspects each value. To modify the original elements, use a reference: for (int& score : scores) .  "
 },
 {
-  "id": "chapter10_for-loops-13",
+  "id": "chapter8_traversing-vectors_while",
   "level": "2",
-  "url": "chapter10_for-loops.html#chapter10_for-loops-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The INCREMENTOR does not have to do ++ to a variable. It can be any statement you like, but it should do something to modify the looping variable. If you want to count down, you could use i-- as your INCREMENTOR . "
-},
-{
-  "id": "for_loops_AC_3",
-  "level": "2",
-  "url": "chapter10_for-loops.html#for_loops_AC_3",
-  "type": "Listing",
+  "url": "chapter8_traversing-vectors.html#chapter8_traversing-vectors_while",
+  "type": "Subsection",
   "number": "8.4.3",
-  "title": "Run this active code, which uses a <code class=\"code-inline tex2jax_ignore\">for<\/code> loop with a negative change in the “INCREMENTOR”.",
-  "body": " Run this active code, which uses a for loop with a negative change in the INCREMENTOR .   #include <iostream> #include <vector> int main() { std::vector<int> count = {1,2,3,4}; int i; for (i = 3; i > -1; i--) { std::cout << count[i] << std::endl; } }   "
+  "title": "Traversal with a <code class=\"code-inline tex2jax_ignore\">while<\/code> Loop",
+  "body": " Traversal with a while Loop  A while loop can traverse a vector when the program's repetition is naturally controlled by a condition other than the loop's usual counting structure. The index must be updated manually.   #include <iostream> #include <vector> int main() { std::vector<int> values{4, 8, 12, 16}; std::size_t index = 0; while (index < values.size() && values[index] < 10) { std::cout << values[index] << '\\n'; ++index; } return 0; }   This loop stops either when it reaches the end or when it finds a value that is not less than 10. A range-based loop is usually clearer when every element should be visited.  "
 },
 {
-  "id": "for_loops_1",
+  "id": "chapter8_traversing-vectors_exercise_loop",
   "level": "2",
-  "url": "chapter10_for-loops.html#for_loops_1",
+  "url": "chapter8_traversing-vectors.html#chapter8_traversing-vectors_exercise_loop",
   "type": "Checkpoint",
   "number": "8.4.1",
   "title": "",
-  "body": "  How many times would the following loop execute? for (int i = 1; i < 4; i++)            Incorrect! The loop does not execute when i = 4.     "
+  "body": "  Which traversal is most appropriate when a program needs to print each vector element but does not need an index?    A range-based for loop It visits each element directly without requiring an index variable.  An indexed loop using index <= values.size() The condition would allow an invalid one-past-the-end index.  An if statement An if statement does not repeat for every element.  A loop that never changes its index That loop could fail to terminate.   "
 },
 {
-  "id": "for_loops_2",
-  "level": "2",
-  "url": "chapter10_for-loops.html#for_loops_2",
-  "type": "Checkpoint",
-  "number": "8.4.2",
-  "title": "",
-  "body": "  Where are the incrementors in for loops and while ?      in the BODIES of both loops   Incorrect!     in the BODY of a for loop, and in the statement of a while loop   Incorrect!     in the statement of a for loop, and in the BODY of a while loop   Correct!     in the statements of both loops   Incorrect!    "
-},
-{
-  "id": "question10_4_3",
-  "level": "2",
-  "url": "chapter10_for-loops.html#question10_4_3",
-  "type": "Checkpoint",
-  "number": "8.4.3",
-  "title": "",
-  "body": "  Construct the half_life() function that prints the first num half lives of the initial amount.      void half_life(int initial_amount, int num) {    int half_life(int initial_amount, int num) {     int new_amount = initial_amount;     for (int i = 0; i < num; i++) {    for (int i = 0; i <= num; i++) {      new_amount = new_amount \/ 2;    new_amount \/ 2;     std::cout << new_amount << std::endl ;    return new_amount;    }  }    "
-},
-{
-  "id": "chapter10_vector-size",
+  "id": "chapter8_vector-operations",
   "level": "1",
-  "url": "chapter10_vector-size.html",
+  "url": "chapter8_vector-operations.html",
   "type": "Section",
   "number": "8.5",
-  "title": "Vector size",
-  "body": " Vector size  There are a few functions you can invoke on an std::vector . One of them is very useful, though: size . Not surprisingly, it returns the size of the Vector(the number of elements).  It is a good idea to use this value as the upper bound of a loop, rather than a constant. That way, if the size of the vector changes, you won't have to go through the program changing all the loops; they will work correctly for any size vector.  size_t i; for (i = 0; i < count.size(); i++) { std::cout << count[i] << std::endl ; }   On some machines, comparing an int to the output from size will generate a type error. This is because the size function returns an unsigned integer type. To keep the variable type consistent, you should use size_t rather than int for the type of iterator i .   The last time the body of the loop gets executed, the value of i is count.size() - 1 , which is the index of the last element. When i is equal to count.size() , the condition fails and the body is not executed, which is a good thing, since it would cause a run-time error. One thing that we should notice here is that the size() function is called every time the loop is executed. Calling a function again and again reduces execution speed, so it would be better to store the size in some variable by calling the size function before the loop begins, and use this variable to check for the last element.   Try running this active code!   #include <iostream> #include <vector> int main() { std::vector<int> count = {1,2,3,4}; size_t i; for (i = 0; i < count.size(); i++) { std::cout << count[i] << std::endl; } }      Let nums be the std::vector { 0, 1, 2, 3, 4 }. What is the variable type of  nums.size() ?          int  Incorrect! Remember, the size function returns an unsigned integer type.        Let nums be the std::vector { 0, 1, 2, 3, 4 }. What is the value of  nums.size() ?              Let nums be the std::vector { 0, 1, 2, 3, 4 }. What is the value at  nums[nums.size()] ?      5   Incorrect! This is what gets returned by nums.size()     4   Incorrect! This is the element before nums[nums.size()]     3   Incorrect!     none of the above due to runtime error   Correct! This would be indexing out of bounds and would cause a runtime error.     "
+  "title": "Vector Operations",
+  "body": " Vector Operations  A vector supports operations for inspecting, modifying, adding, and removing elements. These operations change the vector's contents and may change its size. They do not all affect capacity in the same way.   Common vector operations       Operation  Expression  Effect    Inspect the number of elements  values.size()  Returns the current size.    Test for no elements  values.empty()  Returns true when the vector is empty.    Add at the end  values.push_back(value)  Constructs a new last element and increases size.    Remove the last element  values.pop_back()  Destroys the last element and decreases size.    Insert an element  values.insert(position, value)  Places a value at a position and shifts later elements.    Erase an element  values.erase(position)  Removes an element and shifts later elements.    Remove all elements  values.clear()  Makes the size zero; capacity may remain available.    Change the size  values.resize(count)  Adds value-initialized elements or removes elements.    Request storage  values.reserve(count)  Requests capacity for at least the specified number of elements.     The position arguments in insert() and erase() use vector iterators. For example, values.begin() + 2 identifies the position whose index is 2. We will use these expressions in simple cases; the important idea is that insertion and erasure can shift later elements.   #include <iostream> #include <vector> int main() { std::vector<int> values{10, 20, 30}; values[1] = 25; values.push_back(40); values.insert(values.begin() + 1, 15); values.erase(values.begin() + 2); for (const int value : values) { std::cout << value << ' '; } std::cout << '\\n'; return 0; }   The program first changes an existing element, adds an element at the end, inserts 15 before the element at index 1, and erases the element at index 2. After an operation changes the size, code should not assume that old indices still identify the same values.   Operations and Capacity   push_back() , insert() , and resize() may require additional storage. If the requested size fits within the current capacity, no reallocation is needed. If it does not fit, the vector may reallocate as described in the first section.   pop_back() , erase() , and clear() reduce the number of elements. They normally do not reduce capacity automatically. This behavior can make later additions efficient, because the vector may reuse its existing storage.     What happens when values.push_back(42) is called?    A new element with value 42 is added at the end. push_back() adds one element after the current last element.  The first element is replaced by 42. Use an index assignment to replace an existing element.  The vector is cleared before 42 is added. push_back() preserves the existing elements.  The vector's capacity is guaranteed to increase by exactly one. Capacity growth is implementation-dependent.    "
 },
 {
-  "id": "chapter10_vector-size-2",
+  "id": "chapter8_vector-operations-2",
   "level": "2",
-  "url": "chapter10_vector-size.html#chapter10_vector-size-2",
+  "url": "chapter8_vector-operations.html#chapter8_vector-operations-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "There are a few functions you can invoke on an std::vector . One of them is very useful, though: size . Not surprisingly, it returns the size of the Vector(the number of elements). "
+  "body": "A vector supports operations for inspecting, modifying, adding, and removing elements. These operations change the vector's contents and may change its size. They do not all affect capacity in the same way. "
 },
 {
-  "id": "chapter10_vector-size-3",
+  "id": "table_vector_operations",
   "level": "2",
-  "url": "chapter10_vector-size.html#chapter10_vector-size-3",
+  "url": "chapter8_vector-operations.html#table_vector_operations",
+  "type": "Table",
+  "number": "8.5.1",
+  "title": "Common vector operations",
+  "body": " Common vector operations       Operation  Expression  Effect    Inspect the number of elements  values.size()  Returns the current size.    Test for no elements  values.empty()  Returns true when the vector is empty.    Add at the end  values.push_back(value)  Constructs a new last element and increases size.    Remove the last element  values.pop_back()  Destroys the last element and decreases size.    Insert an element  values.insert(position, value)  Places a value at a position and shifts later elements.    Erase an element  values.erase(position)  Removes an element and shifts later elements.    Remove all elements  values.clear()  Makes the size zero; capacity may remain available.    Change the size  values.resize(count)  Adds value-initialized elements or removes elements.    Request storage  values.reserve(count)  Requests capacity for at least the specified number of elements.    "
+},
+{
+  "id": "chapter8_vector-operations-4",
+  "level": "2",
+  "url": "chapter8_vector-operations.html#chapter8_vector-operations-4",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "It is a good idea to use this value as the upper bound of a loop, rather than a constant. That way, if the size of the vector changes, you won't have to go through the program changing all the loops; they will work correctly for any size vector. "
+  "body": "The position arguments in insert() and erase() use vector iterators. For example, values.begin() + 2 identifies the position whose index is 2. We will use these expressions in simple cases; the important idea is that insertion and erasure can shift later elements. "
 },
 {
-  "id": "chapter10_vector-size-5",
+  "id": "chapter8_vector-operations-6",
   "level": "2",
-  "url": "chapter10_vector-size.html#chapter10_vector-size-5",
-  "type": "Note",
-  "number": "8.5.1",
-  "title": "",
-  "body": " On some machines, comparing an int to the output from size will generate a type error. This is because the size function returns an unsigned integer type. To keep the variable type consistent, you should use size_t rather than int for the type of iterator i .  "
-},
-{
-  "id": "chapter10_vector-size-6",
-  "level": "2",
-  "url": "chapter10_vector-size.html#chapter10_vector-size-6",
+  "url": "chapter8_vector-operations.html#chapter8_vector-operations-6",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The last time the body of the loop gets executed, the value of i is count.size() - 1 , which is the index of the last element. When i is equal to count.size() , the condition fails and the body is not executed, which is a good thing, since it would cause a run-time error. One thing that we should notice here is that the size() function is called every time the loop is executed. Calling a function again and again reduces execution speed, so it would be better to store the size in some variable by calling the size function before the loop begins, and use this variable to check for the last element. "
+  "body": "The program first changes an existing element, adds an element at the end, inserts 15 before the element at index 1, and erases the element at index 2. After an operation changes the size, code should not assume that old indices still identify the same values. "
 },
 {
-  "id": "vector_size_AC_1",
+  "id": "chapter8_vector-operations_capacity",
   "level": "2",
-  "url": "chapter10_vector-size.html#vector_size_AC_1",
-  "type": "Listing",
+  "url": "chapter8_vector-operations.html#chapter8_vector-operations_capacity",
+  "type": "Subsection",
   "number": "8.5.1",
-  "title": "Try running this active code!",
-  "body": " Try running this active code!   #include <iostream> #include <vector> int main() { std::vector<int> count = {1,2,3,4}; size_t i; for (i = 0; i < count.size(); i++) { std::cout << count[i] << std::endl; } }   "
+  "title": "Operations and Capacity",
+  "body": " Operations and Capacity   push_back() , insert() , and resize() may require additional storage. If the requested size fits within the current capacity, no reallocation is needed. If it does not fit, the vector may reallocate as described in the first section.   pop_back() , erase() , and clear() reduce the number of elements. They normally do not reduce capacity automatically. This behavior can make later additions efficient, because the vector may reuse its existing storage.  "
 },
 {
-  "id": "vector_size_1",
+  "id": "chapter8_vector-operations_exercise_push-back",
   "level": "2",
-  "url": "chapter10_vector-size.html#vector_size_1",
+  "url": "chapter8_vector-operations.html#chapter8_vector-operations_exercise_push-back",
   "type": "Checkpoint",
   "number": "8.5.1",
   "title": "",
-  "body": "  Let nums be the std::vector { 0, 1, 2, 3, 4 }. What is the variable type of  nums.size() ?          int  Incorrect! Remember, the size function returns an unsigned integer type.     "
+  "body": "  What happens when values.push_back(42) is called?    A new element with value 42 is added at the end. push_back() adds one element after the current last element.  The first element is replaced by 42. Use an index assignment to replace an existing element.  The vector is cleared before 42 is added. push_back() preserves the existing elements.  The vector's capacity is guaranteed to increase by exactly one. Capacity growth is implementation-dependent.   "
 },
 {
-  "id": "vector_size_2",
-  "level": "2",
-  "url": "chapter10_vector-size.html#vector_size_2",
-  "type": "Checkpoint",
-  "number": "8.5.2",
-  "title": "",
-  "body": "  Let nums be the std::vector { 0, 1, 2, 3, 4 }. What is the value of  nums.size() ?           "
-},
-{
-  "id": "vector_size_3",
-  "level": "2",
-  "url": "chapter10_vector-size.html#vector_size_3",
-  "type": "Checkpoint",
-  "number": "8.5.3",
-  "title": "",
-  "body": "  Let nums be the std::vector { 0, 1, 2, 3, 4 }. What is the value at  nums[nums.size()] ?      5   Incorrect! This is what gets returned by nums.size()     4   Incorrect! This is the element before nums[nums.size()]     3   Incorrect!     none of the above due to runtime error   Correct! This would be indexing out of bounds and would cause a runtime error.    "
-},
-{
-  "id": "chapter10_vector-functions",
+  "id": "chapter8_passing-vectors-to-functions",
   "level": "1",
-  "url": "chapter10_vector-functions.html",
+  "url": "chapter8_passing-vectors-to-functions.html",
   "type": "Section",
   "number": "8.6",
-  "title": "Vector functions",
-  "body": " Vector functions  The best feature of a vector is its resizeability. A vector, once declared, can be resized from anywhere within the program. Suppose we have a situation where we input numbers from the user and store them in a vector till he inputs -1 , and then display them. In such a case, we do not know the size of the vector beforehand. So we need wish add new values to the end of a vector as the user inputs them. We can use then vector function push_back for that purpose.   A program that reads in numbers, adding each to a vector, until the user inputs -1.  #include <iostream> #include <vector> int main() { std::vector<int> values; int c, i; size_t len; std::cin >> c; while (c != -1) { values.push_back(c); std::cin >> c; } len = values.size(); for (i = 0; i < len; i++) { std::cout << values[i] << std::endl; } }    push_back adds a specified element to the end of the vector, pop_back removes element from the end of a vector.    This active code uses the push_back function to add even numbers less than or equal to 10 to the std::vector values .   #include <iostream> #include <vector> void print_vec(std::vector<int> vec); int main() { std::vector<int> values; int i = 0; while (i <= 10) { values.push_back(i); i += 2; } print_vec(values); }  void print_vec(std::vector<int> vec) { size_t i = 0; std::cout << \"[\"; while (i < vec.size()-1) { std::cout << vec[i] << \",\"; i++; } std::cout << vec[vec.size()-1]; std::cout << \"]\" << std::endl; }      Let nums be the std::vector { 0, 1, 2, 3, 4 }. If we run the command nums.push_back(3) , what will be returned by nums.size() ?      5   Incorrect! This is the size of the vector before we ran the command.     6   Correct!     7   Incorrect!     8   Incorrect! We are adding the element 3 to the end of the vector, not 3 elements!       Construct the make_even function that loops through vec , adds 1 to any elements that are odd, and returns the new vector.      std::vector<int> make_even( std::vector<int> vec) {    void make_even( std::vector<int> vec) {      for (size_t i = 0; i < vec.size(); i++) {    for (int i = 0; i < vec.size(); i++) {      if (vec[i] % 2 == 1) {    if (i % 2 == 1) {      vec[i] += 1;  }    i += 1;  }     else {  vec[i] -= 1;  }    }  return vec;  }       What does the following code print?   std::vector<int> numbers(5); int size = 5; for (int i = 0; i < size; i++) { numbers[i] = i; } int end = 4; for (int i = 0; i < size; i++) { numbers[i] = numbers[end]; end--; } for (int i = 0; i < size; i++) { std::cout << numbers[i] << \" \"; } cout << std::endl ;       4 3 2 1 0   we change the numbers in the first half of the vector before we copy them to the second half     4 3 2 3 4   when i is 3 we copy from end = 1 copying the values we already changed.     0 1 2 3 4   we change values in the second loop.     "
+  "title": "Passing Vectors to Functions",
+  "body": " Passing Vectors to Functions  A vector can be passed to a function like other objects. The parameter declaration determines whether the function receives a copy, observes the caller's vector without copying it, or modifies the caller's vector.   Ways to pass a vector to a function       Parameter  Effect  Use when    std::vector<int> values  The function receives a copy.  The function needs an independent vector.    const std::vector<int>& values  No vector copy is made, and the function cannot modify the caller's vector.  The function only needs to inspect the vector. This is the usual recommendation for a large read-only vector.    std::vector<int>& values  No vector copy is made, and the function can modify the caller's vector.  The function's responsibility includes changing the caller's vector.      #include <iostream> #include <vector> int calculate_total(const std::vector<int>& values) { int total = 0; for (const int value : values) { total += value; } return total; } void increase_values(std::vector<int>& values, int amount) { for (int& value : values) { value += amount; } } int main() { std::vector<int> values{4, 8, 12}; std::cout << calculate_total(values) << '\\n'; increase_values(values, 1); std::cout << calculate_total(values) << '\\n'; return 0; }   The first function uses a constant reference because it only reads the vector. The second uses a non-constant reference because it changes the original elements. Passing a large vector by value can perform an unnecessary copy, so prefer const& when the function only needs to inspect it.   Returning a Vector  A function can return a vector when its task is to create a new collection. Returning a vector expresses that the caller receives a result rather than asking a function to modify an unrelated object.   #include <iostream> #include <vector> std::vector<int> create_even_numbers(int limit) { std::vector<int> numbers; for (int value = 2; value <= limit; value += 2) { numbers.push_back(value); } return numbers; } int main() { const std::vector<int> numbers = create_even_numbers(8); for (const int number : numbers) { std::cout << number << ' '; } std::cout << '\\n'; return 0; }      Which parameter is best when a function only needs to inspect a potentially large vector of integers?    const std::vector<int>& values This avoids copying the vector and prevents the function from modifying it.  std::vector<int> values This makes a copy, which is unnecessary for read-only inspection.  std::vector<int>& values This permits modification, which the function does not need.  const int values This parameter is not a vector.    "
 },
 {
-  "id": "chapter10_vector-functions-2",
+  "id": "chapter8_passing-vectors-to-functions-2",
   "level": "2",
-  "url": "chapter10_vector-functions.html#chapter10_vector-functions-2",
+  "url": "chapter8_passing-vectors-to-functions.html#chapter8_passing-vectors-to-functions-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The best feature of a vector is its resizeability. A vector, once declared, can be resized from anywhere within the program. Suppose we have a situation where we input numbers from the user and store them in a vector till he inputs -1 , and then display them. In such a case, we do not know the size of the vector beforehand. So we need wish add new values to the end of a vector as the user inputs them. We can use then vector function push_back for that purpose. "
+  "body": "A vector can be passed to a function like other objects. The parameter declaration determines whether the function receives a copy, observes the caller's vector without copying it, or modifies the caller's vector. "
 },
 {
-  "id": "vector-from-input",
+  "id": "table_passing_vectors_to_functions",
   "level": "2",
-  "url": "chapter10_vector-functions.html#vector-from-input",
-  "type": "Listing",
+  "url": "chapter8_passing-vectors-to-functions.html#table_passing_vectors_to_functions",
+  "type": "Table",
   "number": "8.6.1",
-  "title": "A program that reads in numbers, adding each to a vector, until the user inputs -1.",
-  "body": " A program that reads in numbers, adding each to a vector, until the user inputs -1.  #include <iostream> #include <vector> int main() { std::vector<int> values; int c, i; size_t len; std::cin >> c; while (c != -1) { values.push_back(c); std::cin >> c; } len = values.size(); for (i = 0; i < len; i++) { std::cout << values[i] << std::endl; } }  "
+  "title": "Ways to pass a vector to a function",
+  "body": " Ways to pass a vector to a function       Parameter  Effect  Use when    std::vector<int> values  The function receives a copy.  The function needs an independent vector.    const std::vector<int>& values  No vector copy is made, and the function cannot modify the caller's vector.  The function only needs to inspect the vector. This is the usual recommendation for a large read-only vector.    std::vector<int>& values  No vector copy is made, and the function can modify the caller's vector.  The function's responsibility includes changing the caller's vector.    "
 },
 {
-  "id": "chapter10_vector-functions-4",
+  "id": "chapter8_passing-vectors-to-functions-5",
   "level": "2",
-  "url": "chapter10_vector-functions.html#chapter10_vector-functions-4",
-  "type": "Note",
-  "number": "8.6.1",
+  "url": "chapter8_passing-vectors-to-functions.html#chapter8_passing-vectors-to-functions-5",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": " push_back adds a specified element to the end of the vector, pop_back removes element from the end of a vector.  "
+  "body": "The first function uses a constant reference because it only reads the vector. The second uses a non-constant reference because it changes the original elements. Passing a large vector by value can perform an unnecessary copy, so prefer const& when the function only needs to inspect it. "
 },
 {
-  "id": "vector_functions_AC_1",
+  "id": "chapter8_passing-vectors-to-functions_returning",
   "level": "2",
-  "url": "chapter10_vector-functions.html#vector_functions_AC_1",
-  "type": "Listing",
-  "number": "8.6.2",
-  "title": "This active code uses the <code class=\"code-inline tex2jax_ignore\">push_back<\/code> function to add even numbers less than or equal to 10 to the  std::vector<code class=\"code-inline tex2jax_ignore\">values<\/code>.",
-  "body": " This active code uses the push_back function to add even numbers less than or equal to 10 to the std::vector values .   #include <iostream> #include <vector> void print_vec(std::vector<int> vec); int main() { std::vector<int> values; int i = 0; while (i <= 10) { values.push_back(i); i += 2; } print_vec(values); }  void print_vec(std::vector<int> vec) { size_t i = 0; std::cout << \"[\"; while (i < vec.size()-1) { std::cout << vec[i] << \",\"; i++; } std::cout << vec[vec.size()-1]; std::cout << \"]\" << std::endl; }   "
+  "url": "chapter8_passing-vectors-to-functions.html#chapter8_passing-vectors-to-functions_returning",
+  "type": "Subsection",
+  "number": "8.6.1",
+  "title": "Returning a Vector",
+  "body": " Returning a Vector  A function can return a vector when its task is to create a new collection. Returning a vector expresses that the caller receives a result rather than asking a function to modify an unrelated object.   #include <iostream> #include <vector> std::vector<int> create_even_numbers(int limit) { std::vector<int> numbers; for (int value = 2; value <= limit; value += 2) { numbers.push_back(value); } return numbers; } int main() { const std::vector<int> numbers = create_even_numbers(8); for (const int number : numbers) { std::cout << number << ' '; } std::cout << '\\n'; return 0; }   "
 },
 {
-  "id": "vector_functions_1",
+  "id": "chapter8_passing-vectors-to-functions_exercise_parameter",
   "level": "2",
-  "url": "chapter10_vector-functions.html#vector_functions_1",
+  "url": "chapter8_passing-vectors-to-functions.html#chapter8_passing-vectors-to-functions_exercise_parameter",
   "type": "Checkpoint",
   "number": "8.6.1",
   "title": "",
-  "body": "  Let nums be the std::vector { 0, 1, 2, 3, 4 }. If we run the command nums.push_back(3) , what will be returned by nums.size() ?      5   Incorrect! This is the size of the vector before we ran the command.     6   Correct!     7   Incorrect!     8   Incorrect! We are adding the element 3 to the end of the vector, not 3 elements!    "
+  "body": "  Which parameter is best when a function only needs to inspect a potentially large vector of integers?    const std::vector<int>& values This avoids copying the vector and prevents the function from modifying it.  std::vector<int> values This makes a copy, which is unnecessary for read-only inspection.  std::vector<int>& values This permits modification, which the function does not need.  const int values This parameter is not a vector.   "
 },
 {
-  "id": "vector_functions_2",
-  "level": "2",
-  "url": "chapter10_vector-functions.html#vector_functions_2",
-  "type": "Checkpoint",
-  "number": "8.6.2",
-  "title": "",
-  "body": "  Construct the make_even function that loops through vec , adds 1 to any elements that are odd, and returns the new vector.      std::vector<int> make_even( std::vector<int> vec) {    void make_even( std::vector<int> vec) {      for (size_t i = 0; i < vec.size(); i++) {    for (int i = 0; i < vec.size(); i++) {      if (vec[i] % 2 == 1) {    if (i % 2 == 1) {      vec[i] += 1;  }    i += 1;  }     else {  vec[i] -= 1;  }    }  return vec;  }    "
-},
-{
-  "id": "vector_functions_3",
-  "level": "2",
-  "url": "chapter10_vector-functions.html#vector_functions_3",
-  "type": "Checkpoint",
-  "number": "8.6.3",
-  "title": "",
-  "body": "  What does the following code print?   std::vector<int> numbers(5); int size = 5; for (int i = 0; i < size; i++) { numbers[i] = i; } int end = 4; for (int i = 0; i < size; i++) { numbers[i] = numbers[end]; end--; } for (int i = 0; i < size; i++) { std::cout << numbers[i] << \" \"; } cout << std::endl ;       4 3 2 1 0   we change the numbers in the first half of the vector before we copy them to the second half     4 3 2 3 4   when i is 3 we copy from end = 1 copying the values we already changed.     0 1 2 3 4   we change values in the second loop.    "
-},
-{
-  "id": "chapter10_random-numbers-random",
+  "id": "chapter8_vectors-of-structures-and-objects",
   "level": "1",
-  "url": "chapter10_random-numbers-random.html",
+  "url": "chapter8_vectors-of-structures-and-objects.html",
   "type": "Section",
   "number": "8.7",
-  "title": "Random numbers",
-  "body": " Random numbers  Most computer programs do the same thing every time they are executed, so they are said to be deterministic . Usually, determinism is a good thing, since we expect the same calculation to yield the same result. For some applications, though, we would like the computer to be unpredictable. Games are an obvious example.  Making a program truly nondeterministic turns out to be not so easy, but there are ways to make it at least seem nondeterministic. One of them is to generate pseudorandom numbers and use them to determine the outcome of the program. Pseudorandom numbers are not truly random in the mathematical sense, but for our purposes, they will do.  C++ provides a function called random that generates pseudorandom numbers (pseudo- meaning \"fake\"). It is declared in the header file cstdlib , which contains a variety of standard library functions, hence the name.    random is not a perfect random number generator, but it is good enough for the simple purposes we are using it for. If you are doing serious work that requires high-quality random numbers, like cryptography, you should use a different library.   The return value from random is an integer between 0 and RAND_MAX , where RAND_MAX is a large number (about 2 billion on my computer) also defined in the header file. Each time you call random you get a different randomly-generated number. To see a sample, run this loop:   Take a look at this active code, which generates 4 random numbers.   #include <iostream> #include <cstdlib> int main() { for (int i = 0; i < 4; i++) { int x = random(); std::cout << x << std::endl; } return 0; }    On my machine I got the following output:   1804289383 846930886 1681692777 1714636915   You will probably get something similar, but different, on yours.  Of course, we don't always want to work with gigantic integers. More often we want to generate integers between 0 and some upper bound. A simple way to do that is with the modulus operator. For example:  int x = random(); int y = x % upperBound;  Since y is the remainder when x is divided by upperBound , the only possible values for y are between 0 and upperBound - 1 , including both end points.   Keep in mind, though, that y will never be equal to upperBound .    This active code generates random numbers between 1 and 7.   #include <iostream> #include <cstdlib> int main() { int upperBound = 8; std::cout << \"Let's generate some random numbers between 0 and 7!\" << std::endl; for (int i = 0; i < 10; i++) { int x = random(); int y = x % upperBound; std::cout << y << \" \"; } }    It is also frequently useful to generate random floating-point values. A common way to do that is by dividing by RAND_MAX . For example:  int x = random(); double y = double(x) \/ RAND_MAX;   Notice that we cast x to a double before dividing by RAND_MAX . This is because RAND_MAX is an integer, and if we divided two integers, the result would also be an integer, and we would lose the fractional part.   This code sets y to a random value between 0.0 and 1.0, including both end points. As an exercise, you might want to think about how to generate a random floating-point value in a given range; for example, between 100.0 and 200.0.    This active code generates random numbers between 0 and 1. Can you modify it to generate random numbers between 100.0 and 200.0? If you're stuck you can reveal the hint below!   #include <iostream> #include <cstdlib> int main() { std::cout << \"Let's generate some random numbers between 0 and 1!\" << std::endl; for (int i = 0; i < 10; i++) { int x = random(); double y = double(x) \/ RAND_MAX; std::cout << y << \" \"; } }    The formula to generate random numbers between min and max is min + (max - min) * double(x) \/ RAND_MAX.      Pseudorandom numbers are said to be , because different numbers are generated every time the program is executed.         deterministric  Incorrect! Deterministic programs do the same thing every time they are executed.        What header file do we need to declare in order to use the random function?      cstdlib   Correct!     random   Incorrect!     cmath   Incorrect!     iostream   Incorrect!       If we wanted to generate a random number between 0 and 12, and we have previously declared int int x = random(); , what should be our next line of code?       int y = x \/ 12    This returns some random number between 0 and x \/ 12, which is out of range.      int y = x % 12    This returns a random number between 0 and 11.      int y = x \/ 13    This returns some random number between 0 and x \/ 13, which is out of range.      int y = x % 13    There are 13 numbers from 0 to 12 (the remainders of a division by 13).     "
+  "title": "Vectors of Structures and Objects",
+  "body": " Vectors of Structures and Objects  A vector can store objects of a structure or class type. This allows a program to represent a collection in which each element combines related data and behavior.   #include <iostream> #include <string> #include <vector> struct Student { std::string name; int score; }; int main() { std::vector<Student> students{ {\"Amina\", 92}, {\"Luis\", 85}, {\"Mei\", 97} }; for (const Student& student : students) { std::cout << student.name << \": \" << student.score << '\\n'; } return 0; }   The vector's element type is Student . During traversal, student.name and student.score access members of the current object. The vector manages the collection, while each Student object manages its own data members.   Modifying Objects in a Vector  Use a non-constant reference when a function or loop must modify the objects stored in the original vector.   #include <iostream> #include <string> #include <vector> struct Product { std::string name; double price; }; void apply_discount(std::vector<Product>& products, double rate) { for (Product& product : products) { product.price *= (1.0 - rate); } } int main() { std::vector<Product> products{ {\"Notebook\", 6.00}, {\"Pen\", 2.00} }; apply_discount(products, 0.10); for (const Product& product : products) { std::cout << product.name << \": \" << product.price << '\\n'; } return 0; }   The function receives the vector by reference and each element by reference. Therefore, changing product.price changes the objects stored in the caller's vector.    Vectors of Class Objects  A vector can also contain class objects. The class defines the operations available for each element.   #include <iostream> #include <vector> class Counter { private: int count = 0; public: Counter(int starting_count) : count{starting_count} { } void increase() { ++count; } int get_count() const { return count; } }; int main() { std::vector<Counter> counters{ Counter{1}, Counter{4} }; counters[0].increase(); for (const Counter& counter : counters) { std::cout << counter.get_count() << '\\n'; } return 0; }      In std::vector<Student> students , what is the type of each element?    Student The type between the angle brackets is the vector's element type.  std::vector std::vector is the container type, not the element type.  int The declaration does not specify a vector of integers.  students students is the object name.    "
 },
 {
-  "id": "chapter10_random-numbers-random-2",
+  "id": "chapter8_vectors-of-structures-and-objects-2",
   "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-2",
+  "url": "chapter8_vectors-of-structures-and-objects.html#chapter8_vectors-of-structures-and-objects-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Most computer programs do the same thing every time they are executed, so they are said to be deterministic . Usually, determinism is a good thing, since we expect the same calculation to yield the same result. For some applications, though, we would like the computer to be unpredictable. Games are an obvious example. "
+  "body": "A vector can store objects of a structure or class type. This allows a program to represent a collection in which each element combines related data and behavior. "
 },
 {
-  "id": "chapter10_random-numbers-random-3",
+  "id": "chapter8_vectors-of-structures-and-objects-4",
   "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-3",
+  "url": "chapter8_vectors-of-structures-and-objects.html#chapter8_vectors-of-structures-and-objects-4",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Making a program truly nondeterministic turns out to be not so easy, but there are ways to make it at least seem nondeterministic. One of them is to generate pseudorandom numbers and use them to determine the outcome of the program. Pseudorandom numbers are not truly random in the mathematical sense, but for our purposes, they will do. "
+  "body": "The vector's element type is Student . During traversal, student.name and student.score access members of the current object. The vector manages the collection, while each Student object manages its own data members. "
 },
 {
-  "id": "chapter10_random-numbers-random-4",
+  "id": "chapter8_vectors-of-structures-and-objects_modifying",
   "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "C++ provides a function called random that generates pseudorandom numbers (pseudo- meaning \"fake\"). It is declared in the header file cstdlib , which contains a variety of standard library functions, hence the name. "
-},
-{
-  "id": "chapter10_random-numbers-random-5",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-5",
-  "type": "Warning",
+  "url": "chapter8_vectors-of-structures-and-objects.html#chapter8_vectors-of-structures-and-objects_modifying",
+  "type": "Subsection",
   "number": "8.7.1",
-  "title": "",
-  "body": "  random is not a perfect random number generator, but it is good enough for the simple purposes we are using it for. If you are doing serious work that requires high-quality random numbers, like cryptography, you should use a different library.  "
+  "title": "Modifying Objects in a Vector",
+  "body": " Modifying Objects in a Vector  Use a non-constant reference when a function or loop must modify the objects stored in the original vector.   #include <iostream> #include <string> #include <vector> struct Product { std::string name; double price; }; void apply_discount(std::vector<Product>& products, double rate) { for (Product& product : products) { product.price *= (1.0 - rate); } } int main() { std::vector<Product> products{ {\"Notebook\", 6.00}, {\"Pen\", 2.00} }; apply_discount(products, 0.10); for (const Product& product : products) { std::cout << product.name << \": \" << product.price << '\\n'; } return 0; }   The function receives the vector by reference and each element by reference. Therefore, changing product.price changes the objects stored in the caller's vector.  "
 },
 {
-  "id": "chapter10_random-numbers-random-6",
+  "id": "chapter8_vectors-of-structures-and-objects_member-functions",
   "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The return value from random is an integer between 0 and RAND_MAX , where RAND_MAX is a large number (about 2 billion on my computer) also defined in the header file. Each time you call random you get a different randomly-generated number. To see a sample, run this loop: "
-},
-{
-  "id": "random_numbers_AC_1",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#random_numbers_AC_1",
-  "type": "Listing",
-  "number": "8.7.1",
-  "title": "Take a look at this active code, which generates 4 random numbers.",
-  "body": " Take a look at this active code, which generates 4 random numbers.   #include <iostream> #include <cstdlib> int main() { for (int i = 0; i < 4; i++) { int x = random(); std::cout << x << std::endl; } return 0; }   "
-},
-{
-  "id": "chapter10_random-numbers-random-8",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "On my machine I got the following output: "
-},
-{
-  "id": "chapter10_random-numbers-random-10",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "You will probably get something similar, but different, on yours. "
-},
-{
-  "id": "chapter10_random-numbers-random-11",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Of course, we don't always want to work with gigantic integers. More often we want to generate integers between 0 and some upper bound. A simple way to do that is with the modulus operator. For example: "
-},
-{
-  "id": "chapter10_random-numbers-random-13",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Since y is the remainder when x is divided by upperBound , the only possible values for y are between 0 and upperBound - 1 , including both end points. "
-},
-{
-  "id": "chapter10_random-numbers-random-14",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-14",
-  "type": "Note",
+  "url": "chapter8_vectors-of-structures-and-objects.html#chapter8_vectors-of-structures-and-objects_member-functions",
+  "type": "Subsection",
   "number": "8.7.2",
-  "title": "",
-  "body": " Keep in mind, though, that y will never be equal to upperBound .  "
+  "title": "Vectors of Class Objects",
+  "body": " Vectors of Class Objects  A vector can also contain class objects. The class defines the operations available for each element.   #include <iostream> #include <vector> class Counter { private: int count = 0; public: Counter(int starting_count) : count{starting_count} { } void increase() { ++count; } int get_count() const { return count; } }; int main() { std::vector<Counter> counters{ Counter{1}, Counter{4} }; counters[0].increase(); for (const Counter& counter : counters) { std::cout << counter.get_count() << '\\n'; } return 0; }   "
 },
 {
-  "id": "random_numbers_AC_2",
+  "id": "chapter8_vectors-of-structures-and-objects_exercise_element-type",
   "level": "2",
-  "url": "chapter10_random-numbers-random.html#random_numbers_AC_2",
-  "type": "Listing",
-  "number": "8.7.2",
-  "title": "This active code generates random numbers between 1 and 7.",
-  "body": " This active code generates random numbers between 1 and 7.   #include <iostream> #include <cstdlib> int main() { int upperBound = 8; std::cout << \"Let's generate some random numbers between 0 and 7!\" << std::endl; for (int i = 0; i < 10; i++) { int x = random(); int y = x % upperBound; std::cout << y << \" \"; } }   "
-},
-{
-  "id": "chapter10_random-numbers-random-16",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-16",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "It is also frequently useful to generate random floating-point values. A common way to do that is by dividing by RAND_MAX . For example: "
-},
-{
-  "id": "chapter10_random-numbers-random-18",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-18",
-  "type": "Note",
-  "number": "8.7.3",
-  "title": "",
-  "body": " Notice that we cast x to a double before dividing by RAND_MAX . This is because RAND_MAX is an integer, and if we divided two integers, the result would also be an integer, and we would lose the fractional part.  "
-},
-{
-  "id": "chapter10_random-numbers-random-19",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#chapter10_random-numbers-random-19",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This code sets y to a random value between 0.0 and 1.0, including both end points. As an exercise, you might want to think about how to generate a random floating-point value in a given range; for example, between 100.0 and 200.0. "
-},
-{
-  "id": "random_numbers_AC_3",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#random_numbers_AC_3",
-  "type": "Activity",
-  "number": "8.7.4",
-  "title": "",
-  "body": "  This active code generates random numbers between 0 and 1. Can you modify it to generate random numbers between 100.0 and 200.0? If you're stuck you can reveal the hint below!   #include <iostream> #include <cstdlib> int main() { std::cout << \"Let's generate some random numbers between 0 and 1!\" << std::endl; for (int i = 0; i < 10; i++) { int x = random(); double y = double(x) \/ RAND_MAX; std::cout << y << \" \"; } }    The formula to generate random numbers between min and max is min + (max - min) * double(x) \/ RAND_MAX.   "
-},
-{
-  "id": "random_numbers_1",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#random_numbers_1",
+  "url": "chapter8_vectors-of-structures-and-objects.html#chapter8_vectors-of-structures-and-objects_exercise_element-type",
   "type": "Checkpoint",
   "number": "8.7.1",
   "title": "",
-  "body": "  Pseudorandom numbers are said to be , because different numbers are generated every time the program is executed.         deterministric  Incorrect! Deterministic programs do the same thing every time they are executed.     "
+  "body": "  In std::vector<Student> students , what is the type of each element?    Student The type between the angle brackets is the vector's element type.  std::vector std::vector is the container type, not the element type.  int The declaration does not specify a vector of integers.  students students is the object name.   "
 },
 {
-  "id": "random_numbers_2",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#random_numbers_2",
-  "type": "Checkpoint",
-  "number": "8.7.2",
-  "title": "",
-  "body": "  What header file do we need to declare in order to use the random function?      cstdlib   Correct!     random   Incorrect!     cmath   Incorrect!     iostream   Incorrect!    "
-},
-{
-  "id": "random_numbers_3",
-  "level": "2",
-  "url": "chapter10_random-numbers-random.html#random_numbers_3",
-  "type": "Checkpoint",
-  "number": "8.7.3",
-  "title": "",
-  "body": "  If we wanted to generate a random number between 0 and 12, and we have previously declared int int x = random(); , what should be our next line of code?       int y = x \/ 12    This returns some random number between 0 and x \/ 12, which is out of range.      int y = x % 12    This returns a random number between 0 and 11.      int y = x \/ 13    This returns some random number between 0 and x \/ 13, which is out of range.      int y = x % 13    There are 13 numbers from 0 to 12 (the remainders of a division by 13).    "
-},
-{
-  "id": "chapter10_statistics",
+  "id": "chapter8_objects-containing-vectors",
   "level": "1",
-  "url": "chapter10_statistics.html",
+  "url": "chapter8_objects-containing-vectors.html",
   "type": "Section",
   "number": "8.8",
-  "title": "Statistics",
-  "body": " Statistics  The numbers generated by random are supposed to be distributed uniformly. That means that each value in the range should be equally likely. If we count the number of times each value appears, it should be roughly the same for all values, provided that we generate a large number of values.  In the next few sections, we will write programs that generate a sequence of random numbers and check whether this property holds true.    Random numbers are (hopefully) distributed .           "
+  "title": "Objects Containing Vectors",
+  "body": " Objects Containing Vectors  A class can contain a vector as a data member. This design is called composition : one object is built from other objects or containers. The class can control how outside code adds, removes, and inspects the elements.   #include <iostream> #include <string> #include <vector> struct Card { std::string rank; std::string suit; }; class Deck { private: std::vector<Card> cards; public: void add_card(const Card& card) { cards.push_back(card); } int get_card_count() const { return static_cast<int>(cards.size()); } const Card& get_card(int index) const { return cards.at(index); } }; int main() { Deck deck; deck.add_card({\"Ace\", \"Spades\"}); deck.add_card({\"King\", \"Hearts\"}); std::cout << deck.get_card_count() << '\\n'; std::cout << deck.get_card(0).rank << '\\n'; return 0; }   The vector is private, so code in main() cannot manipulate it directly. The public member functions define the class interface. This allows the class to add validation or other rules later without changing how client code uses a Deck object.   Protecting the Collection  A class containing a vector can protect invariants about the collection. For example, a class could reject an invalid card, prevent duplicate identifiers, or limit the number of elements. Keeping the vector private gives the class a place to enforce those rules.  The class does not remove the vector's ordinary behavior. Instead, it provides carefully chosen operations that express the rules of the larger object. A Deck can expose add_card() and get_card() without exposing every detail of its internal storage.    Copying an Object That Contains a Vector  The vector data member participates in the normal copy behavior of the containing object. Copying a Deck creates a separate deck with a separate copy of the vector's elements, unless the class explicitly defines a different design.    Why is cards declared private in the Deck example?    To make the class control how its collection is accessed and modified. Private data supports encapsulation and protects class rules.  Because vectors cannot be public data members. A vector can be public, although private data is often better design.  To prevent the vector from storing objects. A vector can store objects regardless of its access level.  Because a private vector cannot change size. Private data can still be modified by the class's member functions.     "
 },
 {
-  "id": "chapter10_statistics-2",
+  "id": "chapter8_objects-containing-vectors-2",
   "level": "2",
-  "url": "chapter10_statistics.html#chapter10_statistics-2",
+  "url": "chapter8_objects-containing-vectors.html#chapter8_objects-containing-vectors-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The numbers generated by random are supposed to be distributed uniformly. That means that each value in the range should be equally likely. If we count the number of times each value appears, it should be roughly the same for all values, provided that we generate a large number of values. "
+  "body": "A class can contain a vector as a data member. This design is called composition : one object is built from other objects or containers. The class can control how outside code adds, removes, and inspects the elements. "
 },
 {
-  "id": "chapter10_statistics-3",
+  "id": "chapter8_objects-containing-vectors-4",
   "level": "2",
-  "url": "chapter10_statistics.html#chapter10_statistics-3",
+  "url": "chapter8_objects-containing-vectors.html#chapter8_objects-containing-vectors-4",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In the next few sections, we will write programs that generate a sequence of random numbers and check whether this property holds true. "
+  "body": "The vector is private, so code in main() cannot manipulate it directly. The public member functions define the class interface. This allows the class to add validation or other rules later without changing how client code uses a Deck object. "
 },
 {
-  "id": "statistics_1",
+  "id": "chapter8_objects-containing-vectors_invariants",
   "level": "2",
-  "url": "chapter10_statistics.html#statistics_1",
-  "type": "Checkpoint",
+  "url": "chapter8_objects-containing-vectors.html#chapter8_objects-containing-vectors_invariants",
+  "type": "Subsection",
   "number": "8.8.1",
-  "title": "",
-  "body": "  Random numbers are (hopefully) distributed .          "
+  "title": "Protecting the Collection",
+  "body": " Protecting the Collection  A class containing a vector can protect invariants about the collection. For example, a class could reject an invalid card, prevent duplicate identifiers, or limit the number of elements. Keeping the vector private gives the class a place to enforce those rules.  The class does not remove the vector's ordinary behavior. Instead, it provides carefully chosen operations that express the rules of the larger object. A Deck can expose add_card() and get_card() without exposing every detail of its internal storage.  "
 },
 {
-  "id": "chapter10_vector-of-random-numbers",
+  "id": "chapter8_objects-containing-vectors_vector-copying",
+  "level": "2",
+  "url": "chapter8_objects-containing-vectors.html#chapter8_objects-containing-vectors_vector-copying",
+  "type": "Subsection",
+  "number": "8.8.2",
+  "title": "Copying an Object That Contains a Vector",
+  "body": " Copying an Object That Contains a Vector  The vector data member participates in the normal copy behavior of the containing object. Copying a Deck creates a separate deck with a separate copy of the vector's elements, unless the class explicitly defines a different design.    Why is cards declared private in the Deck example?    To make the class control how its collection is accessed and modified. Private data supports encapsulation and protects class rules.  Because vectors cannot be public data members. A vector can be public, although private data is often better design.  To prevent the vector from storing objects. A vector can store objects regardless of its access level.  Because a private vector cannot change size. Private data can still be modified by the class's member functions.    "
+},
+{
+  "id": "chapter8_searching-and-processing-vectors",
   "level": "1",
-  "url": "chapter10_vector-of-random-numbers.html",
+  "url": "chapter8_searching-and-processing-vectors.html",
   "type": "Section",
   "number": "8.9",
-  "title": "Vector of random numbers",
-  "body": " Vector of random numbers  The first step is to generate a large number of random values and store them in a vector. By large number, of course, I mean 20. It's always a good idea to start with a manageable number, to help with debugging, and then increase it later.  The following function takes a single argument, the size of the vector. It allocates a new vector of int s, and fills it with random values between 0 and upperBound-1 .  std::vector<int> randomVector(int n, int upperBound) { std::vector<int> vec (n); for (size_t i = 0; i < vec.size(); i++) { vec[i] = random() % upperBound; } return vec; }  The return type is std::vector<int> , which means that this function returns a vector of integers. To test this function, it is convenient to have a function that outputs the contents of a vector.  void printVector(const std::vector<int>& vec) { for (size_t i = 0; i < vec.size(); i++) { std::cout << vec[i] << \" \"; } }  Notice that it is legal to pass std::vector s by reference. In fact it is quite common, since it makes it unnecessary to copy the vector. Since printVector does not modify the vector, we declare the parameter const .  The following code generates a vector and outputs it:  int numValues = 20; int upperBound = 10; std::vector<int> vector = randomVector(numValues, upperBound); printVector(vector);  On my machine the output is   3 6 7 5 3 5 6 2 9 1 2 7 0 9 3 6 0 6 2 6   which is pretty random-looking. Your results might be different.   Try running this active code.   #include <iostream> #include <vector> std::vector<int> randomVector(int n, int upperBound); void printVector(const std::vector<int> & vec); int main() { int numValues = 20; int upperBound = 10; std::vector<int> std::vector = randomVector(numValues, upperBound); printVector(std::vector); }  std::vector<int> randomVector(int n, int upperBound) { std::vector<int> vec (n); for (size_t i = 0; i < vec.size(); i++) { vec[i] = random() % upperBound; } return vec; } void printVector(const std::vector<int>& vec) { for (size_t i = 0; i < vec.size(); i++) { std::cout << vec[i] << \" \"; } }    If these numbers are really random, we expect each digit to appear the same number of times—twice each. In fact, the number 6 appears five times, and the numbers 4 and 8 never appear at all.  Do these results mean the values are not really uniform? It's hard to tell. With so few values, the chances are slim that we would get exactly what we expect. But as the number of values increases, the outcome should be more predictable.  To test this theory, we'll write some programs that count the number of times each value appears, and then see what happens when we increase numValues .    How should we declare the parameter, std::vector , if we don't intend to make any changes to it?          .*  Incorrect, Try again! Hint: what word do we put before vector &lt;TYPE &gt;        As we store more and more random numbers in a vector, we expect its contents to be __________.      more uniform   Correct!     less uniform   Incorrect! As we store more random numbers in a vector, we see that the frequencies of each number are approximately equal.     more normal   Incorrect! The distribution of random numbers is not related to the normal distribution.     less normal   Incorrect! The distribution of random numbers is not related to the normal distribution.       Would compiling the following code lead to a compiler error?   void dostuff(const std::vector<int> & vec) { for (size_t i = 0; i < vec.size(); i++) { vec[i] = vec[i] ; } }       yes we would get a compile error   Correct! we can't make changes to a vector we take in by constant reference     no we would not because values remain same.   Even if we keep the values same we are editing a constant which is not allowed.     "
+  "title": "Searching and Processing Vectors",
+  "body": " Searching and Processing Vectors  A vector becomes useful when a program applies an algorithm to its elements. A common first algorithm is a linear search: examine elements from the beginning until the target is found or the vector ends.   #include <iostream> #include <vector> int find_first_value(const std::vector<int>& values, int target) { for (std::size_t index = 0; index < values.size(); ++index) { if (values[index] == target) { return static_cast<int>(index); } } return -1; } int main() { const std::vector<int> values{8, 3, 12, 5}; const int index = find_first_value(values, 12); std::cout << index << '\\n'; return 0; }   This function returns the first matching index. It returns -1 when the target is not found. The caller must treat -1 as a special result rather than using it as a vector index.   Counting and Summarizing  Processing a vector often means maintaining a result while traversing the elements. The result might count matches, add values, or track a minimum or maximum.   #include <iostream> #include <vector> int count_values_at_least(const std::vector<int>& values, int minimum) { int count = 0; for (const int value : values) { if (value >= minimum) { ++count; } } return count; } double calculate_average(const std::vector<int>& values) { if (values.empty()) { return 0.0; } int total = 0; for (const int value : values) { total += value; } return static_cast<double>(total) \/ values.size(); } int main() { const std::vector<int> scores{72, 88, 91, 64}; std::cout << count_values_at_least(scores, 80) << '\\n'; std::cout << calculate_average(scores) << '\\n'; return 0; }   The empty-vector check is important because an average requires a nonzero number of values. Similar counting logic can be used for histograms and simulations that store generated results in vectors. The random-number concepts themselves were introduced in Chapter 6.    Separate the Algorithm from the Collection  The functions in this section receive a vector and perform one clear task. Keeping traversal and processing inside named functions makes the algorithm easier to test and allows the same function to process vectors created in different parts of a program.    Why does find_first_value() return -1 when it does not find the target?    It provides a special result that is not a valid nonnegative vector index. Valid indices begin at zero, so -1 can signal failure.  Because -1 identifies the last element. The last valid index is size minus one.  Because vector elements are always negative when absent. The vector does not contain a hidden negative element.  Because returning zero would always be illegal. Zero is a valid index when the vector is nonempty.     "
 },
 {
-  "id": "chapter10_vector-of-random-numbers-2",
+  "id": "chapter8_searching-and-processing-vectors-2",
   "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#chapter10_vector-of-random-numbers-2",
+  "url": "chapter8_searching-and-processing-vectors.html#chapter8_searching-and-processing-vectors-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The first step is to generate a large number of random values and store them in a vector. By large number, of course, I mean 20. It's always a good idea to start with a manageable number, to help with debugging, and then increase it later. "
+  "body": "A vector becomes useful when a program applies an algorithm to its elements. A common first algorithm is a linear search: examine elements from the beginning until the target is found or the vector ends. "
 },
 {
-  "id": "chapter10_vector-of-random-numbers-3",
+  "id": "chapter8_searching-and-processing-vectors-4",
   "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#chapter10_vector-of-random-numbers-3",
+  "url": "chapter8_searching-and-processing-vectors.html#chapter8_searching-and-processing-vectors-4",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The following function takes a single argument, the size of the vector. It allocates a new vector of int s, and fills it with random values between 0 and upperBound-1 . "
+  "body": "This function returns the first matching index. It returns -1 when the target is not found. The caller must treat -1 as a special result rather than using it as a vector index. "
 },
 {
-  "id": "chapter10_vector-of-random-numbers-5",
+  "id": "chapter8_searching-and-processing-vectors_counting",
   "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#chapter10_vector-of-random-numbers-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The return type is std::vector<int> , which means that this function returns a vector of integers. To test this function, it is convenient to have a function that outputs the contents of a vector. "
-},
-{
-  "id": "chapter10_vector-of-random-numbers-7",
-  "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#chapter10_vector-of-random-numbers-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Notice that it is legal to pass std::vector s by reference. In fact it is quite common, since it makes it unnecessary to copy the vector. Since printVector does not modify the vector, we declare the parameter const . "
-},
-{
-  "id": "chapter10_vector-of-random-numbers-8",
-  "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#chapter10_vector-of-random-numbers-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The following code generates a vector and outputs it: "
-},
-{
-  "id": "chapter10_vector-of-random-numbers-10",
-  "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#chapter10_vector-of-random-numbers-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "On my machine the output is "
-},
-{
-  "id": "chapter10_vector-of-random-numbers-12",
-  "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#chapter10_vector-of-random-numbers-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "which is pretty random-looking. Your results might be different. "
-},
-{
-  "id": "vector_of_rand_nums_AC_1",
-  "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#vector_of_rand_nums_AC_1",
-  "type": "Listing",
+  "url": "chapter8_searching-and-processing-vectors.html#chapter8_searching-and-processing-vectors_counting",
+  "type": "Subsection",
   "number": "8.9.1",
-  "title": "Try running this active code.",
-  "body": " Try running this active code.   #include <iostream> #include <vector> std::vector<int> randomVector(int n, int upperBound); void printVector(const std::vector<int> & vec); int main() { int numValues = 20; int upperBound = 10; std::vector<int> std::vector = randomVector(numValues, upperBound); printVector(std::vector); }  std::vector<int> randomVector(int n, int upperBound) { std::vector<int> vec (n); for (size_t i = 0; i < vec.size(); i++) { vec[i] = random() % upperBound; } return vec; } void printVector(const std::vector<int>& vec) { for (size_t i = 0; i < vec.size(); i++) { std::cout << vec[i] << \" \"; } }   "
+  "title": "Counting and Summarizing",
+  "body": " Counting and Summarizing  Processing a vector often means maintaining a result while traversing the elements. The result might count matches, add values, or track a minimum or maximum.   #include <iostream> #include <vector> int count_values_at_least(const std::vector<int>& values, int minimum) { int count = 0; for (const int value : values) { if (value >= minimum) { ++count; } } return count; } double calculate_average(const std::vector<int>& values) { if (values.empty()) { return 0.0; } int total = 0; for (const int value : values) { total += value; } return static_cast<double>(total) \/ values.size(); } int main() { const std::vector<int> scores{72, 88, 91, 64}; std::cout << count_values_at_least(scores, 80) << '\\n'; std::cout << calculate_average(scores) << '\\n'; return 0; }   The empty-vector check is important because an average requires a nonzero number of values. Similar counting logic can be used for histograms and simulations that store generated results in vectors. The random-number concepts themselves were introduced in Chapter 6.  "
 },
 {
-  "id": "chapter10_vector-of-random-numbers-14",
+  "id": "chapter8_searching-and-processing-vectors_design",
   "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#chapter10_vector-of-random-numbers-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If these numbers are really random, we expect each digit to appear the same number of times—twice each. In fact, the number 6 appears five times, and the numbers 4 and 8 never appear at all. "
-},
-{
-  "id": "chapter10_vector-of-random-numbers-15",
-  "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#chapter10_vector-of-random-numbers-15",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Do these results mean the values are not really uniform? It's hard to tell. With so few values, the chances are slim that we would get exactly what we expect. But as the number of values increases, the outcome should be more predictable. "
-},
-{
-  "id": "chapter10_vector-of-random-numbers-16",
-  "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#chapter10_vector-of-random-numbers-16",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To test this theory, we'll write some programs that count the number of times each value appears, and then see what happens when we increase numValues . "
-},
-{
-  "id": "vector_of_rand_nums_1",
-  "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#vector_of_rand_nums_1",
-  "type": "Checkpoint",
-  "number": "8.9.1",
-  "title": "",
-  "body": "  How should we declare the parameter, std::vector , if we don't intend to make any changes to it?          .*  Incorrect, Try again! Hint: what word do we put before vector &lt;TYPE &gt;     "
-},
-{
-  "id": "vector_of_rand_nums_2",
-  "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#vector_of_rand_nums_2",
-  "type": "Checkpoint",
+  "url": "chapter8_searching-and-processing-vectors.html#chapter8_searching-and-processing-vectors_design",
+  "type": "Subsection",
   "number": "8.9.2",
-  "title": "",
-  "body": "  As we store more and more random numbers in a vector, we expect its contents to be __________.      more uniform   Correct!     less uniform   Incorrect! As we store more random numbers in a vector, we see that the frequencies of each number are approximately equal.     more normal   Incorrect! The distribution of random numbers is not related to the normal distribution.     less normal   Incorrect! The distribution of random numbers is not related to the normal distribution.    "
+  "title": "Separate the Algorithm from the Collection",
+  "body": " Separate the Algorithm from the Collection  The functions in this section receive a vector and perform one clear task. Keeping traversal and processing inside named functions makes the algorithm easier to test and allows the same function to process vectors created in different parts of a program.    Why does find_first_value() return -1 when it does not find the target?    It provides a special result that is not a valid nonnegative vector index. Valid indices begin at zero, so -1 can signal failure.  Because -1 identifies the last element. The last valid index is size minus one.  Because vector elements are always negative when absent. The vector does not contain a hidden negative element.  Because returning zero would always be illegal. Zero is a valid index when the vector is nonempty.    "
 },
 {
-  "id": "vector_of_rand_nums_3",
-  "level": "2",
-  "url": "chapter10_vector-of-random-numbers.html#vector_of_rand_nums_3",
-  "type": "Checkpoint",
-  "number": "8.9.3",
-  "title": "",
-  "body": "  Would compiling the following code lead to a compiler error?   void dostuff(const std::vector<int> & vec) { for (size_t i = 0; i < vec.size(); i++) { vec[i] = vec[i] ; } }       yes we would get a compile error   Correct! we can't make changes to a vector we take in by constant reference     no we would not because values remain same.   Even if we keep the values same we are editing a constant which is not allowed.    "
-},
-{
-  "id": "chapter10_counting",
+  "id": "chapter8_glossary",
   "level": "1",
-  "url": "chapter10_counting.html",
-  "type": "Section",
+  "url": "chapter8_glossary.html",
+  "type": "Glossary",
   "number": "8.10",
-  "title": "Counting",
-  "body": " Counting  A good approach to problems like this is to think of simple functions that are easy to write, and that might turn out to be useful. Then you can combine them into a solution. This approach is sometimes called bottom-up design . Of course, it is not easy to know ahead of time which functions are likely to be useful, but as you gain experience you will have a better idea.  Also, it is not always obvious what sort of things are easy to write, but a good approach is to look for subproblems that fit a pattern you have seen before.  Back in we looked at a loop that traversed a string and counted the number of times a given letter appeared. You can think of this program as an example of a pattern called traverse and count. The elements of this pattern are:     A set or container that can be traversed, like a string or a vector.    A test that you can apply to each element in the container.    A counter that keeps track of how many elements pass the test.     In this case, I have a function in mind called howMany that counts the number of elements in a vector that equal a given value. The parameters are the vector and the integer value we are looking for. The return value is the number of times the value appears.  int howMany(const std::vector<int>& vec, int value) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { if (vec[i] == value) count++; } return count; }   Take a look at this active code which uses the howMany function. Run the code to see how many times the target appears in the vector! Feel free to modify the code and experiment around.   #include <iostream> #include <vector> std::vector<int> randomVector(int n, int upperBound); void printVector(const std::vector<int>& vec); int howMany(const std::vector<int>& vec, int value); int main() { int numValues = 20; int upperBound = 10; int target = 6; std::vector<int> std::vector = randomVector(numValues, upperBound); printVector(std::vector); std::cout << std::endl; std::cout << \"The number \" << target << \" appears \" << howMany(std::vector,target) << \" times in our std::vector!\"; }  int howMany(const std::vector<int>& vec, int value) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { if (vec[i] == value) count++; } return count; } std::vector<int> randomVector(int n, int upperBound) { std::vector<int> vec (n); for (size_t i = 0; i < vec.size(); i++) { vec[i] = random() % upperBound; } return vec; } void printVector(const std::vector<int>& vec) { for (size_t i = 0; i < vec.size(); i++) { std::cout << vec[i] << \" \"; } }      Which of the following is the best definition of bottom-up design?      a method of programming where you write simple \"helper\" functions that are later incorporated into larger functions   Correct! Bottom-up design starts with a lot of small functions and assembles them into a few larger ones that accomplish a task.     a method of programming in which you tackle the largest functions first, and save the simple functions for later   Incorrect! This is describing top-down design.     a method of programming where you break the task down into smaller and smaller components until it cannot be simplified further   Incorrect! This is describing top-down design.     a method of programming where you use the minimum number of functions to accomplish the task   Incorrect! Bottom-up design uses many simple functions rather than a few complex ones, so it is not minimizing the number of functions being used.       Construct a block of code that counts how many numbers are between lowerbound and upperbound inclusive.     int just_right(const std::vector<int>& vec, int lowerbound, int upperbound) {    int count = 0;     for (size_t i = 0; i < vec.size(); i++) {    for (int i = 0; i < upperbound; i++)      if (vec[i] >= lowerbound && vec[i] <= upperbound) {  count++;    if (vec[i] > lowerbound && vec[i] < upperbound) {  count++;     }  }  return count;  }     "
+  "title": "Glossary",
+  "body": " Glossary   vector  A container that stores a sequence of elements of the same type and can change size during program execution.    element  One value or object stored in a container.    size  The number of elements currently stored in a vector.    capacity  The number of elements that can fit in a vector's current storage before more storage is needed.    contiguous storage  Storage in which elements occupy consecutive positions.    reallocation  The process of obtaining a larger storage block and moving or copying vector elements into it.    initializer list  A brace-enclosed list of values used to initialize an object, such as {1, 2, 3} .    traverse  To visit the elements of a collection in a systematic order.    iterator  An object that identifies a position in a container and can be used by operations such as insert() and erase() .    invalidation  The condition in which a pointer, reference, or iterator no longer safely identifies an element after a container operation.    composition  A design in which an object is built from other objects or data members, such as a class containing a vector.    linear search  A search that examines elements in order from the beginning until a target is found or the collection ends.    constant reference  A reference parameter that avoids copying an object while preventing the function from modifying that object through the parameter.    invariant  A rule that should remain true for a valid object, such as a rule about the elements stored in a class's private vector.   "
 },
 {
-  "id": "chapter10_counting-2",
+  "id": "glossary_ch8_vector-2",
   "level": "2",
-  "url": "chapter10_counting.html#chapter10_counting-2",
+  "url": "chapter8_glossary.html#glossary_ch8_vector-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "A good approach to problems like this is to think of simple functions that are easy to write, and that might turn out to be useful. Then you can combine them into a solution. This approach is sometimes called bottom-up design . Of course, it is not easy to know ahead of time which functions are likely to be useful, but as you gain experience you will have a better idea. "
+  "body": "A container that stores a sequence of elements of the same type and can change size during program execution. "
 },
 {
-  "id": "chapter10_counting-3",
+  "id": "glossary_ch8_element-2",
   "level": "2",
-  "url": "chapter10_counting.html#chapter10_counting-3",
+  "url": "chapter8_glossary.html#glossary_ch8_element-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Also, it is not always obvious what sort of things are easy to write, but a good approach is to look for subproblems that fit a pattern you have seen before. "
+  "body": "One value or object stored in a container. "
 },
 {
-  "id": "chapter10_counting-4",
+  "id": "glossary_ch8_size-2",
   "level": "2",
-  "url": "chapter10_counting.html#chapter10_counting-4",
+  "url": "chapter8_glossary.html#glossary_ch8_size-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Back in we looked at a loop that traversed a string and counted the number of times a given letter appeared. You can think of this program as an example of a pattern called traverse and count. The elements of this pattern are: "
+  "body": "The number of elements currently stored in a vector. "
 },
 {
-  "id": "chapter10_counting-5",
+  "id": "glossary_ch8_capacity-2",
   "level": "2",
-  "url": "chapter10_counting.html#chapter10_counting-5",
+  "url": "chapter8_glossary.html#glossary_ch8_capacity-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "   A set or container that can be traversed, like a string or a vector.    A test that you can apply to each element in the container.    A counter that keeps track of how many elements pass the test.    "
+  "body": "The number of elements that can fit in a vector's current storage before more storage is needed. "
 },
 {
-  "id": "chapter10_counting-6",
+  "id": "glossary_ch8_contiguous-storage-2",
   "level": "2",
-  "url": "chapter10_counting.html#chapter10_counting-6",
+  "url": "chapter8_glossary.html#glossary_ch8_contiguous-storage-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In this case, I have a function in mind called howMany that counts the number of elements in a vector that equal a given value. The parameters are the vector and the integer value we are looking for. The return value is the number of times the value appears. "
+  "body": "Storage in which elements occupy consecutive positions. "
 },
 {
-  "id": "counting_AC_1",
+  "id": "glossary_ch8_reallocation-2",
   "level": "2",
-  "url": "chapter10_counting.html#counting_AC_1",
-  "type": "Listing",
-  "number": "8.10.1",
-  "title": "Take a look at this active code which uses the <code class=\"code-inline tex2jax_ignore\">howMany<\/code> function. Run the code to see how many times the target appears in the vector! Feel free to modify the code and experiment around.",
-  "body": " Take a look at this active code which uses the howMany function. Run the code to see how many times the target appears in the vector! Feel free to modify the code and experiment around.   #include <iostream> #include <vector> std::vector<int> randomVector(int n, int upperBound); void printVector(const std::vector<int>& vec); int howMany(const std::vector<int>& vec, int value); int main() { int numValues = 20; int upperBound = 10; int target = 6; std::vector<int> std::vector = randomVector(numValues, upperBound); printVector(std::vector); std::cout << std::endl; std::cout << \"The number \" << target << \" appears \" << howMany(std::vector,target) << \" times in our std::vector!\"; }  int howMany(const std::vector<int>& vec, int value) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { if (vec[i] == value) count++; } return count; } std::vector<int> randomVector(int n, int upperBound) { std::vector<int> vec (n); for (size_t i = 0; i < vec.size(); i++) { vec[i] = random() % upperBound; } return vec; } void printVector(const std::vector<int>& vec) { for (size_t i = 0; i < vec.size(); i++) { std::cout << vec[i] << \" \"; } }   "
-},
-{
-  "id": "counting_1",
-  "level": "2",
-  "url": "chapter10_counting.html#counting_1",
-  "type": "Checkpoint",
-  "number": "8.10.1",
+  "url": "chapter8_glossary.html#glossary_ch8_reallocation-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  Which of the following is the best definition of bottom-up design?      a method of programming where you write simple \"helper\" functions that are later incorporated into larger functions   Correct! Bottom-up design starts with a lot of small functions and assembles them into a few larger ones that accomplish a task.     a method of programming in which you tackle the largest functions first, and save the simple functions for later   Incorrect! This is describing top-down design.     a method of programming where you break the task down into smaller and smaller components until it cannot be simplified further   Incorrect! This is describing top-down design.     a method of programming where you use the minimum number of functions to accomplish the task   Incorrect! Bottom-up design uses many simple functions rather than a few complex ones, so it is not minimizing the number of functions being used.    "
+  "body": "The process of obtaining a larger storage block and moving or copying vector elements into it. "
 },
 {
-  "id": "counting_2",
+  "id": "glossary_ch8_initializer-list-2",
   "level": "2",
-  "url": "chapter10_counting.html#counting_2",
-  "type": "Checkpoint",
-  "number": "8.10.2",
+  "url": "chapter8_glossary.html#glossary_ch8_initializer-list-2",
+  "type": "Paragraph",
+  "number": "",
   "title": "",
-  "body": "  Construct a block of code that counts how many numbers are between lowerbound and upperbound inclusive.     int just_right(const std::vector<int>& vec, int lowerbound, int upperbound) {    int count = 0;     for (size_t i = 0; i < vec.size(); i++) {    for (int i = 0; i < upperbound; i++)      if (vec[i] >= lowerbound && vec[i] <= upperbound) {  count++;    if (vec[i] > lowerbound && vec[i] < upperbound) {  count++;     }  }  return count;  }    "
+  "body": "A brace-enclosed list of values used to initialize an object, such as {1, 2, 3} . "
 },
 {
-  "id": "chapter10_checking-the-other-values",
+  "id": "glossary_ch8_traverse-2",
+  "level": "2",
+  "url": "chapter8_glossary.html#glossary_ch8_traverse-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "To visit the elements of a collection in a systematic order. "
+},
+{
+  "id": "glossary_ch8_iterator-2",
+  "level": "2",
+  "url": "chapter8_glossary.html#glossary_ch8_iterator-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An object that identifies a position in a container and can be used by operations such as insert() and erase() . "
+},
+{
+  "id": "glossary_ch8_reallocation-invalidation-2",
+  "level": "2",
+  "url": "chapter8_glossary.html#glossary_ch8_reallocation-invalidation-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The condition in which a pointer, reference, or iterator no longer safely identifies an element after a container operation. "
+},
+{
+  "id": "glossary_ch8_composition-2",
+  "level": "2",
+  "url": "chapter8_glossary.html#glossary_ch8_composition-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A design in which an object is built from other objects or data members, such as a class containing a vector. "
+},
+{
+  "id": "glossary_ch8_linear-search-2",
+  "level": "2",
+  "url": "chapter8_glossary.html#glossary_ch8_linear-search-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A search that examines elements in order from the beginning until a target is found or the collection ends. "
+},
+{
+  "id": "glossary_ch8_const-reference-2",
+  "level": "2",
+  "url": "chapter8_glossary.html#glossary_ch8_const-reference-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A reference parameter that avoids copying an object while preventing the function from modifying that object through the parameter. "
+},
+{
+  "id": "glossary_ch8_invariant-2",
+  "level": "2",
+  "url": "chapter8_glossary.html#glossary_ch8_invariant-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A rule that should remain true for a valid object, such as a rule about the elements stored in a class's private vector. "
+},
+{
+  "id": "chapter8_exercises",
   "level": "1",
-  "url": "chapter10_checking-the-other-values.html",
-  "type": "Section",
+  "url": "chapter8_exercises.html",
+  "type": "Exercises",
   "number": "8.11",
-  "title": "Checking the other values",
-  "body": " Checking the other values  how_many only counts the occurrences of a particular value, and we are interested in seeing how many times each value appears. We can solve that problem with a loop:  int num_values = 20; int upper_bound = 10; std::vector<int> std::vector = random_vector(num_values, upper_bound); cout << \"value\\thow_many\"; for (int i = 0; i < upper_bound; i++) { std::cout << i << '\\t' << how_many(vector, i) << std::endl ; }  Notice that it is legal to declare a variable inside a for statement. This syntax is sometimes convenient, but you should be aware that a variable declared inside a loop only exists inside the loop. If you try to refer to i later, you will get a compiler error.  This code uses the loop variable as an argument to how_many , in order to check each value between 0 and 9, in order. The result is:  value howMany 0 2 1 1 2 3 3 3 4 0 5 2 6 5 7 2 8 0 9 2  Again, it is hard to tell if the digits are really appearing equally often. If we increase num_values to 100,000 we get the following:  value how_many 0 10130 1 10072 2 9990 3 9842 4 10174 5 9930 6 10059 7 9954 8 9891 9 9958  In each case, the number of appearances is within about 1% of the expected value (10,000), so we conclude that the random numbers are probably uniform.    If you declare a variable inside a for statement, where can it exist?      inside of the for loop.   Correct!     outside of the for loop, but inside of the function it's used in.   Incorrect! The variable goes out of scope as soon as the for loop terminates!     outside of the function, and everywhere else in the program.   Incorrect! The variable goes out of scope as soon as the for loop terminates!       Multiple Response When we increase the size of num_values , which of the following is true:      the difference between actual and expected number of appearances increases   Correct! The numbers go from being off by less than 5 to more than 100.     the difference between actual and expected number of appearances decreases   Incorrect! Take a look at the numbers again!     the percent by which the number of appearances differs from the expected number increases   Incorrect! Take a look at the numbers again!     the percent by which the number of appearances differs from the expected number decreases   Incorrect! As we continue to increase the size of num_values, the percent by which the number of appearances differes from the expected value approaches 0.     "
+  "title": "Exercises",
+  "body": " Exercises   What is the element type in std::vector<double> measurements ?   double The type between the angle brackets identifies every element's type.  std::vector That is the container template, not the element type.  measurements That is the vector's object name.  int The declaration specifies double .     What does std::vector<int> values(3) create?   Three value-initialized integers For int , value initialization produces zero.  One integer whose value is 3 That is the meaning of the brace form {3} .  Three integers whose values are all 3 Use the two-argument form (3, 3) for that.  An empty vector with capacity 3 The size is three in this declaration.      Which expression checks the index before accessing the element?    values.at(index) at() performs a bounds check.  values[index] Subscript access does not perform a bounds check.  values.front() front() accesses the first element and does not take an index.  values.size(index) size() takes no index and reports the number of elements.     What does for (const int value : values) provide during each iteration?   A copy of the current element The loop variable is a constant value copy.  The current element's index A range-based loop does not provide an index automatically.  A reference that can modify the vector The declaration has no & , and it is const .  The vector's capacity The loop visits elements, not storage statistics.      After values has size 2, what is its size after one successful push_back() ?    3 Adding one element increases the size by one.  2 The new element is included in the size.  The capacity Size and capacity are different properties.  0 push_back() does not clear the vector.     What does values.reserve(20) do?   It requests capacity for at least 20 elements without adding elements. reserve() changes storage capacity, not the current size.  It adds 20 zero elements. Use resize() when the number of elements should change.  It guarantees the vector will never grow beyond 20 elements. A vector can obtain more storage later.  It removes all elements. clear() removes elements.     Why is const std::vector<int>& often preferred for a large read-only vector parameter?   It avoids copying the vector and prevents modification through the parameter. The constant reference provides efficient read-only access.  It creates a second vector that can be modified. A reference does not create a vector copy.  It makes every element constant forever. The restriction applies through this parameter, not necessarily to the original object's entire lifetime.  It changes the vector into an array. The object's type remains std::vector .     What does std::vector<Student> students represent?   A vector whose elements are Student objects The template argument identifies the element type.  A Student object containing a vector That would be a class with a vector data member.  A vector that can store any unrelated type One vector has one element type.  A vector of integer indices only The elements are Student objects, not indices.     What design relationship is shown by a Deck class containing std::vector<Card> cards ?   Composition The larger object is built from a collection of other objects.  Inheritance No base class relationship is shown.  Lexicographical comparison The example describes object structure, not ordering.  Function overloading No functions with the same name are being overloaded.     What is the usual order of a linear search?   Inspect elements from the beginning until the target is found or the vector ends. Linear search proceeds in sequence.  Inspect only the last element. A linear search may inspect many elements.  Sort the vector automatically before every comparison. Linear search does not require sorting.  Use the capacity as the target index. Capacity is storage information, not a valid search endpoint.     Why should an average function check whether a vector is empty?   To avoid dividing by zero. The average divides the total by the number of elements.  Because an empty vector has no capacity. An empty vector may still have positive capacity.  Because size() cannot be called on an empty vector. size() is valid for an empty vector and returns zero.  To force the vector to reallocate. Checking emptiness does not request storage.     What may happen to a pointer or reference to a vector element after reallocation?   It may no longer safely identify that element. Moving elements to new storage can invalidate earlier addresses.  It automatically changes into an index. A pointer or reference does not become an index.  It always identifies the new last element. Reallocation does not redefine the pointer's meaning.  It prevents the vector from changing size. Reallocation supports further growth.     What commonly happens to elements after an erased vector element?   They shift toward the erased position. Erasing from the middle preserves sequence order by shifting later elements.  They all become zero. Erasure removes an element; it does not zero all later elements.  They move to the front of the vector in reverse order. The remaining sequence keeps its order.  The vector's capacity must become zero. Erasing elements usually leaves capacity available.    "
 },
 {
-  "id": "chapter10_checking-the-other-values-2",
+  "id": "chapter8_exercise_vector_element_type",
   "level": "2",
-  "url": "chapter10_checking-the-other-values.html#chapter10_checking-the-other-values-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "how_many only counts the occurrences of a particular value, and we are interested in seeing how many times each value appears. We can solve that problem with a loop: "
-},
-{
-  "id": "chapter10_checking-the-other-values-4",
-  "level": "2",
-  "url": "chapter10_checking-the-other-values.html#chapter10_checking-the-other-values-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Notice that it is legal to declare a variable inside a for statement. This syntax is sometimes convenient, but you should be aware that a variable declared inside a loop only exists inside the loop. If you try to refer to i later, you will get a compiler error. "
-},
-{
-  "id": "chapter10_checking-the-other-values-5",
-  "level": "2",
-  "url": "chapter10_checking-the-other-values.html#chapter10_checking-the-other-values-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This code uses the loop variable as an argument to how_many , in order to check each value between 0 and 9, in order. The result is: "
-},
-{
-  "id": "chapter10_checking-the-other-values-7",
-  "level": "2",
-  "url": "chapter10_checking-the-other-values.html#chapter10_checking-the-other-values-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Again, it is hard to tell if the digits are really appearing equally often. If we increase num_values to 100,000 we get the following: "
-},
-{
-  "id": "chapter10_checking-the-other-values-9",
-  "level": "2",
-  "url": "chapter10_checking-the-other-values.html#chapter10_checking-the-other-values-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In each case, the number of appearances is within about 1% of the expected value (10,000), so we conclude that the random numbers are probably uniform. "
-},
-{
-  "id": "checking_values_1",
-  "level": "2",
-  "url": "chapter10_checking-the-other-values.html#checking_values_1",
-  "type": "Checkpoint",
+  "url": "chapter8_exercises.html#chapter8_exercise_vector_element_type",
+  "type": "Exercise",
   "number": "8.11.1",
   "title": "",
-  "body": "  If you declare a variable inside a for statement, where can it exist?      inside of the for loop.   Correct!     outside of the for loop, but inside of the function it's used in.   Incorrect! The variable goes out of scope as soon as the for loop terminates!     outside of the function, and everywhere else in the program.   Incorrect! The variable goes out of scope as soon as the for loop terminates!    "
+  "body": " What is the element type in std::vector<double> measurements ?   double The type between the angle brackets identifies every element's type.  std::vector That is the container template, not the element type.  measurements That is the vector's object name.  int The declaration specifies double .   "
 },
 {
-  "id": "checking_values_2",
+  "id": "chapter8_exercise_value_initialization",
   "level": "2",
-  "url": "chapter10_checking-the-other-values.html#checking_values_2",
-  "type": "Checkpoint",
+  "url": "chapter8_exercises.html#chapter8_exercise_value_initialization",
+  "type": "Exercise",
   "number": "8.11.2",
   "title": "",
-  "body": "  Multiple Response When we increase the size of num_values , which of the following is true:      the difference between actual and expected number of appearances increases   Correct! The numbers go from being off by less than 5 to more than 100.     the difference between actual and expected number of appearances decreases   Incorrect! Take a look at the numbers again!     the percent by which the number of appearances differs from the expected number increases   Incorrect! Take a look at the numbers again!     the percent by which the number of appearances differs from the expected number decreases   Incorrect! As we continue to increase the size of num_values, the percent by which the number of appearances differes from the expected value approaches 0.    "
+  "body": " What does std::vector<int> values(3) create?   Three value-initialized integers For int , value initialization produces zero.  One integer whose value is 3 That is the meaning of the brace form {3} .  Three integers whose values are all 3 Use the two-argument form (3, 3) for that.  An empty vector with capacity 3 The size is three in this declaration.   "
 },
 {
-  "id": "chapter10_a-histogram",
+  "id": "chapter8_exercise_access",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_access",
+  "type": "Exercise",
+  "number": "8.11.3",
+  "title": "",
+  "body": "  Which expression checks the index before accessing the element?    values.at(index) at() performs a bounds check.  values[index] Subscript access does not perform a bounds check.  values.front() front() accesses the first element and does not take an index.  values.size(index) size() takes no index and reports the number of elements.   "
+},
+{
+  "id": "chapter8_exercise_range_loop",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_range_loop",
+  "type": "Exercise",
+  "number": "8.11.4",
+  "title": "",
+  "body": " What does for (const int value : values) provide during each iteration?   A copy of the current element The loop variable is a constant value copy.  The current element's index A range-based loop does not provide an index automatically.  A reference that can modify the vector The declaration has no & , and it is const .  The vector's capacity The loop visits elements, not storage statistics.   "
+},
+{
+  "id": "chapter8_exercise_push_back_size",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_push_back_size",
+  "type": "Exercise",
+  "number": "8.11.5",
+  "title": "",
+  "body": "  After values has size 2, what is its size after one successful push_back() ?    3 Adding one element increases the size by one.  2 The new element is included in the size.  The capacity Size and capacity are different properties.  0 push_back() does not clear the vector.   "
+},
+{
+  "id": "chapter8_exercise_reserve",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_reserve",
+  "type": "Exercise",
+  "number": "8.11.6",
+  "title": "",
+  "body": " What does values.reserve(20) do?   It requests capacity for at least 20 elements without adding elements. reserve() changes storage capacity, not the current size.  It adds 20 zero elements. Use resize() when the number of elements should change.  It guarantees the vector will never grow beyond 20 elements. A vector can obtain more storage later.  It removes all elements. clear() removes elements.   "
+},
+{
+  "id": "chapter8_exercise_const_reference",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_const_reference",
+  "type": "Exercise",
+  "number": "8.11.7",
+  "title": "",
+  "body": " Why is const std::vector<int>& often preferred for a large read-only vector parameter?   It avoids copying the vector and prevents modification through the parameter. The constant reference provides efficient read-only access.  It creates a second vector that can be modified. A reference does not create a vector copy.  It makes every element constant forever. The restriction applies through this parameter, not necessarily to the original object's entire lifetime.  It changes the vector into an array. The object's type remains std::vector .   "
+},
+{
+  "id": "chapter8_exercise_vector_of_objects",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_vector_of_objects",
+  "type": "Exercise",
+  "number": "8.11.8",
+  "title": "",
+  "body": " What does std::vector<Student> students represent?   A vector whose elements are Student objects The template argument identifies the element type.  A Student object containing a vector That would be a class with a vector data member.  A vector that can store any unrelated type One vector has one element type.  A vector of integer indices only The elements are Student objects, not indices.   "
+},
+{
+  "id": "chapter8_exercise_composition",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_composition",
+  "type": "Exercise",
+  "number": "8.11.9",
+  "title": "",
+  "body": " What design relationship is shown by a Deck class containing std::vector<Card> cards ?   Composition The larger object is built from a collection of other objects.  Inheritance No base class relationship is shown.  Lexicographical comparison The example describes object structure, not ordering.  Function overloading No functions with the same name are being overloaded.   "
+},
+{
+  "id": "chapter8_exercise_linear_search",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_linear_search",
+  "type": "Exercise",
+  "number": "8.11.10",
+  "title": "",
+  "body": " What is the usual order of a linear search?   Inspect elements from the beginning until the target is found or the vector ends. Linear search proceeds in sequence.  Inspect only the last element. A linear search may inspect many elements.  Sort the vector automatically before every comparison. Linear search does not require sorting.  Use the capacity as the target index. Capacity is storage information, not a valid search endpoint.   "
+},
+{
+  "id": "chapter8_exercise_empty_average",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_empty_average",
+  "type": "Exercise",
+  "number": "8.11.11",
+  "title": "",
+  "body": " Why should an average function check whether a vector is empty?   To avoid dividing by zero. The average divides the total by the number of elements.  Because an empty vector has no capacity. An empty vector may still have positive capacity.  Because size() cannot be called on an empty vector. size() is valid for an empty vector and returns zero.  To force the vector to reallocate. Checking emptiness does not request storage.   "
+},
+{
+  "id": "chapter8_exercise_reallocation",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_reallocation",
+  "type": "Exercise",
+  "number": "8.11.12",
+  "title": "",
+  "body": " What may happen to a pointer or reference to a vector element after reallocation?   It may no longer safely identify that element. Moving elements to new storage can invalidate earlier addresses.  It automatically changes into an index. A pointer or reference does not become an index.  It always identifies the new last element. Reallocation does not redefine the pointer's meaning.  It prevents the vector from changing size. Reallocation supports further growth.   "
+},
+{
+  "id": "chapter8_exercise_erase",
+  "level": "2",
+  "url": "chapter8_exercises.html#chapter8_exercise_erase",
+  "type": "Exercise",
+  "number": "8.11.13",
+  "title": "",
+  "body": " What commonly happens to elements after an erased vector element?   They shift toward the erased position. Erasing from the middle preserves sequence order by shifting later elements.  They all become zero. Erasure removes an element; it does not zero all later elements.  They move to the front of the vector in reverse order. The remaining sequence keeps its order.  The vector's capacity must become zero. Erasing elements usually leaves capacity available.   "
+},
+{
+  "id": "chapter8_mixed-up-code",
   "level": "1",
-  "url": "chapter10_a-histogram.html",
-  "type": "Section",
+  "url": "chapter8_mixed-up-code.html",
+  "type": "Exercises",
   "number": "8.12",
-  "title": "A histogram",
-  "body": " A histogram  It is often useful to take the data from the previous tables and store them for later access, rather than just print them. What we need is a way to store 10 integers. We could create 10 integer variables with names like howManyOnes , howManyTwos , etc. But that would require a lot of typing, and it would be a real pain later if we decided to change the range of values.  A better solution is to use a vector with size 10. That way we can create all ten storage locations at once and we can access them using indices, rather than ten different names. Here's how:  int numValues = 100000; int upperBound = 10; std::vector<int> vector = randomVector(numValues, upperBound); std::vector<int> histogram(upperBound); for (int i = 0; i < upperBound; i++) { int count = howMany(vector, i); histogram[i] = count; }  I called the std::vector histogram because that's a statistical term for a vector of numbers that counts the number of appearances of a range of values.  The tricky thing here is that I am using the loop variable in two different ways. First, it is an argument to howMany , specifying which value I am interested in. Second, it is an index into the histogram, specifying which location I should store the result in.    Which of the following statements are true about using vectors to store data?      Vectors require more typing than using individual variables to store data.   Incorrect! Vectors require less typing than using individual varaibles to store data.     Vectors create multiple storage locations at once under the same name.   Correct!     Once you store something in a vector, you cannot change its value.   Incorrect! The values of vector elements can always be changed.     Each storage location of a vector is accessed by indexing.   Correct!     "
+  "title": "Mixed-Up Code Practice",
+  "body": " Mixed-Up Code Practice    Arrange the blocks to create a vector of three scores and print its size.    #include <iostream> #include <vector>  int main() {  std::vector<int> scores{82, 91, 88};  std::cout << scores.size() << '\\n';  return 0; }      Arrange the blocks to print every value in the vector.    std::vector<int> values{3, 6, 9};  for (const int value : values) {  std::cout << value << ' '; }  std::cout << '\\n';      Arrange the blocks to add the values in a vector.    int calculate_total(const std::vector<int>& values) {  int total = 0;  for (const int value : values) {  total += value; }  return total; }      Arrange the blocks to add a value and remove the last value.    std::vector<int> values{10, 20};  values.push_back(30);  values.pop_back();  std::cout << values.size() << '\\n';      Arrange the blocks to define a class that stores a vector of integers privately.    class Score_book {  private: std::vector<int> scores;  public: void add_score(int score) { scores.push_back(score); }  };    "
 },
 {
-  "id": "chapter10_a-histogram-2",
+  "id": "chapter8_mixed_up_create_vector",
   "level": "2",
-  "url": "chapter10_a-histogram.html#chapter10_a-histogram-2",
-  "type": "Paragraph",
-  "number": "",
+  "url": "chapter8_mixed-up-code.html#chapter8_mixed_up_create_vector",
+  "type": "Exercise",
+  "number": "8.12.yes",
   "title": "",
-  "body": "It is often useful to take the data from the previous tables and store them for later access, rather than just print them. What we need is a way to store 10 integers. We could create 10 integer variables with names like howManyOnes , howManyTwos , etc. But that would require a lot of typing, and it would be a real pain later if we decided to change the range of values. "
+  "body": "  Arrange the blocks to create a vector of three scores and print its size.    #include <iostream> #include <vector>  int main() {  std::vector<int> scores{82, 91, 88};  std::cout << scores.size() << '\\n';  return 0; }   "
 },
 {
-  "id": "chapter10_a-histogram-3",
+  "id": "chapter8_mixed_up_range_traversal",
   "level": "2",
-  "url": "chapter10_a-histogram.html#chapter10_a-histogram-3",
-  "type": "Paragraph",
-  "number": "",
+  "url": "chapter8_mixed-up-code.html#chapter8_mixed_up_range_traversal",
+  "type": "Exercise",
+  "number": "8.12.yes",
   "title": "",
-  "body": "A better solution is to use a vector with size 10. That way we can create all ten storage locations at once and we can access them using indices, rather than ten different names. Here's how: "
+  "body": "  Arrange the blocks to print every value in the vector.    std::vector<int> values{3, 6, 9};  for (const int value : values) {  std::cout << value << ' '; }  std::cout << '\\n';   "
 },
 {
-  "id": "chapter10_a-histogram-5",
+  "id": "chapter8_mixed_up_add_values",
   "level": "2",
-  "url": "chapter10_a-histogram.html#chapter10_a-histogram-5",
-  "type": "Paragraph",
-  "number": "",
+  "url": "chapter8_mixed-up-code.html#chapter8_mixed_up_add_values",
+  "type": "Exercise",
+  "number": "8.12.yes",
   "title": "",
-  "body": "I called the std::vector histogram because that's a statistical term for a vector of numbers that counts the number of appearances of a range of values. "
+  "body": "  Arrange the blocks to add the values in a vector.    int calculate_total(const std::vector<int>& values) {  int total = 0;  for (const int value : values) {  total += value; }  return total; }   "
 },
 {
-  "id": "chapter10_a-histogram-6",
+  "id": "chapter8_mixed_up_vector_operation",
   "level": "2",
-  "url": "chapter10_a-histogram.html#chapter10_a-histogram-6",
-  "type": "Paragraph",
-  "number": "",
+  "url": "chapter8_mixed-up-code.html#chapter8_mixed_up_vector_operation",
+  "type": "Exercise",
+  "number": "8.12.yes",
   "title": "",
-  "body": "The tricky thing here is that I am using the loop variable in two different ways. First, it is an argument to howMany , specifying which value I am interested in. Second, it is an index into the histogram, specifying which location I should store the result in. "
+  "body": "  Arrange the blocks to add a value and remove the last value.    std::vector<int> values{10, 20};  values.push_back(30);  values.pop_back();  std::cout << values.size() << '\\n';   "
 },
 {
-  "id": "histogram_1",
+  "id": "chapter8_mixed_up_object_vector",
   "level": "2",
-  "url": "chapter10_a-histogram.html#histogram_1",
-  "type": "Checkpoint",
-  "number": "8.12.1",
+  "url": "chapter8_mixed-up-code.html#chapter8_mixed_up_object_vector",
+  "type": "Exercise",
+  "number": "8.12.yes",
   "title": "",
-  "body": "  Which of the following statements are true about using vectors to store data?      Vectors require more typing than using individual variables to store data.   Incorrect! Vectors require less typing than using individual varaibles to store data.     Vectors create multiple storage locations at once under the same name.   Correct!     Once you store something in a vector, you cannot change its value.   Incorrect! The values of vector elements can always be changed.     Each storage location of a vector is accessed by indexing.   Correct!    "
+  "body": "  Arrange the blocks to define a class that stores a vector of integers privately.    class Score_book {  private: std::vector<int> scores;  public: void add_score(int score) { scores.push_back(score); }  };   "
 },
 {
-  "id": "chapter10_a-single-pass-solution",
+  "id": "chapter8_coding-practice",
   "level": "1",
-  "url": "chapter10_a-single-pass-solution.html",
-  "type": "Section",
+  "url": "chapter8_coding-practice.html",
+  "type": "Exercises",
   "number": "8.13",
-  "title": "A single-pass solution",
-  "body": " A single-pass solution  Although this code works, it is not as efficient as it could be. Every time it calls howMany , it traverses the entire vector. In this example we have to traverse the vector ten times!  It would be better to make a single pass through the vector. For each value in the vector we could find the corresponding counter and increment it. In other words, we can use the value from the vector as an index into the histogram. Here's what that looks like:  std::vector<int> histogram(upperBound, 0); for (int i = 0; i < numValues; i++) { int index = vector[i]; histogram[index]++; }  The first line initializes the elements of the histogram to zeroes. That way, when we use the increment operator ( ++ ) inside the loop, we know we are starting from zero. Forgetting to initialize counters is a common error.    What happens if you don't initialize a counter?      Your code runs without a problem because counters are automatically initialized to zero.   Incorrect! Variables are not automatically initialized.     Your code might run, but it probably won't produce the output you desire.   Correct! C++ might assign unused memory to the uninitialized variable, which will allow the code to run, but counts may be off.     You might get an error for using an uninitialized variable.   Correct! Depening on your compiler, you might be lucky enough to get an error message.     Your program will crash.   Incorrect! You might get a compile error, but your program will not crash.       Construct a function called histogram that takes a vector and the range of values in the vector, and that returns a histogram of values in the vector.     std::vector<int> histogram(const std::vector<int>& vec, int range) {     std::vector<int> histogram (range, 0);    std::vector<int> histogram (range);      for (size_t i = 0; i < vec.size(); i++) {    for (size_t i = 0; i < range; i++) {      int index = vec[i];    int index = i;     histogram[index]++;    }  return histogram;  }     "
+  "title": "Coding Practice",
+  "body": " Coding Practice    Write calculate_total , which takes a const std::vector<int>& and returns the sum of its elements. Test it with {4, 8, 12} .   #include <iostream> #include <vector> int calculate_total(const std::vector<int>& values) { \/\/ Write your solution here. } int main() { const std::vector<int> values{4, 8, 12}; std::cout << calculate_total(values) << '\\n'; return 0; }     int calculate_total(const std::vector<int>& values) { int total = 0; for (const int value : values) { total += value; } return total; }      Write count_values_at_least , which takes a constant reference to a vector of integers and a minimum value. Return how many elements are greater than or equal to the minimum.   #include <iostream> #include <vector> int count_values_at_least(const std::vector<int>& values, int minimum) { \/\/ Write your solution here. } int main() { const std::vector<int> values{3, 8, 10, 4, 12}; std::cout << count_values_at_least(values, 8) << '\\n'; return 0; }     int count_values_at_least(const std::vector<int>& values, int minimum) { int count = 0; for (const int value : values) { if (value >= minimum) { ++count; } } return count; }      Write scale_values , which takes a vector of doubles by non-constant reference and multiplies every element by the given factor.   #include <iostream> #include <vector> void scale_values(std::vector<double>& values, double factor) { \/\/ Write your solution here. } int main() { std::vector<double> values{1.5, 2.0, 3.5}; scale_values(values, 2.0); for (const double value : values) { std::cout << value << ' '; } std::cout << '\\n'; return 0; }     void scale_values(std::vector<double>& values, double factor) { for (double& value : values) { value *= factor; } }      Define a Student structure with a name and score. Then write calculate_average_score , which takes a constant reference to a vector of students and returns the average score. Return 0.0 for an empty vector.   #include <iostream> #include <string> #include <vector> struct Student { std::string name; double score; }; double calculate_average_score(const std::vector<Student>& students) { \/\/ Write your solution here. } int main() { const std::vector<Student> students{ {\"Amina\", 92.0}, {\"Luis\", 84.0}, {\"Mei\", 98.0} }; std::cout << calculate_average_score(students) << '\\n'; return 0; }     double calculate_average_score(const std::vector<Student>& students) { if (students.empty()) { return 0.0; } double total = 0.0; for (const Student& student : students) { total += student.score; } return total \/ students.size(); }      Define a Deck class that contains a private std::vector<std::string> . Add member functions named add_card and get_card_count .   #include <iostream> #include <string> #include <vector> class Deck { private: std::vector<std::string> cards; public: void add_card(const std::string& card) { \/\/ Write your solution here. } std::size_t get_card_count() const { \/\/ Write your solution here. } }; int main() { Deck deck; deck.add_card(\"Ace of Spades\"); deck.add_card(\"King of Hearts\"); std::cout << deck.get_card_count() << '\\n'; return 0; }     void add_card(const std::string& card) { cards.push_back(card); } std::size_t get_card_count() const { return cards.size(); }    "
 },
 {
-  "id": "chapter10_a-single-pass-solution-2",
+  "id": "chapter8_coding_sum_vector",
   "level": "2",
-  "url": "chapter10_a-single-pass-solution.html#chapter10_a-single-pass-solution-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Although this code works, it is not as efficient as it could be. Every time it calls howMany , it traverses the entire vector. In this example we have to traverse the vector ten times! "
-},
-{
-  "id": "chapter10_a-single-pass-solution-3",
-  "level": "2",
-  "url": "chapter10_a-single-pass-solution.html#chapter10_a-single-pass-solution-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "It would be better to make a single pass through the vector. For each value in the vector we could find the corresponding counter and increment it. In other words, we can use the value from the vector as an index into the histogram. Here's what that looks like: "
-},
-{
-  "id": "chapter10_a-single-pass-solution-5",
-  "level": "2",
-  "url": "chapter10_a-single-pass-solution.html#chapter10_a-single-pass-solution-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The first line initializes the elements of the histogram to zeroes. That way, when we use the increment operator ( ++ ) inside the loop, we know we are starting from zero. Forgetting to initialize counters is a common error. "
-},
-{
-  "id": "single_pass_solution_1",
-  "level": "2",
-  "url": "chapter10_a-single-pass-solution.html#single_pass_solution_1",
-  "type": "Checkpoint",
+  "url": "chapter8_coding-practice.html#chapter8_coding_sum_vector",
+  "type": "Exercise",
   "number": "8.13.1",
   "title": "",
-  "body": "  What happens if you don't initialize a counter?      Your code runs without a problem because counters are automatically initialized to zero.   Incorrect! Variables are not automatically initialized.     Your code might run, but it probably won't produce the output you desire.   Correct! C++ might assign unused memory to the uninitialized variable, which will allow the code to run, but counts may be off.     You might get an error for using an uninitialized variable.   Correct! Depening on your compiler, you might be lucky enough to get an error message.     Your program will crash.   Incorrect! You might get a compile error, but your program will not crash.    "
+  "body": "  Write calculate_total , which takes a const std::vector<int>& and returns the sum of its elements. Test it with {4, 8, 12} .   #include <iostream> #include <vector> int calculate_total(const std::vector<int>& values) { \/\/ Write your solution here. } int main() { const std::vector<int> values{4, 8, 12}; std::cout << calculate_total(values) << '\\n'; return 0; }     int calculate_total(const std::vector<int>& values) { int total = 0; for (const int value : values) { total += value; } return total; }   "
 },
 {
-  "id": "single_pass_solution_2",
+  "id": "chapter8_coding_count_matching",
   "level": "2",
-  "url": "chapter10_a-single-pass-solution.html#single_pass_solution_2",
-  "type": "Checkpoint",
+  "url": "chapter8_coding-practice.html#chapter8_coding_count_matching",
+  "type": "Exercise",
   "number": "8.13.2",
   "title": "",
-  "body": "  Construct a function called histogram that takes a vector and the range of values in the vector, and that returns a histogram of values in the vector.     std::vector<int> histogram(const std::vector<int>& vec, int range) {     std::vector<int> histogram (range, 0);    std::vector<int> histogram (range);      for (size_t i = 0; i < vec.size(); i++) {    for (size_t i = 0; i < range; i++) {      int index = vec[i];    int index = i;     histogram[index]++;    }  return histogram;  }    "
+  "body": "  Write count_values_at_least , which takes a constant reference to a vector of integers and a minimum value. Return how many elements are greater than or equal to the minimum.   #include <iostream> #include <vector> int count_values_at_least(const std::vector<int>& values, int minimum) { \/\/ Write your solution here. } int main() { const std::vector<int> values{3, 8, 10, 4, 12}; std::cout << count_values_at_least(values, 8) << '\\n'; return 0; }     int count_values_at_least(const std::vector<int>& values, int minimum) { int count = 0; for (const int value : values) { if (value >= minimum) { ++count; } } return count; }   "
 },
 {
-  "id": "chapter10_random-seeds",
-  "level": "1",
-  "url": "chapter10_random-seeds.html",
-  "type": "Section",
-  "number": "8.14",
-  "title": "Random seeds",
-  "body": " Random seeds  If you have run the code in this chapter a few times, you might have noticed that you are getting the same random values every time. That's not very random!  One of the properties of pseudorandom number generators is that if they start from the same place they will generate the same sequence of values. The starting place is called a seed ; by default, C++ uses the same seed every time you run the program.  While you are debugging, it is often helpful to see the same sequence over and over. That way, when you make a change to the program you can compare the output before and after the change.  If you want to choose a different seed for the random number generator, you can use the srand function from the cstdlib library. It takes a single argument, which is an integer between 0 and RAND_MAX .  For many applications, like games, you want to see a different random sequence every time the program runs. A common way to do that is to use a library function like time from the ctime library to generate something reasonably unpredictable and unrepeatable, like the number of seconds on the system clock.   If you are trying to work with times, there are better modern libraries for doing so. This sample uses ctime as the syntax to do so is simpler.    Try this program - it should print a different sequence of numbers each time you run it. If you remove the srand call, it will generate the same sequence each time.  #include <iostream> #include <cstdlib> #include <ctime> int main() { srand(gettimeofday(NULL)); for (int i = 0; i < 4; i++) { int x = random(); std::cout << x << std::endl; } }    Notice how srand is used once at the start of the program. You generally only want to seed the number generator one time or you will keep resetting the seed and may generate the same \"random\" number over and over. If you move srand into the loop, that is what you should see happen.     If we wanted to generate a random number between 0 and 12, and we have previously declared int int x = random (); , what should be our next line of code?      Calling the random() function with no arguments.   This always generates the same set of values, using the default seed in C++.     Calling srand() on a integer seed.   This always generates the same set of values, using the specified seed.     Running the gettimeofday() function, and calling srand() on the result.    gettimeofday() will generate something reasonably random, which you can then use as a random seed.     "
-},
-{
-  "id": "chapter10_random-seeds-2",
-  "level": "2",
-  "url": "chapter10_random-seeds.html#chapter10_random-seeds-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If you have run the code in this chapter a few times, you might have noticed that you are getting the same random values every time. That's not very random! "
-},
-{
-  "id": "chapter10_random-seeds-3",
-  "level": "2",
-  "url": "chapter10_random-seeds.html#chapter10_random-seeds-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "One of the properties of pseudorandom number generators is that if they start from the same place they will generate the same sequence of values. The starting place is called a seed ; by default, C++ uses the same seed every time you run the program. "
-},
-{
-  "id": "chapter10_random-seeds-4",
-  "level": "2",
-  "url": "chapter10_random-seeds.html#chapter10_random-seeds-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "While you are debugging, it is often helpful to see the same sequence over and over. That way, when you make a change to the program you can compare the output before and after the change. "
-},
-{
-  "id": "chapter10_random-seeds-5",
-  "level": "2",
-  "url": "chapter10_random-seeds.html#chapter10_random-seeds-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If you want to choose a different seed for the random number generator, you can use the srand function from the cstdlib library. It takes a single argument, which is an integer between 0 and RAND_MAX . "
-},
-{
-  "id": "chapter10_random-seeds-6",
-  "level": "2",
-  "url": "chapter10_random-seeds.html#chapter10_random-seeds-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For many applications, like games, you want to see a different random sequence every time the program runs. A common way to do that is to use a library function like time from the ctime library to generate something reasonably unpredictable and unrepeatable, like the number of seconds on the system clock. "
-},
-{
-  "id": "chapter10_random-seeds-7",
-  "level": "2",
-  "url": "chapter10_random-seeds.html#chapter10_random-seeds-7",
-  "type": "Note",
-  "number": "8.14.1",
-  "title": "",
-  "body": " If you are trying to work with times, there are better modern libraries for doing so. This sample uses ctime as the syntax to do so is simpler.  "
-},
-{
-  "id": "random-seeds-demo",
-  "level": "2",
-  "url": "chapter10_random-seeds.html#random-seeds-demo",
-  "type": "Listing",
-  "number": "8.14.1",
-  "title": "Try this program - it should print a different sequence of numbers each time you run it. If you remove the srand call, it will generate the same sequence each time.",
-  "body": " Try this program - it should print a different sequence of numbers each time you run it. If you remove the srand call, it will generate the same sequence each time.  #include <iostream> #include <cstdlib> #include <ctime> int main() { srand(gettimeofday(NULL)); for (int i = 0; i < 4; i++) { int x = random(); std::cout << x << std::endl; } }  "
-},
-{
-  "id": "chapter10_random-seeds-9",
-  "level": "2",
-  "url": "chapter10_random-seeds.html#chapter10_random-seeds-9",
-  "type": "Note",
-  "number": "8.14.2",
-  "title": "",
-  "body": " Notice how srand is used once at the start of the program. You generally only want to seed the number generator one time or you will keep resetting the seed and may generate the same \"random\" number over and over. If you move srand into the loop, that is what you should see happen.  "
-},
-{
-  "id": "random_seeds_1",
-  "level": "2",
-  "url": "chapter10_random-seeds.html#random_seeds_1",
-  "type": "Checkpoint",
-  "number": "8.14.1",
-  "title": "",
-  "body": "  If we wanted to generate a random number between 0 and 12, and we have previously declared int int x = random (); , what should be our next line of code?      Calling the random() function with no arguments.   This always generates the same set of values, using the default seed in C++.     Calling srand() on a integer seed.   This always generates the same set of values, using the specified seed.     Running the gettimeofday() function, and calling srand() on the result.    gettimeofday() will generate something reasonably random, which you can then use as a random seed.    "
-},
-{
-  "id": "chapter10_glossary",
-  "level": "1",
-  "url": "chapter10_glossary.html",
-  "type": "Section",
-  "number": "8.15",
-  "title": "Glossary",
-  "body": " Glossary    vector:  A named collection of values, where all the values have the same type, and each value is identified by an index.    element:  One of the values in a vector. The [] operator selects elements of a vector.    index:  An integer variable or value used to indicate an element of a vector.    constructor:  A special function that creates a new object and initializes its instance variables.    deterministic:  A program that does the same thing every time it is run.    pseudorandom:  A sequence of numbers that appear to be random, but which are actually the product of a deterministic computation.    seed:  A value used to initialize a random number sequence. Using the same seed should yield the same sequence of values.    bottom-up design:  A method of program development that starts by writing small, useful functions and then assembling them into larger solutions.    histogram:  A vector of integers where each integer counts the number of values that fall into a certain range.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    vector  A named collection of values, where all the values have the same type, and each value is identified by an index.    element  One of the values in a vector.    index  An integer variable or value used to indicate an element of a vector.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.     constructor  A special function that creates a new object and initializes its instance variables.    pseudorandom  A sequence of numbers that appear to be random, but which are actually the product of a deterministic computation.    seed  A value used to initialize a random number sequence.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    deterministic  A program that does the same thing every time it is run.    bottom-up design  A method of program development that starts by writing small, useful functions and then assembling them into larger solutions.    histogram  A vector of integers where each integer counts the number of values that fall into a certain range.      "
-},
-{
-  "id": "chapter10_glossary-2",
-  "level": "2",
-  "url": "chapter10_glossary.html#chapter10_glossary-2",
-  "type": "Glossary",
-  "number": "8.15",
-  "title": "Glossary",
-  "body": "  vector:  A named collection of values, where all the values have the same type, and each value is identified by an index.    element:  One of the values in a vector. The [] operator selects elements of a vector.    index:  An integer variable or value used to indicate an element of a vector.    constructor:  A special function that creates a new object and initializes its instance variables.    deterministic:  A program that does the same thing every time it is run.    pseudorandom:  A sequence of numbers that appear to be random, but which are actually the product of a deterministic computation.    seed:  A value used to initialize a random number sequence. Using the same seed should yield the same sequence of values.    bottom-up design:  A method of program development that starts by writing small, useful functions and then assembling them into larger solutions.    histogram:  A vector of integers where each integer counts the number of values that fall into a certain range.   "
-},
-{
-  "id": "chapter10_glossary-3",
-  "level": "2",
-  "url": "chapter10_glossary.html#chapter10_glossary-3",
-  "type": "Reading Questions",
-  "number": "8.15",
-  "title": "Reading Questions",
-  "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    vector  A named collection of values, where all the values have the same type, and each value is identified by an index.    element  One of the values in a vector.    index  An integer variable or value used to indicate an element of a vector.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.     constructor  A special function that creates a new object and initializes its instance variables.    pseudorandom  A sequence of numbers that appear to be random, but which are actually the product of a deterministic computation.    seed  A value used to initialize a random number sequence.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    deterministic  A program that does the same thing every time it is run.    bottom-up design  A method of program development that starts by writing small, useful functions and then assembling them into larger solutions.    histogram  A vector of integers where each integer counts the number of values that fall into a certain range.     "
-},
-{
-  "id": "chapter10_multiple-choice-exercises",
-  "level": "1",
-  "url": "chapter10_multiple-choice-exercises.html",
-  "type": "Exercises",
-  "number": "8.16",
-  "title": "Multiple Choice Exercises",
-  "body": " Multiple Choice Exercises   Answer the following Multiple Choice questions to assess what you have learned in this chapter.     Suppose you are collecting data for a science experiment. You are to perform three trials of eight temperature readings measured in degrees fahrenheit to the nearest hundredth and initialized to freezing . Choose the vector that has the proper amount of storage for this scenario.       std::vector<int> temps (24, 32.00);    We can't declare the vector as an integer type because all temperature readings will be truncated.      std::vector<double> temps (24, 32.00);    First comes the vector size, then the initial values.      std::vector<double> temps (0.00, 24);    Freezing is 32 degrees fahrenheit. The order of parameters is incorrect.      std::vector<double> temps (32, 24.00);    This statement creates a vector size 32 with elements initialized to 24.00 degress fahrenheit.       Suppose the following code is run:  std::vector<std::string> lauren = {\"happy\", \"to\", \"you\", \"September\", \"birthday\", \"girl\"}  How would you save the string \"birthday\" from lauren to the variable nurse ?       nurse = lauren[4]    Vectors are zero-indexed, so the fifth element is the fourth index.      nurse = lauren[5]    Remember, vectors are zero-indexed!      nurse = lauren[6]    Remember, vectors are zero-indexed!      nurse = lauren(4)    This is not proper vector indexing.      nurse = lauren(5)    This is not proper vector indexing. Also, vectors are zero-indexed.       What gets printed when the following code is run:  std::vector<std::string> chant = {\"Hail\", \"to\", \"the\", \"victors\", \"valiant\"}; chant[0]=chant[3]; chant[3]=chant[0]; chant[1]=chant[0]; for ( size_t i = 0; i < chant.size(); i++ ) { std::cout << chant[1][i] << \" \"; }      victors victors the victors valiant   Although this is the final version of chant , we are not printing chant !     error! we run into an error somewhere in the execution due to an out of bounds access.   Remember, chant at index 1 is no longer hail .     v i c t o r s   You are thinking of the correct word but consider upto what index we print.     v i c t o   Correct! we print the first 5 letters of the string at index 1 which is victo .       Select all of the following statments that correctly make a copy of lauren .  std::vector<std::string> lauren = {\"happy\", \"to\", \"you\", \"September\", \"birthday\", \"girl\"}  How would you save the string \"birthday\" from lauren to the variable nurse ?       std::vector<std::string> harry (lauren)    This syntax is correct, but isn't used often.      std::vector<std::string> lauren (ella)    You make a copy of the vector in parentheses.      std::vector<std::string> lauren = mariah    Remember how assignment statements work!      std::vector<katie> std::string = lauren    This is not proper syntax.      std::vector<std::string> mariah = lauren    This is the most common syntax.       What is the value of nums after the following code executes?  int main() { std::vector<int> nums = {0, 8, 5, 1, 4, 3}; for (int i = 0; i < 6; i++) { if (nums[i] % 2 == 0) { nums[i]--; } nums[i] = nums[i] * 2; } std::cout << nums[1]; }      {0, 8, 5, 1, 4, 3}    nums is modified inside of the loop.     {0, 16, 10, 2, 8, 6}   Take a look at the conditional.     {0, 16, 8, 0, 8, 4}   Take a closer look at the conditional.     {-2, 14, 10, 2, 6, 6}   All even numbers were decremeneted, then all numbers were multiplied by 2.     {2, 18, 10, 2, 10, 6}   Take a closer look at what happens inside of the conditional.       Multiple Response Select all ways to print out the contents of ryan without going out of bounds.  std::vector<int> ryan = {2, 3, 1, 5, 6, 0, 0, 5, 4};      for (int i = 0; i < ryan.size(); ++i) { std::cout << ryan[i] << \" \"; }   When we deal with the size function, we can't use type int .     for (size_t j = 0; j < ryan.size(); j++) { std::cout << ryan[j] << \" \"; }   When we deal with the size function, we must use type size_t .     for (int k = 0; k < 8; ++k) { std::cout << ryan[k] << \" \"; }   There are 9 elements, numbered 0 through 8, but here we only iterate through 8 of them.     for (int n = 0; n < 9; n++) { std::cout << ryan[n] << \" \"; }   There are 9 elements numbered 0 through 8, and this statement iterates over all of them.     for (int m = 0; m <= 8; ++m) { std::cout << ryan[m] << \" \"; }   There are 9 elements numbered 0 through 8, and this statement iterates over all of them.       Suppose you want ryan to have the value  std::vector<int> ryan = {2, 3, 1, 5, 6, 7, 8, 9};  What vector functions will you use to achieve this, and how many times will you use them? Keep in mind, ryan is currently the following vector of integers.  std::vector<int> ryan = {2, 3, 1, 5, 6, 0, 0, 5, 4};      Use push_back 4 times with no arguments to get rid of the last 4 elements, then use push_back 3 times with arguments to specify which values you want to add to the end.   You'll need to use two different functions to accomplish this task.     Use push_back 4 times with no arguments to get rid of the last 4 elements, then use pop_back 3 times with arguments to specify which values you want to add to the end.    push_back pushes new items onto the end of the vector, and pop_back  pops old items off the end of the vector.     Use pop_back 4 times with no arguments to get rid of the last 4 elements, then use pop_back 3 times with arguments to specify which values you want to add to the end.   You'll need to use two different functions to accomplish this task.     Use pop_back 4 times with no arguments to get rid of the last 4 elements, then use push_back 3 times with arguments to specify which values you want to add to the end.    push_back  pushes new items onto the end of the vector, and pop_back  pops old items off the end of the vector.       Suppose you are randomly assigning students to discussions 1-8. How would you do this correctly? Assume you have alreay implemented the following code.  int x = random();      int y = x % 7; y = y + 1;   The first part creates a random number between 0 and 7 (8 numbers) and the second part adds 1 so that our random number is actually between 1 and 8.     int y = x % 8; y = y + 1;   The first part creates a random number between 0 and 8 (9 numbers). This is too many.     int y = x % 7;   This creates a random number between 0 and 7 (8 numbers), which are not the numbers we are looking for.     int y = x % 8;   The first part creates a random number between 0 and 8 (9 numbers). This is too many, and not the numbers we are looking for.       Suppose you have defined the fizzBuzz function as the following  int fizzBuzz(const std::vector<int> & vec, int num1, int num2) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { if (vec[i] % num1 == 0 && vec[i] % num2 == 0) { count++; } } return count; }  What would be printed in the following case?  std::vector<int> numbers = {6, 8, 14, 21, 28, 35, 36, 42, 49, 70, 81, 98}; cout << fizzBuzz(numbers, 2, 7);      1   14 is 7 * 2. Don't forget about the other multiples of 7 and 2.     2   See if you can find the other multiples of 7 and 2.     3   See if you can find the other multiples of 7 and 2.     4   See if you can find the other multiples of 7 and 2.     5   14, 28, 42, 70, and 98 are all multiples of 7 and 2 and are counted by fizzBuzz .       Suppose you have defined the startsWith function as the following  int startsWith(const std::vector<std::string> & vec, char c) { int count = 0; int pos = 0; for (size_t i = 0; i < vec.size(); i++) { pos = vec[i].find(\" \"); if (vec[i][pos + 1] == c) { count++; } } return count; }  What would be printed in the following case?  std::vector<std::string> names = {\"Ross Meldrum\", \"Monica Morrissey\", \"Maria Geller\", \"Marty Bing\"}; cout << howMany(names, 'M');      1   Is the function counting how many first and last names begin with \"M\" ?     2   The function is counting how many last names begin with \"M\" .     3   Is the function counting how many first names begin with \"M\" ?     4   Is the function counting how many elements in names contain \"M\" ?     5   Is the function counting how many times \"M\" appears in names ?       Suppose you have defined the howMany function as the following  int howMany(const std::vector<std::string>& vec, char let) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { for (size_t c = 0; c < vec[i].size(); c++) { if (vec[i][c] == let) { count++; } } } return count; }  What is the value of counts after the following code is run?  std::vector<std::string> snacks = {\"cheetos\", \"ruffles\", \"jalepeno chips\", \"oreos\", \"m&ms\"}; std::vector<char> letters = {'a', 'e', 'i', 'o', 'u'}; std::vector<int> counts = {}; for (int i = 0; i < letters.size(); ++i) { counts.push_back(howMany(snacks, letters[i])); }      {1, 6, 2, 6, 2}   What is being counted in counts ?     {1, 4, 1, 3, 1}    counts isn't a count of how many words each vowel appers in inside snacks .     {1, 6, 1, 4, 1}    counts contains a count of how many times each vowel appers in snacks .     {1, 6, 2, 3, 2}   What is being counted in counts ?     Error!   There isn't anything wrong with the code that would cause an error.       Suppose you have defined the repeater function as the following  int repeater(const std::vector<int>& vec) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { for (size_t j = 0; j < vec.size(); j++) { if ((vec[j] == vec[i]) && (i != j)) { count++; } } } return count; }  What is the value of counter after the following code is run?  std::vector<int> vals = {1,1,3,2,2,3,3,4,5,6,7,4,4,5}; int counter = repeater(vals);      169   What is being counted by repeater in each iteration of the outer loop? Definitely not everything!     32    repeater does count repeats but does it consider values at the same indexes repeats?     18    repeater considers the number of times each index shares a value with any of the other indices.     13    repeater dosen't simply count the number of elements.     "
-},
-{
-  "id": "chapter10_multiple-choice-exercises-2-1",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#chapter10_multiple-choice-exercises-2-1",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Answer the following Multiple Choice questions to assess what you have learned in this chapter. "
-},
-{
-  "id": "vectors_mc1",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc1",
-  "type": "Exercise",
-  "number": "8.16.1",
-  "title": "",
-  "body": "  Suppose you are collecting data for a science experiment. You are to perform three trials of eight temperature readings measured in degrees fahrenheit to the nearest hundredth and initialized to freezing . Choose the vector that has the proper amount of storage for this scenario.       std::vector<int> temps (24, 32.00);    We can't declare the vector as an integer type because all temperature readings will be truncated.      std::vector<double> temps (24, 32.00);    First comes the vector size, then the initial values.      std::vector<double> temps (0.00, 24);    Freezing is 32 degrees fahrenheit. The order of parameters is incorrect.      std::vector<double> temps (32, 24.00);    This statement creates a vector size 32 with elements initialized to 24.00 degress fahrenheit.    "
-},
-{
-  "id": "vectors_mc2",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc2",
-  "type": "Exercise",
-  "number": "8.16.2",
-  "title": "",
-  "body": "  Suppose the following code is run:  std::vector<std::string> lauren = {\"happy\", \"to\", \"you\", \"September\", \"birthday\", \"girl\"}  How would you save the string \"birthday\" from lauren to the variable nurse ?       nurse = lauren[4]    Vectors are zero-indexed, so the fifth element is the fourth index.      nurse = lauren[5]    Remember, vectors are zero-indexed!      nurse = lauren[6]    Remember, vectors are zero-indexed!      nurse = lauren(4)    This is not proper vector indexing.      nurse = lauren(5)    This is not proper vector indexing. Also, vectors are zero-indexed.    "
-},
-{
-  "id": "vectors_mc3",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc3",
-  "type": "Exercise",
-  "number": "8.16.3",
-  "title": "",
-  "body": "  What gets printed when the following code is run:  std::vector<std::string> chant = {\"Hail\", \"to\", \"the\", \"victors\", \"valiant\"}; chant[0]=chant[3]; chant[3]=chant[0]; chant[1]=chant[0]; for ( size_t i = 0; i < chant.size(); i++ ) { std::cout << chant[1][i] << \" \"; }      victors victors the victors valiant   Although this is the final version of chant , we are not printing chant !     error! we run into an error somewhere in the execution due to an out of bounds access.   Remember, chant at index 1 is no longer hail .     v i c t o r s   You are thinking of the correct word but consider upto what index we print.     v i c t o   Correct! we print the first 5 letters of the string at index 1 which is victo .    "
-},
-{
-  "id": "vectors_mc4",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc4",
-  "type": "Exercise",
-  "number": "8.16.4",
-  "title": "",
-  "body": "  Select all of the following statments that correctly make a copy of lauren .  std::vector<std::string> lauren = {\"happy\", \"to\", \"you\", \"September\", \"birthday\", \"girl\"}  How would you save the string \"birthday\" from lauren to the variable nurse ?       std::vector<std::string> harry (lauren)    This syntax is correct, but isn't used often.      std::vector<std::string> lauren (ella)    You make a copy of the vector in parentheses.      std::vector<std::string> lauren = mariah    Remember how assignment statements work!      std::vector<katie> std::string = lauren    This is not proper syntax.      std::vector<std::string> mariah = lauren    This is the most common syntax.    "
-},
-{
-  "id": "vectors_mc5",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc5",
-  "type": "Exercise",
-  "number": "8.16.5",
-  "title": "",
-  "body": "  What is the value of nums after the following code executes?  int main() { std::vector<int> nums = {0, 8, 5, 1, 4, 3}; for (int i = 0; i < 6; i++) { if (nums[i] % 2 == 0) { nums[i]--; } nums[i] = nums[i] * 2; } std::cout << nums[1]; }      {0, 8, 5, 1, 4, 3}    nums is modified inside of the loop.     {0, 16, 10, 2, 8, 6}   Take a look at the conditional.     {0, 16, 8, 0, 8, 4}   Take a closer look at the conditional.     {-2, 14, 10, 2, 6, 6}   All even numbers were decremeneted, then all numbers were multiplied by 2.     {2, 18, 10, 2, 10, 6}   Take a closer look at what happens inside of the conditional.    "
-},
-{
-  "id": "vectors_mc6",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc6",
-  "type": "Exercise",
-  "number": "8.16.6",
-  "title": "",
-  "body": "  Multiple Response Select all ways to print out the contents of ryan without going out of bounds.  std::vector<int> ryan = {2, 3, 1, 5, 6, 0, 0, 5, 4};      for (int i = 0; i < ryan.size(); ++i) { std::cout << ryan[i] << \" \"; }   When we deal with the size function, we can't use type int .     for (size_t j = 0; j < ryan.size(); j++) { std::cout << ryan[j] << \" \"; }   When we deal with the size function, we must use type size_t .     for (int k = 0; k < 8; ++k) { std::cout << ryan[k] << \" \"; }   There are 9 elements, numbered 0 through 8, but here we only iterate through 8 of them.     for (int n = 0; n < 9; n++) { std::cout << ryan[n] << \" \"; }   There are 9 elements numbered 0 through 8, and this statement iterates over all of them.     for (int m = 0; m <= 8; ++m) { std::cout << ryan[m] << \" \"; }   There are 9 elements numbered 0 through 8, and this statement iterates over all of them.    "
-},
-{
-  "id": "vectors_mc7",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc7",
-  "type": "Exercise",
-  "number": "8.16.7",
-  "title": "",
-  "body": "  Suppose you want ryan to have the value  std::vector<int> ryan = {2, 3, 1, 5, 6, 7, 8, 9};  What vector functions will you use to achieve this, and how many times will you use them? Keep in mind, ryan is currently the following vector of integers.  std::vector<int> ryan = {2, 3, 1, 5, 6, 0, 0, 5, 4};      Use push_back 4 times with no arguments to get rid of the last 4 elements, then use push_back 3 times with arguments to specify which values you want to add to the end.   You'll need to use two different functions to accomplish this task.     Use push_back 4 times with no arguments to get rid of the last 4 elements, then use pop_back 3 times with arguments to specify which values you want to add to the end.    push_back pushes new items onto the end of the vector, and pop_back  pops old items off the end of the vector.     Use pop_back 4 times with no arguments to get rid of the last 4 elements, then use pop_back 3 times with arguments to specify which values you want to add to the end.   You'll need to use two different functions to accomplish this task.     Use pop_back 4 times with no arguments to get rid of the last 4 elements, then use push_back 3 times with arguments to specify which values you want to add to the end.    push_back  pushes new items onto the end of the vector, and pop_back  pops old items off the end of the vector.    "
-},
-{
-  "id": "vectors_mc8",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc8",
-  "type": "Exercise",
-  "number": "8.16.8",
-  "title": "",
-  "body": "  Suppose you are randomly assigning students to discussions 1-8. How would you do this correctly? Assume you have alreay implemented the following code.  int x = random();      int y = x % 7; y = y + 1;   The first part creates a random number between 0 and 7 (8 numbers) and the second part adds 1 so that our random number is actually between 1 and 8.     int y = x % 8; y = y + 1;   The first part creates a random number between 0 and 8 (9 numbers). This is too many.     int y = x % 7;   This creates a random number between 0 and 7 (8 numbers), which are not the numbers we are looking for.     int y = x % 8;   The first part creates a random number between 0 and 8 (9 numbers). This is too many, and not the numbers we are looking for.    "
-},
-{
-  "id": "vectors_mc9",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc9",
-  "type": "Exercise",
-  "number": "8.16.9",
-  "title": "",
-  "body": "  Suppose you have defined the fizzBuzz function as the following  int fizzBuzz(const std::vector<int> & vec, int num1, int num2) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { if (vec[i] % num1 == 0 && vec[i] % num2 == 0) { count++; } } return count; }  What would be printed in the following case?  std::vector<int> numbers = {6, 8, 14, 21, 28, 35, 36, 42, 49, 70, 81, 98}; cout << fizzBuzz(numbers, 2, 7);      1   14 is 7 * 2. Don't forget about the other multiples of 7 and 2.     2   See if you can find the other multiples of 7 and 2.     3   See if you can find the other multiples of 7 and 2.     4   See if you can find the other multiples of 7 and 2.     5   14, 28, 42, 70, and 98 are all multiples of 7 and 2 and are counted by fizzBuzz .    "
-},
-{
-  "id": "vectors_mc10",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc10",
-  "type": "Exercise",
-  "number": "8.16.10",
-  "title": "",
-  "body": "  Suppose you have defined the startsWith function as the following  int startsWith(const std::vector<std::string> & vec, char c) { int count = 0; int pos = 0; for (size_t i = 0; i < vec.size(); i++) { pos = vec[i].find(\" \"); if (vec[i][pos + 1] == c) { count++; } } return count; }  What would be printed in the following case?  std::vector<std::string> names = {\"Ross Meldrum\", \"Monica Morrissey\", \"Maria Geller\", \"Marty Bing\"}; cout << howMany(names, 'M');      1   Is the function counting how many first and last names begin with \"M\" ?     2   The function is counting how many last names begin with \"M\" .     3   Is the function counting how many first names begin with \"M\" ?     4   Is the function counting how many elements in names contain \"M\" ?     5   Is the function counting how many times \"M\" appears in names ?    "
-},
-{
-  "id": "vectors_mc11",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc11",
-  "type": "Exercise",
-  "number": "8.16.11",
-  "title": "",
-  "body": "  Suppose you have defined the howMany function as the following  int howMany(const std::vector<std::string>& vec, char let) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { for (size_t c = 0; c < vec[i].size(); c++) { if (vec[i][c] == let) { count++; } } } return count; }  What is the value of counts after the following code is run?  std::vector<std::string> snacks = {\"cheetos\", \"ruffles\", \"jalepeno chips\", \"oreos\", \"m&ms\"}; std::vector<char> letters = {'a', 'e', 'i', 'o', 'u'}; std::vector<int> counts = {}; for (int i = 0; i < letters.size(); ++i) { counts.push_back(howMany(snacks, letters[i])); }      {1, 6, 2, 6, 2}   What is being counted in counts ?     {1, 4, 1, 3, 1}    counts isn't a count of how many words each vowel appers in inside snacks .     {1, 6, 1, 4, 1}    counts contains a count of how many times each vowel appers in snacks .     {1, 6, 2, 3, 2}   What is being counted in counts ?     Error!   There isn't anything wrong with the code that would cause an error.    "
-},
-{
-  "id": "vectors_mc12",
-  "level": "2",
-  "url": "chapter10_multiple-choice-exercises.html#vectors_mc12",
-  "type": "Exercise",
-  "number": "8.16.12",
-  "title": "",
-  "body": "  Suppose you have defined the repeater function as the following  int repeater(const std::vector<int>& vec) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { for (size_t j = 0; j < vec.size(); j++) { if ((vec[j] == vec[i]) && (i != j)) { count++; } } } return count; }  What is the value of counter after the following code is run?  std::vector<int> vals = {1,1,3,2,2,3,3,4,5,6,7,4,4,5}; int counter = repeater(vals);      169   What is being counted by repeater in each iteration of the outer loop? Definitely not everything!     32    repeater does count repeats but does it consider values at the same indexes repeats?     18    repeater considers the number of times each index shares a value with any of the other indices.     13    repeater dosen't simply count the number of elements.    "
-},
-{
-  "id": "chapter10_mixed-up-code-exercises-1",
-  "level": "1",
-  "url": "chapter10_mixed-up-code-exercises-1.html",
-  "type": "Exercises",
-  "number": "8.17",
-  "title": "Mixed-Up Code Exercises",
-  "body": " Mixed-Up Code Exercises  Answer the following Mixed-Up Code questions to assess what you have learned in this chapter.    Construct a block of code that changes the first element of vec to a 6, multiplies the third element of vec by 2, and increments the last element of vec by 1 (in that order). This should work no matter what vec is.     vec[0] = 6;    vec[2] = vec[2] * 2;    last = vec.size() - 1;  vec[last]++;    vec[1] = 6;    vec[0] == 6;    vec[3] = vec[3] * 2;    last = vec.size();  vec[last]++;       Construct a block of code that creates a vector called digs whose elements are 7, 8, 7, 8. Then access elements to change the digs to contain the elements 7, 4, 7, 4. Important : Change the 8's to 4's in order of increasing index.     std::vector<int> digs = {7, 8, 7, 8};    digs[1] = 4;    digs.pop_back();    digs.push_back(4);    vector digs = {7, 8, 7, 8};    std::vector<int> digs = [7, 8, 7, 8];    digs[2] = 4;    digs.pop_back(4);       Construct a block of code that creates a vector called nums whose elements are five 1's. Then make a copy of this vector called digits , and use vector operations to change digits to {1, 2, 3} .     std::vector<int> nums (5, 1);    std::vector<int> digits = nums;    digits.pop_back();  digits.pop_back();    digits[1]++;  digits[2] = digits[2] * 3;    vector nums = {1, 1, 1, 1, 1};    std::vector<int> nums = digits;    digits.push_back();  digits.push_back();    digits[2]++;  digits[3] = digits[3] * 3;       Construct a block of code that loops over a vector called numbers and transforms the vector so each element is doubled.     std::vector<int> numbers = {1, 2, 3, 4, 5};    for (size_t i = 0; i < numbers.size(); i++) {    numbers[i] = numbers[i] * 2;    }    vector numbers = {1, 2, 3, 4, 5};    for (size_t i = 1; i <= numbers.size(); ++i) {    for (int i = 0; i < numbers.size(); i++) {    numbers[i] * 2;       Suppose you have the vector std::vector<std::string> words = {\"car\", \"cat\", \"switch\", \"princess\"} Construct a block of code that transforms the vector to std::vector<std::string> words = {\"cAr\", \"cAt\", \"switch\", \"mArio\"}     words.pop_back();    words.push_back(\"mario\");    for (size_t i = 0; i < words.size(); ++i) {    for (size_t c = 0; c < words[i].size(); ++c) {    if (words[i][c] == 'a') {    words[i][c] = 'A';    }  }  }    words.pop_back(\"mario\");    for (int i = 0; i < words.size(); ++i) {    for (int c = 0; c < words[i].size(); ++c) {    words[i][c] == 'A';       Suppose you run Club Keno, and you are in charge of picking the 20 random numbered balls between 1 and 80. Construct a block of code that chooses these random numbers, then saves them to a vector called keno .     std::vector<int> keno = {};    for (size_t i = 0; i < 20; i++) {    int x = random();    int y = x % 80;    keno.push_back(y + 1);    }    for (int i = 0; i < 20; i++) {    int y = x % 81;    keno.push_back(y);       Suppose <code>album<\/code> has already been defined as std::vector<std::string> album = {\"imagine\", \"needy\", \"NASA\", \"bloodline\", \"fake smile\", \"bad idea\", \"make up\", \"ghostin\", \"in my head\", \"7 rings\", \"thank u, next\", \"break up with your girlfriend, i'm bored\"} Construct a block of code that counts how many songs in <code>album<\/code> start with b.     count = 0    for (size_t i = 0; i < album.size(); i++) {    if (album[i][0] == 'b') {    ++count;    }  }    for (int i = 0; i < album.size(); i++) {    if (album[i] == 'b') {    if (album[i][1] == 'b') {    count++       Suppose you have the following two vectors to describe the weekly forecast std::vector<double> temps = {82.0, 76.8, 74.3, 58.8, 79.2, 73.4, 80.1}  std::vector<double> precip = {0.00, 0.30, 0.60, 0.90, 0.10, 0.20, 0.80} Your family will go to the beach if the temperature at least 75 degrees and the chance of precipitation is less than 50%. Construct a block of code that counts how many days your family can hit the beach on your vacation.     count = 0;    for (int i = 0; i < 7; ++i) {    if (temps[i] >= 75.0 && precip[i] < 0.50) {    ++count;    }  }    for (size_t i = 1; i <= 7; ++i) {    if (temps[i] > 75.0 && precip[i] <= 0.50) {    count++       Suppose you have the following std::vector nouns , std::vector<std::string> nouns = {\"cereal\", \"Cocoa Puffs\", \"Mario\", \"luigi\", \"Aerosmith\"} Construct a block of code that creates a vector of the proper nouns in nouns . Use the isupper function to check if a letter is uppercase.     std::vector<std::string> proper = {};    for (size_t i = 0; i < nouns.size(); ++i) {    if (isupper(nouns[i][0])) {    proper.push_back(nouns[i]);    }  }    if (isupper(nouns[i][1])) {    proper.push_back(nouns[i][0]);    proper.pop_back(nouns[i]);    vector proper = {};       Suppose you have the following function howMany and vector exclamations Construct a block of code that counts how many times . , ! , and ? occur in exclamations . Save the counts to a vector with . count as the first element, ! count as the second, and ? count as the third. Put the necessary blocks of code in the correct order.  int howMany(const std::vector<std::string>& vec, char let) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { for (size_t c = 0; c < vec[i].size(); c++) { if (vec[i][c] == let) { count++; } } } return count; } std::vector<string> excl = {\"what?!\", \"how???\", \"fine!\", \"STOP.\", \"yay!!!!!\", \"ugh...!\"};     std::vector<char> punc = {'.', '!', '?'};  std::vector<int> counts = {};    for (int i = 0; i < punc.size(); ++i) {    counts.push_back(howMany(excl, punc[i]));    }    std::vector<string> punc = {\".\", \"!\", \"?\"};  std::vector<int> counts = {};    for (int i = 0; i < excl.size(); ++i) {    counts.push_back(howMany(excl, i));     "
-},
-{
-  "id": "chapter10_mixed-up-code-exercises-1-2-1",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#chapter10_mixed-up-code-exercises-1-2-1",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Answer the following Mixed-Up Code questions to assess what you have learned in this chapter. "
-},
-{
-  "id": "vectors_p1",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#vectors_p1",
-  "type": "Exercise",
-  "number": "8.17.yes",
-  "title": "",
-  "body": "  Construct a block of code that changes the first element of vec to a 6, multiplies the third element of vec by 2, and increments the last element of vec by 1 (in that order). This should work no matter what vec is.     vec[0] = 6;    vec[2] = vec[2] * 2;    last = vec.size() - 1;  vec[last]++;    vec[1] = 6;    vec[0] == 6;    vec[3] = vec[3] * 2;    last = vec.size();  vec[last]++;    "
-},
-{
-  "id": "vectors_p2",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#vectors_p2",
-  "type": "Exercise",
-  "number": "8.17.yes",
-  "title": "",
-  "body": "  Construct a block of code that creates a vector called digs whose elements are 7, 8, 7, 8. Then access elements to change the digs to contain the elements 7, 4, 7, 4. Important : Change the 8's to 4's in order of increasing index.     std::vector<int> digs = {7, 8, 7, 8};    digs[1] = 4;    digs.pop_back();    digs.push_back(4);    vector digs = {7, 8, 7, 8};    std::vector<int> digs = [7, 8, 7, 8];    digs[2] = 4;    digs.pop_back(4);    "
-},
-{
-  "id": "vectors_p3",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#vectors_p3",
-  "type": "Exercise",
-  "number": "8.17.yes",
-  "title": "",
-  "body": "  Construct a block of code that creates a vector called nums whose elements are five 1's. Then make a copy of this vector called digits , and use vector operations to change digits to {1, 2, 3} .     std::vector<int> nums (5, 1);    std::vector<int> digits = nums;    digits.pop_back();  digits.pop_back();    digits[1]++;  digits[2] = digits[2] * 3;    vector nums = {1, 1, 1, 1, 1};    std::vector<int> nums = digits;    digits.push_back();  digits.push_back();    digits[2]++;  digits[3] = digits[3] * 3;    "
-},
-{
-  "id": "vectors_p4",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#vectors_p4",
-  "type": "Exercise",
-  "number": "8.17.yes",
-  "title": "",
-  "body": "  Construct a block of code that loops over a vector called numbers and transforms the vector so each element is doubled.     std::vector<int> numbers = {1, 2, 3, 4, 5};    for (size_t i = 0; i < numbers.size(); i++) {    numbers[i] = numbers[i] * 2;    }    vector numbers = {1, 2, 3, 4, 5};    for (size_t i = 1; i <= numbers.size(); ++i) {    for (int i = 0; i < numbers.size(); i++) {    numbers[i] * 2;    "
-},
-{
-  "id": "vectors_p5",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#vectors_p5",
-  "type": "Exercise",
-  "number": "8.17.yes",
-  "title": "",
-  "body": "  Suppose you have the vector std::vector<std::string> words = {\"car\", \"cat\", \"switch\", \"princess\"} Construct a block of code that transforms the vector to std::vector<std::string> words = {\"cAr\", \"cAt\", \"switch\", \"mArio\"}     words.pop_back();    words.push_back(\"mario\");    for (size_t i = 0; i < words.size(); ++i) {    for (size_t c = 0; c < words[i].size(); ++c) {    if (words[i][c] == 'a') {    words[i][c] = 'A';    }  }  }    words.pop_back(\"mario\");    for (int i = 0; i < words.size(); ++i) {    for (int c = 0; c < words[i].size(); ++c) {    words[i][c] == 'A';    "
-},
-{
-  "id": "vectors_p6",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#vectors_p6",
-  "type": "Exercise",
-  "number": "8.17.yes",
-  "title": "",
-  "body": "  Suppose you run Club Keno, and you are in charge of picking the 20 random numbered balls between 1 and 80. Construct a block of code that chooses these random numbers, then saves them to a vector called keno .     std::vector<int> keno = {};    for (size_t i = 0; i < 20; i++) {    int x = random();    int y = x % 80;    keno.push_back(y + 1);    }    for (int i = 0; i < 20; i++) {    int y = x % 81;    keno.push_back(y);    "
-},
-{
-  "id": "vectors_p7",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#vectors_p7",
-  "type": "Exercise",
-  "number": "8.17.yes",
-  "title": "",
-  "body": "  Suppose <code>album<\/code> has already been defined as std::vector<std::string> album = {\"imagine\", \"needy\", \"NASA\", \"bloodline\", \"fake smile\", \"bad idea\", \"make up\", \"ghostin\", \"in my head\", \"7 rings\", \"thank u, next\", \"break up with your girlfriend, i'm bored\"} Construct a block of code that counts how many songs in <code>album<\/code> start with b.     count = 0    for (size_t i = 0; i < album.size(); i++) {    if (album[i][0] == 'b') {    ++count;    }  }    for (int i = 0; i < album.size(); i++) {    if (album[i] == 'b') {    if (album[i][1] == 'b') {    count++    "
-},
-{
-  "id": "vectors_p8",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#vectors_p8",
-  "type": "Exercise",
-  "number": "8.17.yes",
-  "title": "",
-  "body": "  Suppose you have the following two vectors to describe the weekly forecast std::vector<double> temps = {82.0, 76.8, 74.3, 58.8, 79.2, 73.4, 80.1}  std::vector<double> precip = {0.00, 0.30, 0.60, 0.90, 0.10, 0.20, 0.80} Your family will go to the beach if the temperature at least 75 degrees and the chance of precipitation is less than 50%. Construct a block of code that counts how many days your family can hit the beach on your vacation.     count = 0;    for (int i = 0; i < 7; ++i) {    if (temps[i] >= 75.0 && precip[i] < 0.50) {    ++count;    }  }    for (size_t i = 1; i <= 7; ++i) {    if (temps[i] > 75.0 && precip[i] <= 0.50) {    count++    "
-},
-{
-  "id": "vectors_p9",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#vectors_p9",
-  "type": "Exercise",
-  "number": "8.17.yes",
-  "title": "",
-  "body": "  Suppose you have the following std::vector nouns , std::vector<std::string> nouns = {\"cereal\", \"Cocoa Puffs\", \"Mario\", \"luigi\", \"Aerosmith\"} Construct a block of code that creates a vector of the proper nouns in nouns . Use the isupper function to check if a letter is uppercase.     std::vector<std::string> proper = {};    for (size_t i = 0; i < nouns.size(); ++i) {    if (isupper(nouns[i][0])) {    proper.push_back(nouns[i]);    }  }    if (isupper(nouns[i][1])) {    proper.push_back(nouns[i][0]);    proper.pop_back(nouns[i]);    vector proper = {};    "
-},
-{
-  "id": "vectors_p10",
-  "level": "2",
-  "url": "chapter10_mixed-up-code-exercises-1.html#vectors_p10",
-  "type": "Exercise",
-  "number": "8.17.yes",
-  "title": "",
-  "body": "  Suppose you have the following function howMany and vector exclamations Construct a block of code that counts how many times . , ! , and ? occur in exclamations . Save the counts to a vector with . count as the first element, ! count as the second, and ? count as the third. Put the necessary blocks of code in the correct order.  int howMany(const std::vector<std::string>& vec, char let) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { for (size_t c = 0; c < vec[i].size(); c++) { if (vec[i][c] == let) { count++; } } } return count; } std::vector<string> excl = {\"what?!\", \"how???\", \"fine!\", \"STOP.\", \"yay!!!!!\", \"ugh...!\"};     std::vector<char> punc = {'.', '!', '?'};  std::vector<int> counts = {};    for (int i = 0; i < punc.size(); ++i) {    counts.push_back(howMany(excl, punc[i]));    }    std::vector<string> punc = {\".\", \"!\", \"?\"};  std::vector<int> counts = {};    for (int i = 0; i < excl.size(); ++i) {    counts.push_back(howMany(excl, i));    "
-},
-{
-  "id": "chapter10_activecode-exercises",
-  "level": "1",
-  "url": "chapter10_activecode-exercises.html",
-  "type": "Exercises",
-  "number": "8.18",
-  "title": "Activecode Exercises",
-  "body": " Activecode Exercises  Answer the following Activecode questions to assess what you have learned in this chapter.    Fix the code below so that it creates a vector with 5 elements initialized to 1, and changes the third element of that vector to a 2.   #include <iostream> int main () { std::vector<int> nums (5) = 1; nums[3] = 2; }      Below is one way to fix the program. You must always include the <vector> header when dealing with vectors. Furthermore, to initialize a vector’s elements to a certain value, you must include that value as a second argument to the size. Finally, vectors are zero-indexed.   #include <iostream> #include <vector> int main () { std::vector<int> nums (5, 1); nums[2] = 2; }         Fix the function below so that it returns how many even numbers are in nums . Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> int even_count(const std::vector<int> &vec) { for (size_t i = 0; i < vec.size(); i++) { if (i % 2 == 0) { count++; } } return count; } int main() { std::vector<int> vec{1,2,3,4}; std::cout << even_count(vec) << std::endl; }      Fix the function below so that it returns how many even numbers are in nums . Use the lines to construct the code, then go back to complete the Activecode.     int even_count(const std::vector<int> &vec) {    int count = 0;    int count;    for (size_t i = 0; i < vec.size(); i++) {     if (vec[i] % 2 == 0) {    if (vec[i] % 2 != 0) {     count++;    }    }    return count;    }         Fix the function below so that it creates a vector of all of the words in words that end with the passed character.   #include <iostream> #include <string> #include <vector> int ends_with(const std::vector<std::string>& vec, char c) { int count; for (size_t i = 0; i < vec.size(); i++) { size_t last = vec.size() - 1; if (vec[last] == c) { count++; } } return count; }      Below is one way to fix the function. You must initialize count to zero. You also must initialize last as an integer. To access a string inside of vec , we use vec[i] . To get the last character, we must index the string to the last index, which is one less than the length of the string.   #include <iostream> #include <string> #include <vector> int ends_with(const std::vector<std::string>& vec, char c) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { size_t last = vec[i].size() - 1; if (vec[i][last] == c) { count++; } } return count; }         Someone could have COVID-19 if their temperature is above 99.9 degrees Fahrenheit. Finish the code below so that it counts and prints how many students in the class may have been exposed. Check the hint below for help with the construction of the code.   #include <iostream> int main () { std::vector<double> temps = {98.6, 97.8, 100.3, 97.2, 98.7, 97.8, 99.8, 96.9, 98.2, 99.1, 99.9}; int covid_count = 0; for (size_t i = 0; i < temps.size(); i++) { } }      Someone could have COVID-19 if their temperature is above 99.9 degrees Fahrenheit. Finish the code below so that it counts and prints how many students in the class may have been exposed. Use the lines to construct the code, then go back to complete the Activecode.     #include <iostream>  #include <vector>    int main() {    std::vector<double> temps = {98.6, 97.8, 100.3, 97.2, 98.7, 97.8, 99.8, 96.9, 98.2, 99.1, 99.9};    int covid_count = 0;    for (size_t i = 0; i < temps.size(); i++) {    if (temps[i] > 99.9) {    covid_count++;    }    }    std::cout << covid_count << std::endl ;    }         Finish the code below so that it creates removes elements from the end of the vector until it ends with \"stop\" .   #include <iostream> int main () { std::vector<std::string> words = {\"roses\", \"are\", \"red\", \"violets\", \"stop\", \"are\", \"blue\"} while( ) { } }      Below is one way to finish the program. We just use the pop_back function until the last element of the vector is \"stop\" .   #include <iostream> #include <vector> int main () { std::vector<std::string> words = {\"roses\", \"are\", \"red\", \"violets\", \"stop\", \"are\", \"blue\"}; while (words[words.size() - 1] != \"stop\"){ words.pop_back(); } }         Write the function ends_even that takes a vector and removes elements from the end of the vector until it ends with an even number. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> \/\/ Write the ends_even function here int main() { std::vector<int> vec{1,2,3,4,5,6,7,7,9}; ends_even(vec); for(int unsigned i = 0; i < vec.size(); i++) { std::cout << vec[i] << std::endl; } }      Write the function ends_even that takes a vector and removes elements from the end of the vector until it ends with an even number. Use the lines to construct the code, then go back to complete the Activecode.     void ends_even (std::vector<int> &vec) {    vector ends_even (std::vector<int> &vec) {     while (vec.back() % 2 != 0) {    for (size_t i = 0; i < vec.size(); i++) {     vec.pop_back();    }    }         Write a function called has_char that returns a boolean of whether every string in the vector vec contains the character let . It should return true if all strings contain the let .   #include <iostream> #include <vector>      Below is one way to finish the program. We loop through the vector, and we loop through each string inside it. If the string has the character, it is added to count . We then check whether count is equal to the number of elements in vec and return a boolean.   #include <iostream> #include <vector> int has_char(const std::vector<std::string>& vec, char let) { size_t count = 0; for (size_t i = 0; i < vec.size(); i++) { for (size_t c = 0; c < vec[i].size(); c++) { if (vec[i][c] == let) { count++; } } } if (count == vec.size()) { return true; } return false; }         Write the function random_nums that takes two integers: num which is the number of random numbers you wish to generate, and max , which is the maximum value of random number you wish to generate. Your function should return a vector of num integers that are between 1 and max , inclusive. Check the hint below for help with the construction of the code.   #include <iostream> #include <cstdlib> #include <vector> \/\/ Write the random_nums function here int main() { int num = 10; int std::max = 100; random_nums(num,std::max); for (size_t i = 0; i < random_nums(num,std::max).size(); i++) { std::cout << random_nums(num,std::max)[i] << std::endl; } }      Write the function random_nums that takes two integers: num which is the number of random numbers you wish to generate, and max , which is the maximum value of random number you wish to generate. Your function should return a vector of num integers that are between 1 and max , inclusive. Use the lines to construct the code, then go back to complete the Activecode.     std::vector<int> random_nums (int num, int max) {    std::vector<int> random_vec(num);     for (int i = 0; i < num; i++) {    for (size_t i = 0; i <= random_vec.size(); i++) {     random_vec[i] = rand() % max + 1;    }    return random_vec;    return random_vec[i];    }         Write the function mean which returns the average of a vector of numbers.   #include <iostream> #include <vector>      Below is one way to finish the program. First we take the sum, then divide the sum by the number of elements in nums .   #include <iostream> #include <vector> double mean (const std::vector<double> nums) { double sum = 0; for (size_t i = 0; i < nums.size(); ++i) { sum = sum + nums[i]; } return sum\/nums.size(); }         Write the function hundy_bundy that returns a count of all numbers in the passed vector vec that are divisible by 100. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> \/\/ Write the hundy_bundy function here int main() { std::vector<int> vec{ 100,10,300,400,21,1000 }; std::cout << hundy_bundy(vec) << std::endl; }      Write the function hundy_bundy that returns a count of all numbers in the passed vector vec that are divisible by 100. Use the lines to construct the code, then go back to complete the Activecode.      int hundy_bundy (const std::vector<int> vec) {    std::vector<int> hundy_bundy (const std::vector<int> vec) {     int count = 0;    for (size_t i = 0; i < vec.size(); i++) {    for (size_t i = 0; i < count(); i++) {    if (vec[i] % 100 == 0) {    count++;    }    }    return count;    }         Write the function make_odd which subtracts 1 from every even number in a vector of integers. We don’t want any negative values so don’t subtract 1 from 0. ( remember to take in the vector by reference to make changes to the actual vector! )   #include <iostream> #include <vector>      Below is one way to finish the program. We us the modulus operator to check for even numbers and decrement them. we keep an extra check for 0 to make sure wew are not decrementing 0.   #include <iostream> #include <vector> void make_odd ( std::vector<int> &nums) { for (size_t i = 0; i < nums.size(); ++i) { if((nums[i] % 2 == 0) && (nums[i] != 0)){ nums[i]--; } } }         Write the function weird_print that prints the first half of a vector of integers in reverse order and then prints the second half in the order present in the vector. If we had vec = {1,2,3,4,5,6} we would print 3 2 1 4 5 6 . You can assume the size of the vector will always be even. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> \/\/ Write the weird_print function here int main() { std::vector<int> vec{1,2,3,4,5,6}; weird_print(vec); }      Write the function weird_print that prints the first half of a vector of integers in reverse order and then prints the second half in the order present in the vector. If we had vec = {1,2,3,4,5,6} we would print 3 2 1 4 5 6 . You can assume the size of the vector will always be even. Use the lines to construct the code, then go back to complete the Activecode.     void weird_print (std::vector<int> vec) {    size_t half = vec.size() \/ 2;    for (size_t i = vec.size() - 1; i >= half; i--){    std::cout << vec[i-half] << ' ';    }    for (int h = 0; h < half; h++) {    std::cout << vec[h + half] << ' ';    }    std::cout << std::endl ;    }       "
-},
-{
-  "id": "chapter10_activecode-exercises-2-1",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#chapter10_activecode-exercises-2-1",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Answer the following Activecode questions to assess what you have learned in this chapter. "
-},
-{
-  "id": "vectors_a1",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a1",
-  "type": "Exercise",
-  "number": "8.18.1",
-  "title": "",
-  "body": "  Fix the code below so that it creates a vector with 5 elements initialized to 1, and changes the third element of that vector to a 2.   #include <iostream> int main () { std::vector<int> nums (5) = 1; nums[3] = 2; }      Below is one way to fix the program. You must always include the <vector> header when dealing with vectors. Furthermore, to initialize a vector’s elements to a certain value, you must include that value as a second argument to the size. Finally, vectors are zero-indexed.   #include <iostream> #include <vector> int main () { std::vector<int> nums (5, 1); nums[2] = 2; }      "
-},
-{
-  "id": "vectors_a2_q",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a2_q",
-  "type": "Exercise",
-  "number": "8.18.2",
-  "title": "",
-  "body": "  Fix the function below so that it returns how many even numbers are in nums . Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> int even_count(const std::vector<int> &vec) { for (size_t i = 0; i < vec.size(); i++) { if (i % 2 == 0) { count++; } } return count; } int main() { std::vector<int> vec{1,2,3,4}; std::cout << even_count(vec) << std::endl; }      Fix the function below so that it returns how many even numbers are in nums . Use the lines to construct the code, then go back to complete the Activecode.     int even_count(const std::vector<int> &vec) {    int count = 0;    int count;    for (size_t i = 0; i < vec.size(); i++) {     if (vec[i] % 2 == 0) {    if (vec[i] % 2 != 0) {     count++;    }    }    return count;    }      "
-},
-{
-  "id": "vectors_a3",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a3",
-  "type": "Exercise",
-  "number": "8.18.3",
-  "title": "",
-  "body": "  Fix the function below so that it creates a vector of all of the words in words that end with the passed character.   #include <iostream> #include <string> #include <vector> int ends_with(const std::vector<std::string>& vec, char c) { int count; for (size_t i = 0; i < vec.size(); i++) { size_t last = vec.size() - 1; if (vec[last] == c) { count++; } } return count; }      Below is one way to fix the function. You must initialize count to zero. You also must initialize last as an integer. To access a string inside of vec , we use vec[i] . To get the last character, we must index the string to the last index, which is one less than the length of the string.   #include <iostream> #include <string> #include <vector> int ends_with(const std::vector<std::string>& vec, char c) { int count = 0; for (size_t i = 0; i < vec.size(); i++) { size_t last = vec[i].size() - 1; if (vec[i][last] == c) { count++; } } return count; }      "
-},
-{
-  "id": "vectors_a4_q",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a4_q",
-  "type": "Exercise",
-  "number": "8.18.4",
-  "title": "",
-  "body": "  Someone could have COVID-19 if their temperature is above 99.9 degrees Fahrenheit. Finish the code below so that it counts and prints how many students in the class may have been exposed. Check the hint below for help with the construction of the code.   #include <iostream> int main () { std::vector<double> temps = {98.6, 97.8, 100.3, 97.2, 98.7, 97.8, 99.8, 96.9, 98.2, 99.1, 99.9}; int covid_count = 0; for (size_t i = 0; i < temps.size(); i++) { } }      Someone could have COVID-19 if their temperature is above 99.9 degrees Fahrenheit. Finish the code below so that it counts and prints how many students in the class may have been exposed. Use the lines to construct the code, then go back to complete the Activecode.     #include <iostream>  #include <vector>    int main() {    std::vector<double> temps = {98.6, 97.8, 100.3, 97.2, 98.7, 97.8, 99.8, 96.9, 98.2, 99.1, 99.9};    int covid_count = 0;    for (size_t i = 0; i < temps.size(); i++) {    if (temps[i] > 99.9) {    covid_count++;    }    }    std::cout << covid_count << std::endl ;    }      "
-},
-{
-  "id": "vectors_a5",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a5",
-  "type": "Exercise",
-  "number": "8.18.5",
-  "title": "",
-  "body": "  Finish the code below so that it creates removes elements from the end of the vector until it ends with \"stop\" .   #include <iostream> int main () { std::vector<std::string> words = {\"roses\", \"are\", \"red\", \"violets\", \"stop\", \"are\", \"blue\"} while( ) { } }      Below is one way to finish the program. We just use the pop_back function until the last element of the vector is \"stop\" .   #include <iostream> #include <vector> int main () { std::vector<std::string> words = {\"roses\", \"are\", \"red\", \"violets\", \"stop\", \"are\", \"blue\"}; while (words[words.size() - 1] != \"stop\"){ words.pop_back(); } }      "
-},
-{
-  "id": "vectors_a6_q",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a6_q",
-  "type": "Exercise",
-  "number": "8.18.6",
-  "title": "",
-  "body": "  Write the function ends_even that takes a vector and removes elements from the end of the vector until it ends with an even number. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> \/\/ Write the ends_even function here int main() { std::vector<int> vec{1,2,3,4,5,6,7,7,9}; ends_even(vec); for(int unsigned i = 0; i < vec.size(); i++) { std::cout << vec[i] << std::endl; } }      Write the function ends_even that takes a vector and removes elements from the end of the vector until it ends with an even number. Use the lines to construct the code, then go back to complete the Activecode.     void ends_even (std::vector<int> &vec) {    vector ends_even (std::vector<int> &vec) {     while (vec.back() % 2 != 0) {    for (size_t i = 0; i < vec.size(); i++) {     vec.pop_back();    }    }      "
-},
-{
-  "id": "vectors_a7",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a7",
-  "type": "Exercise",
-  "number": "8.18.7",
-  "title": "",
-  "body": "  Write a function called has_char that returns a boolean of whether every string in the vector vec contains the character let . It should return true if all strings contain the let .   #include <iostream> #include <vector>      Below is one way to finish the program. We loop through the vector, and we loop through each string inside it. If the string has the character, it is added to count . We then check whether count is equal to the number of elements in vec and return a boolean.   #include <iostream> #include <vector> int has_char(const std::vector<std::string>& vec, char let) { size_t count = 0; for (size_t i = 0; i < vec.size(); i++) { for (size_t c = 0; c < vec[i].size(); c++) { if (vec[i][c] == let) { count++; } } } if (count == vec.size()) { return true; } return false; }      "
-},
-{
-  "id": "vectors_a8_q",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a8_q",
-  "type": "Exercise",
-  "number": "8.18.8",
-  "title": "",
-  "body": "  Write the function random_nums that takes two integers: num which is the number of random numbers you wish to generate, and max , which is the maximum value of random number you wish to generate. Your function should return a vector of num integers that are between 1 and max , inclusive. Check the hint below for help with the construction of the code.   #include <iostream> #include <cstdlib> #include <vector> \/\/ Write the random_nums function here int main() { int num = 10; int std::max = 100; random_nums(num,std::max); for (size_t i = 0; i < random_nums(num,std::max).size(); i++) { std::cout << random_nums(num,std::max)[i] << std::endl; } }      Write the function random_nums that takes two integers: num which is the number of random numbers you wish to generate, and max , which is the maximum value of random number you wish to generate. Your function should return a vector of num integers that are between 1 and max , inclusive. Use the lines to construct the code, then go back to complete the Activecode.     std::vector<int> random_nums (int num, int max) {    std::vector<int> random_vec(num);     for (int i = 0; i < num; i++) {    for (size_t i = 0; i <= random_vec.size(); i++) {     random_vec[i] = rand() % max + 1;    }    return random_vec;    return random_vec[i];    }      "
-},
-{
-  "id": "vectors_a9",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a9",
-  "type": "Exercise",
-  "number": "8.18.9",
-  "title": "",
-  "body": "  Write the function mean which returns the average of a vector of numbers.   #include <iostream> #include <vector>      Below is one way to finish the program. First we take the sum, then divide the sum by the number of elements in nums .   #include <iostream> #include <vector> double mean (const std::vector<double> nums) { double sum = 0; for (size_t i = 0; i < nums.size(); ++i) { sum = sum + nums[i]; } return sum\/nums.size(); }      "
-},
-{
-  "id": "vectors_a10_q",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a10_q",
-  "type": "Exercise",
-  "number": "8.18.10",
-  "title": "",
-  "body": "  Write the function hundy_bundy that returns a count of all numbers in the passed vector vec that are divisible by 100. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> \/\/ Write the hundy_bundy function here int main() { std::vector<int> vec{ 100,10,300,400,21,1000 }; std::cout << hundy_bundy(vec) << std::endl; }      Write the function hundy_bundy that returns a count of all numbers in the passed vector vec that are divisible by 100. Use the lines to construct the code, then go back to complete the Activecode.      int hundy_bundy (const std::vector<int> vec) {    std::vector<int> hundy_bundy (const std::vector<int> vec) {     int count = 0;    for (size_t i = 0; i < vec.size(); i++) {    for (size_t i = 0; i < count(); i++) {    if (vec[i] % 100 == 0) {    count++;    }    }    return count;    }      "
-},
-{
-  "id": "vectors_a11",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a11",
-  "type": "Exercise",
-  "number": "8.18.11",
-  "title": "",
-  "body": "  Write the function make_odd which subtracts 1 from every even number in a vector of integers. We don’t want any negative values so don’t subtract 1 from 0. ( remember to take in the vector by reference to make changes to the actual vector! )   #include <iostream> #include <vector>      Below is one way to finish the program. We us the modulus operator to check for even numbers and decrement them. we keep an extra check for 0 to make sure wew are not decrementing 0.   #include <iostream> #include <vector> void make_odd ( std::vector<int> &nums) { for (size_t i = 0; i < nums.size(); ++i) { if((nums[i] % 2 == 0) && (nums[i] != 0)){ nums[i]--; } } }      "
-},
-{
-  "id": "vectors_a12_q",
-  "level": "2",
-  "url": "chapter10_activecode-exercises.html#vectors_a12_q",
-  "type": "Exercise",
-  "number": "8.18.12",
-  "title": "",
-  "body": "  Write the function weird_print that prints the first half of a vector of integers in reverse order and then prints the second half in the order present in the vector. If we had vec = {1,2,3,4,5,6} we would print 3 2 1 4 5 6 . You can assume the size of the vector will always be even. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> \/\/ Write the weird_print function here int main() { std::vector<int> vec{1,2,3,4,5,6}; weird_print(vec); }      Write the function weird_print that prints the first half of a vector of integers in reverse order and then prints the second half in the order present in the vector. If we had vec = {1,2,3,4,5,6} we would print 3 2 1 4 5 6 . You can assume the size of the vector will always be even. Use the lines to construct the code, then go back to complete the Activecode.     void weird_print (std::vector<int> vec) {    size_t half = vec.size() \/ 2;    for (size_t i = vec.size() - 1; i >= half; i--){    std::cout << vec[i-half] << ' ';    }    for (int h = 0; h < half; h++) {    std::cout << vec[h + half] << ' ';    }    std::cout << std::endl ;    }      "
-},
-{
-  "id": "chapter12_composition",
-  "level": "1",
-  "url": "chapter12_composition.html",
-  "type": "Section",
-  "number": "9.1",
-  "title": "Composition",
-  "body": " Composition  By now we have seen several examples of composition (the ability to combine language features in a variety of arrangements). One of the first examples we saw was using a function invocation as part of an expression. Another example is the nested structure of statements: you can put an if statement within a while loop, or within another if statement, etc.  Having seen this pattern, and having learned about vectors and objects, you should not be surprised to learn that you can have vectors of objects. In fact, you can also have objects that contain vectors (as instance variables); you can have vectors that contain vectors; you can have objects that contain objects, and so on.  In the next two chapters we will look at some examples of these combinations, using Card objects as a case study.    Which of the following statements is correct?      You can have vectors that contain other vectors and objects that contain other objects.   This is called composition!     You can have vectors that contain other vectors, but you can never have objects that contain other objects.   In this chapter you will see how you can have objects that contain other objects.     You can never have vectors that contain other vectors, but you can have objects that contain other objects.   In this chapter you will see how you can have vectors that contain other vectors.     You can never have vectors that contain other vectors, nor objects that contain other objects.   Vectors and objects can have nested compositons!       There are many different arrangements to combine language features. This is called .           "
-},
-{
-  "id": "chapter12_composition-2",
-  "level": "2",
-  "url": "chapter12_composition.html#chapter12_composition-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "By now we have seen several examples of composition (the ability to combine language features in a variety of arrangements). One of the first examples we saw was using a function invocation as part of an expression. Another example is the nested structure of statements: you can put an if statement within a while loop, or within another if statement, etc. "
-},
-{
-  "id": "chapter12_composition-3",
-  "level": "2",
-  "url": "chapter12_composition.html#chapter12_composition-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Having seen this pattern, and having learned about vectors and objects, you should not be surprised to learn that you can have vectors of objects. In fact, you can also have objects that contain vectors (as instance variables); you can have vectors that contain vectors; you can have objects that contain objects, and so on. "
-},
-{
-  "id": "chapter12_composition-4",
-  "level": "2",
-  "url": "chapter12_composition.html#chapter12_composition-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In the next two chapters we will look at some examples of these combinations, using Card objects as a case study. "
-},
-{
-  "id": "composition_1",
-  "level": "2",
-  "url": "chapter12_composition.html#composition_1",
-  "type": "Checkpoint",
-  "number": "9.1.1",
-  "title": "",
-  "body": "  Which of the following statements is correct?      You can have vectors that contain other vectors and objects that contain other objects.   This is called composition!     You can have vectors that contain other vectors, but you can never have objects that contain other objects.   In this chapter you will see how you can have objects that contain other objects.     You can never have vectors that contain other vectors, but you can have objects that contain other objects.   In this chapter you will see how you can have vectors that contain other vectors.     You can never have vectors that contain other vectors, nor objects that contain other objects.   Vectors and objects can have nested compositons!    "
-},
-{
-  "id": "composition_2",
-  "level": "2",
-  "url": "chapter12_composition.html#composition_2",
-  "type": "Checkpoint",
-  "number": "9.1.2",
-  "title": "",
-  "body": "  There are many different arrangements to combine language features. This is called .          "
-},
-{
-  "id": "chapter12_card-objects",
-  "level": "1",
-  "url": "chapter12_card-objects.html",
-  "type": "Section",
-  "number": "9.2",
-  "title": "<code class=\"code-inline tex2jax_ignore\">Card<\/code> objects",
-  "body": " Card objects  If you are not familiar with common playing cards, now would be a good time to get a deck, or else this chapter might not make much sense. There are 52 cards in a deck, each of which belongs to one of four suits and one of 13 ranks. The suits are Spades, Hearts, Diamonds and Clubs (in descending order in Bridge). The ranks are Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen and King. Depending on what game you are playing, the rank of the Ace may be higher than King or lower than 2.  If we want to define a new object to represent a playing card, it is pretty obvious what the instance variables should be: rank and suit . It is not as obvious what type the instance variables should be. One possibility is string s, containing things like \"Spade\" for suits and \"Queen\" for ranks. One problem with this implementation is that it would not be easy to compare cards to see which had higher rank or suit.  An alternative is to use integers to encode the ranks and suits. By encode, I do not mean what some people think, which is to encrypt, or translate into a secret code. What a computer scientist means by encode is something like define a mapping between a sequence of numbers and the things I want to represent. For example,   Mapping suits to integers    Spades     3    Hearts     2    Diamonds     1    Clubs     0     The symbol is mathematical notation for maps to. The obvious feature of this mapping is that the suits map to integers in order, so we can compare suits by comparing integers. The mapping for ranks is fairly obvious; each of the numerical ranks maps to the corresponding integer, and for face cards:   Mapping ranks to integers    Jack     11    Queen     12    King     13     The reason I am using mathematical notation for these mappings is that they are not part of the C++ program. They are part of the program design, but they never appear explicitly in the code. The class definition for the Card type looks like this:  struct Card { int suit, rank; Card(); Card(int s, int r); }; Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; }  There are two constructors for Card s. You can tell that they are constructors because they have no return type and their name is the same as the name of the structure. The first constructor takes no arguments and initializes the instance variables to a useless value (the zero of clubs).  The second constructor is more useful. It takes two parameters, the suit and rank of the card.  The following code creates an object named threeOfClubs that represents the 3 of Clubs:  Card threeOfClubs(0, 3);  The first argument, 0 represents the suit Clubs, the second, naturally, represents the rank 3.    The instance variables for a playing card are and . (Put them in alphabetical order.)         suit  Wrong spot - use that in the other blank         rank  Wrong spot - use that in the other blank        What does it mean to encode the ranks and suits?      To translate each rank \/ suit into a secret code.   Incorrect! This is called encryption.     To create strings to represent each rank \/ suit.   Incorrect! We create strings before we encode.     To define a mapping between each rank \/ suit and a sequence of numbers.   Correct! This makes it easier to compare cards.     To write code describing real objects, like cards, with their respective ranks \/ suits.   Incorrect! This is how we describe object-oriented programming.       The symbol means .             What is the purpose of mapping?      To have better organization in your code.   Incorrect! Mapping helps more with order than with organization.     To make it possible to compare objects that have non-numerical values.   Correct! By mapping non-numerical values to integers, we can compare them!     To represent complex objects visually.   Incorrect! There is nothing visual about mapping.     To add complexity to your code.   Incorrect! Mapping actually simplifies your code.     "
-},
-{
-  "id": "chapter12_card-objects-2",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If you are not familiar with common playing cards, now would be a good time to get a deck, or else this chapter might not make much sense. There are 52 cards in a deck, each of which belongs to one of four suits and one of 13 ranks. The suits are Spades, Hearts, Diamonds and Clubs (in descending order in Bridge). The ranks are Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen and King. Depending on what game you are playing, the rank of the Ace may be higher than King or lower than 2. "
-},
-{
-  "id": "chapter12_card-objects-3",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If we want to define a new object to represent a playing card, it is pretty obvious what the instance variables should be: rank and suit . It is not as obvious what type the instance variables should be. One possibility is string s, containing things like \"Spade\" for suits and \"Queen\" for ranks. One problem with this implementation is that it would not be easy to compare cards to see which had higher rank or suit. "
-},
-{
-  "id": "chapter12_card-objects-4",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "An alternative is to use integers to encode the ranks and suits. By encode, I do not mean what some people think, which is to encrypt, or translate into a secret code. What a computer scientist means by encode is something like define a mapping between a sequence of numbers and the things I want to represent. For example, "
-},
-{
-  "id": "chapter12_card-objects-5",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-5",
-  "type": "Table",
-  "number": "9.2.1",
-  "title": "Mapping suits to integers",
-  "body": " Mapping suits to integers    Spades     3    Hearts     2    Diamonds     1    Clubs     0    "
-},
-{
-  "id": "chapter12_card-objects-6",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The symbol is mathematical notation for maps to. The obvious feature of this mapping is that the suits map to integers in order, so we can compare suits by comparing integers. The mapping for ranks is fairly obvious; each of the numerical ranks maps to the corresponding integer, and for face cards: "
-},
-{
-  "id": "chapter12_card-objects-7",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-7",
-  "type": "Table",
-  "number": "9.2.2",
-  "title": "Mapping ranks to integers",
-  "body": " Mapping ranks to integers    Jack     11    Queen     12    King     13    "
-},
-{
-  "id": "chapter12_card-objects-8",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The reason I am using mathematical notation for these mappings is that they are not part of the C++ program. They are part of the program design, but they never appear explicitly in the code. The class definition for the Card type looks like this: "
-},
-{
-  "id": "chapter12_card-objects-10",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "There are two constructors for Card s. You can tell that they are constructors because they have no return type and their name is the same as the name of the structure. The first constructor takes no arguments and initializes the instance variables to a useless value (the zero of clubs). "
-},
-{
-  "id": "chapter12_card-objects-11",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The second constructor is more useful. It takes two parameters, the suit and rank of the card. "
-},
-{
-  "id": "chapter12_card-objects-12",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The following code creates an object named threeOfClubs that represents the 3 of Clubs: "
-},
-{
-  "id": "chapter12_card-objects-14",
-  "level": "2",
-  "url": "chapter12_card-objects.html#chapter12_card-objects-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The first argument, 0 represents the suit Clubs, the second, naturally, represents the rank 3. "
-},
-{
-  "id": "card_objects_1",
-  "level": "2",
-  "url": "chapter12_card-objects.html#card_objects_1",
-  "type": "Checkpoint",
-  "number": "9.2.1",
-  "title": "",
-  "body": "  The instance variables for a playing card are and . (Put them in alphabetical order.)         suit  Wrong spot - use that in the other blank         rank  Wrong spot - use that in the other blank     "
-},
-{
-  "id": "card_objects_2",
-  "level": "2",
-  "url": "chapter12_card-objects.html#card_objects_2",
-  "type": "Checkpoint",
-  "number": "9.2.2",
-  "title": "",
-  "body": "  What does it mean to encode the ranks and suits?      To translate each rank \/ suit into a secret code.   Incorrect! This is called encryption.     To create strings to represent each rank \/ suit.   Incorrect! We create strings before we encode.     To define a mapping between each rank \/ suit and a sequence of numbers.   Correct! This makes it easier to compare cards.     To write code describing real objects, like cards, with their respective ranks \/ suits.   Incorrect! This is how we describe object-oriented programming.    "
-},
-{
-  "id": "card_objects_3",
-  "level": "2",
-  "url": "chapter12_card-objects.html#card_objects_3",
-  "type": "Checkpoint",
-  "number": "9.2.3",
-  "title": "",
-  "body": "  The symbol means .          "
-},
-{
-  "id": "card_objects_4",
-  "level": "2",
-  "url": "chapter12_card-objects.html#card_objects_4",
-  "type": "Checkpoint",
-  "number": "9.2.4",
-  "title": "",
-  "body": "  What is the purpose of mapping?      To have better organization in your code.   Incorrect! Mapping helps more with order than with organization.     To make it possible to compare objects that have non-numerical values.   Correct! By mapping non-numerical values to integers, we can compare them!     To represent complex objects visually.   Incorrect! There is nothing visual about mapping.     To add complexity to your code.   Incorrect! Mapping actually simplifies your code.    "
-},
-{
-  "id": "chapter12_the-printcard-function",
-  "level": "1",
-  "url": "chapter12_the-printcard-function.html",
-  "type": "Section",
-  "number": "9.3",
-  "title": "The <code class=\"code-inline tex2jax_ignore\">printCard<\/code> function",
-  "body": " The printCard function  When you create a new type, the first step is usually to declare the instance variables and write constructors. The second step is often to write a function that prints the object in human-readable form.  In the case of Card objects, human-readable means that we have to map the internal representation of the rank and suit onto words. A natural way to do that is with a vector of string s. You can create a vector of string s the same way you create an vector of other types:  std::vector<string> suits(4);  Of course, in order to use std::vector s and string s, you will have to include the header files for both.  To initialize the elements of the vector, we can use a series of assignment statements.  suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\";  A state diagram for this vector looks like this:  We can build a similar vector to decode the ranks. Then we can select the appropriate elements using the suit and rank as indices. Finally, we can write a function called print that outputs the card on which it is invoked:  void Card::print() const { std::vector<string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl ; }  The expression suits[suit] means use the instance variable suit from the current object as an index into the vector named suits , and select the appropriate string.  Because print is a Card member function, it can refer to the instance variables of the current object implicitly (without having to use dot notation to specify the object). The output of this code  Card card (1, 11); card.print();  is Jack of Diamonds .    This active code uses the Card::print() function. Feel free to modify the values that card is being initialized to in the constructor: this will change the output from the Card::print() function.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; }; int main() { Card card (1,11); card.print(); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; }    You might notice that we are not using the zeroeth element of the ranks vector. That's because the only valid ranks are 1–13. By leaving an unused element at the beginning of the vector, we get an encoding where 2 maps to 2 , 3 maps to 3 , etc. From the point of view of the user, it doesn't matter what the encoding is, since all input and output uses human-readable formats. On the other hand, it is often helpful for the programmer if the mappings are easy to remember.    How would we select the appropriate string for the instance variable rank ?      rank.ranks   Incorrect! Remember, ranks is a vector!     ranks.rank   Incorrect! Remember, ranks is a vector!     ranks[rank]   Correct! This is an example of how we use mapping!     rank[ranks]   Incorrect! This is using the vector \"ranks\" as an index to a single \"rank\".       What is printed by card.print()? Type your answer exactly as it would appear in the terminal.  Card card (3, 1); card.print();                Does it matter how we encode a mapping?      Yes, because the mappings should be easy for the programmer to remember.   Correct! The programmer should uses mappings that are easy to remember (even if this means we don't use the zeroeth element of the ranks vector).     Yes, because the mappings should be easy for the user to remember.   Incorrect! The user doesn't need to know how things are mapped.     No! All input and output uses human-readable formats, so the programmer doesn't need to understand what is going on behind the scenes.   Incorrect! The programmer should always know what is going on with their code.     No! All input and output uses human-readable formats, so the user doesn't need to understand what is going on behind the scenes.   Correct! The user doesn't need to know how the programmer coded things.     "
-},
-{
-  "id": "chapter12_the-printcard-function-2",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#chapter12_the-printcard-function-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "When you create a new type, the first step is usually to declare the instance variables and write constructors. The second step is often to write a function that prints the object in human-readable form. "
-},
-{
-  "id": "chapter12_the-printcard-function-3",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#chapter12_the-printcard-function-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In the case of Card objects, human-readable means that we have to map the internal representation of the rank and suit onto words. A natural way to do that is with a vector of string s. You can create a vector of string s the same way you create an vector of other types: "
-},
-{
-  "id": "chapter12_the-printcard-function-5",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#chapter12_the-printcard-function-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Of course, in order to use std::vector s and string s, you will have to include the header files for both. "
-},
-{
-  "id": "chapter12_the-printcard-function-6",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#chapter12_the-printcard-function-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To initialize the elements of the vector, we can use a series of assignment statements. "
-},
-{
-  "id": "chapter12_the-printcard-function-8",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#chapter12_the-printcard-function-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A state diagram for this vector looks like this: "
-},
-{
-  "id": "chapter12_the-printcard-function-9",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#chapter12_the-printcard-function-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "We can build a similar vector to decode the ranks. Then we can select the appropriate elements using the suit and rank as indices. Finally, we can write a function called print that outputs the card on which it is invoked: "
-},
-{
-  "id": "chapter12_the-printcard-function-11",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#chapter12_the-printcard-function-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The expression suits[suit] means use the instance variable suit from the current object as an index into the vector named suits , and select the appropriate string. "
-},
-{
-  "id": "chapter12_the-printcard-function-12",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#chapter12_the-printcard-function-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Because print is a Card member function, it can refer to the instance variables of the current object implicitly (without having to use dot notation to specify the object). The output of this code "
-},
-{
-  "id": "chapter12_the-printcard-function-14",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#chapter12_the-printcard-function-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "is Jack of Diamonds . "
-},
-{
-  "id": "12_3",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#12_3",
-  "type": "Checkpoint",
-  "number": "9.3.1",
-  "title": "",
-  "body": "  This active code uses the Card::print() function. Feel free to modify the values that card is being initialized to in the constructor: this will change the output from the Card::print() function.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; }; int main() { Card card (1,11); card.print(); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; }   "
-},
-{
-  "id": "chapter12_the-printcard-function-16",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#chapter12_the-printcard-function-16",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "You might notice that we are not using the zeroeth element of the ranks vector. That's because the only valid ranks are 1–13. By leaving an unused element at the beginning of the vector, we get an encoding where 2 maps to 2 , 3 maps to 3 , etc. From the point of view of the user, it doesn't matter what the encoding is, since all input and output uses human-readable formats. On the other hand, it is often helpful for the programmer if the mappings are easy to remember. "
-},
-{
-  "id": "printCard_function_1",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#printCard_function_1",
-  "type": "Checkpoint",
-  "number": "9.3.2",
-  "title": "",
-  "body": "  How would we select the appropriate string for the instance variable rank ?      rank.ranks   Incorrect! Remember, ranks is a vector!     ranks.rank   Incorrect! Remember, ranks is a vector!     ranks[rank]   Correct! This is an example of how we use mapping!     rank[ranks]   Incorrect! This is using the vector \"ranks\" as an index to a single \"rank\".    "
-},
-{
-  "id": "printCard_function_2",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#printCard_function_2",
-  "type": "Checkpoint",
-  "number": "9.3.3",
-  "title": "",
-  "body": "  What is printed by card.print()? Type your answer exactly as it would appear in the terminal.  Card card (3, 1); card.print();             "
-},
-{
-  "id": "printCard_function_3",
-  "level": "2",
-  "url": "chapter12_the-printcard-function.html#printCard_function_3",
-  "type": "Checkpoint",
-  "number": "9.3.4",
-  "title": "",
-  "body": "  Does it matter how we encode a mapping?      Yes, because the mappings should be easy for the programmer to remember.   Correct! The programmer should uses mappings that are easy to remember (even if this means we don't use the zeroeth element of the ranks vector).     Yes, because the mappings should be easy for the user to remember.   Incorrect! The user doesn't need to know how things are mapped.     No! All input and output uses human-readable formats, so the programmer doesn't need to understand what is going on behind the scenes.   Incorrect! The programmer should always know what is going on with their code.     No! All input and output uses human-readable formats, so the user doesn't need to understand what is going on behind the scenes.   Correct! The user doesn't need to know how the programmer coded things.    "
-},
-{
-  "id": "chapter12_the-equals-function",
-  "level": "1",
-  "url": "chapter12_the-equals-function.html",
-  "type": "Section",
-  "number": "9.4",
-  "title": "The <code class=\"code-inline tex2jax_ignore\">equals<\/code> function",
-  "body": " The equals function  In order for two cards to be equal, they have to have the same rank and the same suit. Unfortunately, the == operator does not work for user-defined types like Card , so we have to write a function that compares two cards. We'll call it equals . It is also possible to write a new definition for the == operator, but we will not cover that in this book.  It is clear that the return value from equals should be a boolean that indicates whether the cards are the same. It is also clear that there have to be two Card s as parameters. But we have one more choice: should equals be a member function or a free-standing function?  As a member function, it looks like this:  bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); }  To use this function, we have to invoke it on one of the cards and pass the other as an argument:  Card card1 (1, 11); Card card2 (1, 11); if (card1.equals(card2)) { std::cout << \"Yup, that's the same card.\" << std::endl ; }  This method of invocation always seems strange to me when the function is something like equals , in which the two arguments are symmetric. What I mean by symmetric is that it does not matter whether I ask Is A equal to B? or Is B equal to A? In this case, I think it looks better to rewrite equals as a nonmember function:  bool equals(const Card& c1, const Card& c2) { return (c1.rank == c2.rank && c1.suit == c2.suit); }  When we call this version of the function, the arguments appear side-by-side in a way that makes more logical sense, to me at least.  if (equals(card1, card2)) { std::cout << \"Yup, that's the same card.\" << std::endl ; }  Of course, this is a matter of taste. My point here is that you should be comfortable writing both member and nonmember functions, so that you can choose the interface that works best depending on the circumstance.   Run this active code to see how the equals() function works.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool equals(const Card& c2) const; }; int main() { Card card1 (1,11); Card card2 (1,11); Card card3 (3,11); card1.equals(card2); card1.equals(card3); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } bool Card::equals(const Card& c2) const { bool boolean = (rank == c2.rank && suit == c2.suit); if (boolean == true) { std::cout << \"Yup, that's the same card.\" << std::endl; } else { std::cout << \"Nope, those cards are different.\" << std::endl; } return boolean; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; }      How can we compare two Card objects?      Directly, using the build in == operator.   Incorrect! We have to create our own method to compare two Card objects, the == operator won't work.     Compare their ranks and suits separately using the == operator. If either comparison is true, then they are equal.   Incorrect! This would return true if two cards have the same rank, but different suits OR the same suit, but different ranks.     Compare their ranks and suits separately using the == operator. If either comparison is false, then they are NOT equal.   Correct! Both ranks and suits must be the same for two cards to be equal.     They cannot be compared because they are non-numerical objects.   Incorrect! Card objects can be compared, but we must create our own method.       Should we write the equals() function as a free-standing function, or as a member function of Card ?      A free-standing function, because we shouldn't invoke the function on just one Card .   Incorrect! We can invoke the function on a Card !     A member function, because the equals() operation is part of the Card data structure.   Incorrect! The equals() operation is not necessarily part of the Card data structure.     Both are viable.   Correct! This is a matter of preference!       In a card game called Euchre, the highest ranked suit is called the trump suit. The trump suit contains all of the cards of that suit, and the Jack of the other suit of the same color. For example, if Hearts was trump, the trump suit would contain all Hearts, and the Jack of Diamonds. Implement the is_trump() function that returns true of a Card is part of the trump suit. Assume we have a helper function same_color() that returns the other suit of the same color.     bool Card::is_trump(string trump_suit) {     if (suit == trump_suit) {  return true;  }    if (suit != trump_suit) {  return false;  }      else if (rank == \"Jack\" && suit == same_color()) {  return true;  }    else if (rank == \"Jack\") {  return true;  }     else {  return false;  }     }    };      "
-},
-{
-  "id": "chapter12_the-equals-function-2",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#chapter12_the-equals-function-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In order for two cards to be equal, they have to have the same rank and the same suit. Unfortunately, the == operator does not work for user-defined types like Card , so we have to write a function that compares two cards. We'll call it equals . It is also possible to write a new definition for the == operator, but we will not cover that in this book. "
-},
-{
-  "id": "chapter12_the-equals-function-3",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#chapter12_the-equals-function-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "It is clear that the return value from equals should be a boolean that indicates whether the cards are the same. It is also clear that there have to be two Card s as parameters. But we have one more choice: should equals be a member function or a free-standing function? "
-},
-{
-  "id": "chapter12_the-equals-function-4",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#chapter12_the-equals-function-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "As a member function, it looks like this: "
-},
-{
-  "id": "chapter12_the-equals-function-6",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#chapter12_the-equals-function-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To use this function, we have to invoke it on one of the cards and pass the other as an argument: "
-},
-{
-  "id": "chapter12_the-equals-function-8",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#chapter12_the-equals-function-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This method of invocation always seems strange to me when the function is something like equals , in which the two arguments are symmetric. What I mean by symmetric is that it does not matter whether I ask Is A equal to B? or Is B equal to A? In this case, I think it looks better to rewrite equals as a nonmember function: "
-},
-{
-  "id": "chapter12_the-equals-function-10",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#chapter12_the-equals-function-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "When we call this version of the function, the arguments appear side-by-side in a way that makes more logical sense, to me at least. "
-},
-{
-  "id": "chapter12_the-equals-function-12",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#chapter12_the-equals-function-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Of course, this is a matter of taste. My point here is that you should be comfortable writing both member and nonmember functions, so that you can choose the interface that works best depending on the circumstance. "
-},
-{
-  "id": "12_4",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#12_4",
-  "type": "Listing",
-  "number": "9.4.1",
-  "title": "Run this active code to see how the <code class=\"code-inline tex2jax_ignore\">equals()<\/code> function works.",
-  "body": " Run this active code to see how the equals() function works.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool equals(const Card& c2) const; }; int main() { Card card1 (1,11); Card card2 (1,11); Card card3 (3,11); card1.equals(card2); card1.equals(card3); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } bool Card::equals(const Card& c2) const { bool boolean = (rank == c2.rank && suit == c2.suit); if (boolean == true) { std::cout << \"Yup, that's the same card.\" << std::endl; } else { std::cout << \"Nope, those cards are different.\" << std::endl; } return boolean; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; }   "
-},
-{
-  "id": "equals_function_1",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#equals_function_1",
-  "type": "Checkpoint",
-  "number": "9.4.1",
-  "title": "",
-  "body": "  How can we compare two Card objects?      Directly, using the build in == operator.   Incorrect! We have to create our own method to compare two Card objects, the == operator won't work.     Compare their ranks and suits separately using the == operator. If either comparison is true, then they are equal.   Incorrect! This would return true if two cards have the same rank, but different suits OR the same suit, but different ranks.     Compare their ranks and suits separately using the == operator. If either comparison is false, then they are NOT equal.   Correct! Both ranks and suits must be the same for two cards to be equal.     They cannot be compared because they are non-numerical objects.   Incorrect! Card objects can be compared, but we must create our own method.    "
-},
-{
-  "id": "equals_function_2",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#equals_function_2",
-  "type": "Checkpoint",
-  "number": "9.4.2",
-  "title": "",
-  "body": "  Should we write the equals() function as a free-standing function, or as a member function of Card ?      A free-standing function, because we shouldn't invoke the function on just one Card .   Incorrect! We can invoke the function on a Card !     A member function, because the equals() operation is part of the Card data structure.   Incorrect! The equals() operation is not necessarily part of the Card data structure.     Both are viable.   Correct! This is a matter of preference!    "
-},
-{
-  "id": "equals_function_3",
-  "level": "2",
-  "url": "chapter12_the-equals-function.html#equals_function_3",
-  "type": "Checkpoint",
-  "number": "9.4.3",
-  "title": "",
-  "body": "  In a card game called Euchre, the highest ranked suit is called the trump suit. The trump suit contains all of the cards of that suit, and the Jack of the other suit of the same color. For example, if Hearts was trump, the trump suit would contain all Hearts, and the Jack of Diamonds. Implement the is_trump() function that returns true of a Card is part of the trump suit. Assume we have a helper function same_color() that returns the other suit of the same color.     bool Card::is_trump(string trump_suit) {     if (suit == trump_suit) {  return true;  }    if (suit != trump_suit) {  return false;  }      else if (rank == \"Jack\" && suit == same_color()) {  return true;  }    else if (rank == \"Jack\") {  return true;  }     else {  return false;  }     }    };     "
-},
-{
-  "id": "chapter12_the-isgreater-function",
-  "level": "1",
-  "url": "chapter12_the-isgreater-function.html",
-  "type": "Section",
-  "number": "9.5",
-  "title": "The <code class=\"code-inline tex2jax_ignore\">isGreater<\/code> function",
-  "body": " The isGreater function  For basic types like int and double , there are comparison operators that compare values and determine when one is greater or less than another. These operators ( < and > and the others) don't work for user-defined types. Just as we did for the == operator, we will write a comparison function that plays the role of the > operator. Later, we will use this function to sort a deck of cards.  Some sets are totally ordered, which means that you can compare any two elements and tell which is bigger. For example, the integers and the floating-point numbers are totally ordered. Some sets are unordered, which means that there is no meaningful way to say that one element is bigger than another. For example, the fruits are unordered, which is why we cannot compare apples and oranges. As another example, the bool type is unordered; we cannot say that true is greater than false .  The set of playing cards is partially ordered, which means that sometimes we can compare cards and sometimes not. For example, I know that the 3 of Clubs is higher than the 2 of Clubs because it has higher rank, and the 3 of Diamonds is higher than the 3 of Clubs because it has higher suit. But which is better, the 3 of Clubs or the 2 of Diamonds? One has a higher rank, but the other has a higher suit.  In order to make cards comparable, we have to decide which is more important, rank or suit. To be honest, the choice is completely arbitrary. For the sake of choosing, I will say that suit is more important, because when you buy a new deck of cards, it comes sorted with all the Clubs together, followed by all the Diamonds, and so on.  With that decided, we can write isGreater . Again, the arguments (two Card s) and the return type (boolean) are obvious, and again we have to choose between a member function and a nonmember function. This time, the arguments are not symmetric. It matters whether we want to know Is A greater than B? or Is B greater than A? Therefore I think it makes more sense to write isGreater as a member function:  bool Card::isGreater(const Card& c2) const { \/\/ first check the suits if (suit > c2.suit) return true; if (suit < c2.suit) return false; \/\/ if the suits are equal, check the ranks if (rank > c2.rank) return true; if (rank < c2.rank) return false; \/\/ if the ranks are also equal, return false return false; }  Then when we invoke it, it is obvious from the syntax which of the two possible questions we are asking:  Card card1 (2, 10); Card card2 (2, 4); if (card1.isGreater (card2)) { card1.print(); std::cout << \"is greater than\" << std::endl ; card2.print(); }  You can almost read it like English: If card1 isGreater card2 … The output of this program is  10 of Hearts is greater than 4 of Hearts  According to isGreater , aces are less than deuces (2s). As an exercise, fix it so that aces are ranked higher than Kings, as they are in most card games.   Take a look at this active code, which uses the isGreater function. Feel free to change the values of the cards.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool equals(const Card& c2) const; bool isGreater(const Card& c2) const; }; int main() { Card card1 (2,10); Card card2 (2,4); if (card1.isGreater (card2)) { card1.print(); std::cout << \"is greater than\" << std::endl; card2.print(); } else { card2.print(); std::cout << \"is greater than\" << std::endl; card1.print(); } }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } bool Card::equals(const Card& c2) const { bool boolean = (rank == c2.rank && suit == c2.suit); if (boolean == true) { std::cout << \"Yup, that's the same card.\" << std::endl; } else { std::cout << \"Nope, those cards are different.\" << std::endl; } return boolean; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; }      Select all totally ordered sets.      bool   Incorrect! We cannot say true is greater than false, or vice versa.     string   Correct! Strings are ordered lexiographically.     int   Correct! It is quite obvious how integers are ordered.     Animal   Incorrect! We cannot say that one animal is greater than another.     Card   Incorrect! Cards are partially ordered.       Card card1 (2,12); Card card2 (1,12); if (card1.isGreater (card2)) { card1.print(); std::cout << \"is greater than\" << std::endl ; card2.print(); } else { card2.print(); std::cout << \"is greater than\" << std::endl ; card1.print(); }  If the above code is run, the terminal will print: Queen of Hearts Queen of Diamonds  Type your answer exactly as it would appear in the terminal.           "
-},
-{
-  "id": "chapter12_the-isgreater-function-2",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#chapter12_the-isgreater-function-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For basic types like int and double , there are comparison operators that compare values and determine when one is greater or less than another. These operators ( < and > and the others) don't work for user-defined types. Just as we did for the == operator, we will write a comparison function that plays the role of the > operator. Later, we will use this function to sort a deck of cards. "
-},
-{
-  "id": "chapter12_the-isgreater-function-3",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#chapter12_the-isgreater-function-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Some sets are totally ordered, which means that you can compare any two elements and tell which is bigger. For example, the integers and the floating-point numbers are totally ordered. Some sets are unordered, which means that there is no meaningful way to say that one element is bigger than another. For example, the fruits are unordered, which is why we cannot compare apples and oranges. As another example, the bool type is unordered; we cannot say that true is greater than false . "
-},
-{
-  "id": "chapter12_the-isgreater-function-4",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#chapter12_the-isgreater-function-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The set of playing cards is partially ordered, which means that sometimes we can compare cards and sometimes not. For example, I know that the 3 of Clubs is higher than the 2 of Clubs because it has higher rank, and the 3 of Diamonds is higher than the 3 of Clubs because it has higher suit. But which is better, the 3 of Clubs or the 2 of Diamonds? One has a higher rank, but the other has a higher suit. "
-},
-{
-  "id": "chapter12_the-isgreater-function-5",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#chapter12_the-isgreater-function-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In order to make cards comparable, we have to decide which is more important, rank or suit. To be honest, the choice is completely arbitrary. For the sake of choosing, I will say that suit is more important, because when you buy a new deck of cards, it comes sorted with all the Clubs together, followed by all the Diamonds, and so on. "
-},
-{
-  "id": "chapter12_the-isgreater-function-6",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#chapter12_the-isgreater-function-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "With that decided, we can write isGreater . Again, the arguments (two Card s) and the return type (boolean) are obvious, and again we have to choose between a member function and a nonmember function. This time, the arguments are not symmetric. It matters whether we want to know Is A greater than B? or Is B greater than A? Therefore I think it makes more sense to write isGreater as a member function: "
-},
-{
-  "id": "chapter12_the-isgreater-function-8",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#chapter12_the-isgreater-function-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Then when we invoke it, it is obvious from the syntax which of the two possible questions we are asking: "
-},
-{
-  "id": "chapter12_the-isgreater-function-10",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#chapter12_the-isgreater-function-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "You can almost read it like English: If card1 isGreater card2 … The output of this program is "
-},
-{
-  "id": "chapter12_the-isgreater-function-12",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#chapter12_the-isgreater-function-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "According to isGreater , aces are less than deuces (2s). As an exercise, fix it so that aces are ranked higher than Kings, as they are in most card games. "
-},
-{
-  "id": "12_5",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#12_5",
-  "type": "Listing",
-  "number": "9.5.1",
-  "title": "Take a look at this active code, which uses the <code class=\"code-inline tex2jax_ignore\">isGreater<\/code> function. Feel free to change the values of the cards.",
-  "body": " Take a look at this active code, which uses the isGreater function. Feel free to change the values of the cards.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool equals(const Card& c2) const; bool isGreater(const Card& c2) const; }; int main() { Card card1 (2,10); Card card2 (2,4); if (card1.isGreater (card2)) { card1.print(); std::cout << \"is greater than\" << std::endl; card2.print(); } else { card2.print(); std::cout << \"is greater than\" << std::endl; card1.print(); } }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } bool Card::equals(const Card& c2) const { bool boolean = (rank == c2.rank && suit == c2.suit); if (boolean == true) { std::cout << \"Yup, that's the same card.\" << std::endl; } else { std::cout << \"Nope, those cards are different.\" << std::endl; } return boolean; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; }   "
-},
-{
-  "id": "isGreater_function_1",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#isGreater_function_1",
-  "type": "Checkpoint",
-  "number": "9.5.1",
-  "title": "",
-  "body": "  Select all totally ordered sets.      bool   Incorrect! We cannot say true is greater than false, or vice versa.     string   Correct! Strings are ordered lexiographically.     int   Correct! It is quite obvious how integers are ordered.     Animal   Incorrect! We cannot say that one animal is greater than another.     Card   Incorrect! Cards are partially ordered.    "
-},
-{
-  "id": "isGreater_function_2",
-  "level": "2",
-  "url": "chapter12_the-isgreater-function.html#isGreater_function_2",
-  "type": "Checkpoint",
-  "number": "9.5.2",
-  "title": "",
-  "body": "  Card card1 (2,12); Card card2 (1,12); if (card1.isGreater (card2)) { card1.print(); std::cout << \"is greater than\" << std::endl ; card2.print(); } else { card2.print(); std::cout << \"is greater than\" << std::endl ; card1.print(); }  If the above code is run, the terminal will print: Queen of Hearts Queen of Diamonds  Type your answer exactly as it would appear in the terminal.          "
-},
-{
-  "id": "chapter12_vectors-of-cards",
-  "level": "1",
-  "url": "chapter12_vectors-of-cards.html",
-  "type": "Section",
-  "number": "9.6",
-  "title": "Vectors of cards",
-  "body": " Vectors of cards  The reason I chose Cards as the objects for this chapter is that there is an obvious use for a vector of cards—a deck. Here is some code that creates a new deck of 52 cards:  std::vector<Card> deck(52);  Here is the state diagram for this object:   Deck state diagram   A box labeled 'deck' It shows boxes labeled 0, 1, 2 then ... followed by a box labeled 51. Each numbered box has 'suit: 0, rank: 0'    The three dots represent the 48 cards I didn't feel like drawing. Keep in mind that we haven't initialized the instance variables of the cards yet. In some environments, they will get initialized to zero, as shown in the figure, but in others they could contain any possible value.  One way to initialize them would be to pass a Card as a second argument to the constructor:  Card aceOfSpades (3, 1); std::vector<Card> deck(52, aceOfSpades);  This code builds a deck with 52 identical cards, like a special deck for a magic trick. Of course, it makes more sense to build a deck with 52 different cards in it. To do that we use a nested loop.  The outer loop enumerates the suits, from 0 to 3. For each suit, the inner loop enumerates the ranks, from 1 to 13. Since the outer loop iterates 4 times, and the inner loop iterates 13 times, the total number of times the body is executed is 52 (13 times 4).  int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } }  I used the variable i to keep track of where in the deck the next card should go.  Notice that we can compose the syntax for selecting an element from an array (the [] operator) with the syntax for selecting an instance variable from an object (the dot operator). The expression deck[i].suit means the suit of the ith card in the deck .  This deck-building code is encapsulated in a function called buildDeck that takes no parameters and that returns a fully-populated vector of Card s.   Take a look at this active code, which includes the implementation of the buildDeck function.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; }; std::vector<Card> buildDeck() { std::vector<Card> deck(52); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; } int main() { std::vector<Card> deck = buildDeck(); std::cout << \"We just created our deck of 52 cards. We can access an individual card by indexing.\" << std::endl; std::cout << \"For example, the first card in the deck is: \"; deck[0].print(); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; }      Take a look at the code below. What can we say about the deck that is created?  std::vector<Card> createDeck() { std::vector<Card> deck(16); int i = 0; for (int suit = 0; suit <= 1; suit++) { for (int rank = 4; rank <= 11; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; }      There are 16 cards in the deck.   Correct! You can verify this by checking how many times the for loops execute.     The deck is single-suited.   Incorrect! Look at the conditions of the outer for loop, you'll find that there are two suits in this deck.     There are no face cards in the deck.   Incorrect! Look at the conditions of the inner for loop, you'll find that this deck contains face cards.     The deck does not contain any Hearts.   Correct! The two suits in this deck are Clubs and Diamonds.     There are two Jacks in the deck.   Correct! The deck contains the Jack of Clubs and the Jack of Diamonds.       If we actually created the deck in the previous question, what is printed after the following code runs? Type your answer exactly as it would appear in the terminal!  deck[11].print();            "
-},
-{
-  "id": "chapter12_vectors-of-cards-2",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#chapter12_vectors-of-cards-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The reason I chose Cards as the objects for this chapter is that there is an obvious use for a vector of cards—a deck. Here is some code that creates a new deck of 52 cards: "
-},
-{
-  "id": "chapter12_vectors-of-cards-4",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#chapter12_vectors-of-cards-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Here is the state diagram for this object: "
-},
-{
-  "id": "chapter12_vectors-of-cards-5",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#chapter12_vectors-of-cards-5",
-  "type": "Figure",
-  "number": "9.6.1",
-  "title": "",
-  "body": " Deck state diagram   A box labeled 'deck' It shows boxes labeled 0, 1, 2 then ... followed by a box labeled 51. Each numbered box has 'suit: 0, rank: 0'   "
-},
-{
-  "id": "chapter12_vectors-of-cards-6",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#chapter12_vectors-of-cards-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The three dots represent the 48 cards I didn't feel like drawing. Keep in mind that we haven't initialized the instance variables of the cards yet. In some environments, they will get initialized to zero, as shown in the figure, but in others they could contain any possible value. "
-},
-{
-  "id": "chapter12_vectors-of-cards-7",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#chapter12_vectors-of-cards-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "One way to initialize them would be to pass a Card as a second argument to the constructor: "
-},
-{
-  "id": "chapter12_vectors-of-cards-9",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#chapter12_vectors-of-cards-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This code builds a deck with 52 identical cards, like a special deck for a magic trick. Of course, it makes more sense to build a deck with 52 different cards in it. To do that we use a nested loop. "
-},
-{
-  "id": "chapter12_vectors-of-cards-10",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#chapter12_vectors-of-cards-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The outer loop enumerates the suits, from 0 to 3. For each suit, the inner loop enumerates the ranks, from 1 to 13. Since the outer loop iterates 4 times, and the inner loop iterates 13 times, the total number of times the body is executed is 52 (13 times 4). "
-},
-{
-  "id": "chapter12_vectors-of-cards-12",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#chapter12_vectors-of-cards-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "I used the variable i to keep track of where in the deck the next card should go. "
-},
-{
-  "id": "chapter12_vectors-of-cards-13",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#chapter12_vectors-of-cards-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Notice that we can compose the syntax for selecting an element from an array (the [] operator) with the syntax for selecting an instance variable from an object (the dot operator). The expression deck[i].suit means the suit of the ith card in the deck . "
-},
-{
-  "id": "chapter12_vectors-of-cards-14",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#chapter12_vectors-of-cards-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This deck-building code is encapsulated in a function called buildDeck that takes no parameters and that returns a fully-populated vector of Card s. "
-},
-{
-  "id": "12_6",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#12_6",
-  "type": "Listing",
-  "number": "9.6.2",
-  "title": "Take a look at this active code, which includes the implementation of the <code class=\"code-inline tex2jax_ignore\">buildDeck<\/code> function.",
-  "body": " Take a look at this active code, which includes the implementation of the buildDeck function.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; }; std::vector<Card> buildDeck() { std::vector<Card> deck(52); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; } int main() { std::vector<Card> deck = buildDeck(); std::cout << \"We just created our deck of 52 cards. We can access an individual card by indexing.\" << std::endl; std::cout << \"For example, the first card in the deck is: \"; deck[0].print(); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; }   "
-},
-{
-  "id": "vector_of_cards_1",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#vector_of_cards_1",
-  "type": "Checkpoint",
-  "number": "9.6.1",
-  "title": "",
-  "body": "  Take a look at the code below. What can we say about the deck that is created?  std::vector<Card> createDeck() { std::vector<Card> deck(16); int i = 0; for (int suit = 0; suit <= 1; suit++) { for (int rank = 4; rank <= 11; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; }      There are 16 cards in the deck.   Correct! You can verify this by checking how many times the for loops execute.     The deck is single-suited.   Incorrect! Look at the conditions of the outer for loop, you'll find that there are two suits in this deck.     There are no face cards in the deck.   Incorrect! Look at the conditions of the inner for loop, you'll find that this deck contains face cards.     The deck does not contain any Hearts.   Correct! The two suits in this deck are Clubs and Diamonds.     There are two Jacks in the deck.   Correct! The deck contains the Jack of Clubs and the Jack of Diamonds.    "
-},
-{
-  "id": "vector_of_cards_2",
-  "level": "2",
-  "url": "chapter12_vectors-of-cards.html#vector_of_cards_2",
-  "type": "Checkpoint",
-  "number": "9.6.2",
-  "title": "",
-  "body": "  If we actually created the deck in the previous question, what is printed after the following code runs? Type your answer exactly as it would appear in the terminal!  deck[11].print();           "
-},
-{
-  "id": "chapter12_the-printdeck-function-printdeck",
-  "level": "1",
-  "url": "chapter12_the-printdeck-function-printdeck.html",
-  "type": "Section",
-  "number": "9.7",
-  "title": "The <code class=\"code-inline tex2jax_ignore\">printDeck<\/code> function",
-  "body": " The printDeck function  Whenever you are working with vectors, it is convenient to have a function that prints the contents of the vector. We have seen the pattern for traversing a vector several times, so the following function should be familiar:   Printing a Deck  void printDeck(const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { deck[i].print(); } }   By now it should come as no surprise that we can compose the syntax for vector access with the syntax for invoking a function.  Since deck has type std::vector<Card> , an element of deck has type Card . Therefore, it is legal to invoke print on deck[i] .    A Euchre Deck contains 9's, 10's, Jacks, Queens, Kings, and Aces of all four suits. Modify the buildDeck function below to create a Euchre deck. The printDeck function will allow you to verify that you have done this correctly.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; }; std::vector<Card> buildDeck() { std::vector<Card> deck(52); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; } void printDeck(const std::vector<Card>& deck); int main() { std::vector<Card> deck = buildDeck(); printDeck(deck); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } void printDeck(const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { deck[i].print(); } }    Hopefully you took some time to try and figure out the code yourself. The solution below is just one of several correct solutions for creating the Euchre deck:  std::vector<Card> buildEuchreDeck() { std::vector<Card> deck(24); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { if (rank == 1 || rank >= 9) { deck[i].suit = suit; deck[i].rank = rank; i++; } } } return deck; }    "
-},
-{
-  "id": "chapter12_the-printdeck-function-printdeck-2",
-  "level": "2",
-  "url": "chapter12_the-printdeck-function-printdeck.html#chapter12_the-printdeck-function-printdeck-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Whenever you are working with vectors, it is convenient to have a function that prints the contents of the vector. We have seen the pattern for traversing a vector several times, so the following function should be familiar: "
-},
-{
-  "id": "printdeck-code",
-  "level": "2",
-  "url": "chapter12_the-printdeck-function-printdeck.html#printdeck-code",
-  "type": "Listing",
-  "number": "9.7.1",
-  "title": "Printing a Deck",
-  "body": " Printing a Deck  void printDeck(const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { deck[i].print(); } }  "
-},
-{
-  "id": "chapter12_the-printdeck-function-printdeck-4",
-  "level": "2",
-  "url": "chapter12_the-printdeck-function-printdeck.html#chapter12_the-printdeck-function-printdeck-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "By now it should come as no surprise that we can compose the syntax for vector access with the syntax for invoking a function. "
-},
-{
-  "id": "chapter12_the-printdeck-function-printdeck-5",
-  "level": "2",
-  "url": "chapter12_the-printdeck-function-printdeck.html#chapter12_the-printdeck-function-printdeck-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Since deck has type std::vector<Card> , an element of deck has type Card . Therefore, it is legal to invoke print on deck[i] . "
-},
-{
-  "id": "12_7",
-  "level": "2",
-  "url": "chapter12_the-printdeck-function-printdeck.html#12_7",
-  "type": "Checkpoint",
-  "number": "9.7.1",
-  "title": "",
-  "body": "  A Euchre Deck contains 9's, 10's, Jacks, Queens, Kings, and Aces of all four suits. Modify the buildDeck function below to create a Euchre deck. The printDeck function will allow you to verify that you have done this correctly.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; }; std::vector<Card> buildDeck() { std::vector<Card> deck(52); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; } void printDeck(const std::vector<Card>& deck); int main() { std::vector<Card> deck = buildDeck(); printDeck(deck); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } void printDeck(const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { deck[i].print(); } }    Hopefully you took some time to try and figure out the code yourself. The solution below is just one of several correct solutions for creating the Euchre deck:  std::vector<Card> buildEuchreDeck() { std::vector<Card> deck(24); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { if (rank == 1 || rank >= 9) { deck[i].suit = suit; deck[i].rank = rank; i++; } } } return deck; }   "
-},
-{
-  "id": "chapter12_searching-find",
-  "level": "1",
-  "url": "chapter12_searching-find.html",
-  "type": "Section",
-  "number": "9.8",
-  "title": "Searching",
-  "body": " Searching  The next function I want to write is find , which searches through a vector of Card s to see whether it contains a certain card. It may not be obvious why this function would be useful, but it gives me a chance to demonstrate two ways to go searching for things, a linear search and a bisection search.  Linear search is the more obvious of the two; it involves traversing the deck and comparing each card to the one we are looking for. If we find it we return the index where the card appears. If it is not in the deck, we return -1.  int find(const Card& card, const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { if (equals(deck[i], card)) return i; } return -1; }  The loop here is exactly the same as the loop in printDeck . In fact, when I wrote the program, I copied it, which saved me from having to write and debug it twice.  Inside the loop, we compare each element of the deck to card . The function returns as soon as it discovers the card, which means that we do not have to traverse the entire deck if we find the card we are looking for. If the loop terminates without finding the card, we know the card is not in the deck and return -1 .  To test this function, I wrote the following:  std::vector<Card> deck = buildDeck(); int index = card.find(deck[17]); cout << \"I found the card at index = \" << index << std::endl ;  The output of this code is  I found the card at index = 17   The code below searches for a particular card in a standard deck of 52 cards. It returns the index that the card was located at.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; }; std::vector<Card> buildDeck(); bool equals(const Card& c1, const Card& c2) { return (c1.rank == c2.rank && c1.suit == c2.suit); } void printDeck(const std::vector<Card>& deck); int find(const Card& card, const std::vector<Card>& deck); int main() { std::vector<Card> deck = buildDeck(); Card card (3, 6); std::cout << find(card, deck); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } void printDeck(const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { deck[i].print(); } } std::vector<Card> buildDeck() { std::vector<Card> deck(52); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; } int find(const Card& card, const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { if (equals(deck[i], card)) return i; } return -1; }      Say we have standard deck of cards. According to our find() function, the for loop will execute a minimum of times, and a maximum of times while searching for a particular card.              .*  Incorrect! What if the card we were searching for wasn't in the deck? In this case, we'd have looped through all of the cards!        buildEuchreDeck() returns the deck of Euchre cards defined on the previous page. If we run the following code, what is returned?  int main() { EuchreDeck = buildEuchreDeck(); Card card (3, 6); find(card, EuchreDeck); }        Correct! The find method should return -1 if the card is not part of the deck.    .*  Incorrect! Hint: take a look at the suit and rank of card.      "
-},
-{
-  "id": "chapter12_searching-find-2",
-  "level": "2",
-  "url": "chapter12_searching-find.html#chapter12_searching-find-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The next function I want to write is find , which searches through a vector of Card s to see whether it contains a certain card. It may not be obvious why this function would be useful, but it gives me a chance to demonstrate two ways to go searching for things, a linear search and a bisection search. "
-},
-{
-  "id": "chapter12_searching-find-3",
-  "level": "2",
-  "url": "chapter12_searching-find.html#chapter12_searching-find-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Linear search is the more obvious of the two; it involves traversing the deck and comparing each card to the one we are looking for. If we find it we return the index where the card appears. If it is not in the deck, we return -1. "
-},
-{
-  "id": "chapter12_searching-find-5",
-  "level": "2",
-  "url": "chapter12_searching-find.html#chapter12_searching-find-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The loop here is exactly the same as the loop in printDeck . In fact, when I wrote the program, I copied it, which saved me from having to write and debug it twice. "
-},
-{
-  "id": "chapter12_searching-find-6",
-  "level": "2",
-  "url": "chapter12_searching-find.html#chapter12_searching-find-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Inside the loop, we compare each element of the deck to card . The function returns as soon as it discovers the card, which means that we do not have to traverse the entire deck if we find the card we are looking for. If the loop terminates without finding the card, we know the card is not in the deck and return -1 . "
-},
-{
-  "id": "chapter12_searching-find-7",
-  "level": "2",
-  "url": "chapter12_searching-find.html#chapter12_searching-find-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To test this function, I wrote the following: "
-},
-{
-  "id": "chapter12_searching-find-9",
-  "level": "2",
-  "url": "chapter12_searching-find.html#chapter12_searching-find-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The output of this code is "
-},
-{
-  "id": "12_8",
-  "level": "2",
-  "url": "chapter12_searching-find.html#12_8",
-  "type": "Listing",
-  "number": "9.8.1",
-  "title": "The code below searches for a particular card in a standard deck of 52 cards. It returns the index that the card was located at.",
-  "body": " The code below searches for a particular card in a standard deck of 52 cards. It returns the index that the card was located at.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; }; std::vector<Card> buildDeck(); bool equals(const Card& c1, const Card& c2) { return (c1.rank == c2.rank && c1.suit == c2.suit); } void printDeck(const std::vector<Card>& deck); int find(const Card& card, const std::vector<Card>& deck); int main() { std::vector<Card> deck = buildDeck(); Card card (3, 6); std::cout << find(card, deck); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } void printDeck(const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { deck[i].print(); } } std::vector<Card> buildDeck() { std::vector<Card> deck(52); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; } int find(const Card& card, const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { if (equals(deck[i], card)) return i; } return -1; }   "
-},
-{
-  "id": "searching_1",
-  "level": "2",
-  "url": "chapter12_searching-find.html#searching_1",
-  "type": "Checkpoint",
-  "number": "9.8.1",
-  "title": "",
-  "body": "  Say we have standard deck of cards. According to our find() function, the for loop will execute a minimum of times, and a maximum of times while searching for a particular card.              .*  Incorrect! What if the card we were searching for wasn't in the deck? In this case, we'd have looped through all of the cards!     "
-},
-{
-  "id": "searching_2",
-  "level": "2",
-  "url": "chapter12_searching-find.html#searching_2",
-  "type": "Checkpoint",
-  "number": "9.8.2",
-  "title": "",
-  "body": "  buildEuchreDeck() returns the deck of Euchre cards defined on the previous page. If we run the following code, what is returned?  int main() { EuchreDeck = buildEuchreDeck(); Card card (3, 6); find(card, EuchreDeck); }        Correct! The find method should return -1 if the card is not part of the deck.    .*  Incorrect! Hint: take a look at the suit and rank of card.     "
-},
-{
-  "id": "chapter12_bisection-search",
-  "level": "1",
-  "url": "chapter12_bisection-search.html",
-  "type": "Section",
-  "number": "9.9",
-  "title": "Bisection search",
-  "body": " Bisection search  If the cards in the deck are not in order, there is no way to search that is faster than the linear search. We have to look at every card, since otherwise there is no way to be certain the card we want is not there.  But when you look for a word in a dictionary, you don't search linearly through every word. The reason is that the words are in alphabetical order. As a result, you probably use an algorithm that is similar to a bisection search :     Start in the middle somewhere.    Choose a word on the page and compare it to the word you are looking for.    If you found the word you are looking for, stop.    If the word you are looking for comes after the word on the page, flip to somewhere later in the dictionary and go to step 2.    If the word you are looking for comes before the word on the page, flip to somewhere earlier in the dictionary and go to step 2.     If you ever get to the point where there are two adjacent words on the page and your word comes between them, you can conclude that your word is not in the dictionary. The only alternative is that your word has been misfiled somewhere, but that contradicts our assumption that the words are in alphabetical order.  In the case of a deck of cards, if we know that the cards are in order, we can write a version of find that is much faster. The best way to write a bisection search is with a recursive function. That's because bisection is naturally recursive.  The trick is to write a function called findBisect that takes two indices as parameters, low and high , indicating the segment of the vector that should be searched (including both low and high ).     To search the vector, choose an index between low and high , and call it mid . Compare the card at mid to the card you are looking for.    If you found it, stop.    If the card at mid is higher than your card, search in the range from low to mid-1 .    If the card at mid is lower than your card, search in the range from mid+1 to high .     Steps 3 and 4 look suspiciously like recursive invocations. Here's what this all looks like translated into C++:  int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high) { int mid = (high + low) \/ 2; \/\/ if we found the card, return its index if (equals(deck[mid], card)) return mid; \/\/ otherwise, compare the card to the middle card if (deck[mid].isGreater (card)) { \/\/ search the first half of the deck return findBisect (card, deck, low, mid-1); } else { \/\/ search the second half of the deck return findBisect (card, deck, mid+1, high); } }  Although this code contains the kernel of a bisection search, it is still missing a piece. As it is currently written, if the card is not in the deck, it will recurse forever. We need a way to detect this condition and deal with it properly (by returning -1 ).  The easiest way to tell that your card is not in the deck is if there are no cards in the deck, which is the case if high is less than low . Well, there are still cards in the deck, of course, but what I mean is that there are no cards in the segment of the deck indicated by low and high .  With that line added, the function works correctly:  int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high) { std::cout << low << \", \" << high << std::endl ; if (high < low) return -1; int mid = (high + low) \/ 2; if (equals(deck[mid], card)) return mid; if (deck[mid].isGreater (card)) { return findBisect (card, deck, low, mid-1); } else { return findBisect (card, deck, mid+1, high); } }  I added an output statement at the beginning so I could watch the sequence of recursive calls and convince myself that it would eventually reach the base case. I tried out the following code:  cout << findBisect (deck[23], deck, 0, 51);  And got the following output:   0, 51 0, 24 13, 24 19, 24 22, 24 I found the card at index = 23   Then I made up a card that is not in the deck(the 15 of Diamonds), and tried to find it. I got the following:   0, 51 0, 24 13, 24 13, 17 13, 14 13, 12 I found the card at index = -1   These tests don't prove that this program is correct. In fact, no amount of testing can prove that a program is correct. On the other hand, by looking at a few cases and examining the code, you might be able to convince yourself.   The code below searches finds the same card from the same deck we used on the previous page. This time, it uses bisection search to locate the card.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; std::vector<Card> buildDeck(); bool equals(const Card& c1, const Card& c2) { return (c1.rank == c2.rank && c1.suit == c2.suit); } void printDeck(const std::vector<Card>& deck); int find(const Card& card, const std::vector<Card>& deck); int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high); int main() { std::vector<Card> deck = buildDeck(); Card card (3, 6); \/\/ We need to std::sort from the first card (0) to the last card (size-1) std::cout << findBisect(card, deck, 0, deck.size() - 1); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } std::vector<Card> buildDeck() { std::vector<Card> deck(52); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; } void printDeck(const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { deck[i].print(); } } int find(const Card& card, const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { if (equals(deck[i], card)) return i; } return -1; } int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high) { std::cout << low << \", \" << high << std::endl; if (high < low) return -1; int mid = (high + low) \/ 2; if (equals(deck[mid], card)) return mid; if (deck[mid].isGreater (card)) { return findBisect (card, deck, low, mid-1); } else { return findBisect (card, deck, mid+1, high); } } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; }    The number of recursive calls is fairly small, typically 6 or 7. That means we only had to call equals and isGreater 6 or 7 times, compared to up to 52 times if we did a linear search. In general, bisection is much faster than a linear search, especially for large vectors.  Two common errors in recursive programs are forgetting to include a base case and writing the recursive call so that the base case is never reached. Either error will cause an infinite recursion, in which case C++ will (eventually) generate a run-time error.    You are given a list of spelling words where the words are not sorted in any way. What search method should you use?      linear search   Correct! No search is faster than linear search when elements are not sorted.     bisection search   Incorrect! Bisection sort does not work on unsorted elements.     both methods will work, but linear search is more efficient   Incorrect! Bisection sort does not work on unsorted elements.     both methods will work, but bisection search is more efficient   Incorrect! Bisection sort does not work on unsorted elements.       You are given the same list of spelling words, but this time the words are sorted alphabetically . What search method should you use this time?      linear search   Incorrect! You could use linear search, but it is not the only option.     bisection search   Incorrect! You could use bisection search, but it is not the only option.     both methods will work, but linear search is more efficient   Incorrect! Both methods will work, but linear search is not the most efficient method.     both methods will work, but bisection search is more efficient   Correct! When elements are sorted, bisection search is much quicker.       When writing a recursive function, which of the following will result in infinite recursion?      having more than one recursive call   Incorrect! You are allowed to make multiple recursive calls inside of a function! You might do this if there is more than one condition.     not including a base case   Correct! You always need a base case!     writing recursive calls such that the base case is never reached   Correct! If you never reach the base case, the program will never stop making recursive calls.     having more than one base case   Incorrect! You are allowed to have multiple base cases. This is often necessary!       How many recursive calls are used to locate the King of Hearts? (Hearts = suit 2, King = rank 13).          .*  Incorrect! Change the input of card in the int main() of the active code above, then take a look at the output.      "
-},
-{
-  "id": "chapter12_bisection-search-2",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If the cards in the deck are not in order, there is no way to search that is faster than the linear search. We have to look at every card, since otherwise there is no way to be certain the card we want is not there. "
-},
-{
-  "id": "chapter12_bisection-search-3",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "But when you look for a word in a dictionary, you don't search linearly through every word. The reason is that the words are in alphabetical order. As a result, you probably use an algorithm that is similar to a bisection search : "
-},
-{
-  "id": "chapter12_bisection-search-4",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "   Start in the middle somewhere.    Choose a word on the page and compare it to the word you are looking for.    If you found the word you are looking for, stop.    If the word you are looking for comes after the word on the page, flip to somewhere later in the dictionary and go to step 2.    If the word you are looking for comes before the word on the page, flip to somewhere earlier in the dictionary and go to step 2.    "
-},
-{
-  "id": "chapter12_bisection-search-5",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If you ever get to the point where there are two adjacent words on the page and your word comes between them, you can conclude that your word is not in the dictionary. The only alternative is that your word has been misfiled somewhere, but that contradicts our assumption that the words are in alphabetical order. "
-},
-{
-  "id": "chapter12_bisection-search-6",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In the case of a deck of cards, if we know that the cards are in order, we can write a version of find that is much faster. The best way to write a bisection search is with a recursive function. That's because bisection is naturally recursive. "
-},
-{
-  "id": "chapter12_bisection-search-7",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The trick is to write a function called findBisect that takes two indices as parameters, low and high , indicating the segment of the vector that should be searched (including both low and high ). "
-},
-{
-  "id": "chapter12_bisection-search-8",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "   To search the vector, choose an index between low and high , and call it mid . Compare the card at mid to the card you are looking for.    If you found it, stop.    If the card at mid is higher than your card, search in the range from low to mid-1 .    If the card at mid is lower than your card, search in the range from mid+1 to high .    "
-},
-{
-  "id": "chapter12_bisection-search-9",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Steps 3 and 4 look suspiciously like recursive invocations. Here's what this all looks like translated into C++: "
-},
-{
-  "id": "chapter12_bisection-search-11",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Although this code contains the kernel of a bisection search, it is still missing a piece. As it is currently written, if the card is not in the deck, it will recurse forever. We need a way to detect this condition and deal with it properly (by returning -1 ). "
-},
-{
-  "id": "chapter12_bisection-search-12",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The easiest way to tell that your card is not in the deck is if there are no cards in the deck, which is the case if high is less than low . Well, there are still cards in the deck, of course, but what I mean is that there are no cards in the segment of the deck indicated by low and high . "
-},
-{
-  "id": "chapter12_bisection-search-13",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "With that line added, the function works correctly: "
-},
-{
-  "id": "chapter12_bisection-search-15",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-15",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "I added an output statement at the beginning so I could watch the sequence of recursive calls and convince myself that it would eventually reach the base case. I tried out the following code: "
-},
-{
-  "id": "chapter12_bisection-search-17",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-17",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "And got the following output: "
-},
-{
-  "id": "chapter12_bisection-search-19",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-19",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Then I made up a card that is not in the deck(the 15 of Diamonds), and tried to find it. I got the following: "
-},
-{
-  "id": "chapter12_bisection-search-21",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-21",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "These tests don't prove that this program is correct. In fact, no amount of testing can prove that a program is correct. On the other hand, by looking at a few cases and examining the code, you might be able to convince yourself. "
-},
-{
-  "id": "12_9",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#12_9",
-  "type": "Listing",
-  "number": "9.9.1",
-  "title": "The code below searches finds the same card from the same deck we used on the previous page. This time, it uses bisection search to locate the card.",
-  "body": " The code below searches finds the same card from the same deck we used on the previous page. This time, it uses bisection search to locate the card.   #include <iostream> #include <string> #include <vector> struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; std::vector<Card> buildDeck(); bool equals(const Card& c1, const Card& c2) { return (c1.rank == c2.rank && c1.suit == c2.suit); } void printDeck(const std::vector<Card>& deck); int find(const Card& card, const std::vector<Card>& deck); int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high); int main() { std::vector<Card> deck = buildDeck(); Card card (3, 6); \/\/ We need to std::sort from the first card (0) to the last card (size-1) std::cout << findBisect(card, deck, 0, deck.size() - 1); }  Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } std::vector<Card> buildDeck() { std::vector<Card> deck(52); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank <= 13; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; } void printDeck(const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { deck[i].print(); } } int find(const Card& card, const std::vector<Card>& deck) { for (size_t i = 0; i < deck.size(); i++) { if (equals(deck[i], card)) return i; } return -1; } int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high) { std::cout << low << \", \" << high << std::endl; if (high < low) return -1; int mid = (high + low) \/ 2; if (equals(deck[mid], card)) return mid; if (deck[mid].isGreater (card)) { return findBisect (card, deck, low, mid-1); } else { return findBisect (card, deck, mid+1, high); } } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; }   "
-},
-{
-  "id": "chapter12_bisection-search-23",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-23",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The number of recursive calls is fairly small, typically 6 or 7. That means we only had to call equals and isGreater 6 or 7 times, compared to up to 52 times if we did a linear search. In general, bisection is much faster than a linear search, especially for large vectors. "
-},
-{
-  "id": "chapter12_bisection-search-24",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#chapter12_bisection-search-24",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Two common errors in recursive programs are forgetting to include a base case and writing the recursive call so that the base case is never reached. Either error will cause an infinite recursion, in which case C++ will (eventually) generate a run-time error. "
-},
-{
-  "id": "bisection_search_1",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#bisection_search_1",
-  "type": "Checkpoint",
-  "number": "9.9.1",
-  "title": "",
-  "body": "  You are given a list of spelling words where the words are not sorted in any way. What search method should you use?      linear search   Correct! No search is faster than linear search when elements are not sorted.     bisection search   Incorrect! Bisection sort does not work on unsorted elements.     both methods will work, but linear search is more efficient   Incorrect! Bisection sort does not work on unsorted elements.     both methods will work, but bisection search is more efficient   Incorrect! Bisection sort does not work on unsorted elements.    "
-},
-{
-  "id": "bisection_search_2",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#bisection_search_2",
-  "type": "Checkpoint",
-  "number": "9.9.2",
-  "title": "",
-  "body": "  You are given the same list of spelling words, but this time the words are sorted alphabetically . What search method should you use this time?      linear search   Incorrect! You could use linear search, but it is not the only option.     bisection search   Incorrect! You could use bisection search, but it is not the only option.     both methods will work, but linear search is more efficient   Incorrect! Both methods will work, but linear search is not the most efficient method.     both methods will work, but bisection search is more efficient   Correct! When elements are sorted, bisection search is much quicker.    "
-},
-{
-  "id": "bisection_search_3",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#bisection_search_3",
-  "type": "Checkpoint",
-  "number": "9.9.3",
-  "title": "",
-  "body": "  When writing a recursive function, which of the following will result in infinite recursion?      having more than one recursive call   Incorrect! You are allowed to make multiple recursive calls inside of a function! You might do this if there is more than one condition.     not including a base case   Correct! You always need a base case!     writing recursive calls such that the base case is never reached   Correct! If you never reach the base case, the program will never stop making recursive calls.     having more than one base case   Incorrect! You are allowed to have multiple base cases. This is often necessary!    "
-},
-{
-  "id": "bisection_search_4",
-  "level": "2",
-  "url": "chapter12_bisection-search.html#bisection_search_4",
-  "type": "Checkpoint",
-  "number": "9.9.4",
-  "title": "",
-  "body": "  How many recursive calls are used to locate the King of Hearts? (Hearts = suit 2, King = rank 13).          .*  Incorrect! Change the input of card in the int main() of the active code above, then take a look at the output.     "
-},
-{
-  "id": "chapter12_decks-and-subdecks",
-  "level": "1",
-  "url": "chapter12_decks-and-subdecks.html",
-  "type": "Section",
-  "number": "9.10",
-  "title": "Decks and subdecks",
-  "body": " Decks and subdecks  Looking at the interface to findBisect  int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high) {  it might make sense to treat three of the parameters, deck , low and high , as a single parameter that specifies a subdeck .  This kind of thing is quite common, and I sometimes think of it as an abstract parameter . What I mean by abstract, is something that is not literally part of the program text, but which describes the function of the program at a higher level.  For example, when you call a function and pass a vector and the bounds low and high , there is nothing that prevents the called function from accessing parts of the vector that are out of bounds. So you are not literally sending a subset of the deck; you are really sending the whole deck. But as long as the recipient plays by the rules, it makes sense to think of it, abstractly, as a subdeck.  There is one other example of this kind of abstraction that you may have noticed in . When we write empty braces while creating a structure object, such as Point origin{} , no member values are written explicitly.  However, the object is not literally empty. Its data members still have values because empty-brace initialization value-initializes them. We use the idea of an “empty” object only as an abstraction to mean that no meaningful value has been supplied yet.  But if the program guarantees that the current value of a variable is never read before it is written, then the current value is irrelevant. Abstractly, it makes sense to think of such a variable as empty.  This kind of thinking, in which a program comes to take on meaning beyond what is literally encoded, is a very important part of thinking like a computer scientist. Sometimes, the word abstract gets used so often and in so many contexts that it is hard to interpret. Nevertheless, abstraction is a central idea in computer science (as well as many other fields).  A more general definition of abstraction is The process of modeling a complex system with a simplified description in order to suppress unnecessary details while capturing relevant behavior.    Which is false about the findBisect() funtion?      It uses binary search to locate the card in the deck.   This is true. Binary search is very efficient.     If the program user plays by the rules, we can think of deck, low, and high abstractly as a subdeck.   This is true. If the user doesn't follow the rules, we might be in trouble.     It can only access the part of the deck that is between the bounds high and low.   This is false! findBisect() can access the entire deck, even when you pass high and low parameters.     There is no such thing as an empty object.   This is true. When you create an object, it is given default values.       When a programmer hides all unnecessary details from the user to reduce complexity and increase efficiency, this is called .           "
-},
-{
-  "id": "chapter12_decks-and-subdecks-2",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#chapter12_decks-and-subdecks-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Looking at the interface to findBisect "
-},
-{
-  "id": "chapter12_decks-and-subdecks-4",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#chapter12_decks-and-subdecks-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "it might make sense to treat three of the parameters, deck , low and high , as a single parameter that specifies a subdeck . "
-},
-{
-  "id": "chapter12_decks-and-subdecks-5",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#chapter12_decks-and-subdecks-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This kind of thing is quite common, and I sometimes think of it as an abstract parameter . What I mean by abstract, is something that is not literally part of the program text, but which describes the function of the program at a higher level. "
-},
-{
-  "id": "chapter12_decks-and-subdecks-6",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#chapter12_decks-and-subdecks-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For example, when you call a function and pass a vector and the bounds low and high , there is nothing that prevents the called function from accessing parts of the vector that are out of bounds. So you are not literally sending a subset of the deck; you are really sending the whole deck. But as long as the recipient plays by the rules, it makes sense to think of it, abstractly, as a subdeck. "
-},
-{
-  "id": "chapter12_decks-and-subdecks-7",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#chapter12_decks-and-subdecks-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "There is one other example of this kind of abstraction that you may have noticed in . When we write empty braces while creating a structure object, such as Point origin{} , no member values are written explicitly. "
-},
-{
-  "id": "chapter12_decks-and-subdecks-8",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#chapter12_decks-and-subdecks-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "However, the object is not literally empty. Its data members still have values because empty-brace initialization value-initializes them. We use the idea of an “empty” object only as an abstraction to mean that no meaningful value has been supplied yet. "
-},
-{
-  "id": "chapter12_decks-and-subdecks-9",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#chapter12_decks-and-subdecks-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "But if the program guarantees that the current value of a variable is never read before it is written, then the current value is irrelevant. Abstractly, it makes sense to think of such a variable as empty. "
-},
-{
-  "id": "chapter12_decks-and-subdecks-10",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#chapter12_decks-and-subdecks-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This kind of thinking, in which a program comes to take on meaning beyond what is literally encoded, is a very important part of thinking like a computer scientist. Sometimes, the word abstract gets used so often and in so many contexts that it is hard to interpret. Nevertheless, abstraction is a central idea in computer science (as well as many other fields). "
-},
-{
-  "id": "chapter12_decks-and-subdecks-11",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#chapter12_decks-and-subdecks-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A more general definition of abstraction is The process of modeling a complex system with a simplified description in order to suppress unnecessary details while capturing relevant behavior. "
-},
-{
-  "id": "decks_and_subdecks_1",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#decks_and_subdecks_1",
-  "type": "Checkpoint",
-  "number": "9.10.1",
-  "title": "",
-  "body": "  Which is false about the findBisect() funtion?      It uses binary search to locate the card in the deck.   This is true. Binary search is very efficient.     If the program user plays by the rules, we can think of deck, low, and high abstractly as a subdeck.   This is true. If the user doesn't follow the rules, we might be in trouble.     It can only access the part of the deck that is between the bounds high and low.   This is false! findBisect() can access the entire deck, even when you pass high and low parameters.     There is no such thing as an empty object.   This is true. When you create an object, it is given default values.    "
-},
-{
-  "id": "decks_and_subdecks_2",
-  "level": "2",
-  "url": "chapter12_decks-and-subdecks.html#decks_and_subdecks_2",
-  "type": "Checkpoint",
-  "number": "9.10.2",
-  "title": "",
-  "body": "  When a programmer hides all unnecessary details from the user to reduce complexity and increase efficiency, this is called .          "
-},
-{
-  "id": "chapter12_glossary",
-  "level": "1",
-  "url": "chapter12_glossary.html",
-  "type": "Section",
-  "number": "9.11",
-  "title": "Glossary",
-  "body": " Glossary    encode  To represent one set of values using another set of values, by constructing a mapping between them.    abstract parameter  A set of parameters that act together as a single parameter.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    encode  To represent one set of values using another set of values, by constructing a mapping between them    abstract parameter  A set of parameters that act together as a single parameter.      "
-},
-{
-  "id": "chapter12_glossary-2",
-  "level": "2",
-  "url": "chapter12_glossary.html#chapter12_glossary-2",
-  "type": "Glossary",
-  "number": "9.11",
-  "title": "Glossary",
-  "body": "  encode  To represent one set of values using another set of values, by constructing a mapping between them.    abstract parameter  A set of parameters that act together as a single parameter.   "
-},
-{
-  "id": "chapter12_glossary-3",
-  "level": "2",
-  "url": "chapter12_glossary.html#chapter12_glossary-3",
-  "type": "Reading Questions",
-  "number": "9.11",
-  "title": "Reading Questions",
-  "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    encode  To represent one set of values using another set of values, by constructing a mapping between them    abstract parameter  A set of parameters that act together as a single parameter.     "
-},
-{
-  "id": "chapter12_multiple-choice-exercises",
-  "level": "1",
-  "url": "chapter12_multiple-choice-exercises.html",
-  "type": "Exercises",
-  "number": "9.12",
-  "title": "Multiple Choice Exercises",
-  "body": " Multiple Choice Exercises    Select all of the true statements.      You can have a vector that stores a vector of objects.   C++ allows for a variety of different compositions.     In order to check to see if two Card s are equal, we can use the == operator.   We have to write a function that compares two Card s.     There is no faster way to search through an unsorted vector than using a linear search.   If the std::vector were sorted, then there are faster search methods.     There is no such thing as an empty object.   All variables are given default values unless otherwise specified by the user.       What is the correct way to declare a std::vector of std::vector s of int s called vec ?       std::vector<int> vec;    This declares a std::vector of int s.      std::vector<int> vec<int>;    This is not the proper way to declare vec .      std::vector< std::vector<int> vec;    Close! Look closely at the answer choices again.      std::vector< std::vector<int> > vec;    This is the proper way to declare a std::vector of std::vector s of int s.       What is the value of card ?   struct Card { int suit, rank; Card(); Card(int s, int r); }; Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } int main() { Card card (2, 8); }       Ace of Clubs   How did we define our mapping earlier in the chapter?     8 of Hearts    card has a suit value of 2 corresponding to Hearts, and a rank value of 8.     King of Hearts   How did we define our mapping earlier in the chapter?     card does not have a value.   We initialized card with a suit value of 2 and a rank value of 8.       There is an error with the code below. Can you find it?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; }; int main() { Card card (1,3); print (card); }       card is not a valid Card .   A suit of 1 and a rank of 3 maps to the 3 of Diamonds.     There shouldn't be a semicolon after the struct definition.   A struct definition always ends with a semicolon.     print is a member function.   Since print is a member function, we need to use the dot operator.     There is nothing wrong with the code.   There is an error with the code. Can you find it?       What is the output of the code below?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; int main() { Card card1 (2,12); Card card2 (2,2); std::cout << card1.isGreater (card2) << std::endl ; }       True   The output of a bool is either a 0 or 1.     False   The output of a bool is either a 0 or 1.     0   Is card1 greater than card2 ?     1   The Queen of Hearts is greater than the 2 of Hearts.       What is the output of the code below?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; std::vector<Card> buildDeck(); bool equals(const Card& c1, const Card& c2) { return (c1.rank == c2.rank && c1.suit == c2.suit); } void printDeck(const std::vector<Card>& deck); int find(const Card& card, const std::vector<Card>& deck); int main() { std::vector<Card> deck = buildDeck(); Card card (3, 13); std::cout << find(card, deck); }       51   The card is the King of Spades, which is located at the end of the deck.     52   Since the std::vector is size 52, it cannot have an index of 52.     12   What is the value of card ?     -1   What is the value of card ?       What is true about deck ?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; std::vector<Card> createDeck() { std::vector<Card> deck(12); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank < 4; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; } int main() { std::vector<Card> deck = createDeck(); }       It contains 12 Card s.    createDeck returns a std::vector of size 12, corresponding to 12 Card s.     The highest rank is 4.   The rank goes up to but does not include 4.     There are no spades in the deck.   The suit goes up to and include the suit value 3 which corresponds to spades.     The deck has 3 cards in each suit.   Each suit has an Ace, 2, and 3.       How many times does findBisect need to call itself in order to find the King of Diamonds?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; std::vector<Card> buildDeck(); bool equals(const Card& c1, const Card& c2); void printDeck(const std::vector<Card>& deck); int find(const Card& card, const std::vector<Card>& deck); int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high); int main() { std::vector<Card> deck = buildDeck(); Card card (1, 13); std::cout << findBisect(card, deck, 0, 51); }       0   The King of Diamonds is right in the middle of the deck, so it doesn't need to call itself.     1   Where is the King of Diamonds located relative to the sorted deck?     3   Where is the King of Diamonds located relative to the sorted deck?     4   Where is the King of Diamonds located relative to the sorted deck?       We want to write the function findAllQueens , which searches through a deck and prints out the location of all 4 queens in the deck . What should go in the blanks?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; std::vector<Card> buildDeck(); bool equals(const Card& c1, const Card& c2); void printDeck(const std::vector<Card>& deck); void findAllQueens(const std::vector<Card>& deck) { for (size_t i = 0; i < deck.____; ++i) { if (deck[i].____ == 12) { std::cout << ____ << \" \"; } } } int main() { std::vector<Card> deck = buildDeck(); findAllQueens (deck); }       push_back() , suit , i   What value should i go up to?     size() , rank , i   These are the correct variables and functions.     size , rank , deck[i]   We want to print the index, not the card.     front() , suit , deck   What value should i go up to?       What is the process of modeling a complex system with a simplified description in order to suppress unnecessary details while capturing relevant behavior?      Generalization   Generalization means to take something specific and make it more general.     Encapsulation   Encapsulation means taking a piece of code and wrapping it up in a function.     Abstraction   Using this process, we can remove unnecessary details to focus on the more important aspects.     Implementation   Implementation is the process of taking an idea and making it real.     "
-},
-{
-  "id": "mce_12_1",
-  "level": "2",
-  "url": "chapter12_multiple-choice-exercises.html#mce_12_1",
-  "type": "Exercise",
-  "number": "9.12.1",
-  "title": "",
-  "body": "  Select all of the true statements.      You can have a vector that stores a vector of objects.   C++ allows for a variety of different compositions.     In order to check to see if two Card s are equal, we can use the == operator.   We have to write a function that compares two Card s.     There is no faster way to search through an unsorted vector than using a linear search.   If the std::vector were sorted, then there are faster search methods.     There is no such thing as an empty object.   All variables are given default values unless otherwise specified by the user.    "
-},
-{
-  "id": "mce_12_2",
-  "level": "2",
-  "url": "chapter12_multiple-choice-exercises.html#mce_12_2",
-  "type": "Exercise",
-  "number": "9.12.2",
-  "title": "",
-  "body": "  What is the correct way to declare a std::vector of std::vector s of int s called vec ?       std::vector<int> vec;    This declares a std::vector of int s.      std::vector<int> vec<int>;    This is not the proper way to declare vec .      std::vector< std::vector<int> vec;    Close! Look closely at the answer choices again.      std::vector< std::vector<int> > vec;    This is the proper way to declare a std::vector of std::vector s of int s.    "
-},
-{
-  "id": "mce_12_3",
-  "level": "2",
-  "url": "chapter12_multiple-choice-exercises.html#mce_12_3",
-  "type": "Exercise",
-  "number": "9.12.3",
-  "title": "",
-  "body": "  What is the value of card ?   struct Card { int suit, rank; Card(); Card(int s, int r); }; Card::Card() { suit = 0; rank = 0; } Card::Card(int s, int r) { suit = s; rank = r; } int main() { Card card (2, 8); }       Ace of Clubs   How did we define our mapping earlier in the chapter?     8 of Hearts    card has a suit value of 2 corresponding to Hearts, and a rank value of 8.     King of Hearts   How did we define our mapping earlier in the chapter?     card does not have a value.   We initialized card with a suit value of 2 and a rank value of 8.    "
-},
-{
-  "id": "mce_12_4",
-  "level": "2",
-  "url": "chapter12_multiple-choice-exercises.html#mce_12_4",
-  "type": "Exercise",
-  "number": "9.12.4",
-  "title": "",
-  "body": "  There is an error with the code below. Can you find it?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; }; int main() { Card card (1,3); print (card); }       card is not a valid Card .   A suit of 1 and a rank of 3 maps to the 3 of Diamonds.     There shouldn't be a semicolon after the struct definition.   A struct definition always ends with a semicolon.     print is a member function.   Since print is a member function, we need to use the dot operator.     There is nothing wrong with the code.   There is an error with the code. Can you find it?    "
-},
-{
-  "id": "mce_12_5",
-  "level": "2",
-  "url": "chapter12_multiple-choice-exercises.html#mce_12_5",
-  "type": "Exercise",
-  "number": "9.12.5",
-  "title": "",
-  "body": "  What is the output of the code below?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; int main() { Card card1 (2,12); Card card2 (2,2); std::cout << card1.isGreater (card2) << std::endl ; }       True   The output of a bool is either a 0 or 1.     False   The output of a bool is either a 0 or 1.     0   Is card1 greater than card2 ?     1   The Queen of Hearts is greater than the 2 of Hearts.    "
-},
-{
-  "id": "mce_12_6",
-  "level": "2",
-  "url": "chapter12_multiple-choice-exercises.html#mce_12_6",
-  "type": "Exercise",
-  "number": "9.12.6",
-  "title": "",
-  "body": "  What is the output of the code below?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; std::vector<Card> buildDeck(); bool equals(const Card& c1, const Card& c2) { return (c1.rank == c2.rank && c1.suit == c2.suit); } void printDeck(const std::vector<Card>& deck); int find(const Card& card, const std::vector<Card>& deck); int main() { std::vector<Card> deck = buildDeck(); Card card (3, 13); std::cout << find(card, deck); }       51   The card is the King of Spades, which is located at the end of the deck.     52   Since the std::vector is size 52, it cannot have an index of 52.     12   What is the value of card ?     -1   What is the value of card ?    "
-},
-{
-  "id": "mce_12_7",
-  "level": "2",
-  "url": "chapter12_multiple-choice-exercises.html#mce_12_7",
-  "type": "Exercise",
-  "number": "9.12.7",
-  "title": "",
-  "body": "  What is true about deck ?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; std::vector<Card> createDeck() { std::vector<Card> deck(12); int i = 0; for (int suit = 0; suit <= 3; suit++) { for (int rank = 1; rank < 4; rank++) { deck[i].suit = suit; deck[i].rank = rank; i++; } } return deck; } int main() { std::vector<Card> deck = createDeck(); }       It contains 12 Card s.    createDeck returns a std::vector of size 12, corresponding to 12 Card s.     The highest rank is 4.   The rank goes up to but does not include 4.     There are no spades in the deck.   The suit goes up to and include the suit value 3 which corresponds to spades.     The deck has 3 cards in each suit.   Each suit has an Ace, 2, and 3.    "
-},
-{
-  "id": "mce_12_8",
-  "level": "2",
-  "url": "chapter12_multiple-choice-exercises.html#mce_12_8",
-  "type": "Exercise",
-  "number": "9.12.8",
-  "title": "",
-  "body": "  How many times does findBisect need to call itself in order to find the King of Diamonds?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; std::vector<Card> buildDeck(); bool equals(const Card& c1, const Card& c2); void printDeck(const std::vector<Card>& deck); int find(const Card& card, const std::vector<Card>& deck); int findBisect(const Card& card, const std::vector<Card>& deck, int low, int high); int main() { std::vector<Card> deck = buildDeck(); Card card (1, 13); std::cout << findBisect(card, deck, 0, 51); }       0   The King of Diamonds is right in the middle of the deck, so it doesn't need to call itself.     1   Where is the King of Diamonds located relative to the sorted deck?     3   Where is the King of Diamonds located relative to the sorted deck?     4   Where is the King of Diamonds located relative to the sorted deck?    "
-},
-{
-  "id": "mce_12_9",
-  "level": "2",
-  "url": "chapter12_multiple-choice-exercises.html#mce_12_9",
-  "type": "Exercise",
-  "number": "9.12.9",
-  "title": "",
-  "body": "  We want to write the function findAllQueens , which searches through a deck and prints out the location of all 4 queens in the deck . What should go in the blanks?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; }; std::vector<Card> buildDeck(); bool equals(const Card& c1, const Card& c2); void printDeck(const std::vector<Card>& deck); void findAllQueens(const std::vector<Card>& deck) { for (size_t i = 0; i < deck.____; ++i) { if (deck[i].____ == 12) { std::cout << ____ << \" \"; } } } int main() { std::vector<Card> deck = buildDeck(); findAllQueens (deck); }       push_back() , suit , i   What value should i go up to?     size() , rank , i   These are the correct variables and functions.     size , rank , deck[i]   We want to print the index, not the card.     front() , suit , deck   What value should i go up to?    "
-},
-{
-  "id": "mce_12_10",
-  "level": "2",
-  "url": "chapter12_multiple-choice-exercises.html#mce_12_10",
-  "type": "Exercise",
-  "number": "9.12.10",
-  "title": "",
-  "body": "  What is the process of modeling a complex system with a simplified description in order to suppress unnecessary details while capturing relevant behavior?      Generalization   Generalization means to take something specific and make it more general.     Encapsulation   Encapsulation means taking a piece of code and wrapping it up in a function.     Abstraction   Using this process, we can remove unnecessary details to focus on the more important aspects.     Implementation   Implementation is the process of taking an idea and making it real.    "
-},
-{
-  "id": "chapter12_mixed-up-code-practice",
-  "level": "1",
-  "url": "chapter12_mixed-up-code-practice.html",
-  "type": "Exercises",
-  "number": "9.13",
-  "title": "Mixed Up Code Practice",
-  "body": " Mixed Up Code Practice    Let's write the struct definition for Song. Song should have instance variables title, artist, and numLikes (in that order). Put the necessary blocks of code in the correct order.     struct Song {    Struct Song {    std::string title;    std::string artist;    int numLikes;    };    }       Let's make an album! Write the struct definition for Album, which should have instance variables name, year and a vector of Songs (in that order). Put the necessary blocks of code in the correct order.     struct Album {    string Album {    std::string title;    std::string name;    int year;    Song song;    std::vector<Song> songs;    std::vector<string> Song;    };    }       Two Songs are equal if the title and artist of the Songs are equal. Write the function songEqual, which takes two Songs as parameters and returns true if they are equal. Put the necessary blocks of code in the correct order.     bool songEqual(const Song& a, const &Song b) {    bool songEqual(Song const &a, Song const &b) {    bool Song::songEqual(const Song& song) {    if (a.title == b.title && a.artist == b.artist) {    if (title == b.title && artist == b.artist) {    return true;    }    else {    return false;    }    }       What if we'd like to search an album for our favorite song? Write the Album member function searchAlbum which takes a Song as a parameter and returns the location of the Song in the album. If the song isn't found, return -1. Use the songEqual function we defined earlier! Put the necessary blocks of code in the correct order.     int Album::searchAlbum(const Song& a) {    int searchAlbum(const Album& album, const Song& a) {    bool searchAlbum(Song const &a) {    for (size_t i = 0; i < songs.size(); ++i) {    for (size_t i = 0; i < album.size(); ++i) {    for (size_t i = 0; i < Song.size(); ++i) {    if (songEqual (songs[i], a)) {    if (songs[i] == a) {    if (album.song == a) {    if (Song[i] == a) {    return i;    return true;    }    }    return -1;    return false;    }       What's the most popular Song within an Album? Let's write the Album member function mostLikedSong, which prints out the information of the most liked Song in the format The most liked song is title by artist with numLikes likes. Put the necessary blocks of code in the correct order.     void Album::mostLikedSong() {    int Album::mostLikedSong() {    void Album::mostLikedSong(const Song& a) {    int maxIndex = 0;    int maxLikes = 0;    for (size_t i = 0; i < songs.size(); ++i) {    for (size_t i = 0; i < album.size(); ++i) {    if (songs[i].numLikes > maxLikes) {    maxIndex = i;    maxLikes = songs[i].numLikes;    i = maxLikes;    maxLikes = numLikes;    }    }    std::cout << \"The most liked song is \" << songs[maxIndex].title;    std::cout << \" by \" << songs[maxIndex].artist << \" with \";    std::cout << songs[maxIndex].numLikes << \" likes.\" << std::endl ;    }       Let's write the struct definition for Product. Product should have instance variables name and price. Put the necessary blocks of code in the correct order.     struct Product {    struct product {    std::string name;    double price;    int price;    };    }       Let's make a shopping list! Write the struct definition for List, which should have instance variables type and a vector of Products. Put the necessary blocks of code in the correct order.     struct List {    Struct List {    std::string type;    Product type;    std::vector<Product> products;    vector<> Product;    };    }       Two Products are equal if the name and price of the Products are equal. Write the function productEqual, which takes two Products as parameters and returns true if they are equal. What if we want to check to see if we have bananas in our shopping list? Write the List member function searchList, which takes a Product as a parameter and returns the location of the Product in the List. Return -1 if it's not in the List. Put the necessary blocks of code in the correct order.     bool productEqual(const Product& a, const &Product b) {    bool productEqual (Product const &a, Product const &b) {    if (a.name == b.name) {    if (a.name == b.name && a.price == b.price) {    return true;    }    else {    return false;    }    }    int List::searchList(const Product& a) {    int searchList(const Product& a) {    for (size_t i = 0; i < products.size(); ++i) {    for (size_t i = 0; i < numProducts; ++i) {    if (productEqual (products[i], a)) {    if (album.song == a) {    return i;    }    }    return -1;    return 1;    }       Time to checkout! Write the List member function totalPrice which calculates and returns the total price of all the Products. Put the necessary blocks of code in the correct order.     double List::totalPrice() {    double List : totalPrice() {    int totalPrice() {     double total = 0;    double total;     for (size_t i = 0; i < products.size(); ++i) {    for (double i = 0; i < products.size(); ++i) {    for (size_t i = 0; i > products.size(); ++i) {     total += products[i].price;    total += products.price;     }    return total;    }       Oops! We made a mistake and grabbed pineapple pizza. What if we want to remove an Product from our List? Write the List member function removeProduct, which takes an index as a parameter and removes it. Then it fills the gap with the last product in the List. Put the necessary blocks of code in the correct order.      void List::removeProduct(int index) {    int removeProduct(int index) {    int List::removeProduct (const Product& a) {     products[index] = products[products.size() - 1];    for (size_t i = 0; i < products.size(); ++i) {  products[i] = products[products.size() - 1];  } \/\/end for    }     "
-},
-{
-  "id": "mucp_12_1",
-  "level": "2",
-  "url": "chapter12_mixed-up-code-practice.html#mucp_12_1",
-  "type": "Exercise",
-  "number": "9.13.yes",
-  "title": "",
-  "body": "  Let's write the struct definition for Song. Song should have instance variables title, artist, and numLikes (in that order). Put the necessary blocks of code in the correct order.     struct Song {    Struct Song {    std::string title;    std::string artist;    int numLikes;    };    }    "
-},
-{
-  "id": "mucp_12_2",
-  "level": "2",
-  "url": "chapter12_mixed-up-code-practice.html#mucp_12_2",
-  "type": "Exercise",
-  "number": "9.13.yes",
-  "title": "",
-  "body": "  Let's make an album! Write the struct definition for Album, which should have instance variables name, year and a vector of Songs (in that order). Put the necessary blocks of code in the correct order.     struct Album {    string Album {    std::string title;    std::string name;    int year;    Song song;    std::vector<Song> songs;    std::vector<string> Song;    };    }    "
-},
-{
-  "id": "mucp_12_3",
-  "level": "2",
-  "url": "chapter12_mixed-up-code-practice.html#mucp_12_3",
-  "type": "Exercise",
-  "number": "9.13.yes",
-  "title": "",
-  "body": "  Two Songs are equal if the title and artist of the Songs are equal. Write the function songEqual, which takes two Songs as parameters and returns true if they are equal. Put the necessary blocks of code in the correct order.     bool songEqual(const Song& a, const &Song b) {    bool songEqual(Song const &a, Song const &b) {    bool Song::songEqual(const Song& song) {    if (a.title == b.title && a.artist == b.artist) {    if (title == b.title && artist == b.artist) {    return true;    }    else {    return false;    }    }    "
-},
-{
-  "id": "mucp_12_4",
-  "level": "2",
-  "url": "chapter12_mixed-up-code-practice.html#mucp_12_4",
-  "type": "Exercise",
-  "number": "9.13.yes",
-  "title": "",
-  "body": "  What if we'd like to search an album for our favorite song? Write the Album member function searchAlbum which takes a Song as a parameter and returns the location of the Song in the album. If the song isn't found, return -1. Use the songEqual function we defined earlier! Put the necessary blocks of code in the correct order.     int Album::searchAlbum(const Song& a) {    int searchAlbum(const Album& album, const Song& a) {    bool searchAlbum(Song const &a) {    for (size_t i = 0; i < songs.size(); ++i) {    for (size_t i = 0; i < album.size(); ++i) {    for (size_t i = 0; i < Song.size(); ++i) {    if (songEqual (songs[i], a)) {    if (songs[i] == a) {    if (album.song == a) {    if (Song[i] == a) {    return i;    return true;    }    }    return -1;    return false;    }    "
-},
-{
-  "id": "mucp_12_5",
-  "level": "2",
-  "url": "chapter12_mixed-up-code-practice.html#mucp_12_5",
-  "type": "Exercise",
-  "number": "9.13.yes",
-  "title": "",
-  "body": "  What's the most popular Song within an Album? Let's write the Album member function mostLikedSong, which prints out the information of the most liked Song in the format The most liked song is title by artist with numLikes likes. Put the necessary blocks of code in the correct order.     void Album::mostLikedSong() {    int Album::mostLikedSong() {    void Album::mostLikedSong(const Song& a) {    int maxIndex = 0;    int maxLikes = 0;    for (size_t i = 0; i < songs.size(); ++i) {    for (size_t i = 0; i < album.size(); ++i) {    if (songs[i].numLikes > maxLikes) {    maxIndex = i;    maxLikes = songs[i].numLikes;    i = maxLikes;    maxLikes = numLikes;    }    }    std::cout << \"The most liked song is \" << songs[maxIndex].title;    std::cout << \" by \" << songs[maxIndex].artist << \" with \";    std::cout << songs[maxIndex].numLikes << \" likes.\" << std::endl ;    }    "
-},
-{
-  "id": "mucp_12_6",
-  "level": "2",
-  "url": "chapter12_mixed-up-code-practice.html#mucp_12_6",
-  "type": "Exercise",
-  "number": "9.13.yes",
-  "title": "",
-  "body": "  Let's write the struct definition for Product. Product should have instance variables name and price. Put the necessary blocks of code in the correct order.     struct Product {    struct product {    std::string name;    double price;    int price;    };    }    "
-},
-{
-  "id": "mucp_12_7",
-  "level": "2",
-  "url": "chapter12_mixed-up-code-practice.html#mucp_12_7",
-  "type": "Exercise",
-  "number": "9.13.yes",
-  "title": "",
-  "body": "  Let's make a shopping list! Write the struct definition for List, which should have instance variables type and a vector of Products. Put the necessary blocks of code in the correct order.     struct List {    Struct List {    std::string type;    Product type;    std::vector<Product> products;    vector<> Product;    };    }    "
-},
-{
-  "id": "mucp_12_8",
-  "level": "2",
-  "url": "chapter12_mixed-up-code-practice.html#mucp_12_8",
-  "type": "Exercise",
-  "number": "9.13.yes",
-  "title": "",
-  "body": "  Two Products are equal if the name and price of the Products are equal. Write the function productEqual, which takes two Products as parameters and returns true if they are equal. What if we want to check to see if we have bananas in our shopping list? Write the List member function searchList, which takes a Product as a parameter and returns the location of the Product in the List. Return -1 if it's not in the List. Put the necessary blocks of code in the correct order.     bool productEqual(const Product& a, const &Product b) {    bool productEqual (Product const &a, Product const &b) {    if (a.name == b.name) {    if (a.name == b.name && a.price == b.price) {    return true;    }    else {    return false;    }    }    int List::searchList(const Product& a) {    int searchList(const Product& a) {    for (size_t i = 0; i < products.size(); ++i) {    for (size_t i = 0; i < numProducts; ++i) {    if (productEqual (products[i], a)) {    if (album.song == a) {    return i;    }    }    return -1;    return 1;    }    "
-},
-{
-  "id": "mucp_12_9",
-  "level": "2",
-  "url": "chapter12_mixed-up-code-practice.html#mucp_12_9",
-  "type": "Exercise",
-  "number": "9.13.yes",
-  "title": "",
-  "body": "  Time to checkout! Write the List member function totalPrice which calculates and returns the total price of all the Products. Put the necessary blocks of code in the correct order.     double List::totalPrice() {    double List : totalPrice() {    int totalPrice() {     double total = 0;    double total;     for (size_t i = 0; i < products.size(); ++i) {    for (double i = 0; i < products.size(); ++i) {    for (size_t i = 0; i > products.size(); ++i) {     total += products[i].price;    total += products.price;     }    return total;    }    "
-},
-{
-  "id": "mucp_12_10",
-  "level": "2",
-  "url": "chapter12_mixed-up-code-practice.html#mucp_12_10",
-  "type": "Exercise",
-  "number": "9.13.yes",
-  "title": "",
-  "body": "  Oops! We made a mistake and grabbed pineapple pizza. What if we want to remove an Product from our List? Write the List member function removeProduct, which takes an index as a parameter and removes it. Then it fills the gap with the last product in the List. Put the necessary blocks of code in the correct order.      void List::removeProduct(int index) {    int removeProduct(int index) {    int List::removeProduct (const Product& a) {     products[index] = products[products.size() - 1];    for (size_t i = 0; i < products.size(); ++i) {  products[i] = products[products.size() - 1];  } \/\/end for    }    "
-},
-{
-  "id": "chapter12_coding-practice",
-  "level": "1",
-  "url": "chapter12_coding-practice.html",
-  "type": "Exercises",
-  "number": "9.14",
-  "title": "Coding Practice",
-  "body": " Coding Practice    A pixel is the smallest controllable element of a picture represented on the screen. Images are comprised of numerous individual pixels, and each pixel's color sample has three numerical RGB (red, green, blue) components to represent the color of that pixel. The intensity value of each RGB component ranges from 0 to 255, where 0 is no intensity and 255 is highest intensity. Write the struct definition for Pixel , which has values for each component r, g, and b.   #include <iostream> #include <vector> \/\/ Write your code for the struct Pixel here.    Below is one way to implement the program. We declare the Pixel struct and create the instance variables in order.  #include <iostream> #include <vector> struct Pixel { int r; int g; int b; };      An image is just a matrix of pixels. Write the struct definition for Image , which should store information about its height and width and contain a matrix of Pixel s. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; }; \/\/ Write your code for the struct Image here.      An image is just a matrix of pixels. Write the struct definition for Image , which should store information about its height and width and contain a matrix of Pixel s. Use the lines to construct the code, then go back to complete the Activecode.     struct Image {    int height;    int width;    vector<std::vector<Pixel>> matrix;    std::vector<Pixel> matrix;    std::vector<vector> matrix;    };         Let's print out a Pixel ! Write the Pixel member function printPixel , which prints out the values of the Pixel in this form: (r, g, b).   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; \/\/ Write your implementation of printPixel here. int main() { Pixel p = {0, 0, 0}; p.printPixel(); }    Below is one way to implement the program. We use the scope resolution operator to make printPixel a Pixel member function.  #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } int main() { Pixel p = {0, 0, 0}; p.printPixel(); }      Now let’s print an Image . Unfortunately we can’t print out the actual image to the terminal, but we can print out the Pixel s in the Image matrix. Write the Image member function printImage . Separate pixels in the same row with a space and add a new line at the end of each row. Use the printPixel function we created previously. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel>> matrix; void printImage(); }; \/\/ Write your implementation of printImage here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } }, { { 30, 60, 50 }, { 20, 135, 200 }, { 60, 80, 125 } } }; Image image = { 2, 3, matrix }; image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; }      Now let’s print an Image . Unfortunately we can’t print out the actual image to the terminal, but we can print out the Pixel s in the Image matrix. Write the Image member function printImage . Separate pixels in the same row with a space and add a new line at the end of each row. Use the printPixel function we created previously. Use the lines to construct the code, then go back to complete the Activecode.     void Image::printImage() {    for (int r = 0; r < height; ++r) {    for (int c = 0; c < width; ++ c) {    matrix[r][c].printPixel();    std::cout << \" \";    }    std::cout << std::endl ;    }    }         Somebody photobombed our image! What if we wanted to crop the photobomber out? Let's write the Image member function cropImage , which takes four paramenters, a start and stop row and a start and stop column. It then modifies the matrix to the cropped matrix.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); }; \/\/ Write your implementation of cropImage here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } }, { { 30, 60, 50 }, { 20, 135, 200 }, { 60, 80, 125 } }, { { 10, 0, 50 }, { 30, 65, 225 }, { 25, 105, 125 } }, { { 255, 60, 0 }, { 20, 25, 255 }, { 65, 55, 0 } } }; Image image = { 4, 3, matrix }; image.printImage(); std::cout << std::endl; image.cropImage(2, 3, 1, 2); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } }    Below is one way to implement the program. First we make a new matrix with the correct amount of rows. Then we push back the pixels we want into the new matrix. Afterwards, we must update the height and width of the Image and set the Image's matrix equal to the new one we created.  #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); }; void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; } int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } }, { { 30, 60, 50 }, { 20, 135, 200 }, { 60, 80, 125 } }, { { 10, 0, 50 }, { 30, 65, 225 }, { 25, 105, 125 } }, { { 255, 60, 0 }, { 20, 25, 255 }, { 65, 55, 0 } } }; Image image = { 4, 3, matrix }; image.printImage(); std::cout << std::endl; image.cropImage(2, 3, 1, 2); image.printImage(); }       Let’s write a swapPixel member function for Image . swapPixel takes two pairs of row indices and column indices from a matrix and swaps the two Pixel s at those locations. Note that these indices are 0-indexed, unlike the previous cropIndex parameters. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); }; \/\/ Write your implementation of swapPixel here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 140, 255 }, { 0, 0, 0 }, { 15, 20, 255 } } }; Image image = { 1, 3, matrix }; image.printImage(); std::cout << std::endl; image.swapPixel(0, 0, 0, 2); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } } void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; }      Let’s write a swapPixel member function for Image . swapPixel takes two pairs of row indices and column indices from a matrix and swaps the two Pixel s at those locations. Note that these indices are 0-indexed, unlike the previous cropIndex parameters. Use the lines to construct the code, then go back to complete the Activecode.     void Image::swapPixel(int row1, int col1, int row2, int col2) {    Pixel temp = { matrix[row1][col1].r, matrix[row1][col1].g, matrix[row1][col1].b };    matrix[row1][col1] = matrix[row2][col2];    matrix[row2][col2] = temp;    }         When you take a selfie on your phone, the image is mirrored. We can do the same to an image by flipping it horizontally. Write the Image member function flipHorizontal , which flips an image horizontally. Use the swapPixel function we created previously.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); }; \/\/ Write your implementation of flipHorizontal here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 50, 50, 50 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 100, 100, 100 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 150, 150, 150 }, { 10, 10, 10 }, { 255, 255, 255 } } }; Image image = { 4, 3, matrix }; image.printImage(); std::cout << std::endl; image.flipHorizontal(); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } } void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; } void Image::swapPixel(int row1, int col1, int row2, int col2) { Pixel temp = { matrix[row1][col1].r, matrix[row1][col1].g, matrix[row1][col1].b }; matrix[row1][col1] = matrix[row2][col2]; matrix[row2][col2] = temp; }    Below is one way to implement the program. We loop through each row in the matrix. We create start and end indices and repeatedly swap pixels, moving both indices toward the middle. Once they meet in the middle, we have finished flipping the image.  #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); }; void Image::flipHorizontal() { for (int r = 0; r < height; ++r) { int start = 0; int end = width - 1; while (start < end) { swapPixel(r, start, r, end); ++start; --end; } } } int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 50, 50, 50 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 100, 100, 100 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 150, 150, 150 }, { 10, 10, 10 }, { 255, 255, 255 } } }; Image image = { 4, 3, matrix }; image.printImage(); std::cout << std::endl; image.flipHorizontal(); image.printImage(); }      Oops! Somehow our image came out upside down. Let’s write the Image member function flipVertical , which reverts an image to be right side up. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); void flipVertical(); }; \/\/ Write your implementation of flipVertical here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 255, 255, 255 }, { 255, 255, 255 }, { 255, 255, 255 } }, { { 50, 50, 50 }, { 10, 10, 10 }, { 50, 50, 50 } }, { { 30, 30, 30 }, { 70, 70, 70 }, { 30, 30, 30 } }, { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } } }; Image image = { 4, 3, matrix }; image.printImage(); std::cout << std::endl; image.flipVertical(); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } } void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; } void Image::swapPixel(int row1, int col1, int row2, int col2) { Pixel temp = { matrix[row1][col1].r, matrix[row1][col1].g, matrix[row1][col1].b }; matrix[row1][col1] = matrix[row2][col2]; matrix[row2][col2] = temp; } void Image::flipHorizontal() { for (int r = 0; r < height; ++r) { int start = 0; int end = width - 1; while (start < end) { swapPixel(r, start, r, end); ++start; --end; } } }      Oops! Somehow our image came out upside down. Let’s write the Image member function flipVertical , which reverts an image to be right side up. Use the lines to construct the code, then go back to complete the Activecode.     void Image::flipVertical() {  for (int c = 0; c < width; ++c) {    int start = 0;    int end = height - 1;    while (start < end) {    swapPixel(start, c, end, c);    ++start;    --end;    }    }    }         Let's write the Image member function called createBorder , which sets the Pixel s on the edge of an Image to a given Pixel .   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); void flipVertical(); void createBorder(Pixel p); }; \/\/ Write your implementation of createBorder here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 25, 65, 23 }, { 73, 56, 24 }, { 255, 255, 255 }, { 253, 61, 56 } }, { { 50, 50, 50 }, { 145, 52, 102 }, { 2, 0, 25 }, { 52, 47, 35 } }, { { 45, 34, 100 }, { 213, 67, 45 }, { 2, 45, 255 }, { 34, 16, 76 } }, { { 2, 2, 78 }, { 164, 16, 23 }, { 5, 255, 25 }, { 32, 65, 34 } }, { { 150, 150, 150 }, { 241, 42, 64 }, { 1, 4, 255 }, { 16, 73, 84 } } }; Image image = { 5, 4, matrix }; image.printImage(); std::cout << std::endl; Pixel p = { 0, 0, 0 }; image.createBorder(p); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } } void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; } void Image::swapPixel(int row1, int col1, int row2, int col2) { Pixel temp = { matrix[row1][col1].r, matrix[row1][col1].g, matrix[row1][col1].b }; matrix[row1][col1] = matrix[row2][col2]; matrix[row2][col2] = temp; } void Image::flipHorizontal() { for (int r = 0; r < height; ++r) { int start = 0; int end = width - 1; while (start < end) { swapPixel(r, start, r, end); ++start; --end; } } } void Image::flipVertical() { for (int c = 0; c < width; ++c) { int start = 0; int end = height - 1; while (start < end) { swapPixel(start, c, end, c); ++start; --end; } } }    Below is one way to implement the program. We set the first and last row and first and last column of Pixels in the Image to the given Pixel.  #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); void flipVertical(); void createBorder(Pixel p); }; void Image::createBorder(Pixel p) { for (int r = 0; r < height; ++r) { matrix[r][0] = p; matrix[r][width - 1] = p; } for (int c = 0; c < width; ++c) { matrix[0][c] = p; matrix[height - 1][c] = p; } } int main() { std::vector<std::vector<Pixel> > matrix = { { { 25, 65, 23 }, { 73, 56, 24 }, { 255, 255, 255 }, { 253, 61, 56 } }, { { 50, 50, 50 }, { 145, 52, 102 }, { 2, 0, 25 }, { 52, 47, 35 } }, { { 45, 34, 100 }, { 213, 67, 45 }, { 2, 45, 255 }, { 34, 16, 76 } }, { { 2, 2, 78 }, { 164, 16, 23 }, { 5, 255, 25 }, { 32, 65, 34 } }, { { 150, 150, 150 }, { 241, 42, 64 }, { 1, 4, 255 }, { 16, 73, 84 } } }; Image image = { 5, 4, matrix }; image.printImage(); std::cout << std::endl; Pixel p = { 0, 0, 0 }; image.createBorder(p); image.printImage(); }      Let’s return our image to the state of a clean slate. Write the function clearImage , which sets the color of every Pixel to white. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); void flipVertical(); void createBorder(Pixel p); void clearImage(); }; \/\/ Write your implementation of clearImage here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 65, 70, 255 } }, { { 26, 48, 205 }, { 43, 12, 15 }, { 45, 30, 70 } }, { { 89, 36, 65 }, { 75, 43, 26 }, { 40, 75, 70 } } }; Image image = { 3, 3, matrix }; image.printImage(); std::cout << std::endl; image.clearImage(); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } } void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; } void Image::swapPixel(int row1, int col1, int row2, int col2) { Pixel temp = { matrix[row1][col1].r, matrix[row1][col1].g, matrix[row1][col1].b }; matrix[row1][col1] = matrix[row2][col2]; matrix[row2][col2] = temp; } void Image::flipHorizontal() { for (int r = 0; r < height; ++r) { int start = 0; int end = width - 1; while (start < end) { swapPixel(r, start, r, end); ++start; --end; } } } void Image::flipVertical() { for (int c = 0; c < width; ++c) { int start = 0; int end = height - 1; while (start < end) { swapPixel(start, c, end, c); ++start; --end; } } } void Image::createBorder(Pixel p) { for (int r = 0; r < height; ++r) { matrix[r][0] = p; matrix[r][width - 1] = p; } for (int c = 0; c < width; ++c) { matrix[0][c] = p; matrix[height - 1][c] = p; } }      Let’s return our image to the state of a clean slate. Write the function clearImage , which sets the color of every Pixel to white. Use the lines to construct the code, then go back to complete the Activecode.     void Image::clearImage () {    for (int r = 0; r < height; r++) {    for (int c = 0; c < width; c++) {    matrix[r][c].r = 255;    matrix[r][c].g = 255;    matrix[r][c].b = 255;    }    }    }       "
-},
-{
-  "id": "cp_12_1",
-  "level": "2",
-  "url": "chapter12_coding-practice.html#cp_12_1",
-  "type": "Exercise",
-  "number": "9.14.1",
-  "title": "",
-  "body": "  A pixel is the smallest controllable element of a picture represented on the screen. Images are comprised of numerous individual pixels, and each pixel's color sample has three numerical RGB (red, green, blue) components to represent the color of that pixel. The intensity value of each RGB component ranges from 0 to 255, where 0 is no intensity and 255 is highest intensity. Write the struct definition for Pixel , which has values for each component r, g, and b.   #include <iostream> #include <vector> \/\/ Write your code for the struct Pixel here.    Below is one way to implement the program. We declare the Pixel struct and create the instance variables in order.  #include <iostream> #include <vector> struct Pixel { int r; int g; int b; };   "
-},
-{
-  "id": "cp_12_AC_2_q",
-  "level": "2",
-  "url": "chapter12_coding-practice.html#cp_12_AC_2_q",
-  "type": "Exercise",
-  "number": "9.14.2",
-  "title": "",
-  "body": "  An image is just a matrix of pixels. Write the struct definition for Image , which should store information about its height and width and contain a matrix of Pixel s. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; }; \/\/ Write your code for the struct Image here.      An image is just a matrix of pixels. Write the struct definition for Image , which should store information about its height and width and contain a matrix of Pixel s. Use the lines to construct the code, then go back to complete the Activecode.     struct Image {    int height;    int width;    vector<std::vector<Pixel>> matrix;    std::vector<Pixel> matrix;    std::vector<vector> matrix;    };      "
-},
-{
-  "id": "cp_12_AC_3",
-  "level": "2",
-  "url": "chapter12_coding-practice.html#cp_12_AC_3",
-  "type": "Exercise",
-  "number": "9.14.3",
-  "title": "",
-  "body": "  Let's print out a Pixel ! Write the Pixel member function printPixel , which prints out the values of the Pixel in this form: (r, g, b).   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; \/\/ Write your implementation of printPixel here. int main() { Pixel p = {0, 0, 0}; p.printPixel(); }    Below is one way to implement the program. We use the scope resolution operator to make printPixel a Pixel member function.  #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } int main() { Pixel p = {0, 0, 0}; p.printPixel(); }   "
-},
-{
-  "id": "cp_12_AC_4_q",
-  "level": "2",
-  "url": "chapter12_coding-practice.html#cp_12_AC_4_q",
-  "type": "Exercise",
-  "number": "9.14.4",
-  "title": "",
-  "body": "  Now let’s print an Image . Unfortunately we can’t print out the actual image to the terminal, but we can print out the Pixel s in the Image matrix. Write the Image member function printImage . Separate pixels in the same row with a space and add a new line at the end of each row. Use the printPixel function we created previously. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel>> matrix; void printImage(); }; \/\/ Write your implementation of printImage here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } }, { { 30, 60, 50 }, { 20, 135, 200 }, { 60, 80, 125 } } }; Image image = { 2, 3, matrix }; image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; }      Now let’s print an Image . Unfortunately we can’t print out the actual image to the terminal, but we can print out the Pixel s in the Image matrix. Write the Image member function printImage . Separate pixels in the same row with a space and add a new line at the end of each row. Use the printPixel function we created previously. Use the lines to construct the code, then go back to complete the Activecode.     void Image::printImage() {    for (int r = 0; r < height; ++r) {    for (int c = 0; c < width; ++ c) {    matrix[r][c].printPixel();    std::cout << \" \";    }    std::cout << std::endl ;    }    }      "
-},
-{
-  "id": "cp_12_AC_5",
-  "level": "2",
-  "url": "chapter12_coding-practice.html#cp_12_AC_5",
-  "type": "Exercise",
-  "number": "9.14.5",
-  "title": "",
-  "body": "  Somebody photobombed our image! What if we wanted to crop the photobomber out? Let's write the Image member function cropImage , which takes four paramenters, a start and stop row and a start and stop column. It then modifies the matrix to the cropped matrix.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); }; \/\/ Write your implementation of cropImage here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } }, { { 30, 60, 50 }, { 20, 135, 200 }, { 60, 80, 125 } }, { { 10, 0, 50 }, { 30, 65, 225 }, { 25, 105, 125 } }, { { 255, 60, 0 }, { 20, 25, 255 }, { 65, 55, 0 } } }; Image image = { 4, 3, matrix }; image.printImage(); std::cout << std::endl; image.cropImage(2, 3, 1, 2); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } }    Below is one way to implement the program. First we make a new matrix with the correct amount of rows. Then we push back the pixels we want into the new matrix. Afterwards, we must update the height and width of the Image and set the Image's matrix equal to the new one we created.  #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); }; void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; } int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 255, 255 }, { 0, 0, 0 }, { 255, 255, 255 } }, { { 30, 60, 50 }, { 20, 135, 200 }, { 60, 80, 125 } }, { { 10, 0, 50 }, { 30, 65, 225 }, { 25, 105, 125 } }, { { 255, 60, 0 }, { 20, 25, 255 }, { 65, 55, 0 } } }; Image image = { 4, 3, matrix }; image.printImage(); std::cout << std::endl; image.cropImage(2, 3, 1, 2); image.printImage(); }    "
-},
-{
-  "id": "cp_12_AC_6_q",
-  "level": "2",
-  "url": "chapter12_coding-practice.html#cp_12_AC_6_q",
-  "type": "Exercise",
-  "number": "9.14.6",
-  "title": "",
-  "body": "  Let’s write a swapPixel member function for Image . swapPixel takes two pairs of row indices and column indices from a matrix and swaps the two Pixel s at those locations. Note that these indices are 0-indexed, unlike the previous cropIndex parameters. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); }; \/\/ Write your implementation of swapPixel here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 140, 255 }, { 0, 0, 0 }, { 15, 20, 255 } } }; Image image = { 1, 3, matrix }; image.printImage(); std::cout << std::endl; image.swapPixel(0, 0, 0, 2); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } } void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; }      Let’s write a swapPixel member function for Image . swapPixel takes two pairs of row indices and column indices from a matrix and swaps the two Pixel s at those locations. Note that these indices are 0-indexed, unlike the previous cropIndex parameters. Use the lines to construct the code, then go back to complete the Activecode.     void Image::swapPixel(int row1, int col1, int row2, int col2) {    Pixel temp = { matrix[row1][col1].r, matrix[row1][col1].g, matrix[row1][col1].b };    matrix[row1][col1] = matrix[row2][col2];    matrix[row2][col2] = temp;    }      "
-},
-{
-  "id": "cp_12_AC_7",
-  "level": "2",
-  "url": "chapter12_coding-practice.html#cp_12_AC_7",
-  "type": "Exercise",
-  "number": "9.14.7",
-  "title": "",
-  "body": "  When you take a selfie on your phone, the image is mirrored. We can do the same to an image by flipping it horizontally. Write the Image member function flipHorizontal , which flips an image horizontally. Use the swapPixel function we created previously.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); }; \/\/ Write your implementation of flipHorizontal here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 50, 50, 50 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 100, 100, 100 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 150, 150, 150 }, { 10, 10, 10 }, { 255, 255, 255 } } }; Image image = { 4, 3, matrix }; image.printImage(); std::cout << std::endl; image.flipHorizontal(); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } } void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; } void Image::swapPixel(int row1, int col1, int row2, int col2) { Pixel temp = { matrix[row1][col1].r, matrix[row1][col1].g, matrix[row1][col1].b }; matrix[row1][col1] = matrix[row2][col2]; matrix[row2][col2] = temp; }    Below is one way to implement the program. We loop through each row in the matrix. We create start and end indices and repeatedly swap pixels, moving both indices toward the middle. Once they meet in the middle, we have finished flipping the image.  #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); }; void Image::flipHorizontal() { for (int r = 0; r < height; ++r) { int start = 0; int end = width - 1; while (start < end) { swapPixel(r, start, r, end); ++start; --end; } } } int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 50, 50, 50 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 100, 100, 100 }, { 10, 10, 10 }, { 255, 255, 255 } }, { { 150, 150, 150 }, { 10, 10, 10 }, { 255, 255, 255 } } }; Image image = { 4, 3, matrix }; image.printImage(); std::cout << std::endl; image.flipHorizontal(); image.printImage(); }   "
-},
-{
-  "id": "cp_12_AC_8_q",
-  "level": "2",
-  "url": "chapter12_coding-practice.html#cp_12_AC_8_q",
-  "type": "Exercise",
-  "number": "9.14.8",
-  "title": "",
-  "body": "  Oops! Somehow our image came out upside down. Let’s write the Image member function flipVertical , which reverts an image to be right side up. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); void flipVertical(); }; \/\/ Write your implementation of flipVertical here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 255, 255, 255 }, { 255, 255, 255 }, { 255, 255, 255 } }, { { 50, 50, 50 }, { 10, 10, 10 }, { 50, 50, 50 } }, { { 30, 30, 30 }, { 70, 70, 70 }, { 30, 30, 30 } }, { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } } }; Image image = { 4, 3, matrix }; image.printImage(); std::cout << std::endl; image.flipVertical(); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } } void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; } void Image::swapPixel(int row1, int col1, int row2, int col2) { Pixel temp = { matrix[row1][col1].r, matrix[row1][col1].g, matrix[row1][col1].b }; matrix[row1][col1] = matrix[row2][col2]; matrix[row2][col2] = temp; } void Image::flipHorizontal() { for (int r = 0; r < height; ++r) { int start = 0; int end = width - 1; while (start < end) { swapPixel(r, start, r, end); ++start; --end; } } }      Oops! Somehow our image came out upside down. Let’s write the Image member function flipVertical , which reverts an image to be right side up. Use the lines to construct the code, then go back to complete the Activecode.     void Image::flipVertical() {  for (int c = 0; c < width; ++c) {    int start = 0;    int end = height - 1;    while (start < end) {    swapPixel(start, c, end, c);    ++start;    --end;    }    }    }      "
-},
-{
-  "id": "cp_12_AC_9",
-  "level": "2",
-  "url": "chapter12_coding-practice.html#cp_12_AC_9",
-  "type": "Exercise",
-  "number": "9.14.9",
-  "title": "",
-  "body": "  Let's write the Image member function called createBorder , which sets the Pixel s on the edge of an Image to a given Pixel .   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); void flipVertical(); void createBorder(Pixel p); }; \/\/ Write your implementation of createBorder here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 25, 65, 23 }, { 73, 56, 24 }, { 255, 255, 255 }, { 253, 61, 56 } }, { { 50, 50, 50 }, { 145, 52, 102 }, { 2, 0, 25 }, { 52, 47, 35 } }, { { 45, 34, 100 }, { 213, 67, 45 }, { 2, 45, 255 }, { 34, 16, 76 } }, { { 2, 2, 78 }, { 164, 16, 23 }, { 5, 255, 25 }, { 32, 65, 34 } }, { { 150, 150, 150 }, { 241, 42, 64 }, { 1, 4, 255 }, { 16, 73, 84 } } }; Image image = { 5, 4, matrix }; image.printImage(); std::cout << std::endl; Pixel p = { 0, 0, 0 }; image.createBorder(p); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } } void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; } void Image::swapPixel(int row1, int col1, int row2, int col2) { Pixel temp = { matrix[row1][col1].r, matrix[row1][col1].g, matrix[row1][col1].b }; matrix[row1][col1] = matrix[row2][col2]; matrix[row2][col2] = temp; } void Image::flipHorizontal() { for (int r = 0; r < height; ++r) { int start = 0; int end = width - 1; while (start < end) { swapPixel(r, start, r, end); ++start; --end; } } } void Image::flipVertical() { for (int c = 0; c < width; ++c) { int start = 0; int end = height - 1; while (start < end) { swapPixel(start, c, end, c); ++start; --end; } } }    Below is one way to implement the program. We set the first and last row and first and last column of Pixels in the Image to the given Pixel.  #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); void flipVertical(); void createBorder(Pixel p); }; void Image::createBorder(Pixel p) { for (int r = 0; r < height; ++r) { matrix[r][0] = p; matrix[r][width - 1] = p; } for (int c = 0; c < width; ++c) { matrix[0][c] = p; matrix[height - 1][c] = p; } } int main() { std::vector<std::vector<Pixel> > matrix = { { { 25, 65, 23 }, { 73, 56, 24 }, { 255, 255, 255 }, { 253, 61, 56 } }, { { 50, 50, 50 }, { 145, 52, 102 }, { 2, 0, 25 }, { 52, 47, 35 } }, { { 45, 34, 100 }, { 213, 67, 45 }, { 2, 45, 255 }, { 34, 16, 76 } }, { { 2, 2, 78 }, { 164, 16, 23 }, { 5, 255, 25 }, { 32, 65, 34 } }, { { 150, 150, 150 }, { 241, 42, 64 }, { 1, 4, 255 }, { 16, 73, 84 } } }; Image image = { 5, 4, matrix }; image.printImage(); std::cout << std::endl; Pixel p = { 0, 0, 0 }; image.createBorder(p); image.printImage(); }   "
-},
-{
-  "id": "cp_12_AC_10_q",
-  "level": "2",
-  "url": "chapter12_coding-practice.html#cp_12_AC_10_q",
-  "type": "Exercise",
-  "number": "9.14.10",
-  "title": "",
-  "body": "  Let’s return our image to the state of a clean slate. Write the function clearImage , which sets the color of every Pixel to white. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> struct Pixel { int r; int g; int b; void printPixel(); }; struct Image { int height; int width; std::vector<std::vector<Pixel> > matrix; void printImage(); void cropImage(int startRow, int stopRow, int startCol, int stopCol); void swapPixel(int row1, int col1, int row2, int col2); void flipHorizontal(); void flipVertical(); void createBorder(Pixel p); void clearImage(); }; \/\/ Write your implementation of clearImage here. int main() { std::vector<std::vector<Pixel> > matrix = { { { 0, 0, 0 }, { 10, 10, 10 }, { 65, 70, 255 } }, { { 26, 48, 205 }, { 43, 12, 15 }, { 45, 30, 70 } }, { { 89, 36, 65 }, { 75, 43, 26 }, { 40, 75, 70 } } }; Image image = { 3, 3, matrix }; image.printImage(); std::cout << std::endl; image.clearImage(); image.printImage(); }  void Pixel::printPixel() { std::cout << \"(\"<< r << \", \" << g << \", \" << b << \")\"; } void Image::printImage() { for (int r = 0; r < height; ++r) { for (int c = 0; c < width; ++ c) { matrix[r][c].printPixel(); std::cout << \" \"; } std::cout << std::endl; } } void Image::cropImage(int startRow, int stopRow, int startCol, int stopCol) { std::vector<std::vector<Pixel> > newMatrix(stopRow - startRow + 1); for (int r = startRow - 1; r < stopRow; ++r) { for (int c = startCol - 1; c < stopCol; ++c) { newMatrix[r - (startRow - 1)].push_back(matrix[r][c]); } } height = stopRow - startRow + 1; width = stopCol - startCol + 1; matrix = newMatrix; } void Image::swapPixel(int row1, int col1, int row2, int col2) { Pixel temp = { matrix[row1][col1].r, matrix[row1][col1].g, matrix[row1][col1].b }; matrix[row1][col1] = matrix[row2][col2]; matrix[row2][col2] = temp; } void Image::flipHorizontal() { for (int r = 0; r < height; ++r) { int start = 0; int end = width - 1; while (start < end) { swapPixel(r, start, r, end); ++start; --end; } } } void Image::flipVertical() { for (int c = 0; c < width; ++c) { int start = 0; int end = height - 1; while (start < end) { swapPixel(start, c, end, c); ++start; --end; } } } void Image::createBorder(Pixel p) { for (int r = 0; r < height; ++r) { matrix[r][0] = p; matrix[r][width - 1] = p; } for (int c = 0; c < width; ++c) { matrix[0][c] = p; matrix[height - 1][c] = p; } }      Let’s return our image to the state of a clean slate. Write the function clearImage , which sets the color of every Pixel to white. Use the lines to construct the code, then go back to complete the Activecode.     void Image::clearImage () {    for (int r = 0; r < height; r++) {    for (int c = 0; c < width; c++) {    matrix[r][c].r = 255;    matrix[r][c].g = 255;    matrix[r][c].b = 255;    }    }    }      "
-},
-{
-  "id": "chapter13_enumerated-types",
-  "level": "1",
-  "url": "chapter13_enumerated-types.html",
-  "type": "Section",
-  "number": "10.1",
-  "title": "Enumerated types",
-  "body": " Enumerated types  In the previous chapter I talked about mappings between real-world values like rank and suit, and internal representations like integers and strings. Although we created a mapping between ranks and integers, and between suits and integers, I pointed out that the mapping itself does not appear as part of the program.  Actually, C++ provides a feature called an enumerated type that makes it possible to (1) include a mapping as part of the program, and (2) define the set of values that make up the mapping. For example, here is the definition of the enumerated types Suit and Rank :  enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING };   By default, the first value in the enumerated type maps to 0, the second to 1, and so on.   Within the Suit type, the value CLUBS is represented by the integer 0, DIAMONDS is represented by 1, etc.  The definition of Rank overrides the default mapping and specifies that ACE should be represented by the integer 1. The other values follow in the usual way.  Once we have defined these types, we can use them anywhere. For example, the instance variables rank and suit are can be declared with type Rank and Suit :  struct Card { Rank rank; Suit suit; Card(Suit s, Rank r); };  The types of the parameters for the constructor have changed, too. Now, to create a card, we can use the values from the enumerated type as arguments:  Card card (DIAMONDS, JACK);  By convention, the values in enumerated types have names with all capital letters. This code is much clearer than the alternative using integers:  Card card (1, 11);   This active code uses the enumerated types created above to construct Card objects. Feel free to modify the values that the cards are being initialized to in the constructor: this will change the output from the print function. Notice how this is much clearer than using integers.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; struct Card { Rank rank; Suit suit; Card(Suit s, Rank r); void print() const; }; int main() { Card card1 (DIAMONDS, JACK); card1.print(); Card card2 (HEARTS, QUEEN); card2.print(); Card card3 (CLUBS, THREE); card3.print(); }  Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; }    Because we know that the values in the enumerated types are represented as integers, we can use them as indices for a vector. Therefore the old print function will work without modification. We have to make some changes in buildDeck , though:  int index = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { deck[index].suit = suit; deck[index].rank = rank; index++; } }  In some ways, using enumerated types makes this code more readable, but there is one complication. Strictly speaking, we are not allowed to do arithmetic with enumerated types, so suit++ is not legal. On the other hand, in the expression suit+1 , C++ automatically converts the enumerated type to integer. Then we can take the result and typecast it back to the enumerated type:  suit = Suit(suit+1); rank = Rank(rank+1);  Actually, there is a better way to do this—we can define the ++ operator for enumerated types—but that is beyond the scope of this book.    Multiple Response: What can we do with enumerated types?      Perform arithmetic.   We are not allowed to do arithmetic with enumerated types.     Include a mapping as part of the program.   This is the purpose of an enumerated type.     Use the same set of values in multiple mappings.   Variables in one enumeration type cannot be used in another enumeration type.     Define the set of values that make up a mapping.   This is the purpose of an enumerated type.     Use them as indices for a vector.   Since the values in enumerated types are represented as integers, we can use them as vector indices.       Assume we have the following struct defined by this enumerated type. What will be printed by the print function?  enum Scoops { SINGLE = 1, DOUBLE, TRIPLE }; enum Flavor { VANILLA, CHOCOLATE, STRAWBERRY, COOKIESNCREAM, MINTCHIP, COOKIEDOUGH }; enum Order { CUP, CAKECONE, SUGARCONE, WAFFLECONE } struct iceCream { Scoops scoops; Flavor flavor; Order order; iceCream (Scoops s, Flavor f, Order o); printOrder() { \/\/ To save space, I didn't include the mapping. \/\/ I'm sure you can still figure it out. std::cout << \"Who ordered a \" << scoops[scoop] << \" scoop of \" << flavors[flavor] << \" in a \" << orders[order] << ?; } }; int main() { iceCream icecream (2, 3, 2); iceCream.printOrder(); }      Who ordered a triple scoop of Cookies 'n' Cream in a sugar cone?   Remember that we performed an override for one of the enumerated types!     Who ordered a double scoop of Strawberry in a cake cone?   Remember that the default enumeration starts at 0.     Who ordered a double scoop of Cookies 'n' Cream in a sugar cone?   2 corresponds to \"double\", 3 corresponds to \"Cookies 'n' Cream\", and 2 corresponds to \"sugar cone\".     Who ordered a triple scoop of Strawberry in a cake cone?   Remember that we performed an override for one of the enumerated types! The default enumeration starts at 0.     Who ordered a triple scoop of Mint Chocolate Chip in a Waffle Cone?   Take another look at how we defined our enumerated types.       Based on the Rank enumerated type, what integer value does QUEEN have?            "
-},
-{
-  "id": "chapter13_enumerated-types-2",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In the previous chapter I talked about mappings between real-world values like rank and suit, and internal representations like integers and strings. Although we created a mapping between ranks and integers, and between suits and integers, I pointed out that the mapping itself does not appear as part of the program. "
-},
-{
-  "id": "chapter13_enumerated-types-3",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Actually, C++ provides a feature called an enumerated type that makes it possible to (1) include a mapping as part of the program, and (2) define the set of values that make up the mapping. For example, here is the definition of the enumerated types Suit and Rank : "
-},
-{
-  "id": "chapter13_enumerated-types-5",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-5",
-  "type": "Note",
-  "number": "10.1.1",
-  "title": "",
-  "body": " By default, the first value in the enumerated type maps to 0, the second to 1, and so on.  "
-},
-{
-  "id": "chapter13_enumerated-types-6",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Within the Suit type, the value CLUBS is represented by the integer 0, DIAMONDS is represented by 1, etc. "
-},
-{
-  "id": "chapter13_enumerated-types-7",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The definition of Rank overrides the default mapping and specifies that ACE should be represented by the integer 1. The other values follow in the usual way. "
-},
-{
-  "id": "chapter13_enumerated-types-8",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Once we have defined these types, we can use them anywhere. For example, the instance variables rank and suit are can be declared with type Rank and Suit : "
-},
-{
-  "id": "chapter13_enumerated-types-10",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The types of the parameters for the constructor have changed, too. Now, to create a card, we can use the values from the enumerated type as arguments: "
-},
-{
-  "id": "chapter13_enumerated-types-12",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "By convention, the values in enumerated types have names with all capital letters. This code is much clearer than the alternative using integers: "
-},
-{
-  "id": "enum_type_AC_1",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#enum_type_AC_1",
-  "type": "Listing",
-  "number": "10.1.1",
-  "title": "This active code uses the enumerated types created above to construct <code class=\"code-inline tex2jax_ignore\">Card<\/code> objects. Feel free to modify the values that the cards are being initialized to in the constructor: this will change the output from the <code class=\"code-inline tex2jax_ignore\">print<\/code> function. Notice how this is much clearer than using integers.",
-  "body": " This active code uses the enumerated types created above to construct Card objects. Feel free to modify the values that the cards are being initialized to in the constructor: this will change the output from the print function. Notice how this is much clearer than using integers.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; struct Card { Rank rank; Suit suit; Card(Suit s, Rank r); void print() const; }; int main() { Card card1 (DIAMONDS, JACK); card1.print(); Card card2 (HEARTS, QUEEN); card2.print(); Card card3 (CLUBS, THREE); card3.print(); }  Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; }   "
-},
-{
-  "id": "chapter13_enumerated-types-15",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-15",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Because we know that the values in the enumerated types are represented as integers, we can use them as indices for a vector. Therefore the old print function will work without modification. We have to make some changes in buildDeck , though: "
-},
-{
-  "id": "chapter13_enumerated-types-17",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-17",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In some ways, using enumerated types makes this code more readable, but there is one complication. Strictly speaking, we are not allowed to do arithmetic with enumerated types, so suit++ is not legal. On the other hand, in the expression suit+1 , C++ automatically converts the enumerated type to integer. Then we can take the result and typecast it back to the enumerated type: "
-},
-{
-  "id": "chapter13_enumerated-types-19",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#chapter13_enumerated-types-19",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Actually, there is a better way to do this—we can define the ++ operator for enumerated types—but that is beyond the scope of this book. "
-},
-{
-  "id": "enum_type_1",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#enum_type_1",
-  "type": "Checkpoint",
-  "number": "10.1.1",
-  "title": "",
-  "body": "  Multiple Response: What can we do with enumerated types?      Perform arithmetic.   We are not allowed to do arithmetic with enumerated types.     Include a mapping as part of the program.   This is the purpose of an enumerated type.     Use the same set of values in multiple mappings.   Variables in one enumeration type cannot be used in another enumeration type.     Define the set of values that make up a mapping.   This is the purpose of an enumerated type.     Use them as indices for a vector.   Since the values in enumerated types are represented as integers, we can use them as vector indices.    "
-},
-{
-  "id": "enum_type_2",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#enum_type_2",
-  "type": "Checkpoint",
-  "number": "10.1.2",
-  "title": "",
-  "body": "  Assume we have the following struct defined by this enumerated type. What will be printed by the print function?  enum Scoops { SINGLE = 1, DOUBLE, TRIPLE }; enum Flavor { VANILLA, CHOCOLATE, STRAWBERRY, COOKIESNCREAM, MINTCHIP, COOKIEDOUGH }; enum Order { CUP, CAKECONE, SUGARCONE, WAFFLECONE } struct iceCream { Scoops scoops; Flavor flavor; Order order; iceCream (Scoops s, Flavor f, Order o); printOrder() { \/\/ To save space, I didn't include the mapping. \/\/ I'm sure you can still figure it out. std::cout << \"Who ordered a \" << scoops[scoop] << \" scoop of \" << flavors[flavor] << \" in a \" << orders[order] << ?; } }; int main() { iceCream icecream (2, 3, 2); iceCream.printOrder(); }      Who ordered a triple scoop of Cookies 'n' Cream in a sugar cone?   Remember that we performed an override for one of the enumerated types!     Who ordered a double scoop of Strawberry in a cake cone?   Remember that the default enumeration starts at 0.     Who ordered a double scoop of Cookies 'n' Cream in a sugar cone?   2 corresponds to \"double\", 3 corresponds to \"Cookies 'n' Cream\", and 2 corresponds to \"sugar cone\".     Who ordered a triple scoop of Strawberry in a cake cone?   Remember that we performed an override for one of the enumerated types! The default enumeration starts at 0.     Who ordered a triple scoop of Mint Chocolate Chip in a Waffle Cone?   Take another look at how we defined our enumerated types.    "
-},
-{
-  "id": "enum_type_3",
-  "level": "2",
-  "url": "chapter13_enumerated-types.html#enum_type_3",
-  "type": "Checkpoint",
-  "number": "10.1.3",
-  "title": "",
-  "body": "  Based on the Rank enumerated type, what integer value does QUEEN have?           "
-},
-{
-  "id": "chapter13_switch-statement",
-  "level": "1",
-  "url": "chapter13_switch-statement.html",
-  "type": "Section",
-  "number": "10.2",
-  "title": "<code class=\"code-inline tex2jax_ignore\">switch<\/code> statement",
-  "body": " switch statement  It's hard to mention enumerated types without mentioning switch statements, because they often go hand in hand. A switch statement is an alternative to a chained conditional that is syntactically prettier and often more efficient. It looks like this:  switch (symbol) { case '+': perform_addition(); break; case '*': perform_multiplication(); break; default: std::cout << \"I only know how to perform addition and multiplication\" << std::endl ; break; }  This switch statement is equivalent to the following chained conditional:  if (symbol == '+') { perform_addition(); } else if (symbol == '*') { perform_multiplication(); } else { std::cout << \"I only know how to perform addition and multiplication\" << std::endl ; }  The break statements are necessary in each branch in a switch statement because otherwise the flow of execution falls through to the next case.   Be sure to incorporate a break statment into each branch so that the flow of execution stops after that branch.   Without the break statements, the symbol + would make the program perform addition, and then perform multiplication, and then print the error message. Occasionally this feature is useful, but most of the time it is a source of errors when people forget the break statements.   Take a look at this active code that allows you to choose your starter Pokemon. If you change the value of type , it will change the Pokemon you choose. Notice how if you don't assign type to a valid type, it outputs the default message. Try taking out the break statements in each case. What happens if you run the code with type as ‘g' afterwards?   #include <iostream> #include <string> int main() { char type = 'w'; switch (type) { case 'g': std::cout << \"You've chosen Bulbasaur!\" << std::endl; break; case 'f': std::cout << \"You've chosen Charmander!\" << std::endl; break; case 'w': std::cout << \"You've chosen Squirtle!\" << std::endl; break; default: std::cout << \"Invalid type! Please try again.\" << std::endl; break; } }    switch statements work with integers, characters, and enumerated types. For example, to convert a Suit to the corresponding string, we could use something like:  switch (suit) { case CLUBS: return \"Clubs\"; case DIAMONDS: return \"Diamonds\"; case HEARTS: return \"Hearts\"; case SPADES: return \"Spades\"; default: return \"Not a valid suit\"; }  In this case we don't need break statements because the return statements cause the flow of execution to return to the caller instead of falling through to the next case.  In general it is good style to include a default case in every switch statement, to handle errors or unexpected values.    A(n) statement is necessary for each branch in a switch statement.       A return would also suffice.    .*  Try again! How do we prevent the flow of execution from falling through?         Which one of the following types do NOT work with switch statement?      ints   We can use ints with switch statements.     chars   We can use chars with switch statements.     strings   Switch statements only work on integral values, so we cannot use strings with switch statements!     enumerated types   We can use enumerated types with switch statements.       What is the correct output of the code below?   int main() { int num = 2; switch (num) { case 1: std::cout << 1; break; case 2: std::cout << 4; case 3: std::cout << 9; break; default: std::cout << \"Invalid num! Please try again.\"; break; } }       4   Incorrect! Try running it with the active code.     49   Case 2 doesn't end with a break statement, so case 3 also runs!     49Invalid num! Please try again.   Where do we encounter a break statement?     Invalid num! Please try again.   Is 2 one of the invalid numbers?     Code will not run.   There is no reason why the code wouldn't run.       What is the correct output this time ?   int main() { int num = 1; switch (num) { case 1: std::cout << 1; break; case 2: std::cout << 4; case 3: std::cout << 9; default: std::cout << \"Invalid num! Please try again.\"; } }       1   The first statement ends with a break, so only 1 will print!     149   Where do we encounter a break statement?     149Invalid num! Please try again.   Is 1 one of the valid numbers? Where do we encounter a break statement?     Invalid num! Please try again.   Is 1 one of the invalid numbers?     Code will not run.   There is no reason why the code wouldn't run.       And finally, what about this time ?   int main() { int num = 2; switch (num) { case 1: std::cout << 1; break; case 2: std::cout << 4; case 3: std::cout << 9; default: std::cout << \"Invalid num! Please try again.\"; } }       4   Where do we \/ don't we encounter a break statement?     49   Where do we \/ don't we encounter a break statement?     49Invalid num! Please try again.   Notice that 2 is not an invalid number, but since we are missing break statements, multiple branches execute.     Invalid num! Please try again.   Is 2 one of the invalid numbers?     Code will not run.   There is no reason why the code wouldn't run.     "
-},
-{
-  "id": "chapter13_switch-statement-2",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#chapter13_switch-statement-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "It's hard to mention enumerated types without mentioning switch statements, because they often go hand in hand. A switch statement is an alternative to a chained conditional that is syntactically prettier and often more efficient. It looks like this: "
-},
-{
-  "id": "chapter13_switch-statement-4",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#chapter13_switch-statement-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This switch statement is equivalent to the following chained conditional: "
-},
-{
-  "id": "chapter13_switch-statement-6",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#chapter13_switch-statement-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The break statements are necessary in each branch in a switch statement because otherwise the flow of execution falls through to the next case. "
-},
-{
-  "id": "chapter13_switch-statement-7",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#chapter13_switch-statement-7",
-  "type": "Note",
-  "number": "10.2.1",
-  "title": "",
-  "body": " Be sure to incorporate a break statment into each branch so that the flow of execution stops after that branch.  "
-},
-{
-  "id": "chapter13_switch-statement-8",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#chapter13_switch-statement-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Without the break statements, the symbol + would make the program perform addition, and then perform multiplication, and then print the error message. Occasionally this feature is useful, but most of the time it is a source of errors when people forget the break statements. "
-},
-{
-  "id": "switch_AC_1",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#switch_AC_1",
-  "type": "Listing",
-  "number": "10.2.1",
-  "title": "Take a look at this active code that allows you to choose your starter Pokemon. If you change the value of <code class=\"code-inline tex2jax_ignore\">type<\/code>, it will change the Pokemon you choose. Notice how if you don’t assign <code class=\"code-inline tex2jax_ignore\">type<\/code> to a valid type, it outputs the default message. Try taking out the <code class=\"code-inline tex2jax_ignore\">break<\/code> statements in each case. What happens if you run the code with <code class=\"code-inline tex2jax_ignore\">type<\/code> as ‘g’ afterwards?",
-  "body": " Take a look at this active code that allows you to choose your starter Pokemon. If you change the value of type , it will change the Pokemon you choose. Notice how if you don't assign type to a valid type, it outputs the default message. Try taking out the break statements in each case. What happens if you run the code with type as ‘g' afterwards?   #include <iostream> #include <string> int main() { char type = 'w'; switch (type) { case 'g': std::cout << \"You've chosen Bulbasaur!\" << std::endl; break; case 'f': std::cout << \"You've chosen Charmander!\" << std::endl; break; case 'w': std::cout << \"You've chosen Squirtle!\" << std::endl; break; default: std::cout << \"Invalid type! Please try again.\" << std::endl; break; } }   "
-},
-{
-  "id": "chapter13_switch-statement-10",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#chapter13_switch-statement-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "switch statements work with integers, characters, and enumerated types. For example, to convert a Suit to the corresponding string, we could use something like: "
-},
-{
-  "id": "chapter13_switch-statement-12",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#chapter13_switch-statement-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In this case we don't need break statements because the return statements cause the flow of execution to return to the caller instead of falling through to the next case. "
-},
-{
-  "id": "chapter13_switch-statement-13",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#chapter13_switch-statement-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In general it is good style to include a default case in every switch statement, to handle errors or unexpected values. "
-},
-{
-  "id": "switch_1",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#switch_1",
-  "type": "Checkpoint",
-  "number": "10.2.1",
-  "title": "",
-  "body": "  A(n) statement is necessary for each branch in a switch statement.       A return would also suffice.    .*  Try again! How do we prevent the flow of execution from falling through?      "
-},
-{
-  "id": "switch_2",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#switch_2",
-  "type": "Checkpoint",
-  "number": "10.2.2",
-  "title": "",
-  "body": "  Which one of the following types do NOT work with switch statement?      ints   We can use ints with switch statements.     chars   We can use chars with switch statements.     strings   Switch statements only work on integral values, so we cannot use strings with switch statements!     enumerated types   We can use enumerated types with switch statements.    "
-},
-{
-  "id": "switch_3",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#switch_3",
-  "type": "Checkpoint",
-  "number": "10.2.3",
-  "title": "",
-  "body": "  What is the correct output of the code below?   int main() { int num = 2; switch (num) { case 1: std::cout << 1; break; case 2: std::cout << 4; case 3: std::cout << 9; break; default: std::cout << \"Invalid num! Please try again.\"; break; } }       4   Incorrect! Try running it with the active code.     49   Case 2 doesn't end with a break statement, so case 3 also runs!     49Invalid num! Please try again.   Where do we encounter a break statement?     Invalid num! Please try again.   Is 2 one of the invalid numbers?     Code will not run.   There is no reason why the code wouldn't run.    "
-},
-{
-  "id": "switch_4",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#switch_4",
-  "type": "Checkpoint",
-  "number": "10.2.4",
-  "title": "",
-  "body": "  What is the correct output this time ?   int main() { int num = 1; switch (num) { case 1: std::cout << 1; break; case 2: std::cout << 4; case 3: std::cout << 9; default: std::cout << \"Invalid num! Please try again.\"; } }       1   The first statement ends with a break, so only 1 will print!     149   Where do we encounter a break statement?     149Invalid num! Please try again.   Is 1 one of the valid numbers? Where do we encounter a break statement?     Invalid num! Please try again.   Is 1 one of the invalid numbers?     Code will not run.   There is no reason why the code wouldn't run.    "
-},
-{
-  "id": "switch_5",
-  "level": "2",
-  "url": "chapter13_switch-statement.html#switch_5",
-  "type": "Checkpoint",
-  "number": "10.2.5",
-  "title": "",
-  "body": "  And finally, what about this time ?   int main() { int num = 2; switch (num) { case 1: std::cout << 1; break; case 2: std::cout << 4; case 3: std::cout << 9; default: std::cout << \"Invalid num! Please try again.\"; } }       4   Where do we \/ don't we encounter a break statement?     49   Where do we \/ don't we encounter a break statement?     49Invalid num! Please try again.   Notice that 2 is not an invalid number, but since we are missing break statements, multiple branches execute.     Invalid num! Please try again.   Is 2 one of the invalid numbers?     Code will not run.   There is no reason why the code wouldn't run.    "
-},
-{
-  "id": "chapter13_decks",
-  "level": "1",
-  "url": "chapter13_decks.html",
-  "type": "Section",
-  "number": "10.3",
-  "title": "Decks",
-  "body": " Decks  In the previous chapter, we worked with a vector of objects, but I also mentioned that it is possible to have an object that contains a vector as an instance variable. In this chapter I am going to create a new object, called a Deck , that contains a vector of Card s.  The structure definition looks like this  struct Deck { std::vector<Card> cards; Deck(int n); }; Deck::Deck(int size) { std::vector<Card> temp (size); cards = temp; }  The name of the instance variable is cards to help distinguish the Deck object from the vector of Card s that it contains.  For now there is only one constructor. It creates a local variable named temp , which it initializes by invoking the constructor for the std::vector class, passing the size as a parameter. Then it copies the vector from temp into the instance variable cards .  Now we can create a deck of cards like this:  Deck deck(52);  Here is a state diagram showing what a Deck object looks like:     'deck' names a box. Inside it is a box named 'cards'. Inside 'cards' is a sequence of 52 numbered boxes each with 'suit: 0, rank: 0'.    The object named deck has a single instance variable named cards , which is a vector of Card objects. To access the cards in a deck we have to compose the syntax for accessing an instance variable and the syntax for selecting an element from an array. For example, the expression deck.cards[i] is the ith card in the deck, and deck.cards[i].suit is its suit. The following loop  for (int i = 0; i < 52; i++) { deck.cards[i].print(); }  demonstrates how to traverse the deck and output each card.    A euchre deck consists of 9's, 10's, Jacks, Queens, Kings, and Aces. If we wanted to create a deck that is the size of the euchre deck, we would type: Deck euchre_deck   ;              Take a look at the state diagram above. When we create a deck of cards using Deck deck(52) , what is true about our new deck?      The ranks and suits of the cards are initialized to the proper ranks and suits in a standard deck of cards.   Unless you the programmer tell it to, the computer won't do it.     There will be 52 cards.   We initialized cards with a value of 52.     The ranks and suits will be initialized to their default values.   In our case is, the default values are zero.     The only instance variable in the deck is cards.   cards is a vector of Cards!     You can't access individual cards in the deck.   You can access any card by indexing, for example: deck.cards[n].       ACE corresponds to a rank of value 0 .      True - because this is the default mapping of enumerated types.   The default mapping begins with 0.     True - because our definition of rank overrides the default mapping.   Our definition doesn't use the default mapping, which begins with 0.     False - because this is the default mapping of enumerated types.   The default mapping begins with 0.     False - because our definition of rank overrides the default mapping.   If we wanted to, we could have set the rank of ace to 7, and the rest of the cards would still be ranked in order.     "
-},
-{
-  "id": "chapter13_decks-2",
-  "level": "2",
-  "url": "chapter13_decks.html#chapter13_decks-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In the previous chapter, we worked with a vector of objects, but I also mentioned that it is possible to have an object that contains a vector as an instance variable. In this chapter I am going to create a new object, called a Deck , that contains a vector of Card s. "
-},
-{
-  "id": "chapter13_decks-3",
-  "level": "2",
-  "url": "chapter13_decks.html#chapter13_decks-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The structure definition looks like this "
-},
-{
-  "id": "chapter13_decks-5",
-  "level": "2",
-  "url": "chapter13_decks.html#chapter13_decks-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The name of the instance variable is cards to help distinguish the Deck object from the vector of Card s that it contains. "
-},
-{
-  "id": "chapter13_decks-6",
-  "level": "2",
-  "url": "chapter13_decks.html#chapter13_decks-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For now there is only one constructor. It creates a local variable named temp , which it initializes by invoking the constructor for the std::vector class, passing the size as a parameter. Then it copies the vector from temp into the instance variable cards . "
-},
-{
-  "id": "chapter13_decks-7",
-  "level": "2",
-  "url": "chapter13_decks.html#chapter13_decks-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Now we can create a deck of cards like this: "
-},
-{
-  "id": "chapter13_decks-9",
-  "level": "2",
-  "url": "chapter13_decks.html#chapter13_decks-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Here is a state diagram showing what a Deck object looks like: "
-},
-{
-  "id": "chapter13_decks-10",
-  "level": "2",
-  "url": "chapter13_decks.html#chapter13_decks-10",
-  "type": "Figure",
-  "number": "10.3.1",
-  "title": "",
-  "body": "   'deck' names a box. Inside it is a box named 'cards'. Inside 'cards' is a sequence of 52 numbered boxes each with 'suit: 0, rank: 0'.   "
-},
-{
-  "id": "chapter13_decks-11",
-  "level": "2",
-  "url": "chapter13_decks.html#chapter13_decks-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The object named deck has a single instance variable named cards , which is a vector of Card objects. To access the cards in a deck we have to compose the syntax for accessing an instance variable and the syntax for selecting an element from an array. For example, the expression deck.cards[i] is the ith card in the deck, and deck.cards[i].suit is its suit. The following loop "
-},
-{
-  "id": "chapter13_decks-13",
-  "level": "2",
-  "url": "chapter13_decks.html#chapter13_decks-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "demonstrates how to traverse the deck and output each card. "
-},
-{
-  "id": "decks_1",
-  "level": "2",
-  "url": "chapter13_decks.html#decks_1",
-  "type": "Checkpoint",
-  "number": "10.3.1",
-  "title": "",
-  "body": "  A euchre deck consists of 9's, 10's, Jacks, Queens, Kings, and Aces. If we wanted to create a deck that is the size of the euchre deck, we would type: Deck euchre_deck   ;           "
-},
-{
-  "id": "decks_2",
-  "level": "2",
-  "url": "chapter13_decks.html#decks_2",
-  "type": "Checkpoint",
-  "number": "10.3.2",
-  "title": "",
-  "body": "  Take a look at the state diagram above. When we create a deck of cards using Deck deck(52) , what is true about our new deck?      The ranks and suits of the cards are initialized to the proper ranks and suits in a standard deck of cards.   Unless you the programmer tell it to, the computer won't do it.     There will be 52 cards.   We initialized cards with a value of 52.     The ranks and suits will be initialized to their default values.   In our case is, the default values are zero.     The only instance variable in the deck is cards.   cards is a vector of Cards!     You can't access individual cards in the deck.   You can access any card by indexing, for example: deck.cards[n].    "
-},
-{
-  "id": "decks_3",
-  "level": "2",
-  "url": "chapter13_decks.html#decks_3",
-  "type": "Checkpoint",
-  "number": "10.3.3",
-  "title": "",
-  "body": "  ACE corresponds to a rank of value 0 .      True - because this is the default mapping of enumerated types.   The default mapping begins with 0.     True - because our definition of rank overrides the default mapping.   Our definition doesn't use the default mapping, which begins with 0.     False - because this is the default mapping of enumerated types.   The default mapping begins with 0.     False - because our definition of rank overrides the default mapping.   If we wanted to, we could have set the rank of ace to 7, and the rest of the cards would still be ranked in order.    "
-},
-{
-  "id": "chapter13_another-constructor",
-  "level": "1",
-  "url": "chapter13_another-constructor.html",
-  "type": "Section",
-  "number": "10.4",
-  "title": "Another constructor",
-  "body": " Another constructor  Now that we have a Deck object, it would be useful to initialize the cards in it. From the previous chapter we have a function called buildDeck that we could use (with a few adaptations), but it might be more natural to write a second Deck constructor.  Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } }  Notice how similar this function is to buildDeck , except that we had to change the syntax to make it a constructor. Now we can create a standard 52-card deck with the simple declaration Deck deck;   This active code prints out the cards in a deck using the loop from the previous section.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; }; struct Deck { std::vector<Card> cards; Deck(); }; int main() { Deck deck; for (int i = 0; i < 52; i++) { deck.cards[i].print(); } }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } }      Based on your observations from the active code above, the cards in deck are initialized to the correct suits and ranks of a standard deck of 52 cards.      True - we used the buildDeck function with a few modifications to do this.   How do we create the deck?     True - we wrote a Deck constructor to do this.   The for loops in the Deck constructor initialize each card to its proper value.     False - we used the buildDeck function with a few modifications to do this.   Look at the active code. How do we create the deck?     False - we wrote a Deck constructor to do this.   Look at the active code.       Let's write a constructor for a deck of cards that uses 40 cards. This deck uses all 4 suits and ranks Ace through 10, omitting all face cards.     Deck::Deck() {     std::vector<Card> temp (40);    std::vector<Card> temp (52);     cards = temp;  int i = 0;     for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) {    for (Suit suit = CLUBS; suit < SPADES; suit = Suit(suit+1)) {      for (Rank rank = ACE; rank <= TEN; rank = Rank(rank+1)) {    for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) {      cards[i].suit = suit;  cards[i].rank = rank;    cards[i].suit = rank;  cards[i].rank = suit;     i++;  }  }  }     "
-},
-{
-  "id": "chapter13_another-constructor-2",
-  "level": "2",
-  "url": "chapter13_another-constructor.html#chapter13_another-constructor-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Now that we have a Deck object, it would be useful to initialize the cards in it. From the previous chapter we have a function called buildDeck that we could use (with a few adaptations), but it might be more natural to write a second Deck constructor. "
-},
-{
-  "id": "chapter13_another-constructor-4",
-  "level": "2",
-  "url": "chapter13_another-constructor.html#chapter13_another-constructor-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Notice how similar this function is to buildDeck , except that we had to change the syntax to make it a constructor. Now we can create a standard 52-card deck with the simple declaration Deck deck; "
-},
-{
-  "id": "deck_constructor_AC_1",
-  "level": "2",
-  "url": "chapter13_another-constructor.html#deck_constructor_AC_1",
-  "type": "Listing",
-  "number": "10.4.1",
-  "title": "This active code prints out the cards in a deck using the loop from the previous section.",
-  "body": " This active code prints out the cards in a deck using the loop from the previous section.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; }; struct Deck { std::vector<Card> cards; Deck(); }; int main() { Deck deck; for (int i = 0; i < 52; i++) { deck.cards[i].print(); } }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } }   "
-},
-{
-  "id": "deck_constructor_1",
-  "level": "2",
-  "url": "chapter13_another-constructor.html#deck_constructor_1",
-  "type": "Checkpoint",
-  "number": "10.4.1",
-  "title": "",
-  "body": "  Based on your observations from the active code above, the cards in deck are initialized to the correct suits and ranks of a standard deck of 52 cards.      True - we used the buildDeck function with a few modifications to do this.   How do we create the deck?     True - we wrote a Deck constructor to do this.   The for loops in the Deck constructor initialize each card to its proper value.     False - we used the buildDeck function with a few modifications to do this.   Look at the active code. How do we create the deck?     False - we wrote a Deck constructor to do this.   Look at the active code.    "
-},
-{
-  "id": "deck_constructor_2",
-  "level": "2",
-  "url": "chapter13_another-constructor.html#deck_constructor_2",
-  "type": "Checkpoint",
-  "number": "10.4.2",
-  "title": "",
-  "body": "  Let's write a constructor for a deck of cards that uses 40 cards. This deck uses all 4 suits and ranks Ace through 10, omitting all face cards.     Deck::Deck() {     std::vector<Card> temp (40);    std::vector<Card> temp (52);     cards = temp;  int i = 0;     for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) {    for (Suit suit = CLUBS; suit < SPADES; suit = Suit(suit+1)) {      for (Rank rank = ACE; rank <= TEN; rank = Rank(rank+1)) {    for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) {      cards[i].suit = suit;  cards[i].rank = rank;    cards[i].suit = rank;  cards[i].rank = suit;     i++;  }  }  }    "
-},
-{
-  "id": "chapter13_deck-member-functions",
-  "level": "1",
-  "url": "chapter13_deck-member-functions.html",
-  "type": "Section",
-  "number": "10.5",
-  "title": "<code class=\"code-inline tex2jax_ignore\">Deck<\/code> member functions",
-  "body": " Deck member functions  Now that we have a Deck object, it makes sense to put all the functions that pertain to Deck s in the Deck structure definition. Looking at the functions we have written so far, one obvious candidate is printDeck ( ). Here's how it looks, rewritten as a Deck member function:  void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } }  As usual, we can refer to the instance variables of the current object without using dot notation.   This active code prints out the deck of cards like in the previous section. Notice we can just use deck.print() to print out the deck instead of writing a for loop in main.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; }; struct Deck { std::vector<Card> cards; Deck(); void print() const; }; int main() { Deck deck; deck.print(); }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } }    For some of the other functions, it is not obvious whether they should be member functions of Card , member functions of Deck , or nonmember functions that take Card s and Deck s as parameters. For example, the version of find in the previous chapter takes a Card and a Deck as arguments, but you could reasonably make it a member function of either type. As an exercise, rewrite find as a Deck member function that takes a Card as a parameter.  Writing find as a Card member function is a little tricky. Here's my version:  int Card::find(const Deck& deck) const { for (size_t i = 0; i < deck.cards.size(); i++) { if (equals(deck.cards[i], *this)) return i; } return -1; }  The first trick is that we have to use the keyword this to refer to the Card the function is invoked on.  The second trick is that C++ does not make it easy to write structure definitions that refer to each other. The problem is that when the compiler is reading the first structure definition, it doesn't know about the second one yet.  One solution is to declare Deck before Card and then define Deck afterwards:  \/\/ declare that Deck is a structure, without defining it struct Deck; \/\/ that way we can refer to it in the definition of Card struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; int find(const Deck& deck) const; }; \/\/ and then later we provide the definition of Deck struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; int find(const Card& card) const; };    Multiple Response: What are some tricks we can use to write find as a Card member function?      Use the keyword this.   We use this to refer to the Card that the function is invoked on.     Define Deck before Card.   We don't have to define Deck before Card.     Pass a Card parameter in the Card member function find.   What do we pass as a parameter in find?     Declare Deck before Card and then define Deck afterwards.   This is how we implemented our code!       Write find as a Deck member function that takes a Card as a parameter.      int Deck::find(Card card) const {    int find(Card) {      for (size_t i = 0; i < cards.size(); i++) {    for (size_t i = 0; i < deck.cards.size(); i++) {      if (cards[i].equals(card)) {  return i;  }    if (equals(deck.cards[i], *this)) {  return i;  }     }  return -1;  }      This active code uses the Deck::find function you just built.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool equals(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); void print() const; int find(Card card) const; }; int main() { Deck deck; Card card (CLUBS, ACE); Card card2 (DIAMONDS, ACE); \/\/ Should output 0 and 13 std::cout << deck.find(card) << std::endl; std::cout << deck.find(card2) << std::endl; }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int Deck::find(Card card) const { for (size_t i = 0; i < cards.size(); i++) { if (cards[i].equals(card)) { return i; } } return -1; } bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); }    "
-},
-{
-  "id": "chapter13_deck-member-functions-2",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#chapter13_deck-member-functions-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Now that we have a Deck object, it makes sense to put all the functions that pertain to Deck s in the Deck structure definition. Looking at the functions we have written so far, one obvious candidate is printDeck ( ). Here's how it looks, rewritten as a Deck member function: "
-},
-{
-  "id": "chapter13_deck-member-functions-4",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#chapter13_deck-member-functions-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "As usual, we can refer to the instance variables of the current object without using dot notation. "
-},
-{
-  "id": "deck_members_AC_1",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#deck_members_AC_1",
-  "type": "Listing",
-  "number": "10.5.1",
-  "title": "This active code prints out the deck of cards like in the previous section. Notice we can just use <code class=\"code-inline tex2jax_ignore\">deck.print()<\/code> to print out the deck instead of writing a for loop in main.",
-  "body": " This active code prints out the deck of cards like in the previous section. Notice we can just use deck.print() to print out the deck instead of writing a for loop in main.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; }; struct Deck { std::vector<Card> cards; Deck(); void print() const; }; int main() { Deck deck; deck.print(); }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } }   "
-},
-{
-  "id": "chapter13_deck-member-functions-6",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#chapter13_deck-member-functions-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For some of the other functions, it is not obvious whether they should be member functions of Card , member functions of Deck , or nonmember functions that take Card s and Deck s as parameters. For example, the version of find in the previous chapter takes a Card and a Deck as arguments, but you could reasonably make it a member function of either type. As an exercise, rewrite find as a Deck member function that takes a Card as a parameter. "
-},
-{
-  "id": "chapter13_deck-member-functions-7",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#chapter13_deck-member-functions-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Writing find as a Card member function is a little tricky. Here's my version: "
-},
-{
-  "id": "chapter13_deck-member-functions-9",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#chapter13_deck-member-functions-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The first trick is that we have to use the keyword this to refer to the Card the function is invoked on. "
-},
-{
-  "id": "chapter13_deck-member-functions-10",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#chapter13_deck-member-functions-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The second trick is that C++ does not make it easy to write structure definitions that refer to each other. The problem is that when the compiler is reading the first structure definition, it doesn't know about the second one yet. "
-},
-{
-  "id": "chapter13_deck-member-functions-11",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#chapter13_deck-member-functions-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "One solution is to declare Deck before Card and then define Deck afterwards: "
-},
-{
-  "id": "deck_members_1",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#deck_members_1",
-  "type": "Checkpoint",
-  "number": "10.5.1",
-  "title": "",
-  "body": "  Multiple Response: What are some tricks we can use to write find as a Card member function?      Use the keyword this.   We use this to refer to the Card that the function is invoked on.     Define Deck before Card.   We don't have to define Deck before Card.     Pass a Card parameter in the Card member function find.   What do we pass as a parameter in find?     Declare Deck before Card and then define Deck afterwards.   This is how we implemented our code!    "
-},
-{
-  "id": "deck_members_2",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#deck_members_2",
-  "type": "Checkpoint",
-  "number": "10.5.2",
-  "title": "",
-  "body": "  Write find as a Deck member function that takes a Card as a parameter.      int Deck::find(Card card) const {    int find(Card) {      for (size_t i = 0; i < cards.size(); i++) {    for (size_t i = 0; i < deck.cards.size(); i++) {      if (cards[i].equals(card)) {  return i;  }    if (equals(deck.cards[i], *this)) {  return i;  }     }  return -1;  }    "
-},
-{
-  "id": "deck_members_AC_2",
-  "level": "2",
-  "url": "chapter13_deck-member-functions.html#deck_members_AC_2",
-  "type": "Listing",
-  "number": "10.5.2",
-  "title": "This active code uses the <code class=\"code-inline tex2jax_ignore\">Deck::find<\/code> function you just built.",
-  "body": " This active code uses the Deck::find function you just built.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool equals(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); void print() const; int find(Card card) const; }; int main() { Deck deck; Card card (CLUBS, ACE); Card card2 (DIAMONDS, ACE); \/\/ Should output 0 and 13 std::cout << deck.find(card) << std::endl; std::cout << deck.find(card2) << std::endl; }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int Deck::find(Card card) const { for (size_t i = 0; i < cards.size(); i++) { if (cards[i].equals(card)) { return i; } } return -1; } bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); }   "
-},
-{
-  "id": "chapter13_shuffling",
-  "level": "1",
-  "url": "chapter13_shuffling.html",
-  "type": "Section",
-  "number": "10.6",
-  "title": "Shuffling",
-  "body": " Shuffling  For most card games you need to be able to shuffle the deck; that is, put the cards in a random order. In we saw how to generate random numbers, but it is not obvious how to use them to shuffle a deck.  One possibility is to model the way humans shuffle, which is usually by dividing the deck in two and then reassembling the deck by choosing alternately from each deck. Since humans usually don't shuffle perfectly, after about 7 iterations the order of the deck is pretty well randomized. But a computer program would have the annoying property of doing a perfect shuffle every time, which is not really very random. In fact, after 8 perfect shuffles, you would find the deck back in the same order you started in For a discussion of that claim, see http:\/\/www.wiskit.com\/marilyn\/craig.html or do a web search with the keywords perfect shuffle. .  A better shuffling algorithm is to traverse the deck one card at a time, and at each iteration choose two cards and swap them.  Here is an outline of how this algorithm works. To sketch the program, I am using a combination of C++ statements and English words that is sometimes called pseudocode :  for (size_t i = 0; i < cards.size(); i++) { \/\/ choose a random number between i and cards.size() \/\/ swap the ith card and the randomly-chosen card }  The nice thing about using pseudocode is that it often makes it clear what functions you are going to need. In this case, we need something like randomInt , which chooses a random integer between the parameters low and high , and swapCards which takes two indices and switches the cards at the indicated positions.   If you are even the slightest bit unsure on how to begin coding your program, pseudocode is a great place to start!   You can probably figure out how to write randomInt by looking at , although you will have to be careful about possibly generating indices that are out of range.  You can also figure out swapCards yourself. I will leave the remaining implementation of these functions as an exercise to the reader.    Which library should we include to create random numbers?      cstdlib   Correct!     iostream   This is the library for streaming std::cin and cout.     strings   This is the library for strings.     cmath   This is the library for math functions.       Try writing the randomInt and swapCards functions in the commented sections of this active code. Once you're done with randomInt and swapCards , try using them to implement the Deck member function shuffleDeck . If done correctly, the program should output a shuffled deck of cards. If you stuck, you can check the hints below.   #include <iostream> #include <string> #include <vector> #include <cstdlib> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high) { \/\/ ``randomInt`` should choose a random integer between \/\/ the low and high parameters and return an integer. \/\/ Delete the return 0 and write your implementation here. return 0; } struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; }; struct Deck { std::vector<Card> cards; Deck(); void print() const; void swapCards(int index1, int index2); void shuffleDeck(); }; void Deck::swapCards(int index1, int index2) { \/\/ ``swapCards`` should take two indices and switch the cards \/\/ at the indicated positions. Write your implementation here. } void Deck::shuffleDeck() { \/\/ Follow the pseudocode from above and use ``randomInt`` and \/\/ ``swapCards`` to write the ``shuffle`` member function. \/\/ Write your implementation here. } int main() { Deck deck; deck.shuffleDeck(); deck.print(); }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } }    randomInt    Let's write the code for the randomInt function. randomInt should take two parameters, low and high, and return a random integer between them, inclusive.      int randomInt(int low, int high) {    int randomInt() {     int x = random();     int y = x % (high - low + 1) + low;    int y = x % high;      return y;  }    return x;  }        swapCards    Let's write the code for the swapCards function. We'll write swapCards as a Deck member function that takes two indices as parameters.      void Deck::swapCards(int index1, int index2) {    void Card::swapCards(int index1, int index2) {     Card temp = cards[index1];     cards[index1] = cards[index2];    cards[index2] = cards[index1];     cards[index2] = temp;  }       shuffleDeck    Let's write the code for the shuffleDeck function. We'll use randomInt and swapCards in our implementation of shuffleDeck.      void Deck::shuffleDeck() {    Deck Deck::shuffleDeck(Deck deck) {     for (size_t i = 0; i < cards.size(); i++) {     int x = randomInt (i, cards.size() - 1);    int x = randomInt (i, cards.size());     swapCards (i, x);  }  }       "
-},
-{
-  "id": "chapter13_shuffling-2",
-  "level": "2",
-  "url": "chapter13_shuffling.html#chapter13_shuffling-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For most card games you need to be able to shuffle the deck; that is, put the cards in a random order. In we saw how to generate random numbers, but it is not obvious how to use them to shuffle a deck. "
-},
-{
-  "id": "chapter13_shuffling-3",
-  "level": "2",
-  "url": "chapter13_shuffling.html#chapter13_shuffling-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "One possibility is to model the way humans shuffle, which is usually by dividing the deck in two and then reassembling the deck by choosing alternately from each deck. Since humans usually don't shuffle perfectly, after about 7 iterations the order of the deck is pretty well randomized. But a computer program would have the annoying property of doing a perfect shuffle every time, which is not really very random. In fact, after 8 perfect shuffles, you would find the deck back in the same order you started in For a discussion of that claim, see http:\/\/www.wiskit.com\/marilyn\/craig.html or do a web search with the keywords perfect shuffle. . "
-},
-{
-  "id": "chapter13_shuffling-4",
-  "level": "2",
-  "url": "chapter13_shuffling.html#chapter13_shuffling-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A better shuffling algorithm is to traverse the deck one card at a time, and at each iteration choose two cards and swap them. "
-},
-{
-  "id": "chapter13_shuffling-5",
-  "level": "2",
-  "url": "chapter13_shuffling.html#chapter13_shuffling-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Here is an outline of how this algorithm works. To sketch the program, I am using a combination of C++ statements and English words that is sometimes called pseudocode : "
-},
-{
-  "id": "chapter13_shuffling-7",
-  "level": "2",
-  "url": "chapter13_shuffling.html#chapter13_shuffling-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The nice thing about using pseudocode is that it often makes it clear what functions you are going to need. In this case, we need something like randomInt , which chooses a random integer between the parameters low and high , and swapCards which takes two indices and switches the cards at the indicated positions. "
-},
-{
-  "id": "chapter13_shuffling-8",
-  "level": "2",
-  "url": "chapter13_shuffling.html#chapter13_shuffling-8",
-  "type": "Note",
-  "number": "10.6.1",
-  "title": "",
-  "body": " If you are even the slightest bit unsure on how to begin coding your program, pseudocode is a great place to start!  "
-},
-{
-  "id": "chapter13_shuffling-9",
-  "level": "2",
-  "url": "chapter13_shuffling.html#chapter13_shuffling-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "You can probably figure out how to write randomInt by looking at , although you will have to be careful about possibly generating indices that are out of range. "
-},
-{
-  "id": "chapter13_shuffling-10",
-  "level": "2",
-  "url": "chapter13_shuffling.html#chapter13_shuffling-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "You can also figure out swapCards yourself. I will leave the remaining implementation of these functions as an exercise to the reader. "
-},
-{
-  "id": "shuffling_1",
-  "level": "2",
-  "url": "chapter13_shuffling.html#shuffling_1",
-  "type": "Checkpoint",
-  "number": "10.6.1",
-  "title": "",
-  "body": "  Which library should we include to create random numbers?      cstdlib   Correct!     iostream   This is the library for streaming std::cin and cout.     strings   This is the library for strings.     cmath   This is the library for math functions.    "
-},
-{
-  "id": "shuffling_2",
-  "level": "2",
-  "url": "chapter13_shuffling.html#shuffling_2",
-  "type": "Checkpoint",
-  "number": "10.6.2",
-  "title": "",
-  "body": "  Try writing the randomInt and swapCards functions in the commented sections of this active code. Once you're done with randomInt and swapCards , try using them to implement the Deck member function shuffleDeck . If done correctly, the program should output a shuffled deck of cards. If you stuck, you can check the hints below.   #include <iostream> #include <string> #include <vector> #include <cstdlib> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high) { \/\/ ``randomInt`` should choose a random integer between \/\/ the low and high parameters and return an integer. \/\/ Delete the return 0 and write your implementation here. return 0; } struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; }; struct Deck { std::vector<Card> cards; Deck(); void print() const; void swapCards(int index1, int index2); void shuffleDeck(); }; void Deck::swapCards(int index1, int index2) { \/\/ ``swapCards`` should take two indices and switch the cards \/\/ at the indicated positions. Write your implementation here. } void Deck::shuffleDeck() { \/\/ Follow the pseudocode from above and use ``randomInt`` and \/\/ ``swapCards`` to write the ``shuffle`` member function. \/\/ Write your implementation here. } int main() { Deck deck; deck.shuffleDeck(); deck.print(); }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } }    randomInt    Let's write the code for the randomInt function. randomInt should take two parameters, low and high, and return a random integer between them, inclusive.      int randomInt(int low, int high) {    int randomInt() {     int x = random();     int y = x % (high - low + 1) + low;    int y = x % high;      return y;  }    return x;  }        swapCards    Let's write the code for the swapCards function. We'll write swapCards as a Deck member function that takes two indices as parameters.      void Deck::swapCards(int index1, int index2) {    void Card::swapCards(int index1, int index2) {     Card temp = cards[index1];     cards[index1] = cards[index2];    cards[index2] = cards[index1];     cards[index2] = temp;  }       shuffleDeck    Let's write the code for the shuffleDeck function. We'll use randomInt and swapCards in our implementation of shuffleDeck.      void Deck::shuffleDeck() {    Deck Deck::shuffleDeck(Deck deck) {     for (size_t i = 0; i < cards.size(); i++) {     int x = randomInt (i, cards.size() - 1);    int x = randomInt (i, cards.size());     swapCards (i, x);  }  }      "
-},
-{
-  "id": "chapter13_sorting",
-  "level": "1",
-  "url": "chapter13_sorting.html",
-  "type": "Section",
-  "number": "10.7",
-  "title": "Sorting",
-  "body": " Sorting  Now that we have messed up the deck, we need a way to put it back in order. Ironically, there is an algorithm for sorting that is very similar to the algorithm for shuffling.  Again, we are going to traverse the deck and at each location choose another card and swap. The only difference is that this time instead of choosing the other card at random, we are going to find the lowest card remaining in the deck.  By remaining in the deck, I mean cards that are at or to the right of the index i .  for (size_t i = 0; i < cards.size(); i++) { \/\/ find the lowest card at or to the right of i \/\/ swap the ith card and the lowest card }  Again, the pseudocode helps with the design of the helper functions .   Helper functions do exactly what it seems like they would do. They are shorter, simpler functions that help the bigger functions accomplish a task. As a result, they shorten the code used in the bigger functions, and they make the debugging process easier.   In this case we can use swapCards again, so we only need one new one, called findLowestCard , that takes an index where it should start looking in the vector of cards.  This process, using pseudocode to figure out what helper functions are needed, is sometimes called top-down design , in contrast to the bottom-up design I discussed in .  Once again, I am going to leave the implementation up to the reader.    If I'm writing a long, complex function with many steps, a(n)  would help me condense the function's code and make it easier to understand.                  Try writing the findLowestCard function in the commented section of this active code. Once you're done with findLowestCard , try using it along with swapCards to implement the Deck member function sortDeck . If done correctly, the program should output a sorted deck of cards. If you get stuck, you can reveal the hints below for help.   #include <iostream> #include <string> #include <vector> #include <cstdlib> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high); struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool isGreater(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); void print() const; void swapCards(int index1, int index2); int findLowestCard(int index); void shuffleDeck(); void sortDeck(); }; int Deck::findLowestCard(int index) { \/\/ ``findLowestCard`` should search through the std::vector of cards \/\/ starting at index and return the index of the smallest card. \/\/ Delete the return 0 and write your implementation here. return 0; } void Deck::sortDeck() { \/\/ Follow the pseudocode from above and use ``findLowestCard`` and \/\/ ``swapCards`` to write the ``std::sort`` member function. \/\/ Write your implementation here. } int main() { Deck deck; deck.shuffleDeck(); deck.sortDeck(); deck.print(); }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int randomInt(int low, int high) { srand (time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void Deck::swapCards(int index1, int index2) { Card temp = cards[index1]; cards[index1] = cards[index2]; cards[index2] = temp; } void Deck::shuffleDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = randomInt (i, cards.size() - 1); swapCards (i, x); } }    findLowestCard    Let's write the code for the findLowestCard function. findLowestCard should take an index as a parameter and return an int.      int Deck::findLowestCard(int index) {    void Deck::findLowestCard(int index) {     int min = index;     for (size_t i = index; i < cards.size(); ++i) {    for (size_t i = 0; i < cards.size(); ++i) {      if (cards[min].isGreater(cards[i])) {    if (cards[i].isGreater(cards[min])) {     min = i;  }  }     return min;  }    return cards[min];  }        sortDeck    Let's write the code for the sortDeck function. We'll use findLowestCard and swapCards in our implementation of sortDeck.      void Deck::sortDeck() {    Deck::sortDeck() {     for (size_t i = 0; i < cards.size(); i++) {     int x = findLowestCard (i);    int x = findLowestCard (cards.size());     swapCards (i, x);  }  }       "
-},
-{
-  "id": "chapter13_sorting-2",
-  "level": "2",
-  "url": "chapter13_sorting.html#chapter13_sorting-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Now that we have messed up the deck, we need a way to put it back in order. Ironically, there is an algorithm for sorting that is very similar to the algorithm for shuffling. "
-},
-{
-  "id": "chapter13_sorting-3",
-  "level": "2",
-  "url": "chapter13_sorting.html#chapter13_sorting-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Again, we are going to traverse the deck and at each location choose another card and swap. The only difference is that this time instead of choosing the other card at random, we are going to find the lowest card remaining in the deck. "
-},
-{
-  "id": "chapter13_sorting-4",
-  "level": "2",
-  "url": "chapter13_sorting.html#chapter13_sorting-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "By remaining in the deck, I mean cards that are at or to the right of the index i . "
-},
-{
-  "id": "chapter13_sorting-6",
-  "level": "2",
-  "url": "chapter13_sorting.html#chapter13_sorting-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Again, the pseudocode helps with the design of the helper functions . "
-},
-{
-  "id": "chapter13_sorting-7",
-  "level": "2",
-  "url": "chapter13_sorting.html#chapter13_sorting-7",
-  "type": "Note",
-  "number": "10.7.1",
-  "title": "",
-  "body": " Helper functions do exactly what it seems like they would do. They are shorter, simpler functions that help the bigger functions accomplish a task. As a result, they shorten the code used in the bigger functions, and they make the debugging process easier.  "
-},
-{
-  "id": "chapter13_sorting-8",
-  "level": "2",
-  "url": "chapter13_sorting.html#chapter13_sorting-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In this case we can use swapCards again, so we only need one new one, called findLowestCard , that takes an index where it should start looking in the vector of cards. "
-},
-{
-  "id": "chapter13_sorting-9",
-  "level": "2",
-  "url": "chapter13_sorting.html#chapter13_sorting-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This process, using pseudocode to figure out what helper functions are needed, is sometimes called top-down design , in contrast to the bottom-up design I discussed in . "
-},
-{
-  "id": "chapter13_sorting-10",
-  "level": "2",
-  "url": "chapter13_sorting.html#chapter13_sorting-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Once again, I am going to leave the implementation up to the reader. "
-},
-{
-  "id": "sorting_deck_1",
-  "level": "2",
-  "url": "chapter13_sorting.html#sorting_deck_1",
-  "type": "Checkpoint",
-  "number": "10.7.1",
-  "title": "",
-  "body": "  If I'm writing a long, complex function with many steps, a(n)  would help me condense the function's code and make it easier to understand.               "
-},
-{
-  "id": "sorting_deck_2",
-  "level": "2",
-  "url": "chapter13_sorting.html#sorting_deck_2",
-  "type": "Checkpoint",
-  "number": "10.7.2",
-  "title": "",
-  "body": "  Try writing the findLowestCard function in the commented section of this active code. Once you're done with findLowestCard , try using it along with swapCards to implement the Deck member function sortDeck . If done correctly, the program should output a sorted deck of cards. If you get stuck, you can reveal the hints below for help.   #include <iostream> #include <string> #include <vector> #include <cstdlib> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high); struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool isGreater(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); void print() const; void swapCards(int index1, int index2); int findLowestCard(int index); void shuffleDeck(); void sortDeck(); }; int Deck::findLowestCard(int index) { \/\/ ``findLowestCard`` should search through the std::vector of cards \/\/ starting at index and return the index of the smallest card. \/\/ Delete the return 0 and write your implementation here. return 0; } void Deck::sortDeck() { \/\/ Follow the pseudocode from above and use ``findLowestCard`` and \/\/ ``swapCards`` to write the ``std::sort`` member function. \/\/ Write your implementation here. } int main() { Deck deck; deck.shuffleDeck(); deck.sortDeck(); deck.print(); }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int randomInt(int low, int high) { srand (time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void Deck::swapCards(int index1, int index2) { Card temp = cards[index1]; cards[index1] = cards[index2]; cards[index2] = temp; } void Deck::shuffleDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = randomInt (i, cards.size() - 1); swapCards (i, x); } }    findLowestCard    Let's write the code for the findLowestCard function. findLowestCard should take an index as a parameter and return an int.      int Deck::findLowestCard(int index) {    void Deck::findLowestCard(int index) {     int min = index;     for (size_t i = index; i < cards.size(); ++i) {    for (size_t i = 0; i < cards.size(); ++i) {      if (cards[min].isGreater(cards[i])) {    if (cards[i].isGreater(cards[min])) {     min = i;  }  }     return min;  }    return cards[min];  }        sortDeck    Let's write the code for the sortDeck function. We'll use findLowestCard and swapCards in our implementation of sortDeck.      void Deck::sortDeck() {    Deck::sortDeck() {     for (size_t i = 0; i < cards.size(); i++) {     int x = findLowestCard (i);    int x = findLowestCard (cards.size());     swapCards (i, x);  }  }      "
-},
-{
-  "id": "chapter13_subdecks",
-  "level": "1",
-  "url": "chapter13_subdecks.html",
-  "type": "Section",
-  "number": "10.8",
-  "title": "Subdecks",
-  "body": " Subdecks  How should we represent a hand or some other subset of a full deck? One easy choice is to make a Deck object that has fewer than 52 cards.  We might want a function, subdeck , that takes a vector of cards and a range of indices, and that returns a new vector of cards that contains the specified subset of the deck:  Deck Deck::subdeck(int low, int high) const { Deck sub(high - low + 1); for (size_t i = 0; i < sub.cards.size(); i++) { sub.cards[i] = cards[low + i]; } return sub; }  To create the local variable named subdeck we are using the Deck constructor that takes the size of the deck as an argument and that does not initialize the cards. The cards get initialized when they are copied from the original deck.  The length of the subdeck is high - low + 1 because both the low card and high card are included.   This sort of computation can be confusing and can lead to off-by-one errors. Drawing a picture is usually the best way to avoid them.   As an exercise, write a version of findBisect that takes a subdeck as an argument, rather than a deck and an index range. Which version is more error-prone? Which version do you think is more efficient?    Try writing the findBisect function in the commented section of this active code. If done correctly, the program should output that the Seven of Clubs is at index 6 and the King of Diamonds is at index -1. If you get stuck, you can reveal the hint below for help.   #include <iostream> #include <string> #include <vector> #include <cstdlib> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high); struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool isGreater(const Card& c2) const; bool equals(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; void swapCards(int index1, int index2); int findLowestCard(int index); void shuffleDeck(); void sortDeck(); Deck subdeck(int low, int high) const; }; int findBisect(Deck subdeck, Card card) { \/\/ ``findBisect`` should search through the subdeck and \/\/ return the location of card. If card is not found in \/\/ subdeck, it should return -1. \/\/ Delete the return 0 and write your implementation here. return 0; } int main() { Deck deck; Deck clubs = deck.subdeck(0, 12); clubs.print(); Card card1 (CLUBS, SEVEN); Card card2 (DIAMONDS, KING); std::cout << std::endl; std::cout << \"The Seven of Clubs is at index \" << findBisect (clubs, card1) << std::endl; std::cout << \"The King of Diamonds is at index \" << findBisect (clubs, card2) << std::endl; }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } Deck::Deck(int size) { std::vector<Card> temp (size); cards = temp; } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int randomInt(int low, int high) { srand (time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void Deck::swapCards(int index1, int index2) { Card temp = cards[index1]; cards[index1] = cards[index2]; cards[index2] = temp; } int Deck::findLowestCard(int index) { int std::min = index; for (size_t i = index; i < cards.size(); ++i) { if (cards[std::min].isGreater(cards[i])) { std::min = i; } } return std::min; } void Deck::shuffleDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = randomInt (i, cards.size() - 1); swapCards (i, x); } } void Deck::sortDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = findLowestCard (i); swapCards (i, x); } } Deck Deck::subdeck(int low, int high) const { Deck sub(high-low+1); for (size_t i = 0; i < sub.cards.size(); i++) { sub.cards[i] = cards[low+i]; } return sub; }    findBisect    Let's write the code for this version of the findBisect function. findBisect should take a subdeck and a card as parameters and return the index of the card in the subdeck or -1 if it's not found.      int findBisect(Deck subdeck, Card card) {    int findBisect (Subdeck subdeck, Card card) {     if (subdeck.cards.size() == 1 && !subdeck.cards[0].equals(card)) return -1;     int mid = subdeck.cards.size() \/ 2;    int mid = (high + low) \/ 2;     if (subdeck.cards[mid].equals(card)) return mid;     else if (subdeck.cards[mid].isGreater(card)) {  return findBisect (subdeck.subdeck(0, mid - 1), card);  }    else if (subdeck.cards[mid].isGreater(card)) {  return findBisect (subdeck.subdeck(mid + 1, subdeck.cards.size()), card);  }     else {  return findBisect (subdeck.subdeck(mid + 1, subdeck.cards.size()), card);  }  }       "
-},
-{
-  "id": "chapter13_subdecks-2",
-  "level": "2",
-  "url": "chapter13_subdecks.html#chapter13_subdecks-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "How should we represent a hand or some other subset of a full deck? One easy choice is to make a Deck object that has fewer than 52 cards. "
-},
-{
-  "id": "chapter13_subdecks-3",
-  "level": "2",
-  "url": "chapter13_subdecks.html#chapter13_subdecks-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "We might want a function, subdeck , that takes a vector of cards and a range of indices, and that returns a new vector of cards that contains the specified subset of the deck: "
-},
-{
-  "id": "chapter13_subdecks-5",
-  "level": "2",
-  "url": "chapter13_subdecks.html#chapter13_subdecks-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To create the local variable named subdeck we are using the Deck constructor that takes the size of the deck as an argument and that does not initialize the cards. The cards get initialized when they are copied from the original deck. "
-},
-{
-  "id": "chapter13_subdecks-6",
-  "level": "2",
-  "url": "chapter13_subdecks.html#chapter13_subdecks-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The length of the subdeck is high - low + 1 because both the low card and high card are included. "
-},
-{
-  "id": "chapter13_subdecks-7",
-  "level": "2",
-  "url": "chapter13_subdecks.html#chapter13_subdecks-7",
-  "type": "Warning",
-  "number": "10.8.1",
-  "title": "",
-  "body": " This sort of computation can be confusing and can lead to off-by-one errors. Drawing a picture is usually the best way to avoid them.  "
-},
-{
-  "id": "chapter13_subdecks-8",
-  "level": "2",
-  "url": "chapter13_subdecks.html#chapter13_subdecks-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "As an exercise, write a version of findBisect that takes a subdeck as an argument, rather than a deck and an index range. Which version is more error-prone? Which version do you think is more efficient? "
-},
-{
-  "id": "subdeck_cards_1",
-  "level": "2",
-  "url": "chapter13_subdecks.html#subdeck_cards_1",
-  "type": "Checkpoint",
-  "number": "10.8.1",
-  "title": "",
-  "body": "  Try writing the findBisect function in the commented section of this active code. If done correctly, the program should output that the Seven of Clubs is at index 6 and the King of Diamonds is at index -1. If you get stuck, you can reveal the hint below for help.   #include <iostream> #include <string> #include <vector> #include <cstdlib> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high); struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool isGreater(const Card& c2) const; bool equals(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; void swapCards(int index1, int index2); int findLowestCard(int index); void shuffleDeck(); void sortDeck(); Deck subdeck(int low, int high) const; }; int findBisect(Deck subdeck, Card card) { \/\/ ``findBisect`` should search through the subdeck and \/\/ return the location of card. If card is not found in \/\/ subdeck, it should return -1. \/\/ Delete the return 0 and write your implementation here. return 0; } int main() { Deck deck; Deck clubs = deck.subdeck(0, 12); clubs.print(); Card card1 (CLUBS, SEVEN); Card card2 (DIAMONDS, KING); std::cout << std::endl; std::cout << \"The Seven of Clubs is at index \" << findBisect (clubs, card1) << std::endl; std::cout << \"The King of Diamonds is at index \" << findBisect (clubs, card2) << std::endl; }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } Deck::Deck(int size) { std::vector<Card> temp (size); cards = temp; } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int randomInt(int low, int high) { srand (time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void Deck::swapCards(int index1, int index2) { Card temp = cards[index1]; cards[index1] = cards[index2]; cards[index2] = temp; } int Deck::findLowestCard(int index) { int std::min = index; for (size_t i = index; i < cards.size(); ++i) { if (cards[std::min].isGreater(cards[i])) { std::min = i; } } return std::min; } void Deck::shuffleDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = randomInt (i, cards.size() - 1); swapCards (i, x); } } void Deck::sortDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = findLowestCard (i); swapCards (i, x); } } Deck Deck::subdeck(int low, int high) const { Deck sub(high-low+1); for (size_t i = 0; i < sub.cards.size(); i++) { sub.cards[i] = cards[low+i]; } return sub; }    findBisect    Let's write the code for this version of the findBisect function. findBisect should take a subdeck and a card as parameters and return the index of the card in the subdeck or -1 if it's not found.      int findBisect(Deck subdeck, Card card) {    int findBisect (Subdeck subdeck, Card card) {     if (subdeck.cards.size() == 1 && !subdeck.cards[0].equals(card)) return -1;     int mid = subdeck.cards.size() \/ 2;    int mid = (high + low) \/ 2;     if (subdeck.cards[mid].equals(card)) return mid;     else if (subdeck.cards[mid].isGreater(card)) {  return findBisect (subdeck.subdeck(0, mid - 1), card);  }    else if (subdeck.cards[mid].isGreater(card)) {  return findBisect (subdeck.subdeck(mid + 1, subdeck.cards.size()), card);  }     else {  return findBisect (subdeck.subdeck(mid + 1, subdeck.cards.size()), card);  }  }      "
-},
-{
-  "id": "chapter13_shuffling-and-dealing",
-  "level": "1",
-  "url": "chapter13_shuffling-and-dealing.html",
-  "type": "Section",
-  "number": "10.9",
-  "title": "Shuffling and dealing",
-  "body": " Shuffling and dealing  In , I wrote pseudocode for a shuffling algorithm. Assuming that we have a function called shuffleDeck that takes a deck as an argument and shuffles it, we can create and shuffle a deck:  Deck deck; \/\/ create a standard 52-card deck deck.shuffleDeck(); \/\/ shuffle it  Then, to deal out several hands, we can use subdeck :  Deck hand1 = deck.subdeck(0, 4); Deck hand2 = deck.subdeck(5, 9); Deck pack = deck.subdeck(10, 51);  This code puts the first 5 cards in one hand, the next 5 cards in the other, and the rest into the pack.  When you thought about dealing, did you think we should give out one card at a time to each player in the round-robin style that is common in real card games? I thought about it, but then realized that it is unnecessary for a computer program. The round-robin convention is intended to mitigate imperfect shuffling and make it more difficult for the dealer to cheat. Neither of these is an issue for a computer.  This example is a useful reminder of one of the dangers of engineering metaphors: sometimes we impose restrictions on computers that are unnecessary, or expect capabilities that are lacking, because we unthinkingly extend a metaphor past its breaking point. Beware of misleading analogies.   This active code deals a deck of cards among three players for a game of Go Fish. Feel free to experiment with the code and deal decks for other games like War, Poker, or Hearts.   #include <iostream> #include <string> #include <vector> #include <cstdlib> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high); struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool isGreater(const Card& c2) const; bool equals(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; void swapCards(int index1, int index2); int findLowestCard(int index); void shuffleDeck(); void sortDeck(); Deck subdeck(int low, int high) const; }; int findBisect(Deck subdeck, Card card); int main() { Deck deck; deck.shuffleDeck(); Deck hand1 = deck.subdeck(0, 6); Deck hand2 = deck.subdeck(7, 13); Deck hand3 = deck.subdeck(14, 20); Deck pack = deck.subdeck(21, 51); std::cout << \"Player 1's hand:\" << std::endl; hand1.print(); std::cout << std::endl; std::cout << \"Player 2's hand:\" << std::endl; hand2.print(); std::cout << std::endl; std::cout << \"Player 3's hand:\" << std::endl; hand3.print(); }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } Deck::Deck(int size) { std::vector<Card> temp (size); cards = temp; } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int randomInt(int low, int high) { srand (time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void Deck::swapCards(int index1, int index2) { Card temp = cards[index1]; cards[index1] = cards[index2]; cards[index2] = temp; } int Deck::findLowestCard(int index) { int std::min = index; for (size_t i = index; i < cards.size(); ++i) { if (cards[std::min].isGreater(cards[i])) { std::min = i; } } return std::min; } Deck Deck::subdeck(int low, int high) const { Deck sub(high-low+1); for (size_t i = 0; i < sub.cards.size(); i++) { sub.cards[i] = cards[low+i]; } return sub; } int findBisect(Deck subdeck, Card card) { if (subdeck.cards.size() == 1 && !subdeck.cards[0].equals(card)) return -1; int mid = subdeck.cards.size() \/ 2; if (subdeck.cards[mid].equals(card)) return mid; else if (subdeck.cards[mid].isGreater(card)) { return findBisect (subdeck.subdeck(0, mid - 1), card); } else { return findBisect (subdeck.subdeck(mid + 1, subdeck.cards.size()), card); } } void Deck::shuffleDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = randomInt (i, cards.size() - 1); swapCards (i, x); } } void Deck::sortDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = findLowestCard (i); swapCards (i, x); } }    "
-},
-{
-  "id": "chapter13_shuffling-and-dealing-2",
-  "level": "2",
-  "url": "chapter13_shuffling-and-dealing.html#chapter13_shuffling-and-dealing-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In , I wrote pseudocode for a shuffling algorithm. Assuming that we have a function called shuffleDeck that takes a deck as an argument and shuffles it, we can create and shuffle a deck: "
-},
-{
-  "id": "chapter13_shuffling-and-dealing-4",
-  "level": "2",
-  "url": "chapter13_shuffling-and-dealing.html#chapter13_shuffling-and-dealing-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Then, to deal out several hands, we can use subdeck : "
-},
-{
-  "id": "chapter13_shuffling-and-dealing-6",
-  "level": "2",
-  "url": "chapter13_shuffling-and-dealing.html#chapter13_shuffling-and-dealing-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This code puts the first 5 cards in one hand, the next 5 cards in the other, and the rest into the pack. "
-},
-{
-  "id": "chapter13_shuffling-and-dealing-7",
-  "level": "2",
-  "url": "chapter13_shuffling-and-dealing.html#chapter13_shuffling-and-dealing-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "When you thought about dealing, did you think we should give out one card at a time to each player in the round-robin style that is common in real card games? I thought about it, but then realized that it is unnecessary for a computer program. The round-robin convention is intended to mitigate imperfect shuffling and make it more difficult for the dealer to cheat. Neither of these is an issue for a computer. "
-},
-{
-  "id": "chapter13_shuffling-and-dealing-8",
-  "level": "2",
-  "url": "chapter13_shuffling-and-dealing.html#chapter13_shuffling-and-dealing-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This example is a useful reminder of one of the dangers of engineering metaphors: sometimes we impose restrictions on computers that are unnecessary, or expect capabilities that are lacking, because we unthinkingly extend a metaphor past its breaking point. Beware of misleading analogies. "
-},
-{
-  "id": "shuffle_deal_AC_1",
-  "level": "2",
-  "url": "chapter13_shuffling-and-dealing.html#shuffle_deal_AC_1",
-  "type": "Listing",
-  "number": "10.9.1",
-  "title": "This active code deals a deck of cards among three players for a game of Go Fish. Feel free to experiment with the code and deal decks for other games like War, Poker, or Hearts.",
-  "body": " This active code deals a deck of cards among three players for a game of Go Fish. Feel free to experiment with the code and deal decks for other games like War, Poker, or Hearts.   #include <iostream> #include <string> #include <vector> #include <cstdlib> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high); struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool isGreater(const Card& c2) const; bool equals(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; void swapCards(int index1, int index2); int findLowestCard(int index); void shuffleDeck(); void sortDeck(); Deck subdeck(int low, int high) const; }; int findBisect(Deck subdeck, Card card); int main() { Deck deck; deck.shuffleDeck(); Deck hand1 = deck.subdeck(0, 6); Deck hand2 = deck.subdeck(7, 13); Deck hand3 = deck.subdeck(14, 20); Deck pack = deck.subdeck(21, 51); std::cout << \"Player 1's hand:\" << std::endl; hand1.print(); std::cout << std::endl; std::cout << \"Player 2's hand:\" << std::endl; hand2.print(); std::cout << std::endl; std::cout << \"Player 3's hand:\" << std::endl; hand3.print(); }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } Deck::Deck(int size) { std::vector<Card> temp (size); cards = temp; } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int randomInt(int low, int high) { srand (time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void Deck::swapCards(int index1, int index2) { Card temp = cards[index1]; cards[index1] = cards[index2]; cards[index2] = temp; } int Deck::findLowestCard(int index) { int std::min = index; for (size_t i = index; i < cards.size(); ++i) { if (cards[std::min].isGreater(cards[i])) { std::min = i; } } return std::min; } Deck Deck::subdeck(int low, int high) const { Deck sub(high-low+1); for (size_t i = 0; i < sub.cards.size(); i++) { sub.cards[i] = cards[low+i]; } return sub; } int findBisect(Deck subdeck, Card card) { if (subdeck.cards.size() == 1 && !subdeck.cards[0].equals(card)) return -1; int mid = subdeck.cards.size() \/ 2; if (subdeck.cards[mid].equals(card)) return mid; else if (subdeck.cards[mid].isGreater(card)) { return findBisect (subdeck.subdeck(0, mid - 1), card); } else { return findBisect (subdeck.subdeck(mid + 1, subdeck.cards.size()), card); } } void Deck::shuffleDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = randomInt (i, cards.size() - 1); swapCards (i, x); } } void Deck::sortDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = findLowestCard (i); swapCards (i, x); } }   "
-},
-{
-  "id": "chapter13_mergesort",
-  "level": "1",
-  "url": "chapter13_mergesort.html",
-  "type": "Section",
-  "number": "10.10",
-  "title": "Mergesort",
-  "body": " Mergesort  In , we saw a simple sorting algorithm that turns out not to be very efficient. In order to sort items, it has to traverse the std::vector times, and each traversal takes an amount of time that is proportional to . The total time, therefore, is proportional to .  In this section I will sketch a more efficient algorithm called mergesort . To sort items, mergesort takes time proportional to . That may not seem impressive, but as gets big, the difference between and can be enormous. Try out a few values of and see.  The basic idea behind mergesort is this: if you have two subdecks, each of which has been sorted, it is easy (and fast) to merge them into a single, sorted deck. Try this out with a deck of cards:     Form two subdecks with about 10 cards each and sort them so that when they are face up the lowest cards are on top. Place both decks face up in front of you.    Compare the top card from each deck and choose the lower one. Flip it over and add it to the merged deck.    Repeat step two until one of the decks is empty. Then take the remaining cards and add them to the merged deck.     The result should be a single sorted deck. Here's what this looks like in pseudocode:  Deck merge(const Deck& d1, const Deck& d2) { \/\/ create a new deck big enough for all the cards Deck result (d1.cards.size() + d2.cards.size()); \/\/ use the index i to keep track of where we are in \/\/ the first deck, and the index j for the second deck int i = 0; int j = 0; \/\/ the index k traverses the result deck for (size_t k = 0; k<result.cards.size(); k++) { \/\/ if d1 is empty, d2 wins; if d2 is empty, d1 wins; \/\/ otherwise, compare the two cards \/\/ add the winner to the new deck } return result; }  I chose to make merge a nonmember function because the two arguments are symmetric.  The best way to test merge is to build and shuffle a deck, use subdeck to form two (small) hands, and then use the sort routine from the previous chapter to sort the two halves. Then you can pass the two halves to merge to see if it works.  If you can get that working, try a simple implementation of mergeSort :  Deck Deck::mergeSort() const { \/\/ find the midpoint of the deck \/\/ divide the deck into two subdecks \/\/ sort the subdecks using sort \/\/ merge the two halves and return the result }  Notice that the current object is declared const because mergeSort does not modify it. Instead, it creates and returns a new Deck object.  If you get that version working, the real fun begins! The magical thing about mergesort is that it is recursive. At the point where you sort the subdecks, why should you invoke the old, slow version of sort ? Why not invoke the spiffy new mergeSort you are in the process of writing?  Not only is that a good idea, it is necessary in order to achieve the performance advantage I promised. In order to make it work, though, you have to add a base case so that it doesn't recurse forever. A simple base case is a subdeck with 0 or 1 cards. If mergesort receives such a small subdeck, it can return it unmodified, since it is already sorted.  The recursive version of mergesort should look something like this:  Deck Deck::mergeSort(Deck deck) const { \/\/ if the deck is 0 or 1 cards, return it \/\/ find the midpoint of the deck \/\/ divide the deck into two subdecks \/\/ sort the subdecks using mergesort \/\/ merge the two halves and return the result }  As usual, there are two ways to think about recursive programs: you can think through the entire flow of execution, or you can make the leap of faith. I have deliberately constructed this example to encourage you to make the leap of faith.  When you were using sort to sort the subdecks, you didn't feel compelled to follow the flow of execution, right? You just assumed that the sort function would work because you already debugged it. Well, all you did to make mergeSort recursive was replace one sort algorithm with another. There is no reason to read the program differently.  Well, actually you have to give some thought to getting the base case right and making sure that you reach it eventually, but other than that, writing the recursive version should be no problem. Good luck!    The efficiency of a simple sorting algorithm is __________. The efficiency of mergesort is __________. Mergesort is __________ than the simple sorting algorithm.      , , more efficient   Simple sort traverses the vector n times, and each traversal takes additional time.     , , more efficient   Simple sort takes time proporitonal to , mergesort takes time proportional to (which is more efficient).     , , less efficient   You might be confused about which algorithm is which. Also, what is the efficiency of simple sort?     , , less efficient   You might be confused about which algorithm is which.      , less efficient   Which algorithm is more efficient? (Which function grows more slowly?)       Write your implementation of merge in the commented area of the active code below. Read the comments in main to see how we'll test if your merge function works. If you get stuck, you can reveal the hint below for help.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high); struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool isGreater(const Card& c2) const; bool equals(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; void swapCards(int index1, int index2); int findLowestCard(int index); void shuffleDeck(); void sortDeck(); Deck subdeck(int low, int high) const; }; int findBisect(Deck subdeck, Card card); Deck merge(const Deck& d1, const Deck& d2) { \/\/ ``merge`` should merge d1 with d2 and return \/\/ a merged deck. Follow the pseudocode above, \/\/ delete the existing code, and write your \/\/ implementation here. Deck deck(0); return deck; } int main() { Deck deck; \/\/ Shuffle a deck of cards and split it in half deck.shuffleDeck(); Deck d1 = deck.subdeck(0, 25); Deck d2 = deck.subdeck(26, 51); \/\/ Sort each half d1.sortDeck(); d2.sortDeck(); std::cout << \"Sorted first half:\" << std::endl; d1.print(); std::cout << std::endl; std::cout << \"Sorted second half:\" << std::endl; d2.print(); std::cout << std::endl; \/\/ Merge sorted decks together Deck finished = merge(d1, d2); \/\/ We should see a sorted standard deck of 52 cards std::cout << \"Merged sorted full deck:\" << std::endl; finished.print(); }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } Deck::Deck(int size) { std::vector<Card> temp (size); cards = temp; } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int randomInt(int low, int high) { srand (time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void Deck::swapCards(int index1, int index2) { Card temp = cards[index1]; cards[index1] = cards[index2]; cards[index2] = temp; } int Deck::findLowestCard(int index) { int std::min = index; for (size_t i = index; i < cards.size(); ++i) { if (cards[std::min].isGreater(cards[i])) { std::min = i; } } return std::min; } Deck Deck::subdeck(int low, int high) const { Deck sub(high-low+1); for (size_t i = 0; i < sub.cards.size(); i++) { sub.cards[i] = cards[low+i]; } return sub; } int findBisect(Deck subdeck, Card card) { if (subdeck.cards.size() == 1 && !subdeck.cards[0].equals(card)) return -1; int mid = subdeck.cards.size() \/ 2; if (subdeck.cards[mid].equals(card)) return mid; else if (subdeck.cards[mid].isGreater(card)) { return findBisect (subdeck.subdeck(0, mid - 1), card); } else { return findBisect (subdeck.subdeck(mid + 1, subdeck.cards.size()), card); } } void Deck::shuffleDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = randomInt (i, cards.size() - 1); swapCards (i, x); } } void Deck::sortDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = findLowestCard (i); swapCards (i, x); } }    merge    First, let's write the code for the merge function. merge should take two decks as parameters and return a deck with the deck merged.      Deck merge(const Deck& d1, const Deck& d2) {    void merge(const Deck& d1, const Deck& d2) {     Deck result (d1.cards.size() + d2.cards.size());    size_t i = 0;  size_t j = 0;    for (size_t k = 0; k < result.cards.size(); ++k) {     if (d1.cards.empty()) {  result.cards[k] = d2.cards[j];  ++j;  }    if (d1.cards.empty()) {  result.cards[k] = d1.cards[i];  ++i;  }      else if (d2.cards.empty()) {  result.cards[k] = d1.cards[i];  ++i;  }    else if (d1.cards.empty()) {  result.cards[k] = d2.cards[j];  ++j;  }     else {    if (j >= d2.cards.size()) {  result.cards[k] = d1.cards[i];  ++i;  }    else if (i >= d1.cards.size() || d1.cards[i].isGreater(d2.cards[j])) {  result.cards[k] = d2.cards[j];  ++j;  }    else {  result.cards[k] = d1.cards[i];  ++i;  }  }    }  return result;  }         Now that we've written merge , it's time to write the mergeSort function. Try writing the non-recursive version of mergeSort first before writing the recursive version. Follow the comments in main to test your functions. If done correctly, the program should output a sorted deck of cards. If you get stuck, you can reveal the hints below for help.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high); struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool isGreater(const Card& c2) const; bool equals(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; void swapCards(int index1, int index2); int findLowestCard(int index); void shuffleDeck(); void sortDeck(); Deck subdeck(int low, int high) const; Deck mergeSort() const; Deck mergeSort(Deck deck) const; }; int findBisect(Deck subdeck, Card card); Deck merge(const Deck& d1, const Deck& d2); Deck Deck::mergeSort() const { \/\/ This version of ``mergeSort`` is the non-recursive version. \/\/ Follow the pseudocode above delete the existing code, \/\/ and write your implementation here. Deck deck(0); return deck; } Deck Deck::mergeSort(Deck deck) const { \/\/ This version of ``mergeSort`` is the recursive version. \/\/ Follow the pseudocode above delete the existing code, \/\/ and write your implementation here. Deck deck1(0); return deck; } int main() { Deck deck1; deck1.shuffleDeck(); Deck sorted1 = deck1.mergeSort(); sorted1.print(); \/\/ Once you get the above code to work, comment it \/\/ out and uncomment the code below to test the \/\/ recursive version of ``mergeSort``. \/* Deck deck2; deck2.shuffleDeck(); Deck sorted2 = deck2.mergeSort(deck2); sorted2.print(); *\/ }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } Deck::Deck(int size) { std::vector<Card> temp (size); cards = temp; } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int randomInt(int low, int high) { srand (time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void Deck::swapCards(int index1, int index2) { Card temp = cards[index1]; cards[index1] = cards[index2]; cards[index2] = temp; } int Deck::findLowestCard(int index) { int std::min = index; for (size_t i = index; i < cards.size(); ++i) { if (cards[std::min].isGreater(cards[i])) { std::min = i; } } return std::min; } Deck Deck::subdeck(int low, int high) const { Deck sub(high-low+1); for (size_t i = 0; i < sub.cards.size(); i++) { sub.cards[i] = cards[low+i]; } return sub; } int findBisect(Deck subdeck, Card card) { if (subdeck.cards.size() == 1 && !subdeck.cards[0].equals(card)) return -1; int mid = subdeck.cards.size() \/ 2; if (subdeck.cards[mid].equals(card)) return mid; else if (subdeck.cards[mid].isGreater(card)) { return findBisect (subdeck.subdeck(0, mid - 1), card); } else { return findBisect (subdeck.subdeck(mid + 1, subdeck.cards.size()), card); } } void Deck::shuffleDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = randomInt (i, cards.size() - 1); swapCards (i, x); } } void Deck::sortDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = findLowestCard (i); swapCards (i, x); } } Deck merge(const Deck& d1, const Deck& d2) { Deck result (d1.cards.size() + d2.cards.size()); size_t i = 0; size_t j = 0; for (size_t k = 0; k < result.cards.size(); ++k) { if (d1.cards.empty()) { result.cards[k] = d2.cards[j]; ++j; } else if (d2.cards.empty()) { result.cards[k] = d1.cards[i]; ++i; } else { if (j >= d2.cards.size()) { result.cards[k] = d1.cards[i]; ++i; } else if (i >= d1.cards.size() || d1.cards[i].isGreater(d2.cards[j])) { result.cards[k] = d2.cards[j]; ++j; } else { result.cards[k] = d1.cards[i]; ++i; } } } return result; }    mergeSort    Let's write the code for the mergeSort function. mergeSort should be a Deck member function that returns a sorted deck.      Deck Deck::mergeSort() const {    Deck mergeSort() {     int mid = cards.size() \/ 2;    Deck d1 = subdeck(0, mid - 1);  Deck d2 = subdeck(mid, cards.size() - 1);    d1.sortDeck();  d2.sortDeck();    return merge(d1, d2);  }       mergeSort recursive    Let's take it one step further and rewrite mergeSort as a recursive function.     Deck Deck::mergeSort(Deck deck) const {    if (deck.cards.size() == 0 || deck.cards.size() == 1) {  return deck;  }    int mid = deck.cards.size() \/ 2;    Deck d1 = subdeck(0, mid - 1);  Deck d2 = subdeck(mid, deck.cards.size() - 1);    Deck merged1 = d1.mergeSort(d1);  Deck merged2 = d2.mergeSort(d2);    return merge(merged1, merged2);  }       "
-},
-{
-  "id": "chapter13_mergesort-2",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In , we saw a simple sorting algorithm that turns out not to be very efficient. In order to sort items, it has to traverse the std::vector times, and each traversal takes an amount of time that is proportional to . The total time, therefore, is proportional to . "
-},
-{
-  "id": "chapter13_mergesort-3",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In this section I will sketch a more efficient algorithm called mergesort . To sort items, mergesort takes time proportional to . That may not seem impressive, but as gets big, the difference between and can be enormous. Try out a few values of and see. "
-},
-{
-  "id": "chapter13_mergesort-4",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The basic idea behind mergesort is this: if you have two subdecks, each of which has been sorted, it is easy (and fast) to merge them into a single, sorted deck. Try this out with a deck of cards: "
-},
-{
-  "id": "chapter13_mergesort-5",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "   Form two subdecks with about 10 cards each and sort them so that when they are face up the lowest cards are on top. Place both decks face up in front of you.    Compare the top card from each deck and choose the lower one. Flip it over and add it to the merged deck.    Repeat step two until one of the decks is empty. Then take the remaining cards and add them to the merged deck.    "
-},
-{
-  "id": "chapter13_mergesort-6",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The result should be a single sorted deck. Here's what this looks like in pseudocode: "
-},
-{
-  "id": "chapter13_mergesort-8",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "I chose to make merge a nonmember function because the two arguments are symmetric. "
-},
-{
-  "id": "chapter13_mergesort-9",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The best way to test merge is to build and shuffle a deck, use subdeck to form two (small) hands, and then use the sort routine from the previous chapter to sort the two halves. Then you can pass the two halves to merge to see if it works. "
-},
-{
-  "id": "chapter13_mergesort-10",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If you can get that working, try a simple implementation of mergeSort : "
-},
-{
-  "id": "chapter13_mergesort-12",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Notice that the current object is declared const because mergeSort does not modify it. Instead, it creates and returns a new Deck object. "
-},
-{
-  "id": "chapter13_mergesort-13",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If you get that version working, the real fun begins! The magical thing about mergesort is that it is recursive. At the point where you sort the subdecks, why should you invoke the old, slow version of sort ? Why not invoke the spiffy new mergeSort you are in the process of writing? "
-},
-{
-  "id": "chapter13_mergesort-14",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Not only is that a good idea, it is necessary in order to achieve the performance advantage I promised. In order to make it work, though, you have to add a base case so that it doesn't recurse forever. A simple base case is a subdeck with 0 or 1 cards. If mergesort receives such a small subdeck, it can return it unmodified, since it is already sorted. "
-},
-{
-  "id": "chapter13_mergesort-15",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-15",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The recursive version of mergesort should look something like this: "
-},
-{
-  "id": "chapter13_mergesort-17",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-17",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "As usual, there are two ways to think about recursive programs: you can think through the entire flow of execution, or you can make the leap of faith. I have deliberately constructed this example to encourage you to make the leap of faith. "
-},
-{
-  "id": "chapter13_mergesort-18",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-18",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "When you were using sort to sort the subdecks, you didn't feel compelled to follow the flow of execution, right? You just assumed that the sort function would work because you already debugged it. Well, all you did to make mergeSort recursive was replace one sort algorithm with another. There is no reason to read the program differently. "
-},
-{
-  "id": "chapter13_mergesort-19",
-  "level": "2",
-  "url": "chapter13_mergesort.html#chapter13_mergesort-19",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Well, actually you have to give some thought to getting the base case right and making sure that you reach it eventually, but other than that, writing the recursive version should be no problem. Good luck! "
-},
-{
-  "id": "mergesort_1",
-  "level": "2",
-  "url": "chapter13_mergesort.html#mergesort_1",
-  "type": "Checkpoint",
-  "number": "10.10.1",
-  "title": "",
-  "body": "  The efficiency of a simple sorting algorithm is __________. The efficiency of mergesort is __________. Mergesort is __________ than the simple sorting algorithm.      , , more efficient   Simple sort traverses the vector n times, and each traversal takes additional time.     , , more efficient   Simple sort takes time proporitonal to , mergesort takes time proportional to (which is more efficient).     , , less efficient   You might be confused about which algorithm is which. Also, what is the efficiency of simple sort?     , , less efficient   You might be confused about which algorithm is which.      , less efficient   Which algorithm is more efficient? (Which function grows more slowly?)    "
-},
-{
-  "id": "mergesort_2",
-  "level": "2",
-  "url": "chapter13_mergesort.html#mergesort_2",
-  "type": "Checkpoint",
-  "number": "10.10.2",
-  "title": "",
-  "body": "  Write your implementation of merge in the commented area of the active code below. Read the comments in main to see how we'll test if your merge function works. If you get stuck, you can reveal the hint below for help.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high); struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool isGreater(const Card& c2) const; bool equals(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; void swapCards(int index1, int index2); int findLowestCard(int index); void shuffleDeck(); void sortDeck(); Deck subdeck(int low, int high) const; }; int findBisect(Deck subdeck, Card card); Deck merge(const Deck& d1, const Deck& d2) { \/\/ ``merge`` should merge d1 with d2 and return \/\/ a merged deck. Follow the pseudocode above, \/\/ delete the existing code, and write your \/\/ implementation here. Deck deck(0); return deck; } int main() { Deck deck; \/\/ Shuffle a deck of cards and split it in half deck.shuffleDeck(); Deck d1 = deck.subdeck(0, 25); Deck d2 = deck.subdeck(26, 51); \/\/ Sort each half d1.sortDeck(); d2.sortDeck(); std::cout << \"Sorted first half:\" << std::endl; d1.print(); std::cout << std::endl; std::cout << \"Sorted second half:\" << std::endl; d2.print(); std::cout << std::endl; \/\/ Merge sorted decks together Deck finished = merge(d1, d2); \/\/ We should see a sorted standard deck of 52 cards std::cout << \"Merged sorted full deck:\" << std::endl; finished.print(); }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } Deck::Deck(int size) { std::vector<Card> temp (size); cards = temp; } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int randomInt(int low, int high) { srand (time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void Deck::swapCards(int index1, int index2) { Card temp = cards[index1]; cards[index1] = cards[index2]; cards[index2] = temp; } int Deck::findLowestCard(int index) { int std::min = index; for (size_t i = index; i < cards.size(); ++i) { if (cards[std::min].isGreater(cards[i])) { std::min = i; } } return std::min; } Deck Deck::subdeck(int low, int high) const { Deck sub(high-low+1); for (size_t i = 0; i < sub.cards.size(); i++) { sub.cards[i] = cards[low+i]; } return sub; } int findBisect(Deck subdeck, Card card) { if (subdeck.cards.size() == 1 && !subdeck.cards[0].equals(card)) return -1; int mid = subdeck.cards.size() \/ 2; if (subdeck.cards[mid].equals(card)) return mid; else if (subdeck.cards[mid].isGreater(card)) { return findBisect (subdeck.subdeck(0, mid - 1), card); } else { return findBisect (subdeck.subdeck(mid + 1, subdeck.cards.size()), card); } } void Deck::shuffleDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = randomInt (i, cards.size() - 1); swapCards (i, x); } } void Deck::sortDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = findLowestCard (i); swapCards (i, x); } }    merge    First, let's write the code for the merge function. merge should take two decks as parameters and return a deck with the deck merged.      Deck merge(const Deck& d1, const Deck& d2) {    void merge(const Deck& d1, const Deck& d2) {     Deck result (d1.cards.size() + d2.cards.size());    size_t i = 0;  size_t j = 0;    for (size_t k = 0; k < result.cards.size(); ++k) {     if (d1.cards.empty()) {  result.cards[k] = d2.cards[j];  ++j;  }    if (d1.cards.empty()) {  result.cards[k] = d1.cards[i];  ++i;  }      else if (d2.cards.empty()) {  result.cards[k] = d1.cards[i];  ++i;  }    else if (d1.cards.empty()) {  result.cards[k] = d2.cards[j];  ++j;  }     else {    if (j >= d2.cards.size()) {  result.cards[k] = d1.cards[i];  ++i;  }    else if (i >= d1.cards.size() || d1.cards[i].isGreater(d2.cards[j])) {  result.cards[k] = d2.cards[j];  ++j;  }    else {  result.cards[k] = d1.cards[i];  ++i;  }  }    }  return result;  }      "
-},
-{
-  "id": "mergesort_3",
-  "level": "2",
-  "url": "chapter13_mergesort.html#mergesort_3",
-  "type": "Checkpoint",
-  "number": "10.10.3",
-  "title": "",
-  "body": "  Now that we've written merge , it's time to write the mergeSort function. Try writing the non-recursive version of mergeSort first before writing the recursive version. Follow the comments in main to test your functions. If done correctly, the program should output a sorted deck of cards. If you get stuck, you can reveal the hints below for help.   #include <iostream> #include <string> #include <vector> enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }; enum Rank { ACE=1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }; int randomInt(int low, int high); struct Card { Rank rank; Suit suit; Card(); Card(Suit s, Rank r); void print() const; bool isGreater(const Card& c2) const; bool equals(const Card& c2) const; }; struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; void swapCards(int index1, int index2); int findLowestCard(int index); void shuffleDeck(); void sortDeck(); Deck subdeck(int low, int high) const; Deck mergeSort() const; Deck mergeSort(Deck deck) const; }; int findBisect(Deck subdeck, Card card); Deck merge(const Deck& d1, const Deck& d2); Deck Deck::mergeSort() const { \/\/ This version of ``mergeSort`` is the non-recursive version. \/\/ Follow the pseudocode above delete the existing code, \/\/ and write your implementation here. Deck deck(0); return deck; } Deck Deck::mergeSort(Deck deck) const { \/\/ This version of ``mergeSort`` is the recursive version. \/\/ Follow the pseudocode above delete the existing code, \/\/ and write your implementation here. Deck deck1(0); return deck; } int main() { Deck deck1; deck1.shuffleDeck(); Deck sorted1 = deck1.mergeSort(); sorted1.print(); \/\/ Once you get the above code to work, comment it \/\/ out and uncomment the code below to test the \/\/ recursive version of ``mergeSort``. \/* Deck deck2; deck2.shuffleDeck(); Deck sorted2 = deck2.mergeSort(deck2); sorted2.print(); *\/ }  Card::Card() { suit = SPADES; rank = ACE; } Card::Card(Suit s, Rank r) { suit = s; rank = r; } void Card::print() const { std::vector<std::string> suits(4); suits[0] = \"Clubs\"; suits[1] = \"Diamonds\"; suits[2] = \"Hearts\"; suits[3] = \"Spades\"; std::vector<std::string> ranks(14); ranks[1] = \"Ace\"; ranks[2] = \"2\"; ranks[3] = \"3\"; ranks[4] = \"4\"; ranks[5] = \"5\"; ranks[6] = \"6\"; ranks[7] = \"7\"; ranks[8] = \"8\"; ranks[9] = \"9\"; ranks[10] = \"10\"; ranks[11] = \"Jack\"; ranks[12] = \"Queen\"; ranks[13] = \"King\"; std::cout << ranks[rank] << \" of \" << suits[suit] << std::endl; } bool Card::isGreater(const Card& c2) const { if (suit > c2.suit) return true; if (suit < c2.suit) return false; if (rank > c2.rank) return true; if (rank < c2.rank) return false; return false; } bool Card::equals(const Card& c2) const { return (rank == c2.rank && suit == c2.suit); } Deck::Deck() { std::vector<Card> temp (52); cards = temp; int i = 0; for (Suit suit = CLUBS; suit <= SPADES; suit = Suit(suit+1)) { for (Rank rank = ACE; rank <= KING; rank = Rank(rank+1)) { cards[i].suit = suit; cards[i].rank = rank; i++; } } } Deck::Deck(int size) { std::vector<Card> temp (size); cards = temp; } void Deck::print() const { for (size_t i = 0; i < cards.size(); i++) { cards[i].print(); } } int randomInt(int low, int high) { srand (time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void Deck::swapCards(int index1, int index2) { Card temp = cards[index1]; cards[index1] = cards[index2]; cards[index2] = temp; } int Deck::findLowestCard(int index) { int std::min = index; for (size_t i = index; i < cards.size(); ++i) { if (cards[std::min].isGreater(cards[i])) { std::min = i; } } return std::min; } Deck Deck::subdeck(int low, int high) const { Deck sub(high-low+1); for (size_t i = 0; i < sub.cards.size(); i++) { sub.cards[i] = cards[low+i]; } return sub; } int findBisect(Deck subdeck, Card card) { if (subdeck.cards.size() == 1 && !subdeck.cards[0].equals(card)) return -1; int mid = subdeck.cards.size() \/ 2; if (subdeck.cards[mid].equals(card)) return mid; else if (subdeck.cards[mid].isGreater(card)) { return findBisect (subdeck.subdeck(0, mid - 1), card); } else { return findBisect (subdeck.subdeck(mid + 1, subdeck.cards.size()), card); } } void Deck::shuffleDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = randomInt (i, cards.size() - 1); swapCards (i, x); } } void Deck::sortDeck() { for (size_t i = 0; i < cards.size(); i++) { int x = findLowestCard (i); swapCards (i, x); } } Deck merge(const Deck& d1, const Deck& d2) { Deck result (d1.cards.size() + d2.cards.size()); size_t i = 0; size_t j = 0; for (size_t k = 0; k < result.cards.size(); ++k) { if (d1.cards.empty()) { result.cards[k] = d2.cards[j]; ++j; } else if (d2.cards.empty()) { result.cards[k] = d1.cards[i]; ++i; } else { if (j >= d2.cards.size()) { result.cards[k] = d1.cards[i]; ++i; } else if (i >= d1.cards.size() || d1.cards[i].isGreater(d2.cards[j])) { result.cards[k] = d2.cards[j]; ++j; } else { result.cards[k] = d1.cards[i]; ++i; } } } return result; }    mergeSort    Let's write the code for the mergeSort function. mergeSort should be a Deck member function that returns a sorted deck.      Deck Deck::mergeSort() const {    Deck mergeSort() {     int mid = cards.size() \/ 2;    Deck d1 = subdeck(0, mid - 1);  Deck d2 = subdeck(mid, cards.size() - 1);    d1.sortDeck();  d2.sortDeck();    return merge(d1, d2);  }       mergeSort recursive    Let's take it one step further and rewrite mergeSort as a recursive function.     Deck Deck::mergeSort(Deck deck) const {    if (deck.cards.size() == 0 || deck.cards.size() == 1) {  return deck;  }    int mid = deck.cards.size() \/ 2;    Deck d1 = subdeck(0, mid - 1);  Deck d2 = subdeck(mid, deck.cards.size() - 1);    Deck merged1 = d1.mergeSort(d1);  Deck merged2 = d2.mergeSort(d2);    return merge(merged1, merged2);  }      "
-},
-{
-  "id": "chapter13_glossary",
-  "level": "1",
-  "url": "chapter13_glossary.html",
-  "type": "Section",
-  "number": "10.11",
-  "title": "Glossary",
-  "body": " Glossary    pseudocode  A way of designing programs by writing rough drafts in a combination of English and C++.    helper function  Often a small function that does not do anything enormously useful by itself, but which helps another, more useful, function.    top-down design  A method of program development that uses pseudocode to sketch solutions to large problems and design the interfaces of helper functions.    mergesort  An algorithm for sorting a collection of values. Mergesort is faster than the simple algorithm in the previous chapter, especially for large collections.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    pseudocode  A way of designing programs by writing rough drafts in a combination of English and C++.    helper function  Often a small function that does not do anything enormously useful by itself, but which helps another, more useful, function.    top-down design  A method of program development that uses pseudocode to sketch solutions to large problems and design the interfaces of helper functions.    mergesort  An algorithm for sorting a collection of values. It is faster than the simple algorithm in the previous chapter, especially for large collections.      "
-},
-{
-  "id": "chapter13_glossary-2",
-  "level": "2",
-  "url": "chapter13_glossary.html#chapter13_glossary-2",
-  "type": "Glossary",
-  "number": "10.11",
-  "title": "Glossary",
-  "body": "  pseudocode  A way of designing programs by writing rough drafts in a combination of English and C++.    helper function  Often a small function that does not do anything enormously useful by itself, but which helps another, more useful, function.    top-down design  A method of program development that uses pseudocode to sketch solutions to large problems and design the interfaces of helper functions.    mergesort  An algorithm for sorting a collection of values. Mergesort is faster than the simple algorithm in the previous chapter, especially for large collections.   "
-},
-{
-  "id": "chapter13_glossary-3",
-  "level": "2",
-  "url": "chapter13_glossary.html#chapter13_glossary-3",
-  "type": "Reading Questions",
-  "number": "10.11",
-  "title": "Reading Questions",
-  "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    pseudocode  A way of designing programs by writing rough drafts in a combination of English and C++.    helper function  Often a small function that does not do anything enormously useful by itself, but which helps another, more useful, function.    top-down design  A method of program development that uses pseudocode to sketch solutions to large problems and design the interfaces of helper functions.    mergesort  An algorithm for sorting a collection of values. It is faster than the simple algorithm in the previous chapter, especially for large collections.     "
-},
-{
-  "id": "chapter13_multiple-choice-exercises",
-  "level": "1",
-  "url": "chapter13_multiple-choice-exercises.html",
-  "type": "Exercises",
-  "number": "10.12",
-  "title": "Multiple Choice Exercises",
-  "body": " Multiple Choice Exercises    What is the output of the code below?   enum Month { JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC }; int main() { Month m1 = JUL; Month m2 = NOV; std::cout << m1 << \" \" << m2 << std::endl ; }       JULY NOVEMBER   What are the actual values of JUL and NOV ?     JUL NOV   What do the values of enumerated types map to?     7 11   Since we defined JAN to start at 1, JUL and NOV map to 7 and 11.     6 10   Take a closer look at our enumerated type definition.       What is the output of the code below?   int main() { std::string s = \"summer\"; switch (s) { case \"spring\": std::cout << \"It's spring!\"; break; case \"summer\": std::cout << \"It's summer!\"; case \"fall\": std::cout << \"It's fall!\"; break; case \"winter\": std::cout << \"It's winter!\"; default: std::cout << \"Invalid season!\"; break; } }       summer   Although that is the value of s , is that printed?     It's summer!It's fall!   This would be the correct answer if this switch statement worked.     It's summer!It's fall!It's winter!Invalid season!   Where are the break statements?     Compile error.    switch statements can't be used on string s.       What is the output of the code below?   enum Season { SPRING, SUMMER, FALL, WINTER }; int main() { Season s = SUMMER; switch (s) { case SPRING: std::cout << \"It's spring!\"; break; case SUMMER: std::cout << \"It's summer!\"; case FALL: std::cout << \"It's fall!\"; break; case WINTER: std::cout << \"It's winter!\"; default: std::cout << \"Invalid season!\"; break; } }       SUMMER   Although that is the value of s , is that printed?     It's summer!It's fall!   Since there is no break statement after the case for summer but there is one after fall, this is correct.     It's summer!It's fall!It's winter!Invalid season!   Where are the break statements?     Compile error.   Since s is an enumerated type, the Season s are mapped to int s, which are valid for switch statements.       Take a look at the struct definition of Entry . If we wanted to make a struct called Dictionary , how can we create a std::vector of Entry s as a member variable?   struct Entry { std::string word; int page; }        std::vector<Entry> entries;    We create a std::vector with type Entry .      Entry entries    This only creates one Entry .      std::vector<Dictionary> Entry    This creates a std::vector of Dictionary s called Entry .     We can't make an object that contains a std::vector .   We can have std::vector s inside objects.       What is wrong with the code below?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; int find(const Deck& deck) const; }; struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; int find(const Card& card) const; };       We can't have a std::vector in Deck .   We are allowed to have std::vector s in objects.     The definition of Card::find() is invalid.   The definition references Deck , but Deck is defined after Card .     We can't define print() in both Card and in Deck .   Although they have the same name, these are two different print() functions.     Nothing is wrong with the code.   There is an error in the code. Can you find it?       Why can't we code our shuffle function to work the exact same way humans shuffle cards?      Our code can't split the deck exactly in half.   We can split the deck exactly in half.     The way our code would shuffle cards would be unpredictable.   Part of the problem is that the cards would be shuffled in a predictable manner.     Our code would result in an infinite loop.   There's no reason to loop infinitely.     Our code would perform a perfect shuffle.   Because the cards are shuffled perfectly, the exact ordering of the cards is predictable and thus the cards aren't really shuffled.       What is true about helper functions?      They are longer than the bigger functions since they do all the work.   Most helper functions are shorter than the bigger function.     They are simpler functions that help the bigger function.   As the name implies, they help a bigger function.     They shorten the code used in bigger functions.   Usually the bigger function has repetitive code, which is then put into a helper function to help shorten the bigger function.     They make debugging easier.   Since helper functions break down the bigger function into smaller parts, it's easier to isolate and identify issues.       Using pseudocode to figure out what helper functions are needed is a characteristic of what?      Encapsulation   This is the process of wrapping up a sequence of instructions in a function.     Generalization   This is the process of taking something specific and making it more general.     Top-down design   This is the process of using pseudocode to sketch solutions to large problems and design the interfaces of helper functions.     Bottom-up design   This is the process of writing small, useful functions and then assembling them into larger solutions.       Which of the following can lead to off by one errors?      Running a for loop too little or too many times.   This can lead to too few iterations or too many iterations.     Forgetting that indexing starts at 0.   This can lead you to have values that are shifted by one.     Using less than instead of less than or equal to in a while loop.   This can lead to running the while loop one less times than what you wanted.     All of the above.   These can all lead to off by one errors.       What is the amount of time that mergeSort takes?      n log n   This makes mergeSort faster than our previous version of selection sort.     n!   mergeSort runs faster than factorial time.     logn   mergeSort runs slower than logarithmic time.     n^2   This is the time complexity of selection sort.       What kind of sorting algorithm is our sortDeck function? You are encouraged to search up these different sorting algorithms!      Bubble sort   Bubble sort swaps adjacent items and bubbles the lightest items to the top.     Insertion sort   Insertion sort selects an item from the unsorted section and puts it in the right location in the sorted section.     Selection sort   Selection sort finds the smallest item at each iteration i and puts it at the ith location.     Quicksort   Quicksort uses recursive calls to partition a list.     "
-},
-{
-  "id": "mce_13_1",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_1",
-  "type": "Exercise",
-  "number": "10.12.1",
-  "title": "",
-  "body": "  What is the output of the code below?   enum Month { JAN = 1, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC }; int main() { Month m1 = JUL; Month m2 = NOV; std::cout << m1 << \" \" << m2 << std::endl ; }       JULY NOVEMBER   What are the actual values of JUL and NOV ?     JUL NOV   What do the values of enumerated types map to?     7 11   Since we defined JAN to start at 1, JUL and NOV map to 7 and 11.     6 10   Take a closer look at our enumerated type definition.    "
-},
-{
-  "id": "mce_13_2",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_2",
-  "type": "Exercise",
-  "number": "10.12.2",
-  "title": "",
-  "body": "  What is the output of the code below?   int main() { std::string s = \"summer\"; switch (s) { case \"spring\": std::cout << \"It's spring!\"; break; case \"summer\": std::cout << \"It's summer!\"; case \"fall\": std::cout << \"It's fall!\"; break; case \"winter\": std::cout << \"It's winter!\"; default: std::cout << \"Invalid season!\"; break; } }       summer   Although that is the value of s , is that printed?     It's summer!It's fall!   This would be the correct answer if this switch statement worked.     It's summer!It's fall!It's winter!Invalid season!   Where are the break statements?     Compile error.    switch statements can't be used on string s.    "
-},
-{
-  "id": "mce_13_3",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_3",
-  "type": "Exercise",
-  "number": "10.12.3",
-  "title": "",
-  "body": "  What is the output of the code below?   enum Season { SPRING, SUMMER, FALL, WINTER }; int main() { Season s = SUMMER; switch (s) { case SPRING: std::cout << \"It's spring!\"; break; case SUMMER: std::cout << \"It's summer!\"; case FALL: std::cout << \"It's fall!\"; break; case WINTER: std::cout << \"It's winter!\"; default: std::cout << \"Invalid season!\"; break; } }       SUMMER   Although that is the value of s , is that printed?     It's summer!It's fall!   Since there is no break statement after the case for summer but there is one after fall, this is correct.     It's summer!It's fall!It's winter!Invalid season!   Where are the break statements?     Compile error.   Since s is an enumerated type, the Season s are mapped to int s, which are valid for switch statements.    "
-},
-{
-  "id": "mce_13_4",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_4",
-  "type": "Exercise",
-  "number": "10.12.4",
-  "title": "",
-  "body": "  Take a look at the struct definition of Entry . If we wanted to make a struct called Dictionary , how can we create a std::vector of Entry s as a member variable?   struct Entry { std::string word; int page; }        std::vector<Entry> entries;    We create a std::vector with type Entry .      Entry entries    This only creates one Entry .      std::vector<Dictionary> Entry    This creates a std::vector of Dictionary s called Entry .     We can't make an object that contains a std::vector .   We can have std::vector s inside objects.    "
-},
-{
-  "id": "mce_13_5",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_5",
-  "type": "Exercise",
-  "number": "10.12.5",
-  "title": "",
-  "body": "  What is wrong with the code below?   struct Card { int suit, rank; Card(); Card(int s, int r); void print() const; bool isGreater(const Card& c2) const; int find(const Deck& deck) const; }; struct Deck { std::vector<Card> cards; Deck(); Deck(int n); void print() const; int find(const Card& card) const; };       We can't have a std::vector in Deck .   We are allowed to have std::vector s in objects.     The definition of Card::find() is invalid.   The definition references Deck , but Deck is defined after Card .     We can't define print() in both Card and in Deck .   Although they have the same name, these are two different print() functions.     Nothing is wrong with the code.   There is an error in the code. Can you find it?    "
-},
-{
-  "id": "mce_13_6",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_6",
-  "type": "Exercise",
-  "number": "10.12.6",
-  "title": "",
-  "body": "  Why can't we code our shuffle function to work the exact same way humans shuffle cards?      Our code can't split the deck exactly in half.   We can split the deck exactly in half.     The way our code would shuffle cards would be unpredictable.   Part of the problem is that the cards would be shuffled in a predictable manner.     Our code would result in an infinite loop.   There's no reason to loop infinitely.     Our code would perform a perfect shuffle.   Because the cards are shuffled perfectly, the exact ordering of the cards is predictable and thus the cards aren't really shuffled.    "
-},
-{
-  "id": "mce_13_7",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_7",
-  "type": "Exercise",
-  "number": "10.12.7",
-  "title": "",
-  "body": "  What is true about helper functions?      They are longer than the bigger functions since they do all the work.   Most helper functions are shorter than the bigger function.     They are simpler functions that help the bigger function.   As the name implies, they help a bigger function.     They shorten the code used in bigger functions.   Usually the bigger function has repetitive code, which is then put into a helper function to help shorten the bigger function.     They make debugging easier.   Since helper functions break down the bigger function into smaller parts, it's easier to isolate and identify issues.    "
-},
-{
-  "id": "mce_13_8",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_8",
-  "type": "Exercise",
-  "number": "10.12.8",
-  "title": "",
-  "body": "  Using pseudocode to figure out what helper functions are needed is a characteristic of what?      Encapsulation   This is the process of wrapping up a sequence of instructions in a function.     Generalization   This is the process of taking something specific and making it more general.     Top-down design   This is the process of using pseudocode to sketch solutions to large problems and design the interfaces of helper functions.     Bottom-up design   This is the process of writing small, useful functions and then assembling them into larger solutions.    "
-},
-{
-  "id": "mce_13_9",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_9",
-  "type": "Exercise",
-  "number": "10.12.9",
-  "title": "",
-  "body": "  Which of the following can lead to off by one errors?      Running a for loop too little or too many times.   This can lead to too few iterations or too many iterations.     Forgetting that indexing starts at 0.   This can lead you to have values that are shifted by one.     Using less than instead of less than or equal to in a while loop.   This can lead to running the while loop one less times than what you wanted.     All of the above.   These can all lead to off by one errors.    "
-},
-{
-  "id": "mce_13_10",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_10",
-  "type": "Exercise",
-  "number": "10.12.10",
-  "title": "",
-  "body": "  What is the amount of time that mergeSort takes?      n log n   This makes mergeSort faster than our previous version of selection sort.     n!   mergeSort runs faster than factorial time.     logn   mergeSort runs slower than logarithmic time.     n^2   This is the time complexity of selection sort.    "
-},
-{
-  "id": "mce_13_11",
-  "level": "2",
-  "url": "chapter13_multiple-choice-exercises.html#mce_13_11",
-  "type": "Exercise",
-  "number": "10.12.11",
-  "title": "",
-  "body": "  What kind of sorting algorithm is our sortDeck function? You are encouraged to search up these different sorting algorithms!      Bubble sort   Bubble sort swaps adjacent items and bubbles the lightest items to the top.     Insertion sort   Insertion sort selects an item from the unsorted section and puts it in the right location in the sorted section.     Selection sort   Selection sort finds the smallest item at each iteration i and puts it at the ith location.     Quicksort   Quicksort uses recursive calls to partition a list.    "
-},
-{
-  "id": "chapter13_mixed-up-code-practice",
-  "level": "1",
-  "url": "chapter13_mixed-up-code-practice.html",
-  "type": "Exercises",
-  "number": "10.13",
-  "title": "Mixed Up Code Practice",
-  "body": " Mixed Up Code Practice    Below is the enumerated type Days which maps days of the week to integers starting at 1. Use a switch statement to determine whether or not day is a weekend or not. Check for cases in numerical order.     enum Day { MON = 1, TUE, WED, THU, FRI, SAT, SUN };    int main() {    Day day = SUN;    switch (day > 5) {    case 0:    std::cout << \"It is not the weekend :(\" << std::endl ;    break;    case 1:    std::cout << \"It is the weekend :)\" << std::endl ;    break;    default:    std::cout << \"Invalid input.\" << std::endl ;    break;    }    }       Use a switch statement to check and print out whether a number is divisible by two. Prompt and get input from the user. If input isn't valid, print out the default statement Invalid input. Check for cases in numerical order.     int main() {    int input;    std::cout << \"Please enter an integer: \";    std::cin >> input;    switch (input % 2) {    case 0:    std::cout << input << \" is even!\" << std::endl ;    break;    case 1:    std::cout << input << \" is odd!\" << std::endl ;    break;    default:    std::cout << \"Invalid input.\" << std::endl ;    break;    }    }       Use a switch statement to check and print out the maximum between two numbers. Prompt and get input from the user for two integers. If input isn't valid, print out the default statement Invalid input. Check for cases in numerical order.     int main() {    int input1;    int input2;    std::cout << \"Please enter first integer: \";    std::cin >> input1;    std::cout << \"Please enter second integer: \";    std::cin >> input2;    switch (input1 > input2) {    case 0:    std::cout << \"The maximum is \" << input2 << std::endl ;    break;    case 1:    std::cout << \"The maximum is \" << input1 << std::endl ;    default:    std::cout << \"Invalid input.\" << std::endl ;    break;    }    }       Below is the pseudocode for the implementation of mergeSort. Put the blocks in the correct order!     Deck Deck::mergeSort() const {    Deck::mergeSort() const {    find the midpoint of the deck    divide the deck into two subdecks    sort the subdecks using sort    merge the two halves and return the result    use a for loop to traverse half the deck    divide each subdeck into two more subdecks    }       Let's revisit the Dictionary data structure defined in the previous section. Write the struct definitions for Entry, which has member variables word and page, and for Dictionary, which has a vector of Entries. Put the necessary blocks of code in the correct order.     struct Entry {    std::string word;    int page;    Entry word;    };    struct Dictionary {    std::vector<Entry> entries;    std::vector<Word> entries;    Entry entries;    };       Assume our dictionary is currently unsorted. Let's write a Dictionary member function find that takes a string word as a parameter and returns the index of its corresponding entry. If the word isn't in the dictionary, return -1. Put the necessary blocks of code in the correct order.      int Dictionary::find(string word) {    int Dictionary::find(Entry word) {     for (size_t i = 0; i < entries.size(); ++i) {    for (size_t i = 1; i < entries.size(); ++i) {    for (size_t i = 1; i < Dictionary.entries.size(); ++i) {    if (entries[i].word == word) {    if (i.word == word) {    return i;    }    }    return -1;    }       Of course, all dictionaries are in some sort of order. In order to do this, we must first write the Dictionary member function findFirstWord, which takes a starting index as a parameter returns the index of the Entry with the highest priority alphabetically (i.e. the Entry with a word that would come first in the alphabet). Put the necessary blocks of code in the correct order.      int Dictionary::findFirstWord(int start) {    int Dictionary::findFirstWord(string word) {     int min = start;    for (size_t i = start; i < entries.size(); ++i) {    for (size_t i = 0; i < entries.size(); ++i) {    if (entries[i].word < entries[min].word) {    if (entries[i].word > entries[min].word) {    min = i;    }    }    return min;    }       We also need a swap function. Write the Dictionary member function swap which takes two indices as parameters and swaps the Entries at those indices. Put the necessary blocks of code in the correct order.      void Dictionary::swap(int a, int b) {    void Dictionary::swap() {     Entry temp = entries[a];    entries[a] = entries[b];    entries[b] = temp;    }       Now let's write the Dictionary member function alphabetize, which sorts the Entries in the Dictionary in alphabetical order. Use the findFirstWord and swap functions we defined earlier! Put the necessary blocks of code in the correct order.      void Dictionary::alphabetize() {    int Dictionary::alphabetize() {     for (size_t i = 0; i < entries.size(); ++i) {    for (size_t i = 0; i < entries.size() - 1; ++i) {    int min = findFirstWord (i);    int min = findFirstWord (0);    swap (i, min);    swap (0, min);    }    }       Let's check to see if our sorting worked! Write the Dictionary member function printDictionary, which prints out the word in each Entry. Put the necessary blocks of code in the correct order.     void Dictionary::printDictionary() {    for (size_t i = 0; i < entries.size(); ++i) {    std::cout << entries[i].word << std::endl ;    std::cout << entries[i].Entry << std::endl ;    std::cout << Entry.word << std::endl ;    }    }     "
-},
-{
-  "id": "mucp_13_1",
-  "level": "2",
-  "url": "chapter13_mixed-up-code-practice.html#mucp_13_1",
-  "type": "Exercise",
-  "number": "10.13.yes",
-  "title": "",
-  "body": "  Below is the enumerated type Days which maps days of the week to integers starting at 1. Use a switch statement to determine whether or not day is a weekend or not. Check for cases in numerical order.     enum Day { MON = 1, TUE, WED, THU, FRI, SAT, SUN };    int main() {    Day day = SUN;    switch (day > 5) {    case 0:    std::cout << \"It is not the weekend :(\" << std::endl ;    break;    case 1:    std::cout << \"It is the weekend :)\" << std::endl ;    break;    default:    std::cout << \"Invalid input.\" << std::endl ;    break;    }    }    "
-},
-{
-  "id": "mucp_13_2",
-  "level": "2",
-  "url": "chapter13_mixed-up-code-practice.html#mucp_13_2",
-  "type": "Exercise",
-  "number": "10.13.yes",
-  "title": "",
-  "body": "  Use a switch statement to check and print out whether a number is divisible by two. Prompt and get input from the user. If input isn't valid, print out the default statement Invalid input. Check for cases in numerical order.     int main() {    int input;    std::cout << \"Please enter an integer: \";    std::cin >> input;    switch (input % 2) {    case 0:    std::cout << input << \" is even!\" << std::endl ;    break;    case 1:    std::cout << input << \" is odd!\" << std::endl ;    break;    default:    std::cout << \"Invalid input.\" << std::endl ;    break;    }    }    "
-},
-{
-  "id": "mucp_13_3",
-  "level": "2",
-  "url": "chapter13_mixed-up-code-practice.html#mucp_13_3",
-  "type": "Exercise",
-  "number": "10.13.yes",
-  "title": "",
-  "body": "  Use a switch statement to check and print out the maximum between two numbers. Prompt and get input from the user for two integers. If input isn't valid, print out the default statement Invalid input. Check for cases in numerical order.     int main() {    int input1;    int input2;    std::cout << \"Please enter first integer: \";    std::cin >> input1;    std::cout << \"Please enter second integer: \";    std::cin >> input2;    switch (input1 > input2) {    case 0:    std::cout << \"The maximum is \" << input2 << std::endl ;    break;    case 1:    std::cout << \"The maximum is \" << input1 << std::endl ;    default:    std::cout << \"Invalid input.\" << std::endl ;    break;    }    }    "
-},
-{
-  "id": "mucp_13_4",
-  "level": "2",
-  "url": "chapter13_mixed-up-code-practice.html#mucp_13_4",
-  "type": "Exercise",
-  "number": "10.13.yes",
-  "title": "",
-  "body": "  Below is the pseudocode for the implementation of mergeSort. Put the blocks in the correct order!     Deck Deck::mergeSort() const {    Deck::mergeSort() const {    find the midpoint of the deck    divide the deck into two subdecks    sort the subdecks using sort    merge the two halves and return the result    use a for loop to traverse half the deck    divide each subdeck into two more subdecks    }    "
-},
-{
-  "id": "mucp_13_5",
-  "level": "2",
-  "url": "chapter13_mixed-up-code-practice.html#mucp_13_5",
-  "type": "Exercise",
-  "number": "10.13.yes",
-  "title": "",
-  "body": "  Let's revisit the Dictionary data structure defined in the previous section. Write the struct definitions for Entry, which has member variables word and page, and for Dictionary, which has a vector of Entries. Put the necessary blocks of code in the correct order.     struct Entry {    std::string word;    int page;    Entry word;    };    struct Dictionary {    std::vector<Entry> entries;    std::vector<Word> entries;    Entry entries;    };    "
-},
-{
-  "id": "mucp_13_6",
-  "level": "2",
-  "url": "chapter13_mixed-up-code-practice.html#mucp_13_6",
-  "type": "Exercise",
-  "number": "10.13.yes",
-  "title": "",
-  "body": "  Assume our dictionary is currently unsorted. Let's write a Dictionary member function find that takes a string word as a parameter and returns the index of its corresponding entry. If the word isn't in the dictionary, return -1. Put the necessary blocks of code in the correct order.      int Dictionary::find(string word) {    int Dictionary::find(Entry word) {     for (size_t i = 0; i < entries.size(); ++i) {    for (size_t i = 1; i < entries.size(); ++i) {    for (size_t i = 1; i < Dictionary.entries.size(); ++i) {    if (entries[i].word == word) {    if (i.word == word) {    return i;    }    }    return -1;    }    "
-},
-{
-  "id": "mucp_13_7",
-  "level": "2",
-  "url": "chapter13_mixed-up-code-practice.html#mucp_13_7",
-  "type": "Exercise",
-  "number": "10.13.yes",
-  "title": "",
-  "body": "  Of course, all dictionaries are in some sort of order. In order to do this, we must first write the Dictionary member function findFirstWord, which takes a starting index as a parameter returns the index of the Entry with the highest priority alphabetically (i.e. the Entry with a word that would come first in the alphabet). Put the necessary blocks of code in the correct order.      int Dictionary::findFirstWord(int start) {    int Dictionary::findFirstWord(string word) {     int min = start;    for (size_t i = start; i < entries.size(); ++i) {    for (size_t i = 0; i < entries.size(); ++i) {    if (entries[i].word < entries[min].word) {    if (entries[i].word > entries[min].word) {    min = i;    }    }    return min;    }    "
-},
-{
-  "id": "mucp_13_8",
-  "level": "2",
-  "url": "chapter13_mixed-up-code-practice.html#mucp_13_8",
-  "type": "Exercise",
-  "number": "10.13.yes",
-  "title": "",
-  "body": "  We also need a swap function. Write the Dictionary member function swap which takes two indices as parameters and swaps the Entries at those indices. Put the necessary blocks of code in the correct order.      void Dictionary::swap(int a, int b) {    void Dictionary::swap() {     Entry temp = entries[a];    entries[a] = entries[b];    entries[b] = temp;    }    "
-},
-{
-  "id": "mucp_13_9",
-  "level": "2",
-  "url": "chapter13_mixed-up-code-practice.html#mucp_13_9",
-  "type": "Exercise",
-  "number": "10.13.yes",
-  "title": "",
-  "body": "  Now let's write the Dictionary member function alphabetize, which sorts the Entries in the Dictionary in alphabetical order. Use the findFirstWord and swap functions we defined earlier! Put the necessary blocks of code in the correct order.      void Dictionary::alphabetize() {    int Dictionary::alphabetize() {     for (size_t i = 0; i < entries.size(); ++i) {    for (size_t i = 0; i < entries.size() - 1; ++i) {    int min = findFirstWord (i);    int min = findFirstWord (0);    swap (i, min);    swap (0, min);    }    }    "
-},
-{
-  "id": "mucp_13_10",
-  "level": "2",
-  "url": "chapter13_mixed-up-code-practice.html#mucp_13_10",
-  "type": "Exercise",
-  "number": "10.13.yes",
-  "title": "",
-  "body": "  Let's check to see if our sorting worked! Write the Dictionary member function printDictionary, which prints out the word in each Entry. Put the necessary blocks of code in the correct order.     void Dictionary::printDictionary() {    for (size_t i = 0; i < entries.size(); ++i) {    std::cout << entries[i].word << std::endl ;    std::cout << entries[i].Entry << std::endl ;    std::cout << Entry.word << std::endl ;    }    }    "
-},
-{
-  "id": "chapter13_coding-practice",
-  "level": "1",
-  "url": "chapter13_coding-practice.html",
-  "type": "Exercises",
-  "number": "10.14",
-  "title": "Coding Practice",
-  "body": " Coding Practice    Create the enumerated type Planet, which maps the planets in our solar system to integers starting at 1. Make sure to list the planets out in order! (Sadly, Pluto is not a planet :( )   #include <iostream> \/\/ Write your code for the enumerated type Planet.   Below is one way to implement the program. The planets in our solar system are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune.   #include <iostream> enum Planet { MERCURY = 1, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE };       How long is a year on other planets? Let’s write a program that prints out the number of days in a year on each planet using a switch statement. These values are, in planetary order, 88 days, 225 days, 365 days, 687 days, 4333 days, 10759 days, 30687 days, and 60190 days. Print out this information in the following format: Planet planet has numDays number of days in a year! Check the hint below for help with the construction of the code.   #include <iostream> enum Planet { MERCURY = 1, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE }; int main() { Planet p = JUPITER; \/\/ Write your code here. }      How long is a year on other planets? Let’s write a program that prints out the number of days in a year on each planet using a switch statement. These values are, in planetary order, 88 days, 225 days, 365 days, 687 days, 4333 days, 10759 days, 30687 days, and 60190 days. Print out this information in the following format: Planet planet has numDays number of days in a year! Use the lines to construct the code, then go back to complete the Activecode.     enum Planet { MERCURY = 1, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE };    int main() {    Planet p = VENUS;    switch (p) {    case 1:  std::cout << \"Planet Mercury has 88 number of days in a year!\" << std::endl ;  break;    case 2:  std::cout << \"Planet Venus has 225 number of days in a year!\" << std::endl ;  break;    case 3:  std::cout << \"Planet Earth has 365 number of days in a year!\" << std::endl ;  break;    case 4:  std::cout << \"Planet Mars has 687 number of days in a year!\" << std::endl ;  break;    case 5:  std::cout << \"Planet Jupiter has 4333 number of days in a year!\" << std::endl ;  break;    case 6:  std::cout << \"Planet Saturn has 10759 number of days in a year!\" << std::endl ;  break;    case 7:  std::cout << \"Planet Uranus has 30687 number of days in a year!\" << std::endl ;  break;    case 8:  std::cout << \"Planet Neptune has 60190 number of days in a year!\" << std::endl ;  break;    }    }         A Bingo board has 25 Spaces in a matrix-like grid. A Space has a number value randomly selected from 1 to 75 and can either be filled or not. Write the struct definitions for Space and BingoBoard .   #include <iostream> #include <vector> \/\/ Write your code for the struct Space here. \/\/ Write your code for the struct BingoBoard here.   Below is one way to implement the program. We declare the Space and BingoBoard struct and create the instance variables in order. Make sure to set is_filled to false !   #include <iostream> #include <vector> struct Space { int value; bool is_filled; }; struct BingoBoard { std::vector<std::vector<Space> > board; };       Now let’s generate a BingoBoard ! We want to fill the 25 Space s on the BingoBoard with random values from 1 to 75 without repititon. To do this, we’ll make a std::vector of numbers from 1 to 75 and shuffle it using the same method as shown in this chapter. Then we will select the first 25 values for the 25 spaces on the BingoBoard . We will do this entire process in multiple steps. First, write the function randomInt , which generates a random value between low and high, inclusive. Be sure to include the relevant libraries! Check the hint below for help with the construction of the code.   #include <iostream> \/\/ Add any relevant libraries here. \/\/ Write your code for the randomInt function here.      Now let’s generate a BingoBoard ! We want to fill the 25 Space s on the BingoBoard with random values from 1 to 75 without repititon. To do this, we’ll make a std::vector of numbers from 1 to 75 and shuffle it using the same method as shown in this chapter. Then we will select the first 25 values for the 25 spaces on the BingoBoard . We will do this entire process in multiple steps. First, write the function randomInt , which generates a random value between low and high, inclusive. Be sure to include the relevant libraries! Use the lines to construct the code, then go back to complete the Activecode.     int randomInt(int low, int high) {    srand(time(NULL));    int x = random();    int y = x % (high - low + 1) + low;    return y;    }         Now we need a way to swap the values at two indices in a vector. Write the function swapValues , which takes a std::vector of int s and two indices as parameters.   #include <iostream> #include <vector> \/\/ Write your code for the swapValues function here.   Below is one way to implement the program. We store the value at index1 in a temp variable, replace the value at index1 with the value at index2 , and then finally replace the value at index2 with the value of temp . Make sure to pass vec by reference!   #include <iostream> #include <vector> void swapValues (std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; }       Now that we have the functions randomInt and swapValues , we can write the function generateRandVec . generateRandVec creates a std::vector with values from 1 to 75, shuffles it using randomInt and swapValues , and returns the shuffled std::vector . Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> #include <cstdlib> #include <numeric> \/\/ Write your code for the generateRandVec function here.      Now that we have the functions randomInt and swapValues , we can write the function generateRandVec . generateRandVec creates a std::vector with values from 1 to 75, shuffles it using randomInt and swapValues , and returns the shuffled std::vector . Use the lines to construct the code, then go back to complete the Activecode.     std::vector<int> generateRandVec() {    std::vector<int> vec(75);    iota(vec.begin(), vec.end(), 1);    for (size_t i = 0; i < vec.size(); ++i) {    int x = randomInt(i, vec.size() - 1);    swapValues(vec, i, x);    }    return vec;    }         We can now fill our BingoBoard with values! Write the BingoBoard member function makeBoard . Use the generateRandVec function and select the first 25 values to fill up the board. Make sure to create a free space in the middle of the board! Set the value of the free space to 0 and is_filled to true . All other spaces should have is_filled set to false .   #include <iostream> #include <vector> #include <cstdlib> #include <numeric> struct Space { int value; bool is_filled; }; struct BingoBoard { std::vector<std::vector<Space> > board; void makeBoard (); }; int randomInt (int low, int high); void swapValues (std::vector<int> &vec, int index1, int index2); std::vector<int> generateRandVec (); \/\/ Write your code for the makeBoard function here.  int randomInt(int low, int high) { srand(time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } std::vector<int> generateRandVec() { std::vector<int> vec(75); iota(vec.begin(), vec.end(), 1); for (size_t i = 0; i < vec.size(); ++i) { int x = randomInt(i, vec.size() - 1); swapValues(vec, i, x); } return vec; }   Below is one way to implement the program. First we need to initialize the board to the correct dimensions. Then, we use generateRandVec to create a std::vector of random values from 1 to 75. Afterwards, we set the values of the 25 Space s to the first 25 values in the random std::vector . Lastly, we set the middle Space to 0 and set its is_filled to true .   #include <iostream> #include <vector> #include <cstdlib> #include <numeric> struct Space { int value; bool is_filled; }; struct BingoBoard { std::vector<std::vector<Space> > board; void makeBoard (); }; int randomInt (int low, int high); void swapValues (std::vector<int> &vec, int index1, int index2); std::vector<int> generateRandVec (); void BingoBoard::makeBoard() { \/\/ Initialize board Space s = {0, false}; std::vector<Space> cols(5, s); for (size_t i = 0; i < 5; ++i) { board.push_back(cols); } \/\/ Fill board with random values std::vector<int> vec = generateRandVec(); int count = 0; for (size_t row = 0; row < board.size(); ++row) { for (size_t col = 0; col < board[row].size(); ++col) { board[row][col].value = vec[count]; ++count; } } \/\/ Create free space board[2][2].value = 0; board[2][2].is_filled = true; }  int randomInt(int low, int high) { srand(time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } std::vector<int> generateRandVec() { std::vector<int> vec(75); iota(vec.begin(), vec.end(), 1); for (size_t i = 0; i < vec.size(); ++i) { int x = randomInt(i, vec.size() - 1); swapValues(vec, i, x); } return vec; }       Let’s print out our BingoBoard ! Write the BingoBoard member function printBoard . Insert tabs between each value in each row to make the board print out neater. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> #include <cstdlib> #include <numeric> struct Space { int value; bool is_filled; }; struct BingoBoard { std::vector<std::vector<Space> > board; void makeBoard (); void printBoard (); }; int randomInt (int low, int high); void swapValues (std::vector<int> &vec, int index1, int index2); std::vector<int> generateRandVec (); \/\/ Write your code for the printBoard function here. int main() { BingoBoard bingo; bingo.makeBoard (); bingo.printBoard (); }  int randomInt(int low, int high) { srand(time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } std::vector<int> generateRandVec() { std::vector<int> vec(75); iota(vec.begin(), vec.end(), 1); for (size_t i = 0; i < vec.size(); ++i) { int x = randomInt(i, vec.size() - 1); swapValues(vec, i, x); } return vec; } void BingoBoard::makeBoard() { \/\/ Initialize board Space s = {0, false}; std::vector<Space> cols(5, s); for (size_t i = 0; i < 5; ++i) { board.push_back(cols); } \/\/ Fill board with random values std::vector<int> vec = generateRandVec(); int count = 0; for (size_t row = 0; row < board.size(); ++row) { for (size_t col = 0; col < board[row].size(); ++col) { board[row][col].value = vec[count]; ++count; } } \/\/ Create free space board[2][2].value = 0; board[2][2].is_filled = true; }      Let’s print out our BingoBoard ! Write the BingoBoard member function printBoard . Insert tabs between each value in each row to make the board print out neater. Use the lines to construct the code, then go back to complete the Activecode.     void BingoBoard::printBoard () {    for (size_t j = 0; j < board.size(); j++) {    for (size_t i = 0; i < board[j].size(); i++) {    std::cout << board[j][i].value << \"\\t\";    }    std::cout << std::endl ;    }    }         Bubble sort is a method of sorting that involves repeatedly swapping the adjacent elements if they are in the wrong order. For example, let’s say we have the std::vector with elements {3, 2, 4, 1}. On the first pass, we take a look at the first two elements, 3 and 2. Since 3 is bigger than 2, we swap them. Thus, the std::vector now looks like {2, 3, 4, 1}. Next, we look at the next two elements, 3 and 4. Since 3 is less than 4, we don’t swap. Lastly, we look at the last two elements, 4 and 1. Since 4 is greater than 1, we swap the. Thus the std::vector now looks like {2, 3, 1, 4}. Now we restart and look at the first two elements again and the process continues. This way, the biggest elements “bubble” to the back. Write the function bubbleSort , which takes a std::vector as a parameter and sorts it. Feel free to use the provided swapValues function.   #include <iostream> #include <vector> void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } \/\/ Write your code for the bubbleSort function here. int main() { std::vector<int> vec = { 5, 1, 4, 2, 8 }; bubbleSort (vec); for (size_t i = 0; i < vec.size(); ++i) { std::cout << vec[i] << \" \"; } }   Below is one way to implement the program. We must loop through all elements in the vector. Since we know the last i elements are already in place, our inner loop only goes up to vec.size() - 1 - i . If the next element is greater than the current element, we swap the two elements.   #include <iostream> #include <vector> void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } void bubbleSort(std::vector<int> &vec) { for (size_t i = 0; i < vec.size() - 1; ++i) { for (size_t j = 0; j < vec.size() - 1 - i; ++j) { if (vec[j] > vec[j + 1]) { swapValues(vec, j, j + 1); } } } } int main() { std::vector<int> vec = { 5, 1, 4, 2, 8 }; bubbleSort (vec); for (size_t i = 0; i < vec.size(); ++i) { std::cout << vec[i] << \" \"; } }       You may have noticed that in some cases, our version of bubbleSort does an unnecessary amount of work. For example, if our std::vector was {1, 2, 3, 5, 4}, bubbleSort would swap 4 and 5, but then keep going even though our std::vector is already in order! We can save some work by including a bool called is_changed . If we swap values during a pass, we set is_changed to true. If nothing has been swapped, then is_changed stays false, and we know to break out of the loop since our std::vector is already sorted. Write the function fastBubbleSort , which is bubbleSort with this modification. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } \/\/ Write your code for the fastBubbleSort function here. int main() { std::vector<int> vec = { 1, 3, 5, 4, 6, 8, 9 }; fastBubbleSort (vec); for (size_t i = 0; i < vec.size(); ++i) { std::cout << vec[i] << \" \"; } }      You may have noticed that in some cases, our version of bubbleSort does an unnecessary amount of work. For example, if our std::vector was {1, 2, 3, 5, 4}, bubbleSort would swap 4 and 5, but then keep going even though our std::vector is already in order! We can save some work by including a bool called is_changed . If we swap values during a pass, we set is_changed to true. If nothing has been swapped, then is_changed stays false, and we know to break out of the loop since our std::vector is already sorted. Write the function fastBubbleSort , which is bubbleSort with this modification. Use the lines to construct the code, then go back to complete the Activecode.     void fastBubbleSort(std::vector<int> &vec) {    bool is_changed = false;    for (size_t i = 0; i < vec.size() - 1; ++i) {    for (size_t j = 0; j < vec.size() - 1 - i; ++j) {    if (vec[j] > vec[j + 1]) {    swapValues(vec, j, j + 1);    is_changed = true;    }    if (is_changed == false) {    break;    }    }    }    }       "
-},
-{
-  "id": "cp_13_1",
-  "level": "2",
-  "url": "chapter13_coding-practice.html#cp_13_1",
-  "type": "Exercise",
-  "number": "10.14.1",
-  "title": "",
-  "body": "  Create the enumerated type Planet, which maps the planets in our solar system to integers starting at 1. Make sure to list the planets out in order! (Sadly, Pluto is not a planet :( )   #include <iostream> \/\/ Write your code for the enumerated type Planet.   Below is one way to implement the program. The planets in our solar system are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune.   #include <iostream> enum Planet { MERCURY = 1, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE };    "
-},
-{
-  "id": "cp_13_AC_2_q",
-  "level": "2",
-  "url": "chapter13_coding-practice.html#cp_13_AC_2_q",
-  "type": "Exercise",
-  "number": "10.14.2",
-  "title": "",
-  "body": "  How long is a year on other planets? Let’s write a program that prints out the number of days in a year on each planet using a switch statement. These values are, in planetary order, 88 days, 225 days, 365 days, 687 days, 4333 days, 10759 days, 30687 days, and 60190 days. Print out this information in the following format: Planet planet has numDays number of days in a year! Check the hint below for help with the construction of the code.   #include <iostream> enum Planet { MERCURY = 1, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE }; int main() { Planet p = JUPITER; \/\/ Write your code here. }      How long is a year on other planets? Let’s write a program that prints out the number of days in a year on each planet using a switch statement. These values are, in planetary order, 88 days, 225 days, 365 days, 687 days, 4333 days, 10759 days, 30687 days, and 60190 days. Print out this information in the following format: Planet planet has numDays number of days in a year! Use the lines to construct the code, then go back to complete the Activecode.     enum Planet { MERCURY = 1, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE };    int main() {    Planet p = VENUS;    switch (p) {    case 1:  std::cout << \"Planet Mercury has 88 number of days in a year!\" << std::endl ;  break;    case 2:  std::cout << \"Planet Venus has 225 number of days in a year!\" << std::endl ;  break;    case 3:  std::cout << \"Planet Earth has 365 number of days in a year!\" << std::endl ;  break;    case 4:  std::cout << \"Planet Mars has 687 number of days in a year!\" << std::endl ;  break;    case 5:  std::cout << \"Planet Jupiter has 4333 number of days in a year!\" << std::endl ;  break;    case 6:  std::cout << \"Planet Saturn has 10759 number of days in a year!\" << std::endl ;  break;    case 7:  std::cout << \"Planet Uranus has 30687 number of days in a year!\" << std::endl ;  break;    case 8:  std::cout << \"Planet Neptune has 60190 number of days in a year!\" << std::endl ;  break;    }    }      "
-},
-{
-  "id": "cp_13_3",
-  "level": "2",
-  "url": "chapter13_coding-practice.html#cp_13_3",
-  "type": "Exercise",
-  "number": "10.14.3",
-  "title": "",
-  "body": "  A Bingo board has 25 Spaces in a matrix-like grid. A Space has a number value randomly selected from 1 to 75 and can either be filled or not. Write the struct definitions for Space and BingoBoard .   #include <iostream> #include <vector> \/\/ Write your code for the struct Space here. \/\/ Write your code for the struct BingoBoard here.   Below is one way to implement the program. We declare the Space and BingoBoard struct and create the instance variables in order. Make sure to set is_filled to false !   #include <iostream> #include <vector> struct Space { int value; bool is_filled; }; struct BingoBoard { std::vector<std::vector<Space> > board; };    "
-},
-{
-  "id": "cp_13_AC_4_q",
-  "level": "2",
-  "url": "chapter13_coding-practice.html#cp_13_AC_4_q",
-  "type": "Exercise",
-  "number": "10.14.4",
-  "title": "",
-  "body": "  Now let’s generate a BingoBoard ! We want to fill the 25 Space s on the BingoBoard with random values from 1 to 75 without repititon. To do this, we’ll make a std::vector of numbers from 1 to 75 and shuffle it using the same method as shown in this chapter. Then we will select the first 25 values for the 25 spaces on the BingoBoard . We will do this entire process in multiple steps. First, write the function randomInt , which generates a random value between low and high, inclusive. Be sure to include the relevant libraries! Check the hint below for help with the construction of the code.   #include <iostream> \/\/ Add any relevant libraries here. \/\/ Write your code for the randomInt function here.      Now let’s generate a BingoBoard ! We want to fill the 25 Space s on the BingoBoard with random values from 1 to 75 without repititon. To do this, we’ll make a std::vector of numbers from 1 to 75 and shuffle it using the same method as shown in this chapter. Then we will select the first 25 values for the 25 spaces on the BingoBoard . We will do this entire process in multiple steps. First, write the function randomInt , which generates a random value between low and high, inclusive. Be sure to include the relevant libraries! Use the lines to construct the code, then go back to complete the Activecode.     int randomInt(int low, int high) {    srand(time(NULL));    int x = random();    int y = x % (high - low + 1) + low;    return y;    }      "
-},
-{
-  "id": "cp_13_5",
-  "level": "2",
-  "url": "chapter13_coding-practice.html#cp_13_5",
-  "type": "Exercise",
-  "number": "10.14.5",
-  "title": "",
-  "body": "  Now we need a way to swap the values at two indices in a vector. Write the function swapValues , which takes a std::vector of int s and two indices as parameters.   #include <iostream> #include <vector> \/\/ Write your code for the swapValues function here.   Below is one way to implement the program. We store the value at index1 in a temp variable, replace the value at index1 with the value at index2 , and then finally replace the value at index2 with the value of temp . Make sure to pass vec by reference!   #include <iostream> #include <vector> void swapValues (std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; }    "
-},
-{
-  "id": "cp_13_AC_6_q",
-  "level": "2",
-  "url": "chapter13_coding-practice.html#cp_13_AC_6_q",
-  "type": "Exercise",
-  "number": "10.14.6",
-  "title": "",
-  "body": "  Now that we have the functions randomInt and swapValues , we can write the function generateRandVec . generateRandVec creates a std::vector with values from 1 to 75, shuffles it using randomInt and swapValues , and returns the shuffled std::vector . Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> #include <cstdlib> #include <numeric> \/\/ Write your code for the generateRandVec function here.      Now that we have the functions randomInt and swapValues , we can write the function generateRandVec . generateRandVec creates a std::vector with values from 1 to 75, shuffles it using randomInt and swapValues , and returns the shuffled std::vector . Use the lines to construct the code, then go back to complete the Activecode.     std::vector<int> generateRandVec() {    std::vector<int> vec(75);    iota(vec.begin(), vec.end(), 1);    for (size_t i = 0; i < vec.size(); ++i) {    int x = randomInt(i, vec.size() - 1);    swapValues(vec, i, x);    }    return vec;    }      "
-},
-{
-  "id": "cp_13_7",
-  "level": "2",
-  "url": "chapter13_coding-practice.html#cp_13_7",
-  "type": "Exercise",
-  "number": "10.14.7",
-  "title": "",
-  "body": "  We can now fill our BingoBoard with values! Write the BingoBoard member function makeBoard . Use the generateRandVec function and select the first 25 values to fill up the board. Make sure to create a free space in the middle of the board! Set the value of the free space to 0 and is_filled to true . All other spaces should have is_filled set to false .   #include <iostream> #include <vector> #include <cstdlib> #include <numeric> struct Space { int value; bool is_filled; }; struct BingoBoard { std::vector<std::vector<Space> > board; void makeBoard (); }; int randomInt (int low, int high); void swapValues (std::vector<int> &vec, int index1, int index2); std::vector<int> generateRandVec (); \/\/ Write your code for the makeBoard function here.  int randomInt(int low, int high) { srand(time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } std::vector<int> generateRandVec() { std::vector<int> vec(75); iota(vec.begin(), vec.end(), 1); for (size_t i = 0; i < vec.size(); ++i) { int x = randomInt(i, vec.size() - 1); swapValues(vec, i, x); } return vec; }   Below is one way to implement the program. First we need to initialize the board to the correct dimensions. Then, we use generateRandVec to create a std::vector of random values from 1 to 75. Afterwards, we set the values of the 25 Space s to the first 25 values in the random std::vector . Lastly, we set the middle Space to 0 and set its is_filled to true .   #include <iostream> #include <vector> #include <cstdlib> #include <numeric> struct Space { int value; bool is_filled; }; struct BingoBoard { std::vector<std::vector<Space> > board; void makeBoard (); }; int randomInt (int low, int high); void swapValues (std::vector<int> &vec, int index1, int index2); std::vector<int> generateRandVec (); void BingoBoard::makeBoard() { \/\/ Initialize board Space s = {0, false}; std::vector<Space> cols(5, s); for (size_t i = 0; i < 5; ++i) { board.push_back(cols); } \/\/ Fill board with random values std::vector<int> vec = generateRandVec(); int count = 0; for (size_t row = 0; row < board.size(); ++row) { for (size_t col = 0; col < board[row].size(); ++col) { board[row][col].value = vec[count]; ++count; } } \/\/ Create free space board[2][2].value = 0; board[2][2].is_filled = true; }  int randomInt(int low, int high) { srand(time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } std::vector<int> generateRandVec() { std::vector<int> vec(75); iota(vec.begin(), vec.end(), 1); for (size_t i = 0; i < vec.size(); ++i) { int x = randomInt(i, vec.size() - 1); swapValues(vec, i, x); } return vec; }    "
-},
-{
-  "id": "cp_13_AC_8_q",
+  "id": "chapter8_coding_scale_values",
   "level": "2",
-  "url": "chapter13_coding-practice.html#cp_13_AC_8_q",
+  "url": "chapter8_coding-practice.html#chapter8_coding_scale_values",
   "type": "Exercise",
-  "number": "10.14.8",
+  "number": "8.13.3",
   "title": "",
-  "body": "  Let’s print out our BingoBoard ! Write the BingoBoard member function printBoard . Insert tabs between each value in each row to make the board print out neater. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> #include <cstdlib> #include <numeric> struct Space { int value; bool is_filled; }; struct BingoBoard { std::vector<std::vector<Space> > board; void makeBoard (); void printBoard (); }; int randomInt (int low, int high); void swapValues (std::vector<int> &vec, int index1, int index2); std::vector<int> generateRandVec (); \/\/ Write your code for the printBoard function here. int main() { BingoBoard bingo; bingo.makeBoard (); bingo.printBoard (); }  int randomInt(int low, int high) { srand(time(NULL)); int x = random(); int y = x % (high - low + 1) + low; return y; } void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } std::vector<int> generateRandVec() { std::vector<int> vec(75); iota(vec.begin(), vec.end(), 1); for (size_t i = 0; i < vec.size(); ++i) { int x = randomInt(i, vec.size() - 1); swapValues(vec, i, x); } return vec; } void BingoBoard::makeBoard() { \/\/ Initialize board Space s = {0, false}; std::vector<Space> cols(5, s); for (size_t i = 0; i < 5; ++i) { board.push_back(cols); } \/\/ Fill board with random values std::vector<int> vec = generateRandVec(); int count = 0; for (size_t row = 0; row < board.size(); ++row) { for (size_t col = 0; col < board[row].size(); ++col) { board[row][col].value = vec[count]; ++count; } } \/\/ Create free space board[2][2].value = 0; board[2][2].is_filled = true; }      Let’s print out our BingoBoard ! Write the BingoBoard member function printBoard . Insert tabs between each value in each row to make the board print out neater. Use the lines to construct the code, then go back to complete the Activecode.     void BingoBoard::printBoard () {    for (size_t j = 0; j < board.size(); j++) {    for (size_t i = 0; i < board[j].size(); i++) {    std::cout << board[j][i].value << \"\\t\";    }    std::cout << std::endl ;    }    }      "
+  "body": "  Write scale_values , which takes a vector of doubles by non-constant reference and multiplies every element by the given factor.   #include <iostream> #include <vector> void scale_values(std::vector<double>& values, double factor) { \/\/ Write your solution here. } int main() { std::vector<double> values{1.5, 2.0, 3.5}; scale_values(values, 2.0); for (const double value : values) { std::cout << value << ' '; } std::cout << '\\n'; return 0; }     void scale_values(std::vector<double>& values, double factor) { for (double& value : values) { value *= factor; } }   "
 },
 {
-  "id": "cp_13_9",
+  "id": "chapter8_coding_student_average",
   "level": "2",
-  "url": "chapter13_coding-practice.html#cp_13_9",
+  "url": "chapter8_coding-practice.html#chapter8_coding_student_average",
   "type": "Exercise",
-  "number": "10.14.9",
+  "number": "8.13.4",
   "title": "",
-  "body": "  Bubble sort is a method of sorting that involves repeatedly swapping the adjacent elements if they are in the wrong order. For example, let’s say we have the std::vector with elements {3, 2, 4, 1}. On the first pass, we take a look at the first two elements, 3 and 2. Since 3 is bigger than 2, we swap them. Thus, the std::vector now looks like {2, 3, 4, 1}. Next, we look at the next two elements, 3 and 4. Since 3 is less than 4, we don’t swap. Lastly, we look at the last two elements, 4 and 1. Since 4 is greater than 1, we swap the. Thus the std::vector now looks like {2, 3, 1, 4}. Now we restart and look at the first two elements again and the process continues. This way, the biggest elements “bubble” to the back. Write the function bubbleSort , which takes a std::vector as a parameter and sorts it. Feel free to use the provided swapValues function.   #include <iostream> #include <vector> void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } \/\/ Write your code for the bubbleSort function here. int main() { std::vector<int> vec = { 5, 1, 4, 2, 8 }; bubbleSort (vec); for (size_t i = 0; i < vec.size(); ++i) { std::cout << vec[i] << \" \"; } }   Below is one way to implement the program. We must loop through all elements in the vector. Since we know the last i elements are already in place, our inner loop only goes up to vec.size() - 1 - i . If the next element is greater than the current element, we swap the two elements.   #include <iostream> #include <vector> void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } void bubbleSort(std::vector<int> &vec) { for (size_t i = 0; i < vec.size() - 1; ++i) { for (size_t j = 0; j < vec.size() - 1 - i; ++j) { if (vec[j] > vec[j + 1]) { swapValues(vec, j, j + 1); } } } } int main() { std::vector<int> vec = { 5, 1, 4, 2, 8 }; bubbleSort (vec); for (size_t i = 0; i < vec.size(); ++i) { std::cout << vec[i] << \" \"; } }    "
+  "body": "  Define a Student structure with a name and score. Then write calculate_average_score , which takes a constant reference to a vector of students and returns the average score. Return 0.0 for an empty vector.   #include <iostream> #include <string> #include <vector> struct Student { std::string name; double score; }; double calculate_average_score(const std::vector<Student>& students) { \/\/ Write your solution here. } int main() { const std::vector<Student> students{ {\"Amina\", 92.0}, {\"Luis\", 84.0}, {\"Mei\", 98.0} }; std::cout << calculate_average_score(students) << '\\n'; return 0; }     double calculate_average_score(const std::vector<Student>& students) { if (students.empty()) { return 0.0; } double total = 0.0; for (const Student& student : students) { total += student.score; } return total \/ students.size(); }   "
 },
 {
-  "id": "cp_13_AC_10_q",
+  "id": "chapter8_coding_deck",
   "level": "2",
-  "url": "chapter13_coding-practice.html#cp_13_AC_10_q",
+  "url": "chapter8_coding-practice.html#chapter8_coding_deck",
   "type": "Exercise",
-  "number": "10.14.10",
+  "number": "8.13.5",
   "title": "",
-  "body": "  You may have noticed that in some cases, our version of bubbleSort does an unnecessary amount of work. For example, if our std::vector was {1, 2, 3, 5, 4}, bubbleSort would swap 4 and 5, but then keep going even though our std::vector is already in order! We can save some work by including a bool called is_changed . If we swap values during a pass, we set is_changed to true. If nothing has been swapped, then is_changed stays false, and we know to break out of the loop since our std::vector is already sorted. Write the function fastBubbleSort , which is bubbleSort with this modification. Check the hint below for help with the construction of the code.   #include <iostream> #include <vector> void swapValues(std::vector<int> &vec, int index1, int index2) { int temp = vec[index1]; vec[index1] = vec[index2]; vec[index2] = temp; } \/\/ Write your code for the fastBubbleSort function here. int main() { std::vector<int> vec = { 1, 3, 5, 4, 6, 8, 9 }; fastBubbleSort (vec); for (size_t i = 0; i < vec.size(); ++i) { std::cout << vec[i] << \" \"; } }      You may have noticed that in some cases, our version of bubbleSort does an unnecessary amount of work. For example, if our std::vector was {1, 2, 3, 5, 4}, bubbleSort would swap 4 and 5, but then keep going even though our std::vector is already in order! We can save some work by including a bool called is_changed . If we swap values during a pass, we set is_changed to true. If nothing has been swapped, then is_changed stays false, and we know to break out of the loop since our std::vector is already sorted. Write the function fastBubbleSort , which is bubbleSort with this modification. Use the lines to construct the code, then go back to complete the Activecode.     void fastBubbleSort(std::vector<int> &vec) {    bool is_changed = false;    for (size_t i = 0; i < vec.size() - 1; ++i) {    for (size_t j = 0; j < vec.size() - 1 - i; ++j) {    if (vec[j] > vec[j + 1]) {    swapValues(vec, j, j + 1);    is_changed = true;    }    if (is_changed == false) {    break;    }    }    }    }      "
+  "body": "  Define a Deck class that contains a private std::vector<std::string> . Add member functions named add_card and get_card_count .   #include <iostream> #include <string> #include <vector> class Deck { private: std::vector<std::string> cards; public: void add_card(const std::string& card) { \/\/ Write your solution here. } std::size_t get_card_count() const { \/\/ Write your solution here. } }; int main() { Deck deck; deck.add_card(\"Ace of Spades\"); deck.add_card(\"King of Hearts\"); std::cout << deck.get_card_count() << '\\n'; return 0; }     void add_card(const std::string& card) { cards.push_back(card); } std::size_t get_card_count() const { return cards.size(); }   "
 },
 {
   "id": "chapter15_file-input-output-and-matrixes",
   "level": "1",
   "url": "chapter15_file-input-output-and-matrixes.html",
   "type": "Section",
-  "number": "11.1",
+  "number": "9.1",
   "title": "File Input\/Output and <code class=\"code-inline tex2jax_ignore\">matrix<\/code>es",
   "body": " File Input\/Output and matrix es  In this chapter we will develop a program that reads and writes files, parses input, and demonstrates the matrix class. We will also implement a data structure called Set that expands automatically as you add elements.  Aside from demonstrating all these features, the real purpose of the program is to generate a two-dimensional table of the distances between cities in the United States. The output is a matrix that looks like this:  Atlanta 0 Chicago 700 0 Boston 1100 1000 0 Dallas 800 900 1750 0 Denver 1450 1000 2000 800 0 Detroit 750 300 800 1150 1300 0 Orlando 400 1150 1300 1100 1900 1200 0 Phoenix 1850 1750 2650 1000 800 2000 2100 0 Seattle 2650 2000 3000 2150 1350 2300 3100 1450 0 Atlanta Chicago Boston Dallas Denver Detroit Orlando Phoenix Seattle  The diagonal elements are all zero because that is the distance from a city to itself. Also, because the distance from A to B is the same as the distance from B to A, there is no need to print the top half of the matrix.    Why aren't we filling in every value in our table, who are we leaving blank space above the diagonal of 0's?      Because we only need the half of the dataset contained by the triangle.   Incorrect! All of the data above the 0 diagonal is a mirror image of the triangle! So, the triangle contains the whole dataset.     Because triangles are the most effective shape to use when presenting data to others.   Incorrect! Triangles do look cool, but they aren't necessarily the most effective shape to use when presenting data.     Because matrices are triangles.   Incorrect! This triangle is PART OF an apmatrix.     Because the triangle contains the entire dataset.   Correct! The triangle contains all data points with no repeat data. If we included all datapoints, the would just be repeats of the points we already have.       Based on how it is used to create the above table, what do you think a matrix is?      a geometric shape   Incorrect! A matrix is not a geometric shape, although they ARE rectangles.     a two-dimensional std::vector   Correct!     a material in which something develops   Incorrect! This is a definition for matrix, but not in the programming sense.     a mold used to shape things   Incorrect! This is a definition for matrix, but not in the programming sense.     "
 },
@@ -14648,7 +10985,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-output-and-matrixes.html#question15_1_1",
   "type": "Checkpoint",
-  "number": "11.1.1",
+  "number": "9.1.1",
   "title": "",
   "body": "  Why aren't we filling in every value in our table, who are we leaving blank space above the diagonal of 0's?      Because we only need the half of the dataset contained by the triangle.   Incorrect! All of the data above the 0 diagonal is a mirror image of the triangle! So, the triangle contains the whole dataset.     Because triangles are the most effective shape to use when presenting data to others.   Incorrect! Triangles do look cool, but they aren't necessarily the most effective shape to use when presenting data.     Because matrices are triangles.   Incorrect! This triangle is PART OF an apmatrix.     Because the triangle contains the entire dataset.   Correct! The triangle contains all data points with no repeat data. If we included all datapoints, the would just be repeats of the points we already have.    "
 },
@@ -14657,7 +10994,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-output-and-matrixes.html#question15_1_2",
   "type": "Checkpoint",
-  "number": "11.1.2",
+  "number": "9.1.2",
   "title": "",
   "body": "  Based on how it is used to create the above table, what do you think a matrix is?      a geometric shape   Incorrect! A matrix is not a geometric shape, although they ARE rectangles.     a two-dimensional std::vector   Correct!     a material in which something develops   Incorrect! This is a definition for matrix, but not in the programming sense.     a mold used to shape things   Incorrect! This is a definition for matrix, but not in the programming sense.    "
 },
@@ -14666,7 +11003,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_streams.html",
   "type": "Section",
-  "number": "11.2",
+  "number": "9.2",
   "title": "Streams",
   "body": " Streams  To get input from a file or send output to a file, you have to create an ifstream object (for input files) or an ofstream object (for output files). These objects are defined in the header file fstream , which you have to include.  A stream is an abstract object that represents the flow of data from a source like the keyboard or a file to a destination like the screen or a file.  We have already worked with two streams: cin , which has type istream , and cout , which has type ostream . cin represents the flow of data from the keyboard to the program. Each time the program uses the >> operator or the getline function, it removes a piece of data from the input stream.  Similarly, when the program uses the << operator on an ostream , it adds a datum to the outgoing stream.    You create an object to write data to a file, and a object to read data from a file. In order to define objects to input from a file or send output to a file, you must include the <   > header file.                       What is a stream object?      an abstract object that works exclusively with std::cin and std::cout statements   Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!     an abstract object on which input and ouput operations are performed   Correct!     an abstract object that works only with file data   Incorrect! Stream objects do work with file data, but they do other things too.     an abstract object that controls the flow of statements   Incorrect! This is not at all what stream objects do, you should try re-reading to get a better understanding!       Match the stream to its type.   Try again!    cin  ifstream    cout  ofstream     "
 },
@@ -14711,7 +11048,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_2_1",
   "type": "Checkpoint",
-  "number": "11.2.1",
+  "number": "9.2.1",
   "title": "",
   "body": "  You create an object to write data to a file, and a object to read data from a file. In order to define objects to input from a file or send output to a file, you must include the <   > header file.                    "
 },
@@ -14720,7 +11057,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_2_2",
   "type": "Checkpoint",
-  "number": "11.2.2",
+  "number": "9.2.2",
   "title": "",
   "body": "  What is a stream object?      an abstract object that works exclusively with std::cin and std::cout statements   Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!     an abstract object on which input and ouput operations are performed   Correct!     an abstract object that works only with file data   Incorrect! Stream objects do work with file data, but they do other things too.     an abstract object that controls the flow of statements   Incorrect! This is not at all what stream objects do, you should try re-reading to get a better understanding!    "
 },
@@ -14729,7 +11066,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_1_3",
   "type": "Checkpoint",
-  "number": "11.2.3",
+  "number": "9.2.3",
   "title": "",
   "body": "  Match the stream to its type.   Try again!    cin  ifstream    cout  ofstream    "
 },
@@ -14738,7 +11075,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_file-input-finput.html",
   "type": "Section",
-  "number": "11.3",
+  "number": "9.3",
   "title": "File input",
   "body": " File input  To get data from a file, we have to create a stream that flows from the file into the program. We can do that using the ifstream constructor.  ifstream infile(\"file-name\");  The argument for this constructor is a string that contains the name of the file you want to open. The result is an object named infile that supports all the same operations as cin , including >> and getline .  #include <iostream> #include <fstream> int main() { int x; std::string line; std::ifstream infile(\"file-name\"); infile >> x; \/\/ get a single integer and store in x std::getline(infile, line); \/\/ get a whole line and store in line }  If we know ahead of time how much data is in a file, it is straightforward to write a loop that reads the entire file and then stops. More often, though, we want to read the entire file, but don't know how big it is.  There are member functions for ifstreams that check the status of the input stream; they are called good , eof , fail and bad . We will use good to make sure the file was opened successfully and eof to detect the end of file.  Whenever you get data from an input stream, you don't know whether the attempt succeeded until you check. If the return value from eof is true then we have reached the end of the file and we know that the last attempt failed. Here is a program that reads lines from a file and displays them on the screen:  #include <iostream> #include <fstream> int main() { std::string fileName = ...; std::ifstream infile(fileName); if (infile.good() == false) { std::cout << \"Unable to open the file named \" << fileName; exit (1); } while (true) { std::getline(infile, line); if (infile.eof()) { break; } std::cout << line << std::endl; } }  Immediately after opening the file, we invoke the good function. The return value is false if the system could not open the file, most likely because it does not exist, or you do not have permission to read it.  The statement while(true) is an idiom for an infinite loop. Usually there will be a break statement somewhere in the loop so that the program does not really run forever (although some programs do). In this case, the break statement allows us to exit the loop as soon as we detect the end of file.  It is important to exit the loop between the input statement and the output statement, so that when getline fails at the end of the file, we do not output the invalid data in line .    Consider this code snippet: :: ifstream infile(\"file-name\"); Finish each sentence.   Try again!    The constructor is  ifstream.    The argument and the name of the file you want to open is  \"file-name\".    The result of this code snippet is an object named  infile.    The result of this code snippet supports the same operators as  cin.       The ifstream member function called makes sure the file was opened successfully, and member function detects the end of the file.                  The __________ statement allows us to exit the loop as soon as we detect the end of the file.              Create a code block that reads lines from filename and prints them out. First, make sure that the file is able to be opened.     int main() {    string name_of_file = \"filename\";    ifstream in_file(name_of_file);    if (in_file.good() == false) {    std::cout << \"Unable to open the file named \" << name_of_file;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    std::cout << line << std::endl ;  }  }     "
 },
@@ -14819,7 +11156,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_1",
   "type": "Checkpoint",
-  "number": "11.3.1",
+  "number": "9.3.1",
   "title": "",
   "body": "  Consider this code snippet: :: ifstream infile(\"file-name\"); Finish each sentence.   Try again!    The constructor is  ifstream.    The argument and the name of the file you want to open is  \"file-name\".    The result of this code snippet is an object named  infile.    The result of this code snippet supports the same operators as  cin.    "
 },
@@ -14828,7 +11165,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_2",
   "type": "Checkpoint",
-  "number": "11.3.2",
+  "number": "9.3.2",
   "title": "",
   "body": "  The ifstream member function called makes sure the file was opened successfully, and member function detects the end of the file.               "
 },
@@ -14837,7 +11174,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_3",
   "type": "Checkpoint",
-  "number": "11.3.3",
+  "number": "9.3.3",
   "title": "",
   "body": "  The __________ statement allows us to exit the loop as soon as we detect the end of the file.           "
 },
@@ -14846,7 +11183,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_4",
   "type": "Checkpoint",
-  "number": "11.3.4",
+  "number": "9.3.4",
   "title": "",
   "body": "  Create a code block that reads lines from filename and prints them out. First, make sure that the file is able to be opened.     int main() {    string name_of_file = \"filename\";    ifstream in_file(name_of_file);    if (in_file.good() == false) {    std::cout << \"Unable to open the file named \" << name_of_file;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    std::cout << line << std::endl ;  }  }    "
 },
@@ -14855,7 +11192,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_file-output.html",
   "type": "Section",
-  "number": "11.4",
+  "number": "9.4",
   "title": "File output",
   "body": " File output  Sending output to a file is similar. For example, we could modify the previous program to copy lines from one file to another.  #include <iostream> int main() { std::ifstream infile(\"input-file\"); std::ofstream outfile(\"output-file\"); if (infile.good() == false || outfile.good() == false) { std::cout << \"Unable to open one of the files.\" << std::endl; exit (1); } while (true) { std::getline(infile, line); if (infile.eof()) break; outfile << line << std::endl; } }    Create a code block that sends output to a file. First, make sure that both the input file and the output file are able to be opened.     int main() {    ifstream in_file(\"input_file_name\");  ofstream out_file(\"input_file_name\");    if (in_file.good() == false || out_file.good() == false) {    std::cout << \"Unable to open one of the files.\" << std::endl ;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    outfile << line << std::endl ;  }  }       The code from the previous problem checks whether the files open or not. It doesn't specify which one, if any, doesn't open. How could you specify which file does not open?      Create two \"for\" loops instead of an if-statement so that the statement loops through both conditions once.   Try again!     Create a \"while\" loop instead of an if-statement so that the statement loops through both conditions separately until the body of the loop is reached.   Try again!     Create two \"if\" statements, one that check whether in_file.good() is false, and another that checks whether out_file.good() is false, instead of putting them together in one \"if\" statement.   Correct!       Finish the statement:  outfile(\"output-file\"); .           "
 },
@@ -14873,7 +11210,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_1",
   "type": "Checkpoint",
-  "number": "11.4.1",
+  "number": "9.4.1",
   "title": "",
   "body": "  Create a code block that sends output to a file. First, make sure that both the input file and the output file are able to be opened.     int main() {    ifstream in_file(\"input_file_name\");  ofstream out_file(\"input_file_name\");    if (in_file.good() == false || out_file.good() == false) {    std::cout << \"Unable to open one of the files.\" << std::endl ;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    outfile << line << std::endl ;  }  }    "
 },
@@ -14882,7 +11219,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_2",
   "type": "Checkpoint",
-  "number": "11.4.2",
+  "number": "9.4.2",
   "title": "",
   "body": "  The code from the previous problem checks whether the files open or not. It doesn't specify which one, if any, doesn't open. How could you specify which file does not open?      Create two \"for\" loops instead of an if-statement so that the statement loops through both conditions once.   Try again!     Create a \"while\" loop instead of an if-statement so that the statement loops through both conditions separately until the body of the loop is reached.   Try again!     Create two \"if\" statements, one that check whether in_file.good() is false, and another that checks whether out_file.good() is false, instead of putting them together in one \"if\" statement.   Correct!    "
 },
@@ -14891,7 +11228,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_3",
   "type": "Checkpoint",
-  "number": "11.4.3",
+  "number": "9.4.3",
   "title": "",
   "body": "  Finish the statement:  outfile(\"output-file\"); .          "
 },
@@ -14900,7 +11237,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_parsing-input-parsing.html",
   "type": "Section",
-  "number": "11.5",
+  "number": "9.5",
   "title": "Parsing input",
   "body": " Parsing input  In I defined parsing as the process of analyzing the structure of a sentence in a natural language or a statement in a formal language. For example, the compiler has to parse your program before it can translate it into machine language.  In addition, when you read input from a file or from the keyboard you often have to parse it in order to extract the information you want and detect errors.  For example, I have a file called distances that contains information about the distances between major cities in the United States. I got this information from a randomly-chosen web page http:\/\/www.jaring.my\/usiskl\/usa\/distance.html so it may be wildly inaccurate, but that doesn't matter. The format of the file looks like this:  \"Atlanta\" \"Chicago\" 700 \"Atlanta\" \"Boston\" 1,100 \"Atlanta\" \"Chicago\" 700 \"Atlanta\" \"Dallas\" 800 \"Atlanta\" \"Denver\" 1,450 \"Atlanta\" \"Detroit\" 750 \"Atlanta\" \"Orlando\" 400  Each line of the file contains the names of two cities in quotation marks and the distance between them in miles. The quotation marks are useful because they make it easy to deal with names that have more than one word, like San Francisco.  By searching for the quotation marks in a line of input, we can find the beginning and end of each city name. Searching for special characters like quotation marks can be a little awkward, though, because the quotation mark is a special character in C++, used to identify string values.  If we want to find the first appearance of a quotation mark, we have to write something like:  int index = line.find('\\\"');  The argument here looks like a mess, but it represents a single character, a double quotation mark. The outermost single-quotes indicate that this is a character value, as usual. The backslash ( \\ ) indicates that we want to treat the next character literally. The sequence \\\" represents a quotation mark; the sequence \\' represents a single-quote. Interestingly, the sequence \\\\ represents a single backslash. The first backslash indicates that we should take the second backslash seriously.  Parsing input lines consists of finding the beginning and end of each city name and using the substr function to extract the cities and distance. substr is a string member function; it takes two arguments, the starting index of the substring and the length.  void processLine(const string& line) { \/\/ the character we are looking for is a quotation mark char quote = '\\\"'; \/\/ store the indices of the quotation marks in a vector std::vector<int> quoteIndex (4); \/\/ find the first quotation mark using the built-in find quoteIndex[0] = line.find(quote); \/\/ find the other quotation marks using the find from Chapter 7 for (int i=1; i < 4; i++) { quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1); } \/\/ break the line up into substrings int len1 = quoteIndex[1] - quoteIndex[0] - 1; std::string city1 = line.substr(quoteIndex[0]+1, len1); int len2 = quoteIndex[3] - quoteIndex[2] - 1; std::string city2 = line.substr(quoteIndex[2]+1, len2); int len3 = line.length() - quoteIndex[2] - 1; std::string distString = line.substr(quoteIndex[3]+1, len3); \/\/ output the extracted information std::cout << city1 << \"\\t\" << city2 << \"\\t\" << distString << std::endl ; }  Of course, just displaying the extracted information is not exactly what we want, but it is a good starting place.    What does parsing mean in the programming sense?      to scan an entire program for errors   Incorrect! This is included in the debugging process.     to run a program start to finish and record the run time   Incorrect! This is included in the debugging process.     to analyze the structure of a statement in a formal language   Correct! The compiler has to parse the program before it can translate it into machine language!     to search an entire program for a statement   Incorrect! You can use control (command) + F to find a particular statement.       The character indicates that we want to match the next character literally.             The substr() takes and as its two arguments.                  Create a block of code that takes a date written in the format mm\/dd\/yyyyy as an argument, and that separates it into three separate integers: day, month, and year. Find the respective parts in this order: month, first slash, day, second slash, year.     int main() {     string month = date.substr(0, 2);    string month = date.substr(2, 0);     int first_slash = date.find('\/');     string day = date.substr(first_slash + 1, 2);    string day = date.substr(first_slash, 2);      int second_slash = date.find('\/', first_slash + 1);    int second_slash = date.find('\/', first_slash);     int second_slash = date.find('\/');     string year = date.substr(second_slash + 1, 4);    string year = date.substr(second_slash, 4);     string year = date.substr(second_slash + 1, 2);    }     "
 },
@@ -14990,7 +11327,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_1",
   "type": "Checkpoint",
-  "number": "11.5.1",
+  "number": "9.5.1",
   "title": "",
   "body": "  What does parsing mean in the programming sense?      to scan an entire program for errors   Incorrect! This is included in the debugging process.     to run a program start to finish and record the run time   Incorrect! This is included in the debugging process.     to analyze the structure of a statement in a formal language   Correct! The compiler has to parse the program before it can translate it into machine language!     to search an entire program for a statement   Incorrect! You can use control (command) + F to find a particular statement.    "
 },
@@ -14999,7 +11336,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_2",
   "type": "Checkpoint",
-  "number": "11.5.2",
+  "number": "9.5.2",
   "title": "",
   "body": "  The character indicates that we want to match the next character literally.          "
 },
@@ -15008,7 +11345,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_3",
   "type": "Checkpoint",
-  "number": "11.5.3",
+  "number": "9.5.3",
   "title": "",
   "body": "  The substr() takes and as its two arguments.               "
 },
@@ -15017,7 +11354,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_4",
   "type": "Checkpoint",
-  "number": "11.5.4",
+  "number": "9.5.4",
   "title": "",
   "body": "  Create a block of code that takes a date written in the format mm\/dd\/yyyyy as an argument, and that separates it into three separate integers: day, month, and year. Find the respective parts in this order: month, first slash, day, second slash, year.     int main() {     string month = date.substr(0, 2);    string month = date.substr(2, 0);     int first_slash = date.find('\/');     string day = date.substr(first_slash + 1, 2);    string day = date.substr(first_slash, 2);      int second_slash = date.find('\/', first_slash + 1);    int second_slash = date.find('\/', first_slash);     int second_slash = date.find('\/');     string year = date.substr(second_slash + 1, 4);    string year = date.substr(second_slash, 4);     string year = date.substr(second_slash + 1, 2);    }    "
 },
@@ -15026,7 +11363,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_parsing-numbers.html",
   "type": "Section",
-  "number": "11.6",
+  "number": "9.6",
   "title": "Parsing numbers",
   "body": " Parsing numbers  The next task is to convert the numbers in the file from strings to integers. When people write large numbers, they often use commas to group the digits, as in 1,750. Most of the time when computers write large numbers, they don't include commas, and the built-in functions for reading numbers usually can't handle them. That makes the conversion a little more difficult, but it also provides an opportunity to write a comma-stripping function, so that's ok. Once we get rid of the commas, we can use the library function atoi to convert to integer. atoi is defined in the header file cstdlib .  To get rid of the commas, one option is to traverse the string and check whether each character is a digit. If so, we add it to the result string. At the end of the loop, the result string contains all the digits from the original string, in order.  #include <iostream> int convertToInt(const std::string& s) { std::string digitString = \"\"; for (size_t i = 0; i < s.length(); i++) { if (isdigit (s[i])) { digitString += s[i]; } } return atoi(digitString); }  The variable digitString is an example of an accumulator . It is similar to the counter we saw in , except that instead of getting incremented, it gets accumulates one new character at a time, using string concatentation.  The expression  digitString += s[i];  is equivalent to  digitString = digitString + s[i];  Both statements add a single character onto the end of the existing string.  Try the function out for yourself! As you can see, this function can also be used to parse phone numbers!   #include <iostream> #include <string> #include <vector> int convertToInt(const std::string& s) { std::string digitString = \"\"; for (size_t i = 0; i < s.length(); i++) { if (isdigit (s[i])) { digitString += s[i]; } } return atoi(digitString); } int main() { int num = convertToInt(\"867-5309\"); std::cout << num << std::endl; }     What does the atoi() function do?      takes the absolute value of a number   Incorrect! Go back and read for the answer.     converts a double to an int   Incorrect! Go back and read for the answer.     converts a string to an int   Correct! This is very helpful when we read numbers from a file (where they are strings).     converts an int to a string   Incorrect! Go back and read for the answer.       Which of the following strings will return 2020 when passed into convertToInt() ?      2020   Correct! This one is quite simple.     ab,jkl2!!moo0?huh2mth0haha.   Correct! This long, confusing string will clean up nicely!     2,00!!!!!!!!2   Incorrect!     2OOO020OOOOO   Correct! You have to look closely to see that some of these are 0's!     we2love0parsing2numbersO!   Incorrect! Although we do love parsing numbers, this is incorrect.       Create the replace_with() function that takes a string str , a character to get rid of olc_char , and a character to replace it with new_char . It should return a new string that has replaces any occurances of old_char with new_char.      string replace_with(string str, char old_char, char new_char) {    string replace_with() {      for (size_t i = 0; i < str.length(); i++) {    for (int i = 0; i < str.length(); i++) {     for (size_t i = 0; i < str.size(); i++) {     if (str[i] == old_char) {    if (i == old_char) {      str[i] = new_char;  }    new_char = str[i];  }     i = new_char;  }     }  return str;  }    }  return new_char;  }      "
 },
@@ -15098,7 +11435,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_1",
   "type": "Checkpoint",
-  "number": "11.6.1",
+  "number": "9.6.1",
   "title": "",
   "body": "  What does the atoi() function do?      takes the absolute value of a number   Incorrect! Go back and read for the answer.     converts a double to an int   Incorrect! Go back and read for the answer.     converts a string to an int   Correct! This is very helpful when we read numbers from a file (where they are strings).     converts an int to a string   Incorrect! Go back and read for the answer.    "
 },
@@ -15107,7 +11444,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_2",
   "type": "Checkpoint",
-  "number": "11.6.2",
+  "number": "9.6.2",
   "title": "",
   "body": "  Which of the following strings will return 2020 when passed into convertToInt() ?      2020   Correct! This one is quite simple.     ab,jkl2!!moo0?huh2mth0haha.   Correct! This long, confusing string will clean up nicely!     2,00!!!!!!!!2   Incorrect!     2OOO020OOOOO   Correct! You have to look closely to see that some of these are 0's!     we2love0parsing2numbersO!   Incorrect! Although we do love parsing numbers, this is incorrect.    "
 },
@@ -15116,7 +11453,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_3",
   "type": "Checkpoint",
-  "number": "11.6.3",
+  "number": "9.6.3",
   "title": "",
   "body": "  Create the replace_with() function that takes a string str , a character to get rid of olc_char , and a character to replace it with new_char . It should return a new string that has replaces any occurances of old_char with new_char.      string replace_with(string str, char old_char, char new_char) {    string replace_with() {      for (size_t i = 0; i < str.length(); i++) {    for (int i = 0; i < str.length(); i++) {     for (size_t i = 0; i < str.size(); i++) {     if (str[i] == old_char) {    if (i == old_char) {      str[i] = new_char;  }    new_char = str[i];  }     i = new_char;  }     }  return str;  }    }  return new_char;  }     "
 },
@@ -15125,7 +11462,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_the-set-data-structure.html",
   "type": "Section",
-  "number": "11.7",
+  "number": "9.7",
   "title": "The <code class=\"code-inline tex2jax_ignore\">Set<\/code> data structure",
   "body": " The Set data structure  A data structure is a container for grouping a collection of data into a single object. We have seen some examples already, including string s, which are collections of characters, and std::vector s which are collections of any type.  An ordered set is a collection of items with two defining properties:    Ordering:  The elements of the set have indices associated with them. We can use these indices to identify elements of the set.    Uniqueness:  No element appears in the set more than once. If you try to add an element to a set, and it already exists, there is no effect.    In addition, our implementation of an ordered set will have the following property:    Arbitrary size:  As we add elements to the set, it expands to make room for new elements.    Both string s and std::vector s have an ordering; every element has an index we can use to identify it. None of the data structures we have seen so far have the properties of uniqueness or arbitrary size.  To achieve uniqueness, we have to write an add function that searches the set to see if it already exists. To make the set expand as elements are added, we can take advantage of the resize function on std::vector s.  Here is the beginning of a class definition for a Set .  class Set { private: std::vector<string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const string& s) const; int add(const string& s); }; Set::Set(int n) { std::vector<string> temp (n); elements = temp; numElements = 0; }  The instance variables are a std::vector of strings and an integer that keeps track of how many elements there are in the set. Keep in mind that the number of elements in the set, numElements , is not the same thing as the size of the std::vector . Usually it will be smaller.  The Set constructor takes a single parameter, which is the initial size of the std::vector . The initial number of elements is always zero.  getNumElements and getElement are accessor functions for the instance variables, which are private. numElements is a read-only variable, so we provide a get function but not a set function.  int Set::getNumElements() const { return numElements; }  Why do we have to prevent client programs from changing getNumElements ? What are the invariants for this type, and how could a client program break an invariant. As we look at the rest of the Set member function, see if you can convince yourself that they all maintain the invariants.  When we use the [] operator to access the std::vector , it checks to make sure the index is greater than or equal to zero and less than the length of the std::vector . To access the elements of a set, though, we need to check a stronger condition. The index has to be less than the number of elements, which might be smaller than the length of the std::vector .  string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl ; exit (1); } }  If getElement gets an index that is out of range, it prints an error message (not the most useful message, I admit), and exits.  The interesting functions are find and add . By now, the pattern for traversing and searching should be old hat:  int Set::find(const string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; }  So that leaves us with add . Often the return type for something like add would be void, but in this case it might be useful to make it return the index of the element.  int Set::add(const string& s) { \/\/ if the element is already in the set, return its index int index = find(s); if (index != -1) return index; \/\/ if the vector is full, double its size if (numElements == elements.length()) { elements.resize (elements.length() * 2); } \/\/ add the new elements and return its index index = numElements; elements[index] = s; numElements++; return index; }  The tricky thing here is that numElements is used in two ways. It is the number of elements in the set, of course, but it is also the index of the next element to be added.  It takes a minute to convince yourself that that works, but consider this: when the number of elements is zero, the index of the next element is 0. When the number of elements is equal to the length of the std::vector , that means that the vector is full, and we have to allocate more space (using resize ) before we can add the new element.  Here is a state diagram showing a Set object that initially contains space for 2 elements.  Now we can use the Set class to keep track of the cities we find in the file. In main we create the Set with an initial size of 2:  Set cities (2);  Then in processLine we add both cities to the Set and store the index that gets returned.  int index1 = cities.add (city1); int index2 = cities.add (city2);  I modified processLine to take the cities object as a second parameter.   Try running the program:   #include <iostream> #include <string> #include <vector> class Set { private: std::vector<std::string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const std::string& s) const; int add(const std::string& s); }; Set::Set(int n) { std::vector<std::string> temp (n); elements = temp; numElements = 0; } int main() { Set cities(2); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); std::cout << cities.getElement(0); }  int Set::getNumElements() const { return numElements; } std::string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl; exit (1); } } int Set::find(const std::string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; } int Set::add(const std::string& s) { int index = find(s); if (index != -1) return index; size_t num = numElements; if (num == elements.size()) { elements.resize (elements.size() * 2); } index = numElements; elements[index] = s; numElements++; return index; }      Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!       Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.       If the number of elements is 76, then the index of the next element is .             Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.            "
 },
@@ -15332,7 +11669,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#set_sample",
   "type": "Listing",
-  "number": "11.7.1",
+  "number": "9.7.1",
   "title": "Try running the program:",
   "body": " Try running the program:   #include <iostream> #include <string> #include <vector> class Set { private: std::vector<std::string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const std::string& s) const; int add(const std::string& s); }; Set::Set(int n) { std::vector<std::string> temp (n); elements = temp; numElements = 0; } int main() { Set cities(2); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); std::cout << cities.getElement(0); }  int Set::getNumElements() const { return numElements; } std::string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl; exit (1); } } int Set::find(const std::string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; } int Set::add(const std::string& s) { int index = find(s); if (index != -1) return index; size_t num = numElements; if (num == elements.size()) { elements.resize (elements.size() * 2); } index = numElements; elements[index] = s; numElements++; return index; }   "
 },
@@ -15341,7 +11678,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_1",
   "type": "Checkpoint",
-  "number": "11.7.1",
+  "number": "9.7.1",
   "title": "",
   "body": "  Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!    "
 },
@@ -15350,7 +11687,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_2",
   "type": "Checkpoint",
-  "number": "11.7.2",
+  "number": "9.7.2",
   "title": "",
   "body": "  Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.    "
 },
@@ -15359,7 +11696,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_3",
   "type": "Checkpoint",
-  "number": "11.7.3",
+  "number": "9.7.3",
   "title": "",
   "body": "  If the number of elements is 76, then the index of the next element is .          "
 },
@@ -15368,7 +11705,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_4",
   "type": "Checkpoint",
-  "number": "11.7.4",
+  "number": "9.7.4",
   "title": "",
   "body": "  Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.           "
 },
@@ -15377,7 +11714,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_matrix.html",
   "type": "Section",
-  "number": "11.8",
+  "number": "9.8",
   "title": "<code class=\"code-inline tex2jax_ignore\">matrix<\/code>",
   "body": "  matrix   A matrix is similar to a std::vector except it is two-dimensional. Instead of a length, it has two dimensions, called numrows and numcols , for number of rows and number of columns.  Each element in the matrix is indentified by two indices; one specifies the row number, the other the column number.  To create a matrix, there are four constructors:  matrix<char> m1; matrix<int> m2(3, 4); matrix<double> m3(rows, cols, 0.0); matrix<double> m4(m3);  The first is a do-nothing constructor that makes a matrix with both dimensions 0. The second takes two integers, which are the initial number of rows and columns, in that order. The third is the same as the second, except that it takes an additional parameter that is used to initialized the elements of the matrix. The fourth is a copy constructor that takes another matrix as a parameter.  Just as with vectors , we can make matrix es with any type of elements (including std::vector s, and even matrix es).  To access the elements of a matrix, we use the [] operator to specify the row and column:  m2[0][0] = 1; m3[1][2] = 10.0 * m2[0][0];  If we try to access an element that is out of range, the program prints an error message and quits.  The numrows and numcols functions get the number of rows and columns. Remember that the row indices run from 0 to numrows() -1 and the column indices run from 0 to numcols() -1 .  The usual way to traverse a matrix is with a nested loop. This loop sets each element of the matrix to the sum of its two indices:  for (int row=0; row < m2.numrows(); row++) { for (int col=0; col < m2.numcols(); col++) { m2[row][col] = row + col; } }  This loop prints each row of the matrix with tabs between the elements and newlines between the rows:  for (int row=0; row < m2.numrows(); row++) { for (int col=0; col < m2.numcols(); col++) { std::cout << m2[row][col] << \"\\t\"; } std::cout << std::endl ; }    Which of the following data types are supported by matrix?      int   Correct!     string   Correct!     std::vector<int>   Correct!     vector<std::vector<int>>   Correct! This is a technically type of matrix!     matrix   Correct! Matrices can be made of matrices.       Suppose we have matrix mat . Then mat[9][17] would be accessing column and row of our matrix.         .*  Incorrect! Remember to use zero indexing!         .*  Incorrect! Remember to use zero indexing!      "
 },
@@ -15476,7 +11813,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_matrix.html#question15_8_1",
   "type": "Checkpoint",
-  "number": "11.8.1",
+  "number": "9.8.1",
   "title": "",
   "body": "  Which of the following data types are supported by matrix?      int   Correct!     string   Correct!     std::vector<int>   Correct!     vector<std::vector<int>>   Correct! This is a technically type of matrix!     matrix   Correct! Matrices can be made of matrices.    "
 },
@@ -15485,7 +11822,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_matrix.html#question15_8_2",
   "type": "Checkpoint",
-  "number": "11.8.2",
+  "number": "9.8.2",
   "title": "",
   "body": "  Suppose we have matrix mat . Then mat[9][17] would be accessing column and row of our matrix.         .*  Incorrect! Remember to use zero indexing!         .*  Incorrect! Remember to use zero indexing!     "
 },
@@ -15494,7 +11831,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_a-distance-matrix.html",
   "type": "Section",
-  "number": "11.9",
+  "number": "9.9",
   "title": "A distance matrix",
   "body": " A distance matrix  Finally, we are ready to put the data from the file into a matrix. Specifically, the matrix will have one row and one column for each city.  We'll create the matrix in main , with plenty of space to spare:  matrix<int> distances (50, 50, 0);  Inside processLine , we add new information to the matrix by getting the indices of the two cities from the Set and using them as matrix indices:  int dist = convertToInt(distString); int index1 = cities.add (city1); int index2 = cities.add (city2); distances[index1][index2] = distance; distances[index2][index1] = distance;  Finally, in main we can print the information in a human-readable form:  for (int i=0; i < cities.getNumElements(); i++) { std::cout << cities.getElement(i) << \"\\t\"; for (int j=0; j<=i; j++) { std::cout << distances[i][j] << \"\\t\"; } std::cout << std::endl ; } cout << \"\\t\"; for (int i=0; i < cities.getNumElements(); i++) { std::cout << cities.getElement(i) << \"\\t\"; } cout << std::endl ;  This code produces the output shown at the beginning of the chapter.  "
 },
@@ -15548,7 +11885,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_a-proper-distance-matrix.html",
   "type": "Section",
-  "number": "11.10",
+  "number": "9.10",
   "title": "A proper distance matrix",
   "body": " A proper distance matrix  Although this code works, it is not as well organized as it should be. Now that we have written a prototype, we are in a good position to evaluate the design and improve it.  What are some of the problems with the existing code?     We did not know ahead of time how big to make the distance matrix, so we chose an arbitrary large number (50) and made it a fixed size. It would be better to allow the distance matrix to expand in the same way a Set does. The matrix class has a function called resize that makes this possible.    The data in the distance matrix is not well-encapsulated. We have to pass the set of city names and the matrix itself as arguments to processLine , which is awkward. Also, use of the distance matrix is error prone because we have not provided accessor functions that perform error-checking. It might be a good idea to take the Set of city names and the matrix of distances, and combine them into a single object called a DistMatrix .     Here is a draft of what the header for a DistMatrix might look like:  class DistMatrix { private: Set cities; matrix<int> distances; public: DistMatrix(int rows); void add(const string& city1, const string& city2, int dist); int distance(int i, int j) const; int distance(const string& city1, const string& city2) const; std::string cityName(int i) const; int numCities() const; void print(); };  Using this interface simplifies main :  #include <iostream> #include <fstream> int main() { std::string line; std::ifstream infile(\"distances\"); DistMatrix distances(2); while (true) { std::getline(infile, line); if (infile.eof()) break; processLine(line, distances); } distances.print(); return 0; }  It also simplifies processLine :  void processLine(const string& line, DistMatrix& distances) { char quote = '\\\"'; std::vector<int> quoteIndex (4); quoteIndex[0] = line.find(quote); for (int i=1; i < 4; i++) { quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1); } \/\/ break the line up into substrings int len1 = quoteIndex[1] - quoteIndex[0] - 1; std::string city1 = line.substr(quoteIndex[0]+1, len1); int len2 = quoteIndex[3] - quoteIndex[2] - 1; std::string city2 = line.substr(quoteIndex[2]+1, len2); int len3 = line.length() - quoteIndex[2] - 1; std::string distString = line.substr(quoteIndex[3]+1, len3); int distance = convertToInt(distString); \/\/ add the new datum to the distances matrix distances.add(city1, city2, distance); }  I will leave it as an exercise to you to implement the member functions of DistMatrix .  "
 },
@@ -15620,7 +11957,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_glossary.html",
   "type": "Section",
-  "number": "11.11",
+  "number": "9.11",
   "title": "Glossary",
   "body": " Glossary    ordered set  A data structure in which every element appears only once and every element has an index that identifies it.    stream  A data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output.    accumulator  A variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    ordered set  a data structure in which every element appears only once and every element has an index that identifies it    stream  a data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output    accumulator  a variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.      "
 },
@@ -15629,7 +11966,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_glossary.html#chapter15_glossary-2",
   "type": "Glossary",
-  "number": "11.11",
+  "number": "9.11",
   "title": "Glossary",
   "body": "  ordered set  A data structure in which every element appears only once and every element has an index that identifies it.    stream  A data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output.    accumulator  A variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.   "
 },
@@ -15638,7 +11975,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_glossary.html#chapter15_glossary-3",
   "type": "Reading Questions",
-  "number": "11.11",
+  "number": "9.11",
   "title": "Reading Questions",
   "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    ordered set  a data structure in which every element appears only once and every element has an index that identifies it    stream  a data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output    accumulator  a variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.     "
 },
@@ -15647,7 +11984,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_multiple-choice-exercises.html",
   "type": "Exercises",
-  "number": "11.12",
+  "number": "9.12",
   "title": "Multiple Choice Exercises",
   "body": " Multiple Choice Exercises    We want to open a file and parse its data into our program. What library do we need to include?       iostream    This library deals with communication through the standard input and output.      sstream    This library is used to manipulate string objects as if they were streams.      fstream    This library is used to manipulate files using streams.      iomanip    This library is used to modify internal flags and formatting options.       The code below reads data from a file called input.txt . What is wrong with the following code?   #include <iostream> #include <fstream> int main() { std::string input; std::string filename = \"input.txt\"; std::ifstream infile(filename); std::getline(filename, input); }       We should use ofstream instead of ifstream .   Since we are dealing with an input file, we should use ifstream .     The arguments in getline are incorrect.   We are supposed to read input through the ifstream object. This line should be getline(infile, input) .     We cannot use a variable to store the filename.   Since the name of the file is just a string, we can store it in a variable.     There are no errors with this code.   Take another look at the code. Are we reading the input correctly into input ?       We want to make sure the file we wanted to open was opened successfully. Which of the following checks this and prints the proper output?       if (infile.good()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the if statement evaluates to true, then the file was opened successfully.      if (!infile.is_open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }     is_open() is another function that returns true if a file is opened successfully.      if (infile.good() == false) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the file isn't opened successfully, an error message is printed.      if (!infile.open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    The open() function is different from is_open() and does not return a bool .       Which of the following statements are true?      We can assume the program opens all files successfully.   There are times when a file can't be properly opened because they may have not been properly closed the last time they were used or the file is currently used by another program. As a result, it is good practice to include a check in your program.     A stream is an abstract object that represents the flow of data from a source.   We've used two streams before: the standard input stream and standard output stream ( cin and cout ).     We cannot use the operators << and >> , as they are for iostream objects only.   We are also able to use the operators for fstream objects.       What are the contents of the output file output.txt after running the code below?   #include <iostream> #include <fstream> int main() { std::ofstream outfile(\"output.txt\"); if (!outfile.good()) { std::cout << \"Unable to open file\" << std::endl; } std::cout << \"Powers of 2: \"; outfile << \"2 4 8 16 32 64\" << std::endl; }       2 4 8 16 32 64   This is the only thing we write to the output file.     Powers of 2: 2 4 8 16 31 64   Take another look at the stream objects used in the code.     Powers of 2:   This is printed to standard output, not the output file.     Unable to open file   Although this may be printed, this is not the contents of the output file.       The file scores.txt contains data about the roster number and test scores of students in a class. The output file averages.txt should store each student's roster number and average test score. What should replace the question marks?   #include <iostream> #include <fstream> int main() { std::string junk; int studentNum; double mid1, mid2, final; std::ifstream infile(\"scores.txt\"); std::ofstream outfile(\"averages.txt\"); if (!infile.good() || !outfile.good()) { std::cout << \"Unable to open a file\" << std::endl; } std::getline(infile, junk); outfile << \"Student#\\tAverage\" << std::endl; while (infile >> studentNum >> mid1 >> mid2 >> final) { double avg = (mid1 + mid2 + final) \/ 3; ??? } }        cout << avg << std::endl    This will output the average to standard output.      outfile << avg << std::endl    Take another look at the code. Is there a clue as to what data should be in the output file?      infile << studentNum << \"\\t\" << avg << std::endl    The data should be written to the output file.      outfile << studentNum << \"\\t\" << avg << std::endl    This properly outputs the student number and the student's average to the output file.       What does the following code do?   #include <iostream> #include <string> int main() { std::string original = \"430-0444\"; std::string digitString = \"\"; for (size_t i = 0; i < original.length(); i++) { if (isdigit(original[original.length() - 1 - i])) { digitString += original[original.length() - 1 - i]; } } std::cout << atoi(digitString) << std::endl; }       The code converts the original string to an integer and outputs the integer.   Take a closer look at the contents of the for loop.     The code converts an integer to a string and outputs the string.   What does the atoi function do?     The code outputs the sum of all the original string's digits.   The digitString variable is a string , not an int .     The code converts the original string to an integer in reverse and outputs the integer in reverse.   The code in the for loop parses the string in reverse.       Which of the following statements are false about the Set data structure?      A set can contain multiple elements with the same value.   All elements in a set are unique.     We can identify elements of a set by each element's index.   Each element has an index associated with it.     The elements of a Set are always sorted.   Although a set is ordered, it is not necessarily sorted.     The size of a Set object is fixed.   The Set data structure can expand to make room for new elements.       There are many ways to construct a matrix . Which of the following are valid constructors of a matrix ?       matrix<string> m1(2);    A matrix has two dimensions and this constructor only has one dimension.      matrix<int> m2(2, 6, 0);    This creates a matrix with 2 rows and 6 columns with all of its elements equal to 0.      matrix<char> m3(m2);    This creates m3 to be a copy of m2 .      matrix<int> m2(2.4, 2);    There must be a whole number of rows and columns.       What is the output of the following code?   #include <iostream> #include <vector> bool secret_function(int num) { if (num % 2 == 0) { return true; } return false; } int main() { matrix<int> mat(4, 2); for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { if (!secret_function(i + j) { mat[i][j] = 0; } else { mat[i][j] = i + j; } } } int n; for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { n += mat[i][j]; } } std::cout << n << std::endl; }       8   The matrix only contains even sums of the row and column indices and 0 otherwise. Thus, the sum of all elements is 8.     16   What does the secret function do?     0   What are the contents of the matrix?     9   What are the contents of the matrix?     "
 },
@@ -15656,7 +11993,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_1",
   "type": "Exercise",
-  "number": "11.12.1",
+  "number": "9.12.1",
   "title": "",
   "body": "  We want to open a file and parse its data into our program. What library do we need to include?       iostream    This library deals with communication through the standard input and output.      sstream    This library is used to manipulate string objects as if they were streams.      fstream    This library is used to manipulate files using streams.      iomanip    This library is used to modify internal flags and formatting options.    "
 },
@@ -15665,7 +12002,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_2",
   "type": "Exercise",
-  "number": "11.12.2",
+  "number": "9.12.2",
   "title": "",
   "body": "  The code below reads data from a file called input.txt . What is wrong with the following code?   #include <iostream> #include <fstream> int main() { std::string input; std::string filename = \"input.txt\"; std::ifstream infile(filename); std::getline(filename, input); }       We should use ofstream instead of ifstream .   Since we are dealing with an input file, we should use ifstream .     The arguments in getline are incorrect.   We are supposed to read input through the ifstream object. This line should be getline(infile, input) .     We cannot use a variable to store the filename.   Since the name of the file is just a string, we can store it in a variable.     There are no errors with this code.   Take another look at the code. Are we reading the input correctly into input ?    "
 },
@@ -15674,7 +12011,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_3",
   "type": "Exercise",
-  "number": "11.12.3",
+  "number": "9.12.3",
   "title": "",
   "body": "  We want to make sure the file we wanted to open was opened successfully. Which of the following checks this and prints the proper output?       if (infile.good()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the if statement evaluates to true, then the file was opened successfully.      if (!infile.is_open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }     is_open() is another function that returns true if a file is opened successfully.      if (infile.good() == false) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the file isn't opened successfully, an error message is printed.      if (!infile.open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    The open() function is different from is_open() and does not return a bool .    "
 },
@@ -15683,7 +12020,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_4",
   "type": "Exercise",
-  "number": "11.12.4",
+  "number": "9.12.4",
   "title": "",
   "body": "  Which of the following statements are true?      We can assume the program opens all files successfully.   There are times when a file can't be properly opened because they may have not been properly closed the last time they were used or the file is currently used by another program. As a result, it is good practice to include a check in your program.     A stream is an abstract object that represents the flow of data from a source.   We've used two streams before: the standard input stream and standard output stream ( cin and cout ).     We cannot use the operators << and >> , as they are for iostream objects only.   We are also able to use the operators for fstream objects.    "
 },
@@ -15692,7 +12029,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_5",
   "type": "Exercise",
-  "number": "11.12.5",
+  "number": "9.12.5",
   "title": "",
   "body": "  What are the contents of the output file output.txt after running the code below?   #include <iostream> #include <fstream> int main() { std::ofstream outfile(\"output.txt\"); if (!outfile.good()) { std::cout << \"Unable to open file\" << std::endl; } std::cout << \"Powers of 2: \"; outfile << \"2 4 8 16 32 64\" << std::endl; }       2 4 8 16 32 64   This is the only thing we write to the output file.     Powers of 2: 2 4 8 16 31 64   Take another look at the stream objects used in the code.     Powers of 2:   This is printed to standard output, not the output file.     Unable to open file   Although this may be printed, this is not the contents of the output file.    "
 },
@@ -15701,7 +12038,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_6",
   "type": "Exercise",
-  "number": "11.12.6",
+  "number": "9.12.6",
   "title": "",
   "body": "  The file scores.txt contains data about the roster number and test scores of students in a class. The output file averages.txt should store each student's roster number and average test score. What should replace the question marks?   #include <iostream> #include <fstream> int main() { std::string junk; int studentNum; double mid1, mid2, final; std::ifstream infile(\"scores.txt\"); std::ofstream outfile(\"averages.txt\"); if (!infile.good() || !outfile.good()) { std::cout << \"Unable to open a file\" << std::endl; } std::getline(infile, junk); outfile << \"Student#\\tAverage\" << std::endl; while (infile >> studentNum >> mid1 >> mid2 >> final) { double avg = (mid1 + mid2 + final) \/ 3; ??? } }        cout << avg << std::endl    This will output the average to standard output.      outfile << avg << std::endl    Take another look at the code. Is there a clue as to what data should be in the output file?      infile << studentNum << \"\\t\" << avg << std::endl    The data should be written to the output file.      outfile << studentNum << \"\\t\" << avg << std::endl    This properly outputs the student number and the student's average to the output file.    "
 },
@@ -15710,7 +12047,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_7",
   "type": "Exercise",
-  "number": "11.12.7",
+  "number": "9.12.7",
   "title": "",
   "body": "  What does the following code do?   #include <iostream> #include <string> int main() { std::string original = \"430-0444\"; std::string digitString = \"\"; for (size_t i = 0; i < original.length(); i++) { if (isdigit(original[original.length() - 1 - i])) { digitString += original[original.length() - 1 - i]; } } std::cout << atoi(digitString) << std::endl; }       The code converts the original string to an integer and outputs the integer.   Take a closer look at the contents of the for loop.     The code converts an integer to a string and outputs the string.   What does the atoi function do?     The code outputs the sum of all the original string's digits.   The digitString variable is a string , not an int .     The code converts the original string to an integer in reverse and outputs the integer in reverse.   The code in the for loop parses the string in reverse.    "
 },
@@ -15719,7 +12056,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_8",
   "type": "Exercise",
-  "number": "11.12.8",
+  "number": "9.12.8",
   "title": "",
   "body": "  Which of the following statements are false about the Set data structure?      A set can contain multiple elements with the same value.   All elements in a set are unique.     We can identify elements of a set by each element's index.   Each element has an index associated with it.     The elements of a Set are always sorted.   Although a set is ordered, it is not necessarily sorted.     The size of a Set object is fixed.   The Set data structure can expand to make room for new elements.    "
 },
@@ -15728,7 +12065,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_9",
   "type": "Exercise",
-  "number": "11.12.9",
+  "number": "9.12.9",
   "title": "",
   "body": "  There are many ways to construct a matrix . Which of the following are valid constructors of a matrix ?       matrix<string> m1(2);    A matrix has two dimensions and this constructor only has one dimension.      matrix<int> m2(2, 6, 0);    This creates a matrix with 2 rows and 6 columns with all of its elements equal to 0.      matrix<char> m3(m2);    This creates m3 to be a copy of m2 .      matrix<int> m2(2.4, 2);    There must be a whole number of rows and columns.    "
 },
@@ -15737,7 +12074,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_10",
   "type": "Exercise",
-  "number": "11.12.10",
+  "number": "9.12.10",
   "title": "",
   "body": "  What is the output of the following code?   #include <iostream> #include <vector> bool secret_function(int num) { if (num % 2 == 0) { return true; } return false; } int main() { matrix<int> mat(4, 2); for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { if (!secret_function(i + j) { mat[i][j] = 0; } else { mat[i][j] = i + j; } } } int n; for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { n += mat[i][j]; } } std::cout << n << std::endl; }       8   The matrix only contains even sums of the row and column indices and 0 otherwise. Thus, the sum of all elements is 8.     16   What does the secret function do?     0   What are the contents of the matrix?     9   What are the contents of the matrix?    "
 },
@@ -15746,7 +12083,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_mixed-up-code-practice.html",
   "type": "Exercises",
-  "number": "11.13",
+  "number": "9.13",
   "title": "Mixed Up Code Practice",
   "body": " Mixed Up Code Practice    We have a file called locations.txt that we want to read data from. Check to make sure that the file was opened properly; if it wasn't, display an error message and exit with a status of 1. Put the necessary blocks of code in the correct order.     int main() {     ifstream infile(\"locations.txt\");    ifstream infile(locations.txt);      if (infile.good() == false) {    if (infile.good()) {     std::cout << \"Unable to open the file.\" << std::endl ;     exit(1);    return 1;     }    }       Let's write a program that prompts the user for a filename and opens that file. Put the necessary blocks of code in the correct order.     int main() {     std::string filename;    ifstream filename;     std::cout << \"Enter the name of the file: \";    std::cin >> filename;     ifstream infile(filename);    ifstream infile(filename);     if (infile.good() == false) {    std::cout << \"Unable to open the file.\" << std::endl ;    exit(1);    }    }       Now let's write some output to a file. Write a program that prompts a user for a list of 5 integers separated by spaces, calculates the average of those integers, and outputs The average is average to an output file called average.txt . Put the necessary blocks of code in the correct order. Declare the output file first and check that it is opened correctly.     int main() {    ofstream outfile(\"average.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<int> list;    int sum = 0;    int n1, n2, n3, n4, n5;    std::cout << \"Enter five integers separated by spaces: \";    std::cin >> n1 >> n2 >> n3 >> n4 >> n5;    sum = n1 + n2 + n3 + n4 + n5;     outfile << \"The average is \" << sum \/ 5.0 << std::endl ;    std::cout << \"The average is \" << sum \/ 5.0 << std::endl ;     }       We are given a file called data.txt with an unknown number of double values. Write a program that finds the minimum, maximum, and number of data and outputs these values to a file called summary.txt . Put the necessary blocks of code in the correct order. Declare the input and output files first, and check to see that both are opened correctly before dealing with data. Increment the number of data points before checking for the min and max.     int main() {    ifstream infile(\"data.txt\");    ofstream outfile(\"summary.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::vector<int> data;    int numData = 1;    double min, max, value;    infile >> value;    min = value;    max = value;    while (infile >> value) {    ++numData;    if (value < min) { min = value; }    if (value > max) { max = value; }    }    outfile << \"Number of data: \" << numData << \", min: \" << min << \", max: \" << max << std::endl ;    }       You are given a file called employee_data.txt and you want to store the information from that file into a vector of data. The file contains information about an employee's first and last name, age, phone number, and email. Write the definition of an Employee before you write your main function. Open and check the file before working with the data. Put the necessary blocks of code in the correct order.     struct Employee {  std::string fname;  std::string lname;  int age;  int phone;  std::string email;    Employee(string f, string l, int a, int p, string e) {  fname = f;  lname = l;  age = a;  phone = p;  email = e;  }    };    int main() {    ifstream infile(\"employee_data.txt\");    if (infile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<Employee> data;    std::string fname, lname, email;    int age, phone;     while (infile >> fname >> lname >> age >> phone >> email) {    while (infile) {     Employee e(fname, lname, age, phone, email);    data.push_back(e);    }  }       You are given a file but it appears that someone's capslock key was stuck because everything is in uppercase. Write a program that takes the input from the file UPPER.txt and converts all the words to lowercase and prints out the modified message to a file called lower.txt . Write the definition of the function toLower first. Separate the words with spaces. Put the necessary blocks of code in the correct order.     string upperToLower(string upper) {  for (size_t i = 0; i < upper.length(); ++i) {     upper[i] = toupper(upper[i]);    tolower(upper[i]);     }  return upper;  }    int main() {    ifstream infile(\"UPPER.txt\");    ofstream outfile(\"lower.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::string word;    while (infile >> word) {     std::string upper = upperToLower(word);    upperToLower(word);     outfile << upper << \" \";    }  }       Nobody ever put a limit on how many files we can work with. Does this mean we can open two or more files at once? Yes we can! Write a program that combines two files odds.txt and evens.txt into one output file numbers.txt . You should combine them in a way such that numbers.txt contains the first odd number then the first even number then the second odd number and so on. You are guaranteed that there are equal amounts of odd and even numbers. Put the necessary blocks of code in the correct order.     int main() {    ifstream odds(\"odds.txt\");    ifstream evens(\"evens.txt\");    ofstream outfile(\"numbers.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int odd, even;    while (odds >> odd && evens >> even) {    outfile << odd << \" \" << even << \" \";    }  }       In chapter 15.7 we defined the Set data structure. Write a function vectorToSet which takes a std::vector of data and returns a Set object with the data. Put the necessary blocks of code in the correct order. Put the Set definition first in your answer.     class Set {  private:  std::vector<string> elements;  int numElements;  public:  Set(int n);  int getNumElements() const;  std::string getElement(int i) const;  int find(const string& s) const;  int add(const string& s);  };     Set vectorToSet( std::vector<string> data) {    void Set::vectorToSet( std::vector<string> data) {     Set s(data.size());    for (size_t i = 0; i < data.size(); ++i) {    s.add(data[i]);    }    s.numElements++;    if (s.find(data[i]) != -1) {    s.elements.push_back(data[i]);    }       Let's write the class definition for a Matrix ! The underlying data structure is a std::vector of std::vector s of int s. Write the constructor and at function, which returns the data stored at a given row and column. Put the necessary blocks of code in the correct order.     class Matrix {    private:    std::vector< std::vector<int> > elements;    public:    Matrix(int numRows, int numCols) {    std::vector<int> row(numCols);    for (int i = 0; i < numRows; ++i) {    elements.push_back(row);    }  }    int at(int row, int col) {    return elements[row][col];    }    };       Now that we have the basic structure of a Matrix , let's write a function that allows us to add data to a matrix. Write the Matrix member function setData which takes a row and column index as well as a data value and stores the data value in the Matrix at the given location. Then read data in from a file called data.txt . The first line contains the number of rows and columns, separated by a space. Data values begin on the next line. Put the necessary blocks of code in the correct order.      void Matrix::setData(int row, int col, int value) {    void setData(int row, int col, int value) {     elements[row][col] = value;    }    int main() {    ifstream infile(\"data.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int numRows, numCols, data;    infile >> numRows >> numCols;    Matrix mat(numRows, numCols);    while (infile >> data) {    for (int i = 0; i < numRows; ++i) {    for (int j = 0; j < numCols; ++j) {    mat.setData(i, j, data);  }  }  }    }     "
 },
@@ -15755,7 +12092,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_1",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": "  We have a file called locations.txt that we want to read data from. Check to make sure that the file was opened properly; if it wasn't, display an error message and exit with a status of 1. Put the necessary blocks of code in the correct order.     int main() {     ifstream infile(\"locations.txt\");    ifstream infile(locations.txt);      if (infile.good() == false) {    if (infile.good()) {     std::cout << \"Unable to open the file.\" << std::endl ;     exit(1);    return 1;     }    }    "
 },
@@ -15764,7 +12101,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_2",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": "  Let's write a program that prompts the user for a filename and opens that file. Put the necessary blocks of code in the correct order.     int main() {     std::string filename;    ifstream filename;     std::cout << \"Enter the name of the file: \";    std::cin >> filename;     ifstream infile(filename);    ifstream infile(filename);     if (infile.good() == false) {    std::cout << \"Unable to open the file.\" << std::endl ;    exit(1);    }    }    "
 },
@@ -15773,7 +12110,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_3",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": "  Now let's write some output to a file. Write a program that prompts a user for a list of 5 integers separated by spaces, calculates the average of those integers, and outputs The average is average to an output file called average.txt . Put the necessary blocks of code in the correct order. Declare the output file first and check that it is opened correctly.     int main() {    ofstream outfile(\"average.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<int> list;    int sum = 0;    int n1, n2, n3, n4, n5;    std::cout << \"Enter five integers separated by spaces: \";    std::cin >> n1 >> n2 >> n3 >> n4 >> n5;    sum = n1 + n2 + n3 + n4 + n5;     outfile << \"The average is \" << sum \/ 5.0 << std::endl ;    std::cout << \"The average is \" << sum \/ 5.0 << std::endl ;     }    "
 },
@@ -15782,7 +12119,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_4",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": "  We are given a file called data.txt with an unknown number of double values. Write a program that finds the minimum, maximum, and number of data and outputs these values to a file called summary.txt . Put the necessary blocks of code in the correct order. Declare the input and output files first, and check to see that both are opened correctly before dealing with data. Increment the number of data points before checking for the min and max.     int main() {    ifstream infile(\"data.txt\");    ofstream outfile(\"summary.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::vector<int> data;    int numData = 1;    double min, max, value;    infile >> value;    min = value;    max = value;    while (infile >> value) {    ++numData;    if (value < min) { min = value; }    if (value > max) { max = value; }    }    outfile << \"Number of data: \" << numData << \", min: \" << min << \", max: \" << max << std::endl ;    }    "
 },
@@ -15791,7 +12128,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_5",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": "  You are given a file called employee_data.txt and you want to store the information from that file into a vector of data. The file contains information about an employee's first and last name, age, phone number, and email. Write the definition of an Employee before you write your main function. Open and check the file before working with the data. Put the necessary blocks of code in the correct order.     struct Employee {  std::string fname;  std::string lname;  int age;  int phone;  std::string email;    Employee(string f, string l, int a, int p, string e) {  fname = f;  lname = l;  age = a;  phone = p;  email = e;  }    };    int main() {    ifstream infile(\"employee_data.txt\");    if (infile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<Employee> data;    std::string fname, lname, email;    int age, phone;     while (infile >> fname >> lname >> age >> phone >> email) {    while (infile) {     Employee e(fname, lname, age, phone, email);    data.push_back(e);    }  }    "
 },
@@ -15800,7 +12137,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_6",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": "  You are given a file but it appears that someone's capslock key was stuck because everything is in uppercase. Write a program that takes the input from the file UPPER.txt and converts all the words to lowercase and prints out the modified message to a file called lower.txt . Write the definition of the function toLower first. Separate the words with spaces. Put the necessary blocks of code in the correct order.     string upperToLower(string upper) {  for (size_t i = 0; i < upper.length(); ++i) {     upper[i] = toupper(upper[i]);    tolower(upper[i]);     }  return upper;  }    int main() {    ifstream infile(\"UPPER.txt\");    ofstream outfile(\"lower.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::string word;    while (infile >> word) {     std::string upper = upperToLower(word);    upperToLower(word);     outfile << upper << \" \";    }  }    "
 },
@@ -15809,7 +12146,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_7",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": "  Nobody ever put a limit on how many files we can work with. Does this mean we can open two or more files at once? Yes we can! Write a program that combines two files odds.txt and evens.txt into one output file numbers.txt . You should combine them in a way such that numbers.txt contains the first odd number then the first even number then the second odd number and so on. You are guaranteed that there are equal amounts of odd and even numbers. Put the necessary blocks of code in the correct order.     int main() {    ifstream odds(\"odds.txt\");    ifstream evens(\"evens.txt\");    ofstream outfile(\"numbers.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int odd, even;    while (odds >> odd && evens >> even) {    outfile << odd << \" \" << even << \" \";    }  }    "
 },
@@ -15818,7 +12155,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_8",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": "  In chapter 15.7 we defined the Set data structure. Write a function vectorToSet which takes a std::vector of data and returns a Set object with the data. Put the necessary blocks of code in the correct order. Put the Set definition first in your answer.     class Set {  private:  std::vector<string> elements;  int numElements;  public:  Set(int n);  int getNumElements() const;  std::string getElement(int i) const;  int find(const string& s) const;  int add(const string& s);  };     Set vectorToSet( std::vector<string> data) {    void Set::vectorToSet( std::vector<string> data) {     Set s(data.size());    for (size_t i = 0; i < data.size(); ++i) {    s.add(data[i]);    }    s.numElements++;    if (s.find(data[i]) != -1) {    s.elements.push_back(data[i]);    }    "
 },
@@ -15827,7 +12164,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_9",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": "  Let's write the class definition for a Matrix ! The underlying data structure is a std::vector of std::vector s of int s. Write the constructor and at function, which returns the data stored at a given row and column. Put the necessary blocks of code in the correct order.     class Matrix {    private:    std::vector< std::vector<int> > elements;    public:    Matrix(int numRows, int numCols) {    std::vector<int> row(numCols);    for (int i = 0; i < numRows; ++i) {    elements.push_back(row);    }  }    int at(int row, int col) {    return elements[row][col];    }    };    "
 },
@@ -15836,7 +12173,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_10",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": "  Now that we have the basic structure of a Matrix , let's write a function that allows us to add data to a matrix. Write the Matrix member function setData which takes a row and column index as well as a data value and stores the data value in the Matrix at the given location. Then read data in from a file called data.txt . The first line contains the number of rows and columns, separated by a space. Data values begin on the next line. Put the necessary blocks of code in the correct order.      void Matrix::setData(int row, int col, int value) {    void setData(int row, int col, int value) {     elements[row][col] = value;    }    int main() {    ifstream infile(\"data.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int numRows, numCols, data;    infile >> numRows >> numCols;    Matrix mat(numRows, numCols);    while (infile >> data) {    for (int i = 0; i < numRows; ++i) {    for (int j = 0; j < numCols; ++j) {    mat.setData(i, j, data);  }  }  }    }    "
 },
@@ -15845,7 +12182,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_coding-practice.html",
   "type": "Exercises",
-  "number": "11.14",
+  "number": "9.14",
   "title": "Coding Practice",
   "body": " Coding Practice    Write a program that takes in an input file called poem.txt    Two roads diverged in a yellow wood, And sorry I could not travel both And be one traveler, long I stood And looked down one as far as I could To where it bent in the undergrowth; Then took the other, as just as fair, And having perhaps the better claim Because it was grassy and wanted wear, Though as for that the passing there Had worn them really about the same, And both that morning equally lay In leaves no step had trodden black. Oh, I kept the first for another day! Yet knowing how way leads on to way I doubted if I should ever come back. I shall be telling this with a sigh Somewhere ages and ages hence: Two roads diverged in a wood, and I, I took the one less traveled by, And that has made all the difference.   and prints the first 5 lines to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we use getline in a for loop to retrieve and print the first 5 lines of the poem.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"poem.txt\"); std::string input; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } for (int i = 0; i < 5; ++i) { std::getline(infile, input); std::cout << input << std::endl; } }       Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.    #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.     int main () {    std::string fileIn;    int n;    std::string line;    std::cout << \"Enter the name of the file: \";  std::cin >> fileIn;  std::cout << fileIn << std::endl ;    std::cout << \"Enter an integer: \";  std::cin >> n;  std::cout << n << std::endl ;    ifstream inFile(fileIn.c_str());    if (inFile.good() == false) {  std::cout << \"Unable to open the file named \" << fileIn << \" and output \" << n << \" lines.\" << std::endl ;  exit(1);  }    for (int i = 0; i < n; i++) {    getline(inFile, line);    std::cout << line << std::endl ;    }    }         Write a program that takes in an input file called heights.txt   62 67 75 68 65 67 70 72 74 66 72 66 66 73 69 61 60 73 72 60   , finds the median of the data, and prints “The median height is: height inches” to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a vector. After sorting the vector, we find the median depending on whether the number of data values was even or odd. Finally, we output our result to the terminal.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> int main() { std::ifstream infile(\"heights.txt\"); std::vector<int> data; double median; int height; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (infile >> height) { data.push_back(height); } std::sort(data.begin(), data.end()); if (data.size() % 2 == 0) { median = (data[data.size() \/ 2 - 1] + data[data.size() \/ 2]) \/ 2.0; } else { median = data[data.size() \/ 2]; } std::cout << \"The median height is: \" << median << \" inches\" << std::endl; }       Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> #include <cmath> int main() { \/\/ Write your code here. \/\/ Do not modify the code below std::ifstream student_output(\"powers.txt\"); if (!student_output.good()) { std::cout << \"Error opening student's output.\" << std::endl; } std::string answer; while (std::getline(student_output, answer)) { std::cout << answer << std::endl; } }      Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    int n;    std::cout << \"Enter an integer: \";    std::cin >> n;    std::cout << n << std::endl ;    ofstream outfile (\"powers.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open output file.\" << std::endl ;  exit (1);  }    while (true) {    for (int i = 0; i < n; i++) {    outfile << pow(2,i) << std::endl ;    }    }    ifstream student_output(\"powers.txt\");    if (!student_output.good()) {  std::cout << \"Error opening student's output.\" << std::endl ;  }    std::string answer;    while (getline(student_output, answer)) {  std::cout << answer << std::endl ;  }    }         ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter after it in the alphabet. For example, using ROT13 on the letter “a” would turn it into “n”. Notice how since 13 is exactly half the number of characters in the alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus, ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file called message.txt   Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.   applies ROT13, and outputs the result to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <cctype> int main() { \/\/ Write your code here. }    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a string. We call our ROT13 function and output the result to the output file.   #include <iostream> #include <fstream> #include <cctype> std::string ROT13 (std::string message) { for (size_t i = 0; i < message.size(); ++i) { if (isalpha(message[i])) { if (message[i] >= 'A' && message[i] <= 'Z') { if (message[i] <= 'M') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } else { if (message[i] <= 'm') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } } } return message; } int main() { std::ifstream infile(\"message.txt\"); std::string message; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (std::getline(infile, message)) { std::cout << ROT13(message) << std::endl; } }       Write a program that reads in data about a class from the file class_data.txt   Below are the contents of the input file.  First Last Grade GPA Age Alex Jones 9 3.4 14 Beth Hamilton 12 3.7 18 Charles White 11 3.5 16 Daniel Kim 10 3.8 16 Ethan Brooks 11 3.9 17 Faith Flemmings 10 3.0 15 Gina Zhou 9 3.2 14  and outputs the rows of data where a student has a GPA of at least 3.5. Include proper file error checking.   #include <iostream> #include <fstream> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into corresponding variables. We check if the GPA is at least 3.5, and print the data values to the terminal if so.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"class_data.txt\"); std::string fname, lname; int grade, age; double gpa; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::getline(infile, fname); while (infile >> fname >> lname >> grade >> gpa >> age) { if (gpa >= 3.5) { std::cout << fname << '\\t' << lname << '\\t' << grade << '\\t' << gpa << '\\t' << age << std::endl; } } }       Write a program that takes an input file called shrimp.txt and outputs the contents of the file where \"shrimp\" is replaced by a word that the user inputs to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that takes an input file called “shrimp.txt” and outputs the quote with “shrimp” replaced by a word that the user inputs to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.   There's pineapple shrimp, lemon shrimp, coconut shrimp, pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and potatoes, shrimp burger, shrimp sandwich. That- that's about it.      int main() {    std::string word;    std::cout << \"Enter word to replace 'shrimp': \";    std::cin >> word;    std::cout << word << std::endl ;    std::string replace = \"shrimp\";    ifstream inFile(\"shrimp.txt\");    std::string line;    for (int i = 0; i < 4; i++) {    getline(inFile,line);    for (int unsigned j = 0; j < line.size(); j++) {    size_t pos = line.find(replace);    if (pos != std::string::npos) {    line.replace(pos,replace.length(),word);    }    }    std::cout << line<< std::endl ;    }    }         Write a program that creates a multiplication table for the first 10 numbers using a matrix and outputting the table to an output file called mult_table.txt . Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create a 10x10 matrix and fill in the products. Then we traverse through the matrix and output the values into the output file.   #include <iostream> #include <fstream> #include <vector> int main() { std::ofstream outfile(\"mult_table.txt\"); if (!outfile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::vector<int> rows(10); std::vector<std::vector<int> > mat; for (int i = 0; i < 10; ++i) { mat.push_back(rows); } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { matrix[i][j] = (i + 1) * (j + 1); } } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { outfile << matrix[i][j] << '\\t'; } std::cout << std::endl; } }       Write a program that computes the product of two matrices. Take a look at the example below. Two find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> int main() { \/* 2x3 matrix A X 3x2 matrix B 2x2 matrix C [ a b c ] [ g h ] [ ag + bi + cl ah + bj + cm ] [ d e f ] [ i j ] = [ dg + ei + fl dh + ej + fm ] [ l m ] *\/ \/\/ Write your code here. }      Write a program that computes the product of two matrices. Take a look at the example below. To find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    matrix<int> A(2,3);    matrix<int> B(3,2);    matrix<int> C(2,2);    C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);    C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);    C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);    C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);    }       "
 },
@@ -15854,7 +12191,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_1",
   "type": "Exercise",
-  "number": "11.14.1",
+  "number": "9.14.1",
   "title": "",
   "body": "  Write a program that takes in an input file called poem.txt    Two roads diverged in a yellow wood, And sorry I could not travel both And be one traveler, long I stood And looked down one as far as I could To where it bent in the undergrowth; Then took the other, as just as fair, And having perhaps the better claim Because it was grassy and wanted wear, Though as for that the passing there Had worn them really about the same, And both that morning equally lay In leaves no step had trodden black. Oh, I kept the first for another day! Yet knowing how way leads on to way I doubted if I should ever come back. I shall be telling this with a sigh Somewhere ages and ages hence: Two roads diverged in a wood, and I, I took the one less traveled by, And that has made all the difference.   and prints the first 5 lines to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we use getline in a for loop to retrieve and print the first 5 lines of the poem.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"poem.txt\"); std::string input; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } for (int i = 0; i < 5; ++i) { std::getline(infile, input); std::cout << input << std::endl; } }    "
 },
@@ -15863,7 +12200,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_2_q",
   "type": "Exercise",
-  "number": "11.14.2",
+  "number": "9.14.2",
   "title": "",
   "body": "  Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.    #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.     int main () {    std::string fileIn;    int n;    std::string line;    std::cout << \"Enter the name of the file: \";  std::cin >> fileIn;  std::cout << fileIn << std::endl ;    std::cout << \"Enter an integer: \";  std::cin >> n;  std::cout << n << std::endl ;    ifstream inFile(fileIn.c_str());    if (inFile.good() == false) {  std::cout << \"Unable to open the file named \" << fileIn << \" and output \" << n << \" lines.\" << std::endl ;  exit(1);  }    for (int i = 0; i < n; i++) {    getline(inFile, line);    std::cout << line << std::endl ;    }    }      "
 },
@@ -15872,7 +12209,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_3",
   "type": "Exercise",
-  "number": "11.14.3",
+  "number": "9.14.3",
   "title": "",
   "body": "  Write a program that takes in an input file called heights.txt   62 67 75 68 65 67 70 72 74 66 72 66 66 73 69 61 60 73 72 60   , finds the median of the data, and prints “The median height is: height inches” to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a vector. After sorting the vector, we find the median depending on whether the number of data values was even or odd. Finally, we output our result to the terminal.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> int main() { std::ifstream infile(\"heights.txt\"); std::vector<int> data; double median; int height; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (infile >> height) { data.push_back(height); } std::sort(data.begin(), data.end()); if (data.size() % 2 == 0) { median = (data[data.size() \/ 2 - 1] + data[data.size() \/ 2]) \/ 2.0; } else { median = data[data.size() \/ 2]; } std::cout << \"The median height is: \" << median << \" inches\" << std::endl; }    "
 },
@@ -15881,7 +12218,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_4_q",
   "type": "Exercise",
-  "number": "11.14.4",
+  "number": "9.14.4",
   "title": "",
   "body": "  Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> #include <cmath> int main() { \/\/ Write your code here. \/\/ Do not modify the code below std::ifstream student_output(\"powers.txt\"); if (!student_output.good()) { std::cout << \"Error opening student's output.\" << std::endl; } std::string answer; while (std::getline(student_output, answer)) { std::cout << answer << std::endl; } }      Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    int n;    std::cout << \"Enter an integer: \";    std::cin >> n;    std::cout << n << std::endl ;    ofstream outfile (\"powers.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open output file.\" << std::endl ;  exit (1);  }    while (true) {    for (int i = 0; i < n; i++) {    outfile << pow(2,i) << std::endl ;    }    }    ifstream student_output(\"powers.txt\");    if (!student_output.good()) {  std::cout << \"Error opening student's output.\" << std::endl ;  }    std::string answer;    while (getline(student_output, answer)) {  std::cout << answer << std::endl ;  }    }      "
 },
@@ -15890,7 +12227,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_5",
   "type": "Exercise",
-  "number": "11.14.5",
+  "number": "9.14.5",
   "title": "",
   "body": "  ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter after it in the alphabet. For example, using ROT13 on the letter “a” would turn it into “n”. Notice how since 13 is exactly half the number of characters in the alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus, ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file called message.txt   Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.   applies ROT13, and outputs the result to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <cctype> int main() { \/\/ Write your code here. }    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a string. We call our ROT13 function and output the result to the output file.   #include <iostream> #include <fstream> #include <cctype> std::string ROT13 (std::string message) { for (size_t i = 0; i < message.size(); ++i) { if (isalpha(message[i])) { if (message[i] >= 'A' && message[i] <= 'Z') { if (message[i] <= 'M') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } else { if (message[i] <= 'm') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } } } return message; } int main() { std::ifstream infile(\"message.txt\"); std::string message; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (std::getline(infile, message)) { std::cout << ROT13(message) << std::endl; } }    "
 },
@@ -15899,7 +12236,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_7",
   "type": "Exercise",
-  "number": "11.14.6",
+  "number": "9.14.6",
   "title": "",
   "body": "  Write a program that reads in data about a class from the file class_data.txt   Below are the contents of the input file.  First Last Grade GPA Age Alex Jones 9 3.4 14 Beth Hamilton 12 3.7 18 Charles White 11 3.5 16 Daniel Kim 10 3.8 16 Ethan Brooks 11 3.9 17 Faith Flemmings 10 3.0 15 Gina Zhou 9 3.2 14  and outputs the rows of data where a student has a GPA of at least 3.5. Include proper file error checking.   #include <iostream> #include <fstream> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into corresponding variables. We check if the GPA is at least 3.5, and print the data values to the terminal if so.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"class_data.txt\"); std::string fname, lname; int grade, age; double gpa; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::getline(infile, fname); while (infile >> fname >> lname >> grade >> gpa >> age) { if (gpa >= 3.5) { std::cout << fname << '\\t' << lname << '\\t' << grade << '\\t' << gpa << '\\t' << age << std::endl; } } }    "
 },
@@ -15908,7 +12245,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_8_q",
   "type": "Exercise",
-  "number": "11.14.7",
+  "number": "9.14.7",
   "title": "",
   "body": "  Write a program that takes an input file called shrimp.txt and outputs the contents of the file where \"shrimp\" is replaced by a word that the user inputs to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that takes an input file called “shrimp.txt” and outputs the quote with “shrimp” replaced by a word that the user inputs to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.   There's pineapple shrimp, lemon shrimp, coconut shrimp, pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and potatoes, shrimp burger, shrimp sandwich. That- that's about it.      int main() {    std::string word;    std::cout << \"Enter word to replace 'shrimp': \";    std::cin >> word;    std::cout << word << std::endl ;    std::string replace = \"shrimp\";    ifstream inFile(\"shrimp.txt\");    std::string line;    for (int i = 0; i < 4; i++) {    getline(inFile,line);    for (int unsigned j = 0; j < line.size(); j++) {    size_t pos = line.find(replace);    if (pos != std::string::npos) {    line.replace(pos,replace.length(),word);    }    }    std::cout << line<< std::endl ;    }    }      "
 },
@@ -15917,7 +12254,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_9",
   "type": "Exercise",
-  "number": "11.14.8",
+  "number": "9.14.8",
   "title": "",
   "body": "  Write a program that creates a multiplication table for the first 10 numbers using a matrix and outputting the table to an output file called mult_table.txt . Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create a 10x10 matrix and fill in the products. Then we traverse through the matrix and output the values into the output file.   #include <iostream> #include <fstream> #include <vector> int main() { std::ofstream outfile(\"mult_table.txt\"); if (!outfile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::vector<int> rows(10); std::vector<std::vector<int> > mat; for (int i = 0; i < 10; ++i) { mat.push_back(rows); } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { matrix[i][j] = (i + 1) * (j + 1); } } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { outfile << matrix[i][j] << '\\t'; } std::cout << std::endl; } }    "
 },
@@ -15926,7 +12263,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_10_q",
   "type": "Exercise",
-  "number": "11.14.9",
+  "number": "9.14.9",
   "title": "",
   "body": "  Write a program that computes the product of two matrices. Take a look at the example below. Two find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> int main() { \/* 2x3 matrix A X 3x2 matrix B 2x2 matrix C [ a b c ] [ g h ] [ ag + bi + cl ah + bj + cm ] [ d e f ] [ i j ] = [ dg + ei + fl dh + ej + fm ] [ l m ] *\/ \/\/ Write your code here. }      Write a program that computes the product of two matrices. Take a look at the example below. To find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    matrix<int> A(2,3);    matrix<int> B(3,2);    matrix<int> C(2,2);    C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);    C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);    C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);    C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);    }      "
 }
