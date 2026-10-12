@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter8_accessing-vector-elements">
+    <title>Accessing Vector Elements</title>
+
+    <p>
+        Vector indices begin at zero. If a vector has <c>size()</c> elements,
+        its valid indices range from zero through
+        <c>size() - 1</c>. A vector with no elements has no valid index.
+    </p>
+
+    <program xml:id="program_access_vector_elements"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> temperatures{18, 21, 24};
+
+    std::cout << temperatures[0] << '\n';
+    std::cout << temperatures.at(1) << '\n';
+    std::cout << temperatures.front() << '\n';
+    std::cout << temperatures.back() << '\n';
+
+    temperatures[2] = 25;
+    std::cout << temperatures[2] << '\n';
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <table xml:id="table_vector_element_access">
+        <title>Ways to access vector elements</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="25%"/>
+            <col width="37%"/>
+            <col width="38%"/>
+            <row header="yes">
+                <cell>Expression</cell>
+                <cell>Purpose</cell>
+                <cell>Important behavior</cell>
+            </row>
+            <row>
+                <cell><c>values[index]</c></cell>
+                <cell>Access an element by index.</cell>
+                <cell>Does not perform a bounds check.</cell>
+            </row>
+            <row>
+                <cell><c>values.at(index)</c></cell>
+                <cell>Access an element by index.</cell>
+                <cell>Checks the index and reports an invalid access by throwing an exception.</cell>
+            </row>
+            <row>
+                <cell><c>values.front()</c></cell>
+                <cell>Access the first element.</cell>
+                <cell>The vector must not be empty.</cell>
+            </row>
+            <row>
+                <cell><c>values.back()</c></cell>
+                <cell>Access the last element.</cell>
+                <cell>The vector must not be empty.</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        Use <c>[]</c> when the program has already established that the index is
+        valid or when the surrounding logic guarantees it. Use <c>at()</c> when
+        a bounds check is useful. Neither form makes an empty vector safe to
+        access; the program must check <c>empty()</c> before using
+        <c>front()</c> or <c>back()</c>.
+    </p>
+
+    <exercise label="chapter8_accessing-vector-elements_exercise_index">
+        <statement>
+            <p>
+                What is the last valid index of a vector whose size is 7?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>6</p></statement><feedback><p>Indices begin at zero, so the last index is size minus one.</p></feedback></choice>
+            <choice><statement><p>7</p></statement><feedback><p>Index 7 would be one past the last valid index.</p></feedback></choice>
+            <choice><statement><p>8</p></statement><feedback><p>Count seven positions beginning with index zero.</p></feedback></choice>
+            <choice><statement><p>0</p></statement><feedback><p>Zero identifies the first element, not the last.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

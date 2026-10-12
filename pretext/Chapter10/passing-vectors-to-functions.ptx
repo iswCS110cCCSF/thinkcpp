@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter8_passing-vectors-to-functions">
+    <title>Passing Vectors to Functions</title>
+
+    <p>
+        A vector can be passed to a function like other objects. The parameter
+        declaration determines whether the function receives a copy, observes
+        the caller's vector without copying it, or modifies the caller's vector.
+    </p>
+
+    <table xml:id="table_passing_vectors_to_functions">
+        <title>Ways to pass a vector to a function</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="31%"/>
+            <col width="34%"/>
+            <col width="35%"/>
+            <row header="yes">
+                <cell>Parameter</cell>
+                <cell>Effect</cell>
+                <cell>Use when</cell>
+            </row>
+            <row>
+                <cell><c>std::vector&lt;int&gt; values</c></cell>
+                <cell>The function receives a copy.</cell>
+                <cell>The function needs an independent vector.</cell>
+            </row>
+            <row>
+                <cell><c>const std::vector&lt;int&gt;&amp; values</c></cell>
+                <cell>No vector copy is made, and the function cannot modify the caller's vector.</cell>
+                <cell>The function only needs to inspect the vector. This is the usual recommendation for a large read-only vector.</cell>
+            </row>
+            <row>
+                <cell><c>std::vector&lt;int&gt;&amp; values</c></cell>
+                <cell>No vector copy is made, and the function can modify the caller's vector.</cell>
+                <cell>The function's responsibility includes changing the caller's vector.</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <program xml:id="program_vector_function_parameters"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int calculate_total(const std::vector<int>& values) {
+    int total = 0;
+    for (const int value : values) {
+        total += value;
+    }
+    return total;
+}
+
+void increase_values(std::vector<int>& values, int amount) {
+    for (int& value : values) {
+        value += amount;
+    }
+}
+
+int main() {
+    std::vector<int> values{4, 8, 12};
+
+    std::cout << calculate_total(values) << '\n';
+    increase_values(values, 1);
+    std::cout << calculate_total(values) << '\n';
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The first function uses a constant reference because it only reads the
+        vector. The second uses a non-constant reference because it changes the
+        original elements. Passing a large vector by value can perform an
+        unnecessary copy, so prefer <c>const&amp;</c> when the function only needs
+        to inspect it.
+    </p>
+
+    <subsection xml:id="chapter8_passing-vectors-to-functions_returning">
+        <title>Returning a Vector</title>
+
+        <p>
+            A function can return a vector when its task is to create a new
+            collection. Returning a vector expresses that the caller receives a
+            result rather than asking a function to modify an unrelated object.
+        </p>
+
+        <program xml:id="program_return_vector"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+std::vector<int> create_even_numbers(int limit) {
+    std::vector<int> numbers;
+
+    for (int value = 2; value <= limit; value += 2) {
+        numbers.push_back(value);
+    }
+
+    return numbers;
+}
+
+int main() {
+    const std::vector<int> numbers = create_even_numbers(8);
+
+    for (const int number : numbers) {
+        std::cout << number << ' ';
+    }
+    std::cout << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <exercise label="chapter8_passing-vectors-to-functions_exercise_parameter">
+        <statement>
+            <p>
+                Which parameter is best when a function only needs to inspect a
+                potentially large vector of integers?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>const std::vector&lt;int&gt;&amp; values</c></p></statement><feedback><p>This avoids copying the vector and prevents the function from modifying it.</p></feedback></choice>
+            <choice><statement><p><c>std::vector&lt;int&gt; values</c></p></statement><feedback><p>This makes a copy, which is unnecessary for read-only inspection.</p></feedback></choice>
+            <choice><statement><p><c>std::vector&lt;int&gt;&amp; values</c></p></statement><feedback><p>This permits modification, which the function does not need.</p></feedback></choice>
+            <choice><statement><p><c>const int values</c></p></statement><feedback><p>This parameter is not a vector.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

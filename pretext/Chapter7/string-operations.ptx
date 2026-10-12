@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter7_string-operations">
+    <title><c>std::string</c> Operations</title>
+
+    <p>
+        A string object provides operations for asking about its contents and
+        creating new strings. The member functions <c>size()</c> and
+        <c>length()</c> both report the number of characters. In this book we
+        will usually use <c>size()</c>.
+    </p>
+
+    <program xml:id="program_string_size"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string fruit{"banana"};
+
+    std::cout << fruit.size() << '\n';
+    std::cout << fruit.length() << '\n';
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <table xml:id="table_common-string-operations">
+        <title>Common <c>std::string</c> operations</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="28%"/>
+            <col width="34%"/>
+            <col width="38%"/>
+            <row header="yes">
+                <cell>Operation</cell>
+                <cell>Function or expression</cell>
+                <cell>Return value</cell>
+            </row>
+            <row>
+                <cell>Find the number of characters</cell>
+                <cell><c>text.size()</c> or <c>text.length()</c></cell>
+                <cell><c>std::string::size_type</c>, the number of characters</cell>
+            </row>
+            <row>
+                <cell>Test whether the string is empty</cell>
+                <cell><c>text.empty()</c></cell>
+                <cell><c>bool</c></cell>
+            </row>
+            <row>
+                <cell>Access a character without a bounds check</cell>
+                <cell><c>text[index]</c></cell>
+                <cell>A reference to the character, which can be modified when <c>text</c> is non-<c>const</c></cell>
+            </row>
+            <row>
+                <cell>Access a character with a bounds check</cell>
+                <cell><c>text.at(index)</c></cell>
+                <cell>A reference to the character; throws <c>std::out_of_range</c> for an invalid index</cell>
+            </row>
+            <row>
+                <cell>Find the first matching character or substring</cell>
+                <cell><c>text.find(target)</c></cell>
+                <cell>The first matching index, or <c>std::string::npos</c></cell>
+            </row>
+            <row>
+                <cell>Create part of a string</cell>
+                <cell><c>text.substr(start, count)</c></cell>
+                <cell>A new <c>std::string</c></cell>
+            </row>
+            <row>
+                <cell>Concatenate strings</cell>
+                <cell><c>first + second</c></cell>
+                <cell>A new <c>std::string</c></cell>
+            </row>
+            <row>
+                <cell>Append text</cell>
+                <cell><c>text.append(other)</c></cell>
+                <cell><c>std::string&amp;</c> referring to the modified <c>text</c></cell>
+            </row>
+            <row>
+                <cell>Append text with an assignment operator</cell>
+                <cell><c>text += other</c></cell>
+                <cell><c>std::string&amp;</c> referring to the modified <c>text</c></cell>
+            </row>
+            <row>
+                <cell>Remove characters</cell>
+                <cell><c>text.erase(start, count)</c></cell>
+                <cell><c>std::string&amp;</c> referring to the modified <c>text</c></cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        The table shows simplified forms. Many of these functions have
+        additional overloads, but these forms cover the most common beginner
+        uses. Functions that modify a string usually return a reference to the
+        same string, while functions that inspect or search a string return
+        information about it or create a new result.
+    </p>
+
+    <p>
+        The valid indices of a nonempty string range from zero through
+        <c>text.size() - 1</c>. The expression <c>text[text.size()]</c> is past
+        the last character and must not be used as a character index.
+    </p>
+
+    <subsection xml:id="chapter7_string-concatenation">
+        <title>Concatenation</title>
+
+        <p>
+            <term>Concatenation</term> means joining strings end to end. The
+            <c>+</c> operator creates a new string, while <c>+=</c> adds text to
+            an existing string.
+        </p>
+
+        <program xml:id="program_string_concatenation"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string fruit{"banana"};
+    std::string baked_good{" nut bread"};
+
+    std::string dessert = fruit + baked_good;
+    dessert += "!";
+
+    std::cout << dessert << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The output is <c>banana nut bread!</c>. Concatenation does not add a
+            space automatically; include spaces in a string when they are part
+            of the desired result. The member function <c>append()</c> is another
+            way to add text to an existing string.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter7_string-number-conversion">
+        <title>Converting Numbers to Strings</title>
+
+        <p>
+            The library function <c>std::to_string</c> converts a number to a
+            <c>std::string</c>. This is useful when text must include a computed
+            value.
+        </p>
+
+        <program xml:id="program_std_to_string"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    int score{95};
+    std::string message = "Score: " + std::to_string(score);
+
+    std::cout << message << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter7_string-find">
+        <title>Finding Characters and Substrings</title>
+
+        <p>
+            The <c>find()</c> member function searches for a character or a
+            substring. It returns the index of the first match as an <c>std::string::size_type</c>, 
+			an alias of <c>std::size_t</c>. 
+        </p>
+
+        <program xml:id="program_string_find"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string sentence{"The sea is calm."};
+    std::size_t index = sentence.find("sea");
+
+    if (index != std::string::npos) {
+        std::cout << "Found at index " << index << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            If no match exists, <c>find()</c> returns the special value
+            <c>std::string::npos</c> not <c>false</c>. Test for that value before using the
+            result as an index. Searches are case-sensitive: <c>"Sea"</c> and
+            <c>"sea"</c> are different strings.
+        </p>
+    </subsection>
+</section>

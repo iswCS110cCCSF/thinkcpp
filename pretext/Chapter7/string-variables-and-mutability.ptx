@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter7_string-variables-and-mutability">
+    <title><c>std::string</c> Variables and Mutability</title>
+
+    <p>
+        A <c>std::string</c> object stores a sequence of characters. It is part
+        of the C++ Standard Library, so programs that use it should include the
+        <c>&lt;string&gt;</c> header.
+    </p>
+
+    <program xml:id="program_string_declaration_initialization_assignment"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string first;
+    first = "Hello, ";
+
+    std::string second{"world!"};
+
+    std::cout << first << second << '\n';
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The declaration <c>std::string first;</c> creates a string object. The
+        assignment <c>first = "Hello, ";</c> gives an existing object a new
+        value. The expression <c>std::string second{"world!"};</c> declares and
+        initializes an object in one statement.
+    </p>
+
+    <p>
+        C++ <c>std::string</c> objects are mutable unless they are declared
+        <c>const</c>. We can replace one character by using its index on the left
+        side of an assignment.
+    </p>
+
+    <program xml:id="program_mutate_string_character"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string greeting{"Hello, world!"};
+    greeting[0] = 'J';
+
+    std::cout << greeting << '\n';
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        This program prints <c>Jello, world!</c>. Indexing begins at zero, so
+        <c>greeting[0]</c> refers to the first character. A character literal
+        uses single quotation marks, such as <c>'J'</c>; a string literal uses
+        double quotation marks, such as <c>"J"</c>.
+    </p>
+
+    <p>
+        A <c>const std::string</c> can be inspected, but its characters cannot
+        be changed after initialization.
+    </p>
+
+    <program xml:id="program_const_string"
+             language="cpp">
+        <code><![CDATA[
+#include <string>
+
+int main() {
+    const std::string course{"CS110B"};
+    // course[0] = 'X';  // Not allowed: course is const.
+    return 0;
+}
+        ]]></code>
+    </program>
+</section>

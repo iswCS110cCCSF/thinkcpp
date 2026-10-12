@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="generating-random-numbers">
+    <title>Generating Random Numbers</title>
+
+    <p>
+        Iteration repeats a process. Random-number generation gives a repeated
+        process different possible inputs or outcomes. Together, iteration and
+        random numbers allow a program to simulate events, study probabilities,
+        and explore systems with many possible outcomes.
+    </p>
+
+    <subsection xml:id="chapter6_generating-random-numbers_why-randomness">
+        <title>Why Programs Use Randomness</title>
+
+        <p>
+            Many programs are <term>deterministic</term>: when they receive the
+            same input, they produce the same output. Determinism is useful for
+            calculations, testing, and debugging. Other programs need to model
+            situations in which the next outcome cannot be known in advance.
+        </p>
+
+        <p>
+            Random numbers are useful for:
+        </p>
+
+        <ul>
+            <li>creating games and simulations;</li>
+            <li>testing programs with varied inputs;</li>
+            <li>modeling traffic, insurance claims, or customer arrivals;</li>
+            <li>studying scientific systems such as molecules and proteins;</li>
+            <li>estimating risk in systems such as financial markets; and</li>
+            <li>selecting or arranging items unpredictably.</li>
+        </ul>
+
+        <p>
+            A program cannot predict the exact future price of a stock or the
+            exact shape a protein will take. It can, however, simulate many
+            possible situations and summarize the resulting patterns. This is
+            the central purpose of random-number generation in simulation.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter6_generating-random-numbers_random-and-pseudorandom">
+        <title>Random and Pseudorandom Numbers</title>
+
+        <p>
+            A truly random event is not determined by a predictable algorithm.
+            Examples may come from physical processes or other sources of
+            environmental noise. A computer program, however, normally follows
+            an algorithm. It can therefore generate numbers that appear random
+            while actually following a deterministic process.
+        </p>
+
+        <p>
+            A number produced by a deterministic algorithm is called
+            <term>pseudorandom</term>. The prefix <q>pseudo-</q> means
+            <q>imitation</q> or <q>apparently, but not completely, real</q>.
+            A pseudorandom sequence can look random, but the same starting state
+            produces the same sequence again.
+        </p>
+
+        <p>
+            This apparent contradiction is useful. A program can produce
+            different-looking trials while still allowing a programmer to repeat
+            exactly the same trials during debugging.
+        </p>
+
+        <table xml:id="table_randomness_comparison">
+            <title>Types of random-number sources</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="30%"/>
+                <col width="35%"/>
+                <col width="35%"/>
+                <row header="yes">
+                    <cell><p>Source</p></cell>
+                    <cell><p>Main idea</p></cell>
+                    <cell><p>Typical use</p></cell>
+                </row>
+                <row>
+                    <cell><p>General-purpose pseudorandom generator</p></cell>
+                    <cell><p>A deterministic algorithm produces a sequence that appears random.</p></cell>
+                    <cell><p>Simulation, games, and testing</p></cell>
+                </row>
+                <row>
+                    <cell><p>System or physical source</p></cell>
+                    <cell><p>Values come from an external source of entropy when available.</p></cell>
+                    <cell><p>Providing seed material</p></cell>
+                </row>
+                <row>
+                    <cell><p>Cryptographically secure generator</p></cell>
+                    <cell><p>The output is designed to be difficult to predict.</p></cell>
+                    <cell><p>Passwords, keys, and authentication tokens</p></cell>
+                </row>
+            </tabular>
+        </table>
+    </subsection>
+
+    <subsection xml:id="chapter6_generating-random-numbers_generator-mechanism">
+        <title>How a Pseudorandom Generator Works</title>
+
+        <p>
+            A pseudorandom generator keeps an internal <term>state</term>. The
+            state records enough information for the generator to calculate its
+            next state and its next output.
+        </p>
+
+        <p>
+            Conceptually, the process looks like this:
+        </p>
+
+        <program xml:id="program_pseudorandom_generator_model"
+                 language="text">
+            <code><![CDATA[
+starting state
+      |
+      v
+state transformation
+      |
+      v
+next state and output
+      |
+      +---- repeat
+            ]]></code>
+        </program>
+
+        <p>
+            A <term>seed</term> supplies the initial state. The generator then
+            repeatedly applies its state-transition algorithm. Because the
+            transition is deterministic, two generators with the same algorithm
+            and the same seed produce the same sequence.
+        </p>
+
+        <p>
+            Different generator algorithms make different trade-offs involving
+            speed, memory, sequence length, statistical quality, and suitability
+            for parallel computation. Chapter 6 focuses on the general idea
+            rather than the bit-level details of those algorithms.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter6_generating-random-numbers_seeds">
+        <title>Seeds and Repeatable Sequences</title>
+
+        <p>
+            A seed determines the starting state of a pseudorandom generator.
+            Using the same seed gives the generator the same starting point.
+            Therefore, the program produces the same sequence of pseudorandom
+            values.
+        </p>
+
+        <program xml:id="program_fixed_random_seed"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <random>
+
+int main() {
+    std::mt19937 generator{24680};
+
+    for (int value_number = 1; value_number <= 4; ++value_number) {
+        std::cout << generator() << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            Running this program again with the same seed produces the same
+            sequence. This is useful when a programmer wants to reproduce a
+            particular test or investigate a problem.
+        </p>
+
+        <p>
+            A program can also ask for seed material from
+            <c>std::random_device</c>:
+        </p>
+
+        <program xml:id="program_random_device_seed"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <random>
+
+int main() {
+    std::random_device seed_source;
+    std::mt19937 generator{seed_source()};
+
+    for (int value_number = 1; value_number <= 4; ++value_number) {
+        std::cout << generator() << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            This usually gives the generator a different starting point on
+            different runs. The C++ standard does not guarantee that every
+            implementation has access to a nondeterministic physical source,
+            so <c>std::random_device</c> should be described as a source of seed
+            material rather than as a guaranteed source of true randomness.
+        </p>
+
+        <p>
+            A default-constructed <c>std::mt19937</c> uses its standard default
+            seed. It does not automatically use the system clock. An explicit
+            seed makes the programmer's intention clearer. The particular seed
+            value is not special; any suitable seed value could be used.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter6_generating-random-numbers_mersenne-twister">
+        <title>The Mersenne Twister</title>
+
+        <p>
+            The C++ type <c>std::mt19937</c> is a commonly used implementation
+            of the <term>Mersenne Twister</term> pseudorandom-generation
+            algorithm. The algorithm was developed by Makoto Matsumoto and
+            Takuji Nishimura in 1996 and 1997 and published in 1998.
+        </p>
+
+        <p>
+            The name <q>Mersenne</q> honors Marin Mersenne, a French mathematician
+            and philosopher who lived from 1588 to 1648. Mersenne studied numbers
+            of the form <m>2^p - 1</m>, now called <term>Mersenne numbers</term>.
+            The MT19937 algorithm uses the Mersenne-prime period
+            <m>2^{19937} - 1</m>. The superscript is important: this means
+            <q>2 raised to the 19,937th power, minus 1</q>. The digits in the
+            exponent should not be written on the same baseline as the 2.
+        </p>
+
+        <p>
+            The Mersenne Twister keeps a large internal state. It repeatedly
+            transforms that state and applies an output transformation to
+            produce the next value. Students do not need to implement those
+            transformations. The important ideas are that the generator has a
+            state, a seed initializes the state, and the algorithm advances the
+            state one step at a time.
+        </p>
+
+        <p>
+            The Mersenne Twister is fast and has useful statistical behavior for
+            simulations, games, and testing. It is not cryptographically secure
+            because an attacker who learns enough about its state may be able to
+            predict future values.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter6_generating-random-numbers_distributions">
+        <title>Probability Distributions</title>
+
+        <p>
+            A generator produces a sequence of pseudorandom values. A
+            <term>probability distribution</term> describes how likely the
+            possible outcomes should be. The C++ random library separates these
+            responsibilities: an engine generates values, and a distribution
+            shapes them for a particular purpose.
+        </p>
+
+        <table xml:id="table_random_distributions">
+            <title>Examples of probability distributions</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="28%"/>
+                <col width="37%"/>
+                <col width="35%"/>
+                <row header="yes">
+                    <cell><p>Distribution</p></cell>
+                    <cell><p>Conceptual meaning</p></cell>
+                    <cell><p>Example</p></cell>
+                </row>
+                <row>
+                    <cell><p>Uniform</p></cell>
+                    <cell><p>Values in a range are equally likely.</p></cell>
+                    <cell><p>A fair die</p></cell>
+                </row>
+                <row>
+                    <cell><p>Bernoulli</p></cell>
+                    <cell><p>One yes-or-no event.</p></cell>
+                    <cell><p>Whether a machine fails</p></cell>
+                </row>
+                <row>
+                    <cell><p>Binomial</p></cell>
+                    <cell><p>Counts successes across fixed trials.</p></cell>
+                    <cell><p>Defective items in a batch</p></cell>
+                </row>
+                <row>
+                    <cell><p>Normal or Gaussian</p></cell>
+                    <cell><p>Values cluster around an average.</p></cell>
+                    <cell><p>Measurement error</p></cell>
+                </row>
+                <row>
+                    <cell><p>Poisson</p></cell>
+                    <cell><p>Counts events in a fixed interval.</p></cell>
+                    <cell><p>Customer arrivals</p></cell>
+                </row>
+                <row>
+                    <cell><p>Discrete weighted</p></cell>
+                    <cell><p>Outcomes have different probabilities.</p></cell>
+                    <cell><p>Weighted game outcomes</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The C++ library provides types such as
+            <c>std::uniform_int_distribution</c>,
+            <c>std::normal_distribution</c>,
+            <c>std::poisson_distribution</c>, and
+            <c>std::discrete_distribution</c>. In this chapter, we use the
+            uniform distributions in complete programs and discuss the other
+            distributions conceptually.
+        </p>
+
+        <note>
+            <p>
+                Older C++ examples sometimes use <c>random()</c> or
+                <c>std::rand()</c>. These are legacy interfaces. The function
+                <c>random()</c> is a POSIX-style function and is not portable
+                standard C++, while standard <c>&lt;cstdlib&gt;</c> provides
+                <c>std::rand()</c> and <c>std::srand()</c>. New C++17 programs
+                should use the engine-and-distribution design from
+                <c>&lt;random&gt;</c>.
+            </p>
+        </note>
+
+        <program xml:id="program_engine_and_distribution"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <random>
+
+int main() {
+    std::mt19937 generator{13579};
+    std::uniform_int_distribution<int> roll_die{1, 6};
+
+    for (int roll_number = 1; roll_number <= 5; ++roll_number) {
+        std::cout << roll_die(generator) << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The expression <c>roll_die(generator)</c> asks the distribution to
+            use the generator and produce one integer from 1 through 6. The
+            generator does not know that the values represent die rolls. The
+            distribution supplies that interpretation.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter6_generating-random-numbers_die-class">
+        <title>A Die Class</title>
+
+        <p>
+            A class can hide the details of random-number generation behind a
+            simple interface. The following <c>Die</c> class stores the engine
+            and distribution as private data. Its public member function
+            <c>roll()</c> gives outside code one value from 1 through 6.
+        </p>
+
+        <program xml:id="program_die_class"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <random>
+
+class Die {
+private:
+    std::mt19937 generator;
+    std::uniform_int_distribution<int> roll_distribution{1, 6};
+
+public:
+    Die(unsigned int seed)
+        : generator{seed} {
+    }
+
+    int roll() {
+        return roll_distribution(generator);
+    }
+};
+
+int main() {
+    Die die{86420};
+
+    for (int roll_number = 1; roll_number <= 10; ++roll_number) {
+        std::cout << die.roll() << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            Each call to <c>die.roll()</c> advances the generator and returns a
+            new result. Therefore, repeated calls on the same <c>Die</c> object
+            normally produce a changing sequence of values. The caller does not
+            need to know which engine or distribution the class uses. This is an example of
+            <term>encapsulation</term>: the class protects its implementation
+            details while providing a useful public operation.
+        </p>
+
+        <p>
+            The seed still matters. Two <c>Die</c> objects initialized with the
+            same seed produce matching sequences: the first rolls match, the
+            second rolls match, and so on. The two objects do not return the same
+            value forever; each object advances its own generator after every
+            call.
+        </p>
+
+        <program xml:id="program_die_same_seed"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <random>
+
+class Die {
+private:
+    std::mt19937 generator;
+    std::uniform_int_distribution<int> roll_distribution{1, 6};
+
+public:
+    Die(unsigned int seed)
+        : generator{seed} {
+    }
+
+    int roll() {
+        return roll_distribution(generator);
+    }
+};
+
+int main() {
+    Die first_die{2468};
+    Die second_die{2468};
+
+    for (int roll_number = 1; roll_number <= 5; ++roll_number) {
+        std::cout << first_die.roll() << ' '
+                  << second_die.roll() << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            To obtain a sequence that normally differs from one run to the next,
+            give the class seed material from <c>std::random_device</c>:
+        </p>
+
+        <p>
+            A different seed can be supplied without changing the class:
+        </p>
+
+        <program xml:id="program_die_random_seed"
+                 language="cpp">
+            <code><![CDATA[
+std::random_device seed_source;
+Die die{seed_source()};
+            ]]></code>
+        </program>
+
+        <p>
+            Using an explicit seed such as <c>Die die{86420};</c> is useful for
+            repeatable testing. Using <c>std::random_device</c> as a seed source
+            is useful when a program usually should behave differently each time
+            it runs.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter6_generating-random-numbers_simulation">
+        <title>Simulation and Probabilistic Systems</title>
+
+        <p>
+            A <term>simulation</term> uses a program to imitate a process or
+            system. When a system has many possible outcomes, a program can
+            generate many trials and summarize what happens. This approach is
+            often called a <term>Monte Carlo simulation</term>.
+        </p>
+
+        <p>
+            For example, the following program simulates 1,000 die rolls and
+            stores the frequency of each result. The array is initialized with
+            zero counters, and each roll increases one counter.
+        </p>
+
+        <program xml:id="program_die_roll_histogram"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <array>
+#include <iostream>
+#include <random>
+
+int main() {
+    std::mt19937 generator{314159};
+    std::uniform_int_distribution<int> roll_die{1, 6};
+    std::array<int, 6> counts{};
+
+    for (int trial = 1; trial <= 1000; ++trial) {
+        int roll = roll_die(generator);
+        ++counts[roll - 1];
+    }
+
+    for (int side = 1; side <= 6; ++side) {
+        std::cout << side << ": " << counts[side - 1] << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The array of counts is a simple <term>histogram</term>. With a fair
+            die, the six counts will not be exactly equal. As the number of
+            trials becomes larger, however, the proportions generally become
+            closer to the expected proportions. This is one way the
+            <term>law of large numbers</term> appears in a program.
+        </p>
+
+        <p>
+            The same general idea can model stock-market scenarios, insurance
+            claims, traffic, customer arrivals, protein configurations, or
+            properties of atoms. A simulation does not predict one exact future
+            outcome. It estimates patterns across many possible outcomes.
+        </p>
+
+        <p>
+            Randomness can also be used to rearrange an existing collection. For
+            example, <c>std::shuffle</c> can randomize the order of an array. It
+            is declared in <c>&lt;algorithm&gt;</c> and uses a random-number
+            engine supplied by the program.
+        </p>
+
+        <program xml:id="program_shuffle_array"
+                 language="cpp"
+                 interactive="yes">
+            <code><![CDATA[
+#include <algorithm>
+#include <array>
+#include <iostream>
+#include <random>
+
+int main() {
+    std::array<int, 5> values{1, 2, 3, 4, 5};
+    std::mt19937 generator{98765};
+
+    std::shuffle(values.begin(), values.end(), generator);
+
+    for (int value : values) {
+        std::cout << value << ' ';
+    }
+
+    std::cout << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter6_generating-random-numbers_security">
+        <title>Randomness and Security</title>
+
+        <p>
+            Cryptographic systems also use randomness. They may need random
+            values for passwords, encryption keys, authentication tokens, salts,
+            nonces, and other security-related data.
+        </p>
+
+        <p>
+            The ordinary C++ <c>&lt;random&gt;</c> engines, including
+            <c>std::mt19937</c>, are designed for general-purpose simulation
+            and testing. They are not cryptographically secure. A predictable
+            sequence may be acceptable for a die-roll simulation but dangerous
+            when it protects a secret.
+        </p>
+
+        <p>
+            Security-sensitive programs should use a trusted cryptographic
+            library or an operating-system security facility that provides a
+            cryptographically secure pseudorandom number generator. A program
+            should not design its own cryptographic generator.
+        </p>
+
+        <warning>
+            <p>
+                Use ordinary pseudorandom generators for simulation, games, and
+                testing. Use trusted cryptographic facilities for passwords,
+                keys, authentication tokens, and other secrets.
+            </p>
+        </warning>
+    </subsection>
+
+    <exercise label="chapter6_random-numbers_pseudorandom">
+        <statement>
+            <p>
+                A number produced by a deterministic algorithm that appears
+                random is called <fillin width="16" answer="pseudorandom" mode="string"/>.
+            </p>
+        </statement>
+        <evaluation>
+            <evaluate>
+                <test correct="yes">
+                    <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+            </evaluate>
+        </evaluation>
+    </exercise>
+
+    <exercise label="chapter6_random-numbers_seed-purpose">
+        <statement>
+            <p>
+                What does a seed determine in a pseudorandom generator?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement>
+                    <p>The generator's initial state.</p>
+                </statement>
+                <feedback><p>Correct. The initial state determines the sequence that follows.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>The number of values the program must generate.</p>
+                </statement>
+                <feedback><p>A seed initializes the generator; a loop controls how many values are generated.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>The largest value allowed by every distribution.</p>
+                </statement>
+                <feedback><p>The distribution, not the seed, determines the desired range.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>Whether the program uses a loop.</p>
+                </statement>
+                <feedback><p>The seed affects the sequence, not the program's control structure.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_random-numbers_distribution-purpose">
+        <statement>
+            <p>
+                What is the purpose of a probability distribution such as
+                <c>std::uniform_int_distribution&lt;int&gt;</c>?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement>
+                    <p>It shapes generator output according to a desired probability pattern.</p>
+                </statement>
+                <feedback><p>Correct. The engine generates values, and the distribution gives them a useful pattern.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>It stores every value produced by the generator.</p>
+                </statement>
+                <feedback><p>Storage is handled by a variable or container.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>It guarantees cryptographic security.</p>
+                </statement>
+                <feedback><p>A distribution controls probabilities; it does not provide cryptographic security.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>It replaces the random-number engine.</p>
+                </statement>
+                <feedback><p>The distribution and engine work together.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_random-numbers_die-class">
+        <statement>
+            <p>
+                In the <c>Die</c> class, why are the generator and distribution
+                private data members?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement>
+                    <p>They are implementation details hidden behind the public <c>roll()</c> operation.</p>
+                </statement>
+                <feedback><p>Correct. This is encapsulation.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>Private data members cannot store objects from library classes.</p>
+                </statement>
+                <feedback><p>Private members can store objects. Their access is restricted to the class.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>The program must create a new generator for every roll.</p>
+                </statement>
+                <feedback><p>The same generator should produce successive values.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>The distribution must be initialized inside <c>main()</c>.</p>
+                </statement>
+                <feedback><p>The class can initialize its own private distribution.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_random-numbers_security">
+        <statement>
+            <p>
+                Which is the most appropriate use for <c>std::mt19937</c>?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement>
+                    <p>Simulating die rolls and testing a program with varied inputs.</p>
+                </statement>
+                <feedback><p>Correct. It is a general-purpose pseudorandom engine.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>Generating an encryption key for a banking application.</p>
+                </statement>
+                <feedback><p>Security-sensitive values require a trusted cryptographic facility.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>Generating a password-reset token for a website.</p>
+                </statement>
+                <feedback><p>Password-reset tokens must be generated with security-specific randomness.</p></feedback>
+            </choice>
+            <choice>
+                <statement>
+                    <p>Creating a secret authentication value.</p>
+                </statement>
+                <feedback><p>Authentication values require a cryptographically secure generator.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

@@ -41,6 +41,7 @@ while more_items_to_pack and another_item_fits_safely:
         seal the shipping box
         ]]></code>
     </program>
+
     <p>
         The number of repetitions is known: 16 soap pieces per pack and 100
         packs per shipping box. This is the kind of repetition commonly
@@ -48,6 +49,7 @@ while more_items_to_pack and another_item_fits_safely:
         inside another, this is also an example of <term>nested iteration</term>.
         We will translate this idea into C++ later.
     </p>
+
     <p>
         Words in a problem statement can provide useful clues about the kind of
         repetition that is needed.

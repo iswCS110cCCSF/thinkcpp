@@ -1,698 +1,138 @@
-<?xml version="1.0"?>
-<exercises xml:id="chapter10_multiple-choice-exercises">
-    <title>Multiple Choice Exercises</title>
-    <introduction>
-        <p>
-            Answer the following <term>Multiple Choice</term> questions to assess what you have learned in
-            this chapter.
-        </p>
-    </introduction>
-  <exercise label="vectors_mc1">
-    <statement>
-      <p>Suppose you are collecting data for a science experiment. You are to perform three trials
-        of eight temperature readings measured in degrees fahrenheit to the nearest hundredth and
-        initialized to <em>freezing</em>. Choose the vector that has the proper amount of storage
-        for this scenario.</p>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<int> temps (24, 32.00);]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          We can't declare the vector as an integer type because all temperature readings
-            will be truncated.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<double> temps (24, 32.00);]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          First comes the vector size, <em>then</em> the initial values.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<double> temps (0.00, 24);]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          Freezing is 32 degrees fahrenheit. The order of parameters is incorrect.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<double> temps (32, 24.00);]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          This statement creates a vector size 32 with elements initialized to 24.00 degress
-            fahrenheit.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc2">
-    <statement>
-      <p>Suppose the following code is run:</p>
-      <program>
-std::vector&lt;std::string&gt; lauren = {"happy", "to", "you", "September", "birthday", "girl"}
-</program>
-      <p>How would you save the string <c>"birthday"</c> from <c>lauren</c> to the variable <c>nurse</c>?</p>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>nurse = lauren[4]</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Vectors are zero-indexed, so the fifth element is the fourth index.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>nurse = lauren[5]</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Remember, vectors are zero-indexed!
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>nurse = lauren[6]</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Remember, vectors are zero-indexed!
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>nurse = lauren(4)</c>
-          </p>
-        </statement>
-        <feedback><p>
-          This is not proper vector indexing.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>nurse = lauren(5)</c>
-          </p>
-        </statement>
-        <feedback><p>
-          This is not proper vector indexing. Also, vectors are zero-indexed.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc3">
-    <statement>
-      <p>What gets printed when the following code is run:</p>
-      <program>std::vector&lt;std::string&gt; chant = {"Hail", "to", "the", "victors", "valiant"};
-chant[0]=chant[3];
-chant[3]=chant[0];
-chant[1]=chant[0];
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="chapter8_exercises">
+    <title>Exercises</title>
 
-for ( size_t i = 0; i &lt; chant.size(); i++ ) {
-     std::cout &lt;&lt; chant[1][i] &lt;&lt; "  ";
-}</program>
-    </statement>
-    <choices>
-      <choice>
+    <exercise label="chapter8_exercise_vector_element_type">
+        <statement><p>What is the element type in <c>std::vector&lt;double&gt; measurements</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>double</c></p></statement><feedback><p>The type between the angle brackets identifies every element's type.</p></feedback></choice>
+            <choice><statement><p><c>std::vector</c></p></statement><feedback><p>That is the container template, not the element type.</p></feedback></choice>
+            <choice><statement><p><c>measurements</c></p></statement><feedback><p>That is the vector's object name.</p></feedback></choice>
+            <choice><statement><p><c>int</c></p></statement><feedback><p>The declaration specifies <c>double</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_value_initialization">
+        <statement><p>What does <c>std::vector&lt;int&gt; values(3)</c> create?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>Three value-initialized integers</p></statement><feedback><p>For <c>int</c>, value initialization produces zero.</p></feedback></choice>
+            <choice><statement><p>One integer whose value is 3</p></statement><feedback><p>That is the meaning of the brace form <c>{3}</c>.</p></feedback></choice>
+            <choice><statement><p>Three integers whose values are all 3</p></statement><feedback><p>Use the two-argument form <c>(3, 3)</c> for that.</p></feedback></choice>
+            <choice><statement><p>An empty vector with capacity 3</p></statement><feedback><p>The size is three in this declaration.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_access">
         <statement>
-          <p>victors victors the victors valiant</p>
+            <p>Which expression checks the index before accessing the element?</p>
         </statement>
-        <feedback><p>
-          Although this is the final version of <c>chant</c>, we are not printing <c>chant</c>!
-        </p></feedback>
-      </choice>
-      <choice>
+        <choices>
+            <choice correct="yes"><statement><p><c>values.at(index)</c></p></statement><feedback><p><c>at()</c> performs a bounds check.</p></feedback></choice>
+            <choice><statement><p><c>values[index]</c></p></statement><feedback><p>Subscript access does not perform a bounds check.</p></feedback></choice>
+            <choice><statement><p><c>values.front()</c></p></statement><feedback><p><c>front()</c> accesses the first element and does not take an index.</p></feedback></choice>
+            <choice><statement><p><c>values.size(index)</c></p></statement><feedback><p><c>size()</c> takes no index and reports the number of elements.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_range_loop">
+        <statement><p>What does <c>for (const int value : values)</c> provide during each iteration?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A copy of the current element</p></statement><feedback><p>The loop variable is a constant value copy.</p></feedback></choice>
+            <choice><statement><p>The current element's index</p></statement><feedback><p>A range-based loop does not provide an index automatically.</p></feedback></choice>
+            <choice><statement><p>A reference that can modify the vector</p></statement><feedback><p>The declaration has no <c>&amp;</c>, and it is <c>const</c>.</p></feedback></choice>
+            <choice><statement><p>The vector's capacity</p></statement><feedback><p>The loop visits elements, not storage statistics.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_push_back_size">
         <statement>
-          <p>error! we run into an error somewhere in the execution due to an out of bounds access.</p>
+            <p>After <c>values</c> has size 2, what is its size after one successful <c>push_back()</c>?</p>
         </statement>
-        <feedback><p>
-          Remember, <c>chant</c> at index 1 is no longer <q>hail</q>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>v i c t o r s</p>
-        </statement>
-        <feedback><p>
-          You are thinking of the correct word but consider upto what index we print.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>v i c t o</p>
-        </statement>
-        <feedback><p>
-          Correct! we print the first 5 letters of the string at index 1 which is <q>victo</q>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc4">
-    <statement>
-      <p>Select all of the following statments that correctly make a copy of <c>lauren</c>.</p>
-      <program>
-std::vector&lt;std::string&gt; lauren = {"happy", "to", "you", "September", "birthday", "girl"}
-</program>
-      <p>How would you save the string <c>"birthday"</c> from <c>lauren</c> to the variable <c>nurse</c>?</p>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<std::string> harry (lauren)]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          This syntax is correct, but isn't used often.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<std::string> lauren (ella)]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          You make a copy of the vector in parentheses.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<std::string> lauren = mariah]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          Remember how assignment statements work!
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<katie> std::string = lauren]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          This is not proper syntax.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<std::string> mariah = lauren]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          This is the most common syntax.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc5">
-    <statement>
-      <p>What is the value of nums after the following code executes?</p>
-      <program>int main() {
-    std::vector&lt;int&gt; nums = {0, 8, 5, 1, 4, 3};
-    for (int i = 0; i &lt; 6; i++) {
-        if (nums[i] % 2 == 0) {
-           nums[i]--;
-        }
-        nums[i] = nums[i] * 2;
-    }
-    std::cout &lt;&lt; nums[1];
-}</program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>{0, 8, 5, 1, 4, 3}</p>
-        </statement>
-        <feedback><p>
-          <c>nums</c> is modified inside of the loop.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>{0, 16, 10, 2, 8, 6}</p>
-        </statement>
-        <feedback><p>
-          Take a look at the conditional.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>{0, 16, 8, 0, 8, 4}</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the conditional.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>{-2, 14, 10, 2, 6, 6}</p>
-        </statement>
-        <feedback><p>
-          All even numbers were decremeneted, then all numbers were multiplied by 2.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>{2, 18, 10, 2, 10, 6}</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at what happens inside of the conditional.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc6">
-    <statement>
-      <p><term>Multiple Response</term> Select all ways to print out the contents of <c>ryan</c> without
-        going out of bounds.</p>
-      <program>
-std::vector&lt;int&gt; ryan = {2, 3, 1, 5, 6, 0, 0, 5, 4};
-</program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <program>for (int i = 0; i &lt; ryan.size(); ++i) {
-    std::cout &lt;&lt; ryan[i] &lt;&lt; " ";
-}</program>
-        </statement>
-        <feedback><p>
-          When we deal with the <c>size</c> function, we can't use type <c>int</c>.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <program>for (size_t j = 0; j &lt; ryan.size(); j++) {
-    std::cout &lt;&lt; ryan[j] &lt;&lt; " ";
-}</program>
-        </statement>
-        <feedback><p>
-          When we deal with the <c>size</c> function, we must use type <c>size_t</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <program>for (int k = 0; k &lt; 8; ++k) {
-    std::cout &lt;&lt; ryan[k] &lt;&lt; " ";
-}</program>
-        </statement>
-        <feedback><p>
-          There are 9 elements, numbered 0 through 8, but here we only iterate through 8 of them.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <program>for (int n = 0; n &lt; 9; n++) {
-    std::cout &lt;&lt; ryan[n] &lt;&lt; " ";
-}</program>
-        </statement>
-        <feedback><p>
-          There are 9 elements numbered 0 through 8, and this statement iterates over all of
-            them.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <program>for (int m = 0; m &lt;= 8; ++m) {
-    std::cout &lt;&lt; ryan[m] &lt;&lt; " ";
-}</program>
-        </statement>
-        <feedback><p>
-          There are 9 elements numbered 0 through 8, and this statement iterates over all of
-            them.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc7">
-    <statement>
-      <p>Suppose you want <c>ryan</c> to have the value</p>
-      <program>
-std::vector&lt;int&gt; ryan = {2, 3, 1, 5, 6, 7, 8, 9};
-</program>
-      <p>What vector functions will you use to achieve this, and how many times will you use them?
-        Keep in mind, <c>ryan</c> is currently the following vector of integers.</p>
-      <program>
-std::vector&lt;int&gt; ryan = {2, 3, 1, 5, 6, 0, 0, 5, 4};
-</program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Use <c>push_back</c> 4 times with no arguments to get rid of the last 4 elements, then use <c>push_back</c>
-            3 times with arguments to specify which values you want to add to the end.</p>
-        </statement>
-        <feedback><p>
-          You'll need to use two <em>different</em> functions to accomplish this task.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Use <c>push_back</c> 4 times with no arguments to get rid of the last 4 elements, then use <c>pop_back</c>
-            3 times with arguments to specify which values you want to add to the end.</p>
-        </statement>
-        <feedback><p>
-          <c>push_back</c><em>pushes</em> new items onto the end of the vector, and <c>pop_back</c> <em>pops</em>
-            old items off the end of the vector.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Use <c>pop_back</c> 4 times with no arguments to get rid of the last 4 elements, then use <c>pop_back</c>
-            3 times with arguments to specify which values you want to add to the end.</p>
-        </statement>
-        <feedback><p>
-          You'll need to use two <em>different</em> functions to accomplish this task.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Use <c>pop_back</c> 4 times with no arguments to get rid of the last 4 elements, then use <c>push_back</c>
-            3 times with arguments to specify which values you want to add to the end.</p>
-        </statement>
-        <feedback><p>
-          <c>push_back</c> <em>pushes</em> new items onto the end of the vector, and <c>pop_back</c> <em>
-            pops</em> old items off the end of the vector.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc8">
-    <statement>
-      <p>Suppose you are randomly assigning students to discussions 1-8. How would you do this
-        correctly? Assume
-        you have alreay implemented the following code.</p>
-      <program>
-int x = random();
-</program>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <program>int y = x % 7;
-y = y + 1;</program>
-        </statement>
-        <feedback><p>
-          The first part creates a random number between 0 and 7 (8 numbers) and the second part
-            adds 1 so that
-            our random number is actually between 1 and 8.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <program>int y = x % 8;
-y = y + 1;</program>
-        </statement>
-        <feedback><p>
-          The first part creates a random number between 0 and 8 (9 numbers). This is too many.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <program>
-int y = x % 7;
-</program>
-        </statement>
-        <feedback><p>
-          This creates a random number between 0 and 7 (8 numbers), which are not the numbers we
-            are looking for.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <program>
-int y = x % 8;
-</program>
-        </statement>
-        <feedback><p>
-          The first part creates a random number between 0 and 8 (9 numbers). This is too many,
-            and not the numbers we are looking for.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc9">
-    <statement>
-      <p>Suppose you have defined the <c>fizzBuzz</c> function as the following</p>
-      <program>int fizzBuzz(const std::vector&lt;int&gt; &amp; vec, int num1, int num2) {
-    int count = 0;
-    for (size_t i = 0; i &lt; vec.size(); i++) {
-        if (vec[i] % num1 == 0 &amp;&amp; vec[i] % num2 == 0) {
-            count++;
-        }
-    }
-    return count;
-}</program>
-      <p>What would be printed in the following case?</p>
-      <program>std::vector&lt;int&gt; numbers = {6, 8, 14, 21, 28, 35, 36, 42, 49, 70, 81, 98};
-cout &lt;&lt; fizzBuzz(numbers, 2, 7);</program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>1</p>
-        </statement>
-        <feedback><p>
-          14 is 7 * 2. Don't forget about the other multiples of 7 and 2.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>2</p>
-        </statement>
-        <feedback><p>
-          See if you can find the other multiples of 7 and 2.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>3</p>
-        </statement>
-        <feedback><p>
-          See if you can find the other multiples of 7 and 2.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>4</p>
-        </statement>
-        <feedback><p>
-          See if you can find the other multiples of 7 and 2.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>5</p>
-        </statement>
-        <feedback><p>
-          14, 28, 42, 70, and 98 are all multiples of 7 and 2 and are counted by <c>fizzBuzz</c>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc10">
-    <statement>
-      <p>Suppose you have defined the <c>startsWith</c> function as the following</p>
-      <program>int startsWith(const std::vector&lt;std::string&gt; &amp; vec, char c) {
-    int count = 0;
-    int pos = 0;
-    for (size_t i = 0; i &lt; vec.size(); i++) {
-        pos = vec[i].find(" ");
-        if (vec[i][pos + 1] == c) {
-            count++;
-        }
-    }
-    return count;
-}</program>
-      <p>What would be printed in the following case?</p>
-      <program>std::vector&lt;std::string&gt; names = {"Ross Meldrum", "Monica Morrissey", "Maria Geller", "Marty Bing"};
-cout &lt;&lt; howMany(names, 'M');</program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>1</p>
-        </statement>
-        <feedback><p>
-          Is the function counting how many first and last <c>names</c> begin with <c>"M"</c>?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>2</p>
-        </statement>
-        <feedback><p>
-          The function is counting how many last names begin with <c>"M"</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>3</p>
-        </statement>
-        <feedback><p>
-          Is the function counting how many first <c>names</c> begin with <c>"M"</c>?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>4</p>
-        </statement>
-        <feedback><p>
-          Is the function counting how many elements in <c>names</c> contain <c>"M"</c>?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>5</p>
-        </statement>
-        <feedback><p>
-          Is the function counting how many times <c>"M"</c> appears in <c>names</c>?
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc11">
-    <statement>
-      <p>Suppose you have defined the <c>howMany</c> function as the following</p>
-      <program>int howMany(const std::vector&lt;std::string&gt;&amp; vec, char let) {
-    int count = 0;
-    for (size_t i = 0; i &lt; vec.size(); i++) {
-        for (size_t c = 0; c &lt; vec[i].size(); c++) {
-            if (vec[i][c] == let) {
-                count++;
-            }
-        }
-    }
-    return count;
-}</program>
-      <p>What is the value of counts after the following code is run?</p>
-      <program>std::vector&lt;std::string&gt; snacks = {"cheetos", "ruffles", "jalepeno chips", "oreos", "m&amp;ms"};
-std::vector&lt;char&gt; letters = {'a', 'e', 'i', 'o', 'u'};
-std::vector&lt;int&gt; counts = {};
-for (int i = 0; i &lt; letters.size(); ++i) {
-    counts.push_back(howMany(snacks, letters[i]));
-}</program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>{1, 6, 2, 6, 2}</p>
-        </statement>
-        <feedback><p>
-          What is being counted in <c>counts</c>?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>{1, 4, 1, 3, 1}</p>
-        </statement>
-        <feedback><p>
-          <c>counts</c> isn't a count of how many words each vowel appers in inside <c>snacks</c>.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>{1, 6, 1, 4, 1}</p>
-        </statement>
-        <feedback><p>
-          <c>counts</c> contains a count of how many times each vowel appers in <c>snacks</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>{1, 6, 2, 3, 2}</p>
-        </statement>
-        <feedback><p>
-          What is being counted in <c>counts</c>?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Error!</p>
-        </statement>
-        <feedback><p>
-          There isn't anything wrong with the code that would cause an error.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="vectors_mc12">
-    <statement>
-      <p>Suppose you have defined the <c>repeater</c> function as the following</p>
-      <program>int repeater(const std::vector&lt;int&gt;&amp; vec) {
-    int count = 0;
-    for (size_t i = 0; i &lt; vec.size(); i++) {
-        for (size_t j = 0; j &lt; vec.size(); j++) {
-            if ((vec[j] == vec[i]) &amp;&amp; (i != j)) {
-                count++;
-            }
-        }
-    }
-    return count;
-}</program>
-      <p>What is the value of counter after the following code is run?</p>
-      <program>std::vector&lt;int&gt; vals = {1,1,3,2,2,3,3,4,5,6,7,4,4,5};
-int counter = repeater(vals);</program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>169</p>
-        </statement>
-        <feedback><p>
-          What is being counted by <c>repeater</c> in each iteration of the outer loop? Definitely not
-            everything!
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>32</p>
-        </statement>
-        <feedback><p>
-          <c>repeater</c> does count repeats but does it consider values at the same indexes repeats?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>18</p>
-        </statement>
-        <feedback><p>
-          <c>repeater</c> considers the number of times each index shares a value with any of the other
-            indices.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>13</p>
-        </statement>
-        <feedback><p>
-          <c>repeater</c> dosen't simply count the number of elements.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
+        <choices>
+            <choice correct="yes"><statement><p>3</p></statement><feedback><p>Adding one element increases the size by one.</p></feedback></choice>
+            <choice><statement><p>2</p></statement><feedback><p>The new element is included in the size.</p></feedback></choice>
+            <choice><statement><p>The capacity</p></statement><feedback><p>Size and capacity are different properties.</p></feedback></choice>
+            <choice><statement><p>0</p></statement><feedback><p><c>push_back()</c> does not clear the vector.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_reserve">
+        <statement><p>What does <c>values.reserve(20)</c> do?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>It requests capacity for at least 20 elements without adding elements.</p></statement><feedback><p><c>reserve()</c> changes storage capacity, not the current size.</p></feedback></choice>
+            <choice><statement><p>It adds 20 zero elements.</p></statement><feedback><p>Use <c>resize()</c> when the number of elements should change.</p></feedback></choice>
+            <choice><statement><p>It guarantees the vector will never grow beyond 20 elements.</p></statement><feedback><p>A vector can obtain more storage later.</p></feedback></choice>
+            <choice><statement><p>It removes all elements.</p></statement><feedback><p><c>clear()</c> removes elements.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_const_reference">
+        <statement><p>Why is <c>const std::vector&lt;int&gt;&amp;</c> often preferred for a large read-only vector parameter?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>It avoids copying the vector and prevents modification through the parameter.</p></statement><feedback><p>The constant reference provides efficient read-only access.</p></feedback></choice>
+            <choice><statement><p>It creates a second vector that can be modified.</p></statement><feedback><p>A reference does not create a vector copy.</p></feedback></choice>
+            <choice><statement><p>It makes every element constant forever.</p></statement><feedback><p>The restriction applies through this parameter, not necessarily to the original object's entire lifetime.</p></feedback></choice>
+            <choice><statement><p>It changes the vector into an array.</p></statement><feedback><p>The object's type remains <c>std::vector</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_vector_of_objects">
+        <statement><p>What does <c>std::vector&lt;Student&gt; students</c> represent?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A vector whose elements are <c>Student</c> objects</p></statement><feedback><p>The template argument identifies the element type.</p></feedback></choice>
+            <choice><statement><p>A <c>Student</c> object containing a vector</p></statement><feedback><p>That would be a class with a vector data member.</p></feedback></choice>
+            <choice><statement><p>A vector that can store any unrelated type</p></statement><feedback><p>One vector has one element type.</p></feedback></choice>
+            <choice><statement><p>A vector of integer indices only</p></statement><feedback><p>The elements are <c>Student</c> objects, not indices.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_composition">
+        <statement><p>What design relationship is shown by a <c>Deck</c> class containing <c>std::vector&lt;Card&gt; cards</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>Composition</p></statement><feedback><p>The larger object is built from a collection of other objects.</p></feedback></choice>
+            <choice><statement><p>Inheritance</p></statement><feedback><p>No base class relationship is shown.</p></feedback></choice>
+            <choice><statement><p>Lexicographical comparison</p></statement><feedback><p>The example describes object structure, not ordering.</p></feedback></choice>
+            <choice><statement><p>Function overloading</p></statement><feedback><p>No functions with the same name are being overloaded.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_linear_search">
+        <statement><p>What is the usual order of a linear search?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>Inspect elements from the beginning until the target is found or the vector ends.</p></statement><feedback><p>Linear search proceeds in sequence.</p></feedback></choice>
+            <choice><statement><p>Inspect only the last element.</p></statement><feedback><p>A linear search may inspect many elements.</p></feedback></choice>
+            <choice><statement><p>Sort the vector automatically before every comparison.</p></statement><feedback><p>Linear search does not require sorting.</p></feedback></choice>
+            <choice><statement><p>Use the capacity as the target index.</p></statement><feedback><p>Capacity is storage information, not a valid search endpoint.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_empty_average">
+        <statement><p>Why should an average function check whether a vector is empty?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>To avoid dividing by zero.</p></statement><feedback><p>The average divides the total by the number of elements.</p></feedback></choice>
+            <choice><statement><p>Because an empty vector has no capacity.</p></statement><feedback><p>An empty vector may still have positive capacity.</p></feedback></choice>
+            <choice><statement><p>Because <c>size()</c> cannot be called on an empty vector.</p></statement><feedback><p><c>size()</c> is valid for an empty vector and returns zero.</p></feedback></choice>
+            <choice><statement><p>To force the vector to reallocate.</p></statement><feedback><p>Checking emptiness does not request storage.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_reallocation">
+        <statement><p>What may happen to a pointer or reference to a vector element after reallocation?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>It may no longer safely identify that element.</p></statement><feedback><p>Moving elements to new storage can invalidate earlier addresses.</p></feedback></choice>
+            <choice><statement><p>It automatically changes into an index.</p></statement><feedback><p>A pointer or reference does not become an index.</p></feedback></choice>
+            <choice><statement><p>It always identifies the new last element.</p></statement><feedback><p>Reallocation does not redefine the pointer's meaning.</p></feedback></choice>
+            <choice><statement><p>It prevents the vector from changing size.</p></statement><feedback><p>Reallocation supports further growth.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter8_exercise_erase">
+        <statement><p>What commonly happens to elements after an erased vector element?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>They shift toward the erased position.</p></statement><feedback><p>Erasing from the middle preserves sequence order by shifting later elements.</p></feedback></choice>
+            <choice><statement><p>They all become zero.</p></statement><feedback><p>Erasure removes an element; it does not zero all later elements.</p></feedback></choice>
+            <choice><statement><p>They move to the front of the vector in reverse order.</p></statement><feedback><p>The remaining sequence keeps its order.</p></feedback></choice>
+            <choice><statement><p>The vector's capacity must become zero.</p></statement><feedback><p>Erasing elements usually leaves capacity available.</p></feedback></choice>
+        </choices>
+    </exercise>
 </exercises>

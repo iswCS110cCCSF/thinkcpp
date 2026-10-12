@@ -1,81 +1,61 @@
-<?xml version="1.0" ?><section xml:id="chapter7_glossary">
+<?xml version="1.0" encoding="UTF-8"?>
+<glossary xml:id="chapter7_glossary">
     <title>Glossary</title>
-    <glossary>
-        <gi>
-            <title>object</title>
-            <p>A collection of related data that comes with a set of functions that
-            operate on it. The objects we have used so far are the <c>cout</c>
-            object provided by the system, and <c>string</c>s.</p>
-        </gi>
-        <gi>
-            <title>index</title>
-            <p>A variable or value used to select one of the members of an ordered
-            set, like a character from a string.</p>
-        </gi>
-        <gi>
-            <title>traverse</title>
-            <p>To iterate through all the elements of a set performing a similar
-            operation on each.</p>
-        </gi>
-        <gi>
-            <title>counter</title>
-            <p>A variable used to count something, usually initialized to zero and
-            then incremented.</p>
-        </gi>
-        <gi>
-            <title>increment</title>
-            <p>Increase the value of a variable by one. The increment operator in
-            C++ is <c>++</c>. In fact, that's why C++ is called C++, because it is
-            meant to be one better than C.</p>
-        </gi>
-        <gi>
-            <title>decrement</title>
-            <p>Decrease the value of a variable by one. The decrement operator in
-            C++ is <c>–</c>.</p>
-        </gi>
-        <gi>
-            <title>concatenate</title>
-            <p>To join two operands end-to-end.</p>
-        </gi>
-    </glossary>
-    <reading-questions>
-  <exercise label="chapter_seven_glossary">
-    <statement>
-      <p>Match the definition to the term.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">object</premise>
-        <response>A collection of related data that comes with a set of functions that operate on it.</response>
-      </match>
-      <match>
-        <premise order="2">index</premise>
-        <response>A variable or value used to select one of the members of an ordered set, like a character from a string.</response>
-      </match>
-      <match>
-        <premise order="3">traverse</premise>
-        <response>To iterate through all the elements of a set performing a similar operation on each.</response>
-      </match>
-      <match>
-        <premise order="4">counter</premise>
-        <response>A variable used to count something.</response>
-      </match>
-      <match>
-        <premise order="5">increment</premise>
-        <response>Increase the value of a variable by one.</response>
-      </match>
-      <match>
-        <premise order="6">decrement</premise>
-        <response>Decrease the value of a variable by one.</response>
-      </match>
-      <match>
-        <premise order="7">concatenate</premise>
-        <response>To join two operands end-to-end.</response>
-      </match>
-    </cardsort>
-  </exercise>
-    </reading-questions>
-</section>
+
+    <gi xml:id="glossary_ch7_concatenation">
+        <title>concatenation</title>
+        <p>Joining strings end to end.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_character-literal">
+        <title>character literal</title>
+        <p>A single character written in single quotation marks, such as <c>'A'</c>.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_string-literal">
+        <title>string literal</title>
+        <p>A sequence of characters written in double quotation marks, such as <c>"Hello"</c>.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_mutable">
+        <title>mutable</title>
+        <p>Capable of being changed after it is created.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_index">
+        <title>index</title>
+        <p>A zero-based position used to access an element of a string.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_traverse">
+        <title>traverse</title>
+        <p>To visit the characters of a string in sequence.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_counter">
+        <title>counter</title>
+        <p>A variable that records how many times an event occurs.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_substring">
+        <title>substring</title>
+        <p>A sequence of characters contained within a larger string.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_find">
+        <title><c>find()</c></title>
+        <p>A <c>std::string</c> member function that returns the index of the first matching character or substring.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_npos">
+        <title><c>std::string::npos</c></title>
+        <p>A special value returned by a string search when no match is found.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_classification">
+        <title>character classification</title>
+        <p>Testing a character to determine whether it is a letter, digit, whitespace character, or another category.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_lexicographical">
+        <title>lexicographical order</title>
+        <p>An ordering that compares strings from left to right, character by character.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_to-string">
+        <title><c>to_string()</c></title>
+        <p>A function that represents a value as text. <c>std::to_string</c> converts numeric values; a class can also provide its own member function with this name.</p>
+    </gi>
+    <gi xml:id="glossary_ch7_whitespace">
+        <title>whitespace</title>
+        <p>Spaces, tabs, and newline characters that separate visible text.</p>
+    </gi>
+</glossary>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter8_what-is-a-vector">
+    <title>What Is a <c>std::vector</c>?</title>
+
+    <p>
+        A <c>std::vector</c> is a container that stores a sequence of values of
+        the same type. A vector is useful when a program needs to work with a
+        collection whose number of elements may change while the program runs.
+    </p>
+
+    <p>
+        A vector has two related parts. The <term>vector object</term> keeps
+        track of the collection, while separately managed storage holds the
+        elements. The elements are stored contiguously, which means that each
+        element is next to the previous element in the sequence.
+    </p>
+
+    <program xml:id="program_vector_object_and_storage"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> scores;
+
+    scores.push_back(88);
+    scores.push_back(94);
+
+    std::cout << "Number of scores: " << scores.size() << '\n';
+    std::cout << "First score: " << scores[0] << '\n';
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The expression <c>scores.size()</c> reports the number of elements
+        currently stored. The expression <c>scores.capacity()</c> reports how
+        many elements can fit in the current storage before the vector must
+        obtain a larger block. Capacity is usually greater than or equal to
+        size.
+    </p>
+
+    <table xml:id="table_vector_memory_terms">
+        <title>Important vector memory terms</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="24%"/>
+            <col width="38%"/>
+            <col width="38%"/>
+            <row header="yes">
+                <cell>Term</cell>
+                <cell>Meaning</cell>
+                <cell>Related expression</cell>
+            </row>
+            <row>
+                <cell>Size</cell>
+                <cell>The number of elements currently stored.</cell>
+                <cell><c>values.size()</c></cell>
+            </row>
+            <row>
+                <cell>Capacity</cell>
+                <cell>The number of elements the current storage can hold.</cell>
+                <cell><c>values.capacity()</c></cell>
+            </row>
+            <row>
+                <cell>Reallocation</cell>
+                <cell>Obtaining new storage and moving the elements into it.</cell>
+                <cell>May occur during <c>push_back()</c></cell>
+            </row>
+            <row>
+                <cell>Contiguous storage</cell>
+                <cell>Elements occupy consecutive positions in the sequence.</cell>
+                <cell><c>values[index]</c></cell>
+            </row>
+        </tabular>
+    </table>
+
+    <subsection xml:id="chapter8_what-is-a-vector_size-and-capacity">
+        <title>Size and Capacity</title>
+
+        <p>
+            Size describes the vector's current contents. Capacity describes
+            the storage reserved for possible contents. For example, a vector
+            might contain three elements while having room for eight elements.
+            The exact capacity chosen automatically is implementation-dependent,
+            so programs should not depend on a particular growth amount.
+        </p>
+
+        <program xml:id="program_vector_reserve_capacity"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> values;
+    values.reserve(4);
+
+    std::cout << values.size() << '\n';
+    std::cout << values.capacity() << '\n';
+
+    values.push_back(10);
+    values.push_back(20);
+
+    std::cout << values.size() << '\n';
+    std::cout << values.capacity() << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            Here, <c>reserve(4)</c> requests storage for at least four
+            elements. It does not add four elements to the vector. The size is
+            still zero until values are inserted.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter8_what-is-a-vector_growth">
+        <title>What Happens as a Vector Grows?</title>
+
+        <p>
+            When a new element fits in unused capacity, the vector can construct
+            that element in its existing storage. When the storage is full, the
+            vector obtains a larger block, moves or copies the existing elements
+            into the new block, releases the old storage, and then adds the new
+            element.
+        </p>
+
+        <p>
+            This process is called <term>reallocation</term>. Reallocation is
+            managed automatically, but it has two consequences worth knowing:
+        </p>
+
+        <ul>
+            <li>Adding an element can occasionally require more work than usual.</li>
+            <li>Pointers, references, and iterators to elements may become invalid.</li>
+        </ul>
+
+        <p>
+            Removing elements normally decreases the size but does not
+            automatically release the vector's capacity. This allows a program
+            to remove elements and later add more without necessarily requesting
+            new storage each time. The details of storage management are handled
+            by the vector; programmers mainly need to understand size, capacity,
+            and the possibility of reallocation.
+        </p>
+    </subsection>
+
+    <exercise label="chapter8_what-is-a-vector_exercise_size-capacity">
+        <statement>
+            <p>
+                A vector has size 4 and capacity 10. What does this tell us?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>It contains four elements and has room for at least six more without reallocating.</p></statement>
+                <feedback><p>Size counts current elements; capacity describes available storage.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It contains ten elements, four of which are initialized.</p></statement>
+                <feedback><p>Capacity is not the number of current elements.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It can never contain more than ten elements.</p></statement>
+                <feedback><p>A vector can obtain larger storage when necessary.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It contains six uninitialized elements.</p></statement>
+                <feedback><p>Unused capacity is storage, not additional vector elements.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

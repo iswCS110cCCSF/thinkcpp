@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="string-input-and-object-text">
+    <title>Keyboard Input and Text Representation</title>
+
+    <p>
+        A program often needs to receive text typed by a user. In C++, keyboard
+        input is read through <c>std::cin</c>, an input stream provided by the
+        <c>&lt;iostream&gt;</c> header. The extraction operator <c>&gt;&gt;</c>
+        reads formatted values from that stream.
+    </p>
+
+    <subsection xml:id="chapter7_keyboard-input-words">
+        <title>Reading Words with <c>std::cin</c></title>
+
+        <p>
+            When <c>std::cin</c> reads a <c>std::string</c> with
+            <c>&gt;&gt;</c>, it skips leading whitespace and stops at the next
+            whitespace character. Therefore, it reads one word or token rather
+            than an entire line.
+        </p>
+
+        <program xml:id="program_read_keyboard_words"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string first_name;
+    int age;
+
+    std::cout << "Enter your first name and age: ";
+    std::cin >> first_name >> age;
+
+    std::cout << first_name << " is " << age << " years old.\n";
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            If the user types <c>Amina  twenty</c>, the integer input would not
+            succeed because <c>age</c> expects a number. At this stage, we focus
+            on providing input in the type and order the program expects. More
+            detailed stream-state recovery will be studied later.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter7_keyboard-input-lines">
+        <title>Reading Complete Lines</title>
+
+        <p>
+            Use <c>std::getline</c> when the input may contain spaces and the
+            program should read through the end of the line.
+        </p>
+
+        <program xml:id="program_read_keyboard_line"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string full_name;
+
+    std::cout << "Enter your full name: ";
+    std::getline(std::cin, full_name);
+
+    std::cout << "Hello, " << full_name << "!\n";
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The expression <c>std::cin &gt;&gt; name</c> reads one word, while
+            <c>std::getline(std::cin, name)</c> reads a complete line. Choosing
+            between them depends on whether spaces belong to the input value.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter7_mixing-input-operations">
+        <title>Mixing Word and Line Input</title>
+
+        <p>
+            The extraction operator leaves the newline produced by the user's
+            Enter key in the input stream. If <c>std::getline</c> is called
+            immediately afterward, it may read that leftover newline and return
+            an empty string.
+        </p>
+
+        <program xml:id="program_mix_cin_and_getline"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+int main() {
+    int age;
+    std::string full_name;
+
+    std::cin >> age;
+    std::cin.ignore();
+    std::getline(std::cin, full_name);
+
+    std::cout << full_name << " is " << age << " years old.\n";
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            In this simple example, <c>std::cin.ignore()</c> removes the
+            leftover newline before <c>std::getline</c> reads the name. This
+            form assumes that the user enters only the expected integer before
+            pressing Enter. Programs that must recover from invalid or extra
+            input require additional stream-handling techniques.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter7_input-boundary">
+        <title>Keep Input at the Program Boundary</title>
+
+        <p>
+            A common beginner mistake is to treat <c>std::cin</c> as the
+            ultimate source of data and read from it inside every function. A
+            better design keeps keyboard input near the program boundary,
+            usually in <c>main()</c> or in a function whose specific job is to
+            collect input.
+        </p>
+
+        <p>
+            Ordinary processing functions should receive data through parameters
+            and return results. This makes them easier to test, reuse, and call
+            with data from another source, such as a file or a test case.
+        </p>
+
+        <program xml:id="program_separate_input_from_processing"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int calculate_sum(int first_number, int second_number) {
+    return first_number + second_number;
+}
+
+int main() {
+    int first_number;
+    int second_number;
+
+    std::cin >> first_number >> second_number;
+
+    std::cout << calculate_sum(first_number, second_number) << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The function <c>calculate_sum</c> does not know or care where its
+            arguments came from. The function is responsible for processing;
+            <c>main()</c> is responsible for collecting keyboard input and
+            displaying the result.
+        </p>
+
+        <note>
+            <p>
+                A dedicated input function, such as
+                <c>read_full_name()</c>, may use <c>std::cin</c> when reading
+                input is that function's explicit responsibility. The guideline
+                is to avoid hidden keyboard-input dependencies in ordinary
+                calculation and processing functions.
+            </p>
+        </note>
+    </subsection>
+
+    <subsection xml:id="chapter7_object-to-string">
+        <title>Representing Objects as Text</title>
+
+        <p>
+            Input brings data into a program. A program also needs ways to turn
+            values and objects into text for output. The standard function
+            <c>std::to_string</c> converts a numeric value to a
+            <c>std::string</c>.
+        </p>
+
+        <p>
+            A user-defined object cannot automatically be sent to
+            <c>std::cout</c>. For example, <c>std::cout &lt;&lt; account;</c>
+            produces an error unless a suitable output operation has been
+            defined. A simple first design is to give the class a
+            <c>to_string()</c> member function that returns a
+            <c>std::string</c>.
+        </p>
+
+        <program xml:id="program_object_to_string"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+class Score {
+private:
+    int points;
+
+public:
+    Score(int starting_points)
+        : points{starting_points} {
+    }
+
+    std::string to_string() const {
+        return "Score{points=" + std::to_string(points) + "}";
+    }
+};
+
+int main() {
+    Score score{95};
+    std::cout << score.to_string() << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            Later, when operator overloading is studied, we can define
+            <c>operator&lt;&lt;</c> so that <c>std::cout &lt;&lt; score;</c> works
+            directly. For now, <c>to_string()</c> makes the conversion explicit.
+        </p>
+    </subsection>
+</section>

@@ -3,6 +3,7 @@
          xml:lang="en-US"
          xml:id="vectors">
   <title>Vectors</title>
+  	<!-- Old content
   <xi:include href='./vectors.ptx'/>
   <xi:include href='./accessing-elements.ptx'/>
   <xi:include href='./copying-vectors.ptx'/>
@@ -21,4 +22,20 @@
   <xi:include href='./exercises.ptx'/>
   <xi:include href='./mixed-up-code.ptx'/>
   <xi:include href='./active-code.ptx'/>
+  	-->
+	<!-- New content-->
+	<xi:include href="./what-is-a-vector.ptx"/>
+	<xi:include href="./creating-and-initializing-vectors.ptx"/>
+	<xi:include href="./accessing-vector-elements.ptx"/>
+	<xi:include href="./traversing-vectors.ptx"/>
+	<xi:include href="./vector-operations.ptx"/>
+	<xi:include href="./passing-vectors-to-functions.ptx"/>
+	<xi:include href="./vectors-of-structures-and-objects.ptx"/>
+	<xi:include href="./objects-containing-vectors.ptx"/>
+	<xi:include href="./searching-and-processing-vectors.ptx"/>
+	<xi:include href="./glossary.ptx"/>
+	<xi:include href="./exercises.ptx"/>
+	<xi:include href="./mixed-up-code.ptx"/>
+	<xi:include href="./coding-practice.ptx"/>
+
 </chapter>

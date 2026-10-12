@@ -66,4 +66,74 @@
         <title><c>std::array</c></title>
         <p>A C++ standard-library type that represents a fixed-size array.</p>
     </gi>
+
+    <gi xml:id="chapter6_glossary_deterministic">
+        <title>deterministic</title>
+        <p>Producing the same result when given the same starting conditions and input.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_pseudorandom">
+        <title>pseudorandom</title>
+        <p>Produced by a deterministic algorithm but appearing random enough for a particular purpose.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_random-state">
+        <title>state</title>
+        <p>The internal information a pseudorandom engine uses to calculate its next state and output.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_seed">
+        <title>seed</title>
+        <p>The initial value or state used to begin a pseudorandom sequence.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_random-engine">
+        <title>random-number engine</title>
+        <p>A generator that advances internal state and produces a sequence of pseudorandom values.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_probability-distribution">
+        <title>probability distribution</title>
+        <p>A rule describing how likely the possible outcomes of a random process are.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_mersenne-twister">
+        <title>Mersenne Twister</title>
+        <p>A family of fast pseudorandom algorithms. <c>std::mt19937</c> is a commonly used 32-bit version.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_random-device">
+        <title><c>std::random_device</c></title>
+        <p>A standard-library source that can provide seed material, often from an implementation's available environmental or hardware source.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_uniform-distribution">
+        <title>uniform distribution</title>
+        <p>A distribution in which outcomes in the selected range have equal probability, according to the distribution's type.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_simulation">
+        <title>simulation</title>
+        <p>A program-based model of a process or system used to study possible outcomes.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_monte-carlo">
+        <title>Monte Carlo simulation</title>
+        <p>A simulation that uses repeated random trials to estimate patterns or quantities.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_histogram">
+        <title>histogram</title>
+        <p>A collection of counts showing how often values fall into categories or intervals.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_law-of-large-numbers">
+        <title>law of large numbers</title>
+        <p>The tendency for observed proportions to approach expected probabilities as the number of trials increases.</p>
+    </gi>
+
+    <gi xml:id="chapter6_glossary_cryptographically-secure">
+        <title>cryptographically secure generator</title>
+        <p>A generator designed to make its output difficult to predict and suitable for security-sensitive values.</p>
+    </gi>
 </glossary>

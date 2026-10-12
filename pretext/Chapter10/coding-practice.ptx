@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="chapter8_coding-practice">
+    <title>Coding Practice</title>
+
+    <exercise label="chapter8_coding_sum_vector">
+        <statement>
+            <p>
+                Write <c>calculate_total</c>, which takes a
+                <c>const std::vector&lt;int&gt;&amp;</c> and returns the sum of its
+                elements. Test it with <c>{4, 8, 12}</c>.
+            </p>
+            <program interactive="activecode" language="cpp" label="chapter8_coding_sum_vector_editor">
+                <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int calculate_total(const std::vector<int>& values) {
+    // Write your solution here.
+}
+
+int main() {
+    const std::vector<int> values{4, 8, 12};
+    std::cout << calculate_total(values) << '\n';
+    return 0;
+}
+                ]]></code>
+            </program>
+        </statement>
+        <solution>
+            <program language="cpp"><code><![CDATA[
+int calculate_total(const std::vector<int>& values) {
+    int total = 0;
+
+    for (const int value : values) {
+        total += value;
+    }
+
+    return total;
+}
+            ]]></code></program>
+        </solution>
+    </exercise>
+
+    <exercise label="chapter8_coding_count_matching">
+        <statement>
+            <p>
+                Write <c>count_values_at_least</c>, which takes a constant
+                reference to a vector of integers and a minimum value. Return
+                how many elements are greater than or equal to the minimum.
+            </p>
+            <program interactive="activecode" language="cpp" label="chapter8_coding_count_matching_editor">
+                <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int count_values_at_least(const std::vector<int>& values, int minimum) {
+    // Write your solution here.
+}
+
+int main() {
+    const std::vector<int> values{3, 8, 10, 4, 12};
+    std::cout << count_values_at_least(values, 8) << '\n';
+    return 0;
+}
+                ]]></code>
+            </program>
+        </statement>
+        <solution>
+            <program language="cpp"><code><![CDATA[
+int count_values_at_least(const std::vector<int>& values, int minimum) {
+    int count = 0;
+
+    for (const int value : values) {
+        if (value >= minimum) {
+            ++count;
+        }
+    }
+
+    return count;
+}
+            ]]></code></program>
+        </solution>
+    </exercise>
+
+    <exercise label="chapter8_coding_scale_values">
+        <statement>
+            <p>
+                Write <c>scale_values</c>, which takes a vector of doubles by
+                non-constant reference and multiplies every element by the given
+                factor.
+            </p>
+            <program interactive="activecode" language="cpp" label="chapter8_coding_scale_values_editor">
+                <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+void scale_values(std::vector<double>& values, double factor) {
+    // Write your solution here.
+}
+
+int main() {
+    std::vector<double> values{1.5, 2.0, 3.5};
+    scale_values(values, 2.0);
+
+    for (const double value : values) {
+        std::cout << value << ' ';
+    }
+    std::cout << '\n';
+    return 0;
+}
+                ]]></code>
+            </program>
+        </statement>
+        <solution>
+            <program language="cpp"><code><![CDATA[
+void scale_values(std::vector<double>& values, double factor) {
+    for (double& value : values) {
+        value *= factor;
+    }
+}
+            ]]></code></program>
+        </solution>
+    </exercise>
+
+    <exercise label="chapter8_coding_student_average">
+        <statement>
+            <p>
+                Define a <c>Student</c> structure with a name and score. Then
+                write <c>calculate_average_score</c>, which takes a constant
+                reference to a vector of students and returns the average score.
+                Return 0.0 for an empty vector.
+            </p>
+            <program interactive="activecode" language="cpp" label="chapter8_coding_student_average_editor">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+#include <vector>
+
+struct Student {
+    std::string name;
+    double score;
+};
+
+double calculate_average_score(const std::vector<Student>& students) {
+    // Write your solution here.
+}
+
+int main() {
+    const std::vector<Student> students{
+        {"Amina", 92.0},
+        {"Luis", 84.0},
+        {"Mei", 98.0}
+    };
+
+    std::cout << calculate_average_score(students) << '\n';
+    return 0;
+}
+                ]]></code>
+            </program>
+        </statement>
+        <solution>
+            <program language="cpp"><code><![CDATA[
+double calculate_average_score(const std::vector<Student>& students) {
+    if (students.empty()) {
+        return 0.0;
+    }
+
+    double total = 0.0;
+    for (const Student& student : students) {
+        total += student.score;
+    }
+
+    return total / students.size();
+}
+            ]]></code></program>
+        </solution>
+    </exercise>
+
+    <exercise label="chapter8_coding_deck">
+        <statement>
+            <p>
+                Define a <c>Deck</c> class that contains a private
+                <c>std::vector&lt;std::string&gt;</c>. Add member functions named
+                <c>add_card</c> and <c>get_card_count</c>.
+            </p>
+            <program interactive="activecode" language="cpp" label="chapter8_coding_deck_editor">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+#include <vector>
+
+class Deck {
+private:
+    std::vector<std::string> cards;
+
+public:
+    void add_card(const std::string& card) {
+        // Write your solution here.
+    }
+
+    std::size_t get_card_count() const {
+        // Write your solution here.
+    }
+};
+
+int main() {
+    Deck deck;
+    deck.add_card("Ace of Spades");
+    deck.add_card("King of Hearts");
+    std::cout << deck.get_card_count() << '\n';
+    return 0;
+}
+                ]]></code>
+            </program>
+        </statement>
+        <solution>
+            <program language="cpp"><code><![CDATA[
+    void add_card(const std::string& card) {
+        cards.push_back(card);
+    }
+
+    std::size_t get_card_count() const {
+        return cards.size();
+    }
+            ]]></code></program>
+        </solution>
+    </exercise>
+</exercises>

@@ -180,4 +180,88 @@ for (const Rectangle& rectangle : rectangles) {
             <choice><statement><p>It creates a new class for every iteration.</p></statement><feedback><p>The objects were created before the loop began.</p></feedback></choice>
         </choices>
     </exercise>
+
+    <exercise label="chapter6_exercise_random_same_seed">
+        <statement>
+            <p>What relationship should we expect between the two sequences?</p>
+            <program language="cpp"><code><![CDATA[
+std::mt19937 first_generator{2468};
+std::mt19937 second_generator{2468};
+
+for (int count = 1; count <= 3; ++count) {
+    std::cout << first_generator() << ' '
+              << second_generator() << '\n';
+}
+            ]]></code></program>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>The first values match, the second values match, and the third values match.</p></statement><feedback><p>The same engine and same seed create the same deterministic sequence.</p></feedback></choice>
+            <choice><statement><p>Every value is 2468.</p></statement><feedback><p>The seed initializes the generator; it is not the output for every call.</p></feedback></choice>
+            <choice><statement><p>The first sequence is always larger.</p></statement><feedback><p>Neither generator is given an ordering advantage.</p></feedback></choice>
+            <choice><statement><p>The program cannot compile because two engines are created.</p></statement><feedback><p>A program may create multiple independent engines.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_exercise_random_device">
+        <statement><p>What is the most accurate description of <c>std::random_device</c> in this chapter?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>It can provide seed material for a pseudorandom engine.</p></statement><feedback><p>It is commonly used to help choose a starting point for another generator.</p></feedback></choice>
+            <choice><statement><p>It guarantees cryptographically secure passwords on every implementation.</p></statement><feedback><p>The standard does not make that security guarantee.</p></feedback></choice>
+            <choice><statement><p>It is a distribution that chooses values from 1 through 6.</p></statement><feedback><p>A distribution shapes engine output; <c>random_device</c> is a seed source.</p></feedback></choice>
+            <choice><statement><p>It always returns the current time in seconds.</p></statement><feedback><p>Its implementation may use an environmental or hardware source; it is not defined as the system clock.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_exercise_random_distribution_range">
+        <statement>
+            <p>What kind of values does this distribution request?</p>
+            <program language="cpp"><code><![CDATA[
+std::uniform_real_distribution<double> choose_fraction{0.0, 1.0};
+double fraction = choose_fraction(generator);
+            ]]></code></program>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>Floating-point values from 0.0 up to, but not including, 1.0.</p></statement><feedback><p><c>uniform_real_distribution</c> produces real values over the specified interval.</p></feedback></choice>
+            <choice><statement><p>Only the integers 0 and 1.</p></statement><feedback><p>Use an integer distribution for whole-number outcomes.</p></feedback></choice>
+            <choice><statement><p>Any value from negative infinity to positive infinity.</p></statement><feedback><p>The constructor bounds define the interval.</p></feedback></choice>
+            <choice><statement><p>Only the value 1.0.</p></statement><feedback><p>The distribution produces a range of possible real values.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_exercise_histogram_index">
+        <statement>
+            <p>Why does the die-roll simulation use <c>counts[roll - 1]</c>?</p>
+            <program language="cpp"><code><![CDATA[
+std::array<int, 6> counts{};
+int roll = roll_die(generator);  // 1 through 6
+++counts[roll - 1];
+            ]]></code></program>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>It maps die results 1 through 6 to array indexes 0 through 5.</p></statement><feedback><p>The die labels begin at 1, while array indexes begin at 0.</p></feedback></choice>
+            <choice><statement><p>It makes every roll equal to zero.</p></statement><feedback><p>The expression is used as an array index, not as a replacement for the roll.</p></feedback></choice>
+            <choice><statement><p>It creates seven counters.</p></statement><feedback><p>The array still contains six elements.</p></feedback></choice>
+            <choice><statement><p>It converts a die roll into a Boolean value.</p></statement><feedback><p>The expression performs integer subtraction.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_exercise_random_distribution_choice">
+        <statement><p>Which distribution is the best conceptual match for counting customer arrivals during a fixed time interval?</p></statement>
+        <choices>
+            <choice><statement><p>Uniform real distribution</p></statement><feedback><p>This models real-valued outcomes across an interval.</p></feedback></choice>
+            <choice correct="yes"><statement><p>Poisson distribution</p></statement><feedback><p>Poisson models counts of events in a fixed interval.</p></feedback></choice>
+            <choice><statement><p>Normal distribution</p></statement><feedback><p>Normal models values clustered around an average.</p></feedback></choice>
+            <choice><statement><p>Uniform integer distribution</p></statement><feedback><p>Uniform integer makes selected whole-number outcomes equally likely.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter6_exercise_random_simulation">
+        <statement><p>Why can a simulation of a complex system run many trials instead of predicting one exact future?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>Repeated trials can reveal patterns and estimate probabilities across many possible outcomes.</p></statement><feedback><p>Simulation studies distributions of outcomes rather than claiming certainty about one outcome.</p></feedback></choice>
+            <choice><statement><p>Random numbers make every trial identical.</p></statement><feedback><p>Pseudorandom trials can differ while following a chosen distribution.</p></feedback></choice>
+            <choice><statement><p>A simulation removes all uncertainty from the real system.</p></statement><feedback><p>A model helps study uncertainty; it does not eliminate it.</p></feedback></choice>
+            <choice><statement><p>Only one trial is needed when a model uses a loop.</p></statement><feedback><p>Monte Carlo reasoning depends on repeated trials.</p></feedback></choice>
+        </choices>
+    </exercise>
 </exercises>

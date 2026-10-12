@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter8_searching-and-processing-vectors">
+    <title>Searching and Processing Vectors</title>
+
+    <p>
+        A vector becomes useful when a program applies an algorithm to its
+        elements. A common first algorithm is a linear search: examine elements
+        from the beginning until the target is found or the vector ends.
+    </p>
+
+    <program xml:id="program_find_vector_value"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int find_first_value(const std::vector<int>& values, int target) {
+    for (std::size_t index = 0; index < values.size(); ++index) {
+        if (values[index] == target) {
+            return static_cast<int>(index);
+        }
+    }
+
+    return -1;
+}
+
+int main() {
+    const std::vector<int> values{8, 3, 12, 5};
+    const int index = find_first_value(values, 12);
+
+    std::cout << index << '\n';
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        This function returns the first matching index. It returns -1 when the
+        target is not found. The caller must treat -1 as a special result rather
+        than using it as a vector index.
+    </p>
+
+    <subsection xml:id="chapter8_searching-and-processing-vectors_counting">
+        <title>Counting and Summarizing</title>
+
+        <p>
+            Processing a vector often means maintaining a result while traversing
+            the elements. The result might count matches, add values, or track a
+            minimum or maximum.
+        </p>
+
+        <program xml:id="program_process_vector_values"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <vector>
+
+int count_values_at_least(const std::vector<int>& values, int minimum) {
+    int count = 0;
+
+    for (const int value : values) {
+        if (value >= minimum) {
+            ++count;
+        }
+    }
+
+    return count;
+}
+
+double calculate_average(const std::vector<int>& values) {
+    if (values.empty()) {
+        return 0.0;
+    }
+
+    int total = 0;
+    for (const int value : values) {
+        total += value;
+    }
+
+    return static_cast<double>(total) / values.size();
+}
+
+int main() {
+    const std::vector<int> scores{72, 88, 91, 64};
+
+    std::cout << count_values_at_least(scores, 80) << '\n';
+    std::cout << calculate_average(scores) << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The empty-vector check is important because an average requires a
+            nonzero number of values. Similar counting logic can be used for
+            histograms and simulations that store generated results in vectors.
+            The random-number concepts themselves were introduced in Chapter 6.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter8_searching-and-processing-vectors_design">
+        <title>Separate the Algorithm from the Collection</title>
+
+        <p>
+            The functions in this section receive a vector and perform one clear
+            task. Keeping traversal and processing inside named functions makes
+            the algorithm easier to test and allows the same function to process
+            vectors created in different parts of a program.
+        </p>
+
+        <exercise label="chapter8_searching-and-processing-vectors_exercise_search">
+            <statement>
+                <p>
+                    Why does <c>find_first_value()</c> return -1 when it does not
+                    find the target?
+                </p>
+            </statement>
+            <choices>
+                <choice correct="yes"><statement><p>It provides a special result that is not a valid nonnegative vector index.</p></statement><feedback><p>Valid indices begin at zero, so -1 can signal failure.</p></feedback></choice>
+                <choice><statement><p>Because -1 identifies the last element.</p></statement><feedback><p>The last valid index is size minus one.</p></feedback></choice>
+                <choice><statement><p>Because vector elements are always negative when absent.</p></statement><feedback><p>The vector does not contain a hidden negative element.</p></feedback></choice>
+                <choice><statement><p>Because returning zero would always be illegal.</p></statement><feedback><p>Zero is a valid index when the vector is nonempty.</p></feedback></choice>
+            </choices>
+        </exercise>
+    </subsection>
+</section>

@@ -1,824 +1,190 @@
-<?xml version="1.0"?>
-<exercises xml:id="chapter7_multiple-choice-exercises">
-  <title>Multiple Choice Exercises</title>
-  <exercise label="mce_7_1">
-    <statement>
-      <p>Which variables below is declared as a <c>string</c> type?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code>
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="chapter7_exercises">
+    <title>Exercises</title>
+
+    <exercise label="chapter7_exercise_declaration">
+        <statement><p>Which line declares and initializes a <c>std::string</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>std::string word{"hello"};</c></p></statement><feedback><p>The type, name, and initial value appear in one declaration.</p></feedback></choice>
+            <choice><statement><p><c>word = "hello";</c></p></statement><feedback><p>This assigns a value to an object that must already exist.</p></feedback></choice>
+            <choice><statement><p><c>std::string word;</c></p></statement><feedback><p>This declares an object but does not provide this initial text.</p></feedback></choice>
+            <choice><statement><p><c>std::string = "hello";</c></p></statement><feedback><p>A declaration needs a variable name.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_mutation">
+        <statement>
+            <p>What does this program print?</p>
+            <program language="cpp"><code><![CDATA[
+#include <iostream>
+#include <string>
+
 int main() {
-  int x = 0;
-  double y = 4.5;
- std::string word = "hello";
- std::string letter = "a";
-  char c = 'c';
-  bool isPrime = 1;
+    std::string word{"cold"};
+    word[0] = 'g';
+    std::cout << word << '\n';
 }
-</code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>
-            <c>x</c>
-          </p>
+            ]]></code></program>
         </statement>
-        <feedback><p>
-          <c>x</c> is an <c>int</c>.
-        </p></feedback>
-      </choice>
-      <choice>
+        <choices>
+            <choice correct="yes"><statement><p><c>gold</c></p></statement><feedback><p>Index 0 identifies the first character.</p></feedback></choice>
+            <choice><statement><p><c>cold</c></p></statement><feedback><p>The string is mutable, so its first character changes.</p></feedback></choice>
+            <choice><statement><p><c>g</c></p></statement><feedback><p>Only one character changes; the rest of the string remains.</p></feedback></choice>
+            <choice><statement><p>Compilation error</p></statement><feedback><p>Assigning a character through a non-const string index is valid.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_size">
         <statement>
-          <p>
-            <c>y</c>
-          </p>
+            <p>What value does <c>word.size()</c> produce for <c>"banana"</c>?</p>
         </statement>
-        <feedback><p>
-          <c>y</c> is a <c>double</c>.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
+        <choices>
+            <choice><statement><p>5</p></statement><feedback><p>Count every character, including the final <c>a</c>.</p></feedback></choice>
+            <choice correct="yes"><statement><p>6</p></statement><feedback><p><c>banana</c> contains six characters.</p></feedback></choice>
+            <choice><statement><p>7</p></statement><feedback><p>The terminating null character is not counted by <c>std::string::size()</c>.</p></feedback></choice>
+            <choice><statement><p>0</p></statement><feedback><p>The string is not empty.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_concatenation">
         <statement>
-          <p>
-            <c>word</c>
-          </p>
+            <p>What does the following statement print?</p>
+            <program language="cpp"><code><![CDATA[
+std::string first{"C++"};
+std::string second{"rocks"};
+std::cout << first + second << '\n';
+            ]]></code></program>
         </statement>
-        <feedback><p>
-          <c>word</c> is a <c>string</c>.
-        </p></feedback>
-      </choice>
-      <choice>
+        <choices>
+            <choice><statement><p><c>C++ rocks</c></p></statement><feedback><p>The plus operator does not insert a space.</p></feedback></choice>
+            <choice correct="yes"><statement><p><c>C++rocks</c></p></statement><feedback><p>The strings are joined end to end.</p></feedback></choice>
+            <choice><statement><p><c>C++</c></p></statement><feedback><p>The result of concatenation includes both operands.</p></feedback></choice>
+            <choice><statement><p>Compilation error</p></statement><feedback><p><c>std::string</c> supports concatenation with <c>+</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_to_string">
+        <statement><p>Which expression converts the integer <c>42</c> to a <c>std::string</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>std::to_string(42)</c></p></statement><feedback><p><c>std::to_string</c> converts a numeric value to text.</p></feedback></choice>
+            <choice><statement><p><c>std::string(42)</c></p></statement><feedback><p>This is not the intended numeric-to-text conversion.</p></feedback></choice>
+            <choice><statement><p><c>42.to_string()</c></p></statement><feedback><p>An integer literal does not provide this member function.</p></feedback></choice>
+            <choice><statement><p><c>std::convert(42)</c></p></statement><feedback><p>There is no standard function with this name.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_traversal">
         <statement>
-          <p>
-            <c>"hello"</c>
-          </p>
+            <p>Which loop prints every character without using an index?</p>
         </statement>
-        <feedback><p>
-          <q>hello</q> is not a variable.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
+        <choices>
+            <choice><statement><p><c>for (std::size_t index = 0; index &lt; word.size(); ++index)</c></p></statement><feedback><p>This is indexed traversal.</p></feedback></choice>
+            <choice correct="yes"><statement><p><c>for (const char character : word)</c></p></statement><feedback><p>This is range-based traversal.</p></feedback></choice>
+            <choice><statement><p><c>if (word.size() &gt; 0)</c></p></statement><feedback><p>An <c>if</c> statement does not visit every character.</p></feedback></choice>
+            <choice><statement><p><c>std::cout &lt;&lt; word.size()</c></p></statement><feedback><p>This prints the length, not each character.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_count">
         <statement>
-          <p>
-            <c>letter</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>letter</c> is a <c>string</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>c</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>c</c> is a <c>char</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>isPrime</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>isPrime</c> is a <c>bool</c>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_2">
-    <statement>
-      <p>What value should replace the question mark to output the character &#x2018;p'?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string quote = "Not my tempo.";
-  std::cout << quote[?];
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>11</p>
-        </statement>
-        <feedback><p>
-          Remember that indexing begins at 0 in C++.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>10</p>
-        </statement>
-        <feedback><p>
-          &#x2018;p' is located at index 10 in quote.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>4</p>
-        </statement>
-        <feedback><p>
-          The character &#x2018;m' is located at index 4.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>0</p>
-        </statement>
-        <feedback><p>
-          The character <q>N</q> is located at index 0.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_3">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string quote = "I love you 3000.";
-  int x = 3;
-  int y = 3 * x;
-  int z = 1;
-  if (y > 12) {
-    z = z + x + y;
-  }
-  else {
-    z = z + y - x;
-  }
-  std::cout << quote[z];
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>I</p>
-        </statement>
-        <feedback><p>
-          The value of <c>z</c> is not 0.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>0</p>
-        </statement>
-        <feedback><p>
-          The value of <c>z</c> is not greater than 11.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>o</p>
-        </statement>
-        <feedback><p>
-          The value of <c>z</c> is not 3.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>y</p>
-        </statement>
-        <feedback><p>
-          The final value of <c>z</c> is 7, and &#x2018;y' is at index 7 of <c>quote</c>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_4">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string quote = "Look at me. I'm the captain now.";
-  int x = quote.length();
-  std::cout << quote[x];
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>-1</p>
-        </statement>
-        <feedback><p>
-          -1 is not in <c>quote</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>w</p>
-        </statement>
-        <feedback><p>
-          <c>x</c> is not the index value of the character &#x2018;w'.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>.</p>
-        </statement>
-        <feedback><p>
-          <c>x</c> is not the index value of the last period.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>&#x2018; &#x2018;</p>
-        </statement>
-        <feedback><p>
-          It might be logical to think that memory outside of the <c>string</c> is empty space, but
-            there could be leftover junk values.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Error, we are indexing out of bounds.</p>
-        </statement>
-        <feedback><p>
-          <c>x</c> has a value of 32 and there is no index 32 in <c>quote</c>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_5">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string quote = "With great power comes great responsiblity.";
-  size_t n = 0;
-  while (n < quote.length()) {
-    if (n % 5 == 0) {
-      std::cout << quote[n];
+            <p>What does this program print?</p>
+            <program language="cpp"><code><![CDATA[
+std::size_t count = 0;
+for (const char character : std::string{"banana"}) {
+    if (character == 'a') {
+        ++count;
     }
-    n++;
-  }
 }
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>teeest</p>
+std::cout << count << '\n';
+            ]]></code></program>
         </statement>
-        <feedback><p>
-          Remember that indexing begins at 0 in C++.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
+        <choices>
+            <choice><statement><p>1</p></statement><feedback><p>There is more than one <c>a</c>.</p></feedback></choice>
+            <choice correct="yes"><statement><p>3</p></statement><feedback><p>The string contains three occurrences of <c>a</c>.</p></feedback></choice>
+            <choice><statement><p>6</p></statement><feedback><p>The counter changes only when the character is <c>a</c>.</p></feedback></choice>
+            <choice><statement><p>0</p></statement><feedback><p>The loop visits the characters and finds three matches.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_find">
         <statement>
-          <p>Wg reeest</p>
+            <p>What does <c>text.find("cat")</c> return when <c>text</c> is <c>"concatenate"</c>?</p>
         </statement>
-        <feedback><p>
-          If we print out every fifth character, including the first, this is the answer.
-        </p></feedback>
-      </choice>
-      <choice>
+        <choices>
+            <choice><statement><p><c>std::string::npos</c></p></statement><feedback><p>The substring does occur.</p></feedback></choice>
+            <choice correct="yes"><statement><p>3</p></statement><feedback><p>The first <c>c</c> of <c>cat</c> is at index 3.</p></feedback></choice>
+            <choice><statement><p>4</p></statement><feedback><p>Remember that indexing begins at zero.</p></feedback></choice>
+            <choice><statement><p>10</p></statement><feedback><p><c>find()</c> returns the first matching index.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_find_not_found">
+        <statement><p>What should a program test to determine whether a search failed?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>index == std::string::npos</c></p></statement><feedback><p><c>npos</c> represents “not found.”</p></feedback></choice>
+            <choice><statement><p><c>index == -1</c></p></statement><feedback><p>Do not assume that the result is represented by ordinary integer -1.</p></feedback></choice>
+            <choice><statement><p><c>index == 0</c></p></statement><feedback><p>Index 0 is a valid match.</p></feedback></choice>
+            <choice><statement><p><c>index &gt; text.size()</c></p></statement><feedback><p>Use the documented special value.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_lexicographical">
         <statement>
-          <p>ith reatpowe coms grat rsponibliy.</p>
+            <p>What is the result of <c>std::string{"Dog"} &lt; std::string{"Doghouse"}</c>?</p>
         </statement>
-        <feedback><p>
-          This is what we would get if we removed every fifth character.
-        </p></feedback>
-      </choice>
-      <choice>
+        <choices>
+            <choice correct="yes"><statement><p><c>true</c></p></statement><feedback><p>The strings match until the shorter string ends, so the shorter one comes first.</p></feedback></choice>
+            <choice><statement><p><c>false</c></p></statement><feedback><p>Prefix strings are ordered before their longer extensions.</p></feedback></choice>
+            <choice><statement><p>Compilation error</p></statement><feedback><p><c>std::string</c> supports relational comparisons.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_case">
+        <statement><p>Why can <c>"Zebra" &lt; "banana"</c> be true in ordinary string comparison?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The comparison is case-sensitive, and uppercase characters are ordered before lowercase characters.</p></statement><feedback><p>Lexicographical comparison follows character ordering, not a complete dictionary rule.</p></feedback></choice>
+            <choice><statement><p>Because every word beginning with Z comes before every word beginning with b.</p></statement><feedback><p>That is the opposite of the relevant character ordering.</p></feedback></choice>
+            <choice><statement><p>Because strings are compared by length only.</p></statement><feedback><p>Characters are compared from left to right.</p></feedback></choice>
+            <choice><statement><p>Because <c>&lt;</c> means “contains.”</p></statement><feedback><p>The operator performs ordering, not substring testing.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_first_difference">
+        <statement><p>What is the result of <c>std::string{"cat"} &lt; std::string{"car"}</c>?</p></statement>
+        <choices>
+            <choice><statement><p><c>true</c></p></statement><feedback><p>Compare the first pair of characters that differs.</p></feedback></choice>
+            <choice correct="yes"><statement><p><c>false</c></p></statement><feedback><p><c>'t'</c> has a greater character value than <c>'r'</c> in the comparison.</p></feedback></choice>
+            <choice><statement><p>They compare equal.</p></statement><feedback><p>The final characters are different.</p></feedback></choice>
+            <choice><statement><p>It depends only on the lengths.</p></statement><feedback><p>The first difference is found before length becomes relevant.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_array_comparison">
         <statement>
-          <p>With great power comes great responsiblity.</p>
+            <p>What does this program print?</p>
+            <program language="cpp"><code><![CDATA[
+std::array<int, 3> first{1, 4, 9};
+std::array<int, 3> second{1, 5, 0};
+std::cout << std::boolalpha << (first < second) << '\n';
+            ]]></code></program>
         </statement>
-        <feedback><p>
-          Take a look at the conditional in the while loop.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_6">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string quote = "Why so serious?";
-  size_t index = quote.find("a");
-  std::cout << index;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice correct="yes">
+        <choices>
+            <choice correct="yes"><statement><p><c>true</c></p></statement><feedback><p>The first elements match, and 4 is less than 5 at the first difference.</p></feedback></choice>
+            <choice><statement><p><c>false</c></p></statement><feedback><p>The final values are not considered after the second elements decide the result.</p></feedback></choice>
+            <choice><statement><p>Compilation error because arrays cannot be compared.</p></statement><feedback><p>C++17 provides relational operators for same-type, same-size <c>std::array</c> objects.</p></feedback></choice>
+            <choice><statement><p><c>1 4 9 1 5 0</c></p></statement><feedback><p>The program prints one Boolean result.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter7_exercise_array_prefix">
         <statement>
-          <p>
-            <c>string::npos</c>
-          </p>
+            <p>Why does <c>std::lexicographical_compare</c> report that <c>{1, 2}</c> comes before <c>{1, 2, 0}</c>?</p>
         </statement>
-        <feedback><p>
-          Since &#x2018;a' is not found in <c>quote</c>, the <c>find</c> function returns <c>string::npos</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>0</p>
-        </statement>
-        <feedback><p>
-          The character at index 0 is &#x2018;W'.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>8</p>
-        </statement>
-        <feedback><p>
-          The character at index 8 is &#x2018;e'.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>15</p>
-        </statement>
-        <feedback><p>
-          There is no index <c>15</c> in quote.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_7">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string quote = "How much wood could a woodchuck chuck if a woodchuck could chuck wood?";
-  size_t index = quote.find("wood");
-  std::cout << index;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>4</p>
-        </statement>
-        <feedback><p>
-          Although <q>wood</q> appears four times in the <c>string</c>, that is not what the <c>find</c>
-            function returns.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>9</p>
-        </statement>
-        <feedback><p>
-          The index of &#x2018;w' in the first <q>wood</q> is at index 9.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>10</p>
-        </statement>
-        <feedback><p>
-          Remember indexing begins at 0 in C++.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>12</p>
-        </statement>
-        <feedback><p>
-          The <c>find</c> function returns the index of the first character of the found string.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>22</p>
-        </statement>
-        <feedback><p>
-          The <c>find</c> function returns the index of the first character of the found string.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_8">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string quote = "How much wood could a woodchuck chuck if a woodchuck could chuck wood?";
-  size_t index = quote.find('w', quote.find("wood") + 1);
-  std::cout << index;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>9</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the starting index for where we should start looking.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>22</p>
-        </statement>
-        <feedback><p>
-          After the first &#x2018;w', the second &#x2018;w' appears at index 22.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>43</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the <c>find</c> function and its arguments.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>65</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the <c>find</c> function and its arguments.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_9">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string quote = "Life is like a box of chocolates. You never know what you're gonna get.";
-  size_t i = 0;
-  size_t count = 0;
-  while (i < quote.length()) {
-    if (quote[i] == 'e') {
-      count++;
-    }
-    i++;
-  }
-  std::cout << count;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>0</p>
-        </statement>
-        <feedback><p>
-          Are there any occurences of the letter &#x2018;e' in <c>quote</c>?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>6</p>
-        </statement>
-        <feedback><p>
-          Count the number of &#x2018;e's in <c>quote</c>.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>7</p>
-        </statement>
-        <feedback><p>
-          There are 7 occurences of the letter &#x2018;e' in <c>quote</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>12</p>
-        </statement>
-        <feedback><p>
-          Count the number of &#x2018;e's in <c>quote</c>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_10">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string call = "Marco!";
- std::string response = "Polo!";
- std::string output = "call" + "response";
-  std::cout << output;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Marco! Polo!</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the initialization of <c>output</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Marco!Polo!</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the initialization of <c>output</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>call response</p>
-        </statement>
-        <feedback><p>
-          Can we concatenate <q>call</q> and <q>response</q>?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>callresponse</p>
-        </statement>
-        <feedback><p>
-          Can we concatenate <q>call</q> and <q>response</q>?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Error!</p>
-        </statement>
-        <feedback><p>
-          We cannot concatenate native C strings like <q>call</q> and <q>response</q>, so this
-            code results in an error.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_11">
-    <statement>
-      <p>An error occured while delivering a message. All instances of the letter &#x2018;s'
-        got replaced by &#x2018;X's. Can you complete the code below to fix this error by selecting
-        the correct line of code to replace the question marks?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string question = "Honey? Where'X my Xuper Xuit?";
-  size_t i = 0;
-  while (i < question.length()) {
-    if (question[i] == 'X') {
-      ?????
-    }
-    i++;
-  }
-  std::cout << question;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>
-            <c>question['X'] = 's';</c>
-          </p>
-        </statement>
-        <feedback><p>
-          The argument in the <c>[]</c> operator should be a position in the string.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>'s' = question[i];</c>
-          </p>
-        </statement>
-        <feedback><p>
-          Check the order of your assignment.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>'X' = 's';</c>
-          </p>
-        </statement>
-        <feedback><p>
-          We cannot assign the value of &#x2018;s' to &#x2018;X'.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>question[i] = 's';</c>
-          </p>
-        </statement>
-        <feedback><p>
-          This will successfully replace all instances of &#x2018;X' with &#x2018;s'.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_12">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
-  std::cout << ("butter" < "butterfly");
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>butterbutterfly</p>
-        </statement>
-        <feedback><p>
-          The operator between <q>butter</q> and <q>butterfly</q> is the <c>&lt;</c> operator, not <c>&lt;&lt;</c>
-            .
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>0</p>
-        </statement>
-        <feedback><p>
-          Does <q>butter</q> come before or after <q>butterfly</q>?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>1</p>
-        </statement>
-        <feedback><p>
-          <q>butter</q> comes before <q>butterfly</q> in the dictionary.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>False</p>
-        </statement>
-        <feedback><p>
-          In C++, boolean values are outputted as either a 0 or 1.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>True</p>
-        </statement>
-        <feedback><p>
-          In C++, boolean values are outputted as either a 0 or 1.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_13">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
-  std::string quote = "Suffering builds character";
-   size_t count = 0;
-   size_t index = 17;
-   while ( index != quote.length() ) {
-     if ( quote[index] == 'a' || quote[index] == 'e' ) {
-       count = count + index;
-     }
-     index = index + 1;
-   }
-   std::cout << count << std::endl ;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>3</p>
-        </statement>
-        <feedback><p>
-          The code is not counting the number of a's or e's after position 17. Rather adding up
-            their indices.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>4</p>
-        </statement>
-        <feedback><p>
-          The code is not counting the number of a's or e's. Rather adding up their indices.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>64</p>
-        </statement>
-        <feedback><p>
-          Correct! the occurences of &#x2018;a' are 19 and 21, while that of &#x2018;e' is 24
-            (after <c>index</c> 17). The total is 64.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>68</p>
-        </statement>
-        <feedback><p>
-          The first occurence of &#x2018;e' is at index 4 so it is not counted.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_7_14">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program language="cpp"
-               line-numbers="yes">
-        <code><![CDATA[
-int main() {
-  std::string quote = "Its Bond, James Bond";
-   size_t index = 1;
-   while( index < quote.length() ) {
-     quote[index] = 'M';
-     index = index * 2;
-   }
-   std::cout << quote << std::endl ;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <q>IMM MondM James Mond</q>
-          </p>
-        </statement>
-        <feedback><p>
-          Correct! We change indices 1,2,4,8,16 to M before <c>index</c> becomes <c>&gt;</c> <c>quote.length()</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <q>IMMMMMMMMMMMMMMMMMMM</q>
-          </p>
-        </statement>
-        <feedback><p>
-          We are not increasing <c>index</c> by 1, instead we are doubling it.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <q>MMM MondM James Mond</q>
-          </p>
-        </statement>
-        <feedback><p>
-          We don't start at position 0 this time.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <q>IMsMBMnM,MJMmMsMBMnM</q>
-          </p>
-        </statement>
-        <feedback><p>
-          we are not increasing <c>index</c> by 2, instead we are doubling it.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
+        <choices>
+            <choice correct="yes"><statement><p>The first range is a proper prefix of the second range.</p></statement><feedback><p>When all shared elements match, the shorter range comes first.</p></feedback></choice>
+            <choice><statement><p>The value 0 is always smaller than every other value.</p></statement><feedback><p>The final 0 is not reached as a first difference.</p></feedback></choice>
+            <choice><statement><p>The algorithm compares only the first elements.</p></statement><feedback><p>It continues while corresponding elements match.</p></feedback></choice>
+            <choice><statement><p>Different-sized arrays cannot be compared in any way.</p></statement><feedback><p>The built-in array relational operators have restrictions, but the general range algorithm supports different lengths.</p></feedback></choice>
+        </choices>
+    </exercise>
 </exercises>
