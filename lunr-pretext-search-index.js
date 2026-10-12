@@ -10096,7 +10096,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "8.1",
   "title": "What Is a <code class=\"code-inline tex2jax_ignore\">std::vector<\/code>?",
-  "body": " What Is a std::vector ?  A std::vector is a container that stores a sequence of values of the same type. A vector is useful when a program needs to work with a collection whose number of elements may change while the program runs.  A vector has two related parts. The vector object keeps track of the collection, while separately managed storage holds the elements. The elements are stored contiguously, which means that each element is next to the previous element in the sequence.   #include <iostream> #include <vector> int main() { std::vector<int> scores; scores.push_back(88); scores.push_back(94); std::cout << \"Number of scores: \" << scores.size() << '\\n'; std::cout << \"First score: \" << scores[0] << '\\n'; return 0; }   The expression scores.size() reports the number of elements currently stored. The expression scores.capacity() reports how many elements can fit in the current storage before the vector must obtain a larger block. Capacity is usually greater than or equal to size.   Important vector memory terms       Term  Meaning  Related expression    Size  The number of elements currently stored.  values.size()    Capacity  The number of elements the current storage can hold.  values.capacity()    Reallocation  Obtaining new storage and moving the elements into it.  May occur during push_back()    Contiguous storage  Elements occupy consecutive positions in the sequence.  values[index]      Size and Capacity  Size describes the vector's current contents. Capacity describes the storage reserved for possible contents. For example, a vector might contain three elements while having room for eight elements. The exact capacity chosen automatically is implementation-dependent, so programs should not depend on a particular growth amount.   #include <iostream> #include <vector> int main() { std::vector<int> values; values.reserve(4); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; values.push_back(10); values.push_back(20); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; return 0; }   Here, reserve(4) requests storage for at least four elements. It does not add four elements to the vector. The size is still zero until values are inserted.    What Happens as a Vector Grows?  When a new element fits in unused capacity, the vector can construct that element in its existing storage. When the storage is full, the vector obtains a larger block, moves or copies the existing elements into the new block, releases the old storage, and then adds the new element.  This process is called reallocation . Reallocation is managed automatically, but it has two consequences worth knowing:   Adding an element can occasionally require more work than usual.  Pointers, references, and iterators to elements may become invalid.   Removing elements normally decreases the size but does not automatically release the vector's capacity. This allows a program to remove elements and later add more without necessarily requesting new storage each time. The details of storage management are handled by the vector; programmers mainly need to understand size, capacity, and the possibility of reallocation.     A vector has size 4 and capacity 10. What does this tell us?     It contains four elements and has room for at least six more without reallocating.  Size counts current elements; capacity describes available storage.    It contains ten elements, four of which are initialized.  Capacity is not the number of current elements.    It can never contain more than ten elements.  A vector can obtain larger storage when necessary.    It contains six uninitialized elements.  Unused capacity is storage, not additional vector elements.     "
+  "body": " What Is a std::vector ?  A std::vector is a container that stores a sequence of values of the same type. A vector is useful when a program needs to work with a collection whose number of elements may change while the program runs.  A vector has two related parts. The vector object keeps track of the collection, while separately managed storage holds the elements. The elements are stored contiguously, which means that each element is next to the previous element in the sequence.   #include <iostream> #include <vector> int main() { std::vector<int> scores; scores.push_back(88); scores.push_back(94); std::cout << \"Number of scores: \" << scores.size() << '\\n'; std::cout << \"First score: \" << scores[0] << '\\n'; return 0; }   The expression scores.size() reports the number of elements currently stored. The expression scores.capacity() reports how many elements can fit in the current storage. Capacity is always greater than or equal to size.   Important vector memory terms       Term  Meaning  Related expression    Size  The number of elements currently stored.  values.size()    Capacity  The number of elements the current storage can hold.  values.capacity()    Reallocation  Obtaining new storage and moving or copying the elements into it.  Occurs when an insertion would make size exceed capacity.    Contiguous storage  Elements occupy consecutive positions in the sequence.  values[index]      Size and Capacity  Size describes the vector's current contents. Capacity describes the storage reserved for possible contents. For example, a vector might contain three elements while having room for eight elements. The exact capacity chosen automatically is implementation-dependent, so programs must not depend on a particular growth amount.   #include <iostream> #include <vector> int main() { std::vector<int> values; values.reserve(4); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; values.push_back(10); values.push_back(20); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; return 0; }   Here, reserve(4) requests storage for at least four elements. It does not add four elements to the vector. The size is still zero until values are inserted. After this call, the standard guarantees that insertions will not reallocate until an insertion would make the size greater than the current capacity.    What Happens as a Vector Grows?  For an operation such as push_back() , reallocation is required when the new size would be greater than the old capacity. If the new element fits within the current capacity, the vector can construct it in the existing storage. Otherwise, the vector obtains a larger block, moves or copies the existing elements into it, releases the old storage, and adds the new element.  The C++ standard does not require the capacity to grow by exactly 1.5 times, 2 times, or any other fixed factor. A library implementation commonly grows capacity geometrically because that supports the required amortized constant-time insertion at the end, but the particular growth strategy can vary between implementations and library versions. Programs should use reserve() when they know an expected size, rather than relying on a guessed growth factor.   #include <iostream> #include <cstddef> #include <vector> int main() { std::vector<int> values; std::size_t previous_capacity = values.capacity(); for (int value = 0; value < 12; ++value) { values.push_back(value); if (values.capacity() != previous_capacity) { std::cout << \"size: \" << values.size() << \", capacity: \" << values.capacity() << '\\n'; previous_capacity = values.capacity(); } } return 0; }   This program observes the growth strategy used by the current standard-library implementation. Its exact output is not portable; the important observation is that capacity changes only when the implementation must obtain more storage.  This process is called reallocation . Reallocation is managed automatically, but it has two consequences worth knowing:   Adding an element can occasionally require more work than usual.  Pointers, references, and iterators to elements may become invalid.   Removing elements normally decreases the size but does not automatically release the vector's capacity. This allows a program to remove elements and later add more without necessarily requesting new storage each time. The details of storage management are handled by the vector; programmers mainly need to understand size, capacity, and the possibility of reallocation.     A vector has size 4 and capacity 10. What does this tell us?     It contains four elements and has room for at least six more without reallocating.  Size counts current elements; capacity describes available storage.    It contains ten elements, four of which are initialized.  Capacity is not the number of current elements.    It can never contain more than ten elements.  A vector can obtain larger storage when necessary.    It contains six uninitialized elements.  Unused capacity is storage, not additional vector elements.     "
 },
 {
   "id": "chapter8_what-is-a-vector-2",
@@ -10123,7 +10123,7 @@ var ptx_lunr_docs = [
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The expression scores.size() reports the number of elements currently stored. The expression scores.capacity() reports how many elements can fit in the current storage before the vector must obtain a larger block. Capacity is usually greater than or equal to size. "
+  "body": "The expression scores.size() reports the number of elements currently stored. The expression scores.capacity() reports how many elements can fit in the current storage. Capacity is always greater than or equal to size. "
 },
 {
   "id": "table_vector_memory_terms",
@@ -10132,7 +10132,7 @@ var ptx_lunr_docs = [
   "type": "Table",
   "number": "8.1.1",
   "title": "Important vector memory terms",
-  "body": " Important vector memory terms       Term  Meaning  Related expression    Size  The number of elements currently stored.  values.size()    Capacity  The number of elements the current storage can hold.  values.capacity()    Reallocation  Obtaining new storage and moving the elements into it.  May occur during push_back()    Contiguous storage  Elements occupy consecutive positions in the sequence.  values[index]    "
+  "body": " Important vector memory terms       Term  Meaning  Related expression    Size  The number of elements currently stored.  values.size()    Capacity  The number of elements the current storage can hold.  values.capacity()    Reallocation  Obtaining new storage and moving or copying the elements into it.  Occurs when an insertion would make size exceed capacity.    Contiguous storage  Elements occupy consecutive positions in the sequence.  values[index]    "
 },
 {
   "id": "chapter8_what-is-a-vector_size-and-capacity",
@@ -10141,7 +10141,7 @@ var ptx_lunr_docs = [
   "type": "Subsection",
   "number": "8.1.1",
   "title": "Size and Capacity",
-  "body": " Size and Capacity  Size describes the vector's current contents. Capacity describes the storage reserved for possible contents. For example, a vector might contain three elements while having room for eight elements. The exact capacity chosen automatically is implementation-dependent, so programs should not depend on a particular growth amount.   #include <iostream> #include <vector> int main() { std::vector<int> values; values.reserve(4); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; values.push_back(10); values.push_back(20); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; return 0; }   Here, reserve(4) requests storage for at least four elements. It does not add four elements to the vector. The size is still zero until values are inserted.  "
+  "body": " Size and Capacity  Size describes the vector's current contents. Capacity describes the storage reserved for possible contents. For example, a vector might contain three elements while having room for eight elements. The exact capacity chosen automatically is implementation-dependent, so programs must not depend on a particular growth amount.   #include <iostream> #include <vector> int main() { std::vector<int> values; values.reserve(4); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; values.push_back(10); values.push_back(20); std::cout << values.size() << '\\n'; std::cout << values.capacity() << '\\n'; return 0; }   Here, reserve(4) requests storage for at least four elements. It does not add four elements to the vector. The size is still zero until values are inserted. After this call, the standard guarantees that insertions will not reallocate until an insertion would make the size greater than the current capacity.  "
 },
 {
   "id": "chapter8_what-is-a-vector_growth",
@@ -10150,7 +10150,7 @@ var ptx_lunr_docs = [
   "type": "Subsection",
   "number": "8.1.2",
   "title": "What Happens as a Vector Grows?",
-  "body": " What Happens as a Vector Grows?  When a new element fits in unused capacity, the vector can construct that element in its existing storage. When the storage is full, the vector obtains a larger block, moves or copies the existing elements into the new block, releases the old storage, and then adds the new element.  This process is called reallocation . Reallocation is managed automatically, but it has two consequences worth knowing:   Adding an element can occasionally require more work than usual.  Pointers, references, and iterators to elements may become invalid.   Removing elements normally decreases the size but does not automatically release the vector's capacity. This allows a program to remove elements and later add more without necessarily requesting new storage each time. The details of storage management are handled by the vector; programmers mainly need to understand size, capacity, and the possibility of reallocation.  "
+  "body": " What Happens as a Vector Grows?  For an operation such as push_back() , reallocation is required when the new size would be greater than the old capacity. If the new element fits within the current capacity, the vector can construct it in the existing storage. Otherwise, the vector obtains a larger block, moves or copies the existing elements into it, releases the old storage, and adds the new element.  The C++ standard does not require the capacity to grow by exactly 1.5 times, 2 times, or any other fixed factor. A library implementation commonly grows capacity geometrically because that supports the required amortized constant-time insertion at the end, but the particular growth strategy can vary between implementations and library versions. Programs should use reserve() when they know an expected size, rather than relying on a guessed growth factor.   #include <iostream> #include <cstddef> #include <vector> int main() { std::vector<int> values; std::size_t previous_capacity = values.capacity(); for (int value = 0; value < 12; ++value) { values.push_back(value); if (values.capacity() != previous_capacity) { std::cout << \"size: \" << values.size() << \", capacity: \" << values.capacity() << '\\n'; previous_capacity = values.capacity(); } } return 0; }   This program observes the growth strategy used by the current standard-library implementation. Its exact output is not portable; the important observation is that capacity changes only when the implementation must obtain more storage.  This process is called reallocation . Reallocation is managed automatically, but it has two consequences worth knowing:   Adding an element can occasionally require more work than usual.  Pointers, references, and iterators to elements may become invalid.   Removing elements normally decreases the size but does not automatically release the vector's capacity. This allows a program to remove elements and later add more without necessarily requesting new storage each time. The details of storage management are handled by the vector; programmers mainly need to understand size, capacity, and the possibility of reallocation.  "
 },
 {
   "id": "chapter8_what-is-a-vector_exercise_size-capacity",
@@ -10945,11 +10945,1199 @@ var ptx_lunr_docs = [
   "body": "  Define a Deck class that contains a private std::vector<std::string> . Add member functions named add_card and get_card_count .   #include <iostream> #include <string> #include <vector> class Deck { private: std::vector<std::string> cards; public: void add_card(const std::string& card) { \/\/ Write your solution here. } std::size_t get_card_count() const { \/\/ Write your solution here. } }; int main() { Deck deck; deck.add_card(\"Ace of Spades\"); deck.add_card(\"King of Hearts\"); std::cout << deck.get_card_count() << '\\n'; return 0; }     void add_card(const std::string& card) { cards.push_back(card); } std::size_t get_card_count() const { return cards.size(); }   "
 },
 {
+  "id": "chapter9_why-pointers-exist",
+  "level": "1",
+  "url": "chapter9_why-pointers-exist.html",
+  "type": "Section",
+  "number": "9.1",
+  "title": "Why Pointers Exist",
+  "body": " Why Pointers Exist  Every object in a running program occupies storage. The storage has a location, and that location has an address. A pointer is an object that stores the address of another object.  A variable name gives a program a direct way to refer to an object. A pointer gives a program an indirect way to refer to the same object. This indirect access is useful when a function must work with an object owned by its caller, when the object may be optional, or when storage must last beyond the scope in which it was created.   #include <iostream> int main() { int score = 90; int* score_pointer = &score; std::cout << \"Score: \" << score << '\\n'; std::cout << \"Address: \" << score_pointer << '\\n'; return 0; }   The address printed by this program is not a value that a programmer should predict. It can change from one run to another. The important relationship is that score_pointer stores the address of score .  The following full Python Tutor interface lets you step through the example and inspect its storage. It opens with the example already loaded and displays memory addresses.   The pointer can also be used to change the object it identifies:   #include <iostream> int main() { int score = 90; int* score_pointer = &score; *score_pointer = 95; std::cout << score << '\\n'; return 0; }    Some ways objects can obtain storage       Storage situation  Main idea  Typical example    Automatic storage  Storage is created and released as a scope is entered and left.  int score; inside a function    Static storage  Storage lasts for the program's static lifetime.  A namespace-scope variable    Dynamic storage  Storage is requested and released explicitly by the program.  new int{90} and delete     This chapter first studies pointers as addresses. Later it uses pointers to explain dynamically managed storage. A pointer itself does not mean that the pointed-to object was dynamically allocated; it can point to an ordinary local object as in the example above.   What does a pointer normally store?   The address of another object A pointer provides an indirect way to refer to an object.  The complete contents of every object in memory A pointer stores an address, not a complete copy of the object.  The size of the object only Object size and object address are different ideas.  The name of the object Names are source-code identifiers, not stored pointer values.      Arrange the statements to change a local object through a pointer.    int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';     Which object can a pointer identify?   An ordinary local object such as score A pointer can store the address of a local object; it does not require dynamic allocation.  Only an object created with new Pointers can identify local, static, or dynamically allocated objects.  Only an object stored in a vector A pointer is not limited to a particular container.  Only an object whose value is an address The pointer stores an address; the identified object may have another type.     Why should a program not assume that &score will have the same numeric address on every run?   The program's storage locations can vary between executions. The relationship between the pointer and object matters; the particular numeric address is not predictable.  The address changes whenever score is incremented. Changing an object's value does not normally move the object.  A pointer stores the object's current value instead of its address. A pointer stores an address, not the pointed-to value.  The address is always zero until new is used. Local objects normally have valid nonzero addresses.     Which statement about a pointer and dynamic storage is correct?   A pointer can identify an ordinary local object without owning dynamic storage. The pointer's type and the object's storage duration are separate ideas.  Every pointer automatically owns the object it identifies. Ownership must be established by the program's design; a pointer alone does not imply ownership.  Only dynamically allocated objects have addresses. All objects in storage have locations and addresses.  A local object must be released with delete . Local objects are managed by their scope, not by matching delete .    "
+},
+{
+  "id": "chapter9_why-pointers-exist-2",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Every object in a running program occupies storage. The storage has a location, and that location has an address. A pointer is an object that stores the address of another object. "
+},
+{
+  "id": "chapter9_why-pointers-exist-3",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A variable name gives a program a direct way to refer to an object. A pointer gives a program an indirect way to refer to the same object. This indirect access is useful when a function must work with an object owned by its caller, when the object may be optional, or when storage must last beyond the scope in which it was created. "
+},
+{
+  "id": "chapter9_why-pointers-exist-5",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist-5",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The address printed by this program is not a value that a programmer should predict. It can change from one run to another. The important relationship is that score_pointer stores the address of score . "
+},
+{
+  "id": "chapter9_why-pointers-exist-6",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist-6",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The following full Python Tutor interface lets you step through the example and inspect its storage. It opens with the example already loaded and displays memory addresses. "
+},
+{
+  "id": "chapter9_why-pointers-exist-8",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist-8",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The pointer can also be used to change the object it identifies: "
+},
+{
+  "id": "table_ch9_pointer_storage_kinds",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#table_ch9_pointer_storage_kinds",
+  "type": "Table",
+  "number": "9.1.1",
+  "title": "Some ways objects can obtain storage",
+  "body": " Some ways objects can obtain storage       Storage situation  Main idea  Typical example    Automatic storage  Storage is created and released as a scope is entered and left.  int score; inside a function    Static storage  Storage lasts for the program's static lifetime.  A namespace-scope variable    Dynamic storage  Storage is requested and released explicitly by the program.  new int{90} and delete    "
+},
+{
+  "id": "chapter9_why-pointers-exist-11",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist-11",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "This chapter first studies pointers as addresses. Later it uses pointers to explain dynamically managed storage. A pointer itself does not mean that the pointed-to object was dynamically allocated; it can point to an ordinary local object as in the example above. "
+},
+{
+  "id": "chapter9_why-pointers-exist_exercise_address",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_address",
+  "type": "Checkpoint",
+  "number": "9.1.1",
+  "title": "",
+  "body": " What does a pointer normally store?   The address of another object A pointer provides an indirect way to refer to an object.  The complete contents of every object in memory A pointer stores an address, not a complete copy of the object.  The size of the object only Object size and object address are different ideas.  The name of the object Names are source-code identifiers, not stored pointer values.   "
+},
+{
+  "id": "chapter9_why-pointers-exist_parsons_indirect_access",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_parsons_indirect_access",
+  "type": "Checkpoint",
+  "number": "9.1.2",
+  "title": "",
+  "body": "  Arrange the statements to change a local object through a pointer.    int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';   "
+},
+{
+  "id": "chapter9_why-pointers-exist_exercise_local_object",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_local_object",
+  "type": "Checkpoint",
+  "number": "9.1.3",
+  "title": "",
+  "body": " Which object can a pointer identify?   An ordinary local object such as score A pointer can store the address of a local object; it does not require dynamic allocation.  Only an object created with new Pointers can identify local, static, or dynamically allocated objects.  Only an object stored in a vector A pointer is not limited to a particular container.  Only an object whose value is an address The pointer stores an address; the identified object may have another type.   "
+},
+{
+  "id": "chapter9_why-pointers-exist_exercise_address_variation",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_address_variation",
+  "type": "Checkpoint",
+  "number": "9.1.4",
+  "title": "",
+  "body": " Why should a program not assume that &score will have the same numeric address on every run?   The program's storage locations can vary between executions. The relationship between the pointer and object matters; the particular numeric address is not predictable.  The address changes whenever score is incremented. Changing an object's value does not normally move the object.  A pointer stores the object's current value instead of its address. A pointer stores an address, not the pointed-to value.  The address is always zero until new is used. Local objects normally have valid nonzero addresses.   "
+},
+{
+  "id": "chapter9_why-pointers-exist_exercise_dynamic_not_required",
+  "level": "2",
+  "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_dynamic_not_required",
+  "type": "Checkpoint",
+  "number": "9.1.5",
+  "title": "",
+  "body": " Which statement about a pointer and dynamic storage is correct?   A pointer can identify an ordinary local object without owning dynamic storage. The pointer's type and the object's storage duration are separate ideas.  Every pointer automatically owns the object it identifies. Ownership must be established by the program's design; a pointer alone does not imply ownership.  Only dynamically allocated objects have addresses. All objects in storage have locations and addresses.  A local object must be released with delete . Local objects are managed by their scope, not by matching delete .   "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing",
+  "level": "1",
+  "url": "chapter9_pointer-variables-and-dereferencing.html",
+  "type": "Section",
+  "number": "9.2",
+  "title": "Pointer Variables and Dereferencing",
+  "body": " Pointer Variables and Dereferencing  A pointer declaration includes the type of object that the pointer is expected to identify. The * in a declaration says that the new variable is a pointer.   #include <iostream> int main() { int score = 90; int* score_pointer = &score; std::cout << *score_pointer << '\\n'; *score_pointer = 95; std::cout << score << '\\n'; return 0; }   In int* score_pointer , the * is part of the declaration syntax. It says that score_pointer has type pointer to int . In *score_pointer , the * is the dereference operator. It follows the stored address and accesses the object there.   Two pointer-related operators       Expression  Role  Meaning    int* pointer  Pointer declaration  Declares pointer as a pointer to an int .    &score  Address-of operator  Produces the address of score .    *pointer  Dereference operator  Accesses the object identified by pointer .     These declarations are equivalent:   int* first_pointer; int *second_pointer;   In this course, we will declare one variable per line. This avoids a common source of confusion:   int* first_pointer; int second_value;   In int* first_pointer, second_value; , only first_pointer is a pointer. The second variable is an ordinary int . One declaration per line makes this distinction visible.   Lvalues and Rvalues: From Assignment to Expression Categories  The names lvalue and rvalue originally came from assignment expressions. An lvalue appeared on the left-hand side, while an rvalue appeared on the right-hand side:   int score = 90; score = 95;   Modern C++ uses a more useful meaning. An lvalue identifies a persistent object or storage location. An rvalue is usually a temporary value or computation result. The expression remains an lvalue even when it appears on the right side of an assignment:   Here, score is an lvalue because it identifies an object, while score + 5 is an rvalue because it is a temporary computation result. This is why the following is valid and invalid, respectively:   int* pointer = &score; \/\/ valid: score is an lvalue \/\/ int* invalid = &(score + 5); \/\/ invalid: the result is an rvalue   This chapter uses only the practical distinction between lvalues and rvalues. More detailed categories, including prvalues, xvalues, and glvalues, can be studied later with move semantics.    What does *score_pointer = 95; do when score_pointer points to score ?   It changes the pointed-to score object to 95. Dereferencing accesses the object identified by the pointer.  It changes the pointer's address to 95. The dereference operator accesses the pointed-to object, not the pointer's stored address.  It creates a second pointer. A declaration, not this assignment, creates a pointer variable.  It prints the address of score . Output requires std::cout ; this statement performs assignment.      Arrange the statements to store an address and then change the pointed-to object.    int score = 90;  int* score_pointer = &score;  std::cout << *score_pointer << '\\n';  *score_pointer = 95;  std::cout << score << '\\n';     What does &score produce in an expression?   The address of score The address-of operator produces a pointer value identifying the object.  The value stored in score Writing score alone reads its value; &score asks for its address.  The object identified by score The expression produces an address, not the object itself.  The address of the pointer variable itself &score identifies score , not another pointer variable.     In int* pointer , what role does * play?   It declares pointer as a pointer to an int . Here the star is part of the pointer declaration syntax.  It immediately accesses the pointed-to object. Dereferencing occurs in an expression such as *pointer after the pointer exists.  It obtains the address of pointer . The address-of operator is & .  It releases dynamic storage. Storage release uses delete or delete[] .     Which expression is an lvalue because it identifies a persistent object?   score The variable name identifies a storage location and can appear on the left side of assignment.  score + 5 This computation produces a temporary rvalue.  90 + 5 A numeric computation result is an rvalue.  5 A literal is a value, not a named storage location.    "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing-2",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A pointer declaration includes the type of object that the pointer is expected to identify. The * in a declaration says that the new variable is a pointer. "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing-4",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing-4",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In int* score_pointer , the * is part of the declaration syntax. It says that score_pointer has type pointer to int . In *score_pointer , the * is the dereference operator. It follows the stored address and accesses the object there. "
+},
+{
+  "id": "table_ch9_pointer_symbols",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#table_ch9_pointer_symbols",
+  "type": "Table",
+  "number": "9.2.1",
+  "title": "Two pointer-related operators",
+  "body": " Two pointer-related operators       Expression  Role  Meaning    int* pointer  Pointer declaration  Declares pointer as a pointer to an int .    &score  Address-of operator  Produces the address of score .    *pointer  Dereference operator  Accesses the object identified by pointer .    "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing-6",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing-6",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "These declarations are equivalent: "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing-8",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing-8",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In this course, we will declare one variable per line. This avoids a common source of confusion: "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing-10",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing-10",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In int* first_pointer, second_value; , only first_pointer is a pointer. The second variable is an ordinary int . One declaration per line makes this distinction visible. "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues",
+  "type": "Subsection",
+  "number": "9.2.1",
+  "title": "Lvalues and Rvalues: From Assignment to Expression Categories",
+  "body": " Lvalues and Rvalues: From Assignment to Expression Categories  The names lvalue and rvalue originally came from assignment expressions. An lvalue appeared on the left-hand side, while an rvalue appeared on the right-hand side:   int score = 90; score = 95;   Modern C++ uses a more useful meaning. An lvalue identifies a persistent object or storage location. An rvalue is usually a temporary value or computation result. The expression remains an lvalue even when it appears on the right side of an assignment:   Here, score is an lvalue because it identifies an object, while score + 5 is an rvalue because it is a temporary computation result. This is why the following is valid and invalid, respectively:   int* pointer = &score; \/\/ valid: score is an lvalue \/\/ int* invalid = &(score + 5); \/\/ invalid: the result is an rvalue   This chapter uses only the practical distinction between lvalues and rvalues. More detailed categories, including prvalues, xvalues, and glvalues, can be studied later with move semantics.  "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing_exercise_star",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_star",
+  "type": "Checkpoint",
+  "number": "9.2.1",
+  "title": "",
+  "body": " What does *score_pointer = 95; do when score_pointer points to score ?   It changes the pointed-to score object to 95. Dereferencing accesses the object identified by the pointer.  It changes the pointer's address to 95. The dereference operator accesses the pointed-to object, not the pointer's stored address.  It creates a second pointer. A declaration, not this assignment, creates a pointer variable.  It prints the address of score . Output requires std::cout ; this statement performs assignment.   "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing_parsons_dereference",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_parsons_dereference",
+  "type": "Checkpoint",
+  "number": "9.2.2",
+  "title": "",
+  "body": "  Arrange the statements to store an address and then change the pointed-to object.    int score = 90;  int* score_pointer = &score;  std::cout << *score_pointer << '\\n';  *score_pointer = 95;  std::cout << score << '\\n';   "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing_exercise_address_of",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_address_of",
+  "type": "Checkpoint",
+  "number": "9.2.3",
+  "title": "",
+  "body": " What does &score produce in an expression?   The address of score The address-of operator produces a pointer value identifying the object.  The value stored in score Writing score alone reads its value; &score asks for its address.  The object identified by score The expression produces an address, not the object itself.  The address of the pointer variable itself &score identifies score , not another pointer variable.   "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing_exercise_declaration_star",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_declaration_star",
+  "type": "Checkpoint",
+  "number": "9.2.4",
+  "title": "",
+  "body": " In int* pointer , what role does * play?   It declares pointer as a pointer to an int . Here the star is part of the pointer declaration syntax.  It immediately accesses the pointed-to object. Dereferencing occurs in an expression such as *pointer after the pointer exists.  It obtains the address of pointer . The address-of operator is & .  It releases dynamic storage. Storage release uses delete or delete[] .   "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing_exercise_lvalue",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_lvalue",
+  "type": "Checkpoint",
+  "number": "9.2.5",
+  "title": "",
+  "body": " Which expression is an lvalue because it identifies a persistent object?   score The variable name identifies a storage location and can appear on the left side of assignment.  score + 5 This computation produces a temporary rvalue.  90 + 5 A numeric computation result is an rvalue.  5 A literal is a value, not a named storage location.   "
+},
+{
+  "id": "chapter9_nullptr-and-safe-pointer-use",
+  "level": "1",
+  "url": "chapter9_nullptr-and-safe-pointer-use.html",
+  "type": "Section",
+  "number": "9.3",
+  "title": "<code class=\"code-inline tex2jax_ignore\">nullptr<\/code> and Safe Pointer Use",
+  "body": " nullptr and Safe Pointer Use  A pointer can identify an object, or it can identify no object. The value nullptr represents the second situation. A null pointer is useful when a program needs to represent no address explicitly.   The function checks the pointer before dereferencing it. Dereferencing a null pointer will result in undefined behavior causing a Segmentation fault or silent data corruption because it does not identify an object. So validating a pointer variable for not being nullptr is an excellent defensive coding habit.  Use nullptr rather than the older integer-based conventions 0 and NULL . A pointer should be initialized immediately, even when its initial state is no object.     What should a function do before dereferencing a pointer parameter that may be null?   Check whether the pointer is not nullptr . Only a pointer that identifies a live object may be safely dereferenced.  Add 1 to the pointer. Pointer arithmetic does not make a null pointer valid.  Convert the pointer to int . Conversion does not establish that an object exists.  Dereference it once to test it. Dereferencing is exactly the unsafe operation that must be avoided.      Arrange the blocks to print a value only when the pointer identifies an object.    void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }     Which declaration safely represents a pointer that currently identifies no object?   int* value_pointer = nullptr; nullptr gives the pointer an explicit, safe no-object state.  int* value_pointer; An uninitialized pointer has an indeterminate value and must not be used.  int value_pointer = nullptr; This declares an int , not a pointer.  int* value_pointer = 1; An arbitrary integer is not a safe way to represent no object.     Why must a nullable pointer be checked before dereferencing?   A null pointer identifies no object, so dereferencing it has undefined behavior. Dereferencing is valid only when the pointer identifies a live object.  A null pointer always points to the first array element. nullptr identifies no object.  Checking changes the pointer into a reference. A check only tests the pointer's state; it does not change its type.  Checking makes the pointed-to object permanent. A check does not change an object's lifetime.     Which condition is equivalent to checking whether value_pointer is not null?   if (value_pointer) A pointer converts to true when it identifies an address and to false when it is null.  if (*value_pointer) This dereferences the pointer and is unsafe when it is null.  if (&value_pointer) This tests the address of the pointer variable, which is normally non-null.  if (value_pointer = nullptr) This assigns rather than checks and also makes the pointer null.    "
+},
+{
+  "id": "chapter9_nullptr-and-safe-pointer-use-2",
+  "level": "2",
+  "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A pointer can identify an object, or it can identify no object. The value nullptr represents the second situation. A null pointer is useful when a program needs to represent no address explicitly. "
+},
+{
+  "id": "chapter9_nullptr-and-safe-pointer-use-4",
+  "level": "2",
+  "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use-4",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The function checks the pointer before dereferencing it. Dereferencing a null pointer will result in undefined behavior causing a Segmentation fault or silent data corruption because it does not identify an object. So validating a pointer variable for not being nullptr is an excellent defensive coding habit. "
+},
+{
+  "id": "chapter9_nullptr-and-safe-pointer-use-5",
+  "level": "2",
+  "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use-5",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Use nullptr rather than the older integer-based conventions 0 and NULL . A pointer should be initialized immediately, even when its initial state is no object.  "
+},
+{
+  "id": "chapter9_nullptr-and-safe-pointer-use_exercise_check",
+  "level": "2",
+  "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_check",
+  "type": "Checkpoint",
+  "number": "9.3.1",
+  "title": "",
+  "body": " What should a function do before dereferencing a pointer parameter that may be null?   Check whether the pointer is not nullptr . Only a pointer that identifies a live object may be safely dereferenced.  Add 1 to the pointer. Pointer arithmetic does not make a null pointer valid.  Convert the pointer to int . Conversion does not establish that an object exists.  Dereference it once to test it. Dereferencing is exactly the unsafe operation that must be avoided.   "
+},
+{
+  "id": "chapter9_nullptr-and-safe-pointer-use_parsons_guard",
+  "level": "2",
+  "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_parsons_guard",
+  "type": "Checkpoint",
+  "number": "9.3.2",
+  "title": "",
+  "body": "  Arrange the blocks to print a value only when the pointer identifies an object.    void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }   "
+},
+{
+  "id": "chapter9_nullptr-and-safe-pointer-use_exercise_initialization",
+  "level": "2",
+  "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_initialization",
+  "type": "Checkpoint",
+  "number": "9.3.3",
+  "title": "",
+  "body": " Which declaration safely represents a pointer that currently identifies no object?   int* value_pointer = nullptr; nullptr gives the pointer an explicit, safe no-object state.  int* value_pointer; An uninitialized pointer has an indeterminate value and must not be used.  int value_pointer = nullptr; This declares an int , not a pointer.  int* value_pointer = 1; An arbitrary integer is not a safe way to represent no object.   "
+},
+{
+  "id": "chapter9_nullptr-and-safe-pointer-use_exercise_guard",
+  "level": "2",
+  "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_guard",
+  "type": "Checkpoint",
+  "number": "9.3.4",
+  "title": "",
+  "body": " Why must a nullable pointer be checked before dereferencing?   A null pointer identifies no object, so dereferencing it has undefined behavior. Dereferencing is valid only when the pointer identifies a live object.  A null pointer always points to the first array element. nullptr identifies no object.  Checking changes the pointer into a reference. A check only tests the pointer's state; it does not change its type.  Checking makes the pointed-to object permanent. A check does not change an object's lifetime.   "
+},
+{
+  "id": "chapter9_nullptr-and-safe-pointer-use_exercise_boolean_check",
+  "level": "2",
+  "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_boolean_check",
+  "type": "Checkpoint",
+  "number": "9.3.5",
+  "title": "",
+  "body": " Which condition is equivalent to checking whether value_pointer is not null?   if (value_pointer) A pointer converts to true when it identifies an address and to false when it is null.  if (*value_pointer) This dereferences the pointer and is unsafe when it is null.  if (&value_pointer) This tests the address of the pointer variable, which is normally non-null.  if (value_pointer = nullptr) This assigns rather than checks and also makes the pointer null.   "
+},
+{
+  "id": "chapter9_pointers-as-function-parameters",
+  "level": "1",
+  "url": "chapter9_pointers-as-function-parameters.html",
+  "type": "Section",
+  "number": "9.4",
+  "title": "Pointers as Function Parameters",
+  "body": " Pointers as Function Parameters  A pointer parameter lets a function receive the address of an existing object. The function can then modify the caller's object through the dereferenced pointer, provided the pointer is valid and non-constant.   #include <iostream> void increase_value(int* value_pointer) { if (value_pointer != nullptr) { ++(*value_pointer); } } int main() { int count = 4; increase_value(&count); std::cout << count << '\\n'; return 0; }   The parentheses in ++(*value_pointer) make the intended order visible: first dereference the pointer, then increment the pointed-to value.   Read-Only Pointer Parameters  A pointer to const data can inspect an object without changing it through that pointer.   #include <iostream> void print_value(const int* value_pointer) { if (value_pointer != nullptr) { std::cout << *value_pointer << '\\n'; } } int main() { const int temperature = 22; print_value(&temperature); return 0; }   The declaration const int* value_pointer means that the function cannot modify the int through this pointer. A pointer parameter is useful when nullptr is a meaningful possibility. When an object must always exist, a reference is often a clearer choice.    Pointers and References: The swap Example  Both pointer parameters and reference parameters can allow a function to modify the caller's objects. The difference is visible in both the function definition and the call:   A pointer can represent no object with nullptr and can later point to a different object. A reference must bind to an object when it is initialized and cannot be reseated. Neither a pointer nor a reference automatically owns the object it identifies.    Pointer and reference parameter choices       Parameter  Can represent no object?  Can modify the caller's object?    int* value_pointer  Yes, with nullptr .  Yes, after a valid dereference.    const int* value_pointer  Yes, with nullptr .  No.    int& value  No; a reference must bind to an object.  Yes.    const int& value  No; a reference must bind to an object.  No.      When is a pointer parameter preferable to a reference parameter?   When the function needs to allow the possibility that no object is provided. nullptr can represent the absence of an object.  Whenever the function must be faster. Pointer syntax does not automatically make a function faster.  Whenever the function reads an integer. Parameter choice depends on the function's contract, not merely the type.  Whenever a vector is passed to a function. Vectors are often passed by constant reference when read-only.      Arrange the blocks to increment a caller's variable through a pointer parameter.    void increase_value(int* value_pointer) {  if (value_pointer != nullptr) { ++(*value_pointer); }  }  int count = 4;  increase_value(&count);  std::cout << count << '\\n';     What does const int* value_pointer allow the function to do?   Read the pointed-to int without modifying it through this pointer The const applies to the pointed-to integer.  Reseat the pointer but not read the integer This declaration permits reading the integer but does not make the pointer itself const.  Delete every object that the pointer identifies const does not grant ownership or deletion responsibility.  Guarantee that the pointer is never null A pointer to const data can still be nullptr .     Why is a reference often clearer when a function requires an existing object?   A reference must bind to an object and cannot represent nullptr . The reference type communicates that the function expects an object to exist.  A reference automatically allocates the object. References do not create dynamic storage.  A reference always makes a copy. A reference is an alias for an existing object.  A reference can be reseated more easily than a pointer. A reference remains bound to its original object.     How should a caller pass count to increase_value(int* value_pointer) ?   increase_value(&count); The pointer parameter receives the address of the caller's object.  increase_value(*count); * is not used to obtain the address of an ordinary variable.  increase_value(count); This passes the integer value, not its address.  increase_value(nullptr); This intentionally passes no object and would not increment count .    "
+},
+{
+  "id": "chapter9_pointers-as-function-parameters-2",
+  "level": "2",
+  "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A pointer parameter lets a function receive the address of an existing object. The function can then modify the caller's object through the dereferenced pointer, provided the pointer is valid and non-constant. "
+},
+{
+  "id": "chapter9_pointers-as-function-parameters-4",
+  "level": "2",
+  "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters-4",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The parentheses in ++(*value_pointer) make the intended order visible: first dereference the pointer, then increment the pointed-to value. "
+},
+{
+  "id": "chapter9_pointers-as-function-parameters_read-only",
+  "level": "2",
+  "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_read-only",
+  "type": "Subsection",
+  "number": "9.4.1",
+  "title": "Read-Only Pointer Parameters",
+  "body": " Read-Only Pointer Parameters  A pointer to const data can inspect an object without changing it through that pointer.   #include <iostream> void print_value(const int* value_pointer) { if (value_pointer != nullptr) { std::cout << *value_pointer << '\\n'; } } int main() { const int temperature = 22; print_value(&temperature); return 0; }   The declaration const int* value_pointer means that the function cannot modify the int through this pointer. A pointer parameter is useful when nullptr is a meaningful possibility. When an object must always exist, a reference is often a clearer choice.  "
+},
+{
+  "id": "chapter9_pointers-as-function-parameters_pointer-reference-comparison",
+  "level": "2",
+  "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_pointer-reference-comparison",
+  "type": "Subsection",
+  "number": "9.4.2",
+  "title": "Pointers and References: The <code class=\"code-inline tex2jax_ignore\">swap<\/code> Example",
+  "body": " Pointers and References: The swap Example  Both pointer parameters and reference parameters can allow a function to modify the caller's objects. The difference is visible in both the function definition and the call:   A pointer can represent no object with nullptr and can later point to a different object. A reference must bind to an object when it is initialized and cannot be reseated. Neither a pointer nor a reference automatically owns the object it identifies.  "
+},
+{
+  "id": "table_ch9_pointer_and_reference_parameters",
+  "level": "2",
+  "url": "chapter9_pointers-as-function-parameters.html#table_ch9_pointer_and_reference_parameters",
+  "type": "Table",
+  "number": "9.4.1",
+  "title": "Pointer and reference parameter choices",
+  "body": " Pointer and reference parameter choices       Parameter  Can represent no object?  Can modify the caller's object?    int* value_pointer  Yes, with nullptr .  Yes, after a valid dereference.    const int* value_pointer  Yes, with nullptr .  No.    int& value  No; a reference must bind to an object.  Yes.    const int& value  No; a reference must bind to an object.  No.    "
+},
+{
+  "id": "chapter9_pointers-as-function-parameters_exercise_reference",
+  "level": "2",
+  "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_reference",
+  "type": "Checkpoint",
+  "number": "9.4.1",
+  "title": "",
+  "body": " When is a pointer parameter preferable to a reference parameter?   When the function needs to allow the possibility that no object is provided. nullptr can represent the absence of an object.  Whenever the function must be faster. Pointer syntax does not automatically make a function faster.  Whenever the function reads an integer. Parameter choice depends on the function's contract, not merely the type.  Whenever a vector is passed to a function. Vectors are often passed by constant reference when read-only.   "
+},
+{
+  "id": "chapter9_pointers-as-function-parameters_parsons_pointer_call",
+  "level": "2",
+  "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_parsons_pointer_call",
+  "type": "Checkpoint",
+  "number": "9.4.2",
+  "title": "",
+  "body": "  Arrange the blocks to increment a caller's variable through a pointer parameter.    void increase_value(int* value_pointer) {  if (value_pointer != nullptr) { ++(*value_pointer); }  }  int count = 4;  increase_value(&count);  std::cout << count << '\\n';   "
+},
+{
+  "id": "chapter9_pointers-as-function-parameters_exercise_const_pointer",
+  "level": "2",
+  "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_const_pointer",
+  "type": "Checkpoint",
+  "number": "9.4.3",
+  "title": "",
+  "body": " What does const int* value_pointer allow the function to do?   Read the pointed-to int without modifying it through this pointer The const applies to the pointed-to integer.  Reseat the pointer but not read the integer This declaration permits reading the integer but does not make the pointer itself const.  Delete every object that the pointer identifies const does not grant ownership or deletion responsibility.  Guarantee that the pointer is never null A pointer to const data can still be nullptr .   "
+},
+{
+  "id": "chapter9_pointers-as-function-parameters_exercise_reference_contract",
+  "level": "2",
+  "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_reference_contract",
+  "type": "Checkpoint",
+  "number": "9.4.4",
+  "title": "",
+  "body": " Why is a reference often clearer when a function requires an existing object?   A reference must bind to an object and cannot represent nullptr . The reference type communicates that the function expects an object to exist.  A reference automatically allocates the object. References do not create dynamic storage.  A reference always makes a copy. A reference is an alias for an existing object.  A reference can be reseated more easily than a pointer. A reference remains bound to its original object.   "
+},
+{
+  "id": "chapter9_pointers-as-function-parameters_exercise_pointer_argument",
+  "level": "2",
+  "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_pointer_argument",
+  "type": "Checkpoint",
+  "number": "9.4.5",
+  "title": "",
+  "body": " How should a caller pass count to increase_value(int* value_pointer) ?   increase_value(&count); The pointer parameter receives the address of the caller's object.  increase_value(*count); * is not used to obtain the address of an ordinary variable.  increase_value(count); This passes the integer value, not its address.  increase_value(nullptr); This intentionally passes no object and would not increment count .   "
+},
+{
+  "id": "chapter9_pointers-and-c-style-arrays",
+  "level": "1",
+  "url": "chapter9_pointers-and-c-style-arrays.html",
+  "type": "Section",
+  "number": "9.5",
+  "title": "Pointers and C-Style Arrays",
+  "body": " Pointers and C-Style Arrays  A C-style array stores a fixed number of elements of one type in consecutive positions. In many expressions, the array name is converted to a pointer to its first element. This conversion is commonly called array decay .   When scores is passed to print_values() , it becomes a pointer to the first element. The pointer does not carry the array's length, so the function receives count separately.   Pointer Arithmetic  Pointer arithmetic moves by elements of the pointed-to type, not by individual bytes. If an int* points to one array element, adding 1 produces a pointer to the next int in that array.   #include <iostream> int main() { int scores[]{88, 91, 95}; int* current = scores; std::cout << *current << '\\n'; ++current; std::cout << *current << '\\n'; std::cout << *(current + 1) << '\\n'; return 0; }    Common pointer-arithmetic expressions       Expression  Meaning  Important condition    pointer + 1  Pointer to the next element.  Must remain within the same array or one position past it.    ++pointer  Move to the next element.  Do not dereference a one-past-the-end pointer.    *pointer  Access the pointed-to element.  The pointer must identify a valid live element.    pointer[index]  Equivalent to *(pointer + index) .  The resulting position must be a valid element.       Array Size and Function Parameters  An array name does not decay in every context. For example, sizeof(scores) measures the entire array when scores is an actual array in that scope. Once the array has decayed to a pointer parameter, sizeof(values) measures the pointer, not the original array. This is another reason to pass the length explicitly.  A pointer may identify one position past the last element. Such a pointer is useful as a stopping position, but it must never be dereferenced. Pointer arithmetic outside the same array object is not a valid way to reach unrelated storage.    Why does a function receiving const int* values usually need a separate length parameter?   The pointer identifies an element but does not retain the original array's length. Array decay gives the function an address, not the array-size information.  Because pointers cannot access array elements. Pointer indexing and dereferencing can access elements.  Because the array is automatically copied into the function. The array is not copied into a pointer parameter.  Because pointer arithmetic always changes the array length. Pointer arithmetic does not change the array object.      Arrange the statements to traverse two elements of an array with a pointer.    int scores[]{88, 91, 95};  int* current = scores;  std::cout << *current << '\\n';  ++current;  std::cout << *current << '\\n';     What does current + 1 mean when current is an int* into an array?   A pointer to the next int element Pointer arithmetic is scaled by the pointed-to type.  A pointer exactly one byte later The movement is the size of an int , not necessarily one byte.  The next element's integer value The result is still a pointer; dereference it to read a value.  The array's length increased by one Pointer arithmetic does not resize an array.     What does scores provide when passed to void print_values(const int* values, std::size_t count) ?   A pointer to the first element of the array In this function call, the array expression converts to a pointer to its first element.  A copy of the entire array including its length The array is not copied into the pointer parameter, and the length is separate.  A pointer to the last element Array decay identifies the first element.  A std::vector<int> object A C-style array does not automatically become a vector.     Why must a traversal stop before dereferencing one-past-the-end?   One-past-the-end can be used for comparison but does not identify an element. Dereferencing is valid only for pointers to actual array elements.  One-past-the-end always points to the first element of another array. It is a boundary position, not an element of another array.  Pointer arithmetic stops working after the first element. Pointer arithmetic can traverse the array within its bounds.  The array length changes when the pointer reaches the boundary. Pointer movement does not change the array object.    "
+},
+{
+  "id": "chapter9_pointers-and-c-style-arrays-2",
+  "level": "2",
+  "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A C-style array stores a fixed number of elements of one type in consecutive positions. In many expressions, the array name is converted to a pointer to its first element. This conversion is commonly called array decay . "
+},
+{
+  "id": "chapter9_pointers-and-c-style-arrays-4",
+  "level": "2",
+  "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays-4",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "When scores is passed to print_values() , it becomes a pointer to the first element. The pointer does not carry the array's length, so the function receives count separately. "
+},
+{
+  "id": "chapter9_pointers-and-c-style-arrays_pointer-arithmetic",
+  "level": "2",
+  "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_pointer-arithmetic",
+  "type": "Subsection",
+  "number": "9.5.1",
+  "title": "Pointer Arithmetic",
+  "body": " Pointer Arithmetic  Pointer arithmetic moves by elements of the pointed-to type, not by individual bytes. If an int* points to one array element, adding 1 produces a pointer to the next int in that array.   #include <iostream> int main() { int scores[]{88, 91, 95}; int* current = scores; std::cout << *current << '\\n'; ++current; std::cout << *current << '\\n'; std::cout << *(current + 1) << '\\n'; return 0; }    Common pointer-arithmetic expressions       Expression  Meaning  Important condition    pointer + 1  Pointer to the next element.  Must remain within the same array or one position past it.    ++pointer  Move to the next element.  Do not dereference a one-past-the-end pointer.    *pointer  Access the pointed-to element.  The pointer must identify a valid live element.    pointer[index]  Equivalent to *(pointer + index) .  The resulting position must be a valid element.     "
+},
+{
+  "id": "chapter9_pointers-and-c-style-arrays_array-size",
+  "level": "2",
+  "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_array-size",
+  "type": "Subsection",
+  "number": "9.5.2",
+  "title": "Array Size and Function Parameters",
+  "body": " Array Size and Function Parameters  An array name does not decay in every context. For example, sizeof(scores) measures the entire array when scores is an actual array in that scope. Once the array has decayed to a pointer parameter, sizeof(values) measures the pointer, not the original array. This is another reason to pass the length explicitly.  A pointer may identify one position past the last element. Such a pointer is useful as a stopping position, but it must never be dereferenced. Pointer arithmetic outside the same array object is not a valid way to reach unrelated storage.  "
+},
+{
+  "id": "chapter9_pointers-and-c-style-arrays_exercise_decay",
+  "level": "2",
+  "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_decay",
+  "type": "Checkpoint",
+  "number": "9.5.1",
+  "title": "",
+  "body": " Why does a function receiving const int* values usually need a separate length parameter?   The pointer identifies an element but does not retain the original array's length. Array decay gives the function an address, not the array-size information.  Because pointers cannot access array elements. Pointer indexing and dereferencing can access elements.  Because the array is automatically copied into the function. The array is not copied into a pointer parameter.  Because pointer arithmetic always changes the array length. Pointer arithmetic does not change the array object.   "
+},
+{
+  "id": "chapter9_pointers-and-c-style-arrays_parsons_decay",
+  "level": "2",
+  "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_parsons_decay",
+  "type": "Checkpoint",
+  "number": "9.5.2",
+  "title": "",
+  "body": "  Arrange the statements to traverse two elements of an array with a pointer.    int scores[]{88, 91, 95};  int* current = scores;  std::cout << *current << '\\n';  ++current;  std::cout << *current << '\\n';   "
+},
+{
+  "id": "chapter9_pointers-and-c-style-arrays_exercise_increment",
+  "level": "2",
+  "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_increment",
+  "type": "Checkpoint",
+  "number": "9.5.3",
+  "title": "",
+  "body": " What does current + 1 mean when current is an int* into an array?   A pointer to the next int element Pointer arithmetic is scaled by the pointed-to type.  A pointer exactly one byte later The movement is the size of an int , not necessarily one byte.  The next element's integer value The result is still a pointer; dereference it to read a value.  The array's length increased by one Pointer arithmetic does not resize an array.   "
+},
+{
+  "id": "chapter9_pointers-and-c-style-arrays_exercise_decay_call",
+  "level": "2",
+  "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_decay_call",
+  "type": "Checkpoint",
+  "number": "9.5.4",
+  "title": "",
+  "body": " What does scores provide when passed to void print_values(const int* values, std::size_t count) ?   A pointer to the first element of the array In this function call, the array expression converts to a pointer to its first element.  A copy of the entire array including its length The array is not copied into the pointer parameter, and the length is separate.  A pointer to the last element Array decay identifies the first element.  A std::vector<int> object A C-style array does not automatically become a vector.   "
+},
+{
+  "id": "chapter9_pointers-and-c-style-arrays_exercise_pointer_bounds",
+  "level": "2",
+  "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_pointer_bounds",
+  "type": "Checkpoint",
+  "number": "9.5.5",
+  "title": "",
+  "body": " Why must a traversal stop before dereferencing one-past-the-end?   One-past-the-end can be used for comparison but does not identify an element. Dereferencing is valid only for pointers to actual array elements.  One-past-the-end always points to the first element of another array. It is a boundary position, not an element of another array.  Pointer arithmetic stops working after the first element. Pointer arithmetic can traverse the array within its bounds.  The array length changes when the pointer reaches the boundary. Pointer movement does not change the array object.   "
+},
+{
+  "id": "chapter9_c-style-character-strings",
+  "level": "1",
+  "url": "chapter9_c-style-character-strings.html",
+  "type": "Section",
+  "number": "9.6",
+  "title": "C-Style Character Strings",
+  "body": " C-Style Character Strings  A C-style string is a sequence of characters stored in a character array and terminated by the null character '\\0' . The null character is not the same as the character '0' . It marks where the string ends.   #include <iostream> int main() { char message[] = \"Hello\"; for (const char* current = message; *current != '\\0'; ++current) { std::cout << *current << '\\n'; } return 0; }   The literal \"Hello\" initializes six array elements: 'H' , 'e' , 'l' , 'l' , 'o' , and '\\0' . The pointer loop stops when it reaches that final marker.   Mutable Arrays and Read-Only Literals  An array initialized from a string literal owns its character elements and can be modified. A pointer to a string literal should be declared as a pointer to const char because the literal must not be modified.   #include <iostream> int main() { char mutable_message[] = \"Hello\"; const char* read_only_message = \"Hello\"; mutable_message[0] = 'J'; std::cout << mutable_message << '\\n'; std::cout << read_only_message << '\\n'; return 0; }   In modern C++, do not write char* message = \"Hello\" . The correct type for a pointer to a string literal is const char* . For ordinary C++ text processing, prefer std::string .    Capacity and the Null Character  The array must have room for the terminating null character. The following array has room for six characters, not five:   char word[] = \"hello\";   An array such as char letters[5] = {'h', 'e', 'l', 'l', 'o'} contains five characters but is not a C-style string because it has no terminating '\\0' .    Command-Line Arguments  A program can receive text from the command line through the parameters of main() :   #include <iostream> int main(int argc, char* argv[]) { std::cout << \"Argument count: \" << argc << '\\n'; for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } return 0; }    argc is the argument count. argv is an array of pointers, and each pointer identifies a null-terminated C-style string. The execution environment prepares these values before main() begins.   Command-line argument positions       Expression  Points to  Important fact    argv[0]  The program name in ordinary execution.  It is still text.    argv[1]  The first user-supplied argument.  Its type is a C-style string.    argv[argc]  No argument.  The standard specifies a null pointer here.     In a parameter list, char* argv[] is adjusted to a pointer-based form equivalent to char** argv . Command-line arguments arrive as text; converting text to a number is a separate operation.    What does argc represent?   The number of command-line argument strings argc counts the entries available through argv .  The length of the longest argument Each argument's length is separate from the total count.  The number of characters in argv[0] argv[0] is one entry in the array.  The memory address of argv argv holds the pointer-based argument collection.      What marks the end of a C-style character string?   The null character '\\0' C-style string functions search for this terminating character.  The character '0' '0' is a visible digit character, not the null character.  The first space Spaces can be part of a C-style string.  The pointer value nullptr nullptr is a pointer value, not a character stored in the string.      Arrange the blocks to print a C-style string one character at a time.    char word[] = \"cat\";  const char* current = word;  while (*current != '\\0') {  std::cout << *current << '\\n'; ++current;  }     Why does char word[] = \"cat\"; need four elements?   It stores three visible characters plus '\\0' . The null character marks the end of the C-style string.  It stores four visible letters in the word. cat contains three visible characters.  It stores a pointer and three characters. The array stores character elements; it does not contain a separate pointer element.  The compiler always adds an unrelated padding character. The extra element is specifically the required null terminator.     Which declaration creates a modifiable character array initialized from a string literal?   char message[] = \"Hello\"; The array owns its character elements, including the terminating null character.  const char* message = \"Hello\"; This safely refers to a read-only string literal through a pointer.  char* message = \"Hello\"; A string literal must not be treated as modifiable character storage.  char message = \"Hello\"; A single char cannot store an entire string.     What is the important type fact about each argv[index] value?   It identifies a null-terminated C-style string. Command-line arguments arrive as text through pointers to characters.  It is already an int containing the user's number. Converting argument text to a number is a separate operation.  It is always a std::string object. The standard main signature uses C-style strings.  It is the argument count. argc stores the count; argv[index] identifies one text argument.    "
+},
+{
+  "id": "chapter9_c-style-character-strings-2",
+  "level": "2",
+  "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A C-style string is a sequence of characters stored in a character array and terminated by the null character '\\0' . The null character is not the same as the character '0' . It marks where the string ends. "
+},
+{
+  "id": "chapter9_c-style-character-strings-4",
+  "level": "2",
+  "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings-4",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The literal \"Hello\" initializes six array elements: 'H' , 'e' , 'l' , 'l' , 'o' , and '\\0' . The pointer loop stops when it reaches that final marker. "
+},
+{
+  "id": "chapter9_c-style-character-strings_mutability",
+  "level": "2",
+  "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_mutability",
+  "type": "Subsection",
+  "number": "9.6.1",
+  "title": "Mutable Arrays and Read-Only Literals",
+  "body": " Mutable Arrays and Read-Only Literals  An array initialized from a string literal owns its character elements and can be modified. A pointer to a string literal should be declared as a pointer to const char because the literal must not be modified.   #include <iostream> int main() { char mutable_message[] = \"Hello\"; const char* read_only_message = \"Hello\"; mutable_message[0] = 'J'; std::cout << mutable_message << '\\n'; std::cout << read_only_message << '\\n'; return 0; }   In modern C++, do not write char* message = \"Hello\" . The correct type for a pointer to a string literal is const char* . For ordinary C++ text processing, prefer std::string .  "
+},
+{
+  "id": "chapter9_c-style-character-strings_length",
+  "level": "2",
+  "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_length",
+  "type": "Subsection",
+  "number": "9.6.2",
+  "title": "Capacity and the Null Character",
+  "body": " Capacity and the Null Character  The array must have room for the terminating null character. The following array has room for six characters, not five:   char word[] = \"hello\";   An array such as char letters[5] = {'h', 'e', 'l', 'l', 'o'} contains five characters but is not a C-style string because it has no terminating '\\0' .  "
+},
+{
+  "id": "chapter9_c-style-character-strings_command-line-arguments",
+  "level": "2",
+  "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_command-line-arguments",
+  "type": "Subsection",
+  "number": "9.6.3",
+  "title": "Command-Line Arguments",
+  "body": " Command-Line Arguments  A program can receive text from the command line through the parameters of main() :   #include <iostream> int main(int argc, char* argv[]) { std::cout << \"Argument count: \" << argc << '\\n'; for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } return 0; }    argc is the argument count. argv is an array of pointers, and each pointer identifies a null-terminated C-style string. The execution environment prepares these values before main() begins.   Command-line argument positions       Expression  Points to  Important fact    argv[0]  The program name in ordinary execution.  It is still text.    argv[1]  The first user-supplied argument.  Its type is a C-style string.    argv[argc]  No argument.  The standard specifies a null pointer here.     In a parameter list, char* argv[] is adjusted to a pointer-based form equivalent to char** argv . Command-line arguments arrive as text; converting text to a number is a separate operation.    What does argc represent?   The number of command-line argument strings argc counts the entries available through argv .  The length of the longest argument Each argument's length is separate from the total count.  The number of characters in argv[0] argv[0] is one entry in the array.  The memory address of argv argv holds the pointer-based argument collection.    "
+},
+{
+  "id": "chapter9_c-style-character-strings_exercise_null",
+  "level": "2",
+  "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_null",
+  "type": "Checkpoint",
+  "number": "9.6.2",
+  "title": "",
+  "body": " What marks the end of a C-style character string?   The null character '\\0' C-style string functions search for this terminating character.  The character '0' '0' is a visible digit character, not the null character.  The first space Spaces can be part of a C-style string.  The pointer value nullptr nullptr is a pointer value, not a character stored in the string.   "
+},
+{
+  "id": "chapter9_c-style-character-strings_parsons_traversal",
+  "level": "2",
+  "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_parsons_traversal",
+  "type": "Checkpoint",
+  "number": "9.6.3",
+  "title": "",
+  "body": "  Arrange the blocks to print a C-style string one character at a time.    char word[] = \"cat\";  const char* current = word;  while (*current != '\\0') {  std::cout << *current << '\\n'; ++current;  }   "
+},
+{
+  "id": "chapter9_c-style-character-strings_exercise_terminator",
+  "level": "2",
+  "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_terminator",
+  "type": "Checkpoint",
+  "number": "9.6.4",
+  "title": "",
+  "body": " Why does char word[] = \"cat\"; need four elements?   It stores three visible characters plus '\\0' . The null character marks the end of the C-style string.  It stores four visible letters in the word. cat contains three visible characters.  It stores a pointer and three characters. The array stores character elements; it does not contain a separate pointer element.  The compiler always adds an unrelated padding character. The extra element is specifically the required null terminator.   "
+},
+{
+  "id": "chapter9_c-style-character-strings_exercise_mutability",
+  "level": "2",
+  "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_mutability",
+  "type": "Checkpoint",
+  "number": "9.6.5",
+  "title": "",
+  "body": " Which declaration creates a modifiable character array initialized from a string literal?   char message[] = \"Hello\"; The array owns its character elements, including the terminating null character.  const char* message = \"Hello\"; This safely refers to a read-only string literal through a pointer.  char* message = \"Hello\"; A string literal must not be treated as modifiable character storage.  char message = \"Hello\"; A single char cannot store an entire string.   "
+},
+{
+  "id": "chapter9_c-style-character-strings_exercise_argv_text",
+  "level": "2",
+  "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_argv_text",
+  "type": "Checkpoint",
+  "number": "9.6.6",
+  "title": "",
+  "body": " What is the important type fact about each argv[index] value?   It identifies a null-terminated C-style string. Command-line arguments arrive as text through pointers to characters.  It is already an int containing the user's number. Converting argument text to a number is a separate operation.  It is always a std::string object. The standard main signature uses C-style strings.  It is the argument count. argc stores the count; argv[index] identifies one text argument.   "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete",
+  "level": "1",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html",
+  "type": "Section",
+  "number": "9.7",
+  "title": "Dynamic Memory with <code class=\"code-inline tex2jax_ignore\">new<\/code> and <code class=\"code-inline tex2jax_ignore\">delete<\/code>",
+  "body": " Dynamic Memory with new and delete  A program can request dynamically managed storage while it is running. The expression new creates an object and produces a pointer to that object. The expression delete releases storage created by a single use of new .   #include <iostream> int main() { int* score_pointer = new int{90}; std::cout << *score_pointer << '\\n'; delete score_pointer; score_pointer = nullptr; return 0; }   The pointer variable itself is an ordinary local object. The integer created by new int{90} has a dynamically managed lifetime. The program uses the pointer to access that integer and then releases the storage with delete .   The lifecycle of a dynamically created object       Step  Code or action  Result    Request storage  new int{90}  An integer is created and its address is produced.    Store the address  int* pointer  The pointer identifies the dynamic integer.    Use the object  *pointer  The program accesses the dynamic integer.    Release storage  delete pointer  The object's lifetime ends and its storage is released.     The C++ standard describes this as dynamically allocated storage. It is often informally called the heap, but the language does not require a particular physical memory layout. The important responsibility is that storage obtained with new must eventually be released with the matching form of delete .     Rearrange the blocks to allocate an integer, print it safely, release its dynamic storage, and then clear the pointer.    int* my_ptr = new int(75);   if (my_ptr != nullptr) {  std::cout << *my_ptr << '\\n';  }   delete my_ptr;  my_ptr = nullptr;     Deleting a Null Pointer  Applying delete to nullptr is safe and has no effect. This can make cleanup code simpler, but setting a pointer to nullptr does not restore an object whose lifetime has already ended. The program must still avoid using the pointer as an object after deletion.    Dynamically Allocated Arrays  When the required number of elements is known only while a program is running, it can create an array with new[] . The program receives a pointer to the first element and must store the length separately.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 4; int* values = new int[count]{}; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>(index + 1) * 10; } for (std::size_t index = 0; index < count; ++index) { std::cout << values[index] << '\\n'; } delete[] values; values = nullptr; return 0; }   The empty braces in new int[count]{} value-initialize the array's elements. The pointer does not know that the array has four elements, so the program carries count separately.   Matching allocation and release expressions       Allocation  Release  Purpose    new int{5}  delete pointer  One dynamically created object    new int[count]{}  delete[] pointer  A dynamically created array     Do not use delete for an array created with new[] , and do not use delete[] for a single object created with new . Use std::vector for ordinary variable-size collections; use a dynamic array here to understand low-level C++.   Which operation correctly releases an array created with new double[10] ?   delete[] pointer; Array allocation with new[] requires array deletion with delete[] .  delete pointer; This is the single-object form.  free(pointer); C++ new[] must be paired with delete[] .  pointer.clear(); A raw pointer has no clear() member function.      Which operation matches int* pointer = new int{5}; ?   delete pointer; One object created with new is released with delete .  delete[] pointer; delete[] is for storage created with new[] .  free(pointer); C++ new must not be paired with C's free .  remove(pointer); remove is not the matching storage-release operation.     What does new int{90} produce in addition to creating an integer?   The address of the dynamically created integer The address can be stored in an int* pointer.  The integer's array length A single object allocation does not produce an array length.  A reference that cannot be null new produces a pointer value, not a reference.  A std::vector<int> object new int{90} creates one dynamic int .     Which release operation matches new int[count] ?   delete[] pointer; The array form new[] must be paired with delete[] .  delete pointer; That is the form for one object created with ordinary new .  free(pointer); C++ new[] must be paired with C++ delete[] .  pointer.clear(); A raw pointer has no clear() member function.     What happens when a program executes delete pointer; while pointer == nullptr ?   Nothing; deleting a null pointer is safe. C++ defines deletion of a null pointer as having no effect.  It deletes the first object in memory. nullptr identifies no object.  It creates a new dynamic object. delete releases storage; it does not allocate.  It requires a length argument. Only array matching concerns delete[] ; a null pointer still requires no argument.    "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete-2",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A program can request dynamically managed storage while it is running. The expression new creates an object and produces a pointer to that object. The expression delete releases storage created by a single use of new . "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete-4",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete-4",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The pointer variable itself is an ordinary local object. The integer created by new int{90} has a dynamically managed lifetime. The program uses the pointer to access that integer and then releases the storage with delete . "
+},
+{
+  "id": "table_ch9_new_delete_steps",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#table_ch9_new_delete_steps",
+  "type": "Table",
+  "number": "9.7.1",
+  "title": "The lifecycle of a dynamically created object",
+  "body": " The lifecycle of a dynamically created object       Step  Code or action  Result    Request storage  new int{90}  An integer is created and its address is produced.    Store the address  int* pointer  The pointer identifies the dynamic integer.    Use the object  *pointer  The program accesses the dynamic integer.    Release storage  delete pointer  The object's lifetime ends and its storage is released.    "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete-6",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete-6",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The C++ standard describes this as dynamically allocated storage. It is often informally called the heap, but the language does not require a particular physical memory layout. The important responsibility is that storage obtained with new must eventually be released with the matching form of delete . "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete_parsons_delete",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_parsons_delete",
+  "type": "Checkpoint",
+  "number": "9.7.1",
+  "title": "",
+  "body": "  Rearrange the blocks to allocate an integer, print it safely, release its dynamic storage, and then clear the pointer.    int* my_ptr = new int(75);   if (my_ptr != nullptr) {  std::cout << *my_ptr << '\\n';  }   delete my_ptr;  my_ptr = nullptr;   "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete_null",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_null",
+  "type": "Subsection",
+  "number": "9.7.1",
+  "title": "Deleting a Null Pointer",
+  "body": " Deleting a Null Pointer  Applying delete to nullptr is safe and has no effect. This can make cleanup code simpler, but setting a pointer to nullptr does not restore an object whose lifetime has already ended. The program must still avoid using the pointer as an object after deletion.  "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete_arrays",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_arrays",
+  "type": "Subsection",
+  "number": "9.7.2",
+  "title": "Dynamically Allocated Arrays",
+  "body": " Dynamically Allocated Arrays  When the required number of elements is known only while a program is running, it can create an array with new[] . The program receives a pointer to the first element and must store the length separately.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 4; int* values = new int[count]{}; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>(index + 1) * 10; } for (std::size_t index = 0; index < count; ++index) { std::cout << values[index] << '\\n'; } delete[] values; values = nullptr; return 0; }   The empty braces in new int[count]{} value-initialize the array's elements. The pointer does not know that the array has four elements, so the program carries count separately.   Matching allocation and release expressions       Allocation  Release  Purpose    new int{5}  delete pointer  One dynamically created object    new int[count]{}  delete[] pointer  A dynamically created array     Do not use delete for an array created with new[] , and do not use delete[] for a single object created with new . Use std::vector for ordinary variable-size collections; use a dynamic array here to understand low-level C++.   Which operation correctly releases an array created with new double[10] ?   delete[] pointer; Array allocation with new[] requires array deletion with delete[] .  delete pointer; This is the single-object form.  free(pointer); C++ new[] must be paired with delete[] .  pointer.clear(); A raw pointer has no clear() member function.    "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete_exercise_match",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_match",
+  "type": "Checkpoint",
+  "number": "9.7.3",
+  "title": "",
+  "body": " Which operation matches int* pointer = new int{5}; ?   delete pointer; One object created with new is released with delete .  delete[] pointer; delete[] is for storage created with new[] .  free(pointer); C++ new must not be paired with C's free .  remove(pointer); remove is not the matching storage-release operation.   "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete_exercise_new_result",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_new_result",
+  "type": "Checkpoint",
+  "number": "9.7.4",
+  "title": "",
+  "body": " What does new int{90} produce in addition to creating an integer?   The address of the dynamically created integer The address can be stored in an int* pointer.  The integer's array length A single object allocation does not produce an array length.  A reference that cannot be null new produces a pointer value, not a reference.  A std::vector<int> object new int{90} creates one dynamic int .   "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete_exercise_array_match",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_array_match",
+  "type": "Checkpoint",
+  "number": "9.7.5",
+  "title": "",
+  "body": " Which release operation matches new int[count] ?   delete[] pointer; The array form new[] must be paired with delete[] .  delete pointer; That is the form for one object created with ordinary new .  free(pointer); C++ new[] must be paired with C++ delete[] .  pointer.clear(); A raw pointer has no clear() member function.   "
+},
+{
+  "id": "chapter9_dynamic-memory-with-new-and-delete_exercise_delete_nullptr",
+  "level": "2",
+  "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_delete_nullptr",
+  "type": "Checkpoint",
+  "number": "9.7.6",
+  "title": "",
+  "body": " What happens when a program executes delete pointer; while pointer == nullptr ?   Nothing; deleting a null pointer is safe. C++ defines deletion of a null pointer as having no effect.  It deletes the first object in memory. nullptr identifies no object.  It creates a new dynamic object. delete releases storage; it does not allocate.  It requires a length argument. Only array matching concerns delete[] ; a null pointer still requires no argument.   "
+},
+{
+  "id": "chapter9_memory-errors-and-safe-practice",
+  "level": "1",
+  "url": "chapter9_memory-errors-and-safe-practice.html",
+  "type": "Section",
+  "number": "9.8",
+  "title": "Memory Errors and Safe Practice",
+  "body": " Memory Errors and Safe Practice  Manual memory management gives a program flexibility, but it also gives the programmer responsibilities that a std::vector normally handles automatically. Several pointer mistakes have especially serious consequences.   Common pointer and dynamic-memory errors       Error  What happens  Prevention    Memory leak  Allocated storage is no longer reachable and cannot be released.  Release each owned allocation exactly once.    Dangling pointer  A pointer still stores an address after the object's lifetime ends.  Do not use a pointer after deletion or scope exit.    Double deletion  The same storage is released more than once.  Set released pointers to nullptr and manage ownership clearly.    Invalid dereference  A program accesses memory through null, uninitialized, or invalid pointer.  Initialize pointers and verify that they identify valid objects.    Mismatched deletion  delete and delete[] do not match their allocation forms.  Pair new with delete and new[] with delete[] .      Two Golden Rules of Raw Pointers     Initialize every pointer before using it. Use a valid address or initialize the pointer to nullptr when it does not yet identify an object.     After deleting dynamically allocated storage, clear the owning pointer.     Clearing one pointer does not repair other pointers that identify the same object. Those other pointers may still be dangling, so ownership must be managed clearly.     Ownership Responsibility  A pointer does not automatically explain who is responsible for releasing the object it identifies. When a raw pointer owns dynamic storage, the program must document and follow that responsibility. When a pointer merely observes an object owned elsewhere, it must not delete that object.  In later modules, smart pointers will provide safer ways to express ownership. For now, the key practice is to recognize that an address and ownership are different concepts.    Practical Guidance   Prefer ordinary local objects when their lifetime is sufficient.  Prefer std::vector to manually allocated dynamic arrays.  Initialize every pointer.  Check nullable pointers before dereferencing them.  Match every allocation with the correct release operation.  Do not use a pointer after the object it identified has been destroyed.    What is a memory leak?   Allocated storage that can no longer be reached or released The storage remains reserved even though the program lost its pointer to it.  An array containing a null character Null termination is a string concept, not a memory leak.  A pointer that identifies a valid object A valid pointer is not automatically a leak.  A vector whose size is smaller than its capacity Unused vector capacity is managed by the vector and is not necessarily a leak.       Arrange the blocks to release a dynamic object and prevent the owning pointer from remaining dangling.    int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;     Which situation describes a dangling pointer?   A pointer still stores an address after the identified object's lifetime ends The address remains in the pointer, but the object is no longer valid to use.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer that identifies a live local object A valid pointer to a live object is not dangling.  A pointer used to traverse a valid array Valid traversal does not create a dangling pointer.     Which allocation and release pair is correct?   new int[5] with delete[] pointer The array allocation form must match the array deletion form.  new int[5] with delete pointer Single-object delete does not match new[] .  new int{5} with delete[] pointer A single object created with new needs ordinary delete .  new int{5} with free(pointer) C++ new must be paired with C++ delete .     What does setting an owning pointer to nullptr after delete accomplish?   It prevents that pointer from continuing to store the old address. Clearing the owning pointer helps avoid using it as though the destroyed object still exists.  It recreates the deleted object. Assigning nullptr does not restore an object's lifetime.  It repairs every other pointer to the same object. Other pointers may still be dangling and must be managed separately.  It releases storage without needing delete . The storage must be released first with the matching deletion operation.    "
+},
+{
+  "id": "chapter9_memory-errors-and-safe-practice-2",
+  "level": "2",
+  "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Manual memory management gives a program flexibility, but it also gives the programmer responsibilities that a std::vector normally handles automatically. Several pointer mistakes have especially serious consequences. "
+},
+{
+  "id": "table_ch9_pointer_memory_errors",
+  "level": "2",
+  "url": "chapter9_memory-errors-and-safe-practice.html#table_ch9_pointer_memory_errors",
+  "type": "Table",
+  "number": "9.8.1",
+  "title": "Common pointer and dynamic-memory errors",
+  "body": " Common pointer and dynamic-memory errors       Error  What happens  Prevention    Memory leak  Allocated storage is no longer reachable and cannot be released.  Release each owned allocation exactly once.    Dangling pointer  A pointer still stores an address after the object's lifetime ends.  Do not use a pointer after deletion or scope exit.    Double deletion  The same storage is released more than once.  Set released pointers to nullptr and manage ownership clearly.    Invalid dereference  A program accesses memory through null, uninitialized, or invalid pointer.  Initialize pointers and verify that they identify valid objects.    Mismatched deletion  delete and delete[] do not match their allocation forms.  Pair new with delete and new[] with delete[] .    "
+},
+{
+  "id": "chapter9_memory-errors-and-safe-practice_golden-rules",
+  "level": "2",
+  "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_golden-rules",
+  "type": "Subsection",
+  "number": "9.8.1",
+  "title": "Two Golden Rules of Raw Pointers",
+  "body": " Two Golden Rules of Raw Pointers     Initialize every pointer before using it. Use a valid address or initialize the pointer to nullptr when it does not yet identify an object.     After deleting dynamically allocated storage, clear the owning pointer.     Clearing one pointer does not repair other pointers that identify the same object. Those other pointers may still be dangling, so ownership must be managed clearly.   "
+},
+{
+  "id": "chapter9_memory-errors-and-safe-practice_ownership",
+  "level": "2",
+  "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_ownership",
+  "type": "Subsection",
+  "number": "9.8.2",
+  "title": "Ownership Responsibility",
+  "body": " Ownership Responsibility  A pointer does not automatically explain who is responsible for releasing the object it identifies. When a raw pointer owns dynamic storage, the program must document and follow that responsibility. When a pointer merely observes an object owned elsewhere, it must not delete that object.  In later modules, smart pointers will provide safer ways to express ownership. For now, the key practice is to recognize that an address and ownership are different concepts.  "
+},
+{
+  "id": "chapter9_memory-errors-and-safe-practice_guidance",
+  "level": "2",
+  "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_guidance",
+  "type": "Subsection",
+  "number": "9.8.3",
+  "title": "Practical Guidance",
+  "body": " Practical Guidance   Prefer ordinary local objects when their lifetime is sufficient.  Prefer std::vector to manually allocated dynamic arrays.  Initialize every pointer.  Check nullable pointers before dereferencing them.  Match every allocation with the correct release operation.  Do not use a pointer after the object it identified has been destroyed.    What is a memory leak?   Allocated storage that can no longer be reached or released The storage remains reserved even though the program lost its pointer to it.  An array containing a null character Null termination is a string concept, not a memory leak.  A pointer that identifies a valid object A valid pointer is not automatically a leak.  A vector whose size is smaller than its capacity Unused vector capacity is managed by the vector and is not necessarily a leak.    "
+},
+{
+  "id": "chapter9_memory-errors-and-safe-practice_parsons_cleanup",
+  "level": "2",
+  "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_parsons_cleanup",
+  "type": "Checkpoint",
+  "number": "9.8.2",
+  "title": "",
+  "body": "  Arrange the blocks to release a dynamic object and prevent the owning pointer from remaining dangling.    int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;   "
+},
+{
+  "id": "chapter9_memory-errors-and-safe-practice_exercise_dangling",
+  "level": "2",
+  "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_dangling",
+  "type": "Checkpoint",
+  "number": "9.8.3",
+  "title": "",
+  "body": " Which situation describes a dangling pointer?   A pointer still stores an address after the identified object's lifetime ends The address remains in the pointer, but the object is no longer valid to use.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer that identifies a live local object A valid pointer to a live object is not dangling.  A pointer used to traverse a valid array Valid traversal does not create a dangling pointer.   "
+},
+{
+  "id": "chapter9_memory-errors-and-safe-practice_exercise_mismatch",
+  "level": "2",
+  "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_mismatch",
+  "type": "Checkpoint",
+  "number": "9.8.4",
+  "title": "",
+  "body": " Which allocation and release pair is correct?   new int[5] with delete[] pointer The array allocation form must match the array deletion form.  new int[5] with delete pointer Single-object delete does not match new[] .  new int{5} with delete[] pointer A single object created with new needs ordinary delete .  new int{5} with free(pointer) C++ new must be paired with C++ delete .   "
+},
+{
+  "id": "chapter9_memory-errors-and-safe-practice_exercise_ownership",
+  "level": "2",
+  "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_ownership",
+  "type": "Checkpoint",
+  "number": "9.8.5",
+  "title": "",
+  "body": " What does setting an owning pointer to nullptr after delete accomplish?   It prevents that pointer from continuing to store the old address. Clearing the owning pointer helps avoid using it as though the destroyed object still exists.  It recreates the deleted object. Assigning nullptr does not restore an object's lifetime.  It repairs every other pointer to the same object. Other pointers may still be dangling and must be managed separately.  It releases storage without needing delete . The storage must be released first with the matching deletion operation.   "
+},
+{
+  "id": "chapter9_glossary",
+  "level": "1",
+  "url": "chapter9_glossary.html",
+  "type": "Glossary",
+  "number": "9.9",
+  "title": "Glossary",
+  "body": " Glossary   address  The location of an object in a program's storage.    pointer  An object that stores the address of another object or function.    address-of operator  The & operator used in an expression to obtain an object's address.    dereference  To use a pointer to access the object identified by its stored address.    lvalue  An expression that identifies a persistent object or storage location.    rvalue  An expression that generally represents a temporary value or computation result.    reference  An alias that must bind to an object when it is initialized and is then used like that object.    null pointer  A pointer with the value nullptr that identifies no object.    dangling pointer  A pointer that still contains an address after the object at that address has been destroyed.    array-to-pointer conversion  The conversion of an array expression, in many contexts, to a pointer to its first element. This is commonly called array decay.    pointer arithmetic  Adding, subtracting, or comparing pointers within the same array object to identify element positions.    one-past-the-end pointer  A pointer to the position immediately after the last element of an array; it may be used for comparison but not dereferenced.    C-style string  A sequence of characters in an array terminated by the null character '\\0' .    null character  The character '\\0' that marks the end of a C-style string.    command-line argument  A text value supplied to a program when it is started.    dynamic storage  Storage requested during program execution whose lifetime is controlled by the program.    memory leak  Allocated storage that the program can no longer reach and therefore cannot release.    ownership  Responsibility for controlling an object's lifetime and releasing its dynamically managed storage.   "
+},
+{
+  "id": "glossary_ch9_address-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_address-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The location of an object in a program's storage. "
+},
+{
+  "id": "glossary_ch9_pointer-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_pointer-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An object that stores the address of another object or function. "
+},
+{
+  "id": "glossary_ch9_address-of-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_address-of-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The & operator used in an expression to obtain an object's address. "
+},
+{
+  "id": "glossary_ch9_dereference-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_dereference-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "To use a pointer to access the object identified by its stored address. "
+},
+{
+  "id": "glossary_ch9_lvalue-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_lvalue-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An expression that identifies a persistent object or storage location. "
+},
+{
+  "id": "glossary_ch9_rvalue-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_rvalue-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An expression that generally represents a temporary value or computation result. "
+},
+{
+  "id": "glossary_ch9_reference-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_reference-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An alias that must bind to an object when it is initialized and is then used like that object. "
+},
+{
+  "id": "glossary_ch9_null-pointer-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_null-pointer-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A pointer with the value nullptr that identifies no object. "
+},
+{
+  "id": "glossary_ch9_dangling-pointer-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_dangling-pointer-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A pointer that still contains an address after the object at that address has been destroyed. "
+},
+{
+  "id": "glossary_ch9_array-decay-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_array-decay-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The conversion of an array expression, in many contexts, to a pointer to its first element. This is commonly called array decay. "
+},
+{
+  "id": "glossary_ch9_pointer-arithmetic-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_pointer-arithmetic-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Adding, subtracting, or comparing pointers within the same array object to identify element positions. "
+},
+{
+  "id": "glossary_ch9_one-past-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_one-past-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A pointer to the position immediately after the last element of an array; it may be used for comparison but not dereferenced. "
+},
+{
+  "id": "glossary_ch9_c-string-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_c-string-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A sequence of characters in an array terminated by the null character '\\0' . "
+},
+{
+  "id": "glossary_ch9_null-character-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_null-character-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The character '\\0' that marks the end of a C-style string. "
+},
+{
+  "id": "glossary_ch9_command-line-argument-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_command-line-argument-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A text value supplied to a program when it is started. "
+},
+{
+  "id": "glossary_ch9_dynamic-storage-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_dynamic-storage-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Storage requested during program execution whose lifetime is controlled by the program. "
+},
+{
+  "id": "glossary_ch9_memory-leak-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_memory-leak-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Allocated storage that the program can no longer reach and therefore cannot release. "
+},
+{
+  "id": "glossary_ch9_ownership-2",
+  "level": "2",
+  "url": "chapter9_glossary.html#glossary_ch9_ownership-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Responsibility for controlling an object's lifetime and releasing its dynamically managed storage. "
+},
+{
+  "id": "chapter9_exercises",
+  "level": "1",
+  "url": "chapter9_exercises.html",
+  "type": "Exercises",
+  "number": "9.10",
+  "title": "Exercises",
+  "body": " Exercises   What does int* pointer declare?   A pointer that can identify an int object The declaration's * makes pointer a pointer variable.  An integer whose value is an address The declared variable has pointer type, not ordinary integer type.  A pointer to any type of object The pointer type identifies the type it is designed to point to.  A function that returns an integer This declaration does not include a function parameter list.     What does *pointer mean in an expression?   Access the object identified by pointer In an expression, * is the dereference operator.  Declare a new pointer Declaration syntax requires a type, such as int* .  Obtain the pointer's address The address-of operator & obtains an address.  Delete the pointed-to object Deletion uses delete , not * .     What does nullptr represent?   A pointer value that identifies no object It is the modern C++ null pointer value.  The first element of every array Array indexing begins at zero, but zero is not nullptr .  A dynamically allocated integer with value zero nullptr is a pointer value, not an allocated integer.  A pointer that is always safe to dereference A null pointer must not be dereferenced.     What can a non-constant pointer parameter allow a function to do?   Modify the caller's object through a valid pointer Dereferencing a valid non-constant pointer accesses the caller's object.  Know the size of every object automatically A pointer does not generally store object-size information.  Guarantee that the pointer is never null The function may need to check for nullptr .  Change the pointer into a reference Pointer and reference types are distinct.     After an array decays when passed to a pointer parameter, what information is not carried by the pointer?   The array's number of elements The pointer identifies an address, so the length must be supplied separately.  The address of the first element The converted pointer identifies the first element.  The element type used for pointer arithmetic The pointer type still determines its element step.  Whether the function can read the pointed-to values A valid pointer can be dereferenced to read values.     What does pointer + 1 mean when pointer points into an array?   The address of the next element in that array Pointer arithmetic advances by the pointed-to element type.  The next byte in memory regardless of type Pointer arithmetic is scaled by the pointer's element type.  The value of the next element The result is still a pointer; dereference it to access a value.  A pointer to the next unrelated object Pointer arithmetic is defined within an array object.     How many array elements are needed for the C-style string \"cat\" ?   4 The array needs three visible characters plus '\\0' .  3 Three stores the visible characters but not the terminator.  2 Count all three letters and the null character.  5 No extra fifth element is required for this string.     What is the type of each individual argv[index] value?   A pointer to a C-style character string argv is an array of char* values.  An integer containing the argument count argc contains the count; an individual argv entry is text.  A std::string object automatically The standard signature supplies C-style strings.  A pointer to a vector argv is not a std::vector .     What must happen to storage created by new int{7} ?   It must eventually be released with matching delete . A single object created by new matches delete .  It must be released with delete[] . delete[] matches new[] , not a single new .  It is automatically released at the end of the function. Dynamic storage is not automatically released like a local object.  It must be released with std::vector::clear() . The allocation is not a vector.     Why must a program keep the length separately after allocating new int[count] ?   The resulting pointer does not remember the number of elements. The length is separate information needed for safe traversal.  Because the array has no elements. The allocation creates count elements.  Because pointer arithmetic cannot access arrays. Pointer arithmetic can traverse the allocated array.  Because delete[] requires a length argument. delete[] receives only the pointer.     What is a dangling pointer?   A pointer whose former object has already been destroyed The stored address remains, but the object lifetime has ended.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer to the first array element A valid pointer to an array element is not dangling.  A pointer that stores an array length Pointers store addresses, not lengths.    "
+},
+{
+  "id": "chapter9_exercise_pointer_type",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_pointer_type",
+  "type": "Exercise",
+  "number": "9.10.1",
+  "title": "",
+  "body": " What does int* pointer declare?   A pointer that can identify an int object The declaration's * makes pointer a pointer variable.  An integer whose value is an address The declared variable has pointer type, not ordinary integer type.  A pointer to any type of object The pointer type identifies the type it is designed to point to.  A function that returns an integer This declaration does not include a function parameter list.   "
+},
+{
+  "id": "chapter9_exercise_dereference",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_dereference",
+  "type": "Exercise",
+  "number": "9.10.2",
+  "title": "",
+  "body": " What does *pointer mean in an expression?   Access the object identified by pointer In an expression, * is the dereference operator.  Declare a new pointer Declaration syntax requires a type, such as int* .  Obtain the pointer's address The address-of operator & obtains an address.  Delete the pointed-to object Deletion uses delete , not * .   "
+},
+{
+  "id": "chapter9_exercise_nullptr",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_nullptr",
+  "type": "Exercise",
+  "number": "9.10.3",
+  "title": "",
+  "body": " What does nullptr represent?   A pointer value that identifies no object It is the modern C++ null pointer value.  The first element of every array Array indexing begins at zero, but zero is not nullptr .  A dynamically allocated integer with value zero nullptr is a pointer value, not an allocated integer.  A pointer that is always safe to dereference A null pointer must not be dereferenced.   "
+},
+{
+  "id": "chapter9_exercise_pointer_parameter",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_pointer_parameter",
+  "type": "Exercise",
+  "number": "9.10.4",
+  "title": "",
+  "body": " What can a non-constant pointer parameter allow a function to do?   Modify the caller's object through a valid pointer Dereferencing a valid non-constant pointer accesses the caller's object.  Know the size of every object automatically A pointer does not generally store object-size information.  Guarantee that the pointer is never null The function may need to check for nullptr .  Change the pointer into a reference Pointer and reference types are distinct.   "
+},
+{
+  "id": "chapter9_exercise_array_decay",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_array_decay",
+  "type": "Exercise",
+  "number": "9.10.5",
+  "title": "",
+  "body": " After an array decays when passed to a pointer parameter, what information is not carried by the pointer?   The array's number of elements The pointer identifies an address, so the length must be supplied separately.  The address of the first element The converted pointer identifies the first element.  The element type used for pointer arithmetic The pointer type still determines its element step.  Whether the function can read the pointed-to values A valid pointer can be dereferenced to read values.   "
+},
+{
+  "id": "chapter9_exercise_pointer_arithmetic",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_pointer_arithmetic",
+  "type": "Exercise",
+  "number": "9.10.6",
+  "title": "",
+  "body": " What does pointer + 1 mean when pointer points into an array?   The address of the next element in that array Pointer arithmetic advances by the pointed-to element type.  The next byte in memory regardless of type Pointer arithmetic is scaled by the pointer's element type.  The value of the next element The result is still a pointer; dereference it to access a value.  A pointer to the next unrelated object Pointer arithmetic is defined within an array object.   "
+},
+{
+  "id": "chapter9_exercise_c_string",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_c_string",
+  "type": "Exercise",
+  "number": "9.10.7",
+  "title": "",
+  "body": " How many array elements are needed for the C-style string \"cat\" ?   4 The array needs three visible characters plus '\\0' .  3 Three stores the visible characters but not the terminator.  2 Count all three letters and the null character.  5 No extra fifth element is required for this string.   "
+},
+{
+  "id": "chapter9_exercise_argv",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_argv",
+  "type": "Exercise",
+  "number": "9.10.8",
+  "title": "",
+  "body": " What is the type of each individual argv[index] value?   A pointer to a C-style character string argv is an array of char* values.  An integer containing the argument count argc contains the count; an individual argv entry is text.  A std::string object automatically The standard signature supplies C-style strings.  A pointer to a vector argv is not a std::vector .   "
+},
+{
+  "id": "chapter9_exercise_new_delete",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_new_delete",
+  "type": "Exercise",
+  "number": "9.10.9",
+  "title": "",
+  "body": " What must happen to storage created by new int{7} ?   It must eventually be released with matching delete . A single object created by new matches delete .  It must be released with delete[] . delete[] matches new[] , not a single new .  It is automatically released at the end of the function. Dynamic storage is not automatically released like a local object.  It must be released with std::vector::clear() . The allocation is not a vector.   "
+},
+{
+  "id": "chapter9_exercise_dynamic_array",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_dynamic_array",
+  "type": "Exercise",
+  "number": "9.10.10",
+  "title": "",
+  "body": " Why must a program keep the length separately after allocating new int[count] ?   The resulting pointer does not remember the number of elements. The length is separate information needed for safe traversal.  Because the array has no elements. The allocation creates count elements.  Because pointer arithmetic cannot access arrays. Pointer arithmetic can traverse the allocated array.  Because delete[] requires a length argument. delete[] receives only the pointer.   "
+},
+{
+  "id": "chapter9_exercise_memory_error",
+  "level": "2",
+  "url": "chapter9_exercises.html#chapter9_exercise_memory_error",
+  "type": "Exercise",
+  "number": "9.10.11",
+  "title": "",
+  "body": " What is a dangling pointer?   A pointer whose former object has already been destroyed The stored address remains, but the object lifetime has ended.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer to the first array element A valid pointer to an array element is not dangling.  A pointer that stores an array length Pointers store addresses, not lengths.   "
+},
+{
+  "id": "chapter9_mixed-up-code",
+  "level": "1",
+  "url": "chapter9_mixed-up-code.html",
+  "type": "Exercises",
+  "number": "9.11",
+  "title": "Mixed-Up Code Practice",
+  "body": " Mixed-Up Code Practice   Arrange the blocks to modify score through a pointer.   int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';     Arrange the blocks to print a value only when the pointer identifies an object.   void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }     Arrange the blocks to traverse an array with a pointer.   int values[]{10, 20, 30};  int* current = values;  for (int index = 0; index < 3; ++index) {  std::cout << *current << '\\n'; ++current; }     Arrange the blocks to print a C-style string one character at a time.   char word[] = \"cat\";  for (const char* current = word; *current != '\\0'; ++current) {  std::cout << *current << '\\n'; }     Arrange the blocks to create and release one dynamic integer.   int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;    "
+},
+{
+  "id": "chapter9_mixed_up_dereference",
+  "level": "2",
+  "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_dereference",
+  "type": "Exercise",
+  "number": "9.11.yes",
+  "title": "",
+  "body": " Arrange the blocks to modify score through a pointer.   int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';   "
+},
+{
+  "id": "chapter9_mixed_up_null_check",
+  "level": "2",
+  "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_null_check",
+  "type": "Exercise",
+  "number": "9.11.yes",
+  "title": "",
+  "body": " Arrange the blocks to print a value only when the pointer identifies an object.   void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }   "
+},
+{
+  "id": "chapter9_mixed_up_array_pointer",
+  "level": "2",
+  "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_array_pointer",
+  "type": "Exercise",
+  "number": "9.11.yes",
+  "title": "",
+  "body": " Arrange the blocks to traverse an array with a pointer.   int values[]{10, 20, 30};  int* current = values;  for (int index = 0; index < 3; ++index) {  std::cout << *current << '\\n'; ++current; }   "
+},
+{
+  "id": "chapter9_mixed_up_c_string",
+  "level": "2",
+  "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_c_string",
+  "type": "Exercise",
+  "number": "9.11.yes",
+  "title": "",
+  "body": " Arrange the blocks to print a C-style string one character at a time.   char word[] = \"cat\";  for (const char* current = word; *current != '\\0'; ++current) {  std::cout << *current << '\\n'; }   "
+},
+{
+  "id": "chapter9_mixed_up_dynamic_value",
+  "level": "2",
+  "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_dynamic_value",
+  "type": "Exercise",
+  "number": "9.11.yes",
+  "title": "",
+  "body": " Arrange the blocks to create and release one dynamic integer.   int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;   "
+},
+{
+  "id": "chapter9_coding-practice",
+  "level": "1",
+  "url": "chapter9_coding-practice.html",
+  "type": "Exercises",
+  "number": "9.12",
+  "title": "Coding Practice",
+  "body": " Coding Practice    Write increase_value , which takes an int* and increases the pointed-to integer by one when the pointer is not nullptr .   #include <iostream> void increase_value(int* value_pointer) { \/\/ Write your solution here. } int main() { int value = 7; increase_value(&value); increase_value(nullptr); std::cout << value << '\\n'; return 0; }     void increase_value(int* value_pointer) { if (value_pointer != nullptr) { ++(*value_pointer); } }      Write print_values , which takes a pointer to the first integer in an array and the array length. Use pointer arithmetic to print every element.   #include <iostream> #include <cstddef> void print_values(const int* values, std::size_t count) { \/\/ Write your solution here. } int main() { const int values[]{4, 8, 12}; print_values(values, 3); return 0; }     void print_values(const int* values, std::size_t count) { const int* current = values; const int* end = values + count; while (current != end) { std::cout << *current << '\\n'; ++current; } }      Write count_character , which takes a C-style string and a target character. Traverse the string with a pointer and return the number of matching characters.   #include <iostream> int count_character(const char* text, char target) { \/\/ Write your solution here. } int main() { std::cout << count_character(\"banana\", 'a') << '\\n'; return 0; }     int count_character(const char* text, char target) { int count = 0; while (*text != '\\0') { if (*text == target) { ++count; } ++text; } return count; }      Complete print_arguments so that it prints each command- line argument and its index. Remember that the arguments are C-style strings.   #include <iostream> void print_arguments(int argc, char* argv[]) { \/\/ Write your solution here. } int main(int argc, char* argv[]) { print_arguments(argc, argv); return 0; }     void print_arguments(int argc, char* argv[]) { for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } }      Write a program that creates a dynamically allocated array of five integers, stores the values 2, 4, 6, 8, and 10, prints their total, and releases the array correctly.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 5; \/\/ Create, use, and release the dynamic array. return 0; }     int* values = new int[count]{}; int total = 0; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>((index + 1) * 2); total += values[index]; } std::cout << total << '\\n'; delete[] values;    "
+},
+{
+  "id": "chapter9_coding_increase_value",
+  "level": "2",
+  "url": "chapter9_coding-practice.html#chapter9_coding_increase_value",
+  "type": "Exercise",
+  "number": "9.12.1",
+  "title": "",
+  "body": "  Write increase_value , which takes an int* and increases the pointed-to integer by one when the pointer is not nullptr .   #include <iostream> void increase_value(int* value_pointer) { \/\/ Write your solution here. } int main() { int value = 7; increase_value(&value); increase_value(nullptr); std::cout << value << '\\n'; return 0; }     void increase_value(int* value_pointer) { if (value_pointer != nullptr) { ++(*value_pointer); } }   "
+},
+{
+  "id": "chapter9_coding_print_array_pointer",
+  "level": "2",
+  "url": "chapter9_coding-practice.html#chapter9_coding_print_array_pointer",
+  "type": "Exercise",
+  "number": "9.12.2",
+  "title": "",
+  "body": "  Write print_values , which takes a pointer to the first integer in an array and the array length. Use pointer arithmetic to print every element.   #include <iostream> #include <cstddef> void print_values(const int* values, std::size_t count) { \/\/ Write your solution here. } int main() { const int values[]{4, 8, 12}; print_values(values, 3); return 0; }     void print_values(const int* values, std::size_t count) { const int* current = values; const int* end = values + count; while (current != end) { std::cout << *current << '\\n'; ++current; } }   "
+},
+{
+  "id": "chapter9_coding_count_characters",
+  "level": "2",
+  "url": "chapter9_coding-practice.html#chapter9_coding_count_characters",
+  "type": "Exercise",
+  "number": "9.12.3",
+  "title": "",
+  "body": "  Write count_character , which takes a C-style string and a target character. Traverse the string with a pointer and return the number of matching characters.   #include <iostream> int count_character(const char* text, char target) { \/\/ Write your solution here. } int main() { std::cout << count_character(\"banana\", 'a') << '\\n'; return 0; }     int count_character(const char* text, char target) { int count = 0; while (*text != '\\0') { if (*text == target) { ++count; } ++text; } return count; }   "
+},
+{
+  "id": "chapter9_coding_command_line_sum",
+  "level": "2",
+  "url": "chapter9_coding-practice.html#chapter9_coding_command_line_sum",
+  "type": "Exercise",
+  "number": "9.12.4",
+  "title": "",
+  "body": "  Complete print_arguments so that it prints each command- line argument and its index. Remember that the arguments are C-style strings.   #include <iostream> void print_arguments(int argc, char* argv[]) { \/\/ Write your solution here. } int main(int argc, char* argv[]) { print_arguments(argc, argv); return 0; }     void print_arguments(int argc, char* argv[]) { for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } }   "
+},
+{
+  "id": "chapter9_coding_dynamic_array_total",
+  "level": "2",
+  "url": "chapter9_coding-practice.html#chapter9_coding_dynamic_array_total",
+  "type": "Exercise",
+  "number": "9.12.5",
+  "title": "",
+  "body": "  Write a program that creates a dynamically allocated array of five integers, stores the values 2, 4, 6, 8, and 10, prints their total, and releases the array correctly.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 5; \/\/ Create, use, and release the dynamic array. return 0; }     int* values = new int[count]{}; int total = 0; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>((index + 1) * 2); total += values[index]; } std::cout << total << '\\n'; delete[] values;   "
+},
+{
   "id": "chapter15_file-input-output-and-matrixes",
   "level": "1",
   "url": "chapter15_file-input-output-and-matrixes.html",
   "type": "Section",
-  "number": "9.1",
+  "number": "10.1",
   "title": "File Input\/Output and <code class=\"code-inline tex2jax_ignore\">matrix<\/code>es",
   "body": " File Input\/Output and matrix es  In this chapter we will develop a program that reads and writes files, parses input, and demonstrates the matrix class. We will also implement a data structure called Set that expands automatically as you add elements.  Aside from demonstrating all these features, the real purpose of the program is to generate a two-dimensional table of the distances between cities in the United States. The output is a matrix that looks like this:  Atlanta 0 Chicago 700 0 Boston 1100 1000 0 Dallas 800 900 1750 0 Denver 1450 1000 2000 800 0 Detroit 750 300 800 1150 1300 0 Orlando 400 1150 1300 1100 1900 1200 0 Phoenix 1850 1750 2650 1000 800 2000 2100 0 Seattle 2650 2000 3000 2150 1350 2300 3100 1450 0 Atlanta Chicago Boston Dallas Denver Detroit Orlando Phoenix Seattle  The diagonal elements are all zero because that is the distance from a city to itself. Also, because the distance from A to B is the same as the distance from B to A, there is no need to print the top half of the matrix.    Why aren't we filling in every value in our table, who are we leaving blank space above the diagonal of 0's?      Because we only need the half of the dataset contained by the triangle.   Incorrect! All of the data above the 0 diagonal is a mirror image of the triangle! So, the triangle contains the whole dataset.     Because triangles are the most effective shape to use when presenting data to others.   Incorrect! Triangles do look cool, but they aren't necessarily the most effective shape to use when presenting data.     Because matrices are triangles.   Incorrect! This triangle is PART OF an apmatrix.     Because the triangle contains the entire dataset.   Correct! The triangle contains all data points with no repeat data. If we included all datapoints, the would just be repeats of the points we already have.       Based on how it is used to create the above table, what do you think a matrix is?      a geometric shape   Incorrect! A matrix is not a geometric shape, although they ARE rectangles.     a two-dimensional std::vector   Correct!     a material in which something develops   Incorrect! This is a definition for matrix, but not in the programming sense.     a mold used to shape things   Incorrect! This is a definition for matrix, but not in the programming sense.     "
 },
@@ -10985,7 +12173,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-output-and-matrixes.html#question15_1_1",
   "type": "Checkpoint",
-  "number": "9.1.1",
+  "number": "10.1.1",
   "title": "",
   "body": "  Why aren't we filling in every value in our table, who are we leaving blank space above the diagonal of 0's?      Because we only need the half of the dataset contained by the triangle.   Incorrect! All of the data above the 0 diagonal is a mirror image of the triangle! So, the triangle contains the whole dataset.     Because triangles are the most effective shape to use when presenting data to others.   Incorrect! Triangles do look cool, but they aren't necessarily the most effective shape to use when presenting data.     Because matrices are triangles.   Incorrect! This triangle is PART OF an apmatrix.     Because the triangle contains the entire dataset.   Correct! The triangle contains all data points with no repeat data. If we included all datapoints, the would just be repeats of the points we already have.    "
 },
@@ -10994,7 +12182,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-output-and-matrixes.html#question15_1_2",
   "type": "Checkpoint",
-  "number": "9.1.2",
+  "number": "10.1.2",
   "title": "",
   "body": "  Based on how it is used to create the above table, what do you think a matrix is?      a geometric shape   Incorrect! A matrix is not a geometric shape, although they ARE rectangles.     a two-dimensional std::vector   Correct!     a material in which something develops   Incorrect! This is a definition for matrix, but not in the programming sense.     a mold used to shape things   Incorrect! This is a definition for matrix, but not in the programming sense.    "
 },
@@ -11003,7 +12191,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_streams.html",
   "type": "Section",
-  "number": "9.2",
+  "number": "10.2",
   "title": "Streams",
   "body": " Streams  To get input from a file or send output to a file, you have to create an ifstream object (for input files) or an ofstream object (for output files). These objects are defined in the header file fstream , which you have to include.  A stream is an abstract object that represents the flow of data from a source like the keyboard or a file to a destination like the screen or a file.  We have already worked with two streams: cin , which has type istream , and cout , which has type ostream . cin represents the flow of data from the keyboard to the program. Each time the program uses the >> operator or the getline function, it removes a piece of data from the input stream.  Similarly, when the program uses the << operator on an ostream , it adds a datum to the outgoing stream.    You create an object to write data to a file, and a object to read data from a file. In order to define objects to input from a file or send output to a file, you must include the <   > header file.                       What is a stream object?      an abstract object that works exclusively with std::cin and std::cout statements   Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!     an abstract object on which input and ouput operations are performed   Correct!     an abstract object that works only with file data   Incorrect! Stream objects do work with file data, but they do other things too.     an abstract object that controls the flow of statements   Incorrect! This is not at all what stream objects do, you should try re-reading to get a better understanding!       Match the stream to its type.   Try again!    cin  ifstream    cout  ofstream     "
 },
@@ -11048,7 +12236,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_2_1",
   "type": "Checkpoint",
-  "number": "9.2.1",
+  "number": "10.2.1",
   "title": "",
   "body": "  You create an object to write data to a file, and a object to read data from a file. In order to define objects to input from a file or send output to a file, you must include the <   > header file.                    "
 },
@@ -11057,7 +12245,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_2_2",
   "type": "Checkpoint",
-  "number": "9.2.2",
+  "number": "10.2.2",
   "title": "",
   "body": "  What is a stream object?      an abstract object that works exclusively with std::cin and std::cout statements   Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!     an abstract object on which input and ouput operations are performed   Correct!     an abstract object that works only with file data   Incorrect! Stream objects do work with file data, but they do other things too.     an abstract object that controls the flow of statements   Incorrect! This is not at all what stream objects do, you should try re-reading to get a better understanding!    "
 },
@@ -11066,7 +12254,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_1_3",
   "type": "Checkpoint",
-  "number": "9.2.3",
+  "number": "10.2.3",
   "title": "",
   "body": "  Match the stream to its type.   Try again!    cin  ifstream    cout  ofstream    "
 },
@@ -11075,7 +12263,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_file-input-finput.html",
   "type": "Section",
-  "number": "9.3",
+  "number": "10.3",
   "title": "File input",
   "body": " File input  To get data from a file, we have to create a stream that flows from the file into the program. We can do that using the ifstream constructor.  ifstream infile(\"file-name\");  The argument for this constructor is a string that contains the name of the file you want to open. The result is an object named infile that supports all the same operations as cin , including >> and getline .  #include <iostream> #include <fstream> int main() { int x; std::string line; std::ifstream infile(\"file-name\"); infile >> x; \/\/ get a single integer and store in x std::getline(infile, line); \/\/ get a whole line and store in line }  If we know ahead of time how much data is in a file, it is straightforward to write a loop that reads the entire file and then stops. More often, though, we want to read the entire file, but don't know how big it is.  There are member functions for ifstreams that check the status of the input stream; they are called good , eof , fail and bad . We will use good to make sure the file was opened successfully and eof to detect the end of file.  Whenever you get data from an input stream, you don't know whether the attempt succeeded until you check. If the return value from eof is true then we have reached the end of the file and we know that the last attempt failed. Here is a program that reads lines from a file and displays them on the screen:  #include <iostream> #include <fstream> int main() { std::string fileName = ...; std::ifstream infile(fileName); if (infile.good() == false) { std::cout << \"Unable to open the file named \" << fileName; exit (1); } while (true) { std::getline(infile, line); if (infile.eof()) { break; } std::cout << line << std::endl; } }  Immediately after opening the file, we invoke the good function. The return value is false if the system could not open the file, most likely because it does not exist, or you do not have permission to read it.  The statement while(true) is an idiom for an infinite loop. Usually there will be a break statement somewhere in the loop so that the program does not really run forever (although some programs do). In this case, the break statement allows us to exit the loop as soon as we detect the end of file.  It is important to exit the loop between the input statement and the output statement, so that when getline fails at the end of the file, we do not output the invalid data in line .    Consider this code snippet: :: ifstream infile(\"file-name\"); Finish each sentence.   Try again!    The constructor is  ifstream.    The argument and the name of the file you want to open is  \"file-name\".    The result of this code snippet is an object named  infile.    The result of this code snippet supports the same operators as  cin.       The ifstream member function called makes sure the file was opened successfully, and member function detects the end of the file.                  The __________ statement allows us to exit the loop as soon as we detect the end of the file.              Create a code block that reads lines from filename and prints them out. First, make sure that the file is able to be opened.     int main() {    string name_of_file = \"filename\";    ifstream in_file(name_of_file);    if (in_file.good() == false) {    std::cout << \"Unable to open the file named \" << name_of_file;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    std::cout << line << std::endl ;  }  }     "
 },
@@ -11156,7 +12344,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_1",
   "type": "Checkpoint",
-  "number": "9.3.1",
+  "number": "10.3.1",
   "title": "",
   "body": "  Consider this code snippet: :: ifstream infile(\"file-name\"); Finish each sentence.   Try again!    The constructor is  ifstream.    The argument and the name of the file you want to open is  \"file-name\".    The result of this code snippet is an object named  infile.    The result of this code snippet supports the same operators as  cin.    "
 },
@@ -11165,7 +12353,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_2",
   "type": "Checkpoint",
-  "number": "9.3.2",
+  "number": "10.3.2",
   "title": "",
   "body": "  The ifstream member function called makes sure the file was opened successfully, and member function detects the end of the file.               "
 },
@@ -11174,7 +12362,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_3",
   "type": "Checkpoint",
-  "number": "9.3.3",
+  "number": "10.3.3",
   "title": "",
   "body": "  The __________ statement allows us to exit the loop as soon as we detect the end of the file.           "
 },
@@ -11183,7 +12371,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_4",
   "type": "Checkpoint",
-  "number": "9.3.4",
+  "number": "10.3.4",
   "title": "",
   "body": "  Create a code block that reads lines from filename and prints them out. First, make sure that the file is able to be opened.     int main() {    string name_of_file = \"filename\";    ifstream in_file(name_of_file);    if (in_file.good() == false) {    std::cout << \"Unable to open the file named \" << name_of_file;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    std::cout << line << std::endl ;  }  }    "
 },
@@ -11192,7 +12380,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_file-output.html",
   "type": "Section",
-  "number": "9.4",
+  "number": "10.4",
   "title": "File output",
   "body": " File output  Sending output to a file is similar. For example, we could modify the previous program to copy lines from one file to another.  #include <iostream> int main() { std::ifstream infile(\"input-file\"); std::ofstream outfile(\"output-file\"); if (infile.good() == false || outfile.good() == false) { std::cout << \"Unable to open one of the files.\" << std::endl; exit (1); } while (true) { std::getline(infile, line); if (infile.eof()) break; outfile << line << std::endl; } }    Create a code block that sends output to a file. First, make sure that both the input file and the output file are able to be opened.     int main() {    ifstream in_file(\"input_file_name\");  ofstream out_file(\"input_file_name\");    if (in_file.good() == false || out_file.good() == false) {    std::cout << \"Unable to open one of the files.\" << std::endl ;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    outfile << line << std::endl ;  }  }       The code from the previous problem checks whether the files open or not. It doesn't specify which one, if any, doesn't open. How could you specify which file does not open?      Create two \"for\" loops instead of an if-statement so that the statement loops through both conditions once.   Try again!     Create a \"while\" loop instead of an if-statement so that the statement loops through both conditions separately until the body of the loop is reached.   Try again!     Create two \"if\" statements, one that check whether in_file.good() is false, and another that checks whether out_file.good() is false, instead of putting them together in one \"if\" statement.   Correct!       Finish the statement:  outfile(\"output-file\"); .           "
 },
@@ -11210,7 +12398,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_1",
   "type": "Checkpoint",
-  "number": "9.4.1",
+  "number": "10.4.1",
   "title": "",
   "body": "  Create a code block that sends output to a file. First, make sure that both the input file and the output file are able to be opened.     int main() {    ifstream in_file(\"input_file_name\");  ofstream out_file(\"input_file_name\");    if (in_file.good() == false || out_file.good() == false) {    std::cout << \"Unable to open one of the files.\" << std::endl ;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    outfile << line << std::endl ;  }  }    "
 },
@@ -11219,7 +12407,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_2",
   "type": "Checkpoint",
-  "number": "9.4.2",
+  "number": "10.4.2",
   "title": "",
   "body": "  The code from the previous problem checks whether the files open or not. It doesn't specify which one, if any, doesn't open. How could you specify which file does not open?      Create two \"for\" loops instead of an if-statement so that the statement loops through both conditions once.   Try again!     Create a \"while\" loop instead of an if-statement so that the statement loops through both conditions separately until the body of the loop is reached.   Try again!     Create two \"if\" statements, one that check whether in_file.good() is false, and another that checks whether out_file.good() is false, instead of putting them together in one \"if\" statement.   Correct!    "
 },
@@ -11228,7 +12416,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_3",
   "type": "Checkpoint",
-  "number": "9.4.3",
+  "number": "10.4.3",
   "title": "",
   "body": "  Finish the statement:  outfile(\"output-file\"); .          "
 },
@@ -11237,7 +12425,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_parsing-input-parsing.html",
   "type": "Section",
-  "number": "9.5",
+  "number": "10.5",
   "title": "Parsing input",
   "body": " Parsing input  In I defined parsing as the process of analyzing the structure of a sentence in a natural language or a statement in a formal language. For example, the compiler has to parse your program before it can translate it into machine language.  In addition, when you read input from a file or from the keyboard you often have to parse it in order to extract the information you want and detect errors.  For example, I have a file called distances that contains information about the distances between major cities in the United States. I got this information from a randomly-chosen web page http:\/\/www.jaring.my\/usiskl\/usa\/distance.html so it may be wildly inaccurate, but that doesn't matter. The format of the file looks like this:  \"Atlanta\" \"Chicago\" 700 \"Atlanta\" \"Boston\" 1,100 \"Atlanta\" \"Chicago\" 700 \"Atlanta\" \"Dallas\" 800 \"Atlanta\" \"Denver\" 1,450 \"Atlanta\" \"Detroit\" 750 \"Atlanta\" \"Orlando\" 400  Each line of the file contains the names of two cities in quotation marks and the distance between them in miles. The quotation marks are useful because they make it easy to deal with names that have more than one word, like San Francisco.  By searching for the quotation marks in a line of input, we can find the beginning and end of each city name. Searching for special characters like quotation marks can be a little awkward, though, because the quotation mark is a special character in C++, used to identify string values.  If we want to find the first appearance of a quotation mark, we have to write something like:  int index = line.find('\\\"');  The argument here looks like a mess, but it represents a single character, a double quotation mark. The outermost single-quotes indicate that this is a character value, as usual. The backslash ( \\ ) indicates that we want to treat the next character literally. The sequence \\\" represents a quotation mark; the sequence \\' represents a single-quote. Interestingly, the sequence \\\\ represents a single backslash. The first backslash indicates that we should take the second backslash seriously.  Parsing input lines consists of finding the beginning and end of each city name and using the substr function to extract the cities and distance. substr is a string member function; it takes two arguments, the starting index of the substring and the length.  void processLine(const string& line) { \/\/ the character we are looking for is a quotation mark char quote = '\\\"'; \/\/ store the indices of the quotation marks in a vector std::vector<int> quoteIndex (4); \/\/ find the first quotation mark using the built-in find quoteIndex[0] = line.find(quote); \/\/ find the other quotation marks using the find from Chapter 7 for (int i=1; i < 4; i++) { quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1); } \/\/ break the line up into substrings int len1 = quoteIndex[1] - quoteIndex[0] - 1; std::string city1 = line.substr(quoteIndex[0]+1, len1); int len2 = quoteIndex[3] - quoteIndex[2] - 1; std::string city2 = line.substr(quoteIndex[2]+1, len2); int len3 = line.length() - quoteIndex[2] - 1; std::string distString = line.substr(quoteIndex[3]+1, len3); \/\/ output the extracted information std::cout << city1 << \"\\t\" << city2 << \"\\t\" << distString << std::endl ; }  Of course, just displaying the extracted information is not exactly what we want, but it is a good starting place.    What does parsing mean in the programming sense?      to scan an entire program for errors   Incorrect! This is included in the debugging process.     to run a program start to finish and record the run time   Incorrect! This is included in the debugging process.     to analyze the structure of a statement in a formal language   Correct! The compiler has to parse the program before it can translate it into machine language!     to search an entire program for a statement   Incorrect! You can use control (command) + F to find a particular statement.       The character indicates that we want to match the next character literally.             The substr() takes and as its two arguments.                  Create a block of code that takes a date written in the format mm\/dd\/yyyyy as an argument, and that separates it into three separate integers: day, month, and year. Find the respective parts in this order: month, first slash, day, second slash, year.     int main() {     string month = date.substr(0, 2);    string month = date.substr(2, 0);     int first_slash = date.find('\/');     string day = date.substr(first_slash + 1, 2);    string day = date.substr(first_slash, 2);      int second_slash = date.find('\/', first_slash + 1);    int second_slash = date.find('\/', first_slash);     int second_slash = date.find('\/');     string year = date.substr(second_slash + 1, 4);    string year = date.substr(second_slash, 4);     string year = date.substr(second_slash + 1, 2);    }     "
 },
@@ -11327,7 +12515,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_1",
   "type": "Checkpoint",
-  "number": "9.5.1",
+  "number": "10.5.1",
   "title": "",
   "body": "  What does parsing mean in the programming sense?      to scan an entire program for errors   Incorrect! This is included in the debugging process.     to run a program start to finish and record the run time   Incorrect! This is included in the debugging process.     to analyze the structure of a statement in a formal language   Correct! The compiler has to parse the program before it can translate it into machine language!     to search an entire program for a statement   Incorrect! You can use control (command) + F to find a particular statement.    "
 },
@@ -11336,7 +12524,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_2",
   "type": "Checkpoint",
-  "number": "9.5.2",
+  "number": "10.5.2",
   "title": "",
   "body": "  The character indicates that we want to match the next character literally.          "
 },
@@ -11345,7 +12533,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_3",
   "type": "Checkpoint",
-  "number": "9.5.3",
+  "number": "10.5.3",
   "title": "",
   "body": "  The substr() takes and as its two arguments.               "
 },
@@ -11354,7 +12542,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_4",
   "type": "Checkpoint",
-  "number": "9.5.4",
+  "number": "10.5.4",
   "title": "",
   "body": "  Create a block of code that takes a date written in the format mm\/dd\/yyyyy as an argument, and that separates it into three separate integers: day, month, and year. Find the respective parts in this order: month, first slash, day, second slash, year.     int main() {     string month = date.substr(0, 2);    string month = date.substr(2, 0);     int first_slash = date.find('\/');     string day = date.substr(first_slash + 1, 2);    string day = date.substr(first_slash, 2);      int second_slash = date.find('\/', first_slash + 1);    int second_slash = date.find('\/', first_slash);     int second_slash = date.find('\/');     string year = date.substr(second_slash + 1, 4);    string year = date.substr(second_slash, 4);     string year = date.substr(second_slash + 1, 2);    }    "
 },
@@ -11363,7 +12551,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_parsing-numbers.html",
   "type": "Section",
-  "number": "9.6",
+  "number": "10.6",
   "title": "Parsing numbers",
   "body": " Parsing numbers  The next task is to convert the numbers in the file from strings to integers. When people write large numbers, they often use commas to group the digits, as in 1,750. Most of the time when computers write large numbers, they don't include commas, and the built-in functions for reading numbers usually can't handle them. That makes the conversion a little more difficult, but it also provides an opportunity to write a comma-stripping function, so that's ok. Once we get rid of the commas, we can use the library function atoi to convert to integer. atoi is defined in the header file cstdlib .  To get rid of the commas, one option is to traverse the string and check whether each character is a digit. If so, we add it to the result string. At the end of the loop, the result string contains all the digits from the original string, in order.  #include <iostream> int convertToInt(const std::string& s) { std::string digitString = \"\"; for (size_t i = 0; i < s.length(); i++) { if (isdigit (s[i])) { digitString += s[i]; } } return atoi(digitString); }  The variable digitString is an example of an accumulator . It is similar to the counter we saw in , except that instead of getting incremented, it gets accumulates one new character at a time, using string concatentation.  The expression  digitString += s[i];  is equivalent to  digitString = digitString + s[i];  Both statements add a single character onto the end of the existing string.  Try the function out for yourself! As you can see, this function can also be used to parse phone numbers!   #include <iostream> #include <string> #include <vector> int convertToInt(const std::string& s) { std::string digitString = \"\"; for (size_t i = 0; i < s.length(); i++) { if (isdigit (s[i])) { digitString += s[i]; } } return atoi(digitString); } int main() { int num = convertToInt(\"867-5309\"); std::cout << num << std::endl; }     What does the atoi() function do?      takes the absolute value of a number   Incorrect! Go back and read for the answer.     converts a double to an int   Incorrect! Go back and read for the answer.     converts a string to an int   Correct! This is very helpful when we read numbers from a file (where they are strings).     converts an int to a string   Incorrect! Go back and read for the answer.       Which of the following strings will return 2020 when passed into convertToInt() ?      2020   Correct! This one is quite simple.     ab,jkl2!!moo0?huh2mth0haha.   Correct! This long, confusing string will clean up nicely!     2,00!!!!!!!!2   Incorrect!     2OOO020OOOOO   Correct! You have to look closely to see that some of these are 0's!     we2love0parsing2numbersO!   Incorrect! Although we do love parsing numbers, this is incorrect.       Create the replace_with() function that takes a string str , a character to get rid of olc_char , and a character to replace it with new_char . It should return a new string that has replaces any occurances of old_char with new_char.      string replace_with(string str, char old_char, char new_char) {    string replace_with() {      for (size_t i = 0; i < str.length(); i++) {    for (int i = 0; i < str.length(); i++) {     for (size_t i = 0; i < str.size(); i++) {     if (str[i] == old_char) {    if (i == old_char) {      str[i] = new_char;  }    new_char = str[i];  }     i = new_char;  }     }  return str;  }    }  return new_char;  }      "
 },
@@ -11435,7 +12623,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_1",
   "type": "Checkpoint",
-  "number": "9.6.1",
+  "number": "10.6.1",
   "title": "",
   "body": "  What does the atoi() function do?      takes the absolute value of a number   Incorrect! Go back and read for the answer.     converts a double to an int   Incorrect! Go back and read for the answer.     converts a string to an int   Correct! This is very helpful when we read numbers from a file (where they are strings).     converts an int to a string   Incorrect! Go back and read for the answer.    "
 },
@@ -11444,7 +12632,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_2",
   "type": "Checkpoint",
-  "number": "9.6.2",
+  "number": "10.6.2",
   "title": "",
   "body": "  Which of the following strings will return 2020 when passed into convertToInt() ?      2020   Correct! This one is quite simple.     ab,jkl2!!moo0?huh2mth0haha.   Correct! This long, confusing string will clean up nicely!     2,00!!!!!!!!2   Incorrect!     2OOO020OOOOO   Correct! You have to look closely to see that some of these are 0's!     we2love0parsing2numbersO!   Incorrect! Although we do love parsing numbers, this is incorrect.    "
 },
@@ -11453,7 +12641,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_3",
   "type": "Checkpoint",
-  "number": "9.6.3",
+  "number": "10.6.3",
   "title": "",
   "body": "  Create the replace_with() function that takes a string str , a character to get rid of olc_char , and a character to replace it with new_char . It should return a new string that has replaces any occurances of old_char with new_char.      string replace_with(string str, char old_char, char new_char) {    string replace_with() {      for (size_t i = 0; i < str.length(); i++) {    for (int i = 0; i < str.length(); i++) {     for (size_t i = 0; i < str.size(); i++) {     if (str[i] == old_char) {    if (i == old_char) {      str[i] = new_char;  }    new_char = str[i];  }     i = new_char;  }     }  return str;  }    }  return new_char;  }     "
 },
@@ -11462,7 +12650,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_the-set-data-structure.html",
   "type": "Section",
-  "number": "9.7",
+  "number": "10.7",
   "title": "The <code class=\"code-inline tex2jax_ignore\">Set<\/code> data structure",
   "body": " The Set data structure  A data structure is a container for grouping a collection of data into a single object. We have seen some examples already, including string s, which are collections of characters, and std::vector s which are collections of any type.  An ordered set is a collection of items with two defining properties:    Ordering:  The elements of the set have indices associated with them. We can use these indices to identify elements of the set.    Uniqueness:  No element appears in the set more than once. If you try to add an element to a set, and it already exists, there is no effect.    In addition, our implementation of an ordered set will have the following property:    Arbitrary size:  As we add elements to the set, it expands to make room for new elements.    Both string s and std::vector s have an ordering; every element has an index we can use to identify it. None of the data structures we have seen so far have the properties of uniqueness or arbitrary size.  To achieve uniqueness, we have to write an add function that searches the set to see if it already exists. To make the set expand as elements are added, we can take advantage of the resize function on std::vector s.  Here is the beginning of a class definition for a Set .  class Set { private: std::vector<string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const string& s) const; int add(const string& s); }; Set::Set(int n) { std::vector<string> temp (n); elements = temp; numElements = 0; }  The instance variables are a std::vector of strings and an integer that keeps track of how many elements there are in the set. Keep in mind that the number of elements in the set, numElements , is not the same thing as the size of the std::vector . Usually it will be smaller.  The Set constructor takes a single parameter, which is the initial size of the std::vector . The initial number of elements is always zero.  getNumElements and getElement are accessor functions for the instance variables, which are private. numElements is a read-only variable, so we provide a get function but not a set function.  int Set::getNumElements() const { return numElements; }  Why do we have to prevent client programs from changing getNumElements ? What are the invariants for this type, and how could a client program break an invariant. As we look at the rest of the Set member function, see if you can convince yourself that they all maintain the invariants.  When we use the [] operator to access the std::vector , it checks to make sure the index is greater than or equal to zero and less than the length of the std::vector . To access the elements of a set, though, we need to check a stronger condition. The index has to be less than the number of elements, which might be smaller than the length of the std::vector .  string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl ; exit (1); } }  If getElement gets an index that is out of range, it prints an error message (not the most useful message, I admit), and exits.  The interesting functions are find and add . By now, the pattern for traversing and searching should be old hat:  int Set::find(const string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; }  So that leaves us with add . Often the return type for something like add would be void, but in this case it might be useful to make it return the index of the element.  int Set::add(const string& s) { \/\/ if the element is already in the set, return its index int index = find(s); if (index != -1) return index; \/\/ if the vector is full, double its size if (numElements == elements.length()) { elements.resize (elements.length() * 2); } \/\/ add the new elements and return its index index = numElements; elements[index] = s; numElements++; return index; }  The tricky thing here is that numElements is used in two ways. It is the number of elements in the set, of course, but it is also the index of the next element to be added.  It takes a minute to convince yourself that that works, but consider this: when the number of elements is zero, the index of the next element is 0. When the number of elements is equal to the length of the std::vector , that means that the vector is full, and we have to allocate more space (using resize ) before we can add the new element.  Here is a state diagram showing a Set object that initially contains space for 2 elements.  Now we can use the Set class to keep track of the cities we find in the file. In main we create the Set with an initial size of 2:  Set cities (2);  Then in processLine we add both cities to the Set and store the index that gets returned.  int index1 = cities.add (city1); int index2 = cities.add (city2);  I modified processLine to take the cities object as a second parameter.   Try running the program:   #include <iostream> #include <string> #include <vector> class Set { private: std::vector<std::string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const std::string& s) const; int add(const std::string& s); }; Set::Set(int n) { std::vector<std::string> temp (n); elements = temp; numElements = 0; } int main() { Set cities(2); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); std::cout << cities.getElement(0); }  int Set::getNumElements() const { return numElements; } std::string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl; exit (1); } } int Set::find(const std::string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; } int Set::add(const std::string& s) { int index = find(s); if (index != -1) return index; size_t num = numElements; if (num == elements.size()) { elements.resize (elements.size() * 2); } index = numElements; elements[index] = s; numElements++; return index; }      Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!       Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.       If the number of elements is 76, then the index of the next element is .             Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.            "
 },
@@ -11669,7 +12857,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#set_sample",
   "type": "Listing",
-  "number": "9.7.1",
+  "number": "10.7.1",
   "title": "Try running the program:",
   "body": " Try running the program:   #include <iostream> #include <string> #include <vector> class Set { private: std::vector<std::string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const std::string& s) const; int add(const std::string& s); }; Set::Set(int n) { std::vector<std::string> temp (n); elements = temp; numElements = 0; } int main() { Set cities(2); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); std::cout << cities.getElement(0); }  int Set::getNumElements() const { return numElements; } std::string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl; exit (1); } } int Set::find(const std::string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; } int Set::add(const std::string& s) { int index = find(s); if (index != -1) return index; size_t num = numElements; if (num == elements.size()) { elements.resize (elements.size() * 2); } index = numElements; elements[index] = s; numElements++; return index; }   "
 },
@@ -11678,7 +12866,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_1",
   "type": "Checkpoint",
-  "number": "9.7.1",
+  "number": "10.7.1",
   "title": "",
   "body": "  Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!    "
 },
@@ -11687,7 +12875,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_2",
   "type": "Checkpoint",
-  "number": "9.7.2",
+  "number": "10.7.2",
   "title": "",
   "body": "  Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.    "
 },
@@ -11696,7 +12884,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_3",
   "type": "Checkpoint",
-  "number": "9.7.3",
+  "number": "10.7.3",
   "title": "",
   "body": "  If the number of elements is 76, then the index of the next element is .          "
 },
@@ -11705,7 +12893,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_4",
   "type": "Checkpoint",
-  "number": "9.7.4",
+  "number": "10.7.4",
   "title": "",
   "body": "  Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.           "
 },
@@ -11714,7 +12902,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_matrix.html",
   "type": "Section",
-  "number": "9.8",
+  "number": "10.8",
   "title": "<code class=\"code-inline tex2jax_ignore\">matrix<\/code>",
   "body": "  matrix   A matrix is similar to a std::vector except it is two-dimensional. Instead of a length, it has two dimensions, called numrows and numcols , for number of rows and number of columns.  Each element in the matrix is indentified by two indices; one specifies the row number, the other the column number.  To create a matrix, there are four constructors:  matrix<char> m1; matrix<int> m2(3, 4); matrix<double> m3(rows, cols, 0.0); matrix<double> m4(m3);  The first is a do-nothing constructor that makes a matrix with both dimensions 0. The second takes two integers, which are the initial number of rows and columns, in that order. The third is the same as the second, except that it takes an additional parameter that is used to initialized the elements of the matrix. The fourth is a copy constructor that takes another matrix as a parameter.  Just as with vectors , we can make matrix es with any type of elements (including std::vector s, and even matrix es).  To access the elements of a matrix, we use the [] operator to specify the row and column:  m2[0][0] = 1; m3[1][2] = 10.0 * m2[0][0];  If we try to access an element that is out of range, the program prints an error message and quits.  The numrows and numcols functions get the number of rows and columns. Remember that the row indices run from 0 to numrows() -1 and the column indices run from 0 to numcols() -1 .  The usual way to traverse a matrix is with a nested loop. This loop sets each element of the matrix to the sum of its two indices:  for (int row=0; row < m2.numrows(); row++) { for (int col=0; col < m2.numcols(); col++) { m2[row][col] = row + col; } }  This loop prints each row of the matrix with tabs between the elements and newlines between the rows:  for (int row=0; row < m2.numrows(); row++) { for (int col=0; col < m2.numcols(); col++) { std::cout << m2[row][col] << \"\\t\"; } std::cout << std::endl ; }    Which of the following data types are supported by matrix?      int   Correct!     string   Correct!     std::vector<int>   Correct!     vector<std::vector<int>>   Correct! This is a technically type of matrix!     matrix   Correct! Matrices can be made of matrices.       Suppose we have matrix mat . Then mat[9][17] would be accessing column and row of our matrix.         .*  Incorrect! Remember to use zero indexing!         .*  Incorrect! Remember to use zero indexing!      "
 },
@@ -11813,7 +13001,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_matrix.html#question15_8_1",
   "type": "Checkpoint",
-  "number": "9.8.1",
+  "number": "10.8.1",
   "title": "",
   "body": "  Which of the following data types are supported by matrix?      int   Correct!     string   Correct!     std::vector<int>   Correct!     vector<std::vector<int>>   Correct! This is a technically type of matrix!     matrix   Correct! Matrices can be made of matrices.    "
 },
@@ -11822,7 +13010,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_matrix.html#question15_8_2",
   "type": "Checkpoint",
-  "number": "9.8.2",
+  "number": "10.8.2",
   "title": "",
   "body": "  Suppose we have matrix mat . Then mat[9][17] would be accessing column and row of our matrix.         .*  Incorrect! Remember to use zero indexing!         .*  Incorrect! Remember to use zero indexing!     "
 },
@@ -11831,7 +13019,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_a-distance-matrix.html",
   "type": "Section",
-  "number": "9.9",
+  "number": "10.9",
   "title": "A distance matrix",
   "body": " A distance matrix  Finally, we are ready to put the data from the file into a matrix. Specifically, the matrix will have one row and one column for each city.  We'll create the matrix in main , with plenty of space to spare:  matrix<int> distances (50, 50, 0);  Inside processLine , we add new information to the matrix by getting the indices of the two cities from the Set and using them as matrix indices:  int dist = convertToInt(distString); int index1 = cities.add (city1); int index2 = cities.add (city2); distances[index1][index2] = distance; distances[index2][index1] = distance;  Finally, in main we can print the information in a human-readable form:  for (int i=0; i < cities.getNumElements(); i++) { std::cout << cities.getElement(i) << \"\\t\"; for (int j=0; j<=i; j++) { std::cout << distances[i][j] << \"\\t\"; } std::cout << std::endl ; } cout << \"\\t\"; for (int i=0; i < cities.getNumElements(); i++) { std::cout << cities.getElement(i) << \"\\t\"; } cout << std::endl ;  This code produces the output shown at the beginning of the chapter.  "
 },
@@ -11885,7 +13073,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_a-proper-distance-matrix.html",
   "type": "Section",
-  "number": "9.10",
+  "number": "10.10",
   "title": "A proper distance matrix",
   "body": " A proper distance matrix  Although this code works, it is not as well organized as it should be. Now that we have written a prototype, we are in a good position to evaluate the design and improve it.  What are some of the problems with the existing code?     We did not know ahead of time how big to make the distance matrix, so we chose an arbitrary large number (50) and made it a fixed size. It would be better to allow the distance matrix to expand in the same way a Set does. The matrix class has a function called resize that makes this possible.    The data in the distance matrix is not well-encapsulated. We have to pass the set of city names and the matrix itself as arguments to processLine , which is awkward. Also, use of the distance matrix is error prone because we have not provided accessor functions that perform error-checking. It might be a good idea to take the Set of city names and the matrix of distances, and combine them into a single object called a DistMatrix .     Here is a draft of what the header for a DistMatrix might look like:  class DistMatrix { private: Set cities; matrix<int> distances; public: DistMatrix(int rows); void add(const string& city1, const string& city2, int dist); int distance(int i, int j) const; int distance(const string& city1, const string& city2) const; std::string cityName(int i) const; int numCities() const; void print(); };  Using this interface simplifies main :  #include <iostream> #include <fstream> int main() { std::string line; std::ifstream infile(\"distances\"); DistMatrix distances(2); while (true) { std::getline(infile, line); if (infile.eof()) break; processLine(line, distances); } distances.print(); return 0; }  It also simplifies processLine :  void processLine(const string& line, DistMatrix& distances) { char quote = '\\\"'; std::vector<int> quoteIndex (4); quoteIndex[0] = line.find(quote); for (int i=1; i < 4; i++) { quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1); } \/\/ break the line up into substrings int len1 = quoteIndex[1] - quoteIndex[0] - 1; std::string city1 = line.substr(quoteIndex[0]+1, len1); int len2 = quoteIndex[3] - quoteIndex[2] - 1; std::string city2 = line.substr(quoteIndex[2]+1, len2); int len3 = line.length() - quoteIndex[2] - 1; std::string distString = line.substr(quoteIndex[3]+1, len3); int distance = convertToInt(distString); \/\/ add the new datum to the distances matrix distances.add(city1, city2, distance); }  I will leave it as an exercise to you to implement the member functions of DistMatrix .  "
 },
@@ -11957,7 +13145,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_glossary.html",
   "type": "Section",
-  "number": "9.11",
+  "number": "10.11",
   "title": "Glossary",
   "body": " Glossary    ordered set  A data structure in which every element appears only once and every element has an index that identifies it.    stream  A data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output.    accumulator  A variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    ordered set  a data structure in which every element appears only once and every element has an index that identifies it    stream  a data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output    accumulator  a variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.      "
 },
@@ -11966,7 +13154,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_glossary.html#chapter15_glossary-2",
   "type": "Glossary",
-  "number": "9.11",
+  "number": "10.11",
   "title": "Glossary",
   "body": "  ordered set  A data structure in which every element appears only once and every element has an index that identifies it.    stream  A data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output.    accumulator  A variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.   "
 },
@@ -11975,7 +13163,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_glossary.html#chapter15_glossary-3",
   "type": "Reading Questions",
-  "number": "9.11",
+  "number": "10.11",
   "title": "Reading Questions",
   "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    ordered set  a data structure in which every element appears only once and every element has an index that identifies it    stream  a data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output    accumulator  a variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.     "
 },
@@ -11984,7 +13172,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_multiple-choice-exercises.html",
   "type": "Exercises",
-  "number": "9.12",
+  "number": "10.12",
   "title": "Multiple Choice Exercises",
   "body": " Multiple Choice Exercises    We want to open a file and parse its data into our program. What library do we need to include?       iostream    This library deals with communication through the standard input and output.      sstream    This library is used to manipulate string objects as if they were streams.      fstream    This library is used to manipulate files using streams.      iomanip    This library is used to modify internal flags and formatting options.       The code below reads data from a file called input.txt . What is wrong with the following code?   #include <iostream> #include <fstream> int main() { std::string input; std::string filename = \"input.txt\"; std::ifstream infile(filename); std::getline(filename, input); }       We should use ofstream instead of ifstream .   Since we are dealing with an input file, we should use ifstream .     The arguments in getline are incorrect.   We are supposed to read input through the ifstream object. This line should be getline(infile, input) .     We cannot use a variable to store the filename.   Since the name of the file is just a string, we can store it in a variable.     There are no errors with this code.   Take another look at the code. Are we reading the input correctly into input ?       We want to make sure the file we wanted to open was opened successfully. Which of the following checks this and prints the proper output?       if (infile.good()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the if statement evaluates to true, then the file was opened successfully.      if (!infile.is_open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }     is_open() is another function that returns true if a file is opened successfully.      if (infile.good() == false) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the file isn't opened successfully, an error message is printed.      if (!infile.open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    The open() function is different from is_open() and does not return a bool .       Which of the following statements are true?      We can assume the program opens all files successfully.   There are times when a file can't be properly opened because they may have not been properly closed the last time they were used or the file is currently used by another program. As a result, it is good practice to include a check in your program.     A stream is an abstract object that represents the flow of data from a source.   We've used two streams before: the standard input stream and standard output stream ( cin and cout ).     We cannot use the operators << and >> , as they are for iostream objects only.   We are also able to use the operators for fstream objects.       What are the contents of the output file output.txt after running the code below?   #include <iostream> #include <fstream> int main() { std::ofstream outfile(\"output.txt\"); if (!outfile.good()) { std::cout << \"Unable to open file\" << std::endl; } std::cout << \"Powers of 2: \"; outfile << \"2 4 8 16 32 64\" << std::endl; }       2 4 8 16 32 64   This is the only thing we write to the output file.     Powers of 2: 2 4 8 16 31 64   Take another look at the stream objects used in the code.     Powers of 2:   This is printed to standard output, not the output file.     Unable to open file   Although this may be printed, this is not the contents of the output file.       The file scores.txt contains data about the roster number and test scores of students in a class. The output file averages.txt should store each student's roster number and average test score. What should replace the question marks?   #include <iostream> #include <fstream> int main() { std::string junk; int studentNum; double mid1, mid2, final; std::ifstream infile(\"scores.txt\"); std::ofstream outfile(\"averages.txt\"); if (!infile.good() || !outfile.good()) { std::cout << \"Unable to open a file\" << std::endl; } std::getline(infile, junk); outfile << \"Student#\\tAverage\" << std::endl; while (infile >> studentNum >> mid1 >> mid2 >> final) { double avg = (mid1 + mid2 + final) \/ 3; ??? } }        cout << avg << std::endl    This will output the average to standard output.      outfile << avg << std::endl    Take another look at the code. Is there a clue as to what data should be in the output file?      infile << studentNum << \"\\t\" << avg << std::endl    The data should be written to the output file.      outfile << studentNum << \"\\t\" << avg << std::endl    This properly outputs the student number and the student's average to the output file.       What does the following code do?   #include <iostream> #include <string> int main() { std::string original = \"430-0444\"; std::string digitString = \"\"; for (size_t i = 0; i < original.length(); i++) { if (isdigit(original[original.length() - 1 - i])) { digitString += original[original.length() - 1 - i]; } } std::cout << atoi(digitString) << std::endl; }       The code converts the original string to an integer and outputs the integer.   Take a closer look at the contents of the for loop.     The code converts an integer to a string and outputs the string.   What does the atoi function do?     The code outputs the sum of all the original string's digits.   The digitString variable is a string , not an int .     The code converts the original string to an integer in reverse and outputs the integer in reverse.   The code in the for loop parses the string in reverse.       Which of the following statements are false about the Set data structure?      A set can contain multiple elements with the same value.   All elements in a set are unique.     We can identify elements of a set by each element's index.   Each element has an index associated with it.     The elements of a Set are always sorted.   Although a set is ordered, it is not necessarily sorted.     The size of a Set object is fixed.   The Set data structure can expand to make room for new elements.       There are many ways to construct a matrix . Which of the following are valid constructors of a matrix ?       matrix<string> m1(2);    A matrix has two dimensions and this constructor only has one dimension.      matrix<int> m2(2, 6, 0);    This creates a matrix with 2 rows and 6 columns with all of its elements equal to 0.      matrix<char> m3(m2);    This creates m3 to be a copy of m2 .      matrix<int> m2(2.4, 2);    There must be a whole number of rows and columns.       What is the output of the following code?   #include <iostream> #include <vector> bool secret_function(int num) { if (num % 2 == 0) { return true; } return false; } int main() { matrix<int> mat(4, 2); for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { if (!secret_function(i + j) { mat[i][j] = 0; } else { mat[i][j] = i + j; } } } int n; for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { n += mat[i][j]; } } std::cout << n << std::endl; }       8   The matrix only contains even sums of the row and column indices and 0 otherwise. Thus, the sum of all elements is 8.     16   What does the secret function do?     0   What are the contents of the matrix?     9   What are the contents of the matrix?     "
 },
@@ -11993,7 +13181,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_1",
   "type": "Exercise",
-  "number": "9.12.1",
+  "number": "10.12.1",
   "title": "",
   "body": "  We want to open a file and parse its data into our program. What library do we need to include?       iostream    This library deals with communication through the standard input and output.      sstream    This library is used to manipulate string objects as if they were streams.      fstream    This library is used to manipulate files using streams.      iomanip    This library is used to modify internal flags and formatting options.    "
 },
@@ -12002,7 +13190,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_2",
   "type": "Exercise",
-  "number": "9.12.2",
+  "number": "10.12.2",
   "title": "",
   "body": "  The code below reads data from a file called input.txt . What is wrong with the following code?   #include <iostream> #include <fstream> int main() { std::string input; std::string filename = \"input.txt\"; std::ifstream infile(filename); std::getline(filename, input); }       We should use ofstream instead of ifstream .   Since we are dealing with an input file, we should use ifstream .     The arguments in getline are incorrect.   We are supposed to read input through the ifstream object. This line should be getline(infile, input) .     We cannot use a variable to store the filename.   Since the name of the file is just a string, we can store it in a variable.     There are no errors with this code.   Take another look at the code. Are we reading the input correctly into input ?    "
 },
@@ -12011,7 +13199,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_3",
   "type": "Exercise",
-  "number": "9.12.3",
+  "number": "10.12.3",
   "title": "",
   "body": "  We want to make sure the file we wanted to open was opened successfully. Which of the following checks this and prints the proper output?       if (infile.good()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the if statement evaluates to true, then the file was opened successfully.      if (!infile.is_open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }     is_open() is another function that returns true if a file is opened successfully.      if (infile.good() == false) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the file isn't opened successfully, an error message is printed.      if (!infile.open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    The open() function is different from is_open() and does not return a bool .    "
 },
@@ -12020,7 +13208,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_4",
   "type": "Exercise",
-  "number": "9.12.4",
+  "number": "10.12.4",
   "title": "",
   "body": "  Which of the following statements are true?      We can assume the program opens all files successfully.   There are times when a file can't be properly opened because they may have not been properly closed the last time they were used or the file is currently used by another program. As a result, it is good practice to include a check in your program.     A stream is an abstract object that represents the flow of data from a source.   We've used two streams before: the standard input stream and standard output stream ( cin and cout ).     We cannot use the operators << and >> , as they are for iostream objects only.   We are also able to use the operators for fstream objects.    "
 },
@@ -12029,7 +13217,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_5",
   "type": "Exercise",
-  "number": "9.12.5",
+  "number": "10.12.5",
   "title": "",
   "body": "  What are the contents of the output file output.txt after running the code below?   #include <iostream> #include <fstream> int main() { std::ofstream outfile(\"output.txt\"); if (!outfile.good()) { std::cout << \"Unable to open file\" << std::endl; } std::cout << \"Powers of 2: \"; outfile << \"2 4 8 16 32 64\" << std::endl; }       2 4 8 16 32 64   This is the only thing we write to the output file.     Powers of 2: 2 4 8 16 31 64   Take another look at the stream objects used in the code.     Powers of 2:   This is printed to standard output, not the output file.     Unable to open file   Although this may be printed, this is not the contents of the output file.    "
 },
@@ -12038,7 +13226,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_6",
   "type": "Exercise",
-  "number": "9.12.6",
+  "number": "10.12.6",
   "title": "",
   "body": "  The file scores.txt contains data about the roster number and test scores of students in a class. The output file averages.txt should store each student's roster number and average test score. What should replace the question marks?   #include <iostream> #include <fstream> int main() { std::string junk; int studentNum; double mid1, mid2, final; std::ifstream infile(\"scores.txt\"); std::ofstream outfile(\"averages.txt\"); if (!infile.good() || !outfile.good()) { std::cout << \"Unable to open a file\" << std::endl; } std::getline(infile, junk); outfile << \"Student#\\tAverage\" << std::endl; while (infile >> studentNum >> mid1 >> mid2 >> final) { double avg = (mid1 + mid2 + final) \/ 3; ??? } }        cout << avg << std::endl    This will output the average to standard output.      outfile << avg << std::endl    Take another look at the code. Is there a clue as to what data should be in the output file?      infile << studentNum << \"\\t\" << avg << std::endl    The data should be written to the output file.      outfile << studentNum << \"\\t\" << avg << std::endl    This properly outputs the student number and the student's average to the output file.    "
 },
@@ -12047,7 +13235,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_7",
   "type": "Exercise",
-  "number": "9.12.7",
+  "number": "10.12.7",
   "title": "",
   "body": "  What does the following code do?   #include <iostream> #include <string> int main() { std::string original = \"430-0444\"; std::string digitString = \"\"; for (size_t i = 0; i < original.length(); i++) { if (isdigit(original[original.length() - 1 - i])) { digitString += original[original.length() - 1 - i]; } } std::cout << atoi(digitString) << std::endl; }       The code converts the original string to an integer and outputs the integer.   Take a closer look at the contents of the for loop.     The code converts an integer to a string and outputs the string.   What does the atoi function do?     The code outputs the sum of all the original string's digits.   The digitString variable is a string , not an int .     The code converts the original string to an integer in reverse and outputs the integer in reverse.   The code in the for loop parses the string in reverse.    "
 },
@@ -12056,7 +13244,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_8",
   "type": "Exercise",
-  "number": "9.12.8",
+  "number": "10.12.8",
   "title": "",
   "body": "  Which of the following statements are false about the Set data structure?      A set can contain multiple elements with the same value.   All elements in a set are unique.     We can identify elements of a set by each element's index.   Each element has an index associated with it.     The elements of a Set are always sorted.   Although a set is ordered, it is not necessarily sorted.     The size of a Set object is fixed.   The Set data structure can expand to make room for new elements.    "
 },
@@ -12065,7 +13253,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_9",
   "type": "Exercise",
-  "number": "9.12.9",
+  "number": "10.12.9",
   "title": "",
   "body": "  There are many ways to construct a matrix . Which of the following are valid constructors of a matrix ?       matrix<string> m1(2);    A matrix has two dimensions and this constructor only has one dimension.      matrix<int> m2(2, 6, 0);    This creates a matrix with 2 rows and 6 columns with all of its elements equal to 0.      matrix<char> m3(m2);    This creates m3 to be a copy of m2 .      matrix<int> m2(2.4, 2);    There must be a whole number of rows and columns.    "
 },
@@ -12074,7 +13262,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_10",
   "type": "Exercise",
-  "number": "9.12.10",
+  "number": "10.12.10",
   "title": "",
   "body": "  What is the output of the following code?   #include <iostream> #include <vector> bool secret_function(int num) { if (num % 2 == 0) { return true; } return false; } int main() { matrix<int> mat(4, 2); for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { if (!secret_function(i + j) { mat[i][j] = 0; } else { mat[i][j] = i + j; } } } int n; for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { n += mat[i][j]; } } std::cout << n << std::endl; }       8   The matrix only contains even sums of the row and column indices and 0 otherwise. Thus, the sum of all elements is 8.     16   What does the secret function do?     0   What are the contents of the matrix?     9   What are the contents of the matrix?    "
 },
@@ -12083,7 +13271,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_mixed-up-code-practice.html",
   "type": "Exercises",
-  "number": "9.13",
+  "number": "10.13",
   "title": "Mixed Up Code Practice",
   "body": " Mixed Up Code Practice    We have a file called locations.txt that we want to read data from. Check to make sure that the file was opened properly; if it wasn't, display an error message and exit with a status of 1. Put the necessary blocks of code in the correct order.     int main() {     ifstream infile(\"locations.txt\");    ifstream infile(locations.txt);      if (infile.good() == false) {    if (infile.good()) {     std::cout << \"Unable to open the file.\" << std::endl ;     exit(1);    return 1;     }    }       Let's write a program that prompts the user for a filename and opens that file. Put the necessary blocks of code in the correct order.     int main() {     std::string filename;    ifstream filename;     std::cout << \"Enter the name of the file: \";    std::cin >> filename;     ifstream infile(filename);    ifstream infile(filename);     if (infile.good() == false) {    std::cout << \"Unable to open the file.\" << std::endl ;    exit(1);    }    }       Now let's write some output to a file. Write a program that prompts a user for a list of 5 integers separated by spaces, calculates the average of those integers, and outputs The average is average to an output file called average.txt . Put the necessary blocks of code in the correct order. Declare the output file first and check that it is opened correctly.     int main() {    ofstream outfile(\"average.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<int> list;    int sum = 0;    int n1, n2, n3, n4, n5;    std::cout << \"Enter five integers separated by spaces: \";    std::cin >> n1 >> n2 >> n3 >> n4 >> n5;    sum = n1 + n2 + n3 + n4 + n5;     outfile << \"The average is \" << sum \/ 5.0 << std::endl ;    std::cout << \"The average is \" << sum \/ 5.0 << std::endl ;     }       We are given a file called data.txt with an unknown number of double values. Write a program that finds the minimum, maximum, and number of data and outputs these values to a file called summary.txt . Put the necessary blocks of code in the correct order. Declare the input and output files first, and check to see that both are opened correctly before dealing with data. Increment the number of data points before checking for the min and max.     int main() {    ifstream infile(\"data.txt\");    ofstream outfile(\"summary.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::vector<int> data;    int numData = 1;    double min, max, value;    infile >> value;    min = value;    max = value;    while (infile >> value) {    ++numData;    if (value < min) { min = value; }    if (value > max) { max = value; }    }    outfile << \"Number of data: \" << numData << \", min: \" << min << \", max: \" << max << std::endl ;    }       You are given a file called employee_data.txt and you want to store the information from that file into a vector of data. The file contains information about an employee's first and last name, age, phone number, and email. Write the definition of an Employee before you write your main function. Open and check the file before working with the data. Put the necessary blocks of code in the correct order.     struct Employee {  std::string fname;  std::string lname;  int age;  int phone;  std::string email;    Employee(string f, string l, int a, int p, string e) {  fname = f;  lname = l;  age = a;  phone = p;  email = e;  }    };    int main() {    ifstream infile(\"employee_data.txt\");    if (infile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<Employee> data;    std::string fname, lname, email;    int age, phone;     while (infile >> fname >> lname >> age >> phone >> email) {    while (infile) {     Employee e(fname, lname, age, phone, email);    data.push_back(e);    }  }       You are given a file but it appears that someone's capslock key was stuck because everything is in uppercase. Write a program that takes the input from the file UPPER.txt and converts all the words to lowercase and prints out the modified message to a file called lower.txt . Write the definition of the function toLower first. Separate the words with spaces. Put the necessary blocks of code in the correct order.     string upperToLower(string upper) {  for (size_t i = 0; i < upper.length(); ++i) {     upper[i] = toupper(upper[i]);    tolower(upper[i]);     }  return upper;  }    int main() {    ifstream infile(\"UPPER.txt\");    ofstream outfile(\"lower.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::string word;    while (infile >> word) {     std::string upper = upperToLower(word);    upperToLower(word);     outfile << upper << \" \";    }  }       Nobody ever put a limit on how many files we can work with. Does this mean we can open two or more files at once? Yes we can! Write a program that combines two files odds.txt and evens.txt into one output file numbers.txt . You should combine them in a way such that numbers.txt contains the first odd number then the first even number then the second odd number and so on. You are guaranteed that there are equal amounts of odd and even numbers. Put the necessary blocks of code in the correct order.     int main() {    ifstream odds(\"odds.txt\");    ifstream evens(\"evens.txt\");    ofstream outfile(\"numbers.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int odd, even;    while (odds >> odd && evens >> even) {    outfile << odd << \" \" << even << \" \";    }  }       In chapter 15.7 we defined the Set data structure. Write a function vectorToSet which takes a std::vector of data and returns a Set object with the data. Put the necessary blocks of code in the correct order. Put the Set definition first in your answer.     class Set {  private:  std::vector<string> elements;  int numElements;  public:  Set(int n);  int getNumElements() const;  std::string getElement(int i) const;  int find(const string& s) const;  int add(const string& s);  };     Set vectorToSet( std::vector<string> data) {    void Set::vectorToSet( std::vector<string> data) {     Set s(data.size());    for (size_t i = 0; i < data.size(); ++i) {    s.add(data[i]);    }    s.numElements++;    if (s.find(data[i]) != -1) {    s.elements.push_back(data[i]);    }       Let's write the class definition for a Matrix ! The underlying data structure is a std::vector of std::vector s of int s. Write the constructor and at function, which returns the data stored at a given row and column. Put the necessary blocks of code in the correct order.     class Matrix {    private:    std::vector< std::vector<int> > elements;    public:    Matrix(int numRows, int numCols) {    std::vector<int> row(numCols);    for (int i = 0; i < numRows; ++i) {    elements.push_back(row);    }  }    int at(int row, int col) {    return elements[row][col];    }    };       Now that we have the basic structure of a Matrix , let's write a function that allows us to add data to a matrix. Write the Matrix member function setData which takes a row and column index as well as a data value and stores the data value in the Matrix at the given location. Then read data in from a file called data.txt . The first line contains the number of rows and columns, separated by a space. Data values begin on the next line. Put the necessary blocks of code in the correct order.      void Matrix::setData(int row, int col, int value) {    void setData(int row, int col, int value) {     elements[row][col] = value;    }    int main() {    ifstream infile(\"data.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int numRows, numCols, data;    infile >> numRows >> numCols;    Matrix mat(numRows, numCols);    while (infile >> data) {    for (int i = 0; i < numRows; ++i) {    for (int j = 0; j < numCols; ++j) {    mat.setData(i, j, data);  }  }  }    }     "
 },
@@ -12092,7 +13280,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_1",
   "type": "Exercise",
-  "number": "9.13.yes",
+  "number": "10.13.yes",
   "title": "",
   "body": "  We have a file called locations.txt that we want to read data from. Check to make sure that the file was opened properly; if it wasn't, display an error message and exit with a status of 1. Put the necessary blocks of code in the correct order.     int main() {     ifstream infile(\"locations.txt\");    ifstream infile(locations.txt);      if (infile.good() == false) {    if (infile.good()) {     std::cout << \"Unable to open the file.\" << std::endl ;     exit(1);    return 1;     }    }    "
 },
@@ -12101,7 +13289,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_2",
   "type": "Exercise",
-  "number": "9.13.yes",
+  "number": "10.13.yes",
   "title": "",
   "body": "  Let's write a program that prompts the user for a filename and opens that file. Put the necessary blocks of code in the correct order.     int main() {     std::string filename;    ifstream filename;     std::cout << \"Enter the name of the file: \";    std::cin >> filename;     ifstream infile(filename);    ifstream infile(filename);     if (infile.good() == false) {    std::cout << \"Unable to open the file.\" << std::endl ;    exit(1);    }    }    "
 },
@@ -12110,7 +13298,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_3",
   "type": "Exercise",
-  "number": "9.13.yes",
+  "number": "10.13.yes",
   "title": "",
   "body": "  Now let's write some output to a file. Write a program that prompts a user for a list of 5 integers separated by spaces, calculates the average of those integers, and outputs The average is average to an output file called average.txt . Put the necessary blocks of code in the correct order. Declare the output file first and check that it is opened correctly.     int main() {    ofstream outfile(\"average.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<int> list;    int sum = 0;    int n1, n2, n3, n4, n5;    std::cout << \"Enter five integers separated by spaces: \";    std::cin >> n1 >> n2 >> n3 >> n4 >> n5;    sum = n1 + n2 + n3 + n4 + n5;     outfile << \"The average is \" << sum \/ 5.0 << std::endl ;    std::cout << \"The average is \" << sum \/ 5.0 << std::endl ;     }    "
 },
@@ -12119,7 +13307,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_4",
   "type": "Exercise",
-  "number": "9.13.yes",
+  "number": "10.13.yes",
   "title": "",
   "body": "  We are given a file called data.txt with an unknown number of double values. Write a program that finds the minimum, maximum, and number of data and outputs these values to a file called summary.txt . Put the necessary blocks of code in the correct order. Declare the input and output files first, and check to see that both are opened correctly before dealing with data. Increment the number of data points before checking for the min and max.     int main() {    ifstream infile(\"data.txt\");    ofstream outfile(\"summary.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::vector<int> data;    int numData = 1;    double min, max, value;    infile >> value;    min = value;    max = value;    while (infile >> value) {    ++numData;    if (value < min) { min = value; }    if (value > max) { max = value; }    }    outfile << \"Number of data: \" << numData << \", min: \" << min << \", max: \" << max << std::endl ;    }    "
 },
@@ -12128,7 +13316,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_5",
   "type": "Exercise",
-  "number": "9.13.yes",
+  "number": "10.13.yes",
   "title": "",
   "body": "  You are given a file called employee_data.txt and you want to store the information from that file into a vector of data. The file contains information about an employee's first and last name, age, phone number, and email. Write the definition of an Employee before you write your main function. Open and check the file before working with the data. Put the necessary blocks of code in the correct order.     struct Employee {  std::string fname;  std::string lname;  int age;  int phone;  std::string email;    Employee(string f, string l, int a, int p, string e) {  fname = f;  lname = l;  age = a;  phone = p;  email = e;  }    };    int main() {    ifstream infile(\"employee_data.txt\");    if (infile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<Employee> data;    std::string fname, lname, email;    int age, phone;     while (infile >> fname >> lname >> age >> phone >> email) {    while (infile) {     Employee e(fname, lname, age, phone, email);    data.push_back(e);    }  }    "
 },
@@ -12137,7 +13325,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_6",
   "type": "Exercise",
-  "number": "9.13.yes",
+  "number": "10.13.yes",
   "title": "",
   "body": "  You are given a file but it appears that someone's capslock key was stuck because everything is in uppercase. Write a program that takes the input from the file UPPER.txt and converts all the words to lowercase and prints out the modified message to a file called lower.txt . Write the definition of the function toLower first. Separate the words with spaces. Put the necessary blocks of code in the correct order.     string upperToLower(string upper) {  for (size_t i = 0; i < upper.length(); ++i) {     upper[i] = toupper(upper[i]);    tolower(upper[i]);     }  return upper;  }    int main() {    ifstream infile(\"UPPER.txt\");    ofstream outfile(\"lower.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::string word;    while (infile >> word) {     std::string upper = upperToLower(word);    upperToLower(word);     outfile << upper << \" \";    }  }    "
 },
@@ -12146,7 +13334,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_7",
   "type": "Exercise",
-  "number": "9.13.yes",
+  "number": "10.13.yes",
   "title": "",
   "body": "  Nobody ever put a limit on how many files we can work with. Does this mean we can open two or more files at once? Yes we can! Write a program that combines two files odds.txt and evens.txt into one output file numbers.txt . You should combine them in a way such that numbers.txt contains the first odd number then the first even number then the second odd number and so on. You are guaranteed that there are equal amounts of odd and even numbers. Put the necessary blocks of code in the correct order.     int main() {    ifstream odds(\"odds.txt\");    ifstream evens(\"evens.txt\");    ofstream outfile(\"numbers.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int odd, even;    while (odds >> odd && evens >> even) {    outfile << odd << \" \" << even << \" \";    }  }    "
 },
@@ -12155,7 +13343,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_8",
   "type": "Exercise",
-  "number": "9.13.yes",
+  "number": "10.13.yes",
   "title": "",
   "body": "  In chapter 15.7 we defined the Set data structure. Write a function vectorToSet which takes a std::vector of data and returns a Set object with the data. Put the necessary blocks of code in the correct order. Put the Set definition first in your answer.     class Set {  private:  std::vector<string> elements;  int numElements;  public:  Set(int n);  int getNumElements() const;  std::string getElement(int i) const;  int find(const string& s) const;  int add(const string& s);  };     Set vectorToSet( std::vector<string> data) {    void Set::vectorToSet( std::vector<string> data) {     Set s(data.size());    for (size_t i = 0; i < data.size(); ++i) {    s.add(data[i]);    }    s.numElements++;    if (s.find(data[i]) != -1) {    s.elements.push_back(data[i]);    }    "
 },
@@ -12164,7 +13352,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_9",
   "type": "Exercise",
-  "number": "9.13.yes",
+  "number": "10.13.yes",
   "title": "",
   "body": "  Let's write the class definition for a Matrix ! The underlying data structure is a std::vector of std::vector s of int s. Write the constructor and at function, which returns the data stored at a given row and column. Put the necessary blocks of code in the correct order.     class Matrix {    private:    std::vector< std::vector<int> > elements;    public:    Matrix(int numRows, int numCols) {    std::vector<int> row(numCols);    for (int i = 0; i < numRows; ++i) {    elements.push_back(row);    }  }    int at(int row, int col) {    return elements[row][col];    }    };    "
 },
@@ -12173,7 +13361,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_10",
   "type": "Exercise",
-  "number": "9.13.yes",
+  "number": "10.13.yes",
   "title": "",
   "body": "  Now that we have the basic structure of a Matrix , let's write a function that allows us to add data to a matrix. Write the Matrix member function setData which takes a row and column index as well as a data value and stores the data value in the Matrix at the given location. Then read data in from a file called data.txt . The first line contains the number of rows and columns, separated by a space. Data values begin on the next line. Put the necessary blocks of code in the correct order.      void Matrix::setData(int row, int col, int value) {    void setData(int row, int col, int value) {     elements[row][col] = value;    }    int main() {    ifstream infile(\"data.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int numRows, numCols, data;    infile >> numRows >> numCols;    Matrix mat(numRows, numCols);    while (infile >> data) {    for (int i = 0; i < numRows; ++i) {    for (int j = 0; j < numCols; ++j) {    mat.setData(i, j, data);  }  }  }    }    "
 },
@@ -12182,7 +13370,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_coding-practice.html",
   "type": "Exercises",
-  "number": "9.14",
+  "number": "10.14",
   "title": "Coding Practice",
   "body": " Coding Practice    Write a program that takes in an input file called poem.txt    Two roads diverged in a yellow wood, And sorry I could not travel both And be one traveler, long I stood And looked down one as far as I could To where it bent in the undergrowth; Then took the other, as just as fair, And having perhaps the better claim Because it was grassy and wanted wear, Though as for that the passing there Had worn them really about the same, And both that morning equally lay In leaves no step had trodden black. Oh, I kept the first for another day! Yet knowing how way leads on to way I doubted if I should ever come back. I shall be telling this with a sigh Somewhere ages and ages hence: Two roads diverged in a wood, and I, I took the one less traveled by, And that has made all the difference.   and prints the first 5 lines to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we use getline in a for loop to retrieve and print the first 5 lines of the poem.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"poem.txt\"); std::string input; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } for (int i = 0; i < 5; ++i) { std::getline(infile, input); std::cout << input << std::endl; } }       Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.    #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.     int main () {    std::string fileIn;    int n;    std::string line;    std::cout << \"Enter the name of the file: \";  std::cin >> fileIn;  std::cout << fileIn << std::endl ;    std::cout << \"Enter an integer: \";  std::cin >> n;  std::cout << n << std::endl ;    ifstream inFile(fileIn.c_str());    if (inFile.good() == false) {  std::cout << \"Unable to open the file named \" << fileIn << \" and output \" << n << \" lines.\" << std::endl ;  exit(1);  }    for (int i = 0; i < n; i++) {    getline(inFile, line);    std::cout << line << std::endl ;    }    }         Write a program that takes in an input file called heights.txt   62 67 75 68 65 67 70 72 74 66 72 66 66 73 69 61 60 73 72 60   , finds the median of the data, and prints “The median height is: height inches” to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a vector. After sorting the vector, we find the median depending on whether the number of data values was even or odd. Finally, we output our result to the terminal.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> int main() { std::ifstream infile(\"heights.txt\"); std::vector<int> data; double median; int height; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (infile >> height) { data.push_back(height); } std::sort(data.begin(), data.end()); if (data.size() % 2 == 0) { median = (data[data.size() \/ 2 - 1] + data[data.size() \/ 2]) \/ 2.0; } else { median = data[data.size() \/ 2]; } std::cout << \"The median height is: \" << median << \" inches\" << std::endl; }       Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> #include <cmath> int main() { \/\/ Write your code here. \/\/ Do not modify the code below std::ifstream student_output(\"powers.txt\"); if (!student_output.good()) { std::cout << \"Error opening student's output.\" << std::endl; } std::string answer; while (std::getline(student_output, answer)) { std::cout << answer << std::endl; } }      Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    int n;    std::cout << \"Enter an integer: \";    std::cin >> n;    std::cout << n << std::endl ;    ofstream outfile (\"powers.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open output file.\" << std::endl ;  exit (1);  }    while (true) {    for (int i = 0; i < n; i++) {    outfile << pow(2,i) << std::endl ;    }    }    ifstream student_output(\"powers.txt\");    if (!student_output.good()) {  std::cout << \"Error opening student's output.\" << std::endl ;  }    std::string answer;    while (getline(student_output, answer)) {  std::cout << answer << std::endl ;  }    }         ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter after it in the alphabet. For example, using ROT13 on the letter “a” would turn it into “n”. Notice how since 13 is exactly half the number of characters in the alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus, ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file called message.txt   Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.   applies ROT13, and outputs the result to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <cctype> int main() { \/\/ Write your code here. }    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a string. We call our ROT13 function and output the result to the output file.   #include <iostream> #include <fstream> #include <cctype> std::string ROT13 (std::string message) { for (size_t i = 0; i < message.size(); ++i) { if (isalpha(message[i])) { if (message[i] >= 'A' && message[i] <= 'Z') { if (message[i] <= 'M') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } else { if (message[i] <= 'm') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } } } return message; } int main() { std::ifstream infile(\"message.txt\"); std::string message; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (std::getline(infile, message)) { std::cout << ROT13(message) << std::endl; } }       Write a program that reads in data about a class from the file class_data.txt   Below are the contents of the input file.  First Last Grade GPA Age Alex Jones 9 3.4 14 Beth Hamilton 12 3.7 18 Charles White 11 3.5 16 Daniel Kim 10 3.8 16 Ethan Brooks 11 3.9 17 Faith Flemmings 10 3.0 15 Gina Zhou 9 3.2 14  and outputs the rows of data where a student has a GPA of at least 3.5. Include proper file error checking.   #include <iostream> #include <fstream> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into corresponding variables. We check if the GPA is at least 3.5, and print the data values to the terminal if so.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"class_data.txt\"); std::string fname, lname; int grade, age; double gpa; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::getline(infile, fname); while (infile >> fname >> lname >> grade >> gpa >> age) { if (gpa >= 3.5) { std::cout << fname << '\\t' << lname << '\\t' << grade << '\\t' << gpa << '\\t' << age << std::endl; } } }       Write a program that takes an input file called shrimp.txt and outputs the contents of the file where \"shrimp\" is replaced by a word that the user inputs to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that takes an input file called “shrimp.txt” and outputs the quote with “shrimp” replaced by a word that the user inputs to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.   There's pineapple shrimp, lemon shrimp, coconut shrimp, pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and potatoes, shrimp burger, shrimp sandwich. That- that's about it.      int main() {    std::string word;    std::cout << \"Enter word to replace 'shrimp': \";    std::cin >> word;    std::cout << word << std::endl ;    std::string replace = \"shrimp\";    ifstream inFile(\"shrimp.txt\");    std::string line;    for (int i = 0; i < 4; i++) {    getline(inFile,line);    for (int unsigned j = 0; j < line.size(); j++) {    size_t pos = line.find(replace);    if (pos != std::string::npos) {    line.replace(pos,replace.length(),word);    }    }    std::cout << line<< std::endl ;    }    }         Write a program that creates a multiplication table for the first 10 numbers using a matrix and outputting the table to an output file called mult_table.txt . Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create a 10x10 matrix and fill in the products. Then we traverse through the matrix and output the values into the output file.   #include <iostream> #include <fstream> #include <vector> int main() { std::ofstream outfile(\"mult_table.txt\"); if (!outfile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::vector<int> rows(10); std::vector<std::vector<int> > mat; for (int i = 0; i < 10; ++i) { mat.push_back(rows); } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { matrix[i][j] = (i + 1) * (j + 1); } } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { outfile << matrix[i][j] << '\\t'; } std::cout << std::endl; } }       Write a program that computes the product of two matrices. Take a look at the example below. Two find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> int main() { \/* 2x3 matrix A X 3x2 matrix B 2x2 matrix C [ a b c ] [ g h ] [ ag + bi + cl ah + bj + cm ] [ d e f ] [ i j ] = [ dg + ei + fl dh + ej + fm ] [ l m ] *\/ \/\/ Write your code here. }      Write a program that computes the product of two matrices. Take a look at the example below. To find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    matrix<int> A(2,3);    matrix<int> B(3,2);    matrix<int> C(2,2);    C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);    C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);    C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);    C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);    }       "
 },
@@ -12191,7 +13379,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_1",
   "type": "Exercise",
-  "number": "9.14.1",
+  "number": "10.14.1",
   "title": "",
   "body": "  Write a program that takes in an input file called poem.txt    Two roads diverged in a yellow wood, And sorry I could not travel both And be one traveler, long I stood And looked down one as far as I could To where it bent in the undergrowth; Then took the other, as just as fair, And having perhaps the better claim Because it was grassy and wanted wear, Though as for that the passing there Had worn them really about the same, And both that morning equally lay In leaves no step had trodden black. Oh, I kept the first for another day! Yet knowing how way leads on to way I doubted if I should ever come back. I shall be telling this with a sigh Somewhere ages and ages hence: Two roads diverged in a wood, and I, I took the one less traveled by, And that has made all the difference.   and prints the first 5 lines to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we use getline in a for loop to retrieve and print the first 5 lines of the poem.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"poem.txt\"); std::string input; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } for (int i = 0; i < 5; ++i) { std::getline(infile, input); std::cout << input << std::endl; } }    "
 },
@@ -12200,7 +13388,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_2_q",
   "type": "Exercise",
-  "number": "9.14.2",
+  "number": "10.14.2",
   "title": "",
   "body": "  Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.    #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.     int main () {    std::string fileIn;    int n;    std::string line;    std::cout << \"Enter the name of the file: \";  std::cin >> fileIn;  std::cout << fileIn << std::endl ;    std::cout << \"Enter an integer: \";  std::cin >> n;  std::cout << n << std::endl ;    ifstream inFile(fileIn.c_str());    if (inFile.good() == false) {  std::cout << \"Unable to open the file named \" << fileIn << \" and output \" << n << \" lines.\" << std::endl ;  exit(1);  }    for (int i = 0; i < n; i++) {    getline(inFile, line);    std::cout << line << std::endl ;    }    }      "
 },
@@ -12209,7 +13397,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_3",
   "type": "Exercise",
-  "number": "9.14.3",
+  "number": "10.14.3",
   "title": "",
   "body": "  Write a program that takes in an input file called heights.txt   62 67 75 68 65 67 70 72 74 66 72 66 66 73 69 61 60 73 72 60   , finds the median of the data, and prints “The median height is: height inches” to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a vector. After sorting the vector, we find the median depending on whether the number of data values was even or odd. Finally, we output our result to the terminal.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> int main() { std::ifstream infile(\"heights.txt\"); std::vector<int> data; double median; int height; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (infile >> height) { data.push_back(height); } std::sort(data.begin(), data.end()); if (data.size() % 2 == 0) { median = (data[data.size() \/ 2 - 1] + data[data.size() \/ 2]) \/ 2.0; } else { median = data[data.size() \/ 2]; } std::cout << \"The median height is: \" << median << \" inches\" << std::endl; }    "
 },
@@ -12218,7 +13406,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_4_q",
   "type": "Exercise",
-  "number": "9.14.4",
+  "number": "10.14.4",
   "title": "",
   "body": "  Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> #include <cmath> int main() { \/\/ Write your code here. \/\/ Do not modify the code below std::ifstream student_output(\"powers.txt\"); if (!student_output.good()) { std::cout << \"Error opening student's output.\" << std::endl; } std::string answer; while (std::getline(student_output, answer)) { std::cout << answer << std::endl; } }      Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    int n;    std::cout << \"Enter an integer: \";    std::cin >> n;    std::cout << n << std::endl ;    ofstream outfile (\"powers.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open output file.\" << std::endl ;  exit (1);  }    while (true) {    for (int i = 0; i < n; i++) {    outfile << pow(2,i) << std::endl ;    }    }    ifstream student_output(\"powers.txt\");    if (!student_output.good()) {  std::cout << \"Error opening student's output.\" << std::endl ;  }    std::string answer;    while (getline(student_output, answer)) {  std::cout << answer << std::endl ;  }    }      "
 },
@@ -12227,7 +13415,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_5",
   "type": "Exercise",
-  "number": "9.14.5",
+  "number": "10.14.5",
   "title": "",
   "body": "  ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter after it in the alphabet. For example, using ROT13 on the letter “a” would turn it into “n”. Notice how since 13 is exactly half the number of characters in the alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus, ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file called message.txt   Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.   applies ROT13, and outputs the result to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <cctype> int main() { \/\/ Write your code here. }    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a string. We call our ROT13 function and output the result to the output file.   #include <iostream> #include <fstream> #include <cctype> std::string ROT13 (std::string message) { for (size_t i = 0; i < message.size(); ++i) { if (isalpha(message[i])) { if (message[i] >= 'A' && message[i] <= 'Z') { if (message[i] <= 'M') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } else { if (message[i] <= 'm') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } } } return message; } int main() { std::ifstream infile(\"message.txt\"); std::string message; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (std::getline(infile, message)) { std::cout << ROT13(message) << std::endl; } }    "
 },
@@ -12236,7 +13424,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_7",
   "type": "Exercise",
-  "number": "9.14.6",
+  "number": "10.14.6",
   "title": "",
   "body": "  Write a program that reads in data about a class from the file class_data.txt   Below are the contents of the input file.  First Last Grade GPA Age Alex Jones 9 3.4 14 Beth Hamilton 12 3.7 18 Charles White 11 3.5 16 Daniel Kim 10 3.8 16 Ethan Brooks 11 3.9 17 Faith Flemmings 10 3.0 15 Gina Zhou 9 3.2 14  and outputs the rows of data where a student has a GPA of at least 3.5. Include proper file error checking.   #include <iostream> #include <fstream> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into corresponding variables. We check if the GPA is at least 3.5, and print the data values to the terminal if so.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"class_data.txt\"); std::string fname, lname; int grade, age; double gpa; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::getline(infile, fname); while (infile >> fname >> lname >> grade >> gpa >> age) { if (gpa >= 3.5) { std::cout << fname << '\\t' << lname << '\\t' << grade << '\\t' << gpa << '\\t' << age << std::endl; } } }    "
 },
@@ -12245,7 +13433,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_8_q",
   "type": "Exercise",
-  "number": "9.14.7",
+  "number": "10.14.7",
   "title": "",
   "body": "  Write a program that takes an input file called shrimp.txt and outputs the contents of the file where \"shrimp\" is replaced by a word that the user inputs to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that takes an input file called “shrimp.txt” and outputs the quote with “shrimp” replaced by a word that the user inputs to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.   There's pineapple shrimp, lemon shrimp, coconut shrimp, pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and potatoes, shrimp burger, shrimp sandwich. That- that's about it.      int main() {    std::string word;    std::cout << \"Enter word to replace 'shrimp': \";    std::cin >> word;    std::cout << word << std::endl ;    std::string replace = \"shrimp\";    ifstream inFile(\"shrimp.txt\");    std::string line;    for (int i = 0; i < 4; i++) {    getline(inFile,line);    for (int unsigned j = 0; j < line.size(); j++) {    size_t pos = line.find(replace);    if (pos != std::string::npos) {    line.replace(pos,replace.length(),word);    }    }    std::cout << line<< std::endl ;    }    }      "
 },
@@ -12254,7 +13442,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_9",
   "type": "Exercise",
-  "number": "9.14.8",
+  "number": "10.14.8",
   "title": "",
   "body": "  Write a program that creates a multiplication table for the first 10 numbers using a matrix and outputting the table to an output file called mult_table.txt . Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create a 10x10 matrix and fill in the products. Then we traverse through the matrix and output the values into the output file.   #include <iostream> #include <fstream> #include <vector> int main() { std::ofstream outfile(\"mult_table.txt\"); if (!outfile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::vector<int> rows(10); std::vector<std::vector<int> > mat; for (int i = 0; i < 10; ++i) { mat.push_back(rows); } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { matrix[i][j] = (i + 1) * (j + 1); } } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { outfile << matrix[i][j] << '\\t'; } std::cout << std::endl; } }    "
 },
@@ -12263,7 +13451,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_10_q",
   "type": "Exercise",
-  "number": "9.14.9",
+  "number": "10.14.9",
   "title": "",
   "body": "  Write a program that computes the product of two matrices. Take a look at the example below. Two find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> int main() { \/* 2x3 matrix A X 3x2 matrix B 2x2 matrix C [ a b c ] [ g h ] [ ag + bi + cl ah + bj + cm ] [ d e f ] [ i j ] = [ dg + ei + fl dh + ej + fm ] [ l m ] *\/ \/\/ Write your code here. }      Write a program that computes the product of two matrices. Take a look at the example below. To find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    matrix<int> A(2,3);    matrix<int> B(3,2);    matrix<int> C(2,2);    C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);    C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);    C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);    C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);    }      "
 }
