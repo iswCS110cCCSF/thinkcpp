@@ -38,9 +38,8 @@ int main() {
     <p>
         The expression <c>scores.size()</c> reports the number of elements
         currently stored. The expression <c>scores.capacity()</c> reports how
-        many elements can fit in the current storage before the vector must
-        obtain a larger block. Capacity is usually greater than or equal to
-        size.
+        many elements can fit in the current storage. Capacity is always greater
+        than or equal to size.
     </p>
 
     <table xml:id="table_vector_memory_terms">
@@ -66,8 +65,8 @@ int main() {
             </row>
             <row>
                 <cell>Reallocation</cell>
-                <cell>Obtaining new storage and moving the elements into it.</cell>
-                <cell>May occur during <c>push_back()</c></cell>
+                <cell>Obtaining new storage and moving or copying the elements into it.</cell>
+                <cell>Occurs when an insertion would make size exceed capacity.</cell>
             </row>
             <row>
                 <cell>Contiguous storage</cell>
@@ -85,7 +84,7 @@ int main() {
             the storage reserved for possible contents. For example, a vector
             might contain three elements while having room for eight elements.
             The exact capacity chosen automatically is implementation-dependent,
-            so programs should not depend on a particular growth amount.
+            so programs must not depend on a particular growth amount.
         </p>
 
         <program xml:id="program_vector_reserve_capacity"
@@ -115,7 +114,9 @@ int main() {
         <p>
             Here, <c>reserve(4)</c> requests storage for at least four
             elements. It does not add four elements to the vector. The size is
-            still zero until values are inserted.
+            still zero until values are inserted. After this call, the standard
+            guarantees that insertions will not reallocate until an insertion
+            would make the size greater than the current capacity.
         </p>
     </subsection>
 
@@ -123,11 +124,55 @@ int main() {
         <title>What Happens as a Vector Grows?</title>
 
         <p>
-            When a new element fits in unused capacity, the vector can construct
-            that element in its existing storage. When the storage is full, the
-            vector obtains a larger block, moves or copies the existing elements
-            into the new block, releases the old storage, and then adds the new
-            element.
+            For an operation such as <c>push_back()</c>, reallocation is required
+            when the new size would be greater than the old capacity. If the new
+            element fits within the current capacity, the vector can construct it
+            in the existing storage. Otherwise, the vector obtains a larger block,
+            moves or copies the existing elements into it, releases the old
+            storage, and adds the new element.
+        </p>
+
+        <p>
+            The C++ standard does not require the capacity to grow by exactly
+            1.5 times, 2 times, or any other fixed factor. A library
+            implementation commonly grows capacity geometrically because that
+            supports the required amortized constant-time insertion at the end,
+            but the particular growth strategy can vary between implementations
+            and library versions. Programs should use <c>reserve()</c> when they
+            know an expected size, rather than relying on a guessed growth factor.
+        </p>
+
+        <program xml:id="program_vector_capacity_growth"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <cstddef>
+#include <vector>
+
+int main() {
+    std::vector<int> values;
+    std::size_t previous_capacity = values.capacity();
+
+    for (int value = 0; value < 12; ++value) {
+        values.push_back(value);
+
+        if (values.capacity() != previous_capacity) {
+            std::cout << "size: " << values.size()
+                      << ", capacity: " << values.capacity() << '\n';
+            previous_capacity = values.capacity();
+        }
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            This program observes the growth strategy used by the current
+            standard-library implementation. Its exact output is not portable;
+            the important observation is that capacity changes only when the
+            implementation must obtain more storage.
         </p>
 
         <p>

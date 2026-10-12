@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude"
-         xml:id="more-structures"
-         xml:lang="en-US">
-  <title>More structures</title>
-  <xi:include href='./time.ptx'/>
-  <xi:include href='./print-time.ptx'/>
-  <xi:include href='./functions-for-objects.ptx'/>
-  <xi:include href='./pure-functions.ptx'/>
-  <xi:include href='./const-parameters.ptx'/>
-  <xi:include href='./modifiers.ptx'/>
-  <xi:include href='./fillin-functions.ptx'/>
-  <xi:include href='./which-is-best.ptx'/>
-  <xi:include href='./incremental-development.ptx'/>
-  <xi:include href='./generalization.ptx'/>
-  <xi:include href='./algorithms.ptx'/>
-  <xi:include href='./glossary.ptx'/>
-  <xi:include href='./exercises.ptx'/>
-  <xi:include href='./mixed-up-code.ptx'/>
-  <xi:include href='./coding-practice.ptx'/>
+         xml:lang="en-US"
+         xml:id="chapter9_pointers-and-dynamic-memory-part1">
+    <title>Pointers and Dynamic Memory, Part 1</title>
+
+    <xi:include href="./why-pointers-exist.ptx"/>
+    <xi:include href="./pointer-variables-and-dereferencing.ptx"/>
+    <xi:include href="./nullptr-and-safe-pointer-use.ptx"/>
+    <xi:include href="./pointers-as-function-parameters.ptx"/>
+    <xi:include href="./pointers-and-c-style-arrays.ptx"/>
+    <xi:include href="./c-style-character-strings.ptx"/>
+    <xi:include href="./dynamic-memory-with-new-and-delete.ptx"/>
+    <xi:include href="./memory-errors-and-safe-practice.ptx"/>
+
+    <xi:include href="./glossary.ptx"/>
+    <xi:include href="./exercises.ptx"/>
+    <xi:include href="./mixed-up-code.ptx"/>
+    <xi:include href="./coding-practice.ptx"/>
 </chapter>

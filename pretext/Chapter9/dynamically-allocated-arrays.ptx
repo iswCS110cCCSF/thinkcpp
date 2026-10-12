@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_dynamically-allocated-arrays">
+    <title>Dynamically Allocated Arrays</title>
+
+    <p>
+        When the required number of elements is known only while a program is
+        running, it can create a dynamic array with <c>new[]</c>. The program
+        receives a pointer to the first element and must store the length
+        separately.
+    </p>
+
+    <program xml:id="program_ch9_new_delete_array"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+#include <cstddef>
+
+int main() {
+    const std::size_t count = 4;
+    int* values = new int[count]{};
+
+    for (std::size_t index = 0; index < count; ++index) {
+        values[index] = static_cast<int>(index + 1) * 10;
+    }
+
+    for (std::size_t index = 0; index < count; ++index) {
+        std::cout << values[index] << '\n';
+    }
+
+    delete[] values;
+    values = nullptr;
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The empty braces in <c>new int[count]{}</c> value-initialize the array's
+        elements. Without initialization, built-in elements created by a default
+        form of <c>new[]</c> can have indeterminate values. The pointer does not
+        know that the array has four elements, so the program uses
+        <c>count</c> for both loops.
+    </p>
+
+    <table xml:id="table_ch9_single_and_array_delete">
+        <title>Matching allocation and release expressions</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="32%"/>
+            <col width="32%"/>
+            <col width="36%"/>
+            <row header="yes">
+                <cell>Allocation</cell>
+                <cell>Release</cell>
+                <cell>Purpose</cell>
+            </row>
+            <row>
+                <cell><c>new int{5}</c></cell>
+                <cell><c>delete pointer</c></cell>
+                <cell>One dynamically created object</cell>
+            </row>
+            <row>
+                <cell><c>new int[count]{}</c></cell>
+                <cell><c>delete[] pointer</c></cell>
+                <cell>A dynamically created array</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        Do not use <c>delete</c> for an array created with <c>new[]</c>, and do
+        not use <c>delete[]</c> for a single object created with <c>new</c>.
+        Mismatching the forms produces undefined behavior.
+    </p>
+
+    <subsection xml:id="chapter9_dynamically-allocated-arrays_vector-comparison">
+        <title>Why <c>std::vector</c> Is Usually Better</title>
+
+        <p>
+            A <c>std::vector</c> stores its size, manages its storage, and
+            releases that storage automatically. A dynamic array requires the
+            programmer to carry the length and match allocation with
+            deallocation. Use a dynamic array here to understand low-level C++;
+            prefer <c>std::vector</c> for ordinary variable-size collections.
+        </p>
+    </subsection>
+
+    <exercise label="chapter9_dynamically-allocated-arrays_exercise_release">
+        <statement><p>Which operation correctly releases an array created with <c>new double[10]</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>delete[] pointer;</c></p></statement><feedback><p>Array allocation with <c>new[]</c> requires array deletion with <c>delete[]</c>.</p></feedback></choice>
+            <choice><statement><p><c>delete pointer;</c></p></statement><feedback><p>This is the single-object form.</p></feedback></choice>
+            <choice><statement><p><c>free(pointer);</c></p></statement><feedback><p>C++ <c>new[]</c> must be paired with <c>delete[]</c>.</p></feedback></choice>
+            <choice><statement><p><c>pointer.clear();</c></p></statement><feedback><p>A raw pointer has no <c>clear()</c> member function.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

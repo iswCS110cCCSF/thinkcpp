@@ -1,652 +1,114 @@
-<?xml version="1.0"?>
-<exercises xml:id="chapter9_multiple-choice-exercises">
-  <title>Multiple Choice Exercises</title>
-  <exercise label="mce_9_1">
-    <statement>
-      <p>Which of the following are variables of type <c>Book</c>?</p>
-      <program
-               line-numbers="yes">
-        <code>
-struct Book {
- std::string title, author;
-  int yearPublished;
-  double price;
-};
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="chapter9_exercises">
+    <title>Exercises</title>
 
-int main() {
-  Book gatsby = { "The Great Gatsby", "F. Scott Fitzgerald", 1925, 4.75 };
-  Book frankenstein = { "Frankenstein", "Mary Shelley", 1823, 5.99 };
- std::string flies = "Lord of the Flies";
-  int year = 1954;
-}
-</code>
-      </program>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>gatsby</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>gatsby</c> is a <c>Book</c>.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>frankenstein</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>frankenstein</c> is a <c>Book</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>flies</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>flies</c> is a <c>string</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>year</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>year</c> is an <c>int</c>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_9_2">
-    <statement>
-      <p>Which of the following are instance variables of type <c>Book</c>?</p>
-      <program
-               line-numbers="yes">
-        <code>
-struct Book {
- std::string title, author;
-  int yearPublished;
-  double price;
-};
+    <exercise label="chapter9_exercise_pointer_type">
+        <statement><p>What does <c>int* pointer</c> declare?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A pointer that can identify an <c>int</c> object</p></statement><feedback><p>The declaration's <c>*</c> makes <c>pointer</c> a pointer variable.</p></feedback></choice>
+            <choice><statement><p>An integer whose value is an address</p></statement><feedback><p>The declared variable has pointer type, not ordinary integer type.</p></feedback></choice>
+            <choice><statement><p>A pointer to any type of object</p></statement><feedback><p>The pointer type identifies the type it is designed to point to.</p></feedback></choice>
+            <choice><statement><p>A function that returns an integer</p></statement><feedback><p>This declaration does not include a function parameter list.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-int main() {
-  Book gatsby = { "The Great Gatsby", "F. Scott Fitzgerald", 1925, 4.75 };
-  Book frankenstein = { "Frankenstein", "Mary Shelley", 1823, 5.99 };
- std::string flies = "Lord of the Flies";
-  int year = 1954;
-}
-</code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>
-            <c>gatsby</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>gatsby</c> is a <c>Book</c>, not an instance variable of <c>Book</c>.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>title</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>title</c> is an instance variable of <c>Book</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>year</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>year</c> is an <c>int</c> declared in <c>main</c>, not an instance variable of <c>Book</c>.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c>price</c>
-          </p>
-        </statement>
-        <feedback><p>
-          <c>price</c> is an instance variable of <c>Book</c>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_9_3">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program
-               line-numbers="yes">
-        <code><![CDATA[
-struct Book {
- std::string title, author;
-  int yearPublished;
-  double price;
-};
+    <exercise label="chapter9_exercise_dereference">
+        <statement><p>What does <c>*pointer</c> mean in an expression?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>Access the object identified by <c>pointer</c></p></statement><feedback><p>In an expression, <c>*</c> is the dereference operator.</p></feedback></choice>
+            <choice><statement><p>Declare a new pointer</p></statement><feedback><p>Declaration syntax requires a type, such as <c>int*</c>.</p></feedback></choice>
+            <choice><statement><p>Obtain the pointer's address</p></statement><feedback><p>The address-of operator <c>&amp;</c> obtains an address.</p></feedback></choice>
+            <choice><statement><p>Delete the pointed-to object</p></statement><feedback><p>Deletion uses <c>delete</c>, not <c>*</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-void printBook(Book& b) {
-  std::cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << std::endl ;
-}
+    <exercise label="chapter9_exercise_nullptr">
+        <statement><p>What does <c>nullptr</c> represent?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A pointer value that identifies no object</p></statement><feedback><p>It is the modern C++ null pointer value.</p></feedback></choice>
+            <choice><statement><p>The first element of every array</p></statement><feedback><p>Array indexing begins at zero, but zero is not <c>nullptr</c>.</p></feedback></choice>
+            <choice><statement><p>A dynamically allocated integer with value zero</p></statement><feedback><p><c>nullptr</c> is a pointer value, not an allocated integer.</p></feedback></choice>
+            <choice><statement><p>A pointer that is always safe to dereference</p></statement><feedback><p>A null pointer must not be dereferenced.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-int main() {
-  Book mockingbird = { "To Kill a Mockingbird", "Harper Lee", 1960, 9.25 };
-  double discountedPrice = 7.19;
-  mockingbird.price = discountedPrice;
-  printBook(mockingbird);
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>To Kill a Mockingbird by Harper Lee (1960), $9.25</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at <c>main</c>. Was the price of the book modified?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p><q>To Kill a Mockingbird</q> by Harper Lee (1960), $9.25</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at <c>main</c>. Was the price of the book modified?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p><q>To Kill a Mockingbird</q> by Harper Lee (1960), $7.19</p>
-        </statement>
-        <feedback><p>
-          The price was changed from $9.25 to $7.19
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>To Kill a Mockingbirdby Harper Lee (1960), $7.19</p>
-        </statement>
-        <feedback><p>
-          The <c>\</c> are escape characters. Used in this context, they allow us to print
-            quotation marks.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_9_4">
-    <statement>
-      <p>What kind of function is <c>printBook</c>?</p>
-      <program
-               line-numbers="yes">
-        <code><![CDATA[
-struct Book {
- std::string title, author;
-  int yearPublished;
-  double price;
-};
+    <exercise label="chapter9_exercise_pointer_parameter">
+        <statement><p>What can a non-constant pointer parameter allow a function to do?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>Modify the caller's object through a valid pointer</p></statement><feedback><p>Dereferencing a valid non-constant pointer accesses the caller's object.</p></feedback></choice>
+            <choice><statement><p>Know the size of every object automatically</p></statement><feedback><p>A pointer does not generally store object-size information.</p></feedback></choice>
+            <choice><statement><p>Guarantee that the pointer is never null</p></statement><feedback><p>The function may need to check for <c>nullptr</c>.</p></feedback></choice>
+            <choice><statement><p>Change the pointer into a reference</p></statement><feedback><p>Pointer and reference types are distinct.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-void printBook(Book& b) {
-  std::cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << std::endl ;
-}
+    <exercise label="chapter9_exercise_array_decay">
+        <statement><p>After an array decays when passed to a pointer parameter, what information is not carried by the pointer?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The array's number of elements</p></statement><feedback><p>The pointer identifies an address, so the length must be supplied separately.</p></feedback></choice>
+            <choice><statement><p>The address of the first element</p></statement><feedback><p>The converted pointer identifies the first element.</p></feedback></choice>
+            <choice><statement><p>The element type used for pointer arithmetic</p></statement><feedback><p>The pointer type still determines its element step.</p></feedback></choice>
+            <choice><statement><p>Whether the function can read the pointed-to values</p></statement><feedback><p>A valid pointer can be dereferenced to read values.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-int main() {
-  Book dracula = { "Dracula", "Bram Stoker", 1897, 3.95 };
-  printBook(dracula);
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>Pure function</p>
-        </statement>
-        <feedback><p>
-          <c>printBook</c> takes a <c>Book</c> as an object but it doesn't modify it.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Modifier function</p>
-        </statement>
-        <feedback><p>
-          Does <c>printBook</c> modify the <c>Book</c> object?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Fill-in function</p>
-        </statement>
-        <feedback><p>
-          <c>printBook</c> takes one parameter, and its parameter is not an empty <c>Book</c> object.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Fruitful function</p>
-        </statement>
-        <feedback><p>
-          <c>printBook</c> does not return anything.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_9_5">
-    <statement>
-      <p>What is wrong with the code below?</p>
-      <program
-               line-numbers="yes">
-        <code><![CDATA[
-struct Book {
- std::string title, author;
-  int yearPublished;
-  double price;
-}
+    <exercise label="chapter9_exercise_pointer_arithmetic">
+        <statement><p>What does <c>pointer + 1</c> mean when <c>pointer</c> points into an array?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The address of the next element in that array</p></statement><feedback><p>Pointer arithmetic advances by the pointed-to element type.</p></feedback></choice>
+            <choice><statement><p>The next byte in memory regardless of type</p></statement><feedback><p>Pointer arithmetic is scaled by the pointer's element type.</p></feedback></choice>
+            <choice><statement><p>The value of the next element</p></statement><feedback><p>The result is still a pointer; dereference it to access a value.</p></feedback></choice>
+            <choice><statement><p>A pointer to the next unrelated object</p></statement><feedback><p>Pointer arithmetic is defined within an array object.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-void printBook(Book& b) {
-  std::cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << std::endl ;
-}
+    <exercise label="chapter9_exercise_c_string">
+        <statement><p>How many array elements are needed for the C-style string <c>"cat"</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>4</p></statement><feedback><p>The array needs three visible characters plus <c>'\0'</c>.</p></feedback></choice>
+            <choice><statement><p>3</p></statement><feedback><p>Three stores the visible characters but not the terminator.</p></feedback></choice>
+            <choice><statement><p>2</p></statement><feedback><p>Count all three letters and the null character.</p></feedback></choice>
+            <choice><statement><p>5</p></statement><feedback><p>No extra fifth element is required for this string.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-void applyDiscount(const Book& b, double discount) {
-  b.price -= discount;
-}
+    <exercise label="chapter9_exercise_argv">
+        <statement><p>What is the type of each individual <c>argv[index]</c> value?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A pointer to a C-style character string</p></statement><feedback><p><c>argv</c> is an array of <c>char*</c> values.</p></feedback></choice>
+            <choice><statement><p>An integer containing the argument count</p></statement><feedback><p><c>argc</c> contains the count; an individual <c>argv</c> entry is text.</p></feedback></choice>
+            <choice><statement><p>A <c>std::string</c> object automatically</p></statement><feedback><p>The standard signature supplies C-style strings.</p></feedback></choice>
+            <choice><statement><p>A pointer to a vector</p></statement><feedback><p><c>argv</c> is not a <c>std::vector</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-int main() {
-  Book godfather = { "The Godfather", "Mario Puzo", 1969, 10.90 };
-  applyDiscount(godfather, 5.40);
-  printBook(godfather);
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>The <c>struct</c> definition is missing a semicolon at the end.</p>
-        </statement>
-        <feedback><p>
-          It's a common mistake to forget the semicolon at the end of <c>struct</c> definitions.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>We are not allowed to pass in a <c>Book</c> object by reference in <c>printBook</c>.</p>
-        </statement>
-        <feedback><p>
-          We are allowed to do this. It's usually a good idea to pass structures by reference
-            since it won't make copies of the structures, thus saving memory space.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>The keyword <c>const</c> needs to be removed in the function definition for <c>applyDiscount</c>.</p>
-        </statement>
-        <feedback><p>
-          Since the <c>applyDiscount</c> function modifies the <c>Book</c> passed into it, we don't it to be <c>const</c>
-            .
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>There are no errors with the code.</p>
-        </statement>
-        <feedback><p>
-          There are a couple errors. Can you find them?
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_9_6">
-    <statement>
-      <p>What kind of function is <c>applyDiscount</c>?</p>
-      <program
-               line-numbers="yes">
-        <code><![CDATA[
-struct Book {
- std::string title, author;
-  int yearPublished;
-  double price;
-};
+    <exercise label="chapter9_exercise_new_delete">
+        <statement><p>What must happen to storage created by <c>new int{7}</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>It must eventually be released with matching <c>delete</c>.</p></statement><feedback><p>A single object created by <c>new</c> matches <c>delete</c>.</p></feedback></choice>
+            <choice><statement><p>It must be released with <c>delete[]</c>.</p></statement><feedback><p><c>delete[]</c> matches <c>new[]</c>, not a single <c>new</c>.</p></feedback></choice>
+            <choice><statement><p>It is automatically released at the end of the function.</p></statement><feedback><p>Dynamic storage is not automatically released like a local object.</p></feedback></choice>
+            <choice><statement><p>It must be released with <c>std::vector::clear()</c>.</p></statement><feedback><p>The allocation is not a vector.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-void printBook(Book& b) {
-  std::cout << "\"" << b.title << "\" by " << b.author << " (" << b.yearPublished << "), $" << b.price << std::endl ;
-}
+    <exercise label="chapter9_exercise_dynamic_array">
+        <statement><p>Why must a program keep the length separately after allocating <c>new int[count]</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The resulting pointer does not remember the number of elements.</p></statement><feedback><p>The length is separate information needed for safe traversal.</p></feedback></choice>
+            <choice><statement><p>Because the array has no elements.</p></statement><feedback><p>The allocation creates <c>count</c> elements.</p></feedback></choice>
+            <choice><statement><p>Because pointer arithmetic cannot access arrays.</p></statement><feedback><p>Pointer arithmetic can traverse the allocated array.</p></feedback></choice>
+            <choice><statement><p>Because <c>delete[]</c> requires a length argument.</p></statement><feedback><p><c>delete[]</c> receives only the pointer.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-void applyDiscount(Book& b, double discount) {
-  b.price -= discount;
-}
-
-int main() {
-  Book godfather = { "The Godfather", "Mario Puzo", 1969, 10.90 };
-  applyDiscount(godfather, 5.40);
-  printBook(godfather);
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Pure function</p>
-        </statement>
-        <feedback><p>
-          Does <c>applyDiscount</c> modify the <c>Book</c> object?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Modifier function</p>
-        </statement>
-        <feedback><p>
-          <c>applyDiscount</c> modifies the <c>Book</c> object by updating the price.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Fill-in function</p>
-        </statement>
-        <feedback><p>
-          <c>applyDiscount</c> does not take an empty <c>Book</c> object as a parameter.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Fruitful function</p>
-        </statement>
-        <feedback><p>
-          <c>applyDiscount</c> does not return anything.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_9_7">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program
-               line-numbers="yes">
-        <code><![CDATA[
-struct Point3D {
-  double x, y, z;
-};
-
-void printPoint3D(const Point3D& p) {
-  std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << std::endl ;
-}
-
-void midpoint(const Point3D& p1, const Point3D& p2, Point3D p3) {
-  p3.x = (p1.x + p2.x) / 2;
-  p3.y = (p1.y + p2.y) / 2;
-  p3.z = (p1.z + p2.z) / 2;
-}
-
-int main() {
-  Point3D p1 = { 3.0, 5.0, 2.0 };
-  Point3D p2 = { 6.0, 3.5, 9.3 };
-  Point3D p3 = { 0.0, 0.0, 0.0 };
-  midpoint(p1, p2, p3);
-  printPoint3D(p3);
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>(4.5, 4.25, 5.65)</p>
-        </statement>
-        <feedback><p>
-          Look at the function declaration of <c>midpoint</c> carefully.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>(3.0, 5.0, 2.0)</p>
-        </statement>
-        <feedback><p>
-          Look at the function declaration of <c>midpoint</c> carefully.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>(9.0, 8.5, 11.3)</p>
-        </statement>
-        <feedback><p>
-          Look at the function declaration of <c>midpoint</c> carefully.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>(0, 0, 0)</p>
-        </statement>
-        <feedback><p>
-          The last parameter in <c>midpoint</c> is not passed by reference, so a copy is made and changes
-            are made to the copy, not the original.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_9_8">
-    <statement>
-      <p>What kind of function is <c>midpoint</c>?</p>
-      <program
-               line-numbers="yes">
-        <code><![CDATA[
-struct Point3D {
-  double x, y, z;
-};
-
-void printPoint3D(const Point3D& p) {
-  std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << std::endl ;
-}
-
-void midpoint(const Point3D& p1, const Point3D& p2, Point3D& p3) {
-  p3.x = (p1.x + p2.x) / 2;
-  p3.y = (p1.y + p2.y) / 2;
-  p3.z = (p1.z + p2.z) / 2;
-}
-
-int main() {
-  Point3D p1 = { 3.0, 5.0, 2.0 };
-  Point3D p2 = { 6.0, 3.5, 9.3 };
-  Point3D p3 = { 0.0, 0.0, 0.0 };
-  midpoint(p1, p2, p3);
-  printPoint3D(p3);
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Pure function</p>
-        </statement>
-        <feedback><p>
-          Does <c>midpoint</c> modify a <c>Point3D</c> object?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Modifier function</p>
-        </statement>
-        <feedback><p>
-          <c>midpoint</c> modifies the last <c>Point3D</c> object.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Fill-in function</p>
-        </statement>
-        <feedback><p>
-          <c>midpoint</c> takes an <q>empty</q> third <c>Point3D</c> and fills it with the average of the other
-            two <c>Point3D</c> objects.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Fruitful function</p>
-        </statement>
-        <feedback><p>
-          <c>midpoint</c> does not return anything.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_9_9">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program
-               line-numbers="yes">
-        <code><![CDATA[
-struct Point3D {
-  double x, y, z;
-};
-
-void printPoint3D(const Point3D& p) {
-  std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << std::endl ;
-}
-
-void midpoint(const Point3D& p1, const Point3D& p2, Point3D& p3) {
-  p3.x = (p1.x + p2.x) / 2;
-  p3.y = (p1.y + p2.y) / 2;
-  p3.z = (p1.z + p2.z) / 2;
-}
-
-Point3D reflectXYPlane(const Point3D& p) {
-  Point3D flipped = p;
-  flipped.z = -flipped.z;
-  return flipped;
-}
-
-int main() {
-  Point3D p = { 11.3, 4.5, 2.9 };
-  Point3D pReflected = reflectXYPlane(p);
-  printPoint3D(pReflected);
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>(11.3, 4.5, 2.9)</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the implementation of <c>reflectXYPlane</c>.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>(11.3, 4.5, -2.9)</p>
-        </statement>
-        <feedback><p>
-          The point is reflected across the XY plane, so the z value is inverted.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>(-11.3, -4.5, 2.9)</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the implementation of <c>reflectXYPlane</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>(5.65, 2.25, 1.45)</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the implementation of <c>reflectXYPlane</c>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_9_10">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program
-               line-numbers="yes">
-        <code><![CDATA[
-struct Point3D {
-  double x, y, z;
-};
-
-void printPoint3D(const Point3D& p) {
-  std::cout << "(" << p.x << ", " << p.y << ", " << p.z << ")" << std::endl ;
-}
-
-void midpoint(const Point3D& p1, const Point3D& p2, Point3D& p3) {
-  p3.x = (p1.x + p2.x) / 2;
-  p3.y = (p1.y + p2.y) / 2;
-  p3.z = (p1.z + p2.z) / 2;
-}
-
-Point3D reflectXYPlane(const Point3D& p) {
-  Point3D flipped = p;
-  flipped.z = -flipped.z;
-  return flipped;
-}
-
-int main() {
-  Point3D p1 = { 7.0, 3.5, 6.7 };
-  Point3D p2 = { 2.0, 1.0, 0.0 };
-  Point3D p3 = { 3.9, 4.5, 10.0 };
-  Point3D p4 = reflectXYPlane(p1);
-  midpoint(p4, p3, p2);
-  printPoint3D(p2);
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>(5.45, 4, 1.65)</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at the implementation of <c>reflectXYPlane</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>(5.45, 4, 8.35)</p>
-        </statement>
-        <feedback><p>
-          Check the arguments passed into <c>midpoint</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>(7.0, 3.5, -6.7)</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at which point is being printed.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>(4.5, 2.25, 3.35)</p>
-        </statement>
-        <feedback><p>
-          Check the arguments passed into <c>midpoint</c>.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
+    <exercise label="chapter9_exercise_memory_error">
+        <statement><p>What is a dangling pointer?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A pointer whose former object has already been destroyed</p></statement><feedback><p>The stored address remains, but the object lifetime has ended.</p></feedback></choice>
+            <choice><statement><p>A pointer initialized to <c>nullptr</c></p></statement><feedback><p>A null pointer identifies no object but is not dangling.</p></feedback></choice>
+            <choice><statement><p>A pointer to the first array element</p></statement><feedback><p>A valid pointer to an array element is not dangling.</p></feedback></choice>
+            <choice><statement><p>A pointer that stores an array length</p></statement><feedback><p>Pointers store addresses, not lengths.</p></feedback></choice>
+        </choices>
+    </exercise>
 </exercises>

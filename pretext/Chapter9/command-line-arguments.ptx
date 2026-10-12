@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_command-line-arguments">
+    <title>Command-Line Arguments</title>
+
+    <p>
+        A program can receive text from the command line through the parameters
+        of <c>main()</c>:
+    </p>
+
+    <program xml:id="program_ch9_command_line_signature"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+
+int main(int argc, char* argv[]) {
+    std::cout << "Argument count: " << argc << '\n';
+
+    for (int index = 0; index < argc; ++index) {
+        std::cout << index << ": " << argv[index] << '\n';
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        <c>argc</c> is the argument count. <c>argv</c> is an array of pointers,
+        and each pointer identifies a null-terminated C-style string. The
+        program does not allocate or delete this array; the execution environment
+        prepares it before <c>main()</c> begins.
+    </p>
+
+    <p>
+        If the program is run as <c>program red 25</c>, the arguments are
+        conceptually arranged as follows:
+    </p>
+
+    <table xml:id="table_ch9_command_line_arguments">
+        <title>Command-line argument positions</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="22%"/>
+            <col width="38%"/>
+            <col width="40%"/>
+            <row header="yes">
+                <cell>Expression</cell>
+                <cell>Points to</cell>
+                <cell>Important fact</cell>
+            </row>
+            <row>
+                <cell><c>argv[0]</c></cell>
+                <cell>The program name in ordinary execution.</cell>
+                <cell>It is still text.</cell>
+            </row>
+            <row>
+                <cell><c>argv[1]</c></cell>
+                <cell>The first user-supplied argument, <c>"red"</c>.</cell>
+                <cell>Its type is a C-style string.</cell>
+            </row>
+            <row>
+                <cell><c>argv[2]</c></cell>
+                <cell>The second user-supplied argument, <c>"25"</c>.</cell>
+                <cell>It is text, not an <c>int</c>.</cell>
+            </row>
+            <row>
+                <cell><c>argv[argc]</c></cell>
+                <cell>No argument.</cell>
+                <cell>The standard specifies a null pointer here.</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        In a parameter list, <c>char* argv[]</c> is adjusted to a pointer-based
+        form equivalent to <c>char** argv</c>. This is another example of the
+        relationship between arrays and pointers. Command-line arguments arrive
+        as text; converting text such as <c>"25"</c> to a number is a separate
+        operation.
+    </p>
+
+    <exercise label="chapter9_command-line-arguments_exercise_argc">
+        <statement><p>What does <c>argc</c> represent?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The number of command-line argument strings</p></statement><feedback><p><c>argc</c> counts the entries available through <c>argv</c>.</p></feedback></choice>
+            <choice><statement><p>The length of the longest argument</p></statement><feedback><p>Each argument's length is separate from the total count.</p></feedback></choice>
+            <choice><statement><p>The number of characters in <c>argv[0]</c></p></statement><feedback><p><c>argv[0]</c> is one entry in the array.</p></feedback></choice>
+            <choice><statement><p>The memory address of <c>argv</c></p></statement><feedback><p><c>argv</c> holds the pointer-based argument collection.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

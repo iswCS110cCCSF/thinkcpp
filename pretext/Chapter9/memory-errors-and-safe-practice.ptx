@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_memory-errors-and-safe-practice">
+    <title>Memory Errors and Safe Practice</title>
+
+    <p>
+        Manual memory management gives a program flexibility, but it also gives
+        the programmer responsibilities that a <c>std::vector</c> normally
+        handles automatically. Several pointer mistakes have especially serious
+        consequences.
+    </p>
+
+    <table xml:id="table_ch9_pointer_memory_errors">
+        <title>Common pointer and dynamic-memory errors</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="25%"/>
+            <col width="39%"/>
+            <col width="36%"/>
+            <row header="yes">
+                <cell>Error</cell>
+                <cell>What happens</cell>
+                <cell>Prevention</cell>
+            </row>
+            <row>
+                <cell>Memory leak</cell>
+                <cell>Allocated storage is no longer reachable and cannot be released.</cell>
+                <cell>Release each owned allocation exactly once.</cell>
+            </row>
+            <row>
+                <cell>Dangling pointer</cell>
+                <cell>A pointer still stores an address after the object's lifetime ends.</cell>
+                <cell>Do not use a pointer after deletion or scope exit.</cell>
+            </row>
+            <row>
+                <cell>Double deletion</cell>
+                <cell>The same storage is released more than once.</cell>
+                <cell>Set released pointers to <c>nullptr</c> and manage ownership clearly.</cell>
+            </row>
+            <row>
+                <cell>Invalid dereference</cell>
+                <cell>A program accesses memory through null, uninitialized, or invalid pointer.</cell>
+                <cell>Initialize pointers and verify that they identify valid objects.</cell>
+            </row>
+            <row>
+                <cell>Mismatched deletion</cell>
+                <cell><c>delete</c> and <c>delete[]</c> do not match their allocation forms.</cell>
+                <cell>Pair <c>new</c> with <c>delete</c> and <c>new[]</c> with <c>delete[]</c>.</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <subsection xml:id="chapter9_memory-errors-and-safe-practice_golden-rules">
+        <title>Two Golden Rules of Raw Pointers</title>
+
+        <ol>
+            <li>
+                <p>
+                    <alert>Initialize every pointer before using it.</alert>
+                    Use a valid address or initialize the pointer to
+                    <c>nullptr</c> when it does not yet identify an object.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <alert>After deleting dynamically allocated storage, clear
+                    the owning pointer.</alert>
+                </p>
+            </li>
+        </ol>
+
+        <p>
+            Clearing one pointer does not repair other pointers that identify
+            the same object. Those other pointers may still be dangling, so
+            ownership must be managed clearly.
+        </p>
+
+        <interactive xml:id="interactive_ch9_pointer_safety_codelens"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int*%20value_pointer%20%3D%20new%20int%7B42%7D%3B%0A%0A%20%20%20%20delete%20value_pointer%3B%0A%20%20%20%20value_pointer%20%3D%20nullptr%3B%0A%0A%20%20%20%20if%20%28value_pointer%20%3D%3D%20nullptr%29%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Pointer%20cleared%22%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+    </subsection>
+
+    <subsection xml:id="chapter9_memory-errors-and-safe-practice_ownership">
+        <title>Ownership Responsibility</title>
+
+        <p>
+            A pointer does not automatically explain who is responsible for
+            releasing the object it identifies. When a raw pointer owns dynamic
+            storage, the program must document and follow that responsibility.
+            When a pointer merely observes an object owned elsewhere, it must not
+            delete that object.
+        </p>
+
+        <p>
+            In later modules, smart pointers will provide safer ways to express
+            ownership. For now, the key practice is to recognize that an address
+            and ownership are different concepts.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_memory-errors-and-safe-practice_guidance">
+        <title>Practical Guidance</title>
+
+        <ul>
+            <li>Prefer ordinary local objects when their lifetime is sufficient.</li>
+            <li>Prefer <c>std::vector</c> to manually allocated dynamic arrays.</li>
+            <li>Initialize every pointer.</li>
+            <li>Check nullable pointers before dereferencing them.</li>
+            <li>Match every allocation with the correct release operation.</li>
+            <li>Do not use a pointer after the object it identified has been destroyed.</li>
+        </ul>
+
+        <exercise label="chapter9_memory-errors-and-safe-practice_exercise_leak">
+            <statement><p>What is a memory leak?</p></statement>
+            <choices>
+                <choice correct="yes"><statement><p>Allocated storage that can no longer be reached or released</p></statement><feedback><p>The storage remains reserved even though the program lost its pointer to it.</p></feedback></choice>
+                <choice><statement><p>An array containing a null character</p></statement><feedback><p>Null termination is a string concept, not a memory leak.</p></feedback></choice>
+                <choice><statement><p>A pointer that identifies a valid object</p></statement><feedback><p>A valid pointer is not automatically a leak.</p></feedback></choice>
+                <choice><statement><p>A vector whose size is smaller than its capacity</p></statement><feedback><p>Unused vector capacity is managed by the vector and is not necessarily a leak.</p></feedback></choice>
+            </choices>
+        </exercise>
+    </subsection>
+
+    <exercise label="chapter9_memory-errors-and-safe-practice_parsons_cleanup" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the blocks to release a dynamic object and prevent the owning pointer from remaining dangling.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>int* value_pointer = new int{42};</cline></block>
+            <block order="2"><cline>std::cout &lt;&lt; *value_pointer &lt;&lt; '\n';</cline></block>
+            <block order="3"><cline>delete value_pointer;</cline></block>
+            <block order="4"><cline>value_pointer = nullptr;</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter9_memory-errors-and-safe-practice_exercise_dangling">
+        <statement><p>Which situation describes a dangling pointer?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A pointer still stores an address after the identified object's lifetime ends</p></statement><feedback><p>The address remains in the pointer, but the object is no longer valid to use.</p></feedback></choice>
+            <choice><statement><p>A pointer initialized to <c>nullptr</c></p></statement><feedback><p>A null pointer identifies no object but is not dangling.</p></feedback></choice>
+            <choice><statement><p>A pointer that identifies a live local object</p></statement><feedback><p>A valid pointer to a live object is not dangling.</p></feedback></choice>
+            <choice><statement><p>A pointer used to traverse a valid array</p></statement><feedback><p>Valid traversal does not create a dangling pointer.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_memory-errors-and-safe-practice_exercise_mismatch">
+        <statement><p>Which allocation and release pair is correct?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>new int[5]</c> with <c>delete[] pointer</c></p></statement><feedback><p>The array allocation form must match the array deletion form.</p></feedback></choice>
+            <choice><statement><p><c>new int[5]</c> with <c>delete pointer</c></p></statement><feedback><p>Single-object <c>delete</c> does not match <c>new[]</c>.</p></feedback></choice>
+            <choice><statement><p><c>new int{5}</c> with <c>delete[] pointer</c></p></statement><feedback><p>A single object created with <c>new</c> needs ordinary <c>delete</c>.</p></feedback></choice>
+            <choice><statement><p><c>new int{5}</c> with <c>free(pointer)</c></p></statement><feedback><p>C++ <c>new</c> must be paired with C++ <c>delete</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_memory-errors-and-safe-practice_exercise_ownership">
+        <statement><p>What does setting an owning pointer to <c>nullptr</c> after <c>delete</c> accomplish?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>It prevents that pointer from continuing to store the old address.</p></statement><feedback><p>Clearing the owning pointer helps avoid using it as though the destroyed object still exists.</p></feedback></choice>
+            <choice><statement><p>It recreates the deleted object.</p></statement><feedback><p>Assigning <c>nullptr</c> does not restore an object's lifetime.</p></feedback></choice>
+            <choice><statement><p>It repairs every other pointer to the same object.</p></statement><feedback><p>Other pointers may still be dangling and must be managed separately.</p></feedback></choice>
+            <choice><statement><p>It releases storage without needing <c>delete</c>.</p></statement><feedback><p>The storage must be released first with the matching deletion operation.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

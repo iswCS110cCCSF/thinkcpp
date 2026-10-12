@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_pointers-as-function-parameters">
+    <title>Pointers as Function Parameters</title>
+
+    <p>
+        A pointer parameter lets a function receive the address of an existing
+        object. The function can then modify the caller's object through the
+        dereferenced pointer, provided the pointer is valid and non-constant.
+    </p>
+
+    <program xml:id="program_ch9_pointer_parameter_modify"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+
+void increase_value(int* value_pointer) {
+    if (value_pointer != nullptr) {
+        ++(*value_pointer);
+    }
+}
+
+int main() {
+    int count = 4;
+
+    increase_value(&count);
+    std::cout << count << '\n';
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The parentheses in <c>++(*value_pointer)</c> make the intended order
+        visible: first dereference the pointer, then increment the pointed-to
+        value.
+    </p>
+
+    <subsection xml:id="chapter9_pointers-as-function-parameters_read-only">
+        <title>Read-Only Pointer Parameters</title>
+
+        <p>
+            A pointer to <c>const</c> data can inspect an object without changing
+            it through that pointer.
+        </p>
+
+        <program xml:id="program_ch9_const_pointer_parameter"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+void print_value(const int* value_pointer) {
+    if (value_pointer != nullptr) {
+        std::cout << *value_pointer << '\n';
+    }
+}
+
+int main() {
+    const int temperature = 22;
+    print_value(&temperature);
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The declaration <c>const int* value_pointer</c> means that the
+            function cannot modify the <c>int</c> through this pointer. A pointer
+            parameter is useful when <c>nullptr</c> is a meaningful possibility.
+            When an object must always exist, a reference is often a clearer
+            choice.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_pointers-as-function-parameters_pointer-reference-comparison">
+        <title>Pointers and References: The <c>swap</c> Example</title>
+
+        <p>
+            Both pointer parameters and reference parameters can allow a
+            function to modify the caller's objects. The difference is visible
+            in both the function definition and the call:
+        </p>
+
+        <interactive xml:id="interactive_ch9_swap_pointer_and_reference"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Avoid%20swap_values_by_pointer%28int*%20first%2C%20int*%20second%29%20%7B%0A%20%20%20%20if%20%28first%20%3D%3D%20nullptr%20%7C%7C%20second%20%3D%3D%20nullptr%29%20%7B%0A%20%20%20%20%20%20%20%20return%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20int%20temporary%20%3D%20*first%3B%0A%20%20%20%20*first%20%3D%20*second%3B%0A%20%20%20%20*second%20%3D%20temporary%3B%0A%7D%0A%0Avoid%20swap_values_by_reference%28int%26%20first%2C%20int%26%20second%29%20%7B%0A%20%20%20%20int%20temporary%20%3D%20first%3B%0A%20%20%20%20first%20%3D%20second%3B%0A%20%20%20%20second%20%3D%20temporary%3B%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int%20left_value%20%3D%2010%3B%0A%20%20%20%20int%20right_value%20%3D%2020%3B%0A%0A%20%20%20%20swap_values_by_pointer%28%26left_value%2C%20%26right_value%29%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22After%20pointer%20swap%3A%20%22%20%3C%3C%20left_value%20%3C%3C%20%27%20%27%20%3C%3C%20right_value%20%3C%3C%20%22.%20%22%3B%0A%0A%20%20%20%20swap_values_by_reference%28left_value%2C%20right_value%29%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22After%20reference%20swap%3A%20%22%20%3C%3C%20left_value%20%3C%3C%20%27%20%27%20%3C%3C%20right_value%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+
+        <p>
+            A pointer can represent <q>no object</q> with <c>nullptr</c> and
+            can later point to a different object. A reference must bind to an
+            object when it is initialized and cannot be reseated. Neither a
+            pointer nor a reference automatically owns the object it identifies.
+        </p>
+    </subsection>
+
+    <table xml:id="table_ch9_pointer_and_reference_parameters">
+        <title>Pointer and reference parameter choices</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="30%"/>
+            <col width="35%"/>
+            <col width="35%"/>
+            <row header="yes">
+                <cell>Parameter</cell>
+                <cell>Can represent no object?</cell>
+                <cell>Can modify the caller's object?</cell>
+            </row>
+            <row>
+                <cell><c>int* value_pointer</c></cell>
+                <cell>Yes, with <c>nullptr</c>.</cell>
+                <cell>Yes, after a valid dereference.</cell>
+            </row>
+            <row>
+                <cell><c>const int* value_pointer</c></cell>
+                <cell>Yes, with <c>nullptr</c>.</cell>
+                <cell>No.</cell>
+            </row>
+            <row>
+                <cell><c>int&amp; value</c></cell>
+                <cell>No; a reference must bind to an object.</cell>
+                <cell>Yes.</cell>
+            </row>
+            <row>
+                <cell><c>const int&amp; value</c></cell>
+                <cell>No; a reference must bind to an object.</cell>
+                <cell>No.</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <exercise label="chapter9_pointers-as-function-parameters_exercise_reference">
+        <statement><p>When is a pointer parameter preferable to a reference parameter?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>When the function needs to allow the possibility that no object is provided.</p></statement><feedback><p><c>nullptr</c> can represent the absence of an object.</p></feedback></choice>
+            <choice><statement><p>Whenever the function must be faster.</p></statement><feedback><p>Pointer syntax does not automatically make a function faster.</p></feedback></choice>
+            <choice><statement><p>Whenever the function reads an integer.</p></statement><feedback><p>Parameter choice depends on the function's contract, not merely the type.</p></feedback></choice>
+            <choice><statement><p>Whenever a vector is passed to a function.</p></statement><feedback><p>Vectors are often passed by constant reference when read-only.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_pointers-as-function-parameters_parsons_pointer_call" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the blocks to increment a caller's variable through a pointer parameter.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>void increase_value(int* value_pointer) {</cline></block>
+            <block order="2"><cline>if (value_pointer != nullptr) {</cline><cline>    ++(*value_pointer);</cline><cline>}</cline></block>
+            <block order="3"><cline>}</cline></block>
+            <block order="4"><cline>int count = 4;</cline></block>
+            <block order="5"><cline>increase_value(&amp;count);</cline></block>
+            <block order="6"><cline>std::cout &lt;&lt; count &lt;&lt; '\n';</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter9_pointers-as-function-parameters_exercise_const_pointer">
+        <statement><p>What does <c>const int* value_pointer</c> allow the function to do?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>Read the pointed-to <c>int</c> without modifying it through this pointer</p></statement><feedback><p>The <c>const</c> applies to the pointed-to integer.</p></feedback></choice>
+            <choice><statement><p>Reseat the pointer but not read the integer</p></statement><feedback><p>This declaration permits reading the integer but does not make the pointer itself const.</p></feedback></choice>
+            <choice><statement><p>Delete every object that the pointer identifies</p></statement><feedback><p><c>const</c> does not grant ownership or deletion responsibility.</p></feedback></choice>
+            <choice><statement><p>Guarantee that the pointer is never null</p></statement><feedback><p>A pointer to const data can still be <c>nullptr</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_pointers-as-function-parameters_exercise_reference_contract">
+        <statement><p>Why is a reference often clearer when a function requires an existing object?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A reference must bind to an object and cannot represent <c>nullptr</c>.</p></statement><feedback><p>The reference type communicates that the function expects an object to exist.</p></feedback></choice>
+            <choice><statement><p>A reference automatically allocates the object.</p></statement><feedback><p>References do not create dynamic storage.</p></feedback></choice>
+            <choice><statement><p>A reference always makes a copy.</p></statement><feedback><p>A reference is an alias for an existing object.</p></feedback></choice>
+            <choice><statement><p>A reference can be reseated more easily than a pointer.</p></statement><feedback><p>A reference remains bound to its original object.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_pointers-as-function-parameters_exercise_pointer_argument">
+        <statement><p>How should a caller pass <c>count</c> to <c>increase_value(int* value_pointer)</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>increase_value(&amp;count);</c></p></statement><feedback><p>The pointer parameter receives the address of the caller's object.</p></feedback></choice>
+            <choice><statement><p><c>increase_value(*count);</c></p></statement><feedback><p><c>*</c> is not used to obtain the address of an ordinary variable.</p></feedback></choice>
+            <choice><statement><p><c>increase_value(count);</c></p></statement><feedback><p>This passes the integer value, not its address.</p></feedback></choice>
+            <choice><statement><p><c>increase_value(nullptr);</c></p></statement><feedback><p>This intentionally passes no object and would not increment <c>count</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

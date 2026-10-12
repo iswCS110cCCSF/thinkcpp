@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_dynamic-memory-with-new-and-delete">
+    <title>Dynamic Memory with <c>new</c> and <c>delete</c></title>
+
+    <p>
+        A program can request dynamically managed storage while it is running.
+        The expression <c>new</c> creates an object and produces a pointer to that
+        object. The expression <c>delete</c> releases storage created by a single
+        use of <c>new</c>.
+    </p>
+
+    <program xml:id="program_ch9_new_and_delete_single_value"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int* score_pointer = new int{90};
+
+    std::cout << *score_pointer << '\n';
+
+    delete score_pointer;
+    score_pointer = nullptr;
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The pointer variable itself is an ordinary local object. The integer
+        created by <c>new int{90}</c> has a dynamically managed lifetime. The
+        program uses the pointer to access that integer and then releases the
+        storage with <c>delete</c>.
+    </p>
+
+    <table xml:id="table_ch9_new_delete_steps">
+        <title>The lifecycle of a dynamically created object</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="24%"/>
+            <col width="42%"/>
+            <col width="34%"/>
+            <row header="yes">
+                <cell>Step</cell>
+                <cell>Code or action</cell>
+                <cell>Result</cell>
+            </row>
+            <row>
+                <cell>Request storage</cell>
+                <cell><c>new int{90}</c></cell>
+                <cell>An integer is created and its address is produced.</cell>
+            </row>
+            <row>
+                <cell>Store the address</cell>
+                <cell><c>int* pointer</c></cell>
+                <cell>The pointer identifies the dynamic integer.</cell>
+            </row>
+            <row>
+                <cell>Use the object</cell>
+                <cell><c>*pointer</c></cell>
+                <cell>The program accesses the dynamic integer.</cell>
+            </row>
+            <row>
+                <cell>Release storage</cell>
+                <cell><c>delete pointer</c></cell>
+                <cell>The object's lifetime ends and its storage is released.</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        The C++ standard describes this as dynamically allocated storage. It is
+        often informally called the heap, but the language does not require a
+        particular physical memory layout. The important responsibility is that
+        storage obtained with <c>new</c> must eventually be released with the
+        matching form of <c>delete</c>.
+    </p>
+
+    <interactive xml:id="interactive_ch9_dynamic_memory_codelens"
+                 iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int*%20value_pointer%20%3D%20new%20int%7B42%7D%3B%0A%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20*value_pointer%3B%0A%0A%20%20%20%20delete%20value_pointer%3B%0A%20%20%20%20value_pointer%20%3D%20nullptr%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                 width="100%"
+                 aspect="16:10">
+    </interactive>
+
+    <exercise label="chapter9_dynamic-memory-with-new-and-delete_parsons_delete" adaptive="yes">
+        <statement>
+            <p>
+                Rearrange the blocks to allocate an integer, print it safely,
+                release its dynamic storage, and then clear the pointer.
+            </p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>int* my_ptr = new int(75);</cline></block>
+            <block order="2">
+                <cline>if (my_ptr != nullptr) {</cline>
+                <cline>    std::cout &lt;&lt; *my_ptr &lt;&lt; '\n';</cline>
+                <cline>}</cline>
+            </block>
+            <block order="3"><cline>delete my_ptr;</cline></block>
+            <block order="4"><cline>my_ptr = nullptr;</cline></block>
+        </blocks>
+    </exercise>
+
+    <subsection xml:id="chapter9_dynamic-memory-with-new-and-delete_null">
+        <title>Deleting a Null Pointer</title>
+
+        <p>
+            Applying <c>delete</c> to <c>nullptr</c> is safe and has no effect.
+            This can make cleanup code simpler, but setting a pointer to
+            <c>nullptr</c> does not restore an object whose lifetime has already
+            ended. The program must still avoid using the pointer as an object
+            after deletion.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_dynamic-memory-with-new-and-delete_arrays">
+        <title>Dynamically Allocated Arrays</title>
+
+        <p>
+            When the required number of elements is known only while a program
+            is running, it can create an array with <c>new[]</c>. The program
+            receives a pointer to the first element and must store the length
+            separately.
+        </p>
+
+        <program xml:id="program_ch9_new_delete_array"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <cstddef>
+
+int main() {
+    const std::size_t count = 4;
+    int* values = new int[count]{};
+
+    for (std::size_t index = 0; index < count; ++index) {
+        values[index] = static_cast<int>(index + 1) * 10;
+    }
+
+    for (std::size_t index = 0; index < count; ++index) {
+        std::cout << values[index] << '\n';
+    }
+
+    delete[] values;
+    values = nullptr;
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The empty braces in <c>new int[count]{}</c> value-initialize the
+            array's elements. The pointer does not know that the array has four
+            elements, so the program carries <c>count</c> separately.
+        </p>
+
+        <table xml:id="table_ch9_single_and_array_delete">
+            <title>Matching allocation and release expressions</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="32%"/>
+                <col width="32%"/>
+                <col width="36%"/>
+                <row header="yes">
+                    <cell>Allocation</cell>
+                    <cell>Release</cell>
+                    <cell>Purpose</cell>
+                </row>
+                <row>
+                    <cell><c>new int{5}</c></cell>
+                    <cell><c>delete pointer</c></cell>
+                    <cell>One dynamically created object</cell>
+                </row>
+                <row>
+                    <cell><c>new int[count]{}</c></cell>
+                    <cell><c>delete[] pointer</c></cell>
+                    <cell>A dynamically created array</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            Do not use <c>delete</c> for an array created with <c>new[]</c>, and
+            do not use <c>delete[]</c> for a single object created with
+            <c>new</c>. Use <c>std::vector</c> for ordinary variable-size
+            collections; use a dynamic array here to understand low-level C++.
+        </p>
+
+        <exercise label="chapter9_dynamically-allocated-arrays_exercise_release">
+            <statement><p>Which operation correctly releases an array created with <c>new double[10]</c>?</p></statement>
+            <choices>
+                <choice correct="yes"><statement><p><c>delete[] pointer;</c></p></statement><feedback><p>Array allocation with <c>new[]</c> requires array deletion with <c>delete[]</c>.</p></feedback></choice>
+                <choice><statement><p><c>delete pointer;</c></p></statement><feedback><p>This is the single-object form.</p></feedback></choice>
+                <choice><statement><p><c>free(pointer);</c></p></statement><feedback><p>C++ <c>new[]</c> must be paired with <c>delete[]</c>.</p></feedback></choice>
+                <choice><statement><p><c>pointer.clear();</c></p></statement><feedback><p>A raw pointer has no <c>clear()</c> member function.</p></feedback></choice>
+            </choices>
+        </exercise>
+    </subsection>
+
+    <exercise label="chapter9_dynamic-memory-with-new-and-delete_exercise_match">
+        <statement><p>Which operation matches <c>int* pointer = new int{5};</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>delete pointer;</c></p></statement><feedback><p>One object created with <c>new</c> is released with <c>delete</c>.</p></feedback></choice>
+            <choice><statement><p><c>delete[] pointer;</c></p></statement><feedback><p><c>delete[]</c> is for storage created with <c>new[]</c>.</p></feedback></choice>
+            <choice><statement><p><c>free(pointer);</c></p></statement><feedback><p>C++ <c>new</c> must not be paired with C's <c>free</c>.</p></feedback></choice>
+            <choice><statement><p><c>remove(pointer);</c></p></statement><feedback><p><c>remove</c> is not the matching storage-release operation.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_dynamic-memory-with-new-and-delete_exercise_new_result">
+        <statement><p>What does <c>new int{90}</c> produce in addition to creating an integer?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The address of the dynamically created integer</p></statement><feedback><p>The address can be stored in an <c>int*</c> pointer.</p></feedback></choice>
+            <choice><statement><p>The integer's array length</p></statement><feedback><p>A single object allocation does not produce an array length.</p></feedback></choice>
+            <choice><statement><p>A reference that cannot be null</p></statement><feedback><p><c>new</c> produces a pointer value, not a reference.</p></feedback></choice>
+            <choice><statement><p>A <c>std::vector&lt;int&gt;</c> object</p></statement><feedback><p><c>new int{90}</c> creates one dynamic <c>int</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_dynamic-memory-with-new-and-delete_exercise_array_match">
+        <statement><p>Which release operation matches <c>new int[count]</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>delete[] pointer;</c></p></statement><feedback><p>The array form <c>new[]</c> must be paired with <c>delete[]</c>.</p></feedback></choice>
+            <choice><statement><p><c>delete pointer;</c></p></statement><feedback><p>That is the form for one object created with ordinary <c>new</c>.</p></feedback></choice>
+            <choice><statement><p><c>free(pointer);</c></p></statement><feedback><p>C++ <c>new[]</c> must be paired with C++ <c>delete[]</c>.</p></feedback></choice>
+            <choice><statement><p><c>pointer.clear();</c></p></statement><feedback><p>A raw pointer has no <c>clear()</c> member function.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_dynamic-memory-with-new-and-delete_exercise_delete_nullptr">
+        <statement><p>What happens when a program executes <c>delete pointer;</c> while <c>pointer == nullptr</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>Nothing; deleting a null pointer is safe.</p></statement><feedback><p>C++ defines deletion of a null pointer as having no effect.</p></feedback></choice>
+            <choice><statement><p>It deletes the first object in memory.</p></statement><feedback><p><c>nullptr</c> identifies no object.</p></feedback></choice>
+            <choice><statement><p>It creates a new dynamic object.</p></statement><feedback><p><c>delete</c> releases storage; it does not allocate.</p></feedback></choice>
+            <choice><statement><p>It requires a length argument.</p></statement><feedback><p>Only array matching concerns <c>delete[]</c>; a null pointer still requires no argument.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

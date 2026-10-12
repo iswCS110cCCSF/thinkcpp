@@ -1,104 +1,77 @@
-<?xml version="1.0" ?><section xml:id="chapter9_glossary">
+<?xml version="1.0" encoding="UTF-8"?>
+<glossary xml:id="chapter9_glossary">
     <title>Glossary</title>
-    <glossary>
-        <gi>
-            <title>instance</title>
-            <p>An example from a category. My cat is an instance of the category <q>feline things.</q>
-            Every object is an instance of some type.</p>
-        </gi>
-        <gi>
-            <title>instance variable</title>
-            <p>One of the named data items that make up an structure. Each structure
-            has its own copy of the instance variables for its type.</p>
-        </gi>
-        <gi>
-            <title>constant reference parameter</title>
-            <p>A parameter that is passed by reference but that cannot be modified.</p>
-        </gi>
-        <gi>
-            <title>pure function</title>
-            <p>A function whose result depends only on its parameters, and that has
-            so effects other than returning a value.</p>
-        </gi>
-        <gi>
-            <title>functional programming style</title>
-            <p>A style of program design in which the majority of functions are
-            pure.</p>
-        </gi>
-        <gi>
-            <title>modifier</title>
-            <p>A function that changes one or more of the objects it receives as parameters, and usually
-            returns <c>void</c>.</p>
-        </gi>
-        <gi>
-            <title>fill-in function</title>
-            <p>A function that takes an <q>empty</q> object as a parameter and fills in its instance
-            variables instead of generating a return value.</p>
-        </gi>
-        <gi>
-            <title>algorithm</title>
-            <p>A set of instructions for solving a class of problems by a
-            mechanical, unintelligent process.</p>
-        </gi>
-    </glossary>
-    <reading-questions>
-  <exercise label="chapter_nine_glossary_one">
-    <statement>
-      <p>Match the definition to the term.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">instance</premise>
-        <response>An example from a category. My cat is an instance of the category <q>feline
-          things.</q> Every object is an instance of some type.</response>
-      </match>
-      <match>
-        <premise order="2">instance variable</premise>
-        <response>One of the named data items that make up an structure. Each structure has its own
-          copy of the instance variables for its type.</response>
-      </match>
-      <match>
-        <premise order="3">constant reference parameter</premise>
-        <response>A parameter that is passed by reference but that cannot be modified.</response>
-      </match>
-      <match>
-        <premise order="4">pure function</premise>
-        <response>A function whose result depends only on its parameters, and that has so effects
-          other than returning a value.</response>
-      </match>
-    </cardsort>
-  </exercise>
-  <exercise label="chapter_nine_glossary_two">
-    <statement>
-      <p>Match the definition to the term.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">functional programming style</premise>
-        <response>A style of program design in which the majority of functions are pure.</response>
-      </match>
-      <match>
-        <premise order="2">modifier</premise>
-        <response>A function that changes one or more of the objects it receives as parameters, and
-          usually returns void.</response>
-      </match>
-      <match>
-        <premise order="3">fill-in function</premise>
-        <response>A function that takes an <q>empty</q> object as a parameter and fills it its
-          instance variables instead of generating a return value.</response>
-      </match>
-      <match>
-        <premise order="4">algorithm</premise>
-        <response>A set of instructions for solving a class of problems by a mechanical,
-          unintelligent process.</response>
-      </match>
-    </cardsort>
-  </exercise>
-    </reading-questions>
-</section>
+
+    <gi xml:id="glossary_ch9_address">
+        <title>address</title>
+        <p>The location of an object in a program's storage.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_pointer">
+        <title>pointer</title>
+        <p>An object that stores the address of another object or function.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_address-of">
+        <title>address-of operator</title>
+        <p>The <c>&amp;</c> operator used in an expression to obtain an object's address.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_dereference">
+        <title>dereference</title>
+        <p>To use a pointer to access the object identified by its stored address.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_lvalue">
+        <title>lvalue</title>
+        <p>An expression that identifies a persistent object or storage location.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_rvalue">
+        <title>rvalue</title>
+        <p>An expression that generally represents a temporary value or computation result.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_reference">
+        <title>reference</title>
+        <p>An alias that must bind to an object when it is initialized and is then used like that object.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_null-pointer">
+        <title>null pointer</title>
+        <p>A pointer with the value <c>nullptr</c> that identifies no object.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_dangling-pointer">
+        <title>dangling pointer</title>
+        <p>A pointer that still contains an address after the object at that address has been destroyed.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_array-decay">
+        <title>array-to-pointer conversion</title>
+        <p>The conversion of an array expression, in many contexts, to a pointer to its first element. This is commonly called array decay.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_pointer-arithmetic">
+        <title>pointer arithmetic</title>
+        <p>Adding, subtracting, or comparing pointers within the same array object to identify element positions.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_one-past">
+        <title>one-past-the-end pointer</title>
+        <p>A pointer to the position immediately after the last element of an array; it may be used for comparison but not dereferenced.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_c-string">
+        <title>C-style string</title>
+        <p>A sequence of characters in an array terminated by the null character <c>'\0'</c>.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_null-character">
+        <title>null character</title>
+        <p>The character <c>'\0'</c> that marks the end of a C-style string.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_command-line-argument">
+        <title>command-line argument</title>
+        <p>A text value supplied to a program when it is started.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_dynamic-storage">
+        <title>dynamic storage</title>
+        <p>Storage requested during program execution whose lifetime is controlled by the program.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_memory-leak">
+        <title>memory leak</title>
+        <p>Allocated storage that the program can no longer reach and therefore cannot release.</p>
+    </gi>
+    <gi xml:id="glossary_ch9_ownership">
+        <title>ownership</title>
+        <p>Responsibility for controlling an object's lifetime and releasing its dynamically managed storage.</p>
+    </gi>
+</glossary>

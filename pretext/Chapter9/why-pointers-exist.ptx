@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_why-pointers-exist">
+    <title>Why Pointers Exist</title>
+
+    <p>
+        Every object in a running program occupies storage. The storage has a
+        location, and that location has an address. A pointer is an object that
+        stores the address of another object.
+    </p>
+
+    <p>
+        A variable name gives a program a direct way to refer to an object. A
+        pointer gives a program an indirect way to refer to the same object. This
+        indirect access is useful when a function must work with an object owned
+        by its caller, when the object may be optional, or when storage must last
+        beyond the scope in which it was created.
+    </p>
+
+    <program xml:id="program_ch9_pointer_address"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int score = 90;
+    int* score_pointer = &score;
+
+    std::cout << "Score: " << score << '\n';
+    std::cout << "Address: " << score_pointer << '\n';
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The address printed by this program is not a value that a programmer
+        should predict. It can change from one run to another. The important
+        relationship is that <c>score_pointer</c> stores the address of
+        <c>score</c>.
+    </p>
+
+    <p>
+        The following full Python Tutor interface lets you step through the
+        example and inspect its storage. It opens with the example already
+        loaded and displays memory addresses.
+    </p>
+
+    <interactive xml:id="interactive_ch9_pointer_memory"
+                 iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0A%0Aint%20main%28%29%20%7B%0Aint%20score%20%3D%2090%3B%0Aint*%20score_pointer%20%3D%20%26score%3B%0A%0Astd%3A%3Acout%20%3C%3C%20%22Score%3A%20%22%20%3C%3C%20score%20%3C%3C%20%27%5Cn%27%3B%0Astd%3A%3Acout%20%3C%3C%20%22Address%3A%20%22%20%3C%3C%20score_pointer%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D%0A&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=8&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                 width="100%"
+                 aspect="16:10">
+    </interactive>
+
+    <p>
+        The pointer can also be used to change the object it identifies:
+    </p>
+
+    <program xml:id="program_ch9_pointer_modify"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int score = 90;
+    int* score_pointer = &score;
+
+    *score_pointer = 95;
+    std::cout << score << '\n';
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <table xml:id="table_ch9_pointer_storage_kinds">
+        <title>Some ways objects can obtain storage</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="27%"/>
+            <col width="38%"/>
+            <col width="35%"/>
+            <row header="yes">
+                <cell>Storage situation</cell>
+                <cell>Main idea</cell>
+                <cell>Typical example</cell>
+            </row>
+            <row>
+                <cell>Automatic storage</cell>
+                <cell>Storage is created and released as a scope is entered and left.</cell>
+                <cell><c>int score;</c> inside a function</cell>
+            </row>
+            <row>
+                <cell>Static storage</cell>
+                <cell>Storage lasts for the program's static lifetime.</cell>
+                <cell>A namespace-scope variable</cell>
+            </row>
+            <row>
+                <cell>Dynamic storage</cell>
+                <cell>Storage is requested and released explicitly by the program.</cell>
+                <cell><c>new int{90}</c> and <c>delete</c></cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        This chapter first studies pointers as addresses. Later it uses pointers
+        to explain dynamically managed storage. A pointer itself does not mean
+        that the pointed-to object was dynamically allocated; it can point to an
+        ordinary local object as in the example above.
+    </p>
+
+    <exercise label="chapter9_why-pointers-exist_exercise_address">
+        <statement><p>What does a pointer normally store?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The address of another object</p></statement><feedback><p>A pointer provides an indirect way to refer to an object.</p></feedback></choice>
+            <choice><statement><p>The complete contents of every object in memory</p></statement><feedback><p>A pointer stores an address, not a complete copy of the object.</p></feedback></choice>
+            <choice><statement><p>The size of the object only</p></statement><feedback><p>Object size and object address are different ideas.</p></feedback></choice>
+            <choice><statement><p>The name of the object</p></statement><feedback><p>Names are source-code identifiers, not stored pointer values.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_why-pointers-exist_parsons_indirect_access" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the statements to change a local object through a pointer.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>int score = 90;</cline></block>
+            <block order="2"><cline>int* score_pointer = &amp;score;</cline></block>
+            <block order="3"><cline>*score_pointer = 95;</cline></block>
+            <block order="4"><cline>std::cout &lt;&lt; score &lt;&lt; '\n';</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter9_why-pointers-exist_exercise_local_object">
+        <statement><p>Which object can a pointer identify?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>An ordinary local object such as <c>score</c></p></statement><feedback><p>A pointer can store the address of a local object; it does not require dynamic allocation.</p></feedback></choice>
+            <choice><statement><p>Only an object created with <c>new</c></p></statement><feedback><p>Pointers can identify local, static, or dynamically allocated objects.</p></feedback></choice>
+            <choice><statement><p>Only an object stored in a vector</p></statement><feedback><p>A pointer is not limited to a particular container.</p></feedback></choice>
+            <choice><statement><p>Only an object whose value is an address</p></statement><feedback><p>The pointer stores an address; the identified object may have another type.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_why-pointers-exist_exercise_address_variation">
+        <statement><p>Why should a program not assume that <c>&amp;score</c> will have the same numeric address on every run?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The program's storage locations can vary between executions.</p></statement><feedback><p>The relationship between the pointer and object matters; the particular numeric address is not predictable.</p></feedback></choice>
+            <choice><statement><p>The address changes whenever <c>score</c> is incremented.</p></statement><feedback><p>Changing an object's value does not normally move the object.</p></feedback></choice>
+            <choice><statement><p>A pointer stores the object's current value instead of its address.</p></statement><feedback><p>A pointer stores an address, not the pointed-to value.</p></feedback></choice>
+            <choice><statement><p>The address is always zero until <c>new</c> is used.</p></statement><feedback><p>Local objects normally have valid nonzero addresses.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_why-pointers-exist_exercise_dynamic_not_required">
+        <statement><p>Which statement about a pointer and dynamic storage is correct?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A pointer can identify an ordinary local object without owning dynamic storage.</p></statement><feedback><p>The pointer's type and the object's storage duration are separate ideas.</p></feedback></choice>
+            <choice><statement><p>Every pointer automatically owns the object it identifies.</p></statement><feedback><p>Ownership must be established by the program's design; a pointer alone does not imply ownership.</p></feedback></choice>
+            <choice><statement><p>Only dynamically allocated objects have addresses.</p></statement><feedback><p>All objects in storage have locations and addresses.</p></feedback></choice>
+            <choice><statement><p>A local object must be released with <c>delete</c>.</p></statement><feedback><p>Local objects are managed by their scope, not by matching <c>delete</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

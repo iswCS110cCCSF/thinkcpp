@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_pointer-variables-and-dereferencing">
+    <title>Pointer Variables and Dereferencing</title>
+
+    <p>
+        A pointer declaration includes the type of object that the pointer is
+        expected to identify. The <c>*</c> in a declaration says that the new
+        variable is a pointer.
+    </p>
+
+    <program xml:id="program_ch9_pointer_declaration_and_dereference"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int score = 90;
+    int* score_pointer = &score;
+
+    std::cout << *score_pointer << '\n';
+
+    *score_pointer = 95;
+    std::cout << score << '\n';
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        In <c>int* score_pointer</c>, the <c>*</c> is part of the declaration
+        syntax. It says that <c>score_pointer</c> has type pointer to
+        <c>int</c>. In <c>*score_pointer</c>, the <c>*</c> is the dereference
+        operator. It follows the stored address and accesses the object there.
+    </p>
+
+    <table xml:id="table_ch9_pointer_symbols">
+        <title>Two pointer-related operators</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="25%"/>
+            <col width="37%"/>
+            <col width="38%"/>
+            <row header="yes">
+                <cell>Expression</cell>
+                <cell>Role</cell>
+                <cell>Meaning</cell>
+            </row>
+            <row>
+                <cell><c>int* pointer</c></cell>
+                <cell>Pointer declaration</cell>
+                <cell>Declares <c>pointer</c> as a pointer to an <c>int</c>.</cell>
+            </row>
+            <row>
+                <cell><c>&amp;score</c></cell>
+                <cell>Address-of operator</cell>
+                <cell>Produces the address of <c>score</c>.</cell>
+            </row>
+            <row>
+                <cell><c>*pointer</c></cell>
+                <cell>Dereference operator</cell>
+                <cell>Accesses the object identified by <c>pointer</c>.</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        These declarations are equivalent:
+    </p>
+
+    <program xml:id="program_ch9_pointer_declaration_spacing"
+             language="cpp">
+        <code><![CDATA[
+int* first_pointer;
+int *second_pointer;
+        ]]></code>
+    </program>
+
+    <p>
+        In this course, we will declare one variable per line. This avoids a
+        common source of confusion:
+    </p>
+
+    <program xml:id="program_ch9_one_pointer_per_line"
+             language="cpp">
+        <code><![CDATA[
+int* first_pointer;
+int second_value;
+        ]]></code>
+    </program>
+
+    <p>
+        In <c>int* first_pointer, second_value;</c>, only
+        <c>first_pointer</c> is a pointer. The second variable is an ordinary
+        <c>int</c>. One declaration per line makes this distinction visible.
+    </p>
+
+    <subsection xml:id="chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues">
+        <title>Lvalues and Rvalues: From Assignment to Expression Categories</title>
+
+        <p>
+            The names <term>lvalue</term> and <term>rvalue</term> originally
+            came from assignment expressions. An lvalue appeared on the
+            left-hand side, while an rvalue appeared on the right-hand side:
+        </p>
+
+        <program xml:id="program_ch9_lvalue_rvalue_assignment"
+                 language="cpp">
+            <code><![CDATA[
+int score = 90;
+score = 95;
+            ]]></code>
+        </program>
+
+        <p>
+            Modern C++ uses a more useful meaning. An lvalue identifies a
+            persistent object or storage location. An rvalue is usually a
+            temporary value or computation result. The expression remains an
+            lvalue even when it appears on the right side of an assignment:
+        </p>
+
+        <interactive xml:id="interactive_ch9_lvalue_rvalue_codelens"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int%20score%20%3D%2090%3B%0A%20%20%20%20int%20copy%20%3D%20score%3B%0A%0A%20%20%20%20score%20%3D%20score%20%2B%205%3B%0A%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22copy%3D%22%20%3C%3C%20copy%20%3C%3C%20%22%2C%20score%3D%22%20%3C%3C%20score%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+
+        <p>
+            Here, <c>score</c> is an lvalue because it identifies an object,
+            while <c>score + 5</c> is an rvalue because it is a temporary
+            computation result. This is why the following is valid and invalid,
+            respectively:
+        </p>
+
+        <program xml:id="program_ch9_lvalue_address_examples"
+                 language="cpp">
+            <code><![CDATA[
+int* pointer = &score;   // valid: score is an lvalue
+// int* invalid = &(score + 5);  // invalid: the result is an rvalue
+            ]]></code>
+        </program>
+
+        <p>
+            This chapter uses only the practical distinction between lvalues and
+            rvalues. More detailed categories, including prvalues, xvalues, and
+            glvalues, can be studied later with move semantics.
+        </p>
+    </subsection>
+
+    <exercise label="chapter9_pointer-variables-and-dereferencing_exercise_star">
+        <statement><p>What does <c>*score_pointer = 95;</c> do when <c>score_pointer</c> points to <c>score</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>It changes the pointed-to <c>score</c> object to 95.</p></statement><feedback><p>Dereferencing accesses the object identified by the pointer.</p></feedback></choice>
+            <choice><statement><p>It changes the pointer's address to 95.</p></statement><feedback><p>The dereference operator accesses the pointed-to object, not the pointer's stored address.</p></feedback></choice>
+            <choice><statement><p>It creates a second pointer.</p></statement><feedback><p>A declaration, not this assignment, creates a pointer variable.</p></feedback></choice>
+            <choice><statement><p>It prints the address of <c>score</c>.</p></statement><feedback><p>Output requires <c>std::cout</c>; this statement performs assignment.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_pointer-variables-and-dereferencing_parsons_dereference" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the statements to store an address and then change the pointed-to object.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>int score = 90;</cline></block>
+            <block order="2"><cline>int* score_pointer = &amp;score;</cline></block>
+            <block order="3"><cline>std::cout &lt;&lt; *score_pointer &lt;&lt; '\n';</cline></block>
+            <block order="4"><cline>*score_pointer = 95;</cline></block>
+            <block order="5"><cline>std::cout &lt;&lt; score &lt;&lt; '\n';</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter9_pointer-variables-and-dereferencing_exercise_address_of">
+        <statement><p>What does <c>&amp;score</c> produce in an expression?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The address of <c>score</c></p></statement><feedback><p>The address-of operator produces a pointer value identifying the object.</p></feedback></choice>
+            <choice><statement><p>The value stored in <c>score</c></p></statement><feedback><p>Writing <c>score</c> alone reads its value; <c>&amp;score</c> asks for its address.</p></feedback></choice>
+            <choice><statement><p>The object identified by <c>score</c></p></statement><feedback><p>The expression produces an address, not the object itself.</p></feedback></choice>
+            <choice><statement><p>The address of the pointer variable itself</p></statement><feedback><p><c>&amp;score</c> identifies <c>score</c>, not another pointer variable.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_pointer-variables-and-dereferencing_exercise_declaration_star">
+        <statement><p>In <c>int* pointer</c>, what role does <c>*</c> play?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>It declares <c>pointer</c> as a pointer to an <c>int</c>.</p></statement><feedback><p>Here the star is part of the pointer declaration syntax.</p></feedback></choice>
+            <choice><statement><p>It immediately accesses the pointed-to object.</p></statement><feedback><p>Dereferencing occurs in an expression such as <c>*pointer</c> after the pointer exists.</p></feedback></choice>
+            <choice><statement><p>It obtains the address of <c>pointer</c>.</p></statement><feedback><p>The address-of operator is <c>&amp;</c>.</p></feedback></choice>
+            <choice><statement><p>It releases dynamic storage.</p></statement><feedback><p>Storage release uses <c>delete</c> or <c>delete[]</c>.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_pointer-variables-and-dereferencing_exercise_lvalue">
+        <statement><p>Which expression is an lvalue because it identifies a persistent object?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>score</c></p></statement><feedback><p>The variable name identifies a storage location and can appear on the left side of assignment.</p></feedback></choice>
+            <choice><statement><p><c>score + 5</c></p></statement><feedback><p>This computation produces a temporary rvalue.</p></feedback></choice>
+            <choice><statement><p><c>90 + 5</c></p></statement><feedback><p>A numeric computation result is an rvalue.</p></feedback></choice>
+            <choice><statement><p><c>5</c></p></statement><feedback><p>A literal is a value, not a named storage location.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

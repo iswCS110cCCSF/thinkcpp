@@ -36,6 +36,7 @@
     <xi:include href="./Chapter9/toctree.ptx"/>
 	-->
     <xi:include href="./Chapter10/toctree.ptx"/>
+	<xi:include href="./Chapter9/toctree.ptx"/>
 	<!--
      <xi:include href="./Chapter11/toctree.ptx"/>
     <xi:include href="./Chapter12/toctree.ptx"/>

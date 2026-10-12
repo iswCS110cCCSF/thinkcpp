@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_nullptr-and-safe-pointer-use">
+    <title><c>nullptr</c> and Safe Pointer Use</title>
+
+    <p>
+        A pointer can identify an object, or it can identify no object. The
+        value <c>nullptr</c> represents the second situation. A null pointer is
+        useful when a program needs to represent <q>no address</q> explicitly.
+    </p>
+
+    <interactive xml:id="interactive_ch9_check_nullptr"
+                 iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Avoid%20print_value%28const%20int*%20value_pointer%29%20%7B%0A%20%20%20%20if%20%28value_pointer%20%21%3D%20nullptr%29%20%7B%20%2F%2F%20The%20guard%20clause%3B%20verifying%20before%20use.%20%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20*value_pointer%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22No%20value%22%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int%20score%20%3D%2090%3B%0A%0A%20%20%20%20print_value%28%26score%29%3B%0A%20%20%20%20print_value%28nullptr%29%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                 width="100%"
+                 aspect="16:10">
+    </interactive>
+
+    <p>
+        The function checks the pointer before dereferencing it. Dereferencing a
+        null pointer will result in undefined behavior causing a Segmentation fault or 
+        silent data corruption because it does not identify an object. So validating 
+        a pointer variable for not being <c>nullptr</c> is an excellent defensive coding habit.
+    </p>
+
+    <p>
+        Use <c>nullptr</c> rather than the older integer-based conventions
+        <c>0</c> and <c>NULL</c>. A pointer should be initialized immediately,
+        even when its initial state is <q>no object.</q>
+    </p>
+
+    <!-- EXERCISE SECTION -->
+
+    <exercise label="chapter9_nullptr-and-safe-pointer-use_exercise_check">
+        <statement><p>What should a function do before dereferencing a pointer parameter that may be null?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>Check whether the pointer is not <c>nullptr</c>.</p></statement><feedback><p>Only a pointer that identifies a live object may be safely dereferenced.</p></feedback></choice>
+            <choice><statement><p>Add 1 to the pointer.</p></statement><feedback><p>Pointer arithmetic does not make a null pointer valid.</p></feedback></choice>
+            <choice><statement><p>Convert the pointer to <c>int</c>.</p></statement><feedback><p>Conversion does not establish that an object exists.</p></feedback></choice>
+            <choice><statement><p>Dereference it once to test it.</p></statement><feedback><p>Dereferencing is exactly the unsafe operation that must be avoided.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_nullptr-and-safe-pointer-use_parsons_guard" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the blocks to print a value only when the pointer identifies an object.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>void print_value(const int* value_pointer) {</cline></block>
+            <block order="2"><cline>if (value_pointer != nullptr) {</cline></block>
+            <block order="3"><cline>std::cout &lt;&lt; *value_pointer &lt;&lt; '\n';</cline><cline>}</cline></block>
+            <block order="4"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter9_nullptr-and-safe-pointer-use_exercise_initialization">
+        <statement><p>Which declaration safely represents a pointer that currently identifies no object?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>int* value_pointer = nullptr;</c></p></statement><feedback><p><c>nullptr</c> gives the pointer an explicit, safe no-object state.</p></feedback></choice>
+            <choice><statement><p><c>int* value_pointer;</c></p></statement><feedback><p>An uninitialized pointer has an indeterminate value and must not be used.</p></feedback></choice>
+            <choice><statement><p><c>int value_pointer = nullptr;</c></p></statement><feedback><p>This declares an <c>int</c>, not a pointer.</p></feedback></choice>
+            <choice><statement><p><c>int* value_pointer = 1;</c></p></statement><feedback><p>An arbitrary integer is not a safe way to represent no object.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_nullptr-and-safe-pointer-use_exercise_guard">
+        <statement><p>Why must a nullable pointer be checked before dereferencing?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A null pointer identifies no object, so dereferencing it has undefined behavior.</p></statement><feedback><p>Dereferencing is valid only when the pointer identifies a live object.</p></feedback></choice>
+            <choice><statement><p>A null pointer always points to the first array element.</p></statement><feedback><p><c>nullptr</c> identifies no object.</p></feedback></choice>
+            <choice><statement><p>Checking changes the pointer into a reference.</p></statement><feedback><p>A check only tests the pointer's state; it does not change its type.</p></feedback></choice>
+            <choice><statement><p>Checking makes the pointed-to object permanent.</p></statement><feedback><p>A check does not change an object's lifetime.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_nullptr-and-safe-pointer-use_exercise_boolean_check">
+        <statement><p>Which condition is equivalent to checking whether <c>value_pointer</c> is not null?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>if (value_pointer)</c></p></statement><feedback><p>A pointer converts to <c>true</c> when it identifies an address and to <c>false</c> when it is null.</p></feedback></choice>
+            <choice><statement><p><c>if (*value_pointer)</c></p></statement><feedback><p>This dereferences the pointer and is unsafe when it is null.</p></feedback></choice>
+            <choice><statement><p><c>if (&amp;value_pointer)</c></p></statement><feedback><p>This tests the address of the pointer variable, which is normally non-null.</p></feedback></choice>
+            <choice><statement><p><c>if (value_pointer = nullptr)</c></p></statement><feedback><p>This assigns rather than checks and also makes the pointer null.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>
+

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_pointers-and-c-style-arrays">
+    <title>Pointers and C-Style Arrays</title>
+
+    <p>
+        A C-style array stores a fixed number of elements of one type in
+        consecutive positions. In many expressions, the array name is converted
+        to a pointer to its first element. This conversion is commonly called
+        <term>array decay</term>.
+    </p>
+
+    <interactive xml:id="interactive_ch9_array_decay_parameter"
+                 iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Ccstddef%3E%0A%0Avoid%20print_values%28const%20int*%20values%2C%20std%3A%3Asize_t%20count%29%20%7B%0A%20%20%20%20for%20%28std%3A%3Asize_t%20index%20%3D%200%3B%20index%20%3C%20count%3B%20%2B%2Bindex%29%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20values%5Bindex%5D%20%3C%3C%20%27%20%27%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int%20scores%5B%5D%7B88%2C%2091%2C%2095%7D%3B%0A%0A%20%20%20%20print_values%28scores%2C%203%29%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                 width="100%"
+                 aspect="16:10">
+    </interactive>
+
+    <p>
+        When <c>scores</c> is passed to <c>print_values()</c>, it becomes a
+        pointer to the first element. The pointer does not carry the array's
+        length, so the function receives <c>count</c> separately.
+    </p>
+
+    <subsection xml:id="chapter9_pointers-and-c-style-arrays_pointer-arithmetic">
+        <title>Pointer Arithmetic</title>
+
+        <p>
+            Pointer arithmetic moves by elements of the pointed-to type, not by
+            individual bytes. If an <c>int*</c> points to one array element,
+            adding 1 produces a pointer to the next <c>int</c> in that array.
+        </p>
+
+        <program xml:id="program_ch9_pointer_arithmetic_traversal"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int scores[]{88, 91, 95};
+    int* current = scores;
+
+    std::cout << *current << '\n';
+
+    ++current;
+    std::cout << *current << '\n';
+
+    std::cout << *(current + 1) << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <table xml:id="table_ch9_pointer_arithmetic">
+            <title>Common pointer-arithmetic expressions</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="28%"/>
+                <col width="34%"/>
+                <col width="38%"/>
+                <row header="yes">
+                    <cell>Expression</cell>
+                    <cell>Meaning</cell>
+                    <cell>Important condition</cell>
+                </row>
+                <row>
+                    <cell><c>pointer + 1</c></cell>
+                    <cell>Pointer to the next element.</cell>
+                    <cell>Must remain within the same array or one position past it.</cell>
+                </row>
+                <row>
+                    <cell><c>++pointer</c></cell>
+                    <cell>Move to the next element.</cell>
+                    <cell>Do not dereference a one-past-the-end pointer.</cell>
+                </row>
+                <row>
+                    <cell><c>*pointer</c></cell>
+                    <cell>Access the pointed-to element.</cell>
+                    <cell>The pointer must identify a valid live element.</cell>
+                </row>
+                <row>
+                    <cell><c>pointer[index]</c></cell>
+                    <cell>Equivalent to <c>*(pointer + index)</c>.</cell>
+                    <cell>The resulting position must be a valid element.</cell>
+                </row>
+            </tabular>
+        </table>
+    </subsection>
+
+    <subsection xml:id="chapter9_pointers-and-c-style-arrays_array-size">
+        <title>Array Size and Function Parameters</title>
+
+        <p>
+            An array name does not decay in every context. For example,
+            <c>sizeof(scores)</c> measures the entire array when <c>scores</c>
+            is an actual array in that scope. Once the array has decayed to a
+            pointer parameter, <c>sizeof(values)</c> measures the pointer, not
+            the original array. This is another reason to pass the length
+            explicitly.
+        </p>
+
+        <p>
+            A pointer may identify one position past the last element. Such a
+            pointer is useful as a stopping position, but it must never be
+            dereferenced. Pointer arithmetic outside the same array object is not
+            a valid way to reach unrelated storage.
+        </p>
+    </subsection>
+
+    <exercise label="chapter9_pointers-and-c-style-arrays_exercise_decay">
+        <statement><p>Why does a function receiving <c>const int* values</c> usually need a separate length parameter?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The pointer identifies an element but does not retain the original array's length.</p></statement><feedback><p>Array decay gives the function an address, not the array-size information.</p></feedback></choice>
+            <choice><statement><p>Because pointers cannot access array elements.</p></statement><feedback><p>Pointer indexing and dereferencing can access elements.</p></feedback></choice>
+            <choice><statement><p>Because the array is automatically copied into the function.</p></statement><feedback><p>The array is not copied into a pointer parameter.</p></feedback></choice>
+            <choice><statement><p>Because pointer arithmetic always changes the array length.</p></statement><feedback><p>Pointer arithmetic does not change the array object.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_pointers-and-c-style-arrays_parsons_decay" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the statements to traverse two elements of an array with a pointer.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>int scores[]{88, 91, 95};</cline></block>
+            <block order="2"><cline>int* current = scores;</cline></block>
+            <block order="3"><cline>std::cout &lt;&lt; *current &lt;&lt; '\n';</cline></block>
+            <block order="4"><cline>++current;</cline></block>
+            <block order="5"><cline>std::cout &lt;&lt; *current &lt;&lt; '\n';</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter9_pointers-and-c-style-arrays_exercise_increment">
+        <statement><p>What does <c>current + 1</c> mean when <c>current</c> is an <c>int*</c> into an array?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A pointer to the next <c>int</c> element</p></statement><feedback><p>Pointer arithmetic is scaled by the pointed-to type.</p></feedback></choice>
+            <choice><statement><p>A pointer exactly one byte later</p></statement><feedback><p>The movement is the size of an <c>int</c>, not necessarily one byte.</p></feedback></choice>
+            <choice><statement><p>The next element's integer value</p></statement><feedback><p>The result is still a pointer; dereference it to read a value.</p></feedback></choice>
+            <choice><statement><p>The array's length increased by one</p></statement><feedback><p>Pointer arithmetic does not resize an array.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_pointers-and-c-style-arrays_exercise_decay_call">
+        <statement><p>What does <c>scores</c> provide when passed to <c>void print_values(const int* values, std::size_t count)</c>?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>A pointer to the first element of the array</p></statement><feedback><p>In this function call, the array expression converts to a pointer to its first element.</p></feedback></choice>
+            <choice><statement><p>A copy of the entire array including its length</p></statement><feedback><p>The array is not copied into the pointer parameter, and the length is separate.</p></feedback></choice>
+            <choice><statement><p>A pointer to the last element</p></statement><feedback><p>Array decay identifies the first element.</p></feedback></choice>
+            <choice><statement><p>A <c>std::vector&lt;int&gt;</c> object</p></statement><feedback><p>A C-style array does not automatically become a vector.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_pointers-and-c-style-arrays_exercise_pointer_bounds">
+        <statement><p>Why must a traversal stop before dereferencing one-past-the-end?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>One-past-the-end can be used for comparison but does not identify an element.</p></statement><feedback><p>Dereferencing is valid only for pointers to actual array elements.</p></feedback></choice>
+            <choice><statement><p>One-past-the-end always points to the first element of another array.</p></statement><feedback><p>It is a boundary position, not an element of another array.</p></feedback></choice>
+            <choice><statement><p>Pointer arithmetic stops working after the first element.</p></statement><feedback><p>Pointer arithmetic can traverse the array within its bounds.</p></feedback></choice>
+            <choice><statement><p>The array length changes when the pointer reaches the boundary.</p></statement><feedback><p>Pointer movement does not change the array object.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

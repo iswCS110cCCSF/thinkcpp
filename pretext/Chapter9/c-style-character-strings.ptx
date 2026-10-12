@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_c-style-character-strings">
+    <title>C-Style Character Strings</title>
+
+    <p>
+        A C-style string is a sequence of characters stored in a character array
+        and terminated by the null character <c>'\0'</c>. The null character is
+        not the same as the character <c>'0'</c>. It marks where the string ends.
+    </p>
+
+    <program xml:id="program_ch9_c_style_string_traversal"
+             language="cpp" interactive="yes">
+        <code><![CDATA[
+#include <iostream>
+
+int main() {
+    char message[] = "Hello";
+
+    for (const char* current = message; *current != '\0'; ++current) {
+        std::cout << *current << '\n';
+    }
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The literal <c>"Hello"</c> initializes six array elements:
+        <c>'H'</c>, <c>'e'</c>, <c>'l'</c>, <c>'l'</c>, <c>'o'</c>, and
+        <c>'\0'</c>. The pointer loop stops when it reaches that final marker.
+    </p>
+
+    <subsection xml:id="chapter9_c-style-character-strings_mutability">
+        <title>Mutable Arrays and Read-Only Literals</title>
+
+        <p>
+            An array initialized from a string literal owns its character
+            elements and can be modified. A pointer to a string literal should
+            be declared as a pointer to <c>const char</c> because the literal
+            must not be modified.
+        </p>
+
+        <program xml:id="program_ch9_c_style_string_mutability"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int main() {
+    char mutable_message[] = "Hello";
+    const char* read_only_message = "Hello";
+
+    mutable_message[0] = 'J';
+
+    std::cout << mutable_message << '\n';
+    std::cout << read_only_message << '\n';
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            In modern C++, do not write <c>char* message = "Hello"</c>. The
+            correct type for a pointer to a string literal is
+            <c>const char*</c>. For ordinary C++ text processing, prefer
+            <c>std::string</c>.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_c-style-character-strings_length">
+        <title>Capacity and the Null Character</title>
+
+        <p>
+            The array must have room for the terminating null character. The
+            following array has room for six characters, not five:
+        </p>
+
+        <program xml:id="program_ch9_c_style_string_capacity"
+                 language="cpp">
+        <code><![CDATA[
+char word[] = "hello";
+        ]]></code>
+        </program>
+
+        <p>
+            An array such as <c>char letters[5] = {'h', 'e', 'l', 'l', 'o'}</c>
+            contains five characters but is not a C-style string because it has
+            no terminating <c>'\0'</c>.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_c-style-character-strings_command-line-arguments">
+        <title>Command-Line Arguments</title>
+
+        <p>
+            A program can receive text from the command line through the
+            parameters of <c>main()</c>:
+        </p>
+
+        <program xml:id="program_ch9_command_line_signature"
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int main(int argc, char* argv[]) {
+    std::cout << "Argument count: " << argc << '\n';
+
+    for (int index = 0; index < argc; ++index) {
+        std::cout << index << ": " << argv[index] << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            <c>argc</c> is the argument count. <c>argv</c> is an array of
+            pointers, and each pointer identifies a null-terminated C-style
+            string. The execution environment prepares these values before
+            <c>main()</c> begins.
+        </p>
+
+        <table xml:id="table_ch9_command_line_arguments">
+            <title>Command-line argument positions</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="22%"/>
+                <col width="38%"/>
+                <col width="40%"/>
+                <row header="yes">
+                    <cell>Expression</cell>
+                    <cell>Points to</cell>
+                    <cell>Important fact</cell>
+                </row>
+                <row>
+                    <cell><c>argv[0]</c></cell>
+                    <cell>The program name in ordinary execution.</cell>
+                    <cell>It is still text.</cell>
+                </row>
+                <row>
+                    <cell><c>argv[1]</c></cell>
+                    <cell>The first user-supplied argument.</cell>
+                    <cell>Its type is a C-style string.</cell>
+                </row>
+                <row>
+                    <cell><c>argv[argc]</c></cell>
+                    <cell>No argument.</cell>
+                    <cell>The standard specifies a null pointer here.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            In a parameter list, <c>char* argv[]</c> is adjusted to a
+            pointer-based form equivalent to <c>char** argv</c>. Command-line
+            arguments arrive as text; converting text to a number is a
+            separate operation.
+        </p>
+
+        <interactive xml:id="interactive_ch9_c_style_string_codelens"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20char%20word%5B%5D%20%3D%20%22cat%22%3B%0A%20%20%20%20char*%20current%20%3D%20word%3B%0A%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20*current%3B%0A%20%20%20%20%2B%2Bcurrent%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%27%20%27%20%3C%3C%20*current%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+
+        <exercise label="chapter9_command-line-arguments_exercise_argc">
+            <statement><p>What does <c>argc</c> represent?</p></statement>
+            <choices>
+                <choice correct="yes"><statement><p>The number of command-line argument strings</p></statement><feedback><p><c>argc</c> counts the entries available through <c>argv</c>.</p></feedback></choice>
+                <choice><statement><p>The length of the longest argument</p></statement><feedback><p>Each argument's length is separate from the total count.</p></feedback></choice>
+                <choice><statement><p>The number of characters in <c>argv[0]</c></p></statement><feedback><p><c>argv[0]</c> is one entry in the array.</p></feedback></choice>
+                <choice><statement><p>The memory address of <c>argv</c></p></statement><feedback><p><c>argv</c> holds the pointer-based argument collection.</p></feedback></choice>
+            </choices>
+        </exercise>
+    </subsection>
+
+    <exercise label="chapter9_c-style-character-strings_exercise_null">
+        <statement><p>What marks the end of a C-style character string?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>The null character <c>'\0'</c></p></statement><feedback><p>C-style string functions search for this terminating character.</p></feedback></choice>
+            <choice><statement><p>The character <c>'0'</c></p></statement><feedback><p><c>'0'</c> is a visible digit character, not the null character.</p></feedback></choice>
+            <choice><statement><p>The first space</p></statement><feedback><p>Spaces can be part of a C-style string.</p></feedback></choice>
+            <choice><statement><p>The pointer value <c>nullptr</c></p></statement><feedback><p><c>nullptr</c> is a pointer value, not a character stored in the string.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_c-style-character-strings_parsons_traversal" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the blocks to print a C-style string one character at a time.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>char word[] = "cat";</cline></block>
+            <block order="2"><cline>const char* current = word;</cline></block>
+            <block order="3"><cline>while (*current != '\0') {</cline></block>
+            <block order="4"><cline>std::cout &lt;&lt; *current &lt;&lt; '\n';</cline><cline>++current;</cline></block>
+            <block order="5"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter9_c-style-character-strings_exercise_terminator">
+        <statement><p>Why does <c>char word[] = "cat";</c> need four elements?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>It stores three visible characters plus <c>'\0'</c>.</p></statement><feedback><p>The null character marks the end of the C-style string.</p></feedback></choice>
+            <choice><statement><p>It stores four visible letters in the word.</p></statement><feedback><p><c>cat</c> contains three visible characters.</p></feedback></choice>
+            <choice><statement><p>It stores a pointer and three characters.</p></statement><feedback><p>The array stores character elements; it does not contain a separate pointer element.</p></feedback></choice>
+            <choice><statement><p>The compiler always adds an unrelated padding character.</p></statement><feedback><p>The extra element is specifically the required null terminator.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_c-style-character-strings_exercise_mutability">
+        <statement><p>Which declaration creates a modifiable character array initialized from a string literal?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>char message[] = "Hello";</c></p></statement><feedback><p>The array owns its character elements, including the terminating null character.</p></feedback></choice>
+            <choice><statement><p><c>const char* message = "Hello";</c></p></statement><feedback><p>This safely refers to a read-only string literal through a pointer.</p></feedback></choice>
+            <choice><statement><p><c>char* message = "Hello";</c></p></statement><feedback><p>A string literal must not be treated as modifiable character storage.</p></feedback></choice>
+            <choice><statement><p><c>char message = "Hello";</c></p></statement><feedback><p>A single <c>char</c> cannot store an entire string.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_c-style-character-strings_exercise_argv_text">
+        <statement><p>What is the important type fact about each <c>argv[index]</c> value?</p></statement>
+        <choices>
+            <choice correct="yes"><statement><p>It identifies a null-terminated C-style string.</p></statement><feedback><p>Command-line arguments arrive as text through pointers to characters.</p></feedback></choice>
+            <choice><statement><p>It is already an <c>int</c> containing the user's number.</p></statement><feedback><p>Converting argument text to a number is a separate operation.</p></feedback></choice>
+            <choice><statement><p>It is always a <c>std::string</c> object.</p></statement><feedback><p>The standard <c>main</c> signature uses C-style strings.</p></feedback></choice>
+            <choice><statement><p>It is the argument count.</p></statement><feedback><p><c>argc</c> stores the count; <c>argv[index]</c> identifies one text argument.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>
