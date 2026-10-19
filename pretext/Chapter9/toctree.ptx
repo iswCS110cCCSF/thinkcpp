@@ -3,6 +3,7 @@
          xml:lang="en-US"
          xml:id="chapter9_pointers-and-dynamic-memory-part1">
     <title>Pointers and Dynamic Memory, Part 1</title>
+    <xi:include href="./memory-addresses-and-virtual-memory.ptx"/>
 
     <xi:include href="./why-pointers-exist.ptx"/>
     <xi:include href="./pointer-variables-and-dereferencing.ptx"/>

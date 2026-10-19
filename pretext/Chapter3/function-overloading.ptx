@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter3_function-overloading">
+  <title>Function Overloading</title>
+
+  <p>
+    A program often needs to perform the same general task with different
+    kinds of data. <term>Function overloading</term> allows several functions
+    to use the same name when their parameter lists are different. The
+    compiler selects the function whose parameters best match the arguments
+    in a particular call.
+  </p>
+
+  <p>
+    For example, a program can calculate a total for either two integers or
+    two floating-point values:
+  </p>
+
+  <program xml:id="program_chapter3_function_overloading_basic"
+           language="cpp" interactive="yes">
+    <code><![CDATA[
+#include <iostream>
+
+int calculate_total(int first_value, int second_value) {
+    return first_value + second_value;
+}
+
+double calculate_total(double first_value, double second_value) {
+    return first_value + second_value;
+}
+
+int main() {
+    std::cout << calculate_total(3, 4) << '\n';
+    std::cout << calculate_total(2.5, 1.5) << '\n';
+
+    return 0;
+}
+    ]]></code>
+  </program>
+
+  <p>
+    Both functions are named <c>calculate_total</c>, but the first accepts two
+    <c>int</c> parameters and the second accepts two <c>double</c> parameters.
+    The call <c>calculate_total(3, 4)</c> selects the integer version, while
+    <c>calculate_total(2.5, 1.5)</c> selects the floating-point version.
+  </p>
+
+  <subsection xml:id="chapter3_function-overloading_parameter-lists">
+    <title>What Makes an Overload Different?</title>
+
+    <p>
+      The part of a function declaration that distinguishes overloads is its
+      <term>parameter list</term>: the number, types, and order of the
+      parameters. Parameter names do not count as differences.
+    </p>
+
+    <table xml:id="table_chapter3_function-overloading_valid-differences">
+      <title>Differences between overloaded functions</title>
+      <tabular top="major" left="major" bottom="major" right="major">
+        <col width="30%"/>
+        <col width="16%"/>
+        <col width="54%"/>
+        <row header="yes">
+          <cell>Difference</cell>
+          <cell>Valid?</cell>
+          <cell>Explanation</cell>
+        </row>
+        <row>
+          <cell>Number of parameters</cell>
+          <cell>Yes</cell>
+          <cell><c>report_value(int)</c> and <c>report_value(int, int)</c> are different.</cell>
+        </row>
+        <row>
+          <cell>Parameter types</cell>
+          <cell>Yes</cell>
+          <cell><c>report_value(int)</c> and <c>report_value(double)</c> are different.</cell>
+        </row>
+        <row>
+          <cell>Parameter order</cell>
+          <cell>Yes</cell>
+          <cell><c>set_position(int, double)</c> and <c>set_position(double, int)</c> are different.</cell>
+        </row>
+        <row>
+          <cell>Parameter names</cell>
+          <cell>No</cell>
+          <cell>Names describe parameters but do not change a function's parameter list.</cell>
+        </row>
+        <row>
+          <cell>Return type only</cell>
+          <cell>No</cell>
+          <cell>The compiler cannot select a function using only the return type.</cell>
+        </row>
+      </tabular>
+    </table>
+
+    <p>
+      These declarations are valid overloads because their parameter lists
+      contain different types:
+    </p>
+
+    <program xml:id="program_chapter3_function_overloading_parameter_types"
+             language="cpp">
+      <code><![CDATA[
+void report_value(int value);
+void report_value(double value);
+void report_value(const std::string& value);
+      ]]></code>
+    </program>
+
+    <p>
+      The following declarations are not valid overloads. They differ only in
+      return type:
+    </p>
+
+    <program xml:id="program_chapter3_function_overloading_return_type_only"
+             language="cpp">
+      <code><![CDATA[
+// Invalid: return type alone cannot distinguish overloads.
+int get_score();
+double get_score();
+      ]]></code>
+    </program>
+  </subsection>
+
+  <subsection xml:id="chapter3_function-overloading_selection">
+    <title>How the Compiler Selects an Overload</title>
+
+    <p>
+      When the compiler sees a function call, it compares the argument types
+      with the parameter types of the available overloads. An exact match is
+      preferred. For example, an <c>int</c> argument selects an overload with
+      an <c>int</c> parameter when that overload is available.
+    </p>
+
+    <p>
+      A call can also use a standard conversion when no exact match is
+      available. However, relying on several possible conversions can make a
+      call ambiguous. An ambiguous call is one for which the compiler cannot
+      choose one best overload, so the program does not compile.
+    </p>
+
+    <program xml:id="program_chapter3_function_overloading_conversion"
+             language="cpp">
+      <code><![CDATA[
+#include <iostream>
+
+void report_value(long value) {
+    std::cout << "long: " << value << '\n';
+}
+
+void report_value(double value) {
+    std::cout << "double: " << value << '\n';
+}
+
+int main() {
+    // report_value(4);  // Ambiguous: int can convert to long or double.
+    report_value(4L);    // Exact match for long.
+    report_value(4.0);   // Exact match for double.
+
+    return 0;
+}
+      ]]></code>
+    </program>
+
+    <p>
+      Default arguments require similar care. If two overloads can accept the
+      same call after default arguments are applied, the call may be
+      ambiguous:
+    </p>
+
+    <program xml:id="program_chapter3_function_overloading_default_argument"
+             language="cpp">
+      <code><![CDATA[
+void display_value(int value);
+void display_value(int value, int width = 10);
+
+// display_value(5);  // Ambiguous: both declarations can accept this call.
+      ]]></code>
+    </program>
+  </subsection>
+
+  <subsection xml:id="chapter3_function-overloading_design-guidance">
+    <title>Designing an Overload Set</title>
+
+    <p>
+      Overloads should represent the same general operation for different
+      kinds or amounts of data. A reader should be able to predict that
+      functions with the same name perform closely related tasks.
+    </p>
+
+    <ul>
+      <li>
+        <p>
+          Use one name when the operation has the same meaning for different
+          parameter types.
+        </p>
+      </li>
+      <li>
+        <p>
+          Keep overloads simple enough that a call has one obvious match.
+        </p>
+      </li>
+      <li>
+        <p>
+          Avoid overloads that depend on surprising implicit conversions.
+        </p>
+      </li>
+      <li>
+        <p>
+          Do not create overloads that differ only by return type or parameter
+          names.
+        </p>
+      </li>
+    </ul>
+
+    <p>
+      Constructor overloading, introduced earlier in this book, follows the
+      same central idea: one class can provide several constructors with
+      different parameter lists. Function overloading applies that idea to
+      ordinary named functions.
+    </p>
+
+    <interactive xml:id="interactive_chapter3_function_overloading"
+                 iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aint%20calculate_total%28int%20first_value%2C%20int%20second_value%29%20%7B%0A%20%20%20%20return%20first_value%20%2B%20second_value%3B%0A%7D%0A%0Adouble%20calculate_total%28double%20first_value%2C%20double%20second_value%29%20%7B%0A%20%20%20%20return%20first_value%20%2B%20second_value%3B%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20calculate_total%283%2C%204%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20calculate_total%282.5%2C%201.5%29%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=360&amp;codeDivWidth=420&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                 width="100%"
+                 aspect="16:10">
+      <description>
+        <p>
+          C++ Tutor visualization showing two overloaded
+          <c>calculate_total</c> functions and the calls that select them.
+        </p>
+      </description>
+    </interactive>
+  </subsection>
+
+  <subsection xml:id="chapter3_function-overloading_summary">
+    <title>Summary</title>
+
+    <ul>
+      <li>
+        <p>
+          Function overloading gives related functions the same name.
+        </p>
+      </li>
+      <li>
+        <p>
+          Overloaded functions must have different parameter lists.
+        </p>
+      </li>
+      <li>
+        <p>
+          Parameter count, parameter types, and parameter order can distinguish
+          overloads.
+        </p>
+      </li>
+      <li>
+        <p>
+          Parameter names and return types alone cannot distinguish overloads.
+        </p>
+      </li>
+      <li>
+        <p>
+          The compiler selects the best matching overload, but conversions and
+          default arguments can create ambiguity.
+        </p>
+      </li>
+      <li>
+        <p>
+          Good overloads represent one clear operation for different forms of
+          data.
+        </p>
+      </li>
+    </ul>
+  </subsection>
+
+  <exercise label="chapter3_function_overloading_1">
+    <statement>
+      <p>
+        Which pair of declarations is a valid pair of overloaded functions?
+      </p>
+    </statement>
+    <choices>
+      <choice correct="yes">
+        <statement><p><c>void report_value(int value);</c> and <c>void report_value(double value);</c></p></statement>
+        <feedback><p>Correct. The parameter types are different.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>int get_value();</c> and <c>double get_value();</c></p></statement>
+        <feedback><p>Return type alone cannot distinguish overloaded functions.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>void print(int value);</c> and <c>void print(int number);</c></p></statement>
+        <feedback><p>The parameter names are different, but both functions have the same parameter list.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>double calculate(double value);</c> and <c>double calculate(double amount);</c></p></statement>
+        <feedback><p>The parameter names do not distinguish the functions.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="chapter3_function_overloading_2">
+    <statement>
+      <p>
+        Which call selects the overload with two <c>double</c> parameters?
+      </p>
+      <program language="cpp">
+        <code><![CDATA[
+int calculate_total(int first_value, int second_value);
+double calculate_total(double first_value, double second_value);
+        ]]></code>
+      </program>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p><c>calculate_total(3, 4)</c></p></statement>
+        <feedback><p>Both arguments are <c>int</c> values, so the integer overload is an exact match.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p><c>calculate_total(3.0, 4.0)</c></p></statement>
+        <feedback><p>Correct. Both arguments are <c>double</c> values.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>calculate_total(3L, 4L)</c></p></statement>
+        <feedback><p>These arguments are <c>long</c> values, not exact <c>double</c> values.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>calculate_total(3, 4.0)</c></p></statement>
+        <feedback><p>This call has mixed argument types and does not provide two exact <c>double</c> arguments.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="chapter3_function_overloading_3">
+    <statement>
+      <p>
+        Why is the following pair invalid?
+      </p>
+      <program language="cpp">
+        <code><![CDATA[
+int get_score();
+double get_score();
+        ]]></code>
+      </program>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p>Both functions have the same return type.</p></statement>
+        <feedback><p>The return types are different, not the same.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>The parameter lists are identical, and return type alone cannot overload a function.</p></statement>
+        <feedback><p>Correct. A call cannot select between these functions using only its return context.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>A function cannot return a numeric value.</p></statement>
+        <feedback><p>C++ functions can return numeric values. The problem is the identical parameter list.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>Function names must always be different.</p></statement>
+        <feedback><p>Overloaded functions intentionally share a name when their parameter lists differ.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="chapter3_function_overloading_4"
+            adaptive="yes"
+            indentation="show">
+    <statement>
+      <p>
+        Arrange the blocks to define two overloads of
+        <c>calculate_total</c> and call both versions from <c>main</c>.
+      </p>
+    </statement>
+    <blocks>
+      <block order="1"><cline><![CDATA[#include <iostream>]]></cline></block>
+      <block order="2"><cline><![CDATA[int calculate_total(int first_value, int second_value) {]]></cline></block>
+      <block order="3"><cline><![CDATA[    return first_value + second_value;]]></cline><cline>}</cline></block>
+      <block order="4"><cline><![CDATA[double calculate_total(double first_value, double second_value) {]]></cline></block>
+      <block order="5"><cline><![CDATA[    return first_value + second_value;]]></cline><cline>}</cline></block>
+      <block order="6"><cline>int main() {</cline></block>
+      <block order="7"><cline><![CDATA[    std::cout << calculate_total(3, 4) << '\n';]]></cline></block>
+      <block order="8"><cline><![CDATA[    std::cout << calculate_total(2.5, 1.5) << '\n';]]></cline></block>
+      <block order="9"><cline>    return 0;</cline><cline>}</cline></block>
+    </blocks>
+  </exercise>
+
+  <exercise label="chapter3_function_overloading_5">
+    <statement>
+      <p>
+        What is the main problem with the following call?
+      </p>
+      <program language="cpp">
+        <code><![CDATA[
+void report_value(long value);
+void report_value(double value);
+
+report_value(4);
+        ]]></code>
+      </program>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p>The function name is too long.</p></statement>
+        <feedback><p>Function names can contain multiple words when the naming convention permits them.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>The argument must be a string.</p></statement>
+        <feedback><p>The argument is a valid numeric value, but it can convert in more than one way here.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>The call is ambiguous because an <c>int</c> can convert to either <c>long</c> or <c>double</c>.</p></statement>
+        <feedback><p>Correct. Neither conversion is a uniquely best match.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>Overloaded functions cannot have numeric parameters.</p></statement>
+        <feedback><p>Numeric parameter types are commonly used in overloads.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+</section>

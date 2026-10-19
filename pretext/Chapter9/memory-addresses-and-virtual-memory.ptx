@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_memory-addresses-and-virtual-memory">
+    <title>Memory, Addresses, and Virtual Memory</title>
+
+    <p>
+        A running program stores its objects in memory. Each object occupies one
+        or more addressable memory locations, and an <term>address</term> is a
+        number that identifies a location. A pointer stores an address so that a
+        program can reach an object indirectly.
+    </p>
+
+    <p>
+        On the desktop systems used in this course, memory is
+        <term>byte-addressable</term>. This means that one address identifies one
+        byte. A byte is normally eight bits. An address does not identify one
+        entire integer or one entire object; it identifies the first byte at a
+        location. Larger objects occupy several consecutive byte locations.
+    </p>
+
+    <subsection xml:id="chapter9_memory_byte_locations">
+        <title>Objects occupy consecutive byte locations</title>
+
+        <p>
+            The type <c>std::int32_t</c>, provided by <c>&lt;cstdint&gt;</c>,
+            represents a signed integer with exactly 32 bits. On an
+            eight-bit-byte machine, that object occupies four bytes. The
+            following diagram shows a conceptual sequence of virtual byte
+            locations. In these diagrams, addresses increase from top to bottom
+            so that consecutive locations are easy to compare.
+        </p>
+
+        <figure xml:id="figure_chapter9_vertical_int32_memory">
+            <caption>A diagram showing <c>std::int32_t score</c>
+                        occupying four consecutive virtual byte locations at
+                        addresses 0x0000'1000 through 0x0000'1003. Each cell is
+                        one byte, or eight bits.</caption>
+            <image source="chapter9/int32-consecutive-byte-locations.svg" width="80%">
+            </image>
+        </figure>
+
+        <p>
+            The diagram shows the storage size of the object, but it does not
+            show the order in which the four bytes represent the integer's bits.
+            That byte-order question is called <term>endianness</term> and will
+            be studied in Pointers and Dynamic Memory, Part 2.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_virtual-memory-process-view">
+        <title>Virtual memory and physical memory</title>
+
+        <p>
+            A program does not normally use physical RAM addresses directly.
+            Instead, each process receives a virtual address space. The operating
+            system establishes page tables, and the processor's memory-management
+            hardware translates virtual addresses into physical locations during
+            memory access.
+        </p>
+
+        <p>
+            A virtual byte location and a physical byte location use the same
+            basic unit—a byte—but they are not one permanently matched pair across
+            the whole computer. Translation is normally organized in pages. A
+            virtual page is mapped to a physical frame, while the byte offset
+            within the page remains the same.
+        </p>
+
+        <figure xml:id="figure_chapter9_virtual_to_physical_mapping">
+            <caption>A conceptual diagram showing virtual page V12 mapped to
+                        physical frame P41. The page table and memory-management
+                        hardware select the frame while preserving each byte
+                        offset within the page.</caption>
+            <image source="chapter9/virtual-to-physical-page-mapping-explained.svg" width="95%">
+            </image>
+        </figure>
+
+        <p>
+            This architecture allows the operating system to isolate processes,
+            mark pages as read-only or inaccessible, share selected pages, and
+            move or page data without changing the virtual addresses used by the
+            program. It also means that a pointer value in one process should not
+            be treated as a physical RAM address or as a meaningful address in a
+            different process.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_what-64-bit-means">
+        <title>What a 64-bit machine means</title>
+
+        <p>
+            A 64-bit machine commonly uses 64-bit general-purpose registers and
+            pointer representations. On the systems used in this course, a
+            pointer is typically eight bytes. This does not mean that every
+            memory cell is eight bytes or that every integer is 64 bits.
+        </p>
+
+        <table xml:id="table_chapter9_memory_sizes">
+            <title>Common sizes on a 64-bit desktop system</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="30%"/>
+                <col width="35%"/>
+                <col width="35%"/>
+                <row header="yes">
+                    <cell>Item</cell>
+                    <cell>Typical size</cell>
+                    <cell>Meaning</cell>
+                </row>
+                <row>
+                    <cell>Addressable byte</cell>
+                    <cell>8 bits</cell>
+                    <cell>The smallest location identified by an address.</cell>
+                </row>
+                <row>
+                    <cell><c>std::int32_t</c></cell>
+                    <cell>32 bits, usually 4 bytes</cell>
+                    <cell>An integer with exactly 32 bits.</cell>
+                </row>
+                <row>
+                    <cell>Object pointer</cell>
+                    <cell>Usually 64 bits, or 8 bytes</cell>
+                    <cell>A value that identifies an object in the process's address space.</cell>
+                </row>
+                <row>
+                    <cell>64-bit architecture</cell>
+                    <cell>Not a memory-cell size</cell>
+                    <cell>A description of the machine's word and address design.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The C++ language does not require every platform to use these exact
+            pointer sizes. A portable program can inspect sizes with
+            <c>sizeof</c>. Also, a 64-bit architecture may implement fewer than
+            64 usable virtual-address bits. The phrase <q>64-bit</q> therefore
+            describes an architecture, not a promise that a program has 2<sup>64</sup>
+            bytes of physical RAM.
+        </p>
+    </subsection>
+
+    <exercise label="chapter9_memory_exercise_byte">
+        <statement>
+            <p>On an eight-bit-byte machine, what does one memory address normally identify?</p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>One byte</p></statement><feedback><p>The machine is byte-addressable, so each address identifies one byte.</p></feedback></choice>
+            <choice><statement><p>One bit</p></statement><feedback><p>A byte contains multiple bits; addresses do not normally identify individual bits.</p></feedback></choice>
+            <choice><statement><p>One complete object of any type</p></statement><feedback><p>Large objects can occupy several consecutive byte locations.</p></feedback></choice>
+            <choice><statement><p>One physical memory page</p></statement><feedback><p>A page contains many bytes and is a larger mapping unit.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_memory_exercise_int32">
+        <statement>
+            <p>On a machine with eight-bit bytes, how many bytes does a <c>std::int32_t</c> object occupy?</p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>4 bytes</p></statement><feedback><p>Thirty-two bits divided into eight-bit bytes gives four bytes.</p></feedback></choice>
+            <choice><statement><p>1 byte</p></statement><feedback><p>One byte normally contains eight bits, not thirty-two.</p></feedback></choice>
+            <choice><statement><p>8 bytes</p></statement><feedback><p>Eight bytes is a common pointer size on a 64-bit desktop, not the size of a 32-bit integer.</p></feedback></choice>
+            <choice><statement><p>32 bytes</p></statement><feedback><p>The type has 32 bits, not 32 eight-bit bytes.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_memory_exercise_64_bit">
+        <statement>
+            <p>Which statement best describes a 64-bit machine?</p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>It commonly uses 64-bit registers and pointer representations.</p></statement><feedback><p>The term describes an architecture; it does not mean every object is 64 bits.</p></feedback></choice>
+            <choice><statement><p>Every memory cell contains exactly 64 bits.</p></statement><feedback><p>Memory is commonly byte-addressable, with eight bits per byte.</p></feedback></choice>
+            <choice><statement><p>Every C++ <c>int</c> must contain 64 bits.</p></statement><feedback><p>Integer sizes depend on the type and implementation.</p></feedback></choice>
+            <choice><statement><p>The computer must contain 2<sup>64</sup> bytes of RAM.</p></statement><feedback><p>Address width and installed physical RAM are different ideas.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+</section>
+

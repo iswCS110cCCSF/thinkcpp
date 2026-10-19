@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title description">
+  <title id="title">A virtual page maps to a physical frame</title>
+  <desc id="description">A conceptual diagram with a virtual page V12 on the left and physical frame P41 on the right. Four byte offsets are shown in both. The page table and memory-management hardware map the virtual page to the physical frame while preserving each byte offset.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#245a8d"/>
+    </marker>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #17324d; }
+      .heading { font: 700 22px Arial, sans-serif; fill: #17324d; }
+      .label { font: 17px Arial, sans-serif; fill: #17324d; }
+      .address { font: 17px 'DejaVu Sans Mono', monospace; fill: #17324d; }
+      .cell-left { fill: #dceeff; stroke: #245a8d; stroke-width: 2; }
+      .cell-right { fill: #e5f4e3; stroke: #347a3c; stroke-width: 2; }
+      .cell-text { font: 16px Arial, sans-serif; fill: #17324d; }
+      .note { font: 17px Arial, sans-serif; fill: #334e68; }
+      .panel { fill: #f7fafc; stroke: #9fb3c8; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect width="1200" height="700" fill="white"/>
+  <text x="600" y="48" text-anchor="middle" class="title">Virtual memory maps pages to physical frames</text>
+  <text x="600" y="80" text-anchor="middle" class="note">The page offset remains the same during translation.</text>
+
+  <rect x="60" y="115" width="360" height="430" rx="12" class="panel"/>
+  <rect x="780" y="115" width="360" height="430" rx="12" class="panel"/>
+  <text x="240" y="145" text-anchor="middle" class="heading">Single running program</text>
+  <text x="240" y="172" text-anchor="middle" class="label">(One process)</text>
+  <text x="240" y="195" text-anchor="middle" class="label">Virtual page V12</text>
+  <text x="960" y="155" text-anchor="middle" class="heading">Physical memory</text>
+  <text x="960" y="195" text-anchor="middle" class="label">Physical frame P41</text>
+
+  <text x="88" y="235" class="address">V12, offset 0</text>
+  <rect x="245" y="205" width="145" height="55" rx="5" class="cell-left"/>
+  <text x="317" y="238" text-anchor="middle" class="cell-text">byte</text>
+  <text x="808" y="235" class="address">P41, offset 0</text>
+  <rect x="965" y="205" width="145" height="55" rx="5" class="cell-right"/>
+  <text x="1037" y="238" text-anchor="middle" class="cell-text">byte</text>
+  <path d="M 405 232 C 520 232, 650 190, 760 190 C 840 190, 900 190, 965 205" fill="none" stroke="#245a8d" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <text x="88" y="315" class="address">V12, offset 1</text>
+  <rect x="245" y="285" width="145" height="55" rx="5" class="cell-left"/>
+  <text x="317" y="318" text-anchor="middle" class="cell-text">byte</text>
+  <text x="808" y="315" class="address">P41, offset 1</text>
+  <rect x="965" y="285" width="145" height="55" rx="5" class="cell-right"/>
+  <text x="1037" y="318" text-anchor="middle" class="cell-text">byte</text>
+  <path d="M 405 312 C 520 312, 650 270, 760 270 C 840 270, 900 270, 965 285" fill="none" stroke="#245a8d" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <text x="88" y="395" class="address">V12, offset 2</text>
+  <rect x="245" y="365" width="145" height="55" rx="5" class="cell-left"/>
+  <text x="317" y="398" text-anchor="middle" class="cell-text">byte</text>
+  <text x="808" y="395" class="address">P41, offset 2</text>
+  <rect x="965" y="365" width="145" height="55" rx="5" class="cell-right"/>
+  <text x="1037" y="398" text-anchor="middle" class="cell-text">byte</text>
+  <path d="M 405 392 C 520 392, 650 350, 760 350 C 840 350, 900 350, 965 365" fill="none" stroke="#245a8d" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <text x="88" y="475" class="address">V12, offset 3</text>
+  <rect x="245" y="445" width="145" height="55" rx="5" class="cell-left"/>
+  <text x="317" y="478" text-anchor="middle" class="cell-text">byte</text>
+  <text x="808" y="475" class="address">P41, offset 3</text>
+  <rect x="965" y="445" width="145" height="55" rx="5" class="cell-right"/>
+  <text x="1037" y="478" text-anchor="middle" class="cell-text">byte</text>
+  <path d="M 405 472 C 520 472, 650 430, 760 430 C 840 430, 900 430, 965 445" fill="none" stroke="#245a8d" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="430" y="260" width="340" height="150" rx="12" fill="#fff8e6" stroke="#c99a2e" stroke-width="2"/>
+  <text x="600" y="298" text-anchor="middle" class="label">Page table + memory-management</text>
+  <text x="600" y="324" text-anchor="middle" class="label">unit (MMU)</text>
+  <text x="600" y="358" text-anchor="middle" class="label">V12 maps to P41</text>
+  <text x="600" y="386" text-anchor="middle" class="label">offset is preserved</text>
+
+  <text x="600" y="600" text-anchor="middle" class="note">A virtual page maps to a physical frame; it is not a permanent byte-for-byte pairing.</text>
+  <text x="600" y="635" text-anchor="middle" class="note">This translation helps isolate processes and control access to memory.</text>
+</svg>
+
+

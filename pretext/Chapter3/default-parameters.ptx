@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter3_default-parameters">
+  <title>Default Parameters</title>
+
+  <p>
+    A function sometimes has a common value that callers use most of the
+    time. A <term>default parameter</term> gives that parameter a value when
+    the caller omits the corresponding trailing argument.
+  </p>
+
+  <p>
+    The following declaration says that <c>repeat_count</c> has a default
+    value of <c>1</c>:
+  </p>
+
+  <program xml:id="program_chapter3_default_parameters_declaration"
+           language="cpp">
+    <code><![CDATA[
+void print_message(const std::string& message,
+                   int repeat_count = 1);
+    ]]></code>
+  </program>
+
+  <p>
+    A caller can provide either one argument or both arguments:
+  </p>
+
+  <program xml:id="program_chapter3_default_parameters_calls"
+           language="cpp">
+    <code><![CDATA[
+print_message("Welcome");       // repeat_count is 1
+print_message("Welcome", 3);   // repeat_count is 3
+    ]]></code>
+  </program>
+
+  <p>
+    C++17 does not have Python-style keyword arguments. Arguments are matched
+    by position. A default parameter makes a trailing argument optional, but
+    it does not allow a caller to write an argument by parameter name.
+  </p>
+
+  <subsection xml:id="chapter3_default-parameters_basic-use">
+    <title>Defining and Calling a Function with Defaults</title>
+
+    <p>
+      Here is a complete program. The first call uses the default bonus of
+      <c>0</c>. The second call supplies a bonus explicitly.
+    </p>
+
+    <program xml:id="program_chapter3_default_parameters_basic"
+             language="cpp" interactive="yes">
+      <code><![CDATA[
+#include <iostream>
+
+void report_score(int score, int bonus = 0);
+
+int main() {
+    report_score(80);
+    report_score(80, 5);
+
+    return 0;
+}
+
+void report_score(int score, int bonus) {
+    std::cout << score + bonus << '\n';
+}
+      ]]></code>
+    </program>
+
+    <p>
+      The function definition does not repeat <c>= 0</c>. The default value is
+      normally placed in the declaration that callers can see. When the
+      compiler processes <c>report_score(80)</c>, it supplies <c>0</c> for
+      <c>bonus</c>.
+    </p>
+
+    <p>
+      A default parameter is used only when the caller omits that argument. It
+      does not permanently change the parameter's value or create a second
+      function.
+    </p>
+  </subsection>
+
+  <subsection xml:id="chapter3_default-parameters_rules">
+    <title>Rules for Default Parameters</title>
+
+    <p>
+      Default parameters follow several important rules.
+    </p>
+
+    <table xml:id="table_chapter3_default_parameters_rules">
+      <title>Rules for default parameters</title>
+      <tabular top="major" left="major" bottom="major" right="major">
+        <col width="34%"/>
+        <col width="66%"/>
+        <row header="yes">
+          <cell>Rule</cell>
+          <cell>Explanation</cell>
+        </row>
+        <row>
+          <cell>Defaults apply to trailing parameters.</cell>
+          <cell>Once a parameter has a default, every parameter to its right must also have a default.</cell>
+        </row>
+        <row>
+          <cell>The caller may omit only trailing arguments.</cell>
+          <cell>A caller cannot omit an earlier argument while supplying a later one.</cell>
+        </row>
+        <row>
+          <cell>Provide a default in a visible declaration.</cell>
+          <cell>Callers need to see the default when the function call is compiled.</cell>
+        </row>
+        <row>
+          <cell>Do not repeat the default in the definition.</cell>
+          <cell>The same default should not be written again in the function definition.</cell>
+        </row>
+        <row>
+          <cell>A default is not a second overload.</cell>
+          <cell>One function can be called with different numbers of arguments, but only one function is defined.</cell>
+        </row>
+      </tabular>
+    </table>
+
+    <p>
+      This declaration is valid because both parameters after the first one
+      also have defaults:
+    </p>
+
+    <program xml:id="program_chapter3_default_parameters_trailing"
+             language="cpp">
+      <code><![CDATA[
+void draw_line(int length,
+               char symbol = '-',
+               int thickness = 1);
+      ]]></code>
+    </program>
+
+    <p>
+      These calls are valid:
+    </p>
+
+    <program xml:id="program_chapter3_default_parameters_trailing_calls"
+             language="cpp">
+      <code><![CDATA[
+draw_line(10, '*', 2);  // supplies every argument
+draw_line(10, '*');     // thickness is 1
+draw_line(10);          // symbol is '-' and thickness is 1
+      ]]></code>
+    </program>
+
+    <p>
+      A caller cannot skip <c>symbol</c> and provide only <c>thickness</c>:
+
+    </p>
+
+    <program xml:id="program_chapter3_default_parameters_no_skipping"
+             language="cpp">
+      <code><![CDATA[
+// There is no positional syntax for this in C++17:
+// draw_line(10, 2);  // 2 would be used as the symbol, not thickness
+      ]]></code>
+    </program>
+  </subsection>
+
+  <subsection xml:id="chapter3_default-parameters_declaration-definition">
+    <title>Declarations and Definitions</title>
+
+    <p>
+      The declaration is often placed in a header file, while the definition
+      is placed in a source file. The default value should normally appear in
+      the declaration, which is the part visible to callers.
+    </p>
+
+    <program xml:id="program_chapter3_default_parameters_declaration_definition"
+             language="cpp">
+      <code><![CDATA[
+// In a header file or before the calls:
+void display_value(int value, int width = 10);
+
+// In the source file:
+void display_value(int value, int width) {
+    // function body
+}
+      ]]></code>
+    </program>
+
+    <p>
+      Repeating the default in the definition is an error:
+    </p>
+
+    <program xml:id="program_chapter3_default_parameters_repeated"
+             language="cpp">
+      <code><![CDATA[
+void display_value(int value, int width = 10);
+
+// Incorrect: the default is repeated.
+void display_value(int value, int width = 10) {
+}
+      ]]></code>
+    </program>
+
+    <p>
+      The declaration and definition still describe one function. The default
+      argument affects how a call is compiled; it does not change the
+      function's parameter list into multiple overloads.
+    </p>
+  </subsection>
+
+  <subsection xml:id="chapter3_default-parameters_overloading">
+    <title>Default Parameters and Overloading</title>
+
+    <p>
+      Default parameters and overloaded functions can be useful separately,
+      but combining them carelessly can make a call ambiguous. Consider these
+      declarations:
+    </p>
+
+    <program xml:id="program_chapter3_default_parameters_overload_ambiguity"
+             language="cpp">
+      <code><![CDATA[
+void display_value(int value);
+void display_value(int value, int width = 10);
+
+// display_value(5);  // Ambiguous: both functions can accept one int.
+      ]]></code>
+    </program>
+
+    <p>
+      The first function accepts one argument directly. The second can also
+      accept one argument because its second parameter has a default. The
+      compiler cannot choose one best function, so the call is rejected.
+    </p>
+
+    <p>
+      A good design usually chooses one clear strategy. Use a default parameter
+      when the same operation has one optional setting. Use overloads when the
+      different forms represent meaningfully different parameter lists or
+      behaviors.
+    </p>
+  </subsection>
+
+  <subsection xml:id="chapter3_default-parameters_no-keyword-arguments">
+    <title>C++17 Has No Keyword Arguments</title>
+
+    <p>
+      Python permits a caller to identify arguments by parameter name. C++17
+      does not provide that feature:
+    </p>
+
+    <program xml:id="program_chapter3_default_parameters_positional"
+             language="cpp">
+      <code><![CDATA[
+void configure_display(int width, int height, bool show_border = true);
+
+configure_display(800, 600);       // valid: uses the default
+configure_display(800, 600, false); // valid: positional arguments
+
+// C++17 has no keyword-argument form such as:
+// configure_display(height = 600, width = 800);
+      ]]></code>
+    </program>
+
+    <p>
+      In C++, <c>height = 600</c> would be an assignment expression if
+      <c>height</c> were a variable; it would not mean
+      <q>pass 600 to the parameter named height</q>.
+    </p>
+
+    <p>
+      When a function has many optional settings, an options structure can
+      make the call easier to read. In C++17, the member values are still
+      supplied positionally when aggregate initialization is used:
+    </p>
+
+    <program xml:id="program_chapter3_default_parameters_options_struct"
+             language="cpp">
+      <code><![CDATA[
+#include <iostream>
+#include <string>
+
+struct PrintOptions {
+    std::string message;
+    int repeat_count = 1;
+};
+
+void print_message(const PrintOptions& options) {
+    for (int count = 0; count < options.repeat_count; ++count) {
+        std::cout << options.message << '\n';
+    }
+}
+
+int main() {
+    PrintOptions options{"Welcome", 2};
+    print_message(options);
+
+    return 0;
+}
+      ]]></code>
+    </program>
+
+    <p>
+      The field names document the meaning of the values, but C++17 still
+      requires the values to follow the structure's member order. This pattern
+      is sometimes called an <term>options structure</term> or
+      <term>parameter object</term>.
+    </p>
+
+    <p>
+      C++20 adds designated initializers for some aggregate structures, but
+      that is not a C++17 feature and it still is not general-purpose keyword
+      argument syntax.
+    </p>
+  </subsection>
+
+  <subsection xml:id="chapter3_default-parameters_design-guidance">
+    <title>Design Guidance</title>
+
+    <ul>
+      <li>
+        <p>
+          Use defaults for common, unsurprising values.
+        </p>
+      </li>
+      <li>
+        <p>
+          Put defaults in the declaration visible to callers and write them
+          only once.
+        </p>
+      </li>
+      <li>
+        <p>
+          Keep required parameters before optional parameters.
+        </p>
+      </li>
+      <li>
+        <p>
+          Avoid combining defaults and overloads when a call could match more
+          than one function.
+        </p>
+      </li>
+      <li>
+        <p>
+          Consider an options structure when a function has many optional
+          settings or when the meaning of positional arguments is unclear.
+        </p>
+      </li>
+    </ul>
+
+    <interactive xml:id="interactive_chapter3_default_parameters"
+                 iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Avoid%20report_score%28int%20score%2C%20int%20bonus%20%3D%200%29%20%7B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20score%20%2B%20bonus%20%3C%3C%20%27%5Cn%27%3B%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20report_score%2880%29%3B%0A%20%20%20%20report_score%2880%2C%205%29%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=360&amp;codeDivWidth=420&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                 width="100%"
+                 aspect="16:10">
+      <description>
+        <p>
+          C++ Tutor visualization showing one call that uses a default bonus
+          and another call that supplies the bonus explicitly.
+        </p>
+      </description>
+    </interactive>
+  </subsection>
+
+  <subsection xml:id="chapter3_default-parameters_summary">
+    <title>Summary</title>
+
+    <ul>
+      <li>
+        <p>
+          A default parameter supplies a value when a trailing argument is
+          omitted.
+        </p>
+      </li>
+      <li>
+        <p>
+          Required parameters must come before parameters with defaults.
+        </p>
+      </li>
+      <li>
+        <p>
+          Defaults normally appear in a visible declaration, not again in the
+          definition.
+        </p>
+      </li>
+      <li>
+        <p>
+          Default parameters do not create overloads.
+        </p>
+      </li>
+      <li>
+        <p>
+          Combining defaults with overloads can make a call ambiguous.
+        </p>
+      </li>
+      <li>
+        <p>
+          C++17 uses positional arguments and has no Python-style keyword
+          arguments.
+        </p>
+      </li>
+      <li>
+        <p>
+          An options structure can provide a clearer interface when a function
+          has many optional settings.
+        </p>
+      </li>
+    </ul>
+  </subsection>
+
+  <exercise label="chapter3_default_parameters_1">
+    <statement>
+      <p>
+        What value is used for <c>bonus</c> in the first call?
+      </p>
+      <program language="cpp">
+        <code><![CDATA[
+void report_score(int score, int bonus = 5);
+
+report_score(80);
+        ]]></code>
+      </program>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p><c>0</c></p></statement>
+        <feedback><p>The declaration specifies a default of <c>5</c>, not <c>0</c>.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p><c>5</c></p></statement>
+        <feedback><p>Correct. The caller omits the second argument, so the default is used.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>80</c></p></statement>
+        <feedback><p><c>80</c> is the value of <c>score</c>, not the default bonus.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>The call is invalid because every argument must be written.</p></statement>
+        <feedback><p>A trailing argument with a default value may be omitted.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="chapter3_default_parameters_2">
+    <statement>
+      <p>
+        Which declaration is valid according to the trailing-parameter rule?
+      </p>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p><c>void draw_line(int length = 10, char symbol);</c></p></statement>
+        <feedback><p>A required parameter cannot follow a parameter with a default.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p><c>void draw_line(int length, char symbol = '-');</c></p></statement>
+        <feedback><p>Correct. The required parameter comes first and the optional parameter comes last.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>void draw_line(int length = 10, char symbol, int thickness = 1);</c></p></statement>
+        <feedback><p>The required <c>symbol</c> parameter appears after a parameter with a default.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p><c>void draw_line(int length = 10, char symbol, int thickness);</c></p></statement>
+        <feedback><p>Both parameters after <c>length</c> would need defaults.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="chapter3_default_parameters_3">
+    <statement>
+      <p>
+        What is wrong with this declaration and definition?
+      </p>
+      <program language="cpp">
+        <code><![CDATA[
+void display_value(int value, int width = 10);
+
+void display_value(int value, int width = 10) {
+}
+        ]]></code>
+      </program>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p>The function has too many parameters.</p></statement>
+        <feedback><p>Two parameters are allowed. The problem is repeating the default.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>The default argument is repeated in the definition.</p></statement>
+        <feedback><p>Correct. Put the default in the visible declaration and omit it from the definition.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>A function definition cannot have a body.</p></statement>
+        <feedback><p>The definition should have a body. That is not the problem here.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>Default parameters can be used only with strings.</p></statement>
+        <feedback><p>Defaults can be used with many parameter types, including <c>int</c>.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
+  <exercise label="chapter3_default_parameters_4"
+            adaptive="yes"
+            indentation="show">
+    <statement>
+      <p>
+        Arrange the blocks to define <c>print_message</c> with a default repeat
+        count and call it once with the default and once with an explicit
+        count.
+      </p>
+    </statement>
+    <blocks>
+      <block order="1"><cline><![CDATA[#include <iostream>]]></cline></block>
+      <block order="2"><cline><![CDATA[#include <string>]]></cline></block>
+      <block order="3"><cline><![CDATA[void print_message(const std::string& message, int repeat_count = 1);]]></cline></block>
+      <block order="4"><cline>int main() {</cline></block>
+      <block order="5"><cline><![CDATA[    print_message("Ready");]]></cline></block>
+      <block order="6"><cline><![CDATA[    print_message("Go", 2);]]></cline></block>
+      <block order="7"><cline>    return 0;</cline><cline>}</cline></block>
+      <block order="8"><cline><![CDATA[void print_message(const std::string& message, int repeat_count) {]]></cline></block>
+      <block order="9"><cline><![CDATA[    for (int count = 0; count < repeat_count; ++count) {]]></cline></block>
+      <block order="10"><cline><![CDATA[        std::cout << message << '\n';]]></cline><cline>    }</cline><cline>}</cline></block>
+    </blocks>
+  </exercise>
+
+  <exercise label="chapter3_default_parameters_5">
+    <statement>
+      <p>
+        Which statement about C++17 function calls is correct?
+      </p>
+    </statement>
+    <choices>
+      <choice>
+        <statement><p>C++17 supports Python-style keyword arguments for every function.</p></statement>
+        <feedback><p>C++17 does not provide general-purpose keyword arguments.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>C++17 uses positional arguments; an options structure can make many settings clearer.</p></statement>
+        <feedback><p>Correct. Default parameters provide optional trailing values, while an options structure can organize many settings.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>A default parameter allows the caller to skip an earlier argument and supply a later one.</p></statement>
+        <feedback><p>Arguments are positional, so only trailing arguments can be omitted.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>Using a default parameter automatically creates one overload for every possible value.</p></statement>
+        <feedback><p>A default parameter is still part of one function declaration; it does not create overloads.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+</section>

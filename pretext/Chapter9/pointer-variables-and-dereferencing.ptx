@@ -94,6 +94,136 @@ int second_value;
         <c>int</c>. One declaration per line makes this distinction visible.
     </p>
 
+    <subsection xml:id="chapter9_pointer-variables-and-dereferencing_pointer-storage">
+        <title>What a Pointer Contains and Where It Is Stored</title>
+
+        <p>
+            Consider this code:
+        </p>
+
+        <program xml:id=""
+                 language="cpp" interactive="yes">
+            <code><![CDATA[
+#include <cstdint>
+
+int main() {
+    std::int32_t score = 90;
+    std::int32_t* score_pointer = &score;
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The pointer variable and the <c>score</c> object are two different
+            objects. The pointer stores the virtual address of the first byte of
+            <c>score</c>. The pointer variable itself also occupies memory.
+            An address is a numeric identifier; when that identifier is stored
+            in an object pointer on a typical 64-bit desktop system, the pointer
+            object usually occupies eight bytes.
+        </p>
+
+        <p>
+            The pointer variable is stored in ordinary program memory; there is
+            no separate general-purpose area called <q>pointer memory</q>. For
+            example, a local pointer variable is usually stored in the function's
+            stack storage, while a pointer created with <c>new</c> is itself
+            stored in dynamic storage. In either case, its bytes contain a
+            pointer value—the virtual address of another object. The object being
+            pointed to may be in a different storage area. The pointer variable
+            and its target are therefore separate objects with separate storage.
+        </p>
+
+        <figure xml:id="figure_chapter9_pointer_and_target_storage">
+            <caption>A pointer object and its target occupy separate storage</caption>
+            <image source="chapter9/pointer-and-target-storage-address-of-clear.svg" width="90%">
+                <description>
+                    <p>
+                        The pointer object <c>score_pointer</c> occupies eight
+                        bytes beginning at virtual address 0x0000'7000. Its
+                        stored value is the virtual address 0x0000'A000. A
+                        separate four-byte integer object <c>score</c> begins at
+                        that address. The pointer and target are separate
+                        objects with separate storage.
+                    </p>
+                </description>
+            </image>
+        </figure>
+
+        <p>
+            This figure shows a common arrangement, not a rule that every
+            pointer must be on the stack or every target must be in dynamic
+            storage. A pointer object can also have static storage, and its
+            target can be a local object, a static object, or a dynamically
+            allocated object. During execution, a compiler may temporarily keep
+            a pointer value in a CPU register instead of memory. That optimization
+            does not change the C++ idea: the pointer variable represents an
+            object whose value identifies another object's address.
+        </p>
+
+        <p>
+            When estimating storage, count the pointer object and its target as
+            separate objects. For example, if <c>score</c> is a four-byte
+            <c>std::int32_t</c> and <c>score_pointer</c> is an eight-byte pointer,
+            their object storage totals about twelve bytes on a typical 64-bit
+            system. The pointer's eight bytes store an address; they do not
+            include the four bytes occupied by <c>score</c>. If the target was
+            created with <c>new</c>, deleting the target releases its storage,
+            but the pointer variable remains until its own lifetime ends.
+        </p>
+
+        <table xml:id="table_chapter9_pointer_storage_accounting">
+            <title>Counting a pointer and its target</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="30%"/>
+                <col width="25%"/>
+                <col width="45%"/>
+                <row header="yes">
+                    <cell>Object</cell>
+                    <cell>Typical size</cell>
+                    <cell>What the storage contains</cell>
+                </row>
+                <row>
+                    <cell><c>score</c></cell>
+                    <cell>4 bytes</cell>
+                    <cell>The 32-bit integer value</cell>
+                </row>
+                <row>
+                    <cell><c>score_pointer</c></cell>
+                    <cell>8 bytes</cell>
+                    <cell>The virtual address of <c>score</c></cell>
+                </row>
+                <row>
+                    <cell>Both objects</cell>
+                    <cell>About 12 bytes</cell>
+                    <cell>The target and the pointer are counted separately</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The phrase <q>64-bit architecture</q> is connected to this example
+            because the machine commonly represents an object address in a
+            64-bit pointer, which is typically eight bytes. It does not mean
+            that a memory cell is 64 bits, that an <c>int</c> is 64 bits, or
+            that every object occupies eight bytes.
+        </p>
+
+        <interactive xml:id="interactive_chapter9_pointer_storage"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ccstdint%3E%0A%23include%20%3Ciomanip%3E%0A%23include%20%3Ciomanip%3E%0A%23include%20%3Ciostream%3E%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20std%3A%3Aint32_t%20score%20%3D%2090%3B%0A%20%20%20%20std%3A%3Aint32_t*%20score_pointer%20%3D%20%26score%3B%0A%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Bytes%20in%20score%3A%20%22%20%3C%3C%20sizeof%28score%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Bytes%20in%20pointer%3A%20%22%20%3C%3C%20sizeof%28score_pointer%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Score%3A%20%22%20%3C%3C%20score%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Address%3A%20%22%20%3C%3C%20score_pointer%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+
+        <p>
+            The visualization shows addresses assigned by the tool's simulated
+            environment. Use it to see that a pointer stores an address and that
+            an object occupies storage. Do not treat the displayed numeric
+            addresses as portable values.
+        </p>
+    </subsection>
+
     <subsection xml:id="chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues">
         <title>Lvalues and Rvalues: From Assignment to Expression Categories</title>
 
@@ -196,6 +326,29 @@ int* pointer = &score;   // valid: score is an lvalue
             <choice><statement><p><c>score + 5</c></p></statement><feedback><p>This computation produces a temporary rvalue.</p></feedback></choice>
             <choice><statement><p><c>90 + 5</c></p></statement><feedback><p>A numeric computation result is an rvalue.</p></feedback></choice>
             <choice><statement><p><c>5</c></p></statement><feedback><p>A literal is a value, not a named storage location.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_pointer-variables-and-dereferencing_parsons_storage" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the blocks to create an integer and store its address in a pointer.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>std::int32_t score = 90;</cline></block>
+            <block order="2"><cline>std::int32_t* score_pointer = &amp;score;</cline></block>
+            <block order="3"><cline>std::cout &lt;&lt; *score_pointer &lt;&lt; '\n';</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter9_pointer-variables-and-dereferencing_exercise_virtual_address">
+        <statement>
+            <p>What does a pointer in an ordinary C++ process normally contain?</p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>A virtual address that identifies an object in that process's address space</p></statement><feedback><p>The operating system and hardware translate virtual addresses to physical locations.</p></feedback></choice>
+            <choice><statement><p>The object's complete contents</p></statement><feedback><p>A pointer stores an address, not a copy of the object.</p></feedback></choice>
+            <choice><statement><p>A physical RAM address that is valid in every process</p></statement><feedback><p>Processes normally use separate virtual address spaces.</p></feedback></choice>
+            <choice><statement><p>The page-table entry itself</p></statement><feedback><p>Page tables are used by the system to translate addresses; a pointer is a C++ object value.</p></feedback></choice>
         </choices>
     </exercise>
 </section>

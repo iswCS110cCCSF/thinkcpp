@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700" role="img" aria-labelledby="title description">
+  <title id="title">An int32 object occupies four consecutive byte locations</title>
+  <desc id="description">A vertical diagram of four consecutive virtual byte locations. The object std::int32_t score occupies bytes at addresses 0x0000'1000 through 0x0000'1003. Each memory cell is one byte, or eight bits. The address of score is the address of its first byte.</desc>
+  <style>
+    .title { font: 700 28px Arial, sans-serif; fill: #17324d; }
+    .heading { font: 700 22px Arial, sans-serif; fill: #17324d; }
+    .label { font: 18px Arial, sans-serif; fill: #17324d; }
+    .address { font: 18px 'DejaVu Sans Mono', monospace; fill: #17324d; }
+    .cell { fill: #e5f4e3; stroke: #347a3c; stroke-width: 2; }
+    .cell-text { font: 17px Arial, sans-serif; fill: #17324d; }
+    .note { font: 17px Arial, sans-serif; fill: #334e68; }
+    .panel { fill: #f7fafc; stroke: #9fb3c8; stroke-width: 2; }
+  </style>
+  <rect width="900" height="700" fill="white"/>
+  <text x="450" y="48" text-anchor="middle" class="title">An object occupies consecutive byte locations</text>
+  <text x="450" y="80" text-anchor="middle" class="note">One address identifies one byte; addresses increase downward.</text>
+  <rect x="150" y="115" width="600" height="430" rx="12" class="panel"/>
+  <text x="450" y="155" text-anchor="middle" class="heading">std::int32_t score: four bytes</text>
+  <text x="450" y="184" text-anchor="middle" class="label">Each cell contains 8 bits; byte order is not shown here.</text>
+
+  <text x="200" y="235" class="address">0x0000'1000</text>
+  <rect x="390" y="205" width="300" height="62" rx="5" class="cell"/>
+  <text x="540" y="232" text-anchor="middle" class="cell-text">byte 0</text>
+  <text x="540" y="254" text-anchor="middle" class="cell-text">first byte of score</text>
+
+  <text x="200" y="307" class="address">0x0000'1001</text>
+  <rect x="390" y="277" width="300" height="62" rx="5" class="cell"/>
+  <text x="540" y="314" text-anchor="middle" class="cell-text">byte 1</text>
+
+  <text x="200" y="379" class="address">0x0000'1002</text>
+  <rect x="390" y="349" width="300" height="62" rx="5" class="cell"/>
+  <text x="540" y="386" text-anchor="middle" class="cell-text">byte 2</text>
+
+  <text x="200" y="451" class="address">0x0000'1003</text>
+  <rect x="390" y="421" width="300" height="62" rx="5" class="cell"/>
+  <text x="540" y="458" text-anchor="middle" class="cell-text">byte 3</text>
+
+  <text x="450" y="590" text-anchor="middle" class="note">The address of score is the address of its first byte: 0x0000'1000.</text>
+  <text x="450" y="625" text-anchor="middle" class="note">The order of the bytes' bits is an endianness question studied later.</text>
+</svg>
