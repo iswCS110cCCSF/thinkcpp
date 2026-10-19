@@ -4501,11 +4501,281 @@ var ptx_lunr_docs = [
   "body": "  What is printed by the following program?   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }       1     value refers to count , whose value starts at 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      Error!    Passing an int variable to an int& reference parameter is legal.     "
 },
 {
+  "id": "chapter3_function-overloading",
+  "level": "1",
+  "url": "chapter3_function-overloading.html",
+  "type": "Section",
+  "number": "3.13",
+  "title": "Function Overloading",
+  "body": " Function Overloading  A program often needs to perform the same general task with different kinds of data. Function overloading allows several functions to use the same name when their parameter lists are different. The compiler selects the function whose parameters best match the arguments in a particular call.  For example, a program can calculate a total for either two integers or two floating-point values:   #include <iostream> int calculate_total(int first_value, int second_value) { return first_value + second_value; } double calculate_total(double first_value, double second_value) { return first_value + second_value; } int main() { std::cout << calculate_total(3, 4) << '\\n'; std::cout << calculate_total(2.5, 1.5) << '\\n'; return 0; }   Both functions are named calculate_total , but the first accepts two int parameters and the second accepts two double parameters. The call calculate_total(3, 4) selects the integer version, while calculate_total(2.5, 1.5) selects the floating-point version.   What Makes an Overload Different?  The part of a function declaration that distinguishes overloads is its parameter list : the number, types, and order of the parameters. Parameter names do not count as differences.   Differences between overloaded functions       Difference  Valid?  Explanation    Number of parameters  Yes  report_value(int) and report_value(int, int) are different.    Parameter types  Yes  report_value(int) and report_value(double) are different.    Parameter order  Yes  set_position(int, double) and set_position(double, int) are different.    Parameter names  No  Names describe parameters but do not change a function's parameter list.    Return type only  No  The compiler cannot select a function using only the return type.     These declarations are valid overloads because their parameter lists contain different types:   void report_value(int value); void report_value(double value); void report_value(const std::string& value);   The following declarations are not valid overloads. They differ only in return type:   \/\/ Invalid: return type alone cannot distinguish overloads. int get_score(); double get_score();     How the Compiler Selects an Overload  When the compiler sees a function call, it compares the argument types with the parameter types of the available overloads. An exact match is preferred. For example, an int argument selects an overload with an int parameter when that overload is available.  A call can also use a standard conversion when no exact match is available. However, relying on several possible conversions can make a call ambiguous. An ambiguous call is one for which the compiler cannot choose one best overload, so the program does not compile.   #include <iostream> void report_value(long value) { std::cout << \"long: \" << value << '\\n'; } void report_value(double value) { std::cout << \"double: \" << value << '\\n'; } int main() { \/\/ report_value(4); \/\/ Ambiguous: int can convert to long or double. report_value(4L); \/\/ Exact match for long. report_value(4.0); \/\/ Exact match for double. return 0; }   Default arguments require similar care. If two overloads can accept the same call after default arguments are applied, the call may be ambiguous:   void display_value(int value); void display_value(int value, int width = 10); \/\/ display_value(5); \/\/ Ambiguous: both declarations can accept this call.     Designing an Overload Set  Overloads should represent the same general operation for different kinds or amounts of data. A reader should be able to predict that functions with the same name perform closely related tasks.    Use one name when the operation has the same meaning for different parameter types.    Keep overloads simple enough that a call has one obvious match.    Avoid overloads that depend on surprising implicit conversions.    Do not create overloads that differ only by return type or parameter names.    Constructor overloading, introduced earlier in this book, follows the same central idea: one class can provide several constructors with different parameter lists. Function overloading applies that idea to ordinary named functions.     Summary    Function overloading gives related functions the same name.    Overloaded functions must have different parameter lists.    Parameter count, parameter types, and parameter order can distinguish overloads.    Parameter names and return types alone cannot distinguish overloads.    The compiler selects the best matching overload, but conversions and default arguments can create ambiguity.    Good overloads represent one clear operation for different forms of data.       Which pair of declarations is a valid pair of overloaded functions?     void report_value(int value); and void report_value(double value);  Correct. The parameter types are different.    int get_value(); and double get_value();  Return type alone cannot distinguish overloaded functions.    void print(int value); and void print(int number);  The parameter names are different, but both functions have the same parameter list.    double calculate(double value); and double calculate(double amount);  The parameter names do not distinguish the functions.       Which call selects the overload with two double parameters?   int calculate_total(int first_value, int second_value); double calculate_total(double first_value, double second_value);      calculate_total(3, 4)  Both arguments are int values, so the integer overload is an exact match.    calculate_total(3.0, 4.0)  Correct. Both arguments are double values.    calculate_total(3L, 4L)  These arguments are long values, not exact double values.    calculate_total(3, 4.0)  This call has mixed argument types and does not provide two exact double arguments.       Why is the following pair invalid?   int get_score(); double get_score();      Both functions have the same return type.  The return types are different, not the same.    The parameter lists are identical, and return type alone cannot overload a function.  Correct. A call cannot select between these functions using only its return context.    A function cannot return a numeric value.  C++ functions can return numeric values. The problem is the identical parameter list.    Function names must always be different.  Overloaded functions intentionally share a name when their parameter lists differ.       Arrange the blocks to define two overloads of calculate_total and call both versions from main .    #include <iostream>  int calculate_total(int first_value, int second_value) {  return first_value + second_value; }  double calculate_total(double first_value, double second_value) {  return first_value + second_value; }  int main() {  std::cout << calculate_total(3, 4) << '\\n';  std::cout << calculate_total(2.5, 1.5) << '\\n';  return 0; }      What is the main problem with the following call?   void report_value(long value); void report_value(double value); report_value(4);      The function name is too long.  Function names can contain multiple words when the naming convention permits them.    The argument must be a string.  The argument is a valid numeric value, but it can convert in more than one way here.    The call is ambiguous because an int can convert to either long or double .  Correct. Neither conversion is a uniquely best match.    Overloaded functions cannot have numeric parameters.  Numeric parameter types are commonly used in overloads.     "
+},
+{
+  "id": "chapter3_function-overloading-2",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function-overloading-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A program often needs to perform the same general task with different kinds of data. Function overloading allows several functions to use the same name when their parameter lists are different. The compiler selects the function whose parameters best match the arguments in a particular call. "
+},
+{
+  "id": "chapter3_function-overloading-3",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function-overloading-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "For example, a program can calculate a total for either two integers or two floating-point values: "
+},
+{
+  "id": "chapter3_function-overloading-5",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function-overloading-5",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Both functions are named calculate_total , but the first accepts two int parameters and the second accepts two double parameters. The call calculate_total(3, 4) selects the integer version, while calculate_total(2.5, 1.5) selects the floating-point version. "
+},
+{
+  "id": "chapter3_function-overloading_parameter-lists",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function-overloading_parameter-lists",
+  "type": "Subsection",
+  "number": "3.13.1",
+  "title": "What Makes an Overload Different?",
+  "body": " What Makes an Overload Different?  The part of a function declaration that distinguishes overloads is its parameter list : the number, types, and order of the parameters. Parameter names do not count as differences.   Differences between overloaded functions       Difference  Valid?  Explanation    Number of parameters  Yes  report_value(int) and report_value(int, int) are different.    Parameter types  Yes  report_value(int) and report_value(double) are different.    Parameter order  Yes  set_position(int, double) and set_position(double, int) are different.    Parameter names  No  Names describe parameters but do not change a function's parameter list.    Return type only  No  The compiler cannot select a function using only the return type.     These declarations are valid overloads because their parameter lists contain different types:   void report_value(int value); void report_value(double value); void report_value(const std::string& value);   The following declarations are not valid overloads. They differ only in return type:   \/\/ Invalid: return type alone cannot distinguish overloads. int get_score(); double get_score();   "
+},
+{
+  "id": "chapter3_function-overloading_selection",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function-overloading_selection",
+  "type": "Subsection",
+  "number": "3.13.2",
+  "title": "How the Compiler Selects an Overload",
+  "body": " How the Compiler Selects an Overload  When the compiler sees a function call, it compares the argument types with the parameter types of the available overloads. An exact match is preferred. For example, an int argument selects an overload with an int parameter when that overload is available.  A call can also use a standard conversion when no exact match is available. However, relying on several possible conversions can make a call ambiguous. An ambiguous call is one for which the compiler cannot choose one best overload, so the program does not compile.   #include <iostream> void report_value(long value) { std::cout << \"long: \" << value << '\\n'; } void report_value(double value) { std::cout << \"double: \" << value << '\\n'; } int main() { \/\/ report_value(4); \/\/ Ambiguous: int can convert to long or double. report_value(4L); \/\/ Exact match for long. report_value(4.0); \/\/ Exact match for double. return 0; }   Default arguments require similar care. If two overloads can accept the same call after default arguments are applied, the call may be ambiguous:   void display_value(int value); void display_value(int value, int width = 10); \/\/ display_value(5); \/\/ Ambiguous: both declarations can accept this call.   "
+},
+{
+  "id": "chapter3_function-overloading_design-guidance",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function-overloading_design-guidance",
+  "type": "Subsection",
+  "number": "3.13.3",
+  "title": "Designing an Overload Set",
+  "body": " Designing an Overload Set  Overloads should represent the same general operation for different kinds or amounts of data. A reader should be able to predict that functions with the same name perform closely related tasks.    Use one name when the operation has the same meaning for different parameter types.    Keep overloads simple enough that a call has one obvious match.    Avoid overloads that depend on surprising implicit conversions.    Do not create overloads that differ only by return type or parameter names.    Constructor overloading, introduced earlier in this book, follows the same central idea: one class can provide several constructors with different parameter lists. Function overloading applies that idea to ordinary named functions.   "
+},
+{
+  "id": "chapter3_function-overloading_summary",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function-overloading_summary",
+  "type": "Subsection",
+  "number": "3.13.4",
+  "title": "Summary",
+  "body": " Summary    Function overloading gives related functions the same name.    Overloaded functions must have different parameter lists.    Parameter count, parameter types, and parameter order can distinguish overloads.    Parameter names and return types alone cannot distinguish overloads.    The compiler selects the best matching overload, but conversions and default arguments can create ambiguity.    Good overloads represent one clear operation for different forms of data.    "
+},
+{
+  "id": "chapter3_function_overloading_1",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function_overloading_1",
+  "type": "Checkpoint",
+  "number": "3.13.1",
+  "title": "",
+  "body": "  Which pair of declarations is a valid pair of overloaded functions?     void report_value(int value); and void report_value(double value);  Correct. The parameter types are different.    int get_value(); and double get_value();  Return type alone cannot distinguish overloaded functions.    void print(int value); and void print(int number);  The parameter names are different, but both functions have the same parameter list.    double calculate(double value); and double calculate(double amount);  The parameter names do not distinguish the functions.    "
+},
+{
+  "id": "chapter3_function_overloading_2",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function_overloading_2",
+  "type": "Checkpoint",
+  "number": "3.13.2",
+  "title": "",
+  "body": "  Which call selects the overload with two double parameters?   int calculate_total(int first_value, int second_value); double calculate_total(double first_value, double second_value);      calculate_total(3, 4)  Both arguments are int values, so the integer overload is an exact match.    calculate_total(3.0, 4.0)  Correct. Both arguments are double values.    calculate_total(3L, 4L)  These arguments are long values, not exact double values.    calculate_total(3, 4.0)  This call has mixed argument types and does not provide two exact double arguments.    "
+},
+{
+  "id": "chapter3_function_overloading_3",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function_overloading_3",
+  "type": "Checkpoint",
+  "number": "3.13.3",
+  "title": "",
+  "body": "  Why is the following pair invalid?   int get_score(); double get_score();      Both functions have the same return type.  The return types are different, not the same.    The parameter lists are identical, and return type alone cannot overload a function.  Correct. A call cannot select between these functions using only its return context.    A function cannot return a numeric value.  C++ functions can return numeric values. The problem is the identical parameter list.    Function names must always be different.  Overloaded functions intentionally share a name when their parameter lists differ.    "
+},
+{
+  "id": "chapter3_function_overloading_4",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function_overloading_4",
+  "type": "Checkpoint",
+  "number": "3.13.4",
+  "title": "",
+  "body": "  Arrange the blocks to define two overloads of calculate_total and call both versions from main .    #include <iostream>  int calculate_total(int first_value, int second_value) {  return first_value + second_value; }  double calculate_total(double first_value, double second_value) {  return first_value + second_value; }  int main() {  std::cout << calculate_total(3, 4) << '\\n';  std::cout << calculate_total(2.5, 1.5) << '\\n';  return 0; }   "
+},
+{
+  "id": "chapter3_function_overloading_5",
+  "level": "2",
+  "url": "chapter3_function-overloading.html#chapter3_function_overloading_5",
+  "type": "Checkpoint",
+  "number": "3.13.5",
+  "title": "",
+  "body": "  What is the main problem with the following call?   void report_value(long value); void report_value(double value); report_value(4);      The function name is too long.  Function names can contain multiple words when the naming convention permits them.    The argument must be a string.  The argument is a valid numeric value, but it can convert in more than one way here.    The call is ambiguous because an int can convert to either long or double .  Correct. Neither conversion is a uniquely best match.    Overloaded functions cannot have numeric parameters.  Numeric parameter types are commonly used in overloads.    "
+},
+{
+  "id": "chapter3_default-parameters",
+  "level": "1",
+  "url": "chapter3_default-parameters.html",
+  "type": "Section",
+  "number": "3.14",
+  "title": "Default Parameters",
+  "body": " Default Parameters  A function sometimes has a common value that callers use most of the time. A default parameter gives that parameter a value when the caller omits the corresponding trailing argument.  The following declaration says that repeat_count has a default value of 1 :   void print_message(const std::string& message, int repeat_count = 1);   A caller can provide either one argument or both arguments:   print_message(\"Welcome\"); \/\/ repeat_count is 1 print_message(\"Welcome\", 3); \/\/ repeat_count is 3   C++17 does not have Python-style keyword arguments. Arguments are matched by position. A default parameter makes a trailing argument optional, but it does not allow a caller to write an argument by parameter name.   Defining and Calling a Function with Defaults  Here is a complete program. The first call uses the default bonus of 0 . The second call supplies a bonus explicitly.   #include <iostream> void report_score(int score, int bonus = 0); int main() { report_score(80); report_score(80, 5); return 0; } void report_score(int score, int bonus) { std::cout << score + bonus << '\\n'; }   The function definition does not repeat = 0 . The default value is normally placed in the declaration that callers can see. When the compiler processes report_score(80) , it supplies 0 for bonus .  A default parameter is used only when the caller omits that argument. It does not permanently change the parameter's value or create a second function.    Rules for Default Parameters  Default parameters follow several important rules.   Rules for default parameters      Rule  Explanation    Defaults apply to trailing parameters.  Once a parameter has a default, every parameter to its right must also have a default.    The caller may omit only trailing arguments.  A caller cannot omit an earlier argument while supplying a later one.    Provide a default in a visible declaration.  Callers need to see the default when the function call is compiled.    Do not repeat the default in the definition.  The same default should not be written again in the function definition.    A default is not a second overload.  One function can be called with different numbers of arguments, but only one function is defined.     This declaration is valid because both parameters after the first one also have defaults:   void draw_line(int length, char symbol = '-', int thickness = 1);   These calls are valid:   draw_line(10, '*', 2); \/\/ supplies every argument draw_line(10, '*'); \/\/ thickness is 1 draw_line(10); \/\/ symbol is '-' and thickness is 1   A caller cannot skip symbol and provide only thickness :   \/\/ There is no positional syntax for this in C++17: \/\/ draw_line(10, 2); \/\/ 2 would be used as the symbol, not thickness     Declarations and Definitions  The declaration is often placed in a header file, while the definition is placed in a source file. The default value should normally appear in the declaration, which is the part visible to callers.   \/\/ In a header file or before the calls: void display_value(int value, int width = 10); \/\/ In the source file: void display_value(int value, int width) { \/\/ function body }   Repeating the default in the definition is an error:   void display_value(int value, int width = 10); \/\/ Incorrect: the default is repeated. void display_value(int value, int width = 10) { }   The declaration and definition still describe one function. The default argument affects how a call is compiled; it does not change the function's parameter list into multiple overloads.    Default Parameters and Overloading  Default parameters and overloaded functions can be useful separately, but combining them carelessly can make a call ambiguous. Consider these declarations:   void display_value(int value); void display_value(int value, int width = 10); \/\/ display_value(5); \/\/ Ambiguous: both functions can accept one int.   The first function accepts one argument directly. The second can also accept one argument because its second parameter has a default. The compiler cannot choose one best function, so the call is rejected.  A good design usually chooses one clear strategy. Use a default parameter when the same operation has one optional setting. Use overloads when the different forms represent meaningfully different parameter lists or behaviors.    C++17 Has No Keyword Arguments  Python permits a caller to identify arguments by parameter name. C++17 does not provide that feature:   void configure_display(int width, int height, bool show_border = true); configure_display(800, 600); \/\/ valid: uses the default configure_display(800, 600, false); \/\/ valid: positional arguments \/\/ C++17 has no keyword-argument form such as: \/\/ configure_display(height = 600, width = 800);   In C++, height = 600 would be an assignment expression if height were a variable; it would not mean pass 600 to the parameter named height .  When a function has many optional settings, an options structure can make the call easier to read. In C++17, the member values are still supplied positionally when aggregate initialization is used:   #include <iostream> #include <string> struct PrintOptions { std::string message; int repeat_count = 1; }; void print_message(const PrintOptions& options) { for (int count = 0; count < options.repeat_count; ++count) { std::cout << options.message << '\\n'; } } int main() { PrintOptions options{\"Welcome\", 2}; print_message(options); return 0; }   The field names document the meaning of the values, but C++17 still requires the values to follow the structure's member order. This pattern is sometimes called an options structure or parameter object .  C++20 adds designated initializers for some aggregate structures, but that is not a C++17 feature and it still is not general-purpose keyword argument syntax.    Design Guidance    Use defaults for common, unsurprising values.    Put defaults in the declaration visible to callers and write them only once.    Keep required parameters before optional parameters.    Avoid combining defaults and overloads when a call could match more than one function.    Consider an options structure when a function has many optional settings or when the meaning of positional arguments is unclear.       Summary    A default parameter supplies a value when a trailing argument is omitted.    Required parameters must come before parameters with defaults.    Defaults normally appear in a visible declaration, not again in the definition.    Default parameters do not create overloads.    Combining defaults with overloads can make a call ambiguous.    C++17 uses positional arguments and has no Python-style keyword arguments.    An options structure can provide a clearer interface when a function has many optional settings.       What value is used for bonus in the first call?   void report_score(int score, int bonus = 5); report_score(80);      0  The declaration specifies a default of 5 , not 0 .    5  Correct. The caller omits the second argument, so the default is used.    80  80 is the value of score , not the default bonus.    The call is invalid because every argument must be written.  A trailing argument with a default value may be omitted.       Which declaration is valid according to the trailing-parameter rule?     void draw_line(int length = 10, char symbol);  A required parameter cannot follow a parameter with a default.    void draw_line(int length, char symbol = '-');  Correct. The required parameter comes first and the optional parameter comes last.    void draw_line(int length = 10, char symbol, int thickness = 1);  The required symbol parameter appears after a parameter with a default.    void draw_line(int length = 10, char symbol, int thickness);  Both parameters after length would need defaults.       What is wrong with this declaration and definition?   void display_value(int value, int width = 10); void display_value(int value, int width = 10) { }      The function has too many parameters.  Two parameters are allowed. The problem is repeating the default.    The default argument is repeated in the definition.  Correct. Put the default in the visible declaration and omit it from the definition.    A function definition cannot have a body.  The definition should have a body. That is not the problem here.    Default parameters can be used only with strings.  Defaults can be used with many parameter types, including int .       Arrange the blocks to define print_message with a default repeat count and call it once with the default and once with an explicit count.    #include <iostream>  #include <string>  void print_message(const std::string& message, int repeat_count = 1);  int main() {  print_message(\"Ready\");  print_message(\"Go\", 2);  return 0; }  void print_message(const std::string& message, int repeat_count) {  for (int count = 0; count < repeat_count; ++count) {  std::cout << message << '\\n'; } }      Which statement about C++17 function calls is correct?     C++17 supports Python-style keyword arguments for every function.  C++17 does not provide general-purpose keyword arguments.    C++17 uses positional arguments; an options structure can make many settings clearer.  Correct. Default parameters provide optional trailing values, while an options structure can organize many settings.    A default parameter allows the caller to skip an earlier argument and supply a later one.  Arguments are positional, so only trailing arguments can be omitted.    Using a default parameter automatically creates one overload for every possible value.  A default parameter is still part of one function declaration; it does not create overloads.     "
+},
+{
+  "id": "chapter3_default-parameters-2",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A function sometimes has a common value that callers use most of the time. A default parameter gives that parameter a value when the caller omits the corresponding trailing argument. "
+},
+{
+  "id": "chapter3_default-parameters-3",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The following declaration says that repeat_count has a default value of 1 : "
+},
+{
+  "id": "chapter3_default-parameters-5",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters-5",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A caller can provide either one argument or both arguments: "
+},
+{
+  "id": "chapter3_default-parameters-7",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters-7",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "C++17 does not have Python-style keyword arguments. Arguments are matched by position. A default parameter makes a trailing argument optional, but it does not allow a caller to write an argument by parameter name. "
+},
+{
+  "id": "chapter3_default-parameters_basic-use",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters_basic-use",
+  "type": "Subsection",
+  "number": "3.14.1",
+  "title": "Defining and Calling a Function with Defaults",
+  "body": " Defining and Calling a Function with Defaults  Here is a complete program. The first call uses the default bonus of 0 . The second call supplies a bonus explicitly.   #include <iostream> void report_score(int score, int bonus = 0); int main() { report_score(80); report_score(80, 5); return 0; } void report_score(int score, int bonus) { std::cout << score + bonus << '\\n'; }   The function definition does not repeat = 0 . The default value is normally placed in the declaration that callers can see. When the compiler processes report_score(80) , it supplies 0 for bonus .  A default parameter is used only when the caller omits that argument. It does not permanently change the parameter's value or create a second function.  "
+},
+{
+  "id": "chapter3_default-parameters_rules",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters_rules",
+  "type": "Subsection",
+  "number": "3.14.2",
+  "title": "Rules for Default Parameters",
+  "body": " Rules for Default Parameters  Default parameters follow several important rules.   Rules for default parameters      Rule  Explanation    Defaults apply to trailing parameters.  Once a parameter has a default, every parameter to its right must also have a default.    The caller may omit only trailing arguments.  A caller cannot omit an earlier argument while supplying a later one.    Provide a default in a visible declaration.  Callers need to see the default when the function call is compiled.    Do not repeat the default in the definition.  The same default should not be written again in the function definition.    A default is not a second overload.  One function can be called with different numbers of arguments, but only one function is defined.     This declaration is valid because both parameters after the first one also have defaults:   void draw_line(int length, char symbol = '-', int thickness = 1);   These calls are valid:   draw_line(10, '*', 2); \/\/ supplies every argument draw_line(10, '*'); \/\/ thickness is 1 draw_line(10); \/\/ symbol is '-' and thickness is 1   A caller cannot skip symbol and provide only thickness :   \/\/ There is no positional syntax for this in C++17: \/\/ draw_line(10, 2); \/\/ 2 would be used as the symbol, not thickness   "
+},
+{
+  "id": "chapter3_default-parameters_declaration-definition",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters_declaration-definition",
+  "type": "Subsection",
+  "number": "3.14.3",
+  "title": "Declarations and Definitions",
+  "body": " Declarations and Definitions  The declaration is often placed in a header file, while the definition is placed in a source file. The default value should normally appear in the declaration, which is the part visible to callers.   \/\/ In a header file or before the calls: void display_value(int value, int width = 10); \/\/ In the source file: void display_value(int value, int width) { \/\/ function body }   Repeating the default in the definition is an error:   void display_value(int value, int width = 10); \/\/ Incorrect: the default is repeated. void display_value(int value, int width = 10) { }   The declaration and definition still describe one function. The default argument affects how a call is compiled; it does not change the function's parameter list into multiple overloads.  "
+},
+{
+  "id": "chapter3_default-parameters_overloading",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters_overloading",
+  "type": "Subsection",
+  "number": "3.14.4",
+  "title": "Default Parameters and Overloading",
+  "body": " Default Parameters and Overloading  Default parameters and overloaded functions can be useful separately, but combining them carelessly can make a call ambiguous. Consider these declarations:   void display_value(int value); void display_value(int value, int width = 10); \/\/ display_value(5); \/\/ Ambiguous: both functions can accept one int.   The first function accepts one argument directly. The second can also accept one argument because its second parameter has a default. The compiler cannot choose one best function, so the call is rejected.  A good design usually chooses one clear strategy. Use a default parameter when the same operation has one optional setting. Use overloads when the different forms represent meaningfully different parameter lists or behaviors.  "
+},
+{
+  "id": "chapter3_default-parameters_no-keyword-arguments",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters_no-keyword-arguments",
+  "type": "Subsection",
+  "number": "3.14.5",
+  "title": "C++17 Has No Keyword Arguments",
+  "body": " C++17 Has No Keyword Arguments  Python permits a caller to identify arguments by parameter name. C++17 does not provide that feature:   void configure_display(int width, int height, bool show_border = true); configure_display(800, 600); \/\/ valid: uses the default configure_display(800, 600, false); \/\/ valid: positional arguments \/\/ C++17 has no keyword-argument form such as: \/\/ configure_display(height = 600, width = 800);   In C++, height = 600 would be an assignment expression if height were a variable; it would not mean pass 600 to the parameter named height .  When a function has many optional settings, an options structure can make the call easier to read. In C++17, the member values are still supplied positionally when aggregate initialization is used:   #include <iostream> #include <string> struct PrintOptions { std::string message; int repeat_count = 1; }; void print_message(const PrintOptions& options) { for (int count = 0; count < options.repeat_count; ++count) { std::cout << options.message << '\\n'; } } int main() { PrintOptions options{\"Welcome\", 2}; print_message(options); return 0; }   The field names document the meaning of the values, but C++17 still requires the values to follow the structure's member order. This pattern is sometimes called an options structure or parameter object .  C++20 adds designated initializers for some aggregate structures, but that is not a C++17 feature and it still is not general-purpose keyword argument syntax.  "
+},
+{
+  "id": "chapter3_default-parameters_design-guidance",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters_design-guidance",
+  "type": "Subsection",
+  "number": "3.14.6",
+  "title": "Design Guidance",
+  "body": " Design Guidance    Use defaults for common, unsurprising values.    Put defaults in the declaration visible to callers and write them only once.    Keep required parameters before optional parameters.    Avoid combining defaults and overloads when a call could match more than one function.    Consider an options structure when a function has many optional settings or when the meaning of positional arguments is unclear.     "
+},
+{
+  "id": "chapter3_default-parameters_summary",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default-parameters_summary",
+  "type": "Subsection",
+  "number": "3.14.7",
+  "title": "Summary",
+  "body": " Summary    A default parameter supplies a value when a trailing argument is omitted.    Required parameters must come before parameters with defaults.    Defaults normally appear in a visible declaration, not again in the definition.    Default parameters do not create overloads.    Combining defaults with overloads can make a call ambiguous.    C++17 uses positional arguments and has no Python-style keyword arguments.    An options structure can provide a clearer interface when a function has many optional settings.    "
+},
+{
+  "id": "chapter3_default_parameters_1",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default_parameters_1",
+  "type": "Checkpoint",
+  "number": "3.14.1",
+  "title": "",
+  "body": "  What value is used for bonus in the first call?   void report_score(int score, int bonus = 5); report_score(80);      0  The declaration specifies a default of 5 , not 0 .    5  Correct. The caller omits the second argument, so the default is used.    80  80 is the value of score , not the default bonus.    The call is invalid because every argument must be written.  A trailing argument with a default value may be omitted.    "
+},
+{
+  "id": "chapter3_default_parameters_2",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default_parameters_2",
+  "type": "Checkpoint",
+  "number": "3.14.2",
+  "title": "",
+  "body": "  Which declaration is valid according to the trailing-parameter rule?     void draw_line(int length = 10, char symbol);  A required parameter cannot follow a parameter with a default.    void draw_line(int length, char symbol = '-');  Correct. The required parameter comes first and the optional parameter comes last.    void draw_line(int length = 10, char symbol, int thickness = 1);  The required symbol parameter appears after a parameter with a default.    void draw_line(int length = 10, char symbol, int thickness);  Both parameters after length would need defaults.    "
+},
+{
+  "id": "chapter3_default_parameters_3",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default_parameters_3",
+  "type": "Checkpoint",
+  "number": "3.14.3",
+  "title": "",
+  "body": "  What is wrong with this declaration and definition?   void display_value(int value, int width = 10); void display_value(int value, int width = 10) { }      The function has too many parameters.  Two parameters are allowed. The problem is repeating the default.    The default argument is repeated in the definition.  Correct. Put the default in the visible declaration and omit it from the definition.    A function definition cannot have a body.  The definition should have a body. That is not the problem here.    Default parameters can be used only with strings.  Defaults can be used with many parameter types, including int .    "
+},
+{
+  "id": "chapter3_default_parameters_4",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default_parameters_4",
+  "type": "Checkpoint",
+  "number": "3.14.4",
+  "title": "",
+  "body": "  Arrange the blocks to define print_message with a default repeat count and call it once with the default and once with an explicit count.    #include <iostream>  #include <string>  void print_message(const std::string& message, int repeat_count = 1);  int main() {  print_message(\"Ready\");  print_message(\"Go\", 2);  return 0; }  void print_message(const std::string& message, int repeat_count) {  for (int count = 0; count < repeat_count; ++count) {  std::cout << message << '\\n'; } }   "
+},
+{
+  "id": "chapter3_default_parameters_5",
+  "level": "2",
+  "url": "chapter3_default-parameters.html#chapter3_default_parameters_5",
+  "type": "Checkpoint",
+  "number": "3.14.5",
+  "title": "",
+  "body": "  Which statement about C++17 function calls is correct?     C++17 supports Python-style keyword arguments for every function.  C++17 does not provide general-purpose keyword arguments.    C++17 uses positional arguments; an options structure can make many settings clearer.  Correct. Default parameters provide optional trailing values, while an options structure can organize many settings.    A default parameter allows the caller to skip an earlier argument and supply a later one.  Arguments are positional, so only trailing arguments can be omitted.    Using a default parameter automatically creates one overload for every possible value.  A default parameter is still part of one function declaration; it does not create overloads.    "
+},
+{
   "id": "chapter3_glossary",
   "level": "1",
   "url": "chapter3_glossary.html",
   "type": "Section",
-  "number": "3.13",
+  "number": "3.15",
   "title": "Glossary",
   "body": " Glossary    floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double .    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A variable declared in a function's parameter list. A parameter receives a value when the function is called.    argument  A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter.    call  Cause a function to be executed.    scope  The part of a program where a name, such as a variable or parameter name, can be used.    local scope  The scope of a parameter or variable declared inside a function. The name can be used only within that function.    global scope  The scope of a name declared outside all functions. A global name can be used by functions that are within its scope.    constexpr  A C++ keyword meaning constant expression . A constexpr variable cannot be changed after initialization and is intended to be usable as a compile-time constant.    return type  The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value.    return statement  A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call.    return value  The value that a function sends back to its caller.    value-returning function  A function that returns a value to its caller. Its return type is a type other than void .    pass by value  A way of passing an argument to a function in which the parameter receives a copy of the argument's value. Changes made to the parameter do not change the caller's variable.    reference  Another name for an existing variable or object. In this chapter, references are used as function parameters so a function can work with the caller's variable directly.    reference parameter  A parameter that refers to the caller's variable instead of receiving a separate copy. A reference parameter is written with & after the parameter type.    pass by reference  A way of passing an argument to a function in which a reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    floating-point  A type of value that can contain fractions as well as integers.    initialization  A statement that declares a new variable and assigns a value to it.    call  Causes a function to be executed.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    function  A named sequence of statements that performs some useful function.    parameter  A variable declared in a function's parameter list.    argument  A value or expression supplied when a function is called.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    return type  The type of value that a function returns to its caller.    return statement  A statement that sends a value back to the caller and ends the function call.    return value  The value that a function sends back to its caller.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    pass by value  The parameter receives a copy of the argument's value.    reference  Another name for an existing variable or object.    reference parameter  A parameter that refers to the caller's variable.    pass by reference  Allows changes made through a parameter to affect the caller's variable.      "
 },
@@ -4514,7 +4784,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_glossary.html#chapter3_glossary-2",
   "type": "Glossary",
-  "number": "3.13",
+  "number": "3.15",
   "title": "Glossary",
   "body": "  floating-point  A type of variable (or value) that can contain fractions as well as integers. There are a few floating-point types in C++; the one we use in this book is double .    initialization  A statement that declares a new variable and assigns a value to it at the same time.    function  A named sequence of statements that performs some useful function. Functions may or may not take parameters, and may or may not produce a result.    parameter  A variable declared in a function's parameter list. A parameter receives a value when the function is called.    argument  A value or expression supplied to a function when it is called. The argument must be compatible with the type of the corresponding parameter.    call  Cause a function to be executed.    scope  The part of a program where a name, such as a variable or parameter name, can be used.    local scope  The scope of a parameter or variable declared inside a function. The name can be used only within that function.    global scope  The scope of a name declared outside all functions. A global name can be used by functions that are within its scope.    constexpr  A C++ keyword meaning constant expression . A constexpr variable cannot be changed after initialization and is intended to be usable as a compile-time constant.    return type  The type of value that a function returns to its caller. The return type appears before the function name. A function with return type void does not return a value.    return statement  A statement that begins with the keyword return . In a value-returning function, it sends a value back to the caller and ends that function call.    return value  The value that a function sends back to its caller.    value-returning function  A function that returns a value to its caller. Its return type is a type other than void .    pass by value  A way of passing an argument to a function in which the parameter receives a copy of the argument's value. Changes made to the parameter do not change the caller's variable.    reference  Another name for an existing variable or object. In this chapter, references are used as function parameters so a function can work with the caller's variable directly.    reference parameter  A parameter that refers to the caller's variable instead of receiving a separate copy. A reference parameter is written with & after the parameter type.    pass by reference  A way of passing an argument to a function in which a reference parameter refers to the caller's variable. Changes made through the parameter affect that variable.   "
 },
@@ -4523,7 +4793,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_glossary.html#chapter3_glossary-3",
   "type": "Reading Questions",
-  "number": "3.13",
+  "number": "3.15",
   "title": "Reading Questions",
   "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    floating-point  A type of value that can contain fractions as well as integers.    initialization  A statement that declares a new variable and assigns a value to it.    call  Causes a function to be executed.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    function  A named sequence of statements that performs some useful function.    parameter  A variable declared in a function's parameter list.    argument  A value or expression supplied when a function is called.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    return type  The type of value that a function returns to its caller.    return statement  A statement that sends a value back to the caller and ends the function call.    return value  The value that a function sends back to its caller.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    pass by value  The parameter receives a copy of the argument's value.    reference  Another name for an existing variable or object.    reference parameter  A parameter that refers to the caller's variable.    pass by reference  Allows changes made through a parameter to affect the caller's variable.     "
 },
@@ -4532,7 +4802,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter3_multiple-choice-exercises.html",
   "type": "Exercises",
-  "number": "3.14",
+  "number": "3.16",
   "title": "Multiple Choice Exercises",
   "body": " Multiple Choice Exercises   Answer the following Multiple Choice questions to assess what you have learned in this chapter.      What is printed by the following program?  #include <iostream> int main() { double gpa = 3.52; int updated_gpa = static_cast<int>(gpa); std::cout << \"GPA: \" << updated_gpa << '\\n'; }      GPA: 3.0     updated_gpa has type int , so it stores an integer value.      GPA: 3    Correct. Converting 3.52 to int discards the fractional part, producing 3 .      GPA: 4.0    Converting a double to an int does not round to the nearest integer.      GPA: 4    The fractional part is discarded, so 3.52 becomes 3 , not 4 .      Error!    This explicit conversion is legal in C++.         Which header must be included to use std::acos in the following program?  #include <iostream> int main() { double pi = std::acos(-1.0); std::cout << pi << '\\n'; }      <iostream>     <iostream> provides stream input and output, including std::cout .      <string>     <string> provides std::string , not the mathematical functions.      <cmath>    Correct. std::acos is provided by the <cmath> header.      <cstdlib>    The mathematical function std::acos is declared in <cmath> .      No additional header is needed.    Include the header that declares each standard-library facility you use. std::acos requires <cmath> .          Multiple Response Select all variables whose values have a non-zero fractional part after these statements execute.  int a = 1.5; double b = a + 1.5; double c = 2.4; double d = 1 \/ 5; int e = c * c; double f = static_cast<int>(c);      a     a has type int . The conversion discards the fractional part of 1.5 , so a becomes 1 .      b    Correct. Since a is 1 , a + 1.5 produces 2.5 .      c    Correct. c contains 2.4 , which has a non-zero fractional part.      d    Both operands in 1 \/ 5 are integers, so integer division produces 0 . That value is then stored as the double value 0.0 .      e     c * c produces a floating-point value, but storing it in e converts it to int and discards the fractional part.      f     static_cast<int>(c) produces the integer 2 . It is then stored in f as 2.0 .          Multiple Response Which of the following are valid beginnings of a function definition, including the opening brace?   Multiple Response Which of the following can be the first line of a function definition?      print_hello_world() {    A function definition needs a return type.      std::string palindrome(word) {    The parameter word needs a type.      int mult(int a, int b) {    Correct. The function has a return type, a name, typed parameters, and an opening brace.      char shift_three(char letter);    This is a function declaration, not the first line of a function definition.      void give_compliment() {    Correct. This begins the definition of a function with no parameters and return type void .      std::string friend(std::string name) {     friend is a C++ keyword and cannot be used as the function name.         What is printed by the following program?  #include <iostream> int add_values(int first, int second); int main() { int result = add_values(3, 4) * 2; std::cout << result << '\\n'; return 0; } int add_values(int first, int second) { return first + second; }      7     add_values(3, 4) returns 7 , but that returned value is then multiplied by 2 .      8    First evaluate the function call: add_values(3, 4) returns 7 .      14    Correct. The function returns 7 , so the expression becomes 7 * 2 .      34    The arguments are integers. The function adds their values; it does not join them together.      Error!    A call to a value-returning function can be used as part of a larger expression.         What is printed when the following program runs?  #include <iostream> #include <string> void best_friends(std::string first, std::string second); int main() { std::string rachel = \"Rachel\"; std::string monica = \"Monica\"; best_friends(monica, rachel); return 0; } void best_friends(std::string first, std::string second) { std::cout << first << \" is best friends with \" << second << '\\n'; }      Monica is best friends with Rachel    Correct. monica is the first argument, so its value is passed to first . rachel is passed to second .      Rachel is best friends with Monica    Arguments are matched with parameters by position. Look at the order used in the function call.      first is best friends with second    The output uses the values stored in the parameters, not their variable names.      monica is best friends with rachel    The variable names are not printed. Their string values are \"Monica\" and \"Rachel\" .      Error!    The argument types are compatible with the corresponding parameter types, so the call is legal.         What is printed when the following program runs?  #include <iostream> #include <string> void greeting(std::string name); void goodbye(std::string name); int main() { std::string hannah = \"Hannah\"; std::string anna = \"Anna\"; std::string louise = hannah; hannah = anna; anna = louise; goodbye(anna); return 0; } void greeting(std::string name) { std::cout << \"hello, \" << name << \"!\"; } void goodbye(std::string name) { greeting(name); std::cout << \"!!\\n\"; }      hello, Hannah!!!    Correct. louise first receives the value \"Hannah\" , and that value is later assigned to anna .      hello, anna!!!    The function prints the value stored in anna , not the variable's name.      hello, Anna!!!    Trace the assignments before goodbye(anna) . Is \"Anna\" still stored in anna ?      hello, Louise!!!     louise is a variable name. Its stored value is \"Hannah\" .      Error!    The program is valid. Trace the values assigned to the string variables.          Multiple Response Which of the following are legal calls to order_food ?  #include <iostream> #include <string> void order_food(std::string food, int quantity); int main() { std::string a = \"wings\"; std::string b = \"sliders\"; int c = 3; double d = 8.64; char e = 'p'; return 0; } void order_food(std::string food, int quantity) { std::cout << \"I'll have \" << quantity << \" \" << food << '\\n'; }      order_food(a, c);    Correct. a is a std::string and c is an int .      order_food(b, d);    Correct. The double argument can be implicitly converted to the int required by the second parameter. Its fractional part is discarded.      order_food(e, c);    The first parameter requires a std::string . A char is not implicitly converted to a std::string for this call.      order_food(a, d);    Correct. a matches the first parameter, and d can be converted to int for the second parameter.      order_food(c, a);    The arguments are in the wrong order. The first parameter requires a std::string , and the second requires an int .         What is printed when the following program runs?  #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }      1     value refers to the caller's variable count , whose initial value is 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      51    These are integer values. value + 1 performs integer addition.      Error!    Passing an int variable to an int& reference parameter is legal.         How many parameters and local variables are declared in mult ?  int mult(int a, int b, int c) { int d = 7; return a * b * c * d; }      1 parameter, 3 local variables    Parameters appear in the function's parameter list. Count a , b , and c .      2 parameters, 4 local variables    Count the names in the parameter list separately from the variable declared in the function body.      2 parameters, 1 local variable    There are three parameters in the parameter list.      3 parameters, 1 local variable    Correct. a , b , and c are parameters. d is a local variable declared in the function body.      3 parameters, 4 local variables    The parameters have local scope, but this question counts parameters separately from variables declared in the function body. Only d is declared there.         How many times is party called while the following program runs?  #include <iostream> #include <string> void party(std::string location); void weekend(); int main() { party(\"North campus\"); weekend(); party(\"Central campus\"); return 0; } void party(std::string location) { std::cout << \"Party at \" << location << '\\n'; } void weekend() { party(\"Big house\"); party(\"CCTC\"); }      2 calls    There are two direct calls to party in main , but weekend also calls it.      3 calls    Look inside weekend . It calls party twice.      4 calls    Correct. main calls party twice, and its call to weekend causes two more calls to party .      5 calls    Calling weekend is not itself a call to party . Count only executions of party .      6 calls    Trace the calls beginning in main . Only four calls reach party .      "
 },
@@ -4550,7 +4820,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc1",
   "type": "Exercise",
-  "number": "3.14.1",
+  "number": "3.16.1",
   "title": "",
   "body": "  What is printed by the following program?  #include <iostream> int main() { double gpa = 3.52; int updated_gpa = static_cast<int>(gpa); std::cout << \"GPA: \" << updated_gpa << '\\n'; }      GPA: 3.0     updated_gpa has type int , so it stores an integer value.      GPA: 3    Correct. Converting 3.52 to int discards the fractional part, producing 3 .      GPA: 4.0    Converting a double to an int does not round to the nearest integer.      GPA: 4    The fractional part is discarded, so 3.52 becomes 3 , not 4 .      Error!    This explicit conversion is legal in C++.     "
 },
@@ -4559,7 +4829,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc2",
   "type": "Exercise",
-  "number": "3.14.2",
+  "number": "3.16.2",
   "title": "",
   "body": "  Which header must be included to use std::acos in the following program?  #include <iostream> int main() { double pi = std::acos(-1.0); std::cout << pi << '\\n'; }      <iostream>     <iostream> provides stream input and output, including std::cout .      <string>     <string> provides std::string , not the mathematical functions.      <cmath>    Correct. std::acos is provided by the <cmath> header.      <cstdlib>    The mathematical function std::acos is declared in <cmath> .      No additional header is needed.    Include the header that declares each standard-library facility you use. std::acos requires <cmath> .     "
 },
@@ -4568,7 +4838,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc3",
   "type": "Exercise",
-  "number": "3.14.3",
+  "number": "3.16.3",
   "title": "",
   "body": "   Multiple Response Select all variables whose values have a non-zero fractional part after these statements execute.  int a = 1.5; double b = a + 1.5; double c = 2.4; double d = 1 \/ 5; int e = c * c; double f = static_cast<int>(c);      a     a has type int . The conversion discards the fractional part of 1.5 , so a becomes 1 .      b    Correct. Since a is 1 , a + 1.5 produces 2.5 .      c    Correct. c contains 2.4 , which has a non-zero fractional part.      d    Both operands in 1 \/ 5 are integers, so integer division produces 0 . That value is then stored as the double value 0.0 .      e     c * c produces a floating-point value, but storing it in e converts it to int and discards the fractional part.      f     static_cast<int>(c) produces the integer 2 . It is then stored in f as 2.0 .     "
 },
@@ -4577,7 +4847,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc4",
   "type": "Exercise",
-  "number": "3.14.4",
+  "number": "3.16.4",
   "title": "",
   "body": "   Multiple Response Which of the following are valid beginnings of a function definition, including the opening brace?   Multiple Response Which of the following can be the first line of a function definition?      print_hello_world() {    A function definition needs a return type.      std::string palindrome(word) {    The parameter word needs a type.      int mult(int a, int b) {    Correct. The function has a return type, a name, typed parameters, and an opening brace.      char shift_three(char letter);    This is a function declaration, not the first line of a function definition.      void give_compliment() {    Correct. This begins the definition of a function with no parameters and return type void .      std::string friend(std::string name) {     friend is a C++ keyword and cannot be used as the function name.     "
 },
@@ -4586,7 +4856,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc5",
   "type": "Exercise",
-  "number": "3.14.5",
+  "number": "3.16.5",
   "title": "",
   "body": "  What is printed by the following program?  #include <iostream> int add_values(int first, int second); int main() { int result = add_values(3, 4) * 2; std::cout << result << '\\n'; return 0; } int add_values(int first, int second) { return first + second; }      7     add_values(3, 4) returns 7 , but that returned value is then multiplied by 2 .      8    First evaluate the function call: add_values(3, 4) returns 7 .      14    Correct. The function returns 7 , so the expression becomes 7 * 2 .      34    The arguments are integers. The function adds their values; it does not join them together.      Error!    A call to a value-returning function can be used as part of a larger expression.     "
 },
@@ -4595,7 +4865,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc6",
   "type": "Exercise",
-  "number": "3.14.6",
+  "number": "3.16.6",
   "title": "",
   "body": "  What is printed when the following program runs?  #include <iostream> #include <string> void best_friends(std::string first, std::string second); int main() { std::string rachel = \"Rachel\"; std::string monica = \"Monica\"; best_friends(monica, rachel); return 0; } void best_friends(std::string first, std::string second) { std::cout << first << \" is best friends with \" << second << '\\n'; }      Monica is best friends with Rachel    Correct. monica is the first argument, so its value is passed to first . rachel is passed to second .      Rachel is best friends with Monica    Arguments are matched with parameters by position. Look at the order used in the function call.      first is best friends with second    The output uses the values stored in the parameters, not their variable names.      monica is best friends with rachel    The variable names are not printed. Their string values are \"Monica\" and \"Rachel\" .      Error!    The argument types are compatible with the corresponding parameter types, so the call is legal.     "
 },
@@ -4604,7 +4874,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc7",
   "type": "Exercise",
-  "number": "3.14.7",
+  "number": "3.16.7",
   "title": "",
   "body": "  What is printed when the following program runs?  #include <iostream> #include <string> void greeting(std::string name); void goodbye(std::string name); int main() { std::string hannah = \"Hannah\"; std::string anna = \"Anna\"; std::string louise = hannah; hannah = anna; anna = louise; goodbye(anna); return 0; } void greeting(std::string name) { std::cout << \"hello, \" << name << \"!\"; } void goodbye(std::string name) { greeting(name); std::cout << \"!!\\n\"; }      hello, Hannah!!!    Correct. louise first receives the value \"Hannah\" , and that value is later assigned to anna .      hello, anna!!!    The function prints the value stored in anna , not the variable's name.      hello, Anna!!!    Trace the assignments before goodbye(anna) . Is \"Anna\" still stored in anna ?      hello, Louise!!!     louise is a variable name. Its stored value is \"Hannah\" .      Error!    The program is valid. Trace the values assigned to the string variables.     "
 },
@@ -4613,7 +4883,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc8",
   "type": "Exercise",
-  "number": "3.14.8",
+  "number": "3.16.8",
   "title": "",
   "body": "   Multiple Response Which of the following are legal calls to order_food ?  #include <iostream> #include <string> void order_food(std::string food, int quantity); int main() { std::string a = \"wings\"; std::string b = \"sliders\"; int c = 3; double d = 8.64; char e = 'p'; return 0; } void order_food(std::string food, int quantity) { std::cout << \"I'll have \" << quantity << \" \" << food << '\\n'; }      order_food(a, c);    Correct. a is a std::string and c is an int .      order_food(b, d);    Correct. The double argument can be implicitly converted to the int required by the second parameter. Its fractional part is discarded.      order_food(e, c);    The first parameter requires a std::string . A char is not implicitly converted to a std::string for this call.      order_food(a, d);    Correct. a matches the first parameter, and d can be converted to int for the second parameter.      order_food(c, a);    The arguments are in the wrong order. The first parameter requires a std::string , and the second requires an int .     "
 },
@@ -4622,7 +4892,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc9",
   "type": "Exercise",
-  "number": "3.14.9",
+  "number": "3.16.9",
   "title": "",
   "body": "  What is printed when the following program runs?  #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }      1     value refers to the caller's variable count , whose initial value is 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      51    These are integer values. value + 1 performs integer addition.      Error!    Passing an int variable to an int& reference parameter is legal.     "
 },
@@ -4631,7 +4901,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc10",
   "type": "Exercise",
-  "number": "3.14.10",
+  "number": "3.16.10",
   "title": "",
   "body": "  How many parameters and local variables are declared in mult ?  int mult(int a, int b, int c) { int d = 7; return a * b * c * d; }      1 parameter, 3 local variables    Parameters appear in the function's parameter list. Count a , b , and c .      2 parameters, 4 local variables    Count the names in the parameter list separately from the variable declared in the function body.      2 parameters, 1 local variable    There are three parameters in the parameter list.      3 parameters, 1 local variable    Correct. a , b , and c are parameters. d is a local variable declared in the function body.      3 parameters, 4 local variables    The parameters have local scope, but this question counts parameters separately from variables declared in the function body. Only d is declared there.     "
 },
@@ -4640,7 +4910,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_multiple-choice-exercises.html#functions_mc11",
   "type": "Exercise",
-  "number": "3.14.11",
+  "number": "3.16.11",
   "title": "",
   "body": "  How many times is party called while the following program runs?  #include <iostream> #include <string> void party(std::string location); void weekend(); int main() { party(\"North campus\"); weekend(); party(\"Central campus\"); return 0; } void party(std::string location) { std::cout << \"Party at \" << location << '\\n'; } void weekend() { party(\"Big house\"); party(\"CCTC\"); }      2 calls    There are two direct calls to party in main , but weekend also calls it.      3 calls    Look inside weekend . It calls party twice.      4 calls    Correct. main calls party twice, and its call to weekend causes two more calls to party .      5 calls    Calling weekend is not itself a call to party . Count only executions of party .      6 calls    Trace the calls beginning in main . Only four calls reach party .     "
 },
@@ -4649,7 +4919,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter3_mixed-up-code-exercises.html",
   "type": "Exercises",
-  "number": "3.15",
+  "number": "3.17",
   "title": "Mixed-Up Code Exercises",
   "body": " Mixed-Up Code Exercises   Answer the following Mixed-Up Code questions to assess what you have learned in this chapter.      Construct a function that takes a double , converts it to an int , and prints the converted value.      void print_integer(double value) {    void print_integer(int value) {      int converted = static_cast<int>(value);    double converted = static_cast<double>(value);      std::cout << converted << '\\n';    std::cout converted;     }        Construct two functions. new_line prints one blank line. divider calls new_line , prints a divider, and then calls new_line again.     void new_line() {    std::cout << '\\n';    }     void divider() {    void divider(new_line) {      new_line();    std::cout << new_line();     std::cout << \". . . . . . . . . . . .\\n\";     new_line();    newline();     }        Construct a function that returns the volume of a cone. Use 3.14 for pi.      double cone_volume(double radius, double height) {    void cone_volume(double radius, double height) {     constexpr double pi = 3.14;     double volume = (1.0 \/ 3.0) * pi * radius * radius * height;    double volume = (1 \/ 3) * pi * radius * radius * height;      return volume;    std::cout << volume;     }        Construct a function that prints the sine of an angle given in degrees. Use 3.14 for pi.     #include <cmath>    #include <iostream>     void print_sine_degrees(double degrees) {    void print_sine_degrees() {     constexpr double pi = 3.14;     double radians = degrees * pi \/ 180.0;    double radians = degrees * 180.0 \/ pi;      double sine = std::sin(radians);    double sine = std::sin(degrees);     std::cout << sine << '\\n';    }        Construct a function that returns the final price of an item after a 30% discount and then 8% sales tax.      double calculate_final_price(double item_price) {    double calculate_final_price(std::string item_price) {      double discounted_price = item_price * 0.70;    double discounted_price = item_price * 0.30;      double price_with_tax = discounted_price * 1.08;    double price_with_tax = discounted_price * 0.08;     return price_with_tax;    }        Suppose sum_of_squares returns the sum of the squares of two numbers, and root returns the square root of one number. Construct a function that returns the hypotenuse of a right triangle.      double hypotenuse(double side1, double side2) {    void hypotenuse(double side1, double side2) {      double square_sum = sum_of_squares(side1, side2);    double square_sum = root(side1, side2);      return root(square_sum);    return sum_of_squares(square_sum);     }        Construct a function that swaps the values of two int variables in the caller.      void swap_values(int& first, int& second) {    void swap_values(int first, int second) {     int temp = first;    first = second;     second = temp;    second = first;     }        Construct a function that takes a dollar amount and a cent amount and returns the total number of cents.      int total_cents(int dollars, int cents) {    int total_cents(int dollars, cents) {      int total = dollars * 100 + cents;    int total = dollars + cents \/ 100;      return total;    std::cout << total;     }        Suppose the probability of snow is 0.14 and the probability of both snow and a snow day is 0.02 . Construct the program that calculates and prints the probability of a snow day given that it snows.  Use the formula P(A given B) = P(A and B) \/ P(B) .     #include <iostream>     double conditional_probability(double probability_b, double probability_both);    double conditional_probability(double probability_b, probability_both);     int main() {    double p_snow = 0.14;  double p_both = 0.02;     double result = conditional_probability(p_snow, p_both);    double result = conditional_probability(p_both, p_snow);     std::cout << result << '\\n';    return 0;    }    double conditional_probability(double probability_b, double probability_both) {     return probability_both \/ probability_b;    return probability_b \/ probability_both;     }        Two midterms are each worth 20% of a course grade, and the final exam is worth 60%. Construct a function that returns the weighted final percentage.      double final_percentage(double midterm1, double midterm2, double final_exam) {    double final_percentage(double midterm1, midterm2, final_exam) {      double midterm_component = midterm1 * 0.20 + midterm2 * 0.20;    int midterm_component = midterm1 * 0.20 + midterm2 * 0.20;      double final_component = final_exam * 0.60;    double final_component = final_exam * 0.06;      return midterm_component + final_component;    return static_cast<int>(midterm_component + final_component);     }     "
 },
@@ -4667,7 +4937,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p9",
   "type": "Exercise",
-  "number": "3.15.yes",
+  "number": "3.17.yes",
   "title": "",
   "body": "  Construct a function that takes a double , converts it to an int , and prints the converted value.      void print_integer(double value) {    void print_integer(int value) {      int converted = static_cast<int>(value);    double converted = static_cast<double>(value);      std::cout << converted << '\\n';    std::cout converted;     }    "
 },
@@ -4676,7 +4946,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p0",
   "type": "Exercise",
-  "number": "3.15.yes",
+  "number": "3.17.yes",
   "title": "",
   "body": "  Construct two functions. new_line prints one blank line. divider calls new_line , prints a divider, and then calls new_line again.     void new_line() {    std::cout << '\\n';    }     void divider() {    void divider(new_line) {      new_line();    std::cout << new_line();     std::cout << \". . . . . . . . . . . .\\n\";     new_line();    newline();     }    "
 },
@@ -4685,7 +4955,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p1",
   "type": "Exercise",
-  "number": "3.15.yes",
+  "number": "3.17.yes",
   "title": "",
   "body": "  Construct a function that returns the volume of a cone. Use 3.14 for pi.      double cone_volume(double radius, double height) {    void cone_volume(double radius, double height) {     constexpr double pi = 3.14;     double volume = (1.0 \/ 3.0) * pi * radius * radius * height;    double volume = (1 \/ 3) * pi * radius * radius * height;      return volume;    std::cout << volume;     }    "
 },
@@ -4694,7 +4964,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p3",
   "type": "Exercise",
-  "number": "3.15.yes",
+  "number": "3.17.yes",
   "title": "",
   "body": "  Construct a function that prints the sine of an angle given in degrees. Use 3.14 for pi.     #include <cmath>    #include <iostream>     void print_sine_degrees(double degrees) {    void print_sine_degrees() {     constexpr double pi = 3.14;     double radians = degrees * pi \/ 180.0;    double radians = degrees * 180.0 \/ pi;      double sine = std::sin(radians);    double sine = std::sin(degrees);     std::cout << sine << '\\n';    }    "
 },
@@ -4703,7 +4973,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p4",
   "type": "Exercise",
-  "number": "3.15.yes",
+  "number": "3.17.yes",
   "title": "",
   "body": "  Construct a function that returns the final price of an item after a 30% discount and then 8% sales tax.      double calculate_final_price(double item_price) {    double calculate_final_price(std::string item_price) {      double discounted_price = item_price * 0.70;    double discounted_price = item_price * 0.30;      double price_with_tax = discounted_price * 1.08;    double price_with_tax = discounted_price * 0.08;     return price_with_tax;    }    "
 },
@@ -4712,7 +4982,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p5",
   "type": "Exercise",
-  "number": "3.15.yes",
+  "number": "3.17.yes",
   "title": "",
   "body": "  Suppose sum_of_squares returns the sum of the squares of two numbers, and root returns the square root of one number. Construct a function that returns the hypotenuse of a right triangle.      double hypotenuse(double side1, double side2) {    void hypotenuse(double side1, double side2) {      double square_sum = sum_of_squares(side1, side2);    double square_sum = root(side1, side2);      return root(square_sum);    return sum_of_squares(square_sum);     }    "
 },
@@ -4721,7 +4991,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p6",
   "type": "Exercise",
-  "number": "3.15.yes",
+  "number": "3.17.yes",
   "title": "",
   "body": "  Construct a function that swaps the values of two int variables in the caller.      void swap_values(int& first, int& second) {    void swap_values(int first, int second) {     int temp = first;    first = second;     second = temp;    second = first;     }    "
 },
@@ -4730,7 +5000,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p7",
   "type": "Exercise",
-  "number": "3.15.yes",
+  "number": "3.17.yes",
   "title": "",
   "body": "  Construct a function that takes a dollar amount and a cent amount and returns the total number of cents.      int total_cents(int dollars, int cents) {    int total_cents(int dollars, cents) {      int total = dollars * 100 + cents;    int total = dollars + cents \/ 100;      return total;    std::cout << total;     }    "
 },
@@ -4739,7 +5009,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p8",
   "type": "Exercise",
-  "number": "3.15.yes",
+  "number": "3.17.yes",
   "title": "",
   "body": "  Suppose the probability of snow is 0.14 and the probability of both snow and a snow day is 0.02 . Construct the program that calculates and prints the probability of a snow day given that it snows.  Use the formula P(A given B) = P(A and B) \/ P(B) .     #include <iostream>     double conditional_probability(double probability_b, double probability_both);    double conditional_probability(double probability_b, probability_both);     int main() {    double p_snow = 0.14;  double p_both = 0.02;     double result = conditional_probability(p_snow, p_both);    double result = conditional_probability(p_both, p_snow);     std::cout << result << '\\n';    return 0;    }    double conditional_probability(double probability_b, double probability_both) {     return probability_both \/ probability_b;    return probability_b \/ probability_both;     }    "
 },
@@ -4748,7 +5018,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_mixed-up-code-exercises.html#functions_p2",
   "type": "Exercise",
-  "number": "3.15.yes",
+  "number": "3.17.yes",
   "title": "",
   "body": "  Two midterms are each worth 20% of a course grade, and the final exam is worth 60%. Construct a function that returns the weighted final percentage.      double final_percentage(double midterm1, double midterm2, double final_exam) {    double final_percentage(double midterm1, midterm2, final_exam) {      double midterm_component = midterm1 * 0.20 + midterm2 * 0.20;    int midterm_component = midterm1 * 0.20 + midterm2 * 0.20;      double final_component = final_exam * 0.60;    double final_component = final_exam * 0.06;      return midterm_component + final_component;    return static_cast<int>(midterm_component + final_component);     }    "
 },
@@ -4757,7 +5027,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter3_activecode-exercises.html",
   "type": "Exercises",
-  "number": "3.16",
+  "number": "3.18",
   "title": "Activecode Exercises",
   "body": " Activecode Exercises   Answer the following Activecode questions to assess what you have learned in this chapter.      Fix the errors in the code below so that it prints the area of a circle. Use a <cmath> function to obtain an accurate value for pi.   #include <iostream> #include <cmath> void print_area(double radius); int main() { std::cout << \"Testing with radius = 5...\\n\"; std::cout << \" Your function had area = \"; print_area(5.0); std::cout << '\\n'; std::cout << \"Testing with radius = 7.5...\\n\"; std::cout << \" Your function had area = \"; print_area(7.5); std::cout << '\\n'; return 0; } void print_area(double radius) { double pi = std::acos(1.0); double area = pi * radius ^ 2; std::cout << area; }      std::acos(-1.0) gives pi because cos(pi) = -1. C++ does not use ^ for exponentiation, so the radius can be squared by multiplying it by itself.   void print_area(double radius) { double pi = std::acos(-1.0); \/\/ cos(pi) = -1 double area = pi * radius * radius; std::cout << area; }        Fix the code below so that it prints 2 elephants .   #include <iostream> #include <string> void print_animals(std::string animal, int count); int main() { print_animals(2, \"elephants\"); return 0; } void print_animals(std::string animal, int count) { std::cout << count << animal << '\\n'; }     The arguments must match the corresponding parameter types and order, and a space is needed between the number and animal name.   #include <iostream> #include <string> void print_animals(int count, std::string animal); int main() { print_animals(2, \"elephants\"); return 0; } void print_animals(int count, std::string animal) { std::cout << count << \" \" << animal << '\\n'; }        Fix the code below so that it prints 12 \/ 8 = 1.5 .   #include <iostream> double divide(int first, int second); int main() { int a = 8; int b = 12; std::cout << b << \" \/ \" << a << \" = \"; std::cout << divide(b, a) << '\\n'; return 0; } double divide(int first, int second) { return first \/ second; }     Because both parameters are int , first \/ second performs integer division before the result is returned. One way to fix the function is to convert one operand to double .   double divide(int first, int second) { return static_cast<double>(first) \/ second; }        Finish the function so that it returns the common logarithm of a minus the natural logarithm of a . You will need functions from <cmath> .   #include <iostream> #include <cmath> double log_difference(double a); int main() { std::cout << log_difference(8.0) << '\\n'; return 0; } double log_difference(double a) { \/\/ Compute and return log base 10 of a minus natural log of a. }     Use std::log10 for the common logarithm and std::log for the natural logarithm.   double log_difference(double a) { return std::log10(a) - std::log(a); }        Finish the code so that it prints First Line , a border, and Second Line on three separate lines.   #include <iostream> void border(); int main() { \/\/ Write your code here. return 0; } void border() { std::cout << \"------------\\n\"; }     Print the first line, call border , and then print the second line.   #include <iostream> void border(); int main() { std::cout << \"First Line\\n\"; border(); std::cout << \"Second Line\\n\"; return 0; } void border() { std::cout << \"------------\\n\"; }        Write a function called add_one that takes an int by reference and increases the caller's variable by one.   #include <iostream> void add_one(); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one() { }     Use a reference parameter so that changes made through the parameter affect the caller's variable.   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }        Write a function called round_up that takes a double and returns the smallest integer value that is greater than or equal to it. Use a function from <cmath> .   #include <iostream> #include <cmath> double round_up(double value); int main() { std::cout << round_up(2.513) << '\\n'; std::cout << round_up(4.0) << '\\n'; return 0; } double round_up(double value) { }      std::ceil returns the smallest integer-valued floating-point value greater than or equal to its argument.   double round_up(double value) { return std::ceil(value); }        Write a value-returning function called volume_prism that takes three double side lengths and returns the volume of the rectangular prism.   #include <iostream> double volume_prism(); int main() { std::cout << volume_prism(3.0, 4.0, 5.0) << '\\n'; std::cout << volume_prism(5.7, 3.9, 1.3) << '\\n'; return 0; } double volume_prism() { }     The function needs three double parameters and should return their product.   double volume_prism(double side1, double side2, double side3) { return side1 * side2 * side3; }        Write a function called tan_degrees that returns the tangent of an angle given in degrees. Use 3.14 for pi.   #include <iostream> #include <cmath> double tan_degrees(double degrees); int main() { std::cout << tan_degrees(45.0) << '\\n'; std::cout << tan_degrees(112.1) << '\\n'; return 0; } double tan_degrees(double degrees) { }     Convert the angle from degrees to radians before calling std::tan .   double tan_degrees(double degrees) { constexpr double pi = 3.14; double radians = degrees * pi \/ 180.0; return std::tan(radians); }        Write a value-returning function called volume_sphere that takes a double radius and returns the volume of the sphere. Use 3.14 for pi.   #include <iostream> double volume_sphere(double radius); int main() { std::cout << volume_sphere(3.0) << '\\n'; std::cout << volume_sphere(3.24) << '\\n'; return 0; } double volume_sphere(double radius) { }     Use 4.0 \/ 3.0 so the calculation uses floating-point division, and multiply the radius by itself three times.   double volume_sphere(double radius) { constexpr double pi = 3.14; return (4.0 \/ 3.0) * pi * radius * radius * radius; }     "
 },
@@ -4775,7 +5045,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a1",
   "type": "Exercise",
-  "number": "3.16.1",
+  "number": "3.18.1",
   "title": "",
   "body": "  Fix the errors in the code below so that it prints the area of a circle. Use a <cmath> function to obtain an accurate value for pi.   #include <iostream> #include <cmath> void print_area(double radius); int main() { std::cout << \"Testing with radius = 5...\\n\"; std::cout << \" Your function had area = \"; print_area(5.0); std::cout << '\\n'; std::cout << \"Testing with radius = 7.5...\\n\"; std::cout << \" Your function had area = \"; print_area(7.5); std::cout << '\\n'; return 0; } void print_area(double radius) { double pi = std::acos(1.0); double area = pi * radius ^ 2; std::cout << area; }      std::acos(-1.0) gives pi because cos(pi) = -1. C++ does not use ^ for exponentiation, so the radius can be squared by multiplying it by itself.   void print_area(double radius) { double pi = std::acos(-1.0); \/\/ cos(pi) = -1 double area = pi * radius * radius; std::cout << area; }    "
 },
@@ -4784,7 +5054,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a2",
   "type": "Exercise",
-  "number": "3.16.2",
+  "number": "3.18.2",
   "title": "",
   "body": "  Fix the code below so that it prints 2 elephants .   #include <iostream> #include <string> void print_animals(std::string animal, int count); int main() { print_animals(2, \"elephants\"); return 0; } void print_animals(std::string animal, int count) { std::cout << count << animal << '\\n'; }     The arguments must match the corresponding parameter types and order, and a space is needed between the number and animal name.   #include <iostream> #include <string> void print_animals(int count, std::string animal); int main() { print_animals(2, \"elephants\"); return 0; } void print_animals(int count, std::string animal) { std::cout << count << \" \" << animal << '\\n'; }    "
 },
@@ -4793,7 +5063,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a3",
   "type": "Exercise",
-  "number": "3.16.3",
+  "number": "3.18.3",
   "title": "",
   "body": "  Fix the code below so that it prints 12 \/ 8 = 1.5 .   #include <iostream> double divide(int first, int second); int main() { int a = 8; int b = 12; std::cout << b << \" \/ \" << a << \" = \"; std::cout << divide(b, a) << '\\n'; return 0; } double divide(int first, int second) { return first \/ second; }     Because both parameters are int , first \/ second performs integer division before the result is returned. One way to fix the function is to convert one operand to double .   double divide(int first, int second) { return static_cast<double>(first) \/ second; }    "
 },
@@ -4802,7 +5072,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a4",
   "type": "Exercise",
-  "number": "3.16.4",
+  "number": "3.18.4",
   "title": "",
   "body": "  Finish the function so that it returns the common logarithm of a minus the natural logarithm of a . You will need functions from <cmath> .   #include <iostream> #include <cmath> double log_difference(double a); int main() { std::cout << log_difference(8.0) << '\\n'; return 0; } double log_difference(double a) { \/\/ Compute and return log base 10 of a minus natural log of a. }     Use std::log10 for the common logarithm and std::log for the natural logarithm.   double log_difference(double a) { return std::log10(a) - std::log(a); }    "
 },
@@ -4811,7 +5081,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a5",
   "type": "Exercise",
-  "number": "3.16.5",
+  "number": "3.18.5",
   "title": "",
   "body": "  Finish the code so that it prints First Line , a border, and Second Line on three separate lines.   #include <iostream> void border(); int main() { \/\/ Write your code here. return 0; } void border() { std::cout << \"------------\\n\"; }     Print the first line, call border , and then print the second line.   #include <iostream> void border(); int main() { std::cout << \"First Line\\n\"; border(); std::cout << \"Second Line\\n\"; return 0; } void border() { std::cout << \"------------\\n\"; }    "
 },
@@ -4820,7 +5090,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a6",
   "type": "Exercise",
-  "number": "3.16.6",
+  "number": "3.18.6",
   "title": "",
   "body": "  Write a function called add_one that takes an int by reference and increases the caller's variable by one.   #include <iostream> void add_one(); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one() { }     Use a reference parameter so that changes made through the parameter affect the caller's variable.   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }    "
 },
@@ -4829,7 +5099,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a7",
   "type": "Exercise",
-  "number": "3.16.7",
+  "number": "3.18.7",
   "title": "",
   "body": "  Write a function called round_up that takes a double and returns the smallest integer value that is greater than or equal to it. Use a function from <cmath> .   #include <iostream> #include <cmath> double round_up(double value); int main() { std::cout << round_up(2.513) << '\\n'; std::cout << round_up(4.0) << '\\n'; return 0; } double round_up(double value) { }      std::ceil returns the smallest integer-valued floating-point value greater than or equal to its argument.   double round_up(double value) { return std::ceil(value); }    "
 },
@@ -4838,7 +5108,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a8",
   "type": "Exercise",
-  "number": "3.16.8",
+  "number": "3.18.8",
   "title": "",
   "body": "  Write a value-returning function called volume_prism that takes three double side lengths and returns the volume of the rectangular prism.   #include <iostream> double volume_prism(); int main() { std::cout << volume_prism(3.0, 4.0, 5.0) << '\\n'; std::cout << volume_prism(5.7, 3.9, 1.3) << '\\n'; return 0; } double volume_prism() { }     The function needs three double parameters and should return their product.   double volume_prism(double side1, double side2, double side3) { return side1 * side2 * side3; }    "
 },
@@ -4847,7 +5117,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a9",
   "type": "Exercise",
-  "number": "3.16.9",
+  "number": "3.18.9",
   "title": "",
   "body": "  Write a function called tan_degrees that returns the tangent of an angle given in degrees. Use 3.14 for pi.   #include <iostream> #include <cmath> double tan_degrees(double degrees); int main() { std::cout << tan_degrees(45.0) << '\\n'; std::cout << tan_degrees(112.1) << '\\n'; return 0; } double tan_degrees(double degrees) { }     Convert the angle from degrees to radians before calling std::tan .   double tan_degrees(double degrees) { constexpr double pi = 3.14; double radians = degrees * pi \/ 180.0; return std::tan(radians); }    "
 },
@@ -4856,7 +5126,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_activecode-exercises.html#functions_a10",
   "type": "Exercise",
-  "number": "3.16.10",
+  "number": "3.18.10",
   "title": "",
   "body": "  Write a value-returning function called volume_sphere that takes a double radius and returns the volume of the sphere. Use 3.14 for pi.   #include <iostream> double volume_sphere(double radius); int main() { std::cout << volume_sphere(3.0) << '\\n'; std::cout << volume_sphere(3.24) << '\\n'; return 0; } double volume_sphere(double radius) { }     Use 4.0 \/ 3.0 so the calculation uses floating-point division, and multiply the radius by itself three times.   double volume_sphere(double radius) { constexpr double pi = 3.14; return (4.0 \/ 3.0) * pi * radius * radius * radius; }    "
 },
@@ -7963,7 +8233,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "6.1",
   "title": "What Iteration Means",
-  "body": " What Iteration Means  Many everyday activities involve repeating an action. For example, imagine packing groceries into a reusable grocery bag. You place one item into the bag, check whether another item fits safely, and continue while there are still items to pack and another item fits safely.  In this situation, the number of repetitions is not known in advance. The process stops when either no items remain or the next item does not fit safely. This is the kind of repetition commonly expressed with a while statement.   while more_items_to_pack and another_item_fits_safely: place_next_item_in_bag   For a second example, imagine a soap company preparing products for shipment. Each small pack contains 16 soap pieces, and each large shipping box contains 100 small packs. The company repeats one process inside another process:   repeat 100 times: \/\/ packs in one shipping box start a new soap pack repeat 16 times: \/\/ soap pieces in one pack place one soap piece in the pack seal the soap pack place the soap pack in the shipping box seal the shipping box   The number of repetitions is known: 16 soap pieces per pack and 100 packs per shipping box. This is the kind of repetition commonly expressed with for statements. Because one repetition occurs inside another, this is also an example of nested iteration . We will translate this idea into C++ later.  Words in a problem statement can provide useful clues about the kind of repetition that is needed.   Vocabulary that describes repetition    Words or phrases  What they suggest    until or as long as  Continue while a condition is true.    exactly 100 times  Repeat a known number of times.    from 1 through 100  Count through a known range.    for each item  Process every value in a collection.     These words are clues, not automatic rules. Before choosing a loop, ask what action must be repeated and what event should end the repetition. This type of repetition is called iteration .    The statements that are repeated by a loop are called the loop .             Which organization best matches the soap-packing process in this section?      An outer repetition for 100 packs, with an inner repetition for 16 soap pieces in each pack.    The outer task makes the packs for one shipping box, and the inner task fills one pack.      One repetition for 116 soap pieces, with no separate pack operation.    The two quantities describe two different levels of the process.      An outer repetition for 16 shipping boxes, with an inner repetition for 100 soap pieces.    The numbers are assigned to the wrong tasks.      "
+  "body": " What Iteration Means  Many everyday activities involve repeating an action. For example, imagine packing groceries into a reusable grocery bag. You place one item into the bag, check whether another item fits safely, and continue while there are still items to pack and another item fits safely.  In this situation, the number of repetitions is not known in advance. The process stops when either no items remain or the next item does not fit safely. This is the kind of repetition commonly expressed with a while statement.   while more_items_to_pack and another_item_fits_safely: place_next_item_in_bag   For a second example, imagine a soap company preparing products for shipment. Each small pack contains 16 soap pieces, and each large shipping box contains 100 small packs. The company repeats one process inside another process:   repeat 100 times: \/\/ packs in one shipping box start a new soap pack repeat 16 times: \/\/ soap pieces in one pack place one soap piece in the pack seal the soap pack place the soap pack in the shipping box seal the shipping box   The number of repetitions is known: 16 soap pieces per pack and 100 packs per shipping box. This is the kind of repetition commonly expressed with for statements. Because one repetition occurs inside another, this is also an example of nested iteration . We will translate this idea into C++ later.  Words in a problem statement can provide useful clues about the kind of repetition that is needed.   Vocabulary that describes repetition    Words or phrases  What they suggest    until or as long as  Continue while a condition is true.    exactly 100 times  Repeat a known number of times.    from 1 through 100  Count through a known range.    for each item  Process every value in a collection.     These words are clues, not automatic rules. Before choosing a loop, ask what action must be repeated and what event should end the repetition. This type of repetition is called iteration .    Which organization best matches the soap-packing process in this section?      An outer repetition for 100 packs, with an inner repetition for 16 soap pieces in each pack.    The outer task makes the packs for one shipping box, and the inner task fills one pack.      One repetition for 116 soap pieces, with no separate pack operation.    The two quantities describe two different levels of the process.      An outer repetition for 16 shipping boxes, with an inner repetition for 100 soap pieces.    The numbers are assigned to the wrong tasks.        Match each example with the type of iteration they suggest.    Review the iteration types and try again!     Checking for each apple from a shipment of unknown quantities check if the apple is good.  Process every value in a collection.    Check how many apples are bad out of a sub-group of 20 randomly chosen apples.  Count through a known range.    Peel 30 apples.  Repeat a known number of times.    Eat apples until you are full.  Continue while a condition is true.    Sort each apple into a \"good apple\" and \"bad apple\" pile.  Nested conditional statement inside a loop.     "
 },
 {
   "id": "chapter6_what-is-iteration-2",
@@ -8029,22 +8299,22 @@ var ptx_lunr_docs = [
   "body": "These words are clues, not automatic rules. Before choosing a loop, ask what action must be repeated and what event should end the repetition. This type of repetition is called iteration . "
 },
 {
-  "id": "chapter6_what-iteration_short-answer",
-  "level": "2",
-  "url": "chapter6_what-is-iteration.html#chapter6_what-iteration_short-answer",
-  "type": "Checkpoint",
-  "number": "6.1.1",
-  "title": "",
-  "body": "  The statements that are repeated by a loop are called the loop .          "
-},
-{
   "id": "chapter6_what-iteration_organization",
   "level": "2",
   "url": "chapter6_what-is-iteration.html#chapter6_what-iteration_organization",
   "type": "Checkpoint",
-  "number": "6.1.2",
+  "number": "6.1.1",
   "title": "",
   "body": "  Which organization best matches the soap-packing process in this section?      An outer repetition for 100 packs, with an inner repetition for 16 soap pieces in each pack.    The outer task makes the packs for one shipping box, and the inner task fills one pack.      One repetition for 116 soap pieces, with no separate pack operation.    The two quantities describe two different levels of the process.      An outer repetition for 16 shipping boxes, with an inner repetition for 100 soap pieces.    The numbers are assigned to the wrong tasks.     "
+},
+{
+  "id": "chapter6_what-iteration_organization_exercise_2",
+  "level": "2",
+  "url": "chapter6_what-is-iteration.html#chapter6_what-iteration_organization_exercise_2",
+  "type": "Checkpoint",
+  "number": "6.1.2",
+  "title": "",
+  "body": "  Match each example with the type of iteration they suggest.    Review the iteration types and try again!     Checking for each apple from a shipment of unknown quantities check if the apple is good.  Process every value in a collection.    Check how many apples are bad out of a sub-group of 20 randomly chosen apples.  Count through a known range.    Peel 30 apples.  Repeat a known number of times.    Eat apples until you are full.  Continue while a condition is true.    Sort each apple into a \"good apple\" and \"bad apple\" pile.  Nested conditional statement inside a loop.    "
 },
 {
   "id": "chapter6_while-statement",
@@ -10945,11 +11215,92 @@ var ptx_lunr_docs = [
   "body": "  Define a Deck class that contains a private std::vector<std::string> . Add member functions named add_card and get_card_count .   #include <iostream> #include <string> #include <vector> class Deck { private: std::vector<std::string> cards; public: void add_card(const std::string& card) { \/\/ Write your solution here. } std::size_t get_card_count() const { \/\/ Write your solution here. } }; int main() { Deck deck; deck.add_card(\"Ace of Spades\"); deck.add_card(\"King of Hearts\"); std::cout << deck.get_card_count() << '\\n'; return 0; }     void add_card(const std::string& card) { cards.push_back(card); } std::size_t get_card_count() const { return cards.size(); }   "
 },
 {
+  "id": "chapter9_memory-addresses-and-virtual-memory",
+  "level": "1",
+  "url": "chapter9_memory-addresses-and-virtual-memory.html",
+  "type": "Section",
+  "number": "9.1",
+  "title": "Memory, Addresses, and Virtual Memory",
+  "body": " Memory, Addresses, and Virtual Memory  A running program stores its objects in memory. Each object occupies one or more addressable memory locations, and an address is a number that identifies a location. A pointer stores an address so that a program can reach an object indirectly.  On the desktop systems used in this course, memory is byte-addressable . This means that one address identifies one byte. A byte is normally eight bits. An address does not identify one entire integer or one entire object; it identifies the first byte at a location. Larger objects occupy several consecutive byte locations.   Objects occupy consecutive byte locations  The type std::int32_t , provided by <cstdint> , represents a signed integer with exactly 32 bits. On an eight-bit-byte machine, that object occupies four bytes. The following diagram shows a conceptual sequence of virtual byte locations. In these diagrams, addresses increase from top to bottom so that consecutive locations are easy to compare.   A diagram showing std::int32_t score occupying four consecutive virtual byte locations at addresses 0x0000'1000 through 0x0000'1003. Each cell is one byte, or eight bits.     The diagram shows the storage size of the object, but it does not show the order in which the four bytes represent the integer's bits. That byte-order question is called endianness and will be studied in Pointers and Dynamic Memory, Part 2.    Virtual memory and physical memory  A program does not normally use physical RAM addresses directly. Instead, each process receives a virtual address space. The operating system establishes page tables, and the processor's memory-management hardware translates virtual addresses into physical locations during memory access.  A virtual byte location and a physical byte location use the same basic unit—a byte—but they are not one permanently matched pair across the whole computer. Translation is normally organized in pages. A virtual page is mapped to a physical frame, while the byte offset within the page remains the same.   A conceptual diagram showing virtual page V12 mapped to physical frame P41. The page table and memory-management hardware select the frame while preserving each byte offset within the page.     This architecture allows the operating system to isolate processes, mark pages as read-only or inaccessible, share selected pages, and move or page data without changing the virtual addresses used by the program. It also means that a pointer value in one process should not be treated as a physical RAM address or as a meaningful address in a different process.    What a 64-bit machine means  A 64-bit machine commonly uses 64-bit general-purpose registers and pointer representations. On the systems used in this course, a pointer is typically eight bytes. This does not mean that every memory cell is eight bytes or that every integer is 64 bits.   Common sizes on a 64-bit desktop system       Item  Typical size  Meaning    Addressable byte  8 bits  The smallest location identified by an address.    std::int32_t  32 bits, usually 4 bytes  An integer with exactly 32 bits.    Object pointer  Usually 64 bits, or 8 bytes  A value that identifies an object in the process's address space.    64-bit architecture  Not a memory-cell size  A description of the machine's word and address design.     The C++ language does not require every platform to use these exact pointer sizes. A portable program can inspect sizes with sizeof . Also, a 64-bit architecture may implement fewer than 64 usable virtual-address bits. The phrase 64-bit therefore describes an architecture, not a promise that a program has 2 64 bytes of physical RAM.     On an eight-bit-byte machine, what does one memory address normally identify?    One byte The machine is byte-addressable, so each address identifies one byte.  One bit A byte contains multiple bits; addresses do not normally identify individual bits.  One complete object of any type Large objects can occupy several consecutive byte locations.  One physical memory page A page contains many bytes and is a larger mapping unit.      On a machine with eight-bit bytes, how many bytes does a std::int32_t object occupy?    4 bytes Thirty-two bits divided into eight-bit bytes gives four bytes.  1 byte One byte normally contains eight bits, not thirty-two.  8 bytes Eight bytes is a common pointer size on a 64-bit desktop, not the size of a 32-bit integer.  32 bytes The type has 32 bits, not 32 eight-bit bytes.      Which statement best describes a 64-bit machine?    It commonly uses 64-bit registers and pointer representations. The term describes an architecture; it does not mean every object is 64 bits.  Every memory cell contains exactly 64 bits. Memory is commonly byte-addressable, with eight bits per byte.  Every C++ int must contain 64 bits. Integer sizes depend on the type and implementation.  The computer must contain 2 64 bytes of RAM. Address width and installed physical RAM are different ideas.    "
+},
+{
+  "id": "chapter9_memory-addresses-and-virtual-memory-2",
+  "level": "2",
+  "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory-addresses-and-virtual-memory-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A running program stores its objects in memory. Each object occupies one or more addressable memory locations, and an address is a number that identifies a location. A pointer stores an address so that a program can reach an object indirectly. "
+},
+{
+  "id": "chapter9_memory-addresses-and-virtual-memory-3",
+  "level": "2",
+  "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory-addresses-and-virtual-memory-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "On the desktop systems used in this course, memory is byte-addressable . This means that one address identifies one byte. A byte is normally eight bits. An address does not identify one entire integer or one entire object; it identifies the first byte at a location. Larger objects occupy several consecutive byte locations. "
+},
+{
+  "id": "chapter9_memory_byte_locations",
+  "level": "2",
+  "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_byte_locations",
+  "type": "Subsection",
+  "number": "9.1.1",
+  "title": "Objects occupy consecutive byte locations",
+  "body": " Objects occupy consecutive byte locations  The type std::int32_t , provided by <cstdint> , represents a signed integer with exactly 32 bits. On an eight-bit-byte machine, that object occupies four bytes. The following diagram shows a conceptual sequence of virtual byte locations. In these diagrams, addresses increase from top to bottom so that consecutive locations are easy to compare.   A diagram showing std::int32_t score occupying four consecutive virtual byte locations at addresses 0x0000'1000 through 0x0000'1003. Each cell is one byte, or eight bits.     The diagram shows the storage size of the object, but it does not show the order in which the four bytes represent the integer's bits. That byte-order question is called endianness and will be studied in Pointers and Dynamic Memory, Part 2.  "
+},
+{
+  "id": "chapter9_virtual-memory-process-view",
+  "level": "2",
+  "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_virtual-memory-process-view",
+  "type": "Subsection",
+  "number": "9.1.2",
+  "title": "Virtual memory and physical memory",
+  "body": " Virtual memory and physical memory  A program does not normally use physical RAM addresses directly. Instead, each process receives a virtual address space. The operating system establishes page tables, and the processor's memory-management hardware translates virtual addresses into physical locations during memory access.  A virtual byte location and a physical byte location use the same basic unit—a byte—but they are not one permanently matched pair across the whole computer. Translation is normally organized in pages. A virtual page is mapped to a physical frame, while the byte offset within the page remains the same.   A conceptual diagram showing virtual page V12 mapped to physical frame P41. The page table and memory-management hardware select the frame while preserving each byte offset within the page.     This architecture allows the operating system to isolate processes, mark pages as read-only or inaccessible, share selected pages, and move or page data without changing the virtual addresses used by the program. It also means that a pointer value in one process should not be treated as a physical RAM address or as a meaningful address in a different process.  "
+},
+{
+  "id": "chapter9_what-64-bit-means",
+  "level": "2",
+  "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_what-64-bit-means",
+  "type": "Subsection",
+  "number": "9.1.3",
+  "title": "What a 64-bit machine means",
+  "body": " What a 64-bit machine means  A 64-bit machine commonly uses 64-bit general-purpose registers and pointer representations. On the systems used in this course, a pointer is typically eight bytes. This does not mean that every memory cell is eight bytes or that every integer is 64 bits.   Common sizes on a 64-bit desktop system       Item  Typical size  Meaning    Addressable byte  8 bits  The smallest location identified by an address.    std::int32_t  32 bits, usually 4 bytes  An integer with exactly 32 bits.    Object pointer  Usually 64 bits, or 8 bytes  A value that identifies an object in the process's address space.    64-bit architecture  Not a memory-cell size  A description of the machine's word and address design.     The C++ language does not require every platform to use these exact pointer sizes. A portable program can inspect sizes with sizeof . Also, a 64-bit architecture may implement fewer than 64 usable virtual-address bits. The phrase 64-bit therefore describes an architecture, not a promise that a program has 2 64 bytes of physical RAM.  "
+},
+{
+  "id": "chapter9_memory_exercise_byte",
+  "level": "2",
+  "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_byte",
+  "type": "Checkpoint",
+  "number": "9.1.1",
+  "title": "",
+  "body": "  On an eight-bit-byte machine, what does one memory address normally identify?    One byte The machine is byte-addressable, so each address identifies one byte.  One bit A byte contains multiple bits; addresses do not normally identify individual bits.  One complete object of any type Large objects can occupy several consecutive byte locations.  One physical memory page A page contains many bytes and is a larger mapping unit.   "
+},
+{
+  "id": "chapter9_memory_exercise_int32",
+  "level": "2",
+  "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_int32",
+  "type": "Checkpoint",
+  "number": "9.1.2",
+  "title": "",
+  "body": "  On a machine with eight-bit bytes, how many bytes does a std::int32_t object occupy?    4 bytes Thirty-two bits divided into eight-bit bytes gives four bytes.  1 byte One byte normally contains eight bits, not thirty-two.  8 bytes Eight bytes is a common pointer size on a 64-bit desktop, not the size of a 32-bit integer.  32 bytes The type has 32 bits, not 32 eight-bit bytes.   "
+},
+{
+  "id": "chapter9_memory_exercise_64_bit",
+  "level": "2",
+  "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_64_bit",
+  "type": "Checkpoint",
+  "number": "9.1.3",
+  "title": "",
+  "body": "  Which statement best describes a 64-bit machine?    It commonly uses 64-bit registers and pointer representations. The term describes an architecture; it does not mean every object is 64 bits.  Every memory cell contains exactly 64 bits. Memory is commonly byte-addressable, with eight bits per byte.  Every C++ int must contain 64 bits. Integer sizes depend on the type and implementation.  The computer must contain 2 64 bytes of RAM. Address width and installed physical RAM are different ideas.   "
+},
+{
   "id": "chapter9_why-pointers-exist",
   "level": "1",
   "url": "chapter9_why-pointers-exist.html",
   "type": "Section",
-  "number": "9.1",
+  "number": "9.2",
   "title": "Why Pointers Exist",
   "body": " Why Pointers Exist  Every object in a running program occupies storage. The storage has a location, and that location has an address. A pointer is an object that stores the address of another object.  A variable name gives a program a direct way to refer to an object. A pointer gives a program an indirect way to refer to the same object. This indirect access is useful when a function must work with an object owned by its caller, when the object may be optional, or when storage must last beyond the scope in which it was created.   #include <iostream> int main() { int score = 90; int* score_pointer = &score; std::cout << \"Score: \" << score << '\\n'; std::cout << \"Address: \" << score_pointer << '\\n'; return 0; }   The address printed by this program is not a value that a programmer should predict. It can change from one run to another. The important relationship is that score_pointer stores the address of score .  The following full Python Tutor interface lets you step through the example and inspect its storage. It opens with the example already loaded and displays memory addresses.   The pointer can also be used to change the object it identifies:   #include <iostream> int main() { int score = 90; int* score_pointer = &score; *score_pointer = 95; std::cout << score << '\\n'; return 0; }    Some ways objects can obtain storage       Storage situation  Main idea  Typical example    Automatic storage  Storage is created and released as a scope is entered and left.  int score; inside a function    Static storage  Storage lasts for the program's static lifetime.  A namespace-scope variable    Dynamic storage  Storage is requested and released explicitly by the program.  new int{90} and delete     This chapter first studies pointers as addresses. Later it uses pointers to explain dynamically managed storage. A pointer itself does not mean that the pointed-to object was dynamically allocated; it can point to an ordinary local object as in the example above.   What does a pointer normally store?   The address of another object A pointer provides an indirect way to refer to an object.  The complete contents of every object in memory A pointer stores an address, not a complete copy of the object.  The size of the object only Object size and object address are different ideas.  The name of the object Names are source-code identifiers, not stored pointer values.      Arrange the statements to change a local object through a pointer.    int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';     Which object can a pointer identify?   An ordinary local object such as score A pointer can store the address of a local object; it does not require dynamic allocation.  Only an object created with new Pointers can identify local, static, or dynamically allocated objects.  Only an object stored in a vector A pointer is not limited to a particular container.  Only an object whose value is an address The pointer stores an address; the identified object may have another type.     Why should a program not assume that &score will have the same numeric address on every run?   The program's storage locations can vary between executions. The relationship between the pointer and object matters; the particular numeric address is not predictable.  The address changes whenever score is incremented. Changing an object's value does not normally move the object.  A pointer stores the object's current value instead of its address. A pointer stores an address, not the pointed-to value.  The address is always zero until new is used. Local objects normally have valid nonzero addresses.     Which statement about a pointer and dynamic storage is correct?   A pointer can identify an ordinary local object without owning dynamic storage. The pointer's type and the object's storage duration are separate ideas.  Every pointer automatically owns the object it identifies. Ownership must be established by the program's design; a pointer alone does not imply ownership.  Only dynamically allocated objects have addresses. All objects in storage have locations and addresses.  A local object must be released with delete . Local objects are managed by their scope, not by matching delete .    "
 },
@@ -11003,7 +11354,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#table_ch9_pointer_storage_kinds",
   "type": "Table",
-  "number": "9.1.1",
+  "number": "9.2.1",
   "title": "Some ways objects can obtain storage",
   "body": " Some ways objects can obtain storage       Storage situation  Main idea  Typical example    Automatic storage  Storage is created and released as a scope is entered and left.  int score; inside a function    Static storage  Storage lasts for the program's static lifetime.  A namespace-scope variable    Dynamic storage  Storage is requested and released explicitly by the program.  new int{90} and delete    "
 },
@@ -11021,7 +11372,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_address",
   "type": "Checkpoint",
-  "number": "9.1.1",
+  "number": "9.2.1",
   "title": "",
   "body": " What does a pointer normally store?   The address of another object A pointer provides an indirect way to refer to an object.  The complete contents of every object in memory A pointer stores an address, not a complete copy of the object.  The size of the object only Object size and object address are different ideas.  The name of the object Names are source-code identifiers, not stored pointer values.   "
 },
@@ -11030,7 +11381,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_parsons_indirect_access",
   "type": "Checkpoint",
-  "number": "9.1.2",
+  "number": "9.2.2",
   "title": "",
   "body": "  Arrange the statements to change a local object through a pointer.    int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';   "
 },
@@ -11039,7 +11390,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_local_object",
   "type": "Checkpoint",
-  "number": "9.1.3",
+  "number": "9.2.3",
   "title": "",
   "body": " Which object can a pointer identify?   An ordinary local object such as score A pointer can store the address of a local object; it does not require dynamic allocation.  Only an object created with new Pointers can identify local, static, or dynamically allocated objects.  Only an object stored in a vector A pointer is not limited to a particular container.  Only an object whose value is an address The pointer stores an address; the identified object may have another type.   "
 },
@@ -11048,7 +11399,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_address_variation",
   "type": "Checkpoint",
-  "number": "9.1.4",
+  "number": "9.2.4",
   "title": "",
   "body": " Why should a program not assume that &score will have the same numeric address on every run?   The program's storage locations can vary between executions. The relationship between the pointer and object matters; the particular numeric address is not predictable.  The address changes whenever score is incremented. Changing an object's value does not normally move the object.  A pointer stores the object's current value instead of its address. A pointer stores an address, not the pointed-to value.  The address is always zero until new is used. Local objects normally have valid nonzero addresses.   "
 },
@@ -11057,7 +11408,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_dynamic_not_required",
   "type": "Checkpoint",
-  "number": "9.1.5",
+  "number": "9.2.5",
   "title": "",
   "body": " Which statement about a pointer and dynamic storage is correct?   A pointer can identify an ordinary local object without owning dynamic storage. The pointer's type and the object's storage duration are separate ideas.  Every pointer automatically owns the object it identifies. Ownership must be established by the program's design; a pointer alone does not imply ownership.  Only dynamically allocated objects have addresses. All objects in storage have locations and addresses.  A local object must be released with delete . Local objects are managed by their scope, not by matching delete .   "
 },
@@ -11066,9 +11417,9 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_pointer-variables-and-dereferencing.html",
   "type": "Section",
-  "number": "9.2",
+  "number": "9.3",
   "title": "Pointer Variables and Dereferencing",
-  "body": " Pointer Variables and Dereferencing  A pointer declaration includes the type of object that the pointer is expected to identify. The * in a declaration says that the new variable is a pointer.   #include <iostream> int main() { int score = 90; int* score_pointer = &score; std::cout << *score_pointer << '\\n'; *score_pointer = 95; std::cout << score << '\\n'; return 0; }   In int* score_pointer , the * is part of the declaration syntax. It says that score_pointer has type pointer to int . In *score_pointer , the * is the dereference operator. It follows the stored address and accesses the object there.   Two pointer-related operators       Expression  Role  Meaning    int* pointer  Pointer declaration  Declares pointer as a pointer to an int .    &score  Address-of operator  Produces the address of score .    *pointer  Dereference operator  Accesses the object identified by pointer .     These declarations are equivalent:   int* first_pointer; int *second_pointer;   In this course, we will declare one variable per line. This avoids a common source of confusion:   int* first_pointer; int second_value;   In int* first_pointer, second_value; , only first_pointer is a pointer. The second variable is an ordinary int . One declaration per line makes this distinction visible.   Lvalues and Rvalues: From Assignment to Expression Categories  The names lvalue and rvalue originally came from assignment expressions. An lvalue appeared on the left-hand side, while an rvalue appeared on the right-hand side:   int score = 90; score = 95;   Modern C++ uses a more useful meaning. An lvalue identifies a persistent object or storage location. An rvalue is usually a temporary value or computation result. The expression remains an lvalue even when it appears on the right side of an assignment:   Here, score is an lvalue because it identifies an object, while score + 5 is an rvalue because it is a temporary computation result. This is why the following is valid and invalid, respectively:   int* pointer = &score; \/\/ valid: score is an lvalue \/\/ int* invalid = &(score + 5); \/\/ invalid: the result is an rvalue   This chapter uses only the practical distinction between lvalues and rvalues. More detailed categories, including prvalues, xvalues, and glvalues, can be studied later with move semantics.    What does *score_pointer = 95; do when score_pointer points to score ?   It changes the pointed-to score object to 95. Dereferencing accesses the object identified by the pointer.  It changes the pointer's address to 95. The dereference operator accesses the pointed-to object, not the pointer's stored address.  It creates a second pointer. A declaration, not this assignment, creates a pointer variable.  It prints the address of score . Output requires std::cout ; this statement performs assignment.      Arrange the statements to store an address and then change the pointed-to object.    int score = 90;  int* score_pointer = &score;  std::cout << *score_pointer << '\\n';  *score_pointer = 95;  std::cout << score << '\\n';     What does &score produce in an expression?   The address of score The address-of operator produces a pointer value identifying the object.  The value stored in score Writing score alone reads its value; &score asks for its address.  The object identified by score The expression produces an address, not the object itself.  The address of the pointer variable itself &score identifies score , not another pointer variable.     In int* pointer , what role does * play?   It declares pointer as a pointer to an int . Here the star is part of the pointer declaration syntax.  It immediately accesses the pointed-to object. Dereferencing occurs in an expression such as *pointer after the pointer exists.  It obtains the address of pointer . The address-of operator is & .  It releases dynamic storage. Storage release uses delete or delete[] .     Which expression is an lvalue because it identifies a persistent object?   score The variable name identifies a storage location and can appear on the left side of assignment.  score + 5 This computation produces a temporary rvalue.  90 + 5 A numeric computation result is an rvalue.  5 A literal is a value, not a named storage location.    "
+  "body": " Pointer Variables and Dereferencing  A pointer declaration includes the type of object that the pointer is expected to identify. The * in a declaration says that the new variable is a pointer.   #include <iostream> int main() { int score = 90; int* score_pointer = &score; std::cout << *score_pointer << '\\n'; *score_pointer = 95; std::cout << score << '\\n'; return 0; }   In int* score_pointer , the * is part of the declaration syntax. It says that score_pointer has type pointer to int . In *score_pointer , the * is the dereference operator. It follows the stored address and accesses the object there.   Two pointer-related operators       Expression  Role  Meaning    int* pointer  Pointer declaration  Declares pointer as a pointer to an int .    &score  Address-of operator  Produces the address of score .    *pointer  Dereference operator  Accesses the object identified by pointer .     These declarations are equivalent:   int* first_pointer; int *second_pointer;   In this course, we will declare one variable per line. This avoids a common source of confusion:   int* first_pointer; int second_value;   In int* first_pointer, second_value; , only first_pointer is a pointer. The second variable is an ordinary int . One declaration per line makes this distinction visible.   What a Pointer Contains and Where It Is Stored  Consider this code:   #include <cstdint> int main() { std::int32_t score = 90; std::int32_t* score_pointer = &score; return 0; }   The pointer variable and the score object are two different objects. The pointer stores the virtual address of the first byte of score . The pointer variable itself also occupies memory. An address is a numeric identifier; when that identifier is stored in an object pointer on a typical 64-bit desktop system, the pointer object usually occupies eight bytes.  The pointer variable is stored in ordinary program memory; there is no separate general-purpose area called pointer memory . For example, a local pointer variable is usually stored in the function's stack storage, while a pointer created with new is itself stored in dynamic storage. In either case, its bytes contain a pointer value—the virtual address of another object. The object being pointed to may be in a different storage area. The pointer variable and its target are therefore separate objects with separate storage.   A pointer object and its target occupy separate storage    The pointer object score_pointer occupies eight bytes beginning at virtual address 0x0000'7000. Its stored value is the virtual address 0x0000'A000. A separate four-byte integer object score begins at that address. The pointer and target are separate objects with separate storage.     This figure shows a common arrangement, not a rule that every pointer must be on the stack or every target must be in dynamic storage. A pointer object can also have static storage, and its target can be a local object, a static object, or a dynamically allocated object. During execution, a compiler may temporarily keep a pointer value in a CPU register instead of memory. That optimization does not change the C++ idea: the pointer variable represents an object whose value identifies another object's address.  When estimating storage, count the pointer object and its target as separate objects. For example, if score is a four-byte std::int32_t and score_pointer is an eight-byte pointer, their object storage totals about twelve bytes on a typical 64-bit system. The pointer's eight bytes store an address; they do not include the four bytes occupied by score . If the target was created with new , deleting the target releases its storage, but the pointer variable remains until its own lifetime ends.   Counting a pointer and its target       Object  Typical size  What the storage contains    score  4 bytes  The 32-bit integer value    score_pointer  8 bytes  The virtual address of score    Both objects  About 12 bytes  The target and the pointer are counted separately     The phrase 64-bit architecture is connected to this example because the machine commonly represents an object address in a 64-bit pointer, which is typically eight bytes. It does not mean that a memory cell is 64 bits, that an int is 64 bits, or that every object occupies eight bytes.   The visualization shows addresses assigned by the tool's simulated environment. Use it to see that a pointer stores an address and that an object occupies storage. Do not treat the displayed numeric addresses as portable values.    Lvalues and Rvalues: From Assignment to Expression Categories  The names lvalue and rvalue originally came from assignment expressions. An lvalue appeared on the left-hand side, while an rvalue appeared on the right-hand side:   int score = 90; score = 95;   Modern C++ uses a more useful meaning. An lvalue identifies a persistent object or storage location. An rvalue is usually a temporary value or computation result. The expression remains an lvalue even when it appears on the right side of an assignment:   Here, score is an lvalue because it identifies an object, while score + 5 is an rvalue because it is a temporary computation result. This is why the following is valid and invalid, respectively:   int* pointer = &score; \/\/ valid: score is an lvalue \/\/ int* invalid = &(score + 5); \/\/ invalid: the result is an rvalue   This chapter uses only the practical distinction between lvalues and rvalues. More detailed categories, including prvalues, xvalues, and glvalues, can be studied later with move semantics.    What does *score_pointer = 95; do when score_pointer points to score ?   It changes the pointed-to score object to 95. Dereferencing accesses the object identified by the pointer.  It changes the pointer's address to 95. The dereference operator accesses the pointed-to object, not the pointer's stored address.  It creates a second pointer. A declaration, not this assignment, creates a pointer variable.  It prints the address of score . Output requires std::cout ; this statement performs assignment.      Arrange the statements to store an address and then change the pointed-to object.    int score = 90;  int* score_pointer = &score;  std::cout << *score_pointer << '\\n';  *score_pointer = 95;  std::cout << score << '\\n';     What does &score produce in an expression?   The address of score The address-of operator produces a pointer value identifying the object.  The value stored in score Writing score alone reads its value; &score asks for its address.  The object identified by score The expression produces an address, not the object itself.  The address of the pointer variable itself &score identifies score , not another pointer variable.     In int* pointer , what role does * play?   It declares pointer as a pointer to an int . Here the star is part of the pointer declaration syntax.  It immediately accesses the pointed-to object. Dereferencing occurs in an expression such as *pointer after the pointer exists.  It obtains the address of pointer . The address-of operator is & .  It releases dynamic storage. Storage release uses delete or delete[] .     Which expression is an lvalue because it identifies a persistent object?   score The variable name identifies a storage location and can appear on the left side of assignment.  score + 5 This computation produces a temporary rvalue.  90 + 5 A numeric computation result is an rvalue.  5 A literal is a value, not a named storage location.      Arrange the blocks to create an integer and store its address in a pointer.    std::int32_t score = 90;  std::int32_t* score_pointer = &score;  std::cout << *score_pointer << '\\n';      What does a pointer in an ordinary C++ process normally contain?    A virtual address that identifies an object in that process's address space The operating system and hardware translate virtual addresses to physical locations.  The object's complete contents A pointer stores an address, not a copy of the object.  A physical RAM address that is valid in every process Processes normally use separate virtual address spaces.  The page-table entry itself Page tables are used by the system to translate addresses; a pointer is a C++ object value.    "
 },
 {
   "id": "chapter9_pointer-variables-and-dereferencing-2",
@@ -11093,7 +11444,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#table_ch9_pointer_symbols",
   "type": "Table",
-  "number": "9.2.1",
+  "number": "9.3.1",
   "title": "Two pointer-related operators",
   "body": " Two pointer-related operators       Expression  Role  Meaning    int* pointer  Pointer declaration  Declares pointer as a pointer to an int .    &score  Address-of operator  Produces the address of score .    *pointer  Dereference operator  Accesses the object identified by pointer .    "
 },
@@ -11125,11 +11476,20 @@ var ptx_lunr_docs = [
   "body": "In int* first_pointer, second_value; , only first_pointer is a pointer. The second variable is an ordinary int . One declaration per line makes this distinction visible. "
 },
 {
+  "id": "chapter9_pointer-variables-and-dereferencing_pointer-storage",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_pointer-storage",
+  "type": "Subsection",
+  "number": "9.3.1",
+  "title": "What a Pointer Contains and Where It Is Stored",
+  "body": " What a Pointer Contains and Where It Is Stored  Consider this code:   #include <cstdint> int main() { std::int32_t score = 90; std::int32_t* score_pointer = &score; return 0; }   The pointer variable and the score object are two different objects. The pointer stores the virtual address of the first byte of score . The pointer variable itself also occupies memory. An address is a numeric identifier; when that identifier is stored in an object pointer on a typical 64-bit desktop system, the pointer object usually occupies eight bytes.  The pointer variable is stored in ordinary program memory; there is no separate general-purpose area called pointer memory . For example, a local pointer variable is usually stored in the function's stack storage, while a pointer created with new is itself stored in dynamic storage. In either case, its bytes contain a pointer value—the virtual address of another object. The object being pointed to may be in a different storage area. The pointer variable and its target are therefore separate objects with separate storage.   A pointer object and its target occupy separate storage    The pointer object score_pointer occupies eight bytes beginning at virtual address 0x0000'7000. Its stored value is the virtual address 0x0000'A000. A separate four-byte integer object score begins at that address. The pointer and target are separate objects with separate storage.     This figure shows a common arrangement, not a rule that every pointer must be on the stack or every target must be in dynamic storage. A pointer object can also have static storage, and its target can be a local object, a static object, or a dynamically allocated object. During execution, a compiler may temporarily keep a pointer value in a CPU register instead of memory. That optimization does not change the C++ idea: the pointer variable represents an object whose value identifies another object's address.  When estimating storage, count the pointer object and its target as separate objects. For example, if score is a four-byte std::int32_t and score_pointer is an eight-byte pointer, their object storage totals about twelve bytes on a typical 64-bit system. The pointer's eight bytes store an address; they do not include the four bytes occupied by score . If the target was created with new , deleting the target releases its storage, but the pointer variable remains until its own lifetime ends.   Counting a pointer and its target       Object  Typical size  What the storage contains    score  4 bytes  The 32-bit integer value    score_pointer  8 bytes  The virtual address of score    Both objects  About 12 bytes  The target and the pointer are counted separately     The phrase 64-bit architecture is connected to this example because the machine commonly represents an object address in a 64-bit pointer, which is typically eight bytes. It does not mean that a memory cell is 64 bits, that an int is 64 bits, or that every object occupies eight bytes.   The visualization shows addresses assigned by the tool's simulated environment. Use it to see that a pointer stores an address and that an object occupies storage. Do not treat the displayed numeric addresses as portable values.  "
+},
+{
   "id": "chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues",
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues",
   "type": "Subsection",
-  "number": "9.2.1",
+  "number": "9.3.2",
   "title": "Lvalues and Rvalues: From Assignment to Expression Categories",
   "body": " Lvalues and Rvalues: From Assignment to Expression Categories  The names lvalue and rvalue originally came from assignment expressions. An lvalue appeared on the left-hand side, while an rvalue appeared on the right-hand side:   int score = 90; score = 95;   Modern C++ uses a more useful meaning. An lvalue identifies a persistent object or storage location. An rvalue is usually a temporary value or computation result. The expression remains an lvalue even when it appears on the right side of an assignment:   Here, score is an lvalue because it identifies an object, while score + 5 is an rvalue because it is a temporary computation result. This is why the following is valid and invalid, respectively:   int* pointer = &score; \/\/ valid: score is an lvalue \/\/ int* invalid = &(score + 5); \/\/ invalid: the result is an rvalue   This chapter uses only the practical distinction between lvalues and rvalues. More detailed categories, including prvalues, xvalues, and glvalues, can be studied later with move semantics.  "
 },
@@ -11138,7 +11498,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_star",
   "type": "Checkpoint",
-  "number": "9.2.1",
+  "number": "9.3.1",
   "title": "",
   "body": " What does *score_pointer = 95; do when score_pointer points to score ?   It changes the pointed-to score object to 95. Dereferencing accesses the object identified by the pointer.  It changes the pointer's address to 95. The dereference operator accesses the pointed-to object, not the pointer's stored address.  It creates a second pointer. A declaration, not this assignment, creates a pointer variable.  It prints the address of score . Output requires std::cout ; this statement performs assignment.   "
 },
@@ -11147,7 +11507,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_parsons_dereference",
   "type": "Checkpoint",
-  "number": "9.2.2",
+  "number": "9.3.2",
   "title": "",
   "body": "  Arrange the statements to store an address and then change the pointed-to object.    int score = 90;  int* score_pointer = &score;  std::cout << *score_pointer << '\\n';  *score_pointer = 95;  std::cout << score << '\\n';   "
 },
@@ -11156,7 +11516,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_address_of",
   "type": "Checkpoint",
-  "number": "9.2.3",
+  "number": "9.3.3",
   "title": "",
   "body": " What does &score produce in an expression?   The address of score The address-of operator produces a pointer value identifying the object.  The value stored in score Writing score alone reads its value; &score asks for its address.  The object identified by score The expression produces an address, not the object itself.  The address of the pointer variable itself &score identifies score , not another pointer variable.   "
 },
@@ -11165,7 +11525,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_declaration_star",
   "type": "Checkpoint",
-  "number": "9.2.4",
+  "number": "9.3.4",
   "title": "",
   "body": " In int* pointer , what role does * play?   It declares pointer as a pointer to an int . Here the star is part of the pointer declaration syntax.  It immediately accesses the pointed-to object. Dereferencing occurs in an expression such as *pointer after the pointer exists.  It obtains the address of pointer . The address-of operator is & .  It releases dynamic storage. Storage release uses delete or delete[] .   "
 },
@@ -11174,16 +11534,34 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_lvalue",
   "type": "Checkpoint",
-  "number": "9.2.5",
+  "number": "9.3.5",
   "title": "",
   "body": " Which expression is an lvalue because it identifies a persistent object?   score The variable name identifies a storage location and can appear on the left side of assignment.  score + 5 This computation produces a temporary rvalue.  90 + 5 A numeric computation result is an rvalue.  5 A literal is a value, not a named storage location.   "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing_parsons_storage",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_parsons_storage",
+  "type": "Checkpoint",
+  "number": "9.3.6",
+  "title": "",
+  "body": "  Arrange the blocks to create an integer and store its address in a pointer.    std::int32_t score = 90;  std::int32_t* score_pointer = &score;  std::cout << *score_pointer << '\\n';   "
+},
+{
+  "id": "chapter9_pointer-variables-and-dereferencing_exercise_virtual_address",
+  "level": "2",
+  "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_virtual_address",
+  "type": "Checkpoint",
+  "number": "9.3.7",
+  "title": "",
+  "body": "  What does a pointer in an ordinary C++ process normally contain?    A virtual address that identifies an object in that process's address space The operating system and hardware translate virtual addresses to physical locations.  The object's complete contents A pointer stores an address, not a copy of the object.  A physical RAM address that is valid in every process Processes normally use separate virtual address spaces.  The page-table entry itself Page tables are used by the system to translate addresses; a pointer is a C++ object value.   "
 },
 {
   "id": "chapter9_nullptr-and-safe-pointer-use",
   "level": "1",
   "url": "chapter9_nullptr-and-safe-pointer-use.html",
   "type": "Section",
-  "number": "9.3",
+  "number": "9.4",
   "title": "<code class=\"code-inline tex2jax_ignore\">nullptr<\/code> and Safe Pointer Use",
   "body": " nullptr and Safe Pointer Use  A pointer can identify an object, or it can identify no object. The value nullptr represents the second situation. A null pointer is useful when a program needs to represent no address explicitly.   The function checks the pointer before dereferencing it. Dereferencing a null pointer will result in undefined behavior causing a Segmentation fault or silent data corruption because it does not identify an object. So validating a pointer variable for not being nullptr is an excellent defensive coding habit.  Use nullptr rather than the older integer-based conventions 0 and NULL . A pointer should be initialized immediately, even when its initial state is no object.     What should a function do before dereferencing a pointer parameter that may be null?   Check whether the pointer is not nullptr . Only a pointer that identifies a live object may be safely dereferenced.  Add 1 to the pointer. Pointer arithmetic does not make a null pointer valid.  Convert the pointer to int . Conversion does not establish that an object exists.  Dereference it once to test it. Dereferencing is exactly the unsafe operation that must be avoided.      Arrange the blocks to print a value only when the pointer identifies an object.    void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }     Which declaration safely represents a pointer that currently identifies no object?   int* value_pointer = nullptr; nullptr gives the pointer an explicit, safe no-object state.  int* value_pointer; An uninitialized pointer has an indeterminate value and must not be used.  int value_pointer = nullptr; This declares an int , not a pointer.  int* value_pointer = 1; An arbitrary integer is not a safe way to represent no object.     Why must a nullable pointer be checked before dereferencing?   A null pointer identifies no object, so dereferencing it has undefined behavior. Dereferencing is valid only when the pointer identifies a live object.  A null pointer always points to the first array element. nullptr identifies no object.  Checking changes the pointer into a reference. A check only tests the pointer's state; it does not change its type.  Checking makes the pointed-to object permanent. A check does not change an object's lifetime.     Which condition is equivalent to checking whether value_pointer is not null?   if (value_pointer) A pointer converts to true when it identifies an address and to false when it is null.  if (*value_pointer) This dereferences the pointer and is unsafe when it is null.  if (&value_pointer) This tests the address of the pointer variable, which is normally non-null.  if (value_pointer = nullptr) This assigns rather than checks and also makes the pointer null.    "
 },
@@ -11219,7 +11597,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_check",
   "type": "Checkpoint",
-  "number": "9.3.1",
+  "number": "9.4.1",
   "title": "",
   "body": " What should a function do before dereferencing a pointer parameter that may be null?   Check whether the pointer is not nullptr . Only a pointer that identifies a live object may be safely dereferenced.  Add 1 to the pointer. Pointer arithmetic does not make a null pointer valid.  Convert the pointer to int . Conversion does not establish that an object exists.  Dereference it once to test it. Dereferencing is exactly the unsafe operation that must be avoided.   "
 },
@@ -11228,7 +11606,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_parsons_guard",
   "type": "Checkpoint",
-  "number": "9.3.2",
+  "number": "9.4.2",
   "title": "",
   "body": "  Arrange the blocks to print a value only when the pointer identifies an object.    void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }   "
 },
@@ -11237,7 +11615,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_initialization",
   "type": "Checkpoint",
-  "number": "9.3.3",
+  "number": "9.4.3",
   "title": "",
   "body": " Which declaration safely represents a pointer that currently identifies no object?   int* value_pointer = nullptr; nullptr gives the pointer an explicit, safe no-object state.  int* value_pointer; An uninitialized pointer has an indeterminate value and must not be used.  int value_pointer = nullptr; This declares an int , not a pointer.  int* value_pointer = 1; An arbitrary integer is not a safe way to represent no object.   "
 },
@@ -11246,7 +11624,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_guard",
   "type": "Checkpoint",
-  "number": "9.3.4",
+  "number": "9.4.4",
   "title": "",
   "body": " Why must a nullable pointer be checked before dereferencing?   A null pointer identifies no object, so dereferencing it has undefined behavior. Dereferencing is valid only when the pointer identifies a live object.  A null pointer always points to the first array element. nullptr identifies no object.  Checking changes the pointer into a reference. A check only tests the pointer's state; it does not change its type.  Checking makes the pointed-to object permanent. A check does not change an object's lifetime.   "
 },
@@ -11255,7 +11633,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_boolean_check",
   "type": "Checkpoint",
-  "number": "9.3.5",
+  "number": "9.4.5",
   "title": "",
   "body": " Which condition is equivalent to checking whether value_pointer is not null?   if (value_pointer) A pointer converts to true when it identifies an address and to false when it is null.  if (*value_pointer) This dereferences the pointer and is unsafe when it is null.  if (&value_pointer) This tests the address of the pointer variable, which is normally non-null.  if (value_pointer = nullptr) This assigns rather than checks and also makes the pointer null.   "
 },
@@ -11264,7 +11642,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_pointers-as-function-parameters.html",
   "type": "Section",
-  "number": "9.4",
+  "number": "9.5",
   "title": "Pointers as Function Parameters",
   "body": " Pointers as Function Parameters  A pointer parameter lets a function receive the address of an existing object. The function can then modify the caller's object through the dereferenced pointer, provided the pointer is valid and non-constant.   #include <iostream> void increase_value(int* value_pointer) { if (value_pointer != nullptr) { ++(*value_pointer); } } int main() { int count = 4; increase_value(&count); std::cout << count << '\\n'; return 0; }   The parentheses in ++(*value_pointer) make the intended order visible: first dereference the pointer, then increment the pointed-to value.   Read-Only Pointer Parameters  A pointer to const data can inspect an object without changing it through that pointer.   #include <iostream> void print_value(const int* value_pointer) { if (value_pointer != nullptr) { std::cout << *value_pointer << '\\n'; } } int main() { const int temperature = 22; print_value(&temperature); return 0; }   The declaration const int* value_pointer means that the function cannot modify the int through this pointer. A pointer parameter is useful when nullptr is a meaningful possibility. When an object must always exist, a reference is often a clearer choice.    Pointers and References: The swap Example  Both pointer parameters and reference parameters can allow a function to modify the caller's objects. The difference is visible in both the function definition and the call:   A pointer can represent no object with nullptr and can later point to a different object. A reference must bind to an object when it is initialized and cannot be reseated. Neither a pointer nor a reference automatically owns the object it identifies.    Pointer and reference parameter choices       Parameter  Can represent no object?  Can modify the caller's object?    int* value_pointer  Yes, with nullptr .  Yes, after a valid dereference.    const int* value_pointer  Yes, with nullptr .  No.    int& value  No; a reference must bind to an object.  Yes.    const int& value  No; a reference must bind to an object.  No.      When is a pointer parameter preferable to a reference parameter?   When the function needs to allow the possibility that no object is provided. nullptr can represent the absence of an object.  Whenever the function must be faster. Pointer syntax does not automatically make a function faster.  Whenever the function reads an integer. Parameter choice depends on the function's contract, not merely the type.  Whenever a vector is passed to a function. Vectors are often passed by constant reference when read-only.      Arrange the blocks to increment a caller's variable through a pointer parameter.    void increase_value(int* value_pointer) {  if (value_pointer != nullptr) { ++(*value_pointer); }  }  int count = 4;  increase_value(&count);  std::cout << count << '\\n';     What does const int* value_pointer allow the function to do?   Read the pointed-to int without modifying it through this pointer The const applies to the pointed-to integer.  Reseat the pointer but not read the integer This declaration permits reading the integer but does not make the pointer itself const.  Delete every object that the pointer identifies const does not grant ownership or deletion responsibility.  Guarantee that the pointer is never null A pointer to const data can still be nullptr .     Why is a reference often clearer when a function requires an existing object?   A reference must bind to an object and cannot represent nullptr . The reference type communicates that the function expects an object to exist.  A reference automatically allocates the object. References do not create dynamic storage.  A reference always makes a copy. A reference is an alias for an existing object.  A reference can be reseated more easily than a pointer. A reference remains bound to its original object.     How should a caller pass count to increase_value(int* value_pointer) ?   increase_value(&count); The pointer parameter receives the address of the caller's object.  increase_value(*count); * is not used to obtain the address of an ordinary variable.  increase_value(count); This passes the integer value, not its address.  increase_value(nullptr); This intentionally passes no object and would not increment count .    "
 },
@@ -11291,7 +11669,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_read-only",
   "type": "Subsection",
-  "number": "9.4.1",
+  "number": "9.5.1",
   "title": "Read-Only Pointer Parameters",
   "body": " Read-Only Pointer Parameters  A pointer to const data can inspect an object without changing it through that pointer.   #include <iostream> void print_value(const int* value_pointer) { if (value_pointer != nullptr) { std::cout << *value_pointer << '\\n'; } } int main() { const int temperature = 22; print_value(&temperature); return 0; }   The declaration const int* value_pointer means that the function cannot modify the int through this pointer. A pointer parameter is useful when nullptr is a meaningful possibility. When an object must always exist, a reference is often a clearer choice.  "
 },
@@ -11300,7 +11678,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_pointer-reference-comparison",
   "type": "Subsection",
-  "number": "9.4.2",
+  "number": "9.5.2",
   "title": "Pointers and References: The <code class=\"code-inline tex2jax_ignore\">swap<\/code> Example",
   "body": " Pointers and References: The swap Example  Both pointer parameters and reference parameters can allow a function to modify the caller's objects. The difference is visible in both the function definition and the call:   A pointer can represent no object with nullptr and can later point to a different object. A reference must bind to an object when it is initialized and cannot be reseated. Neither a pointer nor a reference automatically owns the object it identifies.  "
 },
@@ -11309,7 +11687,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#table_ch9_pointer_and_reference_parameters",
   "type": "Table",
-  "number": "9.4.1",
+  "number": "9.5.1",
   "title": "Pointer and reference parameter choices",
   "body": " Pointer and reference parameter choices       Parameter  Can represent no object?  Can modify the caller's object?    int* value_pointer  Yes, with nullptr .  Yes, after a valid dereference.    const int* value_pointer  Yes, with nullptr .  No.    int& value  No; a reference must bind to an object.  Yes.    const int& value  No; a reference must bind to an object.  No.    "
 },
@@ -11318,7 +11696,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_reference",
   "type": "Checkpoint",
-  "number": "9.4.1",
+  "number": "9.5.1",
   "title": "",
   "body": " When is a pointer parameter preferable to a reference parameter?   When the function needs to allow the possibility that no object is provided. nullptr can represent the absence of an object.  Whenever the function must be faster. Pointer syntax does not automatically make a function faster.  Whenever the function reads an integer. Parameter choice depends on the function's contract, not merely the type.  Whenever a vector is passed to a function. Vectors are often passed by constant reference when read-only.   "
 },
@@ -11327,7 +11705,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_parsons_pointer_call",
   "type": "Checkpoint",
-  "number": "9.4.2",
+  "number": "9.5.2",
   "title": "",
   "body": "  Arrange the blocks to increment a caller's variable through a pointer parameter.    void increase_value(int* value_pointer) {  if (value_pointer != nullptr) { ++(*value_pointer); }  }  int count = 4;  increase_value(&count);  std::cout << count << '\\n';   "
 },
@@ -11336,7 +11714,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_const_pointer",
   "type": "Checkpoint",
-  "number": "9.4.3",
+  "number": "9.5.3",
   "title": "",
   "body": " What does const int* value_pointer allow the function to do?   Read the pointed-to int without modifying it through this pointer The const applies to the pointed-to integer.  Reseat the pointer but not read the integer This declaration permits reading the integer but does not make the pointer itself const.  Delete every object that the pointer identifies const does not grant ownership or deletion responsibility.  Guarantee that the pointer is never null A pointer to const data can still be nullptr .   "
 },
@@ -11345,7 +11723,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_reference_contract",
   "type": "Checkpoint",
-  "number": "9.4.4",
+  "number": "9.5.4",
   "title": "",
   "body": " Why is a reference often clearer when a function requires an existing object?   A reference must bind to an object and cannot represent nullptr . The reference type communicates that the function expects an object to exist.  A reference automatically allocates the object. References do not create dynamic storage.  A reference always makes a copy. A reference is an alias for an existing object.  A reference can be reseated more easily than a pointer. A reference remains bound to its original object.   "
 },
@@ -11354,7 +11732,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_pointer_argument",
   "type": "Checkpoint",
-  "number": "9.4.5",
+  "number": "9.5.5",
   "title": "",
   "body": " How should a caller pass count to increase_value(int* value_pointer) ?   increase_value(&count); The pointer parameter receives the address of the caller's object.  increase_value(*count); * is not used to obtain the address of an ordinary variable.  increase_value(count); This passes the integer value, not its address.  increase_value(nullptr); This intentionally passes no object and would not increment count .   "
 },
@@ -11363,7 +11741,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_pointers-and-c-style-arrays.html",
   "type": "Section",
-  "number": "9.5",
+  "number": "9.6",
   "title": "Pointers and C-Style Arrays",
   "body": " Pointers and C-Style Arrays  A C-style array stores a fixed number of elements of one type in consecutive positions. In many expressions, the array name is converted to a pointer to its first element. This conversion is commonly called array decay .   When scores is passed to print_values() , it becomes a pointer to the first element. The pointer does not carry the array's length, so the function receives count separately.   Pointer Arithmetic  Pointer arithmetic moves by elements of the pointed-to type, not by individual bytes. If an int* points to one array element, adding 1 produces a pointer to the next int in that array.   #include <iostream> int main() { int scores[]{88, 91, 95}; int* current = scores; std::cout << *current << '\\n'; ++current; std::cout << *current << '\\n'; std::cout << *(current + 1) << '\\n'; return 0; }    Common pointer-arithmetic expressions       Expression  Meaning  Important condition    pointer + 1  Pointer to the next element.  Must remain within the same array or one position past it.    ++pointer  Move to the next element.  Do not dereference a one-past-the-end pointer.    *pointer  Access the pointed-to element.  The pointer must identify a valid live element.    pointer[index]  Equivalent to *(pointer + index) .  The resulting position must be a valid element.       Array Size and Function Parameters  An array name does not decay in every context. For example, sizeof(scores) measures the entire array when scores is an actual array in that scope. Once the array has decayed to a pointer parameter, sizeof(values) measures the pointer, not the original array. This is another reason to pass the length explicitly.  A pointer may identify one position past the last element. Such a pointer is useful as a stopping position, but it must never be dereferenced. Pointer arithmetic outside the same array object is not a valid way to reach unrelated storage.    Why does a function receiving const int* values usually need a separate length parameter?   The pointer identifies an element but does not retain the original array's length. Array decay gives the function an address, not the array-size information.  Because pointers cannot access array elements. Pointer indexing and dereferencing can access elements.  Because the array is automatically copied into the function. The array is not copied into a pointer parameter.  Because pointer arithmetic always changes the array length. Pointer arithmetic does not change the array object.      Arrange the statements to traverse two elements of an array with a pointer.    int scores[]{88, 91, 95};  int* current = scores;  std::cout << *current << '\\n';  ++current;  std::cout << *current << '\\n';     What does current + 1 mean when current is an int* into an array?   A pointer to the next int element Pointer arithmetic is scaled by the pointed-to type.  A pointer exactly one byte later The movement is the size of an int , not necessarily one byte.  The next element's integer value The result is still a pointer; dereference it to read a value.  The array's length increased by one Pointer arithmetic does not resize an array.     What does scores provide when passed to void print_values(const int* values, std::size_t count) ?   A pointer to the first element of the array In this function call, the array expression converts to a pointer to its first element.  A copy of the entire array including its length The array is not copied into the pointer parameter, and the length is separate.  A pointer to the last element Array decay identifies the first element.  A std::vector<int> object A C-style array does not automatically become a vector.     Why must a traversal stop before dereferencing one-past-the-end?   One-past-the-end can be used for comparison but does not identify an element. Dereferencing is valid only for pointers to actual array elements.  One-past-the-end always points to the first element of another array. It is a boundary position, not an element of another array.  Pointer arithmetic stops working after the first element. Pointer arithmetic can traverse the array within its bounds.  The array length changes when the pointer reaches the boundary. Pointer movement does not change the array object.    "
 },
@@ -11390,7 +11768,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_pointer-arithmetic",
   "type": "Subsection",
-  "number": "9.5.1",
+  "number": "9.6.1",
   "title": "Pointer Arithmetic",
   "body": " Pointer Arithmetic  Pointer arithmetic moves by elements of the pointed-to type, not by individual bytes. If an int* points to one array element, adding 1 produces a pointer to the next int in that array.   #include <iostream> int main() { int scores[]{88, 91, 95}; int* current = scores; std::cout << *current << '\\n'; ++current; std::cout << *current << '\\n'; std::cout << *(current + 1) << '\\n'; return 0; }    Common pointer-arithmetic expressions       Expression  Meaning  Important condition    pointer + 1  Pointer to the next element.  Must remain within the same array or one position past it.    ++pointer  Move to the next element.  Do not dereference a one-past-the-end pointer.    *pointer  Access the pointed-to element.  The pointer must identify a valid live element.    pointer[index]  Equivalent to *(pointer + index) .  The resulting position must be a valid element.     "
 },
@@ -11399,7 +11777,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_array-size",
   "type": "Subsection",
-  "number": "9.5.2",
+  "number": "9.6.2",
   "title": "Array Size and Function Parameters",
   "body": " Array Size and Function Parameters  An array name does not decay in every context. For example, sizeof(scores) measures the entire array when scores is an actual array in that scope. Once the array has decayed to a pointer parameter, sizeof(values) measures the pointer, not the original array. This is another reason to pass the length explicitly.  A pointer may identify one position past the last element. Such a pointer is useful as a stopping position, but it must never be dereferenced. Pointer arithmetic outside the same array object is not a valid way to reach unrelated storage.  "
 },
@@ -11408,7 +11786,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_decay",
   "type": "Checkpoint",
-  "number": "9.5.1",
+  "number": "9.6.1",
   "title": "",
   "body": " Why does a function receiving const int* values usually need a separate length parameter?   The pointer identifies an element but does not retain the original array's length. Array decay gives the function an address, not the array-size information.  Because pointers cannot access array elements. Pointer indexing and dereferencing can access elements.  Because the array is automatically copied into the function. The array is not copied into a pointer parameter.  Because pointer arithmetic always changes the array length. Pointer arithmetic does not change the array object.   "
 },
@@ -11417,7 +11795,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_parsons_decay",
   "type": "Checkpoint",
-  "number": "9.5.2",
+  "number": "9.6.2",
   "title": "",
   "body": "  Arrange the statements to traverse two elements of an array with a pointer.    int scores[]{88, 91, 95};  int* current = scores;  std::cout << *current << '\\n';  ++current;  std::cout << *current << '\\n';   "
 },
@@ -11426,7 +11804,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_increment",
   "type": "Checkpoint",
-  "number": "9.5.3",
+  "number": "9.6.3",
   "title": "",
   "body": " What does current + 1 mean when current is an int* into an array?   A pointer to the next int element Pointer arithmetic is scaled by the pointed-to type.  A pointer exactly one byte later The movement is the size of an int , not necessarily one byte.  The next element's integer value The result is still a pointer; dereference it to read a value.  The array's length increased by one Pointer arithmetic does not resize an array.   "
 },
@@ -11435,7 +11813,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_decay_call",
   "type": "Checkpoint",
-  "number": "9.5.4",
+  "number": "9.6.4",
   "title": "",
   "body": " What does scores provide when passed to void print_values(const int* values, std::size_t count) ?   A pointer to the first element of the array In this function call, the array expression converts to a pointer to its first element.  A copy of the entire array including its length The array is not copied into the pointer parameter, and the length is separate.  A pointer to the last element Array decay identifies the first element.  A std::vector<int> object A C-style array does not automatically become a vector.   "
 },
@@ -11444,7 +11822,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_pointer_bounds",
   "type": "Checkpoint",
-  "number": "9.5.5",
+  "number": "9.6.5",
   "title": "",
   "body": " Why must a traversal stop before dereferencing one-past-the-end?   One-past-the-end can be used for comparison but does not identify an element. Dereferencing is valid only for pointers to actual array elements.  One-past-the-end always points to the first element of another array. It is a boundary position, not an element of another array.  Pointer arithmetic stops working after the first element. Pointer arithmetic can traverse the array within its bounds.  The array length changes when the pointer reaches the boundary. Pointer movement does not change the array object.   "
 },
@@ -11453,7 +11831,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_c-style-character-strings.html",
   "type": "Section",
-  "number": "9.6",
+  "number": "9.7",
   "title": "C-Style Character Strings",
   "body": " C-Style Character Strings  A C-style string is a sequence of characters stored in a character array and terminated by the null character '\\0' . The null character is not the same as the character '0' . It marks where the string ends.   #include <iostream> int main() { char message[] = \"Hello\"; for (const char* current = message; *current != '\\0'; ++current) { std::cout << *current << '\\n'; } return 0; }   The literal \"Hello\" initializes six array elements: 'H' , 'e' , 'l' , 'l' , 'o' , and '\\0' . The pointer loop stops when it reaches that final marker.   Mutable Arrays and Read-Only Literals  An array initialized from a string literal owns its character elements and can be modified. A pointer to a string literal should be declared as a pointer to const char because the literal must not be modified.   #include <iostream> int main() { char mutable_message[] = \"Hello\"; const char* read_only_message = \"Hello\"; mutable_message[0] = 'J'; std::cout << mutable_message << '\\n'; std::cout << read_only_message << '\\n'; return 0; }   In modern C++, do not write char* message = \"Hello\" . The correct type for a pointer to a string literal is const char* . For ordinary C++ text processing, prefer std::string .    Capacity and the Null Character  The array must have room for the terminating null character. The following array has room for six characters, not five:   char word[] = \"hello\";   An array such as char letters[5] = {'h', 'e', 'l', 'l', 'o'} contains five characters but is not a C-style string because it has no terminating '\\0' .    Command-Line Arguments  A program can receive text from the command line through the parameters of main() :   #include <iostream> int main(int argc, char* argv[]) { std::cout << \"Argument count: \" << argc << '\\n'; for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } return 0; }    argc is the argument count. argv is an array of pointers, and each pointer identifies a null-terminated C-style string. The execution environment prepares these values before main() begins.   Command-line argument positions       Expression  Points to  Important fact    argv[0]  The program name in ordinary execution.  It is still text.    argv[1]  The first user-supplied argument.  Its type is a C-style string.    argv[argc]  No argument.  The standard specifies a null pointer here.     In a parameter list, char* argv[] is adjusted to a pointer-based form equivalent to char** argv . Command-line arguments arrive as text; converting text to a number is a separate operation.    What does argc represent?   The number of command-line argument strings argc counts the entries available through argv .  The length of the longest argument Each argument's length is separate from the total count.  The number of characters in argv[0] argv[0] is one entry in the array.  The memory address of argv argv holds the pointer-based argument collection.      What marks the end of a C-style character string?   The null character '\\0' C-style string functions search for this terminating character.  The character '0' '0' is a visible digit character, not the null character.  The first space Spaces can be part of a C-style string.  The pointer value nullptr nullptr is a pointer value, not a character stored in the string.      Arrange the blocks to print a C-style string one character at a time.    char word[] = \"cat\";  const char* current = word;  while (*current != '\\0') {  std::cout << *current << '\\n'; ++current;  }     Why does char word[] = \"cat\"; need four elements?   It stores three visible characters plus '\\0' . The null character marks the end of the C-style string.  It stores four visible letters in the word. cat contains three visible characters.  It stores a pointer and three characters. The array stores character elements; it does not contain a separate pointer element.  The compiler always adds an unrelated padding character. The extra element is specifically the required null terminator.     Which declaration creates a modifiable character array initialized from a string literal?   char message[] = \"Hello\"; The array owns its character elements, including the terminating null character.  const char* message = \"Hello\"; This safely refers to a read-only string literal through a pointer.  char* message = \"Hello\"; A string literal must not be treated as modifiable character storage.  char message = \"Hello\"; A single char cannot store an entire string.     What is the important type fact about each argv[index] value?   It identifies a null-terminated C-style string. Command-line arguments arrive as text through pointers to characters.  It is already an int containing the user's number. Converting argument text to a number is a separate operation.  It is always a std::string object. The standard main signature uses C-style strings.  It is the argument count. argc stores the count; argv[index] identifies one text argument.    "
 },
@@ -11480,7 +11858,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_mutability",
   "type": "Subsection",
-  "number": "9.6.1",
+  "number": "9.7.1",
   "title": "Mutable Arrays and Read-Only Literals",
   "body": " Mutable Arrays and Read-Only Literals  An array initialized from a string literal owns its character elements and can be modified. A pointer to a string literal should be declared as a pointer to const char because the literal must not be modified.   #include <iostream> int main() { char mutable_message[] = \"Hello\"; const char* read_only_message = \"Hello\"; mutable_message[0] = 'J'; std::cout << mutable_message << '\\n'; std::cout << read_only_message << '\\n'; return 0; }   In modern C++, do not write char* message = \"Hello\" . The correct type for a pointer to a string literal is const char* . For ordinary C++ text processing, prefer std::string .  "
 },
@@ -11489,7 +11867,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_length",
   "type": "Subsection",
-  "number": "9.6.2",
+  "number": "9.7.2",
   "title": "Capacity and the Null Character",
   "body": " Capacity and the Null Character  The array must have room for the terminating null character. The following array has room for six characters, not five:   char word[] = \"hello\";   An array such as char letters[5] = {'h', 'e', 'l', 'l', 'o'} contains five characters but is not a C-style string because it has no terminating '\\0' .  "
 },
@@ -11498,7 +11876,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_command-line-arguments",
   "type": "Subsection",
-  "number": "9.6.3",
+  "number": "9.7.3",
   "title": "Command-Line Arguments",
   "body": " Command-Line Arguments  A program can receive text from the command line through the parameters of main() :   #include <iostream> int main(int argc, char* argv[]) { std::cout << \"Argument count: \" << argc << '\\n'; for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } return 0; }    argc is the argument count. argv is an array of pointers, and each pointer identifies a null-terminated C-style string. The execution environment prepares these values before main() begins.   Command-line argument positions       Expression  Points to  Important fact    argv[0]  The program name in ordinary execution.  It is still text.    argv[1]  The first user-supplied argument.  Its type is a C-style string.    argv[argc]  No argument.  The standard specifies a null pointer here.     In a parameter list, char* argv[] is adjusted to a pointer-based form equivalent to char** argv . Command-line arguments arrive as text; converting text to a number is a separate operation.    What does argc represent?   The number of command-line argument strings argc counts the entries available through argv .  The length of the longest argument Each argument's length is separate from the total count.  The number of characters in argv[0] argv[0] is one entry in the array.  The memory address of argv argv holds the pointer-based argument collection.    "
 },
@@ -11507,7 +11885,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_null",
   "type": "Checkpoint",
-  "number": "9.6.2",
+  "number": "9.7.2",
   "title": "",
   "body": " What marks the end of a C-style character string?   The null character '\\0' C-style string functions search for this terminating character.  The character '0' '0' is a visible digit character, not the null character.  The first space Spaces can be part of a C-style string.  The pointer value nullptr nullptr is a pointer value, not a character stored in the string.   "
 },
@@ -11516,7 +11894,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_parsons_traversal",
   "type": "Checkpoint",
-  "number": "9.6.3",
+  "number": "9.7.3",
   "title": "",
   "body": "  Arrange the blocks to print a C-style string one character at a time.    char word[] = \"cat\";  const char* current = word;  while (*current != '\\0') {  std::cout << *current << '\\n'; ++current;  }   "
 },
@@ -11525,7 +11903,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_terminator",
   "type": "Checkpoint",
-  "number": "9.6.4",
+  "number": "9.7.4",
   "title": "",
   "body": " Why does char word[] = \"cat\"; need four elements?   It stores three visible characters plus '\\0' . The null character marks the end of the C-style string.  It stores four visible letters in the word. cat contains three visible characters.  It stores a pointer and three characters. The array stores character elements; it does not contain a separate pointer element.  The compiler always adds an unrelated padding character. The extra element is specifically the required null terminator.   "
 },
@@ -11534,7 +11912,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_mutability",
   "type": "Checkpoint",
-  "number": "9.6.5",
+  "number": "9.7.5",
   "title": "",
   "body": " Which declaration creates a modifiable character array initialized from a string literal?   char message[] = \"Hello\"; The array owns its character elements, including the terminating null character.  const char* message = \"Hello\"; This safely refers to a read-only string literal through a pointer.  char* message = \"Hello\"; A string literal must not be treated as modifiable character storage.  char message = \"Hello\"; A single char cannot store an entire string.   "
 },
@@ -11543,7 +11921,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_argv_text",
   "type": "Checkpoint",
-  "number": "9.6.6",
+  "number": "9.7.6",
   "title": "",
   "body": " What is the important type fact about each argv[index] value?   It identifies a null-terminated C-style string. Command-line arguments arrive as text through pointers to characters.  It is already an int containing the user's number. Converting argument text to a number is a separate operation.  It is always a std::string object. The standard main signature uses C-style strings.  It is the argument count. argc stores the count; argv[index] identifies one text argument.   "
 },
@@ -11552,7 +11930,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html",
   "type": "Section",
-  "number": "9.7",
+  "number": "9.8",
   "title": "Dynamic Memory with <code class=\"code-inline tex2jax_ignore\">new<\/code> and <code class=\"code-inline tex2jax_ignore\">delete<\/code>",
   "body": " Dynamic Memory with new and delete  A program can request dynamically managed storage while it is running. The expression new creates an object and produces a pointer to that object. The expression delete releases storage created by a single use of new .   #include <iostream> int main() { int* score_pointer = new int{90}; std::cout << *score_pointer << '\\n'; delete score_pointer; score_pointer = nullptr; return 0; }   The pointer variable itself is an ordinary local object. The integer created by new int{90} has a dynamically managed lifetime. The program uses the pointer to access that integer and then releases the storage with delete .   The lifecycle of a dynamically created object       Step  Code or action  Result    Request storage  new int{90}  An integer is created and its address is produced.    Store the address  int* pointer  The pointer identifies the dynamic integer.    Use the object  *pointer  The program accesses the dynamic integer.    Release storage  delete pointer  The object's lifetime ends and its storage is released.     The C++ standard describes this as dynamically allocated storage. It is often informally called the heap, but the language does not require a particular physical memory layout. The important responsibility is that storage obtained with new must eventually be released with the matching form of delete .     Rearrange the blocks to allocate an integer, print it safely, release its dynamic storage, and then clear the pointer.    int* my_ptr = new int(75);   if (my_ptr != nullptr) {  std::cout << *my_ptr << '\\n';  }   delete my_ptr;  my_ptr = nullptr;     Deleting a Null Pointer  Applying delete to nullptr is safe and has no effect. This can make cleanup code simpler, but setting a pointer to nullptr does not restore an object whose lifetime has already ended. The program must still avoid using the pointer as an object after deletion.    Dynamically Allocated Arrays  When the required number of elements is known only while a program is running, it can create an array with new[] . The program receives a pointer to the first element and must store the length separately.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 4; int* values = new int[count]{}; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>(index + 1) * 10; } for (std::size_t index = 0; index < count; ++index) { std::cout << values[index] << '\\n'; } delete[] values; values = nullptr; return 0; }   The empty braces in new int[count]{} value-initialize the array's elements. The pointer does not know that the array has four elements, so the program carries count separately.   Matching allocation and release expressions       Allocation  Release  Purpose    new int{5}  delete pointer  One dynamically created object    new int[count]{}  delete[] pointer  A dynamically created array     Do not use delete for an array created with new[] , and do not use delete[] for a single object created with new . Use std::vector for ordinary variable-size collections; use a dynamic array here to understand low-level C++.   Which operation correctly releases an array created with new double[10] ?   delete[] pointer; Array allocation with new[] requires array deletion with delete[] .  delete pointer; This is the single-object form.  free(pointer); C++ new[] must be paired with delete[] .  pointer.clear(); A raw pointer has no clear() member function.      Which operation matches int* pointer = new int{5}; ?   delete pointer; One object created with new is released with delete .  delete[] pointer; delete[] is for storage created with new[] .  free(pointer); C++ new must not be paired with C's free .  remove(pointer); remove is not the matching storage-release operation.     What does new int{90} produce in addition to creating an integer?   The address of the dynamically created integer The address can be stored in an int* pointer.  The integer's array length A single object allocation does not produce an array length.  A reference that cannot be null new produces a pointer value, not a reference.  A std::vector<int> object new int{90} creates one dynamic int .     Which release operation matches new int[count] ?   delete[] pointer; The array form new[] must be paired with delete[] .  delete pointer; That is the form for one object created with ordinary new .  free(pointer); C++ new[] must be paired with C++ delete[] .  pointer.clear(); A raw pointer has no clear() member function.     What happens when a program executes delete pointer; while pointer == nullptr ?   Nothing; deleting a null pointer is safe. C++ defines deletion of a null pointer as having no effect.  It deletes the first object in memory. nullptr identifies no object.  It creates a new dynamic object. delete releases storage; it does not allocate.  It requires a length argument. Only array matching concerns delete[] ; a null pointer still requires no argument.    "
 },
@@ -11579,7 +11957,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#table_ch9_new_delete_steps",
   "type": "Table",
-  "number": "9.7.1",
+  "number": "9.8.1",
   "title": "The lifecycle of a dynamically created object",
   "body": " The lifecycle of a dynamically created object       Step  Code or action  Result    Request storage  new int{90}  An integer is created and its address is produced.    Store the address  int* pointer  The pointer identifies the dynamic integer.    Use the object  *pointer  The program accesses the dynamic integer.    Release storage  delete pointer  The object's lifetime ends and its storage is released.    "
 },
@@ -11597,7 +11975,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_parsons_delete",
   "type": "Checkpoint",
-  "number": "9.7.1",
+  "number": "9.8.1",
   "title": "",
   "body": "  Rearrange the blocks to allocate an integer, print it safely, release its dynamic storage, and then clear the pointer.    int* my_ptr = new int(75);   if (my_ptr != nullptr) {  std::cout << *my_ptr << '\\n';  }   delete my_ptr;  my_ptr = nullptr;   "
 },
@@ -11606,7 +11984,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_null",
   "type": "Subsection",
-  "number": "9.7.1",
+  "number": "9.8.1",
   "title": "Deleting a Null Pointer",
   "body": " Deleting a Null Pointer  Applying delete to nullptr is safe and has no effect. This can make cleanup code simpler, but setting a pointer to nullptr does not restore an object whose lifetime has already ended. The program must still avoid using the pointer as an object after deletion.  "
 },
@@ -11615,7 +11993,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_arrays",
   "type": "Subsection",
-  "number": "9.7.2",
+  "number": "9.8.2",
   "title": "Dynamically Allocated Arrays",
   "body": " Dynamically Allocated Arrays  When the required number of elements is known only while a program is running, it can create an array with new[] . The program receives a pointer to the first element and must store the length separately.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 4; int* values = new int[count]{}; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>(index + 1) * 10; } for (std::size_t index = 0; index < count; ++index) { std::cout << values[index] << '\\n'; } delete[] values; values = nullptr; return 0; }   The empty braces in new int[count]{} value-initialize the array's elements. The pointer does not know that the array has four elements, so the program carries count separately.   Matching allocation and release expressions       Allocation  Release  Purpose    new int{5}  delete pointer  One dynamically created object    new int[count]{}  delete[] pointer  A dynamically created array     Do not use delete for an array created with new[] , and do not use delete[] for a single object created with new . Use std::vector for ordinary variable-size collections; use a dynamic array here to understand low-level C++.   Which operation correctly releases an array created with new double[10] ?   delete[] pointer; Array allocation with new[] requires array deletion with delete[] .  delete pointer; This is the single-object form.  free(pointer); C++ new[] must be paired with delete[] .  pointer.clear(); A raw pointer has no clear() member function.    "
 },
@@ -11624,7 +12002,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_match",
   "type": "Checkpoint",
-  "number": "9.7.3",
+  "number": "9.8.3",
   "title": "",
   "body": " Which operation matches int* pointer = new int{5}; ?   delete pointer; One object created with new is released with delete .  delete[] pointer; delete[] is for storage created with new[] .  free(pointer); C++ new must not be paired with C's free .  remove(pointer); remove is not the matching storage-release operation.   "
 },
@@ -11633,7 +12011,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_new_result",
   "type": "Checkpoint",
-  "number": "9.7.4",
+  "number": "9.8.4",
   "title": "",
   "body": " What does new int{90} produce in addition to creating an integer?   The address of the dynamically created integer The address can be stored in an int* pointer.  The integer's array length A single object allocation does not produce an array length.  A reference that cannot be null new produces a pointer value, not a reference.  A std::vector<int> object new int{90} creates one dynamic int .   "
 },
@@ -11642,7 +12020,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_array_match",
   "type": "Checkpoint",
-  "number": "9.7.5",
+  "number": "9.8.5",
   "title": "",
   "body": " Which release operation matches new int[count] ?   delete[] pointer; The array form new[] must be paired with delete[] .  delete pointer; That is the form for one object created with ordinary new .  free(pointer); C++ new[] must be paired with C++ delete[] .  pointer.clear(); A raw pointer has no clear() member function.   "
 },
@@ -11651,7 +12029,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_delete_nullptr",
   "type": "Checkpoint",
-  "number": "9.7.6",
+  "number": "9.8.6",
   "title": "",
   "body": " What happens when a program executes delete pointer; while pointer == nullptr ?   Nothing; deleting a null pointer is safe. C++ defines deletion of a null pointer as having no effect.  It deletes the first object in memory. nullptr identifies no object.  It creates a new dynamic object. delete releases storage; it does not allocate.  It requires a length argument. Only array matching concerns delete[] ; a null pointer still requires no argument.   "
 },
@@ -11660,7 +12038,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_memory-errors-and-safe-practice.html",
   "type": "Section",
-  "number": "9.8",
+  "number": "9.9",
   "title": "Memory Errors and Safe Practice",
   "body": " Memory Errors and Safe Practice  Manual memory management gives a program flexibility, but it also gives the programmer responsibilities that a std::vector normally handles automatically. Several pointer mistakes have especially serious consequences.   Common pointer and dynamic-memory errors       Error  What happens  Prevention    Memory leak  Allocated storage is no longer reachable and cannot be released.  Release each owned allocation exactly once.    Dangling pointer  A pointer still stores an address after the object's lifetime ends.  Do not use a pointer after deletion or scope exit.    Double deletion  The same storage is released more than once.  Set released pointers to nullptr and manage ownership clearly.    Invalid dereference  A program accesses memory through null, uninitialized, or invalid pointer.  Initialize pointers and verify that they identify valid objects.    Mismatched deletion  delete and delete[] do not match their allocation forms.  Pair new with delete and new[] with delete[] .      Two Golden Rules of Raw Pointers     Initialize every pointer before using it. Use a valid address or initialize the pointer to nullptr when it does not yet identify an object.     After deleting dynamically allocated storage, clear the owning pointer.     Clearing one pointer does not repair other pointers that identify the same object. Those other pointers may still be dangling, so ownership must be managed clearly.     Ownership Responsibility  A pointer does not automatically explain who is responsible for releasing the object it identifies. When a raw pointer owns dynamic storage, the program must document and follow that responsibility. When a pointer merely observes an object owned elsewhere, it must not delete that object.  In later modules, smart pointers will provide safer ways to express ownership. For now, the key practice is to recognize that an address and ownership are different concepts.    Practical Guidance   Prefer ordinary local objects when their lifetime is sufficient.  Prefer std::vector to manually allocated dynamic arrays.  Initialize every pointer.  Check nullable pointers before dereferencing them.  Match every allocation with the correct release operation.  Do not use a pointer after the object it identified has been destroyed.    What is a memory leak?   Allocated storage that can no longer be reached or released The storage remains reserved even though the program lost its pointer to it.  An array containing a null character Null termination is a string concept, not a memory leak.  A pointer that identifies a valid object A valid pointer is not automatically a leak.  A vector whose size is smaller than its capacity Unused vector capacity is managed by the vector and is not necessarily a leak.       Arrange the blocks to release a dynamic object and prevent the owning pointer from remaining dangling.    int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;     Which situation describes a dangling pointer?   A pointer still stores an address after the identified object's lifetime ends The address remains in the pointer, but the object is no longer valid to use.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer that identifies a live local object A valid pointer to a live object is not dangling.  A pointer used to traverse a valid array Valid traversal does not create a dangling pointer.     Which allocation and release pair is correct?   new int[5] with delete[] pointer The array allocation form must match the array deletion form.  new int[5] with delete pointer Single-object delete does not match new[] .  new int{5} with delete[] pointer A single object created with new needs ordinary delete .  new int{5} with free(pointer) C++ new must be paired with C++ delete .     What does setting an owning pointer to nullptr after delete accomplish?   It prevents that pointer from continuing to store the old address. Clearing the owning pointer helps avoid using it as though the destroyed object still exists.  It recreates the deleted object. Assigning nullptr does not restore an object's lifetime.  It repairs every other pointer to the same object. Other pointers may still be dangling and must be managed separately.  It releases storage without needing delete . The storage must be released first with the matching deletion operation.    "
 },
@@ -11678,7 +12056,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#table_ch9_pointer_memory_errors",
   "type": "Table",
-  "number": "9.8.1",
+  "number": "9.9.1",
   "title": "Common pointer and dynamic-memory errors",
   "body": " Common pointer and dynamic-memory errors       Error  What happens  Prevention    Memory leak  Allocated storage is no longer reachable and cannot be released.  Release each owned allocation exactly once.    Dangling pointer  A pointer still stores an address after the object's lifetime ends.  Do not use a pointer after deletion or scope exit.    Double deletion  The same storage is released more than once.  Set released pointers to nullptr and manage ownership clearly.    Invalid dereference  A program accesses memory through null, uninitialized, or invalid pointer.  Initialize pointers and verify that they identify valid objects.    Mismatched deletion  delete and delete[] do not match their allocation forms.  Pair new with delete and new[] with delete[] .    "
 },
@@ -11687,7 +12065,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_golden-rules",
   "type": "Subsection",
-  "number": "9.8.1",
+  "number": "9.9.1",
   "title": "Two Golden Rules of Raw Pointers",
   "body": " Two Golden Rules of Raw Pointers     Initialize every pointer before using it. Use a valid address or initialize the pointer to nullptr when it does not yet identify an object.     After deleting dynamically allocated storage, clear the owning pointer.     Clearing one pointer does not repair other pointers that identify the same object. Those other pointers may still be dangling, so ownership must be managed clearly.   "
 },
@@ -11696,7 +12074,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_ownership",
   "type": "Subsection",
-  "number": "9.8.2",
+  "number": "9.9.2",
   "title": "Ownership Responsibility",
   "body": " Ownership Responsibility  A pointer does not automatically explain who is responsible for releasing the object it identifies. When a raw pointer owns dynamic storage, the program must document and follow that responsibility. When a pointer merely observes an object owned elsewhere, it must not delete that object.  In later modules, smart pointers will provide safer ways to express ownership. For now, the key practice is to recognize that an address and ownership are different concepts.  "
 },
@@ -11705,7 +12083,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_guidance",
   "type": "Subsection",
-  "number": "9.8.3",
+  "number": "9.9.3",
   "title": "Practical Guidance",
   "body": " Practical Guidance   Prefer ordinary local objects when their lifetime is sufficient.  Prefer std::vector to manually allocated dynamic arrays.  Initialize every pointer.  Check nullable pointers before dereferencing them.  Match every allocation with the correct release operation.  Do not use a pointer after the object it identified has been destroyed.    What is a memory leak?   Allocated storage that can no longer be reached or released The storage remains reserved even though the program lost its pointer to it.  An array containing a null character Null termination is a string concept, not a memory leak.  A pointer that identifies a valid object A valid pointer is not automatically a leak.  A vector whose size is smaller than its capacity Unused vector capacity is managed by the vector and is not necessarily a leak.    "
 },
@@ -11714,7 +12092,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_parsons_cleanup",
   "type": "Checkpoint",
-  "number": "9.8.2",
+  "number": "9.9.2",
   "title": "",
   "body": "  Arrange the blocks to release a dynamic object and prevent the owning pointer from remaining dangling.    int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;   "
 },
@@ -11723,7 +12101,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_dangling",
   "type": "Checkpoint",
-  "number": "9.8.3",
+  "number": "9.9.3",
   "title": "",
   "body": " Which situation describes a dangling pointer?   A pointer still stores an address after the identified object's lifetime ends The address remains in the pointer, but the object is no longer valid to use.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer that identifies a live local object A valid pointer to a live object is not dangling.  A pointer used to traverse a valid array Valid traversal does not create a dangling pointer.   "
 },
@@ -11732,7 +12110,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_mismatch",
   "type": "Checkpoint",
-  "number": "9.8.4",
+  "number": "9.9.4",
   "title": "",
   "body": " Which allocation and release pair is correct?   new int[5] with delete[] pointer The array allocation form must match the array deletion form.  new int[5] with delete pointer Single-object delete does not match new[] .  new int{5} with delete[] pointer A single object created with new needs ordinary delete .  new int{5} with free(pointer) C++ new must be paired with C++ delete .   "
 },
@@ -11741,7 +12119,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_ownership",
   "type": "Checkpoint",
-  "number": "9.8.5",
+  "number": "9.9.5",
   "title": "",
   "body": " What does setting an owning pointer to nullptr after delete accomplish?   It prevents that pointer from continuing to store the old address. Clearing the owning pointer helps avoid using it as though the destroyed object still exists.  It recreates the deleted object. Assigning nullptr does not restore an object's lifetime.  It repairs every other pointer to the same object. Other pointers may still be dangling and must be managed separately.  It releases storage without needing delete . The storage must be released first with the matching deletion operation.   "
 },
@@ -11750,7 +12128,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_glossary.html",
   "type": "Glossary",
-  "number": "9.9",
+  "number": "9.10",
   "title": "Glossary",
   "body": " Glossary   address  The location of an object in a program's storage.    pointer  An object that stores the address of another object or function.    address-of operator  The & operator used in an expression to obtain an object's address.    dereference  To use a pointer to access the object identified by its stored address.    lvalue  An expression that identifies a persistent object or storage location.    rvalue  An expression that generally represents a temporary value or computation result.    reference  An alias that must bind to an object when it is initialized and is then used like that object.    null pointer  A pointer with the value nullptr that identifies no object.    dangling pointer  A pointer that still contains an address after the object at that address has been destroyed.    array-to-pointer conversion  The conversion of an array expression, in many contexts, to a pointer to its first element. This is commonly called array decay.    pointer arithmetic  Adding, subtracting, or comparing pointers within the same array object to identify element positions.    one-past-the-end pointer  A pointer to the position immediately after the last element of an array; it may be used for comparison but not dereferenced.    C-style string  A sequence of characters in an array terminated by the null character '\\0' .    null character  The character '\\0' that marks the end of a C-style string.    command-line argument  A text value supplied to a program when it is started.    dynamic storage  Storage requested during program execution whose lifetime is controlled by the program.    memory leak  Allocated storage that the program can no longer reach and therefore cannot release.    ownership  Responsibility for controlling an object's lifetime and releasing its dynamically managed storage.   "
 },
@@ -11921,7 +12299,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_exercises.html",
   "type": "Exercises",
-  "number": "9.10",
+  "number": "9.11",
   "title": "Exercises",
   "body": " Exercises   What does int* pointer declare?   A pointer that can identify an int object The declaration's * makes pointer a pointer variable.  An integer whose value is an address The declared variable has pointer type, not ordinary integer type.  A pointer to any type of object The pointer type identifies the type it is designed to point to.  A function that returns an integer This declaration does not include a function parameter list.     What does *pointer mean in an expression?   Access the object identified by pointer In an expression, * is the dereference operator.  Declare a new pointer Declaration syntax requires a type, such as int* .  Obtain the pointer's address The address-of operator & obtains an address.  Delete the pointed-to object Deletion uses delete , not * .     What does nullptr represent?   A pointer value that identifies no object It is the modern C++ null pointer value.  The first element of every array Array indexing begins at zero, but zero is not nullptr .  A dynamically allocated integer with value zero nullptr is a pointer value, not an allocated integer.  A pointer that is always safe to dereference A null pointer must not be dereferenced.     What can a non-constant pointer parameter allow a function to do?   Modify the caller's object through a valid pointer Dereferencing a valid non-constant pointer accesses the caller's object.  Know the size of every object automatically A pointer does not generally store object-size information.  Guarantee that the pointer is never null The function may need to check for nullptr .  Change the pointer into a reference Pointer and reference types are distinct.     After an array decays when passed to a pointer parameter, what information is not carried by the pointer?   The array's number of elements The pointer identifies an address, so the length must be supplied separately.  The address of the first element The converted pointer identifies the first element.  The element type used for pointer arithmetic The pointer type still determines its element step.  Whether the function can read the pointed-to values A valid pointer can be dereferenced to read values.     What does pointer + 1 mean when pointer points into an array?   The address of the next element in that array Pointer arithmetic advances by the pointed-to element type.  The next byte in memory regardless of type Pointer arithmetic is scaled by the pointer's element type.  The value of the next element The result is still a pointer; dereference it to access a value.  A pointer to the next unrelated object Pointer arithmetic is defined within an array object.     How many array elements are needed for the C-style string \"cat\" ?   4 The array needs three visible characters plus '\\0' .  3 Three stores the visible characters but not the terminator.  2 Count all three letters and the null character.  5 No extra fifth element is required for this string.     What is the type of each individual argv[index] value?   A pointer to a C-style character string argv is an array of char* values.  An integer containing the argument count argc contains the count; an individual argv entry is text.  A std::string object automatically The standard signature supplies C-style strings.  A pointer to a vector argv is not a std::vector .     What must happen to storage created by new int{7} ?   It must eventually be released with matching delete . A single object created by new matches delete .  It must be released with delete[] . delete[] matches new[] , not a single new .  It is automatically released at the end of the function. Dynamic storage is not automatically released like a local object.  It must be released with std::vector::clear() . The allocation is not a vector.     Why must a program keep the length separately after allocating new int[count] ?   The resulting pointer does not remember the number of elements. The length is separate information needed for safe traversal.  Because the array has no elements. The allocation creates count elements.  Because pointer arithmetic cannot access arrays. Pointer arithmetic can traverse the allocated array.  Because delete[] requires a length argument. delete[] receives only the pointer.     What is a dangling pointer?   A pointer whose former object has already been destroyed The stored address remains, but the object lifetime has ended.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer to the first array element A valid pointer to an array element is not dangling.  A pointer that stores an array length Pointers store addresses, not lengths.    "
 },
@@ -11930,7 +12308,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_pointer_type",
   "type": "Exercise",
-  "number": "9.10.1",
+  "number": "9.11.1",
   "title": "",
   "body": " What does int* pointer declare?   A pointer that can identify an int object The declaration's * makes pointer a pointer variable.  An integer whose value is an address The declared variable has pointer type, not ordinary integer type.  A pointer to any type of object The pointer type identifies the type it is designed to point to.  A function that returns an integer This declaration does not include a function parameter list.   "
 },
@@ -11939,7 +12317,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_dereference",
   "type": "Exercise",
-  "number": "9.10.2",
+  "number": "9.11.2",
   "title": "",
   "body": " What does *pointer mean in an expression?   Access the object identified by pointer In an expression, * is the dereference operator.  Declare a new pointer Declaration syntax requires a type, such as int* .  Obtain the pointer's address The address-of operator & obtains an address.  Delete the pointed-to object Deletion uses delete , not * .   "
 },
@@ -11948,7 +12326,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_nullptr",
   "type": "Exercise",
-  "number": "9.10.3",
+  "number": "9.11.3",
   "title": "",
   "body": " What does nullptr represent?   A pointer value that identifies no object It is the modern C++ null pointer value.  The first element of every array Array indexing begins at zero, but zero is not nullptr .  A dynamically allocated integer with value zero nullptr is a pointer value, not an allocated integer.  A pointer that is always safe to dereference A null pointer must not be dereferenced.   "
 },
@@ -11957,7 +12335,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_pointer_parameter",
   "type": "Exercise",
-  "number": "9.10.4",
+  "number": "9.11.4",
   "title": "",
   "body": " What can a non-constant pointer parameter allow a function to do?   Modify the caller's object through a valid pointer Dereferencing a valid non-constant pointer accesses the caller's object.  Know the size of every object automatically A pointer does not generally store object-size information.  Guarantee that the pointer is never null The function may need to check for nullptr .  Change the pointer into a reference Pointer and reference types are distinct.   "
 },
@@ -11966,7 +12344,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_array_decay",
   "type": "Exercise",
-  "number": "9.10.5",
+  "number": "9.11.5",
   "title": "",
   "body": " After an array decays when passed to a pointer parameter, what information is not carried by the pointer?   The array's number of elements The pointer identifies an address, so the length must be supplied separately.  The address of the first element The converted pointer identifies the first element.  The element type used for pointer arithmetic The pointer type still determines its element step.  Whether the function can read the pointed-to values A valid pointer can be dereferenced to read values.   "
 },
@@ -11975,7 +12353,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_pointer_arithmetic",
   "type": "Exercise",
-  "number": "9.10.6",
+  "number": "9.11.6",
   "title": "",
   "body": " What does pointer + 1 mean when pointer points into an array?   The address of the next element in that array Pointer arithmetic advances by the pointed-to element type.  The next byte in memory regardless of type Pointer arithmetic is scaled by the pointer's element type.  The value of the next element The result is still a pointer; dereference it to access a value.  A pointer to the next unrelated object Pointer arithmetic is defined within an array object.   "
 },
@@ -11984,7 +12362,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_c_string",
   "type": "Exercise",
-  "number": "9.10.7",
+  "number": "9.11.7",
   "title": "",
   "body": " How many array elements are needed for the C-style string \"cat\" ?   4 The array needs three visible characters plus '\\0' .  3 Three stores the visible characters but not the terminator.  2 Count all three letters and the null character.  5 No extra fifth element is required for this string.   "
 },
@@ -11993,7 +12371,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_argv",
   "type": "Exercise",
-  "number": "9.10.8",
+  "number": "9.11.8",
   "title": "",
   "body": " What is the type of each individual argv[index] value?   A pointer to a C-style character string argv is an array of char* values.  An integer containing the argument count argc contains the count; an individual argv entry is text.  A std::string object automatically The standard signature supplies C-style strings.  A pointer to a vector argv is not a std::vector .   "
 },
@@ -12002,7 +12380,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_new_delete",
   "type": "Exercise",
-  "number": "9.10.9",
+  "number": "9.11.9",
   "title": "",
   "body": " What must happen to storage created by new int{7} ?   It must eventually be released with matching delete . A single object created by new matches delete .  It must be released with delete[] . delete[] matches new[] , not a single new .  It is automatically released at the end of the function. Dynamic storage is not automatically released like a local object.  It must be released with std::vector::clear() . The allocation is not a vector.   "
 },
@@ -12011,7 +12389,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_dynamic_array",
   "type": "Exercise",
-  "number": "9.10.10",
+  "number": "9.11.10",
   "title": "",
   "body": " Why must a program keep the length separately after allocating new int[count] ?   The resulting pointer does not remember the number of elements. The length is separate information needed for safe traversal.  Because the array has no elements. The allocation creates count elements.  Because pointer arithmetic cannot access arrays. Pointer arithmetic can traverse the allocated array.  Because delete[] requires a length argument. delete[] receives only the pointer.   "
 },
@@ -12020,7 +12398,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_memory_error",
   "type": "Exercise",
-  "number": "9.10.11",
+  "number": "9.11.11",
   "title": "",
   "body": " What is a dangling pointer?   A pointer whose former object has already been destroyed The stored address remains, but the object lifetime has ended.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer to the first array element A valid pointer to an array element is not dangling.  A pointer that stores an array length Pointers store addresses, not lengths.   "
 },
@@ -12029,7 +12407,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_mixed-up-code.html",
   "type": "Exercises",
-  "number": "9.11",
+  "number": "9.12",
   "title": "Mixed-Up Code Practice",
   "body": " Mixed-Up Code Practice   Arrange the blocks to modify score through a pointer.   int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';     Arrange the blocks to print a value only when the pointer identifies an object.   void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }     Arrange the blocks to traverse an array with a pointer.   int values[]{10, 20, 30};  int* current = values;  for (int index = 0; index < 3; ++index) {  std::cout << *current << '\\n'; ++current; }     Arrange the blocks to print a C-style string one character at a time.   char word[] = \"cat\";  for (const char* current = word; *current != '\\0'; ++current) {  std::cout << *current << '\\n'; }     Arrange the blocks to create and release one dynamic integer.   int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;    "
 },
@@ -12038,7 +12416,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_dereference",
   "type": "Exercise",
-  "number": "9.11.yes",
+  "number": "9.12.yes",
   "title": "",
   "body": " Arrange the blocks to modify score through a pointer.   int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';   "
 },
@@ -12047,7 +12425,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_null_check",
   "type": "Exercise",
-  "number": "9.11.yes",
+  "number": "9.12.yes",
   "title": "",
   "body": " Arrange the blocks to print a value only when the pointer identifies an object.   void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }   "
 },
@@ -12056,7 +12434,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_array_pointer",
   "type": "Exercise",
-  "number": "9.11.yes",
+  "number": "9.12.yes",
   "title": "",
   "body": " Arrange the blocks to traverse an array with a pointer.   int values[]{10, 20, 30};  int* current = values;  for (int index = 0; index < 3; ++index) {  std::cout << *current << '\\n'; ++current; }   "
 },
@@ -12065,7 +12443,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_c_string",
   "type": "Exercise",
-  "number": "9.11.yes",
+  "number": "9.12.yes",
   "title": "",
   "body": " Arrange the blocks to print a C-style string one character at a time.   char word[] = \"cat\";  for (const char* current = word; *current != '\\0'; ++current) {  std::cout << *current << '\\n'; }   "
 },
@@ -12074,7 +12452,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_dynamic_value",
   "type": "Exercise",
-  "number": "9.11.yes",
+  "number": "9.12.yes",
   "title": "",
   "body": " Arrange the blocks to create and release one dynamic integer.   int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;   "
 },
@@ -12083,7 +12461,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_coding-practice.html",
   "type": "Exercises",
-  "number": "9.12",
+  "number": "9.13",
   "title": "Coding Practice",
   "body": " Coding Practice    Write increase_value , which takes an int* and increases the pointed-to integer by one when the pointer is not nullptr .   #include <iostream> void increase_value(int* value_pointer) { \/\/ Write your solution here. } int main() { int value = 7; increase_value(&value); increase_value(nullptr); std::cout << value << '\\n'; return 0; }     void increase_value(int* value_pointer) { if (value_pointer != nullptr) { ++(*value_pointer); } }      Write print_values , which takes a pointer to the first integer in an array and the array length. Use pointer arithmetic to print every element.   #include <iostream> #include <cstddef> void print_values(const int* values, std::size_t count) { \/\/ Write your solution here. } int main() { const int values[]{4, 8, 12}; print_values(values, 3); return 0; }     void print_values(const int* values, std::size_t count) { const int* current = values; const int* end = values + count; while (current != end) { std::cout << *current << '\\n'; ++current; } }      Write count_character , which takes a C-style string and a target character. Traverse the string with a pointer and return the number of matching characters.   #include <iostream> int count_character(const char* text, char target) { \/\/ Write your solution here. } int main() { std::cout << count_character(\"banana\", 'a') << '\\n'; return 0; }     int count_character(const char* text, char target) { int count = 0; while (*text != '\\0') { if (*text == target) { ++count; } ++text; } return count; }      Complete print_arguments so that it prints each command- line argument and its index. Remember that the arguments are C-style strings.   #include <iostream> void print_arguments(int argc, char* argv[]) { \/\/ Write your solution here. } int main(int argc, char* argv[]) { print_arguments(argc, argv); return 0; }     void print_arguments(int argc, char* argv[]) { for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } }      Write a program that creates a dynamically allocated array of five integers, stores the values 2, 4, 6, 8, and 10, prints their total, and releases the array correctly.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 5; \/\/ Create, use, and release the dynamic array. return 0; }     int* values = new int[count]{}; int total = 0; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>((index + 1) * 2); total += values[index]; } std::cout << total << '\\n'; delete[] values;    "
 },
@@ -12092,7 +12470,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_coding-practice.html#chapter9_coding_increase_value",
   "type": "Exercise",
-  "number": "9.12.1",
+  "number": "9.13.1",
   "title": "",
   "body": "  Write increase_value , which takes an int* and increases the pointed-to integer by one when the pointer is not nullptr .   #include <iostream> void increase_value(int* value_pointer) { \/\/ Write your solution here. } int main() { int value = 7; increase_value(&value); increase_value(nullptr); std::cout << value << '\\n'; return 0; }     void increase_value(int* value_pointer) { if (value_pointer != nullptr) { ++(*value_pointer); } }   "
 },
@@ -12101,7 +12479,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_coding-practice.html#chapter9_coding_print_array_pointer",
   "type": "Exercise",
-  "number": "9.12.2",
+  "number": "9.13.2",
   "title": "",
   "body": "  Write print_values , which takes a pointer to the first integer in an array and the array length. Use pointer arithmetic to print every element.   #include <iostream> #include <cstddef> void print_values(const int* values, std::size_t count) { \/\/ Write your solution here. } int main() { const int values[]{4, 8, 12}; print_values(values, 3); return 0; }     void print_values(const int* values, std::size_t count) { const int* current = values; const int* end = values + count; while (current != end) { std::cout << *current << '\\n'; ++current; } }   "
 },
@@ -12110,7 +12488,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_coding-practice.html#chapter9_coding_count_characters",
   "type": "Exercise",
-  "number": "9.12.3",
+  "number": "9.13.3",
   "title": "",
   "body": "  Write count_character , which takes a C-style string and a target character. Traverse the string with a pointer and return the number of matching characters.   #include <iostream> int count_character(const char* text, char target) { \/\/ Write your solution here. } int main() { std::cout << count_character(\"banana\", 'a') << '\\n'; return 0; }     int count_character(const char* text, char target) { int count = 0; while (*text != '\\0') { if (*text == target) { ++count; } ++text; } return count; }   "
 },
@@ -12119,7 +12497,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_coding-practice.html#chapter9_coding_command_line_sum",
   "type": "Exercise",
-  "number": "9.12.4",
+  "number": "9.13.4",
   "title": "",
   "body": "  Complete print_arguments so that it prints each command- line argument and its index. Remember that the arguments are C-style strings.   #include <iostream> void print_arguments(int argc, char* argv[]) { \/\/ Write your solution here. } int main(int argc, char* argv[]) { print_arguments(argc, argv); return 0; }     void print_arguments(int argc, char* argv[]) { for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } }   "
 },
@@ -12128,7 +12506,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_coding-practice.html#chapter9_coding_dynamic_array_total",
   "type": "Exercise",
-  "number": "9.12.5",
+  "number": "9.13.5",
   "title": "",
   "body": "  Write a program that creates a dynamically allocated array of five integers, stores the values 2, 4, 6, 8, and 10, prints their total, and releases the array correctly.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 5; \/\/ Create, use, and release the dynamic array. return 0; }     int* values = new int[count]{}; int total = 0; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>((index + 1) * 2); total += values[index]; } std::cout << total << '\\n'; delete[] values;   "
 },

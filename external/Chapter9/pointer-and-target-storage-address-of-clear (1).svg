@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1050" viewBox="0 0 1200 1050" role="img" aria-labelledby="title description">
+  <title id="title">Hexadecimal and binary byte values in a pointer and its target</title>
+  <desc id="description">A vertical memory diagram showing eight bytes of a pointer and four bytes of an integer. Every cell displays its hexadecimal and binary value. The diagram uses a common little-endian illustration for pointer address 0x0000'A000 and integer value 90, represented as 0x5A. The declaration std::int32_t* score_pointer = &amp;score; is shown below the diagram.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#245a8d"/>
+    </marker>
+    <marker id="broken-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#8a5a00"/>
+    </marker>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #17324d; }
+      .heading { font: 700 22px Arial, sans-serif; fill: #17324d; }
+      .label { font: 18px Arial, sans-serif; fill: #17324d; }
+      .address { font: 16px 'DejaVu Sans Mono', monospace; fill: #17324d; }
+      .cell-text { font: 14px Arial, sans-serif; fill: #17324d; }
+      .note { font: 17px Arial, sans-serif; fill: #334e68; }
+      .code { font: 22px 'DejaVu Sans Mono', monospace; fill: #17324d; }
+      .code-label { font: 15px Arial, sans-serif; fill: #334e68; }
+      .pointer-cell { fill: #dceeff; stroke: #245a8d; stroke-width: 2; }
+      .target-cell { fill: #e5f4e3; stroke: #347a3c; stroke-width: 2; }
+      .panel { fill: #f7fafc; stroke: #9fb3c8; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="960" fill="white"/>
+  <text x="600" y="48" text-anchor="middle" class="title">Byte values inside a pointer object and its target</text>
+  <text x="600" y="78" text-anchor="middle" class="note">Each cell contains one byte: 8 bits shown in hexadecimal and binary.</text>
+
+  <rect x="55" y="110" width="515" height="620" rx="12" class="panel"/>
+  <rect x="635" y="110" width="515" height="620" rx="12" class="panel"/>
+  <text x="312" y="150" text-anchor="middle" class="heading">Pointer object: score_pointer</text>
+  <text x="892" y="150" text-anchor="middle" class="heading">Target object: score</text>
+  <text x="80" y="180" class="label">8 bytes, typically on a 64-bit system</text>
+  <text x="660" y="180" class="label">4 bytes for std::int32_t; score = 90</text>
+
+  <text x="80" y="223" class="address">0x0000'7000</text><rect x="260" y="195" width="275" height="60" rx="5" class="pointer-cell"/><text x="397" y="216" text-anchor="middle" class="cell-text">Pointer byte 0</text><text x="397" y="235" text-anchor="middle" class="cell-text">Hex value: 0x00</text><text x="397" y="252" text-anchor="middle" class="cell-text">Binary value: 00000000</text>
+  <text x="80" y="285" class="address">0x0000'7001</text><rect x="260" y="257" width="275" height="60" rx="5" class="pointer-cell"/><text x="397" y="278" text-anchor="middle" class="cell-text">Pointer byte 1</text><text x="397" y="297" text-anchor="middle" class="cell-text">Hex value: 0xA0</text><text x="397" y="314" text-anchor="middle" class="cell-text">Binary value: 10100000</text>
+  <text x="80" y="347" class="address">0x0000'7002</text><rect x="260" y="319" width="275" height="60" rx="5" class="pointer-cell"/><text x="397" y="340" text-anchor="middle" class="cell-text">Pointer byte 2</text><text x="397" y="359" text-anchor="middle" class="cell-text">Hex value: 0x00</text><text x="397" y="376" text-anchor="middle" class="cell-text">Binary value: 00000000</text>
+  <text x="80" y="409" class="address">0x0000'7003</text><rect x="260" y="381" width="275" height="60" rx="5" class="pointer-cell"/><text x="397" y="402" text-anchor="middle" class="cell-text">Pointer byte 3</text><text x="397" y="421" text-anchor="middle" class="cell-text">Hex value: 0x00</text><text x="397" y="438" text-anchor="middle" class="cell-text">Binary value: 00000000</text>
+  <text x="80" y="471" class="address">0x0000'7004</text><rect x="260" y="443" width="275" height="60" rx="5" class="pointer-cell"/><text x="397" y="464" text-anchor="middle" class="cell-text">Pointer byte 4</text><text x="397" y="483" text-anchor="middle" class="cell-text">Hex value: 0x00</text><text x="397" y="500" text-anchor="middle" class="cell-text">Binary value: 00000000</text>
+  <text x="80" y="533" class="address">0x0000'7005</text><rect x="260" y="505" width="275" height="60" rx="5" class="pointer-cell"/><text x="397" y="526" text-anchor="middle" class="cell-text">Pointer byte 5</text><text x="397" y="545" text-anchor="middle" class="cell-text">Hex value: 0x00</text><text x="397" y="562" text-anchor="middle" class="cell-text">Binary value: 00000000</text>
+  <text x="80" y="595" class="address">0x0000'7006</text><rect x="260" y="567" width="275" height="60" rx="5" class="pointer-cell"/><text x="397" y="588" text-anchor="middle" class="cell-text">Pointer byte 6</text><text x="397" y="607" text-anchor="middle" class="cell-text">Hex value: 0x00</text><text x="397" y="624" text-anchor="middle" class="cell-text">Binary value: 00000000</text>
+  <text x="80" y="657" class="address">0x0000'7007</text><rect x="260" y="629" width="275" height="60" rx="5" class="pointer-cell"/><text x="397" y="650" text-anchor="middle" class="cell-text">Pointer byte 7</text><text x="397" y="669" text-anchor="middle" class="cell-text">Hex value: 0x00</text><text x="397" y="686" text-anchor="middle" class="cell-text">Binary value: 00000000</text>
+
+  <text x="660" y="223" class="address">0x0000'A000</text><rect x="840" y="195" width="275" height="60" rx="5" class="target-cell"/><text x="977" y="216" text-anchor="middle" class="cell-text">Target byte 0</text><text x="977" y="235" text-anchor="middle" class="cell-text">Hex value: 0x5A</text><text x="977" y="252" text-anchor="middle" class="cell-text">Binary value: 01011010</text>
+  <text x="660" y="285" class="address">0x0000'A001</text><rect x="840" y="257" width="275" height="60" rx="5" class="target-cell"/><text x="977" y="278" text-anchor="middle" class="cell-text">Target byte 1</text><text x="977" y="297" text-anchor="middle" class="cell-text">Hex value: 0x00</text><text x="977" y="314" text-anchor="middle" class="cell-text">Binary value: 00000000</text>
+  <text x="660" y="347" class="address">0x0000'A002</text><rect x="840" y="319" width="275" height="60" rx="5" class="target-cell"/><text x="977" y="340" text-anchor="middle" class="cell-text">Target byte 2</text><text x="977" y="359" text-anchor="middle" class="cell-text">Hex value: 0x00</text><text x="977" y="376" text-anchor="middle" class="cell-text">Binary value: 00000000</text>
+  <text x="660" y="409" class="address">0x0000'A003</text><rect x="840" y="381" width="275" height="60" rx="5" class="target-cell"/><text x="977" y="402" text-anchor="middle" class="cell-text">Target byte 3</text><text x="977" y="421" text-anchor="middle" class="cell-text">Hex value: 0x00</text><text x="977" y="438" text-anchor="middle" class="cell-text">Binary value: 00000000</text>
+
+  <path d="M 535 660 C 640 710, 760 680, 805 420 C 820 330, 830 260, 840 225" fill="none" stroke="#245a8d" stroke-width="4" marker-end="url(#arrow)"/>
+  <rect x="430" y="750" width="340" height="44" rx="8" fill="#eef5fb" stroke="#8fb4d4"/>
+  <text x="600" y="778" text-anchor="middle" class="label">pointer value = 0x0000'A000</text>
+  <text x="300" y="800" text-anchor="middle" class="note">The address and byte values are illustrative.</text>
+  <text x="300" y="830" text-anchor="middle" class="note">The displayed order is a common little-endian arrangement.</text>
+  <text x="300" y="860" text-anchor="middle" class="note">Other systems can arrange the bytes differently.</text>
+
+  <rect x="155" y="925" width="890" height="58" rx="8" fill="#fff8e6" stroke="#c99a2e" stroke-width="2"/>
+  <text x="600" y="962" text-anchor="middle" class="code">std::int32_t* score_pointer = &amp;score;</text>
+  <text x="320" y="1015" text-anchor="middle" class="code-label">pointer type</text>
+  <text x="600" y="1015" text-anchor="middle" class="code-label">pointer variable</text>
+  <text x="890" y="1015" text-anchor="middle" class="code-label">address-of expression</text>
+
+  <text x="925" y="770" text-anchor="middle" class="heading">Address-of result</text>
+  <rect x="700" y="790" width="150" height="70" rx="8" fill="#fff8e6" stroke="#c99a2e" stroke-width="2"/>
+  <text x="775" y="817" text-anchor="middle" class="code">&amp;score</text>
+  <text x="775" y="843" text-anchor="middle" class="code-label">address-of expression</text>
+  <path d="M 855 825 C 880 825, 905 825, 925 825" fill="none" stroke="#8a5a00" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#broken-arrow)"/>
+  <rect x="935" y="790" width="210" height="70" rx="8" fill="#fff8e6" stroke="#c99a2e" stroke-width="2"/>
+  <text x="1040" y="817" text-anchor="middle" class="code-label">address value</text>
+  <text x="1040" y="844" text-anchor="middle" class="code">0x0000'A000</text>
+</svg>
+
+
+
+
+
