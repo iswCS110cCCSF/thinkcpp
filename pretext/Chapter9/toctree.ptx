@@ -7,6 +7,8 @@
 
     <xi:include href="./why-pointers-exist.ptx"/>
     <xi:include href="./pointer-variables-and-dereferencing.ptx"/>
+	
+	<xi:include href="./raw-pointers-and-references.ptx"/>
     <xi:include href="./nullptr-and-safe-pointer-use.ptx"/>
     <xi:include href="./pointers-as-function-parameters.ptx"/>
     <xi:include href="./pointers-and-c-style-arrays.ptx"/>

@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter9_raw-pointers-and-references">
+    <title>Raw Pointers and References</title>
+
+    <p>
+        Chapter 3 introduced references as a way for a function to work with
+        the caller's object. This section compares references with
+        <term>raw pointers</term>, the built-in pointer types such as
+        <c>int*</c>. Both can provide indirect access to an object, but their
+        rules and uses are different.
+    </p>
+
+    <p>
+        A raw pointer is a separate object that stores a pointer value. That
+        value can identify another object, identify no object through
+        <c>nullptr</c>, or be changed to identify a different object. A
+        reference is an alias bound to an existing object.
+    </p>
+
+    <subsection xml:id="chapter9_raw-pointers-and-references_syntax-reassignment">
+        <title>Syntax and Reassignment</title>
+
+        <p>
+            A pointer must be explicitly dereferenced to change the value of
+            the object it identifies. Assigning a new address to the pointer
+            changes which object it identifies.
+        </p>
+
+        <program xml:id="program_chapter9_raw_pointer_reassignment"
+                 language="cpp">
+            <code><![CDATA[
+int x = 10;
+int y = 20;
+
+int* pointer = &x;  // pointer stores the address of x
+*pointer = 15;      // x is now 15
+pointer = &y;       // pointer now identifies y
+*pointer = 25;      // y is now 25
+            ]]></code>
+        </program>
+
+        <p>
+            The statement <c>pointer = &amp;y</c> changes the pointer's stored
+            address. The statement <c>*pointer = 25</c> changes the object at
+            that address.
+        </p>
+
+        <p>
+            A reference acts as another name for the object to which it is
+            bound. It cannot be reseated to refer to a different object.
+        </p>
+
+        <program xml:id="program_chapter9_reference_reassignment"
+                 language="cpp">
+            <code><![CDATA[
+int x = 10;
+int y = 20;
+
+int& reference = x;  // reference is another name for x
+reference = y;       // assigns y's value to x
+                     // reference still refers to x
+            ]]></code>
+        </program>
+
+        <p>
+            In the final assignment, <c>reference = y</c> does not make
+            <c>reference</c> refer to <c>y</c>. It copies the value of
+            <c>y</c> into the object that <c>reference</c> already identifies,
+            so <c>x</c> becomes <c>20</c>.
+        </p>
+
+        <table xml:id="table_chapter9_pointer_reference_syntax">
+            <title>Pointer and reference syntax</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="38%"/>
+                <col width="62%"/>
+                <row header="yes">
+                    <cell>Expression</cell>
+                    <cell>Meaning</cell>
+                </row>
+                <row>
+                    <cell><c>int* pointer = &amp;x;</c></cell>
+                    <cell>Declare a pointer and store the address of <c>x</c>.</cell>
+                </row>
+                <row>
+                    <cell><c>*pointer = 15;</c></cell>
+                    <cell>Access the object identified by <c>pointer</c> and assign to it.</cell>
+                </row>
+                <row>
+                    <cell><c>pointer = &amp;y;</c></cell>
+                    <cell>Change the pointer so it identifies <c>y</c>.</cell>
+                </row>
+                <row>
+                    <cell><c>int&amp; reference = x;</c></cell>
+                    <cell>Declare <c>reference</c> as an alias for <c>x</c>.</cell>
+                </row>
+                <row>
+                    <cell><c>reference = y;</c></cell>
+                    <cell>Assign the value of <c>y</c> to <c>x</c>; it does not reseat the reference.</cell>
+                </row>
+            </tabular>
+        </table>
+    </subsection>
+
+    <subsection xml:id="chapter9_raw-pointers-and-references_ampersand">
+        <title>Two Meanings of <c>&amp;</c></title>
+
+        <p>
+            The symbol <c>&amp;</c> has different meanings depending on its
+            context. In an expression, it is the address-of operator. In a
+            declaration, it can indicate a reference type.
+        </p>
+
+        <program xml:id="program_chapter9_pointer_reference_ampersand"
+                 language="cpp">
+            <code><![CDATA[
+int score = 90;
+
+int* pointer = &score;  // & obtains score's address
+int& reference = score; // & declares reference as an alias
+            ]]></code>
+        </program>
+
+        <p>
+            The address-of expression <c>&amp;score</c> produces a pointer value.
+            The declaration <c>int&amp; reference</c> says that
+            <c>reference</c> is a reference to an existing <c>int</c> object.
+            These uses look similar, but they are not the same operation.
+        </p>
+
+        <p>
+            The symbol <c>*</c> also has two related uses: in a declaration it
+            helps declare a pointer type, and in an expression it dereferences
+            a pointer.
+        </p>
+
+        <program xml:id="program_chapter9_pointer_reference_star"
+                 language="cpp">
+            <code><![CDATA[
+int* pointer;  // pointer declaration
+*pointer;      // dereference expression
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter9_raw-pointers-and-references_comparison">
+        <title>Comparison of Raw Pointers and References</title>
+
+        <table xml:id="table_chapter9_raw_pointer_reference_comparison">
+            <title>Raw pointers and references</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="27%"/>
+                <col width="36.5%"/>
+                <col width="36.5%"/>
+                <row header="yes">
+                    <cell>Feature</cell>
+                    <cell>Raw pointer</cell>
+                    <cell>Reference</cell>
+                </row>
+                <row>
+                    <cell>Initialization</cell>
+                    <cell>May be uninitialized, but an uninitialized pointer is dangerous. It can also be initialized to <c>nullptr</c>.</cell>
+                    <cell>Must be bound to an object when it is declared.</cell>
+                </row>
+                <row>
+                    <cell>Nullability</cell>
+                    <cell>Can represent no object with <c>nullptr</c>.</cell>
+                    <cell>Has no ordinary null value.</cell>
+                </row>
+                <row>
+                    <cell>Reseating</cell>
+                    <cell>Can be changed to identify another object.</cell>
+                    <cell>Cannot be changed to refer to another object.</cell>
+                </row>
+                <row>
+                    <cell>Access syntax</cell>
+                    <cell>Uses <c>*</c> or <c>-&gt;</c> to access the identified object.</cell>
+                    <cell>Uses ordinary variable or member-access syntax.</cell>
+                </row>
+                <row>
+                    <cell>Pointer arithmetic</cell>
+                    <cell>Possible within one array object, including a one-past-the-end position.</cell>
+                    <cell>Not applicable.</cell>
+                </row>
+                <row>
+                    <cell>Lifetime safety</cell>
+                    <cell>Can become null, uninitialized, or dangling.</cell>
+                    <cell>Can become dangling if its referred object is destroyed.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            A reference is not a second copy of the object. It is another way
+            to name the same object. A raw pointer is a separate object that
+            stores a pointer value. The C++ language does not require a
+            particular machine-level representation for references, so it is
+            better to focus on their language rules rather than assume that a
+            reference is always exactly a hidden pointer.
+        </p>
+
+        <interactive xml:id="interactive_chapter9_raw_pointer_reference"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int%20x%20%3D%2010%3B%0A%20%20%20%20int%20y%20%3D%2020%3B%0A%0A%20%20%20%20int*%20pointer%20%3D%20%26x%3B%0A%20%20%20%20*pointer%20%3D%2015%3B%0A%20%20%20%20pointer%20%3D%20%26y%3B%0A%20%20%20%20*pointer%20%3D%2025%3B%0A%0A%20%20%20%20int%26%20reference%20%3D%20x%3B%0A%20%20%20%20reference%20%3D%20y%3B%0A%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22x%20%3D%20%22%20%3C%3C%20x%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22y%20%3D%20%22%20%3C%3C%20y%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+            <description>
+                <p>
+                    C++ Tutor visualization comparing pointer reassignment with
+                    assignment through a reference.
+                </p>
+            </description>
+        </interactive>
+    </subsection>
+
+    <subsection xml:id="chapter9_raw-pointers-and-references_function-parameters">
+        <title>Function Parameters</title>
+
+        <p>
+            Both pointers and references can allow a function to work with an
+            object owned by its caller. The choice communicates an important
+            part of the function's interface.
+        </p>
+
+        <program xml:id="program_chapter9_pointer_reference_parameters"
+                 language="cpp">
+            <code><![CDATA[
+void increase_value(int& value) {
+    ++value;
+}
+
+void increase_value(int* pointer) {
+    if (pointer != nullptr) {
+        ++(*pointer);
+    }
+}
+            ]]></code>
+        </program>
+
+        <p>
+            These functions cannot be overloaded together because their
+            parameter types can create confusing calls in some situations.
+            More importantly, they communicate different contracts:
+            <c>increase_value(int&amp;)</c> requires an existing object, while
+            <c>increase_optional_value(int*)</c> can receive <c>nullptr</c> and
+            therefore must decide what that means. Although pointer and
+            reference parameter overloads are allowed, using both for the same
+            function name can make an interface harder to read and should be
+            done only when the distinction is clear.
+        </p>
+
+        <p>
+            When a function only needs to inspect a large object, a
+            <c>const</c> reference is often a good choice:
+        </p>
+
+        <program xml:id="program_chapter9_const_reference_parameter"
+                 language="cpp">
+            <code><![CDATA[
+void print_score(const int& score) {
+    std::cout << score << '\n';
+}
+            ]]></code>
+        </program>
+
+        <p>
+            For small types such as <c>int</c>, passing by value is usually
+            simpler. The reference-versus-pointer choice becomes especially
+            useful when objects are large, optional, mutable through a function,
+            or connected to dynamic storage.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_raw-pointers-and-references_guidance">
+        <title>When to Use Which</title>
+
+        <p>
+            A practical rule is to use a reference when the function requires
+            a valid object and does not need to change which object is being
+            referred to. Use a pointer when the function must represent
+            <q>no object</q>, change its target, perform pointer-based traversal,
+            or interact with an interface that uses pointers.
+        </p>
+
+        <table xml:id="table_chapter9_raw_pointer_reference_guidance">
+            <title>Choosing between a raw pointer and a reference</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="37%"/>
+                <col width="63%"/>
+                <row header="yes">
+                    <cell>Situation</cell>
+                    <cell>Recommended starting point</cell>
+                </row>
+                <row>
+                    <cell>The function requires a valid object.</cell>
+                    <cell>Use a reference parameter, such as <c>const T&amp;</c> for read-only access.</cell>
+                </row>
+                <row>
+                    <cell>The argument is optional.</cell>
+                    <cell>Use a pointer and define what <c>nullptr</c> means.</cell>
+                </row>
+                <row>
+                    <cell>The function must modify the caller's object.</cell>
+                    <cell>Use <c>T&amp;</c> when the object must exist; use <c>T*</c> when no object is also allowed.</cell>
+                </row>
+                <row>
+                    <cell>The target may change during traversal.</cell>
+                    <cell>Use a pointer, because pointers can be reseated.</cell>
+                </row>
+                <row>
+                    <cell>The function owns dynamic storage.</cell>
+                    <cell>Do not use a raw pointer merely to express ownership. Later, prefer an owning smart pointer such as <c>std::unique_ptr</c> when appropriate.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            A raw pointer does not automatically own the object to which it
+            points. It may point to an ordinary local object, an array element,
+            or dynamically allocated storage. Ownership and lifetime must be
+            designed separately. This is one reason that code using
+            <c>new</c> and <c>delete</c> requires careful rules about which part
+            of a program is responsible for releasing storage.
+        </p>
+
+        <p>
+            Also remember that pointer arithmetic is not general arithmetic on
+            arbitrary addresses. It is defined for positions within the same
+            array object, including the one-past-the-end position, which must
+            not be dereferenced.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_raw-pointers-and-references_summary">
+        <title>Summary</title>
+
+        <ul>
+            <li>
+                <p>A raw pointer is a separate object that stores a pointer value.</p>
+            </li>
+            <li>
+                <p>A reference is an alias bound to an existing object.</p>
+            </li>
+            <li>
+                <p>A pointer can be null and reseated; a reference cannot normally be null or reseated.</p>
+            </li>
+            <li>
+                <p><c>pointer = &amp;object</c> changes a pointer's target, while <c>reference = object</c> assigns through an existing reference.</p>
+            </li>
+            <li>
+                <p>Use references for required objects and pointers when optionality, reseating, or pointer-based traversal matters.</p>
+            </li>
+            <li>
+                <p>Neither a pointer nor a reference automatically communicates ownership.</p>
+            </li>
+        </ul>
+    </subsection>
+
+    <exercise label="chapter9_raw_pointer_reference_1">
+        <statement>
+            <p>What does <c>pointer = &amp;y;</c> do?</p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>It changes <c>pointer</c> so that it identifies <c>y</c>.</p></statement><feedback><p>Correct. The pointer is reseated to store the address of <c>y</c>.</p></feedback></choice>
+            <choice><statement><p>It copies the value of <c>y</c> into the object previously identified by <c>pointer</c>.</p></statement><feedback><p>That would require dereferencing the pointer on the left side.</p></feedback></choice>
+            <choice><statement><p>It changes the type of <c>pointer</c>.</p></statement><feedback><p>A pointer's type does not change through assignment.</p></feedback></choice>
+            <choice><statement><p>It deletes <c>y</c>.</p></statement><feedback><p>Taking an address does not destroy an object.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_raw_pointer_reference_2">
+        <statement>
+            <p>What is the result of the following code?</p>
+            <program line-numbers="yes">
+                <code><![CDATA[
+int x = 10;
+int y = 20;
+int& reference = x;
+reference = y;
+                ]]></code>
+            </program>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p><c>x</c> becomes 20, and <c>reference</c> still refers to <c>x</c>.</p></statement><feedback><p>Correct. Assignment through a reference changes the object to which it is already bound.</p></feedback></choice>
+            <choice><statement><p><c>reference</c> becomes an alias for <c>y</c>.</p></statement><feedback><p>References cannot be reseated by assignment.</p></feedback></choice>
+            <choice><statement><p><c>y</c> becomes 10.</p></statement><feedback><p>The assignment copies from <c>y</c> into the object identified by <c>reference</c>.</p></feedback></choice>
+            <choice><statement><p>The program creates a second copy of <c>x</c>.</p></statement><feedback><p>A reference is an alias, not a copied object.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_raw_pointer_reference_3">
+        <statement>
+            <p>Which parameter is most appropriate when a function requires a valid, read-only object and should avoid copying a large object?</p>
+        </statement>
+        <choices>
+            <choice><statement><p><c>LargeObject object</c></p></statement><feedback><p>This passes a copy of the object.</p></feedback></choice>
+            <choice correct="yes"><statement><p><c>const LargeObject&amp; object</c></p></statement><feedback><p>Correct. A const reference avoids copying and expresses that the object is required but not modified.</p></feedback></choice>
+            <choice><statement><p><c>LargeObject* object</c></p></statement><feedback><p>A pointer allows <c>nullptr</c>, so the function would need a pointer contract and a safety check.</p></feedback></choice>
+            <choice><statement><p><c>LargeObject&amp;&amp; object</c></p></statement><feedback><p>This introduces rvalue references, which are not needed for this requirement.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_raw_pointer_reference_4"
+              adaptive="yes"
+              indentation="show">
+        <statement>
+            <p>Arrange the blocks to change an object through a pointer and then reseat the pointer.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>int first_value = 10;</cline></block>
+            <block order="2"><cline>int second_value = 20;</cline></block>
+            <block order="3"><cline>int* pointer = &amp;first_value;</cline></block>
+            <block order="4"><cline>*pointer = 15;</cline></block>
+            <block order="5"><cline>pointer = &amp;second_value;</cline></block>
+            <block order="6"><cline>*pointer = 25;</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter9_raw_pointer_reference_5">
+        <statement>
+            <p>Which situation most strongly favors a pointer over a reference?</p>
+        </statement>
+        <choices>
+            <choice><statement><p>The function requires a valid object and must not modify it.</p></statement><feedback><p>A const reference commonly expresses this contract.</p></feedback></choice>
+            <choice correct="yes"><statement><p>The function must represent an optional object that may be absent.</p></statement><feedback><p>Correct. A pointer can represent absence with <c>nullptr</c>.</p></feedback></choice>
+            <choice><statement><p>The function should always receive a valid object.</p></statement><feedback><p>A reference communicates that requirement more directly.</p></feedback></choice>
+            <choice><statement><p>The function should use ordinary variable syntax for access.</p></statement><feedback><p>References provide ordinary alias syntax; pointers require explicit access.</p></feedback></choice>
+        </choices>
+    </exercise>
+</section>

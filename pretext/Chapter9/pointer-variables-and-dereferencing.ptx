@@ -137,7 +137,7 @@ int main() {
 
         <figure xml:id="figure_chapter9_pointer_and_target_storage">
             <caption>A pointer object and its target occupy separate storage</caption>
-            <image source="chapter9/pointer-and-target-storage-address-of-clear.svg" width="90%">
+            <image source="Chapter9/pointer-and-target-storage-address-of-clear.svg" width="90%">
                 <description>
                     <p>
                         The pointer object <c>score_pointer</c> occupies eight

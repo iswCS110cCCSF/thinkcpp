@@ -34,7 +34,7 @@
                         occupying four consecutive virtual byte locations at
                         addresses 0x0000'1000 through 0x0000'1003. Each cell is
                         one byte, or eight bits.</caption>
-            <image source="chapter9/int32-consecutive-byte-locations.svg" width="80%">
+            <image source="Chapter9/int32-consecutive-byte-locations.svg" width="80%">
             </image>
         </figure>
 
@@ -70,7 +70,7 @@
                         physical frame P41. The page table and memory-management
                         hardware select the frame while preserving each byte
                         offset within the page.</caption>
-            <image source="chapter9/virtual-to-physical-page-mapping-explained.svg" width="95%">
+            <image source="Chapter9/virtual-to-physical-page-mapping-explained.svg" width="95%">
             </image>
         </figure>
 
