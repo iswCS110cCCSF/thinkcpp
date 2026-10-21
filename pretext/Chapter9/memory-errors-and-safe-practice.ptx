@@ -103,7 +103,7 @@
 
         <ul>
             <li>Prefer ordinary local objects when their lifetime is sufficient.</li>
-            <li>Prefer <c>std::vector</c> to manually allocated dynamic arrays.</li>
+            <li>Prefer <c>std::vector</c>instead of manually allocated dynamic arrays.</li>
             <li>Initialize every pointer.</li>
             <li>Check nullable pointers before dereferencing them.</li>
             <li>Match every allocation with the correct release operation.</li>
