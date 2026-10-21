@@ -11557,11 +11557,137 @@ var ptx_lunr_docs = [
   "body": "  What does a pointer in an ordinary C++ process normally contain?    A virtual address that identifies an object in that process's address space The operating system and hardware translate virtual addresses to physical locations.  The object's complete contents A pointer stores an address, not a copy of the object.  A physical RAM address that is valid in every process Processes normally use separate virtual address spaces.  The page-table entry itself Page tables are used by the system to translate addresses; a pointer is a C++ object value.   "
 },
 {
+  "id": "chapter9_raw-pointers-and-references",
+  "level": "1",
+  "url": "chapter9_raw-pointers-and-references.html",
+  "type": "Section",
+  "number": "9.4",
+  "title": "Raw Pointers and References",
+  "body": " Raw Pointers and References  Chapter 3 introduced references as a way for a function to work with the caller's object. This section compares references with raw pointers , the built-in pointer types such as int* . Both can provide indirect access to an object, but their rules and uses are different.  A raw pointer is a separate object that stores a pointer value. That value can identify another object, identify no object through nullptr , or be changed to identify a different object. A reference is an alias bound to an existing object.   Syntax and Reassignment  A pointer must be explicitly dereferenced to change the value of the object it identifies. Assigning a new address to the pointer changes which object it identifies.   int x = 10; int y = 20; int* pointer = &x; \/\/ pointer stores the address of x *pointer = 15; \/\/ x is now 15 pointer = &y; \/\/ pointer now identifies y *pointer = 25; \/\/ y is now 25   The statement pointer = &y changes the pointer's stored address. The statement *pointer = 25 changes the object at that address.  A reference acts as another name for the object to which it is bound. It cannot be reseated to refer to a different object.   int x = 10; int y = 20; int& reference = x; \/\/ reference is another name for x reference = y; \/\/ assigns y's value to x \/\/ reference still refers to x   In the final assignment, reference = y does not make reference refer to y . It copies the value of y into the object that reference already identifies, so x becomes 20 .   Pointer and reference syntax      Expression  Meaning    int* pointer = &x;  Declare a pointer and store the address of x .    *pointer = 15;  Access the object identified by pointer and assign to it.    pointer = &y;  Change the pointer so it identifies y .    int& reference = x;  Declare reference as an alias for x .    reference = y;  Assign the value of y to x ; it does not reseat the reference.       Two Meanings of &  The symbol & has different meanings depending on its context. In an expression, it is the address-of operator. In a declaration, it can indicate a reference type.   int score = 90; int* pointer = &score; \/\/ & obtains score's address int& reference = score; \/\/ & declares reference as an alias   The address-of expression &score produces a pointer value. The declaration int& reference says that reference is a reference to an existing int object. These uses look similar, but they are not the same operation.  The symbol * also has two related uses: in a declaration it helps declare a pointer type, and in an expression it dereferences a pointer.   int* pointer; \/\/ pointer declaration *pointer; \/\/ dereference expression     Comparison of Raw Pointers and References   Raw pointers and references       Feature  Raw pointer  Reference    Initialization  May be uninitialized, but an uninitialized pointer is dangerous. It can also be initialized to nullptr .  Must be bound to an object when it is declared.    Nullability  Can represent no object with nullptr .  Has no ordinary null value.    Reseating  Can be changed to identify another object.  Cannot be changed to refer to another object.    Access syntax  Uses * or -> to access the identified object.  Uses ordinary variable or member-access syntax.    Pointer arithmetic  Possible within one array object, including a one-past-the-end position.  Not applicable.    Lifetime safety  Can become null, uninitialized, or dangling.  Can become dangling if its referred object is destroyed.     A reference is not a second copy of the object. It is another way to name the same object. A raw pointer is a separate object that stores a pointer value. The C++ language does not require a particular machine-level representation for references, so it is better to focus on their language rules rather than assume that a reference is always exactly a hidden pointer.     Function Parameters  Both pointers and references can allow a function to work with an object owned by its caller. The choice communicates an important part of the function's interface.   void increase_value(int& value) { ++value; } void increase_value(int* pointer) { if (pointer != nullptr) { ++(*pointer); } }   These functions cannot be overloaded together because their parameter types can create confusing calls in some situations. More importantly, they communicate different contracts: increase_value(int&) requires an existing object, while increase_optional_value(int*) can receive nullptr and therefore must decide what that means. Although pointer and reference parameter overloads are allowed, using both for the same function name can make an interface harder to read and should be done only when the distinction is clear.  When a function only needs to inspect a large object, a const reference is often a good choice:   void print_score(const int& score) { std::cout << score << '\\n'; }   For small types such as int , passing by value is usually simpler. The reference-versus-pointer choice becomes especially useful when objects are large, optional, mutable through a function, or connected to dynamic storage.    When to Use Which  A practical rule is to use a reference when the function requires a valid object and does not need to change which object is being referred to. Use a pointer when the function must represent no object , change its target, perform pointer-based traversal, or interact with an interface that uses pointers.   Choosing between a raw pointer and a reference      Situation  Recommended starting point    The function requires a valid object.  Use a reference parameter, such as const T& for read-only access.    The argument is optional.  Use a pointer and define what nullptr means.    The function must modify the caller's object.  Use T& when the object must exist; use T* when no object is also allowed.    The target may change during traversal.  Use a pointer, because pointers can be reseated.    The function owns dynamic storage.  Do not use a raw pointer merely to express ownership. Later, prefer an owning smart pointer such as std::unique_ptr when appropriate.     A raw pointer does not automatically own the object to which it points. It may point to an ordinary local object, an array element, or dynamically allocated storage. Ownership and lifetime must be designed separately. This is one reason that code using new and delete requires careful rules about which part of a program is responsible for releasing storage.  Also remember that pointer arithmetic is not general arithmetic on arbitrary addresses. It is defined for positions within the same array object, including the one-past-the-end position, which must not be dereferenced.    Summary    A raw pointer is a separate object that stores a pointer value.    A reference is an alias bound to an existing object.    A pointer can be null and reseated; a reference cannot normally be null or reseated.    pointer = &object changes a pointer's target, while reference = object assigns through an existing reference.    Use references for required objects and pointers when optionality, reseating, or pointer-based traversal matters.    Neither a pointer nor a reference automatically communicates ownership.       What does pointer = &y; do?    It changes pointer so that it identifies y . Correct. The pointer is reseated to store the address of y .  It copies the value of y into the object previously identified by pointer . That would require dereferencing the pointer on the left side.  It changes the type of pointer . A pointer's type does not change through assignment.  It deletes y . Taking an address does not destroy an object.      What is the result of the following code?   int x = 10; int y = 20; int& reference = x; reference = y;     x becomes 20, and reference still refers to x . Correct. Assignment through a reference changes the object to which it is already bound.  reference becomes an alias for y . References cannot be reseated by assignment.  y becomes 10. The assignment copies from y into the object identified by reference .  The program creates a second copy of x . A reference is an alias, not a copied object.      Which parameter is most appropriate when a function requires a valid, read-only object and should avoid copying a large object?    LargeObject object This passes a copy of the object.  const LargeObject& object Correct. A const reference avoids copying and expresses that the object is required but not modified.  LargeObject* object A pointer allows nullptr , so the function would need a pointer contract and a safety check.  LargeObject&& object This introduces rvalue references, which are not needed for this requirement.      Arrange the blocks to change an object through a pointer and then reseat the pointer.    int first_value = 10;  int second_value = 20;  int* pointer = &first_value;  *pointer = 15;  pointer = &second_value;  *pointer = 25;      Which situation most strongly favors a pointer over a reference?    The function requires a valid object and must not modify it. A const reference commonly expresses this contract.  The function must represent an optional object that may be absent. Correct. A pointer can represent absence with nullptr .  The function should always receive a valid object. A reference communicates that requirement more directly.  The function should use ordinary variable syntax for access. References provide ordinary alias syntax; pointers require explicit access.    "
+},
+{
+  "id": "chapter9_raw-pointers-and-references-2",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw-pointers-and-references-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Chapter 3 introduced references as a way for a function to work with the caller's object. This section compares references with raw pointers , the built-in pointer types such as int* . Both can provide indirect access to an object, but their rules and uses are different. "
+},
+{
+  "id": "chapter9_raw-pointers-and-references-3",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw-pointers-and-references-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A raw pointer is a separate object that stores a pointer value. That value can identify another object, identify no object through nullptr , or be changed to identify a different object. A reference is an alias bound to an existing object. "
+},
+{
+  "id": "chapter9_raw-pointers-and-references_syntax-reassignment",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw-pointers-and-references_syntax-reassignment",
+  "type": "Subsection",
+  "number": "9.4.1",
+  "title": "Syntax and Reassignment",
+  "body": " Syntax and Reassignment  A pointer must be explicitly dereferenced to change the value of the object it identifies. Assigning a new address to the pointer changes which object it identifies.   int x = 10; int y = 20; int* pointer = &x; \/\/ pointer stores the address of x *pointer = 15; \/\/ x is now 15 pointer = &y; \/\/ pointer now identifies y *pointer = 25; \/\/ y is now 25   The statement pointer = &y changes the pointer's stored address. The statement *pointer = 25 changes the object at that address.  A reference acts as another name for the object to which it is bound. It cannot be reseated to refer to a different object.   int x = 10; int y = 20; int& reference = x; \/\/ reference is another name for x reference = y; \/\/ assigns y's value to x \/\/ reference still refers to x   In the final assignment, reference = y does not make reference refer to y . It copies the value of y into the object that reference already identifies, so x becomes 20 .   Pointer and reference syntax      Expression  Meaning    int* pointer = &x;  Declare a pointer and store the address of x .    *pointer = 15;  Access the object identified by pointer and assign to it.    pointer = &y;  Change the pointer so it identifies y .    int& reference = x;  Declare reference as an alias for x .    reference = y;  Assign the value of y to x ; it does not reseat the reference.     "
+},
+{
+  "id": "chapter9_raw-pointers-and-references_ampersand",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw-pointers-and-references_ampersand",
+  "type": "Subsection",
+  "number": "9.4.2",
+  "title": "Two Meanings of <code class=\"code-inline tex2jax_ignore\">&amp;<\/code>",
+  "body": " Two Meanings of &  The symbol & has different meanings depending on its context. In an expression, it is the address-of operator. In a declaration, it can indicate a reference type.   int score = 90; int* pointer = &score; \/\/ & obtains score's address int& reference = score; \/\/ & declares reference as an alias   The address-of expression &score produces a pointer value. The declaration int& reference says that reference is a reference to an existing int object. These uses look similar, but they are not the same operation.  The symbol * also has two related uses: in a declaration it helps declare a pointer type, and in an expression it dereferences a pointer.   int* pointer; \/\/ pointer declaration *pointer; \/\/ dereference expression   "
+},
+{
+  "id": "chapter9_raw-pointers-and-references_comparison",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw-pointers-and-references_comparison",
+  "type": "Subsection",
+  "number": "9.4.3",
+  "title": "Comparison of Raw Pointers and References",
+  "body": " Comparison of Raw Pointers and References   Raw pointers and references       Feature  Raw pointer  Reference    Initialization  May be uninitialized, but an uninitialized pointer is dangerous. It can also be initialized to nullptr .  Must be bound to an object when it is declared.    Nullability  Can represent no object with nullptr .  Has no ordinary null value.    Reseating  Can be changed to identify another object.  Cannot be changed to refer to another object.    Access syntax  Uses * or -> to access the identified object.  Uses ordinary variable or member-access syntax.    Pointer arithmetic  Possible within one array object, including a one-past-the-end position.  Not applicable.    Lifetime safety  Can become null, uninitialized, or dangling.  Can become dangling if its referred object is destroyed.     A reference is not a second copy of the object. It is another way to name the same object. A raw pointer is a separate object that stores a pointer value. The C++ language does not require a particular machine-level representation for references, so it is better to focus on their language rules rather than assume that a reference is always exactly a hidden pointer.   "
+},
+{
+  "id": "chapter9_raw-pointers-and-references_function-parameters",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw-pointers-and-references_function-parameters",
+  "type": "Subsection",
+  "number": "9.4.4",
+  "title": "Function Parameters",
+  "body": " Function Parameters  Both pointers and references can allow a function to work with an object owned by its caller. The choice communicates an important part of the function's interface.   void increase_value(int& value) { ++value; } void increase_value(int* pointer) { if (pointer != nullptr) { ++(*pointer); } }   These functions cannot be overloaded together because their parameter types can create confusing calls in some situations. More importantly, they communicate different contracts: increase_value(int&) requires an existing object, while increase_optional_value(int*) can receive nullptr and therefore must decide what that means. Although pointer and reference parameter overloads are allowed, using both for the same function name can make an interface harder to read and should be done only when the distinction is clear.  When a function only needs to inspect a large object, a const reference is often a good choice:   void print_score(const int& score) { std::cout << score << '\\n'; }   For small types such as int , passing by value is usually simpler. The reference-versus-pointer choice becomes especially useful when objects are large, optional, mutable through a function, or connected to dynamic storage.  "
+},
+{
+  "id": "chapter9_raw-pointers-and-references_guidance",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw-pointers-and-references_guidance",
+  "type": "Subsection",
+  "number": "9.4.5",
+  "title": "When to Use Which",
+  "body": " When to Use Which  A practical rule is to use a reference when the function requires a valid object and does not need to change which object is being referred to. Use a pointer when the function must represent no object , change its target, perform pointer-based traversal, or interact with an interface that uses pointers.   Choosing between a raw pointer and a reference      Situation  Recommended starting point    The function requires a valid object.  Use a reference parameter, such as const T& for read-only access.    The argument is optional.  Use a pointer and define what nullptr means.    The function must modify the caller's object.  Use T& when the object must exist; use T* when no object is also allowed.    The target may change during traversal.  Use a pointer, because pointers can be reseated.    The function owns dynamic storage.  Do not use a raw pointer merely to express ownership. Later, prefer an owning smart pointer such as std::unique_ptr when appropriate.     A raw pointer does not automatically own the object to which it points. It may point to an ordinary local object, an array element, or dynamically allocated storage. Ownership and lifetime must be designed separately. This is one reason that code using new and delete requires careful rules about which part of a program is responsible for releasing storage.  Also remember that pointer arithmetic is not general arithmetic on arbitrary addresses. It is defined for positions within the same array object, including the one-past-the-end position, which must not be dereferenced.  "
+},
+{
+  "id": "chapter9_raw-pointers-and-references_summary",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw-pointers-and-references_summary",
+  "type": "Subsection",
+  "number": "9.4.6",
+  "title": "Summary",
+  "body": " Summary    A raw pointer is a separate object that stores a pointer value.    A reference is an alias bound to an existing object.    A pointer can be null and reseated; a reference cannot normally be null or reseated.    pointer = &object changes a pointer's target, while reference = object assigns through an existing reference.    Use references for required objects and pointers when optionality, reseating, or pointer-based traversal matters.    Neither a pointer nor a reference automatically communicates ownership.    "
+},
+{
+  "id": "chapter9_raw_pointer_reference_1",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_1",
+  "type": "Checkpoint",
+  "number": "9.4.1",
+  "title": "",
+  "body": "  What does pointer = &y; do?    It changes pointer so that it identifies y . Correct. The pointer is reseated to store the address of y .  It copies the value of y into the object previously identified by pointer . That would require dereferencing the pointer on the left side.  It changes the type of pointer . A pointer's type does not change through assignment.  It deletes y . Taking an address does not destroy an object.   "
+},
+{
+  "id": "chapter9_raw_pointer_reference_2",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_2",
+  "type": "Checkpoint",
+  "number": "9.4.2",
+  "title": "",
+  "body": "  What is the result of the following code?   int x = 10; int y = 20; int& reference = x; reference = y;     x becomes 20, and reference still refers to x . Correct. Assignment through a reference changes the object to which it is already bound.  reference becomes an alias for y . References cannot be reseated by assignment.  y becomes 10. The assignment copies from y into the object identified by reference .  The program creates a second copy of x . A reference is an alias, not a copied object.   "
+},
+{
+  "id": "chapter9_raw_pointer_reference_3",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_3",
+  "type": "Checkpoint",
+  "number": "9.4.3",
+  "title": "",
+  "body": "  Which parameter is most appropriate when a function requires a valid, read-only object and should avoid copying a large object?    LargeObject object This passes a copy of the object.  const LargeObject& object Correct. A const reference avoids copying and expresses that the object is required but not modified.  LargeObject* object A pointer allows nullptr , so the function would need a pointer contract and a safety check.  LargeObject&& object This introduces rvalue references, which are not needed for this requirement.   "
+},
+{
+  "id": "chapter9_raw_pointer_reference_4",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_4",
+  "type": "Checkpoint",
+  "number": "9.4.4",
+  "title": "",
+  "body": "  Arrange the blocks to change an object through a pointer and then reseat the pointer.    int first_value = 10;  int second_value = 20;  int* pointer = &first_value;  *pointer = 15;  pointer = &second_value;  *pointer = 25;   "
+},
+{
+  "id": "chapter9_raw_pointer_reference_5",
+  "level": "2",
+  "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_5",
+  "type": "Checkpoint",
+  "number": "9.4.5",
+  "title": "",
+  "body": "  Which situation most strongly favors a pointer over a reference?    The function requires a valid object and must not modify it. A const reference commonly expresses this contract.  The function must represent an optional object that may be absent. Correct. A pointer can represent absence with nullptr .  The function should always receive a valid object. A reference communicates that requirement more directly.  The function should use ordinary variable syntax for access. References provide ordinary alias syntax; pointers require explicit access.   "
+},
+{
   "id": "chapter9_nullptr-and-safe-pointer-use",
   "level": "1",
   "url": "chapter9_nullptr-and-safe-pointer-use.html",
   "type": "Section",
-  "number": "9.4",
+  "number": "9.5",
   "title": "<code class=\"code-inline tex2jax_ignore\">nullptr<\/code> and Safe Pointer Use",
   "body": " nullptr and Safe Pointer Use  A pointer can identify an object, or it can identify no object. The value nullptr represents the second situation. A null pointer is useful when a program needs to represent no address explicitly.   The function checks the pointer before dereferencing it. Dereferencing a null pointer will result in undefined behavior causing a Segmentation fault or silent data corruption because it does not identify an object. So validating a pointer variable for not being nullptr is an excellent defensive coding habit.  Use nullptr rather than the older integer-based conventions 0 and NULL . A pointer should be initialized immediately, even when its initial state is no object.     What should a function do before dereferencing a pointer parameter that may be null?   Check whether the pointer is not nullptr . Only a pointer that identifies a live object may be safely dereferenced.  Add 1 to the pointer. Pointer arithmetic does not make a null pointer valid.  Convert the pointer to int . Conversion does not establish that an object exists.  Dereference it once to test it. Dereferencing is exactly the unsafe operation that must be avoided.      Arrange the blocks to print a value only when the pointer identifies an object.    void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }     Which declaration safely represents a pointer that currently identifies no object?   int* value_pointer = nullptr; nullptr gives the pointer an explicit, safe no-object state.  int* value_pointer; An uninitialized pointer has an indeterminate value and must not be used.  int value_pointer = nullptr; This declares an int , not a pointer.  int* value_pointer = 1; An arbitrary integer is not a safe way to represent no object.     Why must a nullable pointer be checked before dereferencing?   A null pointer identifies no object, so dereferencing it has undefined behavior. Dereferencing is valid only when the pointer identifies a live object.  A null pointer always points to the first array element. nullptr identifies no object.  Checking changes the pointer into a reference. A check only tests the pointer's state; it does not change its type.  Checking makes the pointed-to object permanent. A check does not change an object's lifetime.     Which condition is equivalent to checking whether value_pointer is not null?   if (value_pointer) A pointer converts to true when it identifies an address and to false when it is null.  if (*value_pointer) This dereferences the pointer and is unsafe when it is null.  if (&value_pointer) This tests the address of the pointer variable, which is normally non-null.  if (value_pointer = nullptr) This assigns rather than checks and also makes the pointer null.    "
 },
@@ -11597,7 +11723,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_check",
   "type": "Checkpoint",
-  "number": "9.4.1",
+  "number": "9.5.1",
   "title": "",
   "body": " What should a function do before dereferencing a pointer parameter that may be null?   Check whether the pointer is not nullptr . Only a pointer that identifies a live object may be safely dereferenced.  Add 1 to the pointer. Pointer arithmetic does not make a null pointer valid.  Convert the pointer to int . Conversion does not establish that an object exists.  Dereference it once to test it. Dereferencing is exactly the unsafe operation that must be avoided.   "
 },
@@ -11606,7 +11732,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_parsons_guard",
   "type": "Checkpoint",
-  "number": "9.4.2",
+  "number": "9.5.2",
   "title": "",
   "body": "  Arrange the blocks to print a value only when the pointer identifies an object.    void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }   "
 },
@@ -11615,7 +11741,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_initialization",
   "type": "Checkpoint",
-  "number": "9.4.3",
+  "number": "9.5.3",
   "title": "",
   "body": " Which declaration safely represents a pointer that currently identifies no object?   int* value_pointer = nullptr; nullptr gives the pointer an explicit, safe no-object state.  int* value_pointer; An uninitialized pointer has an indeterminate value and must not be used.  int value_pointer = nullptr; This declares an int , not a pointer.  int* value_pointer = 1; An arbitrary integer is not a safe way to represent no object.   "
 },
@@ -11624,7 +11750,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_guard",
   "type": "Checkpoint",
-  "number": "9.4.4",
+  "number": "9.5.4",
   "title": "",
   "body": " Why must a nullable pointer be checked before dereferencing?   A null pointer identifies no object, so dereferencing it has undefined behavior. Dereferencing is valid only when the pointer identifies a live object.  A null pointer always points to the first array element. nullptr identifies no object.  Checking changes the pointer into a reference. A check only tests the pointer's state; it does not change its type.  Checking makes the pointed-to object permanent. A check does not change an object's lifetime.   "
 },
@@ -11633,7 +11759,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_nullptr-and-safe-pointer-use.html#chapter9_nullptr-and-safe-pointer-use_exercise_boolean_check",
   "type": "Checkpoint",
-  "number": "9.4.5",
+  "number": "9.5.5",
   "title": "",
   "body": " Which condition is equivalent to checking whether value_pointer is not null?   if (value_pointer) A pointer converts to true when it identifies an address and to false when it is null.  if (*value_pointer) This dereferences the pointer and is unsafe when it is null.  if (&value_pointer) This tests the address of the pointer variable, which is normally non-null.  if (value_pointer = nullptr) This assigns rather than checks and also makes the pointer null.   "
 },
@@ -11642,7 +11768,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_pointers-as-function-parameters.html",
   "type": "Section",
-  "number": "9.5",
+  "number": "9.6",
   "title": "Pointers as Function Parameters",
   "body": " Pointers as Function Parameters  A pointer parameter lets a function receive the address of an existing object. The function can then modify the caller's object through the dereferenced pointer, provided the pointer is valid and non-constant.   #include <iostream> void increase_value(int* value_pointer) { if (value_pointer != nullptr) { ++(*value_pointer); } } int main() { int count = 4; increase_value(&count); std::cout << count << '\\n'; return 0; }   The parentheses in ++(*value_pointer) make the intended order visible: first dereference the pointer, then increment the pointed-to value.   Read-Only Pointer Parameters  A pointer to const data can inspect an object without changing it through that pointer.   #include <iostream> void print_value(const int* value_pointer) { if (value_pointer != nullptr) { std::cout << *value_pointer << '\\n'; } } int main() { const int temperature = 22; print_value(&temperature); return 0; }   The declaration const int* value_pointer means that the function cannot modify the int through this pointer. A pointer parameter is useful when nullptr is a meaningful possibility. When an object must always exist, a reference is often a clearer choice.    Pointers and References: The swap Example  Both pointer parameters and reference parameters can allow a function to modify the caller's objects. The difference is visible in both the function definition and the call:   A pointer can represent no object with nullptr and can later point to a different object. A reference must bind to an object when it is initialized and cannot be reseated. Neither a pointer nor a reference automatically owns the object it identifies.    Pointer and reference parameter choices       Parameter  Can represent no object?  Can modify the caller's object?    int* value_pointer  Yes, with nullptr .  Yes, after a valid dereference.    const int* value_pointer  Yes, with nullptr .  No.    int& value  No; a reference must bind to an object.  Yes.    const int& value  No; a reference must bind to an object.  No.      When is a pointer parameter preferable to a reference parameter?   When the function needs to allow the possibility that no object is provided. nullptr can represent the absence of an object.  Whenever the function must be faster. Pointer syntax does not automatically make a function faster.  Whenever the function reads an integer. Parameter choice depends on the function's contract, not merely the type.  Whenever a vector is passed to a function. Vectors are often passed by constant reference when read-only.      Arrange the blocks to increment a caller's variable through a pointer parameter.    void increase_value(int* value_pointer) {  if (value_pointer != nullptr) { ++(*value_pointer); }  }  int count = 4;  increase_value(&count);  std::cout << count << '\\n';     What does const int* value_pointer allow the function to do?   Read the pointed-to int without modifying it through this pointer The const applies to the pointed-to integer.  Reseat the pointer but not read the integer This declaration permits reading the integer but does not make the pointer itself const.  Delete every object that the pointer identifies const does not grant ownership or deletion responsibility.  Guarantee that the pointer is never null A pointer to const data can still be nullptr .     Why is a reference often clearer when a function requires an existing object?   A reference must bind to an object and cannot represent nullptr . The reference type communicates that the function expects an object to exist.  A reference automatically allocates the object. References do not create dynamic storage.  A reference always makes a copy. A reference is an alias for an existing object.  A reference can be reseated more easily than a pointer. A reference remains bound to its original object.     How should a caller pass count to increase_value(int* value_pointer) ?   increase_value(&count); The pointer parameter receives the address of the caller's object.  increase_value(*count); * is not used to obtain the address of an ordinary variable.  increase_value(count); This passes the integer value, not its address.  increase_value(nullptr); This intentionally passes no object and would not increment count .    "
 },
@@ -11669,7 +11795,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_read-only",
   "type": "Subsection",
-  "number": "9.5.1",
+  "number": "9.6.1",
   "title": "Read-Only Pointer Parameters",
   "body": " Read-Only Pointer Parameters  A pointer to const data can inspect an object without changing it through that pointer.   #include <iostream> void print_value(const int* value_pointer) { if (value_pointer != nullptr) { std::cout << *value_pointer << '\\n'; } } int main() { const int temperature = 22; print_value(&temperature); return 0; }   The declaration const int* value_pointer means that the function cannot modify the int through this pointer. A pointer parameter is useful when nullptr is a meaningful possibility. When an object must always exist, a reference is often a clearer choice.  "
 },
@@ -11678,7 +11804,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_pointer-reference-comparison",
   "type": "Subsection",
-  "number": "9.5.2",
+  "number": "9.6.2",
   "title": "Pointers and References: The <code class=\"code-inline tex2jax_ignore\">swap<\/code> Example",
   "body": " Pointers and References: The swap Example  Both pointer parameters and reference parameters can allow a function to modify the caller's objects. The difference is visible in both the function definition and the call:   A pointer can represent no object with nullptr and can later point to a different object. A reference must bind to an object when it is initialized and cannot be reseated. Neither a pointer nor a reference automatically owns the object it identifies.  "
 },
@@ -11687,7 +11813,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#table_ch9_pointer_and_reference_parameters",
   "type": "Table",
-  "number": "9.5.1",
+  "number": "9.6.1",
   "title": "Pointer and reference parameter choices",
   "body": " Pointer and reference parameter choices       Parameter  Can represent no object?  Can modify the caller's object?    int* value_pointer  Yes, with nullptr .  Yes, after a valid dereference.    const int* value_pointer  Yes, with nullptr .  No.    int& value  No; a reference must bind to an object.  Yes.    const int& value  No; a reference must bind to an object.  No.    "
 },
@@ -11696,7 +11822,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_reference",
   "type": "Checkpoint",
-  "number": "9.5.1",
+  "number": "9.6.1",
   "title": "",
   "body": " When is a pointer parameter preferable to a reference parameter?   When the function needs to allow the possibility that no object is provided. nullptr can represent the absence of an object.  Whenever the function must be faster. Pointer syntax does not automatically make a function faster.  Whenever the function reads an integer. Parameter choice depends on the function's contract, not merely the type.  Whenever a vector is passed to a function. Vectors are often passed by constant reference when read-only.   "
 },
@@ -11705,7 +11831,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_parsons_pointer_call",
   "type": "Checkpoint",
-  "number": "9.5.2",
+  "number": "9.6.2",
   "title": "",
   "body": "  Arrange the blocks to increment a caller's variable through a pointer parameter.    void increase_value(int* value_pointer) {  if (value_pointer != nullptr) { ++(*value_pointer); }  }  int count = 4;  increase_value(&count);  std::cout << count << '\\n';   "
 },
@@ -11714,7 +11840,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_const_pointer",
   "type": "Checkpoint",
-  "number": "9.5.3",
+  "number": "9.6.3",
   "title": "",
   "body": " What does const int* value_pointer allow the function to do?   Read the pointed-to int without modifying it through this pointer The const applies to the pointed-to integer.  Reseat the pointer but not read the integer This declaration permits reading the integer but does not make the pointer itself const.  Delete every object that the pointer identifies const does not grant ownership or deletion responsibility.  Guarantee that the pointer is never null A pointer to const data can still be nullptr .   "
 },
@@ -11723,7 +11849,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_reference_contract",
   "type": "Checkpoint",
-  "number": "9.5.4",
+  "number": "9.6.4",
   "title": "",
   "body": " Why is a reference often clearer when a function requires an existing object?   A reference must bind to an object and cannot represent nullptr . The reference type communicates that the function expects an object to exist.  A reference automatically allocates the object. References do not create dynamic storage.  A reference always makes a copy. A reference is an alias for an existing object.  A reference can be reseated more easily than a pointer. A reference remains bound to its original object.   "
 },
@@ -11732,7 +11858,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_pointer_argument",
   "type": "Checkpoint",
-  "number": "9.5.5",
+  "number": "9.6.5",
   "title": "",
   "body": " How should a caller pass count to increase_value(int* value_pointer) ?   increase_value(&count); The pointer parameter receives the address of the caller's object.  increase_value(*count); * is not used to obtain the address of an ordinary variable.  increase_value(count); This passes the integer value, not its address.  increase_value(nullptr); This intentionally passes no object and would not increment count .   "
 },
@@ -11741,7 +11867,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_pointers-and-c-style-arrays.html",
   "type": "Section",
-  "number": "9.6",
+  "number": "9.7",
   "title": "Pointers and C-Style Arrays",
   "body": " Pointers and C-Style Arrays  A C-style array stores a fixed number of elements of one type in consecutive positions. In many expressions, the array name is converted to a pointer to its first element. This conversion is commonly called array decay .   When scores is passed to print_values() , it becomes a pointer to the first element. The pointer does not carry the array's length, so the function receives count separately.   Pointer Arithmetic  Pointer arithmetic moves by elements of the pointed-to type, not by individual bytes. If an int* points to one array element, adding 1 produces a pointer to the next int in that array.   #include <iostream> int main() { int scores[]{88, 91, 95}; int* current = scores; std::cout << *current << '\\n'; ++current; std::cout << *current << '\\n'; std::cout << *(current + 1) << '\\n'; return 0; }    Common pointer-arithmetic expressions       Expression  Meaning  Important condition    pointer + 1  Pointer to the next element.  Must remain within the same array or one position past it.    ++pointer  Move to the next element.  Do not dereference a one-past-the-end pointer.    *pointer  Access the pointed-to element.  The pointer must identify a valid live element.    pointer[index]  Equivalent to *(pointer + index) .  The resulting position must be a valid element.       Array Size and Function Parameters  An array name does not decay in every context. For example, sizeof(scores) measures the entire array when scores is an actual array in that scope. Once the array has decayed to a pointer parameter, sizeof(values) measures the pointer, not the original array. This is another reason to pass the length explicitly.  A pointer may identify one position past the last element. Such a pointer is useful as a stopping position, but it must never be dereferenced. Pointer arithmetic outside the same array object is not a valid way to reach unrelated storage.    Why does a function receiving const int* values usually need a separate length parameter?   The pointer identifies an element but does not retain the original array's length. Array decay gives the function an address, not the array-size information.  Because pointers cannot access array elements. Pointer indexing and dereferencing can access elements.  Because the array is automatically copied into the function. The array is not copied into a pointer parameter.  Because pointer arithmetic always changes the array length. Pointer arithmetic does not change the array object.      Arrange the statements to traverse two elements of an array with a pointer.    int scores[]{88, 91, 95};  int* current = scores;  std::cout << *current << '\\n';  ++current;  std::cout << *current << '\\n';     What does current + 1 mean when current is an int* into an array?   A pointer to the next int element Pointer arithmetic is scaled by the pointed-to type.  A pointer exactly one byte later The movement is the size of an int , not necessarily one byte.  The next element's integer value The result is still a pointer; dereference it to read a value.  The array's length increased by one Pointer arithmetic does not resize an array.     What does scores provide when passed to void print_values(const int* values, std::size_t count) ?   A pointer to the first element of the array In this function call, the array expression converts to a pointer to its first element.  A copy of the entire array including its length The array is not copied into the pointer parameter, and the length is separate.  A pointer to the last element Array decay identifies the first element.  A std::vector<int> object A C-style array does not automatically become a vector.     Why must a traversal stop before dereferencing one-past-the-end?   One-past-the-end can be used for comparison but does not identify an element. Dereferencing is valid only for pointers to actual array elements.  One-past-the-end always points to the first element of another array. It is a boundary position, not an element of another array.  Pointer arithmetic stops working after the first element. Pointer arithmetic can traverse the array within its bounds.  The array length changes when the pointer reaches the boundary. Pointer movement does not change the array object.    "
 },
@@ -11768,7 +11894,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_pointer-arithmetic",
   "type": "Subsection",
-  "number": "9.6.1",
+  "number": "9.7.1",
   "title": "Pointer Arithmetic",
   "body": " Pointer Arithmetic  Pointer arithmetic moves by elements of the pointed-to type, not by individual bytes. If an int* points to one array element, adding 1 produces a pointer to the next int in that array.   #include <iostream> int main() { int scores[]{88, 91, 95}; int* current = scores; std::cout << *current << '\\n'; ++current; std::cout << *current << '\\n'; std::cout << *(current + 1) << '\\n'; return 0; }    Common pointer-arithmetic expressions       Expression  Meaning  Important condition    pointer + 1  Pointer to the next element.  Must remain within the same array or one position past it.    ++pointer  Move to the next element.  Do not dereference a one-past-the-end pointer.    *pointer  Access the pointed-to element.  The pointer must identify a valid live element.    pointer[index]  Equivalent to *(pointer + index) .  The resulting position must be a valid element.     "
 },
@@ -11777,7 +11903,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_array-size",
   "type": "Subsection",
-  "number": "9.6.2",
+  "number": "9.7.2",
   "title": "Array Size and Function Parameters",
   "body": " Array Size and Function Parameters  An array name does not decay in every context. For example, sizeof(scores) measures the entire array when scores is an actual array in that scope. Once the array has decayed to a pointer parameter, sizeof(values) measures the pointer, not the original array. This is another reason to pass the length explicitly.  A pointer may identify one position past the last element. Such a pointer is useful as a stopping position, but it must never be dereferenced. Pointer arithmetic outside the same array object is not a valid way to reach unrelated storage.  "
 },
@@ -11786,7 +11912,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_decay",
   "type": "Checkpoint",
-  "number": "9.6.1",
+  "number": "9.7.1",
   "title": "",
   "body": " Why does a function receiving const int* values usually need a separate length parameter?   The pointer identifies an element but does not retain the original array's length. Array decay gives the function an address, not the array-size information.  Because pointers cannot access array elements. Pointer indexing and dereferencing can access elements.  Because the array is automatically copied into the function. The array is not copied into a pointer parameter.  Because pointer arithmetic always changes the array length. Pointer arithmetic does not change the array object.   "
 },
@@ -11795,7 +11921,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_parsons_decay",
   "type": "Checkpoint",
-  "number": "9.6.2",
+  "number": "9.7.2",
   "title": "",
   "body": "  Arrange the statements to traverse two elements of an array with a pointer.    int scores[]{88, 91, 95};  int* current = scores;  std::cout << *current << '\\n';  ++current;  std::cout << *current << '\\n';   "
 },
@@ -11804,7 +11930,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_increment",
   "type": "Checkpoint",
-  "number": "9.6.3",
+  "number": "9.7.3",
   "title": "",
   "body": " What does current + 1 mean when current is an int* into an array?   A pointer to the next int element Pointer arithmetic is scaled by the pointed-to type.  A pointer exactly one byte later The movement is the size of an int , not necessarily one byte.  The next element's integer value The result is still a pointer; dereference it to read a value.  The array's length increased by one Pointer arithmetic does not resize an array.   "
 },
@@ -11813,7 +11939,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_decay_call",
   "type": "Checkpoint",
-  "number": "9.6.4",
+  "number": "9.7.4",
   "title": "",
   "body": " What does scores provide when passed to void print_values(const int* values, std::size_t count) ?   A pointer to the first element of the array In this function call, the array expression converts to a pointer to its first element.  A copy of the entire array including its length The array is not copied into the pointer parameter, and the length is separate.  A pointer to the last element Array decay identifies the first element.  A std::vector<int> object A C-style array does not automatically become a vector.   "
 },
@@ -11822,7 +11948,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_pointer_bounds",
   "type": "Checkpoint",
-  "number": "9.6.5",
+  "number": "9.7.5",
   "title": "",
   "body": " Why must a traversal stop before dereferencing one-past-the-end?   One-past-the-end can be used for comparison but does not identify an element. Dereferencing is valid only for pointers to actual array elements.  One-past-the-end always points to the first element of another array. It is a boundary position, not an element of another array.  Pointer arithmetic stops working after the first element. Pointer arithmetic can traverse the array within its bounds.  The array length changes when the pointer reaches the boundary. Pointer movement does not change the array object.   "
 },
@@ -11831,7 +11957,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_c-style-character-strings.html",
   "type": "Section",
-  "number": "9.7",
+  "number": "9.8",
   "title": "C-Style Character Strings",
   "body": " C-Style Character Strings  A C-style string is a sequence of characters stored in a character array and terminated by the null character '\\0' . The null character is not the same as the character '0' . It marks where the string ends.   #include <iostream> int main() { char message[] = \"Hello\"; for (const char* current = message; *current != '\\0'; ++current) { std::cout << *current << '\\n'; } return 0; }   The literal \"Hello\" initializes six array elements: 'H' , 'e' , 'l' , 'l' , 'o' , and '\\0' . The pointer loop stops when it reaches that final marker.   Mutable Arrays and Read-Only Literals  An array initialized from a string literal owns its character elements and can be modified. A pointer to a string literal should be declared as a pointer to const char because the literal must not be modified.   #include <iostream> int main() { char mutable_message[] = \"Hello\"; const char* read_only_message = \"Hello\"; mutable_message[0] = 'J'; std::cout << mutable_message << '\\n'; std::cout << read_only_message << '\\n'; return 0; }   In modern C++, do not write char* message = \"Hello\" . The correct type for a pointer to a string literal is const char* . For ordinary C++ text processing, prefer std::string .    Capacity and the Null Character  The array must have room for the terminating null character. The following array has room for six characters, not five:   char word[] = \"hello\";   An array such as char letters[5] = {'h', 'e', 'l', 'l', 'o'} contains five characters but is not a C-style string because it has no terminating '\\0' .    Command-Line Arguments  A program can receive text from the command line through the parameters of main() :   #include <iostream> int main(int argc, char* argv[]) { std::cout << \"Argument count: \" << argc << '\\n'; for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } return 0; }    argc is the argument count. argv is an array of pointers, and each pointer identifies a null-terminated C-style string. The execution environment prepares these values before main() begins.   Command-line argument positions       Expression  Points to  Important fact    argv[0]  The program name in ordinary execution.  It is still text.    argv[1]  The first user-supplied argument.  Its type is a C-style string.    argv[argc]  No argument.  The standard specifies a null pointer here.     In a parameter list, char* argv[] is adjusted to a pointer-based form equivalent to char** argv . Command-line arguments arrive as text; converting text to a number is a separate operation.    What does argc represent?   The number of command-line argument strings argc counts the entries available through argv .  The length of the longest argument Each argument's length is separate from the total count.  The number of characters in argv[0] argv[0] is one entry in the array.  The memory address of argv argv holds the pointer-based argument collection.      What marks the end of a C-style character string?   The null character '\\0' C-style string functions search for this terminating character.  The character '0' '0' is a visible digit character, not the null character.  The first space Spaces can be part of a C-style string.  The pointer value nullptr nullptr is a pointer value, not a character stored in the string.      Arrange the blocks to print a C-style string one character at a time.    char word[] = \"cat\";  const char* current = word;  while (*current != '\\0') {  std::cout << *current << '\\n'; ++current;  }     Why does char word[] = \"cat\"; need four elements?   It stores three visible characters plus '\\0' . The null character marks the end of the C-style string.  It stores four visible letters in the word. cat contains three visible characters.  It stores a pointer and three characters. The array stores character elements; it does not contain a separate pointer element.  The compiler always adds an unrelated padding character. The extra element is specifically the required null terminator.     Which declaration creates a modifiable character array initialized from a string literal?   char message[] = \"Hello\"; The array owns its character elements, including the terminating null character.  const char* message = \"Hello\"; This safely refers to a read-only string literal through a pointer.  char* message = \"Hello\"; A string literal must not be treated as modifiable character storage.  char message = \"Hello\"; A single char cannot store an entire string.     What is the important type fact about each argv[index] value?   It identifies a null-terminated C-style string. Command-line arguments arrive as text through pointers to characters.  It is already an int containing the user's number. Converting argument text to a number is a separate operation.  It is always a std::string object. The standard main signature uses C-style strings.  It is the argument count. argc stores the count; argv[index] identifies one text argument.    "
 },
@@ -11858,7 +11984,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_mutability",
   "type": "Subsection",
-  "number": "9.7.1",
+  "number": "9.8.1",
   "title": "Mutable Arrays and Read-Only Literals",
   "body": " Mutable Arrays and Read-Only Literals  An array initialized from a string literal owns its character elements and can be modified. A pointer to a string literal should be declared as a pointer to const char because the literal must not be modified.   #include <iostream> int main() { char mutable_message[] = \"Hello\"; const char* read_only_message = \"Hello\"; mutable_message[0] = 'J'; std::cout << mutable_message << '\\n'; std::cout << read_only_message << '\\n'; return 0; }   In modern C++, do not write char* message = \"Hello\" . The correct type for a pointer to a string literal is const char* . For ordinary C++ text processing, prefer std::string .  "
 },
@@ -11867,7 +11993,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_length",
   "type": "Subsection",
-  "number": "9.7.2",
+  "number": "9.8.2",
   "title": "Capacity and the Null Character",
   "body": " Capacity and the Null Character  The array must have room for the terminating null character. The following array has room for six characters, not five:   char word[] = \"hello\";   An array such as char letters[5] = {'h', 'e', 'l', 'l', 'o'} contains five characters but is not a C-style string because it has no terminating '\\0' .  "
 },
@@ -11876,7 +12002,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_command-line-arguments",
   "type": "Subsection",
-  "number": "9.7.3",
+  "number": "9.8.3",
   "title": "Command-Line Arguments",
   "body": " Command-Line Arguments  A program can receive text from the command line through the parameters of main() :   #include <iostream> int main(int argc, char* argv[]) { std::cout << \"Argument count: \" << argc << '\\n'; for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } return 0; }    argc is the argument count. argv is an array of pointers, and each pointer identifies a null-terminated C-style string. The execution environment prepares these values before main() begins.   Command-line argument positions       Expression  Points to  Important fact    argv[0]  The program name in ordinary execution.  It is still text.    argv[1]  The first user-supplied argument.  Its type is a C-style string.    argv[argc]  No argument.  The standard specifies a null pointer here.     In a parameter list, char* argv[] is adjusted to a pointer-based form equivalent to char** argv . Command-line arguments arrive as text; converting text to a number is a separate operation.    What does argc represent?   The number of command-line argument strings argc counts the entries available through argv .  The length of the longest argument Each argument's length is separate from the total count.  The number of characters in argv[0] argv[0] is one entry in the array.  The memory address of argv argv holds the pointer-based argument collection.    "
 },
@@ -11885,7 +12011,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_null",
   "type": "Checkpoint",
-  "number": "9.7.2",
+  "number": "9.8.2",
   "title": "",
   "body": " What marks the end of a C-style character string?   The null character '\\0' C-style string functions search for this terminating character.  The character '0' '0' is a visible digit character, not the null character.  The first space Spaces can be part of a C-style string.  The pointer value nullptr nullptr is a pointer value, not a character stored in the string.   "
 },
@@ -11894,7 +12020,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_parsons_traversal",
   "type": "Checkpoint",
-  "number": "9.7.3",
+  "number": "9.8.3",
   "title": "",
   "body": "  Arrange the blocks to print a C-style string one character at a time.    char word[] = \"cat\";  const char* current = word;  while (*current != '\\0') {  std::cout << *current << '\\n'; ++current;  }   "
 },
@@ -11903,7 +12029,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_terminator",
   "type": "Checkpoint",
-  "number": "9.7.4",
+  "number": "9.8.4",
   "title": "",
   "body": " Why does char word[] = \"cat\"; need four elements?   It stores three visible characters plus '\\0' . The null character marks the end of the C-style string.  It stores four visible letters in the word. cat contains three visible characters.  It stores a pointer and three characters. The array stores character elements; it does not contain a separate pointer element.  The compiler always adds an unrelated padding character. The extra element is specifically the required null terminator.   "
 },
@@ -11912,7 +12038,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_mutability",
   "type": "Checkpoint",
-  "number": "9.7.5",
+  "number": "9.8.5",
   "title": "",
   "body": " Which declaration creates a modifiable character array initialized from a string literal?   char message[] = \"Hello\"; The array owns its character elements, including the terminating null character.  const char* message = \"Hello\"; This safely refers to a read-only string literal through a pointer.  char* message = \"Hello\"; A string literal must not be treated as modifiable character storage.  char message = \"Hello\"; A single char cannot store an entire string.   "
 },
@@ -11921,7 +12047,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_argv_text",
   "type": "Checkpoint",
-  "number": "9.7.6",
+  "number": "9.8.6",
   "title": "",
   "body": " What is the important type fact about each argv[index] value?   It identifies a null-terminated C-style string. Command-line arguments arrive as text through pointers to characters.  It is already an int containing the user's number. Converting argument text to a number is a separate operation.  It is always a std::string object. The standard main signature uses C-style strings.  It is the argument count. argc stores the count; argv[index] identifies one text argument.   "
 },
@@ -11930,7 +12056,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html",
   "type": "Section",
-  "number": "9.8",
+  "number": "9.9",
   "title": "Dynamic Memory with <code class=\"code-inline tex2jax_ignore\">new<\/code> and <code class=\"code-inline tex2jax_ignore\">delete<\/code>",
   "body": " Dynamic Memory with new and delete  A program can request dynamically managed storage while it is running. The expression new creates an object and produces a pointer to that object. The expression delete releases storage created by a single use of new .   #include <iostream> int main() { int* score_pointer = new int{90}; std::cout << *score_pointer << '\\n'; delete score_pointer; score_pointer = nullptr; return 0; }   The pointer variable itself is an ordinary local object. The integer created by new int{90} has a dynamically managed lifetime. The program uses the pointer to access that integer and then releases the storage with delete .   The lifecycle of a dynamically created object       Step  Code or action  Result    Request storage  new int{90}  An integer is created and its address is produced.    Store the address  int* pointer  The pointer identifies the dynamic integer.    Use the object  *pointer  The program accesses the dynamic integer.    Release storage  delete pointer  The object's lifetime ends and its storage is released.     The C++ standard describes this as dynamically allocated storage. It is often informally called the heap, but the language does not require a particular physical memory layout. The important responsibility is that storage obtained with new must eventually be released with the matching form of delete .     Rearrange the blocks to allocate an integer, print it safely, release its dynamic storage, and then clear the pointer.    int* my_ptr = new int(75);   if (my_ptr != nullptr) {  std::cout << *my_ptr << '\\n';  }   delete my_ptr;  my_ptr = nullptr;     Deleting a Null Pointer  Applying delete to nullptr is safe and has no effect. This can make cleanup code simpler, but setting a pointer to nullptr does not restore an object whose lifetime has already ended. The program must still avoid using the pointer as an object after deletion.    Dynamically Allocated Arrays  When the required number of elements is known only while a program is running, it can create an array with new[] . The program receives a pointer to the first element and must store the length separately.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 4; int* values = new int[count]{}; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>(index + 1) * 10; } for (std::size_t index = 0; index < count; ++index) { std::cout << values[index] << '\\n'; } delete[] values; values = nullptr; return 0; }   The empty braces in new int[count]{} value-initialize the array's elements. The pointer does not know that the array has four elements, so the program carries count separately.   Matching allocation and release expressions       Allocation  Release  Purpose    new int{5}  delete pointer  One dynamically created object    new int[count]{}  delete[] pointer  A dynamically created array     Do not use delete for an array created with new[] , and do not use delete[] for a single object created with new . Use std::vector for ordinary variable-size collections; use a dynamic array here to understand low-level C++.   Which operation correctly releases an array created with new double[10] ?   delete[] pointer; Array allocation with new[] requires array deletion with delete[] .  delete pointer; This is the single-object form.  free(pointer); C++ new[] must be paired with delete[] .  pointer.clear(); A raw pointer has no clear() member function.      Which operation matches int* pointer = new int{5}; ?   delete pointer; One object created with new is released with delete .  delete[] pointer; delete[] is for storage created with new[] .  free(pointer); C++ new must not be paired with C's free .  remove(pointer); remove is not the matching storage-release operation.     What does new int{90} produce in addition to creating an integer?   The address of the dynamically created integer The address can be stored in an int* pointer.  The integer's array length A single object allocation does not produce an array length.  A reference that cannot be null new produces a pointer value, not a reference.  A std::vector<int> object new int{90} creates one dynamic int .     Which release operation matches new int[count] ?   delete[] pointer; The array form new[] must be paired with delete[] .  delete pointer; That is the form for one object created with ordinary new .  free(pointer); C++ new[] must be paired with C++ delete[] .  pointer.clear(); A raw pointer has no clear() member function.     What happens when a program executes delete pointer; while pointer == nullptr ?   Nothing; deleting a null pointer is safe. C++ defines deletion of a null pointer as having no effect.  It deletes the first object in memory. nullptr identifies no object.  It creates a new dynamic object. delete releases storage; it does not allocate.  It requires a length argument. Only array matching concerns delete[] ; a null pointer still requires no argument.    "
 },
@@ -11957,7 +12083,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#table_ch9_new_delete_steps",
   "type": "Table",
-  "number": "9.8.1",
+  "number": "9.9.1",
   "title": "The lifecycle of a dynamically created object",
   "body": " The lifecycle of a dynamically created object       Step  Code or action  Result    Request storage  new int{90}  An integer is created and its address is produced.    Store the address  int* pointer  The pointer identifies the dynamic integer.    Use the object  *pointer  The program accesses the dynamic integer.    Release storage  delete pointer  The object's lifetime ends and its storage is released.    "
 },
@@ -11975,7 +12101,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_parsons_delete",
   "type": "Checkpoint",
-  "number": "9.8.1",
+  "number": "9.9.1",
   "title": "",
   "body": "  Rearrange the blocks to allocate an integer, print it safely, release its dynamic storage, and then clear the pointer.    int* my_ptr = new int(75);   if (my_ptr != nullptr) {  std::cout << *my_ptr << '\\n';  }   delete my_ptr;  my_ptr = nullptr;   "
 },
@@ -11984,7 +12110,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_null",
   "type": "Subsection",
-  "number": "9.8.1",
+  "number": "9.9.1",
   "title": "Deleting a Null Pointer",
   "body": " Deleting a Null Pointer  Applying delete to nullptr is safe and has no effect. This can make cleanup code simpler, but setting a pointer to nullptr does not restore an object whose lifetime has already ended. The program must still avoid using the pointer as an object after deletion.  "
 },
@@ -11993,7 +12119,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_arrays",
   "type": "Subsection",
-  "number": "9.8.2",
+  "number": "9.9.2",
   "title": "Dynamically Allocated Arrays",
   "body": " Dynamically Allocated Arrays  When the required number of elements is known only while a program is running, it can create an array with new[] . The program receives a pointer to the first element and must store the length separately.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 4; int* values = new int[count]{}; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>(index + 1) * 10; } for (std::size_t index = 0; index < count; ++index) { std::cout << values[index] << '\\n'; } delete[] values; values = nullptr; return 0; }   The empty braces in new int[count]{} value-initialize the array's elements. The pointer does not know that the array has four elements, so the program carries count separately.   Matching allocation and release expressions       Allocation  Release  Purpose    new int{5}  delete pointer  One dynamically created object    new int[count]{}  delete[] pointer  A dynamically created array     Do not use delete for an array created with new[] , and do not use delete[] for a single object created with new . Use std::vector for ordinary variable-size collections; use a dynamic array here to understand low-level C++.   Which operation correctly releases an array created with new double[10] ?   delete[] pointer; Array allocation with new[] requires array deletion with delete[] .  delete pointer; This is the single-object form.  free(pointer); C++ new[] must be paired with delete[] .  pointer.clear(); A raw pointer has no clear() member function.    "
 },
@@ -12002,7 +12128,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_match",
   "type": "Checkpoint",
-  "number": "9.8.3",
+  "number": "9.9.3",
   "title": "",
   "body": " Which operation matches int* pointer = new int{5}; ?   delete pointer; One object created with new is released with delete .  delete[] pointer; delete[] is for storage created with new[] .  free(pointer); C++ new must not be paired with C's free .  remove(pointer); remove is not the matching storage-release operation.   "
 },
@@ -12011,7 +12137,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_new_result",
   "type": "Checkpoint",
-  "number": "9.8.4",
+  "number": "9.9.4",
   "title": "",
   "body": " What does new int{90} produce in addition to creating an integer?   The address of the dynamically created integer The address can be stored in an int* pointer.  The integer's array length A single object allocation does not produce an array length.  A reference that cannot be null new produces a pointer value, not a reference.  A std::vector<int> object new int{90} creates one dynamic int .   "
 },
@@ -12020,7 +12146,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_array_match",
   "type": "Checkpoint",
-  "number": "9.8.5",
+  "number": "9.9.5",
   "title": "",
   "body": " Which release operation matches new int[count] ?   delete[] pointer; The array form new[] must be paired with delete[] .  delete pointer; That is the form for one object created with ordinary new .  free(pointer); C++ new[] must be paired with C++ delete[] .  pointer.clear(); A raw pointer has no clear() member function.   "
 },
@@ -12029,7 +12155,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_delete_nullptr",
   "type": "Checkpoint",
-  "number": "9.8.6",
+  "number": "9.9.6",
   "title": "",
   "body": " What happens when a program executes delete pointer; while pointer == nullptr ?   Nothing; deleting a null pointer is safe. C++ defines deletion of a null pointer as having no effect.  It deletes the first object in memory. nullptr identifies no object.  It creates a new dynamic object. delete releases storage; it does not allocate.  It requires a length argument. Only array matching concerns delete[] ; a null pointer still requires no argument.   "
 },
@@ -12038,7 +12164,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_memory-errors-and-safe-practice.html",
   "type": "Section",
-  "number": "9.9",
+  "number": "9.10",
   "title": "Memory Errors and Safe Practice",
   "body": " Memory Errors and Safe Practice  Manual memory management gives a program flexibility, but it also gives the programmer responsibilities that a std::vector normally handles automatically. Several pointer mistakes have especially serious consequences.   Common pointer and dynamic-memory errors       Error  What happens  Prevention    Memory leak  Allocated storage is no longer reachable and cannot be released.  Release each owned allocation exactly once.    Dangling pointer  A pointer still stores an address after the object's lifetime ends.  Do not use a pointer after deletion or scope exit.    Double deletion  The same storage is released more than once.  Set released pointers to nullptr and manage ownership clearly.    Invalid dereference  A program accesses memory through null, uninitialized, or invalid pointer.  Initialize pointers and verify that they identify valid objects.    Mismatched deletion  delete and delete[] do not match their allocation forms.  Pair new with delete and new[] with delete[] .      Two Golden Rules of Raw Pointers     Initialize every pointer before using it. Use a valid address or initialize the pointer to nullptr when it does not yet identify an object.     After deleting dynamically allocated storage, clear the owning pointer.     Clearing one pointer does not repair other pointers that identify the same object. Those other pointers may still be dangling, so ownership must be managed clearly.     Ownership Responsibility  A pointer does not automatically explain who is responsible for releasing the object it identifies. When a raw pointer owns dynamic storage, the program must document and follow that responsibility. When a pointer merely observes an object owned elsewhere, it must not delete that object.  In later modules, smart pointers will provide safer ways to express ownership. For now, the key practice is to recognize that an address and ownership are different concepts.    Practical Guidance   Prefer ordinary local objects when their lifetime is sufficient.  Prefer std::vector to manually allocated dynamic arrays.  Initialize every pointer.  Check nullable pointers before dereferencing them.  Match every allocation with the correct release operation.  Do not use a pointer after the object it identified has been destroyed.    What is a memory leak?   Allocated storage that can no longer be reached or released The storage remains reserved even though the program lost its pointer to it.  An array containing a null character Null termination is a string concept, not a memory leak.  A pointer that identifies a valid object A valid pointer is not automatically a leak.  A vector whose size is smaller than its capacity Unused vector capacity is managed by the vector and is not necessarily a leak.       Arrange the blocks to release a dynamic object and prevent the owning pointer from remaining dangling.    int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;     Which situation describes a dangling pointer?   A pointer still stores an address after the identified object's lifetime ends The address remains in the pointer, but the object is no longer valid to use.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer that identifies a live local object A valid pointer to a live object is not dangling.  A pointer used to traverse a valid array Valid traversal does not create a dangling pointer.     Which allocation and release pair is correct?   new int[5] with delete[] pointer The array allocation form must match the array deletion form.  new int[5] with delete pointer Single-object delete does not match new[] .  new int{5} with delete[] pointer A single object created with new needs ordinary delete .  new int{5} with free(pointer) C++ new must be paired with C++ delete .     What does setting an owning pointer to nullptr after delete accomplish?   It prevents that pointer from continuing to store the old address. Clearing the owning pointer helps avoid using it as though the destroyed object still exists.  It recreates the deleted object. Assigning nullptr does not restore an object's lifetime.  It repairs every other pointer to the same object. Other pointers may still be dangling and must be managed separately.  It releases storage without needing delete . The storage must be released first with the matching deletion operation.    "
 },
@@ -12056,7 +12182,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#table_ch9_pointer_memory_errors",
   "type": "Table",
-  "number": "9.9.1",
+  "number": "9.10.1",
   "title": "Common pointer and dynamic-memory errors",
   "body": " Common pointer and dynamic-memory errors       Error  What happens  Prevention    Memory leak  Allocated storage is no longer reachable and cannot be released.  Release each owned allocation exactly once.    Dangling pointer  A pointer still stores an address after the object's lifetime ends.  Do not use a pointer after deletion or scope exit.    Double deletion  The same storage is released more than once.  Set released pointers to nullptr and manage ownership clearly.    Invalid dereference  A program accesses memory through null, uninitialized, or invalid pointer.  Initialize pointers and verify that they identify valid objects.    Mismatched deletion  delete and delete[] do not match their allocation forms.  Pair new with delete and new[] with delete[] .    "
 },
@@ -12065,7 +12191,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_golden-rules",
   "type": "Subsection",
-  "number": "9.9.1",
+  "number": "9.10.1",
   "title": "Two Golden Rules of Raw Pointers",
   "body": " Two Golden Rules of Raw Pointers     Initialize every pointer before using it. Use a valid address or initialize the pointer to nullptr when it does not yet identify an object.     After deleting dynamically allocated storage, clear the owning pointer.     Clearing one pointer does not repair other pointers that identify the same object. Those other pointers may still be dangling, so ownership must be managed clearly.   "
 },
@@ -12074,7 +12200,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_ownership",
   "type": "Subsection",
-  "number": "9.9.2",
+  "number": "9.10.2",
   "title": "Ownership Responsibility",
   "body": " Ownership Responsibility  A pointer does not automatically explain who is responsible for releasing the object it identifies. When a raw pointer owns dynamic storage, the program must document and follow that responsibility. When a pointer merely observes an object owned elsewhere, it must not delete that object.  In later modules, smart pointers will provide safer ways to express ownership. For now, the key practice is to recognize that an address and ownership are different concepts.  "
 },
@@ -12083,7 +12209,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_guidance",
   "type": "Subsection",
-  "number": "9.9.3",
+  "number": "9.10.3",
   "title": "Practical Guidance",
   "body": " Practical Guidance   Prefer ordinary local objects when their lifetime is sufficient.  Prefer std::vector to manually allocated dynamic arrays.  Initialize every pointer.  Check nullable pointers before dereferencing them.  Match every allocation with the correct release operation.  Do not use a pointer after the object it identified has been destroyed.    What is a memory leak?   Allocated storage that can no longer be reached or released The storage remains reserved even though the program lost its pointer to it.  An array containing a null character Null termination is a string concept, not a memory leak.  A pointer that identifies a valid object A valid pointer is not automatically a leak.  A vector whose size is smaller than its capacity Unused vector capacity is managed by the vector and is not necessarily a leak.    "
 },
@@ -12092,7 +12218,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_parsons_cleanup",
   "type": "Checkpoint",
-  "number": "9.9.2",
+  "number": "9.10.2",
   "title": "",
   "body": "  Arrange the blocks to release a dynamic object and prevent the owning pointer from remaining dangling.    int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;   "
 },
@@ -12101,7 +12227,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_dangling",
   "type": "Checkpoint",
-  "number": "9.9.3",
+  "number": "9.10.3",
   "title": "",
   "body": " Which situation describes a dangling pointer?   A pointer still stores an address after the identified object's lifetime ends The address remains in the pointer, but the object is no longer valid to use.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer that identifies a live local object A valid pointer to a live object is not dangling.  A pointer used to traverse a valid array Valid traversal does not create a dangling pointer.   "
 },
@@ -12110,7 +12236,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_mismatch",
   "type": "Checkpoint",
-  "number": "9.9.4",
+  "number": "9.10.4",
   "title": "",
   "body": " Which allocation and release pair is correct?   new int[5] with delete[] pointer The array allocation form must match the array deletion form.  new int[5] with delete pointer Single-object delete does not match new[] .  new int{5} with delete[] pointer A single object created with new needs ordinary delete .  new int{5} with free(pointer) C++ new must be paired with C++ delete .   "
 },
@@ -12119,7 +12245,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_ownership",
   "type": "Checkpoint",
-  "number": "9.9.5",
+  "number": "9.10.5",
   "title": "",
   "body": " What does setting an owning pointer to nullptr after delete accomplish?   It prevents that pointer from continuing to store the old address. Clearing the owning pointer helps avoid using it as though the destroyed object still exists.  It recreates the deleted object. Assigning nullptr does not restore an object's lifetime.  It repairs every other pointer to the same object. Other pointers may still be dangling and must be managed separately.  It releases storage without needing delete . The storage must be released first with the matching deletion operation.   "
 },
@@ -12128,7 +12254,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_glossary.html",
   "type": "Glossary",
-  "number": "9.10",
+  "number": "9.11",
   "title": "Glossary",
   "body": " Glossary   address  The location of an object in a program's storage.    pointer  An object that stores the address of another object or function.    address-of operator  The & operator used in an expression to obtain an object's address.    dereference  To use a pointer to access the object identified by its stored address.    lvalue  An expression that identifies a persistent object or storage location.    rvalue  An expression that generally represents a temporary value or computation result.    reference  An alias that must bind to an object when it is initialized and is then used like that object.    null pointer  A pointer with the value nullptr that identifies no object.    dangling pointer  A pointer that still contains an address after the object at that address has been destroyed.    array-to-pointer conversion  The conversion of an array expression, in many contexts, to a pointer to its first element. This is commonly called array decay.    pointer arithmetic  Adding, subtracting, or comparing pointers within the same array object to identify element positions.    one-past-the-end pointer  A pointer to the position immediately after the last element of an array; it may be used for comparison but not dereferenced.    C-style string  A sequence of characters in an array terminated by the null character '\\0' .    null character  The character '\\0' that marks the end of a C-style string.    command-line argument  A text value supplied to a program when it is started.    dynamic storage  Storage requested during program execution whose lifetime is controlled by the program.    memory leak  Allocated storage that the program can no longer reach and therefore cannot release.    ownership  Responsibility for controlling an object's lifetime and releasing its dynamically managed storage.   "
 },
@@ -12299,7 +12425,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_exercises.html",
   "type": "Exercises",
-  "number": "9.11",
+  "number": "9.12",
   "title": "Exercises",
   "body": " Exercises   What does int* pointer declare?   A pointer that can identify an int object The declaration's * makes pointer a pointer variable.  An integer whose value is an address The declared variable has pointer type, not ordinary integer type.  A pointer to any type of object The pointer type identifies the type it is designed to point to.  A function that returns an integer This declaration does not include a function parameter list.     What does *pointer mean in an expression?   Access the object identified by pointer In an expression, * is the dereference operator.  Declare a new pointer Declaration syntax requires a type, such as int* .  Obtain the pointer's address The address-of operator & obtains an address.  Delete the pointed-to object Deletion uses delete , not * .     What does nullptr represent?   A pointer value that identifies no object It is the modern C++ null pointer value.  The first element of every array Array indexing begins at zero, but zero is not nullptr .  A dynamically allocated integer with value zero nullptr is a pointer value, not an allocated integer.  A pointer that is always safe to dereference A null pointer must not be dereferenced.     What can a non-constant pointer parameter allow a function to do?   Modify the caller's object through a valid pointer Dereferencing a valid non-constant pointer accesses the caller's object.  Know the size of every object automatically A pointer does not generally store object-size information.  Guarantee that the pointer is never null The function may need to check for nullptr .  Change the pointer into a reference Pointer and reference types are distinct.     After an array decays when passed to a pointer parameter, what information is not carried by the pointer?   The array's number of elements The pointer identifies an address, so the length must be supplied separately.  The address of the first element The converted pointer identifies the first element.  The element type used for pointer arithmetic The pointer type still determines its element step.  Whether the function can read the pointed-to values A valid pointer can be dereferenced to read values.     What does pointer + 1 mean when pointer points into an array?   The address of the next element in that array Pointer arithmetic advances by the pointed-to element type.  The next byte in memory regardless of type Pointer arithmetic is scaled by the pointer's element type.  The value of the next element The result is still a pointer; dereference it to access a value.  A pointer to the next unrelated object Pointer arithmetic is defined within an array object.     How many array elements are needed for the C-style string \"cat\" ?   4 The array needs three visible characters plus '\\0' .  3 Three stores the visible characters but not the terminator.  2 Count all three letters and the null character.  5 No extra fifth element is required for this string.     What is the type of each individual argv[index] value?   A pointer to a C-style character string argv is an array of char* values.  An integer containing the argument count argc contains the count; an individual argv entry is text.  A std::string object automatically The standard signature supplies C-style strings.  A pointer to a vector argv is not a std::vector .     What must happen to storage created by new int{7} ?   It must eventually be released with matching delete . A single object created by new matches delete .  It must be released with delete[] . delete[] matches new[] , not a single new .  It is automatically released at the end of the function. Dynamic storage is not automatically released like a local object.  It must be released with std::vector::clear() . The allocation is not a vector.     Why must a program keep the length separately after allocating new int[count] ?   The resulting pointer does not remember the number of elements. The length is separate information needed for safe traversal.  Because the array has no elements. The allocation creates count elements.  Because pointer arithmetic cannot access arrays. Pointer arithmetic can traverse the allocated array.  Because delete[] requires a length argument. delete[] receives only the pointer.     What is a dangling pointer?   A pointer whose former object has already been destroyed The stored address remains, but the object lifetime has ended.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer to the first array element A valid pointer to an array element is not dangling.  A pointer that stores an array length Pointers store addresses, not lengths.    "
 },
@@ -12308,7 +12434,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_pointer_type",
   "type": "Exercise",
-  "number": "9.11.1",
+  "number": "9.12.1",
   "title": "",
   "body": " What does int* pointer declare?   A pointer that can identify an int object The declaration's * makes pointer a pointer variable.  An integer whose value is an address The declared variable has pointer type, not ordinary integer type.  A pointer to any type of object The pointer type identifies the type it is designed to point to.  A function that returns an integer This declaration does not include a function parameter list.   "
 },
@@ -12317,7 +12443,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_dereference",
   "type": "Exercise",
-  "number": "9.11.2",
+  "number": "9.12.2",
   "title": "",
   "body": " What does *pointer mean in an expression?   Access the object identified by pointer In an expression, * is the dereference operator.  Declare a new pointer Declaration syntax requires a type, such as int* .  Obtain the pointer's address The address-of operator & obtains an address.  Delete the pointed-to object Deletion uses delete , not * .   "
 },
@@ -12326,7 +12452,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_nullptr",
   "type": "Exercise",
-  "number": "9.11.3",
+  "number": "9.12.3",
   "title": "",
   "body": " What does nullptr represent?   A pointer value that identifies no object It is the modern C++ null pointer value.  The first element of every array Array indexing begins at zero, but zero is not nullptr .  A dynamically allocated integer with value zero nullptr is a pointer value, not an allocated integer.  A pointer that is always safe to dereference A null pointer must not be dereferenced.   "
 },
@@ -12335,7 +12461,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_pointer_parameter",
   "type": "Exercise",
-  "number": "9.11.4",
+  "number": "9.12.4",
   "title": "",
   "body": " What can a non-constant pointer parameter allow a function to do?   Modify the caller's object through a valid pointer Dereferencing a valid non-constant pointer accesses the caller's object.  Know the size of every object automatically A pointer does not generally store object-size information.  Guarantee that the pointer is never null The function may need to check for nullptr .  Change the pointer into a reference Pointer and reference types are distinct.   "
 },
@@ -12344,7 +12470,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_array_decay",
   "type": "Exercise",
-  "number": "9.11.5",
+  "number": "9.12.5",
   "title": "",
   "body": " After an array decays when passed to a pointer parameter, what information is not carried by the pointer?   The array's number of elements The pointer identifies an address, so the length must be supplied separately.  The address of the first element The converted pointer identifies the first element.  The element type used for pointer arithmetic The pointer type still determines its element step.  Whether the function can read the pointed-to values A valid pointer can be dereferenced to read values.   "
 },
@@ -12353,7 +12479,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_pointer_arithmetic",
   "type": "Exercise",
-  "number": "9.11.6",
+  "number": "9.12.6",
   "title": "",
   "body": " What does pointer + 1 mean when pointer points into an array?   The address of the next element in that array Pointer arithmetic advances by the pointed-to element type.  The next byte in memory regardless of type Pointer arithmetic is scaled by the pointer's element type.  The value of the next element The result is still a pointer; dereference it to access a value.  A pointer to the next unrelated object Pointer arithmetic is defined within an array object.   "
 },
@@ -12362,7 +12488,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_c_string",
   "type": "Exercise",
-  "number": "9.11.7",
+  "number": "9.12.7",
   "title": "",
   "body": " How many array elements are needed for the C-style string \"cat\" ?   4 The array needs three visible characters plus '\\0' .  3 Three stores the visible characters but not the terminator.  2 Count all three letters and the null character.  5 No extra fifth element is required for this string.   "
 },
@@ -12371,7 +12497,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_argv",
   "type": "Exercise",
-  "number": "9.11.8",
+  "number": "9.12.8",
   "title": "",
   "body": " What is the type of each individual argv[index] value?   A pointer to a C-style character string argv is an array of char* values.  An integer containing the argument count argc contains the count; an individual argv entry is text.  A std::string object automatically The standard signature supplies C-style strings.  A pointer to a vector argv is not a std::vector .   "
 },
@@ -12380,7 +12506,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_new_delete",
   "type": "Exercise",
-  "number": "9.11.9",
+  "number": "9.12.9",
   "title": "",
   "body": " What must happen to storage created by new int{7} ?   It must eventually be released with matching delete . A single object created by new matches delete .  It must be released with delete[] . delete[] matches new[] , not a single new .  It is automatically released at the end of the function. Dynamic storage is not automatically released like a local object.  It must be released with std::vector::clear() . The allocation is not a vector.   "
 },
@@ -12389,7 +12515,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_dynamic_array",
   "type": "Exercise",
-  "number": "9.11.10",
+  "number": "9.12.10",
   "title": "",
   "body": " Why must a program keep the length separately after allocating new int[count] ?   The resulting pointer does not remember the number of elements. The length is separate information needed for safe traversal.  Because the array has no elements. The allocation creates count elements.  Because pointer arithmetic cannot access arrays. Pointer arithmetic can traverse the allocated array.  Because delete[] requires a length argument. delete[] receives only the pointer.   "
 },
@@ -12398,7 +12524,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_exercises.html#chapter9_exercise_memory_error",
   "type": "Exercise",
-  "number": "9.11.11",
+  "number": "9.12.11",
   "title": "",
   "body": " What is a dangling pointer?   A pointer whose former object has already been destroyed The stored address remains, but the object lifetime has ended.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer to the first array element A valid pointer to an array element is not dangling.  A pointer that stores an array length Pointers store addresses, not lengths.   "
 },
@@ -12407,7 +12533,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_mixed-up-code.html",
   "type": "Exercises",
-  "number": "9.12",
+  "number": "9.13",
   "title": "Mixed-Up Code Practice",
   "body": " Mixed-Up Code Practice   Arrange the blocks to modify score through a pointer.   int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';     Arrange the blocks to print a value only when the pointer identifies an object.   void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }     Arrange the blocks to traverse an array with a pointer.   int values[]{10, 20, 30};  int* current = values;  for (int index = 0; index < 3; ++index) {  std::cout << *current << '\\n'; ++current; }     Arrange the blocks to print a C-style string one character at a time.   char word[] = \"cat\";  for (const char* current = word; *current != '\\0'; ++current) {  std::cout << *current << '\\n'; }     Arrange the blocks to create and release one dynamic integer.   int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;    "
 },
@@ -12416,7 +12542,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_dereference",
   "type": "Exercise",
-  "number": "9.12.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": " Arrange the blocks to modify score through a pointer.   int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';   "
 },
@@ -12425,7 +12551,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_null_check",
   "type": "Exercise",
-  "number": "9.12.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": " Arrange the blocks to print a value only when the pointer identifies an object.   void print_value(const int* value_pointer) {  if (value_pointer != nullptr) {  std::cout << *value_pointer << '\\n'; }  }   "
 },
@@ -12434,7 +12560,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_array_pointer",
   "type": "Exercise",
-  "number": "9.12.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": " Arrange the blocks to traverse an array with a pointer.   int values[]{10, 20, 30};  int* current = values;  for (int index = 0; index < 3; ++index) {  std::cout << *current << '\\n'; ++current; }   "
 },
@@ -12443,7 +12569,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_c_string",
   "type": "Exercise",
-  "number": "9.12.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": " Arrange the blocks to print a C-style string one character at a time.   char word[] = \"cat\";  for (const char* current = word; *current != '\\0'; ++current) {  std::cout << *current << '\\n'; }   "
 },
@@ -12452,7 +12578,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_mixed-up-code.html#chapter9_mixed_up_dynamic_value",
   "type": "Exercise",
-  "number": "9.12.yes",
+  "number": "9.13.yes",
   "title": "",
   "body": " Arrange the blocks to create and release one dynamic integer.   int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;   "
 },
@@ -12461,7 +12587,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter9_coding-practice.html",
   "type": "Exercises",
-  "number": "9.13",
+  "number": "9.14",
   "title": "Coding Practice",
   "body": " Coding Practice    Write increase_value , which takes an int* and increases the pointed-to integer by one when the pointer is not nullptr .   #include <iostream> void increase_value(int* value_pointer) { \/\/ Write your solution here. } int main() { int value = 7; increase_value(&value); increase_value(nullptr); std::cout << value << '\\n'; return 0; }     void increase_value(int* value_pointer) { if (value_pointer != nullptr) { ++(*value_pointer); } }      Write print_values , which takes a pointer to the first integer in an array and the array length. Use pointer arithmetic to print every element.   #include <iostream> #include <cstddef> void print_values(const int* values, std::size_t count) { \/\/ Write your solution here. } int main() { const int values[]{4, 8, 12}; print_values(values, 3); return 0; }     void print_values(const int* values, std::size_t count) { const int* current = values; const int* end = values + count; while (current != end) { std::cout << *current << '\\n'; ++current; } }      Write count_character , which takes a C-style string and a target character. Traverse the string with a pointer and return the number of matching characters.   #include <iostream> int count_character(const char* text, char target) { \/\/ Write your solution here. } int main() { std::cout << count_character(\"banana\", 'a') << '\\n'; return 0; }     int count_character(const char* text, char target) { int count = 0; while (*text != '\\0') { if (*text == target) { ++count; } ++text; } return count; }      Complete print_arguments so that it prints each command- line argument and its index. Remember that the arguments are C-style strings.   #include <iostream> void print_arguments(int argc, char* argv[]) { \/\/ Write your solution here. } int main(int argc, char* argv[]) { print_arguments(argc, argv); return 0; }     void print_arguments(int argc, char* argv[]) { for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } }      Write a program that creates a dynamically allocated array of five integers, stores the values 2, 4, 6, 8, and 10, prints their total, and releases the array correctly.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 5; \/\/ Create, use, and release the dynamic array. return 0; }     int* values = new int[count]{}; int total = 0; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>((index + 1) * 2); total += values[index]; } std::cout << total << '\\n'; delete[] values;    "
 },
@@ -12470,7 +12596,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_coding-practice.html#chapter9_coding_increase_value",
   "type": "Exercise",
-  "number": "9.13.1",
+  "number": "9.14.1",
   "title": "",
   "body": "  Write increase_value , which takes an int* and increases the pointed-to integer by one when the pointer is not nullptr .   #include <iostream> void increase_value(int* value_pointer) { \/\/ Write your solution here. } int main() { int value = 7; increase_value(&value); increase_value(nullptr); std::cout << value << '\\n'; return 0; }     void increase_value(int* value_pointer) { if (value_pointer != nullptr) { ++(*value_pointer); } }   "
 },
@@ -12479,7 +12605,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_coding-practice.html#chapter9_coding_print_array_pointer",
   "type": "Exercise",
-  "number": "9.13.2",
+  "number": "9.14.2",
   "title": "",
   "body": "  Write print_values , which takes a pointer to the first integer in an array and the array length. Use pointer arithmetic to print every element.   #include <iostream> #include <cstddef> void print_values(const int* values, std::size_t count) { \/\/ Write your solution here. } int main() { const int values[]{4, 8, 12}; print_values(values, 3); return 0; }     void print_values(const int* values, std::size_t count) { const int* current = values; const int* end = values + count; while (current != end) { std::cout << *current << '\\n'; ++current; } }   "
 },
@@ -12488,7 +12614,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_coding-practice.html#chapter9_coding_count_characters",
   "type": "Exercise",
-  "number": "9.13.3",
+  "number": "9.14.3",
   "title": "",
   "body": "  Write count_character , which takes a C-style string and a target character. Traverse the string with a pointer and return the number of matching characters.   #include <iostream> int count_character(const char* text, char target) { \/\/ Write your solution here. } int main() { std::cout << count_character(\"banana\", 'a') << '\\n'; return 0; }     int count_character(const char* text, char target) { int count = 0; while (*text != '\\0') { if (*text == target) { ++count; } ++text; } return count; }   "
 },
@@ -12497,7 +12623,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_coding-practice.html#chapter9_coding_command_line_sum",
   "type": "Exercise",
-  "number": "9.13.4",
+  "number": "9.14.4",
   "title": "",
   "body": "  Complete print_arguments so that it prints each command- line argument and its index. Remember that the arguments are C-style strings.   #include <iostream> void print_arguments(int argc, char* argv[]) { \/\/ Write your solution here. } int main(int argc, char* argv[]) { print_arguments(argc, argv); return 0; }     void print_arguments(int argc, char* argv[]) { for (int index = 0; index < argc; ++index) { std::cout << index << \": \" << argv[index] << '\\n'; } }   "
 },
@@ -12506,7 +12632,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_coding-practice.html#chapter9_coding_dynamic_array_total",
   "type": "Exercise",
-  "number": "9.13.5",
+  "number": "9.14.5",
   "title": "",
   "body": "  Write a program that creates a dynamically allocated array of five integers, stores the values 2, 4, 6, 8, and 10, prints their total, and releases the array correctly.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 5; \/\/ Create, use, and release the dynamic array. return 0; }     int* values = new int[count]{}; int total = 0; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>((index + 1) * 2); total += values[index]; } std::cout << total << '\\n'; delete[] values;   "
 },
