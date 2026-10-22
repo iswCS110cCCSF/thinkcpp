@@ -96,7 +96,7 @@ reference = y;       // assigns y's value to x
                 </row>
                 <row>
                     <cell><c>reference = y;</c></cell>
-                    <cell>Assign the value of <c>y</c> to <c>x</c>; it does not reseat the reference.</cell>
+                    <cell>Assign the value of <c>y</c> to <c>x</c>; the reference remains bound to <c>x</c> and cannot be reseated.</cell>
                 </row>
             </tabular>
         </table>
