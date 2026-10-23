@@ -9,7 +9,7 @@
     </p>
 
     <program xml:id="program_ch9_pointer_parameter_modify"
-             language="cpp" interactive="yes">
+             language="cpp" interactive="yes" line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
 
@@ -45,7 +45,7 @@ int main() {
         </p>
 
         <program xml:id="program_ch9_const_pointer_parameter"
-                 language="cpp" interactive="yes">
+                 language="cpp" interactive="yes" line-numbers="yes">
             <code><![CDATA[
 #include <iostream>
 

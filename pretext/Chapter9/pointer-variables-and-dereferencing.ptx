@@ -9,7 +9,7 @@
     </p>
 
     <program xml:id="program_ch9_pointer_declaration_and_dereference"
-             language="cpp" interactive="yes">
+             language="cpp" interactive="yes" line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
 
@@ -28,8 +28,8 @@ int main() {
     </program>
 
     <p>
-        In <c>int* score_pointer</c>, the <c>*</c> is part of the declaration
-        syntax. It says that <c>score_pointer</c> has type pointer to
+        In <c>int* score_pointer</c>, the <c>*</c> in line 5 is part of the declaration
+        syntax(C++ grammar); * here is not an operator. It says that <c>score_pointer</c> has type pointer to
         <c>int</c>. In <c>*score_pointer</c>, the <c>*</c> is the dereference
         operator. It follows the stored address and accesses the object there.
     </p>
@@ -102,7 +102,7 @@ int second_value;
         </p>
 
         <program xml:id=""
-                 language="cpp" interactive="yes">
+                 language="cpp" interactive="yes" line-numbers="yes">
             <code><![CDATA[
 #include <cstdint>
 

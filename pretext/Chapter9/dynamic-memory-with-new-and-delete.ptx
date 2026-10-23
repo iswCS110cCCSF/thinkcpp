@@ -10,7 +10,7 @@
     </p>
 
     <program xml:id="program_ch9_new_and_delete_single_value"
-             language="cpp" interactive="yes">
+             language="cpp" interactive="yes" line-numbers="yes">
         <code><![CDATA[
 #include <iostream>
 
@@ -124,7 +124,7 @@ int main() {
         </p>
 
         <program xml:id="program_ch9_new_delete_array"
-                 language="cpp" interactive="yes">
+                 language="cpp" interactive="yes" line-numbers="yes">
             <code><![CDATA[
 #include <iostream>
 #include <cstddef>

@@ -31,7 +31,7 @@
         </p>
 
         <program xml:id="program_ch9_pointer_arithmetic_traversal"
-                 language="cpp" interactive="yes">
+                 language="cpp" interactive="yes" line-numbers="yes">
             <code><![CDATA[
 #include <iostream>
 
