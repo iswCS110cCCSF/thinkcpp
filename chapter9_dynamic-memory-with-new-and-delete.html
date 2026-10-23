@@ -702,7 +702,7 @@ eBookConfig.enable_chatcodes =  false;
 </h1>
 <div class="para" id="chapter9_dynamic-memory-with-new-and-delete-2">A program can request dynamically managed storage while it is running. The expression <code class="code-inline tex2jax_ignore">new</code> creates an object and produces a pointer to that object. The expression <code class="code-inline tex2jax_ignore">delete</code> releases storage created by a single use of <code class="code-inline tex2jax_ignore">new</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_dynamic-memory-with-new-and-delete-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code id="rs-program_ch9_new_and_delete_single_value" class="language-cpp">#include &lt;iostream&gt;
+<div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-program_ch9_new_and_delete_single_value" class="language-cpp">#include &lt;iostream&gt;
 
 int main() {
     int* score_pointer = new int{90};
@@ -783,7 +783,7 @@ my_ptr = nullptr;</pre>
 </h2>
 <div class="para" id="chapter9_dynamic-memory-with-new-and-delete_arrays-2">When the required number of elements is known only while a program is running, it can create an array with <code class="code-inline tex2jax_ignore">new[]</code>. The program receives a pointer to the first element and must store the length separately.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_dynamic-memory-with-new-and-delete_arrays-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code id="rs-program_ch9_new_delete_array" class="language-cpp">#include &lt;iostream&gt;
+<div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-program_ch9_new_delete_array" class="language-cpp">#include &lt;iostream&gt;
 #include &lt;cstddef&gt;
 
 int main() {

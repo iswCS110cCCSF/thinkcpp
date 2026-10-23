@@ -702,7 +702,7 @@ eBookConfig.enable_chatcodes =  false;
 </h1>
 <div class="para" id="chapter9_pointers-as-function-parameters-2">A pointer parameter lets a function receive the address of an existing object. The function can then modify the caller’s object through the dereferenced pointer, provided the pointer is valid and non-constant.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pointers-as-function-parameters-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code id="rs-program_ch9_pointer_parameter_modify" class="language-cpp">#include &lt;iostream&gt;
+<div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-program_ch9_pointer_parameter_modify" class="language-cpp">#include &lt;iostream&gt;
 
 void increase_value(int* value_pointer) {
     if (value_pointer != nullptr) {
@@ -727,7 +727,7 @@ int main() {
 </h2>
 <div class="para" id="chapter9_pointers-as-function-parameters_read-only-2">A pointer to <code class="code-inline tex2jax_ignore">const</code> data can inspect an object without changing it through that pointer.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pointers-as-function-parameters_read-only-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable"><code id="rs-program_ch9_const_pointer_parameter" class="language-cpp">#include &lt;iostream&gt;
+<div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-program_ch9_const_pointer_parameter" class="language-cpp">#include &lt;iostream&gt;
 
 void print_value(const int* value_pointer) {
     if (value_pointer != nullptr) {
