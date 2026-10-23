@@ -28,9 +28,9 @@ int main() {
     </program>
 
     <p>
-        In <c>int* score_pointer</c>, the <c>*</c> in line 5 is part of the declaration
+        In line 5 in above code(in <c>int* score_pointer = &amp;score;)</c>, the <c>*</c> is part of the declaration
         syntax(C++ grammar); * here is not an operator. It says that <c>score_pointer</c> has type pointer to
-        <c>int</c>. In <c>*score_pointer</c>, the <c>*</c> is the dereference
+        <c>int</c>. In line 9(in <c>*score_pointer</c>), the <c>*</c> is the dereference or indirection
         operator. It follows the stored address and accesses the object there.
     </p>
 
@@ -136,18 +136,14 @@ int main() {
         </p>
 
         <figure xml:id="figure_chapter9_pointer_and_target_storage">
-            <caption>A pointer object and its target occupy separate storage</caption>
-            <image source="Chapter9/pointer-and-target-storage-address-of-clear.svg" width="90%">
-                <description>
-                    <p>
-                        The pointer object <c>score_pointer</c> occupies eight
+            <caption>A pointer object and its target occupy separate storage. 
+			            The pointer object <c>score_pointer</c> occupies eight
                         bytes beginning at virtual address 0x0000'7000. Its
                         stored value is the virtual address 0x0000'A000. A
                         separate four-byte integer object <c>score</c> begins at
                         that address. The pointer and target are separate
-                        objects with separate storage.
-                    </p>
-                </description>
+                        objects with separate storage.</caption>
+            <image source="Chapter9/pointer-and-target-storage-address-of-clear.svg" width="90%">
             </image>
         </figure>
 

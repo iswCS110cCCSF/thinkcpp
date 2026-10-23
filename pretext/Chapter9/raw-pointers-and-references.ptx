@@ -107,8 +107,9 @@ reference = y;       // assigns y's value to x
 
         <p>
             The symbol <c>&amp;</c> has different meanings depending on its
-            context. In an expression, it is the address-of operator. In a
-            declaration, it can indicate a reference type.
+            context. In an expression(as in <c>&amp;score;</c> in <c>int* pointer = &amp;score;</c> ), 
+			it is the address-of operator. In a, declaration(as in <c>int&amp; reference</c> in 
+			<c>int&amp; reference = score;</c> ), it indicates a reference type as part of C++ syntax.
         </p>
 
         <program xml:id="program_chapter9_pointer_reference_ampersand"
