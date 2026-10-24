@@ -137,7 +137,6 @@
             bytes of physical RAM.
         </p>
     </subsection>
-
     <exercise label="chapter9_memory_exercise_byte">
         <statement>
             <p>On an eight-bit-byte machine, what does one memory address normally identify?</p>
@@ -171,6 +170,22 @@
             <choice><statement><p>Every memory cell contains exactly 64 bits.</p></statement><feedback><p>Memory is commonly byte-addressable, with eight bits per byte.</p></feedback></choice>
             <choice><statement><p>Every C++ <c>int</c> must contain 64 bits.</p></statement><feedback><p>Integer sizes depend on the type and implementation.</p></feedback></choice>
             <choice><statement><p>The computer must contain 2<sup>64</sup> bytes of RAM.</p></statement><feedback><p>Address width and installed physical RAM are different ideas.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter9_memory_exercise_sizeof_pointer">
+        <statement>
+            <p>
+                If <c>score</c> is a <c>std::int32_t</c> object and
+                <c>score_pointer</c> is a pointer to it, what does
+                <c>sizeof(score_pointer)</c> measure?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>The size of the pointer object that stores an address</p></statement><feedback><p>The expression names the pointer variable itself, not the object reached through it.</p></feedback></choice>
+            <choice><statement><p>The size of the <c>std::int32_t</c> object</p></statement><feedback><p>Use <c>sizeof(*score_pointer)</c> to measure the pointed-to type.</p></feedback></choice>
+            <choice><statement><p>The numeric address stored in the pointer</p></statement><feedback><p><c>sizeof</c> reports a size in bytes, not an address value.</p></feedback></choice>
+            <choice><statement><p>The amount of physical RAM installed</p></statement><feedback><p><c>sizeof</c> measures the storage required by the specified type or object.</p></feedback></choice>
         </choices>
     </exercise>
 

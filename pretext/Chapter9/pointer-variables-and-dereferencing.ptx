@@ -219,6 +219,89 @@ int main() {
             addresses as portable values.
         </p>
     </subsection>
+    <subsection xml:id="chapter9_memory_sizeof_objects-and-pointers">
+        <title>Measuring Object and Pointer Size with <c>sizeof</c></title>
+
+        <p>
+            The <c>sizeof</c> operator reports how many bytes are used to store a
+            type or an object. It can measure an object, a pointer object, a type,
+            or the type of the object reached by a pointer. The result is a
+            <c>std::size_t</c> value.
+        </p>
+
+        <table xml:id="table_chapter9_sizeof_objects_and_pointers">
+            <title>What different <c>sizeof</c> expressions measure</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="34%"/>
+                <col width="38%"/>
+                <col width="28%"/>
+                <row header="yes">
+                    <cell>Expression</cell>
+                    <cell>What it measures</cell>
+                    <cell>Typical size here</cell>
+                </row>
+                <row>
+                    <cell><c>sizeof(score)</c></cell>
+                    <cell>The <c>score</c> object.</cell>
+                    <cell>4 bytes</cell>
+                </row>
+                <row>
+                    <cell><c>sizeof(score_pointer)</c></cell>
+                    <cell>The pointer object that stores an address.</cell>
+                    <cell>8 bytes</cell>
+                </row>
+                <row>
+                    <cell><c>sizeof(*score_pointer)</c></cell>
+                    <cell>The type of the object reached by the pointer.</cell>
+                    <cell>4 bytes</cell>
+                </row>
+                <row>
+                    <cell><c>sizeof(std::int32_t)</c></cell>
+                    <cell>The <c>std::int32_t</c> type.</cell>
+                    <cell>4 bytes</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            These values are typical for the 64-bit desktop systems used in this
+            course, not universal promises made by the C++ language. Notice that
+            <c>sizeof(score_pointer)</c> measures the pointer itself, while
+            <c>sizeof(*score_pointer)</c> measures the pointed-to type—the amount 
+			of storage required for the object to which it points. The <c>sizeof</c> 
+			operator determines these sizes from the types; it does not need to 
+			read the pointed-to value.
+        </p>
+
+        <listing xml:id="listing_chapter9_sizeof_objects_and_pointers">
+            <title>Comparing the sizes of an object and its pointer</title>
+            <program xml:id="program_chapter9_sizeof_objects_and_pointers"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <cstdint>
+#include <iostream>
+
+int main() {
+    std::int32_t score = 90;
+    std::int32_t* score_pointer = &score;
+
+    std::cout << "score: " << sizeof(score) << " bytes\n";
+    std::cout << "score_pointer: " << sizeof(score_pointer)
+              << " bytes\n";
+    std::cout << "*score_pointer: " << sizeof(*score_pointer)
+              << " bytes\n";
+    std::cout << "std::int32_t: " << sizeof(std::int32_t)
+              << " bytes\n";
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+    </subsection>
+
 
     <subsection xml:id="chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues">
         <title>Lvalues and Rvalues: From Assignment to Expression Categories</title>

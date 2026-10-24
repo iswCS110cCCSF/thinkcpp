@@ -1,18 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="chapter9_pointers-and-c-style-arrays">
-    <title>Pointers and C-Style Arrays</title>
+    <title>C-Style Arrays and Pointers</title>
 
-    <p>
-        A C-style array stores a fixed number of elements of one type in
-        consecutive positions. In many expressions, the array name is converted
-        to a pointer to its first element. This conversion is commonly called
-        <term>array decay</term>.
-    </p>
+    <subsection xml:id="chapter9_c-style-arrays_introduction">
+        <title>What Is a C-Style Array?</title>
+
+        <p>
+            A <term>C-style array</term> is a built-in C++ collection that stores
+            a fixed number of elements of one type in consecutive memory
+            locations. The elements are numbered from zero, so the first element
+            has index <c>0</c> and the last element has index one less than the
+            array's length.
+        </p>
+
+        <p>
+            The following declarations create arrays with five and three
+            elements. The empty braces value-initialize every element, so the
+            integers begin as zero. When an initializer lists the elements, the
+            compiler determines the length when the brackets are empty.
+        </p>
+
+        <listing xml:id="listing_ch9_c_style_array_declaration">
+            <title>Declaring, initializing, and indexing C-style arrays</title>
+            <program xml:id="program_ch9_c_style_array_declaration"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int scores[5]{};
+    int temperatures[]{68, 71, 75};
+
+    scores[0] = 88;
+    scores[1] = 91;
+
+    std::cout << scores[0] << '\n';
+    std::cout << scores[1] << '\n';
+    std::cout << temperatures[2] << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            C-style arrays have a fixed length after they are created. They do
+            not provide member functions such as <c>size()</c> or <c>at()</c>,
+            and indexing does not automatically check whether an index is in
+            range. The programmer must preserve the array's bounds.
+        </p>
+
+        <table xml:id="table_ch9_c_style_array_and_std_array">
+            <title>C-style arrays and <c>std::array</c></title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="28%"/>
+                <col width="36%"/>
+                <col width="36%"/>
+                <row header="yes">
+                    <cell>Feature</cell>
+                    <cell>C-style array</cell>
+                    <cell><c>std::array</c></cell>
+                </row>
+                <row>
+                    <cell>Length</cell>
+                    <cell>Fixed at creation.</cell>
+                    <cell>Fixed at creation.</cell>
+                </row>
+                <row>
+                    <cell>Element access</cell>
+                    <cell>Indexing with no automatic bounds checking.</cell>
+                    <cell>Indexing, plus <c>at()</c> for checked access.</cell>
+                </row>
+                <row>
+                    <cell>Length query</cell>
+                    <cell>Often calculated with <c>sizeof</c>.</cell>
+                    <cell><c>size()</c> reports the number of elements.</cell>
+                </row>
+                <row>
+                    <cell>Interface</cell>
+                    <cell>Built-in language feature.</cell>
+                    <cell>Library type with a clearer object interface.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            In new code, <c>std::array</c> is often easier to use safely. C-style
+            arrays remain important because they are part of C++'s history, are
+            used by older interfaces, and help explain how pointers and memory
+            work.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_c-style-arrays_sizeof">
+        <title>Counting C-Style Array Elements with <c>sizeof</c></title>
+
+        <p>
+            The <c>sizeof</c> operator reports a size in bytes. Applied to an
+            actual C-style array, it reports the size of the entire array. Applied
+            to one element, it reports the size of that element. Dividing the
+            first size by the second gives the number of elements:
+        </p>
+
+        <listing xml:id="listing_ch9_c_style_array_sizeof">
+            <title>Counting elements with <c>sizeof</c></title>
+            <program xml:id="program_ch9_c_style_array_sizeof"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <cstddef>
+#include <iostream>
+
+int main() {
+    int scores[]{88, 91, 95, 97};
+
+    std::size_t array_bytes = sizeof(scores);
+    std::size_t element_bytes = sizeof(scores[0]);
+    std::size_t element_count = array_bytes / element_bytes;
+
+    std::cout << "Array bytes: " << array_bytes << '\n';
+    std::cout << "Element bytes: " << element_bytes << '\n';
+    std::cout << "Element count: " << element_count << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            This calculation works only while <c>scores</c> is still an actual
+            array in the current scope. When an array is passed to a function,
+            it normally converts to a pointer to its first element. Inside that
+            function, <c>sizeof(values)</c> measures the pointer, not the whole
+            original array. That is why a pointer-based function interface must
+            receive the element count separately.
+        </p>
+
+        <p>
+            The type <c>std::size_t</c> is an unsigned integer type intended for
+            object sizes and array indexes. The expression
+            <c>sizeof(scores) / sizeof(scores[0])</c> is a traditional way to
+            count elements in a C-style array. For new code, <c>std::size(scores)</c>
+            or a <c>std::array</c>'s <c>size()</c> member can make the intent
+            clearer when those facilities are available.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter9_c-style-arrays_array-to-pointer-conversion">
+        <title>Array-to-Pointer Conversion</title>
+
+        <p>
+            In many expressions, a C-style array name is converted to a pointer
+            to its first element. This conversion is commonly called
+            <term>array decay</term>.
+        </p>
 
     <interactive xml:id="interactive_ch9_array_decay_parameter"
-                 iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Ccstddef%3E%0A%0Avoid%20print_values%28const%20int*%20values%2C%20std%3A%3Asize_t%20count%29%20%7B%0A%20%20%20%20for%20%28std%3A%3Asize_t%20index%20%3D%200%3B%20index%20%3C%20count%3B%20%2B%2Bindex%29%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20values%5Bindex%5D%20%3C%3C%20%27%20%27%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int%20scores%5B%5D%7B88%2C%2091%2C%2095%7D%3B%0A%0A%20%20%20%20print_values%28scores%2C%203%29%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                 iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Ccstddef%3E%0A%0Avoid%20print_values%28const%20int*%20values%2C%20std%3A%3Asize_t%20count%29%20%7B%0A%20%20%20%20for%20%28std%3A%3Asize_t%20index%20%3D%200%3B%20index%20%3C%20count%3B%20%2B%2Bindex%29%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20values%5Bindex%5D%20%3C%3C%20%27%20%27%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int%20scores%5B%5D%7B88%2C%2091%2C%2095%7D%3B%0A%0A%20%20%20%20print_values%28scores%2C%203%29%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=700&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
                  width="100%"
-                 aspect="16:10">
+                 hight="200%">
     </interactive>
 
     <p>
@@ -20,6 +171,7 @@
         pointer to the first element. The pointer does not carry the array's
         length, so the function receives <c>count</c> separately.
     </p>
+    </subsection>
 
     <subsection xml:id="chapter9_pointers-and-c-style-arrays_pointer-arithmetic">
         <title>Pointer Arithmetic</title>
@@ -30,9 +182,13 @@
             adding 1 produces a pointer to the next <c>int</c> in that array.
         </p>
 
-        <program xml:id="program_ch9_pointer_arithmetic_traversal"
-                 language="cpp" interactive="yes" line-numbers="yes">
-            <code><![CDATA[
+        <listing xml:id="listing_ch9_pointer_arithmetic_traversal">
+            <title>Traversing an array with pointer arithmetic</title>
+            <program xml:id="program_ch9_pointer_arithmetic_traversal"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
 #include <iostream>
 
 int main() {
@@ -48,8 +204,9 @@ int main() {
 
     return 0;
 }
-            ]]></code>
-        </program>
+                ]]></code>
+            </program>
+        </listing>
 
         <table xml:id="table_ch9_pointer_arithmetic">
             <title>Common pointer-arithmetic expressions</title>
@@ -105,6 +262,22 @@ int main() {
             a valid way to reach unrelated storage.
         </p>
     </subsection>
+
+    <exercise label="chapter9_pointers-and-c-style-arrays_exercise_sizeof">
+        <statement>
+            <p>
+                What does
+                <c>sizeof(scores) / sizeof(scores[0])</c> calculate when
+                <c>scores</c> is an actual C-style array in the current scope?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes"><statement><p>The number of elements in the array</p></statement><feedback><p>The total array size in bytes is divided by the size of one element in bytes.</p></feedback></choice>
+            <choice><statement><p>The number of bytes in the array</p></statement><feedback><p><c>sizeof(scores)</c> alone reports the total size in bytes.</p></feedback></choice>
+            <choice><statement><p>The address of the first element</p></statement><feedback><p>An address is not produced by this division.</p></feedback></choice>
+            <choice><statement><p>The size of a pointer</p></statement><feedback><p>This expression is evaluated while <c>scores</c> is still an actual array.</p></feedback></choice>
+        </choices>
+    </exercise>
 
     <exercise label="chapter9_pointers-and-c-style-arrays_exercise_decay">
         <statement><p>Why does a function receiving <c>const int* values</c> usually need a separate length parameter?</p></statement>

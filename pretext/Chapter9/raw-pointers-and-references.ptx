@@ -84,7 +84,7 @@ reference = y;       // assigns y's value to x
                 </row>
                 <row>
                     <cell><c>*pointer = 15;</c></cell>
-                    <cell>Access the object identified by <c>pointer</c> and assign to it.</cell>
+                    <cell>Access the object identified by <c>pointer</c> and assign 15 to it.</cell>
                 </row>
                 <row>
                     <cell><c>pointer = &amp;y;</c></cell>
