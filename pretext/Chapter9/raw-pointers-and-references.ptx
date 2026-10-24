@@ -131,8 +131,8 @@ int& reference = score; // & declares reference as an alias
 
         <p>
             The symbol <c>*</c> also has two related uses: in a declaration it
-            helps declare a pointer type, and in an expression it dereferences
-            a pointer.
+            helps declare a pointer type as part of C++ syntax, and in an expression it dereferences
+            a pointer by acting as dereference or indirection operator.
         </p>
 
         <program xml:id="program_chapter9_pointer_reference_star"
