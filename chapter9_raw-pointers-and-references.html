@@ -611,7 +611,8 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html" class="internal"><span class="codenumber">9.3</span> <span class="title">Pointer Variables and Dereferencing</span></a></div>
 <ul id="ptx-toc-group-chapter9_pointer-variables-and-dereferencing" class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_pointer-storage" class="internal"><span class="codenumber">9.3.1</span> <span class="title">What a Pointer Contains and Where It Is Stored</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues" class="internal"><span class="codenumber">9.3.2</span> <span class="title">Lvalues and Rvalues: From Assignment to Expression Categories</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_memory_sizeof_objects-and-pointers" class="internal"><span class="codenumber">9.3.2</span> <span class="title">Measuring Object and Pointer Size with <code class="code-inline tex2jax_ignore">sizeof</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues" class="internal"><span class="codenumber">9.3.3</span> <span class="title">Lvalues and Rvalues: From Assignment to Expression Categories</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section contains-active">
@@ -634,10 +635,13 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html" class="internal"><span class="codenumber">9.7</span> <span class="title">Pointers and C-Style Arrays</span></a></div>
+<div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html" class="internal"><span class="codenumber">9.7</span> <span class="title">C-Style Arrays and Pointers</span></a></div>
 <ul id="ptx-toc-group-chapter9_pointers-and-c-style-arrays" class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_pointer-arithmetic" class="internal"><span class="codenumber">9.7.1</span> <span class="title">Pointer Arithmetic</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_array-size" class="internal"><span class="codenumber">9.7.2</span> <span class="title">Array Size and Function Parameters</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_c-style-arrays_introduction" class="internal"><span class="codenumber">9.7.1</span> <span class="title">What Is a C-Style Array?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_c-style-arrays_sizeof" class="internal"><span class="codenumber">9.7.2</span> <span class="title">Counting C-Style Array Elements with <code class="code-inline tex2jax_ignore">sizeof</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_c-style-arrays_array-to-pointer-conversion" class="internal"><span class="codenumber">9.7.3</span> <span class="title">Array-to-Pointer Conversion</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_pointer-arithmetic" class="internal"><span class="codenumber">9.7.4</span> <span class="title">Pointer Arithmetic</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_array-size" class="internal"><span class="codenumber">9.7.5</span> <span class="title">Array Size and Function Parameters</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -742,7 +746,7 @@ reference = y;       // assigns y's value to x
 </tr>
 <tr>
 <td class="l m b3 r3 l3 t0 lines"><code class="code-inline tex2jax_ignore">*pointer = 15;</code></td>
-<td class="l m b3 r3 l0 t0 lines">Access the object identified by <code class="code-inline tex2jax_ignore">pointer</code> and assign to it.</td>
+<td class="l m b3 r3 l0 t0 lines">Access the object identified by <code class="code-inline tex2jax_ignore">pointer</code> and assign 15 to it.</td>
 </tr>
 <tr>
 <td class="l m b3 r3 l3 t0 lines"><code class="code-inline tex2jax_ignore">pointer = &amp;y;</code></td>
@@ -772,7 +776,7 @@ int&amp; reference = score; // &amp; declares reference as an alias
 </code></pre></div>
 <div class="para" id="chapter9_raw-pointers-and-references_ampersand-4">The address-of expression <code class="code-inline tex2jax_ignore">&amp;score</code> produces a pointer value. The declaration <code class="code-inline tex2jax_ignore">int&amp; reference</code> says that <code class="code-inline tex2jax_ignore">reference</code> is a reference to an existing <code class="code-inline tex2jax_ignore">int</code> object. These uses look similar, but they are not the same operation.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_raw-pointers-and-references_ampersand-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter9_raw-pointers-and-references_ampersand-5">The symbol <code class="code-inline tex2jax_ignore">*</code> also has two related uses: in a declaration it helps declare a pointer type as part of C++ syntax, and in an expression it dereferences a pointer.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_raw-pointers-and-references_ampersand-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter9_raw-pointers-and-references_ampersand-5">The symbol <code class="code-inline tex2jax_ignore">*</code> also has two related uses: in a declaration it helps declare a pointer type as part of C++ syntax, and in an expression it dereferences a pointer by acting as dereference or indirection operator.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_raw-pointers-and-references_ampersand-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="code-box"><pre class="program clipboardable"><code id="rs-program_chapter9_pointer_reference_star" class="language-cpp">int* pointer;  // pointer declaration
 *pointer;      // dereference expression

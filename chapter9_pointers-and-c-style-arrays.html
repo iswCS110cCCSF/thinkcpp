@@ -14,7 +14,7 @@
 <!--******************************************-->
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TCPP2 Pointers and C-Style Arrays</title>
+<title>TCPP2 C-Style Arrays and Pointers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -611,7 +611,8 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html" class="internal"><span class="codenumber">9.3</span> <span class="title">Pointer Variables and Dereferencing</span></a></div>
 <ul id="ptx-toc-group-chapter9_pointer-variables-and-dereferencing" class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_pointer-storage" class="internal"><span class="codenumber">9.3.1</span> <span class="title">What a Pointer Contains and Where It Is Stored</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues" class="internal"><span class="codenumber">9.3.2</span> <span class="title">Lvalues and Rvalues: From Assignment to Expression Categories</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_memory_sizeof_objects-and-pointers" class="internal"><span class="codenumber">9.3.2</span> <span class="title">Measuring Object and Pointer Size with <code class="code-inline tex2jax_ignore">sizeof</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues" class="internal"><span class="codenumber">9.3.3</span> <span class="title">Lvalues and Rvalues: From Assignment to Expression Categories</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -634,10 +635,13 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section contains-active">
-<div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html" class="internal"><span class="codenumber">9.7</span> <span class="title">Pointers and C-Style Arrays</span></a></div>
+<div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html" class="internal"><span class="codenumber">9.7</span> <span class="title">C-Style Arrays and Pointers</span></a></div>
 <ul class="structural toc-item-list active" id="ptx-toc-group-chapter9_pointers-and-c-style-arrays">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_pointer-arithmetic" class="internal"><span class="codenumber">9.7.1</span> <span class="title">Pointer Arithmetic</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_array-size" class="internal"><span class="codenumber">9.7.2</span> <span class="title">Array Size and Function Parameters</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_c-style-arrays_introduction" class="internal"><span class="codenumber">9.7.1</span> <span class="title">What Is a C-Style Array?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_c-style-arrays_sizeof" class="internal"><span class="codenumber">9.7.2</span> <span class="title">Counting C-Style Array Elements with <code class="code-inline tex2jax_ignore">sizeof</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_c-style-arrays_array-to-pointer-conversion" class="internal"><span class="codenumber">9.7.3</span> <span class="title">Array-to-Pointer Conversion</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_pointer-arithmetic" class="internal"><span class="codenumber">9.7.4</span> <span class="title">Pointer Arithmetic</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_array-size" class="internal"><span class="codenumber">9.7.5</span> <span class="title">Array Size and Function Parameters</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -698,21 +702,117 @@ eBookConfig.enable_chatcodes =  false;
 <main class="ptx-main"><div id="ptx-content" class="ptx-content">
 <section class="section" id="chapter9_pointers-and-c-style-arrays">
 <h1 class="heading hide-type">
-<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Pointers and C-Style Arrays</span>
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">C-Style Arrays and Pointers</span>
 </h1>
-<div class="para" id="chapter9_pointers-and-c-style-arrays-2">A C-style array stores a fixed number of elements of one type in consecutive positions. In many expressions, the array name is converted to a pointer to its first element. This conversion is commonly called <dfn class="terminology">array decay</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<section class="subsection" id="chapter9_c-style-arrays_introduction">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">What Is a C-Style Array?</span>
+</h2>
+<div class="para" id="chapter9_c-style-arrays_introduction-2">A <dfn class="terminology">C-style array</dfn> is a built-in C++ collection that stores a fixed number of elements of one type in consecutive memory locations. The elements are numbered from zero, so the first element has index <code class="code-inline tex2jax_ignore">0</code> and the last element has index one less than the array’s length.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_c-style-arrays_introduction-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="interactive-iframe-container"><iframe src="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Ccstddef%3E%0A%0Avoid%20print_values%28const%20int*%20values%2C%20std%3A%3Asize_t%20count%29%20%7B%0A%20%20%20%20for%20%28std%3A%3Asize_t%20index%20%3D%200%3B%20index%20%3C%20count%3B%20%2B%2Bindex%29%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20values%5Bindex%5D%20%3C%3C%20%27%20%27%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int%20scores%5B%5D%7B88%2C%2091%2C%2095%7D%3B%0A%0A%20%20%20%20print_values%28scores%2C%203%29%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0" id="interactive_ch9_array_decay_parameter" style="width:600px; height:375px; display: block; "></iframe></div>
+<div class="para" id="chapter9_c-style-arrays_introduction-3">The following declarations create arrays with five and three elements. The empty braces value-initialize every element, so the integers begin as zero. When an initializer lists the elements, the compiler determines the length when the brackets are empty.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_c-style-arrays_introduction-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="listing_ch9_c_style_array_declaration"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Declaring, initializing, and indexing C-style arrays<div class="autopermalink" aria-hidden="true" data-description="Listing 9.7.1: Declaring, initializing, and indexing C-style arrays"><a tabindex="-1" href="#listing_ch9_c_style_array_declaration" title="Copy heading and permalink for Listing 9.7.1: Declaring, initializing, and indexing C-style arrays" aria-label="Copy heading and permalink for Listing 9.7.1: Declaring, initializing, and indexing C-style arrays">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-program_ch9_c_style_array_declaration" class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    int scores[5]{};
+    int temperatures[]{68, 71, 75};
+
+    scores[0] = 88;
+    scores[1] = 91;
+
+    std::cout &lt;&lt; scores[0] &lt;&lt; '\n';
+    std::cout &lt;&lt; scores[1] &lt;&lt; '\n';
+    std::cout &lt;&lt; temperatures[2] &lt;&lt; '\n';
+
+    return 0;
+}
+</code></pre></div></div>
+</figure>
+<div class="para" id="chapter9_c-style-arrays_introduction-5">C-style arrays have a fixed length after they are created. They do not provide member functions such as <code class="code-inline tex2jax_ignore">size()</code> or <code class="code-inline tex2jax_ignore">at()</code>, and indexing does not automatically check whether an index is in range. The programmer must preserve the array’s bounds.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_c-style-arrays_introduction-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="table table-like" id="table_ch9_c_style_array_and_std_array"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>C-style arrays and <code class="code-inline tex2jax_ignore">std::array</code><div class="autopermalink" aria-hidden="true" data-description="Table 9.7.2: C-style arrays and std::array"><a tabindex="-1" href="#table_ch9_c_style_array_and_std_array" title="Copy heading and permalink for Table 9.7.2: C-style arrays and std::array" aria-label="Copy heading and permalink for Table 9.7.2: C-style arrays and std::array">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr class="header-horizontal">
+<th scope="col" class="l m b3 r3 l3 t3 lines">Feature</th>
+<th scope="col" class="l m b3 r3 l0 t3 lines">C-style array</th>
+<th scope="col" class="l m b3 r3 l0 t3 lines"><code class="code-inline tex2jax_ignore">std::array</code></th>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0 lines">Length</td>
+<td class="l m b3 r3 l0 t0 lines">Fixed at creation.</td>
+<td class="l m b3 r3 l0 t0 lines">Fixed at creation.</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0 lines">Element access</td>
+<td class="l m b3 r3 l0 t0 lines">Indexing with no automatic bounds checking.</td>
+<td class="l m b3 r3 l0 t0 lines">Indexing, plus <code class="code-inline tex2jax_ignore">at()</code> for checked access.</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0 lines">Length query</td>
+<td class="l m b3 r3 l0 t0 lines">Often calculated with <code class="code-inline tex2jax_ignore">sizeof</code>.</td>
+<td class="l m b3 r3 l0 t0 lines">
+<code class="code-inline tex2jax_ignore">size()</code> reports the number of elements.</td>
+</tr>
+<tr>
+<td class="l m b3 r3 l3 t0 lines">Interface</td>
+<td class="l m b3 r3 l0 t0 lines">Built-in language feature.</td>
+<td class="l m b3 r3 l0 t0 lines">Library type with a clearer object interface.</td>
+</tr>
+</table></div>
+</figure>
+<div class="para" id="chapter9_c-style-arrays_introduction-7">In new code, <code class="code-inline tex2jax_ignore">std::array</code> is often easier to use safely. C-style arrays remain important because they are part of C++’s history, are used by older interfaces, and help explain how pointers and memory work.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_c-style-arrays_introduction-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 9.7.1: What Is a C-Style Array?"><a tabindex="-1" href="#chapter9_c-style-arrays_introduction" title="Copy heading and permalink for Subsection 9.7.1: What Is a C-Style Array?" aria-label="Copy heading and permalink for Subsection 9.7.1: What Is a C-Style Array?">🔗</a></div>
+</section>
+<section class="subsection" id="chapter9_c-style-arrays_sizeof">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Counting C-Style Array Elements with <code class="code-inline tex2jax_ignore">sizeof</code></span>
+</h2>
+<div class="para" id="chapter9_c-style-arrays_sizeof-2">The <code class="code-inline tex2jax_ignore">sizeof</code> operator reports a size in bytes. Applied to an actual C-style array, it reports the size of the entire array. Applied to one element, it reports the size of that element. Dividing the first size by the second gives the number of elements:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_c-style-arrays_sizeof-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="listing_ch9_c_style_array_sizeof"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Counting elements with <code class="code-inline tex2jax_ignore">sizeof</code><div class="autopermalink" aria-hidden="true" data-description="Listing 9.7.3: Counting elements with sizeof"><a tabindex="-1" href="#listing_ch9_c_style_array_sizeof" title="Copy heading and permalink for Listing 9.7.3: Counting elements with sizeof" aria-label="Copy heading and permalink for Listing 9.7.3: Counting elements with sizeof">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-program_ch9_c_style_array_sizeof" class="language-cpp">#include &lt;cstddef&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    int scores[]{88, 91, 95, 97};
+
+    std::size_t array_bytes = sizeof(scores);
+    std::size_t element_bytes = sizeof(scores[0]);
+    std::size_t element_count = array_bytes / element_bytes;
+
+    std::cout &lt;&lt; "Array bytes: " &lt;&lt; array_bytes &lt;&lt; '\n';
+    std::cout &lt;&lt; "Element bytes: " &lt;&lt; element_bytes &lt;&lt; '\n';
+    std::cout &lt;&lt; "Element count: " &lt;&lt; element_count &lt;&lt; '\n';
+
+    return 0;
+}
+</code></pre></div></div>
+</figure>
+<div class="para" id="chapter9_c-style-arrays_sizeof-4">This calculation works only while <code class="code-inline tex2jax_ignore">scores</code> is still an actual array in the current scope. When an array is passed to a function, it normally converts to a pointer to its first element. Inside that function, <code class="code-inline tex2jax_ignore">sizeof(values)</code> measures the pointer, not the whole original array. That is why a pointer-based function interface must receive the element count separately.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_c-style-arrays_sizeof-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter9_c-style-arrays_sizeof-5">The type <code class="code-inline tex2jax_ignore">std::size_t</code> is an unsigned integer type intended for object sizes and array indexes. The expression <code class="code-inline tex2jax_ignore">sizeof(scores) / sizeof(scores[0])</code> is a traditional way to count elements in a C-style array. For new code, <code class="code-inline tex2jax_ignore">std::size(scores)</code> or a <code class="code-inline tex2jax_ignore">std::array</code>’s <code class="code-inline tex2jax_ignore">size()</code> member can make the intent clearer when those facilities are available.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_c-style-arrays_sizeof-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 9.7.2: Counting C-Style Array Elements with sizeof"><a tabindex="-1" href="#chapter9_c-style-arrays_sizeof" title="Copy heading and permalink for Subsection 9.7.2: Counting C-Style Array Elements with sizeof" aria-label="Copy heading and permalink for Subsection 9.7.2: Counting C-Style Array Elements with sizeof">🔗</a></div>
+</section>
+<section class="subsection" id="chapter9_c-style-arrays_array-to-pointer-conversion">
+<h2 class="heading hide-type">
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.3</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Array-to-Pointer Conversion</span>
+</h2>
+<div class="para" id="chapter9_c-style-arrays_array-to-pointer-conversion-2">In many expressions, a C-style array name is converted to a pointer to its first element. This conversion is commonly called <dfn class="terminology">array decay</dfn>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_c-style-arrays_array-to-pointer-conversion-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="interactive-iframe-container"><iframe src="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Ccstddef%3E%0A%0Avoid%20print_values%28const%20int*%20values%2C%20std%3A%3Asize_t%20count%29%20%7B%0A%20%20%20%20for%20%28std%3A%3Asize_t%20index%20%3D%200%3B%20index%20%3C%20count%3B%20%2B%2Bindex%29%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20values%5Bindex%5D%20%3C%3C%20%27%20%27%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int%20scores%5B%5D%7B88%2C%2091%2C%2095%7D%3B%0A%0A%20%20%20%20print_values%28scores%2C%203%29%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=700&amp;codeDivWidth=350&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0" id="interactive_ch9_array_decay_parameter" style="width:600px; height:600px; display: block; "></iframe></div>
 <div class="interactive-iframe-container__opener"><a href="interactive_ch9_array_decay_parameter.html" title="Open in new tab" aria-label="Open in new tab" target="_blank"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe89e;</span></a></div>
-<div class="para" id="chapter9_pointers-and-c-style-arrays-4">When <code class="code-inline tex2jax_ignore">scores</code> is passed to <code class="code-inline tex2jax_ignore">print_values()</code>, it becomes a pointer to the first element. The pointer does not carry the array’s length, so the function receives <code class="code-inline tex2jax_ignore">count</code> separately.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter9_c-style-arrays_array-to-pointer-conversion-4">When <code class="code-inline tex2jax_ignore">scores</code> is passed to <code class="code-inline tex2jax_ignore">print_values()</code>, it becomes a pointer to the first element. The pointer does not carry the array’s length, so the function receives <code class="code-inline tex2jax_ignore">count</code> separately.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_c-style-arrays_array-to-pointer-conversion-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 9.7.3: Array-to-Pointer Conversion"><a tabindex="-1" href="#chapter9_c-style-arrays_array-to-pointer-conversion" title="Copy heading and permalink for Subsection 9.7.3: Array-to-Pointer Conversion" aria-label="Copy heading and permalink for Subsection 9.7.3: Array-to-Pointer Conversion">🔗</a></div>
+</section>
 <section class="subsection" id="chapter9_pointers-and-c-style-arrays_pointer-arithmetic">
 <h2 class="heading hide-type">
-<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.1</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Pointer Arithmetic</span>
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.4</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Pointer Arithmetic</span>
 </h2>
 <div class="para" id="chapter9_pointers-and-c-style-arrays_pointer-arithmetic-2">Pointer arithmetic moves by elements of the pointed-to type, not by individual bytes. If an <code class="code-inline tex2jax_ignore">int*</code> points to one array element, adding 1 produces a pointer to the next <code class="code-inline tex2jax_ignore">int</code> in that array.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_pointer-arithmetic-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-program_ch9_pointer_arithmetic_traversal" class="language-cpp">#include &lt;iostream&gt;
+<figure class="listing figure-like" id="listing_ch9_pointer_arithmetic_traversal"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Traversing an array with pointer arithmetic<div class="autopermalink" aria-hidden="true" data-description="Listing 9.7.4: Traversing an array with pointer arithmetic"><a tabindex="-1" href="#listing_ch9_pointer_arithmetic_traversal" title="Copy heading and permalink for Listing 9.7.4: Traversing an array with pointer arithmetic" aria-label="Copy heading and permalink for Listing 9.7.4: Traversing an array with pointer arithmetic">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-program_ch9_pointer_arithmetic_traversal" class="language-cpp">#include &lt;iostream&gt;
 
 int main() {
     int scores[]{88, 91, 95};
@@ -727,8 +827,9 @@ int main() {
 
     return 0;
 }
-</code></pre></div>
-<figure class="table table-like" id="table_ch9_pointer_arithmetic"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Common pointer-arithmetic expressions<div class="autopermalink" aria-hidden="true" data-description="Table 9.7.1: Common pointer-arithmetic expressions"><a tabindex="-1" href="#table_ch9_pointer_arithmetic" title="Copy heading and permalink for Table 9.7.1: Common pointer-arithmetic expressions" aria-label="Copy heading and permalink for Table 9.7.1: Common pointer-arithmetic expressions">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
+</code></pre></div></div>
+</figure>
+<figure class="table table-like" id="table_ch9_pointer_arithmetic"><figcaption><span class="type">Table</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.5<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Common pointer-arithmetic expressions<div class="autopermalink" aria-hidden="true" data-description="Table 9.7.5: Common pointer-arithmetic expressions"><a tabindex="-1" href="#table_ch9_pointer_arithmetic" title="Copy heading and permalink for Table 9.7.5: Common pointer-arithmetic expressions" aria-label="Copy heading and permalink for Table 9.7.5: Common pointer-arithmetic expressions">🔗</a></div></figcaption><div class="tabular-box natural-width"><table class="tabular">
 <tr class="header-horizontal">
 <th scope="col" class="l m b3 r3 l3 t3 lines">Expression</th>
 <th scope="col" class="l m b3 r3 l0 t3 lines">Meaning</th>
@@ -755,20 +856,58 @@ int main() {
 <td class="l m b3 r3 l0 t0 lines">The resulting position must be a valid element.</td>
 </tr>
 </table></div>
-</figure><div class="autopermalink" aria-hidden="true" data-description="Subsection 9.7.1: Pointer Arithmetic"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_pointer-arithmetic" title="Copy heading and permalink for Subsection 9.7.1: Pointer Arithmetic" aria-label="Copy heading and permalink for Subsection 9.7.1: Pointer Arithmetic">🔗</a></div>
+</figure><div class="autopermalink" aria-hidden="true" data-description="Subsection 9.7.4: Pointer Arithmetic"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_pointer-arithmetic" title="Copy heading and permalink for Subsection 9.7.4: Pointer Arithmetic" aria-label="Copy heading and permalink for Subsection 9.7.4: Pointer Arithmetic">🔗</a></div>
 </section>
 <section class="subsection" id="chapter9_pointers-and-c-style-arrays_array-size">
 <h2 class="heading hide-type">
-<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.2</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Array Size and Function Parameters</span>
+<span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Array Size and Function Parameters</span>
 </h2>
 <div class="para" id="chapter9_pointers-and-c-style-arrays_array-size-2">An array name does not decay in every context. For example, <code class="code-inline tex2jax_ignore">sizeof(scores)</code> measures the entire array when <code class="code-inline tex2jax_ignore">scores</code> is an actual array in that scope. Once the array has decayed to a pointer parameter, <code class="code-inline tex2jax_ignore">sizeof(values)</code> measures the pointer, not the original array. This is another reason to pass the length explicitly.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_array-size-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="chapter9_pointers-and-c-style-arrays_array-size-3">A pointer may identify one position past the last element. Such a pointer is useful as a stopping position, but it must never be dereferenced. Pointer arithmetic outside the same array object is not a valid way to reach unrelated storage.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_array-size-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Subsection 9.7.2: Array Size and Function Parameters"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_array-size" title="Copy heading and permalink for Subsection 9.7.2: Array Size and Function Parameters" aria-label="Copy heading and permalink for Subsection 9.7.2: Array Size and Function Parameters">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Subsection 9.7.5: Array Size and Function Parameters"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_array-size" title="Copy heading and permalink for Subsection 9.7.5: Array Size and Function Parameters" aria-label="Copy heading and permalink for Subsection 9.7.5: Array Size and Function Parameters">🔗</a></div>
 </section>
-<article class="exercise exercise-like" id="chapter9_pointers-and-c-style-arrays_exercise_decay"><h2 class="heading">
+<article class="exercise exercise-like" id="chapter9_pointers-and-c-style-arrays_exercise_sizeof"><h2 class="heading">
 <span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+</h2>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement">
+<div class="para" id="chapter9_pointers-and-c-style-arrays_exercise_sizeof-1-1">What does <code class="code-inline tex2jax_ignore">sizeof(scores) / sizeof(scores[0])</code> calculate when <code class="code-inline tex2jax_ignore">scores</code> is an actual C-style array in the current scope?<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_exercise_sizeof-1-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+</div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-chapter9_pointers-and-c-style-arrays_exercise_sizeof" data-multipleanswers="false">
+<li data-component="answer" id="rs-chapter9_pointers-and-c-style-arrays_exercise_sizeof_opt_a" data-correct="">
+<div class="para" id="chapter9_pointers-and-c-style-arrays_exercise_sizeof-2-1-1-1">The number of elements in the array</div>
+</li>
+<li data-component="feedback" id="rs-chapter9_pointers-and-c-style-arrays_exercise_sizeof_opt_a">
+<div class="para" id="chapter9_pointers-and-c-style-arrays_exercise_sizeof-2-1-2-1">The total array size in bytes is divided by the size of one element in bytes.</div>
+</li>
+<li data-component="answer" id="rs-chapter9_pointers-and-c-style-arrays_exercise_sizeof_opt_b">
+<div class="para" id="chapter9_pointers-and-c-style-arrays_exercise_sizeof-2-2-1-1">The number of bytes in the array</div>
+</li>
+<li data-component="feedback" id="rs-chapter9_pointers-and-c-style-arrays_exercise_sizeof_opt_b">
+<div class="para" id="chapter9_pointers-and-c-style-arrays_exercise_sizeof-2-2-2-1">
+<code class="code-inline tex2jax_ignore">sizeof(scores)</code> alone reports the total size in bytes.</div>
+</li>
+<li data-component="answer" id="rs-chapter9_pointers-and-c-style-arrays_exercise_sizeof_opt_c">
+<div class="para" id="chapter9_pointers-and-c-style-arrays_exercise_sizeof-2-3-1-1">The address of the first element</div>
+</li>
+<li data-component="feedback" id="rs-chapter9_pointers-and-c-style-arrays_exercise_sizeof_opt_c">
+<div class="para" id="chapter9_pointers-and-c-style-arrays_exercise_sizeof-2-3-2-1">An address is not produced by this division.</div>
+</li>
+<li data-component="answer" id="rs-chapter9_pointers-and-c-style-arrays_exercise_sizeof_opt_d">
+<div class="para" id="chapter9_pointers-and-c-style-arrays_exercise_sizeof-2-4-1-1">The size of a pointer</div>
+</li>
+<li data-component="feedback" id="rs-chapter9_pointers-and-c-style-arrays_exercise_sizeof_opt_d">
+<div class="para" id="chapter9_pointers-and-c-style-arrays_exercise_sizeof-2-4-2-1">This expression is evaluated while <code class="code-inline tex2jax_ignore">scores</code> is still an actual array.</div>
+</li>
+</ul>
+</div></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.1"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_exercise_sizeof" title="Copy heading and permalink for Checkpoint 9.7.1" aria-label="Copy heading and permalink for Checkpoint 9.7.1">🔗</a></div>
+</article>
+<article class="exercise exercise-like" id="chapter9_pointers-and-c-style-arrays_exercise_decay"><h2 class="heading">
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
@@ -802,10 +941,10 @@ int main() {
 </li>
 </ul>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.1"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_exercise_decay" title="Copy heading and permalink for Checkpoint 9.7.1" aria-label="Copy heading and permalink for Checkpoint 9.7.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.2"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_exercise_decay" title="Copy heading and permalink for Checkpoint 9.7.2" aria-label="Copy heading and permalink for Checkpoint 9.7.2">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="chapter9_pointers-and-c-style-arrays_parsons_decay"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-chapter9_pointers-and-c-style-arrays_parsons_decay">
 <div class="parsons_question parsons-text">
@@ -822,10 +961,10 @@ std::cout &lt;&lt; *current &lt;&lt; '\n';
 ---
 std::cout &lt;&lt; *current &lt;&lt; '\n';</pre>
 </div></div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.2"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_parsons_decay" title="Copy heading and permalink for Checkpoint 9.7.2" aria-label="Copy heading and permalink for Checkpoint 9.7.2">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.3"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_parsons_decay" title="Copy heading and permalink for Checkpoint 9.7.3" aria-label="Copy heading and permalink for Checkpoint 9.7.3">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="chapter9_pointers-and-c-style-arrays_exercise_increment"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
@@ -859,10 +998,10 @@ std::cout &lt;&lt; *current &lt;&lt; '\n';</pre>
 </li>
 </ul>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.3"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_exercise_increment" title="Copy heading and permalink for Checkpoint 9.7.3" aria-label="Copy heading and permalink for Checkpoint 9.7.3">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.4"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_exercise_increment" title="Copy heading and permalink for Checkpoint 9.7.4" aria-label="Copy heading and permalink for Checkpoint 9.7.4">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="chapter9_pointers-and-c-style-arrays_exercise_decay_call"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
@@ -896,10 +1035,10 @@ std::cout &lt;&lt; *current &lt;&lt; '\n';</pre>
 </li>
 </ul>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.4"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_exercise_decay_call" title="Copy heading and permalink for Checkpoint 9.7.4" aria-label="Copy heading and permalink for Checkpoint 9.7.4">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.5"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_exercise_decay_call" title="Copy heading and permalink for Checkpoint 9.7.5" aria-label="Copy heading and permalink for Checkpoint 9.7.5">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="chapter9_pointers-and-c-style-arrays_exercise_pointer_bounds"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.5</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">9.7.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
@@ -933,8 +1072,8 @@ std::cout &lt;&lt; *current &lt;&lt; '\n';</pre>
 </li>
 </ul>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.5"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_exercise_pointer_bounds" title="Copy heading and permalink for Checkpoint 9.7.5" aria-label="Copy heading and permalink for Checkpoint 9.7.5">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Section 9.7: Pointers and C-Style Arrays"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays" title="Copy heading and permalink for Section 9.7: Pointers and C-Style Arrays" aria-label="Copy heading and permalink for Section 9.7: Pointers and C-Style Arrays">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 9.7.6"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays_exercise_pointer_bounds" title="Copy heading and permalink for Checkpoint 9.7.6" aria-label="Copy heading and permalink for Checkpoint 9.7.6">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Section 9.7: C-Style Arrays and Pointers"><a tabindex="-1" href="#chapter9_pointers-and-c-style-arrays" title="Copy heading and permalink for Section 9.7: C-Style Arrays and Pointers" aria-label="Copy heading and permalink for Section 9.7: C-Style Arrays and Pointers">🔗</a></div>
 </section>
 </div>
 <div id="ptx-content-footer" class="ptx-content-footer">

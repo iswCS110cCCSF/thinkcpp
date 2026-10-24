@@ -611,7 +611,8 @@ eBookConfig.enable_chatcodes =  false;
 <div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html" class="internal"><span class="codenumber">9.3</span> <span class="title">Pointer Variables and Dereferencing</span></a></div>
 <ul id="ptx-toc-group-chapter9_pointer-variables-and-dereferencing" class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_pointer-storage" class="internal"><span class="codenumber">9.3.1</span> <span class="title">What a Pointer Contains and Where It Is Stored</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues" class="internal"><span class="codenumber">9.3.2</span> <span class="title">Lvalues and Rvalues: From Assignment to Expression Categories</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_memory_sizeof_objects-and-pointers" class="internal"><span class="codenumber">9.3.2</span> <span class="title">Measuring Object and Pointer Size with <code class="code-inline tex2jax_ignore">sizeof</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_lvalues-and-rvalues" class="internal"><span class="codenumber">9.3.3</span> <span class="title">Lvalues and Rvalues: From Assignment to Expression Categories</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -634,10 +635,13 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html" class="internal"><span class="codenumber">9.7</span> <span class="title">Pointers and C-Style Arrays</span></a></div>
+<div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html" class="internal"><span class="codenumber">9.7</span> <span class="title">C-Style Arrays and Pointers</span></a></div>
 <ul id="ptx-toc-group-chapter9_pointers-and-c-style-arrays" class="structural toc-item-list">
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_pointer-arithmetic" class="internal"><span class="codenumber">9.7.1</span> <span class="title">Pointer Arithmetic</span></a></div></li>
-<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_array-size" class="internal"><span class="codenumber">9.7.2</span> <span class="title">Array Size and Function Parameters</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_c-style-arrays_introduction" class="internal"><span class="codenumber">9.7.1</span> <span class="title">What Is a C-Style Array?</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_c-style-arrays_sizeof" class="internal"><span class="codenumber">9.7.2</span> <span class="title">Counting C-Style Array Elements with <code class="code-inline tex2jax_ignore">sizeof</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_c-style-arrays_array-to-pointer-conversion" class="internal"><span class="codenumber">9.7.3</span> <span class="title">Array-to-Pointer Conversion</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_pointer-arithmetic" class="internal"><span class="codenumber">9.7.4</span> <span class="title">Pointer Arithmetic</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_array-size" class="internal"><span class="codenumber">9.7.5</span> <span class="title">Array Size and Function Parameters</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -706,7 +710,7 @@ eBookConfig.enable_chatcodes =  false;
 <li><a href="chapter9_raw-pointers-and-references.html" class="internal"><span class="codenumber">9.4</span> <span class="title">Raw Pointers and References</span></a></li>
 <li><a href="chapter9_nullptr-and-safe-pointer-use.html" class="internal"><span class="codenumber">9.5</span> <span class="title"><code class="code-inline tex2jax_ignore">nullptr</code> and Safe Pointer Use</span></a></li>
 <li><a href="chapter9_pointers-as-function-parameters.html" class="internal"><span class="codenumber">9.6</span> <span class="title">Pointers as Function Parameters</span></a></li>
-<li><a href="chapter9_pointers-and-c-style-arrays.html" class="internal"><span class="codenumber">9.7</span> <span class="title">Pointers and C-Style Arrays</span></a></li>
+<li><a href="chapter9_pointers-and-c-style-arrays.html" class="internal"><span class="codenumber">9.7</span> <span class="title">C-Style Arrays and Pointers</span></a></li>
 <li><a href="chapter9_c-style-character-strings.html" class="internal"><span class="codenumber">9.8</span> <span class="title">C-Style Character Strings</span></a></li>
 <li><a href="chapter9_dynamic-memory-with-new-and-delete.html" class="internal"><span class="codenumber">9.9</span> <span class="title">Dynamic Memory with <code class="code-inline tex2jax_ignore">new</code> and <code class="code-inline tex2jax_ignore">delete</code></span></a></li>
 <li><a href="chapter9_memory-errors-and-safe-practice.html" class="internal"><span class="codenumber">9.10</span> <span class="title">Memory Errors and Safe Practice</span></a></li>
