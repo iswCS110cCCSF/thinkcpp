@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter10_static-members-and-class-level-state">
+    <title>Static Members and Class-Level State</title>
+
+    <p>
+        Most data members belong to individual objects. Each
+        <c>StudentAccount</c>, for example, has its own balance. Sometimes a
+        class also needs one value shared by every object of that class. A
+        <term>static data member</term> belongs to the class as a whole rather
+        than to one particular object.
+    </p>
+
+    <p>
+        A static member is useful when the class must keep track of class-level
+        information, such as the number of objects that have been created. It
+        is not a replacement for ordinary object state: each account still has
+        its own balance, while all accounts can share one account count.
+    </p>
+
+    <subsection xml:id="chapter10_static-data-members">
+        <title>Static Data Members Are Shared</title>
+
+        <p>
+            Declare a static data member inside the class, then provide its
+            definition outside the class. The definition creates the one shared
+            object that belongs to the class. In C++17, this traditional form is
+            still clear and useful, so we will use it here.
+        </p>
+
+        <listing xml:id="listing_chapter10_static_account_count">
+            <title>One shared count and one balance per account</title>
+            <program xml:id="program_chapter10_static_account_count"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class StudentAccount {
+private:
+    double balance;
+    static int total_accounts_created;
+
+public:
+    StudentAccount()
+        : balance{0.0} {
+        ++total_accounts_created;
+    }
+
+    void deposit_money(double amount) {
+        balance += amount;
+    }
+
+    double get_balance() const {
+        return balance;
+    }
+
+    static int get_total_accounts_created() {
+        return total_accounts_created;
+    }
+};
+
+int StudentAccount::total_accounts_created = 0;
+
+int main() {
+    StudentAccount first_account;
+    StudentAccount second_account;
+
+    first_account.deposit_money(100.00);
+
+    std::cout << first_account.get_balance() << '\n';
+    std::cout << second_account.get_balance() << '\n';
+    std::cout << StudentAccount::get_total_accounts_created() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            Each object has a separate <c>balance</c>, so depositing money into
+            <c>first_account</c> does not change <c>second_account</c>. The
+            static member <c>total_accounts_created</c> has only one shared
+            value, so both constructor calls update the same count.
+        </p>
+
+        <p>
+            The line
+            <c>int StudentAccount::total_accounts_created = 0;</c>
+            is the out-of-class definition. The scope-resolution operator
+            <c>::</c> says that this definition belongs to
+            <c>StudentAccount</c>.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_static-member-functions">
+        <title>Static Member Functions</title>
+
+        <p>
+            A <term>static member function</term> also belongs to the class
+            rather than to one object. It can be called with the class name and
+            the scope-resolution operator:
+        </p>
+
+        <program xml:id="program_chapter10_static_function_call"
+                 language="cpp">
+            <code><![CDATA[
+int number_of_accounts = StudentAccount::get_total_accounts_created();
+            ]]></code>
+        </program>
+
+        <p>
+            A non-static member function receives an implicit object parameter,
+            represented inside the function by <c>this</c>. A static member
+            function has no implicit object parameter and therefore has no
+            <c>this</c> pointer. It can access static members directly, but it
+            must use an object or a reference parameter to work with a
+            non-static member.
+        </p>
+
+        <table xml:id="table_chapter10_instance-static-functions">
+            <title>Instance and static member functions</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="24%"/>
+                <col width="24%"/>
+                <col width="28%"/>
+                <col width="24%"/>
+                <row header="yes">
+                    <cell>Feature</cell>
+                    <cell>Instance member function</cell>
+                    <cell>Static member function</cell>
+                    <cell>Typical use</cell>
+                </row>
+                <row>
+                    <cell>Belongs to</cell>
+                    <cell>One object</cell>
+                    <cell>The class</cell>
+                    <cell>Choose according to the state needed.</cell>
+                </row>
+                <row>
+                    <cell>Call</cell>
+                    <cell><c>account.get_balance()</c></cell>
+                    <cell><c>StudentAccount::get_total_accounts_created()</c></cell>
+                    <cell>Use the class name for class-wide behavior.</cell>
+                </row>
+                <row>
+                    <cell>Has <c>this</c>?</cell>
+                    <cell>Yes</cell>
+                    <cell>No</cell>
+                    <cell>Static functions have no current object.</cell>
+                </row>
+                <row>
+                    <cell>Directly accesses</cell>
+                    <cell>Static and non-static members</cell>
+                    <cell>Static members only</cell>
+                    <cell>Pass an object if non-static state is needed.</cell>
+                </row>
+                <row>
+                    <cell><c>const</c> after the function</cell>
+                    <cell>May be <c>const</c></cell>
+                    <cell>Cannot be <c>const</c></cell>
+                    <cell>There is no object for a static function to promise not to modify.</cell>
+                </row>
+            </tabular>
+        </table>
+    </subsection>
+
+    <subsection xml:id="chapter10_static-member-design-guidance">
+        <title>When Should a Member Be Static?</title>
+
+        <p>
+            Make a member static when the value or operation describes the class
+            as a whole and does not depend on one object's state. A count of all
+            accounts is class-level information. A particular account's balance
+            is object-level information and should remain a non-static member.
+        </p>
+
+        <p>
+            A static member does not automatically make a class safer. Because
+            every object shares the same static state, changing that state can
+            affect all objects. Keep the static data member private when outside
+            code should not change it directly, and provide a carefully named
+            public member function when access is needed.
+        </p>
+
+        <program xml:id="program_chapter10_static_no-this"
+                 language="cpp">
+            <code><![CDATA[
+static int get_total_accounts_created() {
+    return total_accounts_created;
+    // return balance;  // Error: no particular account is available.
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The commented expression cannot work because a call such as
+            <c>StudentAccount::get_total_accounts_created()</c> does not select
+            a particular account. The function can read the shared count, but
+            it cannot guess which object's balance the caller means.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_static-codelens">
+        <title>Tracing Shared Static State</title>
+
+        <p>
+            Step through the example to observe two separate balances and one
+            shared object count.
+        </p>
+
+        <interactive xml:id="interactive_chapter10_static_members"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Counter%20%7B%0Aprivate%3A%0A%20%20%20%20int%20value%3B%0A%20%20%20%20static%20int%20created_count%3B%0Apublic%3A%0A%20%20%20%20Counter%28%29%20%3A%20value%7B0%7D%20%7B%0A%20%20%20%20%20%20%20%20%2B%2Bcreated_count%3B%0A%20%20%20%20%7D%0A%20%20%20%20static%20int%20get_created_count%28%29%20%7B%0A%20%20%20%20%20%20%20%20return%20created_count%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20Counter%3A%3Acreated_count%20%3D%200%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Counter%20first%3B%0A%20%20%20%20Counter%20second%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20Counter%3A%3Aget_created_count%28%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter10_static_exercise_shared-state">
+        <statement>
+            <p>Which statement best describes a static data member?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>All objects of the class share one value for that member.</p></statement>
+                <feedback><p>A static data member belongs to the class as a whole.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Each object receives a separate copy of the member.</p></statement>
+                <feedback><p>That describes an ordinary non-static data member.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The member can be used only inside a constructor.</p></statement>
+                <feedback><p>Static members can be used by appropriate member functions throughout the class.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The member must always be public.</p></statement>
+                <feedback><p>A static data member can be private, protected, or public.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_static_exercise-no-this">
+        <statement>
+            <p>Why can a static member function not directly read an ordinary data member such as <c>balance</c>?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>It has no <c>this</c> pointer and therefore no particular object.</p></statement>
+                <feedback><p>A static function can access shared static state, but no individual object's state without an object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Static functions cannot read any data.</p></statement>
+                <feedback><p>They can directly read static data members.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The member must first be made public.</p></statement>
+                <feedback><p>Access control is not the reason; the missing object is.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A static function always runs before the class is defined.</p></statement>
+                <feedback><p>Static describes class membership, not source-code order.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_static_parsons">
+        <statement>
+            <p>Arrange the lines to create two objects and then read the shared count.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>StudentAccount first_account;</cline></block>
+            <block order="2"><cline>StudentAccount second_account;</cline></block>
+            <block order="3"><cline>int count = StudentAccount::get_total_accounts_created();</cline></block>
+            <block order="4"><cline>std::cout &lt;&lt; count &lt;&lt; '\n';</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter10_static_exercise-call-syntax">
+        <statement>
+            <p>Which call most clearly communicates that the function uses class-level state?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>StudentAccount::get_total_accounts_created()</c></p></statement>
+                <feedback><p>The class name and scope-resolution operator identify a static member call.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>get_total_accounts_created(StudentAccount)</c></p></statement>
+                <feedback><p>The class name is not passed as a function argument.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>StudentAccount.get_total_accounts_created()</c></p></statement>
+                <feedback><p>C++ uses <c>::</c> with a class name; the dot operator is used with an object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>static.StudentAccount.get_total_accounts_created()</c></p></statement>
+                <feedback><p><c>static</c> is part of the declaration, not a call prefix.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_static_exercise-definition">
+        <statement>
+            <p>Why is an out-of-class definition needed for the traditional static data member declaration?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>The class declaration announces the member, and the definition provides the shared storage.</p></statement>
+                <feedback><p>The out-of-class definition creates the one class-level object used by the program.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It creates a separate static member for every object.</p></statement>
+                <feedback><p>The purpose is one shared member, not one per object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It changes the member into a local variable.</p></statement>
+                <feedback><p>The scope-resolution operator keeps the definition associated with the class.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It is required only for static member functions.</p></statement>
+                <feedback><p>This traditional definition concerns static data members.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+</section>

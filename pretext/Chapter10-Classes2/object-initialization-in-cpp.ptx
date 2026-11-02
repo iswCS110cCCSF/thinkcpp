@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter10_object-initialization-in-cpp">
+    <title>Object Initialization in C++</title>
+
+    <p>
+        C++ provides several ways to initialize an object. The forms can look
+        similar, but they describe different operations. Learning the vocabulary
+        helps us distinguish creating an object from assigning a new value to an
+        object that already exists.
+    </p>
+
+    <p>
+        This section extends the constructors and member-initializer lists from
+        Chapter 5. The examples use the <c>StudentAccount</c> class introduced
+        earlier, but the same forms apply to other user-defined types.
+    </p>
+
+    <subsection xml:id="chapter10_initialization-before-body">
+        <title>Members Are Initialized Before the Constructor Body</title>
+
+        <p>
+            A constructor's member-initializer list initializes data members
+            before the constructor body begins. It is the preferred place to
+            initialize members, especially members such as <c>const</c> objects,
+            references, and other class objects that must be initialized rather
+            than assigned.
+        </p>
+
+        <listing xml:id="listing_chapter10_member_initialization">
+            <title>Initializing a <c>StudentAccount</c> with a member-initializer list</title>
+            <program xml:id="program_chapter10_member_initialization"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+
+class StudentAccount {
+private:
+    std::string owner_name;
+    double balance;
+
+public:
+    StudentAccount(const std::string& starting_owner,
+                   double starting_balance)
+        : owner_name{starting_owner}, balance{starting_balance} {
+    }
+
+    double get_balance() const {
+        return balance;
+    }
+};
+
+int main() {
+    StudentAccount account{"Amina", 125.50};
+
+    std::cout << account.get_balance() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The constructor first initializes <c>owner_name</c> and
+            <c>balance</c>. Only after those initializations does the empty
+            constructor body execute. The order follows the order of declaration
+            in the class, not the order written in the member-initializer list.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_initialization-common-forms">
+        <title>Common Forms of Object Initialization</title>
+
+        <table xml:id="table_chapter10_object_initialization_forms">
+            <title>Common initialization forms</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="34%"/>
+                <col width="31%"/>
+                <col width="35%"/>
+                <row header="yes">
+                    <cell>Form</cell>
+                    <cell>Common name</cell>
+                    <cell>What happens</cell>
+                </row>
+                <row>
+                    <cell><c>StudentAccount account;</c></cell>
+                    <cell>Default initialization</cell>
+                    <cell>The default constructor is selected.</cell>
+                </row>
+                <row>
+                    <cell><c>StudentAccount account{};</c></cell>
+                    <cell>Empty-brace/value initialization</cell>
+                    <cell>The default constructor is selected using an empty list.</cell>
+                </row>
+                <row>
+                    <cell><c>StudentAccount account{"Amina", 125.50};</c></cell>
+                    <cell>Direct-list initialization</cell>
+                    <cell>The matching constructor is called directly.</cell>
+                </row>
+                <row>
+                    <cell><c>Point point{3, 4};</c></cell>
+                    <cell>Aggregate initialization</cell>
+                    <cell>The public data members of an aggregate are initialized in declaration order.</cell>
+                </row>
+                <row>
+                    <cell><c>StudentAccount account("Amina", 125.50);</c></cell>
+                    <cell>Direct initialization</cell>
+                    <cell>The matching constructor is called using parentheses.</cell>
+                </row>
+                <row>
+                    <cell><c>StudentAccount copy = account;</c></cell>
+                    <cell>Copy initialization</cell>
+                    <cell>A new object is initialized from an existing object.</cell>
+                </row>
+                <row>
+                    <cell><c>account = other_account;</c></cell>
+                    <cell>Assignment</cell>
+                    <cell>An already existing object receives a new state.</cell>
+                </row>
+                <row>
+                    <cell><c>new StudentAccount{"Amina", 125.50}</c></cell>
+                    <cell>Dynamic initialization</cell>
+                    <cell>A dynamically created object is initialized and its pointer is returned.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The braces in <c>StudentAccount account{...};</c> perform
+            direct-list initialization. We will generally prefer braces because
+            they make initialization visually distinct from assignment and help
+            prevent some narrowing conversions.
+        </p>
+
+        <p>
+            Aggregate initialization is related to, but not synonymous with,
+            direct-list initialization. <c>Point</c> is an aggregate because it
+            has publicly accessible data members and no user-declared constructors.
+            Therefore, <c>Point point{3, 4};</c> uses braces as direct-list
+            initialization syntax while also initializing the aggregate's members
+            in declaration order. A class with constructors can use direct-list
+            initialization, but it is not initialized as an aggregate.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_initialization-aggregate-and-const">
+        <title>Aggregate and <c>const</c> Object Initialization</title>
+
+        <p>
+            A simple structure with public data members can often use aggregate
+            initialization. The values inside the braces initialize the members
+            in declaration order.
+        </p>
+
+        <program xml:id="program_chapter10_aggregate_initialization"
+                 language="cpp">
+            <code><![CDATA[
+struct Point {
+    int x;
+    int y;
+};
+
+Point origin{0, 0};
+Point destination{3, 4};
+            ]]></code>
+        </program>
+
+        <p>
+            A <c>const</c> object must be initialized when it is created because
+            it cannot later receive a new value through assignment:
+        </p>
+
+        <program xml:id="program_chapter10_const_object_initialization"
+                 language="cpp">
+            <code><![CDATA[
+const Point origin{0, 0};
+// origin = Point{1, 1};  // error: origin is const
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter10_initialization-versus-assignment">
+        <title>Initialization Is Not Assignment</title>
+
+        <p>
+            Initialization happens when an object's lifetime begins. Assignment
+            happens later, after both objects already exist. The following two
+            statements therefore use different operations:
+        </p>
+
+        <program xml:id="program_chapter10_initialization_assignment_difference"
+                 language="cpp">
+            <code><![CDATA[
+StudentAccount first_account{"Amina", 125.50}; // initialization
+StudentAccount second_account{};                // initialization
+
+second_account = first_account;                // assignment
+            ]]></code>
+        </program>
+
+        <p>
+            The assignment statement does not call a constructor for
+            <c>second_account</c>. It uses a copy-assignment operation to update
+            an object that was already constructed. Copy constructors and
+            copy-assignment operators are studied in detail later in this chapter.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_initialization-codelens">
+        <title>Tracing Several Initialization Forms</title>
+
+        <p>
+            This visualization compares default construction, empty-brace
+            initialization, and constructor initialization with arguments.
+        </p>
+
+        <interactive xml:id="interactive_chapter10_initialization_forms"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Cstring%3E%0A%0Aclass%20StudentAccount%20%7B%0Aprivate%3A%0A%20%20%20%20std%3A%3Astring%20owner_name%3B%0A%20%20%20%20double%20balance%3B%0A%0Apublic%3A%0A%20%20%20%20StudentAccount%28%29%0A%20%20%20%20%20%20%20%20%3A%20owner_name%7B%22Unknown%22%7D%2C%20balance%7B0.0%7D%20%7B%0A%20%20%20%20%7D%0A%0A%20%20%20%20StudentAccount%28const%20std%3A%3Astring%26%20starting_owner%2C%20double%20starting_balance%29%0A%20%20%20%20%20%20%20%20%3A%20owner_name%7Bstarting_owner%7D%2C%20balance%7Bstarting_balance%7D%20%7B%0A%20%20%20%20%7D%0A%0A%20%20%20%20double%20get_balance%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20return%20balance%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20StudentAccount%20first_account%3B%0A%20%20%20%20StudentAccount%20second_account%7B%7D%3B%0A%20%20%20%20StudentAccount%20third_account%7B%22Amina%22%2C%20125.50%7D%3B%0A%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20first_account.get_balance%28%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20second_account.get_balance%28%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20third_account.get_balance%28%29%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter10_initialization_exercise_form">
+        <statement>
+            <p>Which statement initializes a new object using a constructor with arguments?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>StudentAccount account{"Amina", 125.50};</c></p></statement>
+                <feedback><p>The braces directly initialize a new object by calling the matching constructor.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>account = StudentAccount{"Amina", 125.50};</c></p></statement>
+                <feedback><p>This creates a temporary object and assigns it to an already existing object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>account.get_balance();</c></p></statement>
+                <feedback><p>This calls a member function; it does not initialize an object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>delete account;</c></p></statement>
+                <feedback><p><c>delete</c> is used with a pointer to a dynamic object, not to initialize an object.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_initialization_exercise_empty_braces">
+        <statement>
+            <p>What does <c>StudentAccount account{};</c> do for a class with a default constructor?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>It creates an object by selecting the default constructor.</p></statement>
+                <feedback><p>Empty braces request initialization with no constructor arguments.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It creates a null pointer.</p></statement>
+                <feedback><p>This declaration creates an object, not a pointer.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It assigns an object after the object already exists.</p></statement>
+                <feedback><p>The object is being initialized as its lifetime begins.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It creates an object with uninitialized class members regardless of the constructor.</p></statement>
+                <feedback><p>The selected constructor and member initializers determine the initial state.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_initialization_parsons_forms" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the statements to initialize an account and then assign its state to another existing account.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>StudentAccount first_account{"Amina", 125.50};</cline></block>
+            <block order="2"><cline>StudentAccount second_account{};</cline></block>
+            <block order="3"><cline>second_account = first_account;</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter10_initialization_exercise_const">
+        <statement>
+            <p>Why must a <c>const</c> object be initialized when it is created?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>A const object cannot later receive a new value through assignment.</p></statement>
+                <feedback><p>The initial state must be established before the const object can be used.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A const object is always dynamically allocated.</p></statement>
+                <feedback><p><c>const</c> does not determine where an object is stored.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A const object cannot have a constructor.</p></statement>
+                <feedback><p>Const objects can be created through constructors.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A const object must contain only integer members.</p></statement>
+                <feedback><p>Const objects can have members of many types.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_initialization_exercise_member_list">
+        <statement>
+            <p>Why are member-initializer lists important?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>They initialize data members before the constructor body runs.</p></statement>
+                <feedback><p>Members already exist when the constructor body begins.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>They make every member public.</p></statement>
+                <feedback><p>Access control is independent of the member-initializer list.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>They dynamically allocate every member.</p></statement>
+                <feedback><p>Member initialization does not imply dynamic allocation.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>They replace the class constructor.</p></statement>
+                <feedback><p>The list is part of a constructor definition.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+</section>

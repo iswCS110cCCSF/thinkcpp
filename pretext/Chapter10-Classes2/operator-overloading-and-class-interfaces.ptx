@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter10_operator-overloading-and-class-interfaces">
+    <title>Operator Overloading and Class Interfaces</title>
+
+    <p>
+        Built-in types already have useful operators. For example, C++ knows
+        how to add two integers with <c>+</c> and compare two integers with
+        <c>==</c>. A class can give selected operators meaningful behavior for
+        its own objects. This is called <term>operator overloading</term>.
+    </p>
+
+    <p>
+        Operator overloading does not create a new kind of operator. It defines
+        a function whose name contains the operator symbol, such as
+        <c>operator+</c> or <c>operator==</c>. The familiar expression remains
+        readable while the class supplies the behavior.
+    </p>
+
+    <subsection xml:id="chapter10_operator-overloading-purpose">
+        <title>Operators Can Express Natural Class Operations</title>
+
+        <p>
+            Consider a <c>Point</c> object with horizontal and vertical
+            coordinates. Adding two points can naturally mean adding their
+            corresponding coordinates. Equality can naturally mean that both
+            coordinates match.
+        </p>
+
+        <listing xml:id="listing_chapter10_point-operators">
+            <title>Overloading addition and equality for <c>Point</c></title>
+            <program xml:id="program_chapter10_point-operators"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Point {
+private:
+    int x;
+    int y;
+
+public:
+    Point(int point_x, int point_y)
+        : x{point_x}, y{point_y} {
+    }
+
+    int get_x() const {
+        return x;
+    }
+
+    int get_y() const {
+        return y;
+    }
+
+    Point operator+(const Point& other) const {
+        return Point{x + other.x, y + other.y};
+    }
+
+    bool operator==(const Point& other) const {
+        return x == other.x && y == other.y;
+    }
+};
+
+int main() {
+    Point first{2, 3};
+    Point second{4, 1};
+    Point total = first + second;
+
+    std::cout << total.get_x() << ", " << total.get_y() << '\n';
+    std::cout << (first == second) << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The expression <c>first + second</c> calls
+            <c>first.operator+(second)</c>. The expression
+            <c>first == second</c> calls <c>first.operator==(second)</c>.
+            The operator notation is shorter, but the member-function meaning
+            is still present.
+        </p>
+
+        <p>
+            An overloaded operator should match the meaning that readers would
+            reasonably expect. If an operation does not have a clear natural
+            interpretation, a named member function is usually a better
+            interface.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_operator-overloading-forms">
+        <title>Member and Non-Member Operator Functions</title>
+
+        <p>
+            An operator can be implemented as a member function or as a
+            non-member function. The choice depends on the operation and on
+            which operands need access to the class interface.
+        </p>
+
+        <table xml:id="table_chapter10_operator-function-forms">
+            <title>Two common forms of overloaded operators</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="27%"/>
+                <col width="29%"/>
+                <col width="24%"/>
+                <col width="20%"/>
+                <row header="yes">
+                    <cell>Form</cell>
+                    <cell>Example declaration</cell>
+                    <cell>Typical operands</cell>
+                    <cell>Useful when</cell>
+                </row>
+                <row>
+                    <cell>Member operator</cell>
+                    <cell><c>Point operator+(const Point&amp;) const;</c></cell>
+                    <cell>The left operand is a <c>Point</c>.</cell>
+                    <cell>The operation naturally belongs to the left object.</cell>
+                </row>
+                <row>
+                    <cell>Non-member operator</cell>
+                    <cell><c>operator&lt;&lt;(std::ostream&amp;, const Point&amp;)</c></cell>
+                    <cell>The left operand is not a <c>Point</c>.</cell>
+                    <cell>The operation must work with another type first.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            A member operator receives the left operand through <c>this</c> and
+            receives the other operand as a parameter. That is why the member
+            declaration for <c>operator+</c> has one explicit parameter even
+            though the expression has two operands.
+        </p>
+
+        <p>
+            A non-member operator receives all of its operands as parameters.
+            This is important for stream output. In
+            <c>std::cout &lt;&lt; point</c>, the left operand is an
+            <c>std::ostream</c>, not a <c>Point</c>, so the output operator is
+            naturally a non-member function.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_operator-output-stream">
+        <title>Overloading <c>operator&lt;&lt;</c> for Output</title>
+
+        <p>
+            A user-defined object does not automatically know how to work with
+            <c>std::cout</c>. We can define a non-member
+            <c>operator&lt;&lt;</c> that describes its text representation.
+            Returning the stream by reference allows output expressions to be
+            chained.
+        </p>
+
+        <listing xml:id="listing_chapter10_point-output">
+            <title>Giving <c>Point</c> a stream-output interface</title>
+            <program xml:id="program_chapter10_point-output"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Point {
+private:
+    int x;
+    int y;
+
+public:
+    Point(int point_x, int point_y)
+        : x{point_x}, y{point_y} {
+    }
+
+    int get_x() const {
+        return x;
+    }
+
+    int get_y() const {
+        return y;
+    }
+};
+
+std::ostream& operator<<(std::ostream& output, const Point& point) {
+    output << '(' << point.get_x() << ", " << point.get_y() << ')';
+    return output;
+}
+
+int main() {
+    Point point{3, 4};
+
+    std::cout << "Point: " << point << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The function uses the public accessor functions instead of reading
+            private data directly. This keeps the class interface in control of
+            how its state is observed. A friend output function could access
+            private members directly, but friendship should be used only when
+            that closer relationship is justified.
+        </p>
+
+        <p>
+            The return type is <c>std::ostream&amp;</c>, and the function returns
+            <c>output</c>. This is what makes an expression such as
+            <c>std::cout &lt;&lt; point &lt;&lt; '\n';</c> possible: the first
+            operation returns the stream for the next operation.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_operator-to-string">
+        <title>A <c>to_string()</c> Function for Text Representation</title>
+
+        <p>
+            A class can also provide a <c>to_string()</c> member function that
+            returns a <c>std::string</c> representation of the object. This is
+            useful when code needs text but is not writing directly to a stream.
+            The stream-output operator can then delegate to the same function
+            instead of duplicating the formatting logic.
+        </p>
+
+        <listing xml:id="listing_chapter10_point-to-string">
+            <title>Using <c>to_string()</c> inside <c>operator&lt;&lt;</c></title>
+            <program xml:id="program_chapter10_point-to-string"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+
+class Point {
+private:
+    int x;
+    int y;
+
+public:
+    Point(int point_x, int point_y)
+        : x{point_x}, y{point_y} {
+    }
+
+    std::string to_string() const {
+        return std::string{"("}
+             + std::to_string(x)
+             + ", "
+             + std::to_string(y)
+             + ")";
+    }
+};
+
+std::ostream& operator<<(std::ostream& output, const Point& point) {
+    return output << point.to_string();
+}
+
+int main() {
+    Point point{3, 4};
+
+    std::string description = point.to_string();
+    std::cout << "Point: " << description << '\n';
+    std::cout << "Again: " << point << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The class's <c>to_string()</c> function is a user-defined member
+            function. It uses <c>std::to_string()</c> to convert the integer
+            coordinates into text. Calling <c>std::to_string(point)</c> would
+            not automatically work because the standard function does not know
+            how to format an arbitrary <c>Point</c> object.
+        </p>
+
+        <p>
+            Keeping the formatting in one place makes the interface easier to
+            maintain. If the desired point format changes, the class can update
+            <c>to_string()</c>, and the stream operator will use the updated
+            representation automatically.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_operator-overloading-rules">
+        <title>Rules and Design Limits</title>
+
+        <p>
+            Operator overloading has important limits. It changes how an
+            operator works with a user-defined type, but it does not let a
+            programmer redesign the C++ language.
+        </p>
+
+        <table xml:id="table_chapter10_operator-overloading-rules">
+            <title>Important operator-overloading rules</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="42%"/>
+                <col width="58%"/>
+                <row header="yes">
+                    <cell>Rule</cell>
+                    <cell>Meaning</cell>
+                </row>
+                <row>
+                    <cell>At least one operand must be a user-defined type.</cell>
+                    <cell>A class cannot redefine the meaning of <c>int + int</c> for the whole program.</cell>
+                </row>
+                <row>
+                    <cell>The operator's precedence does not change.</cell>
+                    <cell>Overloading <c>+</c> does not make it bind more tightly or loosely.</cell>
+                </row>
+                <row>
+                    <cell>The number of operands does not change.</cell>
+                    <cell>A unary operator remains unary, and a binary operator remains binary.</cell>
+                </row>
+                <row>
+                    <cell>New operator symbols cannot be invented.</cell>
+                    <cell>Only existing C++ operators can be overloaded.</cell>
+                </row>
+                <row>
+                    <cell>Meaning should remain understandable.</cell>
+                    <cell>Use a named function when operator notation would confuse readers.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            Operator overloading is therefore part of a class's public design.
+            A good overload makes an object easier to use without hiding an
+            unexpected side effect. A poor overload can make ordinary-looking
+            code difficult to understand.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_operator-overloading-codelens">
+        <title>Tracing an Overloaded Operator</title>
+
+        <p>
+            Step through the expression <c>first + second</c> and observe the
+            new <c>Point</c> object returned by <c>operator+</c>.
+        </p>
+
+        <interactive xml:id="interactive_chapter10_operator-overloading"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Point%20%7B%0Aprivate%3A%0A%20%20%20%20int%20x%3B%0A%20%20%20%20int%20y%3B%0Apublic%3A%0A%20%20%20%20Point%28int%20point_x%2C%20int%20point_y%29%20%3A%20x%7Bpoint_x%7D%2C%20y%7Bpoint_y%7D%20%7B%7D%0A%20%20%20%20Point%20operator%2B%28const%20Point%26%20other%29%20const%20%7B%0A%20%20%20%20%20%20%20%20return%20Point%7Bx%20%2B%20other.x%2C%20y%20%2B%20other.y%7D%3B%0A%20%20%20%20%7D%0A%20%20%20%20int%20get_x%28%29%20const%20%7B%20return%20x%3B%20%7D%0A%20%20%20%20int%20get_y%28%29%20const%20%7B%20return%20y%3B%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Point%20first%7B2%2C%203%7D%3B%0A%20%20%20%20Point%20second%7B4%2C%201%7D%3B%0A%20%20%20%20Point%20total%20%3D%20first%20%2B%20second%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20total.get_x%28%29%20%3C%3C%20%22%2C%20%22%20%3C%3C%20total.get_y%28%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter10_operator_exercise-purpose">
+        <statement>
+            <p>What does operator overloading provide for a class?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>A class-specific meaning for an existing C++ operator.</p></statement>
+                <feedback><p>The operator remains a C++ operator, but the class supplies behavior for its objects.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A way to invent entirely new operator symbols.</p></statement>
+                <feedback><p>Only existing C++ operators may be overloaded.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A way to change operator precedence throughout the program.</p></statement>
+                <feedback><p>Overloading does not change precedence.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A way to make every class member public.</p></statement>
+                <feedback><p>Operator overloading and access control are separate features.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_operator_exercise-member">
+        <statement>
+            <p>In the expression <c>first + second</c>, what does a member <c>operator+</c> use as its explicit parameter?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>The right-hand <c>Point</c>, while <c>first</c> is represented by <c>this</c>.</p></statement>
+                <feedback><p>A member function receives the left object implicitly and the other operand explicitly.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Both <c>first</c> and <c>second</c> as two explicit parameters.</p></statement>
+                <feedback><p>The left operand is the object that calls the member function.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Only the output stream.</p></statement>
+                <feedback><p>An output stream belongs to <c>operator&lt;&lt;</c>, not this addition operation.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>No operand because overloaded operators cannot have parameters.</p></statement>
+                <feedback><p>The other operand must still be supplied.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_operator_parsons">
+        <statement>
+            <p>Arrange the lines to define a member addition operator that returns a new point.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>Point operator+(const Point&amp; other) const {</cline></block>
+            <block order="2"><cline>    return Point{x + other.x, y + other.y};</cline></block>
+            <block order="3"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter10_operator_exercise-stream-return">
+        <statement>
+            <p>Why does a stream-output operator return <c>std::ostream&amp;</c>?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>Returning the stream allows output operations to be chained.</p></statement>
+                <feedback><p>The next <c>&lt;&lt;</c> operation can use the stream returned by the previous one.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It creates a new stream for every object.</p></statement>
+                <feedback><p>The existing stream is returned by reference.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It converts every object into a string automatically.</p></statement>
+                <feedback><p>The function writes a representation to the stream; it does not necessarily create a string.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It makes the class inherit from <c>std::ostream</c>.</p></statement>
+                <feedback><p>The class and the stream remain separate types.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_operator_exercise-limits">
+        <statement>
+            <p>Which statement is a valid limitation of operator overloading?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>At least one operand must have a user-defined type.</p></statement>
+                <feedback><p>A class cannot globally redefine an expression such as <c>int + int</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Only arithmetic operators can be overloaded.</p></statement>
+                <feedback><p>Comparison and stream operators are also common overloads.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Every overloaded operator must be a static function.</p></statement>
+                <feedback><p>Operators can be member or non-member functions, depending on the design.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Overloading automatically changes the operator's precedence.</p></statement>
+                <feedback><p>Precedence remains part of the C++ language rules.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+</section>

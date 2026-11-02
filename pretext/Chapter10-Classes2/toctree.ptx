@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:lang="en-US"
+         xml:id="classes-and-objects-2">
+
+    <title>Class Design and Object Behavior</title>
+
+    <xi:include href="./pointers-to-structures-and-classes.ptx"/>
+	<xi:include href="./the-this-pointer-and-member-access.ptx"/>
+	<xi:include href="./object-initialization-in-cpp.ptx"/>
+	<xi:include href="./object-lifetime-and-destructors.ptx"/>
+	<xi:include href="./copy-constructors-copy-assignment-and-explicit.ptx"/>
+	<xi:include href="./static-members-and-class-level-state.ptx"/>
+	<xi:include href="./access-control-friends-and-protected.ptx"/>
+	<xi:include href="./operator-overloading-and-class-interfaces.ptx"/>
+</chapter>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter10_the-this-pointer-and-member-access">
+    <title>The <c>this</c> Pointer and Member Access</title>
+
+    <p>
+        In Chapter 5, a member function was called through an object, as in
+        <c>counter.increment()</c>. Inside that member function, C++ provides a
+        special pointer named <c>this</c>. It points to the object that made the
+        call.
+    </p>
+
+    <p>
+        The <c>this</c> pointer connects ordinary object notation with the arrow
+        notation from Section 10.1. Outside a member function, a pointer uses
+        <c>-&gt;</c> to reach an object. Inside a non-static member function,
+        <c>this</c> is already a pointer to the current object.
+    </p>
+
+    <subsection xml:id="chapter10_this-current-object">
+        <title><c>this</c> Identifies the Current Object</title>
+
+        <p>
+            Consider a <c>Counter</c> class similar to the class introduced in
+            Chapter 5. When <c>first.increment()</c> is called, <c>this</c> points
+            to <c>first</c>. When <c>second.increment()</c> is called, <c>this</c>
+            points to <c>second</c>.
+        </p>
+
+        <listing xml:id="listing_chapter10_this_current_object">
+            <title>Using <c>this</c> to update the current <c>Counter</c></title>
+            <program xml:id="program_chapter10_this_current_object"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Counter {
+private:
+    int count;
+
+public:
+    Counter(int starting_count)
+        : count{starting_count} {
+    }
+
+    void increment() {
+        this->count += 1;
+    }
+
+    int get_count() const {
+        return this->count;
+    }
+};
+
+int main() {
+    Counter first{2};
+    Counter second{5};
+
+    first.increment();
+    second.increment();
+
+    std::cout << first.get_count() << '\n';
+    std::cout << second.get_count() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The two objects use the same member-function definition, but each
+            call receives a different current object through <c>this</c>. The
+            first call changes <c>first</c>; the second call changes
+            <c>second</c>.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_this-member-access">
+        <title>Dot Notation, Arrow Notation, and <c>this-&gt;</c></title>
+
+        <table xml:id="table_chapter10_this_member_access">
+            <title>Three ways to connect a member function with an object</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="38%"/>
+                <col width="62%"/>
+                <row header="yes">
+                    <cell>Expression</cell>
+                    <cell>Where it is used</cell>
+                </row>
+                <row>
+                    <cell><c>counter.increment()</c></cell>
+                    <cell>Outside the class, when the caller has an object.</cell>
+                </row>
+                <row>
+                    <cell><c>counter_pointer-&gt;increment()</c></cell>
+                    <cell>Outside the class, when the caller has a pointer to an object.</cell>
+                </row>
+                <row>
+                    <cell><c>this-&gt;count</c></cell>
+                    <cell>Inside a non-static member function, to access the current object.</cell>
+                </row>
+                <row>
+                    <cell><c>(*this).count</c></cell>
+                    <cell>The longer equivalent of <c>this-&gt;count</c>.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            Inside a member function, writing <c>count</c> is usually enough;
+            C++ understands that the member belongs to the current object. The
+            explicit form <c>this-&gt;count</c> is useful when explaining the
+            object involved or when a parameter has a similar name.
+        </p>
+
+        <p>
+            The expression <c>this-&gt;count</c> is equivalent to
+            <c>(*this).count</c>. This is the same relationship as
+            <c>pointer-&gt;member</c> and <c>(*pointer).member</c> from Section 10.1.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_this-const-and-static">
+        <title>Limits of <c>this</c></title>
+
+        <p>
+            A <c>const</c> member function can use <c>this</c> to inspect the
+            current object, but it cannot use it to change the object's ordinary
+            data members. This is why accessor functions such as
+            <c>get_count() const</c> can read state without modifying the object.
+        </p>
+
+        <p>
+            A static member function has no particular object and therefore has
+            no <c>this</c> pointer. It can directly access static members, but it
+            must receive an object or a pointer if it needs to work with a
+            particular object's non-static members. Static member functions are
+            discussed in detail later in this chapter.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_this-codelens">
+        <title>Tracing <c>this</c> Through Two Calls</title>
+
+        <p>
+            The visualization shows two calls to the same member function. Watch
+            which object changes after each call.
+        </p>
+
+        <interactive xml:id="interactive_chapter10_this_pointer"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Counter%20%7B%0Apublic%3A%0A%20%20%20%20int%20count%3B%0A%0A%20%20%20%20void%20increment%28%29%20%7B%0A%20%20%20%20%20%20%20%20this-%3Ecount%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Counter%20first%7B2%7D%3B%0A%20%20%20%20Counter%20second%7B5%7D%3B%0A%0A%20%20%20%20first.increment%28%29%3B%0A%20%20%20%20second.increment%28%29%3B%0A%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20first.count%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20second.count%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter10_this_exercise_meaning">
+        <statement>
+            <p>What does <c>this</c> identify inside a non-static member function?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>The address of the object that called the member function</p></statement>
+                <feedback><p><c>this</c> points to the current object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The address of the class definition</p></statement>
+                <feedback><p>A class definition is not the object involved in a particular call.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The address of the member function's source code</p></statement>
+                <feedback><p><c>this</c> identifies the current object, not the function code.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A pointer that always points to the first object created</p></statement>
+                <feedback><p>Each call receives the object that made that particular call.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_this_exercise_equivalence">
+        <statement>
+            <p>Which expression is equivalent to <c>this-&gt;count</c>?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>(*this).count</c></p></statement>
+                <feedback><p>Dereference the pointer first, then use the dot operator.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>this.count</c></p></statement>
+                <feedback><p><c>this</c> is a pointer, so the dot operator cannot be used directly.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>*this.count</c></p></statement>
+                <feedback><p>Parentheses are needed because the dot operator binds more tightly.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>&amp;this-&gt;count</c></p></statement>
+                <feedback><p>This asks for an address instead of accessing the member's value.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_this_parsons_call">
+        <statement>
+            <p>Arrange the statements to increment the object selected by a pointer.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>Counter counter{4};</cline></block>
+            <block order="2"><cline>Counter* counter_pointer = &amp;counter;</cline></block>
+            <block order="3"><cline>counter_pointer-&gt;increment();</cline></block>
+            <block order="4"><cline>std::cout &lt;&lt; counter.get_count() &lt;&lt; '\n';</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter10_this_exercise_static">
+        <statement>
+            <p>Why does a static member function not have a <c>this</c> pointer?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>It is associated with the class rather than with one particular object.</p></statement>
+                <feedback><p><c>this</c> identifies a current object, but a static function has no implicit object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Static functions cannot return values.</p></statement>
+                <feedback><p>Static functions can return values normally.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Static functions cannot access any data.</p></statement>
+                <feedback><p>They can access static members directly.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Static functions are always private.</p></statement>
+                <feedback><p>A static member function can be public, private, or protected.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_this_exercise_objects">
+        <statement>
+            <p>
+                If <c>first.increment()</c> and <c>second.increment()</c> are
+                called, why can the same function update two different counts?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>Each call receives a different current object through <c>this</c>.</p></statement>
+                <feedback><p>The member-function definition is shared, but the current object changes from call to call.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Each object receives a separate copy of the function's source code.</p></statement>
+                <feedback><p>Objects do not each receive a separate source-code copy of the member function.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The function always updates the most recently created object.</p></statement>
+                <feedback><p>The called object, not the newest object, becomes the current object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The function changes the class definition itself.</p></statement>
+                <feedback><p>The function changes the data of the current object.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+</section>

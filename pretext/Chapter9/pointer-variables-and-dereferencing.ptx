@@ -101,7 +101,7 @@ int second_value;
             Consider this code:
         </p>
 
-        <program xml:id=""
+        <program xml:id="program_chapter9_pointer_variables_example"
                  language="cpp" interactive="yes" line-numbers="yes">
             <code><![CDATA[
 #include <cstdint>

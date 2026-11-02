@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter10_object-lifetime-and-destructors">
+    <title>Object Lifetime and Destructors</title>
+
+    <p>
+        An object has a <term>lifetime</term>: the period during which its
+        storage has been obtained, its initialization has completed, and the
+        object can be used. A constructor helps begin an object's lifetime. A
+        destructor performs the class's final cleanup when that lifetime ends.
+    </p>
+
+    <p>
+        This section extends the constructors from Chapter 5 and the dynamic
+        class objects from Section 10.1. Understanding when objects are
+        destroyed is essential before we study classes that manage resources.
+    </p>
+
+    <subsection xml:id="chapter10_lifetime-local-objects">
+        <title>Local Objects End at the End of Their Scope</title>
+
+        <p>
+            A local object begins its lifetime when its declaration initializes
+            it. Its destructor is called automatically when execution leaves the
+            object's scope, including when a function returns.
+        </p>
+
+        <listing xml:id="listing_chapter10_local_object_lifetime">
+            <title>Tracing the lifetime of local objects</title>
+            <program xml:id="program_chapter10_local_object_lifetime"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+
+class LifecycleMarker {
+private:
+    std::string name;
+
+public:
+    LifecycleMarker(const std::string& marker_name)
+        : name{marker_name} {
+        std::cout << "Construct " << name << '\n';
+    }
+
+    ~LifecycleMarker() {
+        std::cout << "Destroy " << name << '\n';
+    }
+};
+
+void create_local_marker() {
+    LifecycleMarker inner{"inner"};
+    std::cout << "Inside function" << '\n';
+}
+
+int main() {
+    LifecycleMarker outer{"outer"};
+
+    create_local_marker();
+
+    std::cout << "End of main" << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The destructor for <c>inner</c> runs when
+            <c>create_local_marker()</c> ends. The destructor for <c>outer</c>
+            runs when <c>main()</c> ends. A local object does not require an
+            explicit destructor call in ordinary code.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_destructor-syntax">
+        <title>Destructor Syntax and Purpose</title>
+
+        <p>
+            A destructor has the class name preceded by a tilde. It has no
+            parameters and no return type:
+        </p>
+
+        <program xml:id="program_chapter10_destructor_syntax"
+                 language="cpp">
+            <code><![CDATA[
+class LifecycleMarker {
+public:
+    ~LifecycleMarker() {
+        // Final cleanup belongs here.
+    }
+};
+            ]]></code>
+        </program>
+
+        <p>
+            A class can have only one destructor. The destructor is not normally
+            called directly. C++ calls it when a local object's scope ends or
+            when <c>delete</c> releases a dynamically created object.
+        </p>
+
+        <p>
+            A destructor may release a resource owned by the object, such as
+            dynamically allocated memory or a file handle. This resource-
+            management pattern will be developed more fully in Pointers and
+            Dynamic Memory, Part 2.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_lifetime-dynamic-objects">
+        <title>Dynamic Objects End with <c>delete</c></title>
+
+        <p>
+            A dynamically created object does not end its lifetime when the local
+            pointer variable goes out of scope. The program must release the
+            object with <c>delete</c>. Calling <c>delete</c> calls the object's
+            destructor and releases its dynamic storage.
+        </p>
+
+        <listing xml:id="listing_chapter10_dynamic_object_lifetime">
+            <title>Releasing a dynamically created object</title>
+            <program xml:id="program_chapter10_dynamic_object_lifetime"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+
+class LifecycleMarker {
+private:
+    std::string name;
+
+public:
+    LifecycleMarker(const std::string& marker_name)
+        : name{marker_name} {
+        std::cout << "Construct " << name << '\n';
+    }
+
+    ~LifecycleMarker() {
+        std::cout << "Destroy " << name << '\n';
+    }
+};
+
+int main() {
+    LifecycleMarker* marker_pointer =
+        new LifecycleMarker{"dynamic"};
+
+    std::cout << "Object is alive" << '\n';
+
+    delete marker_pointer;
+    marker_pointer = nullptr;
+
+    std::cout << "Object is released" << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The pointer variable is local, but the object it identifies is
+            dynamic. These are different lifetimes. Assigning <c>nullptr</c>
+            after <c>delete</c> prevents the pointer from continuing to hold the
+            released address as if it were still usable.
+        </p>
+
+        <table xml:id="table_chapter10_object_lifetimes">
+            <title>Local and dynamic object lifetimes</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="28%"/>
+                <col width="38%"/>
+                <col width="34%"/>
+                <row header="yes">
+                    <cell>Object kind</cell>
+                    <cell>When the lifetime ends</cell>
+                    <cell>Who calls the destructor?</cell>
+                </row>
+                <row>
+                    <cell>Local object</cell>
+                    <cell>When its scope ends</cell>
+                    <cell>C++ calls it automatically.</cell>
+                </row>
+                <row>
+                    <cell>Dynamic object</cell>
+                    <cell>When the program evaluates <c>delete</c></cell>
+                    <cell><c>delete</c> causes the destructor call.</cell>
+                </row>
+            </tabular>
+        </table>
+    </subsection>
+
+    <subsection xml:id="chapter10_lifetime-destruction-order">
+        <title>Destruction Order</title>
+
+        <p>
+            Local objects in the same scope are destroyed in the reverse order
+            of their construction. If <c>first</c> is constructed before
+            <c>second</c>, then <c>second</c> is destroyed before <c>first</c>.
+            This reverse order allows a later object to use an earlier object
+            during its lifetime when the design requires it.
+        </p>
+
+        <p>
+            A class's data members are also destroyed in the reverse order of
+            their declarations. The member-initializer list does not change this
+            destruction order.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_lifetime-codelens">
+        <title>Visualizing Construction and Destruction</title>
+
+        <p>
+            Follow the output as the local object is created, the function-local
+            object is created and destroyed, and the outer object is finally
+            destroyed.
+        </p>
+
+        <interactive xml:id="interactive_chapter10_lifetime"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Cstring%3E%0A%0Aclass%20LifecycleMarker%20%7B%0Apublic%3A%0A%20%20%20%20std%3A%3Astring%20name%3B%0A%0A%20%20%20%20LifecycleMarker%28const%20std%3A%3Astring%26%20marker_name%29%0A%20%20%20%20%20%20%20%20%3A%20name%7Bmarker_name%7D%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Construct%20%22%20%3C%3C%20name%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20~LifecycleMarker%28%29%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Destroy%20%22%20%3C%3C%20name%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Avoid%20create_local_marker%28%29%20%7B%0A%20%20%20%20LifecycleMarker%20inner%7B%22inner%22%7D%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Inside%20function%22%20%3C%3C%20%27%5Cn%27%3B%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20LifecycleMarker%20outer%7B%22outer%22%7D%3B%0A%20%20%20%20create_local_marker%28%29%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22End%20of%20main%22%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter10_lifetime_exercise_local">
+        <statement>
+            <p>When is a local class object's destructor normally called?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>When execution leaves the object's scope</p></statement>
+                <feedback><p>C++ automatically destroys a local object at the end of its lifetime.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Only when the programmer writes <c>delete</c></p></statement>
+                <feedback><p><c>delete</c> is used for dynamically created objects, not ordinary local objects.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>When the class definition is reached</p></statement>
+                <feedback><p>A class definition does not create an object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Only when the program calls the destructor directly</p></statement>
+                <feedback><p>Destructors are normally called automatically.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_lifetime_parsons_dynamic" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the statements to create, release, and clear a dynamic object pointer.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>LifecycleMarker* marker_pointer = new LifecycleMarker{"dynamic"};</cline></block>
+            <block order="2"><cline>std::cout &lt;&lt; "Object is alive" &lt;&lt; '\n';</cline></block>
+            <block order="3"><cline>delete marker_pointer;</cline></block>
+            <block order="4"><cline>marker_pointer = nullptr;</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter10_lifetime_exercise_destructor">
+        <statement>
+            <p>Which declaration correctly defines a destructor for <c>Rectangle</c>?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>~Rectangle() { }</c></p></statement>
+                <feedback><p>A destructor uses the class name preceded by a tilde and has no return type.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>void ~Rectangle() { }</c></p></statement>
+                <feedback><p>Destructors do not have return types.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>Rectangle::~Rectangle() { }</c></p></statement>
+                <feedback><p>The scope-resolution form is not the ordinary in-class destructor definition.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>delete Rectangle() { }</c></p></statement>
+                <feedback><p><c>delete</c> is an expression used to release a dynamic object.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_lifetime_exercise_dynamic">
+        <statement>
+            <p>What is the main danger if a program loses the only pointer to a dynamic object?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>The object cannot be released normally, causing a memory leak.</p></statement>
+                <feedback><p>The program needs an owning pointer or another strategy to reach the object for cleanup.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The object is automatically copied to the stack.</p></statement>
+                <feedback><p>Dynamic objects are not automatically moved to the stack.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The destructor runs twice immediately.</p></statement>
+                <feedback><p>Without a pointer, the program generally cannot release the object at all.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The object becomes a static class member.</p></statement>
+                <feedback><p>Storage duration does not change the class definition.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_lifetime_exercise_order">
+        <statement>
+            <p>If <c>first</c> is constructed before <c>second</c> in the same scope, which object is destroyed first?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>second</c></p></statement>
+                <feedback><p>Objects in the same scope are destroyed in reverse construction order.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>first</c></p></statement>
+                <feedback><p>The first object constructed is normally the last one destroyed.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Both objects are destroyed at exactly the same time.</p></statement>
+                <feedback><p>Destruction has a defined reverse order for local objects.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Neither object is destroyed automatically.</p></statement>
+                <feedback><p>Local class objects are destroyed automatically when their scope ends.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+</section>

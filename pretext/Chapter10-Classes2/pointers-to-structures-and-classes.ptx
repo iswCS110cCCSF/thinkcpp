@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter10_pointers-to-structures-and-classes">
+    <title>Pointers to Structures and Classes</title>
+
+    <p>
+        In Chapter 5, we used variables that directly represented structures and
+        class objects. A pointer can also store the address of a structure or
+        class object. The pointer does not contain a separate object; it provides
+        another way to reach an existing object.
+    </p>
+
+    <p>
+        The syntax is the same for a <c>struct</c> and a <c>class</c>. The main
+        difference is still access control: a pointer does not bypass a class's
+        <c>private</c> members.
+    </p>
+
+    <subsection xml:id="chapter10_pointer-to-object">
+        <title>A Pointer Can Refer to an Object</title>
+
+        <p>
+            The address-of operator <c>&amp;</c> obtains the address of an object,
+            and a pointer variable stores that address. To access the object
+            through the pointer, first dereference the pointer and then use the
+            dot operator.
+        </p>
+
+        <listing xml:id="listing_chapter10_pointer_to_object">
+            <title>Using a pointer to reach a <c>Rectangle</c> object</title>
+            <program xml:id="program_chapter10_pointer_to_object"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Rectangle {
+private:
+    double width;
+    double height;
+
+public:
+    Rectangle(double rectangle_width, double rectangle_height)
+        : width{rectangle_width}, height{rectangle_height} {
+    }
+
+    double calculate_area() const {
+        return width * height;
+    }
+};
+
+int main() {
+    Rectangle rectangle{4.0, 3.0};
+    Rectangle* rectangle_pointer = &rectangle;
+
+    std::cout << rectangle.calculate_area() << '\n';
+    std::cout << (*rectangle_pointer).calculate_area() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The expression <c>(*rectangle_pointer).calculate_area()</c> means:
+            first dereference <c>rectangle_pointer</c>, then call the member
+            function on the resulting object. The parentheses are necessary
+            because the dot operator has higher precedence than the unary
+            dereference operator.
+        </p>
+
+        <p>
+            A pointer to a class object still follows the class's interface. The
+            pointer can call public member functions, but it cannot directly read
+            or change the private data members of <c>Rectangle</c>.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_arrow-operator">
+        <title>The <c>-&gt;</c> Operator</title>
+
+        <p>
+            C++ provides the arrow operator as a shorter notation for
+            dereferencing a pointer and then using the dot operator:
+        </p>
+
+        <table xml:id="table_chapter10_object_access_notation">
+            <title>Ways to access a member</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="40%"/>
+                <col width="60%"/>
+                <row header="yes">
+                    <cell>Expression</cell>
+                    <cell>Meaning</cell>
+                </row>
+                <row>
+                    <cell><c>rectangle.calculate_area()</c></cell>
+                    <cell>Call a member through an object.</cell>
+                </row>
+                <row>
+                    <cell><c>(*rectangle_pointer).calculate_area()</c></cell>
+                    <cell>Dereference the pointer, then call the member through the object.</cell>
+                </row>
+                <row>
+                    <cell><c>rectangle_pointer-&gt;calculate_area()</c></cell>
+                    <cell>Use the arrow shorthand for the previous expression.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The following two calls are equivalent:
+        </p>
+
+        <program xml:id="program_chapter10_arrow_equivalence"
+                 language="cpp">
+            <code><![CDATA[
+std::cout << (*rectangle_pointer).calculate_area() << '\n';
+std::cout << rectangle_pointer->calculate_area() << '\n';
+            ]]></code>
+        </program>
+
+        <p>
+            In ordinary code, the arrow form is usually easier to read. The
+            pointer must identify a valid object before either expression is
+            evaluated.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_dynamic-class-objects">
+        <title>Dynamically Created Class Objects</title>
+
+        <p>
+            The <c>new</c> expression creates an object with dynamic storage
+            duration and returns a pointer to that object. The object remains
+            alive until the program releases it with <c>delete</c>. This is the
+            same raw-pointer lifetime pattern introduced in Chapter 9, now used
+            with a class from Chapter 5.
+        </p>
+
+        <listing xml:id="listing_chapter10_dynamic_rectangle">
+            <title>Creating and releasing a dynamic <c>Rectangle</c></title>
+            <program xml:id="program_chapter10_dynamic_rectangle"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Rectangle {
+private:
+    double width;
+    double height;
+
+public:
+    Rectangle(double rectangle_width, double rectangle_height)
+        : width{rectangle_width}, height{rectangle_height} {
+    }
+
+    double calculate_area() const {
+        return width * height;
+    }
+};
+
+int main() {
+    Rectangle* rectangle_pointer = new Rectangle{5.0, 2.0};
+
+    std::cout << rectangle_pointer->calculate_area() << '\n';
+
+    delete rectangle_pointer;
+    rectangle_pointer = nullptr;
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The pointer variable itself is local to <c>main()</c>, but the
+            <c>Rectangle</c> object created by <c>new</c> has dynamic storage
+            duration. Calling <c>delete</c> ends the object's lifetime and
+            releases its dynamic storage. Assigning <c>nullptr</c> afterward
+            makes the pointer no longer identify the released object.
+        </p>
+
+        <p>
+            Raw dynamic allocation requires careful ownership tracking. If a
+            program loses the pointer before calling <c>delete</c>, the object
+            cannot be released normally and the program has a memory leak. If it
+            uses the pointer after <c>delete</c>, it has a dangling pointer. Later
+            in the course, smart pointers will provide safer ownership strategies.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_pointer-object-codelens">
+        <title>Tracing a Pointer to an Object</title>
+
+        <p>
+            This visualization shows a pointer referring to an existing object.
+            The pointer and the object are separate entities: the pointer stores
+            an address, while the object stores its data.
+        </p>
+
+        <interactive xml:id="interactive_chapter10_pointer_object"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Counter%20%7B%0Apublic%3A%0A%20%20%20%20int%20value%3B%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Counter%20counter%7B5%7D%3B%0A%20%20%20%20Counter*%20counter_pointer%20%3D%20%26counter%3B%0A%0A%20%20%20%20counter_pointer-%3Evalue%20%3D%208%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20counter.value%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter10_pointer_object_exercise_arrow">
+        <statement>
+            <p>
+                Which expression is equivalent to
+                <c>rectangle_pointer-&gt;calculate_area()</c>?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>(*rectangle_pointer).calculate_area()</c></p></statement>
+                <feedback><p>The arrow operator dereferences the pointer before using the dot operator.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>*rectangle_pointer.calculate_area()</c></p></statement>
+                <feedback><p>The dot operator binds before unary dereference, so parentheses are needed.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>rectangle_pointer.calculate_area()</c></p></statement>
+                <feedback><p>The dot operator is used with an object, not directly with a pointer.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>&amp;rectangle_pointer.calculate_area()</c></p></statement>
+                <feedback><p>The address-of operator does not access a member through a pointer.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_pointer_object_parsons_dynamic" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the statements to create, use, and release a dynamic rectangle.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>Rectangle* rectangle_pointer = new Rectangle{5.0, 2.0};</cline></block>
+            <block order="2"><cline>std::cout &lt;&lt; rectangle_pointer-&gt;calculate_area() &lt;&lt; '\n';</cline></block>
+            <block order="3"><cline>delete rectangle_pointer;</cline></block>
+            <block order="4"><cline>rectangle_pointer = nullptr;</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter10_pointer_object_exercise_lifetime">
+        <statement>
+            <p>
+                What happens when <c>delete rectangle_pointer;</c> is executed
+                for a pointer returned by <c>new Rectangle{...}</c>?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>The pointed-to object's lifetime ends and its dynamic storage is released.</p></statement>
+                <feedback><p><c>delete</c> releases the dynamically created object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Only the pointer variable is deleted; the object remains available.</p></statement>
+                <feedback><p>The pointer variable and the dynamically created object have different lifetimes.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The pointer automatically changes to point to a new rectangle.</p></statement>
+                <feedback><p><c>delete</c> does not create a replacement object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The rectangle is copied to the stack.</p></statement>
+                <feedback><p><c>delete</c> releases the object; it does not move it.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_pointer_object_exercise_private">
+        <statement>
+            <p>
+                Suppose <c>width</c> is a private data member of
+                <c>Rectangle</c>. Which statement is valid outside the class?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>rectangle_pointer-&gt;calculate_area()</c></p></statement>
+                <feedback><p>Public member functions remain available through a pointer.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>rectangle_pointer-&gt;width = 10.0;</c></p></statement>
+                <feedback><p>A pointer does not bypass private access control.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>(*rectangle_pointer).width = 10.0;</c></p></statement>
+                <feedback><p>Dereferencing the pointer still does not grant access to private data.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>rectangle_pointer.width</c></p></statement>
+                <feedback><p>The dot operator is not used directly with a pointer.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_pointer_object_exercise_dangling">
+        <statement>
+            <p>
+                Why is assigning <c>nullptr</c> after <c>delete</c> a useful
+                practice?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>It makes the pointer no longer identify the released object.</p></statement>
+                <feedback><p>A null pointer is safer to test than a pointer that still contains a released address.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It recreates the deleted object.</p></statement>
+                <feedback><p><c>nullptr</c> represents no object; it does not create one.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It returns the object to the stack.</p></statement>
+                <feedback><p>Assigning <c>nullptr</c> does not move any object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It makes the pointer point to the next object automatically.</p></statement>
+                <feedback><p>A null pointer does not identify any object.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+</section>

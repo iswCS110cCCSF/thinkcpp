@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter10_access-control-friends-and-protected">
+    <title>Access Control Revisited: Friends and <c>protected</c></title>
+
+    <p>
+        In Chapter 5, we used <c>private</c> members to protect an object's
+        internal state and <c>public</c> member functions to define its
+        interface. C++ also provides <c>protected</c> access and friendship.
+        These features give a class more design choices, but they should be
+        used deliberately because they widen access to implementation details.
+    </p>
+
+    <subsection xml:id="chapter10_access-control-levels">
+        <title>Three Access Levels</title>
+
+        <p>
+            An access specifier controls which code may name a member directly.
+            The following table describes the usual rules for a class and a
+            class derived from it. Inheritance will be studied fully later.
+        </p>
+
+        <table xml:id="table_chapter10_access-levels">
+            <title>Access control in a class hierarchy</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="22%"/>
+                <col width="25%"/>
+                <col width="27%"/>
+                <col width="26%"/>
+                <row header="yes">
+                    <cell>Specifier</cell>
+                    <cell>Member functions of the class</cell>
+                    <cell>Member functions of a derived class</cell>
+                    <cell>Unrelated outside code</cell>
+                </row>
+                <row>
+                    <cell><c>public</c></cell>
+                    <cell>Can access</cell>
+                    <cell>Can access</cell>
+                    <cell>Can access</cell>
+                </row>
+                <row>
+                    <cell><c>protected</c></cell>
+                    <cell>Can access</cell>
+                    <cell>Can access</cell>
+                    <cell>Cannot access directly</cell>
+                </row>
+                <row>
+                    <cell><c>private</c></cell>
+                    <cell>Can access</cell>
+                    <cell>Cannot access directly</cell>
+                    <cell>Cannot access directly</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            A <c>protected</c> member is hidden from ordinary outside code but
+            is available to member functions of a derived class. This can be
+            useful when a base class deliberately designs an implementation
+            extension point. However, private data plus protected or public
+            member functions often provides stronger control than protected
+            data itself.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_friend-functions">
+        <title>Friend Functions</title>
+
+        <p>
+            A <term>friend function</term> is not a member function, but a class
+            may grant it permission to access private and protected members. The
+            class places a friend declaration inside its definition. The friend
+            function is then defined outside the class like an ordinary
+            non-member function.
+        </p>
+
+        <listing xml:id="listing_chapter10_friend-temperature">
+            <title>A friend function compares two private temperatures</title>
+            <program xml:id="program_chapter10_friend-temperature"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Temperature {
+private:
+    double celsius;
+
+public:
+    explicit Temperature(double starting_celsius)
+        : celsius{starting_celsius} {
+    }
+
+    friend bool have_same_temperature(
+        const Temperature& first,
+        const Temperature& second
+    );
+};
+
+bool have_same_temperature(
+    const Temperature& first,
+    const Temperature& second
+) {
+    return first.celsius == second.celsius;
+}
+
+int main() {
+    Temperature morning{20.0};
+    Temperature afternoon{20.0};
+
+    std::cout << have_same_temperature(morning, afternoon) << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            <c>have_same_temperature</c> is not called with the dot operator
+            because it is not a member function. Its friend declaration gives
+            it permission to read the private <c>celsius</c> members of both
+            objects. Without that declaration, the function could not access
+            them directly.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_friend-classes">
+        <title>Friend Classes</title>
+
+        <p>
+            A class can also declare another class as a friend. Every member
+            function of the friend class may then access the granting class's
+            private and protected members. Friend classes can support closely
+            related components, but they create a strong dependency between the
+            two classes.
+        </p>
+
+        <program xml:id="program_chapter10_friend-class"
+                 language="cpp">
+            <code><![CDATA[
+class AccountInspector;
+
+class StudentAccount {
+private:
+    double balance = 0.0;
+
+    friend class AccountInspector;
+};
+
+class AccountInspector {
+public:
+    double read_balance(const StudentAccount& account) const {
+        return account.balance;
+    }
+};
+            ]]></code>
+        </program>
+
+        <p>
+            Friendship is not inherited, not mutual, and not transitive. If
+            <c>StudentAccount</c> makes <c>AccountInspector</c> a friend,
+            <c>AccountInspector</c> does not automatically make
+            <c>StudentAccount</c> a friend. A friend of one class is not
+            automatically a friend of a derived class or of another class.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_protected-members">
+        <title>Using <c>protected</c> with a Derived Class</title>
+
+        <p>
+            The <c>protected</c> specifier is mainly useful in class hierarchies.
+            The following small example previews the idea. A complete study of
+            inheritance and polymorphism comes later.
+        </p>
+
+        <listing xml:id="listing_chapter10_protected-account">
+            <title>A derived class can use a protected member</title>
+            <program xml:id="program_chapter10_protected-account"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Account {
+protected:
+    double balance = 0.0;
+};
+
+class SavingsAccount : public Account {
+public:
+    void add_interest() {
+        balance += 5.0;
+    }
+
+    double get_balance() const {
+        return balance;
+    }
+};
+
+int main() {
+    SavingsAccount account;
+
+    account.add_interest();
+    std::cout << account.get_balance() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            <c>SavingsAccount</c> can use <c>balance</c> because it is a derived
+            class. Code in <c>main</c> cannot write
+            <c>account.balance</c> directly because <c>protected</c> is not
+            public. The public member function provides the outside interface.
+        </p>
+
+        <p>
+            Prefer private data when possible. A protected data member exposes
+            more of the base class's implementation to derived classes, which
+            can make future changes harder. Protected member functions can offer
+            a narrower extension point.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_friends-codelens">
+        <title>Tracing a Friend Function</title>
+
+        <p>
+            Step through the comparison. The friend function is outside the
+            class, but the class has granted it access to private state.
+        </p>
+
+        <interactive xml:id="interactive_chapter10_friend_function"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Temperature%20%7B%0Aprivate%3A%0A%20%20%20%20double%20celsius%3B%0Apublic%3A%0A%20%20%20%20Temperature%28double%20value%29%20%3A%20celsius%7Bvalue%7D%20%7B%7D%0A%20%20%20%20friend%20bool%20same%28const%20Temperature%26%20first%2C%20const%20Temperature%26%20second%29%3B%0A%7D%3B%0A%0Abool%20same%28const%20Temperature%26%20first%2C%20const%20Temperature%26%20second%29%20%7B%0A%20%20%20%20return%20first.celsius%20%3D%3D%20second.celsius%3B%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Temperature%20first%7B21.0%7D%3B%0A%20%20%20%20Temperature%20second%7B21.0%7D%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20same%28first%2C%20second%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter10_access_exercise-table">
+        <statement>
+            <p>Which access specifier allows a derived class to use a member while ordinary outside code cannot use it directly?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>protected</c></p></statement>
+                <feedback><p>Derived-class member functions may access protected members, while unrelated outside code may not.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>private</c></p></statement>
+                <feedback><p>Private members are not directly available to derived-class member functions.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>public</c></p></statement>
+                <feedback><p>Public members are also directly available to unrelated outside code.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>friend</c></p></statement>
+                <feedback><p><c>friend</c> grants a special relationship; it is not an access-specifier category.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_friend_exercise-access">
+        <statement>
+            <p>Why can <c>have_same_temperature</c> read the private <c>celsius</c> member?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>Temperature</c> declared the function as a friend.</p></statement>
+                <feedback><p>A friend declaration grants the named non-member function special access.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Every non-member function can read private data.</p></statement>
+                <feedback><p>Private members are normally inaccessible to non-member functions.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The function is secretly a static member.</p></statement>
+                <feedback><p>Friend functions are non-members unless separately declared as members.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The member becomes public whenever two objects are compared.</p></statement>
+                <feedback><p>Access does not change during a comparison.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_friend_parsons">
+        <statement>
+            <p>Arrange the lines to declare and define a friend comparison function.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>class Temperature {</cline></block>
+            <block order="2"><cline>private: double celsius;</cline></block>
+            <block order="3"><cline>friend bool same(const Temperature&amp; first, const Temperature&amp; second);</cline></block>
+            <block order="4"><cline>};</cline></block>
+            <block order="5"><cline>bool same(const Temperature&amp; first, const Temperature&amp; second) {</cline></block>
+            <block order="6"><cline>    return first.celsius == second.celsius;</cline></block>
+            <block order="7"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter10_friend_exercise-properties">
+        <statement>
+            <p>Which statement about friendship is correct?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>Friendship is granted explicitly and is not automatically mutual or transitive.</p></statement>
+                <feedback><p>A friend relationship gives the named class or function special access only as specified.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>If class A is a friend of class B, B is automatically a friend of A.</p></statement>
+                <feedback><p>Friendship is not automatically mutual.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>If A is a friend of B and B is a friend of C, A is automatically a friend of C.</p></statement>
+                <feedback><p>Friendship is not transitive.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Every derived class automatically inherits all friendship relationships.</p></statement>
+                <feedback><p>Friendship is not inherited automatically.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_protected_exercise">
+        <statement>
+            <p>Why can <c>SavingsAccount::add_interest</c> change <c>balance</c> in the example?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>SavingsAccount</c> is derived from <c>Account</c>, and <c>balance</c> is protected.</p></statement>
+                <feedback><p>Protected members are available to derived-class member functions.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>All data members are accessible through inheritance.</p></statement>
+                <feedback><p>Private base-class members are not directly accessible to derived classes.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>balance</c> is public because it has a default value.</p></statement>
+                <feedback><p>A default member initializer does not change access control.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>protected</c> means public only inside <c>main</c>.</p></statement>
+                <feedback><p>Protected access is intended for the class and its derived classes, not unrelated outside code.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+</section>

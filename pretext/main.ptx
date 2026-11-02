@@ -35,14 +35,28 @@
      <xi:include href="./Chapter8/toctree.ptx"/>
     <xi:include href="./Chapter9/toctree.ptx"/>
 	-->
-    <xi:include href="./Chapter10/toctree.ptx"/>
-	<xi:include href="./Chapter9/toctree.ptx"/>
+	<!-- Logical Chapter 8: physical Chapter10 -->
+	<xi:include href="./Chapter10/toctree.ptx"/>
+	
+	<!-- Logical Chapter 9: physical Chapter9 -->
+	<xi:include href="./Chapter9/toctree.ptx"/>	
+	
+	<!-- Logical Chapter 10: physical Chapter10-Classes2 -->
+	<xi:include href="./Chapter10-Classes2/toctree.ptx"/>
 	<!--
      <xi:include href="./Chapter11/toctree.ptx"/>
     <xi:include href="./Chapter12/toctree.ptx"/>
     <xi:include href="./Chapter13/toctree.ptx"/>
     <xi:include href="./Chapter14/toctree.ptx"/>
 	-->
-    <xi:include href="./Chapter15/toctree.ptx"/>
-  </book>
+	<!-- Next currently published chapter -->
+	<xi:include href="./Chapter15/toctree.ptx"/>  
+</book>
 </pretext>
+
+
+
+
+
+
+

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter10_copy-constructors-copy-assignment-and-explicit">
+    <title>Copy Constructors and Copy Assignment</title>
+
+    <p>
+        When a class object is copied, C++ must decide how to initialize or
+        update the destination object. Two operations are especially important:
+        a <term>copy constructor</term> creates a new object from an existing
+        object, while a <term>copy-assignment operation</term> updates an object
+        that already exists.
+    </p>
+
+    <p>
+        C++ can generate ordinary memberwise copying automatically. That default
+        behavior is useful for many classes, but it can be unsafe when a class
+        owns a raw pointer. We will first learn the two copying operations and
+        then see why resource-owning classes need special care.
+    </p>
+
+    <subsection xml:id="chapter10_copy-constructor">
+        <title>The Copy Constructor</title>
+
+        <p>
+            A copy constructor is a constructor whose parameter is a reference to
+            an object of the same class. The usual form is:
+        </p>
+
+        <program xml:id="program_chapter10_copy_constructor_syntax"
+                 language="cpp">
+            <code><![CDATA[
+class Score {
+public:
+    Score(const Score& other) {
+        // Copy the state from other.
+    }
+};
+            ]]></code>
+        </program>
+
+        <p>
+            The <c>const</c> reference avoids making another copy of the source
+            object and allows the constructor to copy from a const object. A copy
+            constructor is used when a new object is initialized from an existing
+            object.
+        </p>
+
+        <listing xml:id="listing_chapter10_copy_constructor">
+            <title>Copy construction and copy assignment</title>
+            <program xml:id="program_chapter10_copy_constructor"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Score {
+private:
+    int value;
+
+public:
+    explicit Score(int starting_value)
+        : value{starting_value} {
+    }
+
+    int get_value() const {
+        return value;
+    }
+};
+
+int main() {
+    Score original{90};
+    Score copied{original};   // C++ supplies the copy constructor.
+
+    Score assigned{0};
+    assigned = original;
+
+    std::cout << copied.get_value() << '\n';
+    std::cout << assigned.get_value() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            <c>Score copied{original};</c> creates a new object, so it uses the
+            copy constructor. The statement <c>assigned = original;</c> changes
+            an object that was already created, so it uses copy assignment. The
+            compiler can provide a memberwise copy-assignment operation even when
+            we do not write one ourselves.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_copy-assignment">
+        <title>Copy Assignment Updates an Existing Object</title>
+
+        <table xml:id="table_chapter10_copy_operations">
+            <title>Copy construction and copy assignment</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="32%"/>
+                <col width="32%"/>
+                <col width="36%"/>
+                <row header="yes">
+                    <cell>Expression</cell>
+                    <cell>Operation</cell>
+                    <cell>Destination state</cell>
+                </row>
+                <row>
+                    <cell><c>Score copy{original};</c></cell>
+                    <cell>Copy construction</cell>
+                    <cell><c>copy</c> is a new object.</cell>
+                </row>
+                <row>
+                    <cell><c>Score copy = original;</c></cell>
+                    <cell>Copy initialization</cell>
+                    <cell><c>copy</c> is a new object.</cell>
+                </row>
+                <row>
+                    <cell><c>copy = original;</c></cell>
+                    <cell>Copy assignment</cell>
+                    <cell><c>copy</c> already existed.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The assignment statement does not call a constructor for the
+            destination. The destination was already initialized. It instead
+            copies the source object's current state into the existing object.
+            The assignment syntax will be studied more broadly with operator
+            overloading later in this chapter.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_explicit-and-copy-initialization">
+        <title><c>explicit</c> and Copy Initialization</title>
+
+        <p>
+            The <c>explicit</c> keyword prevents a constructor with one argument
+            from being used for an unintended implicit conversion. It does not
+            prevent ordinary copying of an object from another object of the same
+            type.
+        </p>
+
+        <listing xml:id="listing_chapter10_explicit_constructor_copy">
+            <title>Using an <c>explicit</c> constructor and copying an object</title>
+            <program xml:id="program_chapter10_explicit_constructor_copy"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Score {
+private:
+    int value;
+
+public:
+    explicit Score(int starting_value)
+        : value{starting_value} {
+    }
+
+    int get_value() const {
+        return value;
+    }
+};
+
+int main() {
+    Score original{90};
+    Score copied = original;  // Copying an existing Score is permitted.
+
+    // Score invalid = 90;    // Error: implicit conversion is prevented.
+    Score valid{90};          // Direct-list initialization is permitted.
+
+    std::cout << copied.get_value() << '\n';
+    std::cout << valid.get_value() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The expression <c>Score copied = original;</c> initializes a new
+            <c>Score</c> from an existing <c>Score</c>, so the copy constructor
+            is appropriate. The commented statement would ask C++ to convert an
+            <c>int</c> into a <c>Score</c> implicitly, which the
+            <c>explicit</c> constructor prevents.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_copy-memberwise-pointer-risk">
+        <title>Memberwise Copying and Raw Pointer Risk</title>
+
+        <p>
+            The compiler-generated copy operations copy each data member. For
+            ordinary values such as integers and strings, this is often exactly
+            what we want. For a raw pointer, however, memberwise copying copies
+            the address rather than the dynamically allocated object.
+        </p>
+
+        <program xml:id="program_chapter10_memberwise_pointer_risk"
+                 language="cpp">
+            <code><![CDATA[
+class ScoreHolder {
+private:
+    int* score_pointer;
+
+public:
+    ScoreHolder(int starting_score)
+        : score_pointer{new int{starting_score}} {
+    }
+
+    ~ScoreHolder() {
+        delete score_pointer;
+    }
+};
+
+// A compiler-generated copy can make two objects contain
+// the same score_pointer address.
+            ]]></code>
+        </program>
+
+        <p>
+            If two objects contain the same owning pointer, both destructors may
+            try to release the same allocation. This can cause undefined behavior.
+            A class that owns a raw resource commonly needs a destructor, a copy
+            constructor, and a copy-assignment operation that coordinate with one
+            another. This is the Rule of Three, which we will develop fully in
+            Pointers and Dynamic Memory, Part 2.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_copy-codelens">
+        <title>Tracing Copy Construction</title>
+
+        <p>
+            The visualization steps through creation of an original object and a
+            copied object. The two objects contain equal values, but they are
+            separate objects.
+        </p>
+
+        <interactive xml:id="interactive_chapter10_copy_constructor"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Score%20%7B%0Apublic%3A%0A%20%20%20%20int%20value%3B%0A%0A%20%20%20%20Score%28int%20starting_value%29%0A%20%20%20%20%20%20%20%20%3A%20value%7Bstarting_value%7D%20%7B%0A%20%20%20%20%7D%0A%0A%20%20%20%20Score%28const%20Score%26%20other%29%0A%20%20%20%20%20%20%20%20%3A%20value%7Bother.value%7D%20%7B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Score%20original%7B90%7D%3B%0A%20%20%20%20Score%20copied%7Boriginal%7D%3B%0A%0A%20%20%20%20copied.value%20%3D%2095%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20original.value%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20copied.value%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter10_copy_exercise_difference">
+        <statement>
+            <p>What is the difference between <c>Score copy{original};</c> and <c>copy = original;</c>?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>The first creates a new object; the second updates an existing object.</p></statement>
+                <feedback><p>Copy construction begins a new lifetime, while assignment changes an existing object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>They always call exactly the same constructor.</p></statement>
+                <feedback><p>Assignment does not construct the already existing destination.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The first changes the original; the second creates a new object.</p></statement>
+                <feedback><p>The destination of each expression determines the operation.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The first works only for pointers; the second works only for structures.</p></statement>
+                <feedback><p>Both operations can apply to user-defined class objects.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_copy_exercise_signature">
+        <statement>
+            <p>Which declaration has the usual form of a copy constructor for <c>Score</c>?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>Score(const Score&amp; other);</c></p></statement>
+                <feedback><p>A copy constructor receives a const reference to an object of the same class.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>Score(int other);</c></p></statement>
+                <feedback><p>This is a converting or ordinary value constructor, not a copy constructor.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>void Score(Score other);</c></p></statement>
+                <feedback><p>Constructors have no return type, and passing by value would require another copy.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>Score* Score(const Score&amp; other);</c></p></statement>
+                <feedback><p>A constructor does not declare a return type or return a pointer.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_copy_parsons_operations" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the statements to demonstrate copy construction followed by copy assignment.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>Score original{90};</cline></block>
+            <block order="2"><cline>Score copied{original};</cline></block>
+            <block order="3"><cline>Score assigned{0};</cline></block>
+            <block order="4"><cline>assigned = original;</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter10_copy_exercise_explicit">
+        <statement>
+            <p>What does <c>explicit Score(int starting_value)</c> prevent?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>Implicit conversion of an <c>int</c> into a <c>Score</c></p></statement>
+                <feedback><p><c>explicit</c> requires direct initialization such as <c>Score score{90};</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Copying one <c>Score</c> object into another</p></statement>
+                <feedback><p>Ordinary copying between <c>Score</c> objects remains allowed.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Calling every member function</p></statement>
+                <feedback><p><c>explicit</c> affects constructor conversions, not member-function calls.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Creating a <c>Score</c> with braces</p></statement>
+                <feedback><p>Direct-list initialization with braces is permitted.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_copy_exercise_pointer_risk">
+        <statement>
+            <p>Why can compiler-generated memberwise copying be dangerous for a class that owns a raw pointer?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>It can copy the address, causing two objects to release the same allocation.</p></statement>
+                <feedback><p>Copying a pointer value does not copy the dynamically allocated object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It always changes the pointer into a reference.</p></statement>
+                <feedback><p>Memberwise copying preserves the pointer type and copies its address value.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It prevents the destructor from running.</p></statement>
+                <feedback><p>The destructor still runs, which is part of the danger when ownership is duplicated.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It automatically converts the raw pointer to a smart pointer.</p></statement>
+                <feedback><p>Compiler-generated copying does not change the pointer type.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+</section>
