@@ -12673,11 +12673,920 @@ var ptx_lunr_docs = [
   "body": "  Write a program that creates a dynamically allocated array of five integers, stores the values 2, 4, 6, 8, and 10, prints their total, and releases the array correctly.   #include <iostream> #include <cstddef> int main() { const std::size_t count = 5; \/\/ Create, use, and release the dynamic array. return 0; }     int* values = new int[count]{}; int total = 0; for (std::size_t index = 0; index < count; ++index) { values[index] = static_cast<int>((index + 1) * 2); total += values[index]; } std::cout << total << '\\n'; delete[] values;   "
 },
 {
+  "id": "chapter10_pointers-to-structures-and-classes",
+  "level": "1",
+  "url": "chapter10_pointers-to-structures-and-classes.html",
+  "type": "Section",
+  "number": "10.1",
+  "title": "Pointers to Structures and Classes",
+  "body": " Pointers to Structures and Classes  In Chapter 5, we used variables that directly represented structures and class objects. A pointer can also store the address of a structure or class object. The pointer does not contain a separate object; it provides another way to reach an existing object.  The syntax is the same for a struct and a class . The main difference is still access control: a pointer does not bypass a class's private members.   A Pointer Can Refer to an Object  The address-of operator & obtains the address of an object, and a pointer variable stores that address. To access the object through the pointer, first dereference the pointer and then use the dot operator.   Using a pointer to reach a Rectangle object   #include <iostream> class Rectangle { private: double width; double height; public: Rectangle(double rectangle_width, double rectangle_height) : width{rectangle_width}, height{rectangle_height} { } double calculate_area() const { return width * height; } }; int main() { Rectangle rectangle{4.0, 3.0}; Rectangle* rectangle_pointer = &rectangle; std::cout << rectangle.calculate_area() << '\\n'; std::cout << (*rectangle_pointer).calculate_area() << '\\n'; return 0; }    The expression (*rectangle_pointer).calculate_area() means: first dereference rectangle_pointer , then call the member function on the resulting object. The parentheses are necessary because the dot operator has higher precedence than the unary dereference operator.  A pointer to a class object still follows the class's interface. The pointer can call public member functions, but it cannot directly read or change the private data members of Rectangle .    The -> Operator  C++ provides the arrow operator as a shorter notation for dereferencing a pointer and then using the dot operator:   Ways to access a member      Expression  Meaning    rectangle.calculate_area()  Call a member through an object.    (*rectangle_pointer).calculate_area()  Dereference the pointer, then call the member through the object.    rectangle_pointer->calculate_area()  Use the arrow shorthand for the previous expression.     The following two calls are equivalent:   std::cout << (*rectangle_pointer).calculate_area() << '\\n'; std::cout << rectangle_pointer->calculate_area() << '\\n';   In ordinary code, the arrow form is usually easier to read. The pointer must identify a valid object before either expression is evaluated.    Dynamically Created Class Objects  The new expression creates an object with dynamic storage duration and returns a pointer to that object. The object remains alive until the program releases it with delete . This is the same raw-pointer lifetime pattern introduced in Chapter 9, now used with a class from Chapter 5.   Creating and releasing a dynamic Rectangle   #include <iostream> class Rectangle { private: double width; double height; public: Rectangle(double rectangle_width, double rectangle_height) : width{rectangle_width}, height{rectangle_height} { } double calculate_area() const { return width * height; } }; int main() { Rectangle* rectangle_pointer = new Rectangle{5.0, 2.0}; std::cout << rectangle_pointer->calculate_area() << '\\n'; delete rectangle_pointer; rectangle_pointer = nullptr; return 0; }    The pointer variable itself is local to main() , but the Rectangle object created by new has dynamic storage duration. Calling delete ends the object's lifetime and releases its dynamic storage. Assigning nullptr afterward makes the pointer no longer identify the released object.  Raw dynamic allocation requires careful ownership tracking. If a program loses the pointer before calling delete , the object cannot be released normally and the program has a memory leak. If it uses the pointer after delete , it has a dangling pointer. Later in the course, smart pointers will provide safer ownership strategies.    Tracing a Pointer to an Object  This visualization shows a pointer referring to an existing object. The pointer and the object are separate entities: the pointer stores an address, while the object stores its data.      Which expression is equivalent to rectangle_pointer->calculate_area() ?     (*rectangle_pointer).calculate_area()  The arrow operator dereferences the pointer before using the dot operator.    *rectangle_pointer.calculate_area()  The dot operator binds before unary dereference, so parentheses are needed.    rectangle_pointer.calculate_area()  The dot operator is used with an object, not directly with a pointer.    &rectangle_pointer.calculate_area()  The address-of operator does not access a member through a pointer.       Arrange the statements to create, use, and release a dynamic rectangle.    Rectangle* rectangle_pointer = new Rectangle{5.0, 2.0};  std::cout << rectangle_pointer->calculate_area() << '\\n';  delete rectangle_pointer;  rectangle_pointer = nullptr;      What happens when delete rectangle_pointer; is executed for a pointer returned by new Rectangle{...} ?     The pointed-to object's lifetime ends and its dynamic storage is released.  delete releases the dynamically created object.    Only the pointer variable is deleted; the object remains available.  The pointer variable and the dynamically created object have different lifetimes.    The pointer automatically changes to point to a new rectangle.  delete does not create a replacement object.    The rectangle is copied to the stack.  delete releases the object; it does not move it.       Suppose width is a private data member of Rectangle . Which statement is valid outside the class?     rectangle_pointer->calculate_area()  Public member functions remain available through a pointer.    rectangle_pointer->width = 10.0;  A pointer does not bypass private access control.    (*rectangle_pointer).width = 10.0;  Dereferencing the pointer still does not grant access to private data.    rectangle_pointer.width  The dot operator is not used directly with a pointer.       Why is assigning nullptr after delete a useful practice?     It makes the pointer no longer identify the released object.  A null pointer is safer to test than a pointer that still contains a released address.    It recreates the deleted object.  nullptr represents no object; it does not create one.    It returns the object to the stack.  Assigning nullptr does not move any object.    It makes the pointer point to the next object automatically.  A null pointer does not identify any object.     "
+},
+{
+  "id": "chapter10_pointers-to-structures-and-classes-2",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointers-to-structures-and-classes-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In Chapter 5, we used variables that directly represented structures and class objects. A pointer can also store the address of a structure or class object. The pointer does not contain a separate object; it provides another way to reach an existing object. "
+},
+{
+  "id": "chapter10_pointers-to-structures-and-classes-3",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointers-to-structures-and-classes-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The syntax is the same for a struct and a class . The main difference is still access control: a pointer does not bypass a class's private members. "
+},
+{
+  "id": "chapter10_pointer-to-object",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer-to-object",
+  "type": "Subsection",
+  "number": "10.1.1",
+  "title": "A Pointer Can Refer to an Object",
+  "body": " A Pointer Can Refer to an Object  The address-of operator & obtains the address of an object, and a pointer variable stores that address. To access the object through the pointer, first dereference the pointer and then use the dot operator.   Using a pointer to reach a Rectangle object   #include <iostream> class Rectangle { private: double width; double height; public: Rectangle(double rectangle_width, double rectangle_height) : width{rectangle_width}, height{rectangle_height} { } double calculate_area() const { return width * height; } }; int main() { Rectangle rectangle{4.0, 3.0}; Rectangle* rectangle_pointer = &rectangle; std::cout << rectangle.calculate_area() << '\\n'; std::cout << (*rectangle_pointer).calculate_area() << '\\n'; return 0; }    The expression (*rectangle_pointer).calculate_area() means: first dereference rectangle_pointer , then call the member function on the resulting object. The parentheses are necessary because the dot operator has higher precedence than the unary dereference operator.  A pointer to a class object still follows the class's interface. The pointer can call public member functions, but it cannot directly read or change the private data members of Rectangle .  "
+},
+{
+  "id": "chapter10_arrow-operator",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_arrow-operator",
+  "type": "Subsection",
+  "number": "10.1.2",
+  "title": "The <code class=\"code-inline tex2jax_ignore\">-&gt;<\/code> Operator",
+  "body": " The -> Operator  C++ provides the arrow operator as a shorter notation for dereferencing a pointer and then using the dot operator:   Ways to access a member      Expression  Meaning    rectangle.calculate_area()  Call a member through an object.    (*rectangle_pointer).calculate_area()  Dereference the pointer, then call the member through the object.    rectangle_pointer->calculate_area()  Use the arrow shorthand for the previous expression.     The following two calls are equivalent:   std::cout << (*rectangle_pointer).calculate_area() << '\\n'; std::cout << rectangle_pointer->calculate_area() << '\\n';   In ordinary code, the arrow form is usually easier to read. The pointer must identify a valid object before either expression is evaluated.  "
+},
+{
+  "id": "chapter10_dynamic-class-objects",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_dynamic-class-objects",
+  "type": "Subsection",
+  "number": "10.1.3",
+  "title": "Dynamically Created Class Objects",
+  "body": " Dynamically Created Class Objects  The new expression creates an object with dynamic storage duration and returns a pointer to that object. The object remains alive until the program releases it with delete . This is the same raw-pointer lifetime pattern introduced in Chapter 9, now used with a class from Chapter 5.   Creating and releasing a dynamic Rectangle   #include <iostream> class Rectangle { private: double width; double height; public: Rectangle(double rectangle_width, double rectangle_height) : width{rectangle_width}, height{rectangle_height} { } double calculate_area() const { return width * height; } }; int main() { Rectangle* rectangle_pointer = new Rectangle{5.0, 2.0}; std::cout << rectangle_pointer->calculate_area() << '\\n'; delete rectangle_pointer; rectangle_pointer = nullptr; return 0; }    The pointer variable itself is local to main() , but the Rectangle object created by new has dynamic storage duration. Calling delete ends the object's lifetime and releases its dynamic storage. Assigning nullptr afterward makes the pointer no longer identify the released object.  Raw dynamic allocation requires careful ownership tracking. If a program loses the pointer before calling delete , the object cannot be released normally and the program has a memory leak. If it uses the pointer after delete , it has a dangling pointer. Later in the course, smart pointers will provide safer ownership strategies.  "
+},
+{
+  "id": "chapter10_pointer-object-codelens",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer-object-codelens",
+  "type": "Subsection",
+  "number": "10.1.4",
+  "title": "Tracing a Pointer to an Object",
+  "body": " Tracing a Pointer to an Object  This visualization shows a pointer referring to an existing object. The pointer and the object are separate entities: the pointer stores an address, while the object stores its data.   "
+},
+{
+  "id": "chapter10_pointer_object_exercise_arrow",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_arrow",
+  "type": "Checkpoint",
+  "number": "10.1.1",
+  "title": "",
+  "body": "  Which expression is equivalent to rectangle_pointer->calculate_area() ?     (*rectangle_pointer).calculate_area()  The arrow operator dereferences the pointer before using the dot operator.    *rectangle_pointer.calculate_area()  The dot operator binds before unary dereference, so parentheses are needed.    rectangle_pointer.calculate_area()  The dot operator is used with an object, not directly with a pointer.    &rectangle_pointer.calculate_area()  The address-of operator does not access a member through a pointer.    "
+},
+{
+  "id": "chapter10_pointer_object_parsons_dynamic",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_parsons_dynamic",
+  "type": "Checkpoint",
+  "number": "10.1.2",
+  "title": "",
+  "body": "  Arrange the statements to create, use, and release a dynamic rectangle.    Rectangle* rectangle_pointer = new Rectangle{5.0, 2.0};  std::cout << rectangle_pointer->calculate_area() << '\\n';  delete rectangle_pointer;  rectangle_pointer = nullptr;   "
+},
+{
+  "id": "chapter10_pointer_object_exercise_lifetime",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_lifetime",
+  "type": "Checkpoint",
+  "number": "10.1.3",
+  "title": "",
+  "body": "  What happens when delete rectangle_pointer; is executed for a pointer returned by new Rectangle{...} ?     The pointed-to object's lifetime ends and its dynamic storage is released.  delete releases the dynamically created object.    Only the pointer variable is deleted; the object remains available.  The pointer variable and the dynamically created object have different lifetimes.    The pointer automatically changes to point to a new rectangle.  delete does not create a replacement object.    The rectangle is copied to the stack.  delete releases the object; it does not move it.    "
+},
+{
+  "id": "chapter10_pointer_object_exercise_private",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_private",
+  "type": "Checkpoint",
+  "number": "10.1.4",
+  "title": "",
+  "body": "  Suppose width is a private data member of Rectangle . Which statement is valid outside the class?     rectangle_pointer->calculate_area()  Public member functions remain available through a pointer.    rectangle_pointer->width = 10.0;  A pointer does not bypass private access control.    (*rectangle_pointer).width = 10.0;  Dereferencing the pointer still does not grant access to private data.    rectangle_pointer.width  The dot operator is not used directly with a pointer.    "
+},
+{
+  "id": "chapter10_pointer_object_exercise_dangling",
+  "level": "2",
+  "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_dangling",
+  "type": "Checkpoint",
+  "number": "10.1.5",
+  "title": "",
+  "body": "  Why is assigning nullptr after delete a useful practice?     It makes the pointer no longer identify the released object.  A null pointer is safer to test than a pointer that still contains a released address.    It recreates the deleted object.  nullptr represents no object; it does not create one.    It returns the object to the stack.  Assigning nullptr does not move any object.    It makes the pointer point to the next object automatically.  A null pointer does not identify any object.    "
+},
+{
+  "id": "chapter10_the-this-pointer-and-member-access",
+  "level": "1",
+  "url": "chapter10_the-this-pointer-and-member-access.html",
+  "type": "Section",
+  "number": "10.2",
+  "title": "The <code class=\"code-inline tex2jax_ignore\">this<\/code> Pointer and Member Access",
+  "body": " The this Pointer and Member Access  In Chapter 5, a member function was called through an object, as in counter.increment() . Inside that member function, C++ provides a special pointer named this . It points to the object that made the call.  The this pointer connects ordinary object notation with the arrow notation from Section 10.1. Outside a member function, a pointer uses -> to reach an object. Inside a non-static member function, this is already a pointer to the current object.   this Identifies the Current Object  Consider a Counter class similar to the class introduced in Chapter 5. When first.increment() is called, this points to first . When second.increment() is called, this points to second .   Using this to update the current Counter   #include <iostream> class Counter { private: int count; public: Counter(int starting_count) : count{starting_count} { } void increment() { this->count += 1; } int get_count() const { return this->count; } }; int main() { Counter first{2}; Counter second{5}; first.increment(); second.increment(); std::cout << first.get_count() << '\\n'; std::cout << second.get_count() << '\\n'; return 0; }    The two objects use the same member-function definition, but each call receives a different current object through this . The first call changes first ; the second call changes second .    Dot Notation, Arrow Notation, and this->   Three ways to connect a member function with an object      Expression  Where it is used    counter.increment()  Outside the class, when the caller has an object.    counter_pointer->increment()  Outside the class, when the caller has a pointer to an object.    this->count  Inside a non-static member function, to access the current object.    (*this).count  The longer equivalent of this->count .     Inside a member function, writing count is usually enough; C++ understands that the member belongs to the current object. The explicit form this->count is useful when explaining the object involved or when a parameter has a similar name.  The expression this->count is equivalent to (*this).count . This is the same relationship as pointer->member and (*pointer).member from Section 10.1.    Limits of this  A const member function can use this to inspect the current object, but it cannot use it to change the object's ordinary data members. This is why accessor functions such as get_count() const can read state without modifying the object.  A static member function has no particular object and therefore has no this pointer. It can directly access static members, but it must receive an object or a pointer if it needs to work with a particular object's non-static members. Static member functions are discussed in detail later in this chapter.    Tracing this Through Two Calls  The visualization shows two calls to the same member function. Watch which object changes after each call.      What does this identify inside a non-static member function?     The address of the object that called the member function  this points to the current object.    The address of the class definition  A class definition is not the object involved in a particular call.    The address of the member function's source code  this identifies the current object, not the function code.    A pointer that always points to the first object created  Each call receives the object that made that particular call.       Which expression is equivalent to this->count ?     (*this).count  Dereference the pointer first, then use the dot operator.    this.count  this is a pointer, so the dot operator cannot be used directly.    *this.count  Parentheses are needed because the dot operator binds more tightly.    &this->count  This asks for an address instead of accessing the member's value.       Arrange the statements to increment the object selected by a pointer.    Counter counter{4};  Counter* counter_pointer = &counter;  counter_pointer->increment();  std::cout << counter.get_count() << '\\n';      Why does a static member function not have a this pointer?     It is associated with the class rather than with one particular object.  this identifies a current object, but a static function has no implicit object.    Static functions cannot return values.  Static functions can return values normally.    Static functions cannot access any data.  They can access static members directly.    Static functions are always private.  A static member function can be public, private, or protected.       If first.increment() and second.increment() are called, why can the same function update two different counts?     Each call receives a different current object through this .  The member-function definition is shared, but the current object changes from call to call.    Each object receives a separate copy of the function's source code.  Objects do not each receive a separate source-code copy of the member function.    The function always updates the most recently created object.  The called object, not the newest object, becomes the current object.    The function changes the class definition itself.  The function changes the data of the current object.     "
+},
+{
+  "id": "chapter10_the-this-pointer-and-member-access-2",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_the-this-pointer-and-member-access-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In Chapter 5, a member function was called through an object, as in counter.increment() . Inside that member function, C++ provides a special pointer named this . It points to the object that made the call. "
+},
+{
+  "id": "chapter10_the-this-pointer-and-member-access-3",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_the-this-pointer-and-member-access-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The this pointer connects ordinary object notation with the arrow notation from Section 10.1. Outside a member function, a pointer uses -> to reach an object. Inside a non-static member function, this is already a pointer to the current object. "
+},
+{
+  "id": "chapter10_this-current-object",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this-current-object",
+  "type": "Subsection",
+  "number": "10.2.1",
+  "title": "<code class=\"code-inline tex2jax_ignore\">this<\/code> Identifies the Current Object",
+  "body": " this Identifies the Current Object  Consider a Counter class similar to the class introduced in Chapter 5. When first.increment() is called, this points to first . When second.increment() is called, this points to second .   Using this to update the current Counter   #include <iostream> class Counter { private: int count; public: Counter(int starting_count) : count{starting_count} { } void increment() { this->count += 1; } int get_count() const { return this->count; } }; int main() { Counter first{2}; Counter second{5}; first.increment(); second.increment(); std::cout << first.get_count() << '\\n'; std::cout << second.get_count() << '\\n'; return 0; }    The two objects use the same member-function definition, but each call receives a different current object through this . The first call changes first ; the second call changes second .  "
+},
+{
+  "id": "chapter10_this-member-access",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this-member-access",
+  "type": "Subsection",
+  "number": "10.2.2",
+  "title": "Dot Notation, Arrow Notation, and <code class=\"code-inline tex2jax_ignore\">this-&gt;<\/code>",
+  "body": " Dot Notation, Arrow Notation, and this->   Three ways to connect a member function with an object      Expression  Where it is used    counter.increment()  Outside the class, when the caller has an object.    counter_pointer->increment()  Outside the class, when the caller has a pointer to an object.    this->count  Inside a non-static member function, to access the current object.    (*this).count  The longer equivalent of this->count .     Inside a member function, writing count is usually enough; C++ understands that the member belongs to the current object. The explicit form this->count is useful when explaining the object involved or when a parameter has a similar name.  The expression this->count is equivalent to (*this).count . This is the same relationship as pointer->member and (*pointer).member from Section 10.1.  "
+},
+{
+  "id": "chapter10_this-const-and-static",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this-const-and-static",
+  "type": "Subsection",
+  "number": "10.2.3",
+  "title": "Limits of <code class=\"code-inline tex2jax_ignore\">this<\/code>",
+  "body": " Limits of this  A const member function can use this to inspect the current object, but it cannot use it to change the object's ordinary data members. This is why accessor functions such as get_count() const can read state without modifying the object.  A static member function has no particular object and therefore has no this pointer. It can directly access static members, but it must receive an object or a pointer if it needs to work with a particular object's non-static members. Static member functions are discussed in detail later in this chapter.  "
+},
+{
+  "id": "chapter10_this-codelens",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this-codelens",
+  "type": "Subsection",
+  "number": "10.2.4",
+  "title": "Tracing <code class=\"code-inline tex2jax_ignore\">this<\/code> Through Two Calls",
+  "body": " Tracing this Through Two Calls  The visualization shows two calls to the same member function. Watch which object changes after each call.   "
+},
+{
+  "id": "chapter10_this_exercise_meaning",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_meaning",
+  "type": "Checkpoint",
+  "number": "10.2.1",
+  "title": "",
+  "body": "  What does this identify inside a non-static member function?     The address of the object that called the member function  this points to the current object.    The address of the class definition  A class definition is not the object involved in a particular call.    The address of the member function's source code  this identifies the current object, not the function code.    A pointer that always points to the first object created  Each call receives the object that made that particular call.    "
+},
+{
+  "id": "chapter10_this_exercise_equivalence",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_equivalence",
+  "type": "Checkpoint",
+  "number": "10.2.2",
+  "title": "",
+  "body": "  Which expression is equivalent to this->count ?     (*this).count  Dereference the pointer first, then use the dot operator.    this.count  this is a pointer, so the dot operator cannot be used directly.    *this.count  Parentheses are needed because the dot operator binds more tightly.    &this->count  This asks for an address instead of accessing the member's value.    "
+},
+{
+  "id": "chapter10_this_parsons_call",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_parsons_call",
+  "type": "Checkpoint",
+  "number": "10.2.3",
+  "title": "",
+  "body": "  Arrange the statements to increment the object selected by a pointer.    Counter counter{4};  Counter* counter_pointer = &counter;  counter_pointer->increment();  std::cout << counter.get_count() << '\\n';   "
+},
+{
+  "id": "chapter10_this_exercise_static",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_static",
+  "type": "Checkpoint",
+  "number": "10.2.4",
+  "title": "",
+  "body": "  Why does a static member function not have a this pointer?     It is associated with the class rather than with one particular object.  this identifies a current object, but a static function has no implicit object.    Static functions cannot return values.  Static functions can return values normally.    Static functions cannot access any data.  They can access static members directly.    Static functions are always private.  A static member function can be public, private, or protected.    "
+},
+{
+  "id": "chapter10_this_exercise_objects",
+  "level": "2",
+  "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_objects",
+  "type": "Checkpoint",
+  "number": "10.2.5",
+  "title": "",
+  "body": "  If first.increment() and second.increment() are called, why can the same function update two different counts?     Each call receives a different current object through this .  The member-function definition is shared, but the current object changes from call to call.    Each object receives a separate copy of the function's source code.  Objects do not each receive a separate source-code copy of the member function.    The function always updates the most recently created object.  The called object, not the newest object, becomes the current object.    The function changes the class definition itself.  The function changes the data of the current object.    "
+},
+{
+  "id": "chapter10_object-initialization-in-cpp",
+  "level": "1",
+  "url": "chapter10_object-initialization-in-cpp.html",
+  "type": "Section",
+  "number": "10.3",
+  "title": "Object Initialization in C++",
+  "body": " Object Initialization in C++  C++ provides several ways to initialize an object. The forms can look similar, but they describe different operations. Learning the vocabulary helps us distinguish creating an object from assigning a new value to an object that already exists.  This section extends the constructors and member-initializer lists from Chapter 5. The examples use the StudentAccount class introduced earlier, but the same forms apply to other user-defined types.   Members Are Initialized Before the Constructor Body  A constructor's member-initializer list initializes data members before the constructor body begins. It is the preferred place to initialize members, especially members such as const objects, references, and other class objects that must be initialized rather than assigned.   Initializing a StudentAccount with a member-initializer list   #include <iostream> #include <string> class StudentAccount { private: std::string owner_name; double balance; public: StudentAccount(const std::string& starting_owner, double starting_balance) : owner_name{starting_owner}, balance{starting_balance} { } double get_balance() const { return balance; } }; int main() { StudentAccount account{\"Amina\", 125.50}; std::cout << account.get_balance() << '\\n'; return 0; }    The constructor first initializes owner_name and balance . Only after those initializations does the empty constructor body execute. The order follows the order of declaration in the class, not the order written in the member-initializer list.    Common Forms of Object Initialization   Common initialization forms       Form  Common name  What happens    StudentAccount account;  Default initialization  The default constructor is selected.    StudentAccount account{};  Empty-brace\/value initialization  The default constructor is selected using an empty list.    StudentAccount account{\"Amina\", 125.50};  Direct-list initialization  The matching constructor is called directly.    Point point{3, 4};  Aggregate initialization  The public data members of an aggregate are initialized in declaration order.    StudentAccount account(\"Amina\", 125.50);  Direct initialization  The matching constructor is called using parentheses.    StudentAccount copy = account;  Copy initialization  A new object is initialized from an existing object.    account = other_account;  Assignment  An already existing object receives a new state.    new StudentAccount{\"Amina\", 125.50}  Dynamic initialization  A dynamically created object is initialized and its pointer is returned.     The braces in StudentAccount account{...}; perform direct-list initialization. We will generally prefer braces because they make initialization visually distinct from assignment and help prevent some narrowing conversions.  Aggregate initialization is related to, but not synonymous with, direct-list initialization. Point is an aggregate because it has publicly accessible data members and no user-declared constructors. Therefore, Point point{3, 4}; uses braces as direct-list initialization syntax while also initializing the aggregate's members in declaration order. A class with constructors can use direct-list initialization, but it is not initialized as an aggregate.    Aggregate and const Object Initialization  A simple structure with public data members can often use aggregate initialization. The values inside the braces initialize the members in declaration order.   struct Point { int x; int y; }; Point origin{0, 0}; Point destination{3, 4};   A const object must be initialized when it is created because it cannot later receive a new value through assignment:   const Point origin{0, 0}; \/\/ origin = Point{1, 1}; \/\/ error: origin is const     Initialization Is Not Assignment  Initialization happens when an object's lifetime begins. Assignment happens later, after both objects already exist. The following two statements therefore use different operations:   StudentAccount first_account{\"Amina\", 125.50}; \/\/ initialization StudentAccount second_account{}; \/\/ initialization second_account = first_account; \/\/ assignment   The assignment statement does not call a constructor for second_account . It uses a copy-assignment operation to update an object that was already constructed. Copy constructors and copy-assignment operators are studied in detail later in this chapter.    Tracing Several Initialization Forms  This visualization compares default construction, empty-brace initialization, and constructor initialization with arguments.      Which statement initializes a new object using a constructor with arguments?     StudentAccount account{\"Amina\", 125.50};  The braces directly initialize a new object by calling the matching constructor.    account = StudentAccount{\"Amina\", 125.50};  This creates a temporary object and assigns it to an already existing object.    account.get_balance();  This calls a member function; it does not initialize an object.    delete account;  delete is used with a pointer to a dynamic object, not to initialize an object.       What does StudentAccount account{}; do for a class with a default constructor?     It creates an object by selecting the default constructor.  Empty braces request initialization with no constructor arguments.    It creates a null pointer.  This declaration creates an object, not a pointer.    It assigns an object after the object already exists.  The object is being initialized as its lifetime begins.    It creates an object with uninitialized class members regardless of the constructor.  The selected constructor and member initializers determine the initial state.       Arrange the statements to initialize an account and then assign its state to another existing account.    StudentAccount first_account{\"Amina\", 125.50};  StudentAccount second_account{};  second_account = first_account;      Why must a const object be initialized when it is created?     A const object cannot later receive a new value through assignment.  The initial state must be established before the const object can be used.    A const object is always dynamically allocated.  const does not determine where an object is stored.    A const object cannot have a constructor.  Const objects can be created through constructors.    A const object must contain only integer members.  Const objects can have members of many types.       Why are member-initializer lists important?     They initialize data members before the constructor body runs.  Members already exist when the constructor body begins.    They make every member public.  Access control is independent of the member-initializer list.    They dynamically allocate every member.  Member initialization does not imply dynamic allocation.    They replace the class constructor.  The list is part of a constructor definition.     "
+},
+{
+  "id": "chapter10_object-initialization-in-cpp-2",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_object-initialization-in-cpp-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "C++ provides several ways to initialize an object. The forms can look similar, but they describe different operations. Learning the vocabulary helps us distinguish creating an object from assigning a new value to an object that already exists. "
+},
+{
+  "id": "chapter10_object-initialization-in-cpp-3",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_object-initialization-in-cpp-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "This section extends the constructors and member-initializer lists from Chapter 5. The examples use the StudentAccount class introduced earlier, but the same forms apply to other user-defined types. "
+},
+{
+  "id": "chapter10_initialization-before-body",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization-before-body",
+  "type": "Subsection",
+  "number": "10.3.1",
+  "title": "Members Are Initialized Before the Constructor Body",
+  "body": " Members Are Initialized Before the Constructor Body  A constructor's member-initializer list initializes data members before the constructor body begins. It is the preferred place to initialize members, especially members such as const objects, references, and other class objects that must be initialized rather than assigned.   Initializing a StudentAccount with a member-initializer list   #include <iostream> #include <string> class StudentAccount { private: std::string owner_name; double balance; public: StudentAccount(const std::string& starting_owner, double starting_balance) : owner_name{starting_owner}, balance{starting_balance} { } double get_balance() const { return balance; } }; int main() { StudentAccount account{\"Amina\", 125.50}; std::cout << account.get_balance() << '\\n'; return 0; }    The constructor first initializes owner_name and balance . Only after those initializations does the empty constructor body execute. The order follows the order of declaration in the class, not the order written in the member-initializer list.  "
+},
+{
+  "id": "chapter10_initialization-common-forms",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization-common-forms",
+  "type": "Subsection",
+  "number": "10.3.2",
+  "title": "Common Forms of Object Initialization",
+  "body": " Common Forms of Object Initialization   Common initialization forms       Form  Common name  What happens    StudentAccount account;  Default initialization  The default constructor is selected.    StudentAccount account{};  Empty-brace\/value initialization  The default constructor is selected using an empty list.    StudentAccount account{\"Amina\", 125.50};  Direct-list initialization  The matching constructor is called directly.    Point point{3, 4};  Aggregate initialization  The public data members of an aggregate are initialized in declaration order.    StudentAccount account(\"Amina\", 125.50);  Direct initialization  The matching constructor is called using parentheses.    StudentAccount copy = account;  Copy initialization  A new object is initialized from an existing object.    account = other_account;  Assignment  An already existing object receives a new state.    new StudentAccount{\"Amina\", 125.50}  Dynamic initialization  A dynamically created object is initialized and its pointer is returned.     The braces in StudentAccount account{...}; perform direct-list initialization. We will generally prefer braces because they make initialization visually distinct from assignment and help prevent some narrowing conversions.  Aggregate initialization is related to, but not synonymous with, direct-list initialization. Point is an aggregate because it has publicly accessible data members and no user-declared constructors. Therefore, Point point{3, 4}; uses braces as direct-list initialization syntax while also initializing the aggregate's members in declaration order. A class with constructors can use direct-list initialization, but it is not initialized as an aggregate.  "
+},
+{
+  "id": "chapter10_initialization-aggregate-and-const",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization-aggregate-and-const",
+  "type": "Subsection",
+  "number": "10.3.3",
+  "title": "Aggregate and <code class=\"code-inline tex2jax_ignore\">const<\/code> Object Initialization",
+  "body": " Aggregate and const Object Initialization  A simple structure with public data members can often use aggregate initialization. The values inside the braces initialize the members in declaration order.   struct Point { int x; int y; }; Point origin{0, 0}; Point destination{3, 4};   A const object must be initialized when it is created because it cannot later receive a new value through assignment:   const Point origin{0, 0}; \/\/ origin = Point{1, 1}; \/\/ error: origin is const   "
+},
+{
+  "id": "chapter10_initialization-versus-assignment",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization-versus-assignment",
+  "type": "Subsection",
+  "number": "10.3.4",
+  "title": "Initialization Is Not Assignment",
+  "body": " Initialization Is Not Assignment  Initialization happens when an object's lifetime begins. Assignment happens later, after both objects already exist. The following two statements therefore use different operations:   StudentAccount first_account{\"Amina\", 125.50}; \/\/ initialization StudentAccount second_account{}; \/\/ initialization second_account = first_account; \/\/ assignment   The assignment statement does not call a constructor for second_account . It uses a copy-assignment operation to update an object that was already constructed. Copy constructors and copy-assignment operators are studied in detail later in this chapter.  "
+},
+{
+  "id": "chapter10_initialization-codelens",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization-codelens",
+  "type": "Subsection",
+  "number": "10.3.5",
+  "title": "Tracing Several Initialization Forms",
+  "body": " Tracing Several Initialization Forms  This visualization compares default construction, empty-brace initialization, and constructor initialization with arguments.   "
+},
+{
+  "id": "chapter10_initialization_exercise_form",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_form",
+  "type": "Checkpoint",
+  "number": "10.3.1",
+  "title": "",
+  "body": "  Which statement initializes a new object using a constructor with arguments?     StudentAccount account{\"Amina\", 125.50};  The braces directly initialize a new object by calling the matching constructor.    account = StudentAccount{\"Amina\", 125.50};  This creates a temporary object and assigns it to an already existing object.    account.get_balance();  This calls a member function; it does not initialize an object.    delete account;  delete is used with a pointer to a dynamic object, not to initialize an object.    "
+},
+{
+  "id": "chapter10_initialization_exercise_empty_braces",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_empty_braces",
+  "type": "Checkpoint",
+  "number": "10.3.2",
+  "title": "",
+  "body": "  What does StudentAccount account{}; do for a class with a default constructor?     It creates an object by selecting the default constructor.  Empty braces request initialization with no constructor arguments.    It creates a null pointer.  This declaration creates an object, not a pointer.    It assigns an object after the object already exists.  The object is being initialized as its lifetime begins.    It creates an object with uninitialized class members regardless of the constructor.  The selected constructor and member initializers determine the initial state.    "
+},
+{
+  "id": "chapter10_initialization_parsons_forms",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_parsons_forms",
+  "type": "Checkpoint",
+  "number": "10.3.3",
+  "title": "",
+  "body": "  Arrange the statements to initialize an account and then assign its state to another existing account.    StudentAccount first_account{\"Amina\", 125.50};  StudentAccount second_account{};  second_account = first_account;   "
+},
+{
+  "id": "chapter10_initialization_exercise_const",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_const",
+  "type": "Checkpoint",
+  "number": "10.3.4",
+  "title": "",
+  "body": "  Why must a const object be initialized when it is created?     A const object cannot later receive a new value through assignment.  The initial state must be established before the const object can be used.    A const object is always dynamically allocated.  const does not determine where an object is stored.    A const object cannot have a constructor.  Const objects can be created through constructors.    A const object must contain only integer members.  Const objects can have members of many types.    "
+},
+{
+  "id": "chapter10_initialization_exercise_member_list",
+  "level": "2",
+  "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_member_list",
+  "type": "Checkpoint",
+  "number": "10.3.5",
+  "title": "",
+  "body": "  Why are member-initializer lists important?     They initialize data members before the constructor body runs.  Members already exist when the constructor body begins.    They make every member public.  Access control is independent of the member-initializer list.    They dynamically allocate every member.  Member initialization does not imply dynamic allocation.    They replace the class constructor.  The list is part of a constructor definition.    "
+},
+{
+  "id": "chapter10_object-lifetime-and-destructors",
+  "level": "1",
+  "url": "chapter10_object-lifetime-and-destructors.html",
+  "type": "Section",
+  "number": "10.4",
+  "title": "Object Lifetime and Destructors",
+  "body": " Object Lifetime and Destructors  An object has a lifetime : the period during which its storage has been obtained, its initialization has completed, and the object can be used. A constructor helps begin an object's lifetime. A destructor performs the class's final cleanup when that lifetime ends.  This section extends the constructors from Chapter 5 and the dynamic class objects from Section 10.1. Understanding when objects are destroyed is essential before we study classes that manage resources.   Local Objects End at the End of Their Scope  A local object begins its lifetime when its declaration initializes it. Its destructor is called automatically when execution leaves the object's scope, including when a function returns.   Tracing the lifetime of local objects   #include <iostream> #include <string> class LifecycleMarker { private: std::string name; public: LifecycleMarker(const std::string& marker_name) : name{marker_name} { std::cout << \"Construct \" << name << '\\n'; } ~LifecycleMarker() { std::cout << \"Destroy \" << name << '\\n'; } }; void create_local_marker() { LifecycleMarker inner{\"inner\"}; std::cout << \"Inside function\" << '\\n'; } int main() { LifecycleMarker outer{\"outer\"}; create_local_marker(); std::cout << \"End of main\" << '\\n'; return 0; }    The destructor for inner runs when create_local_marker() ends. The destructor for outer runs when main() ends. A local object does not require an explicit destructor call in ordinary code.    Destructor Syntax and Purpose  A destructor has the class name preceded by a tilde. It has no parameters and no return type:   class LifecycleMarker { public: ~LifecycleMarker() { \/\/ Final cleanup belongs here. } };   A class can have only one destructor. The destructor is not normally called directly. C++ calls it when a local object's scope ends or when delete releases a dynamically created object.  A destructor may release a resource owned by the object, such as dynamically allocated memory or a file handle. This resource- management pattern will be developed more fully in Pointers and Dynamic Memory, Part 2.    Dynamic Objects End with delete  A dynamically created object does not end its lifetime when the local pointer variable goes out of scope. The program must release the object with delete . Calling delete calls the object's destructor and releases its dynamic storage.   Releasing a dynamically created object   #include <iostream> #include <string> class LifecycleMarker { private: std::string name; public: LifecycleMarker(const std::string& marker_name) : name{marker_name} { std::cout << \"Construct \" << name << '\\n'; } ~LifecycleMarker() { std::cout << \"Destroy \" << name << '\\n'; } }; int main() { LifecycleMarker* marker_pointer = new LifecycleMarker{\"dynamic\"}; std::cout << \"Object is alive\" << '\\n'; delete marker_pointer; marker_pointer = nullptr; std::cout << \"Object is released\" << '\\n'; return 0; }    The pointer variable is local, but the object it identifies is dynamic. These are different lifetimes. Assigning nullptr after delete prevents the pointer from continuing to hold the released address as if it were still usable.   Local and dynamic object lifetimes       Object kind  When the lifetime ends  Who calls the destructor?    Local object  When its scope ends  C++ calls it automatically.    Dynamic object  When the program evaluates delete  delete causes the destructor call.       Destruction Order  Local objects in the same scope are destroyed in the reverse order of their construction. If first is constructed before second , then second is destroyed before first . This reverse order allows a later object to use an earlier object during its lifetime when the design requires it.  A class's data members are also destroyed in the reverse order of their declarations. The member-initializer list does not change this destruction order.    Visualizing Construction and Destruction  Follow the output as the local object is created, the function-local object is created and destroyed, and the outer object is finally destroyed.      When is a local class object's destructor normally called?     When execution leaves the object's scope  C++ automatically destroys a local object at the end of its lifetime.    Only when the programmer writes delete  delete is used for dynamically created objects, not ordinary local objects.    When the class definition is reached  A class definition does not create an object.    Only when the program calls the destructor directly  Destructors are normally called automatically.       Arrange the statements to create, release, and clear a dynamic object pointer.    LifecycleMarker* marker_pointer = new LifecycleMarker{\"dynamic\"};  std::cout << \"Object is alive\" << '\\n';  delete marker_pointer;  marker_pointer = nullptr;      Which declaration correctly defines a destructor for Rectangle ?     ~Rectangle() { }  A destructor uses the class name preceded by a tilde and has no return type.    void ~Rectangle() { }  Destructors do not have return types.    Rectangle::~Rectangle() { }  The scope-resolution form is not the ordinary in-class destructor definition.    delete Rectangle() { }  delete is an expression used to release a dynamic object.       What is the main danger if a program loses the only pointer to a dynamic object?     The object cannot be released normally, causing a memory leak.  The program needs an owning pointer or another strategy to reach the object for cleanup.    The object is automatically copied to the stack.  Dynamic objects are not automatically moved to the stack.    The destructor runs twice immediately.  Without a pointer, the program generally cannot release the object at all.    The object becomes a static class member.  Storage duration does not change the class definition.       If first is constructed before second in the same scope, which object is destroyed first?     second  Objects in the same scope are destroyed in reverse construction order.    first  The first object constructed is normally the last one destroyed.    Both objects are destroyed at exactly the same time.  Destruction has a defined reverse order for local objects.    Neither object is destroyed automatically.  Local class objects are destroyed automatically when their scope ends.     "
+},
+{
+  "id": "chapter10_object-lifetime-and-destructors-2",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_object-lifetime-and-destructors-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An object has a lifetime : the period during which its storage has been obtained, its initialization has completed, and the object can be used. A constructor helps begin an object's lifetime. A destructor performs the class's final cleanup when that lifetime ends. "
+},
+{
+  "id": "chapter10_object-lifetime-and-destructors-3",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_object-lifetime-and-destructors-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "This section extends the constructors from Chapter 5 and the dynamic class objects from Section 10.1. Understanding when objects are destroyed is essential before we study classes that manage resources. "
+},
+{
+  "id": "chapter10_lifetime-local-objects",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime-local-objects",
+  "type": "Subsection",
+  "number": "10.4.1",
+  "title": "Local Objects End at the End of Their Scope",
+  "body": " Local Objects End at the End of Their Scope  A local object begins its lifetime when its declaration initializes it. Its destructor is called automatically when execution leaves the object's scope, including when a function returns.   Tracing the lifetime of local objects   #include <iostream> #include <string> class LifecycleMarker { private: std::string name; public: LifecycleMarker(const std::string& marker_name) : name{marker_name} { std::cout << \"Construct \" << name << '\\n'; } ~LifecycleMarker() { std::cout << \"Destroy \" << name << '\\n'; } }; void create_local_marker() { LifecycleMarker inner{\"inner\"}; std::cout << \"Inside function\" << '\\n'; } int main() { LifecycleMarker outer{\"outer\"}; create_local_marker(); std::cout << \"End of main\" << '\\n'; return 0; }    The destructor for inner runs when create_local_marker() ends. The destructor for outer runs when main() ends. A local object does not require an explicit destructor call in ordinary code.  "
+},
+{
+  "id": "chapter10_destructor-syntax",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_destructor-syntax",
+  "type": "Subsection",
+  "number": "10.4.2",
+  "title": "Destructor Syntax and Purpose",
+  "body": " Destructor Syntax and Purpose  A destructor has the class name preceded by a tilde. It has no parameters and no return type:   class LifecycleMarker { public: ~LifecycleMarker() { \/\/ Final cleanup belongs here. } };   A class can have only one destructor. The destructor is not normally called directly. C++ calls it when a local object's scope ends or when delete releases a dynamically created object.  A destructor may release a resource owned by the object, such as dynamically allocated memory or a file handle. This resource- management pattern will be developed more fully in Pointers and Dynamic Memory, Part 2.  "
+},
+{
+  "id": "chapter10_lifetime-dynamic-objects",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime-dynamic-objects",
+  "type": "Subsection",
+  "number": "10.4.3",
+  "title": "Dynamic Objects End with <code class=\"code-inline tex2jax_ignore\">delete<\/code>",
+  "body": " Dynamic Objects End with delete  A dynamically created object does not end its lifetime when the local pointer variable goes out of scope. The program must release the object with delete . Calling delete calls the object's destructor and releases its dynamic storage.   Releasing a dynamically created object   #include <iostream> #include <string> class LifecycleMarker { private: std::string name; public: LifecycleMarker(const std::string& marker_name) : name{marker_name} { std::cout << \"Construct \" << name << '\\n'; } ~LifecycleMarker() { std::cout << \"Destroy \" << name << '\\n'; } }; int main() { LifecycleMarker* marker_pointer = new LifecycleMarker{\"dynamic\"}; std::cout << \"Object is alive\" << '\\n'; delete marker_pointer; marker_pointer = nullptr; std::cout << \"Object is released\" << '\\n'; return 0; }    The pointer variable is local, but the object it identifies is dynamic. These are different lifetimes. Assigning nullptr after delete prevents the pointer from continuing to hold the released address as if it were still usable.   Local and dynamic object lifetimes       Object kind  When the lifetime ends  Who calls the destructor?    Local object  When its scope ends  C++ calls it automatically.    Dynamic object  When the program evaluates delete  delete causes the destructor call.     "
+},
+{
+  "id": "chapter10_lifetime-destruction-order",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime-destruction-order",
+  "type": "Subsection",
+  "number": "10.4.4",
+  "title": "Destruction Order",
+  "body": " Destruction Order  Local objects in the same scope are destroyed in the reverse order of their construction. If first is constructed before second , then second is destroyed before first . This reverse order allows a later object to use an earlier object during its lifetime when the design requires it.  A class's data members are also destroyed in the reverse order of their declarations. The member-initializer list does not change this destruction order.  "
+},
+{
+  "id": "chapter10_lifetime-codelens",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime-codelens",
+  "type": "Subsection",
+  "number": "10.4.5",
+  "title": "Visualizing Construction and Destruction",
+  "body": " Visualizing Construction and Destruction  Follow the output as the local object is created, the function-local object is created and destroyed, and the outer object is finally destroyed.   "
+},
+{
+  "id": "chapter10_lifetime_exercise_local",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_local",
+  "type": "Checkpoint",
+  "number": "10.4.1",
+  "title": "",
+  "body": "  When is a local class object's destructor normally called?     When execution leaves the object's scope  C++ automatically destroys a local object at the end of its lifetime.    Only when the programmer writes delete  delete is used for dynamically created objects, not ordinary local objects.    When the class definition is reached  A class definition does not create an object.    Only when the program calls the destructor directly  Destructors are normally called automatically.    "
+},
+{
+  "id": "chapter10_lifetime_parsons_dynamic",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_parsons_dynamic",
+  "type": "Checkpoint",
+  "number": "10.4.2",
+  "title": "",
+  "body": "  Arrange the statements to create, release, and clear a dynamic object pointer.    LifecycleMarker* marker_pointer = new LifecycleMarker{\"dynamic\"};  std::cout << \"Object is alive\" << '\\n';  delete marker_pointer;  marker_pointer = nullptr;   "
+},
+{
+  "id": "chapter10_lifetime_exercise_destructor",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_destructor",
+  "type": "Checkpoint",
+  "number": "10.4.3",
+  "title": "",
+  "body": "  Which declaration correctly defines a destructor for Rectangle ?     ~Rectangle() { }  A destructor uses the class name preceded by a tilde and has no return type.    void ~Rectangle() { }  Destructors do not have return types.    Rectangle::~Rectangle() { }  The scope-resolution form is not the ordinary in-class destructor definition.    delete Rectangle() { }  delete is an expression used to release a dynamic object.    "
+},
+{
+  "id": "chapter10_lifetime_exercise_dynamic",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_dynamic",
+  "type": "Checkpoint",
+  "number": "10.4.4",
+  "title": "",
+  "body": "  What is the main danger if a program loses the only pointer to a dynamic object?     The object cannot be released normally, causing a memory leak.  The program needs an owning pointer or another strategy to reach the object for cleanup.    The object is automatically copied to the stack.  Dynamic objects are not automatically moved to the stack.    The destructor runs twice immediately.  Without a pointer, the program generally cannot release the object at all.    The object becomes a static class member.  Storage duration does not change the class definition.    "
+},
+{
+  "id": "chapter10_lifetime_exercise_order",
+  "level": "2",
+  "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_order",
+  "type": "Checkpoint",
+  "number": "10.4.5",
+  "title": "",
+  "body": "  If first is constructed before second in the same scope, which object is destroyed first?     second  Objects in the same scope are destroyed in reverse construction order.    first  The first object constructed is normally the last one destroyed.    Both objects are destroyed at exactly the same time.  Destruction has a defined reverse order for local objects.    Neither object is destroyed automatically.  Local class objects are destroyed automatically when their scope ends.    "
+},
+{
+  "id": "chapter10_copy-constructors-copy-assignment-and-explicit",
+  "level": "1",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html",
+  "type": "Section",
+  "number": "10.5",
+  "title": "Copy Constructors and Copy Assignment",
+  "body": " Copy Constructors and Copy Assignment  When a class object is copied, C++ must decide how to initialize or update the destination object. Two operations are especially important: a copy constructor creates a new object from an existing object, while a copy-assignment operation updates an object that already exists.  C++ can generate ordinary memberwise copying automatically. That default behavior is useful for many classes, but it can be unsafe when a class owns a raw pointer. We will first learn the two copying operations and then see why resource-owning classes need special care.   The Copy Constructor  A copy constructor is a constructor whose parameter is a reference to an object of the same class. The usual form is:   class Score { public: Score(const Score& other) { \/\/ Copy the state from other. } };   The const reference avoids making another copy of the source object and allows the constructor to copy from a const object. A copy constructor is used when a new object is initialized from an existing object.   Copy construction and copy assignment   #include <iostream> class Score { private: int value; public: explicit Score(int starting_value) : value{starting_value} { } int get_value() const { return value; } }; int main() { Score original{90}; Score copied{original}; \/\/ C++ supplies the copy constructor. Score assigned{0}; assigned = original; std::cout << copied.get_value() << '\\n'; std::cout << assigned.get_value() << '\\n'; return 0; }     Score copied{original}; creates a new object, so it uses the copy constructor. The statement assigned = original; changes an object that was already created, so it uses copy assignment. The compiler can provide a memberwise copy-assignment operation even when we do not write one ourselves.    Copy Assignment Updates an Existing Object   Copy construction and copy assignment       Expression  Operation  Destination state    Score copy{original};  Copy construction  copy is a new object.    Score copy = original;  Copy initialization  copy is a new object.    copy = original;  Copy assignment  copy already existed.     The assignment statement does not call a constructor for the destination. The destination was already initialized. It instead copies the source object's current state into the existing object. The assignment syntax will be studied more broadly with operator overloading later in this chapter.    explicit and Copy Initialization  The explicit keyword prevents a constructor with one argument from being used for an unintended implicit conversion. It does not prevent ordinary copying of an object from another object of the same type.   Using an explicit constructor and copying an object   #include <iostream> class Score { private: int value; public: explicit Score(int starting_value) : value{starting_value} { } int get_value() const { return value; } }; int main() { Score original{90}; Score copied = original; \/\/ Copying an existing Score is permitted. \/\/ Score invalid = 90; \/\/ Error: implicit conversion is prevented. Score valid{90}; \/\/ Direct-list initialization is permitted. std::cout << copied.get_value() << '\\n'; std::cout << valid.get_value() << '\\n'; return 0; }    The expression Score copied = original; initializes a new Score from an existing Score , so the copy constructor is appropriate. The commented statement would ask C++ to convert an int into a Score implicitly, which the explicit constructor prevents.    Memberwise Copying and Raw Pointer Risk  The compiler-generated copy operations copy each data member. For ordinary values such as integers and strings, this is often exactly what we want. For a raw pointer, however, memberwise copying copies the address rather than the dynamically allocated object.   class ScoreHolder { private: int* score_pointer; public: ScoreHolder(int starting_score) : score_pointer{new int{starting_score}} { } ~ScoreHolder() { delete score_pointer; } }; \/\/ A compiler-generated copy can make two objects contain \/\/ the same score_pointer address.   If two objects contain the same owning pointer, both destructors may try to release the same allocation. This can cause undefined behavior. A class that owns a raw resource commonly needs a destructor, a copy constructor, and a copy-assignment operation that coordinate with one another. This is the Rule of Three, which we will develop fully in Pointers and Dynamic Memory, Part 2.    Tracing Copy Construction  The visualization steps through creation of an original object and a copied object. The two objects contain equal values, but they are separate objects.      What is the difference between Score copy{original}; and copy = original; ?     The first creates a new object; the second updates an existing object.  Copy construction begins a new lifetime, while assignment changes an existing object.    They always call exactly the same constructor.  Assignment does not construct the already existing destination.    The first changes the original; the second creates a new object.  The destination of each expression determines the operation.    The first works only for pointers; the second works only for structures.  Both operations can apply to user-defined class objects.       Which declaration has the usual form of a copy constructor for Score ?     Score(const Score& other);  A copy constructor receives a const reference to an object of the same class.    Score(int other);  This is a converting or ordinary value constructor, not a copy constructor.    void Score(Score other);  Constructors have no return type, and passing by value would require another copy.    Score* Score(const Score& other);  A constructor does not declare a return type or return a pointer.       Arrange the statements to demonstrate copy construction followed by copy assignment.    Score original{90};  Score copied{original};  Score assigned{0};  assigned = original;      What does explicit Score(int starting_value) prevent?     Implicit conversion of an int into a Score  explicit requires direct initialization such as Score score{90}; .    Copying one Score object into another  Ordinary copying between Score objects remains allowed.    Calling every member function  explicit affects constructor conversions, not member-function calls.    Creating a Score with braces  Direct-list initialization with braces is permitted.       Why can compiler-generated memberwise copying be dangerous for a class that owns a raw pointer?     It can copy the address, causing two objects to release the same allocation.  Copying a pointer value does not copy the dynamically allocated object.    It always changes the pointer into a reference.  Memberwise copying preserves the pointer type and copies its address value.    It prevents the destructor from running.  The destructor still runs, which is part of the danger when ownership is duplicated.    It automatically converts the raw pointer to a smart pointer.  Compiler-generated copying does not change the pointer type.     "
+},
+{
+  "id": "chapter10_copy-constructors-copy-assignment-and-explicit-2",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-constructors-copy-assignment-and-explicit-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "When a class object is copied, C++ must decide how to initialize or update the destination object. Two operations are especially important: a copy constructor creates a new object from an existing object, while a copy-assignment operation updates an object that already exists. "
+},
+{
+  "id": "chapter10_copy-constructors-copy-assignment-and-explicit-3",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-constructors-copy-assignment-and-explicit-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "C++ can generate ordinary memberwise copying automatically. That default behavior is useful for many classes, but it can be unsafe when a class owns a raw pointer. We will first learn the two copying operations and then see why resource-owning classes need special care. "
+},
+{
+  "id": "chapter10_copy-constructor",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-constructor",
+  "type": "Subsection",
+  "number": "10.5.1",
+  "title": "The Copy Constructor",
+  "body": " The Copy Constructor  A copy constructor is a constructor whose parameter is a reference to an object of the same class. The usual form is:   class Score { public: Score(const Score& other) { \/\/ Copy the state from other. } };   The const reference avoids making another copy of the source object and allows the constructor to copy from a const object. A copy constructor is used when a new object is initialized from an existing object.   Copy construction and copy assignment   #include <iostream> class Score { private: int value; public: explicit Score(int starting_value) : value{starting_value} { } int get_value() const { return value; } }; int main() { Score original{90}; Score copied{original}; \/\/ C++ supplies the copy constructor. Score assigned{0}; assigned = original; std::cout << copied.get_value() << '\\n'; std::cout << assigned.get_value() << '\\n'; return 0; }     Score copied{original}; creates a new object, so it uses the copy constructor. The statement assigned = original; changes an object that was already created, so it uses copy assignment. The compiler can provide a memberwise copy-assignment operation even when we do not write one ourselves.  "
+},
+{
+  "id": "chapter10_copy-assignment",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-assignment",
+  "type": "Subsection",
+  "number": "10.5.2",
+  "title": "Copy Assignment Updates an Existing Object",
+  "body": " Copy Assignment Updates an Existing Object   Copy construction and copy assignment       Expression  Operation  Destination state    Score copy{original};  Copy construction  copy is a new object.    Score copy = original;  Copy initialization  copy is a new object.    copy = original;  Copy assignment  copy already existed.     The assignment statement does not call a constructor for the destination. The destination was already initialized. It instead copies the source object's current state into the existing object. The assignment syntax will be studied more broadly with operator overloading later in this chapter.  "
+},
+{
+  "id": "chapter10_explicit-and-copy-initialization",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_explicit-and-copy-initialization",
+  "type": "Subsection",
+  "number": "10.5.3",
+  "title": "<code class=\"code-inline tex2jax_ignore\">explicit<\/code> and Copy Initialization",
+  "body": " explicit and Copy Initialization  The explicit keyword prevents a constructor with one argument from being used for an unintended implicit conversion. It does not prevent ordinary copying of an object from another object of the same type.   Using an explicit constructor and copying an object   #include <iostream> class Score { private: int value; public: explicit Score(int starting_value) : value{starting_value} { } int get_value() const { return value; } }; int main() { Score original{90}; Score copied = original; \/\/ Copying an existing Score is permitted. \/\/ Score invalid = 90; \/\/ Error: implicit conversion is prevented. Score valid{90}; \/\/ Direct-list initialization is permitted. std::cout << copied.get_value() << '\\n'; std::cout << valid.get_value() << '\\n'; return 0; }    The expression Score copied = original; initializes a new Score from an existing Score , so the copy constructor is appropriate. The commented statement would ask C++ to convert an int into a Score implicitly, which the explicit constructor prevents.  "
+},
+{
+  "id": "chapter10_copy-memberwise-pointer-risk",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-memberwise-pointer-risk",
+  "type": "Subsection",
+  "number": "10.5.4",
+  "title": "Memberwise Copying and Raw Pointer Risk",
+  "body": " Memberwise Copying and Raw Pointer Risk  The compiler-generated copy operations copy each data member. For ordinary values such as integers and strings, this is often exactly what we want. For a raw pointer, however, memberwise copying copies the address rather than the dynamically allocated object.   class ScoreHolder { private: int* score_pointer; public: ScoreHolder(int starting_score) : score_pointer{new int{starting_score}} { } ~ScoreHolder() { delete score_pointer; } }; \/\/ A compiler-generated copy can make two objects contain \/\/ the same score_pointer address.   If two objects contain the same owning pointer, both destructors may try to release the same allocation. This can cause undefined behavior. A class that owns a raw resource commonly needs a destructor, a copy constructor, and a copy-assignment operation that coordinate with one another. This is the Rule of Three, which we will develop fully in Pointers and Dynamic Memory, Part 2.  "
+},
+{
+  "id": "chapter10_copy-codelens",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-codelens",
+  "type": "Subsection",
+  "number": "10.5.5",
+  "title": "Tracing Copy Construction",
+  "body": " Tracing Copy Construction  The visualization steps through creation of an original object and a copied object. The two objects contain equal values, but they are separate objects.   "
+},
+{
+  "id": "chapter10_copy_exercise_difference",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_difference",
+  "type": "Checkpoint",
+  "number": "10.5.1",
+  "title": "",
+  "body": "  What is the difference between Score copy{original}; and copy = original; ?     The first creates a new object; the second updates an existing object.  Copy construction begins a new lifetime, while assignment changes an existing object.    They always call exactly the same constructor.  Assignment does not construct the already existing destination.    The first changes the original; the second creates a new object.  The destination of each expression determines the operation.    The first works only for pointers; the second works only for structures.  Both operations can apply to user-defined class objects.    "
+},
+{
+  "id": "chapter10_copy_exercise_signature",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_signature",
+  "type": "Checkpoint",
+  "number": "10.5.2",
+  "title": "",
+  "body": "  Which declaration has the usual form of a copy constructor for Score ?     Score(const Score& other);  A copy constructor receives a const reference to an object of the same class.    Score(int other);  This is a converting or ordinary value constructor, not a copy constructor.    void Score(Score other);  Constructors have no return type, and passing by value would require another copy.    Score* Score(const Score& other);  A constructor does not declare a return type or return a pointer.    "
+},
+{
+  "id": "chapter10_copy_parsons_operations",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_parsons_operations",
+  "type": "Checkpoint",
+  "number": "10.5.3",
+  "title": "",
+  "body": "  Arrange the statements to demonstrate copy construction followed by copy assignment.    Score original{90};  Score copied{original};  Score assigned{0};  assigned = original;   "
+},
+{
+  "id": "chapter10_copy_exercise_explicit",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_explicit",
+  "type": "Checkpoint",
+  "number": "10.5.4",
+  "title": "",
+  "body": "  What does explicit Score(int starting_value) prevent?     Implicit conversion of an int into a Score  explicit requires direct initialization such as Score score{90}; .    Copying one Score object into another  Ordinary copying between Score objects remains allowed.    Calling every member function  explicit affects constructor conversions, not member-function calls.    Creating a Score with braces  Direct-list initialization with braces is permitted.    "
+},
+{
+  "id": "chapter10_copy_exercise_pointer_risk",
+  "level": "2",
+  "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_pointer_risk",
+  "type": "Checkpoint",
+  "number": "10.5.5",
+  "title": "",
+  "body": "  Why can compiler-generated memberwise copying be dangerous for a class that owns a raw pointer?     It can copy the address, causing two objects to release the same allocation.  Copying a pointer value does not copy the dynamically allocated object.    It always changes the pointer into a reference.  Memberwise copying preserves the pointer type and copies its address value.    It prevents the destructor from running.  The destructor still runs, which is part of the danger when ownership is duplicated.    It automatically converts the raw pointer to a smart pointer.  Compiler-generated copying does not change the pointer type.    "
+},
+{
+  "id": "chapter10_static-members-and-class-level-state",
+  "level": "1",
+  "url": "chapter10_static-members-and-class-level-state.html",
+  "type": "Section",
+  "number": "10.6",
+  "title": "Static Members and Class-Level State",
+  "body": " Static Members and Class-Level State  Most data members belong to individual objects. Each StudentAccount , for example, has its own balance. Sometimes a class also needs one value shared by every object of that class. A static data member belongs to the class as a whole rather than to one particular object.  A static member is useful when the class must keep track of class-level information, such as the number of objects that have been created. It is not a replacement for ordinary object state: each account still has its own balance, while all accounts can share one account count.   Static Data Members Are Shared  Declare a static data member inside the class, then provide its definition outside the class. The definition creates the one shared object that belongs to the class. In C++17, this traditional form is still clear and useful, so we will use it here.   One shared count and one balance per account   #include <iostream> class StudentAccount { private: double balance; static int total_accounts_created; public: StudentAccount() : balance{0.0} { ++total_accounts_created; } void deposit_money(double amount) { balance += amount; } double get_balance() const { return balance; } static int get_total_accounts_created() { return total_accounts_created; } }; int StudentAccount::total_accounts_created = 0; int main() { StudentAccount first_account; StudentAccount second_account; first_account.deposit_money(100.00); std::cout << first_account.get_balance() << '\\n'; std::cout << second_account.get_balance() << '\\n'; std::cout << StudentAccount::get_total_accounts_created() << '\\n'; return 0; }    Each object has a separate balance , so depositing money into first_account does not change second_account . The static member total_accounts_created has only one shared value, so both constructor calls update the same count.  The line int StudentAccount::total_accounts_created = 0; is the out-of-class definition. The scope-resolution operator :: says that this definition belongs to StudentAccount .    Static Member Functions  A static member function also belongs to the class rather than to one object. It can be called with the class name and the scope-resolution operator:   int number_of_accounts = StudentAccount::get_total_accounts_created();   A non-static member function receives an implicit object parameter, represented inside the function by this . A static member function has no implicit object parameter and therefore has no this pointer. It can access static members directly, but it must use an object or a reference parameter to work with a non-static member.   Instance and static member functions        Feature  Instance member function  Static member function  Typical use    Belongs to  One object  The class  Choose according to the state needed.    Call  account.get_balance()  StudentAccount::get_total_accounts_created()  Use the class name for class-wide behavior.    Has this ?  Yes  No  Static functions have no current object.    Directly accesses  Static and non-static members  Static members only  Pass an object if non-static state is needed.    const after the function  May be const  Cannot be const  There is no object for a static function to promise not to modify.       When Should a Member Be Static?  Make a member static when the value or operation describes the class as a whole and does not depend on one object's state. A count of all accounts is class-level information. A particular account's balance is object-level information and should remain a non-static member.  A static member does not automatically make a class safer. Because every object shares the same static state, changing that state can affect all objects. Keep the static data member private when outside code should not change it directly, and provide a carefully named public member function when access is needed.   static int get_total_accounts_created() { return total_accounts_created; \/\/ return balance; \/\/ Error: no particular account is available. }   The commented expression cannot work because a call such as StudentAccount::get_total_accounts_created() does not select a particular account. The function can read the shared count, but it cannot guess which object's balance the caller means.    Tracing Shared Static State  Step through the example to observe two separate balances and one shared object count.      Which statement best describes a static data member?     All objects of the class share one value for that member.  A static data member belongs to the class as a whole.    Each object receives a separate copy of the member.  That describes an ordinary non-static data member.    The member can be used only inside a constructor.  Static members can be used by appropriate member functions throughout the class.    The member must always be public.  A static data member can be private, protected, or public.       Why can a static member function not directly read an ordinary data member such as balance ?     It has no this pointer and therefore no particular object.  A static function can access shared static state, but no individual object's state without an object.    Static functions cannot read any data.  They can directly read static data members.    The member must first be made public.  Access control is not the reason; the missing object is.    A static function always runs before the class is defined.  Static describes class membership, not source-code order.       Arrange the lines to create two objects and then read the shared count.    StudentAccount first_account;  StudentAccount second_account;  int count = StudentAccount::get_total_accounts_created();  std::cout << count << '\\n';      Which call most clearly communicates that the function uses class-level state?     StudentAccount::get_total_accounts_created()  The class name and scope-resolution operator identify a static member call.    get_total_accounts_created(StudentAccount)  The class name is not passed as a function argument.    StudentAccount.get_total_accounts_created()  C++ uses :: with a class name; the dot operator is used with an object.    static.StudentAccount.get_total_accounts_created()  static is part of the declaration, not a call prefix.       Why is an out-of-class definition needed for the traditional static data member declaration?     The class declaration announces the member, and the definition provides the shared storage.  The out-of-class definition creates the one class-level object used by the program.    It creates a separate static member for every object.  The purpose is one shared member, not one per object.    It changes the member into a local variable.  The scope-resolution operator keeps the definition associated with the class.    It is required only for static member functions.  This traditional definition concerns static data members.     "
+},
+{
+  "id": "chapter10_static-members-and-class-level-state-2",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static-members-and-class-level-state-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Most data members belong to individual objects. Each StudentAccount , for example, has its own balance. Sometimes a class also needs one value shared by every object of that class. A static data member belongs to the class as a whole rather than to one particular object. "
+},
+{
+  "id": "chapter10_static-members-and-class-level-state-3",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static-members-and-class-level-state-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A static member is useful when the class must keep track of class-level information, such as the number of objects that have been created. It is not a replacement for ordinary object state: each account still has its own balance, while all accounts can share one account count. "
+},
+{
+  "id": "chapter10_static-data-members",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static-data-members",
+  "type": "Subsection",
+  "number": "10.6.1",
+  "title": "Static Data Members Are Shared",
+  "body": " Static Data Members Are Shared  Declare a static data member inside the class, then provide its definition outside the class. The definition creates the one shared object that belongs to the class. In C++17, this traditional form is still clear and useful, so we will use it here.   One shared count and one balance per account   #include <iostream> class StudentAccount { private: double balance; static int total_accounts_created; public: StudentAccount() : balance{0.0} { ++total_accounts_created; } void deposit_money(double amount) { balance += amount; } double get_balance() const { return balance; } static int get_total_accounts_created() { return total_accounts_created; } }; int StudentAccount::total_accounts_created = 0; int main() { StudentAccount first_account; StudentAccount second_account; first_account.deposit_money(100.00); std::cout << first_account.get_balance() << '\\n'; std::cout << second_account.get_balance() << '\\n'; std::cout << StudentAccount::get_total_accounts_created() << '\\n'; return 0; }    Each object has a separate balance , so depositing money into first_account does not change second_account . The static member total_accounts_created has only one shared value, so both constructor calls update the same count.  The line int StudentAccount::total_accounts_created = 0; is the out-of-class definition. The scope-resolution operator :: says that this definition belongs to StudentAccount .  "
+},
+{
+  "id": "chapter10_static-member-functions",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static-member-functions",
+  "type": "Subsection",
+  "number": "10.6.2",
+  "title": "Static Member Functions",
+  "body": " Static Member Functions  A static member function also belongs to the class rather than to one object. It can be called with the class name and the scope-resolution operator:   int number_of_accounts = StudentAccount::get_total_accounts_created();   A non-static member function receives an implicit object parameter, represented inside the function by this . A static member function has no implicit object parameter and therefore has no this pointer. It can access static members directly, but it must use an object or a reference parameter to work with a non-static member.   Instance and static member functions        Feature  Instance member function  Static member function  Typical use    Belongs to  One object  The class  Choose according to the state needed.    Call  account.get_balance()  StudentAccount::get_total_accounts_created()  Use the class name for class-wide behavior.    Has this ?  Yes  No  Static functions have no current object.    Directly accesses  Static and non-static members  Static members only  Pass an object if non-static state is needed.    const after the function  May be const  Cannot be const  There is no object for a static function to promise not to modify.     "
+},
+{
+  "id": "chapter10_static-member-design-guidance",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static-member-design-guidance",
+  "type": "Subsection",
+  "number": "10.6.3",
+  "title": "When Should a Member Be Static?",
+  "body": " When Should a Member Be Static?  Make a member static when the value or operation describes the class as a whole and does not depend on one object's state. A count of all accounts is class-level information. A particular account's balance is object-level information and should remain a non-static member.  A static member does not automatically make a class safer. Because every object shares the same static state, changing that state can affect all objects. Keep the static data member private when outside code should not change it directly, and provide a carefully named public member function when access is needed.   static int get_total_accounts_created() { return total_accounts_created; \/\/ return balance; \/\/ Error: no particular account is available. }   The commented expression cannot work because a call such as StudentAccount::get_total_accounts_created() does not select a particular account. The function can read the shared count, but it cannot guess which object's balance the caller means.  "
+},
+{
+  "id": "chapter10_static-codelens",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static-codelens",
+  "type": "Subsection",
+  "number": "10.6.4",
+  "title": "Tracing Shared Static State",
+  "body": " Tracing Shared Static State  Step through the example to observe two separate balances and one shared object count.   "
+},
+{
+  "id": "chapter10_static_exercise_shared-state",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise_shared-state",
+  "type": "Checkpoint",
+  "number": "10.6.1",
+  "title": "",
+  "body": "  Which statement best describes a static data member?     All objects of the class share one value for that member.  A static data member belongs to the class as a whole.    Each object receives a separate copy of the member.  That describes an ordinary non-static data member.    The member can be used only inside a constructor.  Static members can be used by appropriate member functions throughout the class.    The member must always be public.  A static data member can be private, protected, or public.    "
+},
+{
+  "id": "chapter10_static_exercise-no-this",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-no-this",
+  "type": "Checkpoint",
+  "number": "10.6.2",
+  "title": "",
+  "body": "  Why can a static member function not directly read an ordinary data member such as balance ?     It has no this pointer and therefore no particular object.  A static function can access shared static state, but no individual object's state without an object.    Static functions cannot read any data.  They can directly read static data members.    The member must first be made public.  Access control is not the reason; the missing object is.    A static function always runs before the class is defined.  Static describes class membership, not source-code order.    "
+},
+{
+  "id": "chapter10_static_parsons",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_parsons",
+  "type": "Checkpoint",
+  "number": "10.6.3",
+  "title": "",
+  "body": "  Arrange the lines to create two objects and then read the shared count.    StudentAccount first_account;  StudentAccount second_account;  int count = StudentAccount::get_total_accounts_created();  std::cout << count << '\\n';   "
+},
+{
+  "id": "chapter10_static_exercise-call-syntax",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-call-syntax",
+  "type": "Checkpoint",
+  "number": "10.6.4",
+  "title": "",
+  "body": "  Which call most clearly communicates that the function uses class-level state?     StudentAccount::get_total_accounts_created()  The class name and scope-resolution operator identify a static member call.    get_total_accounts_created(StudentAccount)  The class name is not passed as a function argument.    StudentAccount.get_total_accounts_created()  C++ uses :: with a class name; the dot operator is used with an object.    static.StudentAccount.get_total_accounts_created()  static is part of the declaration, not a call prefix.    "
+},
+{
+  "id": "chapter10_static_exercise-definition",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-definition",
+  "type": "Checkpoint",
+  "number": "10.6.5",
+  "title": "",
+  "body": "  Why is an out-of-class definition needed for the traditional static data member declaration?     The class declaration announces the member, and the definition provides the shared storage.  The out-of-class definition creates the one class-level object used by the program.    It creates a separate static member for every object.  The purpose is one shared member, not one per object.    It changes the member into a local variable.  The scope-resolution operator keeps the definition associated with the class.    It is required only for static member functions.  This traditional definition concerns static data members.    "
+},
+{
+  "id": "chapter10_access-control-friends-and-protected",
+  "level": "1",
+  "url": "chapter10_access-control-friends-and-protected.html",
+  "type": "Section",
+  "number": "10.7",
+  "title": "Access Control Revisited: Friends and <code class=\"code-inline tex2jax_ignore\">protected<\/code>",
+  "body": " Access Control Revisited: Friends and protected  In Chapter 5, we used private members to protect an object's internal state and public member functions to define its interface. C++ also provides protected access and friendship. These features give a class more design choices, but they should be used deliberately because they widen access to implementation details.   Three Access Levels  An access specifier controls which code may name a member directly. The following table describes the usual rules for a class and a class derived from it. Inheritance will be studied fully later.   Access control in a class hierarchy        Specifier  Member functions of the class  Member functions of a derived class  Unrelated outside code    public  Can access  Can access  Can access    protected  Can access  Can access  Cannot access directly    private  Can access  Cannot access directly  Cannot access directly     A protected member is hidden from ordinary outside code but is available to member functions of a derived class. This can be useful when a base class deliberately designs an implementation extension point. However, private data plus protected or public member functions often provides stronger control than protected data itself.    Friend Functions  A friend function is not a member function, but a class may grant it permission to access private and protected members. The class places a friend declaration inside its definition. The friend function is then defined outside the class like an ordinary non-member function.   A friend function compares two private temperatures   #include <iostream> class Temperature { private: double celsius; public: explicit Temperature(double starting_celsius) : celsius{starting_celsius} { } friend bool have_same_temperature( const Temperature& first, const Temperature& second ); }; bool have_same_temperature( const Temperature& first, const Temperature& second ) { return first.celsius == second.celsius; } int main() { Temperature morning{20.0}; Temperature afternoon{20.0}; std::cout << have_same_temperature(morning, afternoon) << '\\n'; return 0; }     have_same_temperature is not called with the dot operator because it is not a member function. Its friend declaration gives it permission to read the private celsius members of both objects. Without that declaration, the function could not access them directly.    Friend Classes  A class can also declare another class as a friend. Every member function of the friend class may then access the granting class's private and protected members. Friend classes can support closely related components, but they create a strong dependency between the two classes.   class AccountInspector; class StudentAccount { private: double balance = 0.0; friend class AccountInspector; }; class AccountInspector { public: double read_balance(const StudentAccount& account) const { return account.balance; } };   Friendship is not inherited, not mutual, and not transitive. If StudentAccount makes AccountInspector a friend, AccountInspector does not automatically make StudentAccount a friend. A friend of one class is not automatically a friend of a derived class or of another class.    Using protected with a Derived Class  The protected specifier is mainly useful in class hierarchies. The following small example previews the idea. A complete study of inheritance and polymorphism comes later.   A derived class can use a protected member   #include <iostream> class Account { protected: double balance = 0.0; }; class SavingsAccount : public Account { public: void add_interest() { balance += 5.0; } double get_balance() const { return balance; } }; int main() { SavingsAccount account; account.add_interest(); std::cout << account.get_balance() << '\\n'; return 0; }     SavingsAccount can use balance because it is a derived class. Code in main cannot write account.balance directly because protected is not public. The public member function provides the outside interface.  Prefer private data when possible. A protected data member exposes more of the base class's implementation to derived classes, which can make future changes harder. Protected member functions can offer a narrower extension point.    Tracing a Friend Function  Step through the comparison. The friend function is outside the class, but the class has granted it access to private state.      Which access specifier allows a derived class to use a member while ordinary outside code cannot use it directly?     protected  Derived-class member functions may access protected members, while unrelated outside code may not.    private  Private members are not directly available to derived-class member functions.    public  Public members are also directly available to unrelated outside code.    friend  friend grants a special relationship; it is not an access-specifier category.       Why can have_same_temperature read the private celsius member?     Temperature declared the function as a friend.  A friend declaration grants the named non-member function special access.    Every non-member function can read private data.  Private members are normally inaccessible to non-member functions.    The function is secretly a static member.  Friend functions are non-members unless separately declared as members.    The member becomes public whenever two objects are compared.  Access does not change during a comparison.       Arrange the lines to declare and define a friend comparison function.    class Temperature {  private: double celsius;  friend bool same(const Temperature& first, const Temperature& second);  };  bool same(const Temperature& first, const Temperature& second) {  return first.celsius == second.celsius;  }      Which statement about friendship is correct?     Friendship is granted explicitly and is not automatically mutual or transitive.  A friend relationship gives the named class or function special access only as specified.    If class A is a friend of class B, B is automatically a friend of A.  Friendship is not automatically mutual.    If A is a friend of B and B is a friend of C, A is automatically a friend of C.  Friendship is not transitive.    Every derived class automatically inherits all friendship relationships.  Friendship is not inherited automatically.       Why can SavingsAccount::add_interest change balance in the example?     SavingsAccount is derived from Account , and balance is protected.  Protected members are available to derived-class member functions.    All data members are accessible through inheritance.  Private base-class members are not directly accessible to derived classes.    balance is public because it has a default value.  A default member initializer does not change access control.    protected means public only inside main .  Protected access is intended for the class and its derived classes, not unrelated outside code.     "
+},
+{
+  "id": "chapter10_access-control-friends-and-protected-2",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_access-control-friends-and-protected-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "In Chapter 5, we used private members to protect an object's internal state and public member functions to define its interface. C++ also provides protected access and friendship. These features give a class more design choices, but they should be used deliberately because they widen access to implementation details. "
+},
+{
+  "id": "chapter10_access-control-levels",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_access-control-levels",
+  "type": "Subsection",
+  "number": "10.7.1",
+  "title": "Three Access Levels",
+  "body": " Three Access Levels  An access specifier controls which code may name a member directly. The following table describes the usual rules for a class and a class derived from it. Inheritance will be studied fully later.   Access control in a class hierarchy        Specifier  Member functions of the class  Member functions of a derived class  Unrelated outside code    public  Can access  Can access  Can access    protected  Can access  Can access  Cannot access directly    private  Can access  Cannot access directly  Cannot access directly     A protected member is hidden from ordinary outside code but is available to member functions of a derived class. This can be useful when a base class deliberately designs an implementation extension point. However, private data plus protected or public member functions often provides stronger control than protected data itself.  "
+},
+{
+  "id": "chapter10_friend-functions",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend-functions",
+  "type": "Subsection",
+  "number": "10.7.2",
+  "title": "Friend Functions",
+  "body": " Friend Functions  A friend function is not a member function, but a class may grant it permission to access private and protected members. The class places a friend declaration inside its definition. The friend function is then defined outside the class like an ordinary non-member function.   A friend function compares two private temperatures   #include <iostream> class Temperature { private: double celsius; public: explicit Temperature(double starting_celsius) : celsius{starting_celsius} { } friend bool have_same_temperature( const Temperature& first, const Temperature& second ); }; bool have_same_temperature( const Temperature& first, const Temperature& second ) { return first.celsius == second.celsius; } int main() { Temperature morning{20.0}; Temperature afternoon{20.0}; std::cout << have_same_temperature(morning, afternoon) << '\\n'; return 0; }     have_same_temperature is not called with the dot operator because it is not a member function. Its friend declaration gives it permission to read the private celsius members of both objects. Without that declaration, the function could not access them directly.  "
+},
+{
+  "id": "chapter10_friend-classes",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend-classes",
+  "type": "Subsection",
+  "number": "10.7.3",
+  "title": "Friend Classes",
+  "body": " Friend Classes  A class can also declare another class as a friend. Every member function of the friend class may then access the granting class's private and protected members. Friend classes can support closely related components, but they create a strong dependency between the two classes.   class AccountInspector; class StudentAccount { private: double balance = 0.0; friend class AccountInspector; }; class AccountInspector { public: double read_balance(const StudentAccount& account) const { return account.balance; } };   Friendship is not inherited, not mutual, and not transitive. If StudentAccount makes AccountInspector a friend, AccountInspector does not automatically make StudentAccount a friend. A friend of one class is not automatically a friend of a derived class or of another class.  "
+},
+{
+  "id": "chapter10_protected-members",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_protected-members",
+  "type": "Subsection",
+  "number": "10.7.4",
+  "title": "Using <code class=\"code-inline tex2jax_ignore\">protected<\/code> with a Derived Class",
+  "body": " Using protected with a Derived Class  The protected specifier is mainly useful in class hierarchies. The following small example previews the idea. A complete study of inheritance and polymorphism comes later.   A derived class can use a protected member   #include <iostream> class Account { protected: double balance = 0.0; }; class SavingsAccount : public Account { public: void add_interest() { balance += 5.0; } double get_balance() const { return balance; } }; int main() { SavingsAccount account; account.add_interest(); std::cout << account.get_balance() << '\\n'; return 0; }     SavingsAccount can use balance because it is a derived class. Code in main cannot write account.balance directly because protected is not public. The public member function provides the outside interface.  Prefer private data when possible. A protected data member exposes more of the base class's implementation to derived classes, which can make future changes harder. Protected member functions can offer a narrower extension point.  "
+},
+{
+  "id": "chapter10_friends-codelens",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_friends-codelens",
+  "type": "Subsection",
+  "number": "10.7.5",
+  "title": "Tracing a Friend Function",
+  "body": " Tracing a Friend Function  Step through the comparison. The friend function is outside the class, but the class has granted it access to private state.   "
+},
+{
+  "id": "chapter10_access_exercise-table",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_access_exercise-table",
+  "type": "Checkpoint",
+  "number": "10.7.1",
+  "title": "",
+  "body": "  Which access specifier allows a derived class to use a member while ordinary outside code cannot use it directly?     protected  Derived-class member functions may access protected members, while unrelated outside code may not.    private  Private members are not directly available to derived-class member functions.    public  Public members are also directly available to unrelated outside code.    friend  friend grants a special relationship; it is not an access-specifier category.    "
+},
+{
+  "id": "chapter10_friend_exercise-access",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend_exercise-access",
+  "type": "Checkpoint",
+  "number": "10.7.2",
+  "title": "",
+  "body": "  Why can have_same_temperature read the private celsius member?     Temperature declared the function as a friend.  A friend declaration grants the named non-member function special access.    Every non-member function can read private data.  Private members are normally inaccessible to non-member functions.    The function is secretly a static member.  Friend functions are non-members unless separately declared as members.    The member becomes public whenever two objects are compared.  Access does not change during a comparison.    "
+},
+{
+  "id": "chapter10_friend_parsons",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend_parsons",
+  "type": "Checkpoint",
+  "number": "10.7.3",
+  "title": "",
+  "body": "  Arrange the lines to declare and define a friend comparison function.    class Temperature {  private: double celsius;  friend bool same(const Temperature& first, const Temperature& second);  };  bool same(const Temperature& first, const Temperature& second) {  return first.celsius == second.celsius;  }   "
+},
+{
+  "id": "chapter10_friend_exercise-properties",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend_exercise-properties",
+  "type": "Checkpoint",
+  "number": "10.7.4",
+  "title": "",
+  "body": "  Which statement about friendship is correct?     Friendship is granted explicitly and is not automatically mutual or transitive.  A friend relationship gives the named class or function special access only as specified.    If class A is a friend of class B, B is automatically a friend of A.  Friendship is not automatically mutual.    If A is a friend of B and B is a friend of C, A is automatically a friend of C.  Friendship is not transitive.    Every derived class automatically inherits all friendship relationships.  Friendship is not inherited automatically.    "
+},
+{
+  "id": "chapter10_protected_exercise",
+  "level": "2",
+  "url": "chapter10_access-control-friends-and-protected.html#chapter10_protected_exercise",
+  "type": "Checkpoint",
+  "number": "10.7.5",
+  "title": "",
+  "body": "  Why can SavingsAccount::add_interest change balance in the example?     SavingsAccount is derived from Account , and balance is protected.  Protected members are available to derived-class member functions.    All data members are accessible through inheritance.  Private base-class members are not directly accessible to derived classes.    balance is public because it has a default value.  A default member initializer does not change access control.    protected means public only inside main .  Protected access is intended for the class and its derived classes, not unrelated outside code.    "
+},
+{
+  "id": "chapter10_operator-overloading-and-class-interfaces",
+  "level": "1",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html",
+  "type": "Section",
+  "number": "10.8",
+  "title": "Operator Overloading and Class Interfaces",
+  "body": " Operator Overloading and Class Interfaces  Built-in types already have useful operators. For example, C++ knows how to add two integers with + and compare two integers with == . A class can give selected operators meaningful behavior for its own objects. This is called operator overloading .  Operator overloading does not create a new kind of operator. It defines a function whose name contains the operator symbol, such as operator+ or operator== . The familiar expression remains readable while the class supplies the behavior.   Operators Can Express Natural Class Operations  Consider a Point object with horizontal and vertical coordinates. Adding two points can naturally mean adding their corresponding coordinates. Equality can naturally mean that both coordinates match.   Overloading addition and equality for Point   #include <iostream> class Point { private: int x; int y; public: Point(int point_x, int point_y) : x{point_x}, y{point_y} { } int get_x() const { return x; } int get_y() const { return y; } Point operator+(const Point& other) const { return Point{x + other.x, y + other.y}; } bool operator==(const Point& other) const { return x == other.x && y == other.y; } }; int main() { Point first{2, 3}; Point second{4, 1}; Point total = first + second; std::cout << total.get_x() << \", \" << total.get_y() << '\\n'; std::cout << (first == second) << '\\n'; return 0; }    The expression first + second calls first.operator+(second) . The expression first == second calls first.operator==(second) . The operator notation is shorter, but the member-function meaning is still present.  An overloaded operator should match the meaning that readers would reasonably expect. If an operation does not have a clear natural interpretation, a named member function is usually a better interface.    Member and Non-Member Operator Functions  An operator can be implemented as a member function or as a non-member function. The choice depends on the operation and on which operands need access to the class interface.   Two common forms of overloaded operators        Form  Example declaration  Typical operands  Useful when    Member operator  Point operator+(const Point&) const;  The left operand is a Point .  The operation naturally belongs to the left object.    Non-member operator  operator<<(std::ostream&, const Point&)  The left operand is not a Point .  The operation must work with another type first.     A member operator receives the left operand through this and receives the other operand as a parameter. That is why the member declaration for operator+ has one explicit parameter even though the expression has two operands.  A non-member operator receives all of its operands as parameters. This is important for stream output. In std::cout << point , the left operand is an std::ostream , not a Point , so the output operator is naturally a non-member function.    Overloading operator<< for Output  A user-defined object does not automatically know how to work with std::cout . We can define a non-member operator<< that describes its text representation. Returning the stream by reference allows output expressions to be chained.   Giving Point a stream-output interface   #include <iostream> class Point { private: int x; int y; public: Point(int point_x, int point_y) : x{point_x}, y{point_y} { } int get_x() const { return x; } int get_y() const { return y; } }; std::ostream& operator<<(std::ostream& output, const Point& point) { output << '(' << point.get_x() << \", \" << point.get_y() << ')'; return output; } int main() { Point point{3, 4}; std::cout << \"Point: \" << point << '\\n'; return 0; }    The function uses the public accessor functions instead of reading private data directly. This keeps the class interface in control of how its state is observed. A friend output function could access private members directly, but friendship should be used only when that closer relationship is justified.  The return type is std::ostream& , and the function returns output . This is what makes an expression such as std::cout << point << '\\n'; possible: the first operation returns the stream for the next operation.    A to_string() Function for Text Representation  A class can also provide a to_string() member function that returns a std::string representation of the object. This is useful when code needs text but is not writing directly to a stream. The stream-output operator can then delegate to the same function instead of duplicating the formatting logic.   Using to_string() inside operator<<   #include <iostream> #include <string> class Point { private: int x; int y; public: Point(int point_x, int point_y) : x{point_x}, y{point_y} { } std::string to_string() const { return std::string{\"(\"} + std::to_string(x) + \", \" + std::to_string(y) + \")\"; } }; std::ostream& operator<<(std::ostream& output, const Point& point) { return output << point.to_string(); } int main() { Point point{3, 4}; std::string description = point.to_string(); std::cout << \"Point: \" << description << '\\n'; std::cout << \"Again: \" << point << '\\n'; return 0; }    The class's to_string() function is a user-defined member function. It uses std::to_string() to convert the integer coordinates into text. Calling std::to_string(point) would not automatically work because the standard function does not know how to format an arbitrary Point object.  Keeping the formatting in one place makes the interface easier to maintain. If the desired point format changes, the class can update to_string() , and the stream operator will use the updated representation automatically.    Rules and Design Limits  Operator overloading has important limits. It changes how an operator works with a user-defined type, but it does not let a programmer redesign the C++ language.   Important operator-overloading rules      Rule  Meaning    At least one operand must be a user-defined type.  A class cannot redefine the meaning of int + int for the whole program.    The operator's precedence does not change.  Overloading + does not make it bind more tightly or loosely.    The number of operands does not change.  A unary operator remains unary, and a binary operator remains binary.    New operator symbols cannot be invented.  Only existing C++ operators can be overloaded.    Meaning should remain understandable.  Use a named function when operator notation would confuse readers.     Operator overloading is therefore part of a class's public design. A good overload makes an object easier to use without hiding an unexpected side effect. A poor overload can make ordinary-looking code difficult to understand.    Tracing an Overloaded Operator  Step through the expression first + second and observe the new Point object returned by operator+ .      What does operator overloading provide for a class?     A class-specific meaning for an existing C++ operator.  The operator remains a C++ operator, but the class supplies behavior for its objects.    A way to invent entirely new operator symbols.  Only existing C++ operators may be overloaded.    A way to change operator precedence throughout the program.  Overloading does not change precedence.    A way to make every class member public.  Operator overloading and access control are separate features.       In the expression first + second , what does a member operator+ use as its explicit parameter?     The right-hand Point , while first is represented by this .  A member function receives the left object implicitly and the other operand explicitly.    Both first and second as two explicit parameters.  The left operand is the object that calls the member function.    Only the output stream.  An output stream belongs to operator<< , not this addition operation.    No operand because overloaded operators cannot have parameters.  The other operand must still be supplied.       Arrange the lines to define a member addition operator that returns a new point.    Point operator+(const Point& other) const {  return Point{x + other.x, y + other.y};  }      Why does a stream-output operator return std::ostream& ?     Returning the stream allows output operations to be chained.  The next << operation can use the stream returned by the previous one.    It creates a new stream for every object.  The existing stream is returned by reference.    It converts every object into a string automatically.  The function writes a representation to the stream; it does not necessarily create a string.    It makes the class inherit from std::ostream .  The class and the stream remain separate types.       Which statement is a valid limitation of operator overloading?     At least one operand must have a user-defined type.  A class cannot globally redefine an expression such as int + int .    Only arithmetic operators can be overloaded.  Comparison and stream operators are also common overloads.    Every overloaded operator must be a static function.  Operators can be member or non-member functions, depending on the design.    Overloading automatically changes the operator's precedence.  Precedence remains part of the C++ language rules.     "
+},
+{
+  "id": "chapter10_operator-overloading-and-class-interfaces-2",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator-overloading-and-class-interfaces-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Built-in types already have useful operators. For example, C++ knows how to add two integers with + and compare two integers with == . A class can give selected operators meaningful behavior for its own objects. This is called operator overloading . "
+},
+{
+  "id": "chapter10_operator-overloading-and-class-interfaces-3",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator-overloading-and-class-interfaces-3",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Operator overloading does not create a new kind of operator. It defines a function whose name contains the operator symbol, such as operator+ or operator== . The familiar expression remains readable while the class supplies the behavior. "
+},
+{
+  "id": "chapter10_operator-overloading-purpose",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator-overloading-purpose",
+  "type": "Subsection",
+  "number": "10.8.1",
+  "title": "Operators Can Express Natural Class Operations",
+  "body": " Operators Can Express Natural Class Operations  Consider a Point object with horizontal and vertical coordinates. Adding two points can naturally mean adding their corresponding coordinates. Equality can naturally mean that both coordinates match.   Overloading addition and equality for Point   #include <iostream> class Point { private: int x; int y; public: Point(int point_x, int point_y) : x{point_x}, y{point_y} { } int get_x() const { return x; } int get_y() const { return y; } Point operator+(const Point& other) const { return Point{x + other.x, y + other.y}; } bool operator==(const Point& other) const { return x == other.x && y == other.y; } }; int main() { Point first{2, 3}; Point second{4, 1}; Point total = first + second; std::cout << total.get_x() << \", \" << total.get_y() << '\\n'; std::cout << (first == second) << '\\n'; return 0; }    The expression first + second calls first.operator+(second) . The expression first == second calls first.operator==(second) . The operator notation is shorter, but the member-function meaning is still present.  An overloaded operator should match the meaning that readers would reasonably expect. If an operation does not have a clear natural interpretation, a named member function is usually a better interface.  "
+},
+{
+  "id": "chapter10_operator-overloading-forms",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator-overloading-forms",
+  "type": "Subsection",
+  "number": "10.8.2",
+  "title": "Member and Non-Member Operator Functions",
+  "body": " Member and Non-Member Operator Functions  An operator can be implemented as a member function or as a non-member function. The choice depends on the operation and on which operands need access to the class interface.   Two common forms of overloaded operators        Form  Example declaration  Typical operands  Useful when    Member operator  Point operator+(const Point&) const;  The left operand is a Point .  The operation naturally belongs to the left object.    Non-member operator  operator<<(std::ostream&, const Point&)  The left operand is not a Point .  The operation must work with another type first.     A member operator receives the left operand through this and receives the other operand as a parameter. That is why the member declaration for operator+ has one explicit parameter even though the expression has two operands.  A non-member operator receives all of its operands as parameters. This is important for stream output. In std::cout << point , the left operand is an std::ostream , not a Point , so the output operator is naturally a non-member function.  "
+},
+{
+  "id": "chapter10_operator-output-stream",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator-output-stream",
+  "type": "Subsection",
+  "number": "10.8.3",
+  "title": "Overloading <code class=\"code-inline tex2jax_ignore\">operator&lt;&lt;<\/code> for Output",
+  "body": " Overloading operator<< for Output  A user-defined object does not automatically know how to work with std::cout . We can define a non-member operator<< that describes its text representation. Returning the stream by reference allows output expressions to be chained.   Giving Point a stream-output interface   #include <iostream> class Point { private: int x; int y; public: Point(int point_x, int point_y) : x{point_x}, y{point_y} { } int get_x() const { return x; } int get_y() const { return y; } }; std::ostream& operator<<(std::ostream& output, const Point& point) { output << '(' << point.get_x() << \", \" << point.get_y() << ')'; return output; } int main() { Point point{3, 4}; std::cout << \"Point: \" << point << '\\n'; return 0; }    The function uses the public accessor functions instead of reading private data directly. This keeps the class interface in control of how its state is observed. A friend output function could access private members directly, but friendship should be used only when that closer relationship is justified.  The return type is std::ostream& , and the function returns output . This is what makes an expression such as std::cout << point << '\\n'; possible: the first operation returns the stream for the next operation.  "
+},
+{
+  "id": "chapter10_operator-to-string",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator-to-string",
+  "type": "Subsection",
+  "number": "10.8.4",
+  "title": "A <code class=\"code-inline tex2jax_ignore\">to_string()<\/code> Function for Text Representation",
+  "body": " A to_string() Function for Text Representation  A class can also provide a to_string() member function that returns a std::string representation of the object. This is useful when code needs text but is not writing directly to a stream. The stream-output operator can then delegate to the same function instead of duplicating the formatting logic.   Using to_string() inside operator<<   #include <iostream> #include <string> class Point { private: int x; int y; public: Point(int point_x, int point_y) : x{point_x}, y{point_y} { } std::string to_string() const { return std::string{\"(\"} + std::to_string(x) + \", \" + std::to_string(y) + \")\"; } }; std::ostream& operator<<(std::ostream& output, const Point& point) { return output << point.to_string(); } int main() { Point point{3, 4}; std::string description = point.to_string(); std::cout << \"Point: \" << description << '\\n'; std::cout << \"Again: \" << point << '\\n'; return 0; }    The class's to_string() function is a user-defined member function. It uses std::to_string() to convert the integer coordinates into text. Calling std::to_string(point) would not automatically work because the standard function does not know how to format an arbitrary Point object.  Keeping the formatting in one place makes the interface easier to maintain. If the desired point format changes, the class can update to_string() , and the stream operator will use the updated representation automatically.  "
+},
+{
+  "id": "chapter10_operator-overloading-rules",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator-overloading-rules",
+  "type": "Subsection",
+  "number": "10.8.5",
+  "title": "Rules and Design Limits",
+  "body": " Rules and Design Limits  Operator overloading has important limits. It changes how an operator works with a user-defined type, but it does not let a programmer redesign the C++ language.   Important operator-overloading rules      Rule  Meaning    At least one operand must be a user-defined type.  A class cannot redefine the meaning of int + int for the whole program.    The operator's precedence does not change.  Overloading + does not make it bind more tightly or loosely.    The number of operands does not change.  A unary operator remains unary, and a binary operator remains binary.    New operator symbols cannot be invented.  Only existing C++ operators can be overloaded.    Meaning should remain understandable.  Use a named function when operator notation would confuse readers.     Operator overloading is therefore part of a class's public design. A good overload makes an object easier to use without hiding an unexpected side effect. A poor overload can make ordinary-looking code difficult to understand.  "
+},
+{
+  "id": "chapter10_operator-overloading-codelens",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator-overloading-codelens",
+  "type": "Subsection",
+  "number": "10.8.6",
+  "title": "Tracing an Overloaded Operator",
+  "body": " Tracing an Overloaded Operator  Step through the expression first + second and observe the new Point object returned by operator+ .   "
+},
+{
+  "id": "chapter10_operator_exercise-purpose",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-purpose",
+  "type": "Checkpoint",
+  "number": "10.8.1",
+  "title": "",
+  "body": "  What does operator overloading provide for a class?     A class-specific meaning for an existing C++ operator.  The operator remains a C++ operator, but the class supplies behavior for its objects.    A way to invent entirely new operator symbols.  Only existing C++ operators may be overloaded.    A way to change operator precedence throughout the program.  Overloading does not change precedence.    A way to make every class member public.  Operator overloading and access control are separate features.    "
+},
+{
+  "id": "chapter10_operator_exercise-member",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-member",
+  "type": "Checkpoint",
+  "number": "10.8.2",
+  "title": "",
+  "body": "  In the expression first + second , what does a member operator+ use as its explicit parameter?     The right-hand Point , while first is represented by this .  A member function receives the left object implicitly and the other operand explicitly.    Both first and second as two explicit parameters.  The left operand is the object that calls the member function.    Only the output stream.  An output stream belongs to operator<< , not this addition operation.    No operand because overloaded operators cannot have parameters.  The other operand must still be supplied.    "
+},
+{
+  "id": "chapter10_operator_parsons",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_parsons",
+  "type": "Checkpoint",
+  "number": "10.8.3",
+  "title": "",
+  "body": "  Arrange the lines to define a member addition operator that returns a new point.    Point operator+(const Point& other) const {  return Point{x + other.x, y + other.y};  }   "
+},
+{
+  "id": "chapter10_operator_exercise-stream-return",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-stream-return",
+  "type": "Checkpoint",
+  "number": "10.8.4",
+  "title": "",
+  "body": "  Why does a stream-output operator return std::ostream& ?     Returning the stream allows output operations to be chained.  The next << operation can use the stream returned by the previous one.    It creates a new stream for every object.  The existing stream is returned by reference.    It converts every object into a string automatically.  The function writes a representation to the stream; it does not necessarily create a string.    It makes the class inherit from std::ostream .  The class and the stream remain separate types.    "
+},
+{
+  "id": "chapter10_operator_exercise-limits",
+  "level": "2",
+  "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-limits",
+  "type": "Checkpoint",
+  "number": "10.8.5",
+  "title": "",
+  "body": "  Which statement is a valid limitation of operator overloading?     At least one operand must have a user-defined type.  A class cannot globally redefine an expression such as int + int .    Only arithmetic operators can be overloaded.  Comparison and stream operators are also common overloads.    Every overloaded operator must be a static function.  Operators can be member or non-member functions, depending on the design.    Overloading automatically changes the operator's precedence.  Precedence remains part of the C++ language rules.    "
+},
+{
   "id": "chapter15_file-input-output-and-matrixes",
   "level": "1",
   "url": "chapter15_file-input-output-and-matrixes.html",
   "type": "Section",
-  "number": "10.1",
+  "number": "11.1",
   "title": "File Input\/Output and <code class=\"code-inline tex2jax_ignore\">matrix<\/code>es",
   "body": " File Input\/Output and matrix es  In this chapter we will develop a program that reads and writes files, parses input, and demonstrates the matrix class. We will also implement a data structure called Set that expands automatically as you add elements.  Aside from demonstrating all these features, the real purpose of the program is to generate a two-dimensional table of the distances between cities in the United States. The output is a matrix that looks like this:  Atlanta 0 Chicago 700 0 Boston 1100 1000 0 Dallas 800 900 1750 0 Denver 1450 1000 2000 800 0 Detroit 750 300 800 1150 1300 0 Orlando 400 1150 1300 1100 1900 1200 0 Phoenix 1850 1750 2650 1000 800 2000 2100 0 Seattle 2650 2000 3000 2150 1350 2300 3100 1450 0 Atlanta Chicago Boston Dallas Denver Detroit Orlando Phoenix Seattle  The diagonal elements are all zero because that is the distance from a city to itself. Also, because the distance from A to B is the same as the distance from B to A, there is no need to print the top half of the matrix.    Why aren't we filling in every value in our table, who are we leaving blank space above the diagonal of 0's?      Because we only need the half of the dataset contained by the triangle.   Incorrect! All of the data above the 0 diagonal is a mirror image of the triangle! So, the triangle contains the whole dataset.     Because triangles are the most effective shape to use when presenting data to others.   Incorrect! Triangles do look cool, but they aren't necessarily the most effective shape to use when presenting data.     Because matrices are triangles.   Incorrect! This triangle is PART OF an apmatrix.     Because the triangle contains the entire dataset.   Correct! The triangle contains all data points with no repeat data. If we included all datapoints, the would just be repeats of the points we already have.       Based on how it is used to create the above table, what do you think a matrix is?      a geometric shape   Incorrect! A matrix is not a geometric shape, although they ARE rectangles.     a two-dimensional std::vector   Correct!     a material in which something develops   Incorrect! This is a definition for matrix, but not in the programming sense.     a mold used to shape things   Incorrect! This is a definition for matrix, but not in the programming sense.     "
 },
@@ -12713,7 +13622,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-output-and-matrixes.html#question15_1_1",
   "type": "Checkpoint",
-  "number": "10.1.1",
+  "number": "11.1.1",
   "title": "",
   "body": "  Why aren't we filling in every value in our table, who are we leaving blank space above the diagonal of 0's?      Because we only need the half of the dataset contained by the triangle.   Incorrect! All of the data above the 0 diagonal is a mirror image of the triangle! So, the triangle contains the whole dataset.     Because triangles are the most effective shape to use when presenting data to others.   Incorrect! Triangles do look cool, but they aren't necessarily the most effective shape to use when presenting data.     Because matrices are triangles.   Incorrect! This triangle is PART OF an apmatrix.     Because the triangle contains the entire dataset.   Correct! The triangle contains all data points with no repeat data. If we included all datapoints, the would just be repeats of the points we already have.    "
 },
@@ -12722,7 +13631,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-output-and-matrixes.html#question15_1_2",
   "type": "Checkpoint",
-  "number": "10.1.2",
+  "number": "11.1.2",
   "title": "",
   "body": "  Based on how it is used to create the above table, what do you think a matrix is?      a geometric shape   Incorrect! A matrix is not a geometric shape, although they ARE rectangles.     a two-dimensional std::vector   Correct!     a material in which something develops   Incorrect! This is a definition for matrix, but not in the programming sense.     a mold used to shape things   Incorrect! This is a definition for matrix, but not in the programming sense.    "
 },
@@ -12731,7 +13640,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_streams.html",
   "type": "Section",
-  "number": "10.2",
+  "number": "11.2",
   "title": "Streams",
   "body": " Streams  To get input from a file or send output to a file, you have to create an ifstream object (for input files) or an ofstream object (for output files). These objects are defined in the header file fstream , which you have to include.  A stream is an abstract object that represents the flow of data from a source like the keyboard or a file to a destination like the screen or a file.  We have already worked with two streams: cin , which has type istream , and cout , which has type ostream . cin represents the flow of data from the keyboard to the program. Each time the program uses the >> operator or the getline function, it removes a piece of data from the input stream.  Similarly, when the program uses the << operator on an ostream , it adds a datum to the outgoing stream.    You create an object to write data to a file, and a object to read data from a file. In order to define objects to input from a file or send output to a file, you must include the <   > header file.                       What is a stream object?      an abstract object that works exclusively with std::cin and std::cout statements   Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!     an abstract object on which input and ouput operations are performed   Correct!     an abstract object that works only with file data   Incorrect! Stream objects do work with file data, but they do other things too.     an abstract object that controls the flow of statements   Incorrect! This is not at all what stream objects do, you should try re-reading to get a better understanding!       Match the stream to its type.   Try again!    cin  ifstream    cout  ofstream     "
 },
@@ -12776,7 +13685,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_2_1",
   "type": "Checkpoint",
-  "number": "10.2.1",
+  "number": "11.2.1",
   "title": "",
   "body": "  You create an object to write data to a file, and a object to read data from a file. In order to define objects to input from a file or send output to a file, you must include the <   > header file.                    "
 },
@@ -12785,7 +13694,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_2_2",
   "type": "Checkpoint",
-  "number": "10.2.2",
+  "number": "11.2.2",
   "title": "",
   "body": "  What is a stream object?      an abstract object that works exclusively with std::cin and std::cout statements   Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!     an abstract object on which input and ouput operations are performed   Correct!     an abstract object that works only with file data   Incorrect! Stream objects do work with file data, but they do other things too.     an abstract object that controls the flow of statements   Incorrect! This is not at all what stream objects do, you should try re-reading to get a better understanding!    "
 },
@@ -12794,7 +13703,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_1_3",
   "type": "Checkpoint",
-  "number": "10.2.3",
+  "number": "11.2.3",
   "title": "",
   "body": "  Match the stream to its type.   Try again!    cin  ifstream    cout  ofstream    "
 },
@@ -12803,7 +13712,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_file-input-finput.html",
   "type": "Section",
-  "number": "10.3",
+  "number": "11.3",
   "title": "File input",
   "body": " File input  To get data from a file, we have to create a stream that flows from the file into the program. We can do that using the ifstream constructor.  ifstream infile(\"file-name\");  The argument for this constructor is a string that contains the name of the file you want to open. The result is an object named infile that supports all the same operations as cin , including >> and getline .  #include <iostream> #include <fstream> int main() { int x; std::string line; std::ifstream infile(\"file-name\"); infile >> x; \/\/ get a single integer and store in x std::getline(infile, line); \/\/ get a whole line and store in line }  If we know ahead of time how much data is in a file, it is straightforward to write a loop that reads the entire file and then stops. More often, though, we want to read the entire file, but don't know how big it is.  There are member functions for ifstreams that check the status of the input stream; they are called good , eof , fail and bad . We will use good to make sure the file was opened successfully and eof to detect the end of file.  Whenever you get data from an input stream, you don't know whether the attempt succeeded until you check. If the return value from eof is true then we have reached the end of the file and we know that the last attempt failed. Here is a program that reads lines from a file and displays them on the screen:  #include <iostream> #include <fstream> int main() { std::string fileName = ...; std::ifstream infile(fileName); if (infile.good() == false) { std::cout << \"Unable to open the file named \" << fileName; exit (1); } while (true) { std::getline(infile, line); if (infile.eof()) { break; } std::cout << line << std::endl; } }  Immediately after opening the file, we invoke the good function. The return value is false if the system could not open the file, most likely because it does not exist, or you do not have permission to read it.  The statement while(true) is an idiom for an infinite loop. Usually there will be a break statement somewhere in the loop so that the program does not really run forever (although some programs do). In this case, the break statement allows us to exit the loop as soon as we detect the end of file.  It is important to exit the loop between the input statement and the output statement, so that when getline fails at the end of the file, we do not output the invalid data in line .    Consider this code snippet: :: ifstream infile(\"file-name\"); Finish each sentence.   Try again!    The constructor is  ifstream.    The argument and the name of the file you want to open is  \"file-name\".    The result of this code snippet is an object named  infile.    The result of this code snippet supports the same operators as  cin.       The ifstream member function called makes sure the file was opened successfully, and member function detects the end of the file.                  The __________ statement allows us to exit the loop as soon as we detect the end of the file.              Create a code block that reads lines from filename and prints them out. First, make sure that the file is able to be opened.     int main() {    string name_of_file = \"filename\";    ifstream in_file(name_of_file);    if (in_file.good() == false) {    std::cout << \"Unable to open the file named \" << name_of_file;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    std::cout << line << std::endl ;  }  }     "
 },
@@ -12884,7 +13793,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_1",
   "type": "Checkpoint",
-  "number": "10.3.1",
+  "number": "11.3.1",
   "title": "",
   "body": "  Consider this code snippet: :: ifstream infile(\"file-name\"); Finish each sentence.   Try again!    The constructor is  ifstream.    The argument and the name of the file you want to open is  \"file-name\".    The result of this code snippet is an object named  infile.    The result of this code snippet supports the same operators as  cin.    "
 },
@@ -12893,7 +13802,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_2",
   "type": "Checkpoint",
-  "number": "10.3.2",
+  "number": "11.3.2",
   "title": "",
   "body": "  The ifstream member function called makes sure the file was opened successfully, and member function detects the end of the file.               "
 },
@@ -12902,7 +13811,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_3",
   "type": "Checkpoint",
-  "number": "10.3.3",
+  "number": "11.3.3",
   "title": "",
   "body": "  The __________ statement allows us to exit the loop as soon as we detect the end of the file.           "
 },
@@ -12911,7 +13820,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_4",
   "type": "Checkpoint",
-  "number": "10.3.4",
+  "number": "11.3.4",
   "title": "",
   "body": "  Create a code block that reads lines from filename and prints them out. First, make sure that the file is able to be opened.     int main() {    string name_of_file = \"filename\";    ifstream in_file(name_of_file);    if (in_file.good() == false) {    std::cout << \"Unable to open the file named \" << name_of_file;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    std::cout << line << std::endl ;  }  }    "
 },
@@ -12920,7 +13829,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_file-output.html",
   "type": "Section",
-  "number": "10.4",
+  "number": "11.4",
   "title": "File output",
   "body": " File output  Sending output to a file is similar. For example, we could modify the previous program to copy lines from one file to another.  #include <iostream> int main() { std::ifstream infile(\"input-file\"); std::ofstream outfile(\"output-file\"); if (infile.good() == false || outfile.good() == false) { std::cout << \"Unable to open one of the files.\" << std::endl; exit (1); } while (true) { std::getline(infile, line); if (infile.eof()) break; outfile << line << std::endl; } }    Create a code block that sends output to a file. First, make sure that both the input file and the output file are able to be opened.     int main() {    ifstream in_file(\"input_file_name\");  ofstream out_file(\"input_file_name\");    if (in_file.good() == false || out_file.good() == false) {    std::cout << \"Unable to open one of the files.\" << std::endl ;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    outfile << line << std::endl ;  }  }       The code from the previous problem checks whether the files open or not. It doesn't specify which one, if any, doesn't open. How could you specify which file does not open?      Create two \"for\" loops instead of an if-statement so that the statement loops through both conditions once.   Try again!     Create a \"while\" loop instead of an if-statement so that the statement loops through both conditions separately until the body of the loop is reached.   Try again!     Create two \"if\" statements, one that check whether in_file.good() is false, and another that checks whether out_file.good() is false, instead of putting them together in one \"if\" statement.   Correct!       Finish the statement:  outfile(\"output-file\"); .           "
 },
@@ -12938,7 +13847,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_1",
   "type": "Checkpoint",
-  "number": "10.4.1",
+  "number": "11.4.1",
   "title": "",
   "body": "  Create a code block that sends output to a file. First, make sure that both the input file and the output file are able to be opened.     int main() {    ifstream in_file(\"input_file_name\");  ofstream out_file(\"input_file_name\");    if (in_file.good() == false || out_file.good() == false) {    std::cout << \"Unable to open one of the files.\" << std::endl ;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    outfile << line << std::endl ;  }  }    "
 },
@@ -12947,7 +13856,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_2",
   "type": "Checkpoint",
-  "number": "10.4.2",
+  "number": "11.4.2",
   "title": "",
   "body": "  The code from the previous problem checks whether the files open or not. It doesn't specify which one, if any, doesn't open. How could you specify which file does not open?      Create two \"for\" loops instead of an if-statement so that the statement loops through both conditions once.   Try again!     Create a \"while\" loop instead of an if-statement so that the statement loops through both conditions separately until the body of the loop is reached.   Try again!     Create two \"if\" statements, one that check whether in_file.good() is false, and another that checks whether out_file.good() is false, instead of putting them together in one \"if\" statement.   Correct!    "
 },
@@ -12956,7 +13865,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_3",
   "type": "Checkpoint",
-  "number": "10.4.3",
+  "number": "11.4.3",
   "title": "",
   "body": "  Finish the statement:  outfile(\"output-file\"); .          "
 },
@@ -12965,7 +13874,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_parsing-input-parsing.html",
   "type": "Section",
-  "number": "10.5",
+  "number": "11.5",
   "title": "Parsing input",
   "body": " Parsing input  In I defined parsing as the process of analyzing the structure of a sentence in a natural language or a statement in a formal language. For example, the compiler has to parse your program before it can translate it into machine language.  In addition, when you read input from a file or from the keyboard you often have to parse it in order to extract the information you want and detect errors.  For example, I have a file called distances that contains information about the distances between major cities in the United States. I got this information from a randomly-chosen web page http:\/\/www.jaring.my\/usiskl\/usa\/distance.html so it may be wildly inaccurate, but that doesn't matter. The format of the file looks like this:  \"Atlanta\" \"Chicago\" 700 \"Atlanta\" \"Boston\" 1,100 \"Atlanta\" \"Chicago\" 700 \"Atlanta\" \"Dallas\" 800 \"Atlanta\" \"Denver\" 1,450 \"Atlanta\" \"Detroit\" 750 \"Atlanta\" \"Orlando\" 400  Each line of the file contains the names of two cities in quotation marks and the distance between them in miles. The quotation marks are useful because they make it easy to deal with names that have more than one word, like San Francisco.  By searching for the quotation marks in a line of input, we can find the beginning and end of each city name. Searching for special characters like quotation marks can be a little awkward, though, because the quotation mark is a special character in C++, used to identify string values.  If we want to find the first appearance of a quotation mark, we have to write something like:  int index = line.find('\\\"');  The argument here looks like a mess, but it represents a single character, a double quotation mark. The outermost single-quotes indicate that this is a character value, as usual. The backslash ( \\ ) indicates that we want to treat the next character literally. The sequence \\\" represents a quotation mark; the sequence \\' represents a single-quote. Interestingly, the sequence \\\\ represents a single backslash. The first backslash indicates that we should take the second backslash seriously.  Parsing input lines consists of finding the beginning and end of each city name and using the substr function to extract the cities and distance. substr is a string member function; it takes two arguments, the starting index of the substring and the length.  void processLine(const string& line) { \/\/ the character we are looking for is a quotation mark char quote = '\\\"'; \/\/ store the indices of the quotation marks in a vector std::vector<int> quoteIndex (4); \/\/ find the first quotation mark using the built-in find quoteIndex[0] = line.find(quote); \/\/ find the other quotation marks using the find from Chapter 7 for (int i=1; i < 4; i++) { quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1); } \/\/ break the line up into substrings int len1 = quoteIndex[1] - quoteIndex[0] - 1; std::string city1 = line.substr(quoteIndex[0]+1, len1); int len2 = quoteIndex[3] - quoteIndex[2] - 1; std::string city2 = line.substr(quoteIndex[2]+1, len2); int len3 = line.length() - quoteIndex[2] - 1; std::string distString = line.substr(quoteIndex[3]+1, len3); \/\/ output the extracted information std::cout << city1 << \"\\t\" << city2 << \"\\t\" << distString << std::endl ; }  Of course, just displaying the extracted information is not exactly what we want, but it is a good starting place.    What does parsing mean in the programming sense?      to scan an entire program for errors   Incorrect! This is included in the debugging process.     to run a program start to finish and record the run time   Incorrect! This is included in the debugging process.     to analyze the structure of a statement in a formal language   Correct! The compiler has to parse the program before it can translate it into machine language!     to search an entire program for a statement   Incorrect! You can use control (command) + F to find a particular statement.       The character indicates that we want to match the next character literally.             The substr() takes and as its two arguments.                  Create a block of code that takes a date written in the format mm\/dd\/yyyyy as an argument, and that separates it into three separate integers: day, month, and year. Find the respective parts in this order: month, first slash, day, second slash, year.     int main() {     string month = date.substr(0, 2);    string month = date.substr(2, 0);     int first_slash = date.find('\/');     string day = date.substr(first_slash + 1, 2);    string day = date.substr(first_slash, 2);      int second_slash = date.find('\/', first_slash + 1);    int second_slash = date.find('\/', first_slash);     int second_slash = date.find('\/');     string year = date.substr(second_slash + 1, 4);    string year = date.substr(second_slash, 4);     string year = date.substr(second_slash + 1, 2);    }     "
 },
@@ -13055,7 +13964,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_1",
   "type": "Checkpoint",
-  "number": "10.5.1",
+  "number": "11.5.1",
   "title": "",
   "body": "  What does parsing mean in the programming sense?      to scan an entire program for errors   Incorrect! This is included in the debugging process.     to run a program start to finish and record the run time   Incorrect! This is included in the debugging process.     to analyze the structure of a statement in a formal language   Correct! The compiler has to parse the program before it can translate it into machine language!     to search an entire program for a statement   Incorrect! You can use control (command) + F to find a particular statement.    "
 },
@@ -13064,7 +13973,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_2",
   "type": "Checkpoint",
-  "number": "10.5.2",
+  "number": "11.5.2",
   "title": "",
   "body": "  The character indicates that we want to match the next character literally.          "
 },
@@ -13073,7 +13982,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_3",
   "type": "Checkpoint",
-  "number": "10.5.3",
+  "number": "11.5.3",
   "title": "",
   "body": "  The substr() takes and as its two arguments.               "
 },
@@ -13082,7 +13991,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_4",
   "type": "Checkpoint",
-  "number": "10.5.4",
+  "number": "11.5.4",
   "title": "",
   "body": "  Create a block of code that takes a date written in the format mm\/dd\/yyyyy as an argument, and that separates it into three separate integers: day, month, and year. Find the respective parts in this order: month, first slash, day, second slash, year.     int main() {     string month = date.substr(0, 2);    string month = date.substr(2, 0);     int first_slash = date.find('\/');     string day = date.substr(first_slash + 1, 2);    string day = date.substr(first_slash, 2);      int second_slash = date.find('\/', first_slash + 1);    int second_slash = date.find('\/', first_slash);     int second_slash = date.find('\/');     string year = date.substr(second_slash + 1, 4);    string year = date.substr(second_slash, 4);     string year = date.substr(second_slash + 1, 2);    }    "
 },
@@ -13091,7 +14000,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_parsing-numbers.html",
   "type": "Section",
-  "number": "10.6",
+  "number": "11.6",
   "title": "Parsing numbers",
   "body": " Parsing numbers  The next task is to convert the numbers in the file from strings to integers. When people write large numbers, they often use commas to group the digits, as in 1,750. Most of the time when computers write large numbers, they don't include commas, and the built-in functions for reading numbers usually can't handle them. That makes the conversion a little more difficult, but it also provides an opportunity to write a comma-stripping function, so that's ok. Once we get rid of the commas, we can use the library function atoi to convert to integer. atoi is defined in the header file cstdlib .  To get rid of the commas, one option is to traverse the string and check whether each character is a digit. If so, we add it to the result string. At the end of the loop, the result string contains all the digits from the original string, in order.  #include <iostream> int convertToInt(const std::string& s) { std::string digitString = \"\"; for (size_t i = 0; i < s.length(); i++) { if (isdigit (s[i])) { digitString += s[i]; } } return atoi(digitString); }  The variable digitString is an example of an accumulator . It is similar to the counter we saw in , except that instead of getting incremented, it gets accumulates one new character at a time, using string concatentation.  The expression  digitString += s[i];  is equivalent to  digitString = digitString + s[i];  Both statements add a single character onto the end of the existing string.  Try the function out for yourself! As you can see, this function can also be used to parse phone numbers!   #include <iostream> #include <string> #include <vector> int convertToInt(const std::string& s) { std::string digitString = \"\"; for (size_t i = 0; i < s.length(); i++) { if (isdigit (s[i])) { digitString += s[i]; } } return atoi(digitString); } int main() { int num = convertToInt(\"867-5309\"); std::cout << num << std::endl; }     What does the atoi() function do?      takes the absolute value of a number   Incorrect! Go back and read for the answer.     converts a double to an int   Incorrect! Go back and read for the answer.     converts a string to an int   Correct! This is very helpful when we read numbers from a file (where they are strings).     converts an int to a string   Incorrect! Go back and read for the answer.       Which of the following strings will return 2020 when passed into convertToInt() ?      2020   Correct! This one is quite simple.     ab,jkl2!!moo0?huh2mth0haha.   Correct! This long, confusing string will clean up nicely!     2,00!!!!!!!!2   Incorrect!     2OOO020OOOOO   Correct! You have to look closely to see that some of these are 0's!     we2love0parsing2numbersO!   Incorrect! Although we do love parsing numbers, this is incorrect.       Create the replace_with() function that takes a string str , a character to get rid of olc_char , and a character to replace it with new_char . It should return a new string that has replaces any occurances of old_char with new_char.      string replace_with(string str, char old_char, char new_char) {    string replace_with() {      for (size_t i = 0; i < str.length(); i++) {    for (int i = 0; i < str.length(); i++) {     for (size_t i = 0; i < str.size(); i++) {     if (str[i] == old_char) {    if (i == old_char) {      str[i] = new_char;  }    new_char = str[i];  }     i = new_char;  }     }  return str;  }    }  return new_char;  }      "
 },
@@ -13163,7 +14072,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_1",
   "type": "Checkpoint",
-  "number": "10.6.1",
+  "number": "11.6.1",
   "title": "",
   "body": "  What does the atoi() function do?      takes the absolute value of a number   Incorrect! Go back and read for the answer.     converts a double to an int   Incorrect! Go back and read for the answer.     converts a string to an int   Correct! This is very helpful when we read numbers from a file (where they are strings).     converts an int to a string   Incorrect! Go back and read for the answer.    "
 },
@@ -13172,7 +14081,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_2",
   "type": "Checkpoint",
-  "number": "10.6.2",
+  "number": "11.6.2",
   "title": "",
   "body": "  Which of the following strings will return 2020 when passed into convertToInt() ?      2020   Correct! This one is quite simple.     ab,jkl2!!moo0?huh2mth0haha.   Correct! This long, confusing string will clean up nicely!     2,00!!!!!!!!2   Incorrect!     2OOO020OOOOO   Correct! You have to look closely to see that some of these are 0's!     we2love0parsing2numbersO!   Incorrect! Although we do love parsing numbers, this is incorrect.    "
 },
@@ -13181,7 +14090,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_3",
   "type": "Checkpoint",
-  "number": "10.6.3",
+  "number": "11.6.3",
   "title": "",
   "body": "  Create the replace_with() function that takes a string str , a character to get rid of olc_char , and a character to replace it with new_char . It should return a new string that has replaces any occurances of old_char with new_char.      string replace_with(string str, char old_char, char new_char) {    string replace_with() {      for (size_t i = 0; i < str.length(); i++) {    for (int i = 0; i < str.length(); i++) {     for (size_t i = 0; i < str.size(); i++) {     if (str[i] == old_char) {    if (i == old_char) {      str[i] = new_char;  }    new_char = str[i];  }     i = new_char;  }     }  return str;  }    }  return new_char;  }     "
 },
@@ -13190,7 +14099,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_the-set-data-structure.html",
   "type": "Section",
-  "number": "10.7",
+  "number": "11.7",
   "title": "The <code class=\"code-inline tex2jax_ignore\">Set<\/code> data structure",
   "body": " The Set data structure  A data structure is a container for grouping a collection of data into a single object. We have seen some examples already, including string s, which are collections of characters, and std::vector s which are collections of any type.  An ordered set is a collection of items with two defining properties:    Ordering:  The elements of the set have indices associated with them. We can use these indices to identify elements of the set.    Uniqueness:  No element appears in the set more than once. If you try to add an element to a set, and it already exists, there is no effect.    In addition, our implementation of an ordered set will have the following property:    Arbitrary size:  As we add elements to the set, it expands to make room for new elements.    Both string s and std::vector s have an ordering; every element has an index we can use to identify it. None of the data structures we have seen so far have the properties of uniqueness or arbitrary size.  To achieve uniqueness, we have to write an add function that searches the set to see if it already exists. To make the set expand as elements are added, we can take advantage of the resize function on std::vector s.  Here is the beginning of a class definition for a Set .  class Set { private: std::vector<string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const string& s) const; int add(const string& s); }; Set::Set(int n) { std::vector<string> temp (n); elements = temp; numElements = 0; }  The instance variables are a std::vector of strings and an integer that keeps track of how many elements there are in the set. Keep in mind that the number of elements in the set, numElements , is not the same thing as the size of the std::vector . Usually it will be smaller.  The Set constructor takes a single parameter, which is the initial size of the std::vector . The initial number of elements is always zero.  getNumElements and getElement are accessor functions for the instance variables, which are private. numElements is a read-only variable, so we provide a get function but not a set function.  int Set::getNumElements() const { return numElements; }  Why do we have to prevent client programs from changing getNumElements ? What are the invariants for this type, and how could a client program break an invariant. As we look at the rest of the Set member function, see if you can convince yourself that they all maintain the invariants.  When we use the [] operator to access the std::vector , it checks to make sure the index is greater than or equal to zero and less than the length of the std::vector . To access the elements of a set, though, we need to check a stronger condition. The index has to be less than the number of elements, which might be smaller than the length of the std::vector .  string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl ; exit (1); } }  If getElement gets an index that is out of range, it prints an error message (not the most useful message, I admit), and exits.  The interesting functions are find and add . By now, the pattern for traversing and searching should be old hat:  int Set::find(const string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; }  So that leaves us with add . Often the return type for something like add would be void, but in this case it might be useful to make it return the index of the element.  int Set::add(const string& s) { \/\/ if the element is already in the set, return its index int index = find(s); if (index != -1) return index; \/\/ if the vector is full, double its size if (numElements == elements.length()) { elements.resize (elements.length() * 2); } \/\/ add the new elements and return its index index = numElements; elements[index] = s; numElements++; return index; }  The tricky thing here is that numElements is used in two ways. It is the number of elements in the set, of course, but it is also the index of the next element to be added.  It takes a minute to convince yourself that that works, but consider this: when the number of elements is zero, the index of the next element is 0. When the number of elements is equal to the length of the std::vector , that means that the vector is full, and we have to allocate more space (using resize ) before we can add the new element.  Here is a state diagram showing a Set object that initially contains space for 2 elements.  Now we can use the Set class to keep track of the cities we find in the file. In main we create the Set with an initial size of 2:  Set cities (2);  Then in processLine we add both cities to the Set and store the index that gets returned.  int index1 = cities.add (city1); int index2 = cities.add (city2);  I modified processLine to take the cities object as a second parameter.   Try running the program:   #include <iostream> #include <string> #include <vector> class Set { private: std::vector<std::string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const std::string& s) const; int add(const std::string& s); }; Set::Set(int n) { std::vector<std::string> temp (n); elements = temp; numElements = 0; } int main() { Set cities(2); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); std::cout << cities.getElement(0); }  int Set::getNumElements() const { return numElements; } std::string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl; exit (1); } } int Set::find(const std::string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; } int Set::add(const std::string& s) { int index = find(s); if (index != -1) return index; size_t num = numElements; if (num == elements.size()) { elements.resize (elements.size() * 2); } index = numElements; elements[index] = s; numElements++; return index; }      Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!       Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.       If the number of elements is 76, then the index of the next element is .             Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.            "
 },
@@ -13397,7 +14306,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#set_sample",
   "type": "Listing",
-  "number": "10.7.1",
+  "number": "11.7.1",
   "title": "Try running the program:",
   "body": " Try running the program:   #include <iostream> #include <string> #include <vector> class Set { private: std::vector<std::string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const std::string& s) const; int add(const std::string& s); }; Set::Set(int n) { std::vector<std::string> temp (n); elements = temp; numElements = 0; } int main() { Set cities(2); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); std::cout << cities.getElement(0); }  int Set::getNumElements() const { return numElements; } std::string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl; exit (1); } } int Set::find(const std::string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; } int Set::add(const std::string& s) { int index = find(s); if (index != -1) return index; size_t num = numElements; if (num == elements.size()) { elements.resize (elements.size() * 2); } index = numElements; elements[index] = s; numElements++; return index; }   "
 },
@@ -13406,7 +14315,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_1",
   "type": "Checkpoint",
-  "number": "10.7.1",
+  "number": "11.7.1",
   "title": "",
   "body": "  Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!    "
 },
@@ -13415,7 +14324,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_2",
   "type": "Checkpoint",
-  "number": "10.7.2",
+  "number": "11.7.2",
   "title": "",
   "body": "  Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.    "
 },
@@ -13424,7 +14333,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_3",
   "type": "Checkpoint",
-  "number": "10.7.3",
+  "number": "11.7.3",
   "title": "",
   "body": "  If the number of elements is 76, then the index of the next element is .          "
 },
@@ -13433,7 +14342,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_4",
   "type": "Checkpoint",
-  "number": "10.7.4",
+  "number": "11.7.4",
   "title": "",
   "body": "  Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.           "
 },
@@ -13442,7 +14351,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_matrix.html",
   "type": "Section",
-  "number": "10.8",
+  "number": "11.8",
   "title": "<code class=\"code-inline tex2jax_ignore\">matrix<\/code>",
   "body": "  matrix   A matrix is similar to a std::vector except it is two-dimensional. Instead of a length, it has two dimensions, called numrows and numcols , for number of rows and number of columns.  Each element in the matrix is indentified by two indices; one specifies the row number, the other the column number.  To create a matrix, there are four constructors:  matrix<char> m1; matrix<int> m2(3, 4); matrix<double> m3(rows, cols, 0.0); matrix<double> m4(m3);  The first is a do-nothing constructor that makes a matrix with both dimensions 0. The second takes two integers, which are the initial number of rows and columns, in that order. The third is the same as the second, except that it takes an additional parameter that is used to initialized the elements of the matrix. The fourth is a copy constructor that takes another matrix as a parameter.  Just as with vectors , we can make matrix es with any type of elements (including std::vector s, and even matrix es).  To access the elements of a matrix, we use the [] operator to specify the row and column:  m2[0][0] = 1; m3[1][2] = 10.0 * m2[0][0];  If we try to access an element that is out of range, the program prints an error message and quits.  The numrows and numcols functions get the number of rows and columns. Remember that the row indices run from 0 to numrows() -1 and the column indices run from 0 to numcols() -1 .  The usual way to traverse a matrix is with a nested loop. This loop sets each element of the matrix to the sum of its two indices:  for (int row=0; row < m2.numrows(); row++) { for (int col=0; col < m2.numcols(); col++) { m2[row][col] = row + col; } }  This loop prints each row of the matrix with tabs between the elements and newlines between the rows:  for (int row=0; row < m2.numrows(); row++) { for (int col=0; col < m2.numcols(); col++) { std::cout << m2[row][col] << \"\\t\"; } std::cout << std::endl ; }    Which of the following data types are supported by matrix?      int   Correct!     string   Correct!     std::vector<int>   Correct!     vector<std::vector<int>>   Correct! This is a technically type of matrix!     matrix   Correct! Matrices can be made of matrices.       Suppose we have matrix mat . Then mat[9][17] would be accessing column and row of our matrix.         .*  Incorrect! Remember to use zero indexing!         .*  Incorrect! Remember to use zero indexing!      "
 },
@@ -13541,7 +14450,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_matrix.html#question15_8_1",
   "type": "Checkpoint",
-  "number": "10.8.1",
+  "number": "11.8.1",
   "title": "",
   "body": "  Which of the following data types are supported by matrix?      int   Correct!     string   Correct!     std::vector<int>   Correct!     vector<std::vector<int>>   Correct! This is a technically type of matrix!     matrix   Correct! Matrices can be made of matrices.    "
 },
@@ -13550,7 +14459,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_matrix.html#question15_8_2",
   "type": "Checkpoint",
-  "number": "10.8.2",
+  "number": "11.8.2",
   "title": "",
   "body": "  Suppose we have matrix mat . Then mat[9][17] would be accessing column and row of our matrix.         .*  Incorrect! Remember to use zero indexing!         .*  Incorrect! Remember to use zero indexing!     "
 },
@@ -13559,7 +14468,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_a-distance-matrix.html",
   "type": "Section",
-  "number": "10.9",
+  "number": "11.9",
   "title": "A distance matrix",
   "body": " A distance matrix  Finally, we are ready to put the data from the file into a matrix. Specifically, the matrix will have one row and one column for each city.  We'll create the matrix in main , with plenty of space to spare:  matrix<int> distances (50, 50, 0);  Inside processLine , we add new information to the matrix by getting the indices of the two cities from the Set and using them as matrix indices:  int dist = convertToInt(distString); int index1 = cities.add (city1); int index2 = cities.add (city2); distances[index1][index2] = distance; distances[index2][index1] = distance;  Finally, in main we can print the information in a human-readable form:  for (int i=0; i < cities.getNumElements(); i++) { std::cout << cities.getElement(i) << \"\\t\"; for (int j=0; j<=i; j++) { std::cout << distances[i][j] << \"\\t\"; } std::cout << std::endl ; } cout << \"\\t\"; for (int i=0; i < cities.getNumElements(); i++) { std::cout << cities.getElement(i) << \"\\t\"; } cout << std::endl ;  This code produces the output shown at the beginning of the chapter.  "
 },
@@ -13613,7 +14522,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_a-proper-distance-matrix.html",
   "type": "Section",
-  "number": "10.10",
+  "number": "11.10",
   "title": "A proper distance matrix",
   "body": " A proper distance matrix  Although this code works, it is not as well organized as it should be. Now that we have written a prototype, we are in a good position to evaluate the design and improve it.  What are some of the problems with the existing code?     We did not know ahead of time how big to make the distance matrix, so we chose an arbitrary large number (50) and made it a fixed size. It would be better to allow the distance matrix to expand in the same way a Set does. The matrix class has a function called resize that makes this possible.    The data in the distance matrix is not well-encapsulated. We have to pass the set of city names and the matrix itself as arguments to processLine , which is awkward. Also, use of the distance matrix is error prone because we have not provided accessor functions that perform error-checking. It might be a good idea to take the Set of city names and the matrix of distances, and combine them into a single object called a DistMatrix .     Here is a draft of what the header for a DistMatrix might look like:  class DistMatrix { private: Set cities; matrix<int> distances; public: DistMatrix(int rows); void add(const string& city1, const string& city2, int dist); int distance(int i, int j) const; int distance(const string& city1, const string& city2) const; std::string cityName(int i) const; int numCities() const; void print(); };  Using this interface simplifies main :  #include <iostream> #include <fstream> int main() { std::string line; std::ifstream infile(\"distances\"); DistMatrix distances(2); while (true) { std::getline(infile, line); if (infile.eof()) break; processLine(line, distances); } distances.print(); return 0; }  It also simplifies processLine :  void processLine(const string& line, DistMatrix& distances) { char quote = '\\\"'; std::vector<int> quoteIndex (4); quoteIndex[0] = line.find(quote); for (int i=1; i < 4; i++) { quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1); } \/\/ break the line up into substrings int len1 = quoteIndex[1] - quoteIndex[0] - 1; std::string city1 = line.substr(quoteIndex[0]+1, len1); int len2 = quoteIndex[3] - quoteIndex[2] - 1; std::string city2 = line.substr(quoteIndex[2]+1, len2); int len3 = line.length() - quoteIndex[2] - 1; std::string distString = line.substr(quoteIndex[3]+1, len3); int distance = convertToInt(distString); \/\/ add the new datum to the distances matrix distances.add(city1, city2, distance); }  I will leave it as an exercise to you to implement the member functions of DistMatrix .  "
 },
@@ -13685,7 +14594,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_glossary.html",
   "type": "Section",
-  "number": "10.11",
+  "number": "11.11",
   "title": "Glossary",
   "body": " Glossary    ordered set  A data structure in which every element appears only once and every element has an index that identifies it.    stream  A data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output.    accumulator  A variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    ordered set  a data structure in which every element appears only once and every element has an index that identifies it    stream  a data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output    accumulator  a variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.      "
 },
@@ -13694,7 +14603,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_glossary.html#chapter15_glossary-2",
   "type": "Glossary",
-  "number": "10.11",
+  "number": "11.11",
   "title": "Glossary",
   "body": "  ordered set  A data structure in which every element appears only once and every element has an index that identifies it.    stream  A data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output.    accumulator  A variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.   "
 },
@@ -13703,7 +14612,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_glossary.html#chapter15_glossary-3",
   "type": "Reading Questions",
-  "number": "10.11",
+  "number": "11.11",
   "title": "Reading Questions",
   "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    ordered set  a data structure in which every element appears only once and every element has an index that identifies it    stream  a data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output    accumulator  a variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.     "
 },
@@ -13712,7 +14621,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_multiple-choice-exercises.html",
   "type": "Exercises",
-  "number": "10.12",
+  "number": "11.12",
   "title": "Multiple Choice Exercises",
   "body": " Multiple Choice Exercises    We want to open a file and parse its data into our program. What library do we need to include?       iostream    This library deals with communication through the standard input and output.      sstream    This library is used to manipulate string objects as if they were streams.      fstream    This library is used to manipulate files using streams.      iomanip    This library is used to modify internal flags and formatting options.       The code below reads data from a file called input.txt . What is wrong with the following code?   #include <iostream> #include <fstream> int main() { std::string input; std::string filename = \"input.txt\"; std::ifstream infile(filename); std::getline(filename, input); }       We should use ofstream instead of ifstream .   Since we are dealing with an input file, we should use ifstream .     The arguments in getline are incorrect.   We are supposed to read input through the ifstream object. This line should be getline(infile, input) .     We cannot use a variable to store the filename.   Since the name of the file is just a string, we can store it in a variable.     There are no errors with this code.   Take another look at the code. Are we reading the input correctly into input ?       We want to make sure the file we wanted to open was opened successfully. Which of the following checks this and prints the proper output?       if (infile.good()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the if statement evaluates to true, then the file was opened successfully.      if (!infile.is_open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }     is_open() is another function that returns true if a file is opened successfully.      if (infile.good() == false) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the file isn't opened successfully, an error message is printed.      if (!infile.open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    The open() function is different from is_open() and does not return a bool .       Which of the following statements are true?      We can assume the program opens all files successfully.   There are times when a file can't be properly opened because they may have not been properly closed the last time they were used or the file is currently used by another program. As a result, it is good practice to include a check in your program.     A stream is an abstract object that represents the flow of data from a source.   We've used two streams before: the standard input stream and standard output stream ( cin and cout ).     We cannot use the operators << and >> , as they are for iostream objects only.   We are also able to use the operators for fstream objects.       What are the contents of the output file output.txt after running the code below?   #include <iostream> #include <fstream> int main() { std::ofstream outfile(\"output.txt\"); if (!outfile.good()) { std::cout << \"Unable to open file\" << std::endl; } std::cout << \"Powers of 2: \"; outfile << \"2 4 8 16 32 64\" << std::endl; }       2 4 8 16 32 64   This is the only thing we write to the output file.     Powers of 2: 2 4 8 16 31 64   Take another look at the stream objects used in the code.     Powers of 2:   This is printed to standard output, not the output file.     Unable to open file   Although this may be printed, this is not the contents of the output file.       The file scores.txt contains data about the roster number and test scores of students in a class. The output file averages.txt should store each student's roster number and average test score. What should replace the question marks?   #include <iostream> #include <fstream> int main() { std::string junk; int studentNum; double mid1, mid2, final; std::ifstream infile(\"scores.txt\"); std::ofstream outfile(\"averages.txt\"); if (!infile.good() || !outfile.good()) { std::cout << \"Unable to open a file\" << std::endl; } std::getline(infile, junk); outfile << \"Student#\\tAverage\" << std::endl; while (infile >> studentNum >> mid1 >> mid2 >> final) { double avg = (mid1 + mid2 + final) \/ 3; ??? } }        cout << avg << std::endl    This will output the average to standard output.      outfile << avg << std::endl    Take another look at the code. Is there a clue as to what data should be in the output file?      infile << studentNum << \"\\t\" << avg << std::endl    The data should be written to the output file.      outfile << studentNum << \"\\t\" << avg << std::endl    This properly outputs the student number and the student's average to the output file.       What does the following code do?   #include <iostream> #include <string> int main() { std::string original = \"430-0444\"; std::string digitString = \"\"; for (size_t i = 0; i < original.length(); i++) { if (isdigit(original[original.length() - 1 - i])) { digitString += original[original.length() - 1 - i]; } } std::cout << atoi(digitString) << std::endl; }       The code converts the original string to an integer and outputs the integer.   Take a closer look at the contents of the for loop.     The code converts an integer to a string and outputs the string.   What does the atoi function do?     The code outputs the sum of all the original string's digits.   The digitString variable is a string , not an int .     The code converts the original string to an integer in reverse and outputs the integer in reverse.   The code in the for loop parses the string in reverse.       Which of the following statements are false about the Set data structure?      A set can contain multiple elements with the same value.   All elements in a set are unique.     We can identify elements of a set by each element's index.   Each element has an index associated with it.     The elements of a Set are always sorted.   Although a set is ordered, it is not necessarily sorted.     The size of a Set object is fixed.   The Set data structure can expand to make room for new elements.       There are many ways to construct a matrix . Which of the following are valid constructors of a matrix ?       matrix<string> m1(2);    A matrix has two dimensions and this constructor only has one dimension.      matrix<int> m2(2, 6, 0);    This creates a matrix with 2 rows and 6 columns with all of its elements equal to 0.      matrix<char> m3(m2);    This creates m3 to be a copy of m2 .      matrix<int> m2(2.4, 2);    There must be a whole number of rows and columns.       What is the output of the following code?   #include <iostream> #include <vector> bool secret_function(int num) { if (num % 2 == 0) { return true; } return false; } int main() { matrix<int> mat(4, 2); for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { if (!secret_function(i + j) { mat[i][j] = 0; } else { mat[i][j] = i + j; } } } int n; for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { n += mat[i][j]; } } std::cout << n << std::endl; }       8   The matrix only contains even sums of the row and column indices and 0 otherwise. Thus, the sum of all elements is 8.     16   What does the secret function do?     0   What are the contents of the matrix?     9   What are the contents of the matrix?     "
 },
@@ -13721,7 +14630,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_1",
   "type": "Exercise",
-  "number": "10.12.1",
+  "number": "11.12.1",
   "title": "",
   "body": "  We want to open a file and parse its data into our program. What library do we need to include?       iostream    This library deals with communication through the standard input and output.      sstream    This library is used to manipulate string objects as if they were streams.      fstream    This library is used to manipulate files using streams.      iomanip    This library is used to modify internal flags and formatting options.    "
 },
@@ -13730,7 +14639,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_2",
   "type": "Exercise",
-  "number": "10.12.2",
+  "number": "11.12.2",
   "title": "",
   "body": "  The code below reads data from a file called input.txt . What is wrong with the following code?   #include <iostream> #include <fstream> int main() { std::string input; std::string filename = \"input.txt\"; std::ifstream infile(filename); std::getline(filename, input); }       We should use ofstream instead of ifstream .   Since we are dealing with an input file, we should use ifstream .     The arguments in getline are incorrect.   We are supposed to read input through the ifstream object. This line should be getline(infile, input) .     We cannot use a variable to store the filename.   Since the name of the file is just a string, we can store it in a variable.     There are no errors with this code.   Take another look at the code. Are we reading the input correctly into input ?    "
 },
@@ -13739,7 +14648,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_3",
   "type": "Exercise",
-  "number": "10.12.3",
+  "number": "11.12.3",
   "title": "",
   "body": "  We want to make sure the file we wanted to open was opened successfully. Which of the following checks this and prints the proper output?       if (infile.good()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the if statement evaluates to true, then the file was opened successfully.      if (!infile.is_open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }     is_open() is another function that returns true if a file is opened successfully.      if (infile.good() == false) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the file isn't opened successfully, an error message is printed.      if (!infile.open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    The open() function is different from is_open() and does not return a bool .    "
 },
@@ -13748,7 +14657,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_4",
   "type": "Exercise",
-  "number": "10.12.4",
+  "number": "11.12.4",
   "title": "",
   "body": "  Which of the following statements are true?      We can assume the program opens all files successfully.   There are times when a file can't be properly opened because they may have not been properly closed the last time they were used or the file is currently used by another program. As a result, it is good practice to include a check in your program.     A stream is an abstract object that represents the flow of data from a source.   We've used two streams before: the standard input stream and standard output stream ( cin and cout ).     We cannot use the operators << and >> , as they are for iostream objects only.   We are also able to use the operators for fstream objects.    "
 },
@@ -13757,7 +14666,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_5",
   "type": "Exercise",
-  "number": "10.12.5",
+  "number": "11.12.5",
   "title": "",
   "body": "  What are the contents of the output file output.txt after running the code below?   #include <iostream> #include <fstream> int main() { std::ofstream outfile(\"output.txt\"); if (!outfile.good()) { std::cout << \"Unable to open file\" << std::endl; } std::cout << \"Powers of 2: \"; outfile << \"2 4 8 16 32 64\" << std::endl; }       2 4 8 16 32 64   This is the only thing we write to the output file.     Powers of 2: 2 4 8 16 31 64   Take another look at the stream objects used in the code.     Powers of 2:   This is printed to standard output, not the output file.     Unable to open file   Although this may be printed, this is not the contents of the output file.    "
 },
@@ -13766,7 +14675,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_6",
   "type": "Exercise",
-  "number": "10.12.6",
+  "number": "11.12.6",
   "title": "",
   "body": "  The file scores.txt contains data about the roster number and test scores of students in a class. The output file averages.txt should store each student's roster number and average test score. What should replace the question marks?   #include <iostream> #include <fstream> int main() { std::string junk; int studentNum; double mid1, mid2, final; std::ifstream infile(\"scores.txt\"); std::ofstream outfile(\"averages.txt\"); if (!infile.good() || !outfile.good()) { std::cout << \"Unable to open a file\" << std::endl; } std::getline(infile, junk); outfile << \"Student#\\tAverage\" << std::endl; while (infile >> studentNum >> mid1 >> mid2 >> final) { double avg = (mid1 + mid2 + final) \/ 3; ??? } }        cout << avg << std::endl    This will output the average to standard output.      outfile << avg << std::endl    Take another look at the code. Is there a clue as to what data should be in the output file?      infile << studentNum << \"\\t\" << avg << std::endl    The data should be written to the output file.      outfile << studentNum << \"\\t\" << avg << std::endl    This properly outputs the student number and the student's average to the output file.    "
 },
@@ -13775,7 +14684,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_7",
   "type": "Exercise",
-  "number": "10.12.7",
+  "number": "11.12.7",
   "title": "",
   "body": "  What does the following code do?   #include <iostream> #include <string> int main() { std::string original = \"430-0444\"; std::string digitString = \"\"; for (size_t i = 0; i < original.length(); i++) { if (isdigit(original[original.length() - 1 - i])) { digitString += original[original.length() - 1 - i]; } } std::cout << atoi(digitString) << std::endl; }       The code converts the original string to an integer and outputs the integer.   Take a closer look at the contents of the for loop.     The code converts an integer to a string and outputs the string.   What does the atoi function do?     The code outputs the sum of all the original string's digits.   The digitString variable is a string , not an int .     The code converts the original string to an integer in reverse and outputs the integer in reverse.   The code in the for loop parses the string in reverse.    "
 },
@@ -13784,7 +14693,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_8",
   "type": "Exercise",
-  "number": "10.12.8",
+  "number": "11.12.8",
   "title": "",
   "body": "  Which of the following statements are false about the Set data structure?      A set can contain multiple elements with the same value.   All elements in a set are unique.     We can identify elements of a set by each element's index.   Each element has an index associated with it.     The elements of a Set are always sorted.   Although a set is ordered, it is not necessarily sorted.     The size of a Set object is fixed.   The Set data structure can expand to make room for new elements.    "
 },
@@ -13793,7 +14702,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_9",
   "type": "Exercise",
-  "number": "10.12.9",
+  "number": "11.12.9",
   "title": "",
   "body": "  There are many ways to construct a matrix . Which of the following are valid constructors of a matrix ?       matrix<string> m1(2);    A matrix has two dimensions and this constructor only has one dimension.      matrix<int> m2(2, 6, 0);    This creates a matrix with 2 rows and 6 columns with all of its elements equal to 0.      matrix<char> m3(m2);    This creates m3 to be a copy of m2 .      matrix<int> m2(2.4, 2);    There must be a whole number of rows and columns.    "
 },
@@ -13802,7 +14711,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_10",
   "type": "Exercise",
-  "number": "10.12.10",
+  "number": "11.12.10",
   "title": "",
   "body": "  What is the output of the following code?   #include <iostream> #include <vector> bool secret_function(int num) { if (num % 2 == 0) { return true; } return false; } int main() { matrix<int> mat(4, 2); for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { if (!secret_function(i + j) { mat[i][j] = 0; } else { mat[i][j] = i + j; } } } int n; for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { n += mat[i][j]; } } std::cout << n << std::endl; }       8   The matrix only contains even sums of the row and column indices and 0 otherwise. Thus, the sum of all elements is 8.     16   What does the secret function do?     0   What are the contents of the matrix?     9   What are the contents of the matrix?    "
 },
@@ -13811,7 +14720,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_mixed-up-code-practice.html",
   "type": "Exercises",
-  "number": "10.13",
+  "number": "11.13",
   "title": "Mixed Up Code Practice",
   "body": " Mixed Up Code Practice    We have a file called locations.txt that we want to read data from. Check to make sure that the file was opened properly; if it wasn't, display an error message and exit with a status of 1. Put the necessary blocks of code in the correct order.     int main() {     ifstream infile(\"locations.txt\");    ifstream infile(locations.txt);      if (infile.good() == false) {    if (infile.good()) {     std::cout << \"Unable to open the file.\" << std::endl ;     exit(1);    return 1;     }    }       Let's write a program that prompts the user for a filename and opens that file. Put the necessary blocks of code in the correct order.     int main() {     std::string filename;    ifstream filename;     std::cout << \"Enter the name of the file: \";    std::cin >> filename;     ifstream infile(filename);    ifstream infile(filename);     if (infile.good() == false) {    std::cout << \"Unable to open the file.\" << std::endl ;    exit(1);    }    }       Now let's write some output to a file. Write a program that prompts a user for a list of 5 integers separated by spaces, calculates the average of those integers, and outputs The average is average to an output file called average.txt . Put the necessary blocks of code in the correct order. Declare the output file first and check that it is opened correctly.     int main() {    ofstream outfile(\"average.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<int> list;    int sum = 0;    int n1, n2, n3, n4, n5;    std::cout << \"Enter five integers separated by spaces: \";    std::cin >> n1 >> n2 >> n3 >> n4 >> n5;    sum = n1 + n2 + n3 + n4 + n5;     outfile << \"The average is \" << sum \/ 5.0 << std::endl ;    std::cout << \"The average is \" << sum \/ 5.0 << std::endl ;     }       We are given a file called data.txt with an unknown number of double values. Write a program that finds the minimum, maximum, and number of data and outputs these values to a file called summary.txt . Put the necessary blocks of code in the correct order. Declare the input and output files first, and check to see that both are opened correctly before dealing with data. Increment the number of data points before checking for the min and max.     int main() {    ifstream infile(\"data.txt\");    ofstream outfile(\"summary.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::vector<int> data;    int numData = 1;    double min, max, value;    infile >> value;    min = value;    max = value;    while (infile >> value) {    ++numData;    if (value < min) { min = value; }    if (value > max) { max = value; }    }    outfile << \"Number of data: \" << numData << \", min: \" << min << \", max: \" << max << std::endl ;    }       You are given a file called employee_data.txt and you want to store the information from that file into a vector of data. The file contains information about an employee's first and last name, age, phone number, and email. Write the definition of an Employee before you write your main function. Open and check the file before working with the data. Put the necessary blocks of code in the correct order.     struct Employee {  std::string fname;  std::string lname;  int age;  int phone;  std::string email;    Employee(string f, string l, int a, int p, string e) {  fname = f;  lname = l;  age = a;  phone = p;  email = e;  }    };    int main() {    ifstream infile(\"employee_data.txt\");    if (infile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<Employee> data;    std::string fname, lname, email;    int age, phone;     while (infile >> fname >> lname >> age >> phone >> email) {    while (infile) {     Employee e(fname, lname, age, phone, email);    data.push_back(e);    }  }       You are given a file but it appears that someone's capslock key was stuck because everything is in uppercase. Write a program that takes the input from the file UPPER.txt and converts all the words to lowercase and prints out the modified message to a file called lower.txt . Write the definition of the function toLower first. Separate the words with spaces. Put the necessary blocks of code in the correct order.     string upperToLower(string upper) {  for (size_t i = 0; i < upper.length(); ++i) {     upper[i] = toupper(upper[i]);    tolower(upper[i]);     }  return upper;  }    int main() {    ifstream infile(\"UPPER.txt\");    ofstream outfile(\"lower.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::string word;    while (infile >> word) {     std::string upper = upperToLower(word);    upperToLower(word);     outfile << upper << \" \";    }  }       Nobody ever put a limit on how many files we can work with. Does this mean we can open two or more files at once? Yes we can! Write a program that combines two files odds.txt and evens.txt into one output file numbers.txt . You should combine them in a way such that numbers.txt contains the first odd number then the first even number then the second odd number and so on. You are guaranteed that there are equal amounts of odd and even numbers. Put the necessary blocks of code in the correct order.     int main() {    ifstream odds(\"odds.txt\");    ifstream evens(\"evens.txt\");    ofstream outfile(\"numbers.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int odd, even;    while (odds >> odd && evens >> even) {    outfile << odd << \" \" << even << \" \";    }  }       In chapter 15.7 we defined the Set data structure. Write a function vectorToSet which takes a std::vector of data and returns a Set object with the data. Put the necessary blocks of code in the correct order. Put the Set definition first in your answer.     class Set {  private:  std::vector<string> elements;  int numElements;  public:  Set(int n);  int getNumElements() const;  std::string getElement(int i) const;  int find(const string& s) const;  int add(const string& s);  };     Set vectorToSet( std::vector<string> data) {    void Set::vectorToSet( std::vector<string> data) {     Set s(data.size());    for (size_t i = 0; i < data.size(); ++i) {    s.add(data[i]);    }    s.numElements++;    if (s.find(data[i]) != -1) {    s.elements.push_back(data[i]);    }       Let's write the class definition for a Matrix ! The underlying data structure is a std::vector of std::vector s of int s. Write the constructor and at function, which returns the data stored at a given row and column. Put the necessary blocks of code in the correct order.     class Matrix {    private:    std::vector< std::vector<int> > elements;    public:    Matrix(int numRows, int numCols) {    std::vector<int> row(numCols);    for (int i = 0; i < numRows; ++i) {    elements.push_back(row);    }  }    int at(int row, int col) {    return elements[row][col];    }    };       Now that we have the basic structure of a Matrix , let's write a function that allows us to add data to a matrix. Write the Matrix member function setData which takes a row and column index as well as a data value and stores the data value in the Matrix at the given location. Then read data in from a file called data.txt . The first line contains the number of rows and columns, separated by a space. Data values begin on the next line. Put the necessary blocks of code in the correct order.      void Matrix::setData(int row, int col, int value) {    void setData(int row, int col, int value) {     elements[row][col] = value;    }    int main() {    ifstream infile(\"data.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int numRows, numCols, data;    infile >> numRows >> numCols;    Matrix mat(numRows, numCols);    while (infile >> data) {    for (int i = 0; i < numRows; ++i) {    for (int j = 0; j < numCols; ++j) {    mat.setData(i, j, data);  }  }  }    }     "
 },
@@ -13820,7 +14729,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_1",
   "type": "Exercise",
-  "number": "10.13.yes",
+  "number": "11.13.yes",
   "title": "",
   "body": "  We have a file called locations.txt that we want to read data from. Check to make sure that the file was opened properly; if it wasn't, display an error message and exit with a status of 1. Put the necessary blocks of code in the correct order.     int main() {     ifstream infile(\"locations.txt\");    ifstream infile(locations.txt);      if (infile.good() == false) {    if (infile.good()) {     std::cout << \"Unable to open the file.\" << std::endl ;     exit(1);    return 1;     }    }    "
 },
@@ -13829,7 +14738,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_2",
   "type": "Exercise",
-  "number": "10.13.yes",
+  "number": "11.13.yes",
   "title": "",
   "body": "  Let's write a program that prompts the user for a filename and opens that file. Put the necessary blocks of code in the correct order.     int main() {     std::string filename;    ifstream filename;     std::cout << \"Enter the name of the file: \";    std::cin >> filename;     ifstream infile(filename);    ifstream infile(filename);     if (infile.good() == false) {    std::cout << \"Unable to open the file.\" << std::endl ;    exit(1);    }    }    "
 },
@@ -13838,7 +14747,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_3",
   "type": "Exercise",
-  "number": "10.13.yes",
+  "number": "11.13.yes",
   "title": "",
   "body": "  Now let's write some output to a file. Write a program that prompts a user for a list of 5 integers separated by spaces, calculates the average of those integers, and outputs The average is average to an output file called average.txt . Put the necessary blocks of code in the correct order. Declare the output file first and check that it is opened correctly.     int main() {    ofstream outfile(\"average.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<int> list;    int sum = 0;    int n1, n2, n3, n4, n5;    std::cout << \"Enter five integers separated by spaces: \";    std::cin >> n1 >> n2 >> n3 >> n4 >> n5;    sum = n1 + n2 + n3 + n4 + n5;     outfile << \"The average is \" << sum \/ 5.0 << std::endl ;    std::cout << \"The average is \" << sum \/ 5.0 << std::endl ;     }    "
 },
@@ -13847,7 +14756,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_4",
   "type": "Exercise",
-  "number": "10.13.yes",
+  "number": "11.13.yes",
   "title": "",
   "body": "  We are given a file called data.txt with an unknown number of double values. Write a program that finds the minimum, maximum, and number of data and outputs these values to a file called summary.txt . Put the necessary blocks of code in the correct order. Declare the input and output files first, and check to see that both are opened correctly before dealing with data. Increment the number of data points before checking for the min and max.     int main() {    ifstream infile(\"data.txt\");    ofstream outfile(\"summary.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::vector<int> data;    int numData = 1;    double min, max, value;    infile >> value;    min = value;    max = value;    while (infile >> value) {    ++numData;    if (value < min) { min = value; }    if (value > max) { max = value; }    }    outfile << \"Number of data: \" << numData << \", min: \" << min << \", max: \" << max << std::endl ;    }    "
 },
@@ -13856,7 +14765,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_5",
   "type": "Exercise",
-  "number": "10.13.yes",
+  "number": "11.13.yes",
   "title": "",
   "body": "  You are given a file called employee_data.txt and you want to store the information from that file into a vector of data. The file contains information about an employee's first and last name, age, phone number, and email. Write the definition of an Employee before you write your main function. Open and check the file before working with the data. Put the necessary blocks of code in the correct order.     struct Employee {  std::string fname;  std::string lname;  int age;  int phone;  std::string email;    Employee(string f, string l, int a, int p, string e) {  fname = f;  lname = l;  age = a;  phone = p;  email = e;  }    };    int main() {    ifstream infile(\"employee_data.txt\");    if (infile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<Employee> data;    std::string fname, lname, email;    int age, phone;     while (infile >> fname >> lname >> age >> phone >> email) {    while (infile) {     Employee e(fname, lname, age, phone, email);    data.push_back(e);    }  }    "
 },
@@ -13865,7 +14774,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_6",
   "type": "Exercise",
-  "number": "10.13.yes",
+  "number": "11.13.yes",
   "title": "",
   "body": "  You are given a file but it appears that someone's capslock key was stuck because everything is in uppercase. Write a program that takes the input from the file UPPER.txt and converts all the words to lowercase and prints out the modified message to a file called lower.txt . Write the definition of the function toLower first. Separate the words with spaces. Put the necessary blocks of code in the correct order.     string upperToLower(string upper) {  for (size_t i = 0; i < upper.length(); ++i) {     upper[i] = toupper(upper[i]);    tolower(upper[i]);     }  return upper;  }    int main() {    ifstream infile(\"UPPER.txt\");    ofstream outfile(\"lower.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::string word;    while (infile >> word) {     std::string upper = upperToLower(word);    upperToLower(word);     outfile << upper << \" \";    }  }    "
 },
@@ -13874,7 +14783,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_7",
   "type": "Exercise",
-  "number": "10.13.yes",
+  "number": "11.13.yes",
   "title": "",
   "body": "  Nobody ever put a limit on how many files we can work with. Does this mean we can open two or more files at once? Yes we can! Write a program that combines two files odds.txt and evens.txt into one output file numbers.txt . You should combine them in a way such that numbers.txt contains the first odd number then the first even number then the second odd number and so on. You are guaranteed that there are equal amounts of odd and even numbers. Put the necessary blocks of code in the correct order.     int main() {    ifstream odds(\"odds.txt\");    ifstream evens(\"evens.txt\");    ofstream outfile(\"numbers.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int odd, even;    while (odds >> odd && evens >> even) {    outfile << odd << \" \" << even << \" \";    }  }    "
 },
@@ -13883,7 +14792,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_8",
   "type": "Exercise",
-  "number": "10.13.yes",
+  "number": "11.13.yes",
   "title": "",
   "body": "  In chapter 15.7 we defined the Set data structure. Write a function vectorToSet which takes a std::vector of data and returns a Set object with the data. Put the necessary blocks of code in the correct order. Put the Set definition first in your answer.     class Set {  private:  std::vector<string> elements;  int numElements;  public:  Set(int n);  int getNumElements() const;  std::string getElement(int i) const;  int find(const string& s) const;  int add(const string& s);  };     Set vectorToSet( std::vector<string> data) {    void Set::vectorToSet( std::vector<string> data) {     Set s(data.size());    for (size_t i = 0; i < data.size(); ++i) {    s.add(data[i]);    }    s.numElements++;    if (s.find(data[i]) != -1) {    s.elements.push_back(data[i]);    }    "
 },
@@ -13892,7 +14801,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_9",
   "type": "Exercise",
-  "number": "10.13.yes",
+  "number": "11.13.yes",
   "title": "",
   "body": "  Let's write the class definition for a Matrix ! The underlying data structure is a std::vector of std::vector s of int s. Write the constructor and at function, which returns the data stored at a given row and column. Put the necessary blocks of code in the correct order.     class Matrix {    private:    std::vector< std::vector<int> > elements;    public:    Matrix(int numRows, int numCols) {    std::vector<int> row(numCols);    for (int i = 0; i < numRows; ++i) {    elements.push_back(row);    }  }    int at(int row, int col) {    return elements[row][col];    }    };    "
 },
@@ -13901,7 +14810,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_10",
   "type": "Exercise",
-  "number": "10.13.yes",
+  "number": "11.13.yes",
   "title": "",
   "body": "  Now that we have the basic structure of a Matrix , let's write a function that allows us to add data to a matrix. Write the Matrix member function setData which takes a row and column index as well as a data value and stores the data value in the Matrix at the given location. Then read data in from a file called data.txt . The first line contains the number of rows and columns, separated by a space. Data values begin on the next line. Put the necessary blocks of code in the correct order.      void Matrix::setData(int row, int col, int value) {    void setData(int row, int col, int value) {     elements[row][col] = value;    }    int main() {    ifstream infile(\"data.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int numRows, numCols, data;    infile >> numRows >> numCols;    Matrix mat(numRows, numCols);    while (infile >> data) {    for (int i = 0; i < numRows; ++i) {    for (int j = 0; j < numCols; ++j) {    mat.setData(i, j, data);  }  }  }    }    "
 },
@@ -13910,7 +14819,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_coding-practice.html",
   "type": "Exercises",
-  "number": "10.14",
+  "number": "11.14",
   "title": "Coding Practice",
   "body": " Coding Practice    Write a program that takes in an input file called poem.txt    Two roads diverged in a yellow wood, And sorry I could not travel both And be one traveler, long I stood And looked down one as far as I could To where it bent in the undergrowth; Then took the other, as just as fair, And having perhaps the better claim Because it was grassy and wanted wear, Though as for that the passing there Had worn them really about the same, And both that morning equally lay In leaves no step had trodden black. Oh, I kept the first for another day! Yet knowing how way leads on to way I doubted if I should ever come back. I shall be telling this with a sigh Somewhere ages and ages hence: Two roads diverged in a wood, and I, I took the one less traveled by, And that has made all the difference.   and prints the first 5 lines to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we use getline in a for loop to retrieve and print the first 5 lines of the poem.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"poem.txt\"); std::string input; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } for (int i = 0; i < 5; ++i) { std::getline(infile, input); std::cout << input << std::endl; } }       Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.    #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.     int main () {    std::string fileIn;    int n;    std::string line;    std::cout << \"Enter the name of the file: \";  std::cin >> fileIn;  std::cout << fileIn << std::endl ;    std::cout << \"Enter an integer: \";  std::cin >> n;  std::cout << n << std::endl ;    ifstream inFile(fileIn.c_str());    if (inFile.good() == false) {  std::cout << \"Unable to open the file named \" << fileIn << \" and output \" << n << \" lines.\" << std::endl ;  exit(1);  }    for (int i = 0; i < n; i++) {    getline(inFile, line);    std::cout << line << std::endl ;    }    }         Write a program that takes in an input file called heights.txt   62 67 75 68 65 67 70 72 74 66 72 66 66 73 69 61 60 73 72 60   , finds the median of the data, and prints “The median height is: height inches” to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a vector. After sorting the vector, we find the median depending on whether the number of data values was even or odd. Finally, we output our result to the terminal.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> int main() { std::ifstream infile(\"heights.txt\"); std::vector<int> data; double median; int height; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (infile >> height) { data.push_back(height); } std::sort(data.begin(), data.end()); if (data.size() % 2 == 0) { median = (data[data.size() \/ 2 - 1] + data[data.size() \/ 2]) \/ 2.0; } else { median = data[data.size() \/ 2]; } std::cout << \"The median height is: \" << median << \" inches\" << std::endl; }       Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> #include <cmath> int main() { \/\/ Write your code here. \/\/ Do not modify the code below std::ifstream student_output(\"powers.txt\"); if (!student_output.good()) { std::cout << \"Error opening student's output.\" << std::endl; } std::string answer; while (std::getline(student_output, answer)) { std::cout << answer << std::endl; } }      Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    int n;    std::cout << \"Enter an integer: \";    std::cin >> n;    std::cout << n << std::endl ;    ofstream outfile (\"powers.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open output file.\" << std::endl ;  exit (1);  }    while (true) {    for (int i = 0; i < n; i++) {    outfile << pow(2,i) << std::endl ;    }    }    ifstream student_output(\"powers.txt\");    if (!student_output.good()) {  std::cout << \"Error opening student's output.\" << std::endl ;  }    std::string answer;    while (getline(student_output, answer)) {  std::cout << answer << std::endl ;  }    }         ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter after it in the alphabet. For example, using ROT13 on the letter “a” would turn it into “n”. Notice how since 13 is exactly half the number of characters in the alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus, ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file called message.txt   Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.   applies ROT13, and outputs the result to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <cctype> int main() { \/\/ Write your code here. }    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a string. We call our ROT13 function and output the result to the output file.   #include <iostream> #include <fstream> #include <cctype> std::string ROT13 (std::string message) { for (size_t i = 0; i < message.size(); ++i) { if (isalpha(message[i])) { if (message[i] >= 'A' && message[i] <= 'Z') { if (message[i] <= 'M') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } else { if (message[i] <= 'm') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } } } return message; } int main() { std::ifstream infile(\"message.txt\"); std::string message; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (std::getline(infile, message)) { std::cout << ROT13(message) << std::endl; } }       Write a program that reads in data about a class from the file class_data.txt   Below are the contents of the input file.  First Last Grade GPA Age Alex Jones 9 3.4 14 Beth Hamilton 12 3.7 18 Charles White 11 3.5 16 Daniel Kim 10 3.8 16 Ethan Brooks 11 3.9 17 Faith Flemmings 10 3.0 15 Gina Zhou 9 3.2 14  and outputs the rows of data where a student has a GPA of at least 3.5. Include proper file error checking.   #include <iostream> #include <fstream> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into corresponding variables. We check if the GPA is at least 3.5, and print the data values to the terminal if so.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"class_data.txt\"); std::string fname, lname; int grade, age; double gpa; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::getline(infile, fname); while (infile >> fname >> lname >> grade >> gpa >> age) { if (gpa >= 3.5) { std::cout << fname << '\\t' << lname << '\\t' << grade << '\\t' << gpa << '\\t' << age << std::endl; } } }       Write a program that takes an input file called shrimp.txt and outputs the contents of the file where \"shrimp\" is replaced by a word that the user inputs to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that takes an input file called “shrimp.txt” and outputs the quote with “shrimp” replaced by a word that the user inputs to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.   There's pineapple shrimp, lemon shrimp, coconut shrimp, pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and potatoes, shrimp burger, shrimp sandwich. That- that's about it.      int main() {    std::string word;    std::cout << \"Enter word to replace 'shrimp': \";    std::cin >> word;    std::cout << word << std::endl ;    std::string replace = \"shrimp\";    ifstream inFile(\"shrimp.txt\");    std::string line;    for (int i = 0; i < 4; i++) {    getline(inFile,line);    for (int unsigned j = 0; j < line.size(); j++) {    size_t pos = line.find(replace);    if (pos != std::string::npos) {    line.replace(pos,replace.length(),word);    }    }    std::cout << line<< std::endl ;    }    }         Write a program that creates a multiplication table for the first 10 numbers using a matrix and outputting the table to an output file called mult_table.txt . Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create a 10x10 matrix and fill in the products. Then we traverse through the matrix and output the values into the output file.   #include <iostream> #include <fstream> #include <vector> int main() { std::ofstream outfile(\"mult_table.txt\"); if (!outfile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::vector<int> rows(10); std::vector<std::vector<int> > mat; for (int i = 0; i < 10; ++i) { mat.push_back(rows); } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { matrix[i][j] = (i + 1) * (j + 1); } } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { outfile << matrix[i][j] << '\\t'; } std::cout << std::endl; } }       Write a program that computes the product of two matrices. Take a look at the example below. Two find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> int main() { \/* 2x3 matrix A X 3x2 matrix B 2x2 matrix C [ a b c ] [ g h ] [ ag + bi + cl ah + bj + cm ] [ d e f ] [ i j ] = [ dg + ei + fl dh + ej + fm ] [ l m ] *\/ \/\/ Write your code here. }      Write a program that computes the product of two matrices. Take a look at the example below. To find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    matrix<int> A(2,3);    matrix<int> B(3,2);    matrix<int> C(2,2);    C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);    C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);    C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);    C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);    }       "
 },
@@ -13919,7 +14828,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_1",
   "type": "Exercise",
-  "number": "10.14.1",
+  "number": "11.14.1",
   "title": "",
   "body": "  Write a program that takes in an input file called poem.txt    Two roads diverged in a yellow wood, And sorry I could not travel both And be one traveler, long I stood And looked down one as far as I could To where it bent in the undergrowth; Then took the other, as just as fair, And having perhaps the better claim Because it was grassy and wanted wear, Though as for that the passing there Had worn them really about the same, And both that morning equally lay In leaves no step had trodden black. Oh, I kept the first for another day! Yet knowing how way leads on to way I doubted if I should ever come back. I shall be telling this with a sigh Somewhere ages and ages hence: Two roads diverged in a wood, and I, I took the one less traveled by, And that has made all the difference.   and prints the first 5 lines to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we use getline in a for loop to retrieve and print the first 5 lines of the poem.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"poem.txt\"); std::string input; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } for (int i = 0; i < 5; ++i) { std::getline(infile, input); std::cout << input << std::endl; } }    "
 },
@@ -13928,7 +14837,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_2_q",
   "type": "Exercise",
-  "number": "10.14.2",
+  "number": "11.14.2",
   "title": "",
   "body": "  Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.    #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.     int main () {    std::string fileIn;    int n;    std::string line;    std::cout << \"Enter the name of the file: \";  std::cin >> fileIn;  std::cout << fileIn << std::endl ;    std::cout << \"Enter an integer: \";  std::cin >> n;  std::cout << n << std::endl ;    ifstream inFile(fileIn.c_str());    if (inFile.good() == false) {  std::cout << \"Unable to open the file named \" << fileIn << \" and output \" << n << \" lines.\" << std::endl ;  exit(1);  }    for (int i = 0; i < n; i++) {    getline(inFile, line);    std::cout << line << std::endl ;    }    }      "
 },
@@ -13937,7 +14846,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_3",
   "type": "Exercise",
-  "number": "10.14.3",
+  "number": "11.14.3",
   "title": "",
   "body": "  Write a program that takes in an input file called heights.txt   62 67 75 68 65 67 70 72 74 66 72 66 66 73 69 61 60 73 72 60   , finds the median of the data, and prints “The median height is: height inches” to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a vector. After sorting the vector, we find the median depending on whether the number of data values was even or odd. Finally, we output our result to the terminal.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> int main() { std::ifstream infile(\"heights.txt\"); std::vector<int> data; double median; int height; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (infile >> height) { data.push_back(height); } std::sort(data.begin(), data.end()); if (data.size() % 2 == 0) { median = (data[data.size() \/ 2 - 1] + data[data.size() \/ 2]) \/ 2.0; } else { median = data[data.size() \/ 2]; } std::cout << \"The median height is: \" << median << \" inches\" << std::endl; }    "
 },
@@ -13946,7 +14855,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_4_q",
   "type": "Exercise",
-  "number": "10.14.4",
+  "number": "11.14.4",
   "title": "",
   "body": "  Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> #include <cmath> int main() { \/\/ Write your code here. \/\/ Do not modify the code below std::ifstream student_output(\"powers.txt\"); if (!student_output.good()) { std::cout << \"Error opening student's output.\" << std::endl; } std::string answer; while (std::getline(student_output, answer)) { std::cout << answer << std::endl; } }      Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    int n;    std::cout << \"Enter an integer: \";    std::cin >> n;    std::cout << n << std::endl ;    ofstream outfile (\"powers.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open output file.\" << std::endl ;  exit (1);  }    while (true) {    for (int i = 0; i < n; i++) {    outfile << pow(2,i) << std::endl ;    }    }    ifstream student_output(\"powers.txt\");    if (!student_output.good()) {  std::cout << \"Error opening student's output.\" << std::endl ;  }    std::string answer;    while (getline(student_output, answer)) {  std::cout << answer << std::endl ;  }    }      "
 },
@@ -13955,7 +14864,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_5",
   "type": "Exercise",
-  "number": "10.14.5",
+  "number": "11.14.5",
   "title": "",
   "body": "  ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter after it in the alphabet. For example, using ROT13 on the letter “a” would turn it into “n”. Notice how since 13 is exactly half the number of characters in the alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus, ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file called message.txt   Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.   applies ROT13, and outputs the result to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <cctype> int main() { \/\/ Write your code here. }    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a string. We call our ROT13 function and output the result to the output file.   #include <iostream> #include <fstream> #include <cctype> std::string ROT13 (std::string message) { for (size_t i = 0; i < message.size(); ++i) { if (isalpha(message[i])) { if (message[i] >= 'A' && message[i] <= 'Z') { if (message[i] <= 'M') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } else { if (message[i] <= 'm') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } } } return message; } int main() { std::ifstream infile(\"message.txt\"); std::string message; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (std::getline(infile, message)) { std::cout << ROT13(message) << std::endl; } }    "
 },
@@ -13964,7 +14873,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_7",
   "type": "Exercise",
-  "number": "10.14.6",
+  "number": "11.14.6",
   "title": "",
   "body": "  Write a program that reads in data about a class from the file class_data.txt   Below are the contents of the input file.  First Last Grade GPA Age Alex Jones 9 3.4 14 Beth Hamilton 12 3.7 18 Charles White 11 3.5 16 Daniel Kim 10 3.8 16 Ethan Brooks 11 3.9 17 Faith Flemmings 10 3.0 15 Gina Zhou 9 3.2 14  and outputs the rows of data where a student has a GPA of at least 3.5. Include proper file error checking.   #include <iostream> #include <fstream> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into corresponding variables. We check if the GPA is at least 3.5, and print the data values to the terminal if so.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"class_data.txt\"); std::string fname, lname; int grade, age; double gpa; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::getline(infile, fname); while (infile >> fname >> lname >> grade >> gpa >> age) { if (gpa >= 3.5) { std::cout << fname << '\\t' << lname << '\\t' << grade << '\\t' << gpa << '\\t' << age << std::endl; } } }    "
 },
@@ -13973,7 +14882,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_8_q",
   "type": "Exercise",
-  "number": "10.14.7",
+  "number": "11.14.7",
   "title": "",
   "body": "  Write a program that takes an input file called shrimp.txt and outputs the contents of the file where \"shrimp\" is replaced by a word that the user inputs to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that takes an input file called “shrimp.txt” and outputs the quote with “shrimp” replaced by a word that the user inputs to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.   There's pineapple shrimp, lemon shrimp, coconut shrimp, pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and potatoes, shrimp burger, shrimp sandwich. That- that's about it.      int main() {    std::string word;    std::cout << \"Enter word to replace 'shrimp': \";    std::cin >> word;    std::cout << word << std::endl ;    std::string replace = \"shrimp\";    ifstream inFile(\"shrimp.txt\");    std::string line;    for (int i = 0; i < 4; i++) {    getline(inFile,line);    for (int unsigned j = 0; j < line.size(); j++) {    size_t pos = line.find(replace);    if (pos != std::string::npos) {    line.replace(pos,replace.length(),word);    }    }    std::cout << line<< std::endl ;    }    }      "
 },
@@ -13982,7 +14891,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_9",
   "type": "Exercise",
-  "number": "10.14.8",
+  "number": "11.14.8",
   "title": "",
   "body": "  Write a program that creates a multiplication table for the first 10 numbers using a matrix and outputting the table to an output file called mult_table.txt . Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create a 10x10 matrix and fill in the products. Then we traverse through the matrix and output the values into the output file.   #include <iostream> #include <fstream> #include <vector> int main() { std::ofstream outfile(\"mult_table.txt\"); if (!outfile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::vector<int> rows(10); std::vector<std::vector<int> > mat; for (int i = 0; i < 10; ++i) { mat.push_back(rows); } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { matrix[i][j] = (i + 1) * (j + 1); } } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { outfile << matrix[i][j] << '\\t'; } std::cout << std::endl; } }    "
 },
@@ -13991,7 +14900,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_10_q",
   "type": "Exercise",
-  "number": "10.14.9",
+  "number": "11.14.9",
   "title": "",
   "body": "  Write a program that computes the product of two matrices. Take a look at the example below. Two find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> int main() { \/* 2x3 matrix A X 3x2 matrix B 2x2 matrix C [ a b c ] [ g h ] [ ag + bi + cl ah + bj + cm ] [ d e f ] [ i j ] = [ dg + ei + fl dh + ej + fm ] [ l m ] *\/ \/\/ Write your code here. }      Write a program that computes the product of two matrices. Take a look at the example below. To find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    matrix<int> A(2,3);    matrix<int> B(3,2);    matrix<int> C(2,2);    C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);    C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);    C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);    C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);    }      "
 }
