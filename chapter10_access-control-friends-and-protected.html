@@ -715,7 +715,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Copy Constructors and Copy Assignment</span></a></div>
+<div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Copy Constructors, Copy Assignment, and <code class="code-inline tex2jax_ignore">explicit</code></span></a></div>
 <ul id="ptx-toc-group-chapter10_copy-constructors-copy-assignment-and-explicit" class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-constructor" class="internal"><span class="codenumber">10.5.1</span> <span class="title">The Copy Constructor</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-assignment" class="internal"><span class="codenumber">10.5.2</span> <span class="title">Copy Assignment Updates an Existing Object</span></a></div></li>
@@ -934,7 +934,22 @@ int main() {
 <div class="para" id="chapter10_protected-members-4">
 <code class="code-inline tex2jax_ignore">SavingsAccount</code> can use <code class="code-inline tex2jax_ignore">balance</code> because it is a derived class. Code in <code class="code-inline tex2jax_ignore">main</code> cannot write <code class="code-inline tex2jax_ignore">account.balance</code> directly because <code class="code-inline tex2jax_ignore">protected</code> is not public. The public member function provides the outside interface.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_protected-members-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter10_protected-members-5">Prefer private data when possible. A protected data member exposes more of the base class’s implementation to derived classes, which can make future changes harder. Protected member functions can offer a narrower extension point.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_protected-members-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter10_protected-members-5">There is one additional C++ rule to remember. A derived-class member function may access a protected member through the current derived object or through an object whose type is that derived class or one of its subclasses. It may not use the protected member through an arbitrary base-class object.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_protected-members-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program clipboardable"><code id="rs-program_chapter10_protected-object-rule" class="language-cpp">class SavingsAccount : public Account {
+public:
+    void add_bonus(SavingsAccount&amp; other) {
+        other.balance += 5.0;  // allowed
+    }
+
+    void audit_base_account(Account&amp; base) {
+        // base.balance += 5.0;  // error: base is only an Account
+    }
+};
+</code></pre></div>
+<div class="para" id="chapter10_protected-members-7">The rule protects the base-class part of an unrelated <code class="code-inline tex2jax_ignore">Account</code> object from being reached through a derived-class interface. In the preceding example, <code class="code-inline tex2jax_ignore">other</code> is known to be a <code class="code-inline tex2jax_ignore">SavingsAccount</code>, but <code class="code-inline tex2jax_ignore">base</code> could refer to a standalone <code class="code-inline tex2jax_ignore">Account</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_protected-members-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter10_protected-members-8">Prefer private data when possible. A protected data member exposes more of the base class’s implementation to derived classes, which can make future changes harder. Protected member functions can offer a narrower extension point.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_protected-members-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Subsection 10.7.4: Using protected with a Derived Class"><a tabindex="-1" href="#chapter10_protected-members" title="Copy heading and permalink for Subsection 10.7.4: Using protected with a Derived Class" aria-label="Copy heading and permalink for Subsection 10.7.4: Using protected with a Derived Class">🔗</a></div>
 </section>
@@ -1012,7 +1027,7 @@ int main() {
 <div class="para" id="chapter10_friend_exercise-access-2-3-1-1">The function is secretly a static member.</div>
 </li>
 <li data-component="feedback" id="rs-chapter10_friend_exercise-access_opt_c">
-<div class="para" id="chapter10_friend_exercise-access-2-3-2-1">Friend functions are non-members unless separately declared as members.</div>
+<div class="para" id="chapter10_friend_exercise-access-2-3-2-1">Friend functions are independent non-member functions. They are not static members, even though neither function type receives an implicit <code class="code-inline tex2jax_ignore">this</code> pointer.</div>
 </li>
 <li data-component="answer" id="rs-chapter10_friend_exercise-access_opt_d">
 <div class="para" id="chapter10_friend_exercise-access-2-4-1-1">The member becomes public whenever two objects are compared.</div>

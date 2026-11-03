@@ -14,7 +14,7 @@
 <!--******************************************-->
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TCPP2 Copy Constructors and Copy Assignment</title>
+<title>TCPP2 Copy Constructors, Copy Assignment, and explicit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -715,7 +715,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section contains-active">
-<div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Copy Constructors and Copy Assignment</span></a></div>
+<div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Copy Constructors, Copy Assignment, and <code class="code-inline tex2jax_ignore">explicit</code></span></a></div>
 <ul class="structural toc-item-list active" id="ptx-toc-group-chapter10_copy-constructors-copy-assignment-and-explicit">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-constructor" class="internal"><span class="codenumber">10.5.1</span> <span class="title">The Copy Constructor</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-assignment" class="internal"><span class="codenumber">10.5.2</span> <span class="title">Copy Assignment Updates an Existing Object</span></a></div></li>
@@ -785,7 +785,7 @@ eBookConfig.enable_chatcodes =  false;
 <main class="ptx-main"><div id="ptx-content" class="ptx-content">
 <section class="section" id="chapter10_copy-constructors-copy-assignment-and-explicit">
 <h1 class="heading hide-type">
-<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Copy Constructors and Copy Assignment</span>
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Copy Constructors, Copy Assignment, and <code class="code-inline tex2jax_ignore">explicit</code></span>
 </h1>
 <div class="para" id="chapter10_copy-constructors-copy-assignment-and-explicit-2">When a class object is copied, C++ must decide how to initialize or update the destination object. Two operations are especially important: a <dfn class="terminology">copy constructor</dfn> creates a new object from an existing object, while a <dfn class="terminology">copy-assignment operation</dfn> updates an object that already exists.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_copy-constructors-copy-assignment-and-explicit-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -804,7 +804,7 @@ public:
     }
 };
 </code></pre></div>
-<div class="para" id="chapter10_copy-constructor-4">The <code class="code-inline tex2jax_ignore">const</code> reference avoids making another copy of the source object and allows the constructor to copy from a const object. A copy constructor is used when a new object is initialized from an existing object.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_copy-constructor-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter10_copy-constructor-4">The ampersand means that <code class="code-inline tex2jax_ignore">other</code> is received by reference, so C++ does not make another copy just to pass the source object into the copy constructor. Without the ampersand, passing a <code class="code-inline tex2jax_ignore">Score</code> by value would require another copy and could cause the copy constructor to call itself repeatedly. The <code class="code-inline tex2jax_ignore">const</code> keyword allows the constructor to copy from a read-only source and promises that it will not modify that source. A copy constructor is used when a new object is initialized from an existing object.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_copy-constructor-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <figure class="listing figure-like" id="listing_chapter10_copy_constructor"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.5.1<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Copy construction and copy assignment<div class="autopermalink" aria-hidden="true" data-description="Listing 10.5.1: Copy construction and copy assignment"><a tabindex="-1" href="#listing_chapter10_copy_constructor" title="Copy heading and permalink for Listing 10.5.1: Copy construction and copy assignment" aria-label="Copy heading and permalink for Listing 10.5.1: Copy construction and copy assignment">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-program_chapter10_copy_constructor" class="language-cpp">#include &lt;iostream&gt;
 
@@ -938,7 +938,9 @@ public:
 // A compiler-generated copy can make two objects contain
 // the same score_pointer address.
 </code></pre></div>
-<div class="para" id="chapter10_copy-memberwise-pointer-risk-4">If two objects contain the same owning pointer, both destructors may try to release the same allocation. This can cause undefined behavior. A class that owns a raw resource commonly needs a destructor, a copy constructor, and a copy-assignment operation that coordinate with one another. This is the Rule of Three, which we will develop fully in Pointers and Dynamic Memory, Part 2.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_copy-memberwise-pointer-risk-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter10_copy-memberwise-pointer-risk-4">If two objects contain the same owning pointer, both destructors may try to release the same allocation. This can cause undefined behavior. This address-only duplication is called a <dfn class="terminology">shallow copy</dfn>: the pointer value is copied, but the dynamically allocated object is not duplicated. A <dfn class="terminology">deep copy</dfn> would allocate separate storage for the second object and copy the pointed-to value into that new storage.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_copy-memberwise-pointer-risk-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter10_copy-memberwise-pointer-risk-5">A class that owns a raw resource commonly needs a destructor, a copy constructor, and a copy-assignment operation that coordinate with one another. This is the Rule of Three, which we will develop fully in Pointers and Dynamic Memory, Part 2.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_copy-memberwise-pointer-risk-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Subsection 10.5.4: Memberwise Copying and Raw Pointer Risk"><a tabindex="-1" href="#chapter10_copy-memberwise-pointer-risk" title="Copy heading and permalink for Subsection 10.5.4: Memberwise Copying and Raw Pointer Risk" aria-label="Copy heading and permalink for Subsection 10.5.4: Memberwise Copying and Raw Pointer Risk">🔗</a></div>
 </section>
@@ -946,7 +948,7 @@ public:
 <h2 class="heading hide-type">
 <span class="type">Subsection</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.5.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Tracing Copy Construction</span>
 </h2>
-<div class="para" id="chapter10_copy-codelens-2">The visualization steps through creation of an original object and a copied object. The two objects contain equal values, but they are separate objects.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_copy-codelens-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter10_copy-codelens-2">The visualization steps through creation of an original object and a copied object to show how data is replicated in memory. The two objects contain equal values, but they are separate objects.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_copy-codelens-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="interactive-iframe-container"><iframe src="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Score%20%7B%0Apublic%3A%0A%20%20%20%20int%20value%3B%0A%0A%20%20%20%20Score%28int%20starting_value%29%0A%20%20%20%20%20%20%20%20%3A%20value%7Bstarting_value%7D%20%7B%0A%20%20%20%20%7D%0A%0A%20%20%20%20Score%28const%20Score%26%20other%29%0A%20%20%20%20%20%20%20%20%3A%20value%7Bother.value%7D%20%7B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Score%20original%7B90%7D%3B%0A%20%20%20%20Score%20copied%7Boriginal%7D%3B%0A%0A%20%20%20%20copied.value%20%3D%2095%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20original.value%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20copied.value%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp" id="interactive_chapter10_copy_constructor" style="width:600px; height:450px; display: block; "></iframe></div>
 <div class="interactive-iframe-container__opener"><a href="interactive_chapter10_copy_constructor.html" title="Open in new tab" aria-label="Open in new tab" target="_blank"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe89e;</span></a></div>
@@ -1120,7 +1122,7 @@ assigned = original;</pre>
 </ul>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 10.5.5"><a tabindex="-1" href="#chapter10_copy_exercise_pointer_risk" title="Copy heading and permalink for Checkpoint 10.5.5" aria-label="Copy heading and permalink for Checkpoint 10.5.5">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Section 10.5: Copy Constructors and Copy Assignment"><a tabindex="-1" href="#chapter10_copy-constructors-copy-assignment-and-explicit" title="Copy heading and permalink for Section 10.5: Copy Constructors and Copy Assignment" aria-label="Copy heading and permalink for Section 10.5: Copy Constructors and Copy Assignment">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Section 10.5: Copy Constructors, Copy Assignment, and explicit"><a tabindex="-1" href="#chapter10_copy-constructors-copy-assignment-and-explicit" title="Copy heading and permalink for Section 10.5: Copy Constructors, Copy Assignment, and explicit" aria-label="Copy heading and permalink for Section 10.5: Copy Constructors, Copy Assignment, and explicit">🔗</a></div>
 </section>
 </div>
 <div id="ptx-content-footer" class="ptx-content-footer">

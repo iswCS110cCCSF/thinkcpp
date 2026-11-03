@@ -715,7 +715,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Copy Constructors and Copy Assignment</span></a></div>
+<div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Copy Constructors, Copy Assignment, and <code class="code-inline tex2jax_ignore">explicit</code></span></a></div>
 <ul id="ptx-toc-group-chapter10_copy-constructors-copy-assignment-and-explicit" class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-constructor" class="internal"><span class="codenumber">10.5.1</span> <span class="title">The Copy Constructor</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-assignment" class="internal"><span class="codenumber">10.5.2</span> <span class="title">Copy Assignment Updates an Existing Object</span></a></div></li>
@@ -842,6 +842,9 @@ int main() {
 <div class="para" id="chapter10_static-data-members-4">Each object has a separate <code class="code-inline tex2jax_ignore">balance</code>, so depositing money into <code class="code-inline tex2jax_ignore">first_account</code> does not change <code class="code-inline tex2jax_ignore">second_account</code>. The static member <code class="code-inline tex2jax_ignore">total_accounts_created</code> has only one shared value, so both constructor calls update the same count.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_static-data-members-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="chapter10_static-data-members-5">The line <code class="code-inline tex2jax_ignore">int StudentAccount::total_accounts_created = 0;</code> is the out-of-class definition. The scope-resolution operator <code class="code-inline tex2jax_ignore">::</code> says that this definition belongs to <code class="code-inline tex2jax_ignore">StudentAccount</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_static-data-members-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter10_static-data-members-6">
+<em class="emphasis">Important:</em> This simple counter increases only when the default constructor runs. If the class later defines a copy constructor and the count is intended to include copied objects, that copy constructor must also increment the static counter. Copy assignment does not create a new object, so it should not increase an object-creation count.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_static-data-members-6" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Subsection 10.6.1: Static Data Members Are Shared"><a tabindex="-1" href="#chapter10_static-data-members" title="Copy heading and permalink for Subsection 10.6.1: Static Data Members Are Shared" aria-label="Copy heading and permalink for Subsection 10.6.1: Static Data Members Are Shared">🔗</a></div>
 </section>

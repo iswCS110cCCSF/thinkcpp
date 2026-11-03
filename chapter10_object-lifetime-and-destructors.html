@@ -715,7 +715,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section">
-<div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Copy Constructors and Copy Assignment</span></a></div>
+<div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Copy Constructors, Copy Assignment, and <code class="code-inline tex2jax_ignore">explicit</code></span></a></div>
 <ul id="ptx-toc-group-chapter10_copy-constructors-copy-assignment-and-explicit" class="structural toc-item-list">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-constructor" class="internal"><span class="codenumber">10.5.1</span> <span class="title">The Copy Constructor</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-assignment" class="internal"><span class="codenumber">10.5.2</span> <span class="title">Copy Assignment Updates an Existing Object</span></a></div></li>
@@ -922,7 +922,17 @@ int main() {
 </h2>
 <div class="para" id="chapter10_lifetime-destruction-order-2">Local objects in the same scope are destroyed in the reverse order of their construction. If <code class="code-inline tex2jax_ignore">first</code> is constructed before <code class="code-inline tex2jax_ignore">second</code>, then <code class="code-inline tex2jax_ignore">second</code> is destroyed before <code class="code-inline tex2jax_ignore">first</code>. This reverse order allows a later object to use an earlier object during its lifetime when the design requires it.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_lifetime-destruction-order-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="para" id="chapter10_lifetime-destruction-order-3">A class’s data members are also destroyed in the reverse order of their declarations. The member-initializer list does not change this destruction order.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_lifetime-destruction-order-3" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<figure class="listing figure-like" id="listing_chapter10_reverse-destruction"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.4.4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Multiple objects are destroyed in reverse construction order<div class="autopermalink" aria-hidden="true" data-description="Listing 10.4.4: Multiple objects are destroyed in reverse construction order"><a tabindex="-1" href="#listing_chapter10_reverse-destruction" title="Copy heading and permalink for Listing 10.4.4: Multiple objects are destroyed in reverse construction order" aria-label="Copy heading and permalink for Listing 10.4.4: Multiple objects are destroyed in reverse construction order">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable"><code id="rs-program_chapter10_reverse-destruction" class="language-cpp">int main() {
+    LifecycleMarker first{"A"};
+    LifecycleMarker second{"B"};
+
+    // When main ends: Destroy B, then Destroy A.
+}
+</code></pre></div></div>
+</figure>
+<div class="para" id="chapter10_lifetime-destruction-order-4">The object named <code class="code-inline tex2jax_ignore">first</code> is constructed first, so it remains alive while <code class="code-inline tex2jax_ignore">second</code> is constructed and used. When the scope ends, C++ destroys <code class="code-inline tex2jax_ignore">second</code> first and then destroys <code class="code-inline tex2jax_ignore">first</code>.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_lifetime-destruction-order-4" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter10_lifetime-destruction-order-5">A class’s data members are also destroyed in the reverse order of their declarations. The member-initializer list does not change this destruction order.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_lifetime-destruction-order-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="autopermalink" aria-hidden="true" data-description="Subsection 10.4.4: Destruction Order"><a tabindex="-1" href="#chapter10_lifetime-destruction-order" title="Copy heading and permalink for Subsection 10.4.4: Destruction Order" aria-label="Copy heading and permalink for Subsection 10.4.4: Destruction Order">🔗</a></div>
 </section>
