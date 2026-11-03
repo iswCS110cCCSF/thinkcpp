@@ -92,6 +92,15 @@ int main() {
             <c>::</c> says that this definition belongs to
             <c>StudentAccount</c>.
         </p>
+
+        <p>
+            <em>Important:</em> This simple counter increases only when the
+            default constructor runs. If the class later defines a copy
+            constructor and the count is intended to include copied objects,
+            that copy constructor must also increment the static counter. Copy
+            assignment does not create a new object, so it should not increase
+            an object-creation count.
+        </p>
     </subsection>
 
     <subsection xml:id="chapter10_static-member-functions">

@@ -129,10 +129,45 @@ int main() {
         </table>
 
         <p>
+            <em>Warning:</em> Do not write empty parentheses when you mean to
+            create a default-constructed object. The statement
+            <c>StudentAccount account();</c> is interpreted by C++ as a
+            declaration of a function named <c>account</c> that returns a
+            <c>StudentAccount</c>. Use <c>StudentAccount account{};</c> or
+            <c>StudentAccount account;</c> instead. Empty braces make the
+            intention to create an object clear.
+        </p>
+
+        <p>
             The braces in <c>StudentAccount account{...};</c> perform
             direct-list initialization. We will generally prefer braces because
             they make initialization visually distinct from assignment and help
             prevent some narrowing conversions.
+        </p>
+
+        <listing xml:id="listing_chapter10_narrowing-conversion">
+            <title>Braced initialization prevents narrowing conversions</title>
+            <program xml:id="program_chapter10_narrowing-conversion"
+                     language="cpp">
+                <code><![CDATA[
+struct WholeDollarAccount {
+    int balance;
+};
+
+WholeDollarAccount valid_account{125};
+// WholeDollarAccount invalid_account{125.55};
+// error: braced initialization prevents double-to-int narrowing
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            An integer such as <c>125</c> can be used to initialize a
+            <c>double</c> balance because the conversion preserves its value.
+            In the example above, however, <c>balance</c> is an
+            <c>int</c>. Braced initialization rejects the conversion from
+            <c>double</c> to <c>int</c> because the fractional part could be
+            lost. This compile-time check is one reason braces are useful.
         </p>
 
         <p>
@@ -205,7 +240,7 @@ second_account = first_account;                // assignment
             The assignment statement does not call a constructor for
             <c>second_account</c>. It uses a copy-assignment operation to update
             an object that was already constructed. Copy constructors and
-            copy-assignment operators are studied in detail later in this chapter.
+            copy-assignment operators are studied in detail in Section 10.5.
         </p>
     </subsection>
 

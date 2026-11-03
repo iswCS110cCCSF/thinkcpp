@@ -143,6 +143,16 @@ int main() {
             <c>std::ostream</c>, not a <c>Point</c>, so the output operator is
             naturally a non-member function.
         </p>
+
+        <p>
+            Binary operators such as <c>+</c> are often written as non-member
+            functions when the operation should treat both operands
+            symmetrically. A member operator is called through its left operand,
+            so <c>first + second</c> can use a member of <c>Point</c>, but
+            <c>2 + point</c> cannot call a member function through the integer
+            <c>2</c>. A non-member function can receive both operands and can
+            support conversions on either side more naturally.
+        </p>
     </subsection>
 
     <subsection xml:id="chapter10_operator-output-stream">
@@ -213,6 +223,26 @@ int main() {
             <c>output</c>. This is what makes an expression such as
             <c>std::cout &lt;&lt; point &lt;&lt; '\n';</c> possible: the first
             operation returns the stream for the next operation.
+        </p>
+
+        <listing xml:id="listing_chapter10_stream-chaining-evaluation">
+            <title>How stream insertion is evaluated step by step</title>
+            <program xml:id="program_chapter10_stream-chaining-evaluation"
+                     language="cpp">
+                <code><![CDATA[
+// How students write it:
+std::cout << "Point: " << point << '\n';
+
+// How the expression groups from left to right:
+((std::cout << "Point: ") << point) << '\n';
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The first insertion returns a reference to the same stream. That
+            returned stream becomes the left operand of the next insertion, and
+            the process continues from left to right.
         </p>
     </subsection>
 

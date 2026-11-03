@@ -178,6 +178,16 @@ int main() {
         </listing>
 
         <p>
+            <em>Warning:</em> <c>new Rectangle{5.0, 2.0}</c> creates one
+            dynamically allocated <c>Rectangle</c> and passes two arguments to
+            its constructor. This is different from
+            <c>new Rectangle[5]</c>, which requests an array of five
+            <c>Rectangle</c> objects. The array form would need a default
+            constructor so that C++ could construct each element without
+            arguments; it does not mean “pass <c>5</c> to the constructor.”
+        </p>
+
+        <p>
             The pointer variable itself is local to <c>main()</c>, but the
             <c>Rectangle</c> object created by <c>new</c> has dynamic storage
             duration. Calling <c>delete</c> ends the object's lifetime and
@@ -204,7 +214,7 @@ int main() {
         </p>
 
         <interactive xml:id="interactive_chapter10_pointer_object"
-                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Counter%20%7B%0Apublic%3A%0A%20%20%20%20int%20value%3B%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Counter%20counter%7B5%7D%3B%0A%20%20%20%20Counter*%20counter_pointer%20%3D%20%26counter%3B%0A%0A%20%20%20%20counter_pointer-%3Evalue%20%3D%208%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20counter.value%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Astruct%20Counter%20%7B%0A%20%20%20%20int%20value%3B%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Counter%20counter%7B5%7D%3B%0A%20%20%20%20Counter*%20counter_pointer%20%3D%20%26counter%3B%0A%0A%20%20%20%20counter_pointer-%3Evalue%20%3D%208%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20counter.value%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
                      width="100%"
                      aspect="4:3">
         </interactive>

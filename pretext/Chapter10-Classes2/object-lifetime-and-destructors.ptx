@@ -204,6 +204,28 @@ int main() {
             during its lifetime when the design requires it.
         </p>
 
+        <listing xml:id="listing_chapter10_reverse-destruction">
+            <title>Multiple objects are destroyed in reverse construction order</title>
+            <program xml:id="program_chapter10_reverse-destruction"
+                     language="cpp">
+                <code><![CDATA[
+int main() {
+    LifecycleMarker first{"A"};
+    LifecycleMarker second{"B"};
+
+    // When main ends: Destroy B, then Destroy A.
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The object named <c>first</c> is constructed first, so it remains
+            alive while <c>second</c> is constructed and used. When the scope
+            ends, C++ destroys <c>second</c> first and then destroys
+            <c>first</c>.
+        </p>
+
         <p>
             A class's data members are also destroyed in the reverse order of
             their declarations. The member-initializer list does not change this

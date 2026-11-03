@@ -221,6 +221,38 @@ int main() {
         </p>
 
         <p>
+            There is one additional C++ rule to remember. A derived-class
+            member function may access a protected member through the current
+            derived object or through an object whose type is that derived class
+            or one of its subclasses. It may not use the protected member through
+            an arbitrary base-class object.
+        </p>
+
+        <program xml:id="program_chapter10_protected-object-rule"
+                 language="cpp">
+            <code><![CDATA[
+class SavingsAccount : public Account {
+public:
+    void add_bonus(SavingsAccount& other) {
+        other.balance += 5.0;  // allowed
+    }
+
+    void audit_base_account(Account& base) {
+        // base.balance += 5.0;  // error: base is only an Account
+    }
+};
+            ]]></code>
+        </program>
+
+        <p>
+            The rule protects the base-class part of an unrelated
+            <c>Account</c> object from being reached through a derived-class
+            interface. In the preceding example, <c>other</c> is known to be a
+            <c>SavingsAccount</c>, but <c>base</c> could refer to a standalone
+            <c>Account</c>.
+        </p>
+
+        <p>
             Prefer private data when possible. A protected data member exposes
             more of the base class's implementation to derived classes, which
             can make future changes harder. Protected member functions can offer
@@ -282,7 +314,7 @@ int main() {
             </choice>
             <choice>
                 <statement><p>The function is secretly a static member.</p></statement>
-                <feedback><p>Friend functions are non-members unless separately declared as members.</p></feedback>
+                <feedback><p>Friend functions are independent non-member functions. They are not static members, even though neither function type receives an implicit <c>this</c> pointer.</p></feedback>
             </choice>
             <choice>
                 <statement><p>The member becomes public whenever two objects are compared.</p></statement>

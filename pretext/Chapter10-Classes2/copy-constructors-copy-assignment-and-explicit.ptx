@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="chapter10_copy-constructors-copy-assignment-and-explicit">
-    <title>Copy Constructors and Copy Assignment</title>
+    <title>Copy Constructors, Copy Assignment, and <c>explicit</c></title>
 
     <p>
         When a class object is copied, C++ must decide how to initialize or
@@ -38,10 +38,14 @@ public:
         </program>
 
         <p>
-            The <c>const</c> reference avoids making another copy of the source
-            object and allows the constructor to copy from a const object. A copy
-            constructor is used when a new object is initialized from an existing
-            object.
+            The ampersand means that <c>other</c> is received by reference, so
+            C++ does not make another copy just to pass the source object into
+            the copy constructor. Without the ampersand, passing a
+            <c>Score</c> by value would require another copy and could cause the
+            copy constructor to call itself repeatedly. The <c>const</c>
+            keyword allows the constructor to copy from a read-only source and
+            promises that it will not modify that source. A copy constructor is
+            used when a new object is initialized from an existing object.
         </p>
 
         <listing xml:id="listing_chapter10_copy_constructor">
@@ -226,6 +230,14 @@ public:
         <p>
             If two objects contain the same owning pointer, both destructors may
             try to release the same allocation. This can cause undefined behavior.
+            This address-only duplication is called a <term>shallow copy</term>:
+            the pointer value is copied, but the dynamically allocated object is
+            not duplicated. A <term>deep copy</term> would allocate separate
+            storage for the second object and copy the pointed-to value into that
+            new storage.
+        </p>
+
+        <p>
             A class that owns a raw resource commonly needs a destructor, a copy
             constructor, and a copy-assignment operation that coordinate with one
             another. This is the Rule of Three, which we will develop fully in
@@ -238,8 +250,8 @@ public:
 
         <p>
             The visualization steps through creation of an original object and a
-            copied object. The two objects contain equal values, but they are
-            separate objects.
+            copied object to show how data is replicated in memory. The two
+            objects contain equal values, but they are separate objects.
         </p>
 
         <interactive xml:id="interactive_chapter10_copy_constructor"

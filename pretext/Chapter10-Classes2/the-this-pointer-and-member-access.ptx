@@ -115,6 +115,32 @@ int main() {
             object involved or when a parameter has a similar name.
         </p>
 
+        <listing xml:id="listing_chapter10_this-shadowing">
+            <title>Using <c>this-&gt;count</c> when a parameter shadows a member</title>
+            <program xml:id="program_chapter10_this-shadowing"
+                     language="cpp">
+                <code><![CDATA[
+class Counter {
+private:
+    int count;
+
+public:
+    void set_count(int count) {
+        this->count = count;
+    }
+};
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            Here, both names <c>count</c> are valid but refer to different
+            variables. The parameter <c>count</c> is the new value supplied to
+            the function. The expression <c>this-&gt;count</c> identifies the
+            data member belonging to the current object. The assignment copies
+            the parameter into that member.
+        </p>
+
         <p>
             The expression <c>this-&gt;count</c> is equivalent to
             <c>(*this).count</c>. This is the same relationship as
@@ -150,7 +176,7 @@ int main() {
         </p>
 
         <interactive xml:id="interactive_chapter10_this_pointer"
-                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Counter%20%7B%0Apublic%3A%0A%20%20%20%20int%20count%3B%0A%0A%20%20%20%20void%20increment%28%29%20%7B%0A%20%20%20%20%20%20%20%20this-%3Ecount%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Counter%20first%7B2%7D%3B%0A%20%20%20%20Counter%20second%7B5%7D%3B%0A%0A%20%20%20%20first.increment%28%29%3B%0A%20%20%20%20second.increment%28%29%3B%0A%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20first.count%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20second.count%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Astruct%20Counter%20%7B%0A%20%20%20%20int%20count%3B%0A%0A%20%20%20%20void%20increment%28%29%20%7B%0A%20%20%20%20%20%20%20%20this-%3Ecount%20%2B%3D%201%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Counter%20first%7B2%7D%3B%0A%20%20%20%20Counter%20second%7B5%7D%3B%0A%0A%20%20%20%20first.increment%28%29%3B%0A%20%20%20%20second.increment%28%29%3B%0A%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20first.count%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20second.count%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
                      width="100%"
                      aspect="4:3">
         </interactive>
