@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="chapter10_copy-constructors-copy-assignment-and-explicit">
-    <title>Copy Constructors, Copy Assignment, and <c>explicit</c></title>
+    <title>Copy Constructors and Copy Assignment</title>
 
     <p>
         When a class object is copied, C++ must decide how to initialize or
