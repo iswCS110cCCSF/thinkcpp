@@ -14,7 +14,7 @@
 <!--******************************************-->
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TCPP2 Copy Constructors, Copy Assignment, and explicit</title>
+<title>TCPP2 Copy Constructors and Copy Assignment</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
@@ -715,7 +715,7 @@ eBookConfig.enable_chatcodes =  false;
 </ul>
 </li>
 <li class="toc-item toc-section contains-active">
-<div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Copy Constructors, Copy Assignment, and <code class="code-inline tex2jax_ignore">explicit</code></span></a></div>
+<div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html" class="internal"><span class="codenumber">10.5</span> <span class="title">Copy Constructors and Copy Assignment</span></a></div>
 <ul class="structural toc-item-list active" id="ptx-toc-group-chapter10_copy-constructors-copy-assignment-and-explicit">
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-constructor" class="internal"><span class="codenumber">10.5.1</span> <span class="title">The Copy Constructor</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy-assignment" class="internal"><span class="codenumber">10.5.2</span> <span class="title">Copy Assignment Updates an Existing Object</span></a></div></li>
@@ -754,6 +754,17 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator-overloading-codelens" class="internal"><span class="codenumber">10.8.6</span> <span class="title">Tracing an Overloaded Operator</span></a></div></li>
 </ul>
 </li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter10_enumerations-and-enum-class.html" class="internal"><span class="codenumber">10.9</span> <span class="title">Enumerations and <code class="code-inline tex2jax_ignore">enum class</code></span></a></div>
+<ul id="ptx-toc-group-chapter10_enumerations-and-enum-class" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_enumerations-and-enum-class.html#chapter10_enumeration-finite-choices" class="internal"><span class="codenumber">10.9.1</span> <span class="title">Enumerations Represent Named Choices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_enumerations-and-enum-class.html#chapter10_enum-class-scope" class="internal"><span class="codenumber">10.9.2</span> <span class="title">Scoped Enumerations with <code class="code-inline tex2jax_ignore">enum class</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_enumerations-and-enum-class.html#chapter10_enum-integer-values" class="internal"><span class="codenumber">10.9.3</span> <span class="title">Explicit Integer Values</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_enumerations-and-enum-class.html#chapter10_enum-switch" class="internal"><span class="codenumber">10.9.4</span> <span class="title">Using Enumerations with <code class="code-inline tex2jax_ignore">switch</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_enumerations-and-enum-class.html#chapter10_enum-class-state" class="internal"><span class="codenumber">10.9.5</span> <span class="title">Enumerations as Class State</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_enumerations-and-enum-class.html#chapter10_enum-codelens" class="internal"><span class="codenumber">10.9.6</span> <span class="title">Tracing an Enumeration and Its Integer Value</span></a></div></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-item toc-chapter">
@@ -785,7 +796,7 @@ eBookConfig.enable_chatcodes =  false;
 <main class="ptx-main"><div id="ptx-content" class="ptx-content">
 <section class="section" id="chapter10_copy-constructors-copy-assignment-and-explicit">
 <h1 class="heading hide-type">
-<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Copy Constructors, Copy Assignment, and <code class="code-inline tex2jax_ignore">explicit</code></span>
+<span class="type">Section</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">10.5</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="title">Copy Constructors and Copy Assignment</span>
 </h1>
 <div class="para" id="chapter10_copy-constructors-copy-assignment-and-explicit-2">When a class object is copied, C++ must decide how to initialize or update the destination object. Two operations are especially important: a <dfn class="terminology">copy constructor</dfn> creates a new object from an existing object, while a <dfn class="terminology">copy-assignment operation</dfn> updates an object that already exists.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter10_copy-constructors-copy-assignment-and-explicit-2" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
@@ -1122,7 +1133,7 @@ assigned = original;</pre>
 </ul>
 </div></div>
 <div class="autopermalink" aria-hidden="true" data-description="Checkpoint 10.5.5"><a tabindex="-1" href="#chapter10_copy_exercise_pointer_risk" title="Copy heading and permalink for Checkpoint 10.5.5" aria-label="Copy heading and permalink for Checkpoint 10.5.5">🔗</a></div>
-</article><div class="autopermalink" aria-hidden="true" data-description="Section 10.5: Copy Constructors, Copy Assignment, and explicit"><a tabindex="-1" href="#chapter10_copy-constructors-copy-assignment-and-explicit" title="Copy heading and permalink for Section 10.5: Copy Constructors, Copy Assignment, and explicit" aria-label="Copy heading and permalink for Section 10.5: Copy Constructors, Copy Assignment, and explicit">🔗</a></div>
+</article><div class="autopermalink" aria-hidden="true" data-description="Section 10.5: Copy Constructors and Copy Assignment"><a tabindex="-1" href="#chapter10_copy-constructors-copy-assignment-and-explicit" title="Copy heading and permalink for Section 10.5: Copy Constructors and Copy Assignment" aria-label="Copy heading and permalink for Section 10.5: Copy Constructors and Copy Assignment">🔗</a></div>
 </section>
 </div>
 <div id="ptx-content-footer" class="ptx-content-footer">
