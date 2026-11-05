@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter10_enumerations-and-enum-class">
+    <title>Enumerations and <c>enum class</c></title>
+
+    <p>
+        Many programs need to represent one choice from a limited set of
+        possibilities. A traffic light can be red, yellow, or green. A task can
+        be not started, active, or completed. An enumeration gives each choice
+        a meaningful name while keeping the choices within one type.
+    </p>
+
+    <p>
+        C++ provides the older unscoped <c>enum</c> and the modern scoped
+        <c>enum class</c>. We will study both because students will encounter
+        traditional enumerations in existing code, but we will generally prefer
+        <c>enum class</c> in new C++17 code.
+    </p>
+
+    <subsection xml:id="chapter10_enumeration-finite-choices">
+        <title>Enumerations Represent Named Choices</title>
+
+        <p>
+            A traditional enumeration lists a set of named enumerators. If no
+            values are specified, C++ normally assigns consecutive integer
+            values beginning with zero.
+        </p>
+
+        <listing xml:id="listing_chapter10_traditional-enum">
+            <title>A traditional enumeration for traffic-light choices</title>
+            <program xml:id="program_chapter10_traditional-enum"
+                     language="cpp">
+                <code><![CDATA[
+enum TrafficLight {
+    red,       // 0
+    yellow,    // 1
+    green      // 2
+};
+
+TrafficLight light = green;
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The names <c>red</c>, <c>yellow</c>, and <c>green</c> are called
+            <term>enumerators</term>. They are named constants associated with
+            the enumeration. The underlying integer values exist, but the names
+            communicate the program's meaning more clearly than unexplained
+            numbers.
+        </p>
+
+        <p>
+            Traditional enumerators are placed in the surrounding scope. For
+            example, the name <c>red</c> can be used directly after the
+            declaration. This convenient behavior can also cause name conflicts
+            when different enumerations use the same enumerator names.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_enum-class-scope">
+        <title>Scoped Enumerations with <c>enum class</c></title>
+
+        <p>
+            A scoped enumeration places its enumerators inside the enumeration's
+            own scope. The enumeration name must be written before the
+            enumerator:
+        </p>
+
+        <program xml:id="program_chapter10_enum-class-scope"
+                 language="cpp">
+            <code><![CDATA[
+enum class TrafficLight {
+    red,
+    yellow,
+    green
+};
+
+TrafficLight light = TrafficLight::green;
+            ]]></code>
+        </program>
+
+        <table xml:id="table_chapter10_enum-comparison">
+            <title>Traditional <c>enum</c> and scoped <c>enum class</c></title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="25%"/>
+                <col width="37%"/>
+                <col width="38%"/>
+                <row header="yes">
+                    <cell>Feature</cell>
+                    <cell>Traditional <c>enum</c></cell>
+                    <cell><c>enum class</c></cell>
+                </row>
+                <row>
+                    <cell>Enumerator use</cell>
+                    <cell><c>green</c></cell>
+                    <cell><c>TrafficLight::green</c></cell>
+                </row>
+                <row>
+                    <cell>Enumerator scope</cell>
+                    <cell>Surrounding scope</cell>
+                    <cell>Inside the enumeration</cell>
+                </row>
+                <row>
+                    <cell>Implicit conversion to <c>int</c></cell>
+                    <cell>Allowed</cell>
+                    <cell>Not allowed</cell>
+                </row>
+                <row>
+                    <cell>Name-conflict protection</cell>
+                    <cell>Less protection</cell>
+                    <cell>Stronger protection</cell>
+                </row>
+                <row>
+                    <cell>Recommended for new code</cell>
+                    <cell>Usually no</cell>
+                    <cell>Usually yes</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The stronger type checking of <c>enum class</c> prevents accidental
+            mixing of unrelated enumerations and prevents an enumeration value
+            from silently becoming an integer. This is why the scoped form is
+            usually the better choice for new code.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_enum-integer-values">
+        <title>Explicit Integer Values</title>
+
+        <p>
+            A program can assign explicit integer values when the values have
+            meaning outside the program, such as protocol codes, menu codes, or
+            priority levels.
+        </p>
+
+        <listing xml:id="listing_chapter10_enum-explicit-values">
+            <title>Named priority values with explicit integers</title>
+            <program xml:id="program_chapter10_enum-explicit-values"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+enum class Priority : int {
+    low = 1,
+    normal = 5,
+    urgent = 10
+};
+
+int main() {
+    Priority task_priority = Priority::urgent;
+    int numeric_priority = static_cast<int>(task_priority);
+
+    std::cout << numeric_priority << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The values in this example are integer constants associated with the
+            enumerators. The declaration also specifies <c>int</c> as the
+            underlying type. Because <c>Priority</c> is an <c>enum class</c>,
+            C++ does not silently convert <c>Priority::urgent</c> to an
+            integer. The explicit <c>static_cast&lt;int&gt;</c> documents that the
+            program intentionally wants the numeric value.
+        </p>
+
+        <p>
+            Prefer comparing and passing the enumeration value itself when
+            possible. Convert to an integer only when an interface specifically
+            requires a numeric code.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_enum-switch">
+        <title>Using Enumerations with <c>switch</c></title>
+
+        <p>
+            An enumeration works naturally with <c>switch</c>. Each case names
+            one meaningful choice instead of repeating a numeric code.
+        </p>
+
+        <listing xml:id="listing_chapter10_enum-switch">
+            <title>Describing a traffic-light state</title>
+            <program xml:id="program_chapter10_enum-switch"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+
+enum class TrafficLight {
+    red,
+    yellow,
+    green
+};
+
+std::string describe_light(TrafficLight light) {
+    switch (light) {
+        case TrafficLight::red:
+            return "Stop";
+        case TrafficLight::yellow:
+            return "Prepare";
+        case TrafficLight::green:
+            return "Go";
+    }
+
+    return "Unknown";
+}
+
+int main() {
+    TrafficLight light = TrafficLight::yellow;
+
+    std::cout << describe_light(light) << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The enumeration does not automatically become a string. The
+            <c>describe_light()</c> function explicitly translates each named
+            choice into text. A final return statement provides a safe fallback
+            if a value outside the listed cases is ever produced.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_enum-class-state">
+        <title>Enumerations as Class State</title>
+
+        <p>
+            An enumeration can represent the state of an object. Keeping the
+            enumeration private prevents outside code from assigning arbitrary
+            states directly; public member functions can define the permitted
+            transitions.
+        </p>
+
+        <listing xml:id="listing_chapter10_enum-task-state">
+            <title>Representing task state inside a class</title>
+            <program xml:id="program_chapter10_enum-task-state"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Task {
+private:
+    enum class Status {
+        not_started,
+        active,
+        completed
+    };
+
+    Status status = Status::not_started;
+
+public:
+    void start_task() {
+        status = Status::active;
+    }
+
+    void complete_task() {
+        status = Status::completed;
+    }
+
+    bool is_completed() const {
+        return status == Status::completed;
+    }
+};
+
+int main() {
+    Task task;
+
+    task.start_task();
+    task.complete_task();
+
+    std::cout << task.is_completed() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The outside code does not need to know the enumeration's internal
+            names to use the task. It calls behavior-oriented member functions,
+            while the class protects the representation of its state.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter10_enum-codelens">
+        <title>Tracing an Enumeration and Its Integer Value</title>
+
+        <p>
+            The visualization shows an <c>enum class</c> value, its explicit
+            integer value, and the branch selected by a <c>switch</c> statement.
+        </p>
+
+        <interactive xml:id="interactive_chapter10_enumeration"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aenum%20class%20Priority%20%3A%20int%20%7B%0A%20%20%20%20low%20%3D%201%2C%0A%20%20%20%20normal%20%3D%205%2C%0A%20%20%20%20urgent%20%3D%2010%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Priority%20priority%20%3D%20Priority%3A%3Aurgent%3B%0A%20%20%20%20int%20numeric_priority%20%3D%20static_cast%3Cint%3E%28priority%29%3B%0A%0A%20%20%20%20switch%20%28priority%29%20%7B%0A%20%20%20%20%20%20%20%20case%20Priority%3A%3Alow%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Low%22%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20case%20Priority%3A%3Anormal%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Normal%22%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%20%20%20%20case%20Priority%3A%3Aurgent%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Urgent%20%28%22%20%3C%3C%20numeric_priority%20%3C%3C%20%22%29%22%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20break%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter10_enum_exercise-purpose">
+        <statement>
+            <p>What is the main purpose of an enumeration?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>To represent one choice from a limited set of named possibilities.</p></statement>
+                <feedback><p>Enumerations give meaningful names to a fixed collection of alternatives.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>To store an unlimited number of strings.</p></statement>
+                <feedback><p>A string or container is more appropriate for an unlimited collection of text.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>To make every integer variable constant.</p></statement>
+                <feedback><p>An enumeration defines a particular set of named values.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>To replace every class in a program.</p></statement>
+                <feedback><p>Enumerations model choices; classes model objects with state and behavior.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_enum_exercise-scope">
+        <statement>
+            <p>Which expression correctly uses the <c>green</c> enumerator from <c>enum class TrafficLight</c>?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>TrafficLight::green</c></p></statement>
+                <feedback><p>Scoped enumerators are accessed through the enumeration name and <c>::</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>green</c></p></statement>
+                <feedback><p>That unqualified form belongs to a traditional unscoped enumeration.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>TrafficLight.green</c></p></statement>
+                <feedback><p>The dot operator accesses an object member; enumerators use <c>::</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>enum_class::TrafficLight::green</c></p></statement>
+                <feedback><p><c>enum class</c> is declaration syntax, not part of the access expression.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_enum_parsons-switch" adaptive="yes" indentation="hide">
+        <statement>
+            <p>Arrange the statements to declare a scoped enumeration, select a value, and handle it with <c>switch</c>.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>enum class Priority { low, normal, urgent };</cline></block>
+            <block order="2"><cline>Priority priority = Priority::urgent;</cline></block>
+            <block order="3"><cline>switch (priority) {</cline></block>
+            <block order="4"><cline>    case Priority::urgent:</cline></block>
+            <block order="5"><cline>        std::cout &lt;&lt; "Urgent" &lt;&lt; '\n';</cline></block>
+            <block order="6"><cline>        break;</cline></block>
+            <block order="7"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter10_enum_exercise-integer-values">
+        <statement>
+            <p>What does <c>static_cast&lt;int&gt;(Priority::urgent)</c> do when <c>urgent = 10</c>?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>It explicitly obtains the integer value <c>10</c>.</p></statement>
+                <feedback><p>The cast documents the intentional conversion from the scoped enumeration value to its underlying integer representation.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It changes the enumeration's name to <c>int</c>.</p></statement>
+                <feedback><p>The cast converts one value; it does not change the enumeration declaration.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It creates a new enumeration named <c>int</c>.</p></statement>
+                <feedback><p>A cast performs a value conversion, not a type declaration.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It changes <c>urgent</c> from 10 to zero.</p></statement>
+                <feedback><p>The explicit value remains 10.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_enum_exercise-type-safety">
+        <statement>
+            <p>Why is <c>enum class</c> usually preferred for new C++ code?</p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>Its enumerators are scoped and it does not implicitly convert to <c>int</c>.</p></statement>
+                <feedback><p>Scoped names and stronger type checking prevent several accidental uses.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It automatically converts every value to a string.</p></statement>
+                <feedback><p>Text conversion still requires explicit code such as a function with <c>switch</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It can contain any number of values at runtime.</p></statement>
+                <feedback><p>An enumeration still represents a declared set of named choices.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It removes the need for constructors in classes.</p></statement>
+                <feedback><p>Enumerations and constructors solve different design problems.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+</section>

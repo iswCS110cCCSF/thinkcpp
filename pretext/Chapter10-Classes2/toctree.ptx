@@ -14,4 +14,5 @@
 	<xi:include href="./static-members-and-class-level-state.ptx"/>
 	<xi:include href="./access-control-friends-and-protected.ptx"/>
 	<xi:include href="./operator-overloading-and-class-interfaces.ptx"/>
+	<xi:include href="./enumerations-and-enum-class.ptx"/>
 </chapter>
