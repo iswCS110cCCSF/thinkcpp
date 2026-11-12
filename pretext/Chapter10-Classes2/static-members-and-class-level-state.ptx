@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="chapter10_static-members-and-class-level-state">
     <title>Static Members and Class-Level State</title>
-
     <p>
         Most data members belong to individual objects. Each
         <c>StudentAccount</c>, for example, has its own balance. Sometimes a
@@ -102,6 +101,7 @@ int main() {
             an object-creation count.
         </p>
     </subsection>
+
 
     <subsection xml:id="chapter10_static-member-functions">
         <title>Static Member Functions</title>
@@ -226,6 +226,153 @@ static int get_total_accounts_created() {
         </interactive>
     </subsection>
 
+    <subsection xml:id="chapter10_static-data-member-initialization">
+        <title>Declaring and Initializing a Static Data Member</title>
+
+        <p>
+            There are two important ways to define a non-constant static data
+            member. The traditional form declares the member inside the class
+            and defines it once outside the class. The C++17 form uses
+            <c>inline static</c> and defines the member directly inside the
+            class.
+        </p>
+
+        <p>
+            The traditional form is useful when the class declaration is in a
+            header file and the definition is placed in one implementation
+            file. The class declaration announces the member, while the
+            out-of-class definition supplies its shared storage and initial
+            value.
+        </p>
+
+        <listing xml:id="listing_chapter10_traditional-static-definition">
+            <title>Traditional static data member definition</title>
+            <program xml:id="program_chapter10_traditional-static-definition"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class VisitCounter {
+private:
+    static int visit_count;
+
+public:
+    VisitCounter() {
+        ++visit_count;
+    }
+
+    static int get_visit_count() {
+        return visit_count;
+    }
+};
+
+// The class declaration above does not allocate the shared member.
+int VisitCounter::visit_count = 0;
+
+int main() {
+    VisitCounter first_visit;
+    VisitCounter second_visit;
+
+    std::cout << VisitCounter::get_visit_count() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            C++17 introduced <c>inline</c> variables. An
+            <c>inline static</c> data member may be initialized inside the
+            class definition:
+        </p>
+
+        <listing xml:id="listing_chapter10-inline-static-definition">
+            <title>C++17 in-class definition with <c>inline static</c></title>
+            <program xml:id="program_chapter10-inline-static-definition"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class VisitCounter {
+private:
+    inline static int visit_count = 0;
+
+public:
+    VisitCounter() {
+        ++visit_count;
+    }
+
+    static int get_visit_count() {
+        return visit_count;
+    }
+};
+
+int main() {
+    VisitCounter first_visit;
+    VisitCounter second_visit;
+
+    std::cout << VisitCounter::get_visit_count() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The <c>inline</c> keyword here does not mean that a function should
+            be expanded at its call site, and it does not promise a performance
+            improvement. It allows the static data member to be defined in the
+            class definition, including a header file, while still representing
+            one shared member across the program. This is why
+            <c>inline static</c> is especially convenient in C++17.
+        </p>
+
+        <table xml:id="table_chapter10_static-data-member-forms">
+            <title>Forms of static data member definition</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <row header="yes">
+                    <cell>Form</cell>
+                    <cell>Where it is defined</cell>
+                    <cell>Typical use</cell>
+                </row>
+                <row>
+                    <cell><c>static int count;</c></cell>
+                    <cell>Declaration inside the class</cell>
+                    <cell>Used with one separate out-of-class definition.</cell>
+                </row>
+                <row>
+                    <cell><c>int ClassName::count = 0;</c></cell>
+                    <cell>Outside the class</cell>
+                    <cell>Traditional form; define it once in an implementation file.</cell>
+                </row>
+                <row>
+                    <cell><c>inline static int count = 0;</c></cell>
+                    <cell>Inside the class</cell>
+                    <cell>C++17 form; convenient for a class defined in a header.</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            These forms do not create different kinds of object state. In each
+            case, all objects of the class share one static data member. They
+            differ in where the definition and initialization are written.
+        </p>
+
+        <p>
+            An integral constant has another common form. For example,
+            <c>static constexpr int maximum_attempts = 3;</c> can be defined
+            inside a class. In C++17, a static <c>constexpr</c> data member is
+            implicitly inline. This form is appropriate for a named constant,
+            not for a value that changes as objects are created.
+        </p>
+    </subsection>
     <exercise label="chapter10_static_exercise_shared-state">
         <statement>
             <p>Which statement best describes a static data member?</p>
@@ -330,6 +477,53 @@ static int get_total_accounts_created() {
             <choice>
                 <statement><p>It is required only for static member functions.</p></statement>
                 <feedback><p>This traditional definition concerns static data members.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter10_static_exercise-inline-definition">
+        <statement>
+            <p>
+                Which C++17 declaration defines and initializes a shared static
+                data member directly inside the class?
+            </p>
+        </statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>inline static int count = 0;</c></p></statement>
+                <feedback>
+                    <p>
+                        In C++17, <c>inline static</c> permits the definition
+                        and initialization inside the class.
+                    </p>
+                </feedback>
+            </choice>
+            <choice>
+                <statement><p><c>static int count;</c></p></statement>
+                <feedback>
+                    <p>
+                        This is only the traditional in-class declaration; it
+                        still needs an out-of-class definition.
+                    </p>
+                </feedback>
+            </choice>
+            <choice>
+                <statement><p><c>int static::count = 0;</c></p></statement>
+                <feedback>
+                    <p>
+                        The scope-resolution operator follows the class name,
+                        as in <c>ClassName::count</c>.
+                    </p>
+                </feedback>
+            </choice>
+            <choice>
+                <statement><p><c>static inline count;</c></p></statement>
+                <feedback>
+                    <p>
+                        The declaration needs a type and an initializer, such
+                        as <c>inline static int count = 0;</c>.
+                    </p>
+                </feedback>
             </choice>
         </choices>
     </exercise>

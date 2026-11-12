@@ -1,0 +1,30 @@
+PreTeXt project found in `C:\Users\indik\thinkcpp`.
+[33mwarning: [0mUsing CLI version 2.56.1 but project's `requirements.txt`
+[33mwarning: [0mis configured to use 2.51.0. Consider either installing
+[33mwarning: [0mCLI version 2.51.0 or running `pretext update-project`
+[33mwarning: [0mto update `requirements.txt` and other managed files to match 2.56.1.
+Building target web
+XSL conversion of C:\Users\indik\thinkcpp\pretext\main.ptx by C:\Users\indik\.ptx\2.56.1\core\xsl\utilities\pretext-enhanced-source.xsl
+messages from the log for XSL processing (prefaced with a *):
+[36mfallback: [0m* PTX:FALLBACK: HTML calculator/@activecode in publisher file requests "cpp", but this language is not supported unless the publisher file also indicates the build is meant to be hosted on a Runestone server. Proceeding with the default value for current build: "none"
+successful application of C:\Users\indik\.ptx\2.56.1\core\xsl\utilities\pretext-enhanced-source.xsl
+discovering source file's directory name: C:\Users\indik\thinkcpp\pretext
+verifying and expanding input directory: C:\Users\indik\thinkcpp\pretext\../assets
+input directory expanded to absolute path: C:\Users\indik\thinkcpp\assets
+Generating any needed assets.
+Finished generating assets.
+
+Preparing to build into C:\Users\indik\thinkcpp\output\output\html.
+XSL conversion of C:\Users\indik\thinkcpp\pretext\main.ptx by C:\Users\indik\.ptx\2.56.1\core\xsl\utilities\report-publisher-variables.xsl
+successful application of C:\Users\indik\.ptx\2.56.1\core\xsl\utilities\report-publisher-variables.xsl
+Downloading rs services file from https://runestone.academy/cdn/runestone/latest/webpack_static_imports.xml.
+[31m[1mfatal: [0mUnicode strings with encoding declaration are not supported. Please use bytes input or XML fragments without declaration.
+------------------------
+[31mexit: [0mFailed to build without errors.  Exiting...
+
+----------------------------------------------------
+While running pretext, the following errors occurred:
+
+(see log messages above or in the 'logs' folder for more information)
+[31m[1mfatal: [0mUnicode strings with encoding declaration are not supported. Please use bytes input or XML fragments without declaration.
+----------------------------------------------------
