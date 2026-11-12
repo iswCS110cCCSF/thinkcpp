@@ -212,7 +212,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_what-is-a-programming-language.html#program_lang_1",
   "type": "Checkpoint",
-  "number": "1.2.1",
+  "number": "1.2.3",
   "title": "",
   "body": "  A(n) translates a high-level program line by line, executing commands as they come. A(n) translates a high-level program all at once, before executing any of the commands!               "
 },
@@ -221,7 +221,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_what-is-a-programming-language.html#program_lang_2",
   "type": "Checkpoint",
-  "number": "1.2.2",
+  "number": "1.2.4",
   "title": "",
   "body": "  Multiple Response Which is true about a high-level programming language?      Almost all programs are written in high-level languages.   High-level languages are efficient and easy to understand, an obvious choice for writing a program!     Programs written in a high-level language must be translated before they can be run.   All programs in high-level language must be translated to a low-level language before the computer can execute them!     It's easier to program in a low-level language than a high-level language.   Actually, its much the other way around!     Computers can only execute programs written in high-level languages.   Computers actually can't understand high-level languages as they are written.     High-level programs can only run on one kind of computer (you'd have to rewrite the program if you wanted to use a different machine).   High-level programs are portable, meaning they can run on different kinds of computers with little to no modification.    "
 },
@@ -230,7 +230,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_what-is-a-programming-language.html#program_lang_3",
   "type": "Checkpoint",
-  "number": "1.2.3",
+  "number": "1.2.5",
   "title": "",
   "body": "  What is the role of an executor?      To translate the program line by line.   This is the role of an interpreter!     To copy the program from disk to memory and make the computer run the program.   The role of an executor is to carry out, or execute, the program!     To translate the program all at once.   This is the role of a compiler!     To give an error message if something is preventing the code from being translated.   This happens automatically when we try to compile\/interpret our program.    "
 },
@@ -239,7 +239,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_what-is-a-programming-language.html#program_lang_4",
   "type": "Checkpoint",
-  "number": "1.2.4",
+  "number": "1.2.6",
   "title": "",
   "body": "  Match each term to an example of it by dragging the term into the appropriate box.   Try again!    source code  our program written in C++    object code  translated version of our program that the computer can understand and execute    "
 },
@@ -509,7 +509,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_formal-and-natural-languages-formal.html#formal_natural_1",
   "type": "Checkpoint",
-  "number": "1.5.1",
+  "number": "1.5.3",
   "title": "",
   "body": "  Multiple Response Select all formal languages from the choices below.      C++   All programming languages are formal languages!     scientific notation   Scientific notation is designed to denote large numbers.     Mandarin   Mandarin is a natural language.     English   English is a natural language.     chemical formulas   Chemical formulas represent what elements a compound is made of! For example CO2 is is carbon dioxide!    "
 },
@@ -518,7 +518,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_formal-and-natural-languages-formal.html#formal_natural_2",
   "type": "Checkpoint",
-  "number": "1.5.2",
+  "number": "1.5.4",
   "title": "",
   "body": "  Analyzing the structure of a sentence or a program is called .          "
 },
@@ -527,7 +527,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_formal-and-natural-languages-formal.html#formal_natural_3",
   "type": "Checkpoint",
-  "number": "1.5.3",
+  "number": "1.5.5",
   "title": "",
   "body": "  Match each term to an example of it by dragging the term into the appropriate box.   Try again!    ambiguity  being unclear and open to interpretation    redundancy  being repetetive to get the point across    literalness  meaning exactly what is said, nothing more    "
 },
@@ -536,7 +536,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_formal-and-natural-languages-formal.html#formal_natural_4",
   "type": "Checkpoint",
-  "number": "1.5.4",
+  "number": "1.5.6",
   "title": "",
   "body": "  Match each term to an example of it by dragging the term into the appropriate box.   Try again!    ambiguity  I rode a black horse in red jacket.    redundancy  I rode a black horse and I wore a red jacket.    literalness  Give me a cup of water.    "
 },
@@ -545,7 +545,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_formal-and-natural-languages-formal.html#formal_natural_5",
   "type": "Checkpoint",
-  "number": "1.5.5",
+  "number": "1.5.7",
   "title": "",
   "body": "  Multiple Response Formal languages are…      ambiguous   Formal languages are designed to be unambiguous, so that each statement has only one meaning.     redundant   Formal language is straight to the point.     literal   Formal languages mean exactly what they say.     verbose   Formal language is straight to the point.     concise   Formal language is straight to the point.    "
 },
@@ -653,7 +653,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_the-first-program-hello.html#chapter1_the-first-program-hello-12",
   "type": "Warning",
-  "number": "1.6.1",
+  "number": "1.6.2",
   "title": "",
   "body": " Failure to terminate a statement with a semicolon will result in a syntax (compile) error.  "
 },
@@ -725,7 +725,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_the-first-program-hello.html#first_program_1",
   "type": "Checkpoint",
-  "number": "1.6.1",
+  "number": "1.6.3",
   "title": "",
   "body": "  How do you indicate a single line comment in C++?           "
 },
@@ -734,7 +734,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_the-first-program-hello.html#first_program_2",
   "type": "Checkpoint",
-  "number": "1.6.2",
+  "number": "1.6.4",
   "title": "",
   "body": "  Multiple Response Which is true about writing a program?      The main marks the spot in the program where execution begins.   The main indicates where the program begins executing!     There is a limit the number of statements you can put in the main because they occupy system memory.   There is no limit to the number of statements you can put in the main, but it is good practice to keep it as short as possible.     Inside the main, program execution happens in order from top to bottom.   When the program runs, it starts by executing the first statement in main, and it continues until the last.     The main program is enclosed by parentheses.   The main program and all functions in C++ are enclosed by squiggly brackets ( { and } ).     The end of each statement is marked with a semicolon ( ; ).   Forgetting a semicolon will cause a compile error!    "
 },
@@ -743,7 +743,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_the-first-program-hello.html#first_program_3",
   "type": "Checkpoint",
-  "number": "1.6.3",
+  "number": "1.6.5",
   "title": "",
   "body": "  is an object that allows you to send output to the terminal. It requires you to use the operator.               "
 },
@@ -941,7 +941,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#chapter2_more-output-6",
   "type": "Note",
-  "number": "2.1.1",
+  "number": "2.1.2",
   "title": "",
   "body": " In C++, strings are declared as type string . We'll explain what that means in the next few pages.  "
 },
@@ -968,7 +968,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_AC_2",
   "type": "Listing",
-  "number": "2.1.2",
+  "number": "2.1.3",
   "title": "This program prints two different statements on the same line.",
   "body": " This program prints two different statements on the same line.   #include <iostream> int main() { std::cout << \"Goodbye, \"; std::cout << \"cruel world!\" << std::endl; }   "
 },
@@ -995,7 +995,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_AC_3",
   "type": "Listing",
-  "number": "2.1.3",
+  "number": "2.1.4",
   "title": "This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line.",
   "body": " This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line.   #include <iostream> int main() { std::cout<<\"Goodbye, \"; std::cout<<\"cruel world!\"<<std::endl; }   "
 },
@@ -1013,7 +1013,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_AC_4",
   "type": "Listing",
-  "number": "2.1.4",
+  "number": "2.1.5",
   "title": "This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow.",
   "body": " This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow.   #include <iostream> int main() {std::cout<<\"Goodbye, \";std::cout<<\"cruel world!\"<<std::endl;}   "
 },
@@ -1031,7 +1031,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_1",
   "type": "Checkpoint",
-  "number": "2.1.1",
+  "number": "2.1.6",
   "title": "",
   "body": "  A phrase that appears in quotation marks is called a(n) .          "
 },
@@ -1040,7 +1040,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_2",
   "type": "Checkpoint",
-  "number": "2.1.2",
+  "number": "2.1.7",
   "title": "",
   "body": "  On how many separate lines will the 7's be printed?  #include <iostream> int main() { std::cout << 7 << std::endl; std::cout << 7; std::cout << 7; std::cout << 7; }      1   There is an \"endl\" statement, implying that a new line is created.     2   \"endl\" creates one new line. The first line will say 7, while the second will print 777.     3   In C++, you must make sure to say \"endl\" every time you'd like to create a new line.     4   In C++, you must make sure to say \"endl\" every time you'd like to create a new line.    "
 },
@@ -1049,7 +1049,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_3",
   "type": "Checkpoint",
-  "number": "2.1.3",
+  "number": "2.1.8",
   "title": "",
   "body": "  Construct a main function that prints Snap! on the first line, Crackle! on the third line, and Pop! on the sixth line. You might not use all of std::endl blocks provided.     int main() {    std::cout << \"Snap!\";    std::cout << std::endl ; \/\/ first std::endl    std::cout << std::endl ; \/\/ second std::endl    std::cout << \"Crackle!\" << std::endl ;    std::cout << std::endl ; \/\/ third std::endl    std::cout << std::endl ; \/\/ fourth std::endl    std::cout << \"Pop!\";    std::cout << std::endl ; \/\/ fifth std::endl    std::cout << std::endl ; \/\/ sixth std::endl    }    "
 },
@@ -1058,7 +1058,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_4",
   "type": "Checkpoint",
-  "number": "2.1.4",
+  "number": "2.1.9",
   "title": "",
   "body": "  Construct a main function that prints Hello, world! so that Hello, and world! are printed on two separate lines.     int main() {    std::cout << \"Hello,\" << std::endl ; std::cout << \"world!\";    std::cout << \"Hello,\" << \"world!\" << std::endl ;    std::cout >> \"Hello,\" >> std::endl ; std::cout >> \"world!\";    std::cout >> \"Hello,\" >> \"world!\" >> std::endl ;    }    "
 },
@@ -1292,7 +1292,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables_3",
   "type": "Checkpoint",
-  "number": "2.3.1",
+  "number": "2.3.2",
   "title": "",
   "body": "  A(n) is a name given to a location in memory used to keep track of a value.          "
 },
@@ -1301,7 +1301,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables_1",
   "type": "Checkpoint",
-  "number": "2.3.2",
+  "number": "2.3.3",
   "title": "",
   "body": "  Take a look at the code block below:  char tom;  It's an example of a(n) statement.          "
 },
@@ -1310,7 +1310,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables2-0",
   "type": "Checkpoint",
-  "number": "2.3.3",
+  "number": "2.3.4",
   "title": "",
   "body": "  Click on all instances of integer VARIABLES.   Try again!   int main() {  int x = 7 ;  int y = 10 ;   char c = '8' ;  while ( x < y ) {  std::cout << c << std::endl ;   x ++;  }  double d = 9 ;  int z = x + y ;  std::cout << \"It's the year \" << 2000 + z << \"!\";  }   "
 },
@@ -1319,7 +1319,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables2-1",
   "type": "Checkpoint",
-  "number": "2.3.4",
+  "number": "2.3.5",
   "title": "",
   "body": "  Click on all instances of character VARIABLES.   Try again!   int main() {  char init1 = 'K' ;  std::string init2 = \"T\" ;  std::cout << init1 << \"+\" << init2 << std::endl ;  std::string init3 = \"C\" ;  char init4 = 'J' ;  std::cout << init3 << '+' << init4 << std::endl ;  std::string c = \"Carved their initials in a tree!\" ;  std::cout << c ;  }   "
 },
@@ -1328,7 +1328,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables_2",
   "type": "Checkpoint",
-  "number": "2.3.5",
+  "number": "2.3.6",
   "title": "",
   "body": "  Match the variable to the kind of value it can store. Do so by dragging items on the left to the boxes on the right.   Ideally, you want your variables to be named according to what they represent. Not the case here! Try again!    char joe;  'x'    std::string ten;  \"Joe\"    int x;  10    "
 },
@@ -1337,7 +1337,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables_4",
   "type": "Checkpoint",
-  "number": "2.3.6",
+  "number": "2.3.7",
   "title": "",
   "body": "  Arrange the code blocks to create the variables name , first_initial , and number_of_siblings IN THAT ORDER. It is up to you to choose the correct types for these variables.      std::string name;    std::string name      char first_initial;    std::string first_initial;      int number_of_siblings;    double number_of_siblings;     "
 },
@@ -1418,7 +1418,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#state_of_mind",
   "type": "Activity",
-  "number": "2.4.1",
+  "number": "2.4.2",
   "title": "",
   "body": "  Run the code sample below by using the Next button to advance line by line. As you do so, watch the area to the right to examine the state of mind of the computer as it runs the code.  int main() { char first_letter; first_letter = 'a'; \/\/ give first_letter the value 'a' int hour; hour = 11; \/\/ assign the value 11 to hour int minute; minute = 59; \/\/ set minute to 59 }  "
 },
@@ -1427,7 +1427,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#chapter2_assignment-11",
   "type": "Warning",
-  "number": "2.4.2",
+  "number": "2.4.3",
   "title": "",
   "body": " The variable type that you declare must match the type of the value assigned to it. A type mismatch will generate a compile error.  "
 },
@@ -1463,7 +1463,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#assignment_1",
   "type": "Checkpoint",
-  "number": "2.4.1",
+  "number": "2.4.4",
   "title": "",
   "body": "  A(n) statement gives a value to a variable.          "
 },
@@ -1472,7 +1472,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#assignment_2",
   "type": "Checkpoint",
-  "number": "2.4.2",
+  "number": "2.4.5",
   "title": "",
   "body": "  What must be changed in order for this code block to work?  #include <iostream> \/\/ main: generate some simple output int main() { int p; int q; p = \"h\"; q = \"9\"; }      Change the type of variable q from int to string.   Yes, but take a look at variable p.     Change the type of both variables (p and q) from int to string.   Both variables are a character surrounded by double quotes, so they should be type string.     Change the type of variable p from int to char.   Yes, but take a look at variable q.     Nothing needs to change! The code will work just fine!   No! There will be a compile error.    "
 },
@@ -1481,7 +1481,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#assignment_3",
   "type": "Checkpoint",
-  "number": "2.4.3",
+  "number": "2.4.6",
   "title": "",
   "body": "  You love your car, and you decide to keep track of its make, model, and year. You do so using three assignment statements IN THAT ORDER. For the sake of this problem, suppose you drive a 2001 Jeep Cherokee. The variables have already been declared as shown below.   std::string make; std::string model; int year = 0;       make = \"Jeep\";    make = Jeep;     make = \"Jeep;\"     model = \"Cherokee\";    model = Cherokee;     std::string model = Cherokee;     year = 2001;    2001 = year;     year = 2001    "
 },
@@ -1562,7 +1562,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_outputting-variables.html#output_vars_1",
   "type": "Checkpoint",
-  "number": "2.5.1",
+  "number": "2.5.3",
   "title": "",
   "body": "  What prints when the following code is run?  int main() { char a; char b; a = 'z'; b = '8'; std::cout << \"a\"; }      a   The string, not the variable, a will be printed.     b   b will not be printed.     z   The std::cout statement prints a, not the value of the variable a.     8   z is the value of a and 8 will not be printed     Nothing! There will be a compile error!   There is no type mismatch, so there will not be a compile error.    "
 },
@@ -1571,7 +1571,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_outputting-variables.html#output_vars_2",
   "type": "Checkpoint",
-  "number": "2.5.2",
+  "number": "2.5.4",
   "title": "",
   "body": "  Now, what prints?  int main() { char a; char b; a = 'z'; b = '8'; std::cout << b; }      a   The string a will not be printed.     b   The string b will not be printed.     z   z is the value of a and 3 will not be printed.     8   8 is the value of b will be printed!     Nothing! There will be a compile error!   There is no type mismatch, so there will not be a compile error.    "
 },
@@ -1580,7 +1580,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_outputting-variables.html#outputting_variables_3",
   "type": "Checkpoint",
-  "number": "2.5.3",
+  "number": "2.5.5",
   "title": "",
   "body": "  What happens when the following code is compiled?   int number = \"3\"; std::cout << number << '\\n';       The program compiles and prints 3 .    The value \"3\" is a string literal, not an integer value. It cannot be used to initialize an int variable this way.      The compiler reports a type error.    Correct. number has type int , but \"3\" is a string literal. These types are not compatible for this initialization.      The program compiles and prints \"3\" .     std::cout would print the value stored in number , but the program does not compile because \"3\" cannot initialize an int .      The program compiles but produces a semantic error.    A semantic error occurs when code compiles but does not do what was intended. This program does not reach that stage because the type mismatch prevents successful compilation.     "
 },
@@ -1706,7 +1706,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_keywords.html#keywords_1",
   "type": "Checkpoint",
-  "number": "2.6.1",
+  "number": "2.6.4",
   "title": "",
   "body": "  Words that are reserved in C++ because they are used by the compiler to parse the structure of your program are called .          "
 },
@@ -1715,7 +1715,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_keywords.html#keywords_3",
   "type": "Checkpoint",
-  "number": "2.6.2",
+  "number": "2.6.5",
   "title": "",
   "body": "  Click on all keywords.   Try again!   int main() {   double  x = 1.0;   int  y = x + 5;   bool  Bool = true ;   std::string  s = \"void\";  std::cout << Bool << '\\n';  }   "
 },
@@ -1724,7 +1724,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_keywords.html#keywords_4",
   "type": "Checkpoint",
-  "number": "2.6.3",
+  "number": "2.6.6",
   "title": "",
   "body": "  Fix the code below so that it runs without errors and produces the intended output. Hint: you might need to change the names of some variables so they do not conflict with C++ keywords.   #include <iostream> int main() { int friend = 4; int enemy = friend * (-1); std::cout << \"enemy = \" << enemy << std::endl; \/\/ Do not modify anything below. return 0; }   "
 },
@@ -1832,7 +1832,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#chapter2_operators-15",
   "type": "Note",
-  "number": "2.7.1",
+  "number": "2.7.2",
   "title": "",
   "body": " In C++, double is one commonly used floating-points type. We'll get to that in the next chapter.  "
 },
@@ -1841,7 +1841,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_1",
   "type": "Checkpoint",
-  "number": "2.7.1",
+  "number": "2.7.3",
   "title": "",
   "body": "  Match the statement to the result, given that x = 10.   Try again!    x*10  100    x-10  0    100\/x  10    (x+x+x+x+x)*20  1000    "
 },
@@ -1850,7 +1850,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3",
   "type": "Checkpoint",
-  "number": "2.7.2",
+  "number": "2.7.4",
   "title": "",
   "body": "  Integer division always the answer by dropping any decimal portion.          "
 },
@@ -1859,7 +1859,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3-1",
   "type": "Checkpoint",
-  "number": "2.7.3",
+  "number": "2.7.5",
   "title": "",
   "body": "  int num1 = 12; int num2 = 5; std::cout << num1 \/ num2;  What is printed to the terminal?           "
 },
@@ -1868,7 +1868,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3-2",
   "type": "Checkpoint",
-  "number": "2.7.4",
+  "number": "2.7.6",
   "title": "",
   "body": "  int num1 = 10; int num2 = 48; std::cout << num2 \/ num1;  What is printed to the terminal?             "
 },
@@ -1877,7 +1877,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3-3",
   "type": "Checkpoint",
-  "number": "2.7.5",
+  "number": "2.7.7",
   "title": "",
   "body": "  int num1 = 10; int num2 = 40; std::cout << num2 \/ num1;  What is printed to the terminal?             "
 },
@@ -1886,7 +1886,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3-4",
   "type": "Checkpoint",
-  "number": "2.7.6",
+  "number": "2.7.8",
   "title": "",
   "body": "  int num1 = 10; int num2 = 39; std::cout << num2 \/ num1;  What is printed to the terminal?             "
 },
@@ -1895,7 +1895,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3-5",
   "type": "Checkpoint",
-  "number": "2.7.7",
+  "number": "2.7.9",
   "title": "",
   "body": "  int num1 = 7; int num2 = 8; std::cout << \"Decimal:\" << num1 \/ num2;  What is printed after Decimal: ?             "
 },
@@ -1904,7 +1904,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_4",
   "type": "Checkpoint",
-  "number": "2.7.8",
+  "number": "2.7.10",
   "title": "",
   "body": "  Construct a code block that prints the total cost of your meal, including the 6.0% sales tax, after you purchase two orders of fries, three burgers, and a milkshake. Start by initializing the value of sales tax, then the prices of the food. Once you have initialized the variables, you can perform your calculations and save the result in the price variable. At the very end, you will print out the total price.     int main() {    double tax = 0.06;     double fries, milkshake, burger;    string fries, milkshake, burger;     fries = 2.50;  milkshake = 3.75;  burger = 3.00;    double price = 2 * fries + 3 * burger + milkshake;     double price_with_tax = price + price * tax;    double price_with_tax = price * tax;      std::cout << \"The total cost of your meal is $\";  std::cout << price_with_tax << \".\" << std::endl ;    std::cout << \"The total cost of your meal is $\";  std::cout << price << \".\" << std::endl ;     }    "
 },
@@ -1949,7 +1949,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_order-of-operations.html#order_of_operations_1",
   "type": "Checkpoint",
-  "number": "2.8.1",
+  "number": "2.8.2",
   "title": "",
   "body": "  Match the expression to its correct output. Don't forget to consider integer division!   Try again!    (6*4)+1  25    6*(4+1)  30    (6\/4)+1  2    6\/(4+1)  1    "
 },
@@ -1958,7 +1958,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_order-of-operations.html#order_of_operations_2",
   "type": "Checkpoint",
-  "number": "2.8.2",
+  "number": "2.8.3",
   "title": "",
   "body": "  Any time you want to override the rules of precedence, you can use .          "
 },
@@ -1976,7 +1976,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_order-of-operations.html#order_of_operations_3A",
   "type": "Checkpoint",
-  "number": "2.8.3",
+  "number": "2.8.4",
   "title": "",
   "body": "  Click on ALL PARTS of the expression that get evaluated first. For example, if \"1 + 1\" gets evaluated first, click on \"1\", \"+\", and \"1\".   Try again!   1  +  2  * ( 10  -  2 ) \/  4   "
 },
@@ -1985,7 +1985,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_order-of-operations.html#order_of_operations_3B",
   "type": "Checkpoint",
-  "number": "2.8.4",
+  "number": "2.8.5",
   "title": "",
   "body": "  Click on ALL PARTS of the expression that get evaluated first. For example, if \"1 + 1\" gets evaluated first, click on \"1\", \"+\", and \"1\".   Try again!   1  +  2  *  8  \/  4   "
 },
@@ -1994,7 +1994,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_order-of-operations.html#order_of_operations_3C",
   "type": "Checkpoint",
-  "number": "2.8.5",
+  "number": "2.8.6",
   "title": "",
   "body": "  Click on ALL PARTS of the expression that get evaluated first. For example, if \"1 + 1\" gets evaluated first, click on \"1\", \"+\", and \"1\".   Try again!   1  +  16  \/  4   "
 },
@@ -2093,7 +2093,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators-for-characters.html#chapter2_operators-for-characters-10",
   "type": "Note",
-  "number": "2.9.1",
+  "number": "2.9.3",
   "title": "",
   "body": " Character values have integer representations in the character encoding used by the program. On many common systems, the familiar English letters, digits, and punctuation use ASCII-compatible values. For example, 'A' and 'B' have consecutive integer representations on ASCII-based systems.  "
 },
@@ -2120,7 +2120,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators-for-characters.html#char_operations_1",
   "type": "Checkpoint",
-  "number": "2.9.1",
+  "number": "2.9.4",
   "title": "",
   "body": "  What is the value of letter if letter = 'c' + 3 ?           "
 },
@@ -2129,7 +2129,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators-for-characters.html#char_operations_2",
   "type": "Checkpoint",
-  "number": "2.9.2",
+  "number": "2.9.5",
   "title": "",
   "body": "  Construct a main function that uses character operations to generate the output letter r on an ASCII-compatible system.     int main() {    char r;    int r;    r = 'p' + 2;    r = p + 2;    r = 'p' + 3;    std::cout << r << '\\n';    std::cout << \"r\\n\";    }    "
 },
@@ -2228,7 +2228,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#chapter2_composition-11",
   "type": "Warning",
-  "number": "2.10.1",
+  "number": "2.10.4",
   "title": "",
   "body": " There are limits on where you can use certain expressions; most notably, the left-hand side of an assignment statement has to be a variable name, not an expression.  "
 },
@@ -2246,7 +2246,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#compos_1",
   "type": "Checkpoint",
-  "number": "2.10.1",
+  "number": "2.10.5",
   "title": "",
   "body": "  What must be changed in order for this code block to work?  int main() { int dogs = 3; int cats = 6; int pets; dogs + cats = pets; std::cout << \"I have \" << pets << \" pets!\"; return 0; }      Change line 5 to pets = dogs + cats;   Assignment statements operate such that the evaluated expression on the right is assigned to the variable on the left.     Change line 5 to int pets = dogs + cats;   pets has already been declared as an int.     Change line 5 to pets == dogs + cats;   The == operator checks if the left side EQUALS the right side. It is not the correct operator here.     Change line 5 to int pets == dogs + cats;   pets has already been declared as an int. Also, the == operator is not the proper choice here.     No change, the code runs fine as is.   Assignment statements assign the value on the right to the variable on the left.    "
 },
@@ -2255,7 +2255,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#compos_2",
   "type": "Checkpoint",
-  "number": "2.10.2",
+  "number": "2.10.6",
   "title": "",
   "body": "  The left-hand side of an assignment statement has to be a name, not an expression.          "
 },
@@ -2264,7 +2264,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#compos_3",
   "type": "Checkpoint",
-  "number": "2.10.3",
+  "number": "2.10.7",
   "title": "",
   "body": "  In programming, another word for combine is .          "
 },
@@ -2273,7 +2273,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#compos_4",
   "type": "Checkpoint",
-  "number": "2.10.4",
+  "number": "2.10.8",
   "title": "",
   "body": "  Finish the code below so that the velocity is calculated completely on a single line. Hint: the current velocity results from 1) the initial velocity and 2) the acceleration over a window of time. Use v0 for initial velocity, a for acceleration, and t for time.   #include <iostream> int main() { int v0 = 5, a = 3, t = 4, velocity; \/\/ You may only use the next line for your code. velocity = ; std::cout << \"Testing...\" << std::endl; std::cout << \"Yours = \" << velocity << std::endl; std::cout << \"Correct = 17\"; }   "
 },
@@ -2282,7 +2282,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#compos_5",
   "type": "Checkpoint",
-  "number": "2.10.5",
+  "number": "2.10.9",
   "title": "",
   "body": "  Finish the code below so that the volume of a rectangular prism with length l , width w , and height h is calculated on a single line.   #include <iostream> int main() { int l = 2, w = 3, h = 4, volume; \/\/ You may only use the next line for your code. volume = ; std::cout << \"Testing...\" << std::endl; std::cout << \"Yours = \" << volume << std::endl; std::cout << \"Correct = 24\"; }   "
 },
@@ -2786,7 +2786,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_floating-point.html#floating_point_1",
   "type": "Checkpoint",
-  "number": "3.1.1",
+  "number": "3.1.3",
   "title": "",
   "body": "  Giving a variable its initial value when it is declared is called .       Correct. This is called initialization.     "
 },
@@ -2795,7 +2795,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_floating-point.html#floating_point_2",
   "type": "Checkpoint",
-  "number": "3.1.2",
+  "number": "3.1.4",
   "title": "",
   "body": "  A cake contains 12 servings and is divided equally among 5 people. Consider the following code:  int servings = 12; int people = 5; double serving_size = servings \/ people;  The program stores in serving_size . This is (more, less, the same) than the mathematically correct result.       Correct. Both operands are integers, so 12 \/ 5 performs integer division and produces 2 .    .*  Both servings and people have type int . What kind of division will C++ perform?       Correct. The mathematical result is 2.4 , so 2 is less than the correct result.    .*  Compare the program's result, 2 , with the mathematical result of 12 \/ 5 .     "
 },
@@ -2804,7 +2804,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_floating-point.html#floating_point_3",
   "type": "Checkpoint",
-  "number": "3.1.3",
+  "number": "3.1.5",
   "title": "",
   "body": "  Consider the following C++ code:  double e = 2.71828; int e_int = e; double e_double = e_int; std::cout << e_double;  What value is printed?      e     e is the variable name. std::cout prints the value stored in e_double .      3    Converting 2.71828 to int does not round it to the nearest integer. The fractional part is discarded.      2    Correct. Converting e to int discards the fractional part, so e_int becomes 2 . Converting that value back to double gives 2.0 , which std::cout displays as 2 by default.      3.0    The conversion to int discards the fractional part of 2.71828 , producing 2 , not 3 .      2.71828    The fractional part is lost when e is converted to int . Converting the resulting 2 back to double cannot restore the lost fractional part.     "
 },
@@ -2822,7 +2822,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_floating-point.html#floating_point_a1",
   "type": "Listing",
-  "number": "3.1.1",
+  "number": "3.1.6",
   "title": "Run the code to see what type of division occurs each time.",
   "body": " Run the code to see what type of division occurs each time.   #include <iostream> int main() { double value = 5.0 \/ 2; \/\/ (a) std::cout << \"current value (a) is \" << value << '\\n'; value = 5 \/ 2.0; \/\/ (b) std::cout << \"current value (b) is \" << value << '\\n'; value = 5 \/ 2; \/\/ (c) std::cout << \"current value (c) is \" << value << '\\n'; value = 5.0 \/ 2.0; \/\/ (d) std::cout << \"current value (d) is \" << value << '\\n'; return 0; }   "
 },
@@ -3002,7 +3002,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#chapter3_math-functions-9",
   "type": "Note",
-  "number": "3.3.1",
+  "number": "3.3.2",
   "title": "",
   "body": " To convert an angle from degrees to radians, multiply by pi and divide by 180: radians = degrees * pi \/ 180.0 .  "
 },
@@ -3020,7 +3020,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#math_functions_AC_2",
   "type": "Listing",
-  "number": "3.3.2",
+  "number": "3.3.3",
   "title": "This program calculates pi and converts an angle from degrees to radians.",
   "body": " This program calculates pi and converts an angle from degrees to radians.   #include <iostream> #include <cmath> int main() { double pi = std::acos(-1.0); double degrees = 90.0; double radians = degrees * pi \/ 180.0; std::cout << pi << '\\n'; std::cout << degrees << '\\n'; std::cout << radians << '\\n'; return 0; }   "
 },
@@ -3047,7 +3047,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#chapter3_math-functions-15",
   "type": "Note",
-  "number": "3.3.2",
+  "number": "3.3.4",
   "title": "",
   "body": " In this course, qualify standard-library names with the std:: prefix rather than using using namespace std; .  "
 },
@@ -3065,7 +3065,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#chapter3_math-functions-18",
   "type": "Note",
-  "number": "3.3.3",
+  "number": "3.3.5",
   "title": "",
   "body": " The C++ header <cmath> is related to the older C header <math.h> . In C++ programs, prefer <cmath> and the corresponding std:: -qualified function names.  "
 },
@@ -3074,7 +3074,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#dnd1",
   "type": "Checkpoint",
-  "number": "3.3.1",
+  "number": "3.3.6",
   "title": "",
   "body": "  Match each item with its description.    Try again.     <cmath>  declares standard-library mathematical functions such as std::log and std::sin    <iostream>  declares facilities for stream input and output, including std::cout    std  the namespace containing many names from the C++ standard library    "
 },
@@ -3083,7 +3083,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#math_functions_2",
   "type": "Checkpoint",
-  "number": "3.3.2",
+  "number": "3.3.7",
   "title": "",
   "body": "  What unit of angle is used by C++ trigonometric functions such as std::sin and std::cos ?        Correct. C++ trigonometric functions use radians.    degrees  Degrees are commonly used to measure angles, but C++ trigonometric functions use radians.    .*  Review the unit expected by functions such as std::sin and std::cos .     "
 },
@@ -3092,7 +3092,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#math_functions_3",
   "type": "Checkpoint",
-  "number": "3.3.3",
+  "number": "3.3.8",
   "title": "",
   "body": "   Multiple Response Select all valid standard-library functions declared by <cmath> .      std::cos    Correct. std::cos computes the cosine of an angle.      std::arctan    The inverse tangent function is named std::atan .      std::log10    Correct. std::log10 computes a base-10 logarithm.      std::pow    Correct. std::pow raises a value to a power.      std::ln    The natural logarithm function is named std::log .     "
 },
@@ -3164,7 +3164,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_composition.html#function_comp_1",
   "type": "Checkpoint",
-  "number": "3.4.1",
+  "number": "3.4.2",
   "title": "",
   "body": "  Which of these statements has correct C++ syntax and uses valid standard-library functions from <cmath> ?       double x = std::log6(12);      std::log6 is not a standard-library function.       double val = std::abs(std::tan(1.57));     Correct. The result of std::tan(1.57) is passed as the argument to std::abs .       double num = std::exp(std::cosine(0.86667));      std::cosine is not a standard-library function. The cosine function is named std::cos .       double y = std::exp(std::cos(1.047)) + std::exp(std::tan(2.094))     The function calls are valid, but the statement is missing a semicolon.     "
 },
@@ -3173,7 +3173,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_composition.html#function_comp_2",
   "type": "Checkpoint",
-  "number": "3.4.2",
+  "number": "3.4.3",
   "title": "",
   "body": "  Which statement computes the y-component of a unit vector at 330 degrees? Assume pi has already been defined.       y = std::cos(330);      std::cos gives the x-component, and C++ trigonometric functions expect angles in radians.       y = std::cos(330 * pi \/ 180.0);     The angle is converted correctly, but std::cos gives the x-component of the unit vector.       y = std::sin(330);      std::sin gives the y-component, but the angle must be converted from degrees to radians first.       y = std::sin(330 * pi \/ 180.0);     Correct. std::sin gives the y-component, and 330 * pi \/ 180.0 converts 330 degrees to radians.       y = std::tan(330 * pi \/ 180.0);      std::tan does not directly give the y-component of a unit vector.     "
 },
@@ -3362,7 +3362,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-25",
   "type": "Note",
-  "number": "3.5.1",
+  "number": "3.5.2",
   "title": "",
   "body": " Write code so that its organization is clear to another programmer, not just to the compiler.  "
 },
@@ -3407,7 +3407,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_adding-new-functions.html#new_functions_mc_1",
   "type": "Checkpoint",
-  "number": "3.5.1",
+  "number": "3.5.3",
   "title": "",
   "body": "  Which statement about functions is false?      A function can be given any name, including a C++ keyword.    Correct. A function name is an identifier and cannot be a C++ keyword.      A function can have parameters or have an empty parameter list.    This is true. Parentheses are still required even when the parameter list is empty.      One function can call another function.    This is true. Functions commonly call other functions.      The same function can be called more than once.    This is true. Reusing a function is one of the reasons functions are useful.     "
 },
@@ -3416,7 +3416,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_adding-new-functions.html#new_functions_2",
   "type": "Checkpoint",
-  "number": "3.5.2",
+  "number": "3.5.4",
   "title": "",
   "body": "  Click on all function headers .    A function header contains the return type, function name, and parameter list and begins a function definition.    void print_x() {   std::cout << \"X\";  }   void print_var(int value) {   std::cout << value;  }   int main() {   int x = 7;   print_var(x);   print_x();   int y = 3;   double result = x \/ static_cast<double>(y);   print_var(static_cast<int>(result));  return 0;  }   "
 },
@@ -3425,7 +3425,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_adding-new-functions.html#new_functions_3",
   "type": "Checkpoint",
-  "number": "3.5.3",
+  "number": "3.5.5",
   "title": "",
   "body": "  Click on all function calls .    A function call causes a function to execute.    void print_x() {   std::cout << \"X\";  }   void print_var(int value) {   std::cout << value;  }   int main() {   int x = 7;   print_var(x);   print_x();   int y = 3;   double result = x \/ static_cast<double>(y);   print_var(static_cast<int>(result));  return 0;  }   "
 },
@@ -3434,7 +3434,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_adding-new-functions.html#new_functions_pp_1",
   "type": "Checkpoint",
-  "number": "3.5.4",
+  "number": "3.5.6",
   "title": "",
   "body": "  Construct a function that takes the length and width of a rectangle and prints its perimeter.      void print_perimeter(int length, int width) {    void print_perimeter(int length, width) {     int twice_length = 2 * length;  int twice_width = 2 * width;     int perimeter = twice_length + twice_width;    int perimeter = twice_length * twice_width;      std::cout << perimeter << '\\n';    return perimeter;     }    "
 },
@@ -3632,7 +3632,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_programs-with-multiple-functions.html#multiple_fun_1",
   "type": "Checkpoint",
-  "number": "3.7.1",
+  "number": "3.7.3",
   "title": "",
   "body": "  Match each step with its position in the flow of execution for the program above.    Try again! Begin in main and follow each function call.     main begins  executes first    multiply_two is called  executes second    print_total is called inside multiply_two  executes third    add_two is called  executes fourth    print_total is called from main  executes fifth    "
 },
@@ -3641,7 +3641,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_programs-with-multiple-functions.html#multiple_fun_2",
   "type": "Checkpoint",
-  "number": "3.7.2",
+  "number": "3.7.4",
   "title": "",
   "body": "  Consider the following C++ code. Note that line numbers are included on the left.   #include <iostream> \/\/ Function declarations void new_line(); void three_line(); int main() { std::cout << \"First Line.\" << '\\n'; three_line(); std::cout << \"Second Line.\" << '\\n'; return 0; } \/\/ Function definitions void new_line() { std::cout << '\\n'; } void three_line() { new_line(); new_line(); new_line(); }   Which of the following reflects the order in which the functions begin executing?       new_line, three_line, main     Function definition order does not determine execution order. Execution begins in main .       new_line, three_line, new_line, new_line, new_line, main     Execution begins in main , not with the first function definition in the source file.       main, three_line, new_line, new_line, new_line     Correct. Execution begins in main . Then three_line is called, and it calls new_line three times.       main, three_line      three_line also calls new_line three times.     "
 },
@@ -3650,7 +3650,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_programs-with-multiple-functions.html#multiple_fun_3",
   "type": "Checkpoint",
-  "number": "3.7.3",
+  "number": "3.7.5",
   "title": "",
   "body": "  Consider the following C++ code.   #include <iostream> \/\/ Function declarations void yo(); void hello(); void goodbye(); int main() { std::cout << \"welcome, \"; goodbye(); return 0; } \/\/ Function definitions void yo() { std::cout << \"yo, \"; } void hello() { std::cout << \"hello, \"; yo(); yo(); } void goodbye() { yo(); hello(); std::cout << \"goodbye,\"; }   What is printed when the code is executed?       welcome, yo, hello, goodbye,      hello calls yo twice, so those calls also produce output.       welcome, goodbye,      goodbye calls other functions before printing goodbye, .       welcome, yo, hello, yo, yo, goodbye,     Correct. main prints first and calls goodbye . goodbye calls yo and then hello , and hello calls yo twice.       yo, hello, yo, yo, goodbye,     Before calling goodbye , main prints welcome, .     "
 },
@@ -3812,7 +3812,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#params_args_AC_1",
   "type": "Listing",
-  "number": "3.8.1",
+  "number": "3.8.4",
   "title": "The following code shows the output of the <code class=\"code-inline tex2jax_ignore\">print_twice<\/code> function. Try modifying the value of <code class=\"code-inline tex2jax_ignore\">letter<\/code> to change the output.",
   "body": " The following code shows the output of the print_twice function. Try modifying the value of letter to change the output.   #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }   "
 },
@@ -3821,7 +3821,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#params_args_1",
   "type": "Checkpoint",
-  "number": "3.8.1",
+  "number": "3.8.5",
   "title": "",
   "body": "  What will be printed to the terminal? If the program does not compile, enter error .  #include <iostream> #include <string> void print_twice(char symbol); int main() { std::string argument = \"s\"; print_twice(argument); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }          A std::string object cannot be passed as the char argument required by print_twice .     "
 },
@@ -3830,7 +3830,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#params_args_2",
   "type": "Checkpoint",
-  "number": "3.8.2",
+  "number": "3.8.6",
   "title": "",
   "body": "  What will be printed to the terminal? If the program does not compile, enter error .  #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }          The argument letter supplies the value 'b' to the parameter symbol , so print_twice prints bb .     "
 },
@@ -3839,7 +3839,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#params_args_4",
   "type": "Checkpoint",
-  "number": "3.8.3",
+  "number": "3.8.7",
   "title": "",
   "body": "  Match each function declaration with a compatible function call.    Try again! Compare the number, order, and types of the arguments with the parameters in each declaration.     int combine_values(int x, int y);  combine_values(4, 7);    int combine_values(std::string text, int x);  combine_values(\"hello\", 10);    int combine_values(double x, std::string text);  combine_values(4.5, \"hello\");    int combine_values(std::string first, std::string second);  combine_values(\"hello\", \"hi\");    "
 },
@@ -4001,7 +4001,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-19",
   "type": "Note",
-  "number": "3.9.1",
+  "number": "3.9.3",
   "title": "",
   "body": " In C++, main is a function with its own local scope. A variable declared inside main is not global and is not automatically visible inside other functions.  "
 },
@@ -4019,7 +4019,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-21",
   "type": "Note",
-  "number": "3.9.2",
+  "number": "3.9.4",
   "title": "",
   "body": " When you use CodeLens to step through a program, you can see the variables associated with each active function call. Try it on above.  "
 },
@@ -4037,7 +4037,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#locals_1",
   "type": "Checkpoint",
-  "number": "3.9.1",
+  "number": "3.9.5",
   "title": "",
   "body": "  How many local variables and parameters does main have?  #include <iostream> #include <string> void print_hello_name(std::string name); int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; } void print_hello_name(std::string name) { std::cout << \"Hello \" << name << \"!\\n\"; }      1 local variable, 1 parameter    The variables name1 and name2 are both declared inside main . The empty parentheses in main() show that it has no parameters in this example.      0 local variables, 1 parameter     main declares both name1 and name2 , and its parameter list is empty.      2 local variables, 0 parameters    Correct. name1 and name2 are local variables in main , and main() has no parameters in this example.      2 local variables, 1 parameter    There are two local variables, but the empty parameter list in main() means that this version of main has no parameters.     "
 },
@@ -4046,7 +4046,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#locals_2",
   "type": "Checkpoint",
-  "number": "3.9.2",
+  "number": "3.9.6",
   "title": "",
   "body": "  How many local variables and parameters does print_hello_name have?  #include <iostream> #include <string> void print_hello_name(std::string name); int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; } void print_hello_name(std::string name) { std::cout << \"Hello \" << name << \"!\\n\"; }      1 local variable, 1 parameter     name is a parameter because it is declared in the function's parameter list. No additional variable is declared inside the function body.      0 local variables, 1 parameter    Correct. name is the function's one parameter, and no additional local variables are declared in the function body.      2 local variables, 0 parameters     name1 and name2 belong to main , not to print_hello_name . The parameter name belongs to print_hello_name .      2 local variables, 1 parameter     name1 and name2 are local to main . They are not local variables of print_hello_name .     "
 },
@@ -4055,7 +4055,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#locals_3",
   "type": "Checkpoint",
-  "number": "3.9.3",
+  "number": "3.9.7",
   "title": "",
   "body": "  Each time a function is called, that call gets its own and local variables.       Each active function call has its own parameters and local variables.     "
 },
@@ -4064,7 +4064,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#locals_4",
   "type": "Checkpoint",
-  "number": "3.9.4",
+  "number": "3.9.8",
   "title": "",
   "body": "  How many calls to hi are made during the execution of the entire program?  #include <iostream> void hi(); void print_greeting(); int main() { hi(); print_greeting(); hi(); return 0; } void hi() { std::cout << \"hiii!\\n\"; } void print_greeting() { hi(); std::cout << \"How are you doing today?\\n\"; hi(); }      1 call     hi is called directly from main and also from print_greeting .      4 calls    Correct. main calls hi twice, and print_greeting calls hi twice more.      2 calls    There are two direct calls from main , plus two more calls inside print_greeting .      3 calls     main calls hi twice, and print_greeting contains two additional calls.     "
 },
@@ -4145,7 +4145,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-multiple-parameters.html#multiple_params_AC_1",
   "type": "Listing",
-  "number": "3.10.1",
+  "number": "3.10.2",
   "title": "This program shows how the <code class=\"code-inline tex2jax_ignore\">dollar_amount<\/code> and <code class=\"code-inline tex2jax_ignore\">cent_amount<\/code> arguments are passed to the <code class=\"code-inline tex2jax_ignore\">print_price<\/code> function.",
   "body": " This program shows how the dollar_amount and cent_amount arguments are passed to the print_price function.   #include <iostream> void print_price(int dollars, int cents); int main() { int dollar_amount = 2; int cent_amount = 92; print_price(dollar_amount, cent_amount); return 0; } void print_price(int dollars, int cents) { std::cout << \"Price is \" << dollars << \" dollars and \" << cents << \" cents.\\n\"; }   "
 },
@@ -4154,7 +4154,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-multiple-parameters.html#multiple_params_1",
   "type": "Checkpoint",
-  "number": "3.10.1",
+  "number": "3.10.3",
   "title": "",
   "body": "  Which of the following is a correct function header (the first line of a function definition)?       total_cost(double cost, tax, discount) {      total_cost needs a return type, and each parameter needs its own type.       total_cost(double cost, double tax) {      total_cost needs a return type.       void total_cost(double cost, double tax, double discount) {     Correct. The function has a return type, and each parameter has its own type.     "
 },
@@ -4163,7 +4163,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-multiple-parameters.html#multiple_params_2",
   "type": "Checkpoint",
-  "number": "3.10.2",
+  "number": "3.10.4",
   "title": "",
   "body": "  Which of the following is a legal function call for multiply_two in the program below?  #include <iostream> #include <string> void multiply_two(int num, std::string name); int main() { int x = 2; std::string person = \"Phil\"; return 0; } void multiply_two(int num, std::string name) { int total = num * 2; std::cout << \"Hi \" << name << \", your total is \" << total << \"!\\n\"; }       multiply_two(int x, std::string person);     Types belong in the function declaration or definition, not in the argument list of a function call.       multiply_two(x, person);     Correct. The arguments are supplied in the same order as the corresponding parameters.       void multiply_two(int num, std::string name) {     This begins a function definition rather than a function call.       void multiply_two(int x, std::string person);     This is a function declaration, not a function call.     "
 },
@@ -4298,7 +4298,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-results.html#fuwresults_1",
   "type": "Checkpoint",
-  "number": "3.11.1",
+  "number": "3.11.2",
   "title": "",
   "body": "  What will be printed when the following code runs?    #include <iostream> void multiply(int x, int y); int main() { int x = 2; int y = 4; multiply(x, y); return 0; } void multiply(int x, int y) { std::cout << x * y; }        The function prints 2 * 4 , which is 8 . It prints the value but does not return it.     "
 },
@@ -4307,7 +4307,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-results.html#fuwresults_2",
   "type": "Checkpoint",
-  "number": "3.11.2",
+  "number": "3.11.3",
   "title": "",
   "body": "  Will the following code compile?   #include <iostream> void multiply(int x, int y); int main() { int x = 2; int y = 4; std::cout << multiply(x, y); return 0; } void multiply(int x, int y) { std::cout << x * y << '\\n'; }       Yes     multiply has return type void , so the call does not produce a value that can be sent to std::cout .      No    Correct. A void function does not produce a return value that can be used as part of this output expression.     "
 },
@@ -4316,7 +4316,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-results.html#fuwresults_3",
   "type": "Checkpoint",
-  "number": "3.11.3",
+  "number": "3.11.4",
   "title": "",
   "body": "  What value is stored in result after this code runs?   int double_value(int value); int main() { int result = double_value(6); return 0; } int double_value(int value) { return value * 2; }       2    The parameter value receives 6 , so value * 2 is 12 .      6     6 is the argument passed to the function, but the function returns twice that value.      12    Correct. double_value(6) returns 6 * 2 , which is 12 .      Nothing, because the function does not print anything.    Printing and returning are different. The return statement sends the value back to the caller even though the function itself does not print anything.     "
 },
@@ -4325,7 +4325,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-results.html#fuwresults_4",
   "type": "Checkpoint",
-  "number": "3.11.4",
+  "number": "3.11.5",
   "title": "",
   "body": "  What will be printed when the following code runs?   #include <iostream> int double_value(int value); int main() { std::cout << double_value(4) + 3 << '\\n'; return 0; } int double_value(int value) { return value * 2; }       7     double_value(4) returns 8 , not 4 .      8     8 is the value returned by double_value(4) , but then 3 is added to that value.      11    Correct. double_value(4) returns 8 , so the expression becomes 8 + 3 .      Nothing, because the returned value is not stored in a variable.    A returned value does not have to be stored in a variable. It can be used directly as part of a larger expression.     "
 },
@@ -4478,7 +4478,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_pass-by-reference.html#pass_by_reference_1",
   "type": "Checkpoint",
-  "number": "3.12.1",
+  "number": "3.12.2",
   "title": "",
   "body": "  What are the values of x and y after the following code runs?   void swap_values(int first, int second); int main() { int x = 3; int y = 7; swap_values(x, y); return 0; } void swap_values(int first, int second) { int temp = first; first = second; second = temp; }       x is 3 and y is 7.    Correct. first and second receive copies of the argument values. Swapping those local parameters does not change x or y .      x is 7 and y is 3.    The values of the local parameters are swapped, but x and y are passed by value and remain unchanged.      x is 3 and y is 3.    The assignments affect only the local parameters inside swap_values .      x is 7 and y is 7.    Neither variable in main is changed by this pass-by-value function.     "
 },
@@ -4487,7 +4487,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_pass-by-reference.html#pass_by_reference_2",
   "type": "Checkpoint",
-  "number": "3.12.2",
+  "number": "3.12.3",
   "title": "",
   "body": "  Which function declaration allows add_one to change the caller's int variable?      void add_one(int value);    This passes the value by value, so value receives a copy of the argument.      void add_one(int& value);    Correct. value is a reference parameter, so changes made through it affect the caller's variable.      int add_one(int value);    This function can return an int , but value itself is still passed by value.      void add_one(value);    A parameter in a function declaration must have a type.     "
 },
@@ -4496,7 +4496,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_pass-by-reference.html#pass_by_reference_3",
   "type": "Checkpoint",
-  "number": "3.12.3",
+  "number": "3.12.4",
   "title": "",
   "body": "  What is printed by the following program?   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }       1     value refers to count , whose value starts at 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      Error!    Passing an int variable to an int& reference parameter is legal.     "
 },
@@ -4577,7 +4577,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_function-overloading.html#chapter3_function_overloading_1",
   "type": "Checkpoint",
-  "number": "3.13.1",
+  "number": "3.13.2",
   "title": "",
   "body": "  Which pair of declarations is a valid pair of overloaded functions?     void report_value(int value); and void report_value(double value);  Correct. The parameter types are different.    int get_value(); and double get_value();  Return type alone cannot distinguish overloaded functions.    void print(int value); and void print(int number);  The parameter names are different, but both functions have the same parameter list.    double calculate(double value); and double calculate(double amount);  The parameter names do not distinguish the functions.    "
 },
@@ -4586,7 +4586,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_function-overloading.html#chapter3_function_overloading_2",
   "type": "Checkpoint",
-  "number": "3.13.2",
+  "number": "3.13.3",
   "title": "",
   "body": "  Which call selects the overload with two double parameters?   int calculate_total(int first_value, int second_value); double calculate_total(double first_value, double second_value);      calculate_total(3, 4)  Both arguments are int values, so the integer overload is an exact match.    calculate_total(3.0, 4.0)  Correct. Both arguments are double values.    calculate_total(3L, 4L)  These arguments are long values, not exact double values.    calculate_total(3, 4.0)  This call has mixed argument types and does not provide two exact double arguments.    "
 },
@@ -4595,7 +4595,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_function-overloading.html#chapter3_function_overloading_3",
   "type": "Checkpoint",
-  "number": "3.13.3",
+  "number": "3.13.4",
   "title": "",
   "body": "  Why is the following pair invalid?   int get_score(); double get_score();      Both functions have the same return type.  The return types are different, not the same.    The parameter lists are identical, and return type alone cannot overload a function.  Correct. A call cannot select between these functions using only its return context.    A function cannot return a numeric value.  C++ functions can return numeric values. The problem is the identical parameter list.    Function names must always be different.  Overloaded functions intentionally share a name when their parameter lists differ.    "
 },
@@ -4604,7 +4604,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_function-overloading.html#chapter3_function_overloading_4",
   "type": "Checkpoint",
-  "number": "3.13.4",
+  "number": "3.13.5",
   "title": "",
   "body": "  Arrange the blocks to define two overloads of calculate_total and call both versions from main .    #include <iostream>  int calculate_total(int first_value, int second_value) {  return first_value + second_value; }  double calculate_total(double first_value, double second_value) {  return first_value + second_value; }  int main() {  std::cout << calculate_total(3, 4) << '\\n';  std::cout << calculate_total(2.5, 1.5) << '\\n';  return 0; }   "
 },
@@ -4613,7 +4613,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_function-overloading.html#chapter3_function_overloading_5",
   "type": "Checkpoint",
-  "number": "3.13.5",
+  "number": "3.13.6",
   "title": "",
   "body": "  What is the main problem with the following call?   void report_value(long value); void report_value(double value); report_value(4);      The function name is too long.  Function names can contain multiple words when the naming convention permits them.    The argument must be a string.  The argument is a valid numeric value, but it can convert in more than one way here.    The call is ambiguous because an int can convert to either long or double .  Correct. Neither conversion is a uniquely best match.    Overloaded functions cannot have numeric parameters.  Numeric parameter types are commonly used in overloads.    "
 },
@@ -4730,7 +4730,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_default-parameters.html#chapter3_default_parameters_1",
   "type": "Checkpoint",
-  "number": "3.14.1",
+  "number": "3.14.2",
   "title": "",
   "body": "  What value is used for bonus in the first call?   void report_score(int score, int bonus = 5); report_score(80);      0  The declaration specifies a default of 5 , not 0 .    5  Correct. The caller omits the second argument, so the default is used.    80  80 is the value of score , not the default bonus.    The call is invalid because every argument must be written.  A trailing argument with a default value may be omitted.    "
 },
@@ -4739,7 +4739,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_default-parameters.html#chapter3_default_parameters_2",
   "type": "Checkpoint",
-  "number": "3.14.2",
+  "number": "3.14.3",
   "title": "",
   "body": "  Which declaration is valid according to the trailing-parameter rule?     void draw_line(int length = 10, char symbol);  A required parameter cannot follow a parameter with a default.    void draw_line(int length, char symbol = '-');  Correct. The required parameter comes first and the optional parameter comes last.    void draw_line(int length = 10, char symbol, int thickness = 1);  The required symbol parameter appears after a parameter with a default.    void draw_line(int length = 10, char symbol, int thickness);  Both parameters after length would need defaults.    "
 },
@@ -4748,7 +4748,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_default-parameters.html#chapter3_default_parameters_3",
   "type": "Checkpoint",
-  "number": "3.14.3",
+  "number": "3.14.4",
   "title": "",
   "body": "  What is wrong with this declaration and definition?   void display_value(int value, int width = 10); void display_value(int value, int width = 10) { }      The function has too many parameters.  Two parameters are allowed. The problem is repeating the default.    The default argument is repeated in the definition.  Correct. Put the default in the visible declaration and omit it from the definition.    A function definition cannot have a body.  The definition should have a body. That is not the problem here.    Default parameters can be used only with strings.  Defaults can be used with many parameter types, including int .    "
 },
@@ -4757,7 +4757,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_default-parameters.html#chapter3_default_parameters_4",
   "type": "Checkpoint",
-  "number": "3.14.4",
+  "number": "3.14.5",
   "title": "",
   "body": "  Arrange the blocks to define print_message with a default repeat count and call it once with the default and once with an explicit count.    #include <iostream>  #include <string>  void print_message(const std::string& message, int repeat_count = 1);  int main() {  print_message(\"Ready\");  print_message(\"Go\", 2);  return 0; }  void print_message(const std::string& message, int repeat_count) {  for (int count = 0; count < repeat_count; ++count) {  std::cout << message << '\\n'; } }   "
 },
@@ -4766,7 +4766,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_default-parameters.html#chapter3_default_parameters_5",
   "type": "Checkpoint",
-  "number": "3.14.5",
+  "number": "3.14.6",
   "title": "",
   "body": "  Which statement about C++17 function calls is correct?     C++17 supports Python-style keyword arguments for every function.  C++17 does not provide general-purpose keyword arguments.    C++17 uses positional arguments; an options structure can make many settings clearer.  Correct. Default parameters provide optional trailing values, while an options structure can organize many settings.    A default parameter allows the caller to skip an earlier argument and supply a later one.  Arguments are positional, so only trailing arguments can be omitted.    Using a default parameter automatically creates one overload for every possible value.  A default parameter is still part of one function declaration; it does not create overloads.    "
 },
@@ -5189,7 +5189,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_the-modulus-operator.html#mod_operator_1",
   "type": "Checkpoint",
-  "number": "4.1.1",
+  "number": "4.1.2",
   "title": "",
   "body": "  Which expression correctly tests whether the integer variable x is odd?      x % 2 == 0    A remainder of zero when dividing by 2 indicates an even number.      x % 2 != 0    An odd integer has a nonzero remainder when divided by 2.      x \/ 2 == 0    Integer division gives a quotient, not the remainder needed to determine whether a number is odd.      x \/ 2 != 0    Integer division gives a quotient, not the remainder needed to determine whether a number is odd.     "
 },
@@ -5198,7 +5198,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_the-modulus-operator.html#mod_operator_2",
   "type": "Checkpoint",
-  "number": "4.1.2",
+  "number": "4.1.3",
   "title": "",
   "body": "  Match each remainder expression to its result.    Remember that % gives the remainder after integer division.     3 % 2  1    2 % 3  2    6 % 2  0    9 % 6  3    "
 },
@@ -5261,7 +5261,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_conditional-execution.html#conditional_execution_AC_1",
   "type": "Listing",
-  "number": "4.2.1",
+  "number": "4.2.2",
   "title": "This program uses several independent <code class=\"code-inline tex2jax_ignore\">if<\/code> statements.",
   "body": " This program uses several independent if statements.   #include <iostream> int main() { int x = 12; if (x == 12) { std::cout << \"Equal!\\n\"; } if (x != 13) { std::cout << \"Not equal!\\n\"; } if (x < 6) { std::cout << \"Less than 6!\\n\"; } return 0; }   "
 },
@@ -5279,7 +5279,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_conditional-execution.html#conditional_execution_1",
   "type": "Checkpoint",
-  "number": "4.2.1",
+  "number": "4.2.3",
   "title": "",
   "body": "  Suppose x is 12. Which condition is true?      x < 6    Compare 12 with 6 using the meaning of the less-than operator.      x == 13    The equality operator tests whether the two values are the same.      x != 13    This comparison is true because the two values are different.      x > 20    Compare the value of x with 20 before deciding whether this condition is true.     "
 },
@@ -5288,7 +5288,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_conditional-execution.html#conditional_execution_2",
   "type": "Checkpoint",
-  "number": "4.2.2",
+  "number": "4.2.4",
   "title": "",
   "body": "  Match each comparison operator with values that make it true.    Read each comparison from left to right and compare the two values.     x > y  x = 10, y = 2    x <= y  x = 5, y = 5    x < y  x = 2, y = 10    "
 },
@@ -5297,7 +5297,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_conditional-execution.html#conditional_execution_3",
   "type": "Checkpoint",
-  "number": "4.2.3",
+  "number": "4.2.5",
   "title": "",
   "body": "  Match each comparison operator with values that make it true.    Pay attention to whether equality is allowed by the operator.     x == y  x = 3, y = 3    x >= y  x = 6, y = 2    x < y  x = 2, y = 6    "
 },
@@ -5387,7 +5387,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_logical-operators.html#logical_1",
   "type": "Checkpoint",
-  "number": "4.3.1",
+  "number": "4.3.5",
   "title": "",
   "body": "  What is the value of the following expression when x = 7 ?  x > 5 && x < 10     true   Both comparisons are true, so the AND expression is true.     false   Evaluate each comparison separately before applying && .     "
 },
@@ -5396,7 +5396,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_logical-operators.html#logical_2",
   "type": "Checkpoint",
-  "number": "4.3.2",
+  "number": "4.3.6",
   "title": "",
   "body": "  Which condition correctly checks whether choice is either 'A' or 'B' ?      choice == 'A' || choice == 'B'    Each comparison is written completely and the results are joined with logical OR.      choice == 'A' || 'B'    The second comparison must also include choice == .      choice == 'A' && choice == 'B'    A single character cannot be both values at the same time.      choice = 'A' || choice = 'B'    Review the difference between assignment and comparison.     "
 },
@@ -5405,7 +5405,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_logical-operators.html#logical_3",
   "type": "Checkpoint",
-  "number": "4.3.3",
+  "number": "4.3.7",
   "title": "",
   "body": "  What will this program print?  #include <iostream> int main() { int value = 12; if (value >= 10 && value <= 20) { std::cout << \"Inside\\n\"; } else { std::cout << \"Outside\\n\"; } return 0; }     Inside   The value satisfies both comparisons.     Outside   Check both comparisons using the value 12.     Nothing   One branch of an if \/ else must execute.     "
 },
@@ -5477,7 +5477,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_alternative-execution-alternative.html#alt_execution_1",
   "type": "Checkpoint",
-  "number": "4.4.1",
+  "number": "4.4.2",
   "title": "",
   "body": "  What will be printed when main is executed?  #include <iostream> void report_weather_temperature(int temperature); int main() { int degrees = 52; report_weather_temperature(degrees); return 0; } void report_weather_temperature(int temperature) { if (temperature < 52) { std::cout << \"It is cold!\\n\"; } else { std::cout << \"It is warm!\\n\"; } }      It is cold!    Check whether 52 satisfies the condition temperature < 52 .      It is warm!    Since the condition is false, execution follows the else branch.      Nothing prints.    An if \/ else statement executes exactly one of its two branches.      Error message.    Trace the argument into the parameter and then evaluate the comparison.     "
 },
@@ -5486,7 +5486,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_alternative-execution-alternative.html#alt_execution_2",
   "type": "Checkpoint",
-  "number": "4.4.2",
+  "number": "4.4.3",
   "title": "",
   "body": "  Construct a block of code that correctly goes through alternative execution for pricing of an entre at a nice restaurant. If the price is more than $30.00, print Expensive! . If the price is less than $30.00, print Inexpensive! You should by initializing the cost to $40.     int cost = 40;     if (cost > 30) {    if (cost > 30)     std::cout << \"Expensive!\";    } \/\/\"if\" bracket     else {    else if {      std::cout << \"Inexpensive!\";    std::cout << \"Inexpensive!\"     } \/\/\"else\" bracket    "
 },
@@ -5531,7 +5531,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_chained-conditionals.html#chapter4_chained-conditionals-5",
   "type": "Note",
-  "number": "4.5.1",
+  "number": "4.5.2",
   "title": "",
   "body": " Independent if statements behave differently. Each independent if condition is evaluated, so more than one body may execute. In a single if \/ else if \/ else chain, at most one branch executes.  "
 },
@@ -5549,7 +5549,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_chained-conditionals.html#chained_conditionals_1",
   "type": "Checkpoint",
-  "number": "4.5.1",
+  "number": "4.5.3",
   "title": "",
   "body": "  What will this program print?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One! \"; } if (x > 6) { std::cout << \"Two! \"; } if (x > 3) { std::cout << \"Three!\\n\"; } return 0; }      Three!    These are three independent if statements. Check each condition separately.      One!    After the first if finishes, execution continues to the next independent if .      One! Two!    Be sure to evaluate the third independent condition as well.      One! Two! Three!    Each independent if condition is checked separately.     "
 },
@@ -5558,7 +5558,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_chained-conditionals.html#chained_conditionals_2",
   "type": "Checkpoint",
-  "number": "4.5.2",
+  "number": "4.5.4",
   "title": "",
   "body": "  What will this program print?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One!\\n\"; } else if (x > 6) { std::cout << \"Two!\\n\"; } else { std::cout << \"Three!\\n\"; } return 0; }      Three!    Start at the top of the chain and evaluate the first condition.      One!    Once a true branch is found, the remaining branches are skipped.      One! Two!    This is one chained conditional, not two independent if statements.      One! Two! Three!    Only one branch of a single if \/ else if \/ else chain can execute.     "
 },
@@ -5567,7 +5567,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_chained-conditionals.html#chained_conditionals_3",
   "type": "Checkpoint",
-  "number": "4.5.3",
+  "number": "4.5.5",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void report_score_level(int score); int main() { int score = 82; report_score_level(score); return 0; } void report_score_level(int score) { if (score >= 90) { std::cout << \"Excellent\\n\"; } else if (score >= 80) { std::cout << \"Good\\n\"; } else if (score >= 70) { std::cout << \"Satisfactory\\n\"; } else { std::cout << \"Needs improvement\\n\"; } }      Excellent    Evaluate the conditions from top to bottom using the value 82.      Good    This is the first condition in the chain that is true.      Satisfactory    Do not skip an earlier branch that may already be true.      Good and Satisfactory    Once one branch executes, the remaining branches in the chain are skipped.     "
 },
@@ -5576,7 +5576,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_chained-conditionals.html#chained_conditionals_4",
   "type": "Checkpoint",
-  "number": "4.5.4",
+  "number": "4.5.6",
   "title": "",
   "body": "  Which ordering correctly classifies scores using the ranges 90 or above, 80 or above, 70 or above, and below 70?      Test score >= 90 , then score >= 80 , then score >= 70 .    Testing from the most restrictive threshold downward allows each score to reach the appropriate first true branch.      Test score >= 70 , then score >= 80 , then score >= 90 .    Consider what happens to a score of 95 if the broadest condition is tested first.      Test only score >= 90 and use else for every other score.    More than two categories require additional conditions.      Use three independent if statements in any order.    Independent if statements can allow several bodies to execute for the same score.     "
 },
@@ -5711,7 +5711,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_nested-conditionals.html#chapter4_nested-conditionals-5",
   "type": "Note",
-  "number": "4.7.1",
+  "number": "4.7.2",
   "title": "",
   "body": " Nested conditionals can be useful when a second decision only makes sense after an earlier condition has been resolved. However, deeply nested code can become difficult to read, so avoid unnecessary levels of nesting.  "
 },
@@ -5729,7 +5729,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_nested-conditionals.html#nested_conditionals_1",
   "type": "Checkpoint",
-  "number": "4.7.1",
+  "number": "4.7.3",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void report_message(int x); int main() { int value = 0; report_message(value); return 0; } void report_message(int x) { if (x == 0) { std::cout << \"Hey!\\n\"; } else { if (x > 0) { std::cout << \"Hi!\\n\"; } else { std::cout << \"Hello!\\n\"; } } }      Hey!    Start with the outer condition and determine whether the nested conditional is reached.      Hi!    The nested if is reached only when the outer condition is false.      Hello!    Check whether execution enters the outer else branch.      Nothing will print.    Trace the outer condition first. One reachable branch contains an output statement.     "
 },
@@ -5738,7 +5738,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_nested-conditionals.html#nested_conditionals_2",
   "type": "Checkpoint",
-  "number": "4.7.2",
+  "number": "4.7.4",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void report_message(int x); int main() { int value = -4; report_message(value); return 0; } void report_message(int x) { if (x == 0) { std::cout << \"Hey!\\n\"; } else { if (x > 0) { std::cout << \"Hi!\\n\"; } else { std::cout << \"Hello!\\n\"; } } }      Hey!    Check whether x == 0 is true for a value of -4.      Hi!    After entering the outer else , evaluate the nested condition x > 0 .      Hello!    Follow the outer branch first, then evaluate the nested conditional.      Nothing will print.    Both levels of the nested conditional lead to an output branch.     "
 },
@@ -5747,7 +5747,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_nested-conditionals.html#nested_conditionals_3",
   "type": "Checkpoint",
-  "number": "4.7.3",
+  "number": "4.7.5",
   "title": "",
   "body": "  A school uses student initials to choose one of four seating areas. Where would a student with the initials MZ be seated?  #include <string> std::string determine_seating_area(char first_initial, char last_initial); std::string determine_seating_area(char first_initial, char last_initial) { if (last_initial > 'M') { if (first_initial > 'M') { return \"Back Left!\"; } else { return \"Back Right!\"; } } else { if (first_initial > 'M') { return \"Front Left!\"; } else { return \"Front Right!\"; } } }      Back Left!    Evaluate the comparison involving the last initial first, then the comparison involving the first initial.      Back Right!    Character comparisons follow character ordering. Trace the outer comparison before the nested one.      Front Left!    Determine whether 'Z' > 'M' before entering the front or back branch.      Front Right!    Start with the outer comparison involving the last initial.      Error!    Character values can be compared with relational operators such as > .     "
 },
@@ -5828,7 +5828,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_the-return-statement.html#return_1",
   "type": "Checkpoint",
-  "number": "4.8.1",
+  "number": "4.8.3",
   "title": "",
   "body": "  What value does this function return when score is 84?  char determine_letter_grade(int score) { if (score >= 90) { return 'A'; } else if (score >= 80) { return 'B'; } else if (score >= 70) { return 'C'; } else { return 'D'; } }      'A'    Evaluate the conditions from top to bottom and stop at the first true branch.      'B'    This is the first branch whose condition is true.      'C'    Check whether an earlier condition becomes true before this branch is reached.      'D'    The final else executes only when all earlier conditions are false.     "
 },
@@ -5837,7 +5837,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_the-return-statement.html#return_2",
   "type": "Checkpoint",
-  "number": "4.8.2",
+  "number": "4.8.4",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void report_value(int number); int main() { report_value(-3); return 0; } void report_value(int number) { if (number < 0) { std::cout << \"Negative\\n\"; return; } std::cout << \"Nonnegative\\n\"; }      Negative    Once the return executes, the current function call ends.      Nonnegative    Trace the condition first, and notice what happens immediately after the first output statement.      Negative followed by Nonnegative    Consider whether execution can continue to the later output statement after return is reached.      Nothing    Trace the body of report_value using the argument -3.     "
 },
@@ -5882,7 +5882,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_AC_1",
   "type": "Listing",
-  "number": "4.9.1",
+  "number": "4.9.2",
   "title": "This recursive function counts down from a positive integer.",
   "body": " This recursive function counts down from a positive integer.   #include <iostream> \/\/ Function declaration void count_down(int number); int main() { count_down(3); return 0; } \/\/ Function definition void count_down(int number) { if (number == 0) { std::cout << \"Blastoff!\\n\"; } else { std::cout << number << '\\n'; count_down(number - 1); } }   "
 },
@@ -5927,7 +5927,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_AC_1_trace",
   "type": "Activity",
-  "number": "4.9.2",
+  "number": "4.9.3",
   "title": "",
   "body": "  Trace count_down(3) . Notice that each recursive call has its own parameter value and must finish before the previous call can finish.   "
 },
@@ -5945,7 +5945,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_AC_2",
   "type": "Listing",
-  "number": "4.9.2",
+  "number": "4.9.4",
   "title": "This recursive function prints a specified number of blank lines.",
   "body": " This recursive function prints a specified number of blank lines.   #include <iostream> \/\/ Function declaration void print_lines(int number_of_lines); int main() { print_lines(3); return 0; } \/\/ Function definition void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines - 1); } }   "
 },
@@ -5963,7 +5963,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_1",
   "type": "Checkpoint",
-  "number": "4.9.1",
+  "number": "4.9.5",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void print_exclamation_marks(int count); int main() { print_exclamation_marks(3); return 0; } void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count - 1); } }      !    Trace how the argument changes after each recursive call.      !!    Continue tracing until the condition count > 0 becomes false.      !!!    One exclamation mark is printed for each positive value of count .      !!!!    Check whether anything is printed when count reaches zero.     "
 },
@@ -5972,7 +5972,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_2",
   "type": "Checkpoint",
-  "number": "4.9.2",
+  "number": "4.9.6",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void print_exclamation_marks(int count); int main() { print_exclamation_marks(0); return 0; } void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count - 1); } }      !!    Evaluate the condition using the initial argument before looking for a recursive call.      !    Check whether the body of the if executes when count begins at zero.      0    Look at the program's output statement and identify what it is capable of printing.      Nothing prints.    The base case is reached immediately, so the recursive body does not execute.     "
 },
@@ -5981,7 +5981,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_3",
   "type": "Checkpoint",
-  "number": "4.9.3",
+  "number": "4.9.7",
   "title": "",
   "body": "  The best technical term for a function that calls itself is .        The process is called recursion, while the function itself is described as recursive.     recursion   That term names the process. The question asks for the adjective that describes the function.      "
 },
@@ -6035,7 +6035,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_infinite-recursion.html#unbounded_recursion_AC_1",
   "type": "Listing",
-  "number": "4.10.1",
+  "number": "4.10.3",
   "title": "This function moves away from its base case instead of toward it.",
   "body": " This function moves away from its base case instead of toward it.   #include <iostream> \/\/ Function declaration void print_lines(int number_of_lines); int main() { print_lines(10); return 0; } \/\/ Function definition void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines + 1); } }   "
 },
@@ -6053,7 +6053,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_infinite-recursion.html#unbounded_recursion_1",
   "type": "Checkpoint",
-  "number": "4.10.1",
+  "number": "4.10.4",
   "title": "",
   "body": "  If a recursive function never reaches its case, then the recursive calls may continue until the program fails. This is called recursion.               "
 },
@@ -6062,7 +6062,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_infinite-recursion.html#unbounded_recursion_2",
   "type": "Checkpoint",
-  "number": "4.10.2",
+  "number": "4.10.5",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void report_sign(int number); int main() { report_sign(-10); return 0; } void report_sign(int number) { if (number >= 0) { std::cout << \"Not negative!\\n\"; report_sign(number - 1); } else { std::cout << \"Negative!\\n\"; } }      Not negative!    Evaluate the first condition using the initial argument.      Negative!    The initial argument already satisfies the stopping branch.      Not negative! followed by Negative!    Check whether the recursive branch is entered at all.      The function recurses indefinitely.    Determine whether a recursive call is made for the initial value.     "
 },
@@ -6071,7 +6071,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_infinite-recursion.html#unbounded_recursion_3",
   "type": "Checkpoint",
-  "number": "4.10.3",
+  "number": "4.10.6",
   "title": "",
   "body": "  What happens when this program runs?  #include <iostream> void report_count(int number); int main() { report_count(3); return 0; } void report_count(int number) { if (number > 0) { std::cout << number << '\\n'; report_count(number - 1); } }      It prints 3, 2, 1 and then stops.    Each recursive call moves the argument closer to the base case.      It prints 3 forever.    Trace how the argument changes in each recursive call.      It prints 3, 4, 5, ... until the program fails.    Check whether the recursive argument is increased or decreased.      Nothing prints.    Evaluate the condition using the initial value 3.     "
 },
@@ -6080,7 +6080,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_infinite-recursion.html#unbounded_recursion_4",
   "type": "Checkpoint",
-  "number": "4.10.4",
+  "number": "4.10.7",
   "title": "",
   "body": "  What happens when this program runs?  #include <iostream> void report_count(int number); int main() { report_count(3); return 0; } void report_count(int number) { if (number > 0) { std::cout << number << '\\n'; report_count(number + 1); } }      It prints only 3.    Check whether the function makes another recursive call.      It prints 3, 2, 1 and then stops.    Trace whether the argument moves toward or away from zero.      Nothing prints.    Evaluate the condition using the initial value 3.      It continues making recursive calls until the program is terminated or the call stack is exhausted.    The recursive argument moves farther away from the base case.     "
 },
@@ -6143,7 +6143,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_stack-diagrams-for-recursive-functions.html#chapter4_stack-diagrams-for-recursive-functions-7",
   "type": "Figure",
-  "number": "4.11.1",
+  "number": "4.11.2",
   "title": "",
   "body": " Stack frames created by count_down(3)    A stack diagram containing one frame for main and four frames for count_down. The count_down frames contain parameter values 3, 2, 1, and 0.    "
 },
@@ -6179,7 +6179,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_stack-diagrams-for-recursive-functions.html#stack_1",
   "type": "Checkpoint",
-  "number": "4.11.1",
+  "number": "4.11.3",
   "title": "",
   "body": "  Consider the recursive function below. How many stack frames for print_lines exist when the deepest call has been reached after starting with print_lines(4) ?  #include <iostream> void print_lines(int number_of_lines); int main() { print_lines(4); return 0; } void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines - 1); } }      3    Trace the argument values beginning with 4 and continue until the base case is reached.      4    Remember that the call that reaches the base case also has its own stack frame.      5    There is one frame for each call with argument values 4, 3, 2, 1, and 0.      Infinitely many    Check whether each recursive call moves the argument toward or away from the base case.     "
 },
@@ -8303,7 +8303,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_what-is-iteration.html#chapter6_what-iteration_organization",
   "type": "Checkpoint",
-  "number": "6.1.1",
+  "number": "6.1.2",
   "title": "",
   "body": "  Which organization best matches the soap-packing process in this section?      An outer repetition for 100 packs, with an inner repetition for 16 soap pieces in each pack.    The outer task makes the packs for one shipping box, and the inner task fills one pack.      One repetition for 116 soap pieces, with no separate pack operation.    The two quantities describe two different levels of the process.      An outer repetition for 16 shipping boxes, with an inner repetition for 100 soap pieces.    The numbers are assigned to the wrong tasks.     "
 },
@@ -8312,7 +8312,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_what-is-iteration.html#chapter6_what-iteration_organization_exercise_2",
   "type": "Checkpoint",
-  "number": "6.1.2",
+  "number": "6.1.3",
   "title": "",
   "body": "  Match each example with the type of iteration they suggest.    Review the iteration types and try again!     Checking for each apple from a shipment of unknown quantities check if the apple is good.  Process every value in a collection.    Check how many apples are bad out of a sub-group of 20 randomly chosen apples.  Count through a known range.    Peel 30 apples.  Repeat a known number of times.    Eat apples until you are full.  Continue while a condition is true.    Sort each apple into a \"good apple\" and \"bad apple\" pile.  Nested conditional statement inside a loop.    "
 },
@@ -8420,7 +8420,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_while-statement.html#chapter6_while_short-answer",
   "type": "Checkpoint",
-  "number": "6.2.1",
+  "number": "6.2.3",
   "title": "",
   "body": "  In the syntax shown above, the Boolean expression that is tested before each iteration is the loop .          "
 },
@@ -8429,7 +8429,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_while-statement.html#chapter6_while_organization",
   "type": "Checkpoint",
-  "number": "6.2.2",
+  "number": "6.2.4",
   "title": "",
   "body": "  Which organization makes this countdown loop terminate?   int count = 3; while (count > 0) { std::cout << count << '\\n'; \/\/ missing statement }      --count; inside the loop body   The update makes count smaller until the condition becomes false.     int count = 0; inside the loop body   Declaring another variable does not update the controlling variable in the loop condition.     std::cout << count; again inside the loop body   Output does not change the value used by the condition.     "
 },
@@ -8438,7 +8438,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_while-statement.html#chapter6_do-while_short-answer",
   "type": "Checkpoint",
-  "number": "6.2.3",
+  "number": "6.2.5",
   "title": "",
   "body": "  The loop statement whose body executes before its condition is checked is the statement.          "
 },
@@ -8447,7 +8447,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_while-statement.html#chapter6_do-while_usage",
   "type": "Checkpoint",
-  "number": "6.2.4",
+  "number": "6.2.6",
   "title": "",
   "body": "  Which loop is usually the better choice for a menu that must be displayed at least once and then repeated until the user enters a valid choice?     do-while  The menu body must execute before the first condition check.    while  A while loop may be appropriate in other situations, but it can skip the body when its initial condition is false.    Neither loop can validate input.  Both loops can validate input; the required first display makes do-while especially suitable here.    "
 },
@@ -8456,7 +8456,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_while-statement.html#chapter6_do-while_execution",
   "type": "Checkpoint",
-  "number": "6.2.5",
+  "number": "6.2.7",
   "title": "",
   "body": "  How many times does the following body execute?   int count = 0; do { ++count; } while (count < 0);      Once  The do-while body executes before the false condition is checked.    Zero times  That would describe a while loop whose initial condition is false.    Forever  After one execution, count is 1 and the condition is false.    "
 },
@@ -8528,7 +8528,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_for-statement.html#chapter6_for_short-answer",
   "type": "Checkpoint",
-  "number": "6.3.1",
+  "number": "6.3.2",
   "title": "",
   "body": "  In a for statement, the part that runs once before the first iteration is the .          "
 },
@@ -8537,7 +8537,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_for-statement.html#chapter6_for_organization",
   "type": "Checkpoint",
-  "number": "6.3.2",
+  "number": "6.3.3",
   "title": "",
   "body": "  Which for statement correctly prints the integers from 1 through 5?     for (int count = 1; count <= 5; ++count)  The initialization, condition, and update match the requested range.    for (int count = 0; count <= 5; ++count)  This includes 0, which is outside the requested range.    for (int count = 1; count < 5; ++count)  The condition stops the loop before it prints 5.    for (int count = 5; count >= 1; ++count)  The update moves upward while the condition expects a downward count.    "
 },
@@ -8780,7 +8780,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_arrays.html#chapter6_arrays_index-short-answer",
   "type": "Checkpoint",
-  "number": "6.6.1",
+  "number": "6.6.4",
   "title": "",
   "body": "  The first element of a fixed-size array has index .          "
 },
@@ -8789,7 +8789,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_arrays.html#chapter6_arrays_index-organization",
   "type": "Checkpoint",
-  "number": "6.6.2",
+  "number": "6.6.5",
   "title": "",
   "body": "  Which loop correctly visits every element of std::array<int, 4> values by index?     for (std::size_t index = 0; index < values.size(); ++index)  The index begins at 0 and stops before values.size() .    for (std::size_t index = 0; index <= values.size(); ++index)  The final valid index is one less than values.size() .    for (std::size_t index = 1; index < values.size(); ++index)  This skips the element at index 0.    "
 },
@@ -8798,7 +8798,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_arrays.html#chapter6_arrays_const-reference-parameter",
   "type": "Checkpoint",
-  "number": "6.6.3",
+  "number": "6.6.6",
   "title": "",
   "body": "  A function only needs to inspect a std::array<int, 5> . Which parameter avoids a copy and prevents the function from modifying the caller's array?     const std::array<int, 5>& values  A const reference avoids copying and provides read-only access.    std::array<int, 5> values  This parameter receives a copy of the entire array.    std::array<int, 5>& values  This permits modification, which the function does not need.    "
 },
@@ -8807,7 +8807,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_arrays.html#chapter6_arrays_modify-reference-parameter",
   "type": "Checkpoint",
-  "number": "6.6.4",
+  "number": "6.6.7",
   "title": "",
   "body": "  A function must add 5 to every element of the caller's std::array<int, 5> . Which parameter is appropriate?     std::array<int, 5>& values  A non-const reference lets the function modify the original array.    const std::array<int, 5>& values  Const references cannot be used to modify the elements.    std::array<int, 5> values  This changes only a copy, so the caller's array remains unchanged.    "
 },
@@ -8897,7 +8897,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_term",
   "type": "Checkpoint",
-  "number": "6.7.1",
+  "number": "6.7.3",
   "title": "",
   "body": "  Enter the complete term used for a loop that visits each element of a collection directly: .          "
 },
@@ -8906,7 +8906,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_auto-recommendation",
   "type": "Checkpoint",
-  "number": "6.7.2",
+  "number": "6.7.4",
   "title": "",
   "body": "  Which declaration uses auto to read each potentially large object without copying it or modifying it?     const auto& object  A const reference avoids a copy and prevents modification through the loop variable.    auto object  This declaration normally copies each object.    auto& object  This declaration allows modification, which the question does not require.    "
 },
@@ -8915,7 +8915,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_const-reference",
   "type": "Checkpoint",
-  "number": "6.7.3",
+  "number": "6.7.5",
   "title": "",
   "body": "  Which loop variable declaration is most appropriate for reading each large object without copying it or modifying it?     const Rectangle& rectangle  A const reference avoids a copy and prevents modification through the loop variable.    Rectangle rectangle  This declaration creates a copy of each object.    Rectangle& rectangle  This reference allows modification, which is not needed for a read-only traversal.    "
 },
@@ -8924,7 +8924,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_modify",
   "type": "Checkpoint",
-  "number": "6.7.4",
+  "number": "6.7.6",
   "title": "",
   "body": "  Which declaration allows a range-based loop to modify each original integer in the array?     int& value  A non-const reference refers to the original array element.    int value  This loop variable receives a copy, so changing it does not change the array.    const int& value  The const qualifier prevents modification through the reference.    "
 },
@@ -8933,7 +8933,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_member-function",
   "type": "Checkpoint",
-  "number": "6.7.5",
+  "number": "6.7.7",
   "title": "",
   "body": "  A function that belongs to a class and is called through an object is a .          "
 },
@@ -8942,7 +8942,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_encapsulation",
   "type": "Checkpoint",
-  "number": "6.7.6",
+  "number": "6.7.8",
   "title": "",
   "body": "  Which loop organization correctly processes every Rectangle object while preserving encapsulation?      Use const Rectangle& rectangle and call the public member function rectangle.calculate_area() .   The class controls access to its private data through its public operation.    Access rectangle.width directly from main .  width is private, so outside code should use a public member function.    Create a new Rectangle class inside every loop iteration.  The array already contains the objects to process.    "
 },
@@ -9113,7 +9113,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "generating-random-numbers.html#chapter6_random-numbers_pseudorandom",
   "type": "Checkpoint",
-  "number": "6.9.1",
+  "number": "6.9.5",
   "title": "",
   "body": "  A number produced by a deterministic algorithm that appears random is called .          "
 },
@@ -9122,7 +9122,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "generating-random-numbers.html#chapter6_random-numbers_seed-purpose",
   "type": "Checkpoint",
-  "number": "6.9.2",
+  "number": "6.9.6",
   "title": "",
   "body": "  What does a seed determine in a pseudorandom generator?      The generator's initial state.   Correct. The initial state determines the sequence that follows.     The number of values the program must generate.   A seed initializes the generator; a loop controls how many values are generated.     The largest value allowed by every distribution.   The distribution, not the seed, determines the desired range.     Whether the program uses a loop.   The seed affects the sequence, not the program's control structure.    "
 },
@@ -9131,7 +9131,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "generating-random-numbers.html#chapter6_random-numbers_distribution-purpose",
   "type": "Checkpoint",
-  "number": "6.9.3",
+  "number": "6.9.7",
   "title": "",
   "body": "  What is the purpose of a probability distribution such as std::uniform_int_distribution<int> ?      It shapes generator output according to a desired probability pattern.   Correct. The engine generates values, and the distribution gives them a useful pattern.     It stores every value produced by the generator.   Storage is handled by a variable or container.     It guarantees cryptographic security.   A distribution controls probabilities; it does not provide cryptographic security.     It replaces the random-number engine.   The distribution and engine work together.    "
 },
@@ -9140,7 +9140,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "generating-random-numbers.html#chapter6_random-numbers_die-class",
   "type": "Checkpoint",
-  "number": "6.9.4",
+  "number": "6.9.8",
   "title": "",
   "body": "  In the Die class, why are the generator and distribution private data members?      They are implementation details hidden behind the public roll() operation.   Correct. This is encapsulation.     Private data members cannot store objects from library classes.   Private members can store objects. Their access is restricted to the class.     The program must create a new generator for every roll.   The same generator should produce successive values.     The distribution must be initialized inside main() .   The class can initialize its own private distribution.    "
 },
@@ -9149,7 +9149,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "generating-random-numbers.html#chapter6_random-numbers_security",
   "type": "Checkpoint",
-  "number": "6.9.5",
+  "number": "6.9.9",
   "title": "",
   "body": "  Which is the most appropriate use for std::mt19937 ?      Simulating die rolls and testing a program with varied inputs.   Correct. It is a general-purpose pseudorandom engine.     Generating an encryption key for a banking application.   Security-sensitive values require a trusted cryptographic facility.     Generating a password-reset token for a website.   Password-reset tokens must be generated with security-specific randomness.     Creating a secret authentication value.   Authentication values require a cryptographically secure generator.    "
 },
@@ -10427,7 +10427,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter8_what-is-a-vector.html#chapter8_what-is-a-vector_exercise_size-capacity",
   "type": "Checkpoint",
-  "number": "8.1.1",
+  "number": "8.1.2",
   "title": "",
   "body": "  A vector has size 4 and capacity 10. What does this tell us?     It contains four elements and has room for at least six more without reallocating.  Size counts current elements; capacity describes available storage.    It contains ten elements, four of which are initialized.  Capacity is not the number of current elements.    It can never contain more than ten elements.  A vector can obtain larger storage when necessary.    It contains six uninitialized elements.  Unused capacity is storage, not additional vector elements.    "
 },
@@ -10526,7 +10526,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter8_accessing-vector-elements.html#chapter8_accessing-vector-elements_exercise_index",
   "type": "Checkpoint",
-  "number": "8.3.1",
+  "number": "8.3.2",
   "title": "",
   "body": "  What is the last valid index of a vector whose size is 7?    6 Indices begin at zero, so the last index is size minus one.  7 Index 7 would be one past the last valid index.  8 Count seven positions beginning with index zero.  0 Zero identifies the first element, not the last.   "
 },
@@ -10643,7 +10643,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter8_vector-operations.html#chapter8_vector-operations_exercise_push-back",
   "type": "Checkpoint",
-  "number": "8.5.1",
+  "number": "8.5.2",
   "title": "",
   "body": "  What happens when values.push_back(42) is called?    A new element with value 42 is added at the end. push_back() adds one element after the current last element.  The first element is replaced by 42. Use an index assignment to replace an existing element.  The vector is cleared before 42 is added. push_back() preserves the existing elements.  The vector's capacity is guaranteed to increase by exactly one. Capacity growth is implementation-dependent.   "
 },
@@ -10697,7 +10697,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter8_passing-vectors-to-functions.html#chapter8_passing-vectors-to-functions_exercise_parameter",
   "type": "Checkpoint",
-  "number": "8.6.1",
+  "number": "8.6.2",
   "title": "",
   "body": "  Which parameter is best when a function only needs to inspect a potentially large vector of integers?    const std::vector<int>& values This avoids copying the vector and prevents the function from modifying it.  std::vector<int> values This makes a copy, which is unnecessary for read-only inspection.  std::vector<int>& values This permits modification, which the function does not need.  const int values This parameter is not a vector.   "
 },
@@ -11273,7 +11273,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_byte",
   "type": "Checkpoint",
-  "number": "9.1.1",
+  "number": "9.1.4",
   "title": "",
   "body": "  On an eight-bit-byte machine, what does one memory address normally identify?    One byte The machine is byte-addressable, so each address identifies one byte.  One bit A byte contains multiple bits; addresses do not normally identify individual bits.  One complete object of any type Large objects can occupy several consecutive byte locations.  One physical memory page A page contains many bytes and is a larger mapping unit.   "
 },
@@ -11282,7 +11282,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_int32",
   "type": "Checkpoint",
-  "number": "9.1.2",
+  "number": "9.1.5",
   "title": "",
   "body": "  On a machine with eight-bit bytes, how many bytes does a std::int32_t object occupy?    4 bytes Thirty-two bits divided into eight-bit bytes gives four bytes.  1 byte One byte normally contains eight bits, not thirty-two.  8 bytes Eight bytes is a common pointer size on a 64-bit desktop, not the size of a 32-bit integer.  32 bytes The type has 32 bits, not 32 eight-bit bytes.   "
 },
@@ -11291,7 +11291,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_64_bit",
   "type": "Checkpoint",
-  "number": "9.1.3",
+  "number": "9.1.6",
   "title": "",
   "body": "  Which statement best describes a 64-bit machine?    It commonly uses 64-bit registers and pointer representations. The term describes an architecture; it does not mean every object is 64 bits.  Every memory cell contains exactly 64 bits. Memory is commonly byte-addressable, with eight bits per byte.  Every C++ int must contain 64 bits. Integer sizes depend on the type and implementation.  The computer must contain 2 64 bytes of RAM. Address width and installed physical RAM are different ideas.   "
 },
@@ -11300,7 +11300,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_sizeof_pointer",
   "type": "Checkpoint",
-  "number": "9.1.4",
+  "number": "9.1.7",
   "title": "",
   "body": "  If score is a std::int32_t object and score_pointer is a pointer to it, what does sizeof(score_pointer) measure?    The size of the pointer object that stores an address The expression names the pointer variable itself, not the object reached through it.  The size of the std::int32_t object Use sizeof(*score_pointer) to measure the pointed-to type.  The numeric address stored in the pointer sizeof reports a size in bytes, not an address value.  The amount of physical RAM installed sizeof measures the storage required by the specified type or object.   "
 },
@@ -11381,7 +11381,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_address",
   "type": "Checkpoint",
-  "number": "9.2.1",
+  "number": "9.2.2",
   "title": "",
   "body": " What does a pointer normally store?   The address of another object A pointer provides an indirect way to refer to an object.  The complete contents of every object in memory A pointer stores an address, not a complete copy of the object.  The size of the object only Object size and object address are different ideas.  The name of the object Names are source-code identifiers, not stored pointer values.   "
 },
@@ -11390,7 +11390,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_parsons_indirect_access",
   "type": "Checkpoint",
-  "number": "9.2.2",
+  "number": "9.2.3",
   "title": "",
   "body": "  Arrange the statements to change a local object through a pointer.    int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';   "
 },
@@ -11399,7 +11399,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_local_object",
   "type": "Checkpoint",
-  "number": "9.2.3",
+  "number": "9.2.4",
   "title": "",
   "body": " Which object can a pointer identify?   An ordinary local object such as score A pointer can store the address of a local object; it does not require dynamic allocation.  Only an object created with new Pointers can identify local, static, or dynamically allocated objects.  Only an object stored in a vector A pointer is not limited to a particular container.  Only an object whose value is an address The pointer stores an address; the identified object may have another type.   "
 },
@@ -11408,7 +11408,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_address_variation",
   "type": "Checkpoint",
-  "number": "9.2.4",
+  "number": "9.2.5",
   "title": "",
   "body": " Why should a program not assume that &score will have the same numeric address on every run?   The program's storage locations can vary between executions. The relationship between the pointer and object matters; the particular numeric address is not predictable.  The address changes whenever score is incremented. Changing an object's value does not normally move the object.  A pointer stores the object's current value instead of its address. A pointer stores an address, not the pointed-to value.  The address is always zero until new is used. Local objects normally have valid nonzero addresses.   "
 },
@@ -11417,7 +11417,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_dynamic_not_required",
   "type": "Checkpoint",
-  "number": "9.2.5",
+  "number": "9.2.6",
   "title": "",
   "body": " Which statement about a pointer and dynamic storage is correct?   A pointer can identify an ordinary local object without owning dynamic storage. The pointer's type and the object's storage duration are separate ideas.  Every pointer automatically owns the object it identifies. Ownership must be established by the program's design; a pointer alone does not imply ownership.  Only dynamically allocated objects have addresses. All objects in storage have locations and addresses.  A local object must be released with delete . Local objects are managed by their scope, not by matching delete .   "
 },
@@ -11516,7 +11516,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_star",
   "type": "Checkpoint",
-  "number": "9.3.1",
+  "number": "9.3.6",
   "title": "",
   "body": " What does *score_pointer = 95; do when score_pointer points to score ?   It changes the pointed-to score object to 95. Dereferencing accesses the object identified by the pointer.  It changes the pointer's address to 95. The dereference operator accesses the pointed-to object, not the pointer's stored address.  It creates a second pointer. A declaration, not this assignment, creates a pointer variable.  It prints the address of score . Output requires std::cout ; this statement performs assignment.   "
 },
@@ -11525,7 +11525,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_parsons_dereference",
   "type": "Checkpoint",
-  "number": "9.3.2",
+  "number": "9.3.7",
   "title": "",
   "body": "  Arrange the statements to store an address and then change the pointed-to object.    int score = 90;  int* score_pointer = &score;  std::cout << *score_pointer << '\\n';  *score_pointer = 95;  std::cout << score << '\\n';   "
 },
@@ -11534,7 +11534,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_address_of",
   "type": "Checkpoint",
-  "number": "9.3.3",
+  "number": "9.3.8",
   "title": "",
   "body": " What does &score produce in an expression?   The address of score The address-of operator produces a pointer value identifying the object.  The value stored in score Writing score alone reads its value; &score asks for its address.  The object identified by score The expression produces an address, not the object itself.  The address of the pointer variable itself &score identifies score , not another pointer variable.   "
 },
@@ -11543,7 +11543,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_declaration_star",
   "type": "Checkpoint",
-  "number": "9.3.4",
+  "number": "9.3.9",
   "title": "",
   "body": " In int* pointer , what role does * play?   It declares pointer as a pointer to an int . Here the star is part of the pointer declaration syntax.  It immediately accesses the pointed-to object. Dereferencing occurs in an expression such as *pointer after the pointer exists.  It obtains the address of pointer . The address-of operator is & .  It releases dynamic storage. Storage release uses delete or delete[] .   "
 },
@@ -11552,7 +11552,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_lvalue",
   "type": "Checkpoint",
-  "number": "9.3.5",
+  "number": "9.3.10",
   "title": "",
   "body": " Which expression is an lvalue because it identifies a persistent object?   score The variable name identifies a storage location and can appear on the left side of assignment.  score + 5 This computation produces a temporary rvalue.  90 + 5 A numeric computation result is an rvalue.  5 A literal is a value, not a named storage location.   "
 },
@@ -11561,7 +11561,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_parsons_storage",
   "type": "Checkpoint",
-  "number": "9.3.6",
+  "number": "9.3.11",
   "title": "",
   "body": "  Arrange the blocks to create an integer and store its address in a pointer.    std::int32_t score = 90;  std::int32_t* score_pointer = &score;  std::cout << *score_pointer << '\\n';   "
 },
@@ -11570,7 +11570,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_virtual_address",
   "type": "Checkpoint",
-  "number": "9.3.7",
+  "number": "9.3.12",
   "title": "",
   "body": "  What does a pointer in an ordinary C++ process normally contain?    A virtual address that identifies an object in that process's address space The operating system and hardware translate virtual addresses to physical locations.  The object's complete contents A pointer stores an address, not a copy of the object.  A physical RAM address that is valid in every process Processes normally use separate virtual address spaces.  The page-table entry itself Page tables are used by the system to translate addresses; a pointer is a C++ object value.   "
 },
@@ -11660,7 +11660,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_1",
   "type": "Checkpoint",
-  "number": "9.4.1",
+  "number": "9.4.4",
   "title": "",
   "body": "  What does pointer = &y; do?    It changes pointer so that it identifies y . Correct. The pointer is reseated to store the address of y .  It copies the value of y into the object previously identified by pointer . That would require dereferencing the pointer on the left side.  It changes the type of pointer . A pointer's type does not change through assignment.  It deletes y . Taking an address does not destroy an object.   "
 },
@@ -11669,7 +11669,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_2",
   "type": "Checkpoint",
-  "number": "9.4.2",
+  "number": "9.4.5",
   "title": "",
   "body": "  What is the result of the following code?   int x = 10; int y = 20; int& reference = x; reference = y;     x becomes 20, and reference still refers to x . Correct. Assignment through a reference changes the object to which it is already bound.  reference becomes an alias for y . References cannot be reseated by assignment.  y becomes 10. The assignment copies from y into the object identified by reference .  The program creates a second copy of x . A reference is an alias, not a copied object.   "
 },
@@ -11678,7 +11678,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_3",
   "type": "Checkpoint",
-  "number": "9.4.3",
+  "number": "9.4.6",
   "title": "",
   "body": "  Which parameter is most appropriate when a function requires a valid, read-only object and should avoid copying a large object?    LargeObject object This passes a copy of the object.  const LargeObject& object Correct. A const reference avoids copying and expresses that the object is required but not modified.  LargeObject* object A pointer allows nullptr , so the function would need a pointer contract and a safety check.  LargeObject&& object This introduces rvalue references, which are not needed for this requirement.   "
 },
@@ -11687,7 +11687,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_4",
   "type": "Checkpoint",
-  "number": "9.4.4",
+  "number": "9.4.7",
   "title": "",
   "body": "  Arrange the blocks to change an object through a pointer and then reseat the pointer.    int first_value = 10;  int second_value = 20;  int* pointer = &first_value;  *pointer = 15;  pointer = &second_value;  *pointer = 25;   "
 },
@@ -11696,7 +11696,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_5",
   "type": "Checkpoint",
-  "number": "9.4.5",
+  "number": "9.4.8",
   "title": "",
   "body": "  Which situation most strongly favors a pointer over a reference?    The function requires a valid object and must not modify it. A const reference commonly expresses this contract.  The function must represent an optional object that may be absent. Correct. A pointer can represent absence with nullptr .  The function should always receive a valid object. A reference communicates that requirement more directly.  The function should use ordinary variable syntax for access. References provide ordinary alias syntax; pointers require explicit access.   "
 },
@@ -11840,7 +11840,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_reference",
   "type": "Checkpoint",
-  "number": "9.6.1",
+  "number": "9.6.2",
   "title": "",
   "body": " When is a pointer parameter preferable to a reference parameter?   When the function needs to allow the possibility that no object is provided. nullptr can represent the absence of an object.  Whenever the function must be faster. Pointer syntax does not automatically make a function faster.  Whenever the function reads an integer. Parameter choice depends on the function's contract, not merely the type.  Whenever a vector is passed to a function. Vectors are often passed by constant reference when read-only.   "
 },
@@ -11849,7 +11849,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_parsons_pointer_call",
   "type": "Checkpoint",
-  "number": "9.6.2",
+  "number": "9.6.3",
   "title": "",
   "body": "  Arrange the blocks to increment a caller's variable through a pointer parameter.    void increase_value(int* value_pointer) {  if (value_pointer != nullptr) { ++(*value_pointer); }  }  int count = 4;  increase_value(&count);  std::cout << count << '\\n';   "
 },
@@ -11858,7 +11858,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_const_pointer",
   "type": "Checkpoint",
-  "number": "9.6.3",
+  "number": "9.6.4",
   "title": "",
   "body": " What does const int* value_pointer allow the function to do?   Read the pointed-to int without modifying it through this pointer The const applies to the pointed-to integer.  Reseat the pointer but not read the integer This declaration permits reading the integer but does not make the pointer itself const.  Delete every object that the pointer identifies const does not grant ownership or deletion responsibility.  Guarantee that the pointer is never null A pointer to const data can still be nullptr .   "
 },
@@ -11867,7 +11867,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_reference_contract",
   "type": "Checkpoint",
-  "number": "9.6.4",
+  "number": "9.6.5",
   "title": "",
   "body": " Why is a reference often clearer when a function requires an existing object?   A reference must bind to an object and cannot represent nullptr . The reference type communicates that the function expects an object to exist.  A reference automatically allocates the object. References do not create dynamic storage.  A reference always makes a copy. A reference is an alias for an existing object.  A reference can be reseated more easily than a pointer. A reference remains bound to its original object.   "
 },
@@ -11876,7 +11876,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_pointer_argument",
   "type": "Checkpoint",
-  "number": "9.6.5",
+  "number": "9.6.6",
   "title": "",
   "body": " How should a caller pass count to increase_value(int* value_pointer) ?   increase_value(&count); The pointer parameter receives the address of the caller's object.  increase_value(*count); * is not used to obtain the address of an ordinary variable.  increase_value(count); This passes the integer value, not its address.  increase_value(nullptr); This intentionally passes no object and would not increment count .   "
 },
@@ -11939,7 +11939,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_sizeof",
   "type": "Checkpoint",
-  "number": "9.7.1",
+  "number": "9.7.6",
   "title": "",
   "body": "  What does sizeof(scores) \/ sizeof(scores[0]) calculate when scores is an actual C-style array in the current scope?    The number of elements in the array The total array size in bytes is divided by the size of one element in bytes.  The number of bytes in the array sizeof(scores) alone reports the total size in bytes.  The address of the first element An address is not produced by this division.  The size of a pointer This expression is evaluated while scores is still an actual array.   "
 },
@@ -11948,7 +11948,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_decay",
   "type": "Checkpoint",
-  "number": "9.7.2",
+  "number": "9.7.7",
   "title": "",
   "body": " Why does a function receiving const int* values usually need a separate length parameter?   The pointer identifies an element but does not retain the original array's length. Array decay gives the function an address, not the array-size information.  Because pointers cannot access array elements. Pointer indexing and dereferencing can access elements.  Because the array is automatically copied into the function. The array is not copied into a pointer parameter.  Because pointer arithmetic always changes the array length. Pointer arithmetic does not change the array object.   "
 },
@@ -11957,7 +11957,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_parsons_decay",
   "type": "Checkpoint",
-  "number": "9.7.3",
+  "number": "9.7.8",
   "title": "",
   "body": "  Arrange the statements to traverse two elements of an array with a pointer.    int scores[]{88, 91, 95};  int* current = scores;  std::cout << *current << '\\n';  ++current;  std::cout << *current << '\\n';   "
 },
@@ -11966,7 +11966,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_increment",
   "type": "Checkpoint",
-  "number": "9.7.4",
+  "number": "9.7.9",
   "title": "",
   "body": " What does current + 1 mean when current is an int* into an array?   A pointer to the next int element Pointer arithmetic is scaled by the pointed-to type.  A pointer exactly one byte later The movement is the size of an int , not necessarily one byte.  The next element's integer value The result is still a pointer; dereference it to read a value.  The array's length increased by one Pointer arithmetic does not resize an array.   "
 },
@@ -11975,7 +11975,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_decay_call",
   "type": "Checkpoint",
-  "number": "9.7.5",
+  "number": "9.7.10",
   "title": "",
   "body": " What does scores provide when passed to void print_values(const int* values, std::size_t count) ?   A pointer to the first element of the array In this function call, the array expression converts to a pointer to its first element.  A copy of the entire array including its length The array is not copied into the pointer parameter, and the length is separate.  A pointer to the last element Array decay identifies the first element.  A std::vector<int> object A C-style array does not automatically become a vector.   "
 },
@@ -11984,7 +11984,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_pointer_bounds",
   "type": "Checkpoint",
-  "number": "9.7.6",
+  "number": "9.7.11",
   "title": "",
   "body": " Why must a traversal stop before dereferencing one-past-the-end?   One-past-the-end can be used for comparison but does not identify an element. Dereferencing is valid only for pointers to actual array elements.  One-past-the-end always points to the first element of another array. It is a boundary position, not an element of another array.  Pointer arithmetic stops working after the first element. Pointer arithmetic can traverse the array within its bounds.  The array length changes when the pointer reaches the boundary. Pointer movement does not change the array object.   "
 },
@@ -12047,7 +12047,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_null",
   "type": "Checkpoint",
-  "number": "9.8.2",
+  "number": "9.8.3",
   "title": "",
   "body": " What marks the end of a C-style character string?   The null character '\\0' C-style string functions search for this terminating character.  The character '0' '0' is a visible digit character, not the null character.  The first space Spaces can be part of a C-style string.  The pointer value nullptr nullptr is a pointer value, not a character stored in the string.   "
 },
@@ -12056,7 +12056,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_parsons_traversal",
   "type": "Checkpoint",
-  "number": "9.8.3",
+  "number": "9.8.4",
   "title": "",
   "body": "  Arrange the blocks to print a C-style string one character at a time.    char word[] = \"cat\";  const char* current = word;  while (*current != '\\0') {  std::cout << *current << '\\n'; ++current;  }   "
 },
@@ -12065,7 +12065,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_terminator",
   "type": "Checkpoint",
-  "number": "9.8.4",
+  "number": "9.8.5",
   "title": "",
   "body": " Why does char word[] = \"cat\"; need four elements?   It stores three visible characters plus '\\0' . The null character marks the end of the C-style string.  It stores four visible letters in the word. cat contains three visible characters.  It stores a pointer and three characters. The array stores character elements; it does not contain a separate pointer element.  The compiler always adds an unrelated padding character. The extra element is specifically the required null terminator.   "
 },
@@ -12074,7 +12074,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_mutability",
   "type": "Checkpoint",
-  "number": "9.8.5",
+  "number": "9.8.6",
   "title": "",
   "body": " Which declaration creates a modifiable character array initialized from a string literal?   char message[] = \"Hello\"; The array owns its character elements, including the terminating null character.  const char* message = \"Hello\"; This safely refers to a read-only string literal through a pointer.  char* message = \"Hello\"; A string literal must not be treated as modifiable character storage.  char message = \"Hello\"; A single char cannot store an entire string.   "
 },
@@ -12083,7 +12083,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_argv_text",
   "type": "Checkpoint",
-  "number": "9.8.6",
+  "number": "9.8.7",
   "title": "",
   "body": " What is the important type fact about each argv[index] value?   It identifies a null-terminated C-style string. Command-line arguments arrive as text through pointers to characters.  It is already an int containing the user's number. Converting argument text to a number is a separate operation.  It is always a std::string object. The standard main signature uses C-style strings.  It is the argument count. argc stores the count; argv[index] identifies one text argument.   "
 },
@@ -12137,7 +12137,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_parsons_delete",
   "type": "Checkpoint",
-  "number": "9.9.1",
+  "number": "9.9.2",
   "title": "",
   "body": "  Rearrange the blocks to allocate an integer, print it safely, release its dynamic storage, and then clear the pointer.    int* my_ptr = new int(75);   if (my_ptr != nullptr) {  std::cout << *my_ptr << '\\n';  }   delete my_ptr;  my_ptr = nullptr;   "
 },
@@ -12164,7 +12164,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_match",
   "type": "Checkpoint",
-  "number": "9.9.3",
+  "number": "9.9.5",
   "title": "",
   "body": " Which operation matches int* pointer = new int{5}; ?   delete pointer; One object created with new is released with delete .  delete[] pointer; delete[] is for storage created with new[] .  free(pointer); C++ new must not be paired with C's free .  remove(pointer); remove is not the matching storage-release operation.   "
 },
@@ -12173,7 +12173,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_new_result",
   "type": "Checkpoint",
-  "number": "9.9.4",
+  "number": "9.9.6",
   "title": "",
   "body": " What does new int{90} produce in addition to creating an integer?   The address of the dynamically created integer The address can be stored in an int* pointer.  The integer's array length A single object allocation does not produce an array length.  A reference that cannot be null new produces a pointer value, not a reference.  A std::vector<int> object new int{90} creates one dynamic int .   "
 },
@@ -12182,7 +12182,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_array_match",
   "type": "Checkpoint",
-  "number": "9.9.5",
+  "number": "9.9.7",
   "title": "",
   "body": " Which release operation matches new int[count] ?   delete[] pointer; The array form new[] must be paired with delete[] .  delete pointer; That is the form for one object created with ordinary new .  free(pointer); C++ new[] must be paired with C++ delete[] .  pointer.clear(); A raw pointer has no clear() member function.   "
 },
@@ -12191,7 +12191,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_delete_nullptr",
   "type": "Checkpoint",
-  "number": "9.9.6",
+  "number": "9.9.8",
   "title": "",
   "body": " What happens when a program executes delete pointer; while pointer == nullptr ?   Nothing; deleting a null pointer is safe. C++ defines deletion of a null pointer as having no effect.  It deletes the first object in memory. nullptr identifies no object.  It creates a new dynamic object. delete releases storage; it does not allocate.  It requires a length argument. Only array matching concerns delete[] ; a null pointer still requires no argument.   "
 },
@@ -12254,7 +12254,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_parsons_cleanup",
   "type": "Checkpoint",
-  "number": "9.10.2",
+  "number": "9.10.3",
   "title": "",
   "body": "  Arrange the blocks to release a dynamic object and prevent the owning pointer from remaining dangling.    int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;   "
 },
@@ -12263,7 +12263,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_dangling",
   "type": "Checkpoint",
-  "number": "9.10.3",
+  "number": "9.10.4",
   "title": "",
   "body": " Which situation describes a dangling pointer?   A pointer still stores an address after the identified object's lifetime ends The address remains in the pointer, but the object is no longer valid to use.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer that identifies a live local object A valid pointer to a live object is not dangling.  A pointer used to traverse a valid array Valid traversal does not create a dangling pointer.   "
 },
@@ -12272,7 +12272,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_mismatch",
   "type": "Checkpoint",
-  "number": "9.10.4",
+  "number": "9.10.5",
   "title": "",
   "body": " Which allocation and release pair is correct?   new int[5] with delete[] pointer The array allocation form must match the array deletion form.  new int[5] with delete pointer Single-object delete does not match new[] .  new int{5} with delete[] pointer A single object created with new needs ordinary delete .  new int{5} with free(pointer) C++ new must be paired with C++ delete .   "
 },
@@ -12281,7 +12281,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_ownership",
   "type": "Checkpoint",
-  "number": "9.10.5",
+  "number": "9.10.6",
   "title": "",
   "body": " What does setting an owning pointer to nullptr after delete accomplish?   It prevents that pointer from continuing to store the old address. Clearing the owning pointer helps avoid using it as though the destroyed object still exists.  It recreates the deleted object. Assigning nullptr does not restore an object's lifetime.  It repairs every other pointer to the same object. Other pointers may still be dangling and must be managed separately.  It releases storage without needing delete . The storage must be released first with the matching deletion operation.   "
 },
@@ -12740,7 +12740,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_arrow",
   "type": "Checkpoint",
-  "number": "10.1.1",
+  "number": "10.1.4",
   "title": "",
   "body": "  Which expression is equivalent to rectangle_pointer->calculate_area() ?     (*rectangle_pointer).calculate_area()  The arrow operator dereferences the pointer before using the dot operator.    *rectangle_pointer.calculate_area()  The dot operator binds before unary dereference, so parentheses are needed.    rectangle_pointer.calculate_area()  The dot operator is used with an object, not directly with a pointer.    &rectangle_pointer.calculate_area()  The address-of operator does not access a member through a pointer.    "
 },
@@ -12749,7 +12749,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_parsons_dynamic",
   "type": "Checkpoint",
-  "number": "10.1.2",
+  "number": "10.1.5",
   "title": "",
   "body": "  Arrange the statements to create, use, and release a dynamic rectangle.    Rectangle* rectangle_pointer = new Rectangle{5.0, 2.0};  std::cout << rectangle_pointer->calculate_area() << '\\n';  delete rectangle_pointer;  rectangle_pointer = nullptr;   "
 },
@@ -12758,7 +12758,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_lifetime",
   "type": "Checkpoint",
-  "number": "10.1.3",
+  "number": "10.1.6",
   "title": "",
   "body": "  What happens when delete rectangle_pointer; is executed for a pointer returned by new Rectangle{...} ?     The pointed-to object's lifetime ends and its dynamic storage is released.  delete releases the dynamically created object.    Only the pointer variable is deleted; the object remains available.  The pointer variable and the dynamically created object have different lifetimes.    The pointer automatically changes to point to a new rectangle.  delete does not create a replacement object.    The rectangle is copied to the stack.  delete releases the object; it does not move it.    "
 },
@@ -12767,7 +12767,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_private",
   "type": "Checkpoint",
-  "number": "10.1.4",
+  "number": "10.1.7",
   "title": "",
   "body": "  Suppose width is a private data member of Rectangle . Which statement is valid outside the class?     rectangle_pointer->calculate_area()  Public member functions remain available through a pointer.    rectangle_pointer->width = 10.0;  A pointer does not bypass private access control.    (*rectangle_pointer).width = 10.0;  Dereferencing the pointer still does not grant access to private data.    rectangle_pointer.width  The dot operator is not used directly with a pointer.    "
 },
@@ -12776,7 +12776,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_dangling",
   "type": "Checkpoint",
-  "number": "10.1.5",
+  "number": "10.1.8",
   "title": "",
   "body": "  Why is assigning nullptr after delete a useful practice?     It makes the pointer no longer identify the released object.  A null pointer is safer to test than a pointer that still contains a released address.    It recreates the deleted object.  nullptr represents no object; it does not create one.    It returns the object to the stack.  Assigning nullptr does not move any object.    It makes the pointer point to the next object automatically.  A null pointer does not identify any object.    "
 },
@@ -12848,7 +12848,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_meaning",
   "type": "Checkpoint",
-  "number": "10.2.1",
+  "number": "10.2.4",
   "title": "",
   "body": "  What does this identify inside a non-static member function?     The address of the object that called the member function  this points to the current object.    The address of the class definition  A class definition is not the object involved in a particular call.    The address of the member function's source code  this identifies the current object, not the function code.    A pointer that always points to the first object created  Each call receives the object that made that particular call.    "
 },
@@ -12857,7 +12857,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_equivalence",
   "type": "Checkpoint",
-  "number": "10.2.2",
+  "number": "10.2.5",
   "title": "",
   "body": "  Which expression is equivalent to this->count ?     (*this).count  Dereference the pointer first, then use the dot operator.    this.count  this is a pointer, so the dot operator cannot be used directly.    *this.count  Parentheses are needed because the dot operator binds more tightly.    &this->count  This asks for an address instead of accessing the member's value.    "
 },
@@ -12866,7 +12866,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_parsons_call",
   "type": "Checkpoint",
-  "number": "10.2.3",
+  "number": "10.2.6",
   "title": "",
   "body": "  Arrange the statements to increment the object selected by a pointer.    Counter counter{4};  Counter* counter_pointer = &counter;  counter_pointer->increment();  std::cout << counter.get_count() << '\\n';   "
 },
@@ -12875,7 +12875,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_static",
   "type": "Checkpoint",
-  "number": "10.2.4",
+  "number": "10.2.7",
   "title": "",
   "body": "  Why does a static member function not have a this pointer?     It is associated with the class rather than with one particular object.  this identifies a current object, but a static function has no implicit object.    Static functions cannot return values.  Static functions can return values normally.    Static functions cannot access any data.  They can access static members directly.    Static functions are always private.  A static member function can be public, private, or protected.    "
 },
@@ -12884,7 +12884,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_objects",
   "type": "Checkpoint",
-  "number": "10.2.5",
+  "number": "10.2.8",
   "title": "",
   "body": "  If first.increment() and second.increment() are called, why can the same function update two different counts?     Each call receives a different current object through this .  The member-function definition is shared, but the current object changes from call to call.    Each object receives a separate copy of the function's source code.  Objects do not each receive a separate source-code copy of the member function.    The function always updates the most recently created object.  The called object, not the newest object, becomes the current object.    The function changes the class definition itself.  The function changes the data of the current object.    "
 },
@@ -12965,7 +12965,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_form",
   "type": "Checkpoint",
-  "number": "10.3.1",
+  "number": "10.3.4",
   "title": "",
   "body": "  Which statement initializes a new object using a constructor with arguments?     StudentAccount account{\"Amina\", 125.50};  The braces directly initialize a new object by calling the matching constructor.    account = StudentAccount{\"Amina\", 125.50};  This creates a temporary object and assigns it to an already existing object.    account.get_balance();  This calls a member function; it does not initialize an object.    delete account;  delete is used with a pointer to a dynamic object, not to initialize an object.    "
 },
@@ -12974,7 +12974,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_empty_braces",
   "type": "Checkpoint",
-  "number": "10.3.2",
+  "number": "10.3.5",
   "title": "",
   "body": "  What does StudentAccount account{}; do for a class with a default constructor?     It creates an object by selecting the default constructor.  Empty braces request initialization with no constructor arguments.    It creates a null pointer.  This declaration creates an object, not a pointer.    It assigns an object after the object already exists.  The object is being initialized as its lifetime begins.    It creates an object with uninitialized class members regardless of the constructor.  The selected constructor and member initializers determine the initial state.    "
 },
@@ -12983,7 +12983,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_parsons_forms",
   "type": "Checkpoint",
-  "number": "10.3.3",
+  "number": "10.3.6",
   "title": "",
   "body": "  Arrange the statements to initialize an account and then assign its state to another existing account.    StudentAccount first_account{\"Amina\", 125.50};  StudentAccount second_account{};  second_account = first_account;   "
 },
@@ -12992,7 +12992,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_const",
   "type": "Checkpoint",
-  "number": "10.3.4",
+  "number": "10.3.7",
   "title": "",
   "body": "  Why must a const object be initialized when it is created?     A const object cannot later receive a new value through assignment.  The initial state must be established before the const object can be used.    A const object is always dynamically allocated.  const does not determine where an object is stored.    A const object cannot have a constructor.  Const objects can be created through constructors.    A const object must contain only integer members.  Const objects can have members of many types.    "
 },
@@ -13001,7 +13001,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_member_list",
   "type": "Checkpoint",
-  "number": "10.3.5",
+  "number": "10.3.8",
   "title": "",
   "body": "  Why are member-initializer lists important?     They initialize data members before the constructor body runs.  Members already exist when the constructor body begins.    They make every member public.  Access control is independent of the member-initializer list.    They dynamically allocate every member.  Member initialization does not imply dynamic allocation.    They replace the class constructor.  The list is part of a constructor definition.    "
 },
@@ -13082,7 +13082,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_local",
   "type": "Checkpoint",
-  "number": "10.4.1",
+  "number": "10.4.5",
   "title": "",
   "body": "  When is a local class object's destructor normally called?     When execution leaves the object's scope  C++ automatically destroys a local object at the end of its lifetime.    Only when the programmer writes delete  delete is used for dynamically created objects, not ordinary local objects.    When the class definition is reached  A class definition does not create an object.    Only when the program calls the destructor directly  Destructors are normally called automatically.    "
 },
@@ -13091,7 +13091,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_parsons_dynamic",
   "type": "Checkpoint",
-  "number": "10.4.2",
+  "number": "10.4.6",
   "title": "",
   "body": "  Arrange the statements to create, release, and clear a dynamic object pointer.    LifecycleMarker* marker_pointer = new LifecycleMarker{\"dynamic\"};  std::cout << \"Object is alive\" << '\\n';  delete marker_pointer;  marker_pointer = nullptr;   "
 },
@@ -13100,7 +13100,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_destructor",
   "type": "Checkpoint",
-  "number": "10.4.3",
+  "number": "10.4.7",
   "title": "",
   "body": "  Which declaration correctly defines a destructor for Rectangle ?     ~Rectangle() { }  A destructor uses the class name preceded by a tilde and has no return type.    void ~Rectangle() { }  Destructors do not have return types.    Rectangle::~Rectangle() { }  The scope-resolution form is not the ordinary in-class destructor definition.    delete Rectangle() { }  delete is an expression used to release a dynamic object.    "
 },
@@ -13109,7 +13109,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_dynamic",
   "type": "Checkpoint",
-  "number": "10.4.4",
+  "number": "10.4.8",
   "title": "",
   "body": "  What is the main danger if a program loses the only pointer to a dynamic object?     The object cannot be released normally, causing a memory leak.  The program needs an owning pointer or another strategy to reach the object for cleanup.    The object is automatically copied to the stack.  Dynamic objects are not automatically moved to the stack.    The destructor runs twice immediately.  Without a pointer, the program generally cannot release the object at all.    The object becomes a static class member.  Storage duration does not change the class definition.    "
 },
@@ -13118,7 +13118,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_order",
   "type": "Checkpoint",
-  "number": "10.4.5",
+  "number": "10.4.9",
   "title": "",
   "body": "  If first is constructed before second in the same scope, which object is destroyed first?     second  Objects in the same scope are destroyed in reverse construction order.    first  The first object constructed is normally the last one destroyed.    Both objects are destroyed at exactly the same time.  Destruction has a defined reverse order for local objects.    Neither object is destroyed automatically.  Local class objects are destroyed automatically when their scope ends.    "
 },
@@ -13199,7 +13199,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_difference",
   "type": "Checkpoint",
-  "number": "10.5.1",
+  "number": "10.5.4",
   "title": "",
   "body": "  What is the difference between Score copy{original}; and copy = original; ?     The first creates a new object; the second updates an existing object.  Copy construction begins a new lifetime, while assignment changes an existing object.    They always call exactly the same constructor.  Assignment does not construct the already existing destination.    The first changes the original; the second creates a new object.  The destination of each expression determines the operation.    The first works only for pointers; the second works only for structures.  Both operations can apply to user-defined class objects.    "
 },
@@ -13208,7 +13208,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_signature",
   "type": "Checkpoint",
-  "number": "10.5.2",
+  "number": "10.5.5",
   "title": "",
   "body": "  Which declaration has the usual form of a copy constructor for Score ?     Score(const Score& other);  A copy constructor receives a const reference to an object of the same class.    Score(int other);  This is a converting or ordinary value constructor, not a copy constructor.    void Score(Score other);  Constructors have no return type, and passing by value would require another copy.    Score* Score(const Score& other);  A constructor does not declare a return type or return a pointer.    "
 },
@@ -13217,7 +13217,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_parsons_operations",
   "type": "Checkpoint",
-  "number": "10.5.3",
+  "number": "10.5.6",
   "title": "",
   "body": "  Arrange the statements to demonstrate copy construction followed by copy assignment.    Score original{90};  Score copied{original};  Score assigned{0};  assigned = original;   "
 },
@@ -13226,7 +13226,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_explicit",
   "type": "Checkpoint",
-  "number": "10.5.4",
+  "number": "10.5.7",
   "title": "",
   "body": "  What does explicit Score(int starting_value) prevent?     Implicit conversion of an int into a Score  explicit requires direct initialization such as Score score{90}; .    Copying one Score object into another  Ordinary copying between Score objects remains allowed.    Calling every member function  explicit affects constructor conversions, not member-function calls.    Creating a Score with braces  Direct-list initialization with braces is permitted.    "
 },
@@ -13235,7 +13235,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_pointer_risk",
   "type": "Checkpoint",
-  "number": "10.5.5",
+  "number": "10.5.8",
   "title": "",
   "body": "  Why can compiler-generated memberwise copying be dangerous for a class that owns a raw pointer?     It can copy the address, causing two objects to release the same allocation.  Copying a pointer value does not copy the dynamically allocated object.    It always changes the pointer into a reference.  Memberwise copying preserves the pointer type and copies its address value.    It prevents the destructor from running.  The destructor still runs, which is part of the danger when ownership is duplicated.    It automatically converts the raw pointer to a smart pointer.  Compiler-generated copying does not change the pointer type.    "
 },
@@ -13246,7 +13246,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "10.6",
   "title": "Static Members and Class-Level State",
-  "body": " Static Members and Class-Level State  Most data members belong to individual objects. Each StudentAccount , for example, has its own balance. Sometimes a class also needs one value shared by every object of that class. A static data member belongs to the class as a whole rather than to one particular object.  A static member is useful when the class must keep track of class-level information, such as the number of objects that have been created. It is not a replacement for ordinary object state: each account still has its own balance, while all accounts can share one account count.   Static Data Members Are Shared  Declare a static data member inside the class, then provide its definition outside the class. The definition creates the one shared object that belongs to the class. In C++17, this traditional form is still clear and useful, so we will use it here.   One shared count and one balance per account   #include <iostream> class StudentAccount { private: double balance; static int total_accounts_created; public: StudentAccount() : balance{0.0} { ++total_accounts_created; } void deposit_money(double amount) { balance += amount; } double get_balance() const { return balance; } static int get_total_accounts_created() { return total_accounts_created; } }; int StudentAccount::total_accounts_created = 0; int main() { StudentAccount first_account; StudentAccount second_account; first_account.deposit_money(100.00); std::cout << first_account.get_balance() << '\\n'; std::cout << second_account.get_balance() << '\\n'; std::cout << StudentAccount::get_total_accounts_created() << '\\n'; return 0; }    Each object has a separate balance , so depositing money into first_account does not change second_account . The static member total_accounts_created has only one shared value, so both constructor calls update the same count.  The line int StudentAccount::total_accounts_created = 0; is the out-of-class definition. The scope-resolution operator :: says that this definition belongs to StudentAccount .   Important: This simple counter increases only when the default constructor runs. If the class later defines a copy constructor and the count is intended to include copied objects, that copy constructor must also increment the static counter. Copy assignment does not create a new object, so it should not increase an object-creation count.    Static Member Functions  A static member function also belongs to the class rather than to one object. It can be called with the class name and the scope-resolution operator:   int number_of_accounts = StudentAccount::get_total_accounts_created();   A non-static member function receives an implicit object parameter, represented inside the function by this . A static member function has no implicit object parameter and therefore has no this pointer. It can access static members directly, but it must use an object or a reference parameter to work with a non-static member.   Instance and static member functions        Feature  Instance member function  Static member function  Typical use    Belongs to  One object  The class  Choose according to the state needed.    Call  account.get_balance()  StudentAccount::get_total_accounts_created()  Use the class name for class-wide behavior.    Has this ?  Yes  No  Static functions have no current object.    Directly accesses  Static and non-static members  Static members only  Pass an object if non-static state is needed.    const after the function  May be const  Cannot be const  There is no object for a static function to promise not to modify.       When Should a Member Be Static?  Make a member static when the value or operation describes the class as a whole and does not depend on one object's state. A count of all accounts is class-level information. A particular account's balance is object-level information and should remain a non-static member.  A static member does not automatically make a class safer. Because every object shares the same static state, changing that state can affect all objects. Keep the static data member private when outside code should not change it directly, and provide a carefully named public member function when access is needed.   static int get_total_accounts_created() { return total_accounts_created; \/\/ return balance; \/\/ Error: no particular account is available. }   The commented expression cannot work because a call such as StudentAccount::get_total_accounts_created() does not select a particular account. The function can read the shared count, but it cannot guess which object's balance the caller means.    Tracing Shared Static State  Step through the example to observe two separate balances and one shared object count.      Which statement best describes a static data member?     All objects of the class share one value for that member.  A static data member belongs to the class as a whole.    Each object receives a separate copy of the member.  That describes an ordinary non-static data member.    The member can be used only inside a constructor.  Static members can be used by appropriate member functions throughout the class.    The member must always be public.  A static data member can be private, protected, or public.       Why can a static member function not directly read an ordinary data member such as balance ?     It has no this pointer and therefore no particular object.  A static function can access shared static state, but no individual object's state without an object.    Static functions cannot read any data.  They can directly read static data members.    The member must first be made public.  Access control is not the reason; the missing object is.    A static function always runs before the class is defined.  Static describes class membership, not source-code order.       Arrange the lines to create two objects and then read the shared count.    StudentAccount first_account;  StudentAccount second_account;  int count = StudentAccount::get_total_accounts_created();  std::cout << count << '\\n';      Which call most clearly communicates that the function uses class-level state?     StudentAccount::get_total_accounts_created()  The class name and scope-resolution operator identify a static member call.    get_total_accounts_created(StudentAccount)  The class name is not passed as a function argument.    StudentAccount.get_total_accounts_created()  C++ uses :: with a class name; the dot operator is used with an object.    static.StudentAccount.get_total_accounts_created()  static is part of the declaration, not a call prefix.       Why is an out-of-class definition needed for the traditional static data member declaration?     The class declaration announces the member, and the definition provides the shared storage.  The out-of-class definition creates the one class-level object used by the program.    It creates a separate static member for every object.  The purpose is one shared member, not one per object.    It changes the member into a local variable.  The scope-resolution operator keeps the definition associated with the class.    It is required only for static member functions.  This traditional definition concerns static data members.     "
+  "body": " Static Members and Class-Level State  Most data members belong to individual objects. Each StudentAccount , for example, has its own balance. Sometimes a class also needs one value shared by every object of that class. A static data member belongs to the class as a whole rather than to one particular object.  A static member is useful when the class must keep track of class-level information, such as the number of objects that have been created. It is not a replacement for ordinary object state: each account still has its own balance, while all accounts can share one account count.   Static Data Members Are Shared  Declare a static data member inside the class, then provide its definition outside the class. The definition creates the one shared object that belongs to the class. In C++17, this traditional form is still clear and useful, so we will use it here.   One shared count and one balance per account   #include <iostream> class StudentAccount { private: double balance; static int total_accounts_created; public: StudentAccount() : balance{0.0} { ++total_accounts_created; } void deposit_money(double amount) { balance += amount; } double get_balance() const { return balance; } static int get_total_accounts_created() { return total_accounts_created; } }; int StudentAccount::total_accounts_created = 0; int main() { StudentAccount first_account; StudentAccount second_account; first_account.deposit_money(100.00); std::cout << first_account.get_balance() << '\\n'; std::cout << second_account.get_balance() << '\\n'; std::cout << StudentAccount::get_total_accounts_created() << '\\n'; return 0; }    Each object has a separate balance , so depositing money into first_account does not change second_account . The static member total_accounts_created has only one shared value, so both constructor calls update the same count.  The line int StudentAccount::total_accounts_created = 0; is the out-of-class definition. The scope-resolution operator :: says that this definition belongs to StudentAccount .   Important: This simple counter increases only when the default constructor runs. If the class later defines a copy constructor and the count is intended to include copied objects, that copy constructor must also increment the static counter. Copy assignment does not create a new object, so it should not increase an object-creation count.    Static Member Functions  A static member function also belongs to the class rather than to one object. It can be called with the class name and the scope-resolution operator:   int number_of_accounts = StudentAccount::get_total_accounts_created();   A non-static member function receives an implicit object parameter, represented inside the function by this . A static member function has no implicit object parameter and therefore has no this pointer. It can access static members directly, but it must use an object or a reference parameter to work with a non-static member.   Instance and static member functions        Feature  Instance member function  Static member function  Typical use    Belongs to  One object  The class  Choose according to the state needed.    Call  account.get_balance()  StudentAccount::get_total_accounts_created()  Use the class name for class-wide behavior.    Has this ?  Yes  No  Static functions have no current object.    Directly accesses  Static and non-static members  Static members only  Pass an object if non-static state is needed.    const after the function  May be const  Cannot be const  There is no object for a static function to promise not to modify.       When Should a Member Be Static?  Make a member static when the value or operation describes the class as a whole and does not depend on one object's state. A count of all accounts is class-level information. A particular account's balance is object-level information and should remain a non-static member.  A static member does not automatically make a class safer. Because every object shares the same static state, changing that state can affect all objects. Keep the static data member private when outside code should not change it directly, and provide a carefully named public member function when access is needed.   static int get_total_accounts_created() { return total_accounts_created; \/\/ return balance; \/\/ Error: no particular account is available. }   The commented expression cannot work because a call such as StudentAccount::get_total_accounts_created() does not select a particular account. The function can read the shared count, but it cannot guess which object's balance the caller means.    Tracing Shared Static State  Step through the example to observe two separate balances and one shared object count.     Declaring and Initializing a Static Data Member  There are two important ways to define a non-constant static data member. The traditional form declares the member inside the class and defines it once outside the class. The C++17 form uses inline static and defines the member directly inside the class.  The traditional form is useful when the class declaration is in a header file and the definition is placed in one implementation file. The class declaration announces the member, while the out-of-class definition supplies its shared storage and initial value.   Traditional static data member definition   #include <iostream> class VisitCounter { private: static int visit_count; public: VisitCounter() { ++visit_count; } static int get_visit_count() { return visit_count; } }; \/\/ The class declaration above does not allocate the shared member. int VisitCounter::visit_count = 0; int main() { VisitCounter first_visit; VisitCounter second_visit; std::cout << VisitCounter::get_visit_count() << '\\n'; return 0; }    C++17 introduced inline variables. An inline static data member may be initialized inside the class definition:   C++17 in-class definition with inline static   #include <iostream> class VisitCounter { private: inline static int visit_count = 0; public: VisitCounter() { ++visit_count; } static int get_visit_count() { return visit_count; } }; int main() { VisitCounter first_visit; VisitCounter second_visit; std::cout << VisitCounter::get_visit_count() << '\\n'; return 0; }    The inline keyword here does not mean that a function should be expanded at its call site, and it does not promise a performance improvement. It allows the static data member to be defined in the class definition, including a header file, while still representing one shared member across the program. This is why inline static is especially convenient in C++17.   Forms of static data member definition    Form  Where it is defined  Typical use    static int count;  Declaration inside the class  Used with one separate out-of-class definition.    int ClassName::count = 0;  Outside the class  Traditional form; define it once in an implementation file.    inline static int count = 0;  Inside the class  C++17 form; convenient for a class defined in a header.     These forms do not create different kinds of object state. In each case, all objects of the class share one static data member. They differ in where the definition and initialization are written.  An integral constant has another common form. For example, static constexpr int maximum_attempts = 3; can be defined inside a class. In C++17, a static constexpr data member is implicitly inline. This form is appropriate for a named constant, not for a value that changes as objects are created.     Which statement best describes a static data member?     All objects of the class share one value for that member.  A static data member belongs to the class as a whole.    Each object receives a separate copy of the member.  That describes an ordinary non-static data member.    The member can be used only inside a constructor.  Static members can be used by appropriate member functions throughout the class.    The member must always be public.  A static data member can be private, protected, or public.       Why can a static member function not directly read an ordinary data member such as balance ?     It has no this pointer and therefore no particular object.  A static function can access shared static state, but no individual object's state without an object.    Static functions cannot read any data.  They can directly read static data members.    The member must first be made public.  Access control is not the reason; the missing object is.    A static function always runs before the class is defined.  Static describes class membership, not source-code order.       Arrange the lines to create two objects and then read the shared count.    StudentAccount first_account;  StudentAccount second_account;  int count = StudentAccount::get_total_accounts_created();  std::cout << count << '\\n';      Which call most clearly communicates that the function uses class-level state?     StudentAccount::get_total_accounts_created()  The class name and scope-resolution operator identify a static member call.    get_total_accounts_created(StudentAccount)  The class name is not passed as a function argument.    StudentAccount.get_total_accounts_created()  C++ uses :: with a class name; the dot operator is used with an object.    static.StudentAccount.get_total_accounts_created()  static is part of the declaration, not a call prefix.       Why is an out-of-class definition needed for the traditional static data member declaration?     The class declaration announces the member, and the definition provides the shared storage.  The out-of-class definition creates the one class-level object used by the program.    It creates a separate static member for every object.  The purpose is one shared member, not one per object.    It changes the member into a local variable.  The scope-resolution operator keeps the definition associated with the class.    It is required only for static member functions.  This traditional definition concerns static data members.       Which C++17 declaration defines and initializes a shared static data member directly inside the class?     inline static int count = 0;   In C++17, inline static permits the definition and initialization inside the class.     static int count;   This is only the traditional in-class declaration; it still needs an out-of-class definition.     int static::count = 0;   The scope-resolution operator follows the class name, as in ClassName::count .     static inline count;   The declaration needs a type and an initializer, such as inline static int count = 0; .      "
 },
 {
   "id": "chapter10_static-members-and-class-level-state-2",
@@ -13303,11 +13303,20 @@ var ptx_lunr_docs = [
   "body": " Tracing Shared Static State  Step through the example to observe two separate balances and one shared object count.   "
 },
 {
+  "id": "chapter10_static-data-member-initialization",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static-data-member-initialization",
+  "type": "Subsection",
+  "number": "10.6.5",
+  "title": "Declaring and Initializing a Static Data Member",
+  "body": " Declaring and Initializing a Static Data Member  There are two important ways to define a non-constant static data member. The traditional form declares the member inside the class and defines it once outside the class. The C++17 form uses inline static and defines the member directly inside the class.  The traditional form is useful when the class declaration is in a header file and the definition is placed in one implementation file. The class declaration announces the member, while the out-of-class definition supplies its shared storage and initial value.   Traditional static data member definition   #include <iostream> class VisitCounter { private: static int visit_count; public: VisitCounter() { ++visit_count; } static int get_visit_count() { return visit_count; } }; \/\/ The class declaration above does not allocate the shared member. int VisitCounter::visit_count = 0; int main() { VisitCounter first_visit; VisitCounter second_visit; std::cout << VisitCounter::get_visit_count() << '\\n'; return 0; }    C++17 introduced inline variables. An inline static data member may be initialized inside the class definition:   C++17 in-class definition with inline static   #include <iostream> class VisitCounter { private: inline static int visit_count = 0; public: VisitCounter() { ++visit_count; } static int get_visit_count() { return visit_count; } }; int main() { VisitCounter first_visit; VisitCounter second_visit; std::cout << VisitCounter::get_visit_count() << '\\n'; return 0; }    The inline keyword here does not mean that a function should be expanded at its call site, and it does not promise a performance improvement. It allows the static data member to be defined in the class definition, including a header file, while still representing one shared member across the program. This is why inline static is especially convenient in C++17.   Forms of static data member definition    Form  Where it is defined  Typical use    static int count;  Declaration inside the class  Used with one separate out-of-class definition.    int ClassName::count = 0;  Outside the class  Traditional form; define it once in an implementation file.    inline static int count = 0;  Inside the class  C++17 form; convenient for a class defined in a header.     These forms do not create different kinds of object state. In each case, all objects of the class share one static data member. They differ in where the definition and initialization are written.  An integral constant has another common form. For example, static constexpr int maximum_attempts = 3; can be defined inside a class. In C++17, a static constexpr data member is implicitly inline. This form is appropriate for a named constant, not for a value that changes as objects are created.  "
+},
+{
   "id": "chapter10_static_exercise_shared-state",
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise_shared-state",
   "type": "Checkpoint",
-  "number": "10.6.1",
+  "number": "10.6.6",
   "title": "",
   "body": "  Which statement best describes a static data member?     All objects of the class share one value for that member.  A static data member belongs to the class as a whole.    Each object receives a separate copy of the member.  That describes an ordinary non-static data member.    The member can be used only inside a constructor.  Static members can be used by appropriate member functions throughout the class.    The member must always be public.  A static data member can be private, protected, or public.    "
 },
@@ -13316,7 +13325,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-no-this",
   "type": "Checkpoint",
-  "number": "10.6.2",
+  "number": "10.6.7",
   "title": "",
   "body": "  Why can a static member function not directly read an ordinary data member such as balance ?     It has no this pointer and therefore no particular object.  A static function can access shared static state, but no individual object's state without an object.    Static functions cannot read any data.  They can directly read static data members.    The member must first be made public.  Access control is not the reason; the missing object is.    A static function always runs before the class is defined.  Static describes class membership, not source-code order.    "
 },
@@ -13325,7 +13334,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_parsons",
   "type": "Checkpoint",
-  "number": "10.6.3",
+  "number": "10.6.8",
   "title": "",
   "body": "  Arrange the lines to create two objects and then read the shared count.    StudentAccount first_account;  StudentAccount second_account;  int count = StudentAccount::get_total_accounts_created();  std::cout << count << '\\n';   "
 },
@@ -13334,7 +13343,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-call-syntax",
   "type": "Checkpoint",
-  "number": "10.6.4",
+  "number": "10.6.9",
   "title": "",
   "body": "  Which call most clearly communicates that the function uses class-level state?     StudentAccount::get_total_accounts_created()  The class name and scope-resolution operator identify a static member call.    get_total_accounts_created(StudentAccount)  The class name is not passed as a function argument.    StudentAccount.get_total_accounts_created()  C++ uses :: with a class name; the dot operator is used with an object.    static.StudentAccount.get_total_accounts_created()  static is part of the declaration, not a call prefix.    "
 },
@@ -13343,9 +13352,18 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-definition",
   "type": "Checkpoint",
-  "number": "10.6.5",
+  "number": "10.6.10",
   "title": "",
   "body": "  Why is an out-of-class definition needed for the traditional static data member declaration?     The class declaration announces the member, and the definition provides the shared storage.  The out-of-class definition creates the one class-level object used by the program.    It creates a separate static member for every object.  The purpose is one shared member, not one per object.    It changes the member into a local variable.  The scope-resolution operator keeps the definition associated with the class.    It is required only for static member functions.  This traditional definition concerns static data members.    "
+},
+{
+  "id": "chapter10_static_exercise-inline-definition",
+  "level": "2",
+  "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-inline-definition",
+  "type": "Checkpoint",
+  "number": "10.6.11",
+  "title": "",
+  "body": "  Which C++17 declaration defines and initializes a shared static data member directly inside the class?     inline static int count = 0;   In C++17, inline static permits the definition and initialization inside the class.     static int count;   This is only the traditional in-class declaration; it still needs an out-of-class definition.     int static::count = 0;   The scope-resolution operator follows the class name, as in ClassName::count .     static inline count;   The declaration needs a type and an initializer, such as inline static int count = 0; .     "
 },
 {
   "id": "chapter10_access-control-friends-and-protected",
@@ -13415,7 +13433,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_access-control-friends-and-protected.html#chapter10_access_exercise-table",
   "type": "Checkpoint",
-  "number": "10.7.1",
+  "number": "10.7.4",
   "title": "",
   "body": "  Which access specifier allows a derived class to use a member while ordinary outside code cannot use it directly?     protected  Derived-class member functions may access protected members, while unrelated outside code may not.    private  Private members are not directly available to derived-class member functions.    public  Public members are also directly available to unrelated outside code.    friend  friend grants a special relationship; it is not an access-specifier category.    "
 },
@@ -13424,7 +13442,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend_exercise-access",
   "type": "Checkpoint",
-  "number": "10.7.2",
+  "number": "10.7.5",
   "title": "",
   "body": "  Why can have_same_temperature read the private celsius member?     Temperature declared the function as a friend.  A friend declaration grants the named non-member function special access.    Every non-member function can read private data.  Private members are normally inaccessible to non-member functions.    The function is secretly a static member.  Friend functions are independent non-member functions. They are not static members, even though neither function type receives an implicit this pointer.    The member becomes public whenever two objects are compared.  Access does not change during a comparison.    "
 },
@@ -13433,7 +13451,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend_parsons",
   "type": "Checkpoint",
-  "number": "10.7.3",
+  "number": "10.7.6",
   "title": "",
   "body": "  Arrange the lines to declare and define a friend comparison function.    class Temperature {  private: double celsius;  friend bool same(const Temperature& first, const Temperature& second);  };  bool same(const Temperature& first, const Temperature& second) {  return first.celsius == second.celsius;  }   "
 },
@@ -13442,7 +13460,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend_exercise-properties",
   "type": "Checkpoint",
-  "number": "10.7.4",
+  "number": "10.7.7",
   "title": "",
   "body": "  Which statement about friendship is correct?     Friendship is granted explicitly and is not automatically mutual or transitive.  A friend relationship gives the named class or function special access only as specified.    If class A is a friend of class B, B is automatically a friend of A.  Friendship is not automatically mutual.    If A is a friend of B and B is a friend of C, A is automatically a friend of C.  Friendship is not transitive.    Every derived class automatically inherits all friendship relationships.  Friendship is not inherited automatically.    "
 },
@@ -13451,7 +13469,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_access-control-friends-and-protected.html#chapter10_protected_exercise",
   "type": "Checkpoint",
-  "number": "10.7.5",
+  "number": "10.7.8",
   "title": "",
   "body": "  Why can SavingsAccount::add_interest change balance in the example?     SavingsAccount is derived from Account , and balance is protected.  Protected members are available to derived-class member functions.    All data members are accessible through inheritance.  Private base-class members are not directly accessible to derived classes.    balance is public because it has a default value.  A default member initializer does not change access control.    protected means public only inside main .  Protected access is intended for the class and its derived classes, not unrelated outside code.    "
 },
@@ -13541,7 +13559,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-purpose",
   "type": "Checkpoint",
-  "number": "10.8.1",
+  "number": "10.8.7",
   "title": "",
   "body": "  What does operator overloading provide for a class?     A class-specific meaning for an existing C++ operator.  The operator remains a C++ operator, but the class supplies behavior for its objects.    A way to invent entirely new operator symbols.  Only existing C++ operators may be overloaded.    A way to change operator precedence throughout the program.  Overloading does not change precedence.    A way to make every class member public.  Operator overloading and access control are separate features.    "
 },
@@ -13550,7 +13568,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-member",
   "type": "Checkpoint",
-  "number": "10.8.2",
+  "number": "10.8.8",
   "title": "",
   "body": "  In the expression first + second , what does a member operator+ use as its explicit parameter?     The right-hand Point , while first is represented by this .  A member function receives the left object implicitly and the other operand explicitly.    Both first and second as two explicit parameters.  The left operand is the object that calls the member function.    Only the output stream.  An output stream belongs to operator<< , not this addition operation.    No operand because overloaded operators cannot have parameters.  The other operand must still be supplied.    "
 },
@@ -13559,7 +13577,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_parsons",
   "type": "Checkpoint",
-  "number": "10.8.3",
+  "number": "10.8.9",
   "title": "",
   "body": "  Arrange the lines to define a member addition operator that returns a new point.    Point operator+(const Point& other) const {  return Point{x + other.x, y + other.y};  }   "
 },
@@ -13568,7 +13586,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-stream-return",
   "type": "Checkpoint",
-  "number": "10.8.4",
+  "number": "10.8.10",
   "title": "",
   "body": "  Why does a stream-output operator return std::ostream& ?     Returning the stream allows output operations to be chained.  The next << operation can use the stream returned by the previous one.    It creates a new stream for every object.  The existing stream is returned by reference.    It converts every object into a string automatically.  The function writes a representation to the stream; it does not necessarily create a string.    It makes the class inherit from std::ostream .  The class and the stream remain separate types.    "
 },
@@ -13577,7 +13595,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-limits",
   "type": "Checkpoint",
-  "number": "10.8.5",
+  "number": "10.8.11",
   "title": "",
   "body": "  Which statement is a valid limitation of operator overloading?     At least one operand must have a user-defined type.  A class cannot globally redefine an expression such as int + int .    Only arithmetic operators can be overloaded.  Comparison and stream operators are also common overloads.    Every overloaded operator must be a static function.  Operators can be member or non-member functions, depending on the design.    Overloading automatically changes the operator's precedence.  Precedence remains part of the C++ language rules.    "
 },
@@ -13667,7 +13685,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_enumerations-and-enum-class.html#chapter10_enum_exercise-purpose",
   "type": "Checkpoint",
-  "number": "10.9.1",
+  "number": "10.9.6",
   "title": "",
   "body": "  What is the main purpose of an enumeration?     To represent one choice from a limited set of named possibilities.  Enumerations give meaningful names to a fixed collection of alternatives.    To store an unlimited number of strings.  A string or container is more appropriate for an unlimited collection of text.    To make every integer variable constant.  An enumeration defines a particular set of named values.    To replace every class in a program.  Enumerations model choices; classes model objects with state and behavior.    "
 },
@@ -13676,7 +13694,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_enumerations-and-enum-class.html#chapter10_enum_exercise-scope",
   "type": "Checkpoint",
-  "number": "10.9.2",
+  "number": "10.9.7",
   "title": "",
   "body": "  Which expression correctly uses the green enumerator from enum class TrafficLight ?     TrafficLight::green  Scoped enumerators are accessed through the enumeration name and :: .    green  That unqualified form belongs to a traditional unscoped enumeration.    TrafficLight.green  The dot operator accesses an object member; enumerators use :: .    enum_class::TrafficLight::green  enum class is declaration syntax, not part of the access expression.    "
 },
@@ -13685,7 +13703,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_enumerations-and-enum-class.html#chapter10_enum_parsons-switch",
   "type": "Checkpoint",
-  "number": "10.9.3",
+  "number": "10.9.8",
   "title": "",
   "body": "  Arrange the statements to declare a scoped enumeration, select a value, and handle it with switch .    enum class Priority { low, normal, urgent };  Priority priority = Priority::urgent;  switch (priority) {  case Priority::urgent:  std::cout << \"Urgent\" << '\\n';  break;  }   "
 },
@@ -13694,7 +13712,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_enumerations-and-enum-class.html#chapter10_enum_exercise-integer-values",
   "type": "Checkpoint",
-  "number": "10.9.4",
+  "number": "10.9.9",
   "title": "",
   "body": "  What does static_cast<int>(Priority::urgent) do when urgent = 10 ?     It explicitly obtains the integer value 10 .  The cast documents the intentional conversion from the scoped enumeration value to its underlying integer representation.    It changes the enumeration's name to int .  The cast converts one value; it does not change the enumeration declaration.    It creates a new enumeration named int .  A cast performs a value conversion, not a type declaration.    It changes urgent from 10 to zero.  The explicit value remains 10.    "
 },
@@ -13703,7 +13721,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_enumerations-and-enum-class.html#chapter10_enum_exercise-type-safety",
   "type": "Checkpoint",
-  "number": "10.9.5",
+  "number": "10.9.10",
   "title": "",
   "body": "  Why is enum class usually preferred for new C++ code?     Its enumerators are scoped and it does not implicitly convert to int .  Scoped names and stronger type checking prevent several accidental uses.    It automatically converts every value to a string.  Text conversion still requires explicit code such as a function with switch .    It can contain any number of values at runtime.  An enumeration still represents a declared set of named choices.    It removes the need for constructors in classes.  Enumerations and constructors solve different design problems.    "
 },
@@ -14441,7 +14459,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_1",
   "type": "Checkpoint",
-  "number": "11.7.1",
+  "number": "11.7.2",
   "title": "",
   "body": "  Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!    "
 },
@@ -14450,7 +14468,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_2",
   "type": "Checkpoint",
-  "number": "11.7.2",
+  "number": "11.7.3",
   "title": "",
   "body": "  Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.    "
 },
@@ -14459,7 +14477,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_3",
   "type": "Checkpoint",
-  "number": "11.7.3",
+  "number": "11.7.4",
   "title": "",
   "body": "  If the number of elements is 76, then the index of the next element is .          "
 },
@@ -14468,7 +14486,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_4",
   "type": "Checkpoint",
-  "number": "11.7.4",
+  "number": "11.7.5",
   "title": "",
   "body": "  Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.           "
 },

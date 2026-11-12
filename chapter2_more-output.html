@@ -59,15 +59,14 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '8.3.6';
+eBookConfig.runestone_version = '8.4.0';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.4beca1fdeed766a2.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.ebd33f6a21eed414.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
-<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.9963089870a016c8.css">
+<script src="_static/prefix-runtime.7e2ee203f2ecd6c8.bundle.js"></script><script src="_static/prefix-23.7d27cb317c36911a.bundle.js"></script><script src="_static/prefix-runestone.35a40fea06647cf2.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-runestone.7062ede5334282a6.css">
 <script src="_static/pretext/js/dist/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/dist/pretext_search.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
 </head>
@@ -731,6 +730,7 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_static-members-and-class-level-state.html#chapter10_static-member-functions" class="internal"><span class="codenumber">10.6.2</span> <span class="title">Static Member Functions</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_static-members-and-class-level-state.html#chapter10_static-member-design-guidance" class="internal"><span class="codenumber">10.6.3</span> <span class="title">When Should a Member Be Static?</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_static-members-and-class-level-state.html#chapter10_static-codelens" class="internal"><span class="codenumber">10.6.4</span> <span class="title">Tracing Shared Static State</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter10_static-members-and-class-level-state.html#chapter10_static-data-member-initialization" class="internal"><span class="codenumber">10.6.5</span> <span class="title">Declaring and Initializing a Static Data Member</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -813,17 +813,17 @@ int main() {
 <div class="para" id="chapter2_more-output-5">The phrases that appear in quotation marks are called <dfn class="terminology">strings</dfn>, because they are made up of a sequence (string) of letters.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_more-output-5" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="note remark-like" id="chapter2_more-output-6"><h2 class="heading">
-<span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Note</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="para" id="chapter2_more-output-6-1">In C++, strings are declared as type <code class="code-inline tex2jax_ignore">string</code>. We’ll explain what that means in the next few pages.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_more-output-6-1" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<div class="autopermalink" aria-hidden="true" data-description="Note 2.1.1"><a tabindex="-1" href="#chapter2_more-output-6" title="Copy heading and permalink for Note 2.1.1" aria-label="Copy heading and permalink for Note 2.1.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Note 2.1.2"><a tabindex="-1" href="#chapter2_more-output-6" title="Copy heading and permalink for Note 2.1.2" aria-label="Copy heading and permalink for Note 2.1.2">🔗</a></div>
 </article>
 <div class="para" id="chapter2_more-output-7">Actually, strings can contain any combination of letters, numbers, punctuation marks, and other special characters.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_more-output-7" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <div class="para" id="chapter2_more-output-8">Often it is useful to display the output from multiple output statements all on one line. You can do this by leaving out the first <code class="code-inline tex2jax_ignore">endl</code>:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_more-output-8" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="more_output_AC_2"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.2<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program prints two different statements on the same line.<div class="autopermalink" aria-hidden="true" data-description="Listing 2.1.2: This program prints two different statements on the same line."><a tabindex="-1" href="#more_output_AC_2" title="Copy heading and permalink for Listing 2.1.2: This program prints two different statements on the same line." aria-label="Copy heading and permalink for Listing 2.1.2: This program prints two different statements on the same line.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers" data-line="5"><code id="rs-more_output_AC_2_editor" class="language-cpp">#include &lt;iostream&gt;
+<figure class="listing figure-like" id="more_output_AC_2"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program prints two different statements on the same line.<div class="autopermalink" aria-hidden="true" data-description="Listing 2.1.3: This program prints two different statements on the same line."><a tabindex="-1" href="#more_output_AC_2" title="Copy heading and permalink for Listing 2.1.3: This program prints two different statements on the same line." aria-label="Copy heading and permalink for Listing 2.1.3: This program prints two different statements on the same line.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers" data-line="5"><code id="rs-more_output_AC_2_editor" class="language-cpp">#include &lt;iostream&gt;
 
 int main() {
     std::cout &lt;&lt; "Goodbye, ";
@@ -835,7 +835,7 @@ int main() {
 </div>
 <div class="para" id="chapter2_more-output-11">Spaces that appear outside of quotation marks generally do not affect the behavior of the program. For example, I could have written:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_more-output-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="more_output_AC_3"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.3<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line.<div class="autopermalink" aria-hidden="true" data-description="Listing 2.1.3: This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line."><a tabindex="-1" href="#more_output_AC_3" title="Copy heading and permalink for Listing 2.1.3: This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line." aria-label="Copy heading and permalink for Listing 2.1.3: This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-more_output_AC_3_editor" class="language-cpp">#include &lt;iostream&gt;
+<figure class="listing figure-like" id="more_output_AC_3"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line.<div class="autopermalink" aria-hidden="true" data-description="Listing 2.1.4: This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line."><a tabindex="-1" href="#more_output_AC_3" title="Copy heading and permalink for Listing 2.1.4: This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line." aria-label="Copy heading and permalink for Listing 2.1.4: This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-more_output_AC_3_editor" class="language-cpp">#include &lt;iostream&gt;
 
 int main() {
     std::cout&lt;&lt;"Goodbye, ";
@@ -845,7 +845,7 @@ int main() {
 </figure>
 <div class="para" id="chapter2_more-output-13">This program would compile and run just as well as the original. The breaks at the ends of lines (newlines) do not affect the program’s behavior either, so I could have written:<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_more-output-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
-<figure class="listing figure-like" id="more_output_AC_4"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.4<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow.<div class="autopermalink" aria-hidden="true" data-description="Listing 2.1.4: This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow."><a tabindex="-1" href="#more_output_AC_4" title="Copy heading and permalink for Listing 2.1.4: This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow." aria-label="Copy heading and permalink for Listing 2.1.4: This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-more_output_AC_4_editor" class="language-cpp">#include &lt;iostream&gt;
+<figure class="listing figure-like" id="more_output_AC_4"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.5<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow.<div class="autopermalink" aria-hidden="true" data-description="Listing 2.1.5: This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow."><a tabindex="-1" href="#more_output_AC_4" title="Copy heading and permalink for Listing 2.1.5: This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow." aria-label="Copy heading and permalink for Listing 2.1.5: This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow.">🔗</a></div></figcaption><div class="listing__contents"><pre class="program clipboardable line-numbers"><code id="rs-more_output_AC_4_editor" class="language-cpp">#include &lt;iostream&gt;
 
 int main() {std::cout&lt;&lt;"Goodbye, ";std::cout&lt;&lt;"cruel world!"&lt;&lt;std::endl;}
 </code></pre></div>
@@ -853,7 +853,7 @@ int main() {std::cout&lt;&lt;"Goodbye, ";std::cout&lt;&lt;"cruel world!"&lt;&lt;
 <div class="para" id="chapter2_more-output-15">That would work, too, although you have probably noticed that the program is getting harder and harder to read. Newlines and spaces are useful for organizing your program visually, making it easier to read the program and locate syntax errors.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter2_more-output-15" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <article class="exercise exercise-like" id="more_output_1"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.1</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.6</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone">
 <div data-component="fillintheblank" class="fillintheblank" style="visibility: hidden;" id="rs-more_output_1"><script type="application/json">{
@@ -863,10 +863,10 @@ int main() {std::cout&lt;&lt;"Goodbye, ";std::cout&lt;&lt;"cruel world!"&lt;&lt;
 "feedbackArray": [[{"regex": "^\\s*string\\s*$", "regexFlags": "i", "feedback": "Correct!"}, {"feedback": "Incorrect."}]]
 }</script></div>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.1.1"><a tabindex="-1" href="#more_output_1" title="Copy heading and permalink for Checkpoint 2.1.1" aria-label="Copy heading and permalink for Checkpoint 2.1.1">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.1.6"><a tabindex="-1" href="#more_output_1" title="Copy heading and permalink for Checkpoint 2.1.6" aria-label="Copy heading and permalink for Checkpoint 2.1.6">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="more_output_2"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.2</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.7</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
 <div class="exercise-statement">
@@ -908,10 +908,10 @@ int main() {
 </li>
 </ul>
 </div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.1.2"><a tabindex="-1" href="#more_output_2" title="Copy heading and permalink for Checkpoint 2.1.2" aria-label="Copy heading and permalink for Checkpoint 2.1.2">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.1.7"><a tabindex="-1" href="#more_output_2" title="Copy heading and permalink for Checkpoint 2.1.7" aria-label="Copy heading and permalink for Checkpoint 2.1.7">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="more_output_3"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.3</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.8</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-more_output_3">
 <div class="parsons_question parsons-text">
@@ -940,10 +940,10 @@ int main() {
 ---
 }</pre>
 </div></div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.1.3"><a tabindex="-1" href="#more_output_3" title="Copy heading and permalink for Checkpoint 2.1.3" aria-label="Copy heading and permalink for Checkpoint 2.1.3">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.1.8"><a tabindex="-1" href="#more_output_3" title="Copy heading and permalink for Checkpoint 2.1.8" aria-label="Copy heading and permalink for Checkpoint 2.1.8">🔗</a></div>
 </article>
 <article class="exercise exercise-like" id="more_output_4"><h2 class="heading">
-<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.4</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
+<span class="type">Checkpoint</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">2.1.9</span><span class="period heading-divison-mark heading-divison-mark__period">.</span>
 </h2>
 <div class="ptx-runestone-container"><div class="runestone parsons_section" style="max-width: none;"><div data-component="parsons" class="parsons" id="rs-more_output_4">
 <div class="parsons_question parsons-text">
@@ -962,7 +962,7 @@ int main() {
 ---
 }</pre>
 </div></div></div>
-<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.1.4"><a tabindex="-1" href="#more_output_4" title="Copy heading and permalink for Checkpoint 2.1.4" aria-label="Copy heading and permalink for Checkpoint 2.1.4">🔗</a></div>
+<div class="autopermalink" aria-hidden="true" data-description="Checkpoint 2.1.9"><a tabindex="-1" href="#more_output_4" title="Copy heading and permalink for Checkpoint 2.1.9" aria-label="Copy heading and permalink for Checkpoint 2.1.9">🔗</a></div>
 </article><div class="autopermalink" aria-hidden="true" data-description="Section 2.1: More Output"><a tabindex="-1" href="#chapter2_more-output" title="Copy heading and permalink for Section 2.1: More Output" aria-label="Copy heading and permalink for Section 2.1: More Output">🔗</a></div>
 </section>
 </div>
