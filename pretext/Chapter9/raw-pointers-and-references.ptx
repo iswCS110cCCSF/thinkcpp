@@ -203,14 +203,12 @@ int* pointer;  // pointer declaration
         <interactive xml:id="interactive_chapter9_raw_pointer_reference"
                      iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20int%20x%20%3D%2010%3B%0A%20%20%20%20int%20y%20%3D%2020%3B%0A%0A%20%20%20%20int*%20pointer%20%3D%20%26x%3B%0A%20%20%20%20*pointer%20%3D%2015%3B%0A%20%20%20%20pointer%20%3D%20%26y%3B%0A%20%20%20%20*pointer%20%3D%2025%3B%0A%0A%20%20%20%20int%26%20reference%20%3D%20x%3B%0A%20%20%20%20reference%20%3D%20y%3B%0A%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22x%20%3D%20%22%20%3C%3C%20x%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20%22y%20%3D%20%22%20%3C%3C%20y%20%3C%3C%20%27%5Cn%27%3B%0A%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=1&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
                      width="100%"
-                     aspect="16:10">
-            <description>
-                <p>
-                    C++ Tutor visualization comparing pointer reassignment with
-                    assignment through a reference.
-                </p>
-            </description>
+                     aspect="16:10">x   
         </interactive>
+        <p>
+            Figure: C++ Tutor visualization comparing pointer reassignment with
+            assignment through a reference.
+        </p>
     </subsection>
 
     <subsection xml:id="chapter9_raw-pointers-and-references_function-parameters">
