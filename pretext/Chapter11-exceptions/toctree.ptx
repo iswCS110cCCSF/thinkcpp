@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:lang="en-US"
+         xml:id="exception-handling">
+
+    <title>Exception Handling</title>
+
+    <xi:include href="./why-programs-need-error-handling.ptx"/>
+    <xi:include href="./try-throw-and-catch.ptx"/>
+    <xi:include href="./standard-exception-types.ptx"/>
+    <xi:include href="./catching-exceptions-safely.ptx"/>
+    <xi:include href="./exception-propagation-and-stack-unwinding.ptx"/>
+    <xi:include href="./exceptions-in-functions-and-classes.ptx"/>
+    <xi:include href="./constructors-destructors-and-raii.ptx"/>
+    <xi:include href="./exception-safety-guidelines.ptx"/>
+    <xi:include href="./noexcept-and-exception-boundaries.ptx"/>
+    <xi:include href="./designing-recoverable-programs.ptx"/>
+</chapter>

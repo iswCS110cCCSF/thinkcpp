@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_exceptions-in-functions-and-classes">
+    <title>Exceptions in Functions and Classes</title>
+
+    <p>
+        A function or member function should protect the requirements of its
+        interface. When an argument would make the requested operation invalid,
+        the function may throw an exception instead of creating an invalid
+        result.
+    </p>
+
+    <subsection xml:id="chapter11_function-contracts-and-exceptions">
+        <title>Exceptions and Function Contracts</title>
+
+        <p>
+            A function that throws should make the possibility visible in its
+            documentation and should use an exception type that describes the
+            failure. The caller can then decide whether to recover, report the
+            problem, or allow it to propagate farther.
+        </p>
+
+        <listing xml:id="listing_chapter11_function-contract">
+            <title>Protecting a function's precondition</title>
+            <program xml:id="program_chapter11_function-contract"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+double calculate_average(int total, int count) {
+    if (count <= 0) {
+        throw std::invalid_argument("count must be positive");
+    }
+
+    return static_cast<double>(total) / count;
+}
+
+int main() {
+    try {
+        std::cout << calculate_average(85, 0) << '\n';
+    }
+    catch (const std::invalid_argument& error) {
+        std::cout << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The function either returns a valid average or reports that its
+            precondition was violated. It does not return a misleading value
+            such as zero to represent every possible failure.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_constructor-exceptions">
+        <title>Constructors Can Reject Invalid Objects</title>
+
+        <p>
+            A constructor may throw when its arguments cannot create a valid
+            object. This protects the class invariant: an object whose
+            constructor finishes successfully satisfies the class's validity
+            rules.
+        </p>
+
+        <listing xml:id="listing_chapter11_constructor-exception">
+            <title>Rejecting an invalid temperature</title>
+            <program xml:id="program_chapter11_constructor-exception"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+class Temperature {
+private:
+    double celsius;
+
+public:
+    Temperature(double starting_celsius)
+        : celsius{starting_celsius} {
+        if (celsius < -273.15) {
+            throw std::invalid_argument(
+                "temperature is below absolute zero"
+            );
+        }
+    }
+
+    double get_celsius() const {
+        return celsius;
+    }
+};
+
+int main() {
+    try {
+        Temperature temperature{-300.0};
+        std::cout << temperature.get_celsius() << '\n';
+    }
+    catch (const std::invalid_argument& error) {
+        std::cout << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            Because construction fails, the caller does not receive a usable
+            <c>Temperature</c> object. The class does not need to provide an
+            invalid object and hope that every later member function remembers
+            to check it.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_function-class-visualization">
+        <title>Tracing Constructor Validation</title>
+
+        <p>
+            The static listing shows that the constructor detects the invalid temperature before a usable <c>Temperature</c> object becomes available. Control then moves to the handler.
+        </p>
+    </subsection>
+
+    <exercise label="chapter11_functions-exercise-precondition">
+        <statement><p>Why does <c>calculate_average</c> throw when <c>count</c> is zero?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                            <statement><p><c>count</c> must be negative.</p></statement>
+                            <feedback><p>The function requires a positive count, so zero and negative counts violate the precondition.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>The compiler cannot divide any integers.</p></statement>
+                <feedback><p>C++ can divide integers; division by zero is the invalid situation.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The function has no return statement.</p></statement>
+                <feedback><p>The function has a return statement for valid input.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Its precondition requires a positive count.</p></statement>
+                <feedback><p>The function cannot calculate a valid average with zero values.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>All averages must be integers.</p></statement>
+                <feedback><p>The function returns a <c>double</c>; the issue is the count.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_functions-parsons-constructor">
+        <statement><p>Arrange the constructor so that it rejects an invalid object.</p></statement>
+        <blocks>
+            <block order="1"><cline>Temperature(double starting_celsius)</cline></block>
+            <block order="2"><cline>: celsius{starting_celsius} {</cline></block>
+            <block order="3"><cline>if (celsius &lt; -273.15) {</cline></block>
+            <block order="4"><cline>throw std::invalid_argument("temperature is invalid");</cline></block>
+            <block order="5"><cline>}</cline></block>
+            <block order="6"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_functions-exercise-constructor">
+        <statement><p>What does a constructor exception prevent?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>It makes the constructor return a Boolean.</p></statement>
+                <feedback><p>Constructors do not return values; they either create an object or throw.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It prevents every object of the class from ever being created.</p></statement>
+                <feedback><p>Valid constructor arguments can still create objects.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>It constructs and returns the invalid object anyway.</p></statement>
+                            <feedback><p>A constructor exception prevents an invalid object from being made available.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>It changes a class into a structure.</p></statement>
+                <feedback><p>Exceptions do not change the kind of user-defined type.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>It prevents the caller from receiving an object that violates the class invariant.</p></statement>
+                <feedback><p>A constructor that finishes successfully establishes a valid object.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_functions-exercise-design">
+        <statement><p>Which design best protects a class invariant?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                            <statement><p>Make invariant checks optional for callers.</p></statement>
+                            <feedback><p>An invariant is a class responsibility, not merely a suggestion to callers.</p></feedback>
+                        </choice>
+            <choice correct="yes">
+                <statement><p>Reject invalid constructor arguments before the object becomes available.</p></statement>
+                <feedback><p>Preventing invalid objects simplifies every later member function.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Remove all private data members.</p></statement>
+                <feedback><p>Private data helps a class protect its invariant.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Accept every value and ask callers to remember the invariant.</p></statement>
+                <feedback><p>That spreads the responsibility across every caller.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Silently replace every invalid value with zero.</p></statement>
+                <feedback><p>Silently changing input may hide an important programming error.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_functions-exercise-invariants">
+        <statement>
+            <p>Select all practices that help a class protect its invariant.</p>
+        </statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice>
+                <statement><p>Make all data members public and rely on callers to behave correctly.</p></statement>
+                <feedback><p>Public unrestricted data makes invariant protection harder.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Validate constructor arguments before the object becomes available.</p></statement>
+                <feedback><p>Rejecting invalid initial state protects every later operation.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Silently accept every invalid value and document the problem later.</p></statement>
+                <feedback><p>Silently accepting invalid state weakens the class invariant.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Reject an invalid operation before it leaves the object in an unacceptable state.</p></statement>
+                <feedback><p>Operations should preserve the invariant as well as constructors.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Remove validation so every constructor call succeeds.</p></statement>
+                <feedback><p>Successful construction should mean that the object is valid.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_exception-safety-guidelines">
+    <title>Exception-Safety Guidelines</title>
+
+    <p>
+        Exception safety asks what remains true when an operation fails. A
+        well-designed function does not leave objects partly changed, lose a
+        resource, or force every caller to guess what happened.
+    </p>
+
+    <subsection xml:id="chapter11_exception-safety-guarantees">
+        <title>Three Levels of Guarantee</title>
+
+        <table xml:id="table_chapter11_exception-safety-guarantees">
+            <title>Common exception-safety guarantees</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="30%"/>
+                <col width="70%"/>
+                <row header="yes">
+                    <cell><p>Guarantee</p></cell>
+                    <cell><p>Meaning after failure</p></cell>
+                </row>
+                <row>
+                    <cell><p>No-throw guarantee</p></cell>
+                    <cell><p>The operation does not allow an exception to escape.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Strong guarantee</p></cell>
+                    <cell><p>The operation either succeeds completely or leaves the state unchanged.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Basic guarantee</p></cell>
+                    <cell><p>The object remains valid and resources are not leaked, but its value may have changed.</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The strong guarantee is especially easy to understand: the caller
+            sees either the requested change or no change. The basic guarantee
+            still protects validity and cleanup, even when preserving the old
+            value is not practical.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_validate-before-modify">
+        <title>Validate Before Modifying State</title>
+
+        <p>
+            A simple way to improve exception safety is to check all conditions
+            that can be checked before changing the object. In the example, an
+            invalid withdrawal throws before <c>balance</c> is modified.
+        </p>
+
+        <listing xml:id="listing_chapter11_exception-safe-account">
+            <title>Preserving the balance after a failed withdrawal</title>
+            <program xml:id="program_chapter11_exception-safe-account"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+class BankAccount {
+private:
+    double balance;
+
+public:
+    BankAccount(double starting_balance)
+        : balance{starting_balance} {
+    }
+
+    void withdraw_money(double amount) {
+        if (amount < 0 || amount > balance) {
+            throw std::invalid_argument("withdrawal is not allowed");
+        }
+
+        balance -= amount;
+    }
+
+    double get_balance() const {
+        return balance;
+    }
+};
+
+int main() {
+    BankAccount account{100.0};
+
+    try {
+        account.withdraw_money(150.0);
+    }
+    catch (const std::exception& error) {
+        std::cout << error.what() << '\n';
+    }
+
+    std::cout << account.get_balance() << '\n';
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The balance remains 100 because the failed operation does not reach
+            the subtraction. This is a small example of the strong guarantee.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_exception-safety-visualization">
+        <title>Tracing Unchanged State</title>
+
+        <p>
+            The static listing shows that validation occurs before subtraction. When the withdrawal fails, the account remains valid and its balance remains unchanged.
+        </p>
+    </subsection>
+
+    <exercise label="chapter11_safety-exercise-strong">
+        <statement><p>Which description matches the strong exception-safety guarantee?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>The operation always throws.</p></statement>
+                <feedback><p>The guarantee describes state after failure, not an instruction to throw.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The operation may leak resources as long as it reports an error.</p></statement>
+                <feedback><p>Exception safety includes protecting resources from leaks.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The operation ignores all invalid arguments.</p></statement>
+                <feedback><p>Invalid arguments still need a deliberate response.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>The operation may leave the object half-updated after failure.</p></statement>
+                            <feedback><p>The strong guarantee requires unchanged state when the operation fails.</p></feedback>
+                        </choice>
+            <choice correct="yes">
+                <statement><p>The operation succeeds completely or leaves the state unchanged.</p></statement>
+                <feedback><p>This is the commit-or-no-change idea of the strong guarantee.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_safety-parsons-validation">
+        <statement><p>Arrange the withdrawal so validation occurs before the balance changes.</p></statement>
+        <blocks>
+            <block order="1"><cline>if (amount &lt; 0 || amount &gt; balance) {</cline></block>
+            <block order="2"><cline>throw std::invalid_argument("withdrawal is not allowed");</cline></block>
+            <block order="3"><cline>}</cline></block>
+            <block order="4"><cline>balance -= amount;</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_safety-exercise-basic">
+        <statement><p>What does the basic guarantee require?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>The object must always be exactly unchanged.</p></statement>
+                <feedback><p>That stronger requirement describes the strong guarantee.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>The object remains valid and resources are not leaked.</p></statement>
+                <feedback><p>The value may change, but the object and its resources remain safe.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>The object must remain unchanged in every detail.</p></statement>
+                            <feedback><p>That describes the stronger guarantee; the basic guarantee permits a valid changed state.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>The function must never return.</p></statement>
+                <feedback><p>The basic guarantee concerns state and resources after failure.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The program must use only raw pointers.</p></statement>
+                <feedback><p>Exception safety is independent of that choice.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_safety-exercise-guidance">
+        <statement><p>Which practice usually improves exception safety?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>Allow a resource to remain open after failure.</p></statement>
+                <feedback><p>Resources should be cleaned up reliably.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Change half of the object's state before checking the argument.</p></statement>
+                <feedback><p>Partial changes make recovery more difficult.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Validate conditions before changing object state.</p></statement>
+                <feedback><p>Early validation helps keep failed operations from partially changing an object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Catch every exception and discard its message.</p></statement>
+                <feedback><p>Discarding information makes failures harder to diagnose.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>Modify the object first and validate the argument later.</p></statement>
+                            <feedback><p>Validate before modifying state when possible.</p></feedback>
+                        </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_safety-exercise-practices">
+        <statement>
+            <p>Select all practices that generally improve exception safety.</p>
+        </statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice>
+                <statement><p>Validate important conditions before changing object state.</p></statement>
+                <feedback><p>Early validation helps prevent partial changes.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Use RAII objects so resources are released automatically when scope ends.</p></statement>
+                <feedback><p>RAII helps prevent resource leaks during both normal return and stack unwinding.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Ignore every exception so the program always continues.</p></statement>
+                <feedback><p>Ignoring failures can leave the program in an unsafe or unknown state.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Keep an object valid even when an operation reports failure.</p></statement>
+                <feedback><p>Preserving validity is a central part of the basic guarantee.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Allow resources to remain allocated until the operating system ends the process.</p></statement>
+                <feedback><p>Reliable cleanup should occur during program execution, not only at process termination.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

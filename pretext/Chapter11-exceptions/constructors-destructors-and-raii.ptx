@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_constructors-destructors-and-raii">
+    <title>Constructors, Destructors, and RAII During Exceptions</title>
+
+    <p>
+        Exceptions can interrupt normal control flow, but C++ still performs
+        required object cleanup. Objects with automatic storage are destroyed
+        as their scopes are left. This behavior supports
+        <term>RAII</term>, or Resource Acquisition Is Initialization.
+    </p>
+
+    <subsection xml:id="chapter11_destructor-during-unwinding">
+        <title>Destructors Run During Stack Unwinding</title>
+
+        <p>
+            If an object has been completely constructed before an exception is
+            thrown, its destructor runs when its scope is exited during stack
+            unwinding. An object whose constructor throws is not considered a
+            fully constructed object, so its complete destructor does not run.
+        </p>
+
+        <listing xml:id="listing_chapter11_destructor-unwinding">
+            <title>Cleanup during an exception</title>
+            <program xml:id="program_chapter11_destructor-unwinding"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+class ScopeMarker {
+public:
+    ScopeMarker() {
+        std::cout << "created" << '\n';
+    }
+
+    ~ScopeMarker() {
+        std::cout << "destroyed" << '\n';
+    }
+};
+
+void run_task() {
+    ScopeMarker marker;
+    throw std::runtime_error("task failed");
+}
+
+int main() {
+    try {
+        run_task();
+    }
+    catch (const std::exception& error) {
+        std::cout << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The expected order includes <c>destroyed</c> before the handler
+            prints the error. The local object is cleaned up as
+            <c>run_task()</c> is exited.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_raii-purpose">
+        <title>Why RAII Helps</title>
+
+        <p>
+            With RAII, a resource is acquired by an object's constructor and
+            released by its destructor. The release happens when the object
+            leaves its scope, whether the scope ends normally or because an
+            exception is propagating.
+        </p>
+
+        <p>
+            This is safer than asking every possible control-flow path to call a
+            separate cleanup function. The standard library uses this design for
+            many objects, including strings, vectors, streams, and smart
+            pointers.
+        </p>
+
+        <p>
+            A destructor should normally perform cleanup and should not allow a
+            second exception to escape while another exception is already being
+            handled. Later chapters will apply RAII to dynamically allocated
+            resources and smart pointers.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_raii-visualization">
+        <title>Tracing RAII Cleanup</title>
+
+        <p>
+            In the static listing, <c>marker</c> is completely constructed before the exception is thrown. During stack unwinding, its destructor runs before the handler reports the failure.
+        </p>
+    </subsection>
+
+    <exercise label="chapter11_raii-exercise-order">
+        <statement><p>What happens to <c>marker</c> when <c>run_task()</c> throws?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>It remains alive until the operating system shuts down.</p></statement>
+                <feedback><p>Automatic objects are destroyed when their scope is exited.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Its constructor runs a second time.</p></statement>
+                <feedback><p>An exception does not reconstruct the local object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It is copied into the exception object.</p></statement>
+                <feedback><p>The local object's lifetime is separate from the exception object.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>Its destructor is skipped because an exception is active.</p></statement>
+                            <feedback><p>Automatic objects are destroyed during stack unwinding.</p></feedback>
+                        </choice>
+            <choice correct="yes">
+                <statement><p>Its destructor runs while the function is being exited.</p></statement>
+                <feedback><p>Stack unwinding destroys completely constructed local objects.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_raii-parsons-cleanup">
+        <statement><p>Arrange the class so its destructor releases the resource marker.</p></statement>
+        <blocks>
+            <block order="1"><cline>class ScopeMarker {</cline></block>
+            <block order="2"><cline>public:</cline></block>
+            <block order="3"><cline>ScopeMarker() { acquire_resource(); }</cline></block>
+            <block order="4"><cline>~ScopeMarker() { release_resource(); }</cline></block>
+            <block order="5"><cline>};</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_raii-exercise-purpose">
+        <statement><p>What is the main advantage of RAII during exception handling?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>RAII prevents all exceptions from being thrown.</p></statement>
+                <feedback><p>RAII manages cleanup; it does not prevent every failure.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Cleanup happens automatically when the resource-owning object leaves its scope.</p></statement>
+                <feedback><p>RAII makes cleanup apply to both normal and exceptional exits.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>RAII requires every resource to be released manually in <c>main()</c>.</p></statement>
+                            <feedback><p>RAII connects resource cleanup to object lifetime and scope.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>RAII makes destructors run before constructors.</p></statement>
+                <feedback><p>Construction still occurs before destruction.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>RAII removes the need for object scopes.</p></statement>
+                <feedback><p>RAII depends on object lifetimes and scopes.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_raii-exercise-destructor">
+        <statement><p>Which destructor practice is safest during exception handling?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>Delete every object in the program.</p></statement>
+                <feedback><p>A destructor should clean up only its own object's resources.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Always throw a new exception from the destructor.</p></statement>
+                <feedback><p>Throwing from a destructor during unwinding is dangerous.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Perform cleanup and avoid allowing another exception to escape.</p></statement>
+                <feedback><p>A second escaping exception during unwinding can terminate the program.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Leave resources active so the handler can clean them later.</p></statement>
+                <feedback><p>RAII is intended to make cleanup automatic and reliable.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>Allow the destructor to throw whenever cleanup is difficult.</p></statement>
+                            <feedback><p>Throwing during cleanup can cause termination during stack unwinding.</p></feedback>
+                        </choice>
+        </choices>
+    </exercise>
+</section>

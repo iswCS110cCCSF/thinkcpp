@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_noexcept-and-exception-boundaries">
+    <title><c>noexcept</c> and Exception Boundaries</title>
+
+    <p>
+        The <c>noexcept</c> specifier states that a function promises not to
+        allow an exception to escape. It communicates an important boundary in
+        a program's design, but it is not a general-purpose error-suppression
+        mechanism.
+    </p>
+
+    <subsection xml:id="chapter11_noexcept-meaning">
+        <title>What <c>noexcept</c> Means</title>
+
+        <p>
+            A function declared <c>noexcept</c> may still contain ordinary
+            statements that can fail in other ways. The promise concerns
+            exceptions: if an exception escapes the function, the program calls
+            <c>std::terminate()</c> rather than searching for a handler farther
+            up the call chain.
+        </p>
+
+        <listing xml:id="listing_chapter11_noexcept">
+            <title>A function with a no-throw promise</title>
+            <program xml:id="program_chapter11_noexcept"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+int get_fixed_count() noexcept {
+    return 3;
+}
+
+int main() {
+    std::cout << get_fixed_count() << '\n';
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            A function should be marked <c>noexcept</c> only when its
+            implementation and its design genuinely support that promise. Do
+            not add <c>noexcept</c> merely to hide an exception that should have
+            been handled.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_noexcept-and-destructors">
+        <title><c>noexcept</c> and Cleanup</title>
+
+        <p>
+            Cleanup functions and destructors are especially important exception
+            boundaries. A destructor that throws while another exception is
+            already unwinding can cause the program to terminate. For this
+            reason, destructors should normally complete cleanup without
+            allowing exceptions to escape.
+        </p>
+
+        <p>
+            In this introductory course, use <c>noexcept</c> to recognize and
+            document a no-throw promise. Do not use it as a substitute for
+            validating input, reporting failures, or designing RAII cleanup.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_noexcept-visualization">
+        <title>Visualizing a No-Throw Function</title>
+
+        <interactive xml:id="interactive_chapter11_noexcept"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aint%20get_fixed_count%28%29%20noexcept%20%7B%0A%20%20%20%20return%203%3B%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20get_fixed_count%28%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter11_noexcept-exercise-meaning">
+        <statement><p>What does <c>noexcept</c> promise?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>The compiler guarantees that the function's result is correct.</p></statement>
+                <feedback><p><c>noexcept</c> concerns exceptions, not algorithmic correctness.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>The function is forbidden from calling any other function.</p></statement>
+                            <feedback><p><c>noexcept</c> concerns exceptions escaping, not whether the function makes calls.</p></feedback>
+                        </choice>
+            <choice correct="yes">
+                <statement><p>The function will not allow an exception to escape.</p></statement>
+                <feedback><p><c>noexcept</c> describes exception behavior, not every possible program failure.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The function cannot contain any statements.</p></statement>
+                <feedback><p>A <c>noexcept</c> function can contain ordinary executable statements.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The function automatically catches every exception.</p></statement>
+                <feedback><p><c>noexcept</c> is not a catch handler.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_noexcept-parsons-declaration">
+        <statement><p>Arrange a valid no-throw function declaration and definition.</p></statement>
+        <blocks>
+            <block order="1"><cline>int get_fixed_count()</cline></block>
+            <block order="2"><cline>noexcept {</cline></block>
+            <block order="3"><cline>return 3;</cline></block>
+            <block order="4"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_noexcept-exercise-danger">
+        <statement><p>What can happen if an exception escapes a <c>noexcept</c> function?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>The function automatically retries forever.</p></statement>
+                <feedback><p>Retry behavior must be explicitly designed.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The compiler removes the function.</p></statement>
+                <feedback><p>The program terminates at runtime if the promise is violated.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The exception always becomes a return value.</p></statement>
+                <feedback><p><c>noexcept</c> does not convert exceptions into return values.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>The program calls <c>std::terminate()</c>.</p></statement>
+                <feedback><p>The no-throw boundary does not permit the exception to propagate farther.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>The compiler silently catches the exception and returns a default value.</p></statement>
+                            <feedback><p>An exception escaping a <c>noexcept</c> function leads to termination.</p></feedback>
+                        </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_noexcept-exercise-guidance">
+        <statement><p>When should a programmer use <c>noexcept</c>?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>Whenever a function takes an argument.</p></statement>
+                <feedback><p>Parameters do not determine whether a function is no-throw.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>Use <c>noexcept</c> to conceal operations that may fail.</p></statement>
+                            <feedback><p>Use it only when the no-throw contract is genuine.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>Only on functions that return strings.</p></statement>
+                <feedback><p>The return type does not determine the use of <c>noexcept</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Whenever the programmer wants to hide an error.</p></statement>
+                <feedback><p>Hiding an error can cause termination instead of recovery.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>When the function genuinely has a no-throw contract.</p></statement>
+                <feedback><p>The specifier should document a reliable design promise.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

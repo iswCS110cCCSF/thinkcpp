@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_designing-recoverable-programs">
+    <title>Designing Recoverable Programs</title>
+
+    <p>
+        Exception handling is most useful when it is part of a clear division
+        of responsibility. Lower-level code detects and describes a failure.
+        Higher-level code decides whether it can recover, retry, report the
+        problem, or stop the operation.
+    </p>
+
+    <subsection xml:id="chapter11_layered-error-handling">
+        <title>Handle a Failure at the Right Level</title>
+
+        <p>
+            A function should not catch an exception merely because it can. It
+            should catch the exception when it knows what meaningful action to
+            take. Otherwise, it should allow the exception to propagate to a
+            caller with more context.
+        </p>
+
+        <table xml:id="table_chapter11_recovery-responsibilities">
+            <title>Dividing error-handling responsibilities</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="28%"/>
+                <col width="72%"/>
+                <row header="yes">
+                    <cell><p>Program layer</p></cell>
+                    <cell><p>Responsibility</p></cell>
+                </row>
+                <row>
+                    <cell><p>Low-level operation</p></cell>
+                    <cell><p>Detect the failure and throw a meaningful exception.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Intermediate operation</p></cell>
+                    <cell><p>Add context, recover, or allow propagation to continue.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Top-level interaction</p></cell>
+                    <cell><p>Give the user a clear message and choose the next action.</p></cell>
+                </row>
+            </tabular>
+        </table>
+    </subsection>
+
+    <subsection xml:id="chapter11_user-facing-recovery">
+        <title>Give Users a Useful Recovery Path</title>
+
+        <p>
+            A user-facing handler should explain what failed in plain language
+            and, when possible, tell the user what to do next. A diagnostic
+            message for a programmer can be more detailed, but it should not
+            expose unnecessary implementation details to a user.
+        </p>
+
+        <listing xml:id="listing_chapter11_recoverable-score">
+            <title>Handling invalid input at the interaction boundary</title>
+            <program xml:id="program_chapter11_recoverable-score"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+void process_score(int score) {
+    if (score < 0 || score > 100) {
+        throw std::invalid_argument("score must be between 0 and 100");
+    }
+
+    std::cout << "Accepted score: " << score << '\n';
+}
+
+int main() {
+    try {
+        process_score(120);
+    }
+    catch (const std::invalid_argument& error) {
+        std::cout << "Please try again: " << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The low-level function identifies the invalid score. The top-level
+            code chooses a user-facing response. In a larger program, the
+            interaction could ask for a new score instead of ending.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_recovery-guidelines">
+	   <title>Guidelines for Recoverable Programs</title>
+
+	<p>Follow these guidelines for Recoverable Programs:</p>
+<ol>
+  <li>Throw an exception that describes the failure.</li>
+  <li>Catch an exception only where meaningful action is possible.</li>
+  <li>Preserve the object's invariants after a failed operation.</li>
+  <li>Use RAII so cleanup remains reliable during propagation.</li>
+  <li>Keep user messages clear and avoid silently ignoring failures.</li>
+</ol>
+        <p>
+            These guidelines prepare the program for file input and output. A
+            file may be missing, inaccessible, malformed, or unexpectedly
+            shortened. Chapter 12 will apply these exception-handling patterns
+            to those situations.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_recoverable-program-visualization">
+        <title>Tracing Recovery at the Boundary</title>
+
+        <p>
+            The static listing shows the low-level function reporting the invalid score and the top-level code translating that failure into a useful recovery message.
+        </p>
+    </subsection>
+
+    <exercise label="chapter11_recovery-exercise-level">
+        <statement><p>Where should an exception usually be handled?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>Never; all exceptions should be ignored.</p></statement>
+                <feedback><p>Unresolved exceptions can terminate the program.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>At the lowest possible level, even when that level cannot recover.</p></statement>
+                            <feedback><p>The handling level should understand the needed recovery action.</p></feedback>
+                        </choice>
+            <choice correct="yes">
+                <statement><p>At a level that knows how to take meaningful action.</p></statement>
+                <feedback><p>A handler should recover, report, retry, or otherwise respond deliberately.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Immediately in every function that might call another function.</p></statement>
+                <feedback><p>Catching without useful action can hide the failure.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Only inside the compiler.</p></statement>
+                <feedback><p>Exception handling is part of the running program.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_recovery-parsons-boundary">
+        <statement><p>Arrange the top-level recovery boundary.</p></statement>
+        <blocks>
+            <block order="1"><cline>try {</cline></block>
+            <block order="2"><cline>process_score(120);</cline></block>
+            <block order="3"><cline>}</cline></block>
+            <block order="4"><cline>catch (const std::invalid_argument&amp; error) {</cline></block>
+            <block order="5"><cline>std::cout &lt;&lt; "Please try again" &lt;&lt; '\n';</cline></block>
+            <block order="6"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_recovery-exercise-message">
+        <statement><p>Which user-facing message is most useful?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>Internal compiler object 0xA04F failed.</p></statement>
+                <feedback><p>Implementation details are not useful to most users.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Everything succeeded.</p></statement>
+                <feedback><p>The operation actually failed, so the message would be misleading.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Error.</p></statement>
+                <feedback><p>This does not explain what failed or how to recover.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Please try again: score must be between 0 and 100.</p></statement>
+                <feedback><p>The message explains the problem and suggests the next action.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>The operation failed somewhere.</p></statement>
+                            <feedback><p>A useful message identifies the problem and, when possible, a next step.</p></feedback>
+                        </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_recovery-exercise-guidelines">
+        <statement><p>Which practice supports a recoverable program?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>Allow invalid objects to circulate until a later function notices.</p></statement>
+                <feedback><p>Classes should protect their invariants early.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>Put every recovery decision inside the lowest-level helper.</p></statement>
+                            <feedback><p>Lower-level code should detect problems; higher-level code may know how to recover.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>Use exceptions for ordinary loop stopping conditions.</p></statement>
+                <feedback><p>Expected control flow should use ordinary decisions.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Catch every exception and continue as if nothing happened.</p></statement>
+                <feedback><p>Ignoring failure can leave the program's state or output misleading.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Keep low-level detection separate from high-level recovery.</p></statement>
+                <feedback><p>This division lets each layer use the context it has.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

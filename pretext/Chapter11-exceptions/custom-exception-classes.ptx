@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_custom-exception-classes">
+    <title>Custom Exception Classes</title>
+
+    <p>
+        Standard exception types cover many common failures. A program may also
+        define a custom exception class when a particular domain failure needs a
+        name that communicates more clearly to its callers.
+    </p>
+
+    <subsection xml:id="chapter11_custom-exception-derive">
+        <title>Deriving from a Standard Exception</title>
+
+        <p>
+            A custom exception can derive from a standard exception such as
+            <c>std::runtime_error</c>. Its constructor passes a message to the
+            base-class constructor. The custom type can then be caught
+            specifically or handled by a general <c>std::exception</c> handler.
+        </p>
+
+        <listing xml:id="listing_chapter11_custom-exception">
+            <title>A custom exception for insufficient funds</title>
+            <program xml:id="program_chapter11_custom-exception"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+class InsufficientFundsError : public std::runtime_error {
+public:
+    InsufficientFundsError()
+        : std::runtime_error{"balance is too small"} {
+    }
+};
+
+int main() {
+    try {
+        throw InsufficientFundsError{};
+    }
+    catch (const InsufficientFundsError& error) {
+        std::cout << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The name <c>InsufficientFundsError</c> communicates more than a
+            generic runtime failure. The type can later be caught by code that
+            knows how to offer a different response for insufficient funds.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_custom-exception-guidance">
+        <title>When Should a Program Define One?</title>
+
+        <p>
+            A custom exception is useful when the failure is meaningful in the
+            vocabulary of the program and callers may respond to it differently
+            from other failures. A custom type is not needed merely to create a
+            new spelling for an existing general error.
+        </p>
+
+        <p>
+            Keep the first custom exception classes simple. Deriving from a
+            standard exception gives the class the familiar <c>what()</c>
+            interface and allows a general standard-exception handler to remain
+            available as a fallback.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_custom-exception-visualization">
+        <title>Visualizing a Custom Exception</title>
+
+        <interactive xml:id="interactive_chapter11_custom-exception"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Cstdexcept%3E%0A%0Aclass%20InsufficientFundsError%20%3A%20public%20std%3A%3Aruntime_error%20%7B%0Apublic%3A%0A%20%20%20%20InsufficientFundsError%28%29%0A%20%20%20%20%20%20%20%20%3A%20std%3A%3Aruntime_error%7B%22balance%20is%20too%20small%22%7D%20%7B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20try%20%7B%0A%20%20%20%20%20%20%20%20throw%20InsufficientFundsError%7B%7D%3B%0A%20%20%20%20%7D%0A%20%20%20%20catch%20%28const%20InsufficientFundsError%26%20error%29%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20error.what%28%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%200%3B%0A%7D%26codeDivHeight%3D560%26codeDivWidth%3D450%26cppShowMemAddrs%3Dtrue%26mode%3Ddisplay%26curInstr%3D0%26origin%3Dopt-frontend.js%26py%3Dcpp"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter11_custom-exception-exercise-purpose">
+        <statement><p>What is the main benefit of <c>InsufficientFundsError</c>?</p></statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>Its name communicates a domain-specific failure.</p></statement>
+                <feedback><p>A meaningful type helps callers choose an appropriate response.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It makes every exception disappear.</p></statement>
+                <feedback><p>A custom type still represents a failure that must be handled.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It prevents the class from having constructors.</p></statement>
+                <feedback><p>The custom exception is itself a class with a constructor.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It changes <c>std::runtime_error</c> into a variable.</p></statement>
+                <feedback><p>Inheritance creates a new exception type; it does not create a variable.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_custom-exception-parsons">
+        <statement><p>Arrange the custom exception definition.</p></statement>
+        <blocks>
+            <block order="1"><cline>class InsufficientFundsError : public std::runtime_error {</cline></block>
+            <block order="2"><cline>public:</cline></block>
+            <block order="3"><cline>InsufficientFundsError()</cline></block>
+            <block order="4"><cline>: std::runtime_error{"balance is too small"} {}</cline></block>
+            <block order="5"><cline>};</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_custom-exception-exercise-base">
+        <statement><p>Why should a custom exception often derive from a standard exception?</p></statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p>It keeps the familiar <c>what()</c> interface and supports a general fallback handler.</p></statement>
+                <feedback><p>Inheritance connects the custom type to the standard exception hierarchy.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It prevents the custom type from being caught specifically.</p></statement>
+                <feedback><p>The custom type can still be caught specifically.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It automatically writes the error to a file.</p></statement>
+                <feedback><p>File output must be programmed separately.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It removes the need for a message.</p></statement>
+                <feedback><p>The base constructor can receive a useful message.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_custom-exception-exercise-catch">
+        <statement><p>Which handler catches only the custom exception?</p></statement>
+        <choices>
+            <choice correct="yes">
+                <statement><p><c>catch (const InsufficientFundsError&amp; error)</c></p></statement>
+                <feedback><p>The handler parameter names the custom exception type.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>catch (const std::exception&amp; error)</c></p></statement>
+                <feedback><p>This is a general handler for many standard and derived exceptions.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>catch (InsufficientFundsError error())</c></p></statement>
+                <feedback><p>This is not the syntax for catching an exception object.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>catch (error)</c></p></statement>
+                <feedback><p>A catch handler needs a type and a parameter name.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

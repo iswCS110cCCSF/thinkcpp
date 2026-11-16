@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_exception-propagation-and-stack-unwinding">
+    <title>Exception Propagation and Stack Unwinding</title>
+
+    <p>
+        An exception does not have to be handled in the same function that
+        detects it. If a function has no matching handler, the exception moves
+        back through the chain of callers until a matching handler is found.
+        This movement is called <term>exception propagation</term>.
+    </p>
+
+    <subsection xml:id="chapter11_exception-propagation">
+        <title>Propagation Through Function Calls</title>
+
+        <p>
+            Consider a call chain in which <c>main()</c> calls
+            <c>process_order()</c>, and <c>process_order()</c> calls
+            <c>validate_order()</c>. If the deepest function throws and does not
+            catch the exception, the caller's normal path is abandoned too.
+        </p>
+
+        <listing xml:id="listing_chapter11_exception-propagation">
+            <title>An exception propagating to a caller</title>
+            <program xml:id="program_chapter11_exception-propagation"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+void validate_order(int quantity) {
+    if (quantity <= 0) {
+        throw std::invalid_argument("quantity must be positive");
+    }
+}
+
+void process_order() {
+    validate_order(0);
+    std::cout << "Order is ready" << '\n';
+}
+
+int main() {
+    try {
+        process_order();
+    }
+    catch (const std::exception& error) {
+        std::cout << "Order failed: " << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The message <c>Order is ready</c> is never printed because the
+            exception leaves <c>validate_order()</c> and then
+            <c>process_order()</c>. The handler in <c>main()</c> receives it.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_stack-unwinding">
+        <title>Stack Unwinding</title>
+
+        <p>
+            As an exception travels toward a handler, C++ destroys local
+            automatic objects in functions that are being exited. This cleanup
+            process is called <term>stack unwinding</term>. It is one reason
+            destructors and RAII are important: objects can clean up their
+            resources even when normal control flow is interrupted.
+        </p>
+
+        <p>
+            If no matching handler is found, the program calls
+            <c>std::terminate()</c>. A reliable program therefore catches an
+            exception at a level that knows how to report the problem, recover,
+            or end the operation safely.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_propagation-visualization">
+        <title>Tracing Propagation</title>
+
+        <p>
+            Follow the static listing from <c>main()</c> to <c>process_order()</c> and then to <c>validate_order()</c>. The exception moves back toward <c>main()</c>, where the matching handler responds.
+        </p>
+    </subsection>
+
+    <exercise label="chapter11_propagation-exercise">
+        <statement><p>What does exception propagation mean?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>An exception is converted into a loop.</p></statement>
+                <feedback><p>Propagation transfers control; it does not create a loop.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>An exception moves through callers until a matching handler is found.</p></statement>
+                <feedback><p>A function does not have to catch an exception it detects.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The compiler ignores the exception.</p></statement>
+                <feedback><p>The running program searches for a matching handler.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>An exception always stays inside the function that throws it.</p></statement>
+                            <feedback><p>If a function does not handle an exception, it can move to a caller.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>An exception is copied into every local variable.</p></statement>
+                <feedback><p>Propagation concerns control flow through function calls.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_propagation-parsons-call-chain">
+        <statement><p>Arrange the call chain so the exception reaches the handler in <c>main()</c>.</p></statement>
+        <blocks>
+            <block order="1"><cline>void process_order() {</cline></block>
+            <block order="2"><cline>validate_order(0);</cline></block>
+            <block order="3"><cline>}</cline></block>
+            <block order="4"><cline>try {</cline></block>
+            <block order="5"><cline>process_order();</cline></block>
+            <block order="6"><cline>}</cline></block>
+            <block order="7"><cline>catch (const std::exception&amp; error) {</cline></block>
+            <block order="8"><cline>std::cout &lt;&lt; error.what() &lt;&lt; '\n';</cline></block>
+            <block order="9"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_unwinding-exercise">
+        <statement><p>What happens during stack unwinding?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                            <statement><p>The handler runs before local objects in exited functions are destroyed.</p></statement>
+                            <feedback><p>Local automatic objects are destroyed as the program unwinds toward the handler.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>The exception is changed into a compile-time error.</p></statement>
+                <feedback><p>Stack unwinding happens while the program runs.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>Local automatic objects in exited functions are destroyed.</p></statement>
+                <feedback><p>This cleanup supports RAII during exceptional control flow.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Every caller continues normally after the throw.</p></statement>
+                <feedback><p>The interrupted normal paths are abandoned.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>All objects in the entire program are immediately deleted.</p></statement>
+                <feedback><p>Unwinding concerns local objects in functions being exited.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_no-handler-exercise">
+        <statement><p>What happens if no matching handler is found?</p></statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>The compiler adds a handler automatically.</p></statement>
+                <feedback><p>The programmer must provide an appropriate handler.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The exception becomes a return value.</p></statement>
+                <feedback><p>Thrown exceptions and return values are different mechanisms.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>The program returns normally from <c>main()</c>.</p></statement>
+                            <feedback><p>Without a matching handler, the program calls <c>std::terminate()</c>.</p></feedback>
+                        </choice>
+            <choice correct="yes">
+                <statement><p>The program calls <c>std::terminate()</c>.</p></statement>
+                <feedback><p>Unhandled exceptions cannot continue through normal program flow.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The program always retries the operation.</p></statement>
+                <feedback><p>Retry behavior must be written explicitly.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

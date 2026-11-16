@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_catching-exceptions-safely">
+    <title>Catching Exceptions Safely</title>
+
+    <p>
+        A program may provide more than one handler for a <c>try</c> block.
+        Good handlers preserve the type information of the exception, respond
+        to specific failures first, and avoid silently hiding a problem.
+    </p>
+
+    <subsection xml:id="chapter11_catch-by-const-reference">
+        <title>Catch by <c>const</c> Reference</title>
+
+        <p>
+            The usual form for catching a standard exception is
+            <c>catch (const std::exception&amp; error)</c>. The reference avoids
+            copying the exception object, and <c>const</c> promises that the
+            handler will not modify it. Catching by reference also preserves the
+            actual derived exception type when a general base-class handler is
+            used.
+        </p>
+
+        <listing xml:id="listing_chapter11_catch-by-reference">
+            <title>Catching a standard exception by constant reference</title>
+            <program xml:id="program_chapter11_catch-by-reference"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+int main() {
+    try {
+        throw std::runtime_error("the operation failed");
+    }
+    catch (const std::exception& error) {
+        std::cout << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The handler can use the common interface supplied by
+            <c>std::exception</c>, including <c>what()</c>, even though the
+            thrown object is specifically a <c>std::runtime_error</c>.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11-specific-before-general">
+        <title>Catch Specific Types Before General Types</title>
+
+        <p>
+            A derived exception can match a handler for its base class. For that
+            reason, handlers should normally be ordered from specific to
+            general. A handler for <c>std::invalid_argument</c> should appear
+            before a handler for <c>std::exception</c>. If the general handler
+            appears first, it may catch the exception before the specific
+            handler can respond.
+        </p>
+
+        <listing xml:id="listing_chapter11_handler-order">
+            <title>Specific and general handlers</title>
+            <program xml:id="program_chapter11_handler-order"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+void report_failure(int choice) {
+    if (choice == 1) {
+        throw std::invalid_argument("invalid argument");
+    }
+
+    throw std::runtime_error("operation failed");
+}
+
+int main() {
+    try {
+        report_failure(1);
+    }
+    catch (const std::invalid_argument& error) {
+        std::cout << "Argument problem: " << error.what() << '\n';
+    }
+    catch (const std::exception& error) {
+        std::cout << "Other standard exception: " << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The first handler is selected for <c>std::invalid_argument</c>.
+            If the call instead throws <c>std::runtime_error</c>, the second
+            handler provides a general response.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_exception-handling-guidance">
+        <title>Do Not Hide Failures</title>
+
+        <p>
+            A handler should do something meaningful: report the problem,
+            recover with a valid alternative, record diagnostic information, or
+            pass the failure to a higher-level handler. An empty handler can
+            make a serious problem appear to have succeeded.
+        </p>
+
+        <p>
+            Catching <c>std::exception</c> is useful as a final fallback, but a
+            program should not use it to erase all information about the cause.
+            When possible, handle a specific exception where the program knows
+            how to recover and use a general handler only where a general
+            response is appropriate.
+        </p>
+
+        <table xml:id="table_chapter11_exception-catching-guidance">
+            <title>Guidance for exception handlers</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="30%"/>
+                <col width="70%"/>
+                <row header="yes">
+                    <cell><p>Practice</p></cell>
+                    <cell><p>Reason</p></cell>
+                </row>
+                <row>
+                    <cell><p>Catch by <c>const</c> reference.</p></cell>
+                    <cell><p>Avoids an unnecessary copy and preserves exception type information.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Catch specific types before general types.</p></cell>
+                    <cell><p>Specific handlers need an opportunity to match first.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Use <c>what()</c> or another meaningful response.</p></cell>
+                    <cell><p>Users and developers need to know what failed.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Do not catch and ignore an exception accidentally.</p></cell>
+                    <cell><p>Silent failure makes programs difficult to trust and debug.</p></cell>
+                </row>
+            </tabular>
+        </table>
+    </subsection>
+
+    <subsection xml:id="chapter11_exception-visualization-catching">
+        <title>Tracing Handler Selection</title>
+
+        <p>
+            The static listing above demonstrates handler selection. Because the thrown object is an <c>std::invalid_argument</c>, the specific handler is selected before the general <c>std::exception</c> handler.
+        </p>
+    </subsection>
+
+    <exercise label="chapter11_catching-exercise-reference">
+        <statement>
+            <p>Why is <c>catch (const std::exception&amp; error)</c> a common form?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>It automatically fixes the failed operation.</p></statement>
+                <feedback><p>The handler still needs to decide how to respond.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>It avoids an unnecessary copy and preserves the exception's type relationship.</p></statement>
+                <feedback><p>The reference avoids copying, while <c>const</c> prevents modification.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>It prevents all exceptions from being thrown.</p></statement>
+                <feedback><p>The handler runs after an exception has already been thrown.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>It makes the handler receive a copy of every exception.</p></statement>
+                            <feedback><p>Catching by reference avoids an unnecessary copy.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>It catches only integer exceptions.</p></statement>
+                <feedback><p>The parameter type is a reference to <c>std::exception</c>, not an integer.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_catching-exercise-order">
+        <statement>
+            <p>Which handler should appear first?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                            <statement><p>catch (const std::runtime_error&amp; error)</p></statement>
+                            <feedback><p>A general handler should not replace a more specific handler that can respond appropriately.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p><c>catch (const int&amp; error)</c></p></statement>
+                <feedback><p>This handler is unrelated to the standard exception hierarchy.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p><c>catch (const std::invalid_argument&amp; error)</c></p></statement>
+                <feedback><p>The specific derived type should be checked before the general base type.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>No handler should appear first.</p></statement>
+                <feedback><p>Handlers must have an order, and specific handlers should come first.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>catch (const std::exception&amp; error)</c></p></statement>
+                <feedback><p>A general base-class handler could catch the exception before the specific handler.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_catching-parsons-order">
+        <statement>
+            <p>Arrange the handlers from the specific exception to the general exception.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>catch (const std::invalid_argument&amp; error) {</cline></block>
+            <block order="2"><cline>std::cout &lt;&lt; error.what() &lt;&lt; '\n';</cline></block>
+            <block order="3"><cline>}</cline></block>
+            <block order="4"><cline>catch (const std::exception&amp; error) {</cline></block>
+            <block order="5"><cline>std::cout &lt;&lt; error.what() &lt;&lt; '\n';</cline></block>
+            <block order="6"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_catching-exercise-response">
+        <statement>
+            <p>Which is a meaningful response for an exception handler?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>Ignore every exception without recording anything.</p></statement>
+                <feedback><p>Silent handlers make failures difficult to diagnose.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Assume the failed operation succeeded.</p></statement>
+                <feedback><p>The handler should not pretend that an unsuccessful operation completed.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>Continue as though the failed operation produced a valid result.</p></statement>
+                            <feedback><p>Continuing with an invalid result can make the program unsafe.</p></feedback>
+                        </choice>
+            <choice correct="yes">
+                <statement><p>Report the problem or recover with a valid alternative.</p></statement>
+                <feedback><p>A handler should respond deliberately rather than silently hiding the failure.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Delete the exception type from the standard library.</p></statement>
+                <feedback><p>A handler responds to an exception; it does not change the library.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

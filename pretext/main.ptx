@@ -43,6 +43,8 @@
 	
 	<!-- Logical Chapter 10: physical Chapter10-Classes2 -->
 	<xi:include href="./Chapter10-Classes2/toctree.ptx"/>
+	<xi:include href="./Chapter11-exceptions/toctree.ptx"/>
+
 	<!--
      <xi:include href="./Chapter11/toctree.ptx"/>
     <xi:include href="./Chapter12/toctree.ptx"/>
