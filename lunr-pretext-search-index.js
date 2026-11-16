@@ -13726,11 +13726,893 @@ var ptx_lunr_docs = [
   "body": "  Why is enum class usually preferred for new C++ code?     Its enumerators are scoped and it does not implicitly convert to int .  Scoped names and stronger type checking prevent several accidental uses.    It automatically converts every value to a string.  Text conversion still requires explicit code such as a function with switch .    It can contain any number of values at runtime.  An enumeration still represents a declared set of named choices.    It removes the need for constructors in classes.  Enumerations and constructors solve different design problems.    "
 },
 {
+  "id": "chapter11_why-programs-need-error-handling",
+  "level": "1",
+  "url": "chapter11_why-programs-need-error-handling.html",
+  "type": "Section",
+  "number": "11.1",
+  "title": "Why Programs Need Error Handling",
+  "body": " Why Programs Need Error Handling  A program can be syntactically correct and still fail when it runs. Users may provide unexpected input, a function may receive an invalid argument, or a needed resource may not be available. Reliable programs anticipate these situations and respond deliberately.   Three Kinds of Programming Errors  It is useful to distinguish errors by when they are discovered and by whether the programmer or the running program can respond to them.   Common kinds of programming errors        Kind of error  When it appears  Example  Typical response    Compile-time error  Before the program runs  A missing semicolon or incompatible type  Correct the source code.    Runtime error  While the program runs  Opening a file that does not exist  Detect the failure and respond safely.    Logic error  While the program runs  Using the wrong formula for an average  Test the result and correct the algorithm.     Error handling mainly addresses runtime situations in which the program cannot complete an operation as requested. It cannot repair a syntax error, and it cannot automatically recognize every logic error.    Invalid Conditions Are Part of Program Design  A function should document and protect its assumptions. A required assumption is called a precondition . A result that the function promises after it succeeds is a postcondition . A rule that must remain true for an object is an invariant .  For example, an average requires a nonzero number of values. The function below makes that requirement visible to its caller by returning a success value. It does not yet use exceptions; the next sections will introduce exceptions as another way to report failure.   Reporting whether an operation succeeded   #include <iostream> bool try_calculate_average(int total, int count, double& average) { if (count == 0) { return false; } average = static_cast<double>(total) \/ count; return true; } int main() { double average{}; if (try_calculate_average(85, 0, average)) { std::cout << average << '\\n'; } else { std::cout << \"No average is available\" << '\\n'; } return 0; }    The caller must remember to check the Boolean result before using average . This approach can work well, but every caller must remember to check the status. Exception handling provides another design in which the failure can travel to code prepared to handle it.    Normal Decisions and Exceptional Conditions  Not every unusual situation should become an exception. A program should use ordinary control flow for expected choices, such as asking whether a user wants to continue. An exception is more appropriate when an operation cannot fulfill its responsibility and the failure must be handled somewhere else.   Choosing a response to a condition       Situation  Usually appropriate  Reason    A loop has reached its normal stopping condition.  Ordinary control flow  This is an expected part of the algorithm.    A function receives a value that violates its contract.  An error result or an exception  The caller must be informed that the operation did not succeed.    A file cannot be opened.  An error result or an exception  The requested operation cannot continue normally.    A calculation produces the wrong formula.  Testing and debugging  This is a logic error, not automatically an exception.     The English word exception means something that falls outside the normal pattern. In C++, an exception is a mechanism for transferring control from the code that detects an exceptional condition to code that is prepared to respond. The next section introduces the syntax for that transfer.    Tracing a Successful and Unsuccessful Call  The visualization shows that the caller examines the status before deciding whether to use the output value.      Which situation is a runtime error?     A function returns the wrong answer because its formula is incorrect.  That is a logic error, not a runtime failure such as a missing file.    A closing brace is missing.  The compiler can detect this before the program runs.    An average uses the wrong formula but still produces a number.  That is a logic error: the program runs but computes the wrong result.    A program cannot open a requested input file.  The program has compiled, but an operation fails while it runs.    A variable has a misleading name.  A misleading name is a design or readability problem, not necessarily a runtime failure.       In try_calculate_average , what condition must be true before the function can calculate an average?     The caller must create a file.  This function performs a calculation and does not use a file.    total must be positive.  An average can be calculated from a negative total; the divisor is the relevant condition.    count must be negative.  The function rejects zero, so it requires a nonzero count; this example uses zero as the invalid case.    average must already contain a value.  The function writes the calculated result into average .    count must not be zero.  Division by zero must be prevented before the calculation.       Arrange the lines so the caller checks the status before using the average.    double average{};  if (try_calculate_average(85, 5, average)) {  std::cout << average << '\\n';  }      Which response is generally most appropriate when a loop reaches its expected stopping condition?     Throw an exception whenever normal termination occurs.  An expected stopping condition belongs in ordinary control flow.    Use ordinary control flow.  An expected stopping condition is part of normal algorithm behavior.    Ignore the condition and continue forever.  The loop should respond to its normal stopping condition.    Always throw an exception.  Exceptions are not normally needed for expected control flow.    Terminate the operating system.  A normal loop ending is not a system failure.       Select all situations that are discovered while a program is running.     A closing brace is missing from the source code.  This is a compile-time problem found before normal execution.    A requested input file is missing when the program tries to open it.  This is a runtime condition discovered during execution.    A variable has a misleading name but the program still compiles and runs.  A misleading name is a design or readability problem, not necessarily a runtime condition.    A function receives an invalid value from a caller while the program runs.  This condition is discovered during execution and can be handled deliberately.    A calculation uses the wrong formula but still produces a number.  This is a logic error, not necessarily a runtime failure.     "
+},
+{
+  "id": "chapter11_why-programs-need-error-handling-2",
+  "level": "2",
+  "url": "chapter11_why-programs-need-error-handling.html#chapter11_why-programs-need-error-handling-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A program can be syntactically correct and still fail when it runs. Users may provide unexpected input, a function may receive an invalid argument, or a needed resource may not be available. Reliable programs anticipate these situations and respond deliberately. "
+},
+{
+  "id": "chapter11_three-kinds-of-errors",
+  "level": "2",
+  "url": "chapter11_why-programs-need-error-handling.html#chapter11_three-kinds-of-errors",
+  "type": "Subsection",
+  "number": "11.1.1",
+  "title": "Three Kinds of Programming Errors",
+  "body": " Three Kinds of Programming Errors  It is useful to distinguish errors by when they are discovered and by whether the programmer or the running program can respond to them.   Common kinds of programming errors        Kind of error  When it appears  Example  Typical response    Compile-time error  Before the program runs  A missing semicolon or incompatible type  Correct the source code.    Runtime error  While the program runs  Opening a file that does not exist  Detect the failure and respond safely.    Logic error  While the program runs  Using the wrong formula for an average  Test the result and correct the algorithm.     Error handling mainly addresses runtime situations in which the program cannot complete an operation as requested. It cannot repair a syntax error, and it cannot automatically recognize every logic error.  "
+},
+{
+  "id": "chapter11_invalid-conditions",
+  "level": "2",
+  "url": "chapter11_why-programs-need-error-handling.html#chapter11_invalid-conditions",
+  "type": "Subsection",
+  "number": "11.1.2",
+  "title": "Invalid Conditions Are Part of Program Design",
+  "body": " Invalid Conditions Are Part of Program Design  A function should document and protect its assumptions. A required assumption is called a precondition . A result that the function promises after it succeeds is a postcondition . A rule that must remain true for an object is an invariant .  For example, an average requires a nonzero number of values. The function below makes that requirement visible to its caller by returning a success value. It does not yet use exceptions; the next sections will introduce exceptions as another way to report failure.   Reporting whether an operation succeeded   #include <iostream> bool try_calculate_average(int total, int count, double& average) { if (count == 0) { return false; } average = static_cast<double>(total) \/ count; return true; } int main() { double average{}; if (try_calculate_average(85, 0, average)) { std::cout << average << '\\n'; } else { std::cout << \"No average is available\" << '\\n'; } return 0; }    The caller must remember to check the Boolean result before using average . This approach can work well, but every caller must remember to check the status. Exception handling provides another design in which the failure can travel to code prepared to handle it.  "
+},
+{
+  "id": "chapter11_normal-versus-exceptional-flow",
+  "level": "2",
+  "url": "chapter11_why-programs-need-error-handling.html#chapter11_normal-versus-exceptional-flow",
+  "type": "Subsection",
+  "number": "11.1.3",
+  "title": "Normal Decisions and Exceptional Conditions",
+  "body": " Normal Decisions and Exceptional Conditions  Not every unusual situation should become an exception. A program should use ordinary control flow for expected choices, such as asking whether a user wants to continue. An exception is more appropriate when an operation cannot fulfill its responsibility and the failure must be handled somewhere else.   Choosing a response to a condition       Situation  Usually appropriate  Reason    A loop has reached its normal stopping condition.  Ordinary control flow  This is an expected part of the algorithm.    A function receives a value that violates its contract.  An error result or an exception  The caller must be informed that the operation did not succeed.    A file cannot be opened.  An error result or an exception  The requested operation cannot continue normally.    A calculation produces the wrong formula.  Testing and debugging  This is a logic error, not automatically an exception.     The English word exception means something that falls outside the normal pattern. In C++, an exception is a mechanism for transferring control from the code that detects an exceptional condition to code that is prepared to respond. The next section introduces the syntax for that transfer.  "
+},
+{
+  "id": "chapter11_error-handling-trace",
+  "level": "2",
+  "url": "chapter11_why-programs-need-error-handling.html#chapter11_error-handling-trace",
+  "type": "Subsection",
+  "number": "11.1.4",
+  "title": "Tracing a Successful and Unsuccessful Call",
+  "body": " Tracing a Successful and Unsuccessful Call  The visualization shows that the caller examines the status before deciding whether to use the output value.   "
+},
+{
+  "id": "chapter11_error_exercise-kinds",
+  "level": "2",
+  "url": "chapter11_why-programs-need-error-handling.html#chapter11_error_exercise-kinds",
+  "type": "Checkpoint",
+  "number": "11.1.4",
+  "title": "",
+  "body": "  Which situation is a runtime error?     A function returns the wrong answer because its formula is incorrect.  That is a logic error, not a runtime failure such as a missing file.    A closing brace is missing.  The compiler can detect this before the program runs.    An average uses the wrong formula but still produces a number.  That is a logic error: the program runs but computes the wrong result.    A program cannot open a requested input file.  The program has compiled, but an operation fails while it runs.    A variable has a misleading name.  A misleading name is a design or readability problem, not necessarily a runtime failure.    "
+},
+{
+  "id": "chapter11_error_exercise-precondition",
+  "level": "2",
+  "url": "chapter11_why-programs-need-error-handling.html#chapter11_error_exercise-precondition",
+  "type": "Checkpoint",
+  "number": "11.1.5",
+  "title": "",
+  "body": "  In try_calculate_average , what condition must be true before the function can calculate an average?     The caller must create a file.  This function performs a calculation and does not use a file.    total must be positive.  An average can be calculated from a negative total; the divisor is the relevant condition.    count must be negative.  The function rejects zero, so it requires a nonzero count; this example uses zero as the invalid case.    average must already contain a value.  The function writes the calculated result into average .    count must not be zero.  Division by zero must be prevented before the calculation.    "
+},
+{
+  "id": "chapter11_error_parsons-status-check",
+  "level": "2",
+  "url": "chapter11_why-programs-need-error-handling.html#chapter11_error_parsons-status-check",
+  "type": "Checkpoint",
+  "number": "11.1.6",
+  "title": "",
+  "body": "  Arrange the lines so the caller checks the status before using the average.    double average{};  if (try_calculate_average(85, 5, average)) {  std::cout << average << '\\n';  }   "
+},
+{
+  "id": "chapter11_error_exercise-response",
+  "level": "2",
+  "url": "chapter11_why-programs-need-error-handling.html#chapter11_error_exercise-response",
+  "type": "Checkpoint",
+  "number": "11.1.7",
+  "title": "",
+  "body": "  Which response is generally most appropriate when a loop reaches its expected stopping condition?     Throw an exception whenever normal termination occurs.  An expected stopping condition belongs in ordinary control flow.    Use ordinary control flow.  An expected stopping condition is part of normal algorithm behavior.    Ignore the condition and continue forever.  The loop should respond to its normal stopping condition.    Always throw an exception.  Exceptions are not normally needed for expected control flow.    Terminate the operating system.  A normal loop ending is not a system failure.    "
+},
+{
+  "id": "chapter11_error_exercise-runtime-examples",
+  "level": "2",
+  "url": "chapter11_why-programs-need-error-handling.html#chapter11_error_exercise-runtime-examples",
+  "type": "Checkpoint",
+  "number": "11.1.8",
+  "title": "",
+  "body": "  Select all situations that are discovered while a program is running.     A closing brace is missing from the source code.  This is a compile-time problem found before normal execution.    A requested input file is missing when the program tries to open it.  This is a runtime condition discovered during execution.    A variable has a misleading name but the program still compiles and runs.  A misleading name is a design or readability problem, not necessarily a runtime condition.    A function receives an invalid value from a caller while the program runs.  This condition is discovered during execution and can be handled deliberately.    A calculation uses the wrong formula but still produces a number.  This is a logic error, not necessarily a runtime failure.    "
+},
+{
+  "id": "chapter11_try-throw-and-catch",
+  "level": "1",
+  "url": "chapter11_try-throw-and-catch.html",
+  "type": "Section",
+  "number": "11.2",
+  "title": "<code class=\"code-inline tex2jax_ignore\">try<\/code>, <code class=\"code-inline tex2jax_ignore\">throw<\/code>, and <code class=\"code-inline tex2jax_ignore\">catch<\/code>",
+  "body": " try , throw , and catch  C++ exceptions provide a second way to report a failed operation. The code that detects the problem can throw an exception. A nearby or calling function can place the operation in a try block and catch the exception.   The Basic Exception Pattern  A throw expression stops the normal path through the current operation. C++ then searches for a matching catch handler. If a matching handler is found, control continues in that handler.   Throwing and catching an invalid argument   #include <iostream> #include <stdexcept> int read_positive_count(int count) { if (count <= 0) { throw std::invalid_argument(\"count must be positive\"); } return count; } int main() { try { std::cout << read_positive_count(0) << '\\n'; } catch (const std::invalid_argument& error) { std::cout << error.what() << '\\n'; } return 0; }    The call to read_positive_count(0) throws before it returns a value. Therefore, the output expression is not completed. Control moves to the matching catch block, where the program prints the error message.    How Control Moves    The program enters the try block.    A called function detects a problem and throws an exception.    C++ leaves the unfinished normal path.    C++ searches for a matching catch handler.    The handler responds, or the program terminates if no handler is found.    The handler does not resume the failed statement. It handles the failure after the statement has been abandoned. This is different from an if statement, which chooses between normal branches while staying in the ordinary control-flow path.  An exception should carry information useful to the handler. A standard exception object usually provides a message through its what() member function.    Tracing the Exception Steps  The static listing above is the trace for this example. The call enters the try block, the function throws, the unfinished output expression is abandoned, and the matching catch block prints the message.     Which keyword signals that an exceptional condition has occurred?     catch  catch handles an exception after it has been thrown.    handle  handle is not the C++ keyword for reporting an exception.    return  return completes a function normally; it does not throw an exception.    error  error is not the keyword that transfers control with an exception.    throw  throw transfers control with an exception object or value.       What happens when read_positive_count(0) throws?     The function returns zero and continues the output expression.  The function throws before it returns a value.    The unfinished normal path is abandoned and a matching handler is searched for.  A thrown exception transfers control to a matching catch block.    The catch block runs and the failed output expression resumes.  The failed normal path is abandoned; it does not resume after the handler.    The catch block runs before the function is called.  The handler runs only after an exception is thrown.    The compiler fixes the invalid argument automatically.  Runtime error handling must be designed by the programmer.       Arrange the lines to catch an exception from a function call.    try {  read_positive_count(0);  }  catch (const std::invalid_argument& error) {  std::cout << error.what() << '\\n';  }      What is the purpose of the catch block?     To declare a new class.  A handler is part of exception control flow, not a class declaration.    To guarantee that a function returns a value.  A handler responds to failure; it does not automatically return a value.    To respond to a matching exception.  The handler contains the recovery or reporting action.    To run every time the try block finishes normally.  A handler runs when a matching exception is thrown.    To choose the normal path before any exception occurs.  A catch block responds after a matching exception is thrown.       Select all statements that accurately describe exception handling.     A catch block runs every time its try block finishes normally.  A handler runs only when a matching exception is thrown.    throw transfers control with an exception object or value.  This is the role of throw .    An exception automatically repairs the operation that failed.  The handler must report, recover, or otherwise respond deliberately.    A matching catch block responds after the normal path is abandoned.  The handler responds to the exceptional path.    try prevents every possible runtime failure.  A try block only provides a region in which exceptions may be handled.     "
+},
+{
+  "id": "chapter11_try-throw-and-catch-2",
+  "level": "2",
+  "url": "chapter11_try-throw-and-catch.html#chapter11_try-throw-and-catch-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "C++ exceptions provide a second way to report a failed operation. The code that detects the problem can throw an exception. A nearby or calling function can place the operation in a try block and catch the exception. "
+},
+{
+  "id": "chapter11_exception-basic-syntax",
+  "level": "2",
+  "url": "chapter11_try-throw-and-catch.html#chapter11_exception-basic-syntax",
+  "type": "Subsection",
+  "number": "11.2.1",
+  "title": "The Basic Exception Pattern",
+  "body": " The Basic Exception Pattern  A throw expression stops the normal path through the current operation. C++ then searches for a matching catch handler. If a matching handler is found, control continues in that handler.   Throwing and catching an invalid argument   #include <iostream> #include <stdexcept> int read_positive_count(int count) { if (count <= 0) { throw std::invalid_argument(\"count must be positive\"); } return count; } int main() { try { std::cout << read_positive_count(0) << '\\n'; } catch (const std::invalid_argument& error) { std::cout << error.what() << '\\n'; } return 0; }    The call to read_positive_count(0) throws before it returns a value. Therefore, the output expression is not completed. Control moves to the matching catch block, where the program prints the error message.  "
+},
+{
+  "id": "chapter11_exception-control-flow",
+  "level": "2",
+  "url": "chapter11_try-throw-and-catch.html#chapter11_exception-control-flow",
+  "type": "Subsection",
+  "number": "11.2.2",
+  "title": "How Control Moves",
+  "body": " How Control Moves    The program enters the try block.    A called function detects a problem and throws an exception.    C++ leaves the unfinished normal path.    C++ searches for a matching catch handler.    The handler responds, or the program terminates if no handler is found.    The handler does not resume the failed statement. It handles the failure after the statement has been abandoned. This is different from an if statement, which chooses between normal branches while staying in the ordinary control-flow path.  An exception should carry information useful to the handler. A standard exception object usually provides a message through its what() member function.  "
+},
+{
+  "id": "chapter11_exception-visualization",
+  "level": "2",
+  "url": "chapter11_try-throw-and-catch.html#chapter11_exception-visualization",
+  "type": "Subsection",
+  "number": "11.2.3",
+  "title": "Tracing the Exception Steps",
+  "body": " Tracing the Exception Steps  The static listing above is the trace for this example. The call enters the try block, the function throws, the unfinished output expression is abandoned, and the matching catch block prints the message.  "
+},
+{
+  "id": "chapter11_try-exercise-keyword",
+  "level": "2",
+  "url": "chapter11_try-throw-and-catch.html#chapter11_try-exercise-keyword",
+  "type": "Checkpoint",
+  "number": "11.2.2",
+  "title": "",
+  "body": "  Which keyword signals that an exceptional condition has occurred?     catch  catch handles an exception after it has been thrown.    handle  handle is not the C++ keyword for reporting an exception.    return  return completes a function normally; it does not throw an exception.    error  error is not the keyword that transfers control with an exception.    throw  throw transfers control with an exception object or value.    "
+},
+{
+  "id": "chapter11_try-exercise-flow",
+  "level": "2",
+  "url": "chapter11_try-throw-and-catch.html#chapter11_try-exercise-flow",
+  "type": "Checkpoint",
+  "number": "11.2.3",
+  "title": "",
+  "body": "  What happens when read_positive_count(0) throws?     The function returns zero and continues the output expression.  The function throws before it returns a value.    The unfinished normal path is abandoned and a matching handler is searched for.  A thrown exception transfers control to a matching catch block.    The catch block runs and the failed output expression resumes.  The failed normal path is abandoned; it does not resume after the handler.    The catch block runs before the function is called.  The handler runs only after an exception is thrown.    The compiler fixes the invalid argument automatically.  Runtime error handling must be designed by the programmer.    "
+},
+{
+  "id": "chapter11_try-parsons-basic",
+  "level": "2",
+  "url": "chapter11_try-throw-and-catch.html#chapter11_try-parsons-basic",
+  "type": "Checkpoint",
+  "number": "11.2.4",
+  "title": "",
+  "body": "  Arrange the lines to catch an exception from a function call.    try {  read_positive_count(0);  }  catch (const std::invalid_argument& error) {  std::cout << error.what() << '\\n';  }   "
+},
+{
+  "id": "chapter11_try-exercise-handler",
+  "level": "2",
+  "url": "chapter11_try-throw-and-catch.html#chapter11_try-exercise-handler",
+  "type": "Checkpoint",
+  "number": "11.2.5",
+  "title": "",
+  "body": "  What is the purpose of the catch block?     To declare a new class.  A handler is part of exception control flow, not a class declaration.    To guarantee that a function returns a value.  A handler responds to failure; it does not automatically return a value.    To respond to a matching exception.  The handler contains the recovery or reporting action.    To run every time the try block finishes normally.  A handler runs when a matching exception is thrown.    To choose the normal path before any exception occurs.  A catch block responds after a matching exception is thrown.    "
+},
+{
+  "id": "chapter11_try-exercise-statements",
+  "level": "2",
+  "url": "chapter11_try-throw-and-catch.html#chapter11_try-exercise-statements",
+  "type": "Checkpoint",
+  "number": "11.2.6",
+  "title": "",
+  "body": "  Select all statements that accurately describe exception handling.     A catch block runs every time its try block finishes normally.  A handler runs only when a matching exception is thrown.    throw transfers control with an exception object or value.  This is the role of throw .    An exception automatically repairs the operation that failed.  The handler must report, recover, or otherwise respond deliberately.    A matching catch block responds after the normal path is abandoned.  The handler responds to the exceptional path.    try prevents every possible runtime failure.  A try block only provides a region in which exceptions may be handled.    "
+},
+{
+  "id": "chapter11_standard-exception-types",
+  "level": "1",
+  "url": "chapter11_standard-exception-types.html",
+  "type": "Section",
+  "number": "11.3",
+  "title": "Standard Exception Types",
+  "body": " Standard Exception Types  The C++ standard library provides exception classes for common kinds of failure. These classes communicate the category of the problem and provide a message through what() .   A Small Exception Hierarchy  Many standard exceptions derive from std::exception . Two useful branches are std::logic_error and std::runtime_error . A logic error usually means that a precondition or programming assumption was violated. A runtime error usually depends on a condition discovered while the program is running.   Common standard exception types       Type  Typical meaning  Example situation    std::invalid_argument  An argument has an unacceptable value.  A function receives a negative count.    std::out_of_range  An index or value is outside an allowed range.  values.at(8) is used when the valid indices end at 4.    std::runtime_error  A runtime operation cannot complete.  A required external service is unavailable.    std::exception  A general standard exception interface.  A final general handler can report what() .     The hierarchy lets a handler be specific or general. A handler for std::invalid_argument can respond specifically to invalid arguments. A handler for std::exception can provide a general fallback for many standard exception types.    Using what() to Inspect an Exception  The what() member function returns a C-style string describing the exception. The message is useful for logging or explaining the failure, but the exception type communicates the broader category of the problem.   Handling an out-of-range access   #include <array> #include <iostream> #include <stdexcept> int main() { std::array<int, 3> scores{80, 90, 95}; try { std::cout << scores.at(3) << '\\n'; } catch (const std::out_of_range& error) { std::cout << \"Access failed: \" << error.what() << '\\n'; } return 0; }    The valid indices are 0, 1, and 2. The call to at(3) throws an std::out_of_range exception before an invalid element is read. Unlike operator[] , at() checks the index and reports a range violation.    Tracing a Standard Exception  The static listing above shows the sequence: at(3) detects an invalid index, throws std::out_of_range , and the handler prints the message returned by what() .     Which exception best describes an unacceptable function argument?     std::bad_name  std::bad_name is not a standard exception type.    std::invalid_argument  This type communicates that an argument violates the function's requirements.    std::cout  std::cout is an output stream, not an exception.    std::string  std::string is a text type, not a standard exception type.    std::out_of_range  This type is better for an index or value outside an allowed range.       Why does scores.at(3) throw in the example?     The array's first valid index is 1.  std::array uses zero-based indexing, so its valid indices begin at 0.    The array contains floating-point values.  The element type does not cause this exception.    The valid indices are 0, 1, and 2.  The array has three elements, so index 3 is outside its valid range.    std::array cannot be used inside a try block.  std::array can be used normally inside a try block.    at() always throws for every index.  at() throws only when its index is invalid.       Arrange the handlers from the more specific type to the general type.    catch (const std::out_of_range& error) {  std::cout << error.what() << '\\n';  }  catch (const std::exception& error) {  std::cout << error.what() << '\\n';  }      What does error.what() provide?     The line number of every error in the program.  what() provides a message, not a complete debugging report.    A Boolean that says whether the program compiled.  Compilation status is not returned by an exception's what() .    The memory address of the exception object.  what() returns a descriptive message.    A message describing the exception.  what() returns a descriptive C-style string.    A new exception object.  what() describes the current exception; it does not create another one.       Select all statements that correctly describe standard exception types.     what() returns the line number where the exception was thrown.  what() returns a descriptive message, not a complete source location.    std::invalid_argument is appropriate when an argument violates a function's requirements.  This exception communicates an unacceptable argument value.    A handler for std::exception can catch only std::invalid_argument .  The common base type can provide a fallback for many standard exception types.    std::out_of_range can describe an invalid index used with at() .  An index outside the valid range is a typical use of this exception.    Every standard exception represents a syntax error found by the compiler.  Standard exceptions describe runtime conditions, not source-code syntax errors.     "
+},
+{
+  "id": "chapter11_standard-exception-types-2",
+  "level": "2",
+  "url": "chapter11_standard-exception-types.html#chapter11_standard-exception-types-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The C++ standard library provides exception classes for common kinds of failure. These classes communicate the category of the problem and provide a message through what() . "
+},
+{
+  "id": "chapter11_exception-hierarchy",
+  "level": "2",
+  "url": "chapter11_standard-exception-types.html#chapter11_exception-hierarchy",
+  "type": "Subsection",
+  "number": "11.3.1",
+  "title": "A Small Exception Hierarchy",
+  "body": " A Small Exception Hierarchy  Many standard exceptions derive from std::exception . Two useful branches are std::logic_error and std::runtime_error . A logic error usually means that a precondition or programming assumption was violated. A runtime error usually depends on a condition discovered while the program is running.   Common standard exception types       Type  Typical meaning  Example situation    std::invalid_argument  An argument has an unacceptable value.  A function receives a negative count.    std::out_of_range  An index or value is outside an allowed range.  values.at(8) is used when the valid indices end at 4.    std::runtime_error  A runtime operation cannot complete.  A required external service is unavailable.    std::exception  A general standard exception interface.  A final general handler can report what() .     The hierarchy lets a handler be specific or general. A handler for std::invalid_argument can respond specifically to invalid arguments. A handler for std::exception can provide a general fallback for many standard exception types.  "
+},
+{
+  "id": "chapter11_exception-messages",
+  "level": "2",
+  "url": "chapter11_standard-exception-types.html#chapter11_exception-messages",
+  "type": "Subsection",
+  "number": "11.3.2",
+  "title": "Using <code class=\"code-inline tex2jax_ignore\">what()<\/code> to Inspect an Exception",
+  "body": " Using what() to Inspect an Exception  The what() member function returns a C-style string describing the exception. The message is useful for logging or explaining the failure, but the exception type communicates the broader category of the problem.   Handling an out-of-range access   #include <array> #include <iostream> #include <stdexcept> int main() { std::array<int, 3> scores{80, 90, 95}; try { std::cout << scores.at(3) << '\\n'; } catch (const std::out_of_range& error) { std::cout << \"Access failed: \" << error.what() << '\\n'; } return 0; }    The valid indices are 0, 1, and 2. The call to at(3) throws an std::out_of_range exception before an invalid element is read. Unlike operator[] , at() checks the index and reports a range violation.  "
+},
+{
+  "id": "chapter11_exception-visualization-standard",
+  "level": "2",
+  "url": "chapter11_standard-exception-types.html#chapter11_exception-visualization-standard",
+  "type": "Subsection",
+  "number": "11.3.3",
+  "title": "Tracing a Standard Exception",
+  "body": " Tracing a Standard Exception  The static listing above shows the sequence: at(3) detects an invalid index, throws std::out_of_range , and the handler prints the message returned by what() .  "
+},
+{
+  "id": "chapter11_standard-exercise-invalid",
+  "level": "2",
+  "url": "chapter11_standard-exception-types.html#chapter11_standard-exercise-invalid",
+  "type": "Checkpoint",
+  "number": "11.3.3",
+  "title": "",
+  "body": "  Which exception best describes an unacceptable function argument?     std::bad_name  std::bad_name is not a standard exception type.    std::invalid_argument  This type communicates that an argument violates the function's requirements.    std::cout  std::cout is an output stream, not an exception.    std::string  std::string is a text type, not a standard exception type.    std::out_of_range  This type is better for an index or value outside an allowed range.    "
+},
+{
+  "id": "chapter11_standard-exercise-range",
+  "level": "2",
+  "url": "chapter11_standard-exception-types.html#chapter11_standard-exercise-range",
+  "type": "Checkpoint",
+  "number": "11.3.4",
+  "title": "",
+  "body": "  Why does scores.at(3) throw in the example?     The array's first valid index is 1.  std::array uses zero-based indexing, so its valid indices begin at 0.    The array contains floating-point values.  The element type does not cause this exception.    The valid indices are 0, 1, and 2.  The array has three elements, so index 3 is outside its valid range.    std::array cannot be used inside a try block.  std::array can be used normally inside a try block.    at() always throws for every index.  at() throws only when its index is invalid.    "
+},
+{
+  "id": "chapter11_standard-parsons-hierarchy",
+  "level": "2",
+  "url": "chapter11_standard-exception-types.html#chapter11_standard-parsons-hierarchy",
+  "type": "Checkpoint",
+  "number": "11.3.5",
+  "title": "",
+  "body": "  Arrange the handlers from the more specific type to the general type.    catch (const std::out_of_range& error) {  std::cout << error.what() << '\\n';  }  catch (const std::exception& error) {  std::cout << error.what() << '\\n';  }   "
+},
+{
+  "id": "chapter11_standard-exercise-what",
+  "level": "2",
+  "url": "chapter11_standard-exception-types.html#chapter11_standard-exercise-what",
+  "type": "Checkpoint",
+  "number": "11.3.6",
+  "title": "",
+  "body": "  What does error.what() provide?     The line number of every error in the program.  what() provides a message, not a complete debugging report.    A Boolean that says whether the program compiled.  Compilation status is not returned by an exception's what() .    The memory address of the exception object.  what() returns a descriptive message.    A message describing the exception.  what() returns a descriptive C-style string.    A new exception object.  what() describes the current exception; it does not create another one.    "
+},
+{
+  "id": "chapter11_standard-exercise-types",
+  "level": "2",
+  "url": "chapter11_standard-exception-types.html#chapter11_standard-exercise-types",
+  "type": "Checkpoint",
+  "number": "11.3.7",
+  "title": "",
+  "body": "  Select all statements that correctly describe standard exception types.     what() returns the line number where the exception was thrown.  what() returns a descriptive message, not a complete source location.    std::invalid_argument is appropriate when an argument violates a function's requirements.  This exception communicates an unacceptable argument value.    A handler for std::exception can catch only std::invalid_argument .  The common base type can provide a fallback for many standard exception types.    std::out_of_range can describe an invalid index used with at() .  An index outside the valid range is a typical use of this exception.    Every standard exception represents a syntax error found by the compiler.  Standard exceptions describe runtime conditions, not source-code syntax errors.    "
+},
+{
+  "id": "chapter11_catching-exceptions-safely",
+  "level": "1",
+  "url": "chapter11_catching-exceptions-safely.html",
+  "type": "Section",
+  "number": "11.4",
+  "title": "Catching Exceptions Safely",
+  "body": " Catching Exceptions Safely  A program may provide more than one handler for a try block. Good handlers preserve the type information of the exception, respond to specific failures first, and avoid silently hiding a problem.   Catch by const Reference  The usual form for catching a standard exception is catch (const std::exception& error) . The reference avoids copying the exception object, and const promises that the handler will not modify it. Catching by reference also preserves the actual derived exception type when a general base-class handler is used.   Catching a standard exception by constant reference   #include <iostream> #include <stdexcept> int main() { try { throw std::runtime_error(\"the operation failed\"); } catch (const std::exception& error) { std::cout << error.what() << '\\n'; } return 0; }    The handler can use the common interface supplied by std::exception , including what() , even though the thrown object is specifically a std::runtime_error .    Catch Specific Types Before General Types  A derived exception can match a handler for its base class. For that reason, handlers should normally be ordered from specific to general. A handler for std::invalid_argument should appear before a handler for std::exception . If the general handler appears first, it may catch the exception before the specific handler can respond.   Specific and general handlers   #include <iostream> #include <stdexcept> void report_failure(int choice) { if (choice == 1) { throw std::invalid_argument(\"invalid argument\"); } throw std::runtime_error(\"operation failed\"); } int main() { try { report_failure(1); } catch (const std::invalid_argument& error) { std::cout << \"Argument problem: \" << error.what() << '\\n'; } catch (const std::exception& error) { std::cout << \"Other standard exception: \" << error.what() << '\\n'; } return 0; }    The first handler is selected for std::invalid_argument . If the call instead throws std::runtime_error , the second handler provides a general response.    Do Not Hide Failures  A handler should do something meaningful: report the problem, recover with a valid alternative, record diagnostic information, or pass the failure to a higher-level handler. An empty handler can make a serious problem appear to have succeeded.  Catching std::exception is useful as a final fallback, but a program should not use it to erase all information about the cause. When possible, handle a specific exception where the program knows how to recover and use a general handler only where a general response is appropriate.   Guidance for exception handlers      Practice  Reason    Catch by const reference.  Avoids an unnecessary copy and preserves exception type information.    Catch specific types before general types.  Specific handlers need an opportunity to match first.    Use what() or another meaningful response.  Users and developers need to know what failed.    Do not catch and ignore an exception accidentally.  Silent failure makes programs difficult to trust and debug.       Tracing Handler Selection  The static listing above demonstrates handler selection. Because the thrown object is an std::invalid_argument , the specific handler is selected before the general std::exception handler.     Why is catch (const std::exception& error) a common form?     It automatically fixes the failed operation.  The handler still needs to decide how to respond.    It avoids an unnecessary copy and preserves the exception's type relationship.  The reference avoids copying, while const prevents modification.    It prevents all exceptions from being thrown.  The handler runs after an exception has already been thrown.    It makes the handler receive a copy of every exception.  Catching by reference avoids an unnecessary copy.    It catches only integer exceptions.  The parameter type is a reference to std::exception , not an integer.       Which handler should appear first?     catch (const std::runtime_error& error)  A general handler should not replace a more specific handler that can respond appropriately.    catch (const int& error)  This handler is unrelated to the standard exception hierarchy.    catch (const std::invalid_argument& error)  The specific derived type should be checked before the general base type.    No handler should appear first.  Handlers must have an order, and specific handlers should come first.    catch (const std::exception& error)  A general base-class handler could catch the exception before the specific handler.       Arrange the handlers from the specific exception to the general exception.    catch (const std::invalid_argument& error) {  std::cout << error.what() << '\\n';  }  catch (const std::exception& error) {  std::cout << error.what() << '\\n';  }      Which is a meaningful response for an exception handler?     Ignore every exception without recording anything.  Silent handlers make failures difficult to diagnose.    Assume the failed operation succeeded.  The handler should not pretend that an unsuccessful operation completed.    Continue as though the failed operation produced a valid result.  Continuing with an invalid result can make the program unsafe.    Report the problem or recover with a valid alternative.  A handler should respond deliberately rather than silently hiding the failure.    Delete the exception type from the standard library.  A handler responds to an exception; it does not change the library.     "
+},
+{
+  "id": "chapter11_catching-exceptions-safely-2",
+  "level": "2",
+  "url": "chapter11_catching-exceptions-safely.html#chapter11_catching-exceptions-safely-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A program may provide more than one handler for a try block. Good handlers preserve the type information of the exception, respond to specific failures first, and avoid silently hiding a problem. "
+},
+{
+  "id": "chapter11_catch-by-const-reference",
+  "level": "2",
+  "url": "chapter11_catching-exceptions-safely.html#chapter11_catch-by-const-reference",
+  "type": "Subsection",
+  "number": "11.4.1",
+  "title": "Catch by <code class=\"code-inline tex2jax_ignore\">const<\/code> Reference",
+  "body": " Catch by const Reference  The usual form for catching a standard exception is catch (const std::exception& error) . The reference avoids copying the exception object, and const promises that the handler will not modify it. Catching by reference also preserves the actual derived exception type when a general base-class handler is used.   Catching a standard exception by constant reference   #include <iostream> #include <stdexcept> int main() { try { throw std::runtime_error(\"the operation failed\"); } catch (const std::exception& error) { std::cout << error.what() << '\\n'; } return 0; }    The handler can use the common interface supplied by std::exception , including what() , even though the thrown object is specifically a std::runtime_error .  "
+},
+{
+  "id": "chapter11-specific-before-general",
+  "level": "2",
+  "url": "chapter11_catching-exceptions-safely.html#chapter11-specific-before-general",
+  "type": "Subsection",
+  "number": "11.4.2",
+  "title": "Catch Specific Types Before General Types",
+  "body": " Catch Specific Types Before General Types  A derived exception can match a handler for its base class. For that reason, handlers should normally be ordered from specific to general. A handler for std::invalid_argument should appear before a handler for std::exception . If the general handler appears first, it may catch the exception before the specific handler can respond.   Specific and general handlers   #include <iostream> #include <stdexcept> void report_failure(int choice) { if (choice == 1) { throw std::invalid_argument(\"invalid argument\"); } throw std::runtime_error(\"operation failed\"); } int main() { try { report_failure(1); } catch (const std::invalid_argument& error) { std::cout << \"Argument problem: \" << error.what() << '\\n'; } catch (const std::exception& error) { std::cout << \"Other standard exception: \" << error.what() << '\\n'; } return 0; }    The first handler is selected for std::invalid_argument . If the call instead throws std::runtime_error , the second handler provides a general response.  "
+},
+{
+  "id": "chapter11_exception-handling-guidance",
+  "level": "2",
+  "url": "chapter11_catching-exceptions-safely.html#chapter11_exception-handling-guidance",
+  "type": "Subsection",
+  "number": "11.4.3",
+  "title": "Do Not Hide Failures",
+  "body": " Do Not Hide Failures  A handler should do something meaningful: report the problem, recover with a valid alternative, record diagnostic information, or pass the failure to a higher-level handler. An empty handler can make a serious problem appear to have succeeded.  Catching std::exception is useful as a final fallback, but a program should not use it to erase all information about the cause. When possible, handle a specific exception where the program knows how to recover and use a general handler only where a general response is appropriate.   Guidance for exception handlers      Practice  Reason    Catch by const reference.  Avoids an unnecessary copy and preserves exception type information.    Catch specific types before general types.  Specific handlers need an opportunity to match first.    Use what() or another meaningful response.  Users and developers need to know what failed.    Do not catch and ignore an exception accidentally.  Silent failure makes programs difficult to trust and debug.     "
+},
+{
+  "id": "chapter11_exception-visualization-catching",
+  "level": "2",
+  "url": "chapter11_catching-exceptions-safely.html#chapter11_exception-visualization-catching",
+  "type": "Subsection",
+  "number": "11.4.4",
+  "title": "Tracing Handler Selection",
+  "body": " Tracing Handler Selection  The static listing above demonstrates handler selection. Because the thrown object is an std::invalid_argument , the specific handler is selected before the general std::exception handler.  "
+},
+{
+  "id": "chapter11_catching-exercise-reference",
+  "level": "2",
+  "url": "chapter11_catching-exceptions-safely.html#chapter11_catching-exercise-reference",
+  "type": "Checkpoint",
+  "number": "11.4.4",
+  "title": "",
+  "body": "  Why is catch (const std::exception& error) a common form?     It automatically fixes the failed operation.  The handler still needs to decide how to respond.    It avoids an unnecessary copy and preserves the exception's type relationship.  The reference avoids copying, while const prevents modification.    It prevents all exceptions from being thrown.  The handler runs after an exception has already been thrown.    It makes the handler receive a copy of every exception.  Catching by reference avoids an unnecessary copy.    It catches only integer exceptions.  The parameter type is a reference to std::exception , not an integer.    "
+},
+{
+  "id": "chapter11_catching-exercise-order",
+  "level": "2",
+  "url": "chapter11_catching-exceptions-safely.html#chapter11_catching-exercise-order",
+  "type": "Checkpoint",
+  "number": "11.4.5",
+  "title": "",
+  "body": "  Which handler should appear first?     catch (const std::runtime_error& error)  A general handler should not replace a more specific handler that can respond appropriately.    catch (const int& error)  This handler is unrelated to the standard exception hierarchy.    catch (const std::invalid_argument& error)  The specific derived type should be checked before the general base type.    No handler should appear first.  Handlers must have an order, and specific handlers should come first.    catch (const std::exception& error)  A general base-class handler could catch the exception before the specific handler.    "
+},
+{
+  "id": "chapter11_catching-parsons-order",
+  "level": "2",
+  "url": "chapter11_catching-exceptions-safely.html#chapter11_catching-parsons-order",
+  "type": "Checkpoint",
+  "number": "11.4.6",
+  "title": "",
+  "body": "  Arrange the handlers from the specific exception to the general exception.    catch (const std::invalid_argument& error) {  std::cout << error.what() << '\\n';  }  catch (const std::exception& error) {  std::cout << error.what() << '\\n';  }   "
+},
+{
+  "id": "chapter11_catching-exercise-response",
+  "level": "2",
+  "url": "chapter11_catching-exceptions-safely.html#chapter11_catching-exercise-response",
+  "type": "Checkpoint",
+  "number": "11.4.7",
+  "title": "",
+  "body": "  Which is a meaningful response for an exception handler?     Ignore every exception without recording anything.  Silent handlers make failures difficult to diagnose.    Assume the failed operation succeeded.  The handler should not pretend that an unsuccessful operation completed.    Continue as though the failed operation produced a valid result.  Continuing with an invalid result can make the program unsafe.    Report the problem or recover with a valid alternative.  A handler should respond deliberately rather than silently hiding the failure.    Delete the exception type from the standard library.  A handler responds to an exception; it does not change the library.    "
+},
+{
+  "id": "chapter11_exception-propagation-and-stack-unwinding",
+  "level": "1",
+  "url": "chapter11_exception-propagation-and-stack-unwinding.html",
+  "type": "Section",
+  "number": "11.5",
+  "title": "Exception Propagation and Stack Unwinding",
+  "body": " Exception Propagation and Stack Unwinding  An exception does not have to be handled in the same function that detects it. If a function has no matching handler, the exception moves back through the chain of callers until a matching handler is found. This movement is called exception propagation .   Propagation Through Function Calls  Consider a call chain in which main() calls process_order() , and process_order() calls validate_order() . If the deepest function throws and does not catch the exception, the caller's normal path is abandoned too.   An exception propagating to a caller   #include <iostream> #include <stdexcept> void validate_order(int quantity) { if (quantity <= 0) { throw std::invalid_argument(\"quantity must be positive\"); } } void process_order() { validate_order(0); std::cout << \"Order is ready\" << '\\n'; } int main() { try { process_order(); } catch (const std::exception& error) { std::cout << \"Order failed: \" << error.what() << '\\n'; } return 0; }    The message Order is ready is never printed because the exception leaves validate_order() and then process_order() . The handler in main() receives it.    Stack Unwinding  As an exception travels toward a handler, C++ destroys local automatic objects in functions that are being exited. This cleanup process is called stack unwinding . It is one reason destructors and RAII are important: objects can clean up their resources even when normal control flow is interrupted.  If no matching handler is found, the program calls std::terminate() . A reliable program therefore catches an exception at a level that knows how to report the problem, recover, or end the operation safely.    Tracing Propagation  Follow the static listing from main() to process_order() and then to validate_order() . The exception moves back toward main() , where the matching handler responds.    What does exception propagation mean?    An exception is converted into a loop.  Propagation transfers control; it does not create a loop.    An exception moves through callers until a matching handler is found.  A function does not have to catch an exception it detects.    The compiler ignores the exception.  The running program searches for a matching handler.    An exception always stays inside the function that throws it.  If a function does not handle an exception, it can move to a caller.    An exception is copied into every local variable.  Propagation concerns control flow through function calls.      Arrange the call chain so the exception reaches the handler in main() .   void process_order() {  validate_order(0);  }  try {  process_order();  }  catch (const std::exception& error) {  std::cout << error.what() << '\\n';  }     What happens during stack unwinding?    The handler runs before local objects in exited functions are destroyed.  Local automatic objects are destroyed as the program unwinds toward the handler.    The exception is changed into a compile-time error.  Stack unwinding happens while the program runs.    Local automatic objects in exited functions are destroyed.  This cleanup supports RAII during exceptional control flow.    Every caller continues normally after the throw.  The interrupted normal paths are abandoned.    All objects in the entire program are immediately deleted.  Unwinding concerns local objects in functions being exited.      What happens if no matching handler is found?    The compiler adds a handler automatically.  The programmer must provide an appropriate handler.    The exception becomes a return value.  Thrown exceptions and return values are different mechanisms.    The program returns normally from main() .  Without a matching handler, the program calls std::terminate() .    The program calls std::terminate() .  Unhandled exceptions cannot continue through normal program flow.    The program always retries the operation.  Retry behavior must be written explicitly.     "
+},
+{
+  "id": "chapter11_exception-propagation-and-stack-unwinding-2",
+  "level": "2",
+  "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_exception-propagation-and-stack-unwinding-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An exception does not have to be handled in the same function that detects it. If a function has no matching handler, the exception moves back through the chain of callers until a matching handler is found. This movement is called exception propagation . "
+},
+{
+  "id": "chapter11_exception-propagation",
+  "level": "2",
+  "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_exception-propagation",
+  "type": "Subsection",
+  "number": "11.5.1",
+  "title": "Propagation Through Function Calls",
+  "body": " Propagation Through Function Calls  Consider a call chain in which main() calls process_order() , and process_order() calls validate_order() . If the deepest function throws and does not catch the exception, the caller's normal path is abandoned too.   An exception propagating to a caller   #include <iostream> #include <stdexcept> void validate_order(int quantity) { if (quantity <= 0) { throw std::invalid_argument(\"quantity must be positive\"); } } void process_order() { validate_order(0); std::cout << \"Order is ready\" << '\\n'; } int main() { try { process_order(); } catch (const std::exception& error) { std::cout << \"Order failed: \" << error.what() << '\\n'; } return 0; }    The message Order is ready is never printed because the exception leaves validate_order() and then process_order() . The handler in main() receives it.  "
+},
+{
+  "id": "chapter11_stack-unwinding",
+  "level": "2",
+  "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_stack-unwinding",
+  "type": "Subsection",
+  "number": "11.5.2",
+  "title": "Stack Unwinding",
+  "body": " Stack Unwinding  As an exception travels toward a handler, C++ destroys local automatic objects in functions that are being exited. This cleanup process is called stack unwinding . It is one reason destructors and RAII are important: objects can clean up their resources even when normal control flow is interrupted.  If no matching handler is found, the program calls std::terminate() . A reliable program therefore catches an exception at a level that knows how to report the problem, recover, or end the operation safely.  "
+},
+{
+  "id": "chapter11_propagation-visualization",
+  "level": "2",
+  "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_propagation-visualization",
+  "type": "Subsection",
+  "number": "11.5.3",
+  "title": "Tracing Propagation",
+  "body": " Tracing Propagation  Follow the static listing from main() to process_order() and then to validate_order() . The exception moves back toward main() , where the matching handler responds.  "
+},
+{
+  "id": "chapter11_propagation-exercise",
+  "level": "2",
+  "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_propagation-exercise",
+  "type": "Checkpoint",
+  "number": "11.5.2",
+  "title": "",
+  "body": " What does exception propagation mean?    An exception is converted into a loop.  Propagation transfers control; it does not create a loop.    An exception moves through callers until a matching handler is found.  A function does not have to catch an exception it detects.    The compiler ignores the exception.  The running program searches for a matching handler.    An exception always stays inside the function that throws it.  If a function does not handle an exception, it can move to a caller.    An exception is copied into every local variable.  Propagation concerns control flow through function calls.    "
+},
+{
+  "id": "chapter11_propagation-parsons-call-chain",
+  "level": "2",
+  "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_propagation-parsons-call-chain",
+  "type": "Checkpoint",
+  "number": "11.5.3",
+  "title": "",
+  "body": " Arrange the call chain so the exception reaches the handler in main() .   void process_order() {  validate_order(0);  }  try {  process_order();  }  catch (const std::exception& error) {  std::cout << error.what() << '\\n';  }   "
+},
+{
+  "id": "chapter11_unwinding-exercise",
+  "level": "2",
+  "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_unwinding-exercise",
+  "type": "Checkpoint",
+  "number": "11.5.4",
+  "title": "",
+  "body": " What happens during stack unwinding?    The handler runs before local objects in exited functions are destroyed.  Local automatic objects are destroyed as the program unwinds toward the handler.    The exception is changed into a compile-time error.  Stack unwinding happens while the program runs.    Local automatic objects in exited functions are destroyed.  This cleanup supports RAII during exceptional control flow.    Every caller continues normally after the throw.  The interrupted normal paths are abandoned.    All objects in the entire program are immediately deleted.  Unwinding concerns local objects in functions being exited.    "
+},
+{
+  "id": "chapter11_no-handler-exercise",
+  "level": "2",
+  "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_no-handler-exercise",
+  "type": "Checkpoint",
+  "number": "11.5.5",
+  "title": "",
+  "body": " What happens if no matching handler is found?    The compiler adds a handler automatically.  The programmer must provide an appropriate handler.    The exception becomes a return value.  Thrown exceptions and return values are different mechanisms.    The program returns normally from main() .  Without a matching handler, the program calls std::terminate() .    The program calls std::terminate() .  Unhandled exceptions cannot continue through normal program flow.    The program always retries the operation.  Retry behavior must be written explicitly.    "
+},
+{
+  "id": "chapter11_exceptions-in-functions-and-classes",
+  "level": "1",
+  "url": "chapter11_exceptions-in-functions-and-classes.html",
+  "type": "Section",
+  "number": "11.6",
+  "title": "Exceptions in Functions and Classes",
+  "body": " Exceptions in Functions and Classes  A function or member function should protect the requirements of its interface. When an argument would make the requested operation invalid, the function may throw an exception instead of creating an invalid result.   Exceptions and Function Contracts  A function that throws should make the possibility visible in its documentation and should use an exception type that describes the failure. The caller can then decide whether to recover, report the problem, or allow it to propagate farther.   Protecting a function's precondition   #include <iostream> #include <stdexcept> double calculate_average(int total, int count) { if (count <= 0) { throw std::invalid_argument(\"count must be positive\"); } return static_cast<double>(total) \/ count; } int main() { try { std::cout << calculate_average(85, 0) << '\\n'; } catch (const std::invalid_argument& error) { std::cout << error.what() << '\\n'; } return 0; }    The function either returns a valid average or reports that its precondition was violated. It does not return a misleading value such as zero to represent every possible failure.    Constructors Can Reject Invalid Objects  A constructor may throw when its arguments cannot create a valid object. This protects the class invariant: an object whose constructor finishes successfully satisfies the class's validity rules.   Rejecting an invalid temperature   #include <iostream> #include <stdexcept> class Temperature { private: double celsius; public: Temperature(double starting_celsius) : celsius{starting_celsius} { if (celsius < -273.15) { throw std::invalid_argument( \"temperature is below absolute zero\" ); } } double get_celsius() const { return celsius; } }; int main() { try { Temperature temperature{-300.0}; std::cout << temperature.get_celsius() << '\\n'; } catch (const std::invalid_argument& error) { std::cout << error.what() << '\\n'; } return 0; }    Because construction fails, the caller does not receive a usable Temperature object. The class does not need to provide an invalid object and hope that every later member function remembers to check it.    Tracing Constructor Validation  The static listing shows that the constructor detects the invalid temperature before a usable Temperature object becomes available. Control then moves to the handler.    Why does calculate_average throw when count is zero?    count must be negative.  The function requires a positive count, so zero and negative counts violate the precondition.    The compiler cannot divide any integers.  C++ can divide integers; division by zero is the invalid situation.    The function has no return statement.  The function has a return statement for valid input.    Its precondition requires a positive count.  The function cannot calculate a valid average with zero values.    All averages must be integers.  The function returns a double ; the issue is the count.      Arrange the constructor so that it rejects an invalid object.   Temperature(double starting_celsius)  : celsius{starting_celsius} {  if (celsius < -273.15) {  throw std::invalid_argument(\"temperature is invalid\");  }  }     What does a constructor exception prevent?    It makes the constructor return a Boolean.  Constructors do not return values; they either create an object or throw.    It prevents every object of the class from ever being created.  Valid constructor arguments can still create objects.    It constructs and returns the invalid object anyway.  A constructor exception prevents an invalid object from being made available.    It changes a class into a structure.  Exceptions do not change the kind of user-defined type.    It prevents the caller from receiving an object that violates the class invariant.  A constructor that finishes successfully establishes a valid object.      Which design best protects a class invariant?    Make invariant checks optional for callers.  An invariant is a class responsibility, not merely a suggestion to callers.    Reject invalid constructor arguments before the object becomes available.  Preventing invalid objects simplifies every later member function.    Remove all private data members.  Private data helps a class protect its invariant.    Accept every value and ask callers to remember the invariant.  That spreads the responsibility across every caller.    Silently replace every invalid value with zero.  Silently changing input may hide an important programming error.       Select all practices that help a class protect its invariant.     Make all data members public and rely on callers to behave correctly.  Public unrestricted data makes invariant protection harder.    Validate constructor arguments before the object becomes available.  Rejecting invalid initial state protects every later operation.    Silently accept every invalid value and document the problem later.  Silently accepting invalid state weakens the class invariant.    Reject an invalid operation before it leaves the object in an unacceptable state.  Operations should preserve the invariant as well as constructors.    Remove validation so every constructor call succeeds.  Successful construction should mean that the object is valid.     "
+},
+{
+  "id": "chapter11_exceptions-in-functions-and-classes-2",
+  "level": "2",
+  "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_exceptions-in-functions-and-classes-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A function or member function should protect the requirements of its interface. When an argument would make the requested operation invalid, the function may throw an exception instead of creating an invalid result. "
+},
+{
+  "id": "chapter11_function-contracts-and-exceptions",
+  "level": "2",
+  "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_function-contracts-and-exceptions",
+  "type": "Subsection",
+  "number": "11.6.1",
+  "title": "Exceptions and Function Contracts",
+  "body": " Exceptions and Function Contracts  A function that throws should make the possibility visible in its documentation and should use an exception type that describes the failure. The caller can then decide whether to recover, report the problem, or allow it to propagate farther.   Protecting a function's precondition   #include <iostream> #include <stdexcept> double calculate_average(int total, int count) { if (count <= 0) { throw std::invalid_argument(\"count must be positive\"); } return static_cast<double>(total) \/ count; } int main() { try { std::cout << calculate_average(85, 0) << '\\n'; } catch (const std::invalid_argument& error) { std::cout << error.what() << '\\n'; } return 0; }    The function either returns a valid average or reports that its precondition was violated. It does not return a misleading value such as zero to represent every possible failure.  "
+},
+{
+  "id": "chapter11_constructor-exceptions",
+  "level": "2",
+  "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_constructor-exceptions",
+  "type": "Subsection",
+  "number": "11.6.2",
+  "title": "Constructors Can Reject Invalid Objects",
+  "body": " Constructors Can Reject Invalid Objects  A constructor may throw when its arguments cannot create a valid object. This protects the class invariant: an object whose constructor finishes successfully satisfies the class's validity rules.   Rejecting an invalid temperature   #include <iostream> #include <stdexcept> class Temperature { private: double celsius; public: Temperature(double starting_celsius) : celsius{starting_celsius} { if (celsius < -273.15) { throw std::invalid_argument( \"temperature is below absolute zero\" ); } } double get_celsius() const { return celsius; } }; int main() { try { Temperature temperature{-300.0}; std::cout << temperature.get_celsius() << '\\n'; } catch (const std::invalid_argument& error) { std::cout << error.what() << '\\n'; } return 0; }    Because construction fails, the caller does not receive a usable Temperature object. The class does not need to provide an invalid object and hope that every later member function remembers to check it.  "
+},
+{
+  "id": "chapter11_function-class-visualization",
+  "level": "2",
+  "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_function-class-visualization",
+  "type": "Subsection",
+  "number": "11.6.3",
+  "title": "Tracing Constructor Validation",
+  "body": " Tracing Constructor Validation  The static listing shows that the constructor detects the invalid temperature before a usable Temperature object becomes available. Control then moves to the handler.  "
+},
+{
+  "id": "chapter11_functions-exercise-precondition",
+  "level": "2",
+  "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_functions-exercise-precondition",
+  "type": "Checkpoint",
+  "number": "11.6.3",
+  "title": "",
+  "body": " Why does calculate_average throw when count is zero?    count must be negative.  The function requires a positive count, so zero and negative counts violate the precondition.    The compiler cannot divide any integers.  C++ can divide integers; division by zero is the invalid situation.    The function has no return statement.  The function has a return statement for valid input.    Its precondition requires a positive count.  The function cannot calculate a valid average with zero values.    All averages must be integers.  The function returns a double ; the issue is the count.    "
+},
+{
+  "id": "chapter11_functions-parsons-constructor",
+  "level": "2",
+  "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_functions-parsons-constructor",
+  "type": "Checkpoint",
+  "number": "11.6.4",
+  "title": "",
+  "body": " Arrange the constructor so that it rejects an invalid object.   Temperature(double starting_celsius)  : celsius{starting_celsius} {  if (celsius < -273.15) {  throw std::invalid_argument(\"temperature is invalid\");  }  }   "
+},
+{
+  "id": "chapter11_functions-exercise-constructor",
+  "level": "2",
+  "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_functions-exercise-constructor",
+  "type": "Checkpoint",
+  "number": "11.6.5",
+  "title": "",
+  "body": " What does a constructor exception prevent?    It makes the constructor return a Boolean.  Constructors do not return values; they either create an object or throw.    It prevents every object of the class from ever being created.  Valid constructor arguments can still create objects.    It constructs and returns the invalid object anyway.  A constructor exception prevents an invalid object from being made available.    It changes a class into a structure.  Exceptions do not change the kind of user-defined type.    It prevents the caller from receiving an object that violates the class invariant.  A constructor that finishes successfully establishes a valid object.    "
+},
+{
+  "id": "chapter11_functions-exercise-design",
+  "level": "2",
+  "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_functions-exercise-design",
+  "type": "Checkpoint",
+  "number": "11.6.6",
+  "title": "",
+  "body": " Which design best protects a class invariant?    Make invariant checks optional for callers.  An invariant is a class responsibility, not merely a suggestion to callers.    Reject invalid constructor arguments before the object becomes available.  Preventing invalid objects simplifies every later member function.    Remove all private data members.  Private data helps a class protect its invariant.    Accept every value and ask callers to remember the invariant.  That spreads the responsibility across every caller.    Silently replace every invalid value with zero.  Silently changing input may hide an important programming error.    "
+},
+{
+  "id": "chapter11_functions-exercise-invariants",
+  "level": "2",
+  "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_functions-exercise-invariants",
+  "type": "Checkpoint",
+  "number": "11.6.7",
+  "title": "",
+  "body": "  Select all practices that help a class protect its invariant.     Make all data members public and rely on callers to behave correctly.  Public unrestricted data makes invariant protection harder.    Validate constructor arguments before the object becomes available.  Rejecting invalid initial state protects every later operation.    Silently accept every invalid value and document the problem later.  Silently accepting invalid state weakens the class invariant.    Reject an invalid operation before it leaves the object in an unacceptable state.  Operations should preserve the invariant as well as constructors.    Remove validation so every constructor call succeeds.  Successful construction should mean that the object is valid.    "
+},
+{
+  "id": "chapter11_constructors-destructors-and-raii",
+  "level": "1",
+  "url": "chapter11_constructors-destructors-and-raii.html",
+  "type": "Section",
+  "number": "11.7",
+  "title": "Constructors, Destructors, and RAII During Exceptions",
+  "body": " Constructors, Destructors, and RAII During Exceptions  Exceptions can interrupt normal control flow, but C++ still performs required object cleanup. Objects with automatic storage are destroyed as their scopes are left. This behavior supports RAII , or Resource Acquisition Is Initialization.   Destructors Run During Stack Unwinding  If an object has been completely constructed before an exception is thrown, its destructor runs when its scope is exited during stack unwinding. An object whose constructor throws is not considered a fully constructed object, so its complete destructor does not run.   Cleanup during an exception   #include <iostream> #include <stdexcept> class ScopeMarker { public: ScopeMarker() { std::cout << \"created\" << '\\n'; } ~ScopeMarker() { std::cout << \"destroyed\" << '\\n'; } }; void run_task() { ScopeMarker marker; throw std::runtime_error(\"task failed\"); } int main() { try { run_task(); } catch (const std::exception& error) { std::cout << error.what() << '\\n'; } return 0; }    The expected order includes destroyed before the handler prints the error. The local object is cleaned up as run_task() is exited.    Why RAII Helps  With RAII, a resource is acquired by an object's constructor and released by its destructor. The release happens when the object leaves its scope, whether the scope ends normally or because an exception is propagating.  This is safer than asking every possible control-flow path to call a separate cleanup function. The standard library uses this design for many objects, including strings, vectors, streams, and smart pointers.  A destructor should normally perform cleanup and should not allow a second exception to escape while another exception is already being handled. Later chapters will apply RAII to dynamically allocated resources and smart pointers.    Tracing RAII Cleanup  In the static listing, marker is completely constructed before the exception is thrown. During stack unwinding, its destructor runs before the handler reports the failure.    What happens to marker when run_task() throws?    It remains alive until the operating system shuts down.  Automatic objects are destroyed when their scope is exited.    Its constructor runs a second time.  An exception does not reconstruct the local object.    It is copied into the exception object.  The local object's lifetime is separate from the exception object.    Its destructor is skipped because an exception is active.  Automatic objects are destroyed during stack unwinding.    Its destructor runs while the function is being exited.  Stack unwinding destroys completely constructed local objects.      Arrange the class so its destructor releases the resource marker.   class ScopeMarker {  public:  ScopeMarker() { acquire_resource(); }  ~ScopeMarker() { release_resource(); }  };     What is the main advantage of RAII during exception handling?    RAII prevents all exceptions from being thrown.  RAII manages cleanup; it does not prevent every failure.    Cleanup happens automatically when the resource-owning object leaves its scope.  RAII makes cleanup apply to both normal and exceptional exits.    RAII requires every resource to be released manually in main() .  RAII connects resource cleanup to object lifetime and scope.    RAII makes destructors run before constructors.  Construction still occurs before destruction.    RAII removes the need for object scopes.  RAII depends on object lifetimes and scopes.      Which destructor practice is safest during exception handling?    Delete every object in the program.  A destructor should clean up only its own object's resources.    Always throw a new exception from the destructor.  Throwing from a destructor during unwinding is dangerous.    Perform cleanup and avoid allowing another exception to escape.  A second escaping exception during unwinding can terminate the program.    Leave resources active so the handler can clean them later.  RAII is intended to make cleanup automatic and reliable.    Allow the destructor to throw whenever cleanup is difficult.  Throwing during cleanup can cause termination during stack unwinding.     "
+},
+{
+  "id": "chapter11_constructors-destructors-and-raii-2",
+  "level": "2",
+  "url": "chapter11_constructors-destructors-and-raii.html#chapter11_constructors-destructors-and-raii-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Exceptions can interrupt normal control flow, but C++ still performs required object cleanup. Objects with automatic storage are destroyed as their scopes are left. This behavior supports RAII , or Resource Acquisition Is Initialization. "
+},
+{
+  "id": "chapter11_destructor-during-unwinding",
+  "level": "2",
+  "url": "chapter11_constructors-destructors-and-raii.html#chapter11_destructor-during-unwinding",
+  "type": "Subsection",
+  "number": "11.7.1",
+  "title": "Destructors Run During Stack Unwinding",
+  "body": " Destructors Run During Stack Unwinding  If an object has been completely constructed before an exception is thrown, its destructor runs when its scope is exited during stack unwinding. An object whose constructor throws is not considered a fully constructed object, so its complete destructor does not run.   Cleanup during an exception   #include <iostream> #include <stdexcept> class ScopeMarker { public: ScopeMarker() { std::cout << \"created\" << '\\n'; } ~ScopeMarker() { std::cout << \"destroyed\" << '\\n'; } }; void run_task() { ScopeMarker marker; throw std::runtime_error(\"task failed\"); } int main() { try { run_task(); } catch (const std::exception& error) { std::cout << error.what() << '\\n'; } return 0; }    The expected order includes destroyed before the handler prints the error. The local object is cleaned up as run_task() is exited.  "
+},
+{
+  "id": "chapter11_raii-purpose",
+  "level": "2",
+  "url": "chapter11_constructors-destructors-and-raii.html#chapter11_raii-purpose",
+  "type": "Subsection",
+  "number": "11.7.2",
+  "title": "Why RAII Helps",
+  "body": " Why RAII Helps  With RAII, a resource is acquired by an object's constructor and released by its destructor. The release happens when the object leaves its scope, whether the scope ends normally or because an exception is propagating.  This is safer than asking every possible control-flow path to call a separate cleanup function. The standard library uses this design for many objects, including strings, vectors, streams, and smart pointers.  A destructor should normally perform cleanup and should not allow a second exception to escape while another exception is already being handled. Later chapters will apply RAII to dynamically allocated resources and smart pointers.  "
+},
+{
+  "id": "chapter11_raii-visualization",
+  "level": "2",
+  "url": "chapter11_constructors-destructors-and-raii.html#chapter11_raii-visualization",
+  "type": "Subsection",
+  "number": "11.7.3",
+  "title": "Tracing RAII Cleanup",
+  "body": " Tracing RAII Cleanup  In the static listing, marker is completely constructed before the exception is thrown. During stack unwinding, its destructor runs before the handler reports the failure.  "
+},
+{
+  "id": "chapter11_raii-exercise-order",
+  "level": "2",
+  "url": "chapter11_constructors-destructors-and-raii.html#chapter11_raii-exercise-order",
+  "type": "Checkpoint",
+  "number": "11.7.2",
+  "title": "",
+  "body": " What happens to marker when run_task() throws?    It remains alive until the operating system shuts down.  Automatic objects are destroyed when their scope is exited.    Its constructor runs a second time.  An exception does not reconstruct the local object.    It is copied into the exception object.  The local object's lifetime is separate from the exception object.    Its destructor is skipped because an exception is active.  Automatic objects are destroyed during stack unwinding.    Its destructor runs while the function is being exited.  Stack unwinding destroys completely constructed local objects.    "
+},
+{
+  "id": "chapter11_raii-parsons-cleanup",
+  "level": "2",
+  "url": "chapter11_constructors-destructors-and-raii.html#chapter11_raii-parsons-cleanup",
+  "type": "Checkpoint",
+  "number": "11.7.3",
+  "title": "",
+  "body": " Arrange the class so its destructor releases the resource marker.   class ScopeMarker {  public:  ScopeMarker() { acquire_resource(); }  ~ScopeMarker() { release_resource(); }  };   "
+},
+{
+  "id": "chapter11_raii-exercise-purpose",
+  "level": "2",
+  "url": "chapter11_constructors-destructors-and-raii.html#chapter11_raii-exercise-purpose",
+  "type": "Checkpoint",
+  "number": "11.7.4",
+  "title": "",
+  "body": " What is the main advantage of RAII during exception handling?    RAII prevents all exceptions from being thrown.  RAII manages cleanup; it does not prevent every failure.    Cleanup happens automatically when the resource-owning object leaves its scope.  RAII makes cleanup apply to both normal and exceptional exits.    RAII requires every resource to be released manually in main() .  RAII connects resource cleanup to object lifetime and scope.    RAII makes destructors run before constructors.  Construction still occurs before destruction.    RAII removes the need for object scopes.  RAII depends on object lifetimes and scopes.    "
+},
+{
+  "id": "chapter11_raii-exercise-destructor",
+  "level": "2",
+  "url": "chapter11_constructors-destructors-and-raii.html#chapter11_raii-exercise-destructor",
+  "type": "Checkpoint",
+  "number": "11.7.5",
+  "title": "",
+  "body": " Which destructor practice is safest during exception handling?    Delete every object in the program.  A destructor should clean up only its own object's resources.    Always throw a new exception from the destructor.  Throwing from a destructor during unwinding is dangerous.    Perform cleanup and avoid allowing another exception to escape.  A second escaping exception during unwinding can terminate the program.    Leave resources active so the handler can clean them later.  RAII is intended to make cleanup automatic and reliable.    Allow the destructor to throw whenever cleanup is difficult.  Throwing during cleanup can cause termination during stack unwinding.    "
+},
+{
+  "id": "chapter11_exception-safety-guidelines",
+  "level": "1",
+  "url": "chapter11_exception-safety-guidelines.html",
+  "type": "Section",
+  "number": "11.8",
+  "title": "Exception-Safety Guidelines",
+  "body": " Exception-Safety Guidelines  Exception safety asks what remains true when an operation fails. A well-designed function does not leave objects partly changed, lose a resource, or force every caller to guess what happened.   Three Levels of Guarantee   Common exception-safety guarantees      Guarantee  Meaning after failure    No-throw guarantee  The operation does not allow an exception to escape.    Strong guarantee  The operation either succeeds completely or leaves the state unchanged.    Basic guarantee  The object remains valid and resources are not leaked, but its value may have changed.     The strong guarantee is especially easy to understand: the caller sees either the requested change or no change. The basic guarantee still protects validity and cleanup, even when preserving the old value is not practical.    Validate Before Modifying State  A simple way to improve exception safety is to check all conditions that can be checked before changing the object. In the example, an invalid withdrawal throws before balance is modified.   Preserving the balance after a failed withdrawal   #include <iostream> #include <stdexcept> class BankAccount { private: double balance; public: BankAccount(double starting_balance) : balance{starting_balance} { } void withdraw_money(double amount) { if (amount < 0 || amount > balance) { throw std::invalid_argument(\"withdrawal is not allowed\"); } balance -= amount; } double get_balance() const { return balance; } }; int main() { BankAccount account{100.0}; try { account.withdraw_money(150.0); } catch (const std::exception& error) { std::cout << error.what() << '\\n'; } std::cout << account.get_balance() << '\\n'; return 0; }    The balance remains 100 because the failed operation does not reach the subtraction. This is a small example of the strong guarantee.    Tracing Unchanged State  The static listing shows that validation occurs before subtraction. When the withdrawal fails, the account remains valid and its balance remains unchanged.    Which description matches the strong exception-safety guarantee?    The operation always throws.  The guarantee describes state after failure, not an instruction to throw.    The operation may leak resources as long as it reports an error.  Exception safety includes protecting resources from leaks.    The operation ignores all invalid arguments.  Invalid arguments still need a deliberate response.    The operation may leave the object half-updated after failure.  The strong guarantee requires unchanged state when the operation fails.    The operation succeeds completely or leaves the state unchanged.  This is the commit-or-no-change idea of the strong guarantee.      Arrange the withdrawal so validation occurs before the balance changes.   if (amount < 0 || amount > balance) {  throw std::invalid_argument(\"withdrawal is not allowed\");  }  balance -= amount;     What does the basic guarantee require?    The object must always be exactly unchanged.  That stronger requirement describes the strong guarantee.    The object remains valid and resources are not leaked.  The value may change, but the object and its resources remain safe.    The object must remain unchanged in every detail.  That describes the stronger guarantee; the basic guarantee permits a valid changed state.    The function must never return.  The basic guarantee concerns state and resources after failure.    The program must use only raw pointers.  Exception safety is independent of that choice.      Which practice usually improves exception safety?    Allow a resource to remain open after failure.  Resources should be cleaned up reliably.    Change half of the object's state before checking the argument.  Partial changes make recovery more difficult.    Validate conditions before changing object state.  Early validation helps keep failed operations from partially changing an object.    Catch every exception and discard its message.  Discarding information makes failures harder to diagnose.    Modify the object first and validate the argument later.  Validate before modifying state when possible.       Select all practices that generally improve exception safety.     Validate important conditions before changing object state.  Early validation helps prevent partial changes.    Use RAII objects so resources are released automatically when scope ends.  RAII helps prevent resource leaks during both normal return and stack unwinding.    Ignore every exception so the program always continues.  Ignoring failures can leave the program in an unsafe or unknown state.    Keep an object valid even when an operation reports failure.  Preserving validity is a central part of the basic guarantee.    Allow resources to remain allocated until the operating system ends the process.  Reliable cleanup should occur during program execution, not only at process termination.     "
+},
+{
+  "id": "chapter11_exception-safety-guidelines-2",
+  "level": "2",
+  "url": "chapter11_exception-safety-guidelines.html#chapter11_exception-safety-guidelines-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Exception safety asks what remains true when an operation fails. A well-designed function does not leave objects partly changed, lose a resource, or force every caller to guess what happened. "
+},
+{
+  "id": "chapter11_exception-safety-guarantees",
+  "level": "2",
+  "url": "chapter11_exception-safety-guidelines.html#chapter11_exception-safety-guarantees",
+  "type": "Subsection",
+  "number": "11.8.1",
+  "title": "Three Levels of Guarantee",
+  "body": " Three Levels of Guarantee   Common exception-safety guarantees      Guarantee  Meaning after failure    No-throw guarantee  The operation does not allow an exception to escape.    Strong guarantee  The operation either succeeds completely or leaves the state unchanged.    Basic guarantee  The object remains valid and resources are not leaked, but its value may have changed.     The strong guarantee is especially easy to understand: the caller sees either the requested change or no change. The basic guarantee still protects validity and cleanup, even when preserving the old value is not practical.  "
+},
+{
+  "id": "chapter11_validate-before-modify",
+  "level": "2",
+  "url": "chapter11_exception-safety-guidelines.html#chapter11_validate-before-modify",
+  "type": "Subsection",
+  "number": "11.8.2",
+  "title": "Validate Before Modifying State",
+  "body": " Validate Before Modifying State  A simple way to improve exception safety is to check all conditions that can be checked before changing the object. In the example, an invalid withdrawal throws before balance is modified.   Preserving the balance after a failed withdrawal   #include <iostream> #include <stdexcept> class BankAccount { private: double balance; public: BankAccount(double starting_balance) : balance{starting_balance} { } void withdraw_money(double amount) { if (amount < 0 || amount > balance) { throw std::invalid_argument(\"withdrawal is not allowed\"); } balance -= amount; } double get_balance() const { return balance; } }; int main() { BankAccount account{100.0}; try { account.withdraw_money(150.0); } catch (const std::exception& error) { std::cout << error.what() << '\\n'; } std::cout << account.get_balance() << '\\n'; return 0; }    The balance remains 100 because the failed operation does not reach the subtraction. This is a small example of the strong guarantee.  "
+},
+{
+  "id": "chapter11_exception-safety-visualization",
+  "level": "2",
+  "url": "chapter11_exception-safety-guidelines.html#chapter11_exception-safety-visualization",
+  "type": "Subsection",
+  "number": "11.8.3",
+  "title": "Tracing Unchanged State",
+  "body": " Tracing Unchanged State  The static listing shows that validation occurs before subtraction. When the withdrawal fails, the account remains valid and its balance remains unchanged.  "
+},
+{
+  "id": "chapter11_safety-exercise-strong",
+  "level": "2",
+  "url": "chapter11_exception-safety-guidelines.html#chapter11_safety-exercise-strong",
+  "type": "Checkpoint",
+  "number": "11.8.3",
+  "title": "",
+  "body": " Which description matches the strong exception-safety guarantee?    The operation always throws.  The guarantee describes state after failure, not an instruction to throw.    The operation may leak resources as long as it reports an error.  Exception safety includes protecting resources from leaks.    The operation ignores all invalid arguments.  Invalid arguments still need a deliberate response.    The operation may leave the object half-updated after failure.  The strong guarantee requires unchanged state when the operation fails.    The operation succeeds completely or leaves the state unchanged.  This is the commit-or-no-change idea of the strong guarantee.    "
+},
+{
+  "id": "chapter11_safety-parsons-validation",
+  "level": "2",
+  "url": "chapter11_exception-safety-guidelines.html#chapter11_safety-parsons-validation",
+  "type": "Checkpoint",
+  "number": "11.8.4",
+  "title": "",
+  "body": " Arrange the withdrawal so validation occurs before the balance changes.   if (amount < 0 || amount > balance) {  throw std::invalid_argument(\"withdrawal is not allowed\");  }  balance -= amount;   "
+},
+{
+  "id": "chapter11_safety-exercise-basic",
+  "level": "2",
+  "url": "chapter11_exception-safety-guidelines.html#chapter11_safety-exercise-basic",
+  "type": "Checkpoint",
+  "number": "11.8.5",
+  "title": "",
+  "body": " What does the basic guarantee require?    The object must always be exactly unchanged.  That stronger requirement describes the strong guarantee.    The object remains valid and resources are not leaked.  The value may change, but the object and its resources remain safe.    The object must remain unchanged in every detail.  That describes the stronger guarantee; the basic guarantee permits a valid changed state.    The function must never return.  The basic guarantee concerns state and resources after failure.    The program must use only raw pointers.  Exception safety is independent of that choice.    "
+},
+{
+  "id": "chapter11_safety-exercise-guidance",
+  "level": "2",
+  "url": "chapter11_exception-safety-guidelines.html#chapter11_safety-exercise-guidance",
+  "type": "Checkpoint",
+  "number": "11.8.6",
+  "title": "",
+  "body": " Which practice usually improves exception safety?    Allow a resource to remain open after failure.  Resources should be cleaned up reliably.    Change half of the object's state before checking the argument.  Partial changes make recovery more difficult.    Validate conditions before changing object state.  Early validation helps keep failed operations from partially changing an object.    Catch every exception and discard its message.  Discarding information makes failures harder to diagnose.    Modify the object first and validate the argument later.  Validate before modifying state when possible.    "
+},
+{
+  "id": "chapter11_safety-exercise-practices",
+  "level": "2",
+  "url": "chapter11_exception-safety-guidelines.html#chapter11_safety-exercise-practices",
+  "type": "Checkpoint",
+  "number": "11.8.7",
+  "title": "",
+  "body": "  Select all practices that generally improve exception safety.     Validate important conditions before changing object state.  Early validation helps prevent partial changes.    Use RAII objects so resources are released automatically when scope ends.  RAII helps prevent resource leaks during both normal return and stack unwinding.    Ignore every exception so the program always continues.  Ignoring failures can leave the program in an unsafe or unknown state.    Keep an object valid even when an operation reports failure.  Preserving validity is a central part of the basic guarantee.    Allow resources to remain allocated until the operating system ends the process.  Reliable cleanup should occur during program execution, not only at process termination.    "
+},
+{
+  "id": "chapter11_noexcept-and-exception-boundaries",
+  "level": "1",
+  "url": "chapter11_noexcept-and-exception-boundaries.html",
+  "type": "Section",
+  "number": "11.9",
+  "title": "<code class=\"code-inline tex2jax_ignore\">noexcept<\/code> and Exception Boundaries",
+  "body": " noexcept and Exception Boundaries  The noexcept specifier states that a function promises not to allow an exception to escape. It communicates an important boundary in a program's design, but it is not a general-purpose error-suppression mechanism.   What noexcept Means  A function declared noexcept may still contain ordinary statements that can fail in other ways. The promise concerns exceptions: if an exception escapes the function, the program calls std::terminate() rather than searching for a handler farther up the call chain.   A function with a no-throw promise   #include <iostream> int get_fixed_count() noexcept { return 3; } int main() { std::cout << get_fixed_count() << '\\n'; return 0; }    A function should be marked noexcept only when its implementation and its design genuinely support that promise. Do not add noexcept merely to hide an exception that should have been handled.    noexcept and Cleanup  Cleanup functions and destructors are especially important exception boundaries. A destructor that throws while another exception is already unwinding can cause the program to terminate. For this reason, destructors should normally complete cleanup without allowing exceptions to escape.  In this introductory course, use noexcept to recognize and document a no-throw promise. Do not use it as a substitute for validating input, reporting failures, or designing RAII cleanup.    Visualizing a No-Throw Function     What does noexcept promise?    The compiler guarantees that the function's result is correct.  noexcept concerns exceptions, not algorithmic correctness.    The function is forbidden from calling any other function.  noexcept concerns exceptions escaping, not whether the function makes calls.    The function will not allow an exception to escape.  noexcept describes exception behavior, not every possible program failure.    The function cannot contain any statements.  A noexcept function can contain ordinary executable statements.    The function automatically catches every exception.  noexcept is not a catch handler.      Arrange a valid no-throw function declaration and definition.   int get_fixed_count()  noexcept {  return 3;  }     What can happen if an exception escapes a noexcept function?    The function automatically retries forever.  Retry behavior must be explicitly designed.    The compiler removes the function.  The program terminates at runtime if the promise is violated.    The exception always becomes a return value.  noexcept does not convert exceptions into return values.    The program calls std::terminate() .  The no-throw boundary does not permit the exception to propagate farther.    The compiler silently catches the exception and returns a default value.  An exception escaping a noexcept function leads to termination.      When should a programmer use noexcept ?    Whenever a function takes an argument.  Parameters do not determine whether a function is no-throw.    Use noexcept to conceal operations that may fail.  Use it only when the no-throw contract is genuine.    Only on functions that return strings.  The return type does not determine the use of noexcept .    Whenever the programmer wants to hide an error.  Hiding an error can cause termination instead of recovery.    When the function genuinely has a no-throw contract.  The specifier should document a reliable design promise.     "
+},
+{
+  "id": "chapter11_noexcept-and-exception-boundaries-2",
+  "level": "2",
+  "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-and-exception-boundaries-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The noexcept specifier states that a function promises not to allow an exception to escape. It communicates an important boundary in a program's design, but it is not a general-purpose error-suppression mechanism. "
+},
+{
+  "id": "chapter11_noexcept-meaning",
+  "level": "2",
+  "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-meaning",
+  "type": "Subsection",
+  "number": "11.9.1",
+  "title": "What <code class=\"code-inline tex2jax_ignore\">noexcept<\/code> Means",
+  "body": " What noexcept Means  A function declared noexcept may still contain ordinary statements that can fail in other ways. The promise concerns exceptions: if an exception escapes the function, the program calls std::terminate() rather than searching for a handler farther up the call chain.   A function with a no-throw promise   #include <iostream> int get_fixed_count() noexcept { return 3; } int main() { std::cout << get_fixed_count() << '\\n'; return 0; }    A function should be marked noexcept only when its implementation and its design genuinely support that promise. Do not add noexcept merely to hide an exception that should have been handled.  "
+},
+{
+  "id": "chapter11_noexcept-and-destructors",
+  "level": "2",
+  "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-and-destructors",
+  "type": "Subsection",
+  "number": "11.9.2",
+  "title": "<code class=\"code-inline tex2jax_ignore\">noexcept<\/code> and Cleanup",
+  "body": " noexcept and Cleanup  Cleanup functions and destructors are especially important exception boundaries. A destructor that throws while another exception is already unwinding can cause the program to terminate. For this reason, destructors should normally complete cleanup without allowing exceptions to escape.  In this introductory course, use noexcept to recognize and document a no-throw promise. Do not use it as a substitute for validating input, reporting failures, or designing RAII cleanup.  "
+},
+{
+  "id": "chapter11_noexcept-visualization",
+  "level": "2",
+  "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-visualization",
+  "type": "Subsection",
+  "number": "11.9.3",
+  "title": "Visualizing a No-Throw Function",
+  "body": " Visualizing a No-Throw Function   "
+},
+{
+  "id": "chapter11_noexcept-exercise-meaning",
+  "level": "2",
+  "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-exercise-meaning",
+  "type": "Checkpoint",
+  "number": "11.9.2",
+  "title": "",
+  "body": " What does noexcept promise?    The compiler guarantees that the function's result is correct.  noexcept concerns exceptions, not algorithmic correctness.    The function is forbidden from calling any other function.  noexcept concerns exceptions escaping, not whether the function makes calls.    The function will not allow an exception to escape.  noexcept describes exception behavior, not every possible program failure.    The function cannot contain any statements.  A noexcept function can contain ordinary executable statements.    The function automatically catches every exception.  noexcept is not a catch handler.    "
+},
+{
+  "id": "chapter11_noexcept-parsons-declaration",
+  "level": "2",
+  "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-parsons-declaration",
+  "type": "Checkpoint",
+  "number": "11.9.3",
+  "title": "",
+  "body": " Arrange a valid no-throw function declaration and definition.   int get_fixed_count()  noexcept {  return 3;  }   "
+},
+{
+  "id": "chapter11_noexcept-exercise-danger",
+  "level": "2",
+  "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-exercise-danger",
+  "type": "Checkpoint",
+  "number": "11.9.4",
+  "title": "",
+  "body": " What can happen if an exception escapes a noexcept function?    The function automatically retries forever.  Retry behavior must be explicitly designed.    The compiler removes the function.  The program terminates at runtime if the promise is violated.    The exception always becomes a return value.  noexcept does not convert exceptions into return values.    The program calls std::terminate() .  The no-throw boundary does not permit the exception to propagate farther.    The compiler silently catches the exception and returns a default value.  An exception escaping a noexcept function leads to termination.    "
+},
+{
+  "id": "chapter11_noexcept-exercise-guidance",
+  "level": "2",
+  "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-exercise-guidance",
+  "type": "Checkpoint",
+  "number": "11.9.5",
+  "title": "",
+  "body": " When should a programmer use noexcept ?    Whenever a function takes an argument.  Parameters do not determine whether a function is no-throw.    Use noexcept to conceal operations that may fail.  Use it only when the no-throw contract is genuine.    Only on functions that return strings.  The return type does not determine the use of noexcept .    Whenever the programmer wants to hide an error.  Hiding an error can cause termination instead of recovery.    When the function genuinely has a no-throw contract.  The specifier should document a reliable design promise.    "
+},
+{
+  "id": "chapter11_designing-recoverable-programs",
+  "level": "1",
+  "url": "chapter11_designing-recoverable-programs.html",
+  "type": "Section",
+  "number": "11.10",
+  "title": "Designing Recoverable Programs",
+  "body": " Designing Recoverable Programs  Exception handling is most useful when it is part of a clear division of responsibility. Lower-level code detects and describes a failure. Higher-level code decides whether it can recover, retry, report the problem, or stop the operation.   Handle a Failure at the Right Level  A function should not catch an exception merely because it can. It should catch the exception when it knows what meaningful action to take. Otherwise, it should allow the exception to propagate to a caller with more context.   Dividing error-handling responsibilities      Program layer  Responsibility    Low-level operation  Detect the failure and throw a meaningful exception.    Intermediate operation  Add context, recover, or allow propagation to continue.    Top-level interaction  Give the user a clear message and choose the next action.       Give Users a Useful Recovery Path  A user-facing handler should explain what failed in plain language and, when possible, tell the user what to do next. A diagnostic message for a programmer can be more detailed, but it should not expose unnecessary implementation details to a user.   Handling invalid input at the interaction boundary   #include <iostream> #include <stdexcept> void process_score(int score) { if (score < 0 || score > 100) { throw std::invalid_argument(\"score must be between 0 and 100\"); } std::cout << \"Accepted score: \" << score << '\\n'; } int main() { try { process_score(120); } catch (const std::invalid_argument& error) { std::cout << \"Please try again: \" << error.what() << '\\n'; } return 0; }    The low-level function identifies the invalid score. The top-level code chooses a user-facing response. In a larger program, the interaction could ask for a new score instead of ending.    Guidelines for Recoverable Programs  Follow these guidelines for Recoverable Programs:   Throw an exception that describes the failure.  Catch an exception only where meaningful action is possible.  Preserve the object's invariants after a failed operation.  Use RAII so cleanup remains reliable during propagation.  Keep user messages clear and avoid silently ignoring failures.   These guidelines prepare the program for file input and output. A file may be missing, inaccessible, malformed, or unexpectedly shortened. Chapter 12 will apply these exception-handling patterns to those situations.    Tracing Recovery at the Boundary  The static listing shows the low-level function reporting the invalid score and the top-level code translating that failure into a useful recovery message.    Where should an exception usually be handled?    Never; all exceptions should be ignored.  Unresolved exceptions can terminate the program.    At the lowest possible level, even when that level cannot recover.  The handling level should understand the needed recovery action.    At a level that knows how to take meaningful action.  A handler should recover, report, retry, or otherwise respond deliberately.    Immediately in every function that might call another function.  Catching without useful action can hide the failure.    Only inside the compiler.  Exception handling is part of the running program.      Arrange the top-level recovery boundary.   try {  process_score(120);  }  catch (const std::invalid_argument& error) {  std::cout << \"Please try again\" << '\\n';  }     Which user-facing message is most useful?    Internal compiler object 0xA04F failed.  Implementation details are not useful to most users.    Everything succeeded.  The operation actually failed, so the message would be misleading.    Error.  This does not explain what failed or how to recover.    Please try again: score must be between 0 and 100.  The message explains the problem and suggests the next action.    The operation failed somewhere.  A useful message identifies the problem and, when possible, a next step.      Which practice supports a recoverable program?    Allow invalid objects to circulate until a later function notices.  Classes should protect their invariants early.    Put every recovery decision inside the lowest-level helper.  Lower-level code should detect problems; higher-level code may know how to recover.    Use exceptions for ordinary loop stopping conditions.  Expected control flow should use ordinary decisions.    Catch every exception and continue as if nothing happened.  Ignoring failure can leave the program's state or output misleading.    Keep low-level detection separate from high-level recovery.  This division lets each layer use the context it has.     "
+},
+{
+  "id": "chapter11_designing-recoverable-programs-2",
+  "level": "2",
+  "url": "chapter11_designing-recoverable-programs.html#chapter11_designing-recoverable-programs-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Exception handling is most useful when it is part of a clear division of responsibility. Lower-level code detects and describes a failure. Higher-level code decides whether it can recover, retry, report the problem, or stop the operation. "
+},
+{
+  "id": "chapter11_layered-error-handling",
+  "level": "2",
+  "url": "chapter11_designing-recoverable-programs.html#chapter11_layered-error-handling",
+  "type": "Subsection",
+  "number": "11.10.1",
+  "title": "Handle a Failure at the Right Level",
+  "body": " Handle a Failure at the Right Level  A function should not catch an exception merely because it can. It should catch the exception when it knows what meaningful action to take. Otherwise, it should allow the exception to propagate to a caller with more context.   Dividing error-handling responsibilities      Program layer  Responsibility    Low-level operation  Detect the failure and throw a meaningful exception.    Intermediate operation  Add context, recover, or allow propagation to continue.    Top-level interaction  Give the user a clear message and choose the next action.     "
+},
+{
+  "id": "chapter11_user-facing-recovery",
+  "level": "2",
+  "url": "chapter11_designing-recoverable-programs.html#chapter11_user-facing-recovery",
+  "type": "Subsection",
+  "number": "11.10.2",
+  "title": "Give Users a Useful Recovery Path",
+  "body": " Give Users a Useful Recovery Path  A user-facing handler should explain what failed in plain language and, when possible, tell the user what to do next. A diagnostic message for a programmer can be more detailed, but it should not expose unnecessary implementation details to a user.   Handling invalid input at the interaction boundary   #include <iostream> #include <stdexcept> void process_score(int score) { if (score < 0 || score > 100) { throw std::invalid_argument(\"score must be between 0 and 100\"); } std::cout << \"Accepted score: \" << score << '\\n'; } int main() { try { process_score(120); } catch (const std::invalid_argument& error) { std::cout << \"Please try again: \" << error.what() << '\\n'; } return 0; }    The low-level function identifies the invalid score. The top-level code chooses a user-facing response. In a larger program, the interaction could ask for a new score instead of ending.  "
+},
+{
+  "id": "chapter11_recovery-guidelines",
+  "level": "2",
+  "url": "chapter11_designing-recoverable-programs.html#chapter11_recovery-guidelines",
+  "type": "Subsection",
+  "number": "11.10.3",
+  "title": "Guidelines for Recoverable Programs",
+  "body": " Guidelines for Recoverable Programs  Follow these guidelines for Recoverable Programs:   Throw an exception that describes the failure.  Catch an exception only where meaningful action is possible.  Preserve the object's invariants after a failed operation.  Use RAII so cleanup remains reliable during propagation.  Keep user messages clear and avoid silently ignoring failures.   These guidelines prepare the program for file input and output. A file may be missing, inaccessible, malformed, or unexpectedly shortened. Chapter 12 will apply these exception-handling patterns to those situations.  "
+},
+{
+  "id": "chapter11_recoverable-program-visualization",
+  "level": "2",
+  "url": "chapter11_designing-recoverable-programs.html#chapter11_recoverable-program-visualization",
+  "type": "Subsection",
+  "number": "11.10.4",
+  "title": "Tracing Recovery at the Boundary",
+  "body": " Tracing Recovery at the Boundary  The static listing shows the low-level function reporting the invalid score and the top-level code translating that failure into a useful recovery message.  "
+},
+{
+  "id": "chapter11_recovery-exercise-level",
+  "level": "2",
+  "url": "chapter11_designing-recoverable-programs.html#chapter11_recovery-exercise-level",
+  "type": "Checkpoint",
+  "number": "11.10.3",
+  "title": "",
+  "body": " Where should an exception usually be handled?    Never; all exceptions should be ignored.  Unresolved exceptions can terminate the program.    At the lowest possible level, even when that level cannot recover.  The handling level should understand the needed recovery action.    At a level that knows how to take meaningful action.  A handler should recover, report, retry, or otherwise respond deliberately.    Immediately in every function that might call another function.  Catching without useful action can hide the failure.    Only inside the compiler.  Exception handling is part of the running program.    "
+},
+{
+  "id": "chapter11_recovery-parsons-boundary",
+  "level": "2",
+  "url": "chapter11_designing-recoverable-programs.html#chapter11_recovery-parsons-boundary",
+  "type": "Checkpoint",
+  "number": "11.10.4",
+  "title": "",
+  "body": " Arrange the top-level recovery boundary.   try {  process_score(120);  }  catch (const std::invalid_argument& error) {  std::cout << \"Please try again\" << '\\n';  }   "
+},
+{
+  "id": "chapter11_recovery-exercise-message",
+  "level": "2",
+  "url": "chapter11_designing-recoverable-programs.html#chapter11_recovery-exercise-message",
+  "type": "Checkpoint",
+  "number": "11.10.5",
+  "title": "",
+  "body": " Which user-facing message is most useful?    Internal compiler object 0xA04F failed.  Implementation details are not useful to most users.    Everything succeeded.  The operation actually failed, so the message would be misleading.    Error.  This does not explain what failed or how to recover.    Please try again: score must be between 0 and 100.  The message explains the problem and suggests the next action.    The operation failed somewhere.  A useful message identifies the problem and, when possible, a next step.    "
+},
+{
+  "id": "chapter11_recovery-exercise-guidelines",
+  "level": "2",
+  "url": "chapter11_designing-recoverable-programs.html#chapter11_recovery-exercise-guidelines",
+  "type": "Checkpoint",
+  "number": "11.10.6",
+  "title": "",
+  "body": " Which practice supports a recoverable program?    Allow invalid objects to circulate until a later function notices.  Classes should protect their invariants early.    Put every recovery decision inside the lowest-level helper.  Lower-level code should detect problems; higher-level code may know how to recover.    Use exceptions for ordinary loop stopping conditions.  Expected control flow should use ordinary decisions.    Catch every exception and continue as if nothing happened.  Ignoring failure can leave the program's state or output misleading.    Keep low-level detection separate from high-level recovery.  This division lets each layer use the context it has.    "
+},
+{
   "id": "chapter15_file-input-output-and-matrixes",
   "level": "1",
   "url": "chapter15_file-input-output-and-matrixes.html",
   "type": "Section",
-  "number": "11.1",
+  "number": "12.1",
   "title": "File Input\/Output and <code class=\"code-inline tex2jax_ignore\">matrix<\/code>es",
   "body": " File Input\/Output and matrix es  In this chapter we will develop a program that reads and writes files, parses input, and demonstrates the matrix class. We will also implement a data structure called Set that expands automatically as you add elements.  Aside from demonstrating all these features, the real purpose of the program is to generate a two-dimensional table of the distances between cities in the United States. The output is a matrix that looks like this:  Atlanta 0 Chicago 700 0 Boston 1100 1000 0 Dallas 800 900 1750 0 Denver 1450 1000 2000 800 0 Detroit 750 300 800 1150 1300 0 Orlando 400 1150 1300 1100 1900 1200 0 Phoenix 1850 1750 2650 1000 800 2000 2100 0 Seattle 2650 2000 3000 2150 1350 2300 3100 1450 0 Atlanta Chicago Boston Dallas Denver Detroit Orlando Phoenix Seattle  The diagonal elements are all zero because that is the distance from a city to itself. Also, because the distance from A to B is the same as the distance from B to A, there is no need to print the top half of the matrix.    Why aren't we filling in every value in our table, who are we leaving blank space above the diagonal of 0's?      Because we only need the half of the dataset contained by the triangle.   Incorrect! All of the data above the 0 diagonal is a mirror image of the triangle! So, the triangle contains the whole dataset.     Because triangles are the most effective shape to use when presenting data to others.   Incorrect! Triangles do look cool, but they aren't necessarily the most effective shape to use when presenting data.     Because matrices are triangles.   Incorrect! This triangle is PART OF an apmatrix.     Because the triangle contains the entire dataset.   Correct! The triangle contains all data points with no repeat data. If we included all datapoints, the would just be repeats of the points we already have.       Based on how it is used to create the above table, what do you think a matrix is?      a geometric shape   Incorrect! A matrix is not a geometric shape, although they ARE rectangles.     a two-dimensional std::vector   Correct!     a material in which something develops   Incorrect! This is a definition for matrix, but not in the programming sense.     a mold used to shape things   Incorrect! This is a definition for matrix, but not in the programming sense.     "
 },
@@ -13766,7 +14648,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-output-and-matrixes.html#question15_1_1",
   "type": "Checkpoint",
-  "number": "11.1.1",
+  "number": "12.1.1",
   "title": "",
   "body": "  Why aren't we filling in every value in our table, who are we leaving blank space above the diagonal of 0's?      Because we only need the half of the dataset contained by the triangle.   Incorrect! All of the data above the 0 diagonal is a mirror image of the triangle! So, the triangle contains the whole dataset.     Because triangles are the most effective shape to use when presenting data to others.   Incorrect! Triangles do look cool, but they aren't necessarily the most effective shape to use when presenting data.     Because matrices are triangles.   Incorrect! This triangle is PART OF an apmatrix.     Because the triangle contains the entire dataset.   Correct! The triangle contains all data points with no repeat data. If we included all datapoints, the would just be repeats of the points we already have.    "
 },
@@ -13775,7 +14657,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-output-and-matrixes.html#question15_1_2",
   "type": "Checkpoint",
-  "number": "11.1.2",
+  "number": "12.1.2",
   "title": "",
   "body": "  Based on how it is used to create the above table, what do you think a matrix is?      a geometric shape   Incorrect! A matrix is not a geometric shape, although they ARE rectangles.     a two-dimensional std::vector   Correct!     a material in which something develops   Incorrect! This is a definition for matrix, but not in the programming sense.     a mold used to shape things   Incorrect! This is a definition for matrix, but not in the programming sense.    "
 },
@@ -13784,7 +14666,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_streams.html",
   "type": "Section",
-  "number": "11.2",
+  "number": "12.2",
   "title": "Streams",
   "body": " Streams  To get input from a file or send output to a file, you have to create an ifstream object (for input files) or an ofstream object (for output files). These objects are defined in the header file fstream , which you have to include.  A stream is an abstract object that represents the flow of data from a source like the keyboard or a file to a destination like the screen or a file.  We have already worked with two streams: cin , which has type istream , and cout , which has type ostream . cin represents the flow of data from the keyboard to the program. Each time the program uses the >> operator or the getline function, it removes a piece of data from the input stream.  Similarly, when the program uses the << operator on an ostream , it adds a datum to the outgoing stream.    You create an object to write data to a file, and a object to read data from a file. In order to define objects to input from a file or send output to a file, you must include the <   > header file.                       What is a stream object?      an abstract object that works exclusively with std::cin and std::cout statements   Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!     an abstract object on which input and ouput operations are performed   Correct!     an abstract object that works only with file data   Incorrect! Stream objects do work with file data, but they do other things too.     an abstract object that controls the flow of statements   Incorrect! This is not at all what stream objects do, you should try re-reading to get a better understanding!       Match the stream to its type.   Try again!    cin  ifstream    cout  ofstream     "
 },
@@ -13829,7 +14711,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_2_1",
   "type": "Checkpoint",
-  "number": "11.2.1",
+  "number": "12.2.1",
   "title": "",
   "body": "  You create an object to write data to a file, and a object to read data from a file. In order to define objects to input from a file or send output to a file, you must include the <   > header file.                    "
 },
@@ -13838,7 +14720,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_2_2",
   "type": "Checkpoint",
-  "number": "11.2.2",
+  "number": "12.2.2",
   "title": "",
   "body": "  What is a stream object?      an abstract object that works exclusively with std::cin and std::cout statements   Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!     an abstract object on which input and ouput operations are performed   Correct!     an abstract object that works only with file data   Incorrect! Stream objects do work with file data, but they do other things too.     an abstract object that controls the flow of statements   Incorrect! This is not at all what stream objects do, you should try re-reading to get a better understanding!    "
 },
@@ -13847,7 +14729,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_streams.html#question15_1_3",
   "type": "Checkpoint",
-  "number": "11.2.3",
+  "number": "12.2.3",
   "title": "",
   "body": "  Match the stream to its type.   Try again!    cin  ifstream    cout  ofstream    "
 },
@@ -13856,7 +14738,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_file-input-finput.html",
   "type": "Section",
-  "number": "11.3",
+  "number": "12.3",
   "title": "File input",
   "body": " File input  To get data from a file, we have to create a stream that flows from the file into the program. We can do that using the ifstream constructor.  ifstream infile(\"file-name\");  The argument for this constructor is a string that contains the name of the file you want to open. The result is an object named infile that supports all the same operations as cin , including >> and getline .  #include <iostream> #include <fstream> int main() { int x; std::string line; std::ifstream infile(\"file-name\"); infile >> x; \/\/ get a single integer and store in x std::getline(infile, line); \/\/ get a whole line and store in line }  If we know ahead of time how much data is in a file, it is straightforward to write a loop that reads the entire file and then stops. More often, though, we want to read the entire file, but don't know how big it is.  There are member functions for ifstreams that check the status of the input stream; they are called good , eof , fail and bad . We will use good to make sure the file was opened successfully and eof to detect the end of file.  Whenever you get data from an input stream, you don't know whether the attempt succeeded until you check. If the return value from eof is true then we have reached the end of the file and we know that the last attempt failed. Here is a program that reads lines from a file and displays them on the screen:  #include <iostream> #include <fstream> int main() { std::string fileName = ...; std::ifstream infile(fileName); if (infile.good() == false) { std::cout << \"Unable to open the file named \" << fileName; exit (1); } while (true) { std::getline(infile, line); if (infile.eof()) { break; } std::cout << line << std::endl; } }  Immediately after opening the file, we invoke the good function. The return value is false if the system could not open the file, most likely because it does not exist, or you do not have permission to read it.  The statement while(true) is an idiom for an infinite loop. Usually there will be a break statement somewhere in the loop so that the program does not really run forever (although some programs do). In this case, the break statement allows us to exit the loop as soon as we detect the end of file.  It is important to exit the loop between the input statement and the output statement, so that when getline fails at the end of the file, we do not output the invalid data in line .    Consider this code snippet: :: ifstream infile(\"file-name\"); Finish each sentence.   Try again!    The constructor is  ifstream.    The argument and the name of the file you want to open is  \"file-name\".    The result of this code snippet is an object named  infile.    The result of this code snippet supports the same operators as  cin.       The ifstream member function called makes sure the file was opened successfully, and member function detects the end of the file.                  The __________ statement allows us to exit the loop as soon as we detect the end of the file.              Create a code block that reads lines from filename and prints them out. First, make sure that the file is able to be opened.     int main() {    string name_of_file = \"filename\";    ifstream in_file(name_of_file);    if (in_file.good() == false) {    std::cout << \"Unable to open the file named \" << name_of_file;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    std::cout << line << std::endl ;  }  }     "
 },
@@ -13937,7 +14819,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_1",
   "type": "Checkpoint",
-  "number": "11.3.1",
+  "number": "12.3.1",
   "title": "",
   "body": "  Consider this code snippet: :: ifstream infile(\"file-name\"); Finish each sentence.   Try again!    The constructor is  ifstream.    The argument and the name of the file you want to open is  \"file-name\".    The result of this code snippet is an object named  infile.    The result of this code snippet supports the same operators as  cin.    "
 },
@@ -13946,7 +14828,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_2",
   "type": "Checkpoint",
-  "number": "11.3.2",
+  "number": "12.3.2",
   "title": "",
   "body": "  The ifstream member function called makes sure the file was opened successfully, and member function detects the end of the file.               "
 },
@@ -13955,7 +14837,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_3",
   "type": "Checkpoint",
-  "number": "11.3.3",
+  "number": "12.3.3",
   "title": "",
   "body": "  The __________ statement allows us to exit the loop as soon as we detect the end of the file.           "
 },
@@ -13964,7 +14846,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-input-finput.html#question15_3_4",
   "type": "Checkpoint",
-  "number": "11.3.4",
+  "number": "12.3.4",
   "title": "",
   "body": "  Create a code block that reads lines from filename and prints them out. First, make sure that the file is able to be opened.     int main() {    string name_of_file = \"filename\";    ifstream in_file(name_of_file);    if (in_file.good() == false) {    std::cout << \"Unable to open the file named \" << name_of_file;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    std::cout << line << std::endl ;  }  }    "
 },
@@ -13973,7 +14855,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_file-output.html",
   "type": "Section",
-  "number": "11.4",
+  "number": "12.4",
   "title": "File output",
   "body": " File output  Sending output to a file is similar. For example, we could modify the previous program to copy lines from one file to another.  #include <iostream> int main() { std::ifstream infile(\"input-file\"); std::ofstream outfile(\"output-file\"); if (infile.good() == false || outfile.good() == false) { std::cout << \"Unable to open one of the files.\" << std::endl; exit (1); } while (true) { std::getline(infile, line); if (infile.eof()) break; outfile << line << std::endl; } }    Create a code block that sends output to a file. First, make sure that both the input file and the output file are able to be opened.     int main() {    ifstream in_file(\"input_file_name\");  ofstream out_file(\"input_file_name\");    if (in_file.good() == false || out_file.good() == false) {    std::cout << \"Unable to open one of the files.\" << std::endl ;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    outfile << line << std::endl ;  }  }       The code from the previous problem checks whether the files open or not. It doesn't specify which one, if any, doesn't open. How could you specify which file does not open?      Create two \"for\" loops instead of an if-statement so that the statement loops through both conditions once.   Try again!     Create a \"while\" loop instead of an if-statement so that the statement loops through both conditions separately until the body of the loop is reached.   Try again!     Create two \"if\" statements, one that check whether in_file.good() is false, and another that checks whether out_file.good() is false, instead of putting them together in one \"if\" statement.   Correct!       Finish the statement:  outfile(\"output-file\"); .           "
 },
@@ -13991,7 +14873,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_1",
   "type": "Checkpoint",
-  "number": "11.4.1",
+  "number": "12.4.1",
   "title": "",
   "body": "  Create a code block that sends output to a file. First, make sure that both the input file and the output file are able to be opened.     int main() {    ifstream in_file(\"input_file_name\");  ofstream out_file(\"input_file_name\");    if (in_file.good() == false || out_file.good() == false) {    std::cout << \"Unable to open one of the files.\" << std::endl ;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    outfile << line << std::endl ;  }  }    "
 },
@@ -14000,7 +14882,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_2",
   "type": "Checkpoint",
-  "number": "11.4.2",
+  "number": "12.4.2",
   "title": "",
   "body": "  The code from the previous problem checks whether the files open or not. It doesn't specify which one, if any, doesn't open. How could you specify which file does not open?      Create two \"for\" loops instead of an if-statement so that the statement loops through both conditions once.   Try again!     Create a \"while\" loop instead of an if-statement so that the statement loops through both conditions separately until the body of the loop is reached.   Try again!     Create two \"if\" statements, one that check whether in_file.good() is false, and another that checks whether out_file.good() is false, instead of putting them together in one \"if\" statement.   Correct!    "
 },
@@ -14009,7 +14891,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_file-output.html#question15_4_3",
   "type": "Checkpoint",
-  "number": "11.4.3",
+  "number": "12.4.3",
   "title": "",
   "body": "  Finish the statement:  outfile(\"output-file\"); .          "
 },
@@ -14018,7 +14900,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_parsing-input-parsing.html",
   "type": "Section",
-  "number": "11.5",
+  "number": "12.5",
   "title": "Parsing input",
   "body": " Parsing input  In I defined parsing as the process of analyzing the structure of a sentence in a natural language or a statement in a formal language. For example, the compiler has to parse your program before it can translate it into machine language.  In addition, when you read input from a file or from the keyboard you often have to parse it in order to extract the information you want and detect errors.  For example, I have a file called distances that contains information about the distances between major cities in the United States. I got this information from a randomly-chosen web page http:\/\/www.jaring.my\/usiskl\/usa\/distance.html so it may be wildly inaccurate, but that doesn't matter. The format of the file looks like this:  \"Atlanta\" \"Chicago\" 700 \"Atlanta\" \"Boston\" 1,100 \"Atlanta\" \"Chicago\" 700 \"Atlanta\" \"Dallas\" 800 \"Atlanta\" \"Denver\" 1,450 \"Atlanta\" \"Detroit\" 750 \"Atlanta\" \"Orlando\" 400  Each line of the file contains the names of two cities in quotation marks and the distance between them in miles. The quotation marks are useful because they make it easy to deal with names that have more than one word, like San Francisco.  By searching for the quotation marks in a line of input, we can find the beginning and end of each city name. Searching for special characters like quotation marks can be a little awkward, though, because the quotation mark is a special character in C++, used to identify string values.  If we want to find the first appearance of a quotation mark, we have to write something like:  int index = line.find('\\\"');  The argument here looks like a mess, but it represents a single character, a double quotation mark. The outermost single-quotes indicate that this is a character value, as usual. The backslash ( \\ ) indicates that we want to treat the next character literally. The sequence \\\" represents a quotation mark; the sequence \\' represents a single-quote. Interestingly, the sequence \\\\ represents a single backslash. The first backslash indicates that we should take the second backslash seriously.  Parsing input lines consists of finding the beginning and end of each city name and using the substr function to extract the cities and distance. substr is a string member function; it takes two arguments, the starting index of the substring and the length.  void processLine(const string& line) { \/\/ the character we are looking for is a quotation mark char quote = '\\\"'; \/\/ store the indices of the quotation marks in a vector std::vector<int> quoteIndex (4); \/\/ find the first quotation mark using the built-in find quoteIndex[0] = line.find(quote); \/\/ find the other quotation marks using the find from Chapter 7 for (int i=1; i < 4; i++) { quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1); } \/\/ break the line up into substrings int len1 = quoteIndex[1] - quoteIndex[0] - 1; std::string city1 = line.substr(quoteIndex[0]+1, len1); int len2 = quoteIndex[3] - quoteIndex[2] - 1; std::string city2 = line.substr(quoteIndex[2]+1, len2); int len3 = line.length() - quoteIndex[2] - 1; std::string distString = line.substr(quoteIndex[3]+1, len3); \/\/ output the extracted information std::cout << city1 << \"\\t\" << city2 << \"\\t\" << distString << std::endl ; }  Of course, just displaying the extracted information is not exactly what we want, but it is a good starting place.    What does parsing mean in the programming sense?      to scan an entire program for errors   Incorrect! This is included in the debugging process.     to run a program start to finish and record the run time   Incorrect! This is included in the debugging process.     to analyze the structure of a statement in a formal language   Correct! The compiler has to parse the program before it can translate it into machine language!     to search an entire program for a statement   Incorrect! You can use control (command) + F to find a particular statement.       The character indicates that we want to match the next character literally.             The substr() takes and as its two arguments.                  Create a block of code that takes a date written in the format mm\/dd\/yyyyy as an argument, and that separates it into three separate integers: day, month, and year. Find the respective parts in this order: month, first slash, day, second slash, year.     int main() {     string month = date.substr(0, 2);    string month = date.substr(2, 0);     int first_slash = date.find('\/');     string day = date.substr(first_slash + 1, 2);    string day = date.substr(first_slash, 2);      int second_slash = date.find('\/', first_slash + 1);    int second_slash = date.find('\/', first_slash);     int second_slash = date.find('\/');     string year = date.substr(second_slash + 1, 4);    string year = date.substr(second_slash, 4);     string year = date.substr(second_slash + 1, 2);    }     "
 },
@@ -14108,7 +14990,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_1",
   "type": "Checkpoint",
-  "number": "11.5.1",
+  "number": "12.5.1",
   "title": "",
   "body": "  What does parsing mean in the programming sense?      to scan an entire program for errors   Incorrect! This is included in the debugging process.     to run a program start to finish and record the run time   Incorrect! This is included in the debugging process.     to analyze the structure of a statement in a formal language   Correct! The compiler has to parse the program before it can translate it into machine language!     to search an entire program for a statement   Incorrect! You can use control (command) + F to find a particular statement.    "
 },
@@ -14117,7 +14999,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_2",
   "type": "Checkpoint",
-  "number": "11.5.2",
+  "number": "12.5.2",
   "title": "",
   "body": "  The character indicates that we want to match the next character literally.          "
 },
@@ -14126,7 +15008,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_3",
   "type": "Checkpoint",
-  "number": "11.5.3",
+  "number": "12.5.3",
   "title": "",
   "body": "  The substr() takes and as its two arguments.               "
 },
@@ -14135,7 +15017,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-input-parsing.html#question15_5_4",
   "type": "Checkpoint",
-  "number": "11.5.4",
+  "number": "12.5.4",
   "title": "",
   "body": "  Create a block of code that takes a date written in the format mm\/dd\/yyyyy as an argument, and that separates it into three separate integers: day, month, and year. Find the respective parts in this order: month, first slash, day, second slash, year.     int main() {     string month = date.substr(0, 2);    string month = date.substr(2, 0);     int first_slash = date.find('\/');     string day = date.substr(first_slash + 1, 2);    string day = date.substr(first_slash, 2);      int second_slash = date.find('\/', first_slash + 1);    int second_slash = date.find('\/', first_slash);     int second_slash = date.find('\/');     string year = date.substr(second_slash + 1, 4);    string year = date.substr(second_slash, 4);     string year = date.substr(second_slash + 1, 2);    }    "
 },
@@ -14144,7 +15026,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_parsing-numbers.html",
   "type": "Section",
-  "number": "11.6",
+  "number": "12.6",
   "title": "Parsing numbers",
   "body": " Parsing numbers  The next task is to convert the numbers in the file from strings to integers. When people write large numbers, they often use commas to group the digits, as in 1,750. Most of the time when computers write large numbers, they don't include commas, and the built-in functions for reading numbers usually can't handle them. That makes the conversion a little more difficult, but it also provides an opportunity to write a comma-stripping function, so that's ok. Once we get rid of the commas, we can use the library function atoi to convert to integer. atoi is defined in the header file cstdlib .  To get rid of the commas, one option is to traverse the string and check whether each character is a digit. If so, we add it to the result string. At the end of the loop, the result string contains all the digits from the original string, in order.  #include <iostream> int convertToInt(const std::string& s) { std::string digitString = \"\"; for (size_t i = 0; i < s.length(); i++) { if (isdigit (s[i])) { digitString += s[i]; } } return atoi(digitString); }  The variable digitString is an example of an accumulator . It is similar to the counter we saw in , except that instead of getting incremented, it gets accumulates one new character at a time, using string concatentation.  The expression  digitString += s[i];  is equivalent to  digitString = digitString + s[i];  Both statements add a single character onto the end of the existing string.  Try the function out for yourself! As you can see, this function can also be used to parse phone numbers!   #include <iostream> #include <string> #include <vector> int convertToInt(const std::string& s) { std::string digitString = \"\"; for (size_t i = 0; i < s.length(); i++) { if (isdigit (s[i])) { digitString += s[i]; } } return atoi(digitString); } int main() { int num = convertToInt(\"867-5309\"); std::cout << num << std::endl; }     What does the atoi() function do?      takes the absolute value of a number   Incorrect! Go back and read for the answer.     converts a double to an int   Incorrect! Go back and read for the answer.     converts a string to an int   Correct! This is very helpful when we read numbers from a file (where they are strings).     converts an int to a string   Incorrect! Go back and read for the answer.       Which of the following strings will return 2020 when passed into convertToInt() ?      2020   Correct! This one is quite simple.     ab,jkl2!!moo0?huh2mth0haha.   Correct! This long, confusing string will clean up nicely!     2,00!!!!!!!!2   Incorrect!     2OOO020OOOOO   Correct! You have to look closely to see that some of these are 0's!     we2love0parsing2numbersO!   Incorrect! Although we do love parsing numbers, this is incorrect.       Create the replace_with() function that takes a string str , a character to get rid of olc_char , and a character to replace it with new_char . It should return a new string that has replaces any occurances of old_char with new_char.      string replace_with(string str, char old_char, char new_char) {    string replace_with() {      for (size_t i = 0; i < str.length(); i++) {    for (int i = 0; i < str.length(); i++) {     for (size_t i = 0; i < str.size(); i++) {     if (str[i] == old_char) {    if (i == old_char) {      str[i] = new_char;  }    new_char = str[i];  }     i = new_char;  }     }  return str;  }    }  return new_char;  }      "
 },
@@ -14216,7 +15098,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_1",
   "type": "Checkpoint",
-  "number": "11.6.1",
+  "number": "12.6.1",
   "title": "",
   "body": "  What does the atoi() function do?      takes the absolute value of a number   Incorrect! Go back and read for the answer.     converts a double to an int   Incorrect! Go back and read for the answer.     converts a string to an int   Correct! This is very helpful when we read numbers from a file (where they are strings).     converts an int to a string   Incorrect! Go back and read for the answer.    "
 },
@@ -14225,7 +15107,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_2",
   "type": "Checkpoint",
-  "number": "11.6.2",
+  "number": "12.6.2",
   "title": "",
   "body": "  Which of the following strings will return 2020 when passed into convertToInt() ?      2020   Correct! This one is quite simple.     ab,jkl2!!moo0?huh2mth0haha.   Correct! This long, confusing string will clean up nicely!     2,00!!!!!!!!2   Incorrect!     2OOO020OOOOO   Correct! You have to look closely to see that some of these are 0's!     we2love0parsing2numbersO!   Incorrect! Although we do love parsing numbers, this is incorrect.    "
 },
@@ -14234,7 +15116,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_parsing-numbers.html#question15_6_3",
   "type": "Checkpoint",
-  "number": "11.6.3",
+  "number": "12.6.3",
   "title": "",
   "body": "  Create the replace_with() function that takes a string str , a character to get rid of olc_char , and a character to replace it with new_char . It should return a new string that has replaces any occurances of old_char with new_char.      string replace_with(string str, char old_char, char new_char) {    string replace_with() {      for (size_t i = 0; i < str.length(); i++) {    for (int i = 0; i < str.length(); i++) {     for (size_t i = 0; i < str.size(); i++) {     if (str[i] == old_char) {    if (i == old_char) {      str[i] = new_char;  }    new_char = str[i];  }     i = new_char;  }     }  return str;  }    }  return new_char;  }     "
 },
@@ -14243,7 +15125,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_the-set-data-structure.html",
   "type": "Section",
-  "number": "11.7",
+  "number": "12.7",
   "title": "The <code class=\"code-inline tex2jax_ignore\">Set<\/code> data structure",
   "body": " The Set data structure  A data structure is a container for grouping a collection of data into a single object. We have seen some examples already, including string s, which are collections of characters, and std::vector s which are collections of any type.  An ordered set is a collection of items with two defining properties:    Ordering:  The elements of the set have indices associated with them. We can use these indices to identify elements of the set.    Uniqueness:  No element appears in the set more than once. If you try to add an element to a set, and it already exists, there is no effect.    In addition, our implementation of an ordered set will have the following property:    Arbitrary size:  As we add elements to the set, it expands to make room for new elements.    Both string s and std::vector s have an ordering; every element has an index we can use to identify it. None of the data structures we have seen so far have the properties of uniqueness or arbitrary size.  To achieve uniqueness, we have to write an add function that searches the set to see if it already exists. To make the set expand as elements are added, we can take advantage of the resize function on std::vector s.  Here is the beginning of a class definition for a Set .  class Set { private: std::vector<string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const string& s) const; int add(const string& s); }; Set::Set(int n) { std::vector<string> temp (n); elements = temp; numElements = 0; }  The instance variables are a std::vector of strings and an integer that keeps track of how many elements there are in the set. Keep in mind that the number of elements in the set, numElements , is not the same thing as the size of the std::vector . Usually it will be smaller.  The Set constructor takes a single parameter, which is the initial size of the std::vector . The initial number of elements is always zero.  getNumElements and getElement are accessor functions for the instance variables, which are private. numElements is a read-only variable, so we provide a get function but not a set function.  int Set::getNumElements() const { return numElements; }  Why do we have to prevent client programs from changing getNumElements ? What are the invariants for this type, and how could a client program break an invariant. As we look at the rest of the Set member function, see if you can convince yourself that they all maintain the invariants.  When we use the [] operator to access the std::vector , it checks to make sure the index is greater than or equal to zero and less than the length of the std::vector . To access the elements of a set, though, we need to check a stronger condition. The index has to be less than the number of elements, which might be smaller than the length of the std::vector .  string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl ; exit (1); } }  If getElement gets an index that is out of range, it prints an error message (not the most useful message, I admit), and exits.  The interesting functions are find and add . By now, the pattern for traversing and searching should be old hat:  int Set::find(const string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; }  So that leaves us with add . Often the return type for something like add would be void, but in this case it might be useful to make it return the index of the element.  int Set::add(const string& s) { \/\/ if the element is already in the set, return its index int index = find(s); if (index != -1) return index; \/\/ if the vector is full, double its size if (numElements == elements.length()) { elements.resize (elements.length() * 2); } \/\/ add the new elements and return its index index = numElements; elements[index] = s; numElements++; return index; }  The tricky thing here is that numElements is used in two ways. It is the number of elements in the set, of course, but it is also the index of the next element to be added.  It takes a minute to convince yourself that that works, but consider this: when the number of elements is zero, the index of the next element is 0. When the number of elements is equal to the length of the std::vector , that means that the vector is full, and we have to allocate more space (using resize ) before we can add the new element.  Here is a state diagram showing a Set object that initially contains space for 2 elements.  Now we can use the Set class to keep track of the cities we find in the file. In main we create the Set with an initial size of 2:  Set cities (2);  Then in processLine we add both cities to the Set and store the index that gets returned.  int index1 = cities.add (city1); int index2 = cities.add (city2);  I modified processLine to take the cities object as a second parameter.   Try running the program:   #include <iostream> #include <string> #include <vector> class Set { private: std::vector<std::string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const std::string& s) const; int add(const std::string& s); }; Set::Set(int n) { std::vector<std::string> temp (n); elements = temp; numElements = 0; } int main() { Set cities(2); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); std::cout << cities.getElement(0); }  int Set::getNumElements() const { return numElements; } std::string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl; exit (1); } } int Set::find(const std::string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; } int Set::add(const std::string& s) { int index = find(s); if (index != -1) return index; size_t num = numElements; if (num == elements.size()) { elements.resize (elements.size() * 2); } index = numElements; elements[index] = s; numElements++; return index; }      Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!       Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.       If the number of elements is 76, then the index of the next element is .             Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.            "
 },
@@ -14450,7 +15332,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#set_sample",
   "type": "Listing",
-  "number": "11.7.1",
+  "number": "12.7.1",
   "title": "Try running the program:",
   "body": " Try running the program:   #include <iostream> #include <string> #include <vector> class Set { private: std::vector<std::string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const std::string& s) const; int add(const std::string& s); }; Set::Set(int n) { std::vector<std::string> temp (n); elements = temp; numElements = 0; } int main() { Set cities(2); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); std::cout << cities.getElement(0); }  int Set::getNumElements() const { return numElements; } std::string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl; exit (1); } } int Set::find(const std::string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; } int Set::add(const std::string& s) { int index = find(s); if (index != -1) return index; size_t num = numElements; if (num == elements.size()) { elements.resize (elements.size() * 2); } index = numElements; elements[index] = s; numElements++; return index; }   "
 },
@@ -14459,7 +15341,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_1",
   "type": "Checkpoint",
-  "number": "11.7.2",
+  "number": "12.7.2",
   "title": "",
   "body": "  Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!    "
 },
@@ -14468,7 +15350,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_2",
   "type": "Checkpoint",
-  "number": "11.7.3",
+  "number": "12.7.3",
   "title": "",
   "body": "  Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.    "
 },
@@ -14477,7 +15359,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_3",
   "type": "Checkpoint",
-  "number": "11.7.4",
+  "number": "12.7.4",
   "title": "",
   "body": "  If the number of elements is 76, then the index of the next element is .          "
 },
@@ -14486,7 +15368,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_the-set-data-structure.html#question15_7_4",
   "type": "Checkpoint",
-  "number": "11.7.5",
+  "number": "12.7.5",
   "title": "",
   "body": "  Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.           "
 },
@@ -14495,7 +15377,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_matrix.html",
   "type": "Section",
-  "number": "11.8",
+  "number": "12.8",
   "title": "<code class=\"code-inline tex2jax_ignore\">matrix<\/code>",
   "body": "  matrix   A matrix is similar to a std::vector except it is two-dimensional. Instead of a length, it has two dimensions, called numrows and numcols , for number of rows and number of columns.  Each element in the matrix is indentified by two indices; one specifies the row number, the other the column number.  To create a matrix, there are four constructors:  matrix<char> m1; matrix<int> m2(3, 4); matrix<double> m3(rows, cols, 0.0); matrix<double> m4(m3);  The first is a do-nothing constructor that makes a matrix with both dimensions 0. The second takes two integers, which are the initial number of rows and columns, in that order. The third is the same as the second, except that it takes an additional parameter that is used to initialized the elements of the matrix. The fourth is a copy constructor that takes another matrix as a parameter.  Just as with vectors , we can make matrix es with any type of elements (including std::vector s, and even matrix es).  To access the elements of a matrix, we use the [] operator to specify the row and column:  m2[0][0] = 1; m3[1][2] = 10.0 * m2[0][0];  If we try to access an element that is out of range, the program prints an error message and quits.  The numrows and numcols functions get the number of rows and columns. Remember that the row indices run from 0 to numrows() -1 and the column indices run from 0 to numcols() -1 .  The usual way to traverse a matrix is with a nested loop. This loop sets each element of the matrix to the sum of its two indices:  for (int row=0; row < m2.numrows(); row++) { for (int col=0; col < m2.numcols(); col++) { m2[row][col] = row + col; } }  This loop prints each row of the matrix with tabs between the elements and newlines between the rows:  for (int row=0; row < m2.numrows(); row++) { for (int col=0; col < m2.numcols(); col++) { std::cout << m2[row][col] << \"\\t\"; } std::cout << std::endl ; }    Which of the following data types are supported by matrix?      int   Correct!     string   Correct!     std::vector<int>   Correct!     vector<std::vector<int>>   Correct! This is a technically type of matrix!     matrix   Correct! Matrices can be made of matrices.       Suppose we have matrix mat . Then mat[9][17] would be accessing column and row of our matrix.         .*  Incorrect! Remember to use zero indexing!         .*  Incorrect! Remember to use zero indexing!      "
 },
@@ -14594,7 +15476,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_matrix.html#question15_8_1",
   "type": "Checkpoint",
-  "number": "11.8.1",
+  "number": "12.8.1",
   "title": "",
   "body": "  Which of the following data types are supported by matrix?      int   Correct!     string   Correct!     std::vector<int>   Correct!     vector<std::vector<int>>   Correct! This is a technically type of matrix!     matrix   Correct! Matrices can be made of matrices.    "
 },
@@ -14603,7 +15485,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_matrix.html#question15_8_2",
   "type": "Checkpoint",
-  "number": "11.8.2",
+  "number": "12.8.2",
   "title": "",
   "body": "  Suppose we have matrix mat . Then mat[9][17] would be accessing column and row of our matrix.         .*  Incorrect! Remember to use zero indexing!         .*  Incorrect! Remember to use zero indexing!     "
 },
@@ -14612,7 +15494,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_a-distance-matrix.html",
   "type": "Section",
-  "number": "11.9",
+  "number": "12.9",
   "title": "A distance matrix",
   "body": " A distance matrix  Finally, we are ready to put the data from the file into a matrix. Specifically, the matrix will have one row and one column for each city.  We'll create the matrix in main , with plenty of space to spare:  matrix<int> distances (50, 50, 0);  Inside processLine , we add new information to the matrix by getting the indices of the two cities from the Set and using them as matrix indices:  int dist = convertToInt(distString); int index1 = cities.add (city1); int index2 = cities.add (city2); distances[index1][index2] = distance; distances[index2][index1] = distance;  Finally, in main we can print the information in a human-readable form:  for (int i=0; i < cities.getNumElements(); i++) { std::cout << cities.getElement(i) << \"\\t\"; for (int j=0; j<=i; j++) { std::cout << distances[i][j] << \"\\t\"; } std::cout << std::endl ; } cout << \"\\t\"; for (int i=0; i < cities.getNumElements(); i++) { std::cout << cities.getElement(i) << \"\\t\"; } cout << std::endl ;  This code produces the output shown at the beginning of the chapter.  "
 },
@@ -14666,7 +15548,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_a-proper-distance-matrix.html",
   "type": "Section",
-  "number": "11.10",
+  "number": "12.10",
   "title": "A proper distance matrix",
   "body": " A proper distance matrix  Although this code works, it is not as well organized as it should be. Now that we have written a prototype, we are in a good position to evaluate the design and improve it.  What are some of the problems with the existing code?     We did not know ahead of time how big to make the distance matrix, so we chose an arbitrary large number (50) and made it a fixed size. It would be better to allow the distance matrix to expand in the same way a Set does. The matrix class has a function called resize that makes this possible.    The data in the distance matrix is not well-encapsulated. We have to pass the set of city names and the matrix itself as arguments to processLine , which is awkward. Also, use of the distance matrix is error prone because we have not provided accessor functions that perform error-checking. It might be a good idea to take the Set of city names and the matrix of distances, and combine them into a single object called a DistMatrix .     Here is a draft of what the header for a DistMatrix might look like:  class DistMatrix { private: Set cities; matrix<int> distances; public: DistMatrix(int rows); void add(const string& city1, const string& city2, int dist); int distance(int i, int j) const; int distance(const string& city1, const string& city2) const; std::string cityName(int i) const; int numCities() const; void print(); };  Using this interface simplifies main :  #include <iostream> #include <fstream> int main() { std::string line; std::ifstream infile(\"distances\"); DistMatrix distances(2); while (true) { std::getline(infile, line); if (infile.eof()) break; processLine(line, distances); } distances.print(); return 0; }  It also simplifies processLine :  void processLine(const string& line, DistMatrix& distances) { char quote = '\\\"'; std::vector<int> quoteIndex (4); quoteIndex[0] = line.find(quote); for (int i=1; i < 4; i++) { quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1); } \/\/ break the line up into substrings int len1 = quoteIndex[1] - quoteIndex[0] - 1; std::string city1 = line.substr(quoteIndex[0]+1, len1); int len2 = quoteIndex[3] - quoteIndex[2] - 1; std::string city2 = line.substr(quoteIndex[2]+1, len2); int len3 = line.length() - quoteIndex[2] - 1; std::string distString = line.substr(quoteIndex[3]+1, len3); int distance = convertToInt(distString); \/\/ add the new datum to the distances matrix distances.add(city1, city2, distance); }  I will leave it as an exercise to you to implement the member functions of DistMatrix .  "
 },
@@ -14738,7 +15620,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_glossary.html",
   "type": "Section",
-  "number": "11.11",
+  "number": "12.11",
   "title": "Glossary",
   "body": " Glossary    ordered set  A data structure in which every element appears only once and every element has an index that identifies it.    stream  A data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output.    accumulator  A variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    ordered set  a data structure in which every element appears only once and every element has an index that identifies it    stream  a data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output    accumulator  a variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.      "
 },
@@ -14747,7 +15629,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_glossary.html#chapter15_glossary-2",
   "type": "Glossary",
-  "number": "11.11",
+  "number": "12.11",
   "title": "Glossary",
   "body": "  ordered set  A data structure in which every element appears only once and every element has an index that identifies it.    stream  A data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output.    accumulator  A variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.   "
 },
@@ -14756,7 +15638,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_glossary.html#chapter15_glossary-3",
   "type": "Reading Questions",
-  "number": "11.11",
+  "number": "12.11",
   "title": "Reading Questions",
   "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    ordered set  a data structure in which every element appears only once and every element has an index that identifies it    stream  a data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output    accumulator  a variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.     "
 },
@@ -14765,7 +15647,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_multiple-choice-exercises.html",
   "type": "Exercises",
-  "number": "11.12",
+  "number": "12.12",
   "title": "Multiple Choice Exercises",
   "body": " Multiple Choice Exercises    We want to open a file and parse its data into our program. What library do we need to include?       iostream    This library deals with communication through the standard input and output.      sstream    This library is used to manipulate string objects as if they were streams.      fstream    This library is used to manipulate files using streams.      iomanip    This library is used to modify internal flags and formatting options.       The code below reads data from a file called input.txt . What is wrong with the following code?   #include <iostream> #include <fstream> int main() { std::string input; std::string filename = \"input.txt\"; std::ifstream infile(filename); std::getline(filename, input); }       We should use ofstream instead of ifstream .   Since we are dealing with an input file, we should use ifstream .     The arguments in getline are incorrect.   We are supposed to read input through the ifstream object. This line should be getline(infile, input) .     We cannot use a variable to store the filename.   Since the name of the file is just a string, we can store it in a variable.     There are no errors with this code.   Take another look at the code. Are we reading the input correctly into input ?       We want to make sure the file we wanted to open was opened successfully. Which of the following checks this and prints the proper output?       if (infile.good()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the if statement evaluates to true, then the file was opened successfully.      if (!infile.is_open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }     is_open() is another function that returns true if a file is opened successfully.      if (infile.good() == false) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the file isn't opened successfully, an error message is printed.      if (!infile.open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    The open() function is different from is_open() and does not return a bool .       Which of the following statements are true?      We can assume the program opens all files successfully.   There are times when a file can't be properly opened because they may have not been properly closed the last time they were used or the file is currently used by another program. As a result, it is good practice to include a check in your program.     A stream is an abstract object that represents the flow of data from a source.   We've used two streams before: the standard input stream and standard output stream ( cin and cout ).     We cannot use the operators << and >> , as they are for iostream objects only.   We are also able to use the operators for fstream objects.       What are the contents of the output file output.txt after running the code below?   #include <iostream> #include <fstream> int main() { std::ofstream outfile(\"output.txt\"); if (!outfile.good()) { std::cout << \"Unable to open file\" << std::endl; } std::cout << \"Powers of 2: \"; outfile << \"2 4 8 16 32 64\" << std::endl; }       2 4 8 16 32 64   This is the only thing we write to the output file.     Powers of 2: 2 4 8 16 31 64   Take another look at the stream objects used in the code.     Powers of 2:   This is printed to standard output, not the output file.     Unable to open file   Although this may be printed, this is not the contents of the output file.       The file scores.txt contains data about the roster number and test scores of students in a class. The output file averages.txt should store each student's roster number and average test score. What should replace the question marks?   #include <iostream> #include <fstream> int main() { std::string junk; int studentNum; double mid1, mid2, final; std::ifstream infile(\"scores.txt\"); std::ofstream outfile(\"averages.txt\"); if (!infile.good() || !outfile.good()) { std::cout << \"Unable to open a file\" << std::endl; } std::getline(infile, junk); outfile << \"Student#\\tAverage\" << std::endl; while (infile >> studentNum >> mid1 >> mid2 >> final) { double avg = (mid1 + mid2 + final) \/ 3; ??? } }        cout << avg << std::endl    This will output the average to standard output.      outfile << avg << std::endl    Take another look at the code. Is there a clue as to what data should be in the output file?      infile << studentNum << \"\\t\" << avg << std::endl    The data should be written to the output file.      outfile << studentNum << \"\\t\" << avg << std::endl    This properly outputs the student number and the student's average to the output file.       What does the following code do?   #include <iostream> #include <string> int main() { std::string original = \"430-0444\"; std::string digitString = \"\"; for (size_t i = 0; i < original.length(); i++) { if (isdigit(original[original.length() - 1 - i])) { digitString += original[original.length() - 1 - i]; } } std::cout << atoi(digitString) << std::endl; }       The code converts the original string to an integer and outputs the integer.   Take a closer look at the contents of the for loop.     The code converts an integer to a string and outputs the string.   What does the atoi function do?     The code outputs the sum of all the original string's digits.   The digitString variable is a string , not an int .     The code converts the original string to an integer in reverse and outputs the integer in reverse.   The code in the for loop parses the string in reverse.       Which of the following statements are false about the Set data structure?      A set can contain multiple elements with the same value.   All elements in a set are unique.     We can identify elements of a set by each element's index.   Each element has an index associated with it.     The elements of a Set are always sorted.   Although a set is ordered, it is not necessarily sorted.     The size of a Set object is fixed.   The Set data structure can expand to make room for new elements.       There are many ways to construct a matrix . Which of the following are valid constructors of a matrix ?       matrix<string> m1(2);    A matrix has two dimensions and this constructor only has one dimension.      matrix<int> m2(2, 6, 0);    This creates a matrix with 2 rows and 6 columns with all of its elements equal to 0.      matrix<char> m3(m2);    This creates m3 to be a copy of m2 .      matrix<int> m2(2.4, 2);    There must be a whole number of rows and columns.       What is the output of the following code?   #include <iostream> #include <vector> bool secret_function(int num) { if (num % 2 == 0) { return true; } return false; } int main() { matrix<int> mat(4, 2); for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { if (!secret_function(i + j) { mat[i][j] = 0; } else { mat[i][j] = i + j; } } } int n; for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { n += mat[i][j]; } } std::cout << n << std::endl; }       8   The matrix only contains even sums of the row and column indices and 0 otherwise. Thus, the sum of all elements is 8.     16   What does the secret function do?     0   What are the contents of the matrix?     9   What are the contents of the matrix?     "
 },
@@ -14774,7 +15656,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_1",
   "type": "Exercise",
-  "number": "11.12.1",
+  "number": "12.12.1",
   "title": "",
   "body": "  We want to open a file and parse its data into our program. What library do we need to include?       iostream    This library deals with communication through the standard input and output.      sstream    This library is used to manipulate string objects as if they were streams.      fstream    This library is used to manipulate files using streams.      iomanip    This library is used to modify internal flags and formatting options.    "
 },
@@ -14783,7 +15665,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_2",
   "type": "Exercise",
-  "number": "11.12.2",
+  "number": "12.12.2",
   "title": "",
   "body": "  The code below reads data from a file called input.txt . What is wrong with the following code?   #include <iostream> #include <fstream> int main() { std::string input; std::string filename = \"input.txt\"; std::ifstream infile(filename); std::getline(filename, input); }       We should use ofstream instead of ifstream .   Since we are dealing with an input file, we should use ifstream .     The arguments in getline are incorrect.   We are supposed to read input through the ifstream object. This line should be getline(infile, input) .     We cannot use a variable to store the filename.   Since the name of the file is just a string, we can store it in a variable.     There are no errors with this code.   Take another look at the code. Are we reading the input correctly into input ?    "
 },
@@ -14792,7 +15674,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_3",
   "type": "Exercise",
-  "number": "11.12.3",
+  "number": "12.12.3",
   "title": "",
   "body": "  We want to make sure the file we wanted to open was opened successfully. Which of the following checks this and prints the proper output?       if (infile.good()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the if statement evaluates to true, then the file was opened successfully.      if (!infile.is_open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }     is_open() is another function that returns true if a file is opened successfully.      if (infile.good() == false) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the file isn't opened successfully, an error message is printed.      if (!infile.open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    The open() function is different from is_open() and does not return a bool .    "
 },
@@ -14801,7 +15683,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_4",
   "type": "Exercise",
-  "number": "11.12.4",
+  "number": "12.12.4",
   "title": "",
   "body": "  Which of the following statements are true?      We can assume the program opens all files successfully.   There are times when a file can't be properly opened because they may have not been properly closed the last time they were used or the file is currently used by another program. As a result, it is good practice to include a check in your program.     A stream is an abstract object that represents the flow of data from a source.   We've used two streams before: the standard input stream and standard output stream ( cin and cout ).     We cannot use the operators << and >> , as they are for iostream objects only.   We are also able to use the operators for fstream objects.    "
 },
@@ -14810,7 +15692,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_5",
   "type": "Exercise",
-  "number": "11.12.5",
+  "number": "12.12.5",
   "title": "",
   "body": "  What are the contents of the output file output.txt after running the code below?   #include <iostream> #include <fstream> int main() { std::ofstream outfile(\"output.txt\"); if (!outfile.good()) { std::cout << \"Unable to open file\" << std::endl; } std::cout << \"Powers of 2: \"; outfile << \"2 4 8 16 32 64\" << std::endl; }       2 4 8 16 32 64   This is the only thing we write to the output file.     Powers of 2: 2 4 8 16 31 64   Take another look at the stream objects used in the code.     Powers of 2:   This is printed to standard output, not the output file.     Unable to open file   Although this may be printed, this is not the contents of the output file.    "
 },
@@ -14819,7 +15701,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_6",
   "type": "Exercise",
-  "number": "11.12.6",
+  "number": "12.12.6",
   "title": "",
   "body": "  The file scores.txt contains data about the roster number and test scores of students in a class. The output file averages.txt should store each student's roster number and average test score. What should replace the question marks?   #include <iostream> #include <fstream> int main() { std::string junk; int studentNum; double mid1, mid2, final; std::ifstream infile(\"scores.txt\"); std::ofstream outfile(\"averages.txt\"); if (!infile.good() || !outfile.good()) { std::cout << \"Unable to open a file\" << std::endl; } std::getline(infile, junk); outfile << \"Student#\\tAverage\" << std::endl; while (infile >> studentNum >> mid1 >> mid2 >> final) { double avg = (mid1 + mid2 + final) \/ 3; ??? } }        cout << avg << std::endl    This will output the average to standard output.      outfile << avg << std::endl    Take another look at the code. Is there a clue as to what data should be in the output file?      infile << studentNum << \"\\t\" << avg << std::endl    The data should be written to the output file.      outfile << studentNum << \"\\t\" << avg << std::endl    This properly outputs the student number and the student's average to the output file.    "
 },
@@ -14828,7 +15710,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_7",
   "type": "Exercise",
-  "number": "11.12.7",
+  "number": "12.12.7",
   "title": "",
   "body": "  What does the following code do?   #include <iostream> #include <string> int main() { std::string original = \"430-0444\"; std::string digitString = \"\"; for (size_t i = 0; i < original.length(); i++) { if (isdigit(original[original.length() - 1 - i])) { digitString += original[original.length() - 1 - i]; } } std::cout << atoi(digitString) << std::endl; }       The code converts the original string to an integer and outputs the integer.   Take a closer look at the contents of the for loop.     The code converts an integer to a string and outputs the string.   What does the atoi function do?     The code outputs the sum of all the original string's digits.   The digitString variable is a string , not an int .     The code converts the original string to an integer in reverse and outputs the integer in reverse.   The code in the for loop parses the string in reverse.    "
 },
@@ -14837,7 +15719,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_8",
   "type": "Exercise",
-  "number": "11.12.8",
+  "number": "12.12.8",
   "title": "",
   "body": "  Which of the following statements are false about the Set data structure?      A set can contain multiple elements with the same value.   All elements in a set are unique.     We can identify elements of a set by each element's index.   Each element has an index associated with it.     The elements of a Set are always sorted.   Although a set is ordered, it is not necessarily sorted.     The size of a Set object is fixed.   The Set data structure can expand to make room for new elements.    "
 },
@@ -14846,7 +15728,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_9",
   "type": "Exercise",
-  "number": "11.12.9",
+  "number": "12.12.9",
   "title": "",
   "body": "  There are many ways to construct a matrix . Which of the following are valid constructors of a matrix ?       matrix<string> m1(2);    A matrix has two dimensions and this constructor only has one dimension.      matrix<int> m2(2, 6, 0);    This creates a matrix with 2 rows and 6 columns with all of its elements equal to 0.      matrix<char> m3(m2);    This creates m3 to be a copy of m2 .      matrix<int> m2(2.4, 2);    There must be a whole number of rows and columns.    "
 },
@@ -14855,7 +15737,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_multiple-choice-exercises.html#mce_15_10",
   "type": "Exercise",
-  "number": "11.12.10",
+  "number": "12.12.10",
   "title": "",
   "body": "  What is the output of the following code?   #include <iostream> #include <vector> bool secret_function(int num) { if (num % 2 == 0) { return true; } return false; } int main() { matrix<int> mat(4, 2); for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { if (!secret_function(i + j) { mat[i][j] = 0; } else { mat[i][j] = i + j; } } } int n; for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { n += mat[i][j]; } } std::cout << n << std::endl; }       8   The matrix only contains even sums of the row and column indices and 0 otherwise. Thus, the sum of all elements is 8.     16   What does the secret function do?     0   What are the contents of the matrix?     9   What are the contents of the matrix?    "
 },
@@ -14864,7 +15746,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_mixed-up-code-practice.html",
   "type": "Exercises",
-  "number": "11.13",
+  "number": "12.13",
   "title": "Mixed Up Code Practice",
   "body": " Mixed Up Code Practice    We have a file called locations.txt that we want to read data from. Check to make sure that the file was opened properly; if it wasn't, display an error message and exit with a status of 1. Put the necessary blocks of code in the correct order.     int main() {     ifstream infile(\"locations.txt\");    ifstream infile(locations.txt);      if (infile.good() == false) {    if (infile.good()) {     std::cout << \"Unable to open the file.\" << std::endl ;     exit(1);    return 1;     }    }       Let's write a program that prompts the user for a filename and opens that file. Put the necessary blocks of code in the correct order.     int main() {     std::string filename;    ifstream filename;     std::cout << \"Enter the name of the file: \";    std::cin >> filename;     ifstream infile(filename);    ifstream infile(filename);     if (infile.good() == false) {    std::cout << \"Unable to open the file.\" << std::endl ;    exit(1);    }    }       Now let's write some output to a file. Write a program that prompts a user for a list of 5 integers separated by spaces, calculates the average of those integers, and outputs The average is average to an output file called average.txt . Put the necessary blocks of code in the correct order. Declare the output file first and check that it is opened correctly.     int main() {    ofstream outfile(\"average.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<int> list;    int sum = 0;    int n1, n2, n3, n4, n5;    std::cout << \"Enter five integers separated by spaces: \";    std::cin >> n1 >> n2 >> n3 >> n4 >> n5;    sum = n1 + n2 + n3 + n4 + n5;     outfile << \"The average is \" << sum \/ 5.0 << std::endl ;    std::cout << \"The average is \" << sum \/ 5.0 << std::endl ;     }       We are given a file called data.txt with an unknown number of double values. Write a program that finds the minimum, maximum, and number of data and outputs these values to a file called summary.txt . Put the necessary blocks of code in the correct order. Declare the input and output files first, and check to see that both are opened correctly before dealing with data. Increment the number of data points before checking for the min and max.     int main() {    ifstream infile(\"data.txt\");    ofstream outfile(\"summary.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::vector<int> data;    int numData = 1;    double min, max, value;    infile >> value;    min = value;    max = value;    while (infile >> value) {    ++numData;    if (value < min) { min = value; }    if (value > max) { max = value; }    }    outfile << \"Number of data: \" << numData << \", min: \" << min << \", max: \" << max << std::endl ;    }       You are given a file called employee_data.txt and you want to store the information from that file into a vector of data. The file contains information about an employee's first and last name, age, phone number, and email. Write the definition of an Employee before you write your main function. Open and check the file before working with the data. Put the necessary blocks of code in the correct order.     struct Employee {  std::string fname;  std::string lname;  int age;  int phone;  std::string email;    Employee(string f, string l, int a, int p, string e) {  fname = f;  lname = l;  age = a;  phone = p;  email = e;  }    };    int main() {    ifstream infile(\"employee_data.txt\");    if (infile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<Employee> data;    std::string fname, lname, email;    int age, phone;     while (infile >> fname >> lname >> age >> phone >> email) {    while (infile) {     Employee e(fname, lname, age, phone, email);    data.push_back(e);    }  }       You are given a file but it appears that someone's capslock key was stuck because everything is in uppercase. Write a program that takes the input from the file UPPER.txt and converts all the words to lowercase and prints out the modified message to a file called lower.txt . Write the definition of the function toLower first. Separate the words with spaces. Put the necessary blocks of code in the correct order.     string upperToLower(string upper) {  for (size_t i = 0; i < upper.length(); ++i) {     upper[i] = toupper(upper[i]);    tolower(upper[i]);     }  return upper;  }    int main() {    ifstream infile(\"UPPER.txt\");    ofstream outfile(\"lower.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::string word;    while (infile >> word) {     std::string upper = upperToLower(word);    upperToLower(word);     outfile << upper << \" \";    }  }       Nobody ever put a limit on how many files we can work with. Does this mean we can open two or more files at once? Yes we can! Write a program that combines two files odds.txt and evens.txt into one output file numbers.txt . You should combine them in a way such that numbers.txt contains the first odd number then the first even number then the second odd number and so on. You are guaranteed that there are equal amounts of odd and even numbers. Put the necessary blocks of code in the correct order.     int main() {    ifstream odds(\"odds.txt\");    ifstream evens(\"evens.txt\");    ofstream outfile(\"numbers.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int odd, even;    while (odds >> odd && evens >> even) {    outfile << odd << \" \" << even << \" \";    }  }       In chapter 15.7 we defined the Set data structure. Write a function vectorToSet which takes a std::vector of data and returns a Set object with the data. Put the necessary blocks of code in the correct order. Put the Set definition first in your answer.     class Set {  private:  std::vector<string> elements;  int numElements;  public:  Set(int n);  int getNumElements() const;  std::string getElement(int i) const;  int find(const string& s) const;  int add(const string& s);  };     Set vectorToSet( std::vector<string> data) {    void Set::vectorToSet( std::vector<string> data) {     Set s(data.size());    for (size_t i = 0; i < data.size(); ++i) {    s.add(data[i]);    }    s.numElements++;    if (s.find(data[i]) != -1) {    s.elements.push_back(data[i]);    }       Let's write the class definition for a Matrix ! The underlying data structure is a std::vector of std::vector s of int s. Write the constructor and at function, which returns the data stored at a given row and column. Put the necessary blocks of code in the correct order.     class Matrix {    private:    std::vector< std::vector<int> > elements;    public:    Matrix(int numRows, int numCols) {    std::vector<int> row(numCols);    for (int i = 0; i < numRows; ++i) {    elements.push_back(row);    }  }    int at(int row, int col) {    return elements[row][col];    }    };       Now that we have the basic structure of a Matrix , let's write a function that allows us to add data to a matrix. Write the Matrix member function setData which takes a row and column index as well as a data value and stores the data value in the Matrix at the given location. Then read data in from a file called data.txt . The first line contains the number of rows and columns, separated by a space. Data values begin on the next line. Put the necessary blocks of code in the correct order.      void Matrix::setData(int row, int col, int value) {    void setData(int row, int col, int value) {     elements[row][col] = value;    }    int main() {    ifstream infile(\"data.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int numRows, numCols, data;    infile >> numRows >> numCols;    Matrix mat(numRows, numCols);    while (infile >> data) {    for (int i = 0; i < numRows; ++i) {    for (int j = 0; j < numCols; ++j) {    mat.setData(i, j, data);  }  }  }    }     "
 },
@@ -14873,7 +15755,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_1",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "12.13.yes",
   "title": "",
   "body": "  We have a file called locations.txt that we want to read data from. Check to make sure that the file was opened properly; if it wasn't, display an error message and exit with a status of 1. Put the necessary blocks of code in the correct order.     int main() {     ifstream infile(\"locations.txt\");    ifstream infile(locations.txt);      if (infile.good() == false) {    if (infile.good()) {     std::cout << \"Unable to open the file.\" << std::endl ;     exit(1);    return 1;     }    }    "
 },
@@ -14882,7 +15764,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_2",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "12.13.yes",
   "title": "",
   "body": "  Let's write a program that prompts the user for a filename and opens that file. Put the necessary blocks of code in the correct order.     int main() {     std::string filename;    ifstream filename;     std::cout << \"Enter the name of the file: \";    std::cin >> filename;     ifstream infile(filename);    ifstream infile(filename);     if (infile.good() == false) {    std::cout << \"Unable to open the file.\" << std::endl ;    exit(1);    }    }    "
 },
@@ -14891,7 +15773,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_3",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "12.13.yes",
   "title": "",
   "body": "  Now let's write some output to a file. Write a program that prompts a user for a list of 5 integers separated by spaces, calculates the average of those integers, and outputs The average is average to an output file called average.txt . Put the necessary blocks of code in the correct order. Declare the output file first and check that it is opened correctly.     int main() {    ofstream outfile(\"average.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<int> list;    int sum = 0;    int n1, n2, n3, n4, n5;    std::cout << \"Enter five integers separated by spaces: \";    std::cin >> n1 >> n2 >> n3 >> n4 >> n5;    sum = n1 + n2 + n3 + n4 + n5;     outfile << \"The average is \" << sum \/ 5.0 << std::endl ;    std::cout << \"The average is \" << sum \/ 5.0 << std::endl ;     }    "
 },
@@ -14900,7 +15782,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_4",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "12.13.yes",
   "title": "",
   "body": "  We are given a file called data.txt with an unknown number of double values. Write a program that finds the minimum, maximum, and number of data and outputs these values to a file called summary.txt . Put the necessary blocks of code in the correct order. Declare the input and output files first, and check to see that both are opened correctly before dealing with data. Increment the number of data points before checking for the min and max.     int main() {    ifstream infile(\"data.txt\");    ofstream outfile(\"summary.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::vector<int> data;    int numData = 1;    double min, max, value;    infile >> value;    min = value;    max = value;    while (infile >> value) {    ++numData;    if (value < min) { min = value; }    if (value > max) { max = value; }    }    outfile << \"Number of data: \" << numData << \", min: \" << min << \", max: \" << max << std::endl ;    }    "
 },
@@ -14909,7 +15791,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_5",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "12.13.yes",
   "title": "",
   "body": "  You are given a file called employee_data.txt and you want to store the information from that file into a vector of data. The file contains information about an employee's first and last name, age, phone number, and email. Write the definition of an Employee before you write your main function. Open and check the file before working with the data. Put the necessary blocks of code in the correct order.     struct Employee {  std::string fname;  std::string lname;  int age;  int phone;  std::string email;    Employee(string f, string l, int a, int p, string e) {  fname = f;  lname = l;  age = a;  phone = p;  email = e;  }    };    int main() {    ifstream infile(\"employee_data.txt\");    if (infile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<Employee> data;    std::string fname, lname, email;    int age, phone;     while (infile >> fname >> lname >> age >> phone >> email) {    while (infile) {     Employee e(fname, lname, age, phone, email);    data.push_back(e);    }  }    "
 },
@@ -14918,7 +15800,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_6",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "12.13.yes",
   "title": "",
   "body": "  You are given a file but it appears that someone's capslock key was stuck because everything is in uppercase. Write a program that takes the input from the file UPPER.txt and converts all the words to lowercase and prints out the modified message to a file called lower.txt . Write the definition of the function toLower first. Separate the words with spaces. Put the necessary blocks of code in the correct order.     string upperToLower(string upper) {  for (size_t i = 0; i < upper.length(); ++i) {     upper[i] = toupper(upper[i]);    tolower(upper[i]);     }  return upper;  }    int main() {    ifstream infile(\"UPPER.txt\");    ofstream outfile(\"lower.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::string word;    while (infile >> word) {     std::string upper = upperToLower(word);    upperToLower(word);     outfile << upper << \" \";    }  }    "
 },
@@ -14927,7 +15809,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_7",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "12.13.yes",
   "title": "",
   "body": "  Nobody ever put a limit on how many files we can work with. Does this mean we can open two or more files at once? Yes we can! Write a program that combines two files odds.txt and evens.txt into one output file numbers.txt . You should combine them in a way such that numbers.txt contains the first odd number then the first even number then the second odd number and so on. You are guaranteed that there are equal amounts of odd and even numbers. Put the necessary blocks of code in the correct order.     int main() {    ifstream odds(\"odds.txt\");    ifstream evens(\"evens.txt\");    ofstream outfile(\"numbers.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int odd, even;    while (odds >> odd && evens >> even) {    outfile << odd << \" \" << even << \" \";    }  }    "
 },
@@ -14936,7 +15818,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_8",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "12.13.yes",
   "title": "",
   "body": "  In chapter 15.7 we defined the Set data structure. Write a function vectorToSet which takes a std::vector of data and returns a Set object with the data. Put the necessary blocks of code in the correct order. Put the Set definition first in your answer.     class Set {  private:  std::vector<string> elements;  int numElements;  public:  Set(int n);  int getNumElements() const;  std::string getElement(int i) const;  int find(const string& s) const;  int add(const string& s);  };     Set vectorToSet( std::vector<string> data) {    void Set::vectorToSet( std::vector<string> data) {     Set s(data.size());    for (size_t i = 0; i < data.size(); ++i) {    s.add(data[i]);    }    s.numElements++;    if (s.find(data[i]) != -1) {    s.elements.push_back(data[i]);    }    "
 },
@@ -14945,7 +15827,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_9",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "12.13.yes",
   "title": "",
   "body": "  Let's write the class definition for a Matrix ! The underlying data structure is a std::vector of std::vector s of int s. Write the constructor and at function, which returns the data stored at a given row and column. Put the necessary blocks of code in the correct order.     class Matrix {    private:    std::vector< std::vector<int> > elements;    public:    Matrix(int numRows, int numCols) {    std::vector<int> row(numCols);    for (int i = 0; i < numRows; ++i) {    elements.push_back(row);    }  }    int at(int row, int col) {    return elements[row][col];    }    };    "
 },
@@ -14954,7 +15836,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_mixed-up-code-practice.html#mucp_15_10",
   "type": "Exercise",
-  "number": "11.13.yes",
+  "number": "12.13.yes",
   "title": "",
   "body": "  Now that we have the basic structure of a Matrix , let's write a function that allows us to add data to a matrix. Write the Matrix member function setData which takes a row and column index as well as a data value and stores the data value in the Matrix at the given location. Then read data in from a file called data.txt . The first line contains the number of rows and columns, separated by a space. Data values begin on the next line. Put the necessary blocks of code in the correct order.      void Matrix::setData(int row, int col, int value) {    void setData(int row, int col, int value) {     elements[row][col] = value;    }    int main() {    ifstream infile(\"data.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int numRows, numCols, data;    infile >> numRows >> numCols;    Matrix mat(numRows, numCols);    while (infile >> data) {    for (int i = 0; i < numRows; ++i) {    for (int j = 0; j < numCols; ++j) {    mat.setData(i, j, data);  }  }  }    }    "
 },
@@ -14963,7 +15845,7 @@ var ptx_lunr_docs = [
   "level": "1",
   "url": "chapter15_coding-practice.html",
   "type": "Exercises",
-  "number": "11.14",
+  "number": "12.14",
   "title": "Coding Practice",
   "body": " Coding Practice    Write a program that takes in an input file called poem.txt    Two roads diverged in a yellow wood, And sorry I could not travel both And be one traveler, long I stood And looked down one as far as I could To where it bent in the undergrowth; Then took the other, as just as fair, And having perhaps the better claim Because it was grassy and wanted wear, Though as for that the passing there Had worn them really about the same, And both that morning equally lay In leaves no step had trodden black. Oh, I kept the first for another day! Yet knowing how way leads on to way I doubted if I should ever come back. I shall be telling this with a sigh Somewhere ages and ages hence: Two roads diverged in a wood, and I, I took the one less traveled by, And that has made all the difference.   and prints the first 5 lines to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we use getline in a for loop to retrieve and print the first 5 lines of the poem.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"poem.txt\"); std::string input; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } for (int i = 0; i < 5; ++i) { std::getline(infile, input); std::cout << input << std::endl; } }       Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.    #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.     int main () {    std::string fileIn;    int n;    std::string line;    std::cout << \"Enter the name of the file: \";  std::cin >> fileIn;  std::cout << fileIn << std::endl ;    std::cout << \"Enter an integer: \";  std::cin >> n;  std::cout << n << std::endl ;    ifstream inFile(fileIn.c_str());    if (inFile.good() == false) {  std::cout << \"Unable to open the file named \" << fileIn << \" and output \" << n << \" lines.\" << std::endl ;  exit(1);  }    for (int i = 0; i < n; i++) {    getline(inFile, line);    std::cout << line << std::endl ;    }    }         Write a program that takes in an input file called heights.txt   62 67 75 68 65 67 70 72 74 66 72 66 66 73 69 61 60 73 72 60   , finds the median of the data, and prints “The median height is: height inches” to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a vector. After sorting the vector, we find the median depending on whether the number of data values was even or odd. Finally, we output our result to the terminal.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> int main() { std::ifstream infile(\"heights.txt\"); std::vector<int> data; double median; int height; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (infile >> height) { data.push_back(height); } std::sort(data.begin(), data.end()); if (data.size() % 2 == 0) { median = (data[data.size() \/ 2 - 1] + data[data.size() \/ 2]) \/ 2.0; } else { median = data[data.size() \/ 2]; } std::cout << \"The median height is: \" << median << \" inches\" << std::endl; }       Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> #include <cmath> int main() { \/\/ Write your code here. \/\/ Do not modify the code below std::ifstream student_output(\"powers.txt\"); if (!student_output.good()) { std::cout << \"Error opening student's output.\" << std::endl; } std::string answer; while (std::getline(student_output, answer)) { std::cout << answer << std::endl; } }      Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    int n;    std::cout << \"Enter an integer: \";    std::cin >> n;    std::cout << n << std::endl ;    ofstream outfile (\"powers.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open output file.\" << std::endl ;  exit (1);  }    while (true) {    for (int i = 0; i < n; i++) {    outfile << pow(2,i) << std::endl ;    }    }    ifstream student_output(\"powers.txt\");    if (!student_output.good()) {  std::cout << \"Error opening student's output.\" << std::endl ;  }    std::string answer;    while (getline(student_output, answer)) {  std::cout << answer << std::endl ;  }    }         ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter after it in the alphabet. For example, using ROT13 on the letter “a” would turn it into “n”. Notice how since 13 is exactly half the number of characters in the alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus, ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file called message.txt   Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.   applies ROT13, and outputs the result to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <cctype> int main() { \/\/ Write your code here. }    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a string. We call our ROT13 function and output the result to the output file.   #include <iostream> #include <fstream> #include <cctype> std::string ROT13 (std::string message) { for (size_t i = 0; i < message.size(); ++i) { if (isalpha(message[i])) { if (message[i] >= 'A' && message[i] <= 'Z') { if (message[i] <= 'M') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } else { if (message[i] <= 'm') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } } } return message; } int main() { std::ifstream infile(\"message.txt\"); std::string message; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (std::getline(infile, message)) { std::cout << ROT13(message) << std::endl; } }       Write a program that reads in data about a class from the file class_data.txt   Below are the contents of the input file.  First Last Grade GPA Age Alex Jones 9 3.4 14 Beth Hamilton 12 3.7 18 Charles White 11 3.5 16 Daniel Kim 10 3.8 16 Ethan Brooks 11 3.9 17 Faith Flemmings 10 3.0 15 Gina Zhou 9 3.2 14  and outputs the rows of data where a student has a GPA of at least 3.5. Include proper file error checking.   #include <iostream> #include <fstream> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into corresponding variables. We check if the GPA is at least 3.5, and print the data values to the terminal if so.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"class_data.txt\"); std::string fname, lname; int grade, age; double gpa; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::getline(infile, fname); while (infile >> fname >> lname >> grade >> gpa >> age) { if (gpa >= 3.5) { std::cout << fname << '\\t' << lname << '\\t' << grade << '\\t' << gpa << '\\t' << age << std::endl; } } }       Write a program that takes an input file called shrimp.txt and outputs the contents of the file where \"shrimp\" is replaced by a word that the user inputs to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that takes an input file called “shrimp.txt” and outputs the quote with “shrimp” replaced by a word that the user inputs to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.   There's pineapple shrimp, lemon shrimp, coconut shrimp, pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and potatoes, shrimp burger, shrimp sandwich. That- that's about it.      int main() {    std::string word;    std::cout << \"Enter word to replace 'shrimp': \";    std::cin >> word;    std::cout << word << std::endl ;    std::string replace = \"shrimp\";    ifstream inFile(\"shrimp.txt\");    std::string line;    for (int i = 0; i < 4; i++) {    getline(inFile,line);    for (int unsigned j = 0; j < line.size(); j++) {    size_t pos = line.find(replace);    if (pos != std::string::npos) {    line.replace(pos,replace.length(),word);    }    }    std::cout << line<< std::endl ;    }    }         Write a program that creates a multiplication table for the first 10 numbers using a matrix and outputting the table to an output file called mult_table.txt . Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create a 10x10 matrix and fill in the products. Then we traverse through the matrix and output the values into the output file.   #include <iostream> #include <fstream> #include <vector> int main() { std::ofstream outfile(\"mult_table.txt\"); if (!outfile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::vector<int> rows(10); std::vector<std::vector<int> > mat; for (int i = 0; i < 10; ++i) { mat.push_back(rows); } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { matrix[i][j] = (i + 1) * (j + 1); } } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { outfile << matrix[i][j] << '\\t'; } std::cout << std::endl; } }       Write a program that computes the product of two matrices. Take a look at the example below. Two find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> int main() { \/* 2x3 matrix A X 3x2 matrix B 2x2 matrix C [ a b c ] [ g h ] [ ag + bi + cl ah + bj + cm ] [ d e f ] [ i j ] = [ dg + ei + fl dh + ej + fm ] [ l m ] *\/ \/\/ Write your code here. }      Write a program that computes the product of two matrices. Take a look at the example below. To find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    matrix<int> A(2,3);    matrix<int> B(3,2);    matrix<int> C(2,2);    C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);    C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);    C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);    C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);    }       "
 },
@@ -14972,7 +15854,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_1",
   "type": "Exercise",
-  "number": "11.14.1",
+  "number": "12.14.1",
   "title": "",
   "body": "  Write a program that takes in an input file called poem.txt    Two roads diverged in a yellow wood, And sorry I could not travel both And be one traveler, long I stood And looked down one as far as I could To where it bent in the undergrowth; Then took the other, as just as fair, And having perhaps the better claim Because it was grassy and wanted wear, Though as for that the passing there Had worn them really about the same, And both that morning equally lay In leaves no step had trodden black. Oh, I kept the first for another day! Yet knowing how way leads on to way I doubted if I should ever come back. I shall be telling this with a sigh Somewhere ages and ages hence: Two roads diverged in a wood, and I, I took the one less traveled by, And that has made all the difference.   and prints the first 5 lines to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we use getline in a for loop to retrieve and print the first 5 lines of the poem.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"poem.txt\"); std::string input; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } for (int i = 0; i < 5; ++i) { std::getline(infile, input); std::cout << input << std::endl; } }    "
 },
@@ -14981,7 +15863,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_2_q",
   "type": "Exercise",
-  "number": "11.14.2",
+  "number": "12.14.2",
   "title": "",
   "body": "  Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.    #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.     int main () {    std::string fileIn;    int n;    std::string line;    std::cout << \"Enter the name of the file: \";  std::cin >> fileIn;  std::cout << fileIn << std::endl ;    std::cout << \"Enter an integer: \";  std::cin >> n;  std::cout << n << std::endl ;    ifstream inFile(fileIn.c_str());    if (inFile.good() == false) {  std::cout << \"Unable to open the file named \" << fileIn << \" and output \" << n << \" lines.\" << std::endl ;  exit(1);  }    for (int i = 0; i < n; i++) {    getline(inFile, line);    std::cout << line << std::endl ;    }    }      "
 },
@@ -14990,7 +15872,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_3",
   "type": "Exercise",
-  "number": "11.14.3",
+  "number": "12.14.3",
   "title": "",
   "body": "  Write a program that takes in an input file called heights.txt   62 67 75 68 65 67 70 72 74 66 72 66 66 73 69 61 60 73 72 60   , finds the median of the data, and prints “The median height is: height inches” to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a vector. After sorting the vector, we find the median depending on whether the number of data values was even or odd. Finally, we output our result to the terminal.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> int main() { std::ifstream infile(\"heights.txt\"); std::vector<int> data; double median; int height; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (infile >> height) { data.push_back(height); } std::sort(data.begin(), data.end()); if (data.size() % 2 == 0) { median = (data[data.size() \/ 2 - 1] + data[data.size() \/ 2]) \/ 2.0; } else { median = data[data.size() \/ 2]; } std::cout << \"The median height is: \" << median << \" inches\" << std::endl; }    "
 },
@@ -14999,7 +15881,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_4_q",
   "type": "Exercise",
-  "number": "11.14.4",
+  "number": "12.14.4",
   "title": "",
   "body": "  Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> #include <cmath> int main() { \/\/ Write your code here. \/\/ Do not modify the code below std::ifstream student_output(\"powers.txt\"); if (!student_output.good()) { std::cout << \"Error opening student's output.\" << std::endl; } std::string answer; while (std::getline(student_output, answer)) { std::cout << answer << std::endl; } }      Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    int n;    std::cout << \"Enter an integer: \";    std::cin >> n;    std::cout << n << std::endl ;    ofstream outfile (\"powers.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open output file.\" << std::endl ;  exit (1);  }    while (true) {    for (int i = 0; i < n; i++) {    outfile << pow(2,i) << std::endl ;    }    }    ifstream student_output(\"powers.txt\");    if (!student_output.good()) {  std::cout << \"Error opening student's output.\" << std::endl ;  }    std::string answer;    while (getline(student_output, answer)) {  std::cout << answer << std::endl ;  }    }      "
 },
@@ -15008,7 +15890,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_5",
   "type": "Exercise",
-  "number": "11.14.5",
+  "number": "12.14.5",
   "title": "",
   "body": "  ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter after it in the alphabet. For example, using ROT13 on the letter “a” would turn it into “n”. Notice how since 13 is exactly half the number of characters in the alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus, ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file called message.txt   Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.   applies ROT13, and outputs the result to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <cctype> int main() { \/\/ Write your code here. }    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a string. We call our ROT13 function and output the result to the output file.   #include <iostream> #include <fstream> #include <cctype> std::string ROT13 (std::string message) { for (size_t i = 0; i < message.size(); ++i) { if (isalpha(message[i])) { if (message[i] >= 'A' && message[i] <= 'Z') { if (message[i] <= 'M') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } else { if (message[i] <= 'm') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } } } return message; } int main() { std::ifstream infile(\"message.txt\"); std::string message; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (std::getline(infile, message)) { std::cout << ROT13(message) << std::endl; } }    "
 },
@@ -15017,7 +15899,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_7",
   "type": "Exercise",
-  "number": "11.14.6",
+  "number": "12.14.6",
   "title": "",
   "body": "  Write a program that reads in data about a class from the file class_data.txt   Below are the contents of the input file.  First Last Grade GPA Age Alex Jones 9 3.4 14 Beth Hamilton 12 3.7 18 Charles White 11 3.5 16 Daniel Kim 10 3.8 16 Ethan Brooks 11 3.9 17 Faith Flemmings 10 3.0 15 Gina Zhou 9 3.2 14  and outputs the rows of data where a student has a GPA of at least 3.5. Include proper file error checking.   #include <iostream> #include <fstream> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into corresponding variables. We check if the GPA is at least 3.5, and print the data values to the terminal if so.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"class_data.txt\"); std::string fname, lname; int grade, age; double gpa; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::getline(infile, fname); while (infile >> fname >> lname >> grade >> gpa >> age) { if (gpa >= 3.5) { std::cout << fname << '\\t' << lname << '\\t' << grade << '\\t' << gpa << '\\t' << age << std::endl; } } }    "
 },
@@ -15026,7 +15908,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_8_q",
   "type": "Exercise",
-  "number": "11.14.7",
+  "number": "12.14.7",
   "title": "",
   "body": "  Write a program that takes an input file called shrimp.txt and outputs the contents of the file where \"shrimp\" is replaced by a word that the user inputs to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that takes an input file called “shrimp.txt” and outputs the quote with “shrimp” replaced by a word that the user inputs to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.   There's pineapple shrimp, lemon shrimp, coconut shrimp, pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and potatoes, shrimp burger, shrimp sandwich. That- that's about it.      int main() {    std::string word;    std::cout << \"Enter word to replace 'shrimp': \";    std::cin >> word;    std::cout << word << std::endl ;    std::string replace = \"shrimp\";    ifstream inFile(\"shrimp.txt\");    std::string line;    for (int i = 0; i < 4; i++) {    getline(inFile,line);    for (int unsigned j = 0; j < line.size(); j++) {    size_t pos = line.find(replace);    if (pos != std::string::npos) {    line.replace(pos,replace.length(),word);    }    }    std::cout << line<< std::endl ;    }    }      "
 },
@@ -15035,7 +15917,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_9",
   "type": "Exercise",
-  "number": "11.14.8",
+  "number": "12.14.8",
   "title": "",
   "body": "  Write a program that creates a multiplication table for the first 10 numbers using a matrix and outputting the table to an output file called mult_table.txt . Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create a 10x10 matrix and fill in the products. Then we traverse through the matrix and output the values into the output file.   #include <iostream> #include <fstream> #include <vector> int main() { std::ofstream outfile(\"mult_table.txt\"); if (!outfile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::vector<int> rows(10); std::vector<std::vector<int> > mat; for (int i = 0; i < 10; ++i) { mat.push_back(rows); } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { matrix[i][j] = (i + 1) * (j + 1); } } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { outfile << matrix[i][j] << '\\t'; } std::cout << std::endl; } }    "
 },
@@ -15044,7 +15926,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter15_coding-practice.html#cp_15_10_q",
   "type": "Exercise",
-  "number": "11.14.9",
+  "number": "12.14.9",
   "title": "",
   "body": "  Write a program that computes the product of two matrices. Take a look at the example below. Two find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> int main() { \/* 2x3 matrix A X 3x2 matrix B 2x2 matrix C [ a b c ] [ g h ] [ ag + bi + cl ah + bj + cm ] [ d e f ] [ i j ] = [ dg + ei + fl dh + ej + fm ] [ l m ] *\/ \/\/ Write your code here. }      Write a program that computes the product of two matrices. Take a look at the example below. To find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    matrix<int> A(2,3);    matrix<int> B(3,2);    matrix<int> C(2,2);    C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);    C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);    C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);    C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);    }      "
 }
