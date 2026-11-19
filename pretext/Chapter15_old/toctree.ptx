@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:lang="en-US"
+         xml:id="file-io">
+  <title>File Input/Output and matrixes</title>
+  <xi:include href='./intro.ptx'/>
+  <xi:include href='./streams.ptx'/>
+  <xi:include href='./file-input.ptx'/>
+  <xi:include href='./file-output.ptx'/>
+  <xi:include href='./parsing-input.ptx'/>
+  <xi:include href='./parsing-numbers.ptx'/>
+  <xi:include href='./the-set-data-structure.ptx'/>
+  <xi:include href='./apmatrix.ptx'/>
+  <xi:include href='./a-distance-matrix.ptx'/>
+  <xi:include href='./a-proper-distance-matrix.ptx'/>
+  <xi:include href='./glossary.ptx'/>
+  <xi:include href='./exercises.ptx'/>
+  <xi:include href='./mixed-up-code.ptx'/>
+  <xi:include href='./coding-practice.ptx'/>
+</chapter>

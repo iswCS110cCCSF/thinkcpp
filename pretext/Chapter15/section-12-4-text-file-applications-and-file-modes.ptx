@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter12_text-file-applications-and-file-modes">
+    <title>Text-File Applications and File Modes</title>
+
+    <p>
+        A complete text-file application separates file mechanics from the work
+        performed on each record. The program opens the input, reads one line at
+        a time, parses and validates the line, performs an operation, and writes
+        a report when needed.
+    </p>
+
+    <table xml:id="table_chapter12_file-modes">
+        <title>Useful text-file modes</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="25%"/><col width="75%"/>
+            <row header="yes">
+                <cell>Mode</cell>
+                <cell>Purpose</cell>
+            </row>
+            <row><cell>Default output</cell><cell>Create or replace the existing contents.</cell></row>
+            <row><cell><c>std::ios::app</c></cell><cell>Write at the end without replacing existing contents.</cell></row>
+            <row><cell><c>std::ios::in | std::ios::out</c></cell><cell>Open a stream for both reading and writing when supported by the stream type.</cell></row>
+        </tabular>
+    </table>
+
+    <listing xml:id="listing_chapter12_score-analyzer">
+        <title>Complete CSV score analyzer</title>
+        <program xml:id="program_chapter12_score-analyzer"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <string>
+
+struct ScoreRecord {
+    std::string name;
+    int score{};
+};
+
+bool parse_score_record(const std::string& line, ScoreRecord& record) {
+    std::istringstream record_stream{line};
+    std::string name;
+    int score{};
+
+    if (!std::getline(record_stream, name, ',')) {
+        return false;
+    }
+    if (!(record_stream >> score)) {
+        return false;
+    }
+    record_stream >> std::ws;
+
+    if (!record_stream.eof() || name.empty() || score < 0 || score > 100) {
+        return false;
+    }
+
+    record = ScoreRecord{name, score};
+    return true;
+}
+
+int main() {
+    std::ifstream input_file{"scores.csv"};
+    std::ofstream report_file{"score-report.txt"};
+
+    if (!input_file || !report_file) {
+        return 1;
+    }
+
+    std::string line;
+    ScoreRecord record;
+    int count{};
+    int total{};
+
+    while (std::getline(input_file, line)) {
+        if (parse_score_record(line, record)) {
+            ++count;
+            total += record.score;
+        }
+        else {
+            std::cerr << "Skipping malformed record: " << line << '\n';
+        }
+    }
+
+    report_file << "Valid records: " << count << '\n';
+    if (count > 0) {
+        report_file << std::fixed << std::setprecision(2)
+                    << "Average score: "
+                    << static_cast<double>(total) / count << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </listing>
+
+    <listing xml:id="listing_chapter12_inventory-input">
+        <title>Example inventory file</title>
+        <program xml:id="program_chapter12_inventory-input"
+                 language="text" line-numbers="yes">
+            <code><![CDATA[
+1001,Notebook,12,4.50
+1002,Pen,40,1.25
+1003,Backpack,5,32.00
+            ]]></code>
+        </program>
+    </listing>
+
+    <p>
+        An inventory application could parse each line into an item record and
+        calculate <c>quantity * unit_price</c>. The same design applies: keep
+        parsing, validation, calculation, and reporting as separate tasks.
+    </p>
+
+    <exercise label="chapter12_4_append">
+        <statement><p>When should a program use <c>std::ios::app</c>?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p>When it must replace all existing contents</p></statement><feedback><p>Default output commonly replaces existing contents.</p></feedback></choice>
+            <choice correct="yes"><statement><p>When new output must be added at the end of an existing file</p></statement><feedback><p>Append mode preserves earlier contents.</p></feedback></choice>
+            <choice><statement><p>When it wants to read only from a keyboard</p></statement><feedback><p><c>app</c> is a file mode.</p></feedback></choice>
+            <choice><statement><p>When it wants to force binary representation</p></statement><feedback><p>Binary mode is selected separately with <c>std::ios::binary</c>.</p></feedback></choice>
+            <choice><statement><p>When the file must be deleted automatically</p></statement><feedback><p>Append mode does not delete files.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_4_application-design">
+        <statement><p>Select all useful separations of responsibility in a text-file application.</p></statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p>Use one function to parse one record.</p></statement><feedback><p>A small parser is easier to test.</p></feedback></choice>
+            <choice correct="yes"><statement><p>Let the file loop decide how to handle malformed records.</p></statement><feedback><p>The caller can report, skip, or stop as appropriate.</p></feedback></choice>
+            <choice><statement><p>Put every task into one very long loop body.</p></statement><feedback><p>Large mixed responsibilities are harder to test and reuse.</p></feedback></choice>
+            <choice><statement><p>Assume every line is valid because the file extension is CSV.</p></statement><feedback><p>A filename extension does not validate contents.</p></feedback></choice>
+            <choice><statement><p>Use <c>std::cin</c> inside the parser to repair bad file data.</p></statement><feedback><p>Parsing a file should receive its input rather than unexpectedly ask the user.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_4_application-code" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks to open an input file, open a report, and process each line.</p></statement>
+        <blocks>
+            <block order="1"><cline>std::ifstream input_file{"scores.csv"};</cline></block>
+            <block order="2"><cline>std::ofstream report_file{"report.txt"};</cline></block>
+            <block order="3"><cline>if (!input_file || !report_file) { return 1; }</cline></block>
+            <block order="4"><cline>std::string line;</cline></block>
+            <block order="5"><cline>while (std::getline(input_file, line)) {</cline></block>
+            <block order="6"><cline>    report_file &lt;&lt; line &lt;&lt; '\n';</cline></block>
+            <block order="7"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+</section>

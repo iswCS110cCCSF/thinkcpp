@@ -10,7 +10,7 @@
     <target name="web"
       format="html"
       source="main.ptx"
-      publication="publication-web.ptx"
+      publication="publication.ptx"
       output-dir="output/html" />
     <target name="runestone"
       format="html"

@@ -1,0 +1,662 @@
+<?xml version="1.0" ?><exercises xml:id="chapter15_coding-practice">
+  <title>Coding Practice</title>
+  <exercise label="cp_15_1">
+    <statement>
+      <p>Write a program that takes in an input file called <c>poem.txt</c> <fn>
+          <datafile label="poem-txt" filename="poem.txt" cols="10" rows="5">
+            <pre>Two roads diverged in a yellow wood,
+And sorry I could not travel both
+And be one traveler, long I stood
+And looked down one as far as I could
+To where it bent in the undergrowth;
+Then took the other, as just as fair,
+And having perhaps the better claim
+Because it was grassy and wanted wear,
+Though as for that the passing there
+Had worn them really about the same,
+And both that morning equally lay
+In leaves no step had trodden black.
+Oh, I kept the first for another day!
+Yet knowing how way leads on to way
+I doubted if I should ever come back.
+I shall be telling this with a sigh
+Somewhere ages and ages hence:
+Two roads diverged in a wood, and I,
+I took the one less traveled by,
+And that has made all the difference.</pre>
+          </datafile>
+        </fn> and prints the first 5 lines to the
+  terminal. Include proper file error checking.</p>
+    <program interactive="activecode" label="cp_15_AC_1q">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+
+// Write your code here.
+        </code>
+    </program></statement>
+    <solution>
+      <p>Below is one way to implement this program. We create an <c>ifstream</c> object to open our file.
+  We check to make sure the file is opened correctly before we use <c>getline</c> in a <c>for</c> loop to
+  retrieve and print the first 5 lines of the poem.</p>
+      <program xml:id="cp_15_AC_1a">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+
+int main() {
+    std::ifstream infile(&quot;poem.txt&quot;);
+    std::string input;
+    if (!infile.good()) {
+        std::cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; std::endl;
+        exit(1);
+    }
+    for (int i = 0; i &lt; 5; ++i) {
+        std::getline(infile, input);
+        std::cout &lt;&lt; input &lt;&lt; std::endl;
+    }
+}
+        </code>
+    </program>
+    </solution>
+  </exercise>
+  <exercise label="cp_15_2_q">
+    <statement>
+      <p>Write a program that prompts a user for the name of an input file and for an integer <c>n</c>.
+  Then open the file and output the first <c>n</c> lines of the file with each line reversed. For
+  example, if you read in the line “hello world” you should print out “dlrow
+  olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.</p>
+      <!-- 
+      No need for a particular file given the ask of this program...
+      <datafile label="moon-speech.txt" filename="moon-speech.txt">
+        <pre>We choose to go to the Moon. We choose to go to the Moon...
+We choose to go to the Moon in this decade and do the other things,
+not because they are easy, but because they are hard; because that goal
+will serve to organize and measure the best of our energies and skills,
+because that challenge is one that we are willing to accept, one we are
+unwilling to postpone, and one we intend to win, and the others, too.</pre>
+      </datafile> -->
+    <program interactive="activecode" label="cp_15_AC_2q_editor">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+
+// Write your code here.
+        </code>
+    </program></statement>
+    <hint>
+      <activity label="cp_15_AC_2q_pp">
+        <statement>
+          <p>Write a program that prompts a user for the name of an input file and for an integer <c>n</c>.
+  Then open the file and output the first <c>n</c> lines of the file with each line reversed. For
+  example, if you read in the line “hello world” you should print out “dlrow
+  olleh” to the terminal. Include proper file error checking. Use the lines to construct the
+  code, then go back to complete the Activecode.</p>
+        </statement>
+        <blocks>
+          <block order="13">
+            <cline>int main () {</cline>
+          </block>
+          <block order="6">
+            <cline>  std::string fileIn;</cline>
+          </block>
+          <block order="12">
+            <cline>   int n;</cline>
+          </block>
+          <block order="9">
+            <cline>  std::string line;</cline>
+          </block>
+          <block order="8">
+            <cline>   std::cout &lt;&lt; &quot;Enter the name of the file: &quot;;</cline>
+            <cline>   std::cin &gt;&gt; fileIn;</cline>
+            <cline>   std::cout &lt;&lt; fileIn &lt;&lt; std::endl ;</cline>
+          </block>
+          <block order="11">
+            <cline>   std::cout &lt;&lt; &quot;Enter an integer: &quot;;</cline>
+            <cline>   std::cin &gt;&gt; n;</cline>
+            <cline>   std::cout &lt;&lt; n &lt;&lt; std::endl ;</cline>
+          </block>
+          <block order="3">
+            <cline>   ifstream inFile(fileIn.c_str());</cline>
+          </block>
+          <block order="1">
+            <cline>   if (inFile.good() == false) {</cline>
+            <cline>      std::cout &lt;&lt; &quot;Unable to open the file named &quot; &lt;&lt; fileIn &lt;&lt; &quot; and output &quot; &lt;&lt; n &lt;&lt; &quot; lines.&quot; &lt;&lt; std::endl ;</cline>
+            <cline>      exit(1);</cline>
+            <cline>   }</cline>
+          </block>
+          <block order="5">
+            <cline>   for (int i = 0; i &lt; n; i++) {</cline>
+          </block>
+          <block order="10">
+            <cline>      getline(inFile, line);</cline>
+          </block>
+          <block order="4">
+            <cline>      std::cout &lt;&lt; line &lt;&lt; std::endl ;</cline>
+          </block>
+          <block order="2">
+            <cline>   }</cline>
+          </block>
+          <block order="7">
+            <cline>}</cline>
+          </block>
+        </blocks>
+      </activity>
+    </hint>
+  </exercise>
+
+
+
+  <exercise label="cp_15_3">
+    <statement>
+      <p>Write a program that takes in an input file called <c>heights.txt</c><fn>
+          <datafile label="heights-txt" filename="heights.txt">
+            <pre>62  67      75      68      65
+67  70      72      74      66
+72  66      66      73      69
+61  60      73      72      60</pre>
+          </datafile>
+        </fn>, finds the median of the data, and prints
+  “The median height is: <c>height</c> inches” to the terminal. Include proper file error
+  checking.</p>
+    <program interactive="activecode" label="cp_15_AC_3q">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+// Write your code here.
+        </code>
+    </program></statement>
+    <solution>
+      <p>Below is one way to implement this program. We create an <c>ifstream</c> object to open our file.
+  We check to make sure the file is opened correctly before we read the data values into a vector.
+  After sorting the vector, we find the median depending on whether the number of data values was
+  even or odd. Finally, we output our result to the terminal.</p>
+      <program xml:id="cp_15_AC_3a">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+int main() {
+    std::ifstream infile(&quot;heights.txt&quot;);
+    std::vector&lt;int&gt; data;
+    double median;
+    int height;
+    if (!infile.good()) {
+        std::cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; std::endl;
+        exit(1);
+    }
+    while (infile &gt;&gt; height) {
+        data.push_back(height);
+    }
+    std::sort(data.begin(), data.end());
+    if (data.size() % 2 == 0) {
+        median = (data[data.size() / 2 - 1] + data[data.size() / 2]) / 2.0;
+    }
+    else {
+        median = data[data.size() / 2];
+    }
+    std::cout &lt;&lt; &quot;The median height is: &quot; &lt;&lt; median &lt;&lt; &quot; inches&quot; &lt;&lt; std::endl;
+}
+        </code>
+    </program>
+    </solution>
+  </exercise>
+
+  <exercise label="cp_15_4_q">
+    <statement>
+      <p>Write a program that prompts a user for an integer <c>n</c> and print the first <c>n</c>
+  powers of 2 to an output file called <c>powers.txt</c>. Include proper file error checking. To simulate what
+  your output file would look like, the contents of your output file will be displayed on the
+  terminal. Check the hint below for help with the construction of the code.</p>
+
+    <program interactive="activecode" label="cp_15_AC_4q_editor">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;cmath&gt;
+
+int main() {
+   // Write your code here.
+
+
+
+
+
+   // Do not modify the code below
+   std::ifstream student_output(&quot;powers.txt&quot;);
+   if (!student_output.good()) {
+         std::cout &lt;&lt; &quot;Error opening student's output.&quot; &lt;&lt; std::endl;
+   }
+   std::string answer;
+   while (std::getline(student_output, answer)) {
+         std::cout &lt;&lt; answer &lt;&lt; std::endl;
+   }
+}
+        </code>
+    </program></statement>
+    <hint>
+      <activity label="cp_15_AC_4q_pp">
+        <statement>
+          <p>Write a program that prompts a user for an integer <c>n</c> and print the first <c>n</c>
+  powers of 2 to an output file called <c>powers.txt</c>. Include proper file error checking. To simulate what
+  your output file would look like, the contents of your output file will be displayed on the
+  terminal. Use the lines to construct the code, then go back to complete the Activecode.</p>
+        </statement>
+        <blocks>
+          <block order="3">
+            <cline>int main() {</cline>
+          </block>
+          <block order="7">
+            <cline>   int n;</cline>
+          </block>
+          <block order="14">
+            <cline>   std::cout &lt;&lt; &quot;Enter an integer: &quot;;</cline>
+          </block>
+          <block order="9">
+            <cline>   std::cin &gt;&gt; n;</cline>
+          </block>
+          <block order="6">
+            <cline>   std::cout &lt;&lt; n &lt;&lt; std::endl ;</cline>
+          </block>
+          <block order="4">
+            <cline>   ofstream outfile (&quot;powers.txt&quot;);</cline>
+          </block>
+          <block order="12">
+            <cline>   if (outfile.good() == false) {</cline>
+            <cline>      std::cout &lt;&lt; &quot;Unable to open output file.&quot; &lt;&lt; std::endl ;</cline>
+            <cline>      exit (1);</cline>
+            <cline>   }</cline>
+          </block>
+          <block order="5">
+            <cline>   while (true) {</cline>
+          </block>
+          <block order="10">
+            <cline>      for (int i = 0; i &lt; n; i++) {</cline>
+          </block>
+          <block order="15">
+            <cline>            outfile &lt;&lt; pow(2,i) &lt;&lt; std::endl ;</cline>
+          </block>
+          <block order="8">
+            <cline>      }</cline>
+          </block>
+          <block order="11">
+            <cline>   }</cline>
+          </block>
+          <block order="17">
+            <cline>   ifstream student_output(&quot;powers.txt&quot;);</cline>
+          </block>
+          <block order="13">
+            <cline>   if (!student_output.good()) {</cline>
+            <cline>      std::cout &lt;&lt; &quot;Error opening student's output.&quot; &lt;&lt; std::endl ;</cline>
+            <cline>   }</cline>
+          </block>
+          <block order="2">
+            <cline>  std::string answer;</cline>
+          </block>
+          <block order="1">
+            <cline>   while (getline(student_output, answer)) {</cline>
+            <cline>      std::cout &lt;&lt; answer &lt;&lt; std::endl ;</cline>
+            <cline>   }</cline>
+          </block>
+          <block order="16">
+            <cline>}</cline>
+          </block>
+        </blocks>
+      </activity>
+    </hint>
+  </exercise>
+
+
+  <exercise label="cp_15_5">
+    <statement>
+      <p>ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter
+  after it in the alphabet. For example, using ROT13 on the letter “a” would turn it
+  into “n”. Notice how since 13 is exactly half the number of characters in the
+  alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus,
+  ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file
+  called <c>message.txt</c><fn>
+          <datafile label="message-txt" filename="message.txt">
+            <pre>Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.</pre>
+          </datafile>
+        </fn>applies ROT13, and outputs the result to
+  the terminal. Include proper file error checking.</p>
+    <program interactive="activecode" label="cp_15_AC_5q">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;cctype&gt;
+
+int main() {
+    // Write your code here.
+}
+        </code>
+    </program></statement>
+    <solution>
+      <p>Below is one way to implement this program. We create an <c>ifstream</c> object to open our file.
+  We check to make sure the file is opened correctly before we read the data values into a string.
+  We call our <c>ROT13</c> function and output the result to the output file.</p>
+      <program xml:id="cp_15_AC_5a">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;cctype&gt;
+
+std::string ROT13 (std::string message) {
+    for (size_t i = 0; i &lt; message.size(); ++i) {
+        if (isalpha(message[i])) {
+            if (message[i] &gt;= 'A' &amp;&amp; message[i] &lt;= 'Z') {
+                if (message[i] &lt;= 'M') {
+                    message[i] = message[i] + 13;
+                }
+                else {
+                    message[i] = message[i] - 13;
+                }
+            }
+            else {
+                 if (message[i] &lt;= 'm') {
+                    message[i] = message[i] + 13;
+                }
+                else {
+                    message[i] = message[i] - 13;
+                }
+            }
+        }
+    }
+    return message;
+}
+
+int main() {
+    std::ifstream infile(&quot;message.txt&quot;);
+    std::string message;
+    if (!infile.good()) {
+        std::cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; std::endl;
+        exit(1);
+    }
+    while (std::getline(infile, message)) {
+        std::cout &lt;&lt; ROT13(message) &lt;&lt; std::endl;
+    }
+}
+        </code>
+    </program>
+    </solution>
+  </exercise>
+  <exercise label="cp_15_7">
+    <statement>
+      <p>Write a program that reads in data about a class from the file <c>class_data.txt</c><fn>
+          <datafile label="class_data-txt" filename="class_data.txt">
+            <p>Below are the contents of the input file.</p>
+            <pre>First    Last       Grade    GPA    Age
+Alex     Jones      9        3.4    14
+Beth     Hamilton   12       3.7    18
+Charles  White      11       3.5    16
+Daniel   Kim        10       3.8    16
+Ethan    Brooks     11       3.9    17
+Faith    Flemmings  10       3.0    15
+Gina     Zhou       9        3.2    14</pre>
+          </datafile></fn> and outputs the rows
+  of data where a student has a GPA of at least 3.5. Include proper file error checking.</p>
+    <program interactive="activecode" label="cp_15_AC_7q">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+
+int main() {
+    // Write your code here.
+}
+        </code>
+    </program></statement>
+    <solution><p>Below is one way to implement this program. We create an <c>ifstream</c> object to open our
+  file. We check to make sure the file is opened correctly before we read the data values into
+  corresponding variables. We check if the GPA is at least 3.5, and print the data values to the
+  terminal if so.</p>
+  <program xml:id="cp_15_AC_7a">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+
+int main() {
+    std::ifstream infile(&quot;class_data.txt&quot;);
+    std::string fname, lname;
+    int grade, age;
+    double gpa;
+    if (!infile.good()) {
+        std::cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; std::endl;
+        exit(1);
+    }
+    std::getline(infile, fname);
+    while (infile &gt;&gt; fname &gt;&gt; lname &gt;&gt; grade &gt;&gt; gpa &gt;&gt; age) {
+        if (gpa &gt;= 3.5) {
+            std::cout &lt;&lt; fname &lt;&lt; '\t' &lt;&lt; lname &lt;&lt; '\t' &lt;&lt; grade
+                 &lt;&lt; '\t' &lt;&lt; gpa &lt;&lt; '\t' &lt;&lt; age &lt;&lt; std::endl;
+        }
+    }
+}
+        </code>
+    </program>
+    </solution>
+  </exercise>
+
+  <exercise label="cp_15_8_q">
+    <statement>
+      <p>Write a program that takes an input file called <c>shrimp.txt</c> and outputs
+        the contents of the file where &quot;shrimp&quot; is replaced by a word that the user inputs to the terminal.
+  Include proper file error checking.
+        Check the hint below for help with the construction of the code.</p>
+
+    <program interactive="activecode" label="cp_15_AC_8q_editor">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+
+// Write your code here.
+        </code>
+    </program></statement>
+    <hint>
+      <activity label="cp_15_AC_8q_pp">
+        <statement>
+          <p>Write a program that takes an input file called “shrimp.txt” and outputs
+            the quote with “shrimp” replaced by a word that the user inputs to the
+  terminal.
+            Include proper file error checking.
+            Use the lines to construct the code, then go back to complete the Activecode.</p>
+
+          <datafile label="shrimp-txt" filename="shrimp.txt">
+            <pre>There's pineapple shrimp, lemon shrimp, coconut shrimp,
+pepper shrimp, shrimp soup, shrimp stew, shrimp salad,
+shrimp and potatoes, shrimp burger, shrimp sandwich.
+That- that's about it.</pre>
+          </datafile>
+        </statement>
+        <blocks>
+          <block order="5">
+            <cline>int main() {</cline>
+          </block>
+          <block order="14">
+            <cline>  std::string word;</cline>
+          </block>
+          <block order="7">
+            <cline>   std::cout &lt;&lt; &quot;Enter word to replace 'shrimp': &quot;;</cline>
+          </block>
+          <block order="15">
+            <cline>   std::cin &gt;&gt; word;</cline>
+          </block>
+          <block order="10">
+            <cline>   std::cout &lt;&lt; word &lt;&lt; std::endl ;</cline>
+          </block>
+          <block order="2">
+            <cline>  std::string replace = &quot;shrimp&quot;;</cline>
+          </block>
+          <block order="17">
+            <cline>   ifstream inFile(&quot;shrimp.txt&quot;);</cline>
+          </block>
+          <block order="9">
+            <cline>  std::string line;</cline>
+          </block>
+          <block order="13">
+            <cline>   for (int i = 0; i &lt; 4; i++) {</cline>
+          </block>
+          <block order="1">
+            <cline>      getline(inFile,line);</cline>
+          </block>
+          <block order="3">
+            <cline>      for (int unsigned j = 0; j &lt; line.size(); j++) {</cline>
+          </block>
+          <block order="4">
+            <cline>         size_t pos = line.find(replace);</cline>
+          </block>
+          <block order="8">
+            <cline>         if (pos != std::string::npos) {</cline>
+          </block>
+          <block order="18">
+            <cline>            line.replace(pos,replace.length(),word);</cline>
+          </block>
+          <block order="6">
+            <cline>         }</cline>
+          </block>
+          <block order="12">
+            <cline>      }</cline>
+          </block>
+          <block order="19">
+            <cline>      std::cout &lt;&lt; line&lt;&lt; std::endl ;</cline>
+          </block>
+          <block order="11">
+            <cline>   }</cline>
+          </block>
+          <block order="16">
+            <cline>}</cline>
+          </block>
+        </blocks>
+      </activity>
+    </hint>
+  </exercise>
+
+  <exercise label="cp_15_9">
+    <statement>
+      <p>Write a program that creates a multiplication table for the first 10 numbers using a matrix
+  and outputting the table to an output file called <c>mult_table.txt</c>. Include proper file error checking.</p>
+    <program interactive="activecode" label="cp_15_AC_9q">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    // Write your code here.
+}
+        </code>
+    </program></statement>
+    <solution><p>Below is one way to implement this program. We create a 10x10 matrix
+        and fill in the products. Then we traverse through the matrix and output
+        the values into the output file.</p>
+        <program xml:id="cp_15_AC_9a">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;vector&gt;
+
+int main() {
+    std::ofstream outfile(&quot;mult_table.txt&quot;);
+    if (!outfile.good()) {
+        std::cout &lt;&lt; &quot;Error. Unable to open file.&quot; &lt;&lt; std::endl;
+        exit(1);
+    }
+    std::vector&lt;int&gt; rows(10);
+    std::vector&lt;std::vector&lt;int&gt; &gt; mat;
+    for (int i = 0; i &lt; 10; ++i) {
+        mat.push_back(rows);
+    }
+    for (int i = 0; i &lt; 10; ++i) {
+        for (int j = 0; i &lt; 10; ++j) {
+            matrix[i][j] = (i + 1) * (j + 1);
+        }
+    }
+    for (int i = 0; i &lt; 10; ++i) {
+        for (int j = 0; i &lt; 10; ++j) {
+            outfile &lt;&lt; matrix[i][j] &lt;&lt; '\t';
+        }
+        std::cout &lt;&lt; std::endl;
+    }
+}
+        </code>
+    </program>
+    </solution>
+  </exercise>
+
+
+  <exercise label="cp_15_10_q">
+    <statement>
+      <p>Write a program that computes the product of two matrices.
+        Take a look at the example below. Two find the product of two
+        matrices, take the ith row from the first matrix and the jth column
+        from the second matrix, find the summation of the product of each component,
+        and that’s the value that goes into the (i, j) location of the new matrix.
+        The product of an mxn and an nxp matrix is an mxp matrix.
+        Check the hint below for help with the construction of the code.</p>
+
+    <program interactive="activecode" label="cp_15_AC_10q_editor">
+        <code>
+#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+
+int main() {
+   /*
+      2x3 matrix A  X 3x2 matrix B                2x2 matrix C
+   [ a    b    c ]    [ g    h ]       [ ag + bi + cl    ah + bj + cm ]
+   [ d    e    f ]    [ i    j ]   =   [ dg + ei + fl    dh + ej + fm ]
+                      [ l    m ]
+   */
+
+   // Write your code here.
+}
+        </code>
+    </program></statement>
+    <hint>
+      <activity label="cp_15_AC_10q_pp">
+        <statement>
+          <p>Write a program that computes the product of two matrices.
+            Take a look at the example below. To find the product of two
+            matrices, take the ith row from the first matrix and the jth column
+            from the second matrix, find the summation of the product of each component,
+            and that’s the value that goes into the (i, j) location of the new matrix.
+            The product of an mxn and an nxp matrix is an mxp matrix.
+            Use the lines to construct the code, then go back to complete the Activecode.</p>
+        </statement>
+        <blocks>
+          <block order="7">
+            <cline>int main() {</cline>
+          </block>
+          <block order="2">
+            <cline>matrix&lt;int&gt; A(2,3);</cline>
+          </block>
+          <block order="5">
+            <cline>matrix&lt;int&gt; B(3,2);</cline>
+          </block>
+          <block order="3">
+            <cline>matrix&lt;int&gt; C(2,2);</cline>
+          </block>
+          <block order="9">
+            <cline>C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);</cline>
+          </block>
+          <block order="8">
+            <cline>C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);</cline>
+          </block>
+          <block order="6">
+            <cline>C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);</cline>
+          </block>
+          <block order="4">
+            <cline>C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);</cline>
+          </block>
+          <block order="1">
+            <cline>}</cline>
+          </block>
+        </blocks>
+      </activity>
+    </hint>
+  </exercise> 
+
+</exercises>

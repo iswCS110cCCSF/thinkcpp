@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="chapter11_component-mixed-up-code">
+    <title>Chapter 11 Mixed-Up Code Practice</title>
+
+    <exercise label="chapter11_muc_throw" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks to validate a positive count and handle an invalid argument.</p></statement>
+        <blocks>
+            <block order="1"><cline>void validate_count(int count) {</cline></block>
+            <block order="2"><cline>    if (count &lt;= 0) {</cline></block>
+            <block order="3"><cline>        throw std::invalid_argument{"count must be positive"};</cline></block>
+            <block order="4"><cline>    }</cline></block>
+            <block order="5"><cline>}</cline></block>
+            <block order="6"><cline>int main() {</cline></block>
+            <block order="7"><cline>    try { validate_count(0); }</cline></block>
+            <block order="8"><cline>    catch (const std::invalid_argument&amp; error) {</cline></block>
+            <block order="9"><cline>        std::cout &lt;&lt; error.what() &lt;&lt; '\n';</cline></block>
+            <block order="10"><cline>    }</cline></block>
+            <block order="11"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_muc_raii" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks so the marker is destroyed automatically when the function exits.</p></statement>
+        <blocks>
+            <block order="1"><cline>void run_task() {</cline></block>
+            <block order="2"><cline>    LifecycleMarker marker{"task"};</cline></block>
+            <block order="3"><cline>    throw std::runtime_error{"task failed"};</cline></block>
+            <block order="4"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_muc_noexcept" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks to declare a small function with a genuine no-throw contract.</p></statement>
+        <blocks>
+            <block order="1"><cline>int get_fixed_count() noexcept {</cline></block>
+            <block order="2"><cline>    return 3;</cline></block>
+            <block order="3"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+</exercises>

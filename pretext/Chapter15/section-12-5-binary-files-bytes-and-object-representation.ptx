@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter12_binary-files-bytes-and-object-representation">
+    <title>Binary Files, Bytes, and Object Representation</title>
+
+    <p>
+        A binary file stores bytes according to a binary format. The bytes may
+        represent integers, floating-point values, records, images, or other
+        data. Unlike text output, binary output does not automatically convert a
+        value into human-readable decimal characters.
+    </p>
+
+    <table xml:id="table_chapter12_text-binary-comparison">
+        <title>Text and binary files</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="20%"/><col width="35%"/><col width="45%"/>
+            <row header="yes">
+                <cell>Feature</cell>
+                <cell>Text</cell>
+                <cell>Binary</cell>
+            </row>
+            <row><cell>Representation</cell><cell>Characters following a text format</cell><cell>Bytes following a binary format</cell></row>
+            <row><cell>Human inspection</cell><cell>Usually convenient</cell><cell>Usually requires a tool or program</cell></row>
+            <row><cell>Portability</cell><cell>Often easier when the encoding is documented</cell><cell>Requires explicit widths, layout, and byte order</cell></row>
+            <row><cell>Typical access</cell><cell>Often sequential</cell><cell>Can support compact fixed-size records and random access</cell></row>
+        </tabular>
+    </table>
+
+    <subsection xml:id="chapter12_binary-output">
+        <title>Writing bytes with <c>write()</c></title>
+        <program xml:id="program_chapter12_binary-output"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <cstdint>
+#include <fstream>
+
+int main() {
+    std::ofstream output_file{
+        "numbers.bin",
+        std::ios::binary
+    };
+
+    if (!output_file) {
+        return 1;
+    }
+
+    std::int32_t value{1025};
+    output_file.write(
+        reinterpret_cast<const char*>(&value),
+        sizeof value
+    );
+
+    return 0;
+}
+            ]]></code>
+        </program>
+        <p>
+            The call copies the bytes occupied by <c>value</c>. It does not write
+            the four characters <c>1025</c>. The exact byte sequence depends on
+            the object representation used by the implementation.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_binary-input">
+        <title>Reading bytes with <c>read()</c></title>
+        <program xml:id="program_chapter12_binary-input"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <cstdint>
+#include <fstream>
+#include <iostream>
+
+int main() {
+    std::ifstream input_file{
+        "numbers.bin",
+        std::ios::binary
+    };
+
+    if (!input_file) {
+        return 1;
+    }
+
+    std::int32_t value{};
+    while (input_file.read(
+        reinterpret_cast<char*>(&value),
+        sizeof value
+    )) {
+        std::cout << value << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+        <p>
+            Placing <c>read()</c> in the loop condition ensures that the body
+            runs only after a complete value has been read. A final incomplete
+            record is not processed as if it were valid.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_object-representation">
+        <title>Object representation is not automatically a file format</title>
+        <p>
+            C++ defines an object's object representation as the bytes occupied
+            by its storage. Padding bytes may be present, and library-managed
+            objects such as <c>std::string</c> can contain pointers or other
+            implementation details. Copying raw object bytes is therefore not a
+            general serialization strategy. Safe serialization is discussed in
+            Section 12.7.
+        </p>
+    </subsection>
+
+    <exercise label="chapter12_5_binary-write">
+        <statement><p>What does <c>write()</c> copy into a binary output stream?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p>Only the decimal digits displayed by the value</p></statement><feedback><p>Decimal text requires formatted output.</p></feedback></choice>
+            <choice correct="yes"><statement><p>A specified number of bytes from memory</p></statement><feedback><p><c>write()</c> receives a byte address and a byte count.</p></feedback></choice>
+            <choice><statement><p>The variable's source-code name</p></statement><feedback><p>Names are not stored automatically.</p></feedback></choice>
+            <choice><statement><p>The entire operating system process</p></statement><feedback><p>The call copies only the requested bytes.</p></feedback></choice>
+            <choice><statement><p>A portable format regardless of the machine</p></statement><feedback><p>Portability requires a documented representation.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_5_binary-safety">
+        <statement><p>Select all concerns when writing raw object bytes.</p></statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p>The object may contain padding bytes.</p></statement><feedback><p>Padding can vary by compiler and target.</p></feedback></choice>
+            <choice correct="yes"><statement><p>A library object may contain internal pointers or state.</p></statement><feedback><p>Those values are not portable persisted data.</p></feedback></choice>
+            <choice><statement><p><c>write()</c> automatically adds a file format specification.</p></statement><feedback><p>The programmer must define the format.</p></feedback></choice>
+            <choice><statement><p>Binary files cannot contain integers.</p></statement><feedback><p>Integers are common binary data, but their representation must be understood.</p></feedback></choice>
+            <choice><statement><p>Using <c>sizeof</c> guarantees portability.</p></statement><feedback><p><c>sizeof</c> gives a local storage size, not a complete portable format.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_5_binary-code" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks to write one integer as binary data.</p></statement>
+        <blocks>
+            <block order="1"><cline>std::ofstream output_file{"number.bin", std::ios::binary};</cline></block>
+            <block order="2"><cline>if (!output_file) { return 1; }</cline></block>
+            <block order="3"><cline>std::int32_t value{1025};</cline></block>
+            <block order="4"><cline>output_file.write(</cline></block>
+            <block order="5"><cline>    reinterpret_cast&lt;const char*&gt;(&amp;value),</cline></block>
+            <block order="6"><cline>    sizeof value</cline></block>
+            <block order="7"><cline>);</cline></block>
+        </blocks>
+    </exercise>
+</section>

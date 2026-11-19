@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glossary xml:id="chapter11_glossary">
+    <title>Chapter 11 Glossary</title>
+
+    <gi xml:id="chapter11_glossary_exception">
+        <title>exception</title>
+        <p>An object or value used to report an unusual condition and transfer control to a handler.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_throw">
+        <title><c>throw</c></title>
+        <p>The statement or expression that signals an exceptional condition.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_try">
+        <title><c>try</c> block</title>
+        <p>A block containing code whose exceptions may be handled by following <c>catch</c> handlers.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_catch">
+        <title><c>catch</c> handler</title>
+        <p>A block that responds to an exception matching its parameter type.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_precondition">
+        <title>precondition</title>
+        <p>A condition that must be true before an operation can safely begin.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_postcondition">
+        <title>postcondition</title>
+        <p>A condition or result promised after an operation completes successfully.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_invariant">
+        <title>invariant</title>
+        <p>A rule that must remain true for an object or program state to be valid.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_logic-error">
+        <title>logic error</title>
+        <p>An error in the algorithm that can produce an incorrect result even when the program runs.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_runtime-error">
+        <title>runtime error</title>
+        <p>A problem discovered while the program is executing.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_standard-exception">
+        <title>standard exception</title>
+        <p>An exception type provided by the C++ standard library, such as <c>std::invalid_argument</c>.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_exception-propagation">
+        <title>exception propagation</title>
+        <p>The movement of an exception through callers until a matching handler is found.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_stack-unwinding">
+        <title>stack unwinding</title>
+        <p>The process of leaving calls and destroying local automatic objects while searching for a handler.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_raii">
+        <title>RAII</title>
+        <p>A design technique that ties resource cleanup to the lifetime of an object.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_exception-safety">
+        <title>exception-safety guarantee</title>
+        <p>A promise about object validity, state, and resource cleanup when an operation fails.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_noexcept">
+        <title><c>noexcept</c></title>
+        <p>A function specification stating that an exception should not escape the function.</p>
+    </gi>
+    <gi xml:id="chapter11_glossary_termination">
+        <title>termination</title>
+        <p>The ending of the program by <c>std::terminate()</c> when an exception cannot be handled safely.</p>
+    </gi>
+</glossary>

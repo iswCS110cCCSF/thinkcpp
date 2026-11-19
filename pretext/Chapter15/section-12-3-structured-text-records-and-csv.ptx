@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter12_structured-text-records-and-csv">
+    <title>Structured Text Records and CSV Parsing</title>
+
+    <p>
+        A <term>record</term> is one complete logical item of data in a file. In
+        a comma-separated score file, each line is one record containing a name
+        and a score. A file can contain many records, while a C++ structure can
+        represent one record in memory.
+    </p>
+
+    <listing xml:id="listing_chapter12_score-csv-input">
+        <title>Example file: <c>scores.csv</c></title>
+        <program xml:id="program_chapter12_score-csv-input"
+                 language="text" line-numbers="yes">
+            <code><![CDATA[
+Amina,92
+Marco,85
+Li,97
+            ]]></code>
+        </program>
+    </listing>
+
+    <p>
+        A simple CSV parser can treat the comma as a delimiter. This example
+        intentionally supports simple records only: a name cannot contain an
+        unquoted comma. Full CSV formats also support quoted fields, embedded
+        commas, and escaped quotation marks.
+    </p>
+
+    <listing xml:id="listing_chapter12_parse-csv-record">
+        <title>Parsing and validating one CSV record</title>
+        <program xml:id="program_chapter12_parse-csv-record"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <sstream>
+#include <string>
+
+struct ScoreRecord {
+    std::string name;
+    int score{};
+};
+
+bool parse_score_record(const std::string& line, ScoreRecord& record) {
+    std::istringstream record_stream{line};
+    std::string name;
+    int score{};
+
+    if (!std::getline(record_stream, name, ',')) {
+        return false;
+    }
+
+    if (!(record_stream >> score)) {
+        return false;
+    }
+
+    record_stream >> std::ws;
+    if (!record_stream.eof()) {
+        return false;
+    }
+
+    if (name.empty() || score < 0 || score > 100) {
+        return false;
+    }
+
+    record = ScoreRecord{name, score};
+    return true;
+}
+            ]]></code>
+        </program>
+    </listing>
+
+    <p>
+        The parser first separates the fields, then converts the score, rejects
+        extra non-whitespace data, checks the score range, and finally updates
+        the output object. Delaying the assignment helps prevent a partially
+        parsed record from being mistaken for a valid one.
+    </p>
+
+    <listing xml:id="listing_chapter12_read-csv-file">
+        <title>Reading and validating a CSV file</title>
+        <program xml:id="program_chapter12_read-csv-file"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+
+struct ScoreRecord {
+    std::string name;
+    int score{};
+};
+
+bool parse_score_record(const std::string& line, ScoreRecord& record) {
+    std::istringstream record_stream{line};
+    std::string name;
+    int score{};
+
+    if (!std::getline(record_stream, name, ',')) {
+        return false;
+    }
+    if (!(record_stream >> score)) {
+        return false;
+    }
+
+    record_stream >> std::ws;
+    if (!record_stream.eof() || name.empty() || score < 0 || score > 100) {
+        return false;
+    }
+
+    record = ScoreRecord{name, score};
+    return true;
+}
+
+int main() {
+    std::ifstream input_file{"scores.csv"};
+
+    if (!input_file) {
+        return 1;
+    }
+
+    std::string line;
+    ScoreRecord record;
+
+    while (std::getline(input_file, line)) {
+        if (parse_score_record(line, record)) {
+            std::cout << record.name << ": "
+                      << record.score << '\n';
+        }
+        else {
+            std::cerr << "Skipping malformed record: "
+                      << line << '\n';
+        }
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </listing>
+
+    <p>
+        The program opens <c>scores.csv</c>, reads one complete line at a time,
+        parses each line, and processes only valid records. The parser does not
+        ask for keyboard input; it receives a line as a parameter, which keeps
+        file processing and user interaction separate.
+    </p>
+
+    <listing xml:id="listing_chapter12_write-csv-file">
+        <title>Writing records to a CSV file</title>
+        <program xml:id="program_chapter12_write-csv-file"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <fstream>
+#include <string>
+#include <vector>
+
+struct ScoreRecord {
+    std::string name;
+    int score{};
+};
+
+int main() {
+    std::vector<ScoreRecord> records{
+        {"Amina", 92},
+        {"Marco", 85},
+        {"Li", 97}
+    };
+
+    std::ofstream output_file{"scores.csv"};
+
+    if (!output_file) {
+        return 1;
+    }
+
+    for (const ScoreRecord& record : records) {
+        output_file << record.name << ','
+                    << record.score << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </listing>
+
+    <p>
+        By default, opening the output stream replaces an existing file. To add
+        records without replacing earlier contents, open it with
+        <c>std::ios::app</c>. This example assumes that names do not contain
+        unquoted commas; a full CSV implementation must handle quoted fields.
+    </p>
+
+    <subsection xml:id="chapter12_tsv-and-json-preview">
+        <title>Other structured text formats</title>
+        <p>
+            A TSV file uses tab characters instead of commas and can be handled
+            with a similar strategy. JSON is another popular structured format,
+            but C++17 has no JSON library in the standard library. A production
+            program normally uses a carefully selected JSON library rather than
+            writing a complete JSON parser as a beginner exercise.
+        </p>
+    </subsection>
+
+    <exercise label="chapter12_3_record-definition">
+        <statement><p>What is a record in a structured text file?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p>A second file created during parsing</p></statement><feedback><p>A record is data within a file, not another file.</p></feedback></choice>
+            <choice correct="yes"><statement><p>One complete logical item of data</p></statement><feedback><p>For this example, each CSV line is one score record.</p></feedback></choice>
+            <choice><statement><p>Only a pointer to a file</p></statement><feedback><p>A pointer is not a logical data record.</p></feedback></choice>
+            <choice><statement><p>A compiler error message</p></statement><feedback><p>Errors are not records in the CSV format.</p></feedback></choice>
+            <choice><statement><p>The entire computer memory</p></statement><feedback><p>A record is a bounded logical item.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_3_validation">
+        <statement><p>Select all reasons to validate a parsed record.</p></statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p>A field may be missing or have the wrong type.</p></statement><feedback><p>Input can be structurally malformed.</p></feedback></choice>
+            <choice correct="yes"><statement><p>A value may have the right type but violate an application rule.</p></statement><feedback><p>An integer score can still be outside the allowed range.</p></feedback></choice>
+            <choice><statement><p>Text input is always valid once it is read.</p></statement><feedback><p>Successful reading does not guarantee meaningful data.</p></feedback></choice>
+            <choice><statement><p>Validation is needed only for binary files.</p></statement><feedback><p>Text records also require validation.</p></feedback></choice>
+            <choice><statement><p>A parser should silently guess when the format is unclear.</p></statement><feedback><p>Documented formats and explicit failure are safer.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_3_csv-code" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks to parse the name and score from one CSV line.</p></statement>
+        <blocks>
+            <block order="1"><cline>std::istringstream record_stream{line};</cline></block>
+            <block order="2"><cline>std::getline(record_stream, name, ',');</cline></block>
+            <block order="3"><cline>record_stream &gt;&gt; score;</cline></block>
+            <block order="4"><cline>record_stream &gt;&gt; std::ws;</cline></block>
+            <block order="5"><cline>return !name.empty() &amp;&amp; record_stream.eof();</cline></block>
+        </blocks>
+    </exercise>
+</section>

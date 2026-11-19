@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="chapter11_component-exercises">
+    <title>Chapter 11 Exercises</title>
+
+    <exercise label="chapter11_component_error-category">
+        <statement><p>Which situation is most naturally handled as a runtime error?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p>A missing closing brace in the source code</p></statement><feedback><p>This is discovered during compilation.</p></feedback></choice>
+            <choice><statement><p>A misleading variable name</p></statement><feedback><p>This is a readability or design problem.</p></feedback></choice>
+            <choice correct="yes"><statement><p>A file cannot be opened when the program requests it</p></statement><feedback><p>The condition is discovered during execution.</p></feedback></choice>
+            <choice><statement><p>A wrong formula produces an incorrect average</p></statement><feedback><p>This is a logic error.</p></feedback></choice>
+            <choice><statement><p>A missing semicolon in a function</p></statement><feedback><p>This is a compile-time error.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_component_handler-order">
+        <statement><p>Why should a specific handler usually appear before a general handler?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p>The general handler cannot compile otherwise.</p></statement><feedback><p>The important issue is which handler gets the first opportunity to match.</p></feedback></choice>
+            <choice correct="yes"><statement><p>A general handler could match first and prevent the specific handler from responding.</p></statement><feedback><p>Specific cases should be handled before broad fallback cases.</p></feedback></choice>
+            <choice><statement><p>Specific handlers always run after all general handlers.</p></statement><feedback><p>Handlers are considered in their written order.</p></feedback></choice>
+            <choice><statement><p>The exception object is destroyed after every handler.</p></statement><feedback><p>Destruction is not the reason for handler ordering.</p></feedback></choice>
+            <choice><statement><p>A specific handler can catch syntax errors.</p></statement><feedback><p>Handlers respond to exceptions, not compiler syntax errors.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_component_unwinding">
+        <statement><p>What does stack unwinding help C++ accomplish?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p>It retries every failed function call.</p></statement><feedback><p>Unwinding leaves calls; it does not retry them.</p></feedback></choice>
+            <choice><statement><p>It converts exceptions into return values.</p></statement><feedback><p>Exceptions remain part of exceptional control flow.</p></feedback></choice>
+            <choice><statement><p>It keeps every local object alive until <c>main()</c> ends.</p></statement><feedback><p>Local objects are destroyed as their scopes are exited.</p></feedback></choice>
+            <choice correct="yes"><statement><p>It destroys local automatic objects while control moves toward a handler.</p></statement><feedback><p>This cleanup is essential to object lifetime and RAII.</p></feedback></choice>
+            <choice><statement><p>It prevents all exceptions from escaping.</p></statement><feedback><p>A matching handler is still required.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_component_noexcept">
+        <statement><p>What is the safest interpretation of a <c>noexcept</c> function?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p>It may throw if the caller is prepared.</p></statement><feedback><p>An exception escaping a <c>noexcept</c> function leads to termination.</p></feedback></choice>
+            <choice><statement><p>It cannot call other functions.</p></statement><feedback><p><c>noexcept</c> constrains exception escape, not function calls.</p></feedback></choice>
+            <choice correct="yes"><statement><p>Its contract says that no exception should escape it.</p></statement><feedback><p>The specification is appropriate only when the no-throw promise is genuine.</p></feedback></choice>
+            <choice><statement><p>It automatically catches every exception.</p></statement><feedback><p><c>noexcept</c> does not create a handler.</p></feedback></choice>
+            <choice><statement><p>It guarantees that its result is logically correct.</p></statement><feedback><p>It concerns exception behavior, not algorithmic correctness.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_component_good-practices">
+        <statement><p>Select all practices that support reliable exception handling.</p></statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p>Catch an exception at a level that knows how to respond.</p></statement><feedback><p>The handling level should have enough context to recover or report.</p></feedback></choice>
+            <choice><statement><p>Ignore every exception so the program appears to continue.</p></statement><feedback><p>Ignoring failures can produce invalid state.</p></feedback></choice>
+            <choice correct="yes"><statement><p>Use RAII to connect resource cleanup to object lifetime.</p></statement><feedback><p>RAII helps clean up resources during normal return and unwinding.</p></feedback></choice>
+            <choice><statement><p>Use exceptions for every expected loop stopping condition.</p></statement><feedback><p>Expected control flow normally belongs in ordinary statements.</p></feedback></choice>
+            <choice><statement><p>Hide the original error message whenever possible.</p></statement><feedback><p>Useful diagnostics help users and developers understand failure.</p></feedback></choice>
+        </choices>
+    </exercise>
+</exercises>

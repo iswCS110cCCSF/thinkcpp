@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter12_file-errors-exceptions-and-applications">
+    <title>File Errors, Exceptions, and Complete Applications</title>
+
+    <p>
+        File operations can fail because a file is missing, permissions are
+        insufficient, storage is full, or a device reports an input/output
+        failure. A program should distinguish expected conditions such as
+        end-of-file from failures that require recovery or an error report.
+    </p>
+
+    <subsection xml:id="chapter12_file-opening-exception">
+        <title>Throwing when a file cannot be opened</title>
+        <program xml:id="program_chapter12_file-opening-exception"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <fstream>
+#include <ios>
+#include <iostream>
+#include <string>
+
+std::ifstream open_input_file(const std::string& filename) {
+    std::ifstream input_file{filename};
+
+    if (!input_file) {
+        throw std::ios_base::failure{
+            "Could not open " + filename
+        };
+    }
+
+    return input_file;
+}
+
+int main() {
+    try {
+        std::ifstream input_file{
+            open_input_file("scores.csv")
+        };
+
+        std::string line;
+        while (std::getline(input_file, line)) {
+            std::cout << line << '\n';
+        }
+    }
+    catch (const std::ios_base::failure& error) {
+        std::cout << "File operation failed: "
+                  << error.what() << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+        <p>
+            The helper reports an opening failure immediately. The caller has
+            the context to display a message, request another filename, select
+            a default file, or stop the operation.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_stream-exception-mask">
+        <title>Requesting stream exceptions</title>
+        <program xml:id="program_chapter12_stream-exception-mask"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+std::ifstream input_file{"scores.csv"};
+input_file.exceptions(std::ios::badbit);
+
+if (!input_file) {
+    throw std::ios_base::failure{"Could not open scores.csv"};
+}
+            ]]></code>
+        </program>
+        <p>
+            The exception mask selects which stream-state flags cause the stream
+            to throw. Requesting <c>badbit</c> can report serious I/O failures
+            while allowing ordinary end-of-file processing to remain a normal
+            loop condition. Including <c>failbit</c> requires more careful
+            handling because formatted input can set failure-related states at
+            expected stopping points.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_exception-boundary">
+        <title>Choosing an exception boundary</title>
+        <p>
+            Low-level code should provide enough information to explain the
+            failure. Higher-level code should decide how to communicate with the
+            user or whether to retry. Catch an exception at the lowest level
+            that has enough context to respond meaningfully; do not catch and
+            ignore it merely to make the program continue.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_complete-binary-application">
+        <title>Designing a complete file application</title>
+        <p>
+            A reliable application defines its file format, checks every open and
+            read operation, validates records, reports malformed input, and
+            documents how data is represented. For binary files it must also
+            specify field widths, byte order, layout, and version information.
+            These rules allow a future program to determine whether it can safely
+            read the file.
+        </p>
+    </subsection>
+
+    <exercise label="chapter12_8_file-exception">
+        <statement><p>Why might <c>open_input_file()</c> throw?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p>To guarantee that the operating system creates the file</p></statement><feedback><p>An exception reports failure; it does not create a missing file.</p></feedback></choice>
+            <choice correct="yes"><statement><p>To prevent the caller from continuing as though the file were available</p></statement><feedback><p>The caller can catch the exception and choose a meaningful response.</p></feedback></choice>
+            <choice><statement><p>To convert the file into a binary format</p></statement><feedback><p>Opening failure and file format are separate concerns.</p></feedback></choice>
+            <choice><statement><p>To make every later read succeed</p></statement><feedback><p>An exception does not repair later operations.</p></feedback></choice>
+            <choice><statement><p>To avoid checking the stream object anywhere</p></statement><feedback><p>The helper checks the stream before throwing.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_8_error-boundary">
+        <statement><p>Select all sound file-error practices.</p></statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p>Check whether a file opened successfully.</p></statement><feedback><p>Later operations should not assume an unavailable file is usable.</p></feedback></choice>
+            <choice correct="yes"><statement><p>Handle an exception where the program has enough context to recover.</p></statement><feedback><p>The handling level should know what response is appropriate.</p></feedback></choice>
+            <choice><statement><p>Ignore all file failures so the program continues.</p></statement><feedback><p>Continuing with invalid state can make the result unreliable.</p></feedback></choice>
+            <choice><statement><p>Use exceptions to replace all ordinary loop conditions.</p></statement><feedback><p>Expected end-of-file conditions often belong in loop conditions.</p></feedback></choice>
+            <choice><statement><p>Assume binary input is portable without documenting its format.</p></statement><feedback><p>Binary formats require explicit representation rules.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_8_exception-code" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks to open a file, throw on failure, and catch the exception.</p></statement>
+        <blocks>
+            <block order="1"><cline>try {</cline></block>
+            <block order="2"><cline>    std::ifstream input_file{"scores.csv"};</cline></block>
+            <block order="3"><cline>    if (!input_file) {</cline></block>
+            <block order="4"><cline>        throw std::ios_base::failure{"Open failed"};</cline></block>
+            <block order="5"><cline>    }</cline></block>
+            <block order="6"><cline>}</cline></block>
+            <block order="7"><cline>catch (const std::ios_base::failure&amp; error) {</cline></block>
+            <block order="8"><cline>    std::cout &lt;&lt; error.what() &lt;&lt; '\n';</cline></block>
+            <block order="9"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+</section>

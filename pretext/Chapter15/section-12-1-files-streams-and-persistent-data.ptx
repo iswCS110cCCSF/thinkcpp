@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter12_files-streams-and-persistent-data">
+    <title>Files, Streams, and Persistent Data</title>
+
+    <p>
+        A program usually receives input and produces output through streams.
+        Standard input and output connect a program to the keyboard and screen;
+        file streams connect a program to files stored on a device.
+    </p>
+
+    <table xml:id="table_chapter12_stream-endpoints">
+        <title>Common C++ stream endpoints</title>
+        <tabular top="major" left="major" bottom="major" right="major">
+            <col width="25%"/><col width="20%"/><col width="55%"/>
+            <row header="yes">
+                <cell>Stream</cell>
+                <cell>Direction</cell>
+                <cell>Typical endpoint</cell>
+            </row>
+            <row>
+                <cell><c>std::cin</c></cell>
+                <cell>Input</cell>
+                <cell>Keyboard</cell>
+            </row>
+            <row>
+                <cell><c>std::cout</c></cell>
+                <cell>Output</cell>
+                <cell>Screen</cell>
+            </row>
+            <row>
+                <cell><c>std::ifstream</c></cell>
+                <cell>Input</cell>
+                <cell>File</cell>
+            </row>
+            <row>
+                <cell><c>std::ofstream</c></cell>
+                <cell>Output</cell>
+                <cell>File</cell>
+            </row>
+        </tabular>
+    </table>
+
+    <p>
+        A file is persistent data: it can remain available after a program
+        finishes. Persistence allows a program to save records, reports, and
+        configuration so that a later run can use them. In software engineering,
+        separating persistent data from program code also makes data easier to
+        inspect, back up, exchange, and test.
+    </p>
+
+    <subsection xml:id="chapter12_stream-operations">
+        <title>Streams move data</title>
+        <p>
+            The insertion operator <c>&lt;&lt;</c> sends formatted data into an
+            output stream. The extraction operator <c>&gt;&gt;</c> obtains
+            formatted data from an input stream. <c>std::getline()</c> obtains
+            a complete line, including spaces that ordinary extraction would
+            stop before.
+        </p>
+
+        <program xml:id="program_chapter12_stream-operations"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <iostream>
+
+int main() {
+    int quantity{};
+    std::cin >> quantity;
+
+    std::cout << "Quantity: " << quantity << '\n';
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter12_text-and-binary-preview">
+        <title>Text and binary persistence</title>
+        <p>
+            A text file stores characters arranged according to a documented
+            format. A binary file stores bytes according to a documented binary
+            format. Text is convenient for people to inspect, while binary data
+            can represent fixed-width values compactly and support direct access.
+            Neither format is automatically self-describing; the program needs
+            to know how to interpret the stored data.
+        </p>
+    </subsection>
+
+    <exercise label="chapter12_1_stream-endpoints">
+        <statement><p>Which stream normally represents input from a file?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p><c>std::cout</c></p></statement><feedback><p><c>std::cout</c> is normally connected to screen output.</p></feedback></choice>
+            <choice correct="yes"><statement><p><c>std::ifstream</c></p></statement><feedback><p>An input file stream reads data from a file.</p></feedback></choice>
+            <choice><statement><p><c>std::ofstream</c></p></statement><feedback><p>An output file stream writes data to a file.</p></feedback></choice>
+            <choice><statement><p><c>std::cin</c></p></statement><feedback><p><c>std::cin</c> is normally connected to keyboard input.</p></feedback></choice>
+            <choice><statement><p><c>std::string</c></p></statement><feedback><p>A string stores characters but is not itself a file stream.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_1_persistence">
+        <statement><p>Select all benefits of persistent data.</p></statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p>It can be used by a later run of the program.</p></statement><feedback><p>Files remain after the program ends.</p></feedback></choice>
+            <choice correct="yes"><statement><p>It can be backed up or exchanged separately from the program.</p></statement><feedback><p>Persistent files are separate artifacts.</p></feedback></choice>
+            <choice><statement><p>It guarantees that a file format never needs documentation.</p></statement><feedback><p>Programs still need rules for interpreting stored data.</p></feedback></choice>
+            <choice><statement><p>It makes every input operation succeed.</p></statement><feedback><p>Files can be missing, corrupted, or inaccessible.</p></feedback></choice>
+            <choice><statement><p>It replaces the need for program memory.</p></statement><feedback><p>Programs still load and process data in memory.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_1_stream-code" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks to read a quantity and report it through the standard streams.</p></statement>
+        <blocks>
+            <block order="1"><cline>int quantity{};</cline></block>
+            <block order="2"><cline>std::cin &gt;&gt; quantity;</cline></block>
+            <block order="3"><cline>std::cout &lt;&lt; "Quantity: " &lt;&lt; quantity &lt;&lt; '\n';</cline></block>
+        </blocks>
+    </exercise>
+</section>
