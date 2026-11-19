@@ -212,7 +212,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_what-is-a-programming-language.html#program_lang_1",
   "type": "Checkpoint",
-  "number": "1.2.3",
+  "number": "1.2.1",
   "title": "",
   "body": "  A(n) translates a high-level program line by line, executing commands as they come. A(n) translates a high-level program all at once, before executing any of the commands!               "
 },
@@ -221,7 +221,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_what-is-a-programming-language.html#program_lang_2",
   "type": "Checkpoint",
-  "number": "1.2.4",
+  "number": "1.2.2",
   "title": "",
   "body": "  Multiple Response Which is true about a high-level programming language?      Almost all programs are written in high-level languages.   High-level languages are efficient and easy to understand, an obvious choice for writing a program!     Programs written in a high-level language must be translated before they can be run.   All programs in high-level language must be translated to a low-level language before the computer can execute them!     It's easier to program in a low-level language than a high-level language.   Actually, its much the other way around!     Computers can only execute programs written in high-level languages.   Computers actually can't understand high-level languages as they are written.     High-level programs can only run on one kind of computer (you'd have to rewrite the program if you wanted to use a different machine).   High-level programs are portable, meaning they can run on different kinds of computers with little to no modification.    "
 },
@@ -230,7 +230,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_what-is-a-programming-language.html#program_lang_3",
   "type": "Checkpoint",
-  "number": "1.2.5",
+  "number": "1.2.3",
   "title": "",
   "body": "  What is the role of an executor?      To translate the program line by line.   This is the role of an interpreter!     To copy the program from disk to memory and make the computer run the program.   The role of an executor is to carry out, or execute, the program!     To translate the program all at once.   This is the role of a compiler!     To give an error message if something is preventing the code from being translated.   This happens automatically when we try to compile\/interpret our program.    "
 },
@@ -239,7 +239,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_what-is-a-programming-language.html#program_lang_4",
   "type": "Checkpoint",
-  "number": "1.2.6",
+  "number": "1.2.4",
   "title": "",
   "body": "  Match each term to an example of it by dragging the term into the appropriate box.   Try again!    source code  our program written in C++    object code  translated version of our program that the computer can understand and execute    "
 },
@@ -509,7 +509,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_formal-and-natural-languages-formal.html#formal_natural_1",
   "type": "Checkpoint",
-  "number": "1.5.3",
+  "number": "1.5.1",
   "title": "",
   "body": "  Multiple Response Select all formal languages from the choices below.      C++   All programming languages are formal languages!     scientific notation   Scientific notation is designed to denote large numbers.     Mandarin   Mandarin is a natural language.     English   English is a natural language.     chemical formulas   Chemical formulas represent what elements a compound is made of! For example CO2 is is carbon dioxide!    "
 },
@@ -518,7 +518,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_formal-and-natural-languages-formal.html#formal_natural_2",
   "type": "Checkpoint",
-  "number": "1.5.4",
+  "number": "1.5.2",
   "title": "",
   "body": "  Analyzing the structure of a sentence or a program is called .          "
 },
@@ -527,7 +527,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_formal-and-natural-languages-formal.html#formal_natural_3",
   "type": "Checkpoint",
-  "number": "1.5.5",
+  "number": "1.5.3",
   "title": "",
   "body": "  Match each term to an example of it by dragging the term into the appropriate box.   Try again!    ambiguity  being unclear and open to interpretation    redundancy  being repetetive to get the point across    literalness  meaning exactly what is said, nothing more    "
 },
@@ -536,7 +536,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_formal-and-natural-languages-formal.html#formal_natural_4",
   "type": "Checkpoint",
-  "number": "1.5.6",
+  "number": "1.5.4",
   "title": "",
   "body": "  Match each term to an example of it by dragging the term into the appropriate box.   Try again!    ambiguity  I rode a black horse in red jacket.    redundancy  I rode a black horse and I wore a red jacket.    literalness  Give me a cup of water.    "
 },
@@ -545,7 +545,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_formal-and-natural-languages-formal.html#formal_natural_5",
   "type": "Checkpoint",
-  "number": "1.5.7",
+  "number": "1.5.5",
   "title": "",
   "body": "  Multiple Response Formal languages are…      ambiguous   Formal languages are designed to be unambiguous, so that each statement has only one meaning.     redundant   Formal language is straight to the point.     literal   Formal languages mean exactly what they say.     verbose   Formal language is straight to the point.     concise   Formal language is straight to the point.    "
 },
@@ -653,7 +653,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_the-first-program-hello.html#chapter1_the-first-program-hello-12",
   "type": "Warning",
-  "number": "1.6.2",
+  "number": "1.6.1",
   "title": "",
   "body": " Failure to terminate a statement with a semicolon will result in a syntax (compile) error.  "
 },
@@ -725,7 +725,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_the-first-program-hello.html#first_program_1",
   "type": "Checkpoint",
-  "number": "1.6.3",
+  "number": "1.6.1",
   "title": "",
   "body": "  How do you indicate a single line comment in C++?           "
 },
@@ -734,7 +734,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_the-first-program-hello.html#first_program_2",
   "type": "Checkpoint",
-  "number": "1.6.4",
+  "number": "1.6.2",
   "title": "",
   "body": "  Multiple Response Which is true about writing a program?      The main marks the spot in the program where execution begins.   The main indicates where the program begins executing!     There is a limit the number of statements you can put in the main because they occupy system memory.   There is no limit to the number of statements you can put in the main, but it is good practice to keep it as short as possible.     Inside the main, program execution happens in order from top to bottom.   When the program runs, it starts by executing the first statement in main, and it continues until the last.     The main program is enclosed by parentheses.   The main program and all functions in C++ are enclosed by squiggly brackets ( { and } ).     The end of each statement is marked with a semicolon ( ; ).   Forgetting a semicolon will cause a compile error!    "
 },
@@ -743,7 +743,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter1_the-first-program-hello.html#first_program_3",
   "type": "Checkpoint",
-  "number": "1.6.5",
+  "number": "1.6.3",
   "title": "",
   "body": "  is an object that allows you to send output to the terminal. It requires you to use the operator.               "
 },
@@ -941,7 +941,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#chapter2_more-output-6",
   "type": "Note",
-  "number": "2.1.2",
+  "number": "2.1.1",
   "title": "",
   "body": " In C++, strings are declared as type string . We'll explain what that means in the next few pages.  "
 },
@@ -968,7 +968,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_AC_2",
   "type": "Listing",
-  "number": "2.1.3",
+  "number": "2.1.2",
   "title": "This program prints two different statements on the same line.",
   "body": " This program prints two different statements on the same line.   #include <iostream> int main() { std::cout << \"Goodbye, \"; std::cout << \"cruel world!\" << std::endl; }   "
 },
@@ -995,7 +995,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_AC_3",
   "type": "Listing",
-  "number": "2.1.4",
+  "number": "2.1.3",
   "title": "This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line.",
   "body": " This program accomplishes the same thing as the one above. The difference is that there are no spaces separating the different components of each line.   #include <iostream> int main() { std::cout<<\"Goodbye, \"; std::cout<<\"cruel world!\"<<std::endl; }   "
 },
@@ -1013,7 +1013,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_AC_4",
   "type": "Listing",
-  "number": "2.1.5",
+  "number": "2.1.4",
   "title": "This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow.",
   "body": " This program accomplishes the same thing as the two above, but it only uses one line. However, this format is pretty messy and relatively hard to follow.   #include <iostream> int main() {std::cout<<\"Goodbye, \";std::cout<<\"cruel world!\"<<std::endl;}   "
 },
@@ -1031,7 +1031,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_1",
   "type": "Checkpoint",
-  "number": "2.1.6",
+  "number": "2.1.1",
   "title": "",
   "body": "  A phrase that appears in quotation marks is called a(n) .          "
 },
@@ -1040,7 +1040,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_2",
   "type": "Checkpoint",
-  "number": "2.1.7",
+  "number": "2.1.2",
   "title": "",
   "body": "  On how many separate lines will the 7's be printed?  #include <iostream> int main() { std::cout << 7 << std::endl; std::cout << 7; std::cout << 7; std::cout << 7; }      1   There is an \"endl\" statement, implying that a new line is created.     2   \"endl\" creates one new line. The first line will say 7, while the second will print 777.     3   In C++, you must make sure to say \"endl\" every time you'd like to create a new line.     4   In C++, you must make sure to say \"endl\" every time you'd like to create a new line.    "
 },
@@ -1049,7 +1049,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_3",
   "type": "Checkpoint",
-  "number": "2.1.8",
+  "number": "2.1.3",
   "title": "",
   "body": "  Construct a main function that prints Snap! on the first line, Crackle! on the third line, and Pop! on the sixth line. You might not use all of std::endl blocks provided.     int main() {    std::cout << \"Snap!\";    std::cout << std::endl ; \/\/ first std::endl    std::cout << std::endl ; \/\/ second std::endl    std::cout << \"Crackle!\" << std::endl ;    std::cout << std::endl ; \/\/ third std::endl    std::cout << std::endl ; \/\/ fourth std::endl    std::cout << \"Pop!\";    std::cout << std::endl ; \/\/ fifth std::endl    std::cout << std::endl ; \/\/ sixth std::endl    }    "
 },
@@ -1058,7 +1058,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_more-output.html#more_output_4",
   "type": "Checkpoint",
-  "number": "2.1.9",
+  "number": "2.1.4",
   "title": "",
   "body": "  Construct a main function that prints Hello, world! so that Hello, and world! are printed on two separate lines.     int main() {    std::cout << \"Hello,\" << std::endl ; std::cout << \"world!\";    std::cout << \"Hello,\" << \"world!\" << std::endl ;    std::cout >> \"Hello,\" >> std::endl ; std::cout >> \"world!\";    std::cout >> \"Hello,\" >> \"world!\" >> std::endl ;    }    "
 },
@@ -1292,7 +1292,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables_3",
   "type": "Checkpoint",
-  "number": "2.3.2",
+  "number": "2.3.1",
   "title": "",
   "body": "  A(n) is a name given to a location in memory used to keep track of a value.          "
 },
@@ -1301,7 +1301,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables_1",
   "type": "Checkpoint",
-  "number": "2.3.3",
+  "number": "2.3.2",
   "title": "",
   "body": "  Take a look at the code block below:  char tom;  It's an example of a(n) statement.          "
 },
@@ -1310,7 +1310,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables2-0",
   "type": "Checkpoint",
-  "number": "2.3.4",
+  "number": "2.3.3",
   "title": "",
   "body": "  Click on all instances of integer VARIABLES.   Try again!   int main() {  int x = 7 ;  int y = 10 ;   char c = '8' ;  while ( x < y ) {  std::cout << c << std::endl ;   x ++;  }  double d = 9 ;  int z = x + y ;  std::cout << \"It's the year \" << 2000 + z << \"!\";  }   "
 },
@@ -1319,7 +1319,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables2-1",
   "type": "Checkpoint",
-  "number": "2.3.5",
+  "number": "2.3.4",
   "title": "",
   "body": "  Click on all instances of character VARIABLES.   Try again!   int main() {  char init1 = 'K' ;  std::string init2 = \"T\" ;  std::cout << init1 << \"+\" << init2 << std::endl ;  std::string init3 = \"C\" ;  char init4 = 'J' ;  std::cout << init3 << '+' << init4 << std::endl ;  std::string c = \"Carved their initials in a tree!\" ;  std::cout << c ;  }   "
 },
@@ -1328,7 +1328,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables_2",
   "type": "Checkpoint",
-  "number": "2.3.6",
+  "number": "2.3.5",
   "title": "",
   "body": "  Match the variable to the kind of value it can store. Do so by dragging items on the left to the boxes on the right.   Ideally, you want your variables to be named according to what they represent. Not the case here! Try again!    char joe;  'x'    std::string ten;  \"Joe\"    int x;  10    "
 },
@@ -1337,7 +1337,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_variables.html#variables_4",
   "type": "Checkpoint",
-  "number": "2.3.7",
+  "number": "2.3.6",
   "title": "",
   "body": "  Arrange the code blocks to create the variables name , first_initial , and number_of_siblings IN THAT ORDER. It is up to you to choose the correct types for these variables.      std::string name;    std::string name      char first_initial;    std::string first_initial;      int number_of_siblings;    double number_of_siblings;     "
 },
@@ -1418,7 +1418,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#state_of_mind",
   "type": "Activity",
-  "number": "2.4.2",
+  "number": "2.4.1",
   "title": "",
   "body": "  Run the code sample below by using the Next button to advance line by line. As you do so, watch the area to the right to examine the state of mind of the computer as it runs the code.  int main() { char first_letter; first_letter = 'a'; \/\/ give first_letter the value 'a' int hour; hour = 11; \/\/ assign the value 11 to hour int minute; minute = 59; \/\/ set minute to 59 }  "
 },
@@ -1427,7 +1427,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#chapter2_assignment-11",
   "type": "Warning",
-  "number": "2.4.3",
+  "number": "2.4.2",
   "title": "",
   "body": " The variable type that you declare must match the type of the value assigned to it. A type mismatch will generate a compile error.  "
 },
@@ -1463,7 +1463,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#assignment_1",
   "type": "Checkpoint",
-  "number": "2.4.4",
+  "number": "2.4.1",
   "title": "",
   "body": "  A(n) statement gives a value to a variable.          "
 },
@@ -1472,7 +1472,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#assignment_2",
   "type": "Checkpoint",
-  "number": "2.4.5",
+  "number": "2.4.2",
   "title": "",
   "body": "  What must be changed in order for this code block to work?  #include <iostream> \/\/ main: generate some simple output int main() { int p; int q; p = \"h\"; q = \"9\"; }      Change the type of variable q from int to string.   Yes, but take a look at variable p.     Change the type of both variables (p and q) from int to string.   Both variables are a character surrounded by double quotes, so they should be type string.     Change the type of variable p from int to char.   Yes, but take a look at variable q.     Nothing needs to change! The code will work just fine!   No! There will be a compile error.    "
 },
@@ -1481,7 +1481,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_assignment.html#assignment_3",
   "type": "Checkpoint",
-  "number": "2.4.6",
+  "number": "2.4.3",
   "title": "",
   "body": "  You love your car, and you decide to keep track of its make, model, and year. You do so using three assignment statements IN THAT ORDER. For the sake of this problem, suppose you drive a 2001 Jeep Cherokee. The variables have already been declared as shown below.   std::string make; std::string model; int year = 0;       make = \"Jeep\";    make = Jeep;     make = \"Jeep;\"     model = \"Cherokee\";    model = Cherokee;     std::string model = Cherokee;     year = 2001;    2001 = year;     year = 2001    "
 },
@@ -1562,7 +1562,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_outputting-variables.html#output_vars_1",
   "type": "Checkpoint",
-  "number": "2.5.3",
+  "number": "2.5.1",
   "title": "",
   "body": "  What prints when the following code is run?  int main() { char a; char b; a = 'z'; b = '8'; std::cout << \"a\"; }      a   The string, not the variable, a will be printed.     b   b will not be printed.     z   The std::cout statement prints a, not the value of the variable a.     8   z is the value of a and 8 will not be printed     Nothing! There will be a compile error!   There is no type mismatch, so there will not be a compile error.    "
 },
@@ -1571,7 +1571,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_outputting-variables.html#output_vars_2",
   "type": "Checkpoint",
-  "number": "2.5.4",
+  "number": "2.5.2",
   "title": "",
   "body": "  Now, what prints?  int main() { char a; char b; a = 'z'; b = '8'; std::cout << b; }      a   The string a will not be printed.     b   The string b will not be printed.     z   z is the value of a and 3 will not be printed.     8   8 is the value of b will be printed!     Nothing! There will be a compile error!   There is no type mismatch, so there will not be a compile error.    "
 },
@@ -1580,7 +1580,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_outputting-variables.html#outputting_variables_3",
   "type": "Checkpoint",
-  "number": "2.5.5",
+  "number": "2.5.3",
   "title": "",
   "body": "  What happens when the following code is compiled?   int number = \"3\"; std::cout << number << '\\n';       The program compiles and prints 3 .    The value \"3\" is a string literal, not an integer value. It cannot be used to initialize an int variable this way.      The compiler reports a type error.    Correct. number has type int , but \"3\" is a string literal. These types are not compatible for this initialization.      The program compiles and prints \"3\" .     std::cout would print the value stored in number , but the program does not compile because \"3\" cannot initialize an int .      The program compiles but produces a semantic error.    A semantic error occurs when code compiles but does not do what was intended. This program does not reach that stage because the type mismatch prevents successful compilation.     "
 },
@@ -1706,7 +1706,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_keywords.html#keywords_1",
   "type": "Checkpoint",
-  "number": "2.6.4",
+  "number": "2.6.1",
   "title": "",
   "body": "  Words that are reserved in C++ because they are used by the compiler to parse the structure of your program are called .          "
 },
@@ -1715,7 +1715,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_keywords.html#keywords_3",
   "type": "Checkpoint",
-  "number": "2.6.5",
+  "number": "2.6.2",
   "title": "",
   "body": "  Click on all keywords.   Try again!   int main() {   double  x = 1.0;   int  y = x + 5;   bool  Bool = true ;   std::string  s = \"void\";  std::cout << Bool << '\\n';  }   "
 },
@@ -1724,7 +1724,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_keywords.html#keywords_4",
   "type": "Checkpoint",
-  "number": "2.6.6",
+  "number": "2.6.3",
   "title": "",
   "body": "  Fix the code below so that it runs without errors and produces the intended output. Hint: you might need to change the names of some variables so they do not conflict with C++ keywords.   #include <iostream> int main() { int friend = 4; int enemy = friend * (-1); std::cout << \"enemy = \" << enemy << std::endl; \/\/ Do not modify anything below. return 0; }   "
 },
@@ -1832,7 +1832,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#chapter2_operators-15",
   "type": "Note",
-  "number": "2.7.2",
+  "number": "2.7.1",
   "title": "",
   "body": " In C++, double is one commonly used floating-points type. We'll get to that in the next chapter.  "
 },
@@ -1841,7 +1841,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_1",
   "type": "Checkpoint",
-  "number": "2.7.3",
+  "number": "2.7.1",
   "title": "",
   "body": "  Match the statement to the result, given that x = 10.   Try again!    x*10  100    x-10  0    100\/x  10    (x+x+x+x+x)*20  1000    "
 },
@@ -1850,7 +1850,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3",
   "type": "Checkpoint",
-  "number": "2.7.4",
+  "number": "2.7.2",
   "title": "",
   "body": "  Integer division always the answer by dropping any decimal portion.          "
 },
@@ -1859,7 +1859,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3-1",
   "type": "Checkpoint",
-  "number": "2.7.5",
+  "number": "2.7.3",
   "title": "",
   "body": "  int num1 = 12; int num2 = 5; std::cout << num1 \/ num2;  What is printed to the terminal?           "
 },
@@ -1868,7 +1868,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3-2",
   "type": "Checkpoint",
-  "number": "2.7.6",
+  "number": "2.7.4",
   "title": "",
   "body": "  int num1 = 10; int num2 = 48; std::cout << num2 \/ num1;  What is printed to the terminal?             "
 },
@@ -1877,7 +1877,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3-3",
   "type": "Checkpoint",
-  "number": "2.7.7",
+  "number": "2.7.5",
   "title": "",
   "body": "  int num1 = 10; int num2 = 40; std::cout << num2 \/ num1;  What is printed to the terminal?             "
 },
@@ -1886,7 +1886,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3-4",
   "type": "Checkpoint",
-  "number": "2.7.8",
+  "number": "2.7.6",
   "title": "",
   "body": "  int num1 = 10; int num2 = 39; std::cout << num2 \/ num1;  What is printed to the terminal?             "
 },
@@ -1895,7 +1895,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_3-5",
   "type": "Checkpoint",
-  "number": "2.7.9",
+  "number": "2.7.7",
   "title": "",
   "body": "  int num1 = 7; int num2 = 8; std::cout << \"Decimal:\" << num1 \/ num2;  What is printed after Decimal: ?             "
 },
@@ -1904,7 +1904,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators.html#operators_4",
   "type": "Checkpoint",
-  "number": "2.7.10",
+  "number": "2.7.8",
   "title": "",
   "body": "  Construct a code block that prints the total cost of your meal, including the 6.0% sales tax, after you purchase two orders of fries, three burgers, and a milkshake. Start by initializing the value of sales tax, then the prices of the food. Once you have initialized the variables, you can perform your calculations and save the result in the price variable. At the very end, you will print out the total price.     int main() {    double tax = 0.06;     double fries, milkshake, burger;    string fries, milkshake, burger;     fries = 2.50;  milkshake = 3.75;  burger = 3.00;    double price = 2 * fries + 3 * burger + milkshake;     double price_with_tax = price + price * tax;    double price_with_tax = price * tax;      std::cout << \"The total cost of your meal is $\";  std::cout << price_with_tax << \".\" << std::endl ;    std::cout << \"The total cost of your meal is $\";  std::cout << price << \".\" << std::endl ;     }    "
 },
@@ -1949,7 +1949,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_order-of-operations.html#order_of_operations_1",
   "type": "Checkpoint",
-  "number": "2.8.2",
+  "number": "2.8.1",
   "title": "",
   "body": "  Match the expression to its correct output. Don't forget to consider integer division!   Try again!    (6*4)+1  25    6*(4+1)  30    (6\/4)+1  2    6\/(4+1)  1    "
 },
@@ -1958,7 +1958,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_order-of-operations.html#order_of_operations_2",
   "type": "Checkpoint",
-  "number": "2.8.3",
+  "number": "2.8.2",
   "title": "",
   "body": "  Any time you want to override the rules of precedence, you can use .          "
 },
@@ -1976,7 +1976,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_order-of-operations.html#order_of_operations_3A",
   "type": "Checkpoint",
-  "number": "2.8.4",
+  "number": "2.8.3",
   "title": "",
   "body": "  Click on ALL PARTS of the expression that get evaluated first. For example, if \"1 + 1\" gets evaluated first, click on \"1\", \"+\", and \"1\".   Try again!   1  +  2  * ( 10  -  2 ) \/  4   "
 },
@@ -1985,7 +1985,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_order-of-operations.html#order_of_operations_3B",
   "type": "Checkpoint",
-  "number": "2.8.5",
+  "number": "2.8.4",
   "title": "",
   "body": "  Click on ALL PARTS of the expression that get evaluated first. For example, if \"1 + 1\" gets evaluated first, click on \"1\", \"+\", and \"1\".   Try again!   1  +  2  *  8  \/  4   "
 },
@@ -1994,7 +1994,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_order-of-operations.html#order_of_operations_3C",
   "type": "Checkpoint",
-  "number": "2.8.6",
+  "number": "2.8.5",
   "title": "",
   "body": "  Click on ALL PARTS of the expression that get evaluated first. For example, if \"1 + 1\" gets evaluated first, click on \"1\", \"+\", and \"1\".   Try again!   1  +  16  \/  4   "
 },
@@ -2093,7 +2093,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators-for-characters.html#chapter2_operators-for-characters-10",
   "type": "Note",
-  "number": "2.9.3",
+  "number": "2.9.1",
   "title": "",
   "body": " Character values have integer representations in the character encoding used by the program. On many common systems, the familiar English letters, digits, and punctuation use ASCII-compatible values. For example, 'A' and 'B' have consecutive integer representations on ASCII-based systems.  "
 },
@@ -2120,7 +2120,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators-for-characters.html#char_operations_1",
   "type": "Checkpoint",
-  "number": "2.9.4",
+  "number": "2.9.1",
   "title": "",
   "body": "  What is the value of letter if letter = 'c' + 3 ?           "
 },
@@ -2129,7 +2129,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_operators-for-characters.html#char_operations_2",
   "type": "Checkpoint",
-  "number": "2.9.5",
+  "number": "2.9.2",
   "title": "",
   "body": "  Construct a main function that uses character operations to generate the output letter r on an ASCII-compatible system.     int main() {    char r;    int r;    r = 'p' + 2;    r = p + 2;    r = 'p' + 3;    std::cout << r << '\\n';    std::cout << \"r\\n\";    }    "
 },
@@ -2228,7 +2228,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#chapter2_composition-11",
   "type": "Warning",
-  "number": "2.10.4",
+  "number": "2.10.1",
   "title": "",
   "body": " There are limits on where you can use certain expressions; most notably, the left-hand side of an assignment statement has to be a variable name, not an expression.  "
 },
@@ -2246,7 +2246,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#compos_1",
   "type": "Checkpoint",
-  "number": "2.10.5",
+  "number": "2.10.1",
   "title": "",
   "body": "  What must be changed in order for this code block to work?  int main() { int dogs = 3; int cats = 6; int pets; dogs + cats = pets; std::cout << \"I have \" << pets << \" pets!\"; return 0; }      Change line 5 to pets = dogs + cats;   Assignment statements operate such that the evaluated expression on the right is assigned to the variable on the left.     Change line 5 to int pets = dogs + cats;   pets has already been declared as an int.     Change line 5 to pets == dogs + cats;   The == operator checks if the left side EQUALS the right side. It is not the correct operator here.     Change line 5 to int pets == dogs + cats;   pets has already been declared as an int. Also, the == operator is not the proper choice here.     No change, the code runs fine as is.   Assignment statements assign the value on the right to the variable on the left.    "
 },
@@ -2255,7 +2255,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#compos_2",
   "type": "Checkpoint",
-  "number": "2.10.6",
+  "number": "2.10.2",
   "title": "",
   "body": "  The left-hand side of an assignment statement has to be a name, not an expression.          "
 },
@@ -2264,7 +2264,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#compos_3",
   "type": "Checkpoint",
-  "number": "2.10.7",
+  "number": "2.10.3",
   "title": "",
   "body": "  In programming, another word for combine is .          "
 },
@@ -2273,7 +2273,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#compos_4",
   "type": "Checkpoint",
-  "number": "2.10.8",
+  "number": "2.10.4",
   "title": "",
   "body": "  Finish the code below so that the velocity is calculated completely on a single line. Hint: the current velocity results from 1) the initial velocity and 2) the acceleration over a window of time. Use v0 for initial velocity, a for acceleration, and t for time.   #include <iostream> int main() { int v0 = 5, a = 3, t = 4, velocity; \/\/ You may only use the next line for your code. velocity = ; std::cout << \"Testing...\" << std::endl; std::cout << \"Yours = \" << velocity << std::endl; std::cout << \"Correct = 17\"; }   "
 },
@@ -2282,7 +2282,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter2_composition.html#compos_5",
   "type": "Checkpoint",
-  "number": "2.10.9",
+  "number": "2.10.5",
   "title": "",
   "body": "  Finish the code below so that the volume of a rectangular prism with length l , width w , and height h is calculated on a single line.   #include <iostream> int main() { int l = 2, w = 3, h = 4, volume; \/\/ You may only use the next line for your code. volume = ; std::cout << \"Testing...\" << std::endl; std::cout << \"Yours = \" << volume << std::endl; std::cout << \"Correct = 24\"; }   "
 },
@@ -2786,7 +2786,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_floating-point.html#floating_point_1",
   "type": "Checkpoint",
-  "number": "3.1.3",
+  "number": "3.1.1",
   "title": "",
   "body": "  Giving a variable its initial value when it is declared is called .       Correct. This is called initialization.     "
 },
@@ -2795,7 +2795,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_floating-point.html#floating_point_2",
   "type": "Checkpoint",
-  "number": "3.1.4",
+  "number": "3.1.2",
   "title": "",
   "body": "  A cake contains 12 servings and is divided equally among 5 people. Consider the following code:  int servings = 12; int people = 5; double serving_size = servings \/ people;  The program stores in serving_size . This is (more, less, the same) than the mathematically correct result.       Correct. Both operands are integers, so 12 \/ 5 performs integer division and produces 2 .    .*  Both servings and people have type int . What kind of division will C++ perform?       Correct. The mathematical result is 2.4 , so 2 is less than the correct result.    .*  Compare the program's result, 2 , with the mathematical result of 12 \/ 5 .     "
 },
@@ -2804,7 +2804,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_floating-point.html#floating_point_3",
   "type": "Checkpoint",
-  "number": "3.1.5",
+  "number": "3.1.3",
   "title": "",
   "body": "  Consider the following C++ code:  double e = 2.71828; int e_int = e; double e_double = e_int; std::cout << e_double;  What value is printed?      e     e is the variable name. std::cout prints the value stored in e_double .      3    Converting 2.71828 to int does not round it to the nearest integer. The fractional part is discarded.      2    Correct. Converting e to int discards the fractional part, so e_int becomes 2 . Converting that value back to double gives 2.0 , which std::cout displays as 2 by default.      3.0    The conversion to int discards the fractional part of 2.71828 , producing 2 , not 3 .      2.71828    The fractional part is lost when e is converted to int . Converting the resulting 2 back to double cannot restore the lost fractional part.     "
 },
@@ -2822,7 +2822,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_floating-point.html#floating_point_a1",
   "type": "Listing",
-  "number": "3.1.6",
+  "number": "3.1.1",
   "title": "Run the code to see what type of division occurs each time.",
   "body": " Run the code to see what type of division occurs each time.   #include <iostream> int main() { double value = 5.0 \/ 2; \/\/ (a) std::cout << \"current value (a) is \" << value << '\\n'; value = 5 \/ 2.0; \/\/ (b) std::cout << \"current value (b) is \" << value << '\\n'; value = 5 \/ 2; \/\/ (c) std::cout << \"current value (c) is \" << value << '\\n'; value = 5.0 \/ 2.0; \/\/ (d) std::cout << \"current value (d) is \" << value << '\\n'; return 0; }   "
 },
@@ -3002,7 +3002,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#chapter3_math-functions-9",
   "type": "Note",
-  "number": "3.3.2",
+  "number": "3.3.1",
   "title": "",
   "body": " To convert an angle from degrees to radians, multiply by pi and divide by 180: radians = degrees * pi \/ 180.0 .  "
 },
@@ -3020,7 +3020,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#math_functions_AC_2",
   "type": "Listing",
-  "number": "3.3.3",
+  "number": "3.3.2",
   "title": "This program calculates pi and converts an angle from degrees to radians.",
   "body": " This program calculates pi and converts an angle from degrees to radians.   #include <iostream> #include <cmath> int main() { double pi = std::acos(-1.0); double degrees = 90.0; double radians = degrees * pi \/ 180.0; std::cout << pi << '\\n'; std::cout << degrees << '\\n'; std::cout << radians << '\\n'; return 0; }   "
 },
@@ -3047,7 +3047,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#chapter3_math-functions-15",
   "type": "Note",
-  "number": "3.3.4",
+  "number": "3.3.2",
   "title": "",
   "body": " In this course, qualify standard-library names with the std:: prefix rather than using using namespace std; .  "
 },
@@ -3065,7 +3065,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#chapter3_math-functions-18",
   "type": "Note",
-  "number": "3.3.5",
+  "number": "3.3.3",
   "title": "",
   "body": " The C++ header <cmath> is related to the older C header <math.h> . In C++ programs, prefer <cmath> and the corresponding std:: -qualified function names.  "
 },
@@ -3074,7 +3074,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#dnd1",
   "type": "Checkpoint",
-  "number": "3.3.6",
+  "number": "3.3.1",
   "title": "",
   "body": "  Match each item with its description.    Try again.     <cmath>  declares standard-library mathematical functions such as std::log and std::sin    <iostream>  declares facilities for stream input and output, including std::cout    std  the namespace containing many names from the C++ standard library    "
 },
@@ -3083,7 +3083,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#math_functions_2",
   "type": "Checkpoint",
-  "number": "3.3.7",
+  "number": "3.3.2",
   "title": "",
   "body": "  What unit of angle is used by C++ trigonometric functions such as std::sin and std::cos ?        Correct. C++ trigonometric functions use radians.    degrees  Degrees are commonly used to measure angles, but C++ trigonometric functions use radians.    .*  Review the unit expected by functions such as std::sin and std::cos .     "
 },
@@ -3092,7 +3092,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_math-functions.html#math_functions_3",
   "type": "Checkpoint",
-  "number": "3.3.8",
+  "number": "3.3.3",
   "title": "",
   "body": "   Multiple Response Select all valid standard-library functions declared by <cmath> .      std::cos    Correct. std::cos computes the cosine of an angle.      std::arctan    The inverse tangent function is named std::atan .      std::log10    Correct. std::log10 computes a base-10 logarithm.      std::pow    Correct. std::pow raises a value to a power.      std::ln    The natural logarithm function is named std::log .     "
 },
@@ -3164,7 +3164,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_composition.html#function_comp_1",
   "type": "Checkpoint",
-  "number": "3.4.2",
+  "number": "3.4.1",
   "title": "",
   "body": "  Which of these statements has correct C++ syntax and uses valid standard-library functions from <cmath> ?       double x = std::log6(12);      std::log6 is not a standard-library function.       double val = std::abs(std::tan(1.57));     Correct. The result of std::tan(1.57) is passed as the argument to std::abs .       double num = std::exp(std::cosine(0.86667));      std::cosine is not a standard-library function. The cosine function is named std::cos .       double y = std::exp(std::cos(1.047)) + std::exp(std::tan(2.094))     The function calls are valid, but the statement is missing a semicolon.     "
 },
@@ -3173,7 +3173,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_composition.html#function_comp_2",
   "type": "Checkpoint",
-  "number": "3.4.3",
+  "number": "3.4.2",
   "title": "",
   "body": "  Which statement computes the y-component of a unit vector at 330 degrees? Assume pi has already been defined.       y = std::cos(330);      std::cos gives the x-component, and C++ trigonometric functions expect angles in radians.       y = std::cos(330 * pi \/ 180.0);     The angle is converted correctly, but std::cos gives the x-component of the unit vector.       y = std::sin(330);      std::sin gives the y-component, but the angle must be converted from degrees to radians first.       y = std::sin(330 * pi \/ 180.0);     Correct. std::sin gives the y-component, and 330 * pi \/ 180.0 converts 330 degrees to radians.       y = std::tan(330 * pi \/ 180.0);      std::tan does not directly give the y-component of a unit vector.     "
 },
@@ -3362,7 +3362,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_adding-new-functions.html#chapter3_adding-new-functions-25",
   "type": "Note",
-  "number": "3.5.2",
+  "number": "3.5.1",
   "title": "",
   "body": " Write code so that its organization is clear to another programmer, not just to the compiler.  "
 },
@@ -3407,7 +3407,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_adding-new-functions.html#new_functions_mc_1",
   "type": "Checkpoint",
-  "number": "3.5.3",
+  "number": "3.5.1",
   "title": "",
   "body": "  Which statement about functions is false?      A function can be given any name, including a C++ keyword.    Correct. A function name is an identifier and cannot be a C++ keyword.      A function can have parameters or have an empty parameter list.    This is true. Parentheses are still required even when the parameter list is empty.      One function can call another function.    This is true. Functions commonly call other functions.      The same function can be called more than once.    This is true. Reusing a function is one of the reasons functions are useful.     "
 },
@@ -3416,7 +3416,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_adding-new-functions.html#new_functions_2",
   "type": "Checkpoint",
-  "number": "3.5.4",
+  "number": "3.5.2",
   "title": "",
   "body": "  Click on all function headers .    A function header contains the return type, function name, and parameter list and begins a function definition.    void print_x() {   std::cout << \"X\";  }   void print_var(int value) {   std::cout << value;  }   int main() {   int x = 7;   print_var(x);   print_x();   int y = 3;   double result = x \/ static_cast<double>(y);   print_var(static_cast<int>(result));  return 0;  }   "
 },
@@ -3425,7 +3425,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_adding-new-functions.html#new_functions_3",
   "type": "Checkpoint",
-  "number": "3.5.5",
+  "number": "3.5.3",
   "title": "",
   "body": "  Click on all function calls .    A function call causes a function to execute.    void print_x() {   std::cout << \"X\";  }   void print_var(int value) {   std::cout << value;  }   int main() {   int x = 7;   print_var(x);   print_x();   int y = 3;   double result = x \/ static_cast<double>(y);   print_var(static_cast<int>(result));  return 0;  }   "
 },
@@ -3434,7 +3434,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_adding-new-functions.html#new_functions_pp_1",
   "type": "Checkpoint",
-  "number": "3.5.6",
+  "number": "3.5.4",
   "title": "",
   "body": "  Construct a function that takes the length and width of a rectangle and prints its perimeter.      void print_perimeter(int length, int width) {    void print_perimeter(int length, width) {     int twice_length = 2 * length;  int twice_width = 2 * width;     int perimeter = twice_length + twice_width;    int perimeter = twice_length * twice_width;      std::cout << perimeter << '\\n';    return perimeter;     }    "
 },
@@ -3632,7 +3632,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_programs-with-multiple-functions.html#multiple_fun_1",
   "type": "Checkpoint",
-  "number": "3.7.3",
+  "number": "3.7.1",
   "title": "",
   "body": "  Match each step with its position in the flow of execution for the program above.    Try again! Begin in main and follow each function call.     main begins  executes first    multiply_two is called  executes second    print_total is called inside multiply_two  executes third    add_two is called  executes fourth    print_total is called from main  executes fifth    "
 },
@@ -3641,7 +3641,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_programs-with-multiple-functions.html#multiple_fun_2",
   "type": "Checkpoint",
-  "number": "3.7.4",
+  "number": "3.7.2",
   "title": "",
   "body": "  Consider the following C++ code. Note that line numbers are included on the left.   #include <iostream> \/\/ Function declarations void new_line(); void three_line(); int main() { std::cout << \"First Line.\" << '\\n'; three_line(); std::cout << \"Second Line.\" << '\\n'; return 0; } \/\/ Function definitions void new_line() { std::cout << '\\n'; } void three_line() { new_line(); new_line(); new_line(); }   Which of the following reflects the order in which the functions begin executing?       new_line, three_line, main     Function definition order does not determine execution order. Execution begins in main .       new_line, three_line, new_line, new_line, new_line, main     Execution begins in main , not with the first function definition in the source file.       main, three_line, new_line, new_line, new_line     Correct. Execution begins in main . Then three_line is called, and it calls new_line three times.       main, three_line      three_line also calls new_line three times.     "
 },
@@ -3650,7 +3650,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_programs-with-multiple-functions.html#multiple_fun_3",
   "type": "Checkpoint",
-  "number": "3.7.5",
+  "number": "3.7.3",
   "title": "",
   "body": "  Consider the following C++ code.   #include <iostream> \/\/ Function declarations void yo(); void hello(); void goodbye(); int main() { std::cout << \"welcome, \"; goodbye(); return 0; } \/\/ Function definitions void yo() { std::cout << \"yo, \"; } void hello() { std::cout << \"hello, \"; yo(); yo(); } void goodbye() { yo(); hello(); std::cout << \"goodbye,\"; }   What is printed when the code is executed?       welcome, yo, hello, goodbye,      hello calls yo twice, so those calls also produce output.       welcome, goodbye,      goodbye calls other functions before printing goodbye, .       welcome, yo, hello, yo, yo, goodbye,     Correct. main prints first and calls goodbye . goodbye calls yo and then hello , and hello calls yo twice.       yo, hello, yo, yo, goodbye,     Before calling goodbye , main prints welcome, .     "
 },
@@ -3812,7 +3812,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#params_args_AC_1",
   "type": "Listing",
-  "number": "3.8.4",
+  "number": "3.8.1",
   "title": "The following code shows the output of the <code class=\"code-inline tex2jax_ignore\">print_twice<\/code> function. Try modifying the value of <code class=\"code-inline tex2jax_ignore\">letter<\/code> to change the output.",
   "body": " The following code shows the output of the print_twice function. Try modifying the value of letter to change the output.   #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }   "
 },
@@ -3821,7 +3821,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#params_args_1",
   "type": "Checkpoint",
-  "number": "3.8.5",
+  "number": "3.8.1",
   "title": "",
   "body": "  What will be printed to the terminal? If the program does not compile, enter error .  #include <iostream> #include <string> void print_twice(char symbol); int main() { std::string argument = \"s\"; print_twice(argument); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }          A std::string object cannot be passed as the char argument required by print_twice .     "
 },
@@ -3830,7 +3830,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#params_args_2",
   "type": "Checkpoint",
-  "number": "3.8.6",
+  "number": "3.8.2",
   "title": "",
   "body": "  What will be printed to the terminal? If the program does not compile, enter error .  #include <iostream> void print_twice(char symbol); int main() { char letter = 'b'; print_twice(letter); return 0; } void print_twice(char symbol) { std::cout << symbol << symbol << '\\n'; }          The argument letter supplies the value 'b' to the parameter symbol , so print_twice prints bb .     "
 },
@@ -3839,7 +3839,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-arguments.html#params_args_4",
   "type": "Checkpoint",
-  "number": "3.8.7",
+  "number": "3.8.3",
   "title": "",
   "body": "  Match each function declaration with a compatible function call.    Try again! Compare the number, order, and types of the arguments with the parameters in each declaration.     int combine_values(int x, int y);  combine_values(4, 7);    int combine_values(std::string text, int x);  combine_values(\"hello\", 10);    int combine_values(double x, std::string text);  combine_values(4.5, \"hello\");    int combine_values(std::string first, std::string second);  combine_values(\"hello\", \"hi\");    "
 },
@@ -4001,7 +4001,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-19",
   "type": "Note",
-  "number": "3.9.3",
+  "number": "3.9.1",
   "title": "",
   "body": " In C++, main is a function with its own local scope. A variable declared inside main is not global and is not automatically visible inside other functions.  "
 },
@@ -4019,7 +4019,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#chapter3_parameters-and-variables-are-local-21",
   "type": "Note",
-  "number": "3.9.4",
+  "number": "3.9.2",
   "title": "",
   "body": " When you use CodeLens to step through a program, you can see the variables associated with each active function call. Try it on above.  "
 },
@@ -4037,7 +4037,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#locals_1",
   "type": "Checkpoint",
-  "number": "3.9.5",
+  "number": "3.9.1",
   "title": "",
   "body": "  How many local variables and parameters does main have?  #include <iostream> #include <string> void print_hello_name(std::string name); int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; } void print_hello_name(std::string name) { std::cout << \"Hello \" << name << \"!\\n\"; }      1 local variable, 1 parameter    The variables name1 and name2 are both declared inside main . The empty parentheses in main() show that it has no parameters in this example.      0 local variables, 1 parameter     main declares both name1 and name2 , and its parameter list is empty.      2 local variables, 0 parameters    Correct. name1 and name2 are local variables in main , and main() has no parameters in this example.      2 local variables, 1 parameter    There are two local variables, but the empty parameter list in main() means that this version of main has no parameters.     "
 },
@@ -4046,7 +4046,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#locals_2",
   "type": "Checkpoint",
-  "number": "3.9.6",
+  "number": "3.9.2",
   "title": "",
   "body": "  How many local variables and parameters does print_hello_name have?  #include <iostream> #include <string> void print_hello_name(std::string name); int main() { std::string name1 = \"Phil\"; print_hello_name(name1); std::string name2 = \"Joe\"; print_hello_name(name2); return 0; } void print_hello_name(std::string name) { std::cout << \"Hello \" << name << \"!\\n\"; }      1 local variable, 1 parameter     name is a parameter because it is declared in the function's parameter list. No additional variable is declared inside the function body.      0 local variables, 1 parameter    Correct. name is the function's one parameter, and no additional local variables are declared in the function body.      2 local variables, 0 parameters     name1 and name2 belong to main , not to print_hello_name . The parameter name belongs to print_hello_name .      2 local variables, 1 parameter     name1 and name2 are local to main . They are not local variables of print_hello_name .     "
 },
@@ -4055,7 +4055,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#locals_3",
   "type": "Checkpoint",
-  "number": "3.9.7",
+  "number": "3.9.3",
   "title": "",
   "body": "  Each time a function is called, that call gets its own and local variables.       Each active function call has its own parameters and local variables.     "
 },
@@ -4064,7 +4064,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_parameters-and-variables-are-local.html#locals_4",
   "type": "Checkpoint",
-  "number": "3.9.8",
+  "number": "3.9.4",
   "title": "",
   "body": "  How many calls to hi are made during the execution of the entire program?  #include <iostream> void hi(); void print_greeting(); int main() { hi(); print_greeting(); hi(); return 0; } void hi() { std::cout << \"hiii!\\n\"; } void print_greeting() { hi(); std::cout << \"How are you doing today?\\n\"; hi(); }      1 call     hi is called directly from main and also from print_greeting .      4 calls    Correct. main calls hi twice, and print_greeting calls hi twice more.      2 calls    There are two direct calls from main , plus two more calls inside print_greeting .      3 calls     main calls hi twice, and print_greeting contains two additional calls.     "
 },
@@ -4145,7 +4145,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-multiple-parameters.html#multiple_params_AC_1",
   "type": "Listing",
-  "number": "3.10.2",
+  "number": "3.10.1",
   "title": "This program shows how the <code class=\"code-inline tex2jax_ignore\">dollar_amount<\/code> and <code class=\"code-inline tex2jax_ignore\">cent_amount<\/code> arguments are passed to the <code class=\"code-inline tex2jax_ignore\">print_price<\/code> function.",
   "body": " This program shows how the dollar_amount and cent_amount arguments are passed to the print_price function.   #include <iostream> void print_price(int dollars, int cents); int main() { int dollar_amount = 2; int cent_amount = 92; print_price(dollar_amount, cent_amount); return 0; } void print_price(int dollars, int cents) { std::cout << \"Price is \" << dollars << \" dollars and \" << cents << \" cents.\\n\"; }   "
 },
@@ -4154,7 +4154,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-multiple-parameters.html#multiple_params_1",
   "type": "Checkpoint",
-  "number": "3.10.3",
+  "number": "3.10.1",
   "title": "",
   "body": "  Which of the following is a correct function header (the first line of a function definition)?       total_cost(double cost, tax, discount) {      total_cost needs a return type, and each parameter needs its own type.       total_cost(double cost, double tax) {      total_cost needs a return type.       void total_cost(double cost, double tax, double discount) {     Correct. The function has a return type, and each parameter has its own type.     "
 },
@@ -4163,7 +4163,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-multiple-parameters.html#multiple_params_2",
   "type": "Checkpoint",
-  "number": "3.10.4",
+  "number": "3.10.2",
   "title": "",
   "body": "  Which of the following is a legal function call for multiply_two in the program below?  #include <iostream> #include <string> void multiply_two(int num, std::string name); int main() { int x = 2; std::string person = \"Phil\"; return 0; } void multiply_two(int num, std::string name) { int total = num * 2; std::cout << \"Hi \" << name << \", your total is \" << total << \"!\\n\"; }       multiply_two(int x, std::string person);     Types belong in the function declaration or definition, not in the argument list of a function call.       multiply_two(x, person);     Correct. The arguments are supplied in the same order as the corresponding parameters.       void multiply_two(int num, std::string name) {     This begins a function definition rather than a function call.       void multiply_two(int x, std::string person);     This is a function declaration, not a function call.     "
 },
@@ -4298,7 +4298,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-results.html#fuwresults_1",
   "type": "Checkpoint",
-  "number": "3.11.2",
+  "number": "3.11.1",
   "title": "",
   "body": "  What will be printed when the following code runs?    #include <iostream> void multiply(int x, int y); int main() { int x = 2; int y = 4; multiply(x, y); return 0; } void multiply(int x, int y) { std::cout << x * y; }        The function prints 2 * 4 , which is 8 . It prints the value but does not return it.     "
 },
@@ -4307,7 +4307,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-results.html#fuwresults_2",
   "type": "Checkpoint",
-  "number": "3.11.3",
+  "number": "3.11.2",
   "title": "",
   "body": "  Will the following code compile?   #include <iostream> void multiply(int x, int y); int main() { int x = 2; int y = 4; std::cout << multiply(x, y); return 0; } void multiply(int x, int y) { std::cout << x * y << '\\n'; }       Yes     multiply has return type void , so the call does not produce a value that can be sent to std::cout .      No    Correct. A void function does not produce a return value that can be used as part of this output expression.     "
 },
@@ -4316,7 +4316,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-results.html#fuwresults_3",
   "type": "Checkpoint",
-  "number": "3.11.4",
+  "number": "3.11.3",
   "title": "",
   "body": "  What value is stored in result after this code runs?   int double_value(int value); int main() { int result = double_value(6); return 0; } int double_value(int value) { return value * 2; }       2    The parameter value receives 6 , so value * 2 is 12 .      6     6 is the argument passed to the function, but the function returns twice that value.      12    Correct. double_value(6) returns 6 * 2 , which is 12 .      Nothing, because the function does not print anything.    Printing and returning are different. The return statement sends the value back to the caller even though the function itself does not print anything.     "
 },
@@ -4325,7 +4325,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_functions-with-results.html#fuwresults_4",
   "type": "Checkpoint",
-  "number": "3.11.5",
+  "number": "3.11.4",
   "title": "",
   "body": "  What will be printed when the following code runs?   #include <iostream> int double_value(int value); int main() { std::cout << double_value(4) + 3 << '\\n'; return 0; } int double_value(int value) { return value * 2; }       7     double_value(4) returns 8 , not 4 .      8     8 is the value returned by double_value(4) , but then 3 is added to that value.      11    Correct. double_value(4) returns 8 , so the expression becomes 8 + 3 .      Nothing, because the returned value is not stored in a variable.    A returned value does not have to be stored in a variable. It can be used directly as part of a larger expression.     "
 },
@@ -4478,7 +4478,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_pass-by-reference.html#pass_by_reference_1",
   "type": "Checkpoint",
-  "number": "3.12.2",
+  "number": "3.12.1",
   "title": "",
   "body": "  What are the values of x and y after the following code runs?   void swap_values(int first, int second); int main() { int x = 3; int y = 7; swap_values(x, y); return 0; } void swap_values(int first, int second) { int temp = first; first = second; second = temp; }       x is 3 and y is 7.    Correct. first and second receive copies of the argument values. Swapping those local parameters does not change x or y .      x is 7 and y is 3.    The values of the local parameters are swapped, but x and y are passed by value and remain unchanged.      x is 3 and y is 3.    The assignments affect only the local parameters inside swap_values .      x is 7 and y is 7.    Neither variable in main is changed by this pass-by-value function.     "
 },
@@ -4487,7 +4487,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_pass-by-reference.html#pass_by_reference_2",
   "type": "Checkpoint",
-  "number": "3.12.3",
+  "number": "3.12.2",
   "title": "",
   "body": "  Which function declaration allows add_one to change the caller's int variable?      void add_one(int value);    This passes the value by value, so value receives a copy of the argument.      void add_one(int& value);    Correct. value is a reference parameter, so changes made through it affect the caller's variable.      int add_one(int value);    This function can return an int , but value itself is still passed by value.      void add_one(value);    A parameter in a function declaration must have a type.     "
 },
@@ -4496,7 +4496,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_pass-by-reference.html#pass_by_reference_3",
   "type": "Checkpoint",
-  "number": "3.12.4",
+  "number": "3.12.3",
   "title": "",
   "body": "  What is printed by the following program?   #include <iostream> void add_one(int& value); int main() { int count = 5; add_one(count); std::cout << count << '\\n'; return 0; } void add_one(int& value) { value = value + 1; }       1     value refers to count , whose value starts at 5 .      5    Because value is a reference parameter, changing it also changes count .      6    Correct. value refers to count , so adding 1 changes count from 5 to 6 .      Error!    Passing an int variable to an int& reference parameter is legal.     "
 },
@@ -4577,7 +4577,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_function-overloading.html#chapter3_function_overloading_1",
   "type": "Checkpoint",
-  "number": "3.13.2",
+  "number": "3.13.1",
   "title": "",
   "body": "  Which pair of declarations is a valid pair of overloaded functions?     void report_value(int value); and void report_value(double value);  Correct. The parameter types are different.    int get_value(); and double get_value();  Return type alone cannot distinguish overloaded functions.    void print(int value); and void print(int number);  The parameter names are different, but both functions have the same parameter list.    double calculate(double value); and double calculate(double amount);  The parameter names do not distinguish the functions.    "
 },
@@ -4586,7 +4586,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_function-overloading.html#chapter3_function_overloading_2",
   "type": "Checkpoint",
-  "number": "3.13.3",
+  "number": "3.13.2",
   "title": "",
   "body": "  Which call selects the overload with two double parameters?   int calculate_total(int first_value, int second_value); double calculate_total(double first_value, double second_value);      calculate_total(3, 4)  Both arguments are int values, so the integer overload is an exact match.    calculate_total(3.0, 4.0)  Correct. Both arguments are double values.    calculate_total(3L, 4L)  These arguments are long values, not exact double values.    calculate_total(3, 4.0)  This call has mixed argument types and does not provide two exact double arguments.    "
 },
@@ -4595,7 +4595,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_function-overloading.html#chapter3_function_overloading_3",
   "type": "Checkpoint",
-  "number": "3.13.4",
+  "number": "3.13.3",
   "title": "",
   "body": "  Why is the following pair invalid?   int get_score(); double get_score();      Both functions have the same return type.  The return types are different, not the same.    The parameter lists are identical, and return type alone cannot overload a function.  Correct. A call cannot select between these functions using only its return context.    A function cannot return a numeric value.  C++ functions can return numeric values. The problem is the identical parameter list.    Function names must always be different.  Overloaded functions intentionally share a name when their parameter lists differ.    "
 },
@@ -4604,7 +4604,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_function-overloading.html#chapter3_function_overloading_4",
   "type": "Checkpoint",
-  "number": "3.13.5",
+  "number": "3.13.4",
   "title": "",
   "body": "  Arrange the blocks to define two overloads of calculate_total and call both versions from main .    #include <iostream>  int calculate_total(int first_value, int second_value) {  return first_value + second_value; }  double calculate_total(double first_value, double second_value) {  return first_value + second_value; }  int main() {  std::cout << calculate_total(3, 4) << '\\n';  std::cout << calculate_total(2.5, 1.5) << '\\n';  return 0; }   "
 },
@@ -4613,7 +4613,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_function-overloading.html#chapter3_function_overloading_5",
   "type": "Checkpoint",
-  "number": "3.13.6",
+  "number": "3.13.5",
   "title": "",
   "body": "  What is the main problem with the following call?   void report_value(long value); void report_value(double value); report_value(4);      The function name is too long.  Function names can contain multiple words when the naming convention permits them.    The argument must be a string.  The argument is a valid numeric value, but it can convert in more than one way here.    The call is ambiguous because an int can convert to either long or double .  Correct. Neither conversion is a uniquely best match.    Overloaded functions cannot have numeric parameters.  Numeric parameter types are commonly used in overloads.    "
 },
@@ -4730,7 +4730,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_default-parameters.html#chapter3_default_parameters_1",
   "type": "Checkpoint",
-  "number": "3.14.2",
+  "number": "3.14.1",
   "title": "",
   "body": "  What value is used for bonus in the first call?   void report_score(int score, int bonus = 5); report_score(80);      0  The declaration specifies a default of 5 , not 0 .    5  Correct. The caller omits the second argument, so the default is used.    80  80 is the value of score , not the default bonus.    The call is invalid because every argument must be written.  A trailing argument with a default value may be omitted.    "
 },
@@ -4739,7 +4739,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_default-parameters.html#chapter3_default_parameters_2",
   "type": "Checkpoint",
-  "number": "3.14.3",
+  "number": "3.14.2",
   "title": "",
   "body": "  Which declaration is valid according to the trailing-parameter rule?     void draw_line(int length = 10, char symbol);  A required parameter cannot follow a parameter with a default.    void draw_line(int length, char symbol = '-');  Correct. The required parameter comes first and the optional parameter comes last.    void draw_line(int length = 10, char symbol, int thickness = 1);  The required symbol parameter appears after a parameter with a default.    void draw_line(int length = 10, char symbol, int thickness);  Both parameters after length would need defaults.    "
 },
@@ -4748,7 +4748,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_default-parameters.html#chapter3_default_parameters_3",
   "type": "Checkpoint",
-  "number": "3.14.4",
+  "number": "3.14.3",
   "title": "",
   "body": "  What is wrong with this declaration and definition?   void display_value(int value, int width = 10); void display_value(int value, int width = 10) { }      The function has too many parameters.  Two parameters are allowed. The problem is repeating the default.    The default argument is repeated in the definition.  Correct. Put the default in the visible declaration and omit it from the definition.    A function definition cannot have a body.  The definition should have a body. That is not the problem here.    Default parameters can be used only with strings.  Defaults can be used with many parameter types, including int .    "
 },
@@ -4757,7 +4757,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_default-parameters.html#chapter3_default_parameters_4",
   "type": "Checkpoint",
-  "number": "3.14.5",
+  "number": "3.14.4",
   "title": "",
   "body": "  Arrange the blocks to define print_message with a default repeat count and call it once with the default and once with an explicit count.    #include <iostream>  #include <string>  void print_message(const std::string& message, int repeat_count = 1);  int main() {  print_message(\"Ready\");  print_message(\"Go\", 2);  return 0; }  void print_message(const std::string& message, int repeat_count) {  for (int count = 0; count < repeat_count; ++count) {  std::cout << message << '\\n'; } }   "
 },
@@ -4766,7 +4766,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter3_default-parameters.html#chapter3_default_parameters_5",
   "type": "Checkpoint",
-  "number": "3.14.6",
+  "number": "3.14.5",
   "title": "",
   "body": "  Which statement about C++17 function calls is correct?     C++17 supports Python-style keyword arguments for every function.  C++17 does not provide general-purpose keyword arguments.    C++17 uses positional arguments; an options structure can make many settings clearer.  Correct. Default parameters provide optional trailing values, while an options structure can organize many settings.    A default parameter allows the caller to skip an earlier argument and supply a later one.  Arguments are positional, so only trailing arguments can be omitted.    Using a default parameter automatically creates one overload for every possible value.  A default parameter is still part of one function declaration; it does not create overloads.    "
 },
@@ -5189,7 +5189,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_the-modulus-operator.html#mod_operator_1",
   "type": "Checkpoint",
-  "number": "4.1.2",
+  "number": "4.1.1",
   "title": "",
   "body": "  Which expression correctly tests whether the integer variable x is odd?      x % 2 == 0    A remainder of zero when dividing by 2 indicates an even number.      x % 2 != 0    An odd integer has a nonzero remainder when divided by 2.      x \/ 2 == 0    Integer division gives a quotient, not the remainder needed to determine whether a number is odd.      x \/ 2 != 0    Integer division gives a quotient, not the remainder needed to determine whether a number is odd.     "
 },
@@ -5198,7 +5198,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_the-modulus-operator.html#mod_operator_2",
   "type": "Checkpoint",
-  "number": "4.1.3",
+  "number": "4.1.2",
   "title": "",
   "body": "  Match each remainder expression to its result.    Remember that % gives the remainder after integer division.     3 % 2  1    2 % 3  2    6 % 2  0    9 % 6  3    "
 },
@@ -5261,7 +5261,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_conditional-execution.html#conditional_execution_AC_1",
   "type": "Listing",
-  "number": "4.2.2",
+  "number": "4.2.1",
   "title": "This program uses several independent <code class=\"code-inline tex2jax_ignore\">if<\/code> statements.",
   "body": " This program uses several independent if statements.   #include <iostream> int main() { int x = 12; if (x == 12) { std::cout << \"Equal!\\n\"; } if (x != 13) { std::cout << \"Not equal!\\n\"; } if (x < 6) { std::cout << \"Less than 6!\\n\"; } return 0; }   "
 },
@@ -5279,7 +5279,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_conditional-execution.html#conditional_execution_1",
   "type": "Checkpoint",
-  "number": "4.2.3",
+  "number": "4.2.1",
   "title": "",
   "body": "  Suppose x is 12. Which condition is true?      x < 6    Compare 12 with 6 using the meaning of the less-than operator.      x == 13    The equality operator tests whether the two values are the same.      x != 13    This comparison is true because the two values are different.      x > 20    Compare the value of x with 20 before deciding whether this condition is true.     "
 },
@@ -5288,7 +5288,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_conditional-execution.html#conditional_execution_2",
   "type": "Checkpoint",
-  "number": "4.2.4",
+  "number": "4.2.2",
   "title": "",
   "body": "  Match each comparison operator with values that make it true.    Read each comparison from left to right and compare the two values.     x > y  x = 10, y = 2    x <= y  x = 5, y = 5    x < y  x = 2, y = 10    "
 },
@@ -5297,7 +5297,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_conditional-execution.html#conditional_execution_3",
   "type": "Checkpoint",
-  "number": "4.2.5",
+  "number": "4.2.3",
   "title": "",
   "body": "  Match each comparison operator with values that make it true.    Pay attention to whether equality is allowed by the operator.     x == y  x = 3, y = 3    x >= y  x = 6, y = 2    x < y  x = 2, y = 6    "
 },
@@ -5387,7 +5387,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_logical-operators.html#logical_1",
   "type": "Checkpoint",
-  "number": "4.3.5",
+  "number": "4.3.1",
   "title": "",
   "body": "  What is the value of the following expression when x = 7 ?  x > 5 && x < 10     true   Both comparisons are true, so the AND expression is true.     false   Evaluate each comparison separately before applying && .     "
 },
@@ -5396,7 +5396,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_logical-operators.html#logical_2",
   "type": "Checkpoint",
-  "number": "4.3.6",
+  "number": "4.3.2",
   "title": "",
   "body": "  Which condition correctly checks whether choice is either 'A' or 'B' ?      choice == 'A' || choice == 'B'    Each comparison is written completely and the results are joined with logical OR.      choice == 'A' || 'B'    The second comparison must also include choice == .      choice == 'A' && choice == 'B'    A single character cannot be both values at the same time.      choice = 'A' || choice = 'B'    Review the difference between assignment and comparison.     "
 },
@@ -5405,7 +5405,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_logical-operators.html#logical_3",
   "type": "Checkpoint",
-  "number": "4.3.7",
+  "number": "4.3.3",
   "title": "",
   "body": "  What will this program print?  #include <iostream> int main() { int value = 12; if (value >= 10 && value <= 20) { std::cout << \"Inside\\n\"; } else { std::cout << \"Outside\\n\"; } return 0; }     Inside   The value satisfies both comparisons.     Outside   Check both comparisons using the value 12.     Nothing   One branch of an if \/ else must execute.     "
 },
@@ -5477,7 +5477,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_alternative-execution-alternative.html#alt_execution_1",
   "type": "Checkpoint",
-  "number": "4.4.2",
+  "number": "4.4.1",
   "title": "",
   "body": "  What will be printed when main is executed?  #include <iostream> void report_weather_temperature(int temperature); int main() { int degrees = 52; report_weather_temperature(degrees); return 0; } void report_weather_temperature(int temperature) { if (temperature < 52) { std::cout << \"It is cold!\\n\"; } else { std::cout << \"It is warm!\\n\"; } }      It is cold!    Check whether 52 satisfies the condition temperature < 52 .      It is warm!    Since the condition is false, execution follows the else branch.      Nothing prints.    An if \/ else statement executes exactly one of its two branches.      Error message.    Trace the argument into the parameter and then evaluate the comparison.     "
 },
@@ -5486,7 +5486,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_alternative-execution-alternative.html#alt_execution_2",
   "type": "Checkpoint",
-  "number": "4.4.3",
+  "number": "4.4.2",
   "title": "",
   "body": "  Construct a block of code that correctly goes through alternative execution for pricing of an entre at a nice restaurant. If the price is more than $30.00, print Expensive! . If the price is less than $30.00, print Inexpensive! You should by initializing the cost to $40.     int cost = 40;     if (cost > 30) {    if (cost > 30)     std::cout << \"Expensive!\";    } \/\/\"if\" bracket     else {    else if {      std::cout << \"Inexpensive!\";    std::cout << \"Inexpensive!\"     } \/\/\"else\" bracket    "
 },
@@ -5531,7 +5531,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_chained-conditionals.html#chapter4_chained-conditionals-5",
   "type": "Note",
-  "number": "4.5.2",
+  "number": "4.5.1",
   "title": "",
   "body": " Independent if statements behave differently. Each independent if condition is evaluated, so more than one body may execute. In a single if \/ else if \/ else chain, at most one branch executes.  "
 },
@@ -5549,7 +5549,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_chained-conditionals.html#chained_conditionals_1",
   "type": "Checkpoint",
-  "number": "4.5.3",
+  "number": "4.5.1",
   "title": "",
   "body": "  What will this program print?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One! \"; } if (x > 6) { std::cout << \"Two! \"; } if (x > 3) { std::cout << \"Three!\\n\"; } return 0; }      Three!    These are three independent if statements. Check each condition separately.      One!    After the first if finishes, execution continues to the next independent if .      One! Two!    Be sure to evaluate the third independent condition as well.      One! Two! Three!    Each independent if condition is checked separately.     "
 },
@@ -5558,7 +5558,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_chained-conditionals.html#chained_conditionals_2",
   "type": "Checkpoint",
-  "number": "4.5.4",
+  "number": "4.5.2",
   "title": "",
   "body": "  What will this program print?  #include <iostream> int main() { int x = 10; if (x > 8) { std::cout << \"One!\\n\"; } else if (x > 6) { std::cout << \"Two!\\n\"; } else { std::cout << \"Three!\\n\"; } return 0; }      Three!    Start at the top of the chain and evaluate the first condition.      One!    Once a true branch is found, the remaining branches are skipped.      One! Two!    This is one chained conditional, not two independent if statements.      One! Two! Three!    Only one branch of a single if \/ else if \/ else chain can execute.     "
 },
@@ -5567,7 +5567,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_chained-conditionals.html#chained_conditionals_3",
   "type": "Checkpoint",
-  "number": "4.5.5",
+  "number": "4.5.3",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void report_score_level(int score); int main() { int score = 82; report_score_level(score); return 0; } void report_score_level(int score) { if (score >= 90) { std::cout << \"Excellent\\n\"; } else if (score >= 80) { std::cout << \"Good\\n\"; } else if (score >= 70) { std::cout << \"Satisfactory\\n\"; } else { std::cout << \"Needs improvement\\n\"; } }      Excellent    Evaluate the conditions from top to bottom using the value 82.      Good    This is the first condition in the chain that is true.      Satisfactory    Do not skip an earlier branch that may already be true.      Good and Satisfactory    Once one branch executes, the remaining branches in the chain are skipped.     "
 },
@@ -5576,7 +5576,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_chained-conditionals.html#chained_conditionals_4",
   "type": "Checkpoint",
-  "number": "4.5.6",
+  "number": "4.5.4",
   "title": "",
   "body": "  Which ordering correctly classifies scores using the ranges 90 or above, 80 or above, 70 or above, and below 70?      Test score >= 90 , then score >= 80 , then score >= 70 .    Testing from the most restrictive threshold downward allows each score to reach the appropriate first true branch.      Test score >= 70 , then score >= 80 , then score >= 90 .    Consider what happens to a score of 95 if the broadest condition is tested first.      Test only score >= 90 and use else for every other score.    More than two categories require additional conditions.      Use three independent if statements in any order.    Independent if statements can allow several bodies to execute for the same score.     "
 },
@@ -5711,7 +5711,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_nested-conditionals.html#chapter4_nested-conditionals-5",
   "type": "Note",
-  "number": "4.7.2",
+  "number": "4.7.1",
   "title": "",
   "body": " Nested conditionals can be useful when a second decision only makes sense after an earlier condition has been resolved. However, deeply nested code can become difficult to read, so avoid unnecessary levels of nesting.  "
 },
@@ -5729,7 +5729,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_nested-conditionals.html#nested_conditionals_1",
   "type": "Checkpoint",
-  "number": "4.7.3",
+  "number": "4.7.1",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void report_message(int x); int main() { int value = 0; report_message(value); return 0; } void report_message(int x) { if (x == 0) { std::cout << \"Hey!\\n\"; } else { if (x > 0) { std::cout << \"Hi!\\n\"; } else { std::cout << \"Hello!\\n\"; } } }      Hey!    Start with the outer condition and determine whether the nested conditional is reached.      Hi!    The nested if is reached only when the outer condition is false.      Hello!    Check whether execution enters the outer else branch.      Nothing will print.    Trace the outer condition first. One reachable branch contains an output statement.     "
 },
@@ -5738,7 +5738,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_nested-conditionals.html#nested_conditionals_2",
   "type": "Checkpoint",
-  "number": "4.7.4",
+  "number": "4.7.2",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void report_message(int x); int main() { int value = -4; report_message(value); return 0; } void report_message(int x) { if (x == 0) { std::cout << \"Hey!\\n\"; } else { if (x > 0) { std::cout << \"Hi!\\n\"; } else { std::cout << \"Hello!\\n\"; } } }      Hey!    Check whether x == 0 is true for a value of -4.      Hi!    After entering the outer else , evaluate the nested condition x > 0 .      Hello!    Follow the outer branch first, then evaluate the nested conditional.      Nothing will print.    Both levels of the nested conditional lead to an output branch.     "
 },
@@ -5747,7 +5747,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_nested-conditionals.html#nested_conditionals_3",
   "type": "Checkpoint",
-  "number": "4.7.5",
+  "number": "4.7.3",
   "title": "",
   "body": "  A school uses student initials to choose one of four seating areas. Where would a student with the initials MZ be seated?  #include <string> std::string determine_seating_area(char first_initial, char last_initial); std::string determine_seating_area(char first_initial, char last_initial) { if (last_initial > 'M') { if (first_initial > 'M') { return \"Back Left!\"; } else { return \"Back Right!\"; } } else { if (first_initial > 'M') { return \"Front Left!\"; } else { return \"Front Right!\"; } } }      Back Left!    Evaluate the comparison involving the last initial first, then the comparison involving the first initial.      Back Right!    Character comparisons follow character ordering. Trace the outer comparison before the nested one.      Front Left!    Determine whether 'Z' > 'M' before entering the front or back branch.      Front Right!    Start with the outer comparison involving the last initial.      Error!    Character values can be compared with relational operators such as > .     "
 },
@@ -5828,7 +5828,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_the-return-statement.html#return_1",
   "type": "Checkpoint",
-  "number": "4.8.3",
+  "number": "4.8.1",
   "title": "",
   "body": "  What value does this function return when score is 84?  char determine_letter_grade(int score) { if (score >= 90) { return 'A'; } else if (score >= 80) { return 'B'; } else if (score >= 70) { return 'C'; } else { return 'D'; } }      'A'    Evaluate the conditions from top to bottom and stop at the first true branch.      'B'    This is the first branch whose condition is true.      'C'    Check whether an earlier condition becomes true before this branch is reached.      'D'    The final else executes only when all earlier conditions are false.     "
 },
@@ -5837,7 +5837,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_the-return-statement.html#return_2",
   "type": "Checkpoint",
-  "number": "4.8.4",
+  "number": "4.8.2",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void report_value(int number); int main() { report_value(-3); return 0; } void report_value(int number) { if (number < 0) { std::cout << \"Negative\\n\"; return; } std::cout << \"Nonnegative\\n\"; }      Negative    Once the return executes, the current function call ends.      Nonnegative    Trace the condition first, and notice what happens immediately after the first output statement.      Negative followed by Nonnegative    Consider whether execution can continue to the later output statement after return is reached.      Nothing    Trace the body of report_value using the argument -3.     "
 },
@@ -5882,7 +5882,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_AC_1",
   "type": "Listing",
-  "number": "4.9.2",
+  "number": "4.9.1",
   "title": "This recursive function counts down from a positive integer.",
   "body": " This recursive function counts down from a positive integer.   #include <iostream> \/\/ Function declaration void count_down(int number); int main() { count_down(3); return 0; } \/\/ Function definition void count_down(int number) { if (number == 0) { std::cout << \"Blastoff!\\n\"; } else { std::cout << number << '\\n'; count_down(number - 1); } }   "
 },
@@ -5927,7 +5927,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_AC_1_trace",
   "type": "Activity",
-  "number": "4.9.3",
+  "number": "4.9.2",
   "title": "",
   "body": "  Trace count_down(3) . Notice that each recursive call has its own parameter value and must finish before the previous call can finish.   "
 },
@@ -5945,7 +5945,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_AC_2",
   "type": "Listing",
-  "number": "4.9.4",
+  "number": "4.9.2",
   "title": "This recursive function prints a specified number of blank lines.",
   "body": " This recursive function prints a specified number of blank lines.   #include <iostream> \/\/ Function declaration void print_lines(int number_of_lines); int main() { print_lines(3); return 0; } \/\/ Function definition void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines - 1); } }   "
 },
@@ -5963,7 +5963,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_1",
   "type": "Checkpoint",
-  "number": "4.9.5",
+  "number": "4.9.1",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void print_exclamation_marks(int count); int main() { print_exclamation_marks(3); return 0; } void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count - 1); } }      !    Trace how the argument changes after each recursive call.      !!    Continue tracing until the condition count > 0 becomes false.      !!!    One exclamation mark is printed for each positive value of count .      !!!!    Check whether anything is printed when count reaches zero.     "
 },
@@ -5972,7 +5972,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_2",
   "type": "Checkpoint",
-  "number": "4.9.6",
+  "number": "4.9.2",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void print_exclamation_marks(int count); int main() { print_exclamation_marks(0); return 0; } void print_exclamation_marks(int count) { if (count > 0) { std::cout << \"!\"; print_exclamation_marks(count - 1); } }      !!    Evaluate the condition using the initial argument before looking for a recursive call.      !    Check whether the body of the if executes when count begins at zero.      0    Look at the program's output statement and identify what it is capable of printing.      Nothing prints.    The base case is reached immediately, so the recursive body does not execute.     "
 },
@@ -5981,7 +5981,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_recursion.html#recursion_3",
   "type": "Checkpoint",
-  "number": "4.9.7",
+  "number": "4.9.3",
   "title": "",
   "body": "  The best technical term for a function that calls itself is .        The process is called recursion, while the function itself is described as recursive.     recursion   That term names the process. The question asks for the adjective that describes the function.      "
 },
@@ -6035,7 +6035,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_infinite-recursion.html#unbounded_recursion_AC_1",
   "type": "Listing",
-  "number": "4.10.3",
+  "number": "4.10.1",
   "title": "This function moves away from its base case instead of toward it.",
   "body": " This function moves away from its base case instead of toward it.   #include <iostream> \/\/ Function declaration void print_lines(int number_of_lines); int main() { print_lines(10); return 0; } \/\/ Function definition void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines + 1); } }   "
 },
@@ -6053,7 +6053,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_infinite-recursion.html#unbounded_recursion_1",
   "type": "Checkpoint",
-  "number": "4.10.4",
+  "number": "4.10.1",
   "title": "",
   "body": "  If a recursive function never reaches its case, then the recursive calls may continue until the program fails. This is called recursion.               "
 },
@@ -6062,7 +6062,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_infinite-recursion.html#unbounded_recursion_2",
   "type": "Checkpoint",
-  "number": "4.10.5",
+  "number": "4.10.2",
   "title": "",
   "body": "  What will this program print?  #include <iostream> void report_sign(int number); int main() { report_sign(-10); return 0; } void report_sign(int number) { if (number >= 0) { std::cout << \"Not negative!\\n\"; report_sign(number - 1); } else { std::cout << \"Negative!\\n\"; } }      Not negative!    Evaluate the first condition using the initial argument.      Negative!    The initial argument already satisfies the stopping branch.      Not negative! followed by Negative!    Check whether the recursive branch is entered at all.      The function recurses indefinitely.    Determine whether a recursive call is made for the initial value.     "
 },
@@ -6071,7 +6071,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_infinite-recursion.html#unbounded_recursion_3",
   "type": "Checkpoint",
-  "number": "4.10.6",
+  "number": "4.10.3",
   "title": "",
   "body": "  What happens when this program runs?  #include <iostream> void report_count(int number); int main() { report_count(3); return 0; } void report_count(int number) { if (number > 0) { std::cout << number << '\\n'; report_count(number - 1); } }      It prints 3, 2, 1 and then stops.    Each recursive call moves the argument closer to the base case.      It prints 3 forever.    Trace how the argument changes in each recursive call.      It prints 3, 4, 5, ... until the program fails.    Check whether the recursive argument is increased or decreased.      Nothing prints.    Evaluate the condition using the initial value 3.     "
 },
@@ -6080,7 +6080,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_infinite-recursion.html#unbounded_recursion_4",
   "type": "Checkpoint",
-  "number": "4.10.7",
+  "number": "4.10.4",
   "title": "",
   "body": "  What happens when this program runs?  #include <iostream> void report_count(int number); int main() { report_count(3); return 0; } void report_count(int number) { if (number > 0) { std::cout << number << '\\n'; report_count(number + 1); } }      It prints only 3.    Check whether the function makes another recursive call.      It prints 3, 2, 1 and then stops.    Trace whether the argument moves toward or away from zero.      Nothing prints.    Evaluate the condition using the initial value 3.      It continues making recursive calls until the program is terminated or the call stack is exhausted.    The recursive argument moves farther away from the base case.     "
 },
@@ -6143,7 +6143,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_stack-diagrams-for-recursive-functions.html#chapter4_stack-diagrams-for-recursive-functions-7",
   "type": "Figure",
-  "number": "4.11.2",
+  "number": "4.11.1",
   "title": "",
   "body": " Stack frames created by count_down(3)    A stack diagram containing one frame for main and four frames for count_down. The count_down frames contain parameter values 3, 2, 1, and 0.    "
 },
@@ -6179,7 +6179,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter4_stack-diagrams-for-recursive-functions.html#stack_1",
   "type": "Checkpoint",
-  "number": "4.11.3",
+  "number": "4.11.1",
   "title": "",
   "body": "  Consider the recursive function below. How many stack frames for print_lines exist when the deepest call has been reached after starting with print_lines(4) ?  #include <iostream> void print_lines(int number_of_lines); int main() { print_lines(4); return 0; } void print_lines(int number_of_lines) { if (number_of_lines > 0) { std::cout << '\\n'; print_lines(number_of_lines - 1); } }      3    Trace the argument values beginning with 4 and continue until the base case is reached.      4    Remember that the call that reaches the base case also has its own stack frame.      5    There is one frame for each call with argument values 4, 3, 2, 1, and 0.      Infinitely many    Check whether each recursive call moves the argument toward or away from the base case.     "
 },
@@ -8303,7 +8303,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_what-is-iteration.html#chapter6_what-iteration_organization",
   "type": "Checkpoint",
-  "number": "6.1.2",
+  "number": "6.1.1",
   "title": "",
   "body": "  Which organization best matches the soap-packing process in this section?      An outer repetition for 100 packs, with an inner repetition for 16 soap pieces in each pack.    The outer task makes the packs for one shipping box, and the inner task fills one pack.      One repetition for 116 soap pieces, with no separate pack operation.    The two quantities describe two different levels of the process.      An outer repetition for 16 shipping boxes, with an inner repetition for 100 soap pieces.    The numbers are assigned to the wrong tasks.     "
 },
@@ -8312,7 +8312,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_what-is-iteration.html#chapter6_what-iteration_organization_exercise_2",
   "type": "Checkpoint",
-  "number": "6.1.3",
+  "number": "6.1.2",
   "title": "",
   "body": "  Match each example with the type of iteration they suggest.    Review the iteration types and try again!     Checking for each apple from a shipment of unknown quantities check if the apple is good.  Process every value in a collection.    Check how many apples are bad out of a sub-group of 20 randomly chosen apples.  Count through a known range.    Peel 30 apples.  Repeat a known number of times.    Eat apples until you are full.  Continue while a condition is true.    Sort each apple into a \"good apple\" and \"bad apple\" pile.  Nested conditional statement inside a loop.    "
 },
@@ -8420,7 +8420,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_while-statement.html#chapter6_while_short-answer",
   "type": "Checkpoint",
-  "number": "6.2.3",
+  "number": "6.2.1",
   "title": "",
   "body": "  In the syntax shown above, the Boolean expression that is tested before each iteration is the loop .          "
 },
@@ -8429,7 +8429,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_while-statement.html#chapter6_while_organization",
   "type": "Checkpoint",
-  "number": "6.2.4",
+  "number": "6.2.2",
   "title": "",
   "body": "  Which organization makes this countdown loop terminate?   int count = 3; while (count > 0) { std::cout << count << '\\n'; \/\/ missing statement }      --count; inside the loop body   The update makes count smaller until the condition becomes false.     int count = 0; inside the loop body   Declaring another variable does not update the controlling variable in the loop condition.     std::cout << count; again inside the loop body   Output does not change the value used by the condition.     "
 },
@@ -8438,7 +8438,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_while-statement.html#chapter6_do-while_short-answer",
   "type": "Checkpoint",
-  "number": "6.2.5",
+  "number": "6.2.3",
   "title": "",
   "body": "  The loop statement whose body executes before its condition is checked is the statement.          "
 },
@@ -8447,7 +8447,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_while-statement.html#chapter6_do-while_usage",
   "type": "Checkpoint",
-  "number": "6.2.6",
+  "number": "6.2.4",
   "title": "",
   "body": "  Which loop is usually the better choice for a menu that must be displayed at least once and then repeated until the user enters a valid choice?     do-while  The menu body must execute before the first condition check.    while  A while loop may be appropriate in other situations, but it can skip the body when its initial condition is false.    Neither loop can validate input.  Both loops can validate input; the required first display makes do-while especially suitable here.    "
 },
@@ -8456,7 +8456,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_while-statement.html#chapter6_do-while_execution",
   "type": "Checkpoint",
-  "number": "6.2.7",
+  "number": "6.2.5",
   "title": "",
   "body": "  How many times does the following body execute?   int count = 0; do { ++count; } while (count < 0);      Once  The do-while body executes before the false condition is checked.    Zero times  That would describe a while loop whose initial condition is false.    Forever  After one execution, count is 1 and the condition is false.    "
 },
@@ -8528,7 +8528,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_for-statement.html#chapter6_for_short-answer",
   "type": "Checkpoint",
-  "number": "6.3.2",
+  "number": "6.3.1",
   "title": "",
   "body": "  In a for statement, the part that runs once before the first iteration is the .          "
 },
@@ -8537,7 +8537,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_for-statement.html#chapter6_for_organization",
   "type": "Checkpoint",
-  "number": "6.3.3",
+  "number": "6.3.2",
   "title": "",
   "body": "  Which for statement correctly prints the integers from 1 through 5?     for (int count = 1; count <= 5; ++count)  The initialization, condition, and update match the requested range.    for (int count = 0; count <= 5; ++count)  This includes 0, which is outside the requested range.    for (int count = 1; count < 5; ++count)  The condition stops the loop before it prints 5.    for (int count = 5; count >= 1; ++count)  The update moves upward while the condition expects a downward count.    "
 },
@@ -8780,7 +8780,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_arrays.html#chapter6_arrays_index-short-answer",
   "type": "Checkpoint",
-  "number": "6.6.4",
+  "number": "6.6.1",
   "title": "",
   "body": "  The first element of a fixed-size array has index .          "
 },
@@ -8789,7 +8789,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_arrays.html#chapter6_arrays_index-organization",
   "type": "Checkpoint",
-  "number": "6.6.5",
+  "number": "6.6.2",
   "title": "",
   "body": "  Which loop correctly visits every element of std::array<int, 4> values by index?     for (std::size_t index = 0; index < values.size(); ++index)  The index begins at 0 and stops before values.size() .    for (std::size_t index = 0; index <= values.size(); ++index)  The final valid index is one less than values.size() .    for (std::size_t index = 1; index < values.size(); ++index)  This skips the element at index 0.    "
 },
@@ -8798,7 +8798,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_arrays.html#chapter6_arrays_const-reference-parameter",
   "type": "Checkpoint",
-  "number": "6.6.6",
+  "number": "6.6.3",
   "title": "",
   "body": "  A function only needs to inspect a std::array<int, 5> . Which parameter avoids a copy and prevents the function from modifying the caller's array?     const std::array<int, 5>& values  A const reference avoids copying and provides read-only access.    std::array<int, 5> values  This parameter receives a copy of the entire array.    std::array<int, 5>& values  This permits modification, which the function does not need.    "
 },
@@ -8807,7 +8807,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_arrays.html#chapter6_arrays_modify-reference-parameter",
   "type": "Checkpoint",
-  "number": "6.6.7",
+  "number": "6.6.4",
   "title": "",
   "body": "  A function must add 5 to every element of the caller's std::array<int, 5> . Which parameter is appropriate?     std::array<int, 5>& values  A non-const reference lets the function modify the original array.    const std::array<int, 5>& values  Const references cannot be used to modify the elements.    std::array<int, 5> values  This changes only a copy, so the caller's array remains unchanged.    "
 },
@@ -8897,7 +8897,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_term",
   "type": "Checkpoint",
-  "number": "6.7.3",
+  "number": "6.7.1",
   "title": "",
   "body": "  Enter the complete term used for a loop that visits each element of a collection directly: .          "
 },
@@ -8906,7 +8906,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_auto-recommendation",
   "type": "Checkpoint",
-  "number": "6.7.4",
+  "number": "6.7.2",
   "title": "",
   "body": "  Which declaration uses auto to read each potentially large object without copying it or modifying it?     const auto& object  A const reference avoids a copy and prevents modification through the loop variable.    auto object  This declaration normally copies each object.    auto& object  This declaration allows modification, which the question does not require.    "
 },
@@ -8915,7 +8915,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_const-reference",
   "type": "Checkpoint",
-  "number": "6.7.5",
+  "number": "6.7.3",
   "title": "",
   "body": "  Which loop variable declaration is most appropriate for reading each large object without copying it or modifying it?     const Rectangle& rectangle  A const reference avoids a copy and prevents modification through the loop variable.    Rectangle rectangle  This declaration creates a copy of each object.    Rectangle& rectangle  This reference allows modification, which is not needed for a read-only traversal.    "
 },
@@ -8924,7 +8924,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_modify",
   "type": "Checkpoint",
-  "number": "6.7.6",
+  "number": "6.7.4",
   "title": "",
   "body": "  Which declaration allows a range-based loop to modify each original integer in the array?     int& value  A non-const reference refers to the original array element.    int value  This loop variable receives a copy, so changing it does not change the array.    const int& value  The const qualifier prevents modification through the reference.    "
 },
@@ -8933,7 +8933,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_member-function",
   "type": "Checkpoint",
-  "number": "6.7.7",
+  "number": "6.7.5",
   "title": "",
   "body": "  A function that belongs to a class and is called through an object is a .          "
 },
@@ -8942,7 +8942,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter6_range-based-for-loops.html#chapter6_range-based-for-loops_encapsulation",
   "type": "Checkpoint",
-  "number": "6.7.8",
+  "number": "6.7.6",
   "title": "",
   "body": "  Which loop organization correctly processes every Rectangle object while preserving encapsulation?      Use const Rectangle& rectangle and call the public member function rectangle.calculate_area() .   The class controls access to its private data through its public operation.    Access rectangle.width directly from main .  width is private, so outside code should use a public member function.    Create a new Rectangle class inside every loop iteration.  The array already contains the objects to process.    "
 },
@@ -9113,7 +9113,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "generating-random-numbers.html#chapter6_random-numbers_pseudorandom",
   "type": "Checkpoint",
-  "number": "6.9.5",
+  "number": "6.9.1",
   "title": "",
   "body": "  A number produced by a deterministic algorithm that appears random is called .          "
 },
@@ -9122,7 +9122,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "generating-random-numbers.html#chapter6_random-numbers_seed-purpose",
   "type": "Checkpoint",
-  "number": "6.9.6",
+  "number": "6.9.2",
   "title": "",
   "body": "  What does a seed determine in a pseudorandom generator?      The generator's initial state.   Correct. The initial state determines the sequence that follows.     The number of values the program must generate.   A seed initializes the generator; a loop controls how many values are generated.     The largest value allowed by every distribution.   The distribution, not the seed, determines the desired range.     Whether the program uses a loop.   The seed affects the sequence, not the program's control structure.    "
 },
@@ -9131,7 +9131,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "generating-random-numbers.html#chapter6_random-numbers_distribution-purpose",
   "type": "Checkpoint",
-  "number": "6.9.7",
+  "number": "6.9.3",
   "title": "",
   "body": "  What is the purpose of a probability distribution such as std::uniform_int_distribution<int> ?      It shapes generator output according to a desired probability pattern.   Correct. The engine generates values, and the distribution gives them a useful pattern.     It stores every value produced by the generator.   Storage is handled by a variable or container.     It guarantees cryptographic security.   A distribution controls probabilities; it does not provide cryptographic security.     It replaces the random-number engine.   The distribution and engine work together.    "
 },
@@ -9140,7 +9140,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "generating-random-numbers.html#chapter6_random-numbers_die-class",
   "type": "Checkpoint",
-  "number": "6.9.8",
+  "number": "6.9.4",
   "title": "",
   "body": "  In the Die class, why are the generator and distribution private data members?      They are implementation details hidden behind the public roll() operation.   Correct. This is encapsulation.     Private data members cannot store objects from library classes.   Private members can store objects. Their access is restricted to the class.     The program must create a new generator for every roll.   The same generator should produce successive values.     The distribution must be initialized inside main() .   The class can initialize its own private distribution.    "
 },
@@ -9149,7 +9149,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "generating-random-numbers.html#chapter6_random-numbers_security",
   "type": "Checkpoint",
-  "number": "6.9.9",
+  "number": "6.9.5",
   "title": "",
   "body": "  Which is the most appropriate use for std::mt19937 ?      Simulating die rolls and testing a program with varied inputs.   Correct. It is a general-purpose pseudorandom engine.     Generating an encryption key for a banking application.   Security-sensitive values require a trusted cryptographic facility.     Generating a password-reset token for a website.   Password-reset tokens must be generated with security-specific randomness.     Creating a secret authentication value.   Authentication values require a cryptographically secure generator.    "
 },
@@ -10427,7 +10427,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter8_what-is-a-vector.html#chapter8_what-is-a-vector_exercise_size-capacity",
   "type": "Checkpoint",
-  "number": "8.1.2",
+  "number": "8.1.1",
   "title": "",
   "body": "  A vector has size 4 and capacity 10. What does this tell us?     It contains four elements and has room for at least six more without reallocating.  Size counts current elements; capacity describes available storage.    It contains ten elements, four of which are initialized.  Capacity is not the number of current elements.    It can never contain more than ten elements.  A vector can obtain larger storage when necessary.    It contains six uninitialized elements.  Unused capacity is storage, not additional vector elements.    "
 },
@@ -10526,7 +10526,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter8_accessing-vector-elements.html#chapter8_accessing-vector-elements_exercise_index",
   "type": "Checkpoint",
-  "number": "8.3.2",
+  "number": "8.3.1",
   "title": "",
   "body": "  What is the last valid index of a vector whose size is 7?    6 Indices begin at zero, so the last index is size minus one.  7 Index 7 would be one past the last valid index.  8 Count seven positions beginning with index zero.  0 Zero identifies the first element, not the last.   "
 },
@@ -10643,7 +10643,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter8_vector-operations.html#chapter8_vector-operations_exercise_push-back",
   "type": "Checkpoint",
-  "number": "8.5.2",
+  "number": "8.5.1",
   "title": "",
   "body": "  What happens when values.push_back(42) is called?    A new element with value 42 is added at the end. push_back() adds one element after the current last element.  The first element is replaced by 42. Use an index assignment to replace an existing element.  The vector is cleared before 42 is added. push_back() preserves the existing elements.  The vector's capacity is guaranteed to increase by exactly one. Capacity growth is implementation-dependent.   "
 },
@@ -10697,7 +10697,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter8_passing-vectors-to-functions.html#chapter8_passing-vectors-to-functions_exercise_parameter",
   "type": "Checkpoint",
-  "number": "8.6.2",
+  "number": "8.6.1",
   "title": "",
   "body": "  Which parameter is best when a function only needs to inspect a potentially large vector of integers?    const std::vector<int>& values This avoids copying the vector and prevents the function from modifying it.  std::vector<int> values This makes a copy, which is unnecessary for read-only inspection.  std::vector<int>& values This permits modification, which the function does not need.  const int values This parameter is not a vector.   "
 },
@@ -11273,7 +11273,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_byte",
   "type": "Checkpoint",
-  "number": "9.1.4",
+  "number": "9.1.1",
   "title": "",
   "body": "  On an eight-bit-byte machine, what does one memory address normally identify?    One byte The machine is byte-addressable, so each address identifies one byte.  One bit A byte contains multiple bits; addresses do not normally identify individual bits.  One complete object of any type Large objects can occupy several consecutive byte locations.  One physical memory page A page contains many bytes and is a larger mapping unit.   "
 },
@@ -11282,7 +11282,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_int32",
   "type": "Checkpoint",
-  "number": "9.1.5",
+  "number": "9.1.2",
   "title": "",
   "body": "  On a machine with eight-bit bytes, how many bytes does a std::int32_t object occupy?    4 bytes Thirty-two bits divided into eight-bit bytes gives four bytes.  1 byte One byte normally contains eight bits, not thirty-two.  8 bytes Eight bytes is a common pointer size on a 64-bit desktop, not the size of a 32-bit integer.  32 bytes The type has 32 bits, not 32 eight-bit bytes.   "
 },
@@ -11291,7 +11291,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_64_bit",
   "type": "Checkpoint",
-  "number": "9.1.6",
+  "number": "9.1.3",
   "title": "",
   "body": "  Which statement best describes a 64-bit machine?    It commonly uses 64-bit registers and pointer representations. The term describes an architecture; it does not mean every object is 64 bits.  Every memory cell contains exactly 64 bits. Memory is commonly byte-addressable, with eight bits per byte.  Every C++ int must contain 64 bits. Integer sizes depend on the type and implementation.  The computer must contain 2 64 bytes of RAM. Address width and installed physical RAM are different ideas.   "
 },
@@ -11300,7 +11300,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-addresses-and-virtual-memory.html#chapter9_memory_exercise_sizeof_pointer",
   "type": "Checkpoint",
-  "number": "9.1.7",
+  "number": "9.1.4",
   "title": "",
   "body": "  If score is a std::int32_t object and score_pointer is a pointer to it, what does sizeof(score_pointer) measure?    The size of the pointer object that stores an address The expression names the pointer variable itself, not the object reached through it.  The size of the std::int32_t object Use sizeof(*score_pointer) to measure the pointed-to type.  The numeric address stored in the pointer sizeof reports a size in bytes, not an address value.  The amount of physical RAM installed sizeof measures the storage required by the specified type or object.   "
 },
@@ -11381,7 +11381,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_address",
   "type": "Checkpoint",
-  "number": "9.2.2",
+  "number": "9.2.1",
   "title": "",
   "body": " What does a pointer normally store?   The address of another object A pointer provides an indirect way to refer to an object.  The complete contents of every object in memory A pointer stores an address, not a complete copy of the object.  The size of the object only Object size and object address are different ideas.  The name of the object Names are source-code identifiers, not stored pointer values.   "
 },
@@ -11390,7 +11390,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_parsons_indirect_access",
   "type": "Checkpoint",
-  "number": "9.2.3",
+  "number": "9.2.2",
   "title": "",
   "body": "  Arrange the statements to change a local object through a pointer.    int score = 90;  int* score_pointer = &score;  *score_pointer = 95;  std::cout << score << '\\n';   "
 },
@@ -11399,7 +11399,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_local_object",
   "type": "Checkpoint",
-  "number": "9.2.4",
+  "number": "9.2.3",
   "title": "",
   "body": " Which object can a pointer identify?   An ordinary local object such as score A pointer can store the address of a local object; it does not require dynamic allocation.  Only an object created with new Pointers can identify local, static, or dynamically allocated objects.  Only an object stored in a vector A pointer is not limited to a particular container.  Only an object whose value is an address The pointer stores an address; the identified object may have another type.   "
 },
@@ -11408,7 +11408,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_address_variation",
   "type": "Checkpoint",
-  "number": "9.2.5",
+  "number": "9.2.4",
   "title": "",
   "body": " Why should a program not assume that &score will have the same numeric address on every run?   The program's storage locations can vary between executions. The relationship between the pointer and object matters; the particular numeric address is not predictable.  The address changes whenever score is incremented. Changing an object's value does not normally move the object.  A pointer stores the object's current value instead of its address. A pointer stores an address, not the pointed-to value.  The address is always zero until new is used. Local objects normally have valid nonzero addresses.   "
 },
@@ -11417,7 +11417,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_why-pointers-exist.html#chapter9_why-pointers-exist_exercise_dynamic_not_required",
   "type": "Checkpoint",
-  "number": "9.2.6",
+  "number": "9.2.5",
   "title": "",
   "body": " Which statement about a pointer and dynamic storage is correct?   A pointer can identify an ordinary local object without owning dynamic storage. The pointer's type and the object's storage duration are separate ideas.  Every pointer automatically owns the object it identifies. Ownership must be established by the program's design; a pointer alone does not imply ownership.  Only dynamically allocated objects have addresses. All objects in storage have locations and addresses.  A local object must be released with delete . Local objects are managed by their scope, not by matching delete .   "
 },
@@ -11516,7 +11516,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_star",
   "type": "Checkpoint",
-  "number": "9.3.6",
+  "number": "9.3.1",
   "title": "",
   "body": " What does *score_pointer = 95; do when score_pointer points to score ?   It changes the pointed-to score object to 95. Dereferencing accesses the object identified by the pointer.  It changes the pointer's address to 95. The dereference operator accesses the pointed-to object, not the pointer's stored address.  It creates a second pointer. A declaration, not this assignment, creates a pointer variable.  It prints the address of score . Output requires std::cout ; this statement performs assignment.   "
 },
@@ -11525,7 +11525,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_parsons_dereference",
   "type": "Checkpoint",
-  "number": "9.3.7",
+  "number": "9.3.2",
   "title": "",
   "body": "  Arrange the statements to store an address and then change the pointed-to object.    int score = 90;  int* score_pointer = &score;  std::cout << *score_pointer << '\\n';  *score_pointer = 95;  std::cout << score << '\\n';   "
 },
@@ -11534,7 +11534,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_address_of",
   "type": "Checkpoint",
-  "number": "9.3.8",
+  "number": "9.3.3",
   "title": "",
   "body": " What does &score produce in an expression?   The address of score The address-of operator produces a pointer value identifying the object.  The value stored in score Writing score alone reads its value; &score asks for its address.  The object identified by score The expression produces an address, not the object itself.  The address of the pointer variable itself &score identifies score , not another pointer variable.   "
 },
@@ -11543,7 +11543,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_declaration_star",
   "type": "Checkpoint",
-  "number": "9.3.9",
+  "number": "9.3.4",
   "title": "",
   "body": " In int* pointer , what role does * play?   It declares pointer as a pointer to an int . Here the star is part of the pointer declaration syntax.  It immediately accesses the pointed-to object. Dereferencing occurs in an expression such as *pointer after the pointer exists.  It obtains the address of pointer . The address-of operator is & .  It releases dynamic storage. Storage release uses delete or delete[] .   "
 },
@@ -11552,7 +11552,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_lvalue",
   "type": "Checkpoint",
-  "number": "9.3.10",
+  "number": "9.3.5",
   "title": "",
   "body": " Which expression is an lvalue because it identifies a persistent object?   score The variable name identifies a storage location and can appear on the left side of assignment.  score + 5 This computation produces a temporary rvalue.  90 + 5 A numeric computation result is an rvalue.  5 A literal is a value, not a named storage location.   "
 },
@@ -11561,7 +11561,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_parsons_storage",
   "type": "Checkpoint",
-  "number": "9.3.11",
+  "number": "9.3.6",
   "title": "",
   "body": "  Arrange the blocks to create an integer and store its address in a pointer.    std::int32_t score = 90;  std::int32_t* score_pointer = &score;  std::cout << *score_pointer << '\\n';   "
 },
@@ -11570,7 +11570,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointer-variables-and-dereferencing.html#chapter9_pointer-variables-and-dereferencing_exercise_virtual_address",
   "type": "Checkpoint",
-  "number": "9.3.12",
+  "number": "9.3.7",
   "title": "",
   "body": "  What does a pointer in an ordinary C++ process normally contain?    A virtual address that identifies an object in that process's address space The operating system and hardware translate virtual addresses to physical locations.  The object's complete contents A pointer stores an address, not a copy of the object.  A physical RAM address that is valid in every process Processes normally use separate virtual address spaces.  The page-table entry itself Page tables are used by the system to translate addresses; a pointer is a C++ object value.   "
 },
@@ -11660,7 +11660,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_1",
   "type": "Checkpoint",
-  "number": "9.4.4",
+  "number": "9.4.1",
   "title": "",
   "body": "  What does pointer = &y; do?    It changes pointer so that it identifies y . Correct. The pointer is reseated to store the address of y .  It copies the value of y into the object previously identified by pointer . That would require dereferencing the pointer on the left side.  It changes the type of pointer . A pointer's type does not change through assignment.  It deletes y . Taking an address does not destroy an object.   "
 },
@@ -11669,7 +11669,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_2",
   "type": "Checkpoint",
-  "number": "9.4.5",
+  "number": "9.4.2",
   "title": "",
   "body": "  What is the result of the following code?   int x = 10; int y = 20; int& reference = x; reference = y;     x becomes 20, and reference still refers to x . Correct. Assignment through a reference changes the object to which it is already bound.  reference becomes an alias for y . References cannot be reseated by assignment.  y becomes 10. The assignment copies from y into the object identified by reference .  The program creates a second copy of x . A reference is an alias, not a copied object.   "
 },
@@ -11678,7 +11678,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_3",
   "type": "Checkpoint",
-  "number": "9.4.6",
+  "number": "9.4.3",
   "title": "",
   "body": "  Which parameter is most appropriate when a function requires a valid, read-only object and should avoid copying a large object?    LargeObject object This passes a copy of the object.  const LargeObject& object Correct. A const reference avoids copying and expresses that the object is required but not modified.  LargeObject* object A pointer allows nullptr , so the function would need a pointer contract and a safety check.  LargeObject&& object This introduces rvalue references, which are not needed for this requirement.   "
 },
@@ -11687,7 +11687,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_4",
   "type": "Checkpoint",
-  "number": "9.4.7",
+  "number": "9.4.4",
   "title": "",
   "body": "  Arrange the blocks to change an object through a pointer and then reseat the pointer.    int first_value = 10;  int second_value = 20;  int* pointer = &first_value;  *pointer = 15;  pointer = &second_value;  *pointer = 25;   "
 },
@@ -11696,7 +11696,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_raw-pointers-and-references.html#chapter9_raw_pointer_reference_5",
   "type": "Checkpoint",
-  "number": "9.4.8",
+  "number": "9.4.5",
   "title": "",
   "body": "  Which situation most strongly favors a pointer over a reference?    The function requires a valid object and must not modify it. A const reference commonly expresses this contract.  The function must represent an optional object that may be absent. Correct. A pointer can represent absence with nullptr .  The function should always receive a valid object. A reference communicates that requirement more directly.  The function should use ordinary variable syntax for access. References provide ordinary alias syntax; pointers require explicit access.   "
 },
@@ -11840,7 +11840,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_reference",
   "type": "Checkpoint",
-  "number": "9.6.2",
+  "number": "9.6.1",
   "title": "",
   "body": " When is a pointer parameter preferable to a reference parameter?   When the function needs to allow the possibility that no object is provided. nullptr can represent the absence of an object.  Whenever the function must be faster. Pointer syntax does not automatically make a function faster.  Whenever the function reads an integer. Parameter choice depends on the function's contract, not merely the type.  Whenever a vector is passed to a function. Vectors are often passed by constant reference when read-only.   "
 },
@@ -11849,7 +11849,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_parsons_pointer_call",
   "type": "Checkpoint",
-  "number": "9.6.3",
+  "number": "9.6.2",
   "title": "",
   "body": "  Arrange the blocks to increment a caller's variable through a pointer parameter.    void increase_value(int* value_pointer) {  if (value_pointer != nullptr) { ++(*value_pointer); }  }  int count = 4;  increase_value(&count);  std::cout << count << '\\n';   "
 },
@@ -11858,7 +11858,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_const_pointer",
   "type": "Checkpoint",
-  "number": "9.6.4",
+  "number": "9.6.3",
   "title": "",
   "body": " What does const int* value_pointer allow the function to do?   Read the pointed-to int without modifying it through this pointer The const applies to the pointed-to integer.  Reseat the pointer but not read the integer This declaration permits reading the integer but does not make the pointer itself const.  Delete every object that the pointer identifies const does not grant ownership or deletion responsibility.  Guarantee that the pointer is never null A pointer to const data can still be nullptr .   "
 },
@@ -11867,7 +11867,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_reference_contract",
   "type": "Checkpoint",
-  "number": "9.6.5",
+  "number": "9.6.4",
   "title": "",
   "body": " Why is a reference often clearer when a function requires an existing object?   A reference must bind to an object and cannot represent nullptr . The reference type communicates that the function expects an object to exist.  A reference automatically allocates the object. References do not create dynamic storage.  A reference always makes a copy. A reference is an alias for an existing object.  A reference can be reseated more easily than a pointer. A reference remains bound to its original object.   "
 },
@@ -11876,7 +11876,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-as-function-parameters.html#chapter9_pointers-as-function-parameters_exercise_pointer_argument",
   "type": "Checkpoint",
-  "number": "9.6.6",
+  "number": "9.6.5",
   "title": "",
   "body": " How should a caller pass count to increase_value(int* value_pointer) ?   increase_value(&count); The pointer parameter receives the address of the caller's object.  increase_value(*count); * is not used to obtain the address of an ordinary variable.  increase_value(count); This passes the integer value, not its address.  increase_value(nullptr); This intentionally passes no object and would not increment count .   "
 },
@@ -11939,7 +11939,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_sizeof",
   "type": "Checkpoint",
-  "number": "9.7.6",
+  "number": "9.7.1",
   "title": "",
   "body": "  What does sizeof(scores) \/ sizeof(scores[0]) calculate when scores is an actual C-style array in the current scope?    The number of elements in the array The total array size in bytes is divided by the size of one element in bytes.  The number of bytes in the array sizeof(scores) alone reports the total size in bytes.  The address of the first element An address is not produced by this division.  The size of a pointer This expression is evaluated while scores is still an actual array.   "
 },
@@ -11948,7 +11948,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_decay",
   "type": "Checkpoint",
-  "number": "9.7.7",
+  "number": "9.7.2",
   "title": "",
   "body": " Why does a function receiving const int* values usually need a separate length parameter?   The pointer identifies an element but does not retain the original array's length. Array decay gives the function an address, not the array-size information.  Because pointers cannot access array elements. Pointer indexing and dereferencing can access elements.  Because the array is automatically copied into the function. The array is not copied into a pointer parameter.  Because pointer arithmetic always changes the array length. Pointer arithmetic does not change the array object.   "
 },
@@ -11957,7 +11957,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_parsons_decay",
   "type": "Checkpoint",
-  "number": "9.7.8",
+  "number": "9.7.3",
   "title": "",
   "body": "  Arrange the statements to traverse two elements of an array with a pointer.    int scores[]{88, 91, 95};  int* current = scores;  std::cout << *current << '\\n';  ++current;  std::cout << *current << '\\n';   "
 },
@@ -11966,7 +11966,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_increment",
   "type": "Checkpoint",
-  "number": "9.7.9",
+  "number": "9.7.4",
   "title": "",
   "body": " What does current + 1 mean when current is an int* into an array?   A pointer to the next int element Pointer arithmetic is scaled by the pointed-to type.  A pointer exactly one byte later The movement is the size of an int , not necessarily one byte.  The next element's integer value The result is still a pointer; dereference it to read a value.  The array's length increased by one Pointer arithmetic does not resize an array.   "
 },
@@ -11975,7 +11975,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_decay_call",
   "type": "Checkpoint",
-  "number": "9.7.10",
+  "number": "9.7.5",
   "title": "",
   "body": " What does scores provide when passed to void print_values(const int* values, std::size_t count) ?   A pointer to the first element of the array In this function call, the array expression converts to a pointer to its first element.  A copy of the entire array including its length The array is not copied into the pointer parameter, and the length is separate.  A pointer to the last element Array decay identifies the first element.  A std::vector<int> object A C-style array does not automatically become a vector.   "
 },
@@ -11984,7 +11984,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_pointers-and-c-style-arrays.html#chapter9_pointers-and-c-style-arrays_exercise_pointer_bounds",
   "type": "Checkpoint",
-  "number": "9.7.11",
+  "number": "9.7.6",
   "title": "",
   "body": " Why must a traversal stop before dereferencing one-past-the-end?   One-past-the-end can be used for comparison but does not identify an element. Dereferencing is valid only for pointers to actual array elements.  One-past-the-end always points to the first element of another array. It is a boundary position, not an element of another array.  Pointer arithmetic stops working after the first element. Pointer arithmetic can traverse the array within its bounds.  The array length changes when the pointer reaches the boundary. Pointer movement does not change the array object.   "
 },
@@ -12047,7 +12047,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_null",
   "type": "Checkpoint",
-  "number": "9.8.3",
+  "number": "9.8.2",
   "title": "",
   "body": " What marks the end of a C-style character string?   The null character '\\0' C-style string functions search for this terminating character.  The character '0' '0' is a visible digit character, not the null character.  The first space Spaces can be part of a C-style string.  The pointer value nullptr nullptr is a pointer value, not a character stored in the string.   "
 },
@@ -12056,7 +12056,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_parsons_traversal",
   "type": "Checkpoint",
-  "number": "9.8.4",
+  "number": "9.8.3",
   "title": "",
   "body": "  Arrange the blocks to print a C-style string one character at a time.    char word[] = \"cat\";  const char* current = word;  while (*current != '\\0') {  std::cout << *current << '\\n'; ++current;  }   "
 },
@@ -12065,7 +12065,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_terminator",
   "type": "Checkpoint",
-  "number": "9.8.5",
+  "number": "9.8.4",
   "title": "",
   "body": " Why does char word[] = \"cat\"; need four elements?   It stores three visible characters plus '\\0' . The null character marks the end of the C-style string.  It stores four visible letters in the word. cat contains three visible characters.  It stores a pointer and three characters. The array stores character elements; it does not contain a separate pointer element.  The compiler always adds an unrelated padding character. The extra element is specifically the required null terminator.   "
 },
@@ -12074,7 +12074,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_mutability",
   "type": "Checkpoint",
-  "number": "9.8.6",
+  "number": "9.8.5",
   "title": "",
   "body": " Which declaration creates a modifiable character array initialized from a string literal?   char message[] = \"Hello\"; The array owns its character elements, including the terminating null character.  const char* message = \"Hello\"; This safely refers to a read-only string literal through a pointer.  char* message = \"Hello\"; A string literal must not be treated as modifiable character storage.  char message = \"Hello\"; A single char cannot store an entire string.   "
 },
@@ -12083,7 +12083,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_c-style-character-strings.html#chapter9_c-style-character-strings_exercise_argv_text",
   "type": "Checkpoint",
-  "number": "9.8.7",
+  "number": "9.8.6",
   "title": "",
   "body": " What is the important type fact about each argv[index] value?   It identifies a null-terminated C-style string. Command-line arguments arrive as text through pointers to characters.  It is already an int containing the user's number. Converting argument text to a number is a separate operation.  It is always a std::string object. The standard main signature uses C-style strings.  It is the argument count. argc stores the count; argv[index] identifies one text argument.   "
 },
@@ -12137,7 +12137,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_parsons_delete",
   "type": "Checkpoint",
-  "number": "9.9.2",
+  "number": "9.9.1",
   "title": "",
   "body": "  Rearrange the blocks to allocate an integer, print it safely, release its dynamic storage, and then clear the pointer.    int* my_ptr = new int(75);   if (my_ptr != nullptr) {  std::cout << *my_ptr << '\\n';  }   delete my_ptr;  my_ptr = nullptr;   "
 },
@@ -12164,7 +12164,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_match",
   "type": "Checkpoint",
-  "number": "9.9.5",
+  "number": "9.9.3",
   "title": "",
   "body": " Which operation matches int* pointer = new int{5}; ?   delete pointer; One object created with new is released with delete .  delete[] pointer; delete[] is for storage created with new[] .  free(pointer); C++ new must not be paired with C's free .  remove(pointer); remove is not the matching storage-release operation.   "
 },
@@ -12173,7 +12173,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_new_result",
   "type": "Checkpoint",
-  "number": "9.9.6",
+  "number": "9.9.4",
   "title": "",
   "body": " What does new int{90} produce in addition to creating an integer?   The address of the dynamically created integer The address can be stored in an int* pointer.  The integer's array length A single object allocation does not produce an array length.  A reference that cannot be null new produces a pointer value, not a reference.  A std::vector<int> object new int{90} creates one dynamic int .   "
 },
@@ -12182,7 +12182,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_array_match",
   "type": "Checkpoint",
-  "number": "9.9.7",
+  "number": "9.9.5",
   "title": "",
   "body": " Which release operation matches new int[count] ?   delete[] pointer; The array form new[] must be paired with delete[] .  delete pointer; That is the form for one object created with ordinary new .  free(pointer); C++ new[] must be paired with C++ delete[] .  pointer.clear(); A raw pointer has no clear() member function.   "
 },
@@ -12191,7 +12191,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_dynamic-memory-with-new-and-delete.html#chapter9_dynamic-memory-with-new-and-delete_exercise_delete_nullptr",
   "type": "Checkpoint",
-  "number": "9.9.8",
+  "number": "9.9.6",
   "title": "",
   "body": " What happens when a program executes delete pointer; while pointer == nullptr ?   Nothing; deleting a null pointer is safe. C++ defines deletion of a null pointer as having no effect.  It deletes the first object in memory. nullptr identifies no object.  It creates a new dynamic object. delete releases storage; it does not allocate.  It requires a length argument. Only array matching concerns delete[] ; a null pointer still requires no argument.   "
 },
@@ -12254,7 +12254,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_parsons_cleanup",
   "type": "Checkpoint",
-  "number": "9.10.3",
+  "number": "9.10.2",
   "title": "",
   "body": "  Arrange the blocks to release a dynamic object and prevent the owning pointer from remaining dangling.    int* value_pointer = new int{42};  std::cout << *value_pointer << '\\n';  delete value_pointer;  value_pointer = nullptr;   "
 },
@@ -12263,7 +12263,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_dangling",
   "type": "Checkpoint",
-  "number": "9.10.4",
+  "number": "9.10.3",
   "title": "",
   "body": " Which situation describes a dangling pointer?   A pointer still stores an address after the identified object's lifetime ends The address remains in the pointer, but the object is no longer valid to use.  A pointer initialized to nullptr A null pointer identifies no object but is not dangling.  A pointer that identifies a live local object A valid pointer to a live object is not dangling.  A pointer used to traverse a valid array Valid traversal does not create a dangling pointer.   "
 },
@@ -12272,7 +12272,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_mismatch",
   "type": "Checkpoint",
-  "number": "9.10.5",
+  "number": "9.10.4",
   "title": "",
   "body": " Which allocation and release pair is correct?   new int[5] with delete[] pointer The array allocation form must match the array deletion form.  new int[5] with delete pointer Single-object delete does not match new[] .  new int{5} with delete[] pointer A single object created with new needs ordinary delete .  new int{5} with free(pointer) C++ new must be paired with C++ delete .   "
 },
@@ -12281,7 +12281,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter9_memory-errors-and-safe-practice.html#chapter9_memory-errors-and-safe-practice_exercise_ownership",
   "type": "Checkpoint",
-  "number": "9.10.6",
+  "number": "9.10.5",
   "title": "",
   "body": " What does setting an owning pointer to nullptr after delete accomplish?   It prevents that pointer from continuing to store the old address. Clearing the owning pointer helps avoid using it as though the destroyed object still exists.  It recreates the deleted object. Assigning nullptr does not restore an object's lifetime.  It repairs every other pointer to the same object. Other pointers may still be dangling and must be managed separately.  It releases storage without needing delete . The storage must be released first with the matching deletion operation.   "
 },
@@ -12740,7 +12740,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_arrow",
   "type": "Checkpoint",
-  "number": "10.1.4",
+  "number": "10.1.1",
   "title": "",
   "body": "  Which expression is equivalent to rectangle_pointer->calculate_area() ?     (*rectangle_pointer).calculate_area()  The arrow operator dereferences the pointer before using the dot operator.    *rectangle_pointer.calculate_area()  The dot operator binds before unary dereference, so parentheses are needed.    rectangle_pointer.calculate_area()  The dot operator is used with an object, not directly with a pointer.    &rectangle_pointer.calculate_area()  The address-of operator does not access a member through a pointer.    "
 },
@@ -12749,7 +12749,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_parsons_dynamic",
   "type": "Checkpoint",
-  "number": "10.1.5",
+  "number": "10.1.2",
   "title": "",
   "body": "  Arrange the statements to create, use, and release a dynamic rectangle.    Rectangle* rectangle_pointer = new Rectangle{5.0, 2.0};  std::cout << rectangle_pointer->calculate_area() << '\\n';  delete rectangle_pointer;  rectangle_pointer = nullptr;   "
 },
@@ -12758,7 +12758,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_lifetime",
   "type": "Checkpoint",
-  "number": "10.1.6",
+  "number": "10.1.3",
   "title": "",
   "body": "  What happens when delete rectangle_pointer; is executed for a pointer returned by new Rectangle{...} ?     The pointed-to object's lifetime ends and its dynamic storage is released.  delete releases the dynamically created object.    Only the pointer variable is deleted; the object remains available.  The pointer variable and the dynamically created object have different lifetimes.    The pointer automatically changes to point to a new rectangle.  delete does not create a replacement object.    The rectangle is copied to the stack.  delete releases the object; it does not move it.    "
 },
@@ -12767,7 +12767,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_private",
   "type": "Checkpoint",
-  "number": "10.1.7",
+  "number": "10.1.4",
   "title": "",
   "body": "  Suppose width is a private data member of Rectangle . Which statement is valid outside the class?     rectangle_pointer->calculate_area()  Public member functions remain available through a pointer.    rectangle_pointer->width = 10.0;  A pointer does not bypass private access control.    (*rectangle_pointer).width = 10.0;  Dereferencing the pointer still does not grant access to private data.    rectangle_pointer.width  The dot operator is not used directly with a pointer.    "
 },
@@ -12776,7 +12776,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_pointers-to-structures-and-classes.html#chapter10_pointer_object_exercise_dangling",
   "type": "Checkpoint",
-  "number": "10.1.8",
+  "number": "10.1.5",
   "title": "",
   "body": "  Why is assigning nullptr after delete a useful practice?     It makes the pointer no longer identify the released object.  A null pointer is safer to test than a pointer that still contains a released address.    It recreates the deleted object.  nullptr represents no object; it does not create one.    It returns the object to the stack.  Assigning nullptr does not move any object.    It makes the pointer point to the next object automatically.  A null pointer does not identify any object.    "
 },
@@ -12848,7 +12848,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_meaning",
   "type": "Checkpoint",
-  "number": "10.2.4",
+  "number": "10.2.1",
   "title": "",
   "body": "  What does this identify inside a non-static member function?     The address of the object that called the member function  this points to the current object.    The address of the class definition  A class definition is not the object involved in a particular call.    The address of the member function's source code  this identifies the current object, not the function code.    A pointer that always points to the first object created  Each call receives the object that made that particular call.    "
 },
@@ -12857,7 +12857,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_equivalence",
   "type": "Checkpoint",
-  "number": "10.2.5",
+  "number": "10.2.2",
   "title": "",
   "body": "  Which expression is equivalent to this->count ?     (*this).count  Dereference the pointer first, then use the dot operator.    this.count  this is a pointer, so the dot operator cannot be used directly.    *this.count  Parentheses are needed because the dot operator binds more tightly.    &this->count  This asks for an address instead of accessing the member's value.    "
 },
@@ -12866,7 +12866,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_parsons_call",
   "type": "Checkpoint",
-  "number": "10.2.6",
+  "number": "10.2.3",
   "title": "",
   "body": "  Arrange the statements to increment the object selected by a pointer.    Counter counter{4};  Counter* counter_pointer = &counter;  counter_pointer->increment();  std::cout << counter.get_count() << '\\n';   "
 },
@@ -12875,7 +12875,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_static",
   "type": "Checkpoint",
-  "number": "10.2.7",
+  "number": "10.2.4",
   "title": "",
   "body": "  Why does a static member function not have a this pointer?     It is associated with the class rather than with one particular object.  this identifies a current object, but a static function has no implicit object.    Static functions cannot return values.  Static functions can return values normally.    Static functions cannot access any data.  They can access static members directly.    Static functions are always private.  A static member function can be public, private, or protected.    "
 },
@@ -12884,7 +12884,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_the-this-pointer-and-member-access.html#chapter10_this_exercise_objects",
   "type": "Checkpoint",
-  "number": "10.2.8",
+  "number": "10.2.5",
   "title": "",
   "body": "  If first.increment() and second.increment() are called, why can the same function update two different counts?     Each call receives a different current object through this .  The member-function definition is shared, but the current object changes from call to call.    Each object receives a separate copy of the function's source code.  Objects do not each receive a separate source-code copy of the member function.    The function always updates the most recently created object.  The called object, not the newest object, becomes the current object.    The function changes the class definition itself.  The function changes the data of the current object.    "
 },
@@ -12965,7 +12965,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_form",
   "type": "Checkpoint",
-  "number": "10.3.4",
+  "number": "10.3.1",
   "title": "",
   "body": "  Which statement initializes a new object using a constructor with arguments?     StudentAccount account{\"Amina\", 125.50};  The braces directly initialize a new object by calling the matching constructor.    account = StudentAccount{\"Amina\", 125.50};  This creates a temporary object and assigns it to an already existing object.    account.get_balance();  This calls a member function; it does not initialize an object.    delete account;  delete is used with a pointer to a dynamic object, not to initialize an object.    "
 },
@@ -12974,7 +12974,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_empty_braces",
   "type": "Checkpoint",
-  "number": "10.3.5",
+  "number": "10.3.2",
   "title": "",
   "body": "  What does StudentAccount account{}; do for a class with a default constructor?     It creates an object by selecting the default constructor.  Empty braces request initialization with no constructor arguments.    It creates a null pointer.  This declaration creates an object, not a pointer.    It assigns an object after the object already exists.  The object is being initialized as its lifetime begins.    It creates an object with uninitialized class members regardless of the constructor.  The selected constructor and member initializers determine the initial state.    "
 },
@@ -12983,7 +12983,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_parsons_forms",
   "type": "Checkpoint",
-  "number": "10.3.6",
+  "number": "10.3.3",
   "title": "",
   "body": "  Arrange the statements to initialize an account and then assign its state to another existing account.    StudentAccount first_account{\"Amina\", 125.50};  StudentAccount second_account{};  second_account = first_account;   "
 },
@@ -12992,7 +12992,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_const",
   "type": "Checkpoint",
-  "number": "10.3.7",
+  "number": "10.3.4",
   "title": "",
   "body": "  Why must a const object be initialized when it is created?     A const object cannot later receive a new value through assignment.  The initial state must be established before the const object can be used.    A const object is always dynamically allocated.  const does not determine where an object is stored.    A const object cannot have a constructor.  Const objects can be created through constructors.    A const object must contain only integer members.  Const objects can have members of many types.    "
 },
@@ -13001,7 +13001,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-initialization-in-cpp.html#chapter10_initialization_exercise_member_list",
   "type": "Checkpoint",
-  "number": "10.3.8",
+  "number": "10.3.5",
   "title": "",
   "body": "  Why are member-initializer lists important?     They initialize data members before the constructor body runs.  Members already exist when the constructor body begins.    They make every member public.  Access control is independent of the member-initializer list.    They dynamically allocate every member.  Member initialization does not imply dynamic allocation.    They replace the class constructor.  The list is part of a constructor definition.    "
 },
@@ -13082,7 +13082,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_local",
   "type": "Checkpoint",
-  "number": "10.4.5",
+  "number": "10.4.1",
   "title": "",
   "body": "  When is a local class object's destructor normally called?     When execution leaves the object's scope  C++ automatically destroys a local object at the end of its lifetime.    Only when the programmer writes delete  delete is used for dynamically created objects, not ordinary local objects.    When the class definition is reached  A class definition does not create an object.    Only when the program calls the destructor directly  Destructors are normally called automatically.    "
 },
@@ -13091,7 +13091,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_parsons_dynamic",
   "type": "Checkpoint",
-  "number": "10.4.6",
+  "number": "10.4.2",
   "title": "",
   "body": "  Arrange the statements to create, release, and clear a dynamic object pointer.    LifecycleMarker* marker_pointer = new LifecycleMarker{\"dynamic\"};  std::cout << \"Object is alive\" << '\\n';  delete marker_pointer;  marker_pointer = nullptr;   "
 },
@@ -13100,7 +13100,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_destructor",
   "type": "Checkpoint",
-  "number": "10.4.7",
+  "number": "10.4.3",
   "title": "",
   "body": "  Which declaration correctly defines a destructor for Rectangle ?     ~Rectangle() { }  A destructor uses the class name preceded by a tilde and has no return type.    void ~Rectangle() { }  Destructors do not have return types.    Rectangle::~Rectangle() { }  The scope-resolution form is not the ordinary in-class destructor definition.    delete Rectangle() { }  delete is an expression used to release a dynamic object.    "
 },
@@ -13109,7 +13109,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_dynamic",
   "type": "Checkpoint",
-  "number": "10.4.8",
+  "number": "10.4.4",
   "title": "",
   "body": "  What is the main danger if a program loses the only pointer to a dynamic object?     The object cannot be released normally, causing a memory leak.  The program needs an owning pointer or another strategy to reach the object for cleanup.    The object is automatically copied to the stack.  Dynamic objects are not automatically moved to the stack.    The destructor runs twice immediately.  Without a pointer, the program generally cannot release the object at all.    The object becomes a static class member.  Storage duration does not change the class definition.    "
 },
@@ -13118,7 +13118,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_object-lifetime-and-destructors.html#chapter10_lifetime_exercise_order",
   "type": "Checkpoint",
-  "number": "10.4.9",
+  "number": "10.4.5",
   "title": "",
   "body": "  If first is constructed before second in the same scope, which object is destroyed first?     second  Objects in the same scope are destroyed in reverse construction order.    first  The first object constructed is normally the last one destroyed.    Both objects are destroyed at exactly the same time.  Destruction has a defined reverse order for local objects.    Neither object is destroyed automatically.  Local class objects are destroyed automatically when their scope ends.    "
 },
@@ -13199,7 +13199,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_difference",
   "type": "Checkpoint",
-  "number": "10.5.4",
+  "number": "10.5.1",
   "title": "",
   "body": "  What is the difference between Score copy{original}; and copy = original; ?     The first creates a new object; the second updates an existing object.  Copy construction begins a new lifetime, while assignment changes an existing object.    They always call exactly the same constructor.  Assignment does not construct the already existing destination.    The first changes the original; the second creates a new object.  The destination of each expression determines the operation.    The first works only for pointers; the second works only for structures.  Both operations can apply to user-defined class objects.    "
 },
@@ -13208,7 +13208,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_signature",
   "type": "Checkpoint",
-  "number": "10.5.5",
+  "number": "10.5.2",
   "title": "",
   "body": "  Which declaration has the usual form of a copy constructor for Score ?     Score(const Score& other);  A copy constructor receives a const reference to an object of the same class.    Score(int other);  This is a converting or ordinary value constructor, not a copy constructor.    void Score(Score other);  Constructors have no return type, and passing by value would require another copy.    Score* Score(const Score& other);  A constructor does not declare a return type or return a pointer.    "
 },
@@ -13217,7 +13217,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_parsons_operations",
   "type": "Checkpoint",
-  "number": "10.5.6",
+  "number": "10.5.3",
   "title": "",
   "body": "  Arrange the statements to demonstrate copy construction followed by copy assignment.    Score original{90};  Score copied{original};  Score assigned{0};  assigned = original;   "
 },
@@ -13226,7 +13226,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_explicit",
   "type": "Checkpoint",
-  "number": "10.5.7",
+  "number": "10.5.4",
   "title": "",
   "body": "  What does explicit Score(int starting_value) prevent?     Implicit conversion of an int into a Score  explicit requires direct initialization such as Score score{90}; .    Copying one Score object into another  Ordinary copying between Score objects remains allowed.    Calling every member function  explicit affects constructor conversions, not member-function calls.    Creating a Score with braces  Direct-list initialization with braces is permitted.    "
 },
@@ -13235,7 +13235,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_copy-constructors-copy-assignment-and-explicit.html#chapter10_copy_exercise_pointer_risk",
   "type": "Checkpoint",
-  "number": "10.5.8",
+  "number": "10.5.5",
   "title": "",
   "body": "  Why can compiler-generated memberwise copying be dangerous for a class that owns a raw pointer?     It can copy the address, causing two objects to release the same allocation.  Copying a pointer value does not copy the dynamically allocated object.    It always changes the pointer into a reference.  Memberwise copying preserves the pointer type and copies its address value.    It prevents the destructor from running.  The destructor still runs, which is part of the danger when ownership is duplicated.    It automatically converts the raw pointer to a smart pointer.  Compiler-generated copying does not change the pointer type.    "
 },
@@ -13316,7 +13316,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise_shared-state",
   "type": "Checkpoint",
-  "number": "10.6.6",
+  "number": "10.6.1",
   "title": "",
   "body": "  Which statement best describes a static data member?     All objects of the class share one value for that member.  A static data member belongs to the class as a whole.    Each object receives a separate copy of the member.  That describes an ordinary non-static data member.    The member can be used only inside a constructor.  Static members can be used by appropriate member functions throughout the class.    The member must always be public.  A static data member can be private, protected, or public.    "
 },
@@ -13325,7 +13325,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-no-this",
   "type": "Checkpoint",
-  "number": "10.6.7",
+  "number": "10.6.2",
   "title": "",
   "body": "  Why can a static member function not directly read an ordinary data member such as balance ?     It has no this pointer and therefore no particular object.  A static function can access shared static state, but no individual object's state without an object.    Static functions cannot read any data.  They can directly read static data members.    The member must first be made public.  Access control is not the reason; the missing object is.    A static function always runs before the class is defined.  Static describes class membership, not source-code order.    "
 },
@@ -13334,7 +13334,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_parsons",
   "type": "Checkpoint",
-  "number": "10.6.8",
+  "number": "10.6.3",
   "title": "",
   "body": "  Arrange the lines to create two objects and then read the shared count.    StudentAccount first_account;  StudentAccount second_account;  int count = StudentAccount::get_total_accounts_created();  std::cout << count << '\\n';   "
 },
@@ -13343,7 +13343,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-call-syntax",
   "type": "Checkpoint",
-  "number": "10.6.9",
+  "number": "10.6.4",
   "title": "",
   "body": "  Which call most clearly communicates that the function uses class-level state?     StudentAccount::get_total_accounts_created()  The class name and scope-resolution operator identify a static member call.    get_total_accounts_created(StudentAccount)  The class name is not passed as a function argument.    StudentAccount.get_total_accounts_created()  C++ uses :: with a class name; the dot operator is used with an object.    static.StudentAccount.get_total_accounts_created()  static is part of the declaration, not a call prefix.    "
 },
@@ -13352,7 +13352,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-definition",
   "type": "Checkpoint",
-  "number": "10.6.10",
+  "number": "10.6.5",
   "title": "",
   "body": "  Why is an out-of-class definition needed for the traditional static data member declaration?     The class declaration announces the member, and the definition provides the shared storage.  The out-of-class definition creates the one class-level object used by the program.    It creates a separate static member for every object.  The purpose is one shared member, not one per object.    It changes the member into a local variable.  The scope-resolution operator keeps the definition associated with the class.    It is required only for static member functions.  This traditional definition concerns static data members.    "
 },
@@ -13361,7 +13361,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_static-members-and-class-level-state.html#chapter10_static_exercise-inline-definition",
   "type": "Checkpoint",
-  "number": "10.6.11",
+  "number": "10.6.6",
   "title": "",
   "body": "  Which C++17 declaration defines and initializes a shared static data member directly inside the class?     inline static int count = 0;   In C++17, inline static permits the definition and initialization inside the class.     static int count;   This is only the traditional in-class declaration; it still needs an out-of-class definition.     int static::count = 0;   The scope-resolution operator follows the class name, as in ClassName::count .     static inline count;   The declaration needs a type and an initializer, such as inline static int count = 0; .     "
 },
@@ -13433,7 +13433,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_access-control-friends-and-protected.html#chapter10_access_exercise-table",
   "type": "Checkpoint",
-  "number": "10.7.4",
+  "number": "10.7.1",
   "title": "",
   "body": "  Which access specifier allows a derived class to use a member while ordinary outside code cannot use it directly?     protected  Derived-class member functions may access protected members, while unrelated outside code may not.    private  Private members are not directly available to derived-class member functions.    public  Public members are also directly available to unrelated outside code.    friend  friend grants a special relationship; it is not an access-specifier category.    "
 },
@@ -13442,7 +13442,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend_exercise-access",
   "type": "Checkpoint",
-  "number": "10.7.5",
+  "number": "10.7.2",
   "title": "",
   "body": "  Why can have_same_temperature read the private celsius member?     Temperature declared the function as a friend.  A friend declaration grants the named non-member function special access.    Every non-member function can read private data.  Private members are normally inaccessible to non-member functions.    The function is secretly a static member.  Friend functions are independent non-member functions. They are not static members, even though neither function type receives an implicit this pointer.    The member becomes public whenever two objects are compared.  Access does not change during a comparison.    "
 },
@@ -13451,7 +13451,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend_parsons",
   "type": "Checkpoint",
-  "number": "10.7.6",
+  "number": "10.7.3",
   "title": "",
   "body": "  Arrange the lines to declare and define a friend comparison function.    class Temperature {  private: double celsius;  friend bool same(const Temperature& first, const Temperature& second);  };  bool same(const Temperature& first, const Temperature& second) {  return first.celsius == second.celsius;  }   "
 },
@@ -13460,7 +13460,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_access-control-friends-and-protected.html#chapter10_friend_exercise-properties",
   "type": "Checkpoint",
-  "number": "10.7.7",
+  "number": "10.7.4",
   "title": "",
   "body": "  Which statement about friendship is correct?     Friendship is granted explicitly and is not automatically mutual or transitive.  A friend relationship gives the named class or function special access only as specified.    If class A is a friend of class B, B is automatically a friend of A.  Friendship is not automatically mutual.    If A is a friend of B and B is a friend of C, A is automatically a friend of C.  Friendship is not transitive.    Every derived class automatically inherits all friendship relationships.  Friendship is not inherited automatically.    "
 },
@@ -13469,7 +13469,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_access-control-friends-and-protected.html#chapter10_protected_exercise",
   "type": "Checkpoint",
-  "number": "10.7.8",
+  "number": "10.7.5",
   "title": "",
   "body": "  Why can SavingsAccount::add_interest change balance in the example?     SavingsAccount is derived from Account , and balance is protected.  Protected members are available to derived-class member functions.    All data members are accessible through inheritance.  Private base-class members are not directly accessible to derived classes.    balance is public because it has a default value.  A default member initializer does not change access control.    protected means public only inside main .  Protected access is intended for the class and its derived classes, not unrelated outside code.    "
 },
@@ -13559,7 +13559,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-purpose",
   "type": "Checkpoint",
-  "number": "10.8.7",
+  "number": "10.8.1",
   "title": "",
   "body": "  What does operator overloading provide for a class?     A class-specific meaning for an existing C++ operator.  The operator remains a C++ operator, but the class supplies behavior for its objects.    A way to invent entirely new operator symbols.  Only existing C++ operators may be overloaded.    A way to change operator precedence throughout the program.  Overloading does not change precedence.    A way to make every class member public.  Operator overloading and access control are separate features.    "
 },
@@ -13568,7 +13568,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-member",
   "type": "Checkpoint",
-  "number": "10.8.8",
+  "number": "10.8.2",
   "title": "",
   "body": "  In the expression first + second , what does a member operator+ use as its explicit parameter?     The right-hand Point , while first is represented by this .  A member function receives the left object implicitly and the other operand explicitly.    Both first and second as two explicit parameters.  The left operand is the object that calls the member function.    Only the output stream.  An output stream belongs to operator<< , not this addition operation.    No operand because overloaded operators cannot have parameters.  The other operand must still be supplied.    "
 },
@@ -13577,7 +13577,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_parsons",
   "type": "Checkpoint",
-  "number": "10.8.9",
+  "number": "10.8.3",
   "title": "",
   "body": "  Arrange the lines to define a member addition operator that returns a new point.    Point operator+(const Point& other) const {  return Point{x + other.x, y + other.y};  }   "
 },
@@ -13586,7 +13586,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-stream-return",
   "type": "Checkpoint",
-  "number": "10.8.10",
+  "number": "10.8.4",
   "title": "",
   "body": "  Why does a stream-output operator return std::ostream& ?     Returning the stream allows output operations to be chained.  The next << operation can use the stream returned by the previous one.    It creates a new stream for every object.  The existing stream is returned by reference.    It converts every object into a string automatically.  The function writes a representation to the stream; it does not necessarily create a string.    It makes the class inherit from std::ostream .  The class and the stream remain separate types.    "
 },
@@ -13595,7 +13595,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_operator-overloading-and-class-interfaces.html#chapter10_operator_exercise-limits",
   "type": "Checkpoint",
-  "number": "10.8.11",
+  "number": "10.8.5",
   "title": "",
   "body": "  Which statement is a valid limitation of operator overloading?     At least one operand must have a user-defined type.  A class cannot globally redefine an expression such as int + int .    Only arithmetic operators can be overloaded.  Comparison and stream operators are also common overloads.    Every overloaded operator must be a static function.  Operators can be member or non-member functions, depending on the design.    Overloading automatically changes the operator's precedence.  Precedence remains part of the C++ language rules.    "
 },
@@ -13685,7 +13685,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_enumerations-and-enum-class.html#chapter10_enum_exercise-purpose",
   "type": "Checkpoint",
-  "number": "10.9.6",
+  "number": "10.9.1",
   "title": "",
   "body": "  What is the main purpose of an enumeration?     To represent one choice from a limited set of named possibilities.  Enumerations give meaningful names to a fixed collection of alternatives.    To store an unlimited number of strings.  A string or container is more appropriate for an unlimited collection of text.    To make every integer variable constant.  An enumeration defines a particular set of named values.    To replace every class in a program.  Enumerations model choices; classes model objects with state and behavior.    "
 },
@@ -13694,7 +13694,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_enumerations-and-enum-class.html#chapter10_enum_exercise-scope",
   "type": "Checkpoint",
-  "number": "10.9.7",
+  "number": "10.9.2",
   "title": "",
   "body": "  Which expression correctly uses the green enumerator from enum class TrafficLight ?     TrafficLight::green  Scoped enumerators are accessed through the enumeration name and :: .    green  That unqualified form belongs to a traditional unscoped enumeration.    TrafficLight.green  The dot operator accesses an object member; enumerators use :: .    enum_class::TrafficLight::green  enum class is declaration syntax, not part of the access expression.    "
 },
@@ -13703,7 +13703,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_enumerations-and-enum-class.html#chapter10_enum_parsons-switch",
   "type": "Checkpoint",
-  "number": "10.9.8",
+  "number": "10.9.3",
   "title": "",
   "body": "  Arrange the statements to declare a scoped enumeration, select a value, and handle it with switch .    enum class Priority { low, normal, urgent };  Priority priority = Priority::urgent;  switch (priority) {  case Priority::urgent:  std::cout << \"Urgent\" << '\\n';  break;  }   "
 },
@@ -13712,7 +13712,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_enumerations-and-enum-class.html#chapter10_enum_exercise-integer-values",
   "type": "Checkpoint",
-  "number": "10.9.9",
+  "number": "10.9.4",
   "title": "",
   "body": "  What does static_cast<int>(Priority::urgent) do when urgent = 10 ?     It explicitly obtains the integer value 10 .  The cast documents the intentional conversion from the scoped enumeration value to its underlying integer representation.    It changes the enumeration's name to int .  The cast converts one value; it does not change the enumeration declaration.    It creates a new enumeration named int .  A cast performs a value conversion, not a type declaration.    It changes urgent from 10 to zero.  The explicit value remains 10.    "
 },
@@ -13721,7 +13721,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter10_enumerations-and-enum-class.html#chapter10_enum_exercise-type-safety",
   "type": "Checkpoint",
-  "number": "10.9.10",
+  "number": "10.9.5",
   "title": "",
   "body": "  Why is enum class usually preferred for new C++ code?     Its enumerators are scoped and it does not implicitly convert to int .  Scoped names and stronger type checking prevent several accidental uses.    It automatically converts every value to a string.  Text conversion still requires explicit code such as a function with switch .    It can contain any number of values at runtime.  An enumeration still represents a declared set of named choices.    It removes the need for constructors in classes.  Enumerations and constructors solve different design problems.    "
 },
@@ -13784,7 +13784,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_why-programs-need-error-handling.html#chapter11_error_exercise-kinds",
   "type": "Checkpoint",
-  "number": "11.1.4",
+  "number": "11.1.1",
   "title": "",
   "body": "  Which situation is a runtime error?     A function returns the wrong answer because its formula is incorrect.  That is a logic error, not a runtime failure such as a missing file.    A closing brace is missing.  The compiler can detect this before the program runs.    An average uses the wrong formula but still produces a number.  That is a logic error: the program runs but computes the wrong result.    A program cannot open a requested input file.  The program has compiled, but an operation fails while it runs.    A variable has a misleading name.  A misleading name is a design or readability problem, not necessarily a runtime failure.    "
 },
@@ -13793,7 +13793,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_why-programs-need-error-handling.html#chapter11_error_exercise-precondition",
   "type": "Checkpoint",
-  "number": "11.1.5",
+  "number": "11.1.2",
   "title": "",
   "body": "  In try_calculate_average , what condition must be true before the function can calculate an average?     The caller must create a file.  This function performs a calculation and does not use a file.    total must be positive.  An average can be calculated from a negative total; the divisor is the relevant condition.    count must be negative.  The function rejects zero, so it requires a nonzero count; this example uses zero as the invalid case.    average must already contain a value.  The function writes the calculated result into average .    count must not be zero.  Division by zero must be prevented before the calculation.    "
 },
@@ -13802,7 +13802,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_why-programs-need-error-handling.html#chapter11_error_parsons-status-check",
   "type": "Checkpoint",
-  "number": "11.1.6",
+  "number": "11.1.3",
   "title": "",
   "body": "  Arrange the lines so the caller checks the status before using the average.    double average{};  if (try_calculate_average(85, 5, average)) {  std::cout << average << '\\n';  }   "
 },
@@ -13811,7 +13811,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_why-programs-need-error-handling.html#chapter11_error_exercise-response",
   "type": "Checkpoint",
-  "number": "11.1.7",
+  "number": "11.1.4",
   "title": "",
   "body": "  Which response is generally most appropriate when a loop reaches its expected stopping condition?     Throw an exception whenever normal termination occurs.  An expected stopping condition belongs in ordinary control flow.    Use ordinary control flow.  An expected stopping condition is part of normal algorithm behavior.    Ignore the condition and continue forever.  The loop should respond to its normal stopping condition.    Always throw an exception.  Exceptions are not normally needed for expected control flow.    Terminate the operating system.  A normal loop ending is not a system failure.    "
 },
@@ -13820,7 +13820,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_why-programs-need-error-handling.html#chapter11_error_exercise-runtime-examples",
   "type": "Checkpoint",
-  "number": "11.1.8",
+  "number": "11.1.5",
   "title": "",
   "body": "  Select all situations that are discovered while a program is running.     A closing brace is missing from the source code.  This is a compile-time problem found before normal execution.    A requested input file is missing when the program tries to open it.  This is a runtime condition discovered during execution.    A variable has a misleading name but the program still compiles and runs.  A misleading name is a design or readability problem, not necessarily a runtime condition.    A function receives an invalid value from a caller while the program runs.  This condition is discovered during execution and can be handled deliberately.    A calculation uses the wrong formula but still produces a number.  This is a logic error, not necessarily a runtime failure.    "
 },
@@ -13874,7 +13874,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_try-throw-and-catch.html#chapter11_try-exercise-keyword",
   "type": "Checkpoint",
-  "number": "11.2.2",
+  "number": "11.2.1",
   "title": "",
   "body": "  Which keyword signals that an exceptional condition has occurred?     catch  catch handles an exception after it has been thrown.    handle  handle is not the C++ keyword for reporting an exception.    return  return completes a function normally; it does not throw an exception.    error  error is not the keyword that transfers control with an exception.    throw  throw transfers control with an exception object or value.    "
 },
@@ -13883,7 +13883,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_try-throw-and-catch.html#chapter11_try-exercise-flow",
   "type": "Checkpoint",
-  "number": "11.2.3",
+  "number": "11.2.2",
   "title": "",
   "body": "  What happens when read_positive_count(0) throws?     The function returns zero and continues the output expression.  The function throws before it returns a value.    The unfinished normal path is abandoned and a matching handler is searched for.  A thrown exception transfers control to a matching catch block.    The catch block runs and the failed output expression resumes.  The failed normal path is abandoned; it does not resume after the handler.    The catch block runs before the function is called.  The handler runs only after an exception is thrown.    The compiler fixes the invalid argument automatically.  Runtime error handling must be designed by the programmer.    "
 },
@@ -13892,7 +13892,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_try-throw-and-catch.html#chapter11_try-parsons-basic",
   "type": "Checkpoint",
-  "number": "11.2.4",
+  "number": "11.2.3",
   "title": "",
   "body": "  Arrange the lines to catch an exception from a function call.    try {  read_positive_count(0);  }  catch (const std::invalid_argument& error) {  std::cout << error.what() << '\\n';  }   "
 },
@@ -13901,7 +13901,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_try-throw-and-catch.html#chapter11_try-exercise-handler",
   "type": "Checkpoint",
-  "number": "11.2.5",
+  "number": "11.2.4",
   "title": "",
   "body": "  What is the purpose of the catch block?     To declare a new class.  A handler is part of exception control flow, not a class declaration.    To guarantee that a function returns a value.  A handler responds to failure; it does not automatically return a value.    To respond to a matching exception.  The handler contains the recovery or reporting action.    To run every time the try block finishes normally.  A handler runs when a matching exception is thrown.    To choose the normal path before any exception occurs.  A catch block responds after a matching exception is thrown.    "
 },
@@ -13910,7 +13910,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_try-throw-and-catch.html#chapter11_try-exercise-statements",
   "type": "Checkpoint",
-  "number": "11.2.6",
+  "number": "11.2.5",
   "title": "",
   "body": "  Select all statements that accurately describe exception handling.     A catch block runs every time its try block finishes normally.  A handler runs only when a matching exception is thrown.    throw transfers control with an exception object or value.  This is the role of throw .    An exception automatically repairs the operation that failed.  The handler must report, recover, or otherwise respond deliberately.    A matching catch block responds after the normal path is abandoned.  The handler responds to the exceptional path.    try prevents every possible runtime failure.  A try block only provides a region in which exceptions may be handled.    "
 },
@@ -13964,7 +13964,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_standard-exception-types.html#chapter11_standard-exercise-invalid",
   "type": "Checkpoint",
-  "number": "11.3.3",
+  "number": "11.3.1",
   "title": "",
   "body": "  Which exception best describes an unacceptable function argument?     std::bad_name  std::bad_name is not a standard exception type.    std::invalid_argument  This type communicates that an argument violates the function's requirements.    std::cout  std::cout is an output stream, not an exception.    std::string  std::string is a text type, not a standard exception type.    std::out_of_range  This type is better for an index or value outside an allowed range.    "
 },
@@ -13973,7 +13973,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_standard-exception-types.html#chapter11_standard-exercise-range",
   "type": "Checkpoint",
-  "number": "11.3.4",
+  "number": "11.3.2",
   "title": "",
   "body": "  Why does scores.at(3) throw in the example?     The array's first valid index is 1.  std::array uses zero-based indexing, so its valid indices begin at 0.    The array contains floating-point values.  The element type does not cause this exception.    The valid indices are 0, 1, and 2.  The array has three elements, so index 3 is outside its valid range.    std::array cannot be used inside a try block.  std::array can be used normally inside a try block.    at() always throws for every index.  at() throws only when its index is invalid.    "
 },
@@ -13982,7 +13982,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_standard-exception-types.html#chapter11_standard-parsons-hierarchy",
   "type": "Checkpoint",
-  "number": "11.3.5",
+  "number": "11.3.3",
   "title": "",
   "body": "  Arrange the handlers from the more specific type to the general type.    catch (const std::out_of_range& error) {  std::cout << error.what() << '\\n';  }  catch (const std::exception& error) {  std::cout << error.what() << '\\n';  }   "
 },
@@ -13991,7 +13991,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_standard-exception-types.html#chapter11_standard-exercise-what",
   "type": "Checkpoint",
-  "number": "11.3.6",
+  "number": "11.3.4",
   "title": "",
   "body": "  What does error.what() provide?     The line number of every error in the program.  what() provides a message, not a complete debugging report.    A Boolean that says whether the program compiled.  Compilation status is not returned by an exception's what() .    The memory address of the exception object.  what() returns a descriptive message.    A message describing the exception.  what() returns a descriptive C-style string.    A new exception object.  what() describes the current exception; it does not create another one.    "
 },
@@ -14000,7 +14000,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_standard-exception-types.html#chapter11_standard-exercise-types",
   "type": "Checkpoint",
-  "number": "11.3.7",
+  "number": "11.3.5",
   "title": "",
   "body": "  Select all statements that correctly describe standard exception types.     what() returns the line number where the exception was thrown.  what() returns a descriptive message, not a complete source location.    std::invalid_argument is appropriate when an argument violates a function's requirements.  This exception communicates an unacceptable argument value.    A handler for std::exception can catch only std::invalid_argument .  The common base type can provide a fallback for many standard exception types.    std::out_of_range can describe an invalid index used with at() .  An index outside the valid range is a typical use of this exception.    Every standard exception represents a syntax error found by the compiler.  Standard exceptions describe runtime conditions, not source-code syntax errors.    "
 },
@@ -14063,7 +14063,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_catching-exceptions-safely.html#chapter11_catching-exercise-reference",
   "type": "Checkpoint",
-  "number": "11.4.4",
+  "number": "11.4.1",
   "title": "",
   "body": "  Why is catch (const std::exception& error) a common form?     It automatically fixes the failed operation.  The handler still needs to decide how to respond.    It avoids an unnecessary copy and preserves the exception's type relationship.  The reference avoids copying, while const prevents modification.    It prevents all exceptions from being thrown.  The handler runs after an exception has already been thrown.    It makes the handler receive a copy of every exception.  Catching by reference avoids an unnecessary copy.    It catches only integer exceptions.  The parameter type is a reference to std::exception , not an integer.    "
 },
@@ -14072,7 +14072,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_catching-exceptions-safely.html#chapter11_catching-exercise-order",
   "type": "Checkpoint",
-  "number": "11.4.5",
+  "number": "11.4.2",
   "title": "",
   "body": "  Which handler should appear first?     catch (const std::runtime_error& error)  A general handler should not replace a more specific handler that can respond appropriately.    catch (const int& error)  This handler is unrelated to the standard exception hierarchy.    catch (const std::invalid_argument& error)  The specific derived type should be checked before the general base type.    No handler should appear first.  Handlers must have an order, and specific handlers should come first.    catch (const std::exception& error)  A general base-class handler could catch the exception before the specific handler.    "
 },
@@ -14081,7 +14081,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_catching-exceptions-safely.html#chapter11_catching-parsons-order",
   "type": "Checkpoint",
-  "number": "11.4.6",
+  "number": "11.4.3",
   "title": "",
   "body": "  Arrange the handlers from the specific exception to the general exception.    catch (const std::invalid_argument& error) {  std::cout << error.what() << '\\n';  }  catch (const std::exception& error) {  std::cout << error.what() << '\\n';  }   "
 },
@@ -14090,7 +14090,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_catching-exceptions-safely.html#chapter11_catching-exercise-response",
   "type": "Checkpoint",
-  "number": "11.4.7",
+  "number": "11.4.4",
   "title": "",
   "body": "  Which is a meaningful response for an exception handler?     Ignore every exception without recording anything.  Silent handlers make failures difficult to diagnose.    Assume the failed operation succeeded.  The handler should not pretend that an unsuccessful operation completed.    Continue as though the failed operation produced a valid result.  Continuing with an invalid result can make the program unsafe.    Report the problem or recover with a valid alternative.  A handler should respond deliberately rather than silently hiding the failure.    Delete the exception type from the standard library.  A handler responds to an exception; it does not change the library.    "
 },
@@ -14144,7 +14144,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_propagation-exercise",
   "type": "Checkpoint",
-  "number": "11.5.2",
+  "number": "11.5.1",
   "title": "",
   "body": " What does exception propagation mean?    An exception is converted into a loop.  Propagation transfers control; it does not create a loop.    An exception moves through callers until a matching handler is found.  A function does not have to catch an exception it detects.    The compiler ignores the exception.  The running program searches for a matching handler.    An exception always stays inside the function that throws it.  If a function does not handle an exception, it can move to a caller.    An exception is copied into every local variable.  Propagation concerns control flow through function calls.    "
 },
@@ -14153,7 +14153,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_propagation-parsons-call-chain",
   "type": "Checkpoint",
-  "number": "11.5.3",
+  "number": "11.5.2",
   "title": "",
   "body": " Arrange the call chain so the exception reaches the handler in main() .   void process_order() {  validate_order(0);  }  try {  process_order();  }  catch (const std::exception& error) {  std::cout << error.what() << '\\n';  }   "
 },
@@ -14162,7 +14162,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_unwinding-exercise",
   "type": "Checkpoint",
-  "number": "11.5.4",
+  "number": "11.5.3",
   "title": "",
   "body": " What happens during stack unwinding?    The handler runs before local objects in exited functions are destroyed.  Local automatic objects are destroyed as the program unwinds toward the handler.    The exception is changed into a compile-time error.  Stack unwinding happens while the program runs.    Local automatic objects in exited functions are destroyed.  This cleanup supports RAII during exceptional control flow.    Every caller continues normally after the throw.  The interrupted normal paths are abandoned.    All objects in the entire program are immediately deleted.  Unwinding concerns local objects in functions being exited.    "
 },
@@ -14171,7 +14171,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exception-propagation-and-stack-unwinding.html#chapter11_no-handler-exercise",
   "type": "Checkpoint",
-  "number": "11.5.5",
+  "number": "11.5.4",
   "title": "",
   "body": " What happens if no matching handler is found?    The compiler adds a handler automatically.  The programmer must provide an appropriate handler.    The exception becomes a return value.  Thrown exceptions and return values are different mechanisms.    The program returns normally from main() .  Without a matching handler, the program calls std::terminate() .    The program calls std::terminate() .  Unhandled exceptions cannot continue through normal program flow.    The program always retries the operation.  Retry behavior must be written explicitly.    "
 },
@@ -14225,7 +14225,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_functions-exercise-precondition",
   "type": "Checkpoint",
-  "number": "11.6.3",
+  "number": "11.6.1",
   "title": "",
   "body": " Why does calculate_average throw when count is zero?    count must be negative.  The function requires a positive count, so zero and negative counts violate the precondition.    The compiler cannot divide any integers.  C++ can divide integers; division by zero is the invalid situation.    The function has no return statement.  The function has a return statement for valid input.    Its precondition requires a positive count.  The function cannot calculate a valid average with zero values.    All averages must be integers.  The function returns a double ; the issue is the count.    "
 },
@@ -14234,7 +14234,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_functions-parsons-constructor",
   "type": "Checkpoint",
-  "number": "11.6.4",
+  "number": "11.6.2",
   "title": "",
   "body": " Arrange the constructor so that it rejects an invalid object.   Temperature(double starting_celsius)  : celsius{starting_celsius} {  if (celsius < -273.15) {  throw std::invalid_argument(\"temperature is invalid\");  }  }   "
 },
@@ -14243,7 +14243,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_functions-exercise-constructor",
   "type": "Checkpoint",
-  "number": "11.6.5",
+  "number": "11.6.3",
   "title": "",
   "body": " What does a constructor exception prevent?    It makes the constructor return a Boolean.  Constructors do not return values; they either create an object or throw.    It prevents every object of the class from ever being created.  Valid constructor arguments can still create objects.    It constructs and returns the invalid object anyway.  A constructor exception prevents an invalid object from being made available.    It changes a class into a structure.  Exceptions do not change the kind of user-defined type.    It prevents the caller from receiving an object that violates the class invariant.  A constructor that finishes successfully establishes a valid object.    "
 },
@@ -14252,7 +14252,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_functions-exercise-design",
   "type": "Checkpoint",
-  "number": "11.6.6",
+  "number": "11.6.4",
   "title": "",
   "body": " Which design best protects a class invariant?    Make invariant checks optional for callers.  An invariant is a class responsibility, not merely a suggestion to callers.    Reject invalid constructor arguments before the object becomes available.  Preventing invalid objects simplifies every later member function.    Remove all private data members.  Private data helps a class protect its invariant.    Accept every value and ask callers to remember the invariant.  That spreads the responsibility across every caller.    Silently replace every invalid value with zero.  Silently changing input may hide an important programming error.    "
 },
@@ -14261,7 +14261,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exceptions-in-functions-and-classes.html#chapter11_functions-exercise-invariants",
   "type": "Checkpoint",
-  "number": "11.6.7",
+  "number": "11.6.5",
   "title": "",
   "body": "  Select all practices that help a class protect its invariant.     Make all data members public and rely on callers to behave correctly.  Public unrestricted data makes invariant protection harder.    Validate constructor arguments before the object becomes available.  Rejecting invalid initial state protects every later operation.    Silently accept every invalid value and document the problem later.  Silently accepting invalid state weakens the class invariant.    Reject an invalid operation before it leaves the object in an unacceptable state.  Operations should preserve the invariant as well as constructors.    Remove validation so every constructor call succeeds.  Successful construction should mean that the object is valid.    "
 },
@@ -14315,7 +14315,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_constructors-destructors-and-raii.html#chapter11_raii-exercise-order",
   "type": "Checkpoint",
-  "number": "11.7.2",
+  "number": "11.7.1",
   "title": "",
   "body": " What happens to marker when run_task() throws?    It remains alive until the operating system shuts down.  Automatic objects are destroyed when their scope is exited.    Its constructor runs a second time.  An exception does not reconstruct the local object.    It is copied into the exception object.  The local object's lifetime is separate from the exception object.    Its destructor is skipped because an exception is active.  Automatic objects are destroyed during stack unwinding.    Its destructor runs while the function is being exited.  Stack unwinding destroys completely constructed local objects.    "
 },
@@ -14324,7 +14324,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_constructors-destructors-and-raii.html#chapter11_raii-parsons-cleanup",
   "type": "Checkpoint",
-  "number": "11.7.3",
+  "number": "11.7.2",
   "title": "",
   "body": " Arrange the class so its destructor releases the resource marker.   class ScopeMarker {  public:  ScopeMarker() { acquire_resource(); }  ~ScopeMarker() { release_resource(); }  };   "
 },
@@ -14333,7 +14333,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_constructors-destructors-and-raii.html#chapter11_raii-exercise-purpose",
   "type": "Checkpoint",
-  "number": "11.7.4",
+  "number": "11.7.3",
   "title": "",
   "body": " What is the main advantage of RAII during exception handling?    RAII prevents all exceptions from being thrown.  RAII manages cleanup; it does not prevent every failure.    Cleanup happens automatically when the resource-owning object leaves its scope.  RAII makes cleanup apply to both normal and exceptional exits.    RAII requires every resource to be released manually in main() .  RAII connects resource cleanup to object lifetime and scope.    RAII makes destructors run before constructors.  Construction still occurs before destruction.    RAII removes the need for object scopes.  RAII depends on object lifetimes and scopes.    "
 },
@@ -14342,7 +14342,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_constructors-destructors-and-raii.html#chapter11_raii-exercise-destructor",
   "type": "Checkpoint",
-  "number": "11.7.5",
+  "number": "11.7.4",
   "title": "",
   "body": " Which destructor practice is safest during exception handling?    Delete every object in the program.  A destructor should clean up only its own object's resources.    Always throw a new exception from the destructor.  Throwing from a destructor during unwinding is dangerous.    Perform cleanup and avoid allowing another exception to escape.  A second escaping exception during unwinding can terminate the program.    Leave resources active so the handler can clean them later.  RAII is intended to make cleanup automatic and reliable.    Allow the destructor to throw whenever cleanup is difficult.  Throwing during cleanup can cause termination during stack unwinding.    "
 },
@@ -14396,7 +14396,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exception-safety-guidelines.html#chapter11_safety-exercise-strong",
   "type": "Checkpoint",
-  "number": "11.8.3",
+  "number": "11.8.1",
   "title": "",
   "body": " Which description matches the strong exception-safety guarantee?    The operation always throws.  The guarantee describes state after failure, not an instruction to throw.    The operation may leak resources as long as it reports an error.  Exception safety includes protecting resources from leaks.    The operation ignores all invalid arguments.  Invalid arguments still need a deliberate response.    The operation may leave the object half-updated after failure.  The strong guarantee requires unchanged state when the operation fails.    The operation succeeds completely or leaves the state unchanged.  This is the commit-or-no-change idea of the strong guarantee.    "
 },
@@ -14405,7 +14405,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exception-safety-guidelines.html#chapter11_safety-parsons-validation",
   "type": "Checkpoint",
-  "number": "11.8.4",
+  "number": "11.8.2",
   "title": "",
   "body": " Arrange the withdrawal so validation occurs before the balance changes.   if (amount < 0 || amount > balance) {  throw std::invalid_argument(\"withdrawal is not allowed\");  }  balance -= amount;   "
 },
@@ -14414,7 +14414,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exception-safety-guidelines.html#chapter11_safety-exercise-basic",
   "type": "Checkpoint",
-  "number": "11.8.5",
+  "number": "11.8.3",
   "title": "",
   "body": " What does the basic guarantee require?    The object must always be exactly unchanged.  That stronger requirement describes the strong guarantee.    The object remains valid and resources are not leaked.  The value may change, but the object and its resources remain safe.    The object must remain unchanged in every detail.  That describes the stronger guarantee; the basic guarantee permits a valid changed state.    The function must never return.  The basic guarantee concerns state and resources after failure.    The program must use only raw pointers.  Exception safety is independent of that choice.    "
 },
@@ -14423,7 +14423,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exception-safety-guidelines.html#chapter11_safety-exercise-guidance",
   "type": "Checkpoint",
-  "number": "11.8.6",
+  "number": "11.8.4",
   "title": "",
   "body": " Which practice usually improves exception safety?    Allow a resource to remain open after failure.  Resources should be cleaned up reliably.    Change half of the object's state before checking the argument.  Partial changes make recovery more difficult.    Validate conditions before changing object state.  Early validation helps keep failed operations from partially changing an object.    Catch every exception and discard its message.  Discarding information makes failures harder to diagnose.    Modify the object first and validate the argument later.  Validate before modifying state when possible.    "
 },
@@ -14432,7 +14432,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_exception-safety-guidelines.html#chapter11_safety-exercise-practices",
   "type": "Checkpoint",
-  "number": "11.8.7",
+  "number": "11.8.5",
   "title": "",
   "body": "  Select all practices that generally improve exception safety.     Validate important conditions before changing object state.  Early validation helps prevent partial changes.    Use RAII objects so resources are released automatically when scope ends.  RAII helps prevent resource leaks during both normal return and stack unwinding.    Ignore every exception so the program always continues.  Ignoring failures can leave the program in an unsafe or unknown state.    Keep an object valid even when an operation reports failure.  Preserving validity is a central part of the basic guarantee.    Allow resources to remain allocated until the operating system ends the process.  Reliable cleanup should occur during program execution, not only at process termination.    "
 },
@@ -14486,7 +14486,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-exercise-meaning",
   "type": "Checkpoint",
-  "number": "11.9.2",
+  "number": "11.9.1",
   "title": "",
   "body": " What does noexcept promise?    The compiler guarantees that the function's result is correct.  noexcept concerns exceptions, not algorithmic correctness.    The function is forbidden from calling any other function.  noexcept concerns exceptions escaping, not whether the function makes calls.    The function will not allow an exception to escape.  noexcept describes exception behavior, not every possible program failure.    The function cannot contain any statements.  A noexcept function can contain ordinary executable statements.    The function automatically catches every exception.  noexcept is not a catch handler.    "
 },
@@ -14495,7 +14495,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-parsons-declaration",
   "type": "Checkpoint",
-  "number": "11.9.3",
+  "number": "11.9.2",
   "title": "",
   "body": " Arrange a valid no-throw function declaration and definition.   int get_fixed_count()  noexcept {  return 3;  }   "
 },
@@ -14504,7 +14504,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-exercise-danger",
   "type": "Checkpoint",
-  "number": "11.9.4",
+  "number": "11.9.3",
   "title": "",
   "body": " What can happen if an exception escapes a noexcept function?    The function automatically retries forever.  Retry behavior must be explicitly designed.    The compiler removes the function.  The program terminates at runtime if the promise is violated.    The exception always becomes a return value.  noexcept does not convert exceptions into return values.    The program calls std::terminate() .  The no-throw boundary does not permit the exception to propagate farther.    The compiler silently catches the exception and returns a default value.  An exception escaping a noexcept function leads to termination.    "
 },
@@ -14513,7 +14513,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_noexcept-and-exception-boundaries.html#chapter11_noexcept-exercise-guidance",
   "type": "Checkpoint",
-  "number": "11.9.5",
+  "number": "11.9.4",
   "title": "",
   "body": " When should a programmer use noexcept ?    Whenever a function takes an argument.  Parameters do not determine whether a function is no-throw.    Use noexcept to conceal operations that may fail.  Use it only when the no-throw contract is genuine.    Only on functions that return strings.  The return type does not determine the use of noexcept .    Whenever the programmer wants to hide an error.  Hiding an error can cause termination instead of recovery.    When the function genuinely has a no-throw contract.  The specifier should document a reliable design promise.    "
 },
@@ -14576,7 +14576,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_designing-recoverable-programs.html#chapter11_recovery-exercise-level",
   "type": "Checkpoint",
-  "number": "11.10.3",
+  "number": "11.10.1",
   "title": "",
   "body": " Where should an exception usually be handled?    Never; all exceptions should be ignored.  Unresolved exceptions can terminate the program.    At the lowest possible level, even when that level cannot recover.  The handling level should understand the needed recovery action.    At a level that knows how to take meaningful action.  A handler should recover, report, retry, or otherwise respond deliberately.    Immediately in every function that might call another function.  Catching without useful action can hide the failure.    Only inside the compiler.  Exception handling is part of the running program.    "
 },
@@ -14585,7 +14585,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_designing-recoverable-programs.html#chapter11_recovery-parsons-boundary",
   "type": "Checkpoint",
-  "number": "11.10.4",
+  "number": "11.10.2",
   "title": "",
   "body": " Arrange the top-level recovery boundary.   try {  process_score(120);  }  catch (const std::invalid_argument& error) {  std::cout << \"Please try again\" << '\\n';  }   "
 },
@@ -14594,7 +14594,7 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_designing-recoverable-programs.html#chapter11_recovery-exercise-message",
   "type": "Checkpoint",
-  "number": "11.10.5",
+  "number": "11.10.3",
   "title": "",
   "body": " Which user-facing message is most useful?    Internal compiler object 0xA04F failed.  Implementation details are not useful to most users.    Everything succeeded.  The operation actually failed, so the message would be misleading.    Error.  This does not explain what failed or how to recover.    Please try again: score must be between 0 and 100.  The message explains the problem and suggests the next action.    The operation failed somewhere.  A useful message identifies the problem and, when possible, a next step.    "
 },
@@ -14603,1332 +14603,1269 @@ var ptx_lunr_docs = [
   "level": "2",
   "url": "chapter11_designing-recoverable-programs.html#chapter11_recovery-exercise-guidelines",
   "type": "Checkpoint",
-  "number": "11.10.6",
+  "number": "11.10.4",
   "title": "",
   "body": " Which practice supports a recoverable program?    Allow invalid objects to circulate until a later function notices.  Classes should protect their invariants early.    Put every recovery decision inside the lowest-level helper.  Lower-level code should detect problems; higher-level code may know how to recover.    Use exceptions for ordinary loop stopping conditions.  Expected control flow should use ordinary decisions.    Catch every exception and continue as if nothing happened.  Ignoring failure can leave the program's state or output misleading.    Keep low-level detection separate from high-level recovery.  This division lets each layer use the context it has.    "
 },
 {
-  "id": "chapter15_file-input-output-and-matrixes",
+  "id": "chapter11_glossary",
   "level": "1",
-  "url": "chapter15_file-input-output-and-matrixes.html",
+  "url": "chapter11_glossary.html",
+  "type": "Glossary",
+  "number": "11.11",
+  "title": "Chapter 11 Glossary",
+  "body": " Chapter 11 Glossary   exception  An object or value used to report an unusual condition and transfer control to a handler.    throw  The statement or expression that signals an exceptional condition.    try block  A block containing code whose exceptions may be handled by following catch handlers.    catch handler  A block that responds to an exception matching its parameter type.    precondition  A condition that must be true before an operation can safely begin.    postcondition  A condition or result promised after an operation completes successfully.    invariant  A rule that must remain true for an object or program state to be valid.    logic error  An error in the algorithm that can produce an incorrect result even when the program runs.    runtime error  A problem discovered while the program is executing.    standard exception  An exception type provided by the C++ standard library, such as std::invalid_argument .    exception propagation  The movement of an exception through callers until a matching handler is found.    stack unwinding  The process of leaving calls and destroying local automatic objects while searching for a handler.    RAII  A design technique that ties resource cleanup to the lifetime of an object.    exception-safety guarantee  A promise about object validity, state, and resource cleanup when an operation fails.    noexcept  A function specification stating that an exception should not escape the function.    termination  The ending of the program by std::terminate() when an exception cannot be handled safely.   "
+},
+{
+  "id": "chapter11_glossary_exception-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_exception-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An object or value used to report an unusual condition and transfer control to a handler. "
+},
+{
+  "id": "chapter11_glossary_throw-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_throw-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The statement or expression that signals an exceptional condition. "
+},
+{
+  "id": "chapter11_glossary_try-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_try-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A block containing code whose exceptions may be handled by following catch handlers. "
+},
+{
+  "id": "chapter11_glossary_catch-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_catch-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A block that responds to an exception matching its parameter type. "
+},
+{
+  "id": "chapter11_glossary_precondition-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_precondition-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A condition that must be true before an operation can safely begin. "
+},
+{
+  "id": "chapter11_glossary_postcondition-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_postcondition-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A condition or result promised after an operation completes successfully. "
+},
+{
+  "id": "chapter11_glossary_invariant-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_invariant-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A rule that must remain true for an object or program state to be valid. "
+},
+{
+  "id": "chapter11_glossary_logic-error-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_logic-error-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An error in the algorithm that can produce an incorrect result even when the program runs. "
+},
+{
+  "id": "chapter11_glossary_runtime-error-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_runtime-error-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A problem discovered while the program is executing. "
+},
+{
+  "id": "chapter11_glossary_standard-exception-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_standard-exception-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An exception type provided by the C++ standard library, such as std::invalid_argument . "
+},
+{
+  "id": "chapter11_glossary_exception-propagation-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_exception-propagation-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The movement of an exception through callers until a matching handler is found. "
+},
+{
+  "id": "chapter11_glossary_stack-unwinding-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_stack-unwinding-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The process of leaving calls and destroying local automatic objects while searching for a handler. "
+},
+{
+  "id": "chapter11_glossary_raii-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_raii-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A design technique that ties resource cleanup to the lifetime of an object. "
+},
+{
+  "id": "chapter11_glossary_exception-safety-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_exception-safety-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A promise about object validity, state, and resource cleanup when an operation fails. "
+},
+{
+  "id": "chapter11_glossary_noexcept-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_noexcept-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A function specification stating that an exception should not escape the function. "
+},
+{
+  "id": "chapter11_glossary_termination-2",
+  "level": "2",
+  "url": "chapter11_glossary.html#chapter11_glossary_termination-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The ending of the program by std::terminate() when an exception cannot be handled safely. "
+},
+{
+  "id": "chapter11_component-exercises",
+  "level": "1",
+  "url": "chapter11_component-exercises.html",
+  "type": "Exercises",
+  "number": "11.12",
+  "title": "Chapter 11 Exercises",
+  "body": " Chapter 11 Exercises   Which situation is most naturally handled as a runtime error?   A missing closing brace in the source code This is discovered during compilation.  A misleading variable name This is a readability or design problem.  A file cannot be opened when the program requests it The condition is discovered during execution.  A wrong formula produces an incorrect average This is a logic error.  A missing semicolon in a function This is a compile-time error.     Why should a specific handler usually appear before a general handler?   The general handler cannot compile otherwise. The important issue is which handler gets the first opportunity to match.  A general handler could match first and prevent the specific handler from responding. Specific cases should be handled before broad fallback cases.  Specific handlers always run after all general handlers. Handlers are considered in their written order.  The exception object is destroyed after every handler. Destruction is not the reason for handler ordering.  A specific handler can catch syntax errors. Handlers respond to exceptions, not compiler syntax errors.     What does stack unwinding help C++ accomplish?   It retries every failed function call. Unwinding leaves calls; it does not retry them.  It converts exceptions into return values. Exceptions remain part of exceptional control flow.  It keeps every local object alive until main() ends. Local objects are destroyed as their scopes are exited.  It destroys local automatic objects while control moves toward a handler. This cleanup is essential to object lifetime and RAII.  It prevents all exceptions from escaping. A matching handler is still required.     What is the safest interpretation of a noexcept function?   It may throw if the caller is prepared. An exception escaping a noexcept function leads to termination.  It cannot call other functions. noexcept constrains exception escape, not function calls.  Its contract says that no exception should escape it. The specification is appropriate only when the no-throw promise is genuine.  It automatically catches every exception. noexcept does not create a handler.  It guarantees that its result is logically correct. It concerns exception behavior, not algorithmic correctness.     Select all practices that support reliable exception handling.   Catch an exception at a level that knows how to respond. The handling level should have enough context to recover or report.  Ignore every exception so the program appears to continue. Ignoring failures can produce invalid state.  Use RAII to connect resource cleanup to object lifetime. RAII helps clean up resources during normal return and unwinding.  Use exceptions for every expected loop stopping condition. Expected control flow normally belongs in ordinary statements.  Hide the original error message whenever possible. Useful diagnostics help users and developers understand failure.    "
+},
+{
+  "id": "chapter11_component_error-category",
+  "level": "2",
+  "url": "chapter11_component-exercises.html#chapter11_component_error-category",
+  "type": "Exercise",
+  "number": "11.12.1",
+  "title": "",
+  "body": " Which situation is most naturally handled as a runtime error?   A missing closing brace in the source code This is discovered during compilation.  A misleading variable name This is a readability or design problem.  A file cannot be opened when the program requests it The condition is discovered during execution.  A wrong formula produces an incorrect average This is a logic error.  A missing semicolon in a function This is a compile-time error.   "
+},
+{
+  "id": "chapter11_component_handler-order",
+  "level": "2",
+  "url": "chapter11_component-exercises.html#chapter11_component_handler-order",
+  "type": "Exercise",
+  "number": "11.12.2",
+  "title": "",
+  "body": " Why should a specific handler usually appear before a general handler?   The general handler cannot compile otherwise. The important issue is which handler gets the first opportunity to match.  A general handler could match first and prevent the specific handler from responding. Specific cases should be handled before broad fallback cases.  Specific handlers always run after all general handlers. Handlers are considered in their written order.  The exception object is destroyed after every handler. Destruction is not the reason for handler ordering.  A specific handler can catch syntax errors. Handlers respond to exceptions, not compiler syntax errors.   "
+},
+{
+  "id": "chapter11_component_unwinding",
+  "level": "2",
+  "url": "chapter11_component-exercises.html#chapter11_component_unwinding",
+  "type": "Exercise",
+  "number": "11.12.3",
+  "title": "",
+  "body": " What does stack unwinding help C++ accomplish?   It retries every failed function call. Unwinding leaves calls; it does not retry them.  It converts exceptions into return values. Exceptions remain part of exceptional control flow.  It keeps every local object alive until main() ends. Local objects are destroyed as their scopes are exited.  It destroys local automatic objects while control moves toward a handler. This cleanup is essential to object lifetime and RAII.  It prevents all exceptions from escaping. A matching handler is still required.   "
+},
+{
+  "id": "chapter11_component_noexcept",
+  "level": "2",
+  "url": "chapter11_component-exercises.html#chapter11_component_noexcept",
+  "type": "Exercise",
+  "number": "11.12.4",
+  "title": "",
+  "body": " What is the safest interpretation of a noexcept function?   It may throw if the caller is prepared. An exception escaping a noexcept function leads to termination.  It cannot call other functions. noexcept constrains exception escape, not function calls.  Its contract says that no exception should escape it. The specification is appropriate only when the no-throw promise is genuine.  It automatically catches every exception. noexcept does not create a handler.  It guarantees that its result is logically correct. It concerns exception behavior, not algorithmic correctness.   "
+},
+{
+  "id": "chapter11_component_good-practices",
+  "level": "2",
+  "url": "chapter11_component-exercises.html#chapter11_component_good-practices",
+  "type": "Exercise",
+  "number": "11.12.5",
+  "title": "",
+  "body": " Select all practices that support reliable exception handling.   Catch an exception at a level that knows how to respond. The handling level should have enough context to recover or report.  Ignore every exception so the program appears to continue. Ignoring failures can produce invalid state.  Use RAII to connect resource cleanup to object lifetime. RAII helps clean up resources during normal return and unwinding.  Use exceptions for every expected loop stopping condition. Expected control flow normally belongs in ordinary statements.  Hide the original error message whenever possible. Useful diagnostics help users and developers understand failure.   "
+},
+{
+  "id": "chapter11_component-mixed-up-code",
+  "level": "1",
+  "url": "chapter11_component-mixed-up-code.html",
+  "type": "Exercises",
+  "number": "11.13",
+  "title": "Chapter 11 Mixed-Up Code Practice",
+  "body": " Chapter 11 Mixed-Up Code Practice   Arrange the blocks to validate a positive count and handle an invalid argument.   void validate_count(int count) {  if (count <= 0) {  throw std::invalid_argument{\"count must be positive\"};  }  }  int main() {  try { validate_count(0); }  catch (const std::invalid_argument& error) {  std::cout << error.what() << '\\n';  }  }     Arrange the blocks so the marker is destroyed automatically when the function exits.   void run_task() {  LifecycleMarker marker{\"task\"};  throw std::runtime_error{\"task failed\"};  }     Arrange the blocks to declare a small function with a genuine no-throw contract.   int get_fixed_count() noexcept {  return 3;  }    "
+},
+{
+  "id": "chapter11_muc_throw",
+  "level": "2",
+  "url": "chapter11_component-mixed-up-code.html#chapter11_muc_throw",
+  "type": "Exercise",
+  "number": "11.13.yes",
+  "title": "",
+  "body": " Arrange the blocks to validate a positive count and handle an invalid argument.   void validate_count(int count) {  if (count <= 0) {  throw std::invalid_argument{\"count must be positive\"};  }  }  int main() {  try { validate_count(0); }  catch (const std::invalid_argument& error) {  std::cout << error.what() << '\\n';  }  }   "
+},
+{
+  "id": "chapter11_muc_raii",
+  "level": "2",
+  "url": "chapter11_component-mixed-up-code.html#chapter11_muc_raii",
+  "type": "Exercise",
+  "number": "11.13.yes",
+  "title": "",
+  "body": " Arrange the blocks so the marker is destroyed automatically when the function exits.   void run_task() {  LifecycleMarker marker{\"task\"};  throw std::runtime_error{\"task failed\"};  }   "
+},
+{
+  "id": "chapter11_muc_noexcept",
+  "level": "2",
+  "url": "chapter11_component-mixed-up-code.html#chapter11_muc_noexcept",
+  "type": "Exercise",
+  "number": "11.13.yes",
+  "title": "",
+  "body": " Arrange the blocks to declare a small function with a genuine no-throw contract.   int get_fixed_count() noexcept {  return 3;  }   "
+},
+{
+  "id": "chapter11_component-coding-practice",
+  "level": "1",
+  "url": "chapter11_component-coding-practice.html",
+  "type": "Exercises",
+  "number": "11.14",
+  "title": "Chapter 11 Coding Practice",
+  "body": " Chapter 11 Coding Practice    Complete read_positive_count() so it throws std::invalid_argument when the argument is not positive. The supplied main() handles the exception.   #include <iostream> #include <stdexcept> int read_positive_count(int count) { \/\/ Add the validation and throw statement here. } int main() { try { std::cout << read_positive_count(0) << '\\n'; } catch (const std::invalid_argument& error) { std::cout << error.what() << '\\n'; } return 0; }       Complete withdraw_money() . It should throw when the amount is not positive or exceeds the balance, and it should change the balance only after validation succeeds.   #include <iostream> #include <stdexcept> class Account { private: double balance; public: Account(double starting_balance) : balance{starting_balance} {} void withdraw_money(double amount) { \/\/ Add validation and the state change here. } double get_balance() const { return balance; } }; int main() { try { Account account{100.00}; account.withdraw_money(35.00); std::cout << account.get_balance() << '\\n'; } catch (const std::invalid_argument& error) { std::cout << error.what() << '\\n'; } return 0; }       Complete try_calculate_average() so it returns false when count is zero and writes the average only when the operation succeeds.   #include <iostream> bool try_calculate_average(int total, int count, double& average) { \/\/ Add the validation and calculation here. } int main() { double average{}; if (try_calculate_average(85, 5, average)) { std::cout << average << '\\n'; } return 0; }     "
+},
+{
+  "id": "chapter11_cp_positive-count",
+  "level": "2",
+  "url": "chapter11_component-coding-practice.html#chapter11_cp_positive-count",
+  "type": "Exercise",
+  "number": "11.14.1",
+  "title": "",
+  "body": "  Complete read_positive_count() so it throws std::invalid_argument when the argument is not positive. The supplied main() handles the exception.   #include <iostream> #include <stdexcept> int read_positive_count(int count) { \/\/ Add the validation and throw statement here. } int main() { try { std::cout << read_positive_count(0) << '\\n'; } catch (const std::invalid_argument& error) { std::cout << error.what() << '\\n'; } return 0; }    "
+},
+{
+  "id": "chapter11_cp_safe-withdrawal",
+  "level": "2",
+  "url": "chapter11_component-coding-practice.html#chapter11_cp_safe-withdrawal",
+  "type": "Exercise",
+  "number": "11.14.2",
+  "title": "",
+  "body": "  Complete withdraw_money() . It should throw when the amount is not positive or exceeds the balance, and it should change the balance only after validation succeeds.   #include <iostream> #include <stdexcept> class Account { private: double balance; public: Account(double starting_balance) : balance{starting_balance} {} void withdraw_money(double amount) { \/\/ Add validation and the state change here. } double get_balance() const { return balance; } }; int main() { try { Account account{100.00}; account.withdraw_money(35.00); std::cout << account.get_balance() << '\\n'; } catch (const std::invalid_argument& error) { std::cout << error.what() << '\\n'; } return 0; }    "
+},
+{
+  "id": "chapter11_cp_recoverable-average",
+  "level": "2",
+  "url": "chapter11_component-coding-practice.html#chapter11_cp_recoverable-average",
+  "type": "Exercise",
+  "number": "11.14.3",
+  "title": "",
+  "body": "  Complete try_calculate_average() so it returns false when count is zero and writes the average only when the operation succeeds.   #include <iostream> bool try_calculate_average(int total, int count, double& average) { \/\/ Add the validation and calculation here. } int main() { double average{}; if (try_calculate_average(85, 5, average)) { std::cout << average << '\\n'; } return 0; }    "
+},
+{
+  "id": "chapter12_files-streams-and-persistent-data",
+  "level": "1",
+  "url": "chapter12_files-streams-and-persistent-data.html",
   "type": "Section",
   "number": "12.1",
-  "title": "File Input\/Output and <code class=\"code-inline tex2jax_ignore\">matrix<\/code>es",
-  "body": " File Input\/Output and matrix es  In this chapter we will develop a program that reads and writes files, parses input, and demonstrates the matrix class. We will also implement a data structure called Set that expands automatically as you add elements.  Aside from demonstrating all these features, the real purpose of the program is to generate a two-dimensional table of the distances between cities in the United States. The output is a matrix that looks like this:  Atlanta 0 Chicago 700 0 Boston 1100 1000 0 Dallas 800 900 1750 0 Denver 1450 1000 2000 800 0 Detroit 750 300 800 1150 1300 0 Orlando 400 1150 1300 1100 1900 1200 0 Phoenix 1850 1750 2650 1000 800 2000 2100 0 Seattle 2650 2000 3000 2150 1350 2300 3100 1450 0 Atlanta Chicago Boston Dallas Denver Detroit Orlando Phoenix Seattle  The diagonal elements are all zero because that is the distance from a city to itself. Also, because the distance from A to B is the same as the distance from B to A, there is no need to print the top half of the matrix.    Why aren't we filling in every value in our table, who are we leaving blank space above the diagonal of 0's?      Because we only need the half of the dataset contained by the triangle.   Incorrect! All of the data above the 0 diagonal is a mirror image of the triangle! So, the triangle contains the whole dataset.     Because triangles are the most effective shape to use when presenting data to others.   Incorrect! Triangles do look cool, but they aren't necessarily the most effective shape to use when presenting data.     Because matrices are triangles.   Incorrect! This triangle is PART OF an apmatrix.     Because the triangle contains the entire dataset.   Correct! The triangle contains all data points with no repeat data. If we included all datapoints, the would just be repeats of the points we already have.       Based on how it is used to create the above table, what do you think a matrix is?      a geometric shape   Incorrect! A matrix is not a geometric shape, although they ARE rectangles.     a two-dimensional std::vector   Correct!     a material in which something develops   Incorrect! This is a definition for matrix, but not in the programming sense.     a mold used to shape things   Incorrect! This is a definition for matrix, but not in the programming sense.     "
+  "title": "Files, Streams, and Persistent Data",
+  "body": " Files, Streams, and Persistent Data  A program usually receives input and produces output through streams. Standard input and output connect a program to the keyboard and screen; file streams connect a program to files stored on a device.   Common C++ stream endpoints     Stream  Direction  Typical endpoint    std::cin  Input  Keyboard    std::cout  Output  Screen    std::ifstream  Input  File    std::ofstream  Output  File     A file is persistent data: it can remain available after a program finishes. Persistence allows a program to save records, reports, and configuration so that a later run can use them. In software engineering, separating persistent data from program code also makes data easier to inspect, back up, exchange, and test.   Streams move data  The insertion operator << sends formatted data into an output stream. The extraction operator >> obtains formatted data from an input stream. std::getline() obtains a complete line, including spaces that ordinary extraction would stop before.   #include <iostream> int main() { int quantity{}; std::cin >> quantity; std::cout << \"Quantity: \" << quantity << '\\n'; return 0; }     Text and binary persistence  A text file stores characters arranged according to a documented format. A binary file stores bytes according to a documented binary format. Text is convenient for people to inspect, while binary data can represent fixed-width values compactly and support direct access. Neither format is automatically self-describing; the program needs to know how to interpret the stored data.    Which stream normally represents input from a file?   std::cout std::cout is normally connected to screen output.  std::ifstream An input file stream reads data from a file.  std::ofstream An output file stream writes data to a file.  std::cin std::cin is normally connected to keyboard input.  std::string A string stores characters but is not itself a file stream.     Select all benefits of persistent data.   It can be used by a later run of the program. Files remain after the program ends.  It can be backed up or exchanged separately from the program. Persistent files are separate artifacts.  It guarantees that a file format never needs documentation. Programs still need rules for interpreting stored data.  It makes every input operation succeed. Files can be missing, corrupted, or inaccessible.  It replaces the need for program memory. Programs still load and process data in memory.     Arrange the blocks to read a quantity and report it through the standard streams.   int quantity{};  std::cin >> quantity;  std::cout << \"Quantity: \" << quantity << '\\n';    "
 },
 {
-  "id": "chapter15_file-input-output-and-matrixes-2",
+  "id": "chapter12_files-streams-and-persistent-data-2",
   "level": "2",
-  "url": "chapter15_file-input-output-and-matrixes.html#chapter15_file-input-output-and-matrixes-2",
+  "url": "chapter12_files-streams-and-persistent-data.html#chapter12_files-streams-and-persistent-data-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In this chapter we will develop a program that reads and writes files, parses input, and demonstrates the matrix class. We will also implement a data structure called Set that expands automatically as you add elements. "
+  "body": "A program usually receives input and produces output through streams. Standard input and output connect a program to the keyboard and screen; file streams connect a program to files stored on a device. "
 },
 {
-  "id": "chapter15_file-input-output-and-matrixes-3",
+  "id": "table_chapter12_stream-endpoints",
   "level": "2",
-  "url": "chapter15_file-input-output-and-matrixes.html#chapter15_file-input-output-and-matrixes-3",
+  "url": "chapter12_files-streams-and-persistent-data.html#table_chapter12_stream-endpoints",
+  "type": "Table",
+  "number": "12.1.1",
+  "title": "Common C++ stream endpoints",
+  "body": " Common C++ stream endpoints     Stream  Direction  Typical endpoint    std::cin  Input  Keyboard    std::cout  Output  Screen    std::ifstream  Input  File    std::ofstream  Output  File    "
+},
+{
+  "id": "chapter12_files-streams-and-persistent-data-4",
+  "level": "2",
+  "url": "chapter12_files-streams-and-persistent-data.html#chapter12_files-streams-and-persistent-data-4",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Aside from demonstrating all these features, the real purpose of the program is to generate a two-dimensional table of the distances between cities in the United States. The output is a matrix that looks like this: "
+  "body": "A file is persistent data: it can remain available after a program finishes. Persistence allows a program to save records, reports, and configuration so that a later run can use them. In software engineering, separating persistent data from program code also makes data easier to inspect, back up, exchange, and test. "
 },
 {
-  "id": "chapter15_file-input-output-and-matrixes-5",
+  "id": "chapter12_stream-operations",
   "level": "2",
-  "url": "chapter15_file-input-output-and-matrixes.html#chapter15_file-input-output-and-matrixes-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The diagonal elements are all zero because that is the distance from a city to itself. Also, because the distance from A to B is the same as the distance from B to A, there is no need to print the top half of the matrix. "
+  "url": "chapter12_files-streams-and-persistent-data.html#chapter12_stream-operations",
+  "type": "Subsection",
+  "number": "12.1.1",
+  "title": "Streams move data",
+  "body": " Streams move data  The insertion operator << sends formatted data into an output stream. The extraction operator >> obtains formatted data from an input stream. std::getline() obtains a complete line, including spaces that ordinary extraction would stop before.   #include <iostream> int main() { int quantity{}; std::cin >> quantity; std::cout << \"Quantity: \" << quantity << '\\n'; return 0; }   "
 },
 {
-  "id": "question15_1_1",
+  "id": "chapter12_text-and-binary-preview",
   "level": "2",
-  "url": "chapter15_file-input-output-and-matrixes.html#question15_1_1",
+  "url": "chapter12_files-streams-and-persistent-data.html#chapter12_text-and-binary-preview",
+  "type": "Subsection",
+  "number": "12.1.2",
+  "title": "Text and binary persistence",
+  "body": " Text and binary persistence  A text file stores characters arranged according to a documented format. A binary file stores bytes according to a documented binary format. Text is convenient for people to inspect, while binary data can represent fixed-width values compactly and support direct access. Neither format is automatically self-describing; the program needs to know how to interpret the stored data.  "
+},
+{
+  "id": "chapter12_1_stream-endpoints",
+  "level": "2",
+  "url": "chapter12_files-streams-and-persistent-data.html#chapter12_1_stream-endpoints",
   "type": "Checkpoint",
   "number": "12.1.1",
   "title": "",
-  "body": "  Why aren't we filling in every value in our table, who are we leaving blank space above the diagonal of 0's?      Because we only need the half of the dataset contained by the triangle.   Incorrect! All of the data above the 0 diagonal is a mirror image of the triangle! So, the triangle contains the whole dataset.     Because triangles are the most effective shape to use when presenting data to others.   Incorrect! Triangles do look cool, but they aren't necessarily the most effective shape to use when presenting data.     Because matrices are triangles.   Incorrect! This triangle is PART OF an apmatrix.     Because the triangle contains the entire dataset.   Correct! The triangle contains all data points with no repeat data. If we included all datapoints, the would just be repeats of the points we already have.    "
+  "body": " Which stream normally represents input from a file?   std::cout std::cout is normally connected to screen output.  std::ifstream An input file stream reads data from a file.  std::ofstream An output file stream writes data to a file.  std::cin std::cin is normally connected to keyboard input.  std::string A string stores characters but is not itself a file stream.   "
 },
 {
-  "id": "question15_1_2",
+  "id": "chapter12_1_persistence",
   "level": "2",
-  "url": "chapter15_file-input-output-and-matrixes.html#question15_1_2",
+  "url": "chapter12_files-streams-and-persistent-data.html#chapter12_1_persistence",
   "type": "Checkpoint",
   "number": "12.1.2",
   "title": "",
-  "body": "  Based on how it is used to create the above table, what do you think a matrix is?      a geometric shape   Incorrect! A matrix is not a geometric shape, although they ARE rectangles.     a two-dimensional std::vector   Correct!     a material in which something develops   Incorrect! This is a definition for matrix, but not in the programming sense.     a mold used to shape things   Incorrect! This is a definition for matrix, but not in the programming sense.    "
+  "body": " Select all benefits of persistent data.   It can be used by a later run of the program. Files remain after the program ends.  It can be backed up or exchanged separately from the program. Persistent files are separate artifacts.  It guarantees that a file format never needs documentation. Programs still need rules for interpreting stored data.  It makes every input operation succeed. Files can be missing, corrupted, or inaccessible.  It replaces the need for program memory. Programs still load and process data in memory.   "
 },
 {
-  "id": "chapter15_streams",
+  "id": "chapter12_1_stream-code",
+  "level": "2",
+  "url": "chapter12_files-streams-and-persistent-data.html#chapter12_1_stream-code",
+  "type": "Checkpoint",
+  "number": "12.1.3",
+  "title": "",
+  "body": " Arrange the blocks to read a quantity and report it through the standard streams.   int quantity{};  std::cin >> quantity;  std::cout << \"Quantity: \" << quantity << '\\n';   "
+},
+{
+  "id": "chapter12_text-files-and-stream-states",
   "level": "1",
-  "url": "chapter15_streams.html",
+  "url": "chapter12_text-files-and-stream-states.html",
   "type": "Section",
   "number": "12.2",
-  "title": "Streams",
-  "body": " Streams  To get input from a file or send output to a file, you have to create an ifstream object (for input files) or an ofstream object (for output files). These objects are defined in the header file fstream , which you have to include.  A stream is an abstract object that represents the flow of data from a source like the keyboard or a file to a destination like the screen or a file.  We have already worked with two streams: cin , which has type istream , and cout , which has type ostream . cin represents the flow of data from the keyboard to the program. Each time the program uses the >> operator or the getline function, it removes a piece of data from the input stream.  Similarly, when the program uses the << operator on an ostream , it adds a datum to the outgoing stream.    You create an object to write data to a file, and a object to read data from a file. In order to define objects to input from a file or send output to a file, you must include the <   > header file.                       What is a stream object?      an abstract object that works exclusively with std::cin and std::cout statements   Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!     an abstract object on which input and ouput operations are performed   Correct!     an abstract object that works only with file data   Incorrect! Stream objects do work with file data, but they do other things too.     an abstract object that controls the flow of statements   Incorrect! This is not at all what stream objects do, you should try re-reading to get a better understanding!       Match the stream to its type.   Try again!    cin  ifstream    cout  ofstream     "
+  "title": "Text Files and Stream States",
+  "body": " Text Files and Stream States  Text-file programs commonly open a file, perform input or output, test whether each operation succeeded, and close the file. File stream objects can close themselves when they leave scope, but checking the stream after opening is still essential.   Writing a text file   #include <fstream> int main() { std::ofstream output_file{\"scores.txt\"}; if (!output_file) { return 1; } output_file << \"Amina,92\\n\"; output_file << \"Marco,85\\n\"; return 0; }   Opening an std::ofstream normally creates a missing file or replaces existing contents. The file mode determines whether the program overwrites or appends data; that choice is discussed in Section 12.4.    Reading tokens and lines   #include <fstream> #include <iostream> #include <string> int main() { std::ifstream input_file{\"scores.txt\"}; if (!input_file) { return 1; } std::string line; while (std::getline(input_file, line)) { std::cout << \"Read line: \" << line << '\\n'; } return 0; }   Formatted extraction such as input_file >> score is useful for whitespace-separated values. std::getline() is useful when the program must preserve the spaces and delimiters in a complete line.    Stream-state flags   Common stream states     State  Meaning   good() No failure has been detected.  eof() The end of the input sequence was reached.  fail() A formatted operation failed or another recoverable failure occurred.  bad() A serious input\/output failure occurred.    A read loop should normally use the input operation itself as its condition. The body then runs only after a complete requested value has been obtained.    Why is std::getline() useful for a record containing spaces?   It converts every line into a binary object. getline() reads characters into a string.  It reads through the line ending instead of stopping at the next whitespace token. This preserves spaces within the line.  It guarantees that the file exists. Opening and checking the file are separate operations.  It automatically validates the record fields. Parsing and validation still belong to the program.  It reads only the first line. A loop can call it repeatedly.     Select all correct reasons to test a file stream.   The file may not exist or may be inaccessible. Opening can fail before input begins.  A read operation may reach end-of-file or encounter malformed input. Each operation can change the stream state.  Testing a stream causes all files to become binary. Stream tests do not change the file format.  A successful open guarantees every future read succeeds. Later input can still fail.  eof() should always be checked before attempting a read. The read operation should usually be part of the loop condition.     Arrange the blocks to open a text file and print each complete line.   std::ifstream input_file{\"notes.txt\"};  if (!input_file) { return 1; }  std::string line;  while (std::getline(input_file, line)) {  std::cout << line << '\\n';  }    "
 },
 {
-  "id": "chapter15_streams-2",
+  "id": "chapter12_text-files-and-stream-states-2",
   "level": "2",
-  "url": "chapter15_streams.html#chapter15_streams-2",
+  "url": "chapter12_text-files-and-stream-states.html#chapter12_text-files-and-stream-states-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "To get input from a file or send output to a file, you have to create an ifstream object (for input files) or an ofstream object (for output files). These objects are defined in the header file fstream , which you have to include. "
+  "body": "Text-file programs commonly open a file, perform input or output, test whether each operation succeeded, and close the file. File stream objects can close themselves when they leave scope, but checking the stream after opening is still essential. "
 },
 {
-  "id": "chapter15_streams-3",
+  "id": "chapter12_write-text-file",
   "level": "2",
-  "url": "chapter15_streams.html#chapter15_streams-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "A stream is an abstract object that represents the flow of data from a source like the keyboard or a file to a destination like the screen or a file. "
+  "url": "chapter12_text-files-and-stream-states.html#chapter12_write-text-file",
+  "type": "Subsection",
+  "number": "12.2.1",
+  "title": "Writing a text file",
+  "body": " Writing a text file   #include <fstream> int main() { std::ofstream output_file{\"scores.txt\"}; if (!output_file) { return 1; } output_file << \"Amina,92\\n\"; output_file << \"Marco,85\\n\"; return 0; }   Opening an std::ofstream normally creates a missing file or replaces existing contents. The file mode determines whether the program overwrites or appends data; that choice is discussed in Section 12.4.  "
 },
 {
-  "id": "chapter15_streams-4",
+  "id": "chapter12_read-text-file",
   "level": "2",
-  "url": "chapter15_streams.html#chapter15_streams-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "We have already worked with two streams: cin , which has type istream , and cout , which has type ostream . cin represents the flow of data from the keyboard to the program. Each time the program uses the >> operator or the getline function, it removes a piece of data from the input stream. "
+  "url": "chapter12_text-files-and-stream-states.html#chapter12_read-text-file",
+  "type": "Subsection",
+  "number": "12.2.2",
+  "title": "Reading tokens and lines",
+  "body": " Reading tokens and lines   #include <fstream> #include <iostream> #include <string> int main() { std::ifstream input_file{\"scores.txt\"}; if (!input_file) { return 1; } std::string line; while (std::getline(input_file, line)) { std::cout << \"Read line: \" << line << '\\n'; } return 0; }   Formatted extraction such as input_file >> score is useful for whitespace-separated values. std::getline() is useful when the program must preserve the spaces and delimiters in a complete line.  "
 },
 {
-  "id": "chapter15_streams-5",
+  "id": "chapter12_stream-state-flags",
   "level": "2",
-  "url": "chapter15_streams.html#chapter15_streams-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Similarly, when the program uses the << operator on an ostream , it adds a datum to the outgoing stream. "
+  "url": "chapter12_text-files-and-stream-states.html#chapter12_stream-state-flags",
+  "type": "Subsection",
+  "number": "12.2.3",
+  "title": "Stream-state flags",
+  "body": " Stream-state flags   Common stream states     State  Meaning   good() No failure has been detected.  eof() The end of the input sequence was reached.  fail() A formatted operation failed or another recoverable failure occurred.  bad() A serious input\/output failure occurred.    A read loop should normally use the input operation itself as its condition. The body then runs only after a complete requested value has been obtained.  "
 },
 {
-  "id": "question15_2_1",
+  "id": "chapter12_2_line-input",
   "level": "2",
-  "url": "chapter15_streams.html#question15_2_1",
+  "url": "chapter12_text-files-and-stream-states.html#chapter12_2_line-input",
   "type": "Checkpoint",
   "number": "12.2.1",
   "title": "",
-  "body": "  You create an object to write data to a file, and a object to read data from a file. In order to define objects to input from a file or send output to a file, you must include the <   > header file.                    "
+  "body": " Why is std::getline() useful for a record containing spaces?   It converts every line into a binary object. getline() reads characters into a string.  It reads through the line ending instead of stopping at the next whitespace token. This preserves spaces within the line.  It guarantees that the file exists. Opening and checking the file are separate operations.  It automatically validates the record fields. Parsing and validation still belong to the program.  It reads only the first line. A loop can call it repeatedly.   "
 },
 {
-  "id": "question15_2_2",
+  "id": "chapter12_2_read-loop",
   "level": "2",
-  "url": "chapter15_streams.html#question15_2_2",
+  "url": "chapter12_text-files-and-stream-states.html#chapter12_2_read-loop",
   "type": "Checkpoint",
   "number": "12.2.2",
   "title": "",
-  "body": "  What is a stream object?      an abstract object that works exclusively with std::cin and std::cout statements   Incorrect! Stream objects do work with std::cin and cout, but that is not all that they do!     an abstract object on which input and ouput operations are performed   Correct!     an abstract object that works only with file data   Incorrect! Stream objects do work with file data, but they do other things too.     an abstract object that controls the flow of statements   Incorrect! This is not at all what stream objects do, you should try re-reading to get a better understanding!    "
+  "body": " Select all correct reasons to test a file stream.   The file may not exist or may be inaccessible. Opening can fail before input begins.  A read operation may reach end-of-file or encounter malformed input. Each operation can change the stream state.  Testing a stream causes all files to become binary. Stream tests do not change the file format.  A successful open guarantees every future read succeeds. Later input can still fail.  eof() should always be checked before attempting a read. The read operation should usually be part of the loop condition.   "
 },
 {
-  "id": "question15_1_3",
+  "id": "chapter12_2_text-code",
   "level": "2",
-  "url": "chapter15_streams.html#question15_1_3",
+  "url": "chapter12_text-files-and-stream-states.html#chapter12_2_text-code",
   "type": "Checkpoint",
   "number": "12.2.3",
   "title": "",
-  "body": "  Match the stream to its type.   Try again!    cin  ifstream    cout  ofstream    "
+  "body": " Arrange the blocks to open a text file and print each complete line.   std::ifstream input_file{\"notes.txt\"};  if (!input_file) { return 1; }  std::string line;  while (std::getline(input_file, line)) {  std::cout << line << '\\n';  }   "
 },
 {
-  "id": "chapter15_file-input-finput",
+  "id": "chapter12_structured-text-records-and-csv",
   "level": "1",
-  "url": "chapter15_file-input-finput.html",
+  "url": "chapter12_structured-text-records-and-csv.html",
   "type": "Section",
   "number": "12.3",
-  "title": "File input",
-  "body": " File input  To get data from a file, we have to create a stream that flows from the file into the program. We can do that using the ifstream constructor.  ifstream infile(\"file-name\");  The argument for this constructor is a string that contains the name of the file you want to open. The result is an object named infile that supports all the same operations as cin , including >> and getline .  #include <iostream> #include <fstream> int main() { int x; std::string line; std::ifstream infile(\"file-name\"); infile >> x; \/\/ get a single integer and store in x std::getline(infile, line); \/\/ get a whole line and store in line }  If we know ahead of time how much data is in a file, it is straightforward to write a loop that reads the entire file and then stops. More often, though, we want to read the entire file, but don't know how big it is.  There are member functions for ifstreams that check the status of the input stream; they are called good , eof , fail and bad . We will use good to make sure the file was opened successfully and eof to detect the end of file.  Whenever you get data from an input stream, you don't know whether the attempt succeeded until you check. If the return value from eof is true then we have reached the end of the file and we know that the last attempt failed. Here is a program that reads lines from a file and displays them on the screen:  #include <iostream> #include <fstream> int main() { std::string fileName = ...; std::ifstream infile(fileName); if (infile.good() == false) { std::cout << \"Unable to open the file named \" << fileName; exit (1); } while (true) { std::getline(infile, line); if (infile.eof()) { break; } std::cout << line << std::endl; } }  Immediately after opening the file, we invoke the good function. The return value is false if the system could not open the file, most likely because it does not exist, or you do not have permission to read it.  The statement while(true) is an idiom for an infinite loop. Usually there will be a break statement somewhere in the loop so that the program does not really run forever (although some programs do). In this case, the break statement allows us to exit the loop as soon as we detect the end of file.  It is important to exit the loop between the input statement and the output statement, so that when getline fails at the end of the file, we do not output the invalid data in line .    Consider this code snippet: :: ifstream infile(\"file-name\"); Finish each sentence.   Try again!    The constructor is  ifstream.    The argument and the name of the file you want to open is  \"file-name\".    The result of this code snippet is an object named  infile.    The result of this code snippet supports the same operators as  cin.       The ifstream member function called makes sure the file was opened successfully, and member function detects the end of the file.                  The __________ statement allows us to exit the loop as soon as we detect the end of the file.              Create a code block that reads lines from filename and prints them out. First, make sure that the file is able to be opened.     int main() {    string name_of_file = \"filename\";    ifstream in_file(name_of_file);    if (in_file.good() == false) {    std::cout << \"Unable to open the file named \" << name_of_file;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    std::cout << line << std::endl ;  }  }     "
+  "title": "Structured Text Records and CSV Parsing",
+  "body": " Structured Text Records and CSV Parsing  A record is one complete logical item of data in a file. In a comma-separated score file, each line is one record containing a name and a score. A file can contain many records, while a C++ structure can represent one record in memory.   Example file: scores.csv   Amina,92 Marco,85 Li,97    A simple CSV parser can treat the comma as a delimiter. This example intentionally supports simple records only: a name cannot contain an unquoted comma. Full CSV formats also support quoted fields, embedded commas, and escaped quotation marks.   Parsing and validating one CSV record   #include <sstream> #include <string> struct ScoreRecord { std::string name; int score{}; }; bool parse_score_record(const std::string& line, ScoreRecord& record) { std::istringstream record_stream{line}; std::string name; int score{}; if (!std::getline(record_stream, name, ',')) { return false; } if (!(record_stream >> score)) { return false; } record_stream >> std::ws; if (!record_stream.eof()) { return false; } if (name.empty() || score < 0 || score > 100) { return false; } record = ScoreRecord{name, score}; return true; }    The parser first separates the fields, then converts the score, rejects extra non-whitespace data, checks the score range, and finally updates the output object. Delaying the assignment helps prevent a partially parsed record from being mistaken for a valid one.   Reading and validating a CSV file   #include <fstream> #include <iostream> #include <sstream> #include <string> struct ScoreRecord { std::string name; int score{}; }; bool parse_score_record(const std::string& line, ScoreRecord& record) { std::istringstream record_stream{line}; std::string name; int score{}; if (!std::getline(record_stream, name, ',')) { return false; } if (!(record_stream >> score)) { return false; } record_stream >> std::ws; if (!record_stream.eof() || name.empty() || score < 0 || score > 100) { return false; } record = ScoreRecord{name, score}; return true; } int main() { std::ifstream input_file{\"scores.csv\"}; if (!input_file) { return 1; } std::string line; ScoreRecord record; while (std::getline(input_file, line)) { if (parse_score_record(line, record)) { std::cout << record.name << \": \" << record.score << '\\n'; } else { std::cerr << \"Skipping malformed record: \" << line << '\\n'; } } return 0; }    The program opens scores.csv , reads one complete line at a time, parses each line, and processes only valid records. The parser does not ask for keyboard input; it receives a line as a parameter, which keeps file processing and user interaction separate.   Writing records to a CSV file   #include <fstream> #include <string> #include <vector> struct ScoreRecord { std::string name; int score{}; }; int main() { std::vector<ScoreRecord> records{ {\"Amina\", 92}, {\"Marco\", 85}, {\"Li\", 97} }; std::ofstream output_file{\"scores.csv\"}; if (!output_file) { return 1; } for (const ScoreRecord& record : records) { output_file << record.name << ',' << record.score << '\\n'; } return 0; }    By default, opening the output stream replaces an existing file. To add records without replacing earlier contents, open it with std::ios::app . This example assumes that names do not contain unquoted commas; a full CSV implementation must handle quoted fields.   Other structured text formats  A TSV file uses tab characters instead of commas and can be handled with a similar strategy. JSON is another popular structured format, but C++17 has no JSON library in the standard library. A production program normally uses a carefully selected JSON library rather than writing a complete JSON parser as a beginner exercise.    What is a record in a structured text file?   A second file created during parsing A record is data within a file, not another file.  One complete logical item of data For this example, each CSV line is one score record.  Only a pointer to a file A pointer is not a logical data record.  A compiler error message Errors are not records in the CSV format.  The entire computer memory A record is a bounded logical item.     Select all reasons to validate a parsed record.   A field may be missing or have the wrong type. Input can be structurally malformed.  A value may have the right type but violate an application rule. An integer score can still be outside the allowed range.  Text input is always valid once it is read. Successful reading does not guarantee meaningful data.  Validation is needed only for binary files. Text records also require validation.  A parser should silently guess when the format is unclear. Documented formats and explicit failure are safer.     Arrange the blocks to parse the name and score from one CSV line.   std::istringstream record_stream{line};  std::getline(record_stream, name, ',');  record_stream >> score;  record_stream >> std::ws;  return !name.empty() && record_stream.eof();    "
 },
 {
-  "id": "chapter15_file-input-finput-2",
+  "id": "chapter12_structured-text-records-and-csv-2",
   "level": "2",
-  "url": "chapter15_file-input-finput.html#chapter15_file-input-finput-2",
+  "url": "chapter12_structured-text-records-and-csv.html#chapter12_structured-text-records-and-csv-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "To get data from a file, we have to create a stream that flows from the file into the program. We can do that using the ifstream constructor. "
+  "body": "A record is one complete logical item of data in a file. In a comma-separated score file, each line is one record containing a name and a score. A file can contain many records, while a C++ structure can represent one record in memory. "
 },
 {
-  "id": "chapter15_file-input-finput-4",
+  "id": "listing_chapter12_score-csv-input",
   "level": "2",
-  "url": "chapter15_file-input-finput.html#chapter15_file-input-finput-4",
+  "url": "chapter12_structured-text-records-and-csv.html#listing_chapter12_score-csv-input",
+  "type": "Listing",
+  "number": "12.3.1",
+  "title": "Example file: <code class=\"code-inline tex2jax_ignore\">scores.csv<\/code>",
+  "body": " Example file: scores.csv   Amina,92 Marco,85 Li,97   "
+},
+{
+  "id": "chapter12_structured-text-records-and-csv-4",
+  "level": "2",
+  "url": "chapter12_structured-text-records-and-csv.html#chapter12_structured-text-records-and-csv-4",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The argument for this constructor is a string that contains the name of the file you want to open. The result is an object named infile that supports all the same operations as cin , including >> and getline . "
+  "body": "A simple CSV parser can treat the comma as a delimiter. This example intentionally supports simple records only: a name cannot contain an unquoted comma. Full CSV formats also support quoted fields, embedded commas, and escaped quotation marks. "
 },
 {
-  "id": "chapter15_file-input-finput-6",
+  "id": "listing_chapter12_parse-csv-record",
   "level": "2",
-  "url": "chapter15_file-input-finput.html#chapter15_file-input-finput-6",
+  "url": "chapter12_structured-text-records-and-csv.html#listing_chapter12_parse-csv-record",
+  "type": "Listing",
+  "number": "12.3.2",
+  "title": "Parsing and validating one CSV record",
+  "body": " Parsing and validating one CSV record   #include <sstream> #include <string> struct ScoreRecord { std::string name; int score{}; }; bool parse_score_record(const std::string& line, ScoreRecord& record) { std::istringstream record_stream{line}; std::string name; int score{}; if (!std::getline(record_stream, name, ',')) { return false; } if (!(record_stream >> score)) { return false; } record_stream >> std::ws; if (!record_stream.eof()) { return false; } if (name.empty() || score < 0 || score > 100) { return false; } record = ScoreRecord{name, score}; return true; }   "
+},
+{
+  "id": "chapter12_structured-text-records-and-csv-6",
+  "level": "2",
+  "url": "chapter12_structured-text-records-and-csv.html#chapter12_structured-text-records-and-csv-6",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "If we know ahead of time how much data is in a file, it is straightforward to write a loop that reads the entire file and then stops. More often, though, we want to read the entire file, but don't know how big it is. "
+  "body": "The parser first separates the fields, then converts the score, rejects extra non-whitespace data, checks the score range, and finally updates the output object. Delaying the assignment helps prevent a partially parsed record from being mistaken for a valid one. "
 },
 {
-  "id": "chapter15_file-input-finput-7",
+  "id": "listing_chapter12_read-csv-file",
   "level": "2",
-  "url": "chapter15_file-input-finput.html#chapter15_file-input-finput-7",
+  "url": "chapter12_structured-text-records-and-csv.html#listing_chapter12_read-csv-file",
+  "type": "Listing",
+  "number": "12.3.3",
+  "title": "Reading and validating a CSV file",
+  "body": " Reading and validating a CSV file   #include <fstream> #include <iostream> #include <sstream> #include <string> struct ScoreRecord { std::string name; int score{}; }; bool parse_score_record(const std::string& line, ScoreRecord& record) { std::istringstream record_stream{line}; std::string name; int score{}; if (!std::getline(record_stream, name, ',')) { return false; } if (!(record_stream >> score)) { return false; } record_stream >> std::ws; if (!record_stream.eof() || name.empty() || score < 0 || score > 100) { return false; } record = ScoreRecord{name, score}; return true; } int main() { std::ifstream input_file{\"scores.csv\"}; if (!input_file) { return 1; } std::string line; ScoreRecord record; while (std::getline(input_file, line)) { if (parse_score_record(line, record)) { std::cout << record.name << \": \" << record.score << '\\n'; } else { std::cerr << \"Skipping malformed record: \" << line << '\\n'; } } return 0; }   "
+},
+{
+  "id": "chapter12_structured-text-records-and-csv-8",
+  "level": "2",
+  "url": "chapter12_structured-text-records-and-csv.html#chapter12_structured-text-records-and-csv-8",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "There are member functions for ifstreams that check the status of the input stream; they are called good , eof , fail and bad . We will use good to make sure the file was opened successfully and eof to detect the end of file. "
+  "body": "The program opens scores.csv , reads one complete line at a time, parses each line, and processes only valid records. The parser does not ask for keyboard input; it receives a line as a parameter, which keeps file processing and user interaction separate. "
 },
 {
-  "id": "chapter15_file-input-finput-8",
+  "id": "listing_chapter12_write-csv-file",
   "level": "2",
-  "url": "chapter15_file-input-finput.html#chapter15_file-input-finput-8",
+  "url": "chapter12_structured-text-records-and-csv.html#listing_chapter12_write-csv-file",
+  "type": "Listing",
+  "number": "12.3.4",
+  "title": "Writing records to a CSV file",
+  "body": " Writing records to a CSV file   #include <fstream> #include <string> #include <vector> struct ScoreRecord { std::string name; int score{}; }; int main() { std::vector<ScoreRecord> records{ {\"Amina\", 92}, {\"Marco\", 85}, {\"Li\", 97} }; std::ofstream output_file{\"scores.csv\"}; if (!output_file) { return 1; } for (const ScoreRecord& record : records) { output_file << record.name << ',' << record.score << '\\n'; } return 0; }   "
+},
+{
+  "id": "chapter12_structured-text-records-and-csv-10",
+  "level": "2",
+  "url": "chapter12_structured-text-records-and-csv.html#chapter12_structured-text-records-and-csv-10",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Whenever you get data from an input stream, you don't know whether the attempt succeeded until you check. If the return value from eof is true then we have reached the end of the file and we know that the last attempt failed. Here is a program that reads lines from a file and displays them on the screen: "
+  "body": "By default, opening the output stream replaces an existing file. To add records without replacing earlier contents, open it with std::ios::app . This example assumes that names do not contain unquoted commas; a full CSV implementation must handle quoted fields. "
 },
 {
-  "id": "chapter15_file-input-finput-10",
+  "id": "chapter12_tsv-and-json-preview",
   "level": "2",
-  "url": "chapter15_file-input-finput.html#chapter15_file-input-finput-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Immediately after opening the file, we invoke the good function. The return value is false if the system could not open the file, most likely because it does not exist, or you do not have permission to read it. "
+  "url": "chapter12_structured-text-records-and-csv.html#chapter12_tsv-and-json-preview",
+  "type": "Subsection",
+  "number": "12.3.1",
+  "title": "Other structured text formats",
+  "body": " Other structured text formats  A TSV file uses tab characters instead of commas and can be handled with a similar strategy. JSON is another popular structured format, but C++17 has no JSON library in the standard library. A production program normally uses a carefully selected JSON library rather than writing a complete JSON parser as a beginner exercise.  "
 },
 {
-  "id": "chapter15_file-input-finput-11",
+  "id": "chapter12_3_record-definition",
   "level": "2",
-  "url": "chapter15_file-input-finput.html#chapter15_file-input-finput-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The statement while(true) is an idiom for an infinite loop. Usually there will be a break statement somewhere in the loop so that the program does not really run forever (although some programs do). In this case, the break statement allows us to exit the loop as soon as we detect the end of file. "
-},
-{
-  "id": "chapter15_file-input-finput-12",
-  "level": "2",
-  "url": "chapter15_file-input-finput.html#chapter15_file-input-finput-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "It is important to exit the loop between the input statement and the output statement, so that when getline fails at the end of the file, we do not output the invalid data in line . "
-},
-{
-  "id": "question15_3_1",
-  "level": "2",
-  "url": "chapter15_file-input-finput.html#question15_3_1",
+  "url": "chapter12_structured-text-records-and-csv.html#chapter12_3_record-definition",
   "type": "Checkpoint",
   "number": "12.3.1",
   "title": "",
-  "body": "  Consider this code snippet: :: ifstream infile(\"file-name\"); Finish each sentence.   Try again!    The constructor is  ifstream.    The argument and the name of the file you want to open is  \"file-name\".    The result of this code snippet is an object named  infile.    The result of this code snippet supports the same operators as  cin.    "
+  "body": " What is a record in a structured text file?   A second file created during parsing A record is data within a file, not another file.  One complete logical item of data For this example, each CSV line is one score record.  Only a pointer to a file A pointer is not a logical data record.  A compiler error message Errors are not records in the CSV format.  The entire computer memory A record is a bounded logical item.   "
 },
 {
-  "id": "question15_3_2",
+  "id": "chapter12_3_validation",
   "level": "2",
-  "url": "chapter15_file-input-finput.html#question15_3_2",
+  "url": "chapter12_structured-text-records-and-csv.html#chapter12_3_validation",
   "type": "Checkpoint",
   "number": "12.3.2",
   "title": "",
-  "body": "  The ifstream member function called makes sure the file was opened successfully, and member function detects the end of the file.               "
+  "body": " Select all reasons to validate a parsed record.   A field may be missing or have the wrong type. Input can be structurally malformed.  A value may have the right type but violate an application rule. An integer score can still be outside the allowed range.  Text input is always valid once it is read. Successful reading does not guarantee meaningful data.  Validation is needed only for binary files. Text records also require validation.  A parser should silently guess when the format is unclear. Documented formats and explicit failure are safer.   "
 },
 {
-  "id": "question15_3_3",
+  "id": "chapter12_3_csv-code",
   "level": "2",
-  "url": "chapter15_file-input-finput.html#question15_3_3",
+  "url": "chapter12_structured-text-records-and-csv.html#chapter12_3_csv-code",
   "type": "Checkpoint",
   "number": "12.3.3",
   "title": "",
-  "body": "  The __________ statement allows us to exit the loop as soon as we detect the end of the file.           "
+  "body": " Arrange the blocks to parse the name and score from one CSV line.   std::istringstream record_stream{line};  std::getline(record_stream, name, ',');  record_stream >> score;  record_stream >> std::ws;  return !name.empty() && record_stream.eof();   "
 },
 {
-  "id": "question15_3_4",
-  "level": "2",
-  "url": "chapter15_file-input-finput.html#question15_3_4",
-  "type": "Checkpoint",
-  "number": "12.3.4",
-  "title": "",
-  "body": "  Create a code block that reads lines from filename and prints them out. First, make sure that the file is able to be opened.     int main() {    string name_of_file = \"filename\";    ifstream in_file(name_of_file);    if (in_file.good() == false) {    std::cout << \"Unable to open the file named \" << name_of_file;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    std::cout << line << std::endl ;  }  }    "
-},
-{
-  "id": "chapter15_file-output",
+  "id": "chapter12_text-file-applications-and-file-modes",
   "level": "1",
-  "url": "chapter15_file-output.html",
+  "url": "chapter12_text-file-applications-and-file-modes.html",
   "type": "Section",
   "number": "12.4",
-  "title": "File output",
-  "body": " File output  Sending output to a file is similar. For example, we could modify the previous program to copy lines from one file to another.  #include <iostream> int main() { std::ifstream infile(\"input-file\"); std::ofstream outfile(\"output-file\"); if (infile.good() == false || outfile.good() == false) { std::cout << \"Unable to open one of the files.\" << std::endl; exit (1); } while (true) { std::getline(infile, line); if (infile.eof()) break; outfile << line << std::endl; } }    Create a code block that sends output to a file. First, make sure that both the input file and the output file are able to be opened.     int main() {    ifstream in_file(\"input_file_name\");  ofstream out_file(\"input_file_name\");    if (in_file.good() == false || out_file.good() == false) {    std::cout << \"Unable to open one of the files.\" << std::endl ;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    outfile << line << std::endl ;  }  }       The code from the previous problem checks whether the files open or not. It doesn't specify which one, if any, doesn't open. How could you specify which file does not open?      Create two \"for\" loops instead of an if-statement so that the statement loops through both conditions once.   Try again!     Create a \"while\" loop instead of an if-statement so that the statement loops through both conditions separately until the body of the loop is reached.   Try again!     Create two \"if\" statements, one that check whether in_file.good() is false, and another that checks whether out_file.good() is false, instead of putting them together in one \"if\" statement.   Correct!       Finish the statement:  outfile(\"output-file\"); .           "
+  "title": "Text-File Applications and File Modes",
+  "body": " Text-File Applications and File Modes  A complete text-file application separates file mechanics from the work performed on each record. The program opens the input, reads one line at a time, parses and validates the line, performs an operation, and writes a report when needed.   Useful text-file modes     Mode  Purpose   Default output Create or replace the existing contents.  std::ios::app Write at the end without replacing existing contents.  std::ios::in | std::ios::out Open a stream for both reading and writing when supported by the stream type.     Complete CSV score analyzer   #include <fstream> #include <iomanip> #include <iostream> #include <sstream> #include <string> struct ScoreRecord { std::string name; int score{}; }; bool parse_score_record(const std::string& line, ScoreRecord& record) { std::istringstream record_stream{line}; std::string name; int score{}; if (!std::getline(record_stream, name, ',')) { return false; } if (!(record_stream >> score)) { return false; } record_stream >> std::ws; if (!record_stream.eof() || name.empty() || score < 0 || score > 100) { return false; } record = ScoreRecord{name, score}; return true; } int main() { std::ifstream input_file{\"scores.csv\"}; std::ofstream report_file{\"score-report.txt\"}; if (!input_file || !report_file) { return 1; } std::string line; ScoreRecord record; int count{}; int total{}; while (std::getline(input_file, line)) { if (parse_score_record(line, record)) { ++count; total += record.score; } else { std::cerr << \"Skipping malformed record: \" << line << '\\n'; } } report_file << \"Valid records: \" << count << '\\n'; if (count > 0) { report_file << std::fixed << std::setprecision(2) << \"Average score: \" << static_cast<double>(total) \/ count << '\\n'; } return 0; }     Example inventory file   1001,Notebook,12,4.50 1002,Pen,40,1.25 1003,Backpack,5,32.00    An inventory application could parse each line into an item record and calculate quantity * unit_price . The same design applies: keep parsing, validation, calculation, and reporting as separate tasks.   When should a program use std::ios::app ?   When it must replace all existing contents Default output commonly replaces existing contents.  When new output must be added at the end of an existing file Append mode preserves earlier contents.  When it wants to read only from a keyboard app is a file mode.  When it wants to force binary representation Binary mode is selected separately with std::ios::binary .  When the file must be deleted automatically Append mode does not delete files.     Select all useful separations of responsibility in a text-file application.   Use one function to parse one record. A small parser is easier to test.  Let the file loop decide how to handle malformed records. The caller can report, skip, or stop as appropriate.  Put every task into one very long loop body. Large mixed responsibilities are harder to test and reuse.  Assume every line is valid because the file extension is CSV. A filename extension does not validate contents.  Use std::cin inside the parser to repair bad file data. Parsing a file should receive its input rather than unexpectedly ask the user.     Arrange the blocks to open an input file, open a report, and process each line.   std::ifstream input_file{\"scores.csv\"};  std::ofstream report_file{\"report.txt\"};  if (!input_file || !report_file) { return 1; }  std::string line;  while (std::getline(input_file, line)) {  report_file << line << '\\n';  }    "
 },
 {
-  "id": "chapter15_file-output-2",
+  "id": "chapter12_text-file-applications-and-file-modes-2",
   "level": "2",
-  "url": "chapter15_file-output.html#chapter15_file-output-2",
+  "url": "chapter12_text-file-applications-and-file-modes.html#chapter12_text-file-applications-and-file-modes-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "Sending output to a file is similar. For example, we could modify the previous program to copy lines from one file to another. "
+  "body": "A complete text-file application separates file mechanics from the work performed on each record. The program opens the input, reads one line at a time, parses and validates the line, performs an operation, and writes a report when needed. "
 },
 {
-  "id": "question15_4_1",
+  "id": "table_chapter12_file-modes",
   "level": "2",
-  "url": "chapter15_file-output.html#question15_4_1",
+  "url": "chapter12_text-file-applications-and-file-modes.html#table_chapter12_file-modes",
+  "type": "Table",
+  "number": "12.4.1",
+  "title": "Useful text-file modes",
+  "body": " Useful text-file modes     Mode  Purpose   Default output Create or replace the existing contents.  std::ios::app Write at the end without replacing existing contents.  std::ios::in | std::ios::out Open a stream for both reading and writing when supported by the stream type.   "
+},
+{
+  "id": "listing_chapter12_score-analyzer",
+  "level": "2",
+  "url": "chapter12_text-file-applications-and-file-modes.html#listing_chapter12_score-analyzer",
+  "type": "Listing",
+  "number": "12.4.2",
+  "title": "Complete CSV score analyzer",
+  "body": " Complete CSV score analyzer   #include <fstream> #include <iomanip> #include <iostream> #include <sstream> #include <string> struct ScoreRecord { std::string name; int score{}; }; bool parse_score_record(const std::string& line, ScoreRecord& record) { std::istringstream record_stream{line}; std::string name; int score{}; if (!std::getline(record_stream, name, ',')) { return false; } if (!(record_stream >> score)) { return false; } record_stream >> std::ws; if (!record_stream.eof() || name.empty() || score < 0 || score > 100) { return false; } record = ScoreRecord{name, score}; return true; } int main() { std::ifstream input_file{\"scores.csv\"}; std::ofstream report_file{\"score-report.txt\"}; if (!input_file || !report_file) { return 1; } std::string line; ScoreRecord record; int count{}; int total{}; while (std::getline(input_file, line)) { if (parse_score_record(line, record)) { ++count; total += record.score; } else { std::cerr << \"Skipping malformed record: \" << line << '\\n'; } } report_file << \"Valid records: \" << count << '\\n'; if (count > 0) { report_file << std::fixed << std::setprecision(2) << \"Average score: \" << static_cast<double>(total) \/ count << '\\n'; } return 0; }   "
+},
+{
+  "id": "listing_chapter12_inventory-input",
+  "level": "2",
+  "url": "chapter12_text-file-applications-and-file-modes.html#listing_chapter12_inventory-input",
+  "type": "Listing",
+  "number": "12.4.3",
+  "title": "Example inventory file",
+  "body": " Example inventory file   1001,Notebook,12,4.50 1002,Pen,40,1.25 1003,Backpack,5,32.00   "
+},
+{
+  "id": "chapter12_text-file-applications-and-file-modes-6",
+  "level": "2",
+  "url": "chapter12_text-file-applications-and-file-modes.html#chapter12_text-file-applications-and-file-modes-6",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An inventory application could parse each line into an item record and calculate quantity * unit_price . The same design applies: keep parsing, validation, calculation, and reporting as separate tasks. "
+},
+{
+  "id": "chapter12_4_append",
+  "level": "2",
+  "url": "chapter12_text-file-applications-and-file-modes.html#chapter12_4_append",
   "type": "Checkpoint",
   "number": "12.4.1",
   "title": "",
-  "body": "  Create a code block that sends output to a file. First, make sure that both the input file and the output file are able to be opened.     int main() {    ifstream in_file(\"input_file_name\");  ofstream out_file(\"input_file_name\");    if (in_file.good() == false || out_file.good() == false) {    std::cout << \"Unable to open one of the files.\" << std::endl ;    exit(1);  }    while (true) {    getline(in_file, line);    if (in_file.eof()) break;    outfile << line << std::endl ;  }  }    "
+  "body": " When should a program use std::ios::app ?   When it must replace all existing contents Default output commonly replaces existing contents.  When new output must be added at the end of an existing file Append mode preserves earlier contents.  When it wants to read only from a keyboard app is a file mode.  When it wants to force binary representation Binary mode is selected separately with std::ios::binary .  When the file must be deleted automatically Append mode does not delete files.   "
 },
 {
-  "id": "question15_4_2",
+  "id": "chapter12_4_application-design",
   "level": "2",
-  "url": "chapter15_file-output.html#question15_4_2",
+  "url": "chapter12_text-file-applications-and-file-modes.html#chapter12_4_application-design",
   "type": "Checkpoint",
   "number": "12.4.2",
   "title": "",
-  "body": "  The code from the previous problem checks whether the files open or not. It doesn't specify which one, if any, doesn't open. How could you specify which file does not open?      Create two \"for\" loops instead of an if-statement so that the statement loops through both conditions once.   Try again!     Create a \"while\" loop instead of an if-statement so that the statement loops through both conditions separately until the body of the loop is reached.   Try again!     Create two \"if\" statements, one that check whether in_file.good() is false, and another that checks whether out_file.good() is false, instead of putting them together in one \"if\" statement.   Correct!    "
+  "body": " Select all useful separations of responsibility in a text-file application.   Use one function to parse one record. A small parser is easier to test.  Let the file loop decide how to handle malformed records. The caller can report, skip, or stop as appropriate.  Put every task into one very long loop body. Large mixed responsibilities are harder to test and reuse.  Assume every line is valid because the file extension is CSV. A filename extension does not validate contents.  Use std::cin inside the parser to repair bad file data. Parsing a file should receive its input rather than unexpectedly ask the user.   "
 },
 {
-  "id": "question15_4_3",
+  "id": "chapter12_4_application-code",
   "level": "2",
-  "url": "chapter15_file-output.html#question15_4_3",
+  "url": "chapter12_text-file-applications-and-file-modes.html#chapter12_4_application-code",
   "type": "Checkpoint",
   "number": "12.4.3",
   "title": "",
-  "body": "  Finish the statement:  outfile(\"output-file\"); .          "
+  "body": " Arrange the blocks to open an input file, open a report, and process each line.   std::ifstream input_file{\"scores.csv\"};  std::ofstream report_file{\"report.txt\"};  if (!input_file || !report_file) { return 1; }  std::string line;  while (std::getline(input_file, line)) {  report_file << line << '\\n';  }   "
 },
 {
-  "id": "chapter15_parsing-input-parsing",
+  "id": "chapter12_binary-files-bytes-and-object-representation",
   "level": "1",
-  "url": "chapter15_parsing-input-parsing.html",
+  "url": "chapter12_binary-files-bytes-and-object-representation.html",
   "type": "Section",
   "number": "12.5",
-  "title": "Parsing input",
-  "body": " Parsing input  In I defined parsing as the process of analyzing the structure of a sentence in a natural language or a statement in a formal language. For example, the compiler has to parse your program before it can translate it into machine language.  In addition, when you read input from a file or from the keyboard you often have to parse it in order to extract the information you want and detect errors.  For example, I have a file called distances that contains information about the distances between major cities in the United States. I got this information from a randomly-chosen web page http:\/\/www.jaring.my\/usiskl\/usa\/distance.html so it may be wildly inaccurate, but that doesn't matter. The format of the file looks like this:  \"Atlanta\" \"Chicago\" 700 \"Atlanta\" \"Boston\" 1,100 \"Atlanta\" \"Chicago\" 700 \"Atlanta\" \"Dallas\" 800 \"Atlanta\" \"Denver\" 1,450 \"Atlanta\" \"Detroit\" 750 \"Atlanta\" \"Orlando\" 400  Each line of the file contains the names of two cities in quotation marks and the distance between them in miles. The quotation marks are useful because they make it easy to deal with names that have more than one word, like San Francisco.  By searching for the quotation marks in a line of input, we can find the beginning and end of each city name. Searching for special characters like quotation marks can be a little awkward, though, because the quotation mark is a special character in C++, used to identify string values.  If we want to find the first appearance of a quotation mark, we have to write something like:  int index = line.find('\\\"');  The argument here looks like a mess, but it represents a single character, a double quotation mark. The outermost single-quotes indicate that this is a character value, as usual. The backslash ( \\ ) indicates that we want to treat the next character literally. The sequence \\\" represents a quotation mark; the sequence \\' represents a single-quote. Interestingly, the sequence \\\\ represents a single backslash. The first backslash indicates that we should take the second backslash seriously.  Parsing input lines consists of finding the beginning and end of each city name and using the substr function to extract the cities and distance. substr is a string member function; it takes two arguments, the starting index of the substring and the length.  void processLine(const string& line) { \/\/ the character we are looking for is a quotation mark char quote = '\\\"'; \/\/ store the indices of the quotation marks in a vector std::vector<int> quoteIndex (4); \/\/ find the first quotation mark using the built-in find quoteIndex[0] = line.find(quote); \/\/ find the other quotation marks using the find from Chapter 7 for (int i=1; i < 4; i++) { quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1); } \/\/ break the line up into substrings int len1 = quoteIndex[1] - quoteIndex[0] - 1; std::string city1 = line.substr(quoteIndex[0]+1, len1); int len2 = quoteIndex[3] - quoteIndex[2] - 1; std::string city2 = line.substr(quoteIndex[2]+1, len2); int len3 = line.length() - quoteIndex[2] - 1; std::string distString = line.substr(quoteIndex[3]+1, len3); \/\/ output the extracted information std::cout << city1 << \"\\t\" << city2 << \"\\t\" << distString << std::endl ; }  Of course, just displaying the extracted information is not exactly what we want, but it is a good starting place.    What does parsing mean in the programming sense?      to scan an entire program for errors   Incorrect! This is included in the debugging process.     to run a program start to finish and record the run time   Incorrect! This is included in the debugging process.     to analyze the structure of a statement in a formal language   Correct! The compiler has to parse the program before it can translate it into machine language!     to search an entire program for a statement   Incorrect! You can use control (command) + F to find a particular statement.       The character indicates that we want to match the next character literally.             The substr() takes and as its two arguments.                  Create a block of code that takes a date written in the format mm\/dd\/yyyyy as an argument, and that separates it into three separate integers: day, month, and year. Find the respective parts in this order: month, first slash, day, second slash, year.     int main() {     string month = date.substr(0, 2);    string month = date.substr(2, 0);     int first_slash = date.find('\/');     string day = date.substr(first_slash + 1, 2);    string day = date.substr(first_slash, 2);      int second_slash = date.find('\/', first_slash + 1);    int second_slash = date.find('\/', first_slash);     int second_slash = date.find('\/');     string year = date.substr(second_slash + 1, 4);    string year = date.substr(second_slash, 4);     string year = date.substr(second_slash + 1, 2);    }     "
+  "title": "Binary Files, Bytes, and Object Representation",
+  "body": " Binary Files, Bytes, and Object Representation  A binary file stores bytes according to a binary format. The bytes may represent integers, floating-point values, records, images, or other data. Unlike text output, binary output does not automatically convert a value into human-readable decimal characters.   Text and binary files     Feature  Text  Binary   Representation Characters following a text format Bytes following a binary format  Human inspection Usually convenient Usually requires a tool or program  Portability Often easier when the encoding is documented Requires explicit widths, layout, and byte order  Typical access Often sequential Can support compact fixed-size records and random access     Writing bytes with write()   #include <cstdint> #include <fstream> int main() { std::ofstream output_file{ \"numbers.bin\", std::ios::binary }; if (!output_file) { return 1; } std::int32_t value{1025}; output_file.write( reinterpret_cast<const char*>(&value), sizeof value ); return 0; }   The call copies the bytes occupied by value . It does not write the four characters 1025 . The exact byte sequence depends on the object representation used by the implementation.    Reading bytes with read()   #include <cstdint> #include <fstream> #include <iostream> int main() { std::ifstream input_file{ \"numbers.bin\", std::ios::binary }; if (!input_file) { return 1; } std::int32_t value{}; while (input_file.read( reinterpret_cast<char*>(&value), sizeof value )) { std::cout << value << '\\n'; } return 0; }   Placing read() in the loop condition ensures that the body runs only after a complete value has been read. A final incomplete record is not processed as if it were valid.    Object representation is not automatically a file format  C++ defines an object's object representation as the bytes occupied by its storage. Padding bytes may be present, and library-managed objects such as std::string can contain pointers or other implementation details. Copying raw object bytes is therefore not a general serialization strategy. Safe serialization is discussed in Section 12.7.    What does write() copy into a binary output stream?   Only the decimal digits displayed by the value Decimal text requires formatted output.  A specified number of bytes from memory write() receives a byte address and a byte count.  The variable's source-code name Names are not stored automatically.  The entire operating system process The call copies only the requested bytes.  A portable format regardless of the machine Portability requires a documented representation.     Select all concerns when writing raw object bytes.   The object may contain padding bytes. Padding can vary by compiler and target.  A library object may contain internal pointers or state. Those values are not portable persisted data.  write() automatically adds a file format specification. The programmer must define the format.  Binary files cannot contain integers. Integers are common binary data, but their representation must be understood.  Using sizeof guarantees portability. sizeof gives a local storage size, not a complete portable format.     Arrange the blocks to write one integer as binary data.   std::ofstream output_file{\"number.bin\", std::ios::binary};  if (!output_file) { return 1; }  std::int32_t value{1025};  output_file.write(  reinterpret_cast<const char*>(&value),  sizeof value  );    "
 },
 {
-  "id": "chapter15_parsing-input-parsing-2",
+  "id": "chapter12_binary-files-bytes-and-object-representation-2",
   "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#chapter15_parsing-input-parsing-2",
+  "url": "chapter12_binary-files-bytes-and-object-representation.html#chapter12_binary-files-bytes-and-object-representation-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "In I defined parsing as the process of analyzing the structure of a sentence in a natural language or a statement in a formal language. For example, the compiler has to parse your program before it can translate it into machine language. "
+  "body": "A binary file stores bytes according to a binary format. The bytes may represent integers, floating-point values, records, images, or other data. Unlike text output, binary output does not automatically convert a value into human-readable decimal characters. "
 },
 {
-  "id": "chapter15_parsing-input-parsing-3",
+  "id": "table_chapter12_text-binary-comparison",
   "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#chapter15_parsing-input-parsing-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In addition, when you read input from a file or from the keyboard you often have to parse it in order to extract the information you want and detect errors. "
+  "url": "chapter12_binary-files-bytes-and-object-representation.html#table_chapter12_text-binary-comparison",
+  "type": "Table",
+  "number": "12.5.1",
+  "title": "Text and binary files",
+  "body": " Text and binary files     Feature  Text  Binary   Representation Characters following a text format Bytes following a binary format  Human inspection Usually convenient Usually requires a tool or program  Portability Often easier when the encoding is documented Requires explicit widths, layout, and byte order  Typical access Often sequential Can support compact fixed-size records and random access   "
 },
 {
-  "id": "chapter15_parsing-input-parsing-4",
+  "id": "chapter12_binary-output",
   "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#chapter15_parsing-input-parsing-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "For example, I have a file called distances that contains information about the distances between major cities in the United States. I got this information from a randomly-chosen web page http:\/\/www.jaring.my\/usiskl\/usa\/distance.html so it may be wildly inaccurate, but that doesn't matter. The format of the file looks like this: "
+  "url": "chapter12_binary-files-bytes-and-object-representation.html#chapter12_binary-output",
+  "type": "Subsection",
+  "number": "12.5.1",
+  "title": "Writing bytes with <code class=\"code-inline tex2jax_ignore\">write()<\/code>",
+  "body": " Writing bytes with write()   #include <cstdint> #include <fstream> int main() { std::ofstream output_file{ \"numbers.bin\", std::ios::binary }; if (!output_file) { return 1; } std::int32_t value{1025}; output_file.write( reinterpret_cast<const char*>(&value), sizeof value ); return 0; }   The call copies the bytes occupied by value . It does not write the four characters 1025 . The exact byte sequence depends on the object representation used by the implementation.  "
 },
 {
-  "id": "chapter15_parsing-input-parsing-6",
+  "id": "chapter12_binary-input",
   "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#chapter15_parsing-input-parsing-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Each line of the file contains the names of two cities in quotation marks and the distance between them in miles. The quotation marks are useful because they make it easy to deal with names that have more than one word, like San Francisco. "
+  "url": "chapter12_binary-files-bytes-and-object-representation.html#chapter12_binary-input",
+  "type": "Subsection",
+  "number": "12.5.2",
+  "title": "Reading bytes with <code class=\"code-inline tex2jax_ignore\">read()<\/code>",
+  "body": " Reading bytes with read()   #include <cstdint> #include <fstream> #include <iostream> int main() { std::ifstream input_file{ \"numbers.bin\", std::ios::binary }; if (!input_file) { return 1; } std::int32_t value{}; while (input_file.read( reinterpret_cast<char*>(&value), sizeof value )) { std::cout << value << '\\n'; } return 0; }   Placing read() in the loop condition ensures that the body runs only after a complete value has been read. A final incomplete record is not processed as if it were valid.  "
 },
 {
-  "id": "chapter15_parsing-input-parsing-7",
+  "id": "chapter12_object-representation",
   "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#chapter15_parsing-input-parsing-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "By searching for the quotation marks in a line of input, we can find the beginning and end of each city name. Searching for special characters like quotation marks can be a little awkward, though, because the quotation mark is a special character in C++, used to identify string values. "
+  "url": "chapter12_binary-files-bytes-and-object-representation.html#chapter12_object-representation",
+  "type": "Subsection",
+  "number": "12.5.3",
+  "title": "Object representation is not automatically a file format",
+  "body": " Object representation is not automatically a file format  C++ defines an object's object representation as the bytes occupied by its storage. Padding bytes may be present, and library-managed objects such as std::string can contain pointers or other implementation details. Copying raw object bytes is therefore not a general serialization strategy. Safe serialization is discussed in Section 12.7.  "
 },
 {
-  "id": "chapter15_parsing-input-parsing-8",
+  "id": "chapter12_5_binary-write",
   "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#chapter15_parsing-input-parsing-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If we want to find the first appearance of a quotation mark, we have to write something like: "
-},
-{
-  "id": "chapter15_parsing-input-parsing-10",
-  "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#chapter15_parsing-input-parsing-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The argument here looks like a mess, but it represents a single character, a double quotation mark. The outermost single-quotes indicate that this is a character value, as usual. The backslash ( \\ ) indicates that we want to treat the next character literally. The sequence \\\" represents a quotation mark; the sequence \\' represents a single-quote. Interestingly, the sequence \\\\ represents a single backslash. The first backslash indicates that we should take the second backslash seriously. "
-},
-{
-  "id": "chapter15_parsing-input-parsing-11",
-  "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#chapter15_parsing-input-parsing-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Parsing input lines consists of finding the beginning and end of each city name and using the substr function to extract the cities and distance. substr is a string member function; it takes two arguments, the starting index of the substring and the length. "
-},
-{
-  "id": "chapter15_parsing-input-parsing-13",
-  "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#chapter15_parsing-input-parsing-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Of course, just displaying the extracted information is not exactly what we want, but it is a good starting place. "
-},
-{
-  "id": "question15_5_1",
-  "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#question15_5_1",
+  "url": "chapter12_binary-files-bytes-and-object-representation.html#chapter12_5_binary-write",
   "type": "Checkpoint",
   "number": "12.5.1",
   "title": "",
-  "body": "  What does parsing mean in the programming sense?      to scan an entire program for errors   Incorrect! This is included in the debugging process.     to run a program start to finish and record the run time   Incorrect! This is included in the debugging process.     to analyze the structure of a statement in a formal language   Correct! The compiler has to parse the program before it can translate it into machine language!     to search an entire program for a statement   Incorrect! You can use control (command) + F to find a particular statement.    "
+  "body": " What does write() copy into a binary output stream?   Only the decimal digits displayed by the value Decimal text requires formatted output.  A specified number of bytes from memory write() receives a byte address and a byte count.  The variable's source-code name Names are not stored automatically.  The entire operating system process The call copies only the requested bytes.  A portable format regardless of the machine Portability requires a documented representation.   "
 },
 {
-  "id": "question15_5_2",
+  "id": "chapter12_5_binary-safety",
   "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#question15_5_2",
+  "url": "chapter12_binary-files-bytes-and-object-representation.html#chapter12_5_binary-safety",
   "type": "Checkpoint",
   "number": "12.5.2",
   "title": "",
-  "body": "  The character indicates that we want to match the next character literally.          "
+  "body": " Select all concerns when writing raw object bytes.   The object may contain padding bytes. Padding can vary by compiler and target.  A library object may contain internal pointers or state. Those values are not portable persisted data.  write() automatically adds a file format specification. The programmer must define the format.  Binary files cannot contain integers. Integers are common binary data, but their representation must be understood.  Using sizeof guarantees portability. sizeof gives a local storage size, not a complete portable format.   "
 },
 {
-  "id": "question15_5_3",
+  "id": "chapter12_5_binary-code",
   "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#question15_5_3",
+  "url": "chapter12_binary-files-bytes-and-object-representation.html#chapter12_5_binary-code",
   "type": "Checkpoint",
   "number": "12.5.3",
   "title": "",
-  "body": "  The substr() takes and as its two arguments.               "
+  "body": " Arrange the blocks to write one integer as binary data.   std::ofstream output_file{\"number.bin\", std::ios::binary};  if (!output_file) { return 1; }  std::int32_t value{1025};  output_file.write(  reinterpret_cast<const char*>(&value),  sizeof value  );   "
 },
 {
-  "id": "question15_5_4",
-  "level": "2",
-  "url": "chapter15_parsing-input-parsing.html#question15_5_4",
-  "type": "Checkpoint",
-  "number": "12.5.4",
-  "title": "",
-  "body": "  Create a block of code that takes a date written in the format mm\/dd\/yyyyy as an argument, and that separates it into three separate integers: day, month, and year. Find the respective parts in this order: month, first slash, day, second slash, year.     int main() {     string month = date.substr(0, 2);    string month = date.substr(2, 0);     int first_slash = date.find('\/');     string day = date.substr(first_slash + 1, 2);    string day = date.substr(first_slash, 2);      int second_slash = date.find('\/', first_slash + 1);    int second_slash = date.find('\/', first_slash);     int second_slash = date.find('\/');     string year = date.substr(second_slash + 1, 4);    string year = date.substr(second_slash, 4);     string year = date.substr(second_slash + 1, 2);    }    "
-},
-{
-  "id": "chapter15_parsing-numbers",
+  "id": "chapter12_fixed-size-binary-records-and-random-access",
   "level": "1",
-  "url": "chapter15_parsing-numbers.html",
+  "url": "chapter12_fixed-size-binary-records-and-random-access.html",
   "type": "Section",
   "number": "12.6",
-  "title": "Parsing numbers",
-  "body": " Parsing numbers  The next task is to convert the numbers in the file from strings to integers. When people write large numbers, they often use commas to group the digits, as in 1,750. Most of the time when computers write large numbers, they don't include commas, and the built-in functions for reading numbers usually can't handle them. That makes the conversion a little more difficult, but it also provides an opportunity to write a comma-stripping function, so that's ok. Once we get rid of the commas, we can use the library function atoi to convert to integer. atoi is defined in the header file cstdlib .  To get rid of the commas, one option is to traverse the string and check whether each character is a digit. If so, we add it to the result string. At the end of the loop, the result string contains all the digits from the original string, in order.  #include <iostream> int convertToInt(const std::string& s) { std::string digitString = \"\"; for (size_t i = 0; i < s.length(); i++) { if (isdigit (s[i])) { digitString += s[i]; } } return atoi(digitString); }  The variable digitString is an example of an accumulator . It is similar to the counter we saw in , except that instead of getting incremented, it gets accumulates one new character at a time, using string concatentation.  The expression  digitString += s[i];  is equivalent to  digitString = digitString + s[i];  Both statements add a single character onto the end of the existing string.  Try the function out for yourself! As you can see, this function can also be used to parse phone numbers!   #include <iostream> #include <string> #include <vector> int convertToInt(const std::string& s) { std::string digitString = \"\"; for (size_t i = 0; i < s.length(); i++) { if (isdigit (s[i])) { digitString += s[i]; } } return atoi(digitString); } int main() { int num = convertToInt(\"867-5309\"); std::cout << num << std::endl; }     What does the atoi() function do?      takes the absolute value of a number   Incorrect! Go back and read for the answer.     converts a double to an int   Incorrect! Go back and read for the answer.     converts a string to an int   Correct! This is very helpful when we read numbers from a file (where they are strings).     converts an int to a string   Incorrect! Go back and read for the answer.       Which of the following strings will return 2020 when passed into convertToInt() ?      2020   Correct! This one is quite simple.     ab,jkl2!!moo0?huh2mth0haha.   Correct! This long, confusing string will clean up nicely!     2,00!!!!!!!!2   Incorrect!     2OOO020OOOOO   Correct! You have to look closely to see that some of these are 0's!     we2love0parsing2numbersO!   Incorrect! Although we do love parsing numbers, this is incorrect.       Create the replace_with() function that takes a string str , a character to get rid of olc_char , and a character to replace it with new_char . It should return a new string that has replaces any occurances of old_char with new_char.      string replace_with(string str, char old_char, char new_char) {    string replace_with() {      for (size_t i = 0; i < str.length(); i++) {    for (int i = 0; i < str.length(); i++) {     for (size_t i = 0; i < str.size(); i++) {     if (str[i] == old_char) {    if (i == old_char) {      str[i] = new_char;  }    new_char = str[i];  }     i = new_char;  }     }  return str;  }    }  return new_char;  }      "
+  "title": "Fixed-Size Binary Records and Random Access",
+  "body": " Fixed-Size Binary Records and Random Access  A fixed-size binary record occupies the same number of bytes for every record of one format. If each record has size record_size , record number n begins at byte offset n * record_size . Record numbers in this example begin at zero.   #include <cstdint> #include <fstream> #include <string> struct ScoreRecord { std::int32_t student_id; std::int32_t score; }; int main() { std::ofstream output_file{ \"score_records.bin\", std::ios::binary }; if (!output_file) { return 1; } ScoreRecord records[]{{101, 92}, {102, 85}, {103, 97}}; output_file.write( reinterpret_cast<const char*>(records), sizeof records ); return 0; }   The example is suitable only when the reader and writer agree on the record layout, integer widths, padding, and byte order. A portable file format should write each field explicitly instead of assuming that a C++ structure has the same layout everywhere.   File-position operations   Reading and writing positions     Operation  Meaning   tellg() Report the current input, or get, position.  seekg() Move the input position.  tellp() Report the current output, or put, position.  seekp() Move the output position.     #include <cstdint> #include <fstream> #include <iostream> struct ScoreRecord { std::int32_t student_id; std::int32_t score; }; int main() { std::ifstream input_file{ \"score_records.bin\", std::ios::binary }; if (!input_file) { return 1; } std::streamoff record_number{2}; std::streamoff record_size{ static_cast<std::streamoff>(sizeof(ScoreRecord)) }; ScoreRecord record{}; input_file.seekg(record_number * record_size, std::ios::beg); if (input_file.read( reinterpret_cast<char*>(&record), sizeof record )) { std::cout << record.student_id << \": \" << record.score << '\\n'; } return 0; }     When random access is appropriate  Random access is useful when records are fixed-size and the program knows the file format. It is less direct for variable-length text records because later positions cannot be calculated from a simple multiplication. A text program may need an index of positions or may process the file sequentially instead.    Searching a CSV file in binary mode  CSV records are usually not fixed-size records. A student's name can have different lengths, scores can contain different numbers of digits, and line endings can occupy different numbers of bytes on different systems. Therefore, opening a CSV file with std::ios::binary does not make its records fixed-size. It only asks the stream to preserve the file's bytes without text-mode translation.  A program can still use byte positions to search a CSV file. It must first scan the file and build an index because it cannot calculate a record's position with record_number * record_size .   Indexing and searching a CSV file by byte position   #include <fstream> #include <iostream> #include <sstream> #include <string> #include <unordered_map> int main() { std::ifstream input_file{ \"scores.csv\", std::ios::binary }; if (!input_file) { return 1; } std::unordered_map<int, std::streampos> positions; std::string line; while (true) { std::streampos position{input_file.tellg()}; if (!std::getline(input_file, line)) { break; } std::istringstream record_stream{line}; int student_id{}; if (record_stream >> student_id) { positions[student_id] = position; } } const int target_id{102}; const auto found{positions.find(target_id)}; if (found == positions.end()) { return 1; } input_file.clear(); input_file.seekg(found->second); if (std::getline(input_file, line)) { std::cout << \"Found record: \" << line << '\\n'; } return 0; }    The first pass scans the CSV file and records the byte position at which each student ID begins. The later seekg() operation can jump directly to the indexed line. This is faster for repeated searches after the index exists, but building the index still requires an initial scan. A database or a deliberately fixed-width binary format may be more appropriate for very large data sets.    If every binary record has size record_size , what is the starting offset of record n ?   n + record_size The offset must account for all preceding records.  n * record_size Each preceding record contributes one full record size.  record_size - n Subtraction does not locate the nth slot.  sizeof(n) The index size is unrelated to the record offset.  record_size \/ n Division does not identify the record slot.     Select all correctly matched file-position operations.   tellg() reports the current input position. The get position is used by input operations.  seekp() can move where a later write occurs. The put position controls later output.  seekg() moves the next output position. seekg() moves the input position.  tellp() returns the number of records automatically. It reports a position, not a record count.  Seeking makes a binary format portable automatically. Positioning does not solve layout or byte-order differences.     Arrange the blocks to locate and read a selected fixed-size record.   std::streamoff offset{record_number * record_size};  input_file.seekg(offset, std::ios::beg);  input_file.read(reinterpret_cast<char*>(&record), sizeof record);  if (input_file) {  std::cout << record.score << '\\n';  }    "
 },
 {
-  "id": "chapter15_parsing-numbers-2",
+  "id": "chapter12_fixed-size-binary-records-and-random-access-2",
   "level": "2",
-  "url": "chapter15_parsing-numbers.html#chapter15_parsing-numbers-2",
+  "url": "chapter12_fixed-size-binary-records-and-random-access.html#chapter12_fixed-size-binary-records-and-random-access-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "The next task is to convert the numbers in the file from strings to integers. When people write large numbers, they often use commas to group the digits, as in 1,750. Most of the time when computers write large numbers, they don't include commas, and the built-in functions for reading numbers usually can't handle them. That makes the conversion a little more difficult, but it also provides an opportunity to write a comma-stripping function, so that's ok. Once we get rid of the commas, we can use the library function atoi to convert to integer. atoi is defined in the header file cstdlib . "
+  "body": "A fixed-size binary record occupies the same number of bytes for every record of one format. If each record has size record_size , record number n begins at byte offset n * record_size . Record numbers in this example begin at zero. "
 },
 {
-  "id": "chapter15_parsing-numbers-3",
+  "id": "chapter12_fixed-size-binary-records-and-random-access-4",
   "level": "2",
-  "url": "chapter15_parsing-numbers.html#chapter15_parsing-numbers-3",
+  "url": "chapter12_fixed-size-binary-records-and-random-access.html#chapter12_fixed-size-binary-records-and-random-access-4",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "To get rid of the commas, one option is to traverse the string and check whether each character is a digit. If so, we add it to the result string. At the end of the loop, the result string contains all the digits from the original string, in order. "
+  "body": "The example is suitable only when the reader and writer agree on the record layout, integer widths, padding, and byte order. A portable file format should write each field explicitly instead of assuming that a C++ structure has the same layout everywhere. "
 },
 {
-  "id": "chapter15_parsing-numbers-5",
+  "id": "chapter12_file-position-operations",
   "level": "2",
-  "url": "chapter15_parsing-numbers.html#chapter15_parsing-numbers-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The variable digitString is an example of an accumulator . It is similar to the counter we saw in , except that instead of getting incremented, it gets accumulates one new character at a time, using string concatentation. "
+  "url": "chapter12_fixed-size-binary-records-and-random-access.html#chapter12_file-position-operations",
+  "type": "Subsection",
+  "number": "12.6.1",
+  "title": "File-position operations",
+  "body": " File-position operations   Reading and writing positions     Operation  Meaning   tellg() Report the current input, or get, position.  seekg() Move the input position.  tellp() Report the current output, or put, position.  seekp() Move the output position.     #include <cstdint> #include <fstream> #include <iostream> struct ScoreRecord { std::int32_t student_id; std::int32_t score; }; int main() { std::ifstream input_file{ \"score_records.bin\", std::ios::binary }; if (!input_file) { return 1; } std::streamoff record_number{2}; std::streamoff record_size{ static_cast<std::streamoff>(sizeof(ScoreRecord)) }; ScoreRecord record{}; input_file.seekg(record_number * record_size, std::ios::beg); if (input_file.read( reinterpret_cast<char*>(&record), sizeof record )) { std::cout << record.student_id << \": \" << record.score << '\\n'; } return 0; }   "
 },
 {
-  "id": "chapter15_parsing-numbers-6",
+  "id": "chapter12_random-access-caution",
   "level": "2",
-  "url": "chapter15_parsing-numbers.html#chapter15_parsing-numbers-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The expression "
+  "url": "chapter12_fixed-size-binary-records-and-random-access.html#chapter12_random-access-caution",
+  "type": "Subsection",
+  "number": "12.6.2",
+  "title": "When random access is appropriate",
+  "body": " When random access is appropriate  Random access is useful when records are fixed-size and the program knows the file format. It is less direct for variable-length text records because later positions cannot be calculated from a simple multiplication. A text program may need an index of positions or may process the file sequentially instead.  "
 },
 {
-  "id": "chapter15_parsing-numbers-8",
+  "id": "chapter12_csv-binary-search",
   "level": "2",
-  "url": "chapter15_parsing-numbers.html#chapter15_parsing-numbers-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "is equivalent to "
+  "url": "chapter12_fixed-size-binary-records-and-random-access.html#chapter12_csv-binary-search",
+  "type": "Subsection",
+  "number": "12.6.3",
+  "title": "Searching a CSV file in binary mode",
+  "body": " Searching a CSV file in binary mode  CSV records are usually not fixed-size records. A student's name can have different lengths, scores can contain different numbers of digits, and line endings can occupy different numbers of bytes on different systems. Therefore, opening a CSV file with std::ios::binary does not make its records fixed-size. It only asks the stream to preserve the file's bytes without text-mode translation.  A program can still use byte positions to search a CSV file. It must first scan the file and build an index because it cannot calculate a record's position with record_number * record_size .   Indexing and searching a CSV file by byte position   #include <fstream> #include <iostream> #include <sstream> #include <string> #include <unordered_map> int main() { std::ifstream input_file{ \"scores.csv\", std::ios::binary }; if (!input_file) { return 1; } std::unordered_map<int, std::streampos> positions; std::string line; while (true) { std::streampos position{input_file.tellg()}; if (!std::getline(input_file, line)) { break; } std::istringstream record_stream{line}; int student_id{}; if (record_stream >> student_id) { positions[student_id] = position; } } const int target_id{102}; const auto found{positions.find(target_id)}; if (found == positions.end()) { return 1; } input_file.clear(); input_file.seekg(found->second); if (std::getline(input_file, line)) { std::cout << \"Found record: \" << line << '\\n'; } return 0; }    The first pass scans the CSV file and records the byte position at which each student ID begins. The later seekg() operation can jump directly to the indexed line. This is faster for repeated searches after the index exists, but building the index still requires an initial scan. A database or a deliberately fixed-width binary format may be more appropriate for very large data sets.  "
 },
 {
-  "id": "chapter15_parsing-numbers-10",
+  "id": "chapter12_6_record-offset",
   "level": "2",
-  "url": "chapter15_parsing-numbers.html#chapter15_parsing-numbers-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Both statements add a single character onto the end of the existing string. "
-},
-{
-  "id": "chapter15_parsing-numbers-11",
-  "level": "2",
-  "url": "chapter15_parsing-numbers.html#chapter15_parsing-numbers-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Try the function out for yourself! As you can see, this function can also be used to parse phone numbers! "
-},
-{
-  "id": "question15_6_1",
-  "level": "2",
-  "url": "chapter15_parsing-numbers.html#question15_6_1",
+  "url": "chapter12_fixed-size-binary-records-and-random-access.html#chapter12_6_record-offset",
   "type": "Checkpoint",
   "number": "12.6.1",
   "title": "",
-  "body": "  What does the atoi() function do?      takes the absolute value of a number   Incorrect! Go back and read for the answer.     converts a double to an int   Incorrect! Go back and read for the answer.     converts a string to an int   Correct! This is very helpful when we read numbers from a file (where they are strings).     converts an int to a string   Incorrect! Go back and read for the answer.    "
+  "body": " If every binary record has size record_size , what is the starting offset of record n ?   n + record_size The offset must account for all preceding records.  n * record_size Each preceding record contributes one full record size.  record_size - n Subtraction does not locate the nth slot.  sizeof(n) The index size is unrelated to the record offset.  record_size \/ n Division does not identify the record slot.   "
 },
 {
-  "id": "question15_6_2",
+  "id": "chapter12_6_position-operations",
   "level": "2",
-  "url": "chapter15_parsing-numbers.html#question15_6_2",
+  "url": "chapter12_fixed-size-binary-records-and-random-access.html#chapter12_6_position-operations",
   "type": "Checkpoint",
   "number": "12.6.2",
   "title": "",
-  "body": "  Which of the following strings will return 2020 when passed into convertToInt() ?      2020   Correct! This one is quite simple.     ab,jkl2!!moo0?huh2mth0haha.   Correct! This long, confusing string will clean up nicely!     2,00!!!!!!!!2   Incorrect!     2OOO020OOOOO   Correct! You have to look closely to see that some of these are 0's!     we2love0parsing2numbersO!   Incorrect! Although we do love parsing numbers, this is incorrect.    "
+  "body": " Select all correctly matched file-position operations.   tellg() reports the current input position. The get position is used by input operations.  seekp() can move where a later write occurs. The put position controls later output.  seekg() moves the next output position. seekg() moves the input position.  tellp() returns the number of records automatically. It reports a position, not a record count.  Seeking makes a binary format portable automatically. Positioning does not solve layout or byte-order differences.   "
 },
 {
-  "id": "question15_6_3",
+  "id": "chapter12_6_random-access-code",
   "level": "2",
-  "url": "chapter15_parsing-numbers.html#question15_6_3",
+  "url": "chapter12_fixed-size-binary-records-and-random-access.html#chapter12_6_random-access-code",
   "type": "Checkpoint",
   "number": "12.6.3",
   "title": "",
-  "body": "  Create the replace_with() function that takes a string str , a character to get rid of olc_char , and a character to replace it with new_char . It should return a new string that has replaces any occurances of old_char with new_char.      string replace_with(string str, char old_char, char new_char) {    string replace_with() {      for (size_t i = 0; i < str.length(); i++) {    for (int i = 0; i < str.length(); i++) {     for (size_t i = 0; i < str.size(); i++) {     if (str[i] == old_char) {    if (i == old_char) {      str[i] = new_char;  }    new_char = str[i];  }     i = new_char;  }     }  return str;  }    }  return new_char;  }     "
+  "body": " Arrange the blocks to locate and read a selected fixed-size record.   std::streamoff offset{record_number * record_size};  input_file.seekg(offset, std::ios::beg);  input_file.read(reinterpret_cast<char*>(&record), sizeof record);  if (input_file) {  std::cout << record.score << '\\n';  }   "
 },
 {
-  "id": "chapter15_the-set-data-structure",
+  "id": "chapter12_portable-binary-formats-endianness-and-serialization",
   "level": "1",
-  "url": "chapter15_the-set-data-structure.html",
+  "url": "chapter12_portable-binary-formats-endianness-and-serialization.html",
   "type": "Section",
   "number": "12.7",
-  "title": "The <code class=\"code-inline tex2jax_ignore\">Set<\/code> data structure",
-  "body": " The Set data structure  A data structure is a container for grouping a collection of data into a single object. We have seen some examples already, including string s, which are collections of characters, and std::vector s which are collections of any type.  An ordered set is a collection of items with two defining properties:    Ordering:  The elements of the set have indices associated with them. We can use these indices to identify elements of the set.    Uniqueness:  No element appears in the set more than once. If you try to add an element to a set, and it already exists, there is no effect.    In addition, our implementation of an ordered set will have the following property:    Arbitrary size:  As we add elements to the set, it expands to make room for new elements.    Both string s and std::vector s have an ordering; every element has an index we can use to identify it. None of the data structures we have seen so far have the properties of uniqueness or arbitrary size.  To achieve uniqueness, we have to write an add function that searches the set to see if it already exists. To make the set expand as elements are added, we can take advantage of the resize function on std::vector s.  Here is the beginning of a class definition for a Set .  class Set { private: std::vector<string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const string& s) const; int add(const string& s); }; Set::Set(int n) { std::vector<string> temp (n); elements = temp; numElements = 0; }  The instance variables are a std::vector of strings and an integer that keeps track of how many elements there are in the set. Keep in mind that the number of elements in the set, numElements , is not the same thing as the size of the std::vector . Usually it will be smaller.  The Set constructor takes a single parameter, which is the initial size of the std::vector . The initial number of elements is always zero.  getNumElements and getElement are accessor functions for the instance variables, which are private. numElements is a read-only variable, so we provide a get function but not a set function.  int Set::getNumElements() const { return numElements; }  Why do we have to prevent client programs from changing getNumElements ? What are the invariants for this type, and how could a client program break an invariant. As we look at the rest of the Set member function, see if you can convince yourself that they all maintain the invariants.  When we use the [] operator to access the std::vector , it checks to make sure the index is greater than or equal to zero and less than the length of the std::vector . To access the elements of a set, though, we need to check a stronger condition. The index has to be less than the number of elements, which might be smaller than the length of the std::vector .  string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl ; exit (1); } }  If getElement gets an index that is out of range, it prints an error message (not the most useful message, I admit), and exits.  The interesting functions are find and add . By now, the pattern for traversing and searching should be old hat:  int Set::find(const string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; }  So that leaves us with add . Often the return type for something like add would be void, but in this case it might be useful to make it return the index of the element.  int Set::add(const string& s) { \/\/ if the element is already in the set, return its index int index = find(s); if (index != -1) return index; \/\/ if the vector is full, double its size if (numElements == elements.length()) { elements.resize (elements.length() * 2); } \/\/ add the new elements and return its index index = numElements; elements[index] = s; numElements++; return index; }  The tricky thing here is that numElements is used in two ways. It is the number of elements in the set, of course, but it is also the index of the next element to be added.  It takes a minute to convince yourself that that works, but consider this: when the number of elements is zero, the index of the next element is 0. When the number of elements is equal to the length of the std::vector , that means that the vector is full, and we have to allocate more space (using resize ) before we can add the new element.  Here is a state diagram showing a Set object that initially contains space for 2 elements.  Now we can use the Set class to keep track of the cities we find in the file. In main we create the Set with an initial size of 2:  Set cities (2);  Then in processLine we add both cities to the Set and store the index that gets returned.  int index1 = cities.add (city1); int index2 = cities.add (city2);  I modified processLine to take the cities object as a second parameter.   Try running the program:   #include <iostream> #include <string> #include <vector> class Set { private: std::vector<std::string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const std::string& s) const; int add(const std::string& s); }; Set::Set(int n) { std::vector<std::string> temp (n); elements = temp; numElements = 0; } int main() { Set cities(2); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); std::cout << cities.getElement(0); }  int Set::getNumElements() const { return numElements; } std::string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl; exit (1); } } int Set::find(const std::string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; } int Set::add(const std::string& s) { int index = find(s); if (index != -1) return index; size_t num = numElements; if (num == elements.size()) { elements.resize (elements.size() * 2); } index = numElements; elements[index] = s; numElements++; return index; }      Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!       Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.       If the number of elements is 76, then the index of the next element is .             Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.            "
+  "title": "Portable Binary Formats, Endianness, and Serialization",
+  "body": " Portable Binary Formats, Endianness, and Serialization  A binary representation that works on one machine is not automatically a portable file format. A portable format should document field meanings, field widths, byte order, padding rules, and version information.   Endianness   Endianness describes the order in which the bytes of a multi-byte value are stored. Consider the 32-bit hexadecimal value 0x01020304 :   Two common byte orders     Byte order  Lowest-address byte  Byte sequence   Big-endian Most significant byte 01 02 03 04  Little-endian Least significant byte 04 03 02 01    Endianness does not change the mathematical value when a processor interprets its own representation. It matters when raw bytes cross a machine, file-format, or network boundary. C++17 has no standard std::endian facility; that facility was added in C++20.    Fixed-width values do not choose byte order  A type such as std::uint32_t communicates that the value uses exactly 32 bits when the implementation provides that type. It does not say whether the most significant or least significant byte comes first. A binary format must specify both the width and the byte order.   #include <cstdint> void write_big_endian(std::uint32_t value, unsigned char bytes[4]) { bytes[0] = static_cast<unsigned char>(value >> 24); bytes[1] = static_cast<unsigned char>(value >> 16); bytes[2] = static_cast<unsigned char>(value >> 8); bytes[3] = static_cast<unsigned char>(value); }   This function constructs a documented big-endian representation rather than copying the machine's native object bytes. A reader can reverse the process by shifting the bytes back into a 32-bit value.    Safe serialization   Serialization converts meaningful program data into a storable or transferable representation. Deserialization reconstructs program data from that representation. A safe design serializes fields explicitly rather than blindly writing an entire object.   #include <cstdint> #include <ostream> struct ScoreRecord { std::uint32_t student_id; std::int32_t score; }; void write_score_record( std::ostream& output, const ScoreRecord& record ) { output.write( reinterpret_cast<const char*>(&record.student_id), sizeof record.student_id ); output.write( reinterpret_cast<const char*>(&record.score), sizeof record.score ); }   This example identifies the fields in the format, but it still uses native byte order. A fully portable version would encode each fixed- width value according to the format's documented byte order.    Version and validation information  A durable binary format can begin with a magic value and a version number. A reader can reject an unknown version before interpreting the remaining bytes. It should also check file size, record counts, field ranges, and read success rather than trusting arbitrary input.    Persisting a class object  A class object can be persisted by saving the meaningful values of its data members and later using those values to reconstruct another object. The program should not copy the class object's entire memory representation, especially when the class owns strings, pointers, or other resources.   Saving and loading a class object   #include <cstdint> #include <fstream> #include <iostream> #include <istream> #include <ostream> class ScoreRecord { private: std::uint32_t student_id{}; std::int32_t score{}; public: ScoreRecord() = default; ScoreRecord(std::uint32_t starting_id, std::int32_t starting_score) : student_id{starting_id}, score{starting_score} { } void save_to(std::ostream& output) const { output.write( reinterpret_cast<const char*>(&student_id), sizeof student_id ); output.write( reinterpret_cast<const char*>(&score), sizeof score ); } bool load_from(std::istream& input) { std::uint32_t loaded_id{}; std::int32_t loaded_score{}; if (!input.read( reinterpret_cast<char*>(&loaded_id), sizeof loaded_id )) { return false; } if (!input.read( reinterpret_cast<char*>(&loaded_score), sizeof loaded_score )) { return false; } student_id = loaded_id; score = loaded_score; return true; } void print_summary() const { std::cout << \"Student \" << student_id << \": \" << score << '\\n'; } }; int main() { ScoreRecord original{1042, 92}; { std::ofstream output_file{ \"score-record.bin\", std::ios::binary }; if (!output_file) { return 1; } original.save_to(output_file); } ScoreRecord restored{}; { std::ifstream input_file{ \"score-record.bin\", std::ios::binary }; if (!input_file || !restored.load_from(input_file)) { return 1; } } restored.print_summary(); return 0; }    The first object is created in memory, its meaningful fields are written to score-record.bin , and a second object is then populated by reading those fields. The class definition exists in the program both when saving and when loading; the file stores data, not executable class definitions.  This example uses the machine's native byte order for simplicity. A portable version would encode the fixed-width values using the file format's specified byte order, add a format version, and check limits before allocating or reading data.    What does endianness describe?   The order of source files during compilation Compilation order is unrelated to byte order.  The order of bytes used to store a multi-byte value Big-endian and little-endian systems arrange those bytes differently.  The number of bits in every integer type Width and byte order are separate properties.  The order in which files are opened Opening order does not describe memory representation.  The order of characters in a string only Endianness concerns byte order in multi-byte representations.     Select all details a portable binary format should document.   The width and meaning of each numeric field The reader needs to know how to interpret each field.  The byte order for multi-byte values Readers must know how bytes are arranged.  A version or format identifier Versioning helps readers detect format changes.  That every pointer address can be saved and reused later Addresses are not portable persisted references.  That readers may guess unknown fields Explicit rules are safer than guessing.     Arrange the blocks to construct the bytes of a 32-bit value in big-endian order.   std::uint32_t value{0x01020304};  bytes[0] = static_cast<unsigned char>(value >> 24);  bytes[1] = static_cast<unsigned char>(value >> 16);  bytes[2] = static_cast<unsigned char>(value >> 8);  bytes[3] = static_cast<unsigned char>(value);    "
 },
 {
-  "id": "chapter15_the-set-data-structure-2",
+  "id": "chapter12_portable-binary-formats-endianness-and-serialization-2",
   "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-2",
+  "url": "chapter12_portable-binary-formats-endianness-and-serialization.html#chapter12_portable-binary-formats-endianness-and-serialization-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "A data structure is a container for grouping a collection of data into a single object. We have seen some examples already, including string s, which are collections of characters, and std::vector s which are collections of any type. "
+  "body": "A binary representation that works on one machine is not automatically a portable file format. A portable format should document field meanings, field widths, byte order, padding rules, and version information. "
 },
 {
-  "id": "chapter15_the-set-data-structure-3",
+  "id": "chapter12_endianness",
   "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "An ordered set is a collection of items with two defining properties: "
-},
-{
-  "id": "chapter15_the-set-data-structure-4",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "  Ordering:  The elements of the set have indices associated with them. We can use these indices to identify elements of the set.    Uniqueness:  No element appears in the set more than once. If you try to add an element to a set, and it already exists, there is no effect.   "
-},
-{
-  "id": "chapter15_the-set-data-structure-5",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "In addition, our implementation of an ordered set will have the following property: "
-},
-{
-  "id": "chapter15_the-set-data-structure-6",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "  Arbitrary size:  As we add elements to the set, it expands to make room for new elements.   "
-},
-{
-  "id": "chapter15_the-set-data-structure-7",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Both string s and std::vector s have an ordering; every element has an index we can use to identify it. None of the data structures we have seen so far have the properties of uniqueness or arbitrary size. "
-},
-{
-  "id": "chapter15_the-set-data-structure-8",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To achieve uniqueness, we have to write an add function that searches the set to see if it already exists. To make the set expand as elements are added, we can take advantage of the resize function on std::vector s. "
-},
-{
-  "id": "chapter15_the-set-data-structure-9",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Here is the beginning of a class definition for a Set . "
-},
-{
-  "id": "chapter15_the-set-data-structure-11",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The instance variables are a std::vector of strings and an integer that keeps track of how many elements there are in the set. Keep in mind that the number of elements in the set, numElements , is not the same thing as the size of the std::vector . Usually it will be smaller. "
-},
-{
-  "id": "chapter15_the-set-data-structure-12",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The Set constructor takes a single parameter, which is the initial size of the std::vector . The initial number of elements is always zero. "
-},
-{
-  "id": "chapter15_the-set-data-structure-13",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-13",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "getNumElements and getElement are accessor functions for the instance variables, which are private. numElements is a read-only variable, so we provide a get function but not a set function. "
-},
-{
-  "id": "chapter15_the-set-data-structure-15",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-15",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Why do we have to prevent client programs from changing getNumElements ? What are the invariants for this type, and how could a client program break an invariant. As we look at the rest of the Set member function, see if you can convince yourself that they all maintain the invariants. "
-},
-{
-  "id": "chapter15_the-set-data-structure-16",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-16",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "When we use the [] operator to access the std::vector , it checks to make sure the index is greater than or equal to zero and less than the length of the std::vector . To access the elements of a set, though, we need to check a stronger condition. The index has to be less than the number of elements, which might be smaller than the length of the std::vector . "
-},
-{
-  "id": "chapter15_the-set-data-structure-18",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-18",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If getElement gets an index that is out of range, it prints an error message (not the most useful message, I admit), and exits. "
-},
-{
-  "id": "chapter15_the-set-data-structure-19",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-19",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The interesting functions are find and add . By now, the pattern for traversing and searching should be old hat: "
-},
-{
-  "id": "chapter15_the-set-data-structure-21",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-21",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "So that leaves us with add . Often the return type for something like add would be void, but in this case it might be useful to make it return the index of the element. "
-},
-{
-  "id": "chapter15_the-set-data-structure-23",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-23",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The tricky thing here is that numElements is used in two ways. It is the number of elements in the set, of course, but it is also the index of the next element to be added. "
-},
-{
-  "id": "chapter15_the-set-data-structure-24",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-24",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "It takes a minute to convince yourself that that works, but consider this: when the number of elements is zero, the index of the next element is 0. When the number of elements is equal to the length of the std::vector , that means that the vector is full, and we have to allocate more space (using resize ) before we can add the new element. "
-},
-{
-  "id": "chapter15_the-set-data-structure-25",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-25",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Here is a state diagram showing a Set object that initially contains space for 2 elements. "
-},
-{
-  "id": "chapter15_the-set-data-structure-26",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-26",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Now we can use the Set class to keep track of the cities we find in the file. In main we create the Set with an initial size of 2: "
-},
-{
-  "id": "chapter15_the-set-data-structure-28",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-28",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Then in processLine we add both cities to the Set and store the index that gets returned. "
-},
-{
-  "id": "chapter15_the-set-data-structure-30",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#chapter15_the-set-data-structure-30",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "I modified processLine to take the cities object as a second parameter. "
-},
-{
-  "id": "set_sample",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#set_sample",
-  "type": "Listing",
+  "url": "chapter12_portable-binary-formats-endianness-and-serialization.html#chapter12_endianness",
+  "type": "Subsection",
   "number": "12.7.1",
-  "title": "Try running the program:",
-  "body": " Try running the program:   #include <iostream> #include <string> #include <vector> class Set { private: std::vector<std::string> elements; int numElements; public: Set(int n); int getNumElements() const; std::string getElement(int i) const; int find(const std::string& s) const; int add(const std::string& s); }; Set::Set(int n) { std::vector<std::string> temp (n); elements = temp; numElements = 0; } int main() { Set cities(2); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); std::cout << cities.getElement(0); }  int Set::getNumElements() const { return numElements; } std::string Set::getElement(int i) const { if (i < numElements) { return elements[i]; } else { std::cout << \"Set index out of range.\" << std::endl; exit (1); } } int Set::find(const std::string& s) const { for (int i=0; i < numElements; i++) { if (elements[i] == s) return i; } return -1; } int Set::add(const std::string& s) { int index = find(s); if (index != -1) return index; size_t num = numElements; if (num == elements.size()) { elements.resize (elements.size() * 2); } index = numElements; elements[index] = s; numElements++; return index; }   "
+  "title": "Endianness",
+  "body": " Endianness   Endianness describes the order in which the bytes of a multi-byte value are stored. Consider the 32-bit hexadecimal value 0x01020304 :   Two common byte orders     Byte order  Lowest-address byte  Byte sequence   Big-endian Most significant byte 01 02 03 04  Little-endian Least significant byte 04 03 02 01    Endianness does not change the mathematical value when a processor interprets its own representation. It matters when raw bytes cross a machine, file-format, or network boundary. C++17 has no standard std::endian facility; that facility was added in C++20.  "
 },
 {
-  "id": "question15_7_1",
+  "id": "chapter12_fixed-width-portable-values",
   "level": "2",
-  "url": "chapter15_the-set-data-structure.html#question15_7_1",
+  "url": "chapter12_portable-binary-formats-endianness-and-serialization.html#chapter12_fixed-width-portable-values",
+  "type": "Subsection",
+  "number": "12.7.2",
+  "title": "Fixed-width values do not choose byte order",
+  "body": " Fixed-width values do not choose byte order  A type such as std::uint32_t communicates that the value uses exactly 32 bits when the implementation provides that type. It does not say whether the most significant or least significant byte comes first. A binary format must specify both the width and the byte order.   #include <cstdint> void write_big_endian(std::uint32_t value, unsigned char bytes[4]) { bytes[0] = static_cast<unsigned char>(value >> 24); bytes[1] = static_cast<unsigned char>(value >> 16); bytes[2] = static_cast<unsigned char>(value >> 8); bytes[3] = static_cast<unsigned char>(value); }   This function constructs a documented big-endian representation rather than copying the machine's native object bytes. A reader can reverse the process by shifting the bytes back into a 32-bit value.  "
+},
+{
+  "id": "chapter12_serialization",
+  "level": "2",
+  "url": "chapter12_portable-binary-formats-endianness-and-serialization.html#chapter12_serialization",
+  "type": "Subsection",
+  "number": "12.7.3",
+  "title": "Safe serialization",
+  "body": " Safe serialization   Serialization converts meaningful program data into a storable or transferable representation. Deserialization reconstructs program data from that representation. A safe design serializes fields explicitly rather than blindly writing an entire object.   #include <cstdint> #include <ostream> struct ScoreRecord { std::uint32_t student_id; std::int32_t score; }; void write_score_record( std::ostream& output, const ScoreRecord& record ) { output.write( reinterpret_cast<const char*>(&record.student_id), sizeof record.student_id ); output.write( reinterpret_cast<const char*>(&record.score), sizeof record.score ); }   This example identifies the fields in the format, but it still uses native byte order. A fully portable version would encode each fixed- width value according to the format's documented byte order.  "
+},
+{
+  "id": "chapter12_binary-format-versioning",
+  "level": "2",
+  "url": "chapter12_portable-binary-formats-endianness-and-serialization.html#chapter12_binary-format-versioning",
+  "type": "Subsection",
+  "number": "12.7.4",
+  "title": "Version and validation information",
+  "body": " Version and validation information  A durable binary format can begin with a magic value and a version number. A reader can reject an unknown version before interpreting the remaining bytes. It should also check file size, record counts, field ranges, and read success rather than trusting arbitrary input.  "
+},
+{
+  "id": "chapter12_class-persistence",
+  "level": "2",
+  "url": "chapter12_portable-binary-formats-endianness-and-serialization.html#chapter12_class-persistence",
+  "type": "Subsection",
+  "number": "12.7.5",
+  "title": "Persisting a class object",
+  "body": " Persisting a class object  A class object can be persisted by saving the meaningful values of its data members and later using those values to reconstruct another object. The program should not copy the class object's entire memory representation, especially when the class owns strings, pointers, or other resources.   Saving and loading a class object   #include <cstdint> #include <fstream> #include <iostream> #include <istream> #include <ostream> class ScoreRecord { private: std::uint32_t student_id{}; std::int32_t score{}; public: ScoreRecord() = default; ScoreRecord(std::uint32_t starting_id, std::int32_t starting_score) : student_id{starting_id}, score{starting_score} { } void save_to(std::ostream& output) const { output.write( reinterpret_cast<const char*>(&student_id), sizeof student_id ); output.write( reinterpret_cast<const char*>(&score), sizeof score ); } bool load_from(std::istream& input) { std::uint32_t loaded_id{}; std::int32_t loaded_score{}; if (!input.read( reinterpret_cast<char*>(&loaded_id), sizeof loaded_id )) { return false; } if (!input.read( reinterpret_cast<char*>(&loaded_score), sizeof loaded_score )) { return false; } student_id = loaded_id; score = loaded_score; return true; } void print_summary() const { std::cout << \"Student \" << student_id << \": \" << score << '\\n'; } }; int main() { ScoreRecord original{1042, 92}; { std::ofstream output_file{ \"score-record.bin\", std::ios::binary }; if (!output_file) { return 1; } original.save_to(output_file); } ScoreRecord restored{}; { std::ifstream input_file{ \"score-record.bin\", std::ios::binary }; if (!input_file || !restored.load_from(input_file)) { return 1; } } restored.print_summary(); return 0; }    The first object is created in memory, its meaningful fields are written to score-record.bin , and a second object is then populated by reading those fields. The class definition exists in the program both when saving and when loading; the file stores data, not executable class definitions.  This example uses the machine's native byte order for simplicity. A portable version would encode the fixed-width values using the file format's specified byte order, add a format version, and check limits before allocating or reading data.  "
+},
+{
+  "id": "chapter12_7_endian-meaning",
+  "level": "2",
+  "url": "chapter12_portable-binary-formats-endianness-and-serialization.html#chapter12_7_endian-meaning",
+  "type": "Checkpoint",
+  "number": "12.7.1",
+  "title": "",
+  "body": " What does endianness describe?   The order of source files during compilation Compilation order is unrelated to byte order.  The order of bytes used to store a multi-byte value Big-endian and little-endian systems arrange those bytes differently.  The number of bits in every integer type Width and byte order are separate properties.  The order in which files are opened Opening order does not describe memory representation.  The order of characters in a string only Endianness concerns byte order in multi-byte representations.   "
+},
+{
+  "id": "chapter12_7_portable-format",
+  "level": "2",
+  "url": "chapter12_portable-binary-formats-endianness-and-serialization.html#chapter12_7_portable-format",
   "type": "Checkpoint",
   "number": "12.7.2",
   "title": "",
-  "body": "  Which of the following are properties of an ordered set?      the set grows to accomodate any new elements we add   Correct! This is the \"arbitrary size\" property.     the set is sorted in an order (ie alphabetically, numerically, e.t.c.)   Incorrect! This is not a requirement of a set.     elements of the set have indices, which can be used to identify them   Correct! This is the \"ordering\" property.     there is a limit on how large a set can be   Incorrect! This is not a requirement of a set... in fact, sets are always expanding with each added element!     there are no repeat elements in the set   Correct! This is the uniqueness property!    "
+  "body": " Select all details a portable binary format should document.   The width and meaning of each numeric field The reader needs to know how to interpret each field.  The byte order for multi-byte values Readers must know how bytes are arranged.  A version or format identifier Versioning helps readers detect format changes.  That every pointer address can be saved and reused later Addresses are not portable persisted references.  That readers may guess unknown fields Explicit rules are safer than guessing.   "
 },
 {
-  "id": "question15_7_2",
+  "id": "chapter12_7_endian-code",
   "level": "2",
-  "url": "chapter15_the-set-data-structure.html#question15_7_2",
+  "url": "chapter12_portable-binary-formats-endianness-and-serialization.html#chapter12_7_endian-code",
   "type": "Checkpoint",
   "number": "12.7.3",
   "title": "",
-  "body": "  Why don't we provide a set() function for numElements ?      numElements is a read-only variable.   Correct!     The user might pick a value for numElements that is out of range.   Incorrect! While this could happen, it just wouldn't make sense for the uer to interact with numElements at all!     numElements cannot be modified.   Incorrect! numElements is modified, just not by the user.     We should provide a set function, we just haven't implemented it yet!   Incorrect! There is no need for the user to have access to a set function.    "
+  "body": " Arrange the blocks to construct the bytes of a 32-bit value in big-endian order.   std::uint32_t value{0x01020304};  bytes[0] = static_cast<unsigned char>(value >> 24);  bytes[1] = static_cast<unsigned char>(value >> 16);  bytes[2] = static_cast<unsigned char>(value >> 8);  bytes[3] = static_cast<unsigned char>(value);   "
 },
 {
-  "id": "question15_7_3",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#question15_7_3",
-  "type": "Checkpoint",
-  "number": "12.7.4",
-  "title": "",
-  "body": "  If the number of elements is 76, then the index of the next element is .          "
-},
-{
-  "id": "question15_7_4",
-  "level": "2",
-  "url": "chapter15_the-set-data-structure.html#question15_7_4",
-  "type": "Checkpoint",
-  "number": "12.7.5",
-  "title": "",
-  "body": "  Suppose we have implemented the Set data structure as defined above, and we run the following code.  Set cities(10); cities.add(\"Detroit\"); cities.add(\"Ann Arbor\"); cities.add(\"Ann Arbor\"); cities.add(\"East Lansing\"); cities.add(\"Grand Rapids\"); cities.add(\"Detroit\"); cities.add(\"Mackinac\"); cities.add(\"Mackinaw\"); string element = cities.getElement(4); std::cout << element;  Type the output exactly as it would appear in the terminal.           "
-},
-{
-  "id": "chapter15_matrix",
+  "id": "chapter12_file-errors-exceptions-and-applications",
   "level": "1",
-  "url": "chapter15_matrix.html",
+  "url": "chapter12_file-errors-exceptions-and-applications.html",
   "type": "Section",
   "number": "12.8",
-  "title": "<code class=\"code-inline tex2jax_ignore\">matrix<\/code>",
-  "body": "  matrix   A matrix is similar to a std::vector except it is two-dimensional. Instead of a length, it has two dimensions, called numrows and numcols , for number of rows and number of columns.  Each element in the matrix is indentified by two indices; one specifies the row number, the other the column number.  To create a matrix, there are four constructors:  matrix<char> m1; matrix<int> m2(3, 4); matrix<double> m3(rows, cols, 0.0); matrix<double> m4(m3);  The first is a do-nothing constructor that makes a matrix with both dimensions 0. The second takes two integers, which are the initial number of rows and columns, in that order. The third is the same as the second, except that it takes an additional parameter that is used to initialized the elements of the matrix. The fourth is a copy constructor that takes another matrix as a parameter.  Just as with vectors , we can make matrix es with any type of elements (including std::vector s, and even matrix es).  To access the elements of a matrix, we use the [] operator to specify the row and column:  m2[0][0] = 1; m3[1][2] = 10.0 * m2[0][0];  If we try to access an element that is out of range, the program prints an error message and quits.  The numrows and numcols functions get the number of rows and columns. Remember that the row indices run from 0 to numrows() -1 and the column indices run from 0 to numcols() -1 .  The usual way to traverse a matrix is with a nested loop. This loop sets each element of the matrix to the sum of its two indices:  for (int row=0; row < m2.numrows(); row++) { for (int col=0; col < m2.numcols(); col++) { m2[row][col] = row + col; } }  This loop prints each row of the matrix with tabs between the elements and newlines between the rows:  for (int row=0; row < m2.numrows(); row++) { for (int col=0; col < m2.numcols(); col++) { std::cout << m2[row][col] << \"\\t\"; } std::cout << std::endl ; }    Which of the following data types are supported by matrix?      int   Correct!     string   Correct!     std::vector<int>   Correct!     vector<std::vector<int>>   Correct! This is a technically type of matrix!     matrix   Correct! Matrices can be made of matrices.       Suppose we have matrix mat . Then mat[9][17] would be accessing column and row of our matrix.         .*  Incorrect! Remember to use zero indexing!         .*  Incorrect! Remember to use zero indexing!      "
+  "title": "File Errors, Exceptions, and Complete Applications",
+  "body": " File Errors, Exceptions, and Complete Applications  File operations can fail because a file is missing, permissions are insufficient, storage is full, or a device reports an input\/output failure. A program should distinguish expected conditions such as end-of-file from failures that require recovery or an error report.   Throwing when a file cannot be opened   #include <fstream> #include <ios> #include <iostream> #include <string> std::ifstream open_input_file(const std::string& filename) { std::ifstream input_file{filename}; if (!input_file) { throw std::ios_base::failure{ \"Could not open \" + filename }; } return input_file; } int main() { try { std::ifstream input_file{ open_input_file(\"scores.csv\") }; std::string line; while (std::getline(input_file, line)) { std::cout << line << '\\n'; } } catch (const std::ios_base::failure& error) { std::cout << \"File operation failed: \" << error.what() << '\\n'; } return 0; }   The helper reports an opening failure immediately. The caller has the context to display a message, request another filename, select a default file, or stop the operation.    Requesting stream exceptions   std::ifstream input_file{\"scores.csv\"}; input_file.exceptions(std::ios::badbit); if (!input_file) { throw std::ios_base::failure{\"Could not open scores.csv\"}; }   The exception mask selects which stream-state flags cause the stream to throw. Requesting badbit can report serious I\/O failures while allowing ordinary end-of-file processing to remain a normal loop condition. Including failbit requires more careful handling because formatted input can set failure-related states at expected stopping points.    Choosing an exception boundary  Low-level code should provide enough information to explain the failure. Higher-level code should decide how to communicate with the user or whether to retry. Catch an exception at the lowest level that has enough context to respond meaningfully; do not catch and ignore it merely to make the program continue.    Designing a complete file application  A reliable application defines its file format, checks every open and read operation, validates records, reports malformed input, and documents how data is represented. For binary files it must also specify field widths, byte order, layout, and version information. These rules allow a future program to determine whether it can safely read the file.    Why might open_input_file() throw?   To guarantee that the operating system creates the file An exception reports failure; it does not create a missing file.  To prevent the caller from continuing as though the file were available The caller can catch the exception and choose a meaningful response.  To convert the file into a binary format Opening failure and file format are separate concerns.  To make every later read succeed An exception does not repair later operations.  To avoid checking the stream object anywhere The helper checks the stream before throwing.     Select all sound file-error practices.   Check whether a file opened successfully. Later operations should not assume an unavailable file is usable.  Handle an exception where the program has enough context to recover. The handling level should know what response is appropriate.  Ignore all file failures so the program continues. Continuing with invalid state can make the result unreliable.  Use exceptions to replace all ordinary loop conditions. Expected end-of-file conditions often belong in loop conditions.  Assume binary input is portable without documenting its format. Binary formats require explicit representation rules.     Arrange the blocks to open a file, throw on failure, and catch the exception.   try {  std::ifstream input_file{\"scores.csv\"};  if (!input_file) {  throw std::ios_base::failure{\"Open failed\"};  }  }  catch (const std::ios_base::failure& error) {  std::cout << error.what() << '\\n';  }    "
 },
 {
-  "id": "chapter15_matrix-2",
+  "id": "chapter12_file-errors-exceptions-and-applications-2",
   "level": "2",
-  "url": "chapter15_matrix.html#chapter15_matrix-2",
+  "url": "chapter12_file-errors-exceptions-and-applications.html#chapter12_file-errors-exceptions-and-applications-2",
   "type": "Paragraph",
   "number": "",
   "title": "",
-  "body": "A matrix is similar to a std::vector except it is two-dimensional. Instead of a length, it has two dimensions, called numrows and numcols , for number of rows and number of columns. "
+  "body": "File operations can fail because a file is missing, permissions are insufficient, storage is full, or a device reports an input\/output failure. A program should distinguish expected conditions such as end-of-file from failures that require recovery or an error report. "
 },
 {
-  "id": "chapter15_matrix-3",
+  "id": "chapter12_file-opening-exception",
   "level": "2",
-  "url": "chapter15_matrix.html#chapter15_matrix-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Each element in the matrix is indentified by two indices; one specifies the row number, the other the column number. "
+  "url": "chapter12_file-errors-exceptions-and-applications.html#chapter12_file-opening-exception",
+  "type": "Subsection",
+  "number": "12.8.1",
+  "title": "Throwing when a file cannot be opened",
+  "body": " Throwing when a file cannot be opened   #include <fstream> #include <ios> #include <iostream> #include <string> std::ifstream open_input_file(const std::string& filename) { std::ifstream input_file{filename}; if (!input_file) { throw std::ios_base::failure{ \"Could not open \" + filename }; } return input_file; } int main() { try { std::ifstream input_file{ open_input_file(\"scores.csv\") }; std::string line; while (std::getline(input_file, line)) { std::cout << line << '\\n'; } } catch (const std::ios_base::failure& error) { std::cout << \"File operation failed: \" << error.what() << '\\n'; } return 0; }   The helper reports an opening failure immediately. The caller has the context to display a message, request another filename, select a default file, or stop the operation.  "
 },
 {
-  "id": "chapter15_matrix-4",
+  "id": "chapter12_stream-exception-mask",
   "level": "2",
-  "url": "chapter15_matrix.html#chapter15_matrix-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To create a matrix, there are four constructors: "
+  "url": "chapter12_file-errors-exceptions-and-applications.html#chapter12_stream-exception-mask",
+  "type": "Subsection",
+  "number": "12.8.2",
+  "title": "Requesting stream exceptions",
+  "body": " Requesting stream exceptions   std::ifstream input_file{\"scores.csv\"}; input_file.exceptions(std::ios::badbit); if (!input_file) { throw std::ios_base::failure{\"Could not open scores.csv\"}; }   The exception mask selects which stream-state flags cause the stream to throw. Requesting badbit can report serious I\/O failures while allowing ordinary end-of-file processing to remain a normal loop condition. Including failbit requires more careful handling because formatted input can set failure-related states at expected stopping points.  "
 },
 {
-  "id": "chapter15_matrix-6",
+  "id": "chapter12_exception-boundary",
   "level": "2",
-  "url": "chapter15_matrix.html#chapter15_matrix-6",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The first is a do-nothing constructor that makes a matrix with both dimensions 0. The second takes two integers, which are the initial number of rows and columns, in that order. The third is the same as the second, except that it takes an additional parameter that is used to initialized the elements of the matrix. The fourth is a copy constructor that takes another matrix as a parameter. "
+  "url": "chapter12_file-errors-exceptions-and-applications.html#chapter12_exception-boundary",
+  "type": "Subsection",
+  "number": "12.8.3",
+  "title": "Choosing an exception boundary",
+  "body": " Choosing an exception boundary  Low-level code should provide enough information to explain the failure. Higher-level code should decide how to communicate with the user or whether to retry. Catch an exception at the lowest level that has enough context to respond meaningfully; do not catch and ignore it merely to make the program continue.  "
 },
 {
-  "id": "chapter15_matrix-7",
+  "id": "chapter12_complete-binary-application",
   "level": "2",
-  "url": "chapter15_matrix.html#chapter15_matrix-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Just as with vectors , we can make matrix es with any type of elements (including std::vector s, and even matrix es). "
+  "url": "chapter12_file-errors-exceptions-and-applications.html#chapter12_complete-binary-application",
+  "type": "Subsection",
+  "number": "12.8.4",
+  "title": "Designing a complete file application",
+  "body": " Designing a complete file application  A reliable application defines its file format, checks every open and read operation, validates records, reports malformed input, and documents how data is represented. For binary files it must also specify field widths, byte order, layout, and version information. These rules allow a future program to determine whether it can safely read the file.  "
 },
 {
-  "id": "chapter15_matrix-8",
+  "id": "chapter12_8_file-exception",
   "level": "2",
-  "url": "chapter15_matrix.html#chapter15_matrix-8",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "To access the elements of a matrix, we use the [] operator to specify the row and column: "
-},
-{
-  "id": "chapter15_matrix-10",
-  "level": "2",
-  "url": "chapter15_matrix.html#chapter15_matrix-10",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "If we try to access an element that is out of range, the program prints an error message and quits. "
-},
-{
-  "id": "chapter15_matrix-11",
-  "level": "2",
-  "url": "chapter15_matrix.html#chapter15_matrix-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The numrows and numcols functions get the number of rows and columns. Remember that the row indices run from 0 to numrows() -1 and the column indices run from 0 to numcols() -1 . "
-},
-{
-  "id": "chapter15_matrix-12",
-  "level": "2",
-  "url": "chapter15_matrix.html#chapter15_matrix-12",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "The usual way to traverse a matrix is with a nested loop. This loop sets each element of the matrix to the sum of its two indices: "
-},
-{
-  "id": "chapter15_matrix-14",
-  "level": "2",
-  "url": "chapter15_matrix.html#chapter15_matrix-14",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This loop prints each row of the matrix with tabs between the elements and newlines between the rows: "
-},
-{
-  "id": "question15_8_1",
-  "level": "2",
-  "url": "chapter15_matrix.html#question15_8_1",
+  "url": "chapter12_file-errors-exceptions-and-applications.html#chapter12_8_file-exception",
   "type": "Checkpoint",
   "number": "12.8.1",
   "title": "",
-  "body": "  Which of the following data types are supported by matrix?      int   Correct!     string   Correct!     std::vector<int>   Correct!     vector<std::vector<int>>   Correct! This is a technically type of matrix!     matrix   Correct! Matrices can be made of matrices.    "
+  "body": " Why might open_input_file() throw?   To guarantee that the operating system creates the file An exception reports failure; it does not create a missing file.  To prevent the caller from continuing as though the file were available The caller can catch the exception and choose a meaningful response.  To convert the file into a binary format Opening failure and file format are separate concerns.  To make every later read succeed An exception does not repair later operations.  To avoid checking the stream object anywhere The helper checks the stream before throwing.   "
 },
 {
-  "id": "question15_8_2",
+  "id": "chapter12_8_error-boundary",
   "level": "2",
-  "url": "chapter15_matrix.html#question15_8_2",
+  "url": "chapter12_file-errors-exceptions-and-applications.html#chapter12_8_error-boundary",
   "type": "Checkpoint",
   "number": "12.8.2",
   "title": "",
-  "body": "  Suppose we have matrix mat . Then mat[9][17] would be accessing column and row of our matrix.         .*  Incorrect! Remember to use zero indexing!         .*  Incorrect! Remember to use zero indexing!     "
+  "body": " Select all sound file-error practices.   Check whether a file opened successfully. Later operations should not assume an unavailable file is usable.  Handle an exception where the program has enough context to recover. The handling level should know what response is appropriate.  Ignore all file failures so the program continues. Continuing with invalid state can make the result unreliable.  Use exceptions to replace all ordinary loop conditions. Expected end-of-file conditions often belong in loop conditions.  Assume binary input is portable without documenting its format. Binary formats require explicit representation rules.   "
 },
 {
-  "id": "chapter15_a-distance-matrix",
+  "id": "chapter12_8_exception-code",
+  "level": "2",
+  "url": "chapter12_file-errors-exceptions-and-applications.html#chapter12_8_exception-code",
+  "type": "Checkpoint",
+  "number": "12.8.3",
+  "title": "",
+  "body": " Arrange the blocks to open a file, throw on failure, and catch the exception.   try {  std::ifstream input_file{\"scores.csv\"};  if (!input_file) {  throw std::ios_base::failure{\"Open failed\"};  }  }  catch (const std::ios_base::failure& error) {  std::cout << error.what() << '\\n';  }   "
+},
+{
+  "id": "chapter12_glossary",
   "level": "1",
-  "url": "chapter15_a-distance-matrix.html",
-  "type": "Section",
-  "number": "12.9",
-  "title": "A distance matrix",
-  "body": " A distance matrix  Finally, we are ready to put the data from the file into a matrix. Specifically, the matrix will have one row and one column for each city.  We'll create the matrix in main , with plenty of space to spare:  matrix<int> distances (50, 50, 0);  Inside processLine , we add new information to the matrix by getting the indices of the two cities from the Set and using them as matrix indices:  int dist = convertToInt(distString); int index1 = cities.add (city1); int index2 = cities.add (city2); distances[index1][index2] = distance; distances[index2][index1] = distance;  Finally, in main we can print the information in a human-readable form:  for (int i=0; i < cities.getNumElements(); i++) { std::cout << cities.getElement(i) << \"\\t\"; for (int j=0; j<=i; j++) { std::cout << distances[i][j] << \"\\t\"; } std::cout << std::endl ; } cout << \"\\t\"; for (int i=0; i < cities.getNumElements(); i++) { std::cout << cities.getElement(i) << \"\\t\"; } cout << std::endl ;  This code produces the output shown at the beginning of the chapter.  "
-},
-{
-  "id": "chapter15_a-distance-matrix-2",
-  "level": "2",
-  "url": "chapter15_a-distance-matrix.html#chapter15_a-distance-matrix-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Finally, we are ready to put the data from the file into a matrix. Specifically, the matrix will have one row and one column for each city. "
-},
-{
-  "id": "chapter15_a-distance-matrix-3",
-  "level": "2",
-  "url": "chapter15_a-distance-matrix.html#chapter15_a-distance-matrix-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "We'll create the matrix in main , with plenty of space to spare: "
-},
-{
-  "id": "chapter15_a-distance-matrix-5",
-  "level": "2",
-  "url": "chapter15_a-distance-matrix.html#chapter15_a-distance-matrix-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Inside processLine , we add new information to the matrix by getting the indices of the two cities from the Set and using them as matrix indices: "
-},
-{
-  "id": "chapter15_a-distance-matrix-7",
-  "level": "2",
-  "url": "chapter15_a-distance-matrix.html#chapter15_a-distance-matrix-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Finally, in main we can print the information in a human-readable form: "
-},
-{
-  "id": "chapter15_a-distance-matrix-9",
-  "level": "2",
-  "url": "chapter15_a-distance-matrix.html#chapter15_a-distance-matrix-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "This code produces the output shown at the beginning of the chapter. "
-},
-{
-  "id": "chapter15_a-proper-distance-matrix",
-  "level": "1",
-  "url": "chapter15_a-proper-distance-matrix.html",
-  "type": "Section",
-  "number": "12.10",
-  "title": "A proper distance matrix",
-  "body": " A proper distance matrix  Although this code works, it is not as well organized as it should be. Now that we have written a prototype, we are in a good position to evaluate the design and improve it.  What are some of the problems with the existing code?     We did not know ahead of time how big to make the distance matrix, so we chose an arbitrary large number (50) and made it a fixed size. It would be better to allow the distance matrix to expand in the same way a Set does. The matrix class has a function called resize that makes this possible.    The data in the distance matrix is not well-encapsulated. We have to pass the set of city names and the matrix itself as arguments to processLine , which is awkward. Also, use of the distance matrix is error prone because we have not provided accessor functions that perform error-checking. It might be a good idea to take the Set of city names and the matrix of distances, and combine them into a single object called a DistMatrix .     Here is a draft of what the header for a DistMatrix might look like:  class DistMatrix { private: Set cities; matrix<int> distances; public: DistMatrix(int rows); void add(const string& city1, const string& city2, int dist); int distance(int i, int j) const; int distance(const string& city1, const string& city2) const; std::string cityName(int i) const; int numCities() const; void print(); };  Using this interface simplifies main :  #include <iostream> #include <fstream> int main() { std::string line; std::ifstream infile(\"distances\"); DistMatrix distances(2); while (true) { std::getline(infile, line); if (infile.eof()) break; processLine(line, distances); } distances.print(); return 0; }  It also simplifies processLine :  void processLine(const string& line, DistMatrix& distances) { char quote = '\\\"'; std::vector<int> quoteIndex (4); quoteIndex[0] = line.find(quote); for (int i=1; i < 4; i++) { quoteIndex[i] = find(line, quote, quoteIndex[i-1]+1); } \/\/ break the line up into substrings int len1 = quoteIndex[1] - quoteIndex[0] - 1; std::string city1 = line.substr(quoteIndex[0]+1, len1); int len2 = quoteIndex[3] - quoteIndex[2] - 1; std::string city2 = line.substr(quoteIndex[2]+1, len2); int len3 = line.length() - quoteIndex[2] - 1; std::string distString = line.substr(quoteIndex[3]+1, len3); int distance = convertToInt(distString); \/\/ add the new datum to the distances matrix distances.add(city1, city2, distance); }  I will leave it as an exercise to you to implement the member functions of DistMatrix .  "
-},
-{
-  "id": "chapter15_a-proper-distance-matrix-2",
-  "level": "2",
-  "url": "chapter15_a-proper-distance-matrix.html#chapter15_a-proper-distance-matrix-2",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Although this code works, it is not as well organized as it should be. Now that we have written a prototype, we are in a good position to evaluate the design and improve it. "
-},
-{
-  "id": "chapter15_a-proper-distance-matrix-3",
-  "level": "2",
-  "url": "chapter15_a-proper-distance-matrix.html#chapter15_a-proper-distance-matrix-3",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "What are some of the problems with the existing code? "
-},
-{
-  "id": "chapter15_a-proper-distance-matrix-4",
-  "level": "2",
-  "url": "chapter15_a-proper-distance-matrix.html#chapter15_a-proper-distance-matrix-4",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "   We did not know ahead of time how big to make the distance matrix, so we chose an arbitrary large number (50) and made it a fixed size. It would be better to allow the distance matrix to expand in the same way a Set does. The matrix class has a function called resize that makes this possible.    The data in the distance matrix is not well-encapsulated. We have to pass the set of city names and the matrix itself as arguments to processLine , which is awkward. Also, use of the distance matrix is error prone because we have not provided accessor functions that perform error-checking. It might be a good idea to take the Set of city names and the matrix of distances, and combine them into a single object called a DistMatrix .    "
-},
-{
-  "id": "chapter15_a-proper-distance-matrix-5",
-  "level": "2",
-  "url": "chapter15_a-proper-distance-matrix.html#chapter15_a-proper-distance-matrix-5",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Here is a draft of what the header for a DistMatrix might look like: "
-},
-{
-  "id": "chapter15_a-proper-distance-matrix-7",
-  "level": "2",
-  "url": "chapter15_a-proper-distance-matrix.html#chapter15_a-proper-distance-matrix-7",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "Using this interface simplifies main : "
-},
-{
-  "id": "chapter15_a-proper-distance-matrix-9",
-  "level": "2",
-  "url": "chapter15_a-proper-distance-matrix.html#chapter15_a-proper-distance-matrix-9",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "It also simplifies processLine : "
-},
-{
-  "id": "chapter15_a-proper-distance-matrix-11",
-  "level": "2",
-  "url": "chapter15_a-proper-distance-matrix.html#chapter15_a-proper-distance-matrix-11",
-  "type": "Paragraph",
-  "number": "",
-  "title": "",
-  "body": "I will leave it as an exercise to you to implement the member functions of DistMatrix . "
-},
-{
-  "id": "chapter15_glossary",
-  "level": "1",
-  "url": "chapter15_glossary.html",
-  "type": "Section",
-  "number": "12.11",
-  "title": "Glossary",
-  "body": " Glossary    ordered set  A data structure in which every element appears only once and every element has an index that identifies it.    stream  A data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output.    accumulator  A variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.       Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    ordered set  a data structure in which every element appears only once and every element has an index that identifies it    stream  a data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output    accumulator  a variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.      "
-},
-{
-  "id": "chapter15_glossary-2",
-  "level": "2",
-  "url": "chapter15_glossary.html#chapter15_glossary-2",
+  "url": "chapter12_glossary.html",
   "type": "Glossary",
+  "number": "12.9",
+  "title": "Chapter 12 Glossary",
+  "body": " Chapter 12 Glossary  stream An abstraction that moves data between a program and an endpoint.  persistence The ability of data to remain available after a program finishes.  text file A file whose bytes represent characters according to a text encoding and documented format.  binary file A file whose bytes represent data according to a binary format.  record One complete logical item of data in a file.  delimiter A character used to separate fields in a structured text record.  parser Code that interprets input according to a documented format.  validation Checking whether parsed data satisfies structural and application rules.  CSV Comma-separated values, a simple delimited text format.  token input Formatted input that commonly stops at whitespace.  line input Input that reads characters through a line ending.  stream state Flags describing whether a stream is usable, at end-of-file, or in a failure state.  object representation The bytes occupied by an object in memory.  fixed-size record A record whose storage size is constant within a file format.  random access Moving directly to a selected file position instead of reading all earlier data.  endianness The order in which the bytes of a multi-byte value are stored.  serialization Converting program data into a representation that can be stored or transmitted.  deserialization Reconstructing program data from a stored or transmitted representation.  padding Unused bytes inserted into an object representation for alignment.  format version An identifier that tells a reader which rules describe a file's data.  exception mask The set of stream-state flags configured to cause exceptions.  "
+},
+{
+  "id": "chapter12_glossary_stream-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_stream-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An abstraction that moves data between a program and an endpoint. "
+},
+{
+  "id": "chapter12_glossary_persistence-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_persistence-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The ability of data to remain available after a program finishes. "
+},
+{
+  "id": "chapter12_glossary_text-file-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_text-file-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A file whose bytes represent characters according to a text encoding and documented format. "
+},
+{
+  "id": "chapter12_glossary_binary-file-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_binary-file-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A file whose bytes represent data according to a binary format. "
+},
+{
+  "id": "chapter12_glossary_record-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_record-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "One complete logical item of data in a file. "
+},
+{
+  "id": "chapter12_glossary_delimiter-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_delimiter-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A character used to separate fields in a structured text record. "
+},
+{
+  "id": "chapter12_glossary_parser-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_parser-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Code that interprets input according to a documented format. "
+},
+{
+  "id": "chapter12_glossary_validation-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_validation-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Checking whether parsed data satisfies structural and application rules. "
+},
+{
+  "id": "chapter12_glossary_csv-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_csv-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Comma-separated values, a simple delimited text format. "
+},
+{
+  "id": "chapter12_glossary_token-input-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_token-input-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Formatted input that commonly stops at whitespace. "
+},
+{
+  "id": "chapter12_glossary_line-input-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_line-input-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Input that reads characters through a line ending. "
+},
+{
+  "id": "chapter12_glossary_stream-state-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_stream-state-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Flags describing whether a stream is usable, at end-of-file, or in a failure state. "
+},
+{
+  "id": "chapter12_glossary_object-representation-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_object-representation-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The bytes occupied by an object in memory. "
+},
+{
+  "id": "chapter12_glossary_fixed-size-record-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_fixed-size-record-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A record whose storage size is constant within a file format. "
+},
+{
+  "id": "chapter12_glossary_random-access-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_random-access-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Moving directly to a selected file position instead of reading all earlier data. "
+},
+{
+  "id": "chapter12_glossary_endianness-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_endianness-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The order in which the bytes of a multi-byte value are stored. "
+},
+{
+  "id": "chapter12_glossary_serialization-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_serialization-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Converting program data into a representation that can be stored or transmitted. "
+},
+{
+  "id": "chapter12_glossary_deserialization-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_deserialization-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Reconstructing program data from a stored or transmitted representation. "
+},
+{
+  "id": "chapter12_glossary_padding-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_padding-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Unused bytes inserted into an object representation for alignment. "
+},
+{
+  "id": "chapter12_glossary_format-version-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_format-version-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An identifier that tells a reader which rules describe a file's data. "
+},
+{
+  "id": "chapter12_glossary_exception-mask-2",
+  "level": "2",
+  "url": "chapter12_glossary.html#chapter12_glossary_exception-mask-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The set of stream-state flags configured to cause exceptions. "
+},
+{
+  "id": "chapter12_component-exercises",
+  "level": "1",
+  "url": "chapter12_component-exercises.html",
+  "type": "Exercises",
+  "number": "12.10",
+  "title": "Chapter 12 Exercises",
+  "body": " Chapter 12 Exercises   Which statement best distinguishes text and binary files?   Text files cannot store numbers. Text files can store numbers as characters.  Text files use a character-oriented format, while binary files use a documented byte-oriented format. The distinction concerns representation, not whether the data are useful.  Binary files never need documentation. Binary readers need format rules.  Only binary files can be persistent. Both formats can be persistent.  Text files are always portable. Text encoding and format rules still matter.     What should a simple CSV parser do after extracting the expected fields?   Assume the line is valid without further checks. Input still needs validation.  Check ranges, extra content, and other documented rules. Parsing and validation are related but distinct tasks.  Convert the record into a binary file automatically. File conversion is a separate operation.  Ask for keyboard input inside the parser. The parser should process the line it receives.  Delete malformed input silently. The application should choose an explicit reporting or recovery policy.     Select all requirements for a portable binary format.   Specify field widths and meanings. The reader must know how to interpret each field.  Specify byte order for multi-byte values. Native byte order is not automatically portable.  Provide a version or format identifier. Versioning helps readers detect format changes.  Persist raw pointer addresses. Addresses are not stable serialized references.  Let readers guess unknown fields. Explicit rules are safer than guessing.     Why should ordinary end-of-file usually be handled differently from a serious I\/O failure?   End-of-file is often an expected stopping condition, while a serious I\/O failure requires reporting or recovery. The program should distinguish expected control flow from failure.  End-of-file always means the file was corrupted. End-of-file is normal for many read loops.  Serious I\/O failures never affect stream state. They are represented by stream-state flags.  Exceptions remove the need to check files. Exceptions are one error-handling strategy, not a substitute for design.  Binary files cannot reach end-of-file. All finite files have an end.    "
+},
+{
+  "id": "chapter12_component_text-binary",
+  "level": "2",
+  "url": "chapter12_component-exercises.html#chapter12_component_text-binary",
+  "type": "Exercise",
+  "number": "12.10.1",
+  "title": "",
+  "body": " Which statement best distinguishes text and binary files?   Text files cannot store numbers. Text files can store numbers as characters.  Text files use a character-oriented format, while binary files use a documented byte-oriented format. The distinction concerns representation, not whether the data are useful.  Binary files never need documentation. Binary readers need format rules.  Only binary files can be persistent. Both formats can be persistent.  Text files are always portable. Text encoding and format rules still matter.   "
+},
+{
+  "id": "chapter12_component_csv",
+  "level": "2",
+  "url": "chapter12_component-exercises.html#chapter12_component_csv",
+  "type": "Exercise",
+  "number": "12.10.2",
+  "title": "",
+  "body": " What should a simple CSV parser do after extracting the expected fields?   Assume the line is valid without further checks. Input still needs validation.  Check ranges, extra content, and other documented rules. Parsing and validation are related but distinct tasks.  Convert the record into a binary file automatically. File conversion is a separate operation.  Ask for keyboard input inside the parser. The parser should process the line it receives.  Delete malformed input silently. The application should choose an explicit reporting or recovery policy.   "
+},
+{
+  "id": "chapter12_component_endian",
+  "level": "2",
+  "url": "chapter12_component-exercises.html#chapter12_component_endian",
+  "type": "Exercise",
+  "number": "12.10.3",
+  "title": "",
+  "body": " Select all requirements for a portable binary format.   Specify field widths and meanings. The reader must know how to interpret each field.  Specify byte order for multi-byte values. Native byte order is not automatically portable.  Provide a version or format identifier. Versioning helps readers detect format changes.  Persist raw pointer addresses. Addresses are not stable serialized references.  Let readers guess unknown fields. Explicit rules are safer than guessing.   "
+},
+{
+  "id": "chapter12_component_exceptions",
+  "level": "2",
+  "url": "chapter12_component-exercises.html#chapter12_component_exceptions",
+  "type": "Exercise",
+  "number": "12.10.4",
+  "title": "",
+  "body": " Why should ordinary end-of-file usually be handled differently from a serious I\/O failure?   End-of-file is often an expected stopping condition, while a serious I\/O failure requires reporting or recovery. The program should distinguish expected control flow from failure.  End-of-file always means the file was corrupted. End-of-file is normal for many read loops.  Serious I\/O failures never affect stream state. They are represented by stream-state flags.  Exceptions remove the need to check files. Exceptions are one error-handling strategy, not a substitute for design.  Binary files cannot reach end-of-file. All finite files have an end.   "
+},
+{
+  "id": "chapter12_mixed-up-code",
+  "level": "1",
+  "url": "chapter12_mixed-up-code.html",
+  "type": "Exercises",
   "number": "12.11",
-  "title": "Glossary",
-  "body": "  ordered set  A data structure in which every element appears only once and every element has an index that identifies it.    stream  A data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output.    accumulator  A variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.   "
+  "title": "Chapter 12 Mixed-Up Code Practice",
+  "body": " Chapter 12 Mixed-Up Code Practice   Arrange the blocks to open a text file and process each line.   std::ifstream input_file{\"notes.txt\"};  if (!input_file) { return 1; }  std::string line;  while (std::getline(input_file, line)) {  std::cout << line << '\\n';  }     Arrange the blocks to parse and validate a simple score record.   std::istringstream record_stream{line};  std::getline(record_stream, name, ',');  record_stream >> score;  record_stream >> std::ws;  return !name.empty() && record_stream.eof();     Arrange the blocks to read complete binary integers.   std::int32_t value{};  while (input_file.read(  reinterpret_cast<char*>(&value),  sizeof value  )) {  std::cout << value << '\\n';  }     Arrange the blocks to locate and read a fixed-size record.   std::streamoff offset{record_number * record_size};  input_file.seekg(offset, std::ios::beg);  input_file.read(reinterpret_cast<char*>(&record), sizeof record);  std::cout << record.score << '\\n';    "
 },
 {
-  "id": "chapter15_glossary-3",
+  "id": "chapter12_muc_read-lines",
   "level": "2",
-  "url": "chapter15_glossary.html#chapter15_glossary-3",
-  "type": "Reading Questions",
-  "number": "12.11",
-  "title": "Reading Questions",
-  "body": "   Match each phrase with the corresponding definition by dragging the phrase into the appropriate box.   Try again!    ordered set  a data structure in which every element appears only once and every element has an index that identifies it    stream  a data structure that represents a flow or sequence of data items from one place to another. In C++ streams are used for input and output    accumulator  a variable used inside a loop to accumulate a result, often by getting something added or concatenated during each iteration.     "
-},
-{
-  "id": "chapter15_multiple-choice-exercises",
-  "level": "1",
-  "url": "chapter15_multiple-choice-exercises.html",
-  "type": "Exercises",
-  "number": "12.12",
-  "title": "Multiple Choice Exercises",
-  "body": " Multiple Choice Exercises    We want to open a file and parse its data into our program. What library do we need to include?       iostream    This library deals with communication through the standard input and output.      sstream    This library is used to manipulate string objects as if they were streams.      fstream    This library is used to manipulate files using streams.      iomanip    This library is used to modify internal flags and formatting options.       The code below reads data from a file called input.txt . What is wrong with the following code?   #include <iostream> #include <fstream> int main() { std::string input; std::string filename = \"input.txt\"; std::ifstream infile(filename); std::getline(filename, input); }       We should use ofstream instead of ifstream .   Since we are dealing with an input file, we should use ifstream .     The arguments in getline are incorrect.   We are supposed to read input through the ifstream object. This line should be getline(infile, input) .     We cannot use a variable to store the filename.   Since the name of the file is just a string, we can store it in a variable.     There are no errors with this code.   Take another look at the code. Are we reading the input correctly into input ?       We want to make sure the file we wanted to open was opened successfully. Which of the following checks this and prints the proper output?       if (infile.good()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the if statement evaluates to true, then the file was opened successfully.      if (!infile.is_open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }     is_open() is another function that returns true if a file is opened successfully.      if (infile.good() == false) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the file isn't opened successfully, an error message is printed.      if (!infile.open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    The open() function is different from is_open() and does not return a bool .       Which of the following statements are true?      We can assume the program opens all files successfully.   There are times when a file can't be properly opened because they may have not been properly closed the last time they were used or the file is currently used by another program. As a result, it is good practice to include a check in your program.     A stream is an abstract object that represents the flow of data from a source.   We've used two streams before: the standard input stream and standard output stream ( cin and cout ).     We cannot use the operators << and >> , as they are for iostream objects only.   We are also able to use the operators for fstream objects.       What are the contents of the output file output.txt after running the code below?   #include <iostream> #include <fstream> int main() { std::ofstream outfile(\"output.txt\"); if (!outfile.good()) { std::cout << \"Unable to open file\" << std::endl; } std::cout << \"Powers of 2: \"; outfile << \"2 4 8 16 32 64\" << std::endl; }       2 4 8 16 32 64   This is the only thing we write to the output file.     Powers of 2: 2 4 8 16 31 64   Take another look at the stream objects used in the code.     Powers of 2:   This is printed to standard output, not the output file.     Unable to open file   Although this may be printed, this is not the contents of the output file.       The file scores.txt contains data about the roster number and test scores of students in a class. The output file averages.txt should store each student's roster number and average test score. What should replace the question marks?   #include <iostream> #include <fstream> int main() { std::string junk; int studentNum; double mid1, mid2, final; std::ifstream infile(\"scores.txt\"); std::ofstream outfile(\"averages.txt\"); if (!infile.good() || !outfile.good()) { std::cout << \"Unable to open a file\" << std::endl; } std::getline(infile, junk); outfile << \"Student#\\tAverage\" << std::endl; while (infile >> studentNum >> mid1 >> mid2 >> final) { double avg = (mid1 + mid2 + final) \/ 3; ??? } }        cout << avg << std::endl    This will output the average to standard output.      outfile << avg << std::endl    Take another look at the code. Is there a clue as to what data should be in the output file?      infile << studentNum << \"\\t\" << avg << std::endl    The data should be written to the output file.      outfile << studentNum << \"\\t\" << avg << std::endl    This properly outputs the student number and the student's average to the output file.       What does the following code do?   #include <iostream> #include <string> int main() { std::string original = \"430-0444\"; std::string digitString = \"\"; for (size_t i = 0; i < original.length(); i++) { if (isdigit(original[original.length() - 1 - i])) { digitString += original[original.length() - 1 - i]; } } std::cout << atoi(digitString) << std::endl; }       The code converts the original string to an integer and outputs the integer.   Take a closer look at the contents of the for loop.     The code converts an integer to a string and outputs the string.   What does the atoi function do?     The code outputs the sum of all the original string's digits.   The digitString variable is a string , not an int .     The code converts the original string to an integer in reverse and outputs the integer in reverse.   The code in the for loop parses the string in reverse.       Which of the following statements are false about the Set data structure?      A set can contain multiple elements with the same value.   All elements in a set are unique.     We can identify elements of a set by each element's index.   Each element has an index associated with it.     The elements of a Set are always sorted.   Although a set is ordered, it is not necessarily sorted.     The size of a Set object is fixed.   The Set data structure can expand to make room for new elements.       There are many ways to construct a matrix . Which of the following are valid constructors of a matrix ?       matrix<string> m1(2);    A matrix has two dimensions and this constructor only has one dimension.      matrix<int> m2(2, 6, 0);    This creates a matrix with 2 rows and 6 columns with all of its elements equal to 0.      matrix<char> m3(m2);    This creates m3 to be a copy of m2 .      matrix<int> m2(2.4, 2);    There must be a whole number of rows and columns.       What is the output of the following code?   #include <iostream> #include <vector> bool secret_function(int num) { if (num % 2 == 0) { return true; } return false; } int main() { matrix<int> mat(4, 2); for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { if (!secret_function(i + j) { mat[i][j] = 0; } else { mat[i][j] = i + j; } } } int n; for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { n += mat[i][j]; } } std::cout << n << std::endl; }       8   The matrix only contains even sums of the row and column indices and 0 otherwise. Thus, the sum of all elements is 8.     16   What does the secret function do?     0   What are the contents of the matrix?     9   What are the contents of the matrix?     "
-},
-{
-  "id": "mce_15_1",
-  "level": "2",
-  "url": "chapter15_multiple-choice-exercises.html#mce_15_1",
+  "url": "chapter12_mixed-up-code.html#chapter12_muc_read-lines",
   "type": "Exercise",
-  "number": "12.12.1",
+  "number": "12.11.yes",
   "title": "",
-  "body": "  We want to open a file and parse its data into our program. What library do we need to include?       iostream    This library deals with communication through the standard input and output.      sstream    This library is used to manipulate string objects as if they were streams.      fstream    This library is used to manipulate files using streams.      iomanip    This library is used to modify internal flags and formatting options.    "
+  "body": " Arrange the blocks to open a text file and process each line.   std::ifstream input_file{\"notes.txt\"};  if (!input_file) { return 1; }  std::string line;  while (std::getline(input_file, line)) {  std::cout << line << '\\n';  }   "
 },
 {
-  "id": "mce_15_2",
+  "id": "chapter12_muc_csv-parser",
   "level": "2",
-  "url": "chapter15_multiple-choice-exercises.html#mce_15_2",
+  "url": "chapter12_mixed-up-code.html#chapter12_muc_csv-parser",
   "type": "Exercise",
-  "number": "12.12.2",
+  "number": "12.11.yes",
   "title": "",
-  "body": "  The code below reads data from a file called input.txt . What is wrong with the following code?   #include <iostream> #include <fstream> int main() { std::string input; std::string filename = \"input.txt\"; std::ifstream infile(filename); std::getline(filename, input); }       We should use ofstream instead of ifstream .   Since we are dealing with an input file, we should use ifstream .     The arguments in getline are incorrect.   We are supposed to read input through the ifstream object. This line should be getline(infile, input) .     We cannot use a variable to store the filename.   Since the name of the file is just a string, we can store it in a variable.     There are no errors with this code.   Take another look at the code. Are we reading the input correctly into input ?    "
+  "body": " Arrange the blocks to parse and validate a simple score record.   std::istringstream record_stream{line};  std::getline(record_stream, name, ',');  record_stream >> score;  record_stream >> std::ws;  return !name.empty() && record_stream.eof();   "
 },
 {
-  "id": "mce_15_3",
+  "id": "chapter12_muc_binary-read",
   "level": "2",
-  "url": "chapter15_multiple-choice-exercises.html#mce_15_3",
+  "url": "chapter12_mixed-up-code.html#chapter12_muc_binary-read",
   "type": "Exercise",
-  "number": "12.12.3",
+  "number": "12.11.yes",
   "title": "",
-  "body": "  We want to make sure the file we wanted to open was opened successfully. Which of the following checks this and prints the proper output?       if (infile.good()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the if statement evaluates to true, then the file was opened successfully.      if (!infile.is_open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }     is_open() is another function that returns true if a file is opened successfully.      if (infile.good() == false) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    If the file isn't opened successfully, an error message is printed.      if (!infile.open()) { std::cout << \"File opened unsuccessfully\" << std::endl ; }    The open() function is different from is_open() and does not return a bool .    "
+  "body": " Arrange the blocks to read complete binary integers.   std::int32_t value{};  while (input_file.read(  reinterpret_cast<char*>(&value),  sizeof value  )) {  std::cout << value << '\\n';  }   "
 },
 {
-  "id": "mce_15_4",
+  "id": "chapter12_muc-random-access",
   "level": "2",
-  "url": "chapter15_multiple-choice-exercises.html#mce_15_4",
+  "url": "chapter12_mixed-up-code.html#chapter12_muc-random-access",
   "type": "Exercise",
-  "number": "12.12.4",
+  "number": "12.11.yes",
   "title": "",
-  "body": "  Which of the following statements are true?      We can assume the program opens all files successfully.   There are times when a file can't be properly opened because they may have not been properly closed the last time they were used or the file is currently used by another program. As a result, it is good practice to include a check in your program.     A stream is an abstract object that represents the flow of data from a source.   We've used two streams before: the standard input stream and standard output stream ( cin and cout ).     We cannot use the operators << and >> , as they are for iostream objects only.   We are also able to use the operators for fstream objects.    "
-},
-{
-  "id": "mce_15_5",
-  "level": "2",
-  "url": "chapter15_multiple-choice-exercises.html#mce_15_5",
-  "type": "Exercise",
-  "number": "12.12.5",
-  "title": "",
-  "body": "  What are the contents of the output file output.txt after running the code below?   #include <iostream> #include <fstream> int main() { std::ofstream outfile(\"output.txt\"); if (!outfile.good()) { std::cout << \"Unable to open file\" << std::endl; } std::cout << \"Powers of 2: \"; outfile << \"2 4 8 16 32 64\" << std::endl; }       2 4 8 16 32 64   This is the only thing we write to the output file.     Powers of 2: 2 4 8 16 31 64   Take another look at the stream objects used in the code.     Powers of 2:   This is printed to standard output, not the output file.     Unable to open file   Although this may be printed, this is not the contents of the output file.    "
-},
-{
-  "id": "mce_15_6",
-  "level": "2",
-  "url": "chapter15_multiple-choice-exercises.html#mce_15_6",
-  "type": "Exercise",
-  "number": "12.12.6",
-  "title": "",
-  "body": "  The file scores.txt contains data about the roster number and test scores of students in a class. The output file averages.txt should store each student's roster number and average test score. What should replace the question marks?   #include <iostream> #include <fstream> int main() { std::string junk; int studentNum; double mid1, mid2, final; std::ifstream infile(\"scores.txt\"); std::ofstream outfile(\"averages.txt\"); if (!infile.good() || !outfile.good()) { std::cout << \"Unable to open a file\" << std::endl; } std::getline(infile, junk); outfile << \"Student#\\tAverage\" << std::endl; while (infile >> studentNum >> mid1 >> mid2 >> final) { double avg = (mid1 + mid2 + final) \/ 3; ??? } }        cout << avg << std::endl    This will output the average to standard output.      outfile << avg << std::endl    Take another look at the code. Is there a clue as to what data should be in the output file?      infile << studentNum << \"\\t\" << avg << std::endl    The data should be written to the output file.      outfile << studentNum << \"\\t\" << avg << std::endl    This properly outputs the student number and the student's average to the output file.    "
-},
-{
-  "id": "mce_15_7",
-  "level": "2",
-  "url": "chapter15_multiple-choice-exercises.html#mce_15_7",
-  "type": "Exercise",
-  "number": "12.12.7",
-  "title": "",
-  "body": "  What does the following code do?   #include <iostream> #include <string> int main() { std::string original = \"430-0444\"; std::string digitString = \"\"; for (size_t i = 0; i < original.length(); i++) { if (isdigit(original[original.length() - 1 - i])) { digitString += original[original.length() - 1 - i]; } } std::cout << atoi(digitString) << std::endl; }       The code converts the original string to an integer and outputs the integer.   Take a closer look at the contents of the for loop.     The code converts an integer to a string and outputs the string.   What does the atoi function do?     The code outputs the sum of all the original string's digits.   The digitString variable is a string , not an int .     The code converts the original string to an integer in reverse and outputs the integer in reverse.   The code in the for loop parses the string in reverse.    "
-},
-{
-  "id": "mce_15_8",
-  "level": "2",
-  "url": "chapter15_multiple-choice-exercises.html#mce_15_8",
-  "type": "Exercise",
-  "number": "12.12.8",
-  "title": "",
-  "body": "  Which of the following statements are false about the Set data structure?      A set can contain multiple elements with the same value.   All elements in a set are unique.     We can identify elements of a set by each element's index.   Each element has an index associated with it.     The elements of a Set are always sorted.   Although a set is ordered, it is not necessarily sorted.     The size of a Set object is fixed.   The Set data structure can expand to make room for new elements.    "
-},
-{
-  "id": "mce_15_9",
-  "level": "2",
-  "url": "chapter15_multiple-choice-exercises.html#mce_15_9",
-  "type": "Exercise",
-  "number": "12.12.9",
-  "title": "",
-  "body": "  There are many ways to construct a matrix . Which of the following are valid constructors of a matrix ?       matrix<string> m1(2);    A matrix has two dimensions and this constructor only has one dimension.      matrix<int> m2(2, 6, 0);    This creates a matrix with 2 rows and 6 columns with all of its elements equal to 0.      matrix<char> m3(m2);    This creates m3 to be a copy of m2 .      matrix<int> m2(2.4, 2);    There must be a whole number of rows and columns.    "
-},
-{
-  "id": "mce_15_10",
-  "level": "2",
-  "url": "chapter15_multiple-choice-exercises.html#mce_15_10",
-  "type": "Exercise",
-  "number": "12.12.10",
-  "title": "",
-  "body": "  What is the output of the following code?   #include <iostream> #include <vector> bool secret_function(int num) { if (num % 2 == 0) { return true; } return false; } int main() { matrix<int> mat(4, 2); for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { if (!secret_function(i + j) { mat[i][j] = 0; } else { mat[i][j] = i + j; } } } int n; for (size_t i = 0 i < mat.size(); ++i) { for (size_t j = 0; j < mat[i].size(); ++j) { n += mat[i][j]; } } std::cout << n << std::endl; }       8   The matrix only contains even sums of the row and column indices and 0 otherwise. Thus, the sum of all elements is 8.     16   What does the secret function do?     0   What are the contents of the matrix?     9   What are the contents of the matrix?    "
-},
-{
-  "id": "chapter15_mixed-up-code-practice",
-  "level": "1",
-  "url": "chapter15_mixed-up-code-practice.html",
-  "type": "Exercises",
-  "number": "12.13",
-  "title": "Mixed Up Code Practice",
-  "body": " Mixed Up Code Practice    We have a file called locations.txt that we want to read data from. Check to make sure that the file was opened properly; if it wasn't, display an error message and exit with a status of 1. Put the necessary blocks of code in the correct order.     int main() {     ifstream infile(\"locations.txt\");    ifstream infile(locations.txt);      if (infile.good() == false) {    if (infile.good()) {     std::cout << \"Unable to open the file.\" << std::endl ;     exit(1);    return 1;     }    }       Let's write a program that prompts the user for a filename and opens that file. Put the necessary blocks of code in the correct order.     int main() {     std::string filename;    ifstream filename;     std::cout << \"Enter the name of the file: \";    std::cin >> filename;     ifstream infile(filename);    ifstream infile(filename);     if (infile.good() == false) {    std::cout << \"Unable to open the file.\" << std::endl ;    exit(1);    }    }       Now let's write some output to a file. Write a program that prompts a user for a list of 5 integers separated by spaces, calculates the average of those integers, and outputs The average is average to an output file called average.txt . Put the necessary blocks of code in the correct order. Declare the output file first and check that it is opened correctly.     int main() {    ofstream outfile(\"average.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<int> list;    int sum = 0;    int n1, n2, n3, n4, n5;    std::cout << \"Enter five integers separated by spaces: \";    std::cin >> n1 >> n2 >> n3 >> n4 >> n5;    sum = n1 + n2 + n3 + n4 + n5;     outfile << \"The average is \" << sum \/ 5.0 << std::endl ;    std::cout << \"The average is \" << sum \/ 5.0 << std::endl ;     }       We are given a file called data.txt with an unknown number of double values. Write a program that finds the minimum, maximum, and number of data and outputs these values to a file called summary.txt . Put the necessary blocks of code in the correct order. Declare the input and output files first, and check to see that both are opened correctly before dealing with data. Increment the number of data points before checking for the min and max.     int main() {    ifstream infile(\"data.txt\");    ofstream outfile(\"summary.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::vector<int> data;    int numData = 1;    double min, max, value;    infile >> value;    min = value;    max = value;    while (infile >> value) {    ++numData;    if (value < min) { min = value; }    if (value > max) { max = value; }    }    outfile << \"Number of data: \" << numData << \", min: \" << min << \", max: \" << max << std::endl ;    }       You are given a file called employee_data.txt and you want to store the information from that file into a vector of data. The file contains information about an employee's first and last name, age, phone number, and email. Write the definition of an Employee before you write your main function. Open and check the file before working with the data. Put the necessary blocks of code in the correct order.     struct Employee {  std::string fname;  std::string lname;  int age;  int phone;  std::string email;    Employee(string f, string l, int a, int p, string e) {  fname = f;  lname = l;  age = a;  phone = p;  email = e;  }    };    int main() {    ifstream infile(\"employee_data.txt\");    if (infile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<Employee> data;    std::string fname, lname, email;    int age, phone;     while (infile >> fname >> lname >> age >> phone >> email) {    while (infile) {     Employee e(fname, lname, age, phone, email);    data.push_back(e);    }  }       You are given a file but it appears that someone's capslock key was stuck because everything is in uppercase. Write a program that takes the input from the file UPPER.txt and converts all the words to lowercase and prints out the modified message to a file called lower.txt . Write the definition of the function toLower first. Separate the words with spaces. Put the necessary blocks of code in the correct order.     string upperToLower(string upper) {  for (size_t i = 0; i < upper.length(); ++i) {     upper[i] = toupper(upper[i]);    tolower(upper[i]);     }  return upper;  }    int main() {    ifstream infile(\"UPPER.txt\");    ofstream outfile(\"lower.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::string word;    while (infile >> word) {     std::string upper = upperToLower(word);    upperToLower(word);     outfile << upper << \" \";    }  }       Nobody ever put a limit on how many files we can work with. Does this mean we can open two or more files at once? Yes we can! Write a program that combines two files odds.txt and evens.txt into one output file numbers.txt . You should combine them in a way such that numbers.txt contains the first odd number then the first even number then the second odd number and so on. You are guaranteed that there are equal amounts of odd and even numbers. Put the necessary blocks of code in the correct order.     int main() {    ifstream odds(\"odds.txt\");    ifstream evens(\"evens.txt\");    ofstream outfile(\"numbers.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int odd, even;    while (odds >> odd && evens >> even) {    outfile << odd << \" \" << even << \" \";    }  }       In chapter 15.7 we defined the Set data structure. Write a function vectorToSet which takes a std::vector of data and returns a Set object with the data. Put the necessary blocks of code in the correct order. Put the Set definition first in your answer.     class Set {  private:  std::vector<string> elements;  int numElements;  public:  Set(int n);  int getNumElements() const;  std::string getElement(int i) const;  int find(const string& s) const;  int add(const string& s);  };     Set vectorToSet( std::vector<string> data) {    void Set::vectorToSet( std::vector<string> data) {     Set s(data.size());    for (size_t i = 0; i < data.size(); ++i) {    s.add(data[i]);    }    s.numElements++;    if (s.find(data[i]) != -1) {    s.elements.push_back(data[i]);    }       Let's write the class definition for a Matrix ! The underlying data structure is a std::vector of std::vector s of int s. Write the constructor and at function, which returns the data stored at a given row and column. Put the necessary blocks of code in the correct order.     class Matrix {    private:    std::vector< std::vector<int> > elements;    public:    Matrix(int numRows, int numCols) {    std::vector<int> row(numCols);    for (int i = 0; i < numRows; ++i) {    elements.push_back(row);    }  }    int at(int row, int col) {    return elements[row][col];    }    };       Now that we have the basic structure of a Matrix , let's write a function that allows us to add data to a matrix. Write the Matrix member function setData which takes a row and column index as well as a data value and stores the data value in the Matrix at the given location. Then read data in from a file called data.txt . The first line contains the number of rows and columns, separated by a space. Data values begin on the next line. Put the necessary blocks of code in the correct order.      void Matrix::setData(int row, int col, int value) {    void setData(int row, int col, int value) {     elements[row][col] = value;    }    int main() {    ifstream infile(\"data.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int numRows, numCols, data;    infile >> numRows >> numCols;    Matrix mat(numRows, numCols);    while (infile >> data) {    for (int i = 0; i < numRows; ++i) {    for (int j = 0; j < numCols; ++j) {    mat.setData(i, j, data);  }  }  }    }     "
-},
-{
-  "id": "mucp_15_1",
-  "level": "2",
-  "url": "chapter15_mixed-up-code-practice.html#mucp_15_1",
-  "type": "Exercise",
-  "number": "12.13.yes",
-  "title": "",
-  "body": "  We have a file called locations.txt that we want to read data from. Check to make sure that the file was opened properly; if it wasn't, display an error message and exit with a status of 1. Put the necessary blocks of code in the correct order.     int main() {     ifstream infile(\"locations.txt\");    ifstream infile(locations.txt);      if (infile.good() == false) {    if (infile.good()) {     std::cout << \"Unable to open the file.\" << std::endl ;     exit(1);    return 1;     }    }    "
-},
-{
-  "id": "mucp_15_2",
-  "level": "2",
-  "url": "chapter15_mixed-up-code-practice.html#mucp_15_2",
-  "type": "Exercise",
-  "number": "12.13.yes",
-  "title": "",
-  "body": "  Let's write a program that prompts the user for a filename and opens that file. Put the necessary blocks of code in the correct order.     int main() {     std::string filename;    ifstream filename;     std::cout << \"Enter the name of the file: \";    std::cin >> filename;     ifstream infile(filename);    ifstream infile(filename);     if (infile.good() == false) {    std::cout << \"Unable to open the file.\" << std::endl ;    exit(1);    }    }    "
-},
-{
-  "id": "mucp_15_3",
-  "level": "2",
-  "url": "chapter15_mixed-up-code-practice.html#mucp_15_3",
-  "type": "Exercise",
-  "number": "12.13.yes",
-  "title": "",
-  "body": "  Now let's write some output to a file. Write a program that prompts a user for a list of 5 integers separated by spaces, calculates the average of those integers, and outputs The average is average to an output file called average.txt . Put the necessary blocks of code in the correct order. Declare the output file first and check that it is opened correctly.     int main() {    ofstream outfile(\"average.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<int> list;    int sum = 0;    int n1, n2, n3, n4, n5;    std::cout << \"Enter five integers separated by spaces: \";    std::cin >> n1 >> n2 >> n3 >> n4 >> n5;    sum = n1 + n2 + n3 + n4 + n5;     outfile << \"The average is \" << sum \/ 5.0 << std::endl ;    std::cout << \"The average is \" << sum \/ 5.0 << std::endl ;     }    "
-},
-{
-  "id": "mucp_15_4",
-  "level": "2",
-  "url": "chapter15_mixed-up-code-practice.html#mucp_15_4",
-  "type": "Exercise",
-  "number": "12.13.yes",
-  "title": "",
-  "body": "  We are given a file called data.txt with an unknown number of double values. Write a program that finds the minimum, maximum, and number of data and outputs these values to a file called summary.txt . Put the necessary blocks of code in the correct order. Declare the input and output files first, and check to see that both are opened correctly before dealing with data. Increment the number of data points before checking for the min and max.     int main() {    ifstream infile(\"data.txt\");    ofstream outfile(\"summary.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::vector<int> data;    int numData = 1;    double min, max, value;    infile >> value;    min = value;    max = value;    while (infile >> value) {    ++numData;    if (value < min) { min = value; }    if (value > max) { max = value; }    }    outfile << \"Number of data: \" << numData << \", min: \" << min << \", max: \" << max << std::endl ;    }    "
-},
-{
-  "id": "mucp_15_5",
-  "level": "2",
-  "url": "chapter15_mixed-up-code-practice.html#mucp_15_5",
-  "type": "Exercise",
-  "number": "12.13.yes",
-  "title": "",
-  "body": "  You are given a file called employee_data.txt and you want to store the information from that file into a vector of data. The file contains information about an employee's first and last name, age, phone number, and email. Write the definition of an Employee before you write your main function. Open and check the file before working with the data. Put the necessary blocks of code in the correct order.     struct Employee {  std::string fname;  std::string lname;  int age;  int phone;  std::string email;    Employee(string f, string l, int a, int p, string e) {  fname = f;  lname = l;  age = a;  phone = p;  email = e;  }    };    int main() {    ifstream infile(\"employee_data.txt\");    if (infile.good() == false) {  std::cout << \"Unable to open the file.\" << std::endl ;  exit(1);  }    std::vector<Employee> data;    std::string fname, lname, email;    int age, phone;     while (infile >> fname >> lname >> age >> phone >> email) {    while (infile) {     Employee e(fname, lname, age, phone, email);    data.push_back(e);    }  }    "
-},
-{
-  "id": "mucp_15_6",
-  "level": "2",
-  "url": "chapter15_mixed-up-code-practice.html#mucp_15_6",
-  "type": "Exercise",
-  "number": "12.13.yes",
-  "title": "",
-  "body": "  You are given a file but it appears that someone's capslock key was stuck because everything is in uppercase. Write a program that takes the input from the file UPPER.txt and converts all the words to lowercase and prints out the modified message to a file called lower.txt . Write the definition of the function toLower first. Separate the words with spaces. Put the necessary blocks of code in the correct order.     string upperToLower(string upper) {  for (size_t i = 0; i < upper.length(); ++i) {     upper[i] = toupper(upper[i]);    tolower(upper[i]);     }  return upper;  }    int main() {    ifstream infile(\"UPPER.txt\");    ofstream outfile(\"lower.txt\");    if (infile.good() == false || outfile.good() == false) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    std::string word;    while (infile >> word) {     std::string upper = upperToLower(word);    upperToLower(word);     outfile << upper << \" \";    }  }    "
-},
-{
-  "id": "mucp_15_7",
-  "level": "2",
-  "url": "chapter15_mixed-up-code-practice.html#mucp_15_7",
-  "type": "Exercise",
-  "number": "12.13.yes",
-  "title": "",
-  "body": "  Nobody ever put a limit on how many files we can work with. Does this mean we can open two or more files at once? Yes we can! Write a program that combines two files odds.txt and evens.txt into one output file numbers.txt . You should combine them in a way such that numbers.txt contains the first odd number then the first even number then the second odd number and so on. You are guaranteed that there are equal amounts of odd and even numbers. Put the necessary blocks of code in the correct order.     int main() {    ifstream odds(\"odds.txt\");    ifstream evens(\"evens.txt\");    ofstream outfile(\"numbers.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int odd, even;    while (odds >> odd && evens >> even) {    outfile << odd << \" \" << even << \" \";    }  }    "
-},
-{
-  "id": "mucp_15_8",
-  "level": "2",
-  "url": "chapter15_mixed-up-code-practice.html#mucp_15_8",
-  "type": "Exercise",
-  "number": "12.13.yes",
-  "title": "",
-  "body": "  In chapter 15.7 we defined the Set data structure. Write a function vectorToSet which takes a std::vector of data and returns a Set object with the data. Put the necessary blocks of code in the correct order. Put the Set definition first in your answer.     class Set {  private:  std::vector<string> elements;  int numElements;  public:  Set(int n);  int getNumElements() const;  std::string getElement(int i) const;  int find(const string& s) const;  int add(const string& s);  };     Set vectorToSet( std::vector<string> data) {    void Set::vectorToSet( std::vector<string> data) {     Set s(data.size());    for (size_t i = 0; i < data.size(); ++i) {    s.add(data[i]);    }    s.numElements++;    if (s.find(data[i]) != -1) {    s.elements.push_back(data[i]);    }    "
-},
-{
-  "id": "mucp_15_9",
-  "level": "2",
-  "url": "chapter15_mixed-up-code-practice.html#mucp_15_9",
-  "type": "Exercise",
-  "number": "12.13.yes",
-  "title": "",
-  "body": "  Let's write the class definition for a Matrix ! The underlying data structure is a std::vector of std::vector s of int s. Write the constructor and at function, which returns the data stored at a given row and column. Put the necessary blocks of code in the correct order.     class Matrix {    private:    std::vector< std::vector<int> > elements;    public:    Matrix(int numRows, int numCols) {    std::vector<int> row(numCols);    for (int i = 0; i < numRows; ++i) {    elements.push_back(row);    }  }    int at(int row, int col) {    return elements[row][col];    }    };    "
-},
-{
-  "id": "mucp_15_10",
-  "level": "2",
-  "url": "chapter15_mixed-up-code-practice.html#mucp_15_10",
-  "type": "Exercise",
-  "number": "12.13.yes",
-  "title": "",
-  "body": "  Now that we have the basic structure of a Matrix , let's write a function that allows us to add data to a matrix. Write the Matrix member function setData which takes a row and column index as well as a data value and stores the data value in the Matrix at the given location. Then read data in from a file called data.txt . The first line contains the number of rows and columns, separated by a space. Data values begin on the next line. Put the necessary blocks of code in the correct order.      void Matrix::setData(int row, int col, int value) {    void setData(int row, int col, int value) {     elements[row][col] = value;    }    int main() {    ifstream infile(\"data.txt\");    if (!odds.good() || !evens.good() || !outfile.good()) {  std::cout << \"Unable to open a file.\" << std::endl ;  exit(1);  }    int numRows, numCols, data;    infile >> numRows >> numCols;    Matrix mat(numRows, numCols);    while (infile >> data) {    for (int i = 0; i < numRows; ++i) {    for (int j = 0; j < numCols; ++j) {    mat.setData(i, j, data);  }  }  }    }    "
-},
-{
-  "id": "chapter15_coding-practice",
-  "level": "1",
-  "url": "chapter15_coding-practice.html",
-  "type": "Exercises",
-  "number": "12.14",
-  "title": "Coding Practice",
-  "body": " Coding Practice    Write a program that takes in an input file called poem.txt    Two roads diverged in a yellow wood, And sorry I could not travel both And be one traveler, long I stood And looked down one as far as I could To where it bent in the undergrowth; Then took the other, as just as fair, And having perhaps the better claim Because it was grassy and wanted wear, Though as for that the passing there Had worn them really about the same, And both that morning equally lay In leaves no step had trodden black. Oh, I kept the first for another day! Yet knowing how way leads on to way I doubted if I should ever come back. I shall be telling this with a sigh Somewhere ages and ages hence: Two roads diverged in a wood, and I, I took the one less traveled by, And that has made all the difference.   and prints the first 5 lines to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we use getline in a for loop to retrieve and print the first 5 lines of the poem.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"poem.txt\"); std::string input; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } for (int i = 0; i < 5; ++i) { std::getline(infile, input); std::cout << input << std::endl; } }       Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.    #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.     int main () {    std::string fileIn;    int n;    std::string line;    std::cout << \"Enter the name of the file: \";  std::cin >> fileIn;  std::cout << fileIn << std::endl ;    std::cout << \"Enter an integer: \";  std::cin >> n;  std::cout << n << std::endl ;    ifstream inFile(fileIn.c_str());    if (inFile.good() == false) {  std::cout << \"Unable to open the file named \" << fileIn << \" and output \" << n << \" lines.\" << std::endl ;  exit(1);  }    for (int i = 0; i < n; i++) {    getline(inFile, line);    std::cout << line << std::endl ;    }    }         Write a program that takes in an input file called heights.txt   62 67 75 68 65 67 70 72 74 66 72 66 66 73 69 61 60 73 72 60   , finds the median of the data, and prints “The median height is: height inches” to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a vector. After sorting the vector, we find the median depending on whether the number of data values was even or odd. Finally, we output our result to the terminal.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> int main() { std::ifstream infile(\"heights.txt\"); std::vector<int> data; double median; int height; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (infile >> height) { data.push_back(height); } std::sort(data.begin(), data.end()); if (data.size() % 2 == 0) { median = (data[data.size() \/ 2 - 1] + data[data.size() \/ 2]) \/ 2.0; } else { median = data[data.size() \/ 2]; } std::cout << \"The median height is: \" << median << \" inches\" << std::endl; }       Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> #include <cmath> int main() { \/\/ Write your code here. \/\/ Do not modify the code below std::ifstream student_output(\"powers.txt\"); if (!student_output.good()) { std::cout << \"Error opening student's output.\" << std::endl; } std::string answer; while (std::getline(student_output, answer)) { std::cout << answer << std::endl; } }      Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    int n;    std::cout << \"Enter an integer: \";    std::cin >> n;    std::cout << n << std::endl ;    ofstream outfile (\"powers.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open output file.\" << std::endl ;  exit (1);  }    while (true) {    for (int i = 0; i < n; i++) {    outfile << pow(2,i) << std::endl ;    }    }    ifstream student_output(\"powers.txt\");    if (!student_output.good()) {  std::cout << \"Error opening student's output.\" << std::endl ;  }    std::string answer;    while (getline(student_output, answer)) {  std::cout << answer << std::endl ;  }    }         ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter after it in the alphabet. For example, using ROT13 on the letter “a” would turn it into “n”. Notice how since 13 is exactly half the number of characters in the alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus, ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file called message.txt   Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.   applies ROT13, and outputs the result to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <cctype> int main() { \/\/ Write your code here. }    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a string. We call our ROT13 function and output the result to the output file.   #include <iostream> #include <fstream> #include <cctype> std::string ROT13 (std::string message) { for (size_t i = 0; i < message.size(); ++i) { if (isalpha(message[i])) { if (message[i] >= 'A' && message[i] <= 'Z') { if (message[i] <= 'M') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } else { if (message[i] <= 'm') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } } } return message; } int main() { std::ifstream infile(\"message.txt\"); std::string message; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (std::getline(infile, message)) { std::cout << ROT13(message) << std::endl; } }       Write a program that reads in data about a class from the file class_data.txt   Below are the contents of the input file.  First Last Grade GPA Age Alex Jones 9 3.4 14 Beth Hamilton 12 3.7 18 Charles White 11 3.5 16 Daniel Kim 10 3.8 16 Ethan Brooks 11 3.9 17 Faith Flemmings 10 3.0 15 Gina Zhou 9 3.2 14  and outputs the rows of data where a student has a GPA of at least 3.5. Include proper file error checking.   #include <iostream> #include <fstream> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into corresponding variables. We check if the GPA is at least 3.5, and print the data values to the terminal if so.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"class_data.txt\"); std::string fname, lname; int grade, age; double gpa; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::getline(infile, fname); while (infile >> fname >> lname >> grade >> gpa >> age) { if (gpa >= 3.5) { std::cout << fname << '\\t' << lname << '\\t' << grade << '\\t' << gpa << '\\t' << age << std::endl; } } }       Write a program that takes an input file called shrimp.txt and outputs the contents of the file where \"shrimp\" is replaced by a word that the user inputs to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that takes an input file called “shrimp.txt” and outputs the quote with “shrimp” replaced by a word that the user inputs to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.   There's pineapple shrimp, lemon shrimp, coconut shrimp, pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and potatoes, shrimp burger, shrimp sandwich. That- that's about it.      int main() {    std::string word;    std::cout << \"Enter word to replace 'shrimp': \";    std::cin >> word;    std::cout << word << std::endl ;    std::string replace = \"shrimp\";    ifstream inFile(\"shrimp.txt\");    std::string line;    for (int i = 0; i < 4; i++) {    getline(inFile,line);    for (int unsigned j = 0; j < line.size(); j++) {    size_t pos = line.find(replace);    if (pos != std::string::npos) {    line.replace(pos,replace.length(),word);    }    }    std::cout << line<< std::endl ;    }    }         Write a program that creates a multiplication table for the first 10 numbers using a matrix and outputting the table to an output file called mult_table.txt . Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create a 10x10 matrix and fill in the products. Then we traverse through the matrix and output the values into the output file.   #include <iostream> #include <fstream> #include <vector> int main() { std::ofstream outfile(\"mult_table.txt\"); if (!outfile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::vector<int> rows(10); std::vector<std::vector<int> > mat; for (int i = 0; i < 10; ++i) { mat.push_back(rows); } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { matrix[i][j] = (i + 1) * (j + 1); } } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { outfile << matrix[i][j] << '\\t'; } std::cout << std::endl; } }       Write a program that computes the product of two matrices. Take a look at the example below. Two find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> int main() { \/* 2x3 matrix A X 3x2 matrix B 2x2 matrix C [ a b c ] [ g h ] [ ag + bi + cl ah + bj + cm ] [ d e f ] [ i j ] = [ dg + ei + fl dh + ej + fm ] [ l m ] *\/ \/\/ Write your code here. }      Write a program that computes the product of two matrices. Take a look at the example below. To find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    matrix<int> A(2,3);    matrix<int> B(3,2);    matrix<int> C(2,2);    C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);    C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);    C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);    C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);    }       "
-},
-{
-  "id": "cp_15_1",
-  "level": "2",
-  "url": "chapter15_coding-practice.html#cp_15_1",
-  "type": "Exercise",
-  "number": "12.14.1",
-  "title": "",
-  "body": "  Write a program that takes in an input file called poem.txt    Two roads diverged in a yellow wood, And sorry I could not travel both And be one traveler, long I stood And looked down one as far as I could To where it bent in the undergrowth; Then took the other, as just as fair, And having perhaps the better claim Because it was grassy and wanted wear, Though as for that the passing there Had worn them really about the same, And both that morning equally lay In leaves no step had trodden black. Oh, I kept the first for another day! Yet knowing how way leads on to way I doubted if I should ever come back. I shall be telling this with a sigh Somewhere ages and ages hence: Two roads diverged in a wood, and I, I took the one less traveled by, And that has made all the difference.   and prints the first 5 lines to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we use getline in a for loop to retrieve and print the first 5 lines of the poem.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"poem.txt\"); std::string input; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } for (int i = 0; i < 5; ++i) { std::getline(infile, input); std::cout << input << std::endl; } }    "
-},
-{
-  "id": "cp_15_2_q",
-  "level": "2",
-  "url": "chapter15_coding-practice.html#cp_15_2_q",
-  "type": "Exercise",
-  "number": "12.14.2",
-  "title": "",
-  "body": "  Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.    #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that prompts a user for the name of an input file and for an integer n . Then open the file and output the first n lines of the file with each line reversed. For example, if you read in the line “hello world” you should print out “dlrow olleh” to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.     int main () {    std::string fileIn;    int n;    std::string line;    std::cout << \"Enter the name of the file: \";  std::cin >> fileIn;  std::cout << fileIn << std::endl ;    std::cout << \"Enter an integer: \";  std::cin >> n;  std::cout << n << std::endl ;    ifstream inFile(fileIn.c_str());    if (inFile.good() == false) {  std::cout << \"Unable to open the file named \" << fileIn << \" and output \" << n << \" lines.\" << std::endl ;  exit(1);  }    for (int i = 0; i < n; i++) {    getline(inFile, line);    std::cout << line << std::endl ;    }    }      "
-},
-{
-  "id": "cp_15_3",
-  "level": "2",
-  "url": "chapter15_coding-practice.html#cp_15_3",
-  "type": "Exercise",
-  "number": "12.14.3",
-  "title": "",
-  "body": "  Write a program that takes in an input file called heights.txt   62 67 75 68 65 67 70 72 74 66 72 66 66 73 69 61 60 73 72 60   , finds the median of the data, and prints “The median height is: height inches” to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> \/\/ Write your code here.    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a vector. After sorting the vector, we find the median depending on whether the number of data values was even or odd. Finally, we output our result to the terminal.   #include <iostream> #include <fstream> #include <vector> #include <algorithm> int main() { std::ifstream infile(\"heights.txt\"); std::vector<int> data; double median; int height; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (infile >> height) { data.push_back(height); } std::sort(data.begin(), data.end()); if (data.size() % 2 == 0) { median = (data[data.size() \/ 2 - 1] + data[data.size() \/ 2]) \/ 2.0; } else { median = data[data.size() \/ 2]; } std::cout << \"The median height is: \" << median << \" inches\" << std::endl; }    "
-},
-{
-  "id": "cp_15_4_q",
-  "level": "2",
-  "url": "chapter15_coding-practice.html#cp_15_4_q",
-  "type": "Exercise",
-  "number": "12.14.4",
-  "title": "",
-  "body": "  Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> #include <cmath> int main() { \/\/ Write your code here. \/\/ Do not modify the code below std::ifstream student_output(\"powers.txt\"); if (!student_output.good()) { std::cout << \"Error opening student's output.\" << std::endl; } std::string answer; while (std::getline(student_output, answer)) { std::cout << answer << std::endl; } }      Write a program that prompts a user for an integer n and print the first n powers of 2 to an output file called powers.txt . Include proper file error checking. To simulate what your output file would look like, the contents of your output file will be displayed on the terminal. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    int n;    std::cout << \"Enter an integer: \";    std::cin >> n;    std::cout << n << std::endl ;    ofstream outfile (\"powers.txt\");    if (outfile.good() == false) {  std::cout << \"Unable to open output file.\" << std::endl ;  exit (1);  }    while (true) {    for (int i = 0; i < n; i++) {    outfile << pow(2,i) << std::endl ;    }    }    ifstream student_output(\"powers.txt\");    if (!student_output.good()) {  std::cout << \"Error opening student's output.\" << std::endl ;  }    std::string answer;    while (getline(student_output, answer)) {  std::cout << answer << std::endl ;  }    }      "
-},
-{
-  "id": "cp_15_5",
-  "level": "2",
-  "url": "chapter15_coding-practice.html#cp_15_5",
-  "type": "Exercise",
-  "number": "12.14.5",
-  "title": "",
-  "body": "  ROT13 is a simple Caesar cipher that replaces each letter in a string with the 13th letter after it in the alphabet. For example, using ROT13 on the letter “a” would turn it into “n”. Notice how since 13 is exactly half the number of characters in the alphabet, using ROT13 on the letter “n” would turn it into “a”. Thus, ROT13 can be used to encrypt and decrypt messages. Write a program that takes in an input file called message.txt   Pbatenghyngvbaf! Lbh'ir qrpelcgrq guvf zrffntr.   applies ROT13, and outputs the result to the terminal. Include proper file error checking.   #include <iostream> #include <fstream> #include <cctype> int main() { \/\/ Write your code here. }    Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into a string. We call our ROT13 function and output the result to the output file.   #include <iostream> #include <fstream> #include <cctype> std::string ROT13 (std::string message) { for (size_t i = 0; i < message.size(); ++i) { if (isalpha(message[i])) { if (message[i] >= 'A' && message[i] <= 'Z') { if (message[i] <= 'M') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } else { if (message[i] <= 'm') { message[i] = message[i] + 13; } else { message[i] = message[i] - 13; } } } } return message; } int main() { std::ifstream infile(\"message.txt\"); std::string message; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } while (std::getline(infile, message)) { std::cout << ROT13(message) << std::endl; } }    "
-},
-{
-  "id": "cp_15_7",
-  "level": "2",
-  "url": "chapter15_coding-practice.html#cp_15_7",
-  "type": "Exercise",
-  "number": "12.14.6",
-  "title": "",
-  "body": "  Write a program that reads in data about a class from the file class_data.txt   Below are the contents of the input file.  First Last Grade GPA Age Alex Jones 9 3.4 14 Beth Hamilton 12 3.7 18 Charles White 11 3.5 16 Daniel Kim 10 3.8 16 Ethan Brooks 11 3.9 17 Faith Flemmings 10 3.0 15 Gina Zhou 9 3.2 14  and outputs the rows of data where a student has a GPA of at least 3.5. Include proper file error checking.   #include <iostream> #include <fstream> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create an ifstream object to open our file. We check to make sure the file is opened correctly before we read the data values into corresponding variables. We check if the GPA is at least 3.5, and print the data values to the terminal if so.   #include <iostream> #include <fstream> int main() { std::ifstream infile(\"class_data.txt\"); std::string fname, lname; int grade, age; double gpa; if (!infile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::getline(infile, fname); while (infile >> fname >> lname >> grade >> gpa >> age) { if (gpa >= 3.5) { std::cout << fname << '\\t' << lname << '\\t' << grade << '\\t' << gpa << '\\t' << age << std::endl; } } }    "
-},
-{
-  "id": "cp_15_8_q",
-  "level": "2",
-  "url": "chapter15_coding-practice.html#cp_15_8_q",
-  "type": "Exercise",
-  "number": "12.14.7",
-  "title": "",
-  "body": "  Write a program that takes an input file called shrimp.txt and outputs the contents of the file where \"shrimp\" is replaced by a word that the user inputs to the terminal. Include proper file error checking. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> \/\/ Write your code here.      Write a program that takes an input file called “shrimp.txt” and outputs the quote with “shrimp” replaced by a word that the user inputs to the terminal. Include proper file error checking. Use the lines to construct the code, then go back to complete the Activecode.   There's pineapple shrimp, lemon shrimp, coconut shrimp, pepper shrimp, shrimp soup, shrimp stew, shrimp salad, shrimp and potatoes, shrimp burger, shrimp sandwich. That- that's about it.      int main() {    std::string word;    std::cout << \"Enter word to replace 'shrimp': \";    std::cin >> word;    std::cout << word << std::endl ;    std::string replace = \"shrimp\";    ifstream inFile(\"shrimp.txt\");    std::string line;    for (int i = 0; i < 4; i++) {    getline(inFile,line);    for (int unsigned j = 0; j < line.size(); j++) {    size_t pos = line.find(replace);    if (pos != std::string::npos) {    line.replace(pos,replace.length(),word);    }    }    std::cout << line<< std::endl ;    }    }      "
-},
-{
-  "id": "cp_15_9",
-  "level": "2",
-  "url": "chapter15_coding-practice.html#cp_15_9",
-  "type": "Exercise",
-  "number": "12.14.8",
-  "title": "",
-  "body": "  Write a program that creates a multiplication table for the first 10 numbers using a matrix and outputting the table to an output file called mult_table.txt . Include proper file error checking.   #include <iostream> #include <fstream> #include <vector> int main() { \/\/ Write your code here. }   Below is one way to implement this program. We create a 10x10 matrix and fill in the products. Then we traverse through the matrix and output the values into the output file.   #include <iostream> #include <fstream> #include <vector> int main() { std::ofstream outfile(\"mult_table.txt\"); if (!outfile.good()) { std::cout << \"Error. Unable to open file.\" << std::endl; exit(1); } std::vector<int> rows(10); std::vector<std::vector<int> > mat; for (int i = 0; i < 10; ++i) { mat.push_back(rows); } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { matrix[i][j] = (i + 1) * (j + 1); } } for (int i = 0; i < 10; ++i) { for (int j = 0; i < 10; ++j) { outfile << matrix[i][j] << '\\t'; } std::cout << std::endl; } }    "
-},
-{
-  "id": "cp_15_10_q",
-  "level": "2",
-  "url": "chapter15_coding-practice.html#cp_15_10_q",
-  "type": "Exercise",
-  "number": "12.14.9",
-  "title": "",
-  "body": "  Write a program that computes the product of two matrices. Take a look at the example below. Two find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Check the hint below for help with the construction of the code.   #include <iostream> #include <fstream> int main() { \/* 2x3 matrix A X 3x2 matrix B 2x2 matrix C [ a b c ] [ g h ] [ ag + bi + cl ah + bj + cm ] [ d e f ] [ i j ] = [ dg + ei + fl dh + ej + fm ] [ l m ] *\/ \/\/ Write your code here. }      Write a program that computes the product of two matrices. Take a look at the example below. To find the product of two matrices, take the ith row from the first matrix and the jth column from the second matrix, find the summation of the product of each component, and that’s the value that goes into the (i, j) location of the new matrix. The product of an mxn and an nxp matrix is an mxp matrix. Use the lines to construct the code, then go back to complete the Activecode.     int main() {    matrix<int> A(2,3);    matrix<int> B(3,2);    matrix<int> C(2,2);    C[0,0] = (A[0,0] * B[0,0]) + (A[0,1] * B[1,0]) + (A[0,2] * B[2,0]);    C[0,1] = (A[0,0] * B[0,1]) + (A[0,1] * B[1,1]) + (A[0,2] * B[2,1]);    C[1,0] = (A[1,0] * B[0,0]) + (A[1,1] * B[1,0]) + (A[1,2] * B[2,0]);    C[1,1] = (A[1,0] * B[0,1]) + (A[1,1] * B[1,1]) + (A[1,2] * B[2,1]);    }      "
+  "body": " Arrange the blocks to locate and read a fixed-size record.   std::streamoff offset{record_number * record_size};  input_file.seekg(offset, std::ios::beg);  input_file.read(reinterpret_cast<char*>(&record), sizeof record);  std::cout << record.score << '\\n';   "
 }
 ]
 
