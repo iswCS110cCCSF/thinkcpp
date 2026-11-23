@@ -59,14 +59,14 @@ eBookConfig.allow_pairs = false;
 eBookConfig.enableScratchAC = false;
 eBookConfig.build_info = "";
 eBookConfig.python3 = null;
-eBookConfig.runestone_version = '8.4.1';
+eBookConfig.runestone_version = '8.4.3';
 eBookConfig.jobehost = '';
 eBookConfig.proxyuri_runs = '';
 eBookConfig.proxyuri_files = '';
 eBookConfig.enable_chatcodes =  false;
 </script>
 <!--*** Runestone Services ***-->
-<script src="_static/prefix-runtime.82b21a4699b89209.bundle.js"></script><script src="_static/prefix-23.7d27cb317c36911a.bundle.js"></script><script src="_static/prefix-runestone.35a40fea06647cf2.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-runestone.7062ede5334282a6.css">
+<script src="_static/prefix-runtime.90336ab72cbb648f.bundle.js"></script><script src="_static/prefix-23.7d27cb317c36911a.bundle.js"></script><script src="_static/prefix-runestone.1f0ec0deacd7bb16.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-runestone.52ceae47a9e6e8ed.css">
 <script src="_static/pretext/js/dist/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/dist/pretext_search.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script>
 </head>
@@ -875,6 +875,7 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter12_text-files-and-stream-states.html#chapter12_write-text-file" class="internal"><span class="codenumber">12.2.1</span> <span class="title">Writing a text file</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter12_text-files-and-stream-states.html#chapter12_read-text-file" class="internal"><span class="codenumber">12.2.2</span> <span class="title">Reading tokens and lines</span></a></div></li>
 <li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter12_text-files-and-stream-states.html#chapter12_stream-state-flags" class="internal"><span class="codenumber">12.2.3</span> <span class="title">Stream-state flags</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter12_text-files-and-stream-states.html#chapter12_why_not_eof_loop_condition" class="internal"><span class="codenumber">12.2.4</span> <span class="title">Why <code class="code-inline tex2jax_ignore">eof()</code> is usually not the loop condition</span></a></div></li>
 </ul>
 </li>
 <li class="toc-item toc-section">
@@ -922,6 +923,105 @@ eBookConfig.enable_chatcodes =  false;
 <li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter12_mixed-up-code.html" class="internal"><span class="codenumber">12.11</span> <span class="title">Chapter 12 Mixed-Up Code Practice</span></a></div></li>
 </ul>
 </li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="chapter12_inheritance-composition-and-polymorphism.html" class="internal"><span class="codenumber">13</span> <span class="title">Inheritance, Composition, and Polymorphism</span></a></div>
+<ul id="ptx-toc-group-chapter12_inheritance-composition-and-polymorphism" class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_is-a-and-has-a-relationships.html" class="internal"><span class="codenumber">13.1</span> <span class="title">Is-A and Has-A Relationships</span></a></div>
+<ul id="ptx-toc-group-chapter13_is-a-and-has-a-relationships" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_is-a-and-has-a-relationships.html#chapter13_subsection_is_a_relationship" class="internal"><span class="codenumber">13.1.1</span> <span class="title">The Is-A Relationship</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_is-a-and-has-a-relationships.html#chapter13_subsection_has_a_relationship" class="internal"><span class="codenumber">13.1.2</span> <span class="title">The Has-A Relationship</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_is-a-and-has-a-relationships.html#chapter13_subsection_comparing_relationships" class="internal"><span class="codenumber">13.1.3</span> <span class="title">Comparing the Two Relationships</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_is-a-and-has-a-relationships.html#chapter13_subsection_design_guidance" class="internal"><span class="codenumber">13.1.4</span> <span class="title">Design Guidance</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_is-a-and-has-a-relationships.html#exercises_chapter13_is_a_has_a_relationship" class="internal"><span class="codenumber">13.1.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_inheritance_base_and_derived_classes.html" class="internal"><span class="codenumber">13.2</span> <span class="title">Inheritance: Base and Derived Classes</span></a></div>
+<ul id="ptx-toc-group-chapter13_inheritance_base_and_derived_classes" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_inheritance_base_and_derived_classes.html#chapter13_subsection_inheritance_syntax" class="internal"><span class="codenumber">13.2.1</span> <span class="title">Basic Inheritance Syntax</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_inheritance_base_and_derived_classes.html#chapter13_subsection_base_and_derived_members" class="internal"><span class="codenumber">13.2.2</span> <span class="title">Base and Derived Members</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_inheritance_base_and_derived_classes.html#chapter13_subsection_constructor_order" class="internal"><span class="codenumber">13.2.3</span> <span class="title">Construction Order</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_inheritance_base_and_derived_classes.html#chapter13_subsection_inheritance_visualization" class="internal"><span class="codenumber">13.2.4</span> <span class="title">Visualizing a Base and Derived Object</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_inheritance_base_and_derived_classes.html#exercises_chapter13_inheritance_base_and_derived" class="internal"><span class="codenumber">13.2.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_composition_building_objects_from_objects.html" class="internal"><span class="codenumber">13.3</span> <span class="title">Composition: Building Objects from Other Objects</span></a></div>
+<ul id="ptx-toc-group-chapter13_composition_building_objects_from_objects" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_composition_building_objects_from_objects.html#chapter13_subsection_component_objects" class="internal"><span class="codenumber">13.3.1</span> <span class="title">Objects as Components</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_composition_building_objects_from_objects.html#chapter13_subsection_component_lifetime" class="internal"><span class="codenumber">13.3.2</span> <span class="title">Component Lifetime</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_composition_building_objects_from_objects.html#chapter13_subsection_delegation" class="internal"><span class="codenumber">13.3.3</span> <span class="title">Delegating Work to Components</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_composition_building_objects_from_objects.html#exercises_chapter13_composition" class="internal"><span class="codenumber">13.3.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_inheritance_tradeoffs_and_design_choices.html" class="internal"><span class="codenumber">13.4</span> <span class="title">Inheritance Trade-Offs and Design Choices</span></a></div>
+<ul id="ptx-toc-group-chapter13_inheritance_tradeoffs_and_design_choices" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_inheritance_tradeoffs_and_design_choices.html#chapter13_subsection_inheritance_coupling" class="internal"><span class="codenumber">13.4.1</span> <span class="title">Inheritance Creates Coupling</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_inheritance_tradeoffs_and_design_choices.html#chapter13_subsection_classes_not_designed_for_inheritance" class="internal"><span class="codenumber">13.4.2</span> <span class="title">Not Every Class Is Designed for Inheritance</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_inheritance_tradeoffs_and_design_choices.html#chapter13_subsection_prefer_composition_guidance" class="internal"><span class="codenumber">13.4.3</span> <span class="title">When Composition Is the Better Choice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_inheritance_tradeoffs_and_design_choices.html#exercises_chapter13_inheritance_tradeoffs" class="internal"><span class="codenumber">13.4.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_overriding_and_virtual_functions.html" class="internal"><span class="codenumber">13.5</span> <span class="title">Overriding and Virtual Functions</span></a></div>
+<ul id="ptx-toc-group-chapter13_overriding_and_virtual_functions" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_overriding_and_virtual_functions.html#chapter13_subsection_virtual_member_functions" class="internal"><span class="codenumber">13.5.1</span> <span class="title">Virtual Member Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_overriding_and_virtual_functions.html#chapter13_subsection_override_and_final" class="internal"><span class="codenumber">13.5.2</span> <span class="title"><code class="code-inline tex2jax_ignore">override</code> and <code class="code-inline tex2jax_ignore">final</code></span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_overriding_and_virtual_functions.html#chapter13_subsection_function_hiding" class="internal"><span class="codenumber">13.5.3</span> <span class="title">Overriding and Function Hiding</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_overriding_and_virtual_functions.html#chapter13_subsection_comparing_overriding_hiding_overloading" class="internal"><span class="codenumber">13.5.4</span> <span class="title">Overriding, Hiding, and Overloading Compared</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_overriding_and_virtual_functions.html#chapter13_subsection_overriding_visualization" class="internal"><span class="codenumber">13.5.5</span> <span class="title">Visualizing an Overridden Function</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_overriding_and_virtual_functions.html#exercises_chapter13_overriding" class="internal"><span class="codenumber">13.5.6</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_abstract_classes_and_pure_virtual_functions.html" class="internal"><span class="codenumber">13.6</span> <span class="title">Abstract Classes and Pure Virtual Functions</span></a></div>
+<ul id="ptx-toc-group-chapter13_abstract_classes_and_pure_virtual_functions" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_abstract_classes_and_pure_virtual_functions.html#chapter13_subsection_pure_virtual_functions" class="internal"><span class="codenumber">13.6.1</span> <span class="title">Pure Virtual Functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_abstract_classes_and_pure_virtual_functions.html#chapter13_subsection_abstract_and_concrete_classes" class="internal"><span class="codenumber">13.6.2</span> <span class="title">Abstract and Concrete Classes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_abstract_classes_and_pure_virtual_functions.html#chapter13_subsection_using_abstract_references" class="internal"><span class="codenumber">13.6.3</span> <span class="title">Using Abstract References</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_abstract_classes_and_pure_virtual_functions.html#exercises_chapter13_abstract_classes" class="internal"><span class="codenumber">13.6.4</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_polymorphism_and_dynamic_dispatch.html" class="internal"><span class="codenumber">13.7</span> <span class="title">Polymorphism and Dynamic Dispatch</span></a></div>
+<ul id="ptx-toc-group-chapter13_polymorphism_and_dynamic_dispatch" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_polymorphism_and_dynamic_dispatch.html#chapter13_subsection_base_references_and_pointers" class="internal"><span class="codenumber">13.7.1</span> <span class="title">Base References and Pointers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_polymorphism_and_dynamic_dispatch.html#chapter13_subsection_object_slicing" class="internal"><span class="codenumber">13.7.2</span> <span class="title">Object Slicing</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_polymorphism_and_dynamic_dispatch.html#chapter13_subsection_shape2d_polymorphic_array" class="internal"><span class="codenumber">13.7.3</span> <span class="title">A Polymorphic Array of Two-Dimensional Shapes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_polymorphism_and_dynamic_dispatch.html#chapter13_subsection_virtual_destructors" class="internal"><span class="codenumber">13.7.4</span> <span class="title">Why Polymorphic Bases Need Virtual Destructors</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_polymorphism_and_dynamic_dispatch.html#exercises_chapter13_polymorphism" class="internal"><span class="codenumber">13.7.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_multiple_inheritance_and_interface_composition.html" class="internal"><span class="codenumber">13.8</span> <span class="title">Multiple Inheritance and Interface Composition</span></a></div>
+<ul id="ptx-toc-group-chapter13_multiple_inheritance_and_interface_composition" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_multiple_inheritance_and_interface_composition.html#chapter13_subsection_multiple_base_classes" class="internal"><span class="codenumber">13.8.1</span> <span class="title">More Than One Base Class</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_multiple_inheritance_and_interface_composition.html#chapter13_subsection_interface_references" class="internal"><span class="codenumber">13.8.2</span> <span class="title">Using Each Interface Separately</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_multiple_inheritance_and_interface_composition.html#chapter13_subsection_multiple_inheritance_tradeoffs" class="internal"><span class="codenumber">13.8.3</span> <span class="title">Benefits and Risks</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_multiple_inheritance_and_interface_composition.html#chapter13_subsection_ambiguous_members" class="internal"><span class="codenumber">13.8.4</span> <span class="title">Ambiguous Members</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_multiple_inheritance_and_interface_composition.html#exercises_chapter13_multiple_inheritance" class="internal"><span class="codenumber">13.8.5</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="chapter13_user_defined_exception_classes.html" class="internal"><span class="codenumber">13.9</span> <span class="title">User-Defined Exception Classes</span></a></div>
+<ul id="ptx-toc-group-chapter13_user_defined_exception_classes" class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_user_defined_exception_classes.html#chapter13_subsection_derive_exception_class" class="internal"><span class="codenumber">13.9.1</span> <span class="title">Deriving a Custom Exception</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_user_defined_exception_classes.html#chapter13_subsection_exception_base_types" class="internal"><span class="codenumber">13.9.2</span> <span class="title">Choosing an Exception Base Class</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_user_defined_exception_classes.html#chapter13_subsection_catching_custom_exceptions" class="internal"><span class="codenumber">13.9.3</span> <span class="title">Catching Specifically or Generally</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_user_defined_exception_classes.html#chapter13_subsection_standard_exception_family" class="internal"><span class="codenumber">13.9.4</span> <span class="title">Common Standard Exception Classes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_user_defined_exception_classes.html#chapter13_subsection_specific_before_general_catch" class="internal"><span class="codenumber">13.9.5</span> <span class="title">Catch Specific Exceptions Before General Ones</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="chapter13_user_defined_exception_classes.html#chapter13_subsection_exception_design_guidance" class="internal"><span class="codenumber">13.9.6</span> <span class="title">Guidance for Exception Classes</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_user_defined_exception_classes.html#exercises_chapter13_user_defined_exceptions" class="internal"><span class="codenumber">13.9.7</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-glossary"><div class="toc-title-box"><a href="chapter13_glossary.html" class="internal"><span class="codenumber">13.10</span> <span class="title">Chapter 13 Glossary</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_exercises.html" class="internal"><span class="codenumber">13.11</span> <span class="title">Chapter 13 Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_mixed_up_code.html" class="internal"><span class="codenumber">13.12</span> <span class="title">Chapter 13 Mixed-Up Code Practice</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="chapter13_coding_practice.html" class="internal"><span class="codenumber">13.13</span> <span class="title">Chapter 13 Coding Practice</span></a></div></li>
+</ul>
+</li>
 </ul></nav></div>
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="book" id="book"><h1 class="heading ptx-toc-heading">Contents</h1>
 <nav class="summary-links"><ul>
@@ -938,6 +1038,7 @@ eBookConfig.enable_chatcodes =  false;
 <li><a href="classes-and-objects-2.html" class="internal"><span class="codenumber">10</span> <span class="title">Class Design and Object Behavior</span></a></li>
 <li><a href="exception-handling.html" class="internal"><span class="codenumber">11</span> <span class="title">Exception Handling</span></a></li>
 <li><a href="chapter12_file-input-output.html" class="internal"><span class="codenumber">12</span> <span class="title">File Input and Output</span></a></li>
+<li><a href="chapter12_inheritance-composition-and-polymorphism.html" class="internal"><span class="codenumber">13</span> <span class="title">Inheritance, Composition, and Polymorphism</span></a></li>
 </ul></nav><div class="autopermalink" aria-hidden="true" data-description="Book: How To Think Like a Computer Scientist C++ Edition"><a tabindex="-1" href="#book" title="Copy heading and permalink for Book: How To Think Like a Computer Scientist C++ Edition" aria-label="Copy heading and permalink for Book: How To Think Like a Computer Scientist C++ Edition">🔗</a></div></section></div>
 <div id="ptx-content-footer" class="ptx-content-footer">
 <span class="previous-button button disabled"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></span><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="frontmatter.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>

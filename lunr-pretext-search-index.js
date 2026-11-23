@@ -14974,7 +14974,7 @@ var ptx_lunr_docs = [
   "type": "Section",
   "number": "12.2",
   "title": "Text Files and Stream States",
-  "body": " Text Files and Stream States  Text-file programs commonly open a file, perform input or output, test whether each operation succeeded, and close the file. File stream objects can close themselves when they leave scope, but checking the stream after opening is still essential.   Writing a text file   #include <fstream> int main() { std::ofstream output_file{\"scores.txt\"}; if (!output_file) { return 1; } output_file << \"Amina,92\\n\"; output_file << \"Marco,85\\n\"; return 0; }   Opening an std::ofstream normally creates a missing file or replaces existing contents. The file mode determines whether the program overwrites or appends data; that choice is discussed in Section 12.4.    Reading tokens and lines   #include <fstream> #include <iostream> #include <string> int main() { std::ifstream input_file{\"scores.txt\"}; if (!input_file) { return 1; } std::string line; while (std::getline(input_file, line)) { std::cout << \"Read line: \" << line << '\\n'; } return 0; }   Formatted extraction such as input_file >> score is useful for whitespace-separated values. std::getline() is useful when the program must preserve the spaces and delimiters in a complete line.    Stream-state flags   Common stream states     State  Meaning   good() No failure has been detected.  eof() The end of the input sequence was reached.  fail() A formatted operation failed or another recoverable failure occurred.  bad() A serious input\/output failure occurred.    A read loop should normally use the input operation itself as its condition. The body then runs only after a complete requested value has been obtained.    Why is std::getline() useful for a record containing spaces?   It converts every line into a binary object. getline() reads characters into a string.  It reads through the line ending instead of stopping at the next whitespace token. This preserves spaces within the line.  It guarantees that the file exists. Opening and checking the file are separate operations.  It automatically validates the record fields. Parsing and validation still belong to the program.  It reads only the first line. A loop can call it repeatedly.     Select all correct reasons to test a file stream.   The file may not exist or may be inaccessible. Opening can fail before input begins.  A read operation may reach end-of-file or encounter malformed input. Each operation can change the stream state.  Testing a stream causes all files to become binary. Stream tests do not change the file format.  A successful open guarantees every future read succeeds. Later input can still fail.  eof() should always be checked before attempting a read. The read operation should usually be part of the loop condition.     Arrange the blocks to open a text file and print each complete line.   std::ifstream input_file{\"notes.txt\"};  if (!input_file) { return 1; }  std::string line;  while (std::getline(input_file, line)) {  std::cout << line << '\\n';  }    "
+  "body": " Text Files and Stream States  Text-file programs commonly open a file, perform input or output, test whether each operation succeeded, and close the file. File stream objects can close themselves when they leave scope, but checking the stream after opening is still essential.   Writing a text file   #include <fstream> int main() { std::ofstream output_file{\"scores.txt\"}; if (!output_file) { return 1; } output_file << \"Amina,92\\n\"; output_file << \"Marco,85\\n\"; return 0; }   Opening an std::ofstream normally creates the file if it does not already exist. If the file already exists, opening it normally erases its previous contents before writing. However, we can avoid overwriting by opening for writing in append mode which we will discus in Section 12.4.    Reading tokens and lines   #include <fstream> #include <iostream> #include <string> int main() { std::ifstream input_file{\"scores.txt\"}; if (!input_file) { return 1; } std::string line; while (std::getline(input_file, line)) { std::cout << \"Read line: \" << line << '\\n'; } return 0; }   Formatted extraction such as input_file >> score is useful for whitespace-separated values. std::getline() is useful when the program must preserve the spaces and delimiters in a complete line.    Stream-state flags   Common stream states     State  Meaning    good()  No stream-state flags are set.    eof()  An input operation reached the end of the stream's input sequence, so eofbit is set.    fail()  An input operation failed, commonly because the input had the wrong format or type. fail() is also true when badbit is set.    bad()  A serious input\/output failure occurred, so badbit is set.     A read loop should normally use the input operation itself as its condition. The body then runs only after a complete requested value has been obtained.  These functions inspect flags on the stream; they do not inspect the file object directly. More than one flag can be set at the same time. For example, a failed read at the end of a file may set both eofbit and failbit .  A stream stores these conditions as state flags. The functions good() , eof() , fail() , and bad() query those flags. In ordinary reading loops, the extraction operation should be the loop condition. The query functions are especially useful when a program needs to diagnose why a loop stopped or decide whether recovery is possible.   Stream flags and typical responses      Flag  Typical response    goodbit  Continue normal processing. No error flags are set.    eofbit  The input has reached its natural end.    failbit  Check the input format or determine whether the operation can be recovered.    badbit  Report a serious input\/output problem; recovery may not be possible.     The member function clear() clears the error flags, but it does not repair malformed input or create missing data. A program should address the underlying problem before trying the operation again.    Why eof() is usually not the loop condition  The end-of-file flag is set only after an input operation reaches the end of the input sequence. Therefore, checking eof() before attempting the next read can allow one extra loop iteration.   Avoid using eof() as the primary read-loop condition   #include <fstream> #include <iostream> int main() { std::ifstream input_file{\"scores.txt\"}; if (!input_file) { return 1; } int score{}; while (!input_file.eof()) { input_file >> score; std::cout << score << '\\n'; } return 0; }    On the final iteration, the loop begins before the program attempts the read that reaches the end of the file. The extraction then fails, but the body still prints score . If the input contains a formatting error instead of the end of the file, the loop may not terminate because eofbit is not necessarily set.   Use the extraction operation as the loop condition   #include <fstream> #include <iostream> int main() { std::ifstream input_file{\"scores.txt\"}; if (!input_file) { return 1; } int score{}; while (input_file >> score) { std::cout << score << '\\n'; } return 0; }    This version attempts the extraction first and enters the loop only when the operation succeeds.    Why is std::getline() useful for a record containing spaces?   It converts every line into a binary object. getline() reads characters into a string.  It reads through the line ending instead of stopping at the next whitespace token. This preserves spaces within the line.  It guarantees that the file exists. Opening and checking the file are separate operations.  It automatically validates the record fields. Parsing and validation still belong to the program.  It reads only the first line. A loop can call it repeatedly.     Select all correct reasons to test a file stream.   The file may not exist or may be inaccessible. Opening can fail before input begins.  A read operation may reach end-of-file or encounter malformed input. Each operation can change the stream state.  Testing a stream causes all files to become binary. Stream tests do not change the file format.  A successful open guarantees every future read succeeds. Later input can still fail.  eof() should always be checked before attempting a read. The read operation should usually be part of the loop condition.     Arrange the blocks to open a text file and print each complete line.   std::ifstream input_file{\"notes.txt\"};  if (!input_file) { return 1; }  std::string line;  while (std::getline(input_file, line)) {  std::cout << line << '\\n';  }    "
 },
 {
   "id": "chapter12_text-files-and-stream-states-2",
@@ -14992,7 +14992,7 @@ var ptx_lunr_docs = [
   "type": "Subsection",
   "number": "12.2.1",
   "title": "Writing a text file",
-  "body": " Writing a text file   #include <fstream> int main() { std::ofstream output_file{\"scores.txt\"}; if (!output_file) { return 1; } output_file << \"Amina,92\\n\"; output_file << \"Marco,85\\n\"; return 0; }   Opening an std::ofstream normally creates a missing file or replaces existing contents. The file mode determines whether the program overwrites or appends data; that choice is discussed in Section 12.4.  "
+  "body": " Writing a text file   #include <fstream> int main() { std::ofstream output_file{\"scores.txt\"}; if (!output_file) { return 1; } output_file << \"Amina,92\\n\"; output_file << \"Marco,85\\n\"; return 0; }   Opening an std::ofstream normally creates the file if it does not already exist. If the file already exists, opening it normally erases its previous contents before writing. However, we can avoid overwriting by opening for writing in append mode which we will discus in Section 12.4.  "
 },
 {
   "id": "chapter12_read-text-file",
@@ -15010,7 +15010,16 @@ var ptx_lunr_docs = [
   "type": "Subsection",
   "number": "12.2.3",
   "title": "Stream-state flags",
-  "body": " Stream-state flags   Common stream states     State  Meaning   good() No failure has been detected.  eof() The end of the input sequence was reached.  fail() A formatted operation failed or another recoverable failure occurred.  bad() A serious input\/output failure occurred.    A read loop should normally use the input operation itself as its condition. The body then runs only after a complete requested value has been obtained.  "
+  "body": " Stream-state flags   Common stream states     State  Meaning    good()  No stream-state flags are set.    eof()  An input operation reached the end of the stream's input sequence, so eofbit is set.    fail()  An input operation failed, commonly because the input had the wrong format or type. fail() is also true when badbit is set.    bad()  A serious input\/output failure occurred, so badbit is set.     A read loop should normally use the input operation itself as its condition. The body then runs only after a complete requested value has been obtained.  These functions inspect flags on the stream; they do not inspect the file object directly. More than one flag can be set at the same time. For example, a failed read at the end of a file may set both eofbit and failbit .  A stream stores these conditions as state flags. The functions good() , eof() , fail() , and bad() query those flags. In ordinary reading loops, the extraction operation should be the loop condition. The query functions are especially useful when a program needs to diagnose why a loop stopped or decide whether recovery is possible.   Stream flags and typical responses      Flag  Typical response    goodbit  Continue normal processing. No error flags are set.    eofbit  The input has reached its natural end.    failbit  Check the input format or determine whether the operation can be recovered.    badbit  Report a serious input\/output problem; recovery may not be possible.     The member function clear() clears the error flags, but it does not repair malformed input or create missing data. A program should address the underlying problem before trying the operation again.  "
+},
+{
+  "id": "chapter12_why_not_eof_loop_condition",
+  "level": "2",
+  "url": "chapter12_text-files-and-stream-states.html#chapter12_why_not_eof_loop_condition",
+  "type": "Subsection",
+  "number": "12.2.4",
+  "title": "Why <code class=\"code-inline tex2jax_ignore\">eof()<\/code> is usually not the loop condition",
+  "body": " Why eof() is usually not the loop condition  The end-of-file flag is set only after an input operation reaches the end of the input sequence. Therefore, checking eof() before attempting the next read can allow one extra loop iteration.   Avoid using eof() as the primary read-loop condition   #include <fstream> #include <iostream> int main() { std::ifstream input_file{\"scores.txt\"}; if (!input_file) { return 1; } int score{}; while (!input_file.eof()) { input_file >> score; std::cout << score << '\\n'; } return 0; }    On the final iteration, the loop begins before the program attempts the read that reaches the end of the file. The extraction then fails, but the body still prints score . If the input contains a formatting error instead of the end of the file, the loop may not terminate because eofbit is not necessarily set.   Use the extraction operation as the loop condition   #include <fstream> #include <iostream> int main() { std::ifstream input_file{\"scores.txt\"}; if (!input_file) { return 1; } int score{}; while (input_file >> score) { std::cout << score << '\\n'; } return 0; }    This version attempts the extraction first and enters the loop only when the operation succeeds.  "
 },
 {
   "id": "chapter12_2_line-input",
@@ -15866,6 +15875,924 @@ var ptx_lunr_docs = [
   "number": "12.11.yes",
   "title": "",
   "body": " Arrange the blocks to locate and read a fixed-size record.   std::streamoff offset{record_number * record_size};  input_file.seekg(offset, std::ios::beg);  input_file.read(reinterpret_cast<char*>(&record), sizeof record);  std::cout << record.score << '\\n';   "
+},
+{
+  "id": "chapter13_is-a-and-has-a-relationships",
+  "level": "1",
+  "url": "chapter13_is-a-and-has-a-relationships.html",
+  "type": "Section",
+  "number": "13.1",
+  "title": "Is-A and Has-A Relationships",
+  "body": " Is-A and Has-A Relationships  Object-oriented design often begins by asking how two types are related. Does one type represent a specialized kind of another type, or does one object simply contain and use another object? These questions lead to two important relationships: is-a and has-a .   The Is-A Relationship  An is-a relationship means that one type is a specialized version of another type. For example, a circle is a two-dimensional shape, and an hourly employee is an employee. In C++, an is-a relationship can be represented with public inheritance.   A derived class adds specialized behavior   #include <iostream> class Employee { public: void report_role() const { std::cout << \"Employee\\n\"; } }; class HourlyEmployee : public Employee { public: void report_pay_type() const { std::cout << \"Paid by the hour\\n\"; } }; int main() { HourlyEmployee employee; employee.report_role(); employee.report_pay_type(); return 0; }     HourlyEmployee inherits the public member function report_role() from Employee . It also has its own member function, report_pay_type() . The derived type is more specific, but it remains usable as an employee.    The Has-A Relationship  A has-a relationship means that one object contains or uses another object as one of its parts. This design technique is called composition . A car has an engine, a report has a formatter, and a student account has a balance.   A car contains and uses an engine   #include <iostream> class Engine { public: void start() const { std::cout << \"Engine started\\n\"; } }; class Car { private: Engine engine; public: void start_car() const { engine.start(); std::cout << \"Car started\\n\"; } }; int main() { Car car; car.start_car(); return 0; }    A Car is not a kind of Engine . Instead, a Car has an Engine . The Car delegates the engine's work to its engine member.    Comparing the Two Relationships   Is-a and has-a relationships        Relationship  Meaning  Example  Common C++ design    Is-a  One type is a specialized version of another.  A circle is a shape.  Public inheritance    Has-a  One object contains or uses another object.  A car has an engine.  Composition     The wording of the relationship is a useful design test. If the sentence A derived type is a base type is not accurate, inheritance is probably the wrong tool. If the sentence An object has a component is accurate, composition may be the better choice.    Design Guidance  Composition is often easier to change because the containing class depends on a component's public interface rather than becoming part of the component's type hierarchy. Inheritance is appropriate when the derived object must be usable wherever the base type is expected. The next sections examine both choices more closely.  The following visualization shows composition: a Car object contains an Engine object and asks that engine to start.     Exercises    Which relationship best describes a Library containing several Book objects?     Has-a  A library contains or uses books, so composition is appropriate.    Is-a  A library is not a specialized kind of book.    Overrides-a  Overriding describes replacing inherited behavior.    Copies-a  Copying is not the relationship represented here.       Which statements correctly describe composition in the car example? Select all that apply.     Car contains an Engine member.  This is a has-a relationship.    Car must inherit from Engine .  Composition does not require inheritance.    Car can delegate engine work to its member.  Delegation is a common use of composition.    The contained Engine is automatically a base-class subobject.  A member object is a component, not a base-class subobject.       A Circle is a specialized kind of Shape2D . Which design relationship expresses this idea?   An is-a relationship, commonly represented with public inheritance.     In the car example, identify the component object and the operation delegated to it.    The Car contains an Engine object named engine , and start_car() delegates work by calling engine.start() .      Arrange the blocks to define a Car that contains an Engine and delegates starting to that engine.     class Car {    private:    Engine engine;    public:    void start_car() const {    engine.start();    }    };    class Car : public Engine {      "
+},
+{
+  "id": "chapter13_is-a-and-has-a-relationships-2",
+  "level": "2",
+  "url": "chapter13_is-a-and-has-a-relationships.html#chapter13_is-a-and-has-a-relationships-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Object-oriented design often begins by asking how two types are related. Does one type represent a specialized kind of another type, or does one object simply contain and use another object? These questions lead to two important relationships: is-a and has-a . "
+},
+{
+  "id": "chapter13_subsection_is_a_relationship",
+  "level": "2",
+  "url": "chapter13_is-a-and-has-a-relationships.html#chapter13_subsection_is_a_relationship",
+  "type": "Subsection",
+  "number": "13.1.1",
+  "title": "The Is-A Relationship",
+  "body": " The Is-A Relationship  An is-a relationship means that one type is a specialized version of another type. For example, a circle is a two-dimensional shape, and an hourly employee is an employee. In C++, an is-a relationship can be represented with public inheritance.   A derived class adds specialized behavior   #include <iostream> class Employee { public: void report_role() const { std::cout << \"Employee\\n\"; } }; class HourlyEmployee : public Employee { public: void report_pay_type() const { std::cout << \"Paid by the hour\\n\"; } }; int main() { HourlyEmployee employee; employee.report_role(); employee.report_pay_type(); return 0; }     HourlyEmployee inherits the public member function report_role() from Employee . It also has its own member function, report_pay_type() . The derived type is more specific, but it remains usable as an employee.  "
+},
+{
+  "id": "chapter13_subsection_has_a_relationship",
+  "level": "2",
+  "url": "chapter13_is-a-and-has-a-relationships.html#chapter13_subsection_has_a_relationship",
+  "type": "Subsection",
+  "number": "13.1.2",
+  "title": "The Has-A Relationship",
+  "body": " The Has-A Relationship  A has-a relationship means that one object contains or uses another object as one of its parts. This design technique is called composition . A car has an engine, a report has a formatter, and a student account has a balance.   A car contains and uses an engine   #include <iostream> class Engine { public: void start() const { std::cout << \"Engine started\\n\"; } }; class Car { private: Engine engine; public: void start_car() const { engine.start(); std::cout << \"Car started\\n\"; } }; int main() { Car car; car.start_car(); return 0; }    A Car is not a kind of Engine . Instead, a Car has an Engine . The Car delegates the engine's work to its engine member.  "
+},
+{
+  "id": "chapter13_subsection_comparing_relationships",
+  "level": "2",
+  "url": "chapter13_is-a-and-has-a-relationships.html#chapter13_subsection_comparing_relationships",
+  "type": "Subsection",
+  "number": "13.1.3",
+  "title": "Comparing the Two Relationships",
+  "body": " Comparing the Two Relationships   Is-a and has-a relationships        Relationship  Meaning  Example  Common C++ design    Is-a  One type is a specialized version of another.  A circle is a shape.  Public inheritance    Has-a  One object contains or uses another object.  A car has an engine.  Composition     The wording of the relationship is a useful design test. If the sentence A derived type is a base type is not accurate, inheritance is probably the wrong tool. If the sentence An object has a component is accurate, composition may be the better choice.  "
+},
+{
+  "id": "chapter13_subsection_design_guidance",
+  "level": "2",
+  "url": "chapter13_is-a-and-has-a-relationships.html#chapter13_subsection_design_guidance",
+  "type": "Subsection",
+  "number": "13.1.4",
+  "title": "Design Guidance",
+  "body": " Design Guidance  Composition is often easier to change because the containing class depends on a component's public interface rather than becoming part of the component's type hierarchy. Inheritance is appropriate when the derived object must be usable wherever the base type is expected. The next sections examine both choices more closely.  The following visualization shows composition: a Car object contains an Engine object and asks that engine to start.   "
+},
+{
+  "id": "exercises_chapter13_is_a_has_a_relationship",
+  "level": "2",
+  "url": "chapter13_is-a-and-has-a-relationships.html#exercises_chapter13_is_a_has_a_relationship",
+  "type": "Exercises",
+  "number": "13.1.5",
+  "title": "Exercises",
+  "body": " Exercises    Which relationship best describes a Library containing several Book objects?     Has-a  A library contains or uses books, so composition is appropriate.    Is-a  A library is not a specialized kind of book.    Overrides-a  Overriding describes replacing inherited behavior.    Copies-a  Copying is not the relationship represented here.       Which statements correctly describe composition in the car example? Select all that apply.     Car contains an Engine member.  This is a has-a relationship.    Car must inherit from Engine .  Composition does not require inheritance.    Car can delegate engine work to its member.  Delegation is a common use of composition.    The contained Engine is automatically a base-class subobject.  A member object is a component, not a base-class subobject.       A Circle is a specialized kind of Shape2D . Which design relationship expresses this idea?   An is-a relationship, commonly represented with public inheritance.     In the car example, identify the component object and the operation delegated to it.    The Car contains an Engine object named engine , and start_car() delegates work by calling engine.start() .      Arrange the blocks to define a Car that contains an Engine and delegates starting to that engine.     class Car {    private:    Engine engine;    public:    void start_car() const {    engine.start();    }    };    class Car : public Engine {     "
+},
+{
+  "id": "chapter13_inheritance_base_and_derived_classes",
+  "level": "1",
+  "url": "chapter13_inheritance_base_and_derived_classes.html",
+  "type": "Section",
+  "number": "13.2",
+  "title": "Inheritance: Base and Derived Classes",
+  "body": " Inheritance: Base and Derived Classes   Inheritance allows one class to begin with the members of another class and then add or replace behavior. The existing class is the base class , and the new class is the derived class . Public inheritance expresses an is-a relationship.   Basic Inheritance Syntax  The syntax places the base class after a colon in the derived-class declaration:   A derived class inherits a public member   #include <iostream> class Employee { public: void report_role() const { std::cout << \"Employee\\n\"; } }; class HourlyEmployee : public Employee { public: void report_pay_type() const { std::cout << \"Paid by the hour\\n\"; } }; int main() { HourlyEmployee employee; employee.report_role(); employee.report_pay_type(); return 0; }    The public member function report_role() belongs to Employee , but an HourlyEmployee object can call it because it inherits that public member. The derived class also contributes its own report_pay_type() member function.    Base and Derived Members  A derived class does not receive unrestricted access to every base-class member. Access control still applies:   Access to base-class members        Base member  Base class  Derived class  Unrelated code    public  Accessible  Accessible  Accessible through the public interface    protected  Accessible  Accessible  Not directly accessible    private  Accessible  Not directly accessible  Not directly accessible     A protected member is available to the class that declares it and to derived classes. It is not available to ordinary client code. This can be useful, but protected data also creates tighter coupling between a base class and its derived classes. Private data with public or protected member functions often provides better control.   A derived class accesses a protected member   #include <iostream> #include <string> class Employee { protected: std::string name; public: Employee(const std::string& employee_name) : name{employee_name} { } }; class HourlyEmployee : public Employee { public: HourlyEmployee(const std::string& employee_name) : Employee{employee_name} { } void report_name() const { std::cout << name << '\\n'; } }; int main() { HourlyEmployee employee{\"Amina\"}; employee.report_name(); return 0; }    The derived class can use name because it is protected. However, code in main() cannot access employee.name directly.    Construction Order  When a derived object is created, the base-class portion is constructed first. The derived-class portion is constructed afterward. This order ensures that the base part exists before the derived constructor uses it. Destruction occurs in the reverse order; the derived part is destroyed before the base part.   Construction and destruction in an inherited class   #include <iostream> class Employee { public: Employee() { std::cout << \"Employee constructed\\n\"; } ~Employee() { std::cout << \"Employee destroyed\\n\"; } }; class HourlyEmployee : public Employee { public: HourlyEmployee() { std::cout << \"HourlyEmployee constructed\\n\"; } ~HourlyEmployee() { std::cout << \"HourlyEmployee destroyed\\n\"; } }; int main() { HourlyEmployee employee; return 0; }    The output shows that construction proceeds from base to derived, while destruction proceeds from derived to base.    Visualizing a Base and Derived Object  The following visualization shows a derived object being created from a base class and then calling members from both classes.     Exercises    In class HourlyEmployee : public Employee , which class is the base class?     Employee  The class after public is the base class.    HourlyEmployee  HourlyEmployee is the derived class.    public  public specifies the inheritance access mode.    employee  employee is an object, not a class.       Which member can the derived class access directly but ordinary code in main() cannot access directly?     A public member  Public members are available through the public interface.    A protected member  Protected members are accessible to derived classes but not ordinary client code.    A private member declared in the base class  Private base members are not directly accessible in derived classes.    A local variable in main()  Inheritance does not provide access to local variables.       Which statements about the inheritance example are correct? Select all that apply.     HourlyEmployee can use public members inherited from Employee .  Public inheritance preserves access to public base members.    HourlyEmployee can directly access every private member of Employee .  Private base members are not directly accessible in derived classes.    The base part is constructed before the derived part.  The base must be initialized before the derived portion.    The derived part is destroyed before the base part.  Destruction occurs in the reverse of construction order.       Place these events in their construction order: construction of the derived part, construction of the base part, construction of the derived object's members.    The base part is constructed first, followed by the derived object's members, and then the derived constructor body runs.      Arrange the blocks to define HourlyEmployee as a public derived class of Employee .     class HourlyEmployee : public Employee {    public:    void report_pay_type() const {    std::cout << \"Paid by the hour\\n\";    }    };    class HourlyEmployee : private Employee {      "
+},
+{
+  "id": "chapter13_inheritance_base_and_derived_classes-2",
+  "level": "2",
+  "url": "chapter13_inheritance_base_and_derived_classes.html#chapter13_inheritance_base_and_derived_classes-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": " Inheritance allows one class to begin with the members of another class and then add or replace behavior. The existing class is the base class , and the new class is the derived class . Public inheritance expresses an is-a relationship. "
+},
+{
+  "id": "chapter13_subsection_inheritance_syntax",
+  "level": "2",
+  "url": "chapter13_inheritance_base_and_derived_classes.html#chapter13_subsection_inheritance_syntax",
+  "type": "Subsection",
+  "number": "13.2.1",
+  "title": "Basic Inheritance Syntax",
+  "body": " Basic Inheritance Syntax  The syntax places the base class after a colon in the derived-class declaration:   A derived class inherits a public member   #include <iostream> class Employee { public: void report_role() const { std::cout << \"Employee\\n\"; } }; class HourlyEmployee : public Employee { public: void report_pay_type() const { std::cout << \"Paid by the hour\\n\"; } }; int main() { HourlyEmployee employee; employee.report_role(); employee.report_pay_type(); return 0; }    The public member function report_role() belongs to Employee , but an HourlyEmployee object can call it because it inherits that public member. The derived class also contributes its own report_pay_type() member function.  "
+},
+{
+  "id": "chapter13_subsection_base_and_derived_members",
+  "level": "2",
+  "url": "chapter13_inheritance_base_and_derived_classes.html#chapter13_subsection_base_and_derived_members",
+  "type": "Subsection",
+  "number": "13.2.2",
+  "title": "Base and Derived Members",
+  "body": " Base and Derived Members  A derived class does not receive unrestricted access to every base-class member. Access control still applies:   Access to base-class members        Base member  Base class  Derived class  Unrelated code    public  Accessible  Accessible  Accessible through the public interface    protected  Accessible  Accessible  Not directly accessible    private  Accessible  Not directly accessible  Not directly accessible     A protected member is available to the class that declares it and to derived classes. It is not available to ordinary client code. This can be useful, but protected data also creates tighter coupling between a base class and its derived classes. Private data with public or protected member functions often provides better control.   A derived class accesses a protected member   #include <iostream> #include <string> class Employee { protected: std::string name; public: Employee(const std::string& employee_name) : name{employee_name} { } }; class HourlyEmployee : public Employee { public: HourlyEmployee(const std::string& employee_name) : Employee{employee_name} { } void report_name() const { std::cout << name << '\\n'; } }; int main() { HourlyEmployee employee{\"Amina\"}; employee.report_name(); return 0; }    The derived class can use name because it is protected. However, code in main() cannot access employee.name directly.  "
+},
+{
+  "id": "chapter13_subsection_constructor_order",
+  "level": "2",
+  "url": "chapter13_inheritance_base_and_derived_classes.html#chapter13_subsection_constructor_order",
+  "type": "Subsection",
+  "number": "13.2.3",
+  "title": "Construction Order",
+  "body": " Construction Order  When a derived object is created, the base-class portion is constructed first. The derived-class portion is constructed afterward. This order ensures that the base part exists before the derived constructor uses it. Destruction occurs in the reverse order; the derived part is destroyed before the base part.   Construction and destruction in an inherited class   #include <iostream> class Employee { public: Employee() { std::cout << \"Employee constructed\\n\"; } ~Employee() { std::cout << \"Employee destroyed\\n\"; } }; class HourlyEmployee : public Employee { public: HourlyEmployee() { std::cout << \"HourlyEmployee constructed\\n\"; } ~HourlyEmployee() { std::cout << \"HourlyEmployee destroyed\\n\"; } }; int main() { HourlyEmployee employee; return 0; }    The output shows that construction proceeds from base to derived, while destruction proceeds from derived to base.  "
+},
+{
+  "id": "chapter13_subsection_inheritance_visualization",
+  "level": "2",
+  "url": "chapter13_inheritance_base_and_derived_classes.html#chapter13_subsection_inheritance_visualization",
+  "type": "Subsection",
+  "number": "13.2.4",
+  "title": "Visualizing a Base and Derived Object",
+  "body": " Visualizing a Base and Derived Object  The following visualization shows a derived object being created from a base class and then calling members from both classes.   "
+},
+{
+  "id": "exercises_chapter13_inheritance_base_and_derived",
+  "level": "2",
+  "url": "chapter13_inheritance_base_and_derived_classes.html#exercises_chapter13_inheritance_base_and_derived",
+  "type": "Exercises",
+  "number": "13.2.5",
+  "title": "Exercises",
+  "body": " Exercises    In class HourlyEmployee : public Employee , which class is the base class?     Employee  The class after public is the base class.    HourlyEmployee  HourlyEmployee is the derived class.    public  public specifies the inheritance access mode.    employee  employee is an object, not a class.       Which member can the derived class access directly but ordinary code in main() cannot access directly?     A public member  Public members are available through the public interface.    A protected member  Protected members are accessible to derived classes but not ordinary client code.    A private member declared in the base class  Private base members are not directly accessible in derived classes.    A local variable in main()  Inheritance does not provide access to local variables.       Which statements about the inheritance example are correct? Select all that apply.     HourlyEmployee can use public members inherited from Employee .  Public inheritance preserves access to public base members.    HourlyEmployee can directly access every private member of Employee .  Private base members are not directly accessible in derived classes.    The base part is constructed before the derived part.  The base must be initialized before the derived portion.    The derived part is destroyed before the base part.  Destruction occurs in the reverse of construction order.       Place these events in their construction order: construction of the derived part, construction of the base part, construction of the derived object's members.    The base part is constructed first, followed by the derived object's members, and then the derived constructor body runs.      Arrange the blocks to define HourlyEmployee as a public derived class of Employee .     class HourlyEmployee : public Employee {    public:    void report_pay_type() const {    std::cout << \"Paid by the hour\\n\";    }    };    class HourlyEmployee : private Employee {     "
+},
+{
+  "id": "chapter13_composition_building_objects_from_objects",
+  "level": "1",
+  "url": "chapter13_composition_building_objects_from_objects.html",
+  "type": "Section",
+  "number": "13.3",
+  "title": "Composition: Building Objects from Other Objects",
+  "body": " Composition: Building Objects from Other Objects   Composition means that a class contains one or more objects of other classes as data members. The containing object uses those component objects to carry out its work. Composition is a direct implementation of a has-a relationship.   Objects as Components  A component is an ordinary data member whose type is another class. In this example, a Car has an Engine . The Car is not a kind of Engine ; it uses an engine as one of its parts.   A car delegates starting to its engine   #include <iostream> #include <string> class Engine { private: std::string model; public: Engine(const std::string& starting_model) : model{starting_model} { } void start() const { std::cout << model << \" started\\n\"; } }; class Car { private: Engine engine; public: Car(const std::string& engine_model) : engine{engine_model} { } void start_car() const { engine.start(); std::cout << \"Car started\\n\"; } }; int main() { Car car{\"E-17\"}; car.start_car(); return 0; }    The Car constructor initializes its engine member in the member-initializer list. The start_car() function then delegates part of its work to engine.start() .    Component Lifetime  When a component is stored as an ordinary data member, its lifetime is tied to the containing object. The component is constructed as part of the containing object and is destroyed when the containing object is destroyed.  Construction follows the order of member declarations, not the order in which members appear in the constructor's initializer list. Destruction occurs in the reverse order. This rule ensures that a component remains available for the containing object throughout the containing object's lifetime.   Composition and component lifetime        Design  Component storage  Component lifetime  Typical meaning    Composition  Object member  Usually tied to the containing object  A car has an engine    Reference to another object  Reference member or parameter  Managed elsewhere  A report uses a formatter    Inheritance  Base-class subobject  Part of the derived object  A circle is a shape       Delegating Work to Components  A containing class can provide a simple public operation while allowing a component to perform specialized work. This separation lets each class focus on one responsibility. The containing class coordinates the operation, and the component class implements its own behavior.  Composition does not prevent a component from changing later. For example, a car could contain a different engine class in a future design, as long as the car's expected interface remains clear. This flexibility is one reason composition is often preferred for combining implementation details.  The following visualization shows the Car object containing its Engine component and delegating the start operation.     Exercises    Which statement best describes the relationship between Car and Engine ?     A car is a specialized kind of engine.  The example does not model an is-a relationship.    A car contains an engine and uses it as a component.  This describes a has-a relationship implemented with composition.    An engine inherits all members from a car.  The component relationship does not reverse the roles.    A car and an engine must be the same class.  Composition combines objects of different classes.       Which statements correctly describe composition? Select all that apply.     A containing object can delegate work to a component.  Delegation lets each class focus on its own responsibility.    Composition always means that the two classes have an is-a relationship.  Composition normally represents a has-a relationship.    An object member can have a lifetime tied to its containing object.  This is a common form of composition.    Composition can reduce dependence on a class hierarchy.  The containing class uses a component instead of becoming its derived class.       When a Car object is constructed, when is its Engine member constructed?    The Engine member is constructed as part of constructing the Car , before the body of the Car constructor runs.      Arrange the blocks to define a Car that initializes its Engine component.     class Car {    private:    Engine engine;    public:    Car(const std::string& model)    : engine{model} {    }    };    Car(const std::string& model) {      "
+},
+{
+  "id": "chapter13_composition_building_objects_from_objects-2",
+  "level": "2",
+  "url": "chapter13_composition_building_objects_from_objects.html#chapter13_composition_building_objects_from_objects-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": " Composition means that a class contains one or more objects of other classes as data members. The containing object uses those component objects to carry out its work. Composition is a direct implementation of a has-a relationship. "
+},
+{
+  "id": "chapter13_subsection_component_objects",
+  "level": "2",
+  "url": "chapter13_composition_building_objects_from_objects.html#chapter13_subsection_component_objects",
+  "type": "Subsection",
+  "number": "13.3.1",
+  "title": "Objects as Components",
+  "body": " Objects as Components  A component is an ordinary data member whose type is another class. In this example, a Car has an Engine . The Car is not a kind of Engine ; it uses an engine as one of its parts.   A car delegates starting to its engine   #include <iostream> #include <string> class Engine { private: std::string model; public: Engine(const std::string& starting_model) : model{starting_model} { } void start() const { std::cout << model << \" started\\n\"; } }; class Car { private: Engine engine; public: Car(const std::string& engine_model) : engine{engine_model} { } void start_car() const { engine.start(); std::cout << \"Car started\\n\"; } }; int main() { Car car{\"E-17\"}; car.start_car(); return 0; }    The Car constructor initializes its engine member in the member-initializer list. The start_car() function then delegates part of its work to engine.start() .  "
+},
+{
+  "id": "chapter13_subsection_component_lifetime",
+  "level": "2",
+  "url": "chapter13_composition_building_objects_from_objects.html#chapter13_subsection_component_lifetime",
+  "type": "Subsection",
+  "number": "13.3.2",
+  "title": "Component Lifetime",
+  "body": " Component Lifetime  When a component is stored as an ordinary data member, its lifetime is tied to the containing object. The component is constructed as part of the containing object and is destroyed when the containing object is destroyed.  Construction follows the order of member declarations, not the order in which members appear in the constructor's initializer list. Destruction occurs in the reverse order. This rule ensures that a component remains available for the containing object throughout the containing object's lifetime.   Composition and component lifetime        Design  Component storage  Component lifetime  Typical meaning    Composition  Object member  Usually tied to the containing object  A car has an engine    Reference to another object  Reference member or parameter  Managed elsewhere  A report uses a formatter    Inheritance  Base-class subobject  Part of the derived object  A circle is a shape     "
+},
+{
+  "id": "chapter13_subsection_delegation",
+  "level": "2",
+  "url": "chapter13_composition_building_objects_from_objects.html#chapter13_subsection_delegation",
+  "type": "Subsection",
+  "number": "13.3.3",
+  "title": "Delegating Work to Components",
+  "body": " Delegating Work to Components  A containing class can provide a simple public operation while allowing a component to perform specialized work. This separation lets each class focus on one responsibility. The containing class coordinates the operation, and the component class implements its own behavior.  Composition does not prevent a component from changing later. For example, a car could contain a different engine class in a future design, as long as the car's expected interface remains clear. This flexibility is one reason composition is often preferred for combining implementation details.  The following visualization shows the Car object containing its Engine component and delegating the start operation.   "
+},
+{
+  "id": "exercises_chapter13_composition",
+  "level": "2",
+  "url": "chapter13_composition_building_objects_from_objects.html#exercises_chapter13_composition",
+  "type": "Exercises",
+  "number": "13.3.4",
+  "title": "Exercises",
+  "body": " Exercises    Which statement best describes the relationship between Car and Engine ?     A car is a specialized kind of engine.  The example does not model an is-a relationship.    A car contains an engine and uses it as a component.  This describes a has-a relationship implemented with composition.    An engine inherits all members from a car.  The component relationship does not reverse the roles.    A car and an engine must be the same class.  Composition combines objects of different classes.       Which statements correctly describe composition? Select all that apply.     A containing object can delegate work to a component.  Delegation lets each class focus on its own responsibility.    Composition always means that the two classes have an is-a relationship.  Composition normally represents a has-a relationship.    An object member can have a lifetime tied to its containing object.  This is a common form of composition.    Composition can reduce dependence on a class hierarchy.  The containing class uses a component instead of becoming its derived class.       When a Car object is constructed, when is its Engine member constructed?    The Engine member is constructed as part of constructing the Car , before the body of the Car constructor runs.      Arrange the blocks to define a Car that initializes its Engine component.     class Car {    private:    Engine engine;    public:    Car(const std::string& model)    : engine{model} {    }    };    Car(const std::string& model) {     "
+},
+{
+  "id": "chapter13_inheritance_tradeoffs_and_design_choices",
+  "level": "1",
+  "url": "chapter13_inheritance_tradeoffs_and_design_choices.html",
+  "type": "Section",
+  "number": "13.4",
+  "title": "Inheritance Trade-Offs and Design Choices",
+  "body": " Inheritance Trade-Offs and Design Choices  Inheritance can express a genuine is-a relationship, but it is not simply a general-purpose mechanism for reusing code. A derived class becomes coupled to the base class's interface and behavior. Before choosing inheritance, we should ask whether the derived object can really be used wherever the base object is expected.   Inheritance Creates Coupling  A derived class depends on details of its base class. Changes to the base class can therefore affect every derived class. A short hierarchy may be easy to understand, but a deep hierarchy can make it difficult to locate where behavior comes from.  Inheritance can also expose behavior that does not make sense for the derived type. If a derived class must disable, reinterpret, or contradict an inherited operation, the proposed is-a relationship may be incorrect. Sharing a few lines of implementation is not enough to justify inheritance.   Common inheritance trade-offs       Concern  What can happen  Design question    Tight coupling  Base-class changes affect derived classes.  Could the behavior be provided by a component instead?    Deep hierarchy  Behavior becomes difficult to trace.  Can the design remain shallow and easy to explain?    Wrong is-a relationship  The derived class inherits unsuitable operations.  Can every derived object substitute for the base object?    Implementation reuse only  The hierarchy communicates a relationship that is not real.  Would composition or a helper function express the goal better?       Not Every Class Is Designed for Inheritance  C++ does not forbid inheriting from every standard-library class, but a class such as std::string is not generally designed to be a polymorphic base class. It has no virtual destructor for safe deletion through a std::string* , and it does not provide a virtual interface intended for derived customization.  A wrapper class uses composition to add a label while keeping the original string as a private component:   A wrapper adds behavior through composition   #include <iostream> #include <string> class LabeledText { private: std::string text; std::string label; public: LabeledText(const std::string& starting_label, const std::string& starting_text) : text{starting_text}, label{starting_label} { } void print() const { std::cout << label << \": \" << text << '\\n'; } std::size_t length() const { return text.length(); } }; int main() { LabeledText message{\"Status\", \"Ready\"}; message.print(); std::cout << message.length() << '\\n'; return 0; }     LabeledText is not a specialized kind of std::string . It has a string and provides only the operations that belong in its own interface. This wrapper design avoids making a standard-library class part of an unnecessary inheritance hierarchy.    When Composition Is the Better Choice  Composition is often a better choice when the goal is to combine implementation components, replace one component with another, or keep class responsibilities independent. Inheritance is more appropriate when a derived object must genuinely satisfy the base type's public contract.   Choosing between composition and inheritance       Question  Composition is likely when...  Inheritance is likely when...    What is the relationship?  The object has or uses another object.  The object is a specialized version of the base type.    What should change?  A component may be replaced independently.  Derived types share a stable public contract.    Why reuse behavior?  To delegate implementation work.  To support substitutability and shared polymorphic behavior.      Prefer composition over inheritance is useful guidance, not an absolute rule. The important step is to choose the relationship that accurately communicates the design.  The visualization shows a wrapper object containing a std::string rather than inheriting from it.     Exercises    Which design is usually better for adding a label to a std::string ?     Always inherit publicly from std::string .  std::string is not generally designed as a polymorphic base class.    Use a wrapper class that contains a std::string .  Composition keeps the string as an implementation component.    Make the label a global variable.  A global variable does not model the relationship between one label and one string.    Copy the string into every function that prints it.  Repeated copying does not create a clear object design.       Which situations favor composition over inheritance? Select all that apply.     The object has another object as one of its parts.  This is a has-a relationship.    A component may need to be replaced independently.  Composition can reduce dependence on a fixed class hierarchy.    The derived object must be usable wherever the base type is expected.  This is a reason to consider inheritance and polymorphism.    The design goal is to delegate implementation work to another object.  Delegation is a common composition technique.       Why is sharing a few lines of implementation not, by itself, a sufficient reason to use inheritance?    Inheritance communicates an is-a relationship and creates coupling between the base and derived classes. Composition or a helper function may reuse implementation without making a false type relationship.      Arrange the blocks to define a wrapper class that contains a std::string .     class LabeledText {    private:    std::string text;    public:    void print() const {    std::cout << text << '\\n';    }    };    class LabeledText : public std::string {      "
+},
+{
+  "id": "chapter13_inheritance_tradeoffs_and_design_choices-2",
+  "level": "2",
+  "url": "chapter13_inheritance_tradeoffs_and_design_choices.html#chapter13_inheritance_tradeoffs_and_design_choices-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Inheritance can express a genuine is-a relationship, but it is not simply a general-purpose mechanism for reusing code. A derived class becomes coupled to the base class's interface and behavior. Before choosing inheritance, we should ask whether the derived object can really be used wherever the base object is expected. "
+},
+{
+  "id": "chapter13_subsection_inheritance_coupling",
+  "level": "2",
+  "url": "chapter13_inheritance_tradeoffs_and_design_choices.html#chapter13_subsection_inheritance_coupling",
+  "type": "Subsection",
+  "number": "13.4.1",
+  "title": "Inheritance Creates Coupling",
+  "body": " Inheritance Creates Coupling  A derived class depends on details of its base class. Changes to the base class can therefore affect every derived class. A short hierarchy may be easy to understand, but a deep hierarchy can make it difficult to locate where behavior comes from.  Inheritance can also expose behavior that does not make sense for the derived type. If a derived class must disable, reinterpret, or contradict an inherited operation, the proposed is-a relationship may be incorrect. Sharing a few lines of implementation is not enough to justify inheritance.   Common inheritance trade-offs       Concern  What can happen  Design question    Tight coupling  Base-class changes affect derived classes.  Could the behavior be provided by a component instead?    Deep hierarchy  Behavior becomes difficult to trace.  Can the design remain shallow and easy to explain?    Wrong is-a relationship  The derived class inherits unsuitable operations.  Can every derived object substitute for the base object?    Implementation reuse only  The hierarchy communicates a relationship that is not real.  Would composition or a helper function express the goal better?     "
+},
+{
+  "id": "chapter13_subsection_classes_not_designed_for_inheritance",
+  "level": "2",
+  "url": "chapter13_inheritance_tradeoffs_and_design_choices.html#chapter13_subsection_classes_not_designed_for_inheritance",
+  "type": "Subsection",
+  "number": "13.4.2",
+  "title": "Not Every Class Is Designed for Inheritance",
+  "body": " Not Every Class Is Designed for Inheritance  C++ does not forbid inheriting from every standard-library class, but a class such as std::string is not generally designed to be a polymorphic base class. It has no virtual destructor for safe deletion through a std::string* , and it does not provide a virtual interface intended for derived customization.  A wrapper class uses composition to add a label while keeping the original string as a private component:   A wrapper adds behavior through composition   #include <iostream> #include <string> class LabeledText { private: std::string text; std::string label; public: LabeledText(const std::string& starting_label, const std::string& starting_text) : text{starting_text}, label{starting_label} { } void print() const { std::cout << label << \": \" << text << '\\n'; } std::size_t length() const { return text.length(); } }; int main() { LabeledText message{\"Status\", \"Ready\"}; message.print(); std::cout << message.length() << '\\n'; return 0; }     LabeledText is not a specialized kind of std::string . It has a string and provides only the operations that belong in its own interface. This wrapper design avoids making a standard-library class part of an unnecessary inheritance hierarchy.  "
+},
+{
+  "id": "chapter13_subsection_prefer_composition_guidance",
+  "level": "2",
+  "url": "chapter13_inheritance_tradeoffs_and_design_choices.html#chapter13_subsection_prefer_composition_guidance",
+  "type": "Subsection",
+  "number": "13.4.3",
+  "title": "When Composition Is the Better Choice",
+  "body": " When Composition Is the Better Choice  Composition is often a better choice when the goal is to combine implementation components, replace one component with another, or keep class responsibilities independent. Inheritance is more appropriate when a derived object must genuinely satisfy the base type's public contract.   Choosing between composition and inheritance       Question  Composition is likely when...  Inheritance is likely when...    What is the relationship?  The object has or uses another object.  The object is a specialized version of the base type.    What should change?  A component may be replaced independently.  Derived types share a stable public contract.    Why reuse behavior?  To delegate implementation work.  To support substitutability and shared polymorphic behavior.      Prefer composition over inheritance is useful guidance, not an absolute rule. The important step is to choose the relationship that accurately communicates the design.  The visualization shows a wrapper object containing a std::string rather than inheriting from it.   "
+},
+{
+  "id": "exercises_chapter13_inheritance_tradeoffs",
+  "level": "2",
+  "url": "chapter13_inheritance_tradeoffs_and_design_choices.html#exercises_chapter13_inheritance_tradeoffs",
+  "type": "Exercises",
+  "number": "13.4.4",
+  "title": "Exercises",
+  "body": " Exercises    Which design is usually better for adding a label to a std::string ?     Always inherit publicly from std::string .  std::string is not generally designed as a polymorphic base class.    Use a wrapper class that contains a std::string .  Composition keeps the string as an implementation component.    Make the label a global variable.  A global variable does not model the relationship between one label and one string.    Copy the string into every function that prints it.  Repeated copying does not create a clear object design.       Which situations favor composition over inheritance? Select all that apply.     The object has another object as one of its parts.  This is a has-a relationship.    A component may need to be replaced independently.  Composition can reduce dependence on a fixed class hierarchy.    The derived object must be usable wherever the base type is expected.  This is a reason to consider inheritance and polymorphism.    The design goal is to delegate implementation work to another object.  Delegation is a common composition technique.       Why is sharing a few lines of implementation not, by itself, a sufficient reason to use inheritance?    Inheritance communicates an is-a relationship and creates coupling between the base and derived classes. Composition or a helper function may reuse implementation without making a false type relationship.      Arrange the blocks to define a wrapper class that contains a std::string .     class LabeledText {    private:    std::string text;    public:    void print() const {    std::cout << text << '\\n';    }    };    class LabeledText : public std::string {     "
+},
+{
+  "id": "chapter13_overriding_and_virtual_functions",
+  "level": "1",
+  "url": "chapter13_overriding_and_virtual_functions.html",
+  "type": "Section",
+  "number": "13.5",
+  "title": "Overriding and Virtual Functions",
+  "body": " Overriding and Virtual Functions  A derived class can provide a new implementation of a member function that it inherits from a base class. This is called overriding . The base function must be virtual for a call through a base reference or pointer to select the derived implementation at run time.   Virtual Member Functions  The keyword virtual tells C++ that a derived class may replace a member function. The derived declaration should use override to state explicitly that it is intended to override a base function.   A derived class overrides a virtual member function   #include <iostream> class Employee { public: virtual void report_role() const { std::cout << \"Employee\\n\"; } virtual ~Employee() = default; }; class HourlyEmployee : public Employee { public: void report_role() const override { std::cout << \"Hourly employee\\n\"; } }; int main() { HourlyEmployee employee; Employee& employee_reference = employee; employee_reference.report_role(); return 0; }    The reference has the static type Employee& , but it refers to an HourlyEmployee object. Because report_role() is virtual, the call uses the derived implementation.  The override keyword is valuable because the compiler checks that the derived declaration really matches a virtual base function. A typo, different parameter list, or missing const qualifier then becomes a compiler error instead of an accidental new function.    override and final   Keywords for controlling inherited behavior       Keyword  Where it appears  Purpose    virtual  Base-class member function  Allows a derived class to provide a run-time replacement.    override  Derived member function  Requests a compiler check that a base virtual function is being overridden.    final  Overriding member or class  Prevents further overriding or further derivation.     A member function declared with final cannot be overridden by a later derived class. A class declared with final cannot be used as a base class. These restrictions can protect a design when further customization would be unsafe or misleading.   class Report { public: virtual void print() const final { \/\/ This implementation cannot be overridden. } }; class SecureReport final : public Report { \/\/ No class may derive from SecureReport. }; int main() { SecureReport report; report.print(); return 0; }     Overriding and Function Hiding  A derived declaration can hide all base functions with the same name, even when the parameter lists differ. The using declaration can bring the hidden base overloads into the derived class's overload set.  Hiding is based on the function's name. It does not require the base function to be virtual, and it does not mean that the derived function replaces the base implementation for polymorphic calls. This makes hiding different from overriding.   #include <iostream> class Printer { public: void print() const { std::cout << \"No argument\\n\"; } void print(int copies) const { std::cout << copies << \" copies\\n\"; } }; class ColorPrinter : public Printer { public: using Printer::print; void print() const { std::cout << \"Color output\\n\"; } }; int main() { ColorPrinter printer; printer.print(); printer.print(2); return 0; }   Without using Printer::print; , the declaration of ColorPrinter::print() would hide the inherited overload Printer::print(int) when called through a ColorPrinter object. The using declaration makes both overloads available.    Overriding, Hiding, and Overloading Compared   Three similar but different ideas        Idea  What must match?  When is it selected?  Useful tool    Overriding  A virtual base function's name, parameters, and relevant qualifiers  At run time through a base reference or pointer  override    Hiding  Only the function name needs to be declared in the derived class  During name lookup  using Base::function_name    Overloading  Same name in one scope, with different parameter lists  At compile time from the argument types  Function overload resolution     The const qualifier is part of the relevant member-function signature for overriding. If a base function is declared void display() const , a derived function declared void display() does not override it because the qualifiers differ. Writing override makes the compiler identify this mistake.   Overriding and restoring hidden overloads   #include <iostream> class BasePrinter { public: virtual void report(int value) const { std::cout << \"Base report: \" << value << '\\n'; } void print() const { std::cout << \"Base print\\n\"; } void print(int copies) const { std::cout << copies << \" copies\\n\"; } }; class ColorPrinter : public BasePrinter { public: void report(int value) const override { std::cout << \"Color report: \" << value << '\\n'; } using BasePrinter::print; void print(double brightness) const { std::cout << \"Brightness: \" << brightness << '\\n'; } }; int main() { ColorPrinter printer; BasePrinter& printer_reference = printer; printer_reference.report(7); printer.print(); printer.print(2); printer.print(0.8); return 0; }     report(int) overrides the virtual base function. The derived print(double) would hide the two base print overloads, but using BasePrinter::print; makes those base overloads available again. The calls are therefore resolved for three different argument forms.    Visualizing an Overridden Function  The visualization shows an Employee reference referring to an HourlyEmployee object and calling the overridden function.     Exercises    What does the override keyword ask the compiler to check?     That the function is private.  override concerns inherited virtual functions, not access.    That the derived function matches a virtual function in a base class.  The compiler checks the intended overriding relationship.    That no object can call the function.  override does not prevent calls.    That the function is automatically static.  Overridden functions are associated with object behavior.       Which statements about virtual , override , and final are correct? Select all that apply.     override helps detect a mismatch with a base virtual function.  The compiler checks the intended override.    final always makes a function private.  final controls further overriding, not access.    A virtual base function can be replaced by a derived implementation.  This is the purpose of virtual dispatch.    A class declared final cannot be used as a base class.  final can prevent further class derivation.       Which statements correctly distinguish overriding from hiding? Select all that apply.     Overriding requires a matching virtual base function.  A derived function uses the base virtual interface when it overrides.    Hiding can occur when a derived function has the same name but different parameters.  Name lookup can hide all base overloads with that name.    Hiding automatically causes dynamic dispatch through a base reference.  Dynamic dispatch is associated with virtual overriding, not ordinary name hiding.    A using Base::function_name; declaration can restore hidden base overloads.  The using declaration brings the base overload set into the derived scope.       Why might a derived class use using Printer::print; ?    It brings hidden base-class overloads named print into the derived class's overload set.      Arrange the blocks to override report_role() correctly.     class HourlyEmployee : public Employee {    public:    void report_role() const override {    std::cout << \"Hourly employee\\n\";    }    };    void report_role(int level) const override {      "
+},
+{
+  "id": "chapter13_overriding_and_virtual_functions-2",
+  "level": "2",
+  "url": "chapter13_overriding_and_virtual_functions.html#chapter13_overriding_and_virtual_functions-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A derived class can provide a new implementation of a member function that it inherits from a base class. This is called overriding . The base function must be virtual for a call through a base reference or pointer to select the derived implementation at run time. "
+},
+{
+  "id": "chapter13_subsection_virtual_member_functions",
+  "level": "2",
+  "url": "chapter13_overriding_and_virtual_functions.html#chapter13_subsection_virtual_member_functions",
+  "type": "Subsection",
+  "number": "13.5.1",
+  "title": "Virtual Member Functions",
+  "body": " Virtual Member Functions  The keyword virtual tells C++ that a derived class may replace a member function. The derived declaration should use override to state explicitly that it is intended to override a base function.   A derived class overrides a virtual member function   #include <iostream> class Employee { public: virtual void report_role() const { std::cout << \"Employee\\n\"; } virtual ~Employee() = default; }; class HourlyEmployee : public Employee { public: void report_role() const override { std::cout << \"Hourly employee\\n\"; } }; int main() { HourlyEmployee employee; Employee& employee_reference = employee; employee_reference.report_role(); return 0; }    The reference has the static type Employee& , but it refers to an HourlyEmployee object. Because report_role() is virtual, the call uses the derived implementation.  The override keyword is valuable because the compiler checks that the derived declaration really matches a virtual base function. A typo, different parameter list, or missing const qualifier then becomes a compiler error instead of an accidental new function.  "
+},
+{
+  "id": "chapter13_subsection_override_and_final",
+  "level": "2",
+  "url": "chapter13_overriding_and_virtual_functions.html#chapter13_subsection_override_and_final",
+  "type": "Subsection",
+  "number": "13.5.2",
+  "title": "<code class=\"code-inline tex2jax_ignore\">override<\/code> and <code class=\"code-inline tex2jax_ignore\">final<\/code>",
+  "body": " override and final   Keywords for controlling inherited behavior       Keyword  Where it appears  Purpose    virtual  Base-class member function  Allows a derived class to provide a run-time replacement.    override  Derived member function  Requests a compiler check that a base virtual function is being overridden.    final  Overriding member or class  Prevents further overriding or further derivation.     A member function declared with final cannot be overridden by a later derived class. A class declared with final cannot be used as a base class. These restrictions can protect a design when further customization would be unsafe or misleading.   class Report { public: virtual void print() const final { \/\/ This implementation cannot be overridden. } }; class SecureReport final : public Report { \/\/ No class may derive from SecureReport. }; int main() { SecureReport report; report.print(); return 0; }   "
+},
+{
+  "id": "chapter13_subsection_function_hiding",
+  "level": "2",
+  "url": "chapter13_overriding_and_virtual_functions.html#chapter13_subsection_function_hiding",
+  "type": "Subsection",
+  "number": "13.5.3",
+  "title": "Overriding and Function Hiding",
+  "body": " Overriding and Function Hiding  A derived declaration can hide all base functions with the same name, even when the parameter lists differ. The using declaration can bring the hidden base overloads into the derived class's overload set.  Hiding is based on the function's name. It does not require the base function to be virtual, and it does not mean that the derived function replaces the base implementation for polymorphic calls. This makes hiding different from overriding.   #include <iostream> class Printer { public: void print() const { std::cout << \"No argument\\n\"; } void print(int copies) const { std::cout << copies << \" copies\\n\"; } }; class ColorPrinter : public Printer { public: using Printer::print; void print() const { std::cout << \"Color output\\n\"; } }; int main() { ColorPrinter printer; printer.print(); printer.print(2); return 0; }   Without using Printer::print; , the declaration of ColorPrinter::print() would hide the inherited overload Printer::print(int) when called through a ColorPrinter object. The using declaration makes both overloads available.  "
+},
+{
+  "id": "chapter13_subsection_comparing_overriding_hiding_overloading",
+  "level": "2",
+  "url": "chapter13_overriding_and_virtual_functions.html#chapter13_subsection_comparing_overriding_hiding_overloading",
+  "type": "Subsection",
+  "number": "13.5.4",
+  "title": "Overriding, Hiding, and Overloading Compared",
+  "body": " Overriding, Hiding, and Overloading Compared   Three similar but different ideas        Idea  What must match?  When is it selected?  Useful tool    Overriding  A virtual base function's name, parameters, and relevant qualifiers  At run time through a base reference or pointer  override    Hiding  Only the function name needs to be declared in the derived class  During name lookup  using Base::function_name    Overloading  Same name in one scope, with different parameter lists  At compile time from the argument types  Function overload resolution     The const qualifier is part of the relevant member-function signature for overriding. If a base function is declared void display() const , a derived function declared void display() does not override it because the qualifiers differ. Writing override makes the compiler identify this mistake.   Overriding and restoring hidden overloads   #include <iostream> class BasePrinter { public: virtual void report(int value) const { std::cout << \"Base report: \" << value << '\\n'; } void print() const { std::cout << \"Base print\\n\"; } void print(int copies) const { std::cout << copies << \" copies\\n\"; } }; class ColorPrinter : public BasePrinter { public: void report(int value) const override { std::cout << \"Color report: \" << value << '\\n'; } using BasePrinter::print; void print(double brightness) const { std::cout << \"Brightness: \" << brightness << '\\n'; } }; int main() { ColorPrinter printer; BasePrinter& printer_reference = printer; printer_reference.report(7); printer.print(); printer.print(2); printer.print(0.8); return 0; }     report(int) overrides the virtual base function. The derived print(double) would hide the two base print overloads, but using BasePrinter::print; makes those base overloads available again. The calls are therefore resolved for three different argument forms.  "
+},
+{
+  "id": "chapter13_subsection_overriding_visualization",
+  "level": "2",
+  "url": "chapter13_overriding_and_virtual_functions.html#chapter13_subsection_overriding_visualization",
+  "type": "Subsection",
+  "number": "13.5.5",
+  "title": "Visualizing an Overridden Function",
+  "body": " Visualizing an Overridden Function  The visualization shows an Employee reference referring to an HourlyEmployee object and calling the overridden function.   "
+},
+{
+  "id": "exercises_chapter13_overriding",
+  "level": "2",
+  "url": "chapter13_overriding_and_virtual_functions.html#exercises_chapter13_overriding",
+  "type": "Exercises",
+  "number": "13.5.6",
+  "title": "Exercises",
+  "body": " Exercises    What does the override keyword ask the compiler to check?     That the function is private.  override concerns inherited virtual functions, not access.    That the derived function matches a virtual function in a base class.  The compiler checks the intended overriding relationship.    That no object can call the function.  override does not prevent calls.    That the function is automatically static.  Overridden functions are associated with object behavior.       Which statements about virtual , override , and final are correct? Select all that apply.     override helps detect a mismatch with a base virtual function.  The compiler checks the intended override.    final always makes a function private.  final controls further overriding, not access.    A virtual base function can be replaced by a derived implementation.  This is the purpose of virtual dispatch.    A class declared final cannot be used as a base class.  final can prevent further class derivation.       Which statements correctly distinguish overriding from hiding? Select all that apply.     Overriding requires a matching virtual base function.  A derived function uses the base virtual interface when it overrides.    Hiding can occur when a derived function has the same name but different parameters.  Name lookup can hide all base overloads with that name.    Hiding automatically causes dynamic dispatch through a base reference.  Dynamic dispatch is associated with virtual overriding, not ordinary name hiding.    A using Base::function_name; declaration can restore hidden base overloads.  The using declaration brings the base overload set into the derived scope.       Why might a derived class use using Printer::print; ?    It brings hidden base-class overloads named print into the derived class's overload set.      Arrange the blocks to override report_role() correctly.     class HourlyEmployee : public Employee {    public:    void report_role() const override {    std::cout << \"Hourly employee\\n\";    }    };    void report_role(int level) const override {     "
+},
+{
+  "id": "chapter13_abstract_classes_and_pure_virtual_functions",
+  "level": "1",
+  "url": "chapter13_abstract_classes_and_pure_virtual_functions.html",
+  "type": "Section",
+  "number": "13.6",
+  "title": "Abstract Classes and Pure Virtual Functions",
+  "body": " Abstract Classes and Pure Virtual Functions  Sometimes a base class should describe a common interface without representing a complete object on its own. C++ supports this design with an abstract class . An abstract class cannot be instantiated directly, but it can provide a common interface for concrete derived classes.   Pure Virtual Functions  A pure virtual function is declared by placing = 0 after its parameter list. The declaration specifies an operation that concrete derived classes must provide.   A concrete circle implements an abstract shape interface   #include <iostream> class Shape2D { public: virtual double calculate_area() const = 0; virtual ~Shape2D() = default; }; class Circle : public Shape2D { private: double radius; public: Circle(double starting_radius) : radius{starting_radius} { } double calculate_area() const override { return 3.14159 * radius * radius; } }; int main() { Circle circle{2.0}; Shape2D& shape = circle; std::cout << shape.calculate_area() << '\\n'; return 0; }    The declaration of calculate_area() tells every concrete shape what operation it must provide. Circle satisfies the interface by defining that function with override .    Abstract and Concrete Classes   Abstract and concrete classes       Feature  Abstract class  Concrete class    Can create objects directly?  No  Yes    Can declare member data?  Yes  Yes    Can define ordinary member functions?  Yes  Yes    Can contain pure virtual functions?  Yes  No requirement    Typical role  Shared interface or incomplete base design  Complete object design     A class is abstract if it has at least one pure virtual function that has not been implemented in that class. A derived class becomes concrete only after it implements every inherited pure virtual function that it needs to provide.    Using Abstract References  Although we cannot create a Shape2D object directly, we can use a reference or pointer of type Shape2D to refer to a concrete derived object. This allows common functions to work with different concrete shapes without knowing their exact types.  A direct declaration such as Shape2D shape; is invalid because Shape2D is abstract. A declaration such as Shape2D& shape = circle; is valid because the reference refers to the complete concrete Circle object.  The following visualization shows a concrete Circle being used through an abstract Shape2D reference.     Exercises    What does the declaration virtual double calculate_area() const = 0; indicate?     The function always returns zero.  = 0 marks the function as pure virtual; it is not an ordinary return statement.    The function is pure virtual and the class is abstract unless a derived class implements it.  The declaration defines a required interface operation.    The function is automatically private.  Access is controlled by the surrounding access specifier.    The function can never be overridden.  Concrete derived classes are expected to implement it.       Which statements about abstract classes are correct? Select all that apply.     An abstract class cannot be instantiated directly.  At least one pure virtual function remains unimplemented.    An abstract class can contain ordinary implemented member functions.  Abstract describes instantiation, not the absence of all implementation.    Every class with a virtual function is abstract.  A class is abstract when it has an unimplemented pure virtual function.    A derived class can become concrete by implementing inherited pure virtual functions.  Implementing all required operations completes the derived design.       Why is Shape2D& shape = circle; valid even though a Shape2D object cannot be created directly?    The reference refers to an existing concrete Circle object. It does not attempt to create an abstract Shape2D object.      Arrange the blocks to declare an abstract Shape2D interface.     class Shape2D {    public:    virtual double calculate_area() const = 0;    virtual ~Shape2D() = default;    };    double calculate_area() const;      "
+},
+{
+  "id": "chapter13_abstract_classes_and_pure_virtual_functions-2",
+  "level": "2",
+  "url": "chapter13_abstract_classes_and_pure_virtual_functions.html#chapter13_abstract_classes_and_pure_virtual_functions-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Sometimes a base class should describe a common interface without representing a complete object on its own. C++ supports this design with an abstract class . An abstract class cannot be instantiated directly, but it can provide a common interface for concrete derived classes. "
+},
+{
+  "id": "chapter13_subsection_pure_virtual_functions",
+  "level": "2",
+  "url": "chapter13_abstract_classes_and_pure_virtual_functions.html#chapter13_subsection_pure_virtual_functions",
+  "type": "Subsection",
+  "number": "13.6.1",
+  "title": "Pure Virtual Functions",
+  "body": " Pure Virtual Functions  A pure virtual function is declared by placing = 0 after its parameter list. The declaration specifies an operation that concrete derived classes must provide.   A concrete circle implements an abstract shape interface   #include <iostream> class Shape2D { public: virtual double calculate_area() const = 0; virtual ~Shape2D() = default; }; class Circle : public Shape2D { private: double radius; public: Circle(double starting_radius) : radius{starting_radius} { } double calculate_area() const override { return 3.14159 * radius * radius; } }; int main() { Circle circle{2.0}; Shape2D& shape = circle; std::cout << shape.calculate_area() << '\\n'; return 0; }    The declaration of calculate_area() tells every concrete shape what operation it must provide. Circle satisfies the interface by defining that function with override .  "
+},
+{
+  "id": "chapter13_subsection_abstract_and_concrete_classes",
+  "level": "2",
+  "url": "chapter13_abstract_classes_and_pure_virtual_functions.html#chapter13_subsection_abstract_and_concrete_classes",
+  "type": "Subsection",
+  "number": "13.6.2",
+  "title": "Abstract and Concrete Classes",
+  "body": " Abstract and Concrete Classes   Abstract and concrete classes       Feature  Abstract class  Concrete class    Can create objects directly?  No  Yes    Can declare member data?  Yes  Yes    Can define ordinary member functions?  Yes  Yes    Can contain pure virtual functions?  Yes  No requirement    Typical role  Shared interface or incomplete base design  Complete object design     A class is abstract if it has at least one pure virtual function that has not been implemented in that class. A derived class becomes concrete only after it implements every inherited pure virtual function that it needs to provide.  "
+},
+{
+  "id": "chapter13_subsection_using_abstract_references",
+  "level": "2",
+  "url": "chapter13_abstract_classes_and_pure_virtual_functions.html#chapter13_subsection_using_abstract_references",
+  "type": "Subsection",
+  "number": "13.6.3",
+  "title": "Using Abstract References",
+  "body": " Using Abstract References  Although we cannot create a Shape2D object directly, we can use a reference or pointer of type Shape2D to refer to a concrete derived object. This allows common functions to work with different concrete shapes without knowing their exact types.  A direct declaration such as Shape2D shape; is invalid because Shape2D is abstract. A declaration such as Shape2D& shape = circle; is valid because the reference refers to the complete concrete Circle object.  The following visualization shows a concrete Circle being used through an abstract Shape2D reference.   "
+},
+{
+  "id": "exercises_chapter13_abstract_classes",
+  "level": "2",
+  "url": "chapter13_abstract_classes_and_pure_virtual_functions.html#exercises_chapter13_abstract_classes",
+  "type": "Exercises",
+  "number": "13.6.4",
+  "title": "Exercises",
+  "body": " Exercises    What does the declaration virtual double calculate_area() const = 0; indicate?     The function always returns zero.  = 0 marks the function as pure virtual; it is not an ordinary return statement.    The function is pure virtual and the class is abstract unless a derived class implements it.  The declaration defines a required interface operation.    The function is automatically private.  Access is controlled by the surrounding access specifier.    The function can never be overridden.  Concrete derived classes are expected to implement it.       Which statements about abstract classes are correct? Select all that apply.     An abstract class cannot be instantiated directly.  At least one pure virtual function remains unimplemented.    An abstract class can contain ordinary implemented member functions.  Abstract describes instantiation, not the absence of all implementation.    Every class with a virtual function is abstract.  A class is abstract when it has an unimplemented pure virtual function.    A derived class can become concrete by implementing inherited pure virtual functions.  Implementing all required operations completes the derived design.       Why is Shape2D& shape = circle; valid even though a Shape2D object cannot be created directly?    The reference refers to an existing concrete Circle object. It does not attempt to create an abstract Shape2D object.      Arrange the blocks to declare an abstract Shape2D interface.     class Shape2D {    public:    virtual double calculate_area() const = 0;    virtual ~Shape2D() = default;    };    double calculate_area() const;     "
+},
+{
+  "id": "chapter13_polymorphism_and_dynamic_dispatch",
+  "level": "1",
+  "url": "chapter13_polymorphism_and_dynamic_dispatch.html",
+  "type": "Section",
+  "number": "13.7",
+  "title": "Polymorphism and Dynamic Dispatch",
+  "body": " Polymorphism and Dynamic Dispatch   Polymorphism means that one interface can work with objects of different derived types. When a virtual member function is called through a base reference or pointer, C++ selects the implementation belonging to the actual object. This run-time selection is called dynamic dispatch .   Base References and Pointers  A base reference or pointer can refer to a derived object. The expression used to call the virtual function can remain the same while the actual object determines which implementation runs.   A base reference invokes derived behavior   #include <iostream> class Shape2D { public: virtual void report_type() const { std::cout << \"A two-dimensional shape\\n\"; } virtual ~Shape2D() = default; }; class Circle : public Shape2D { public: void report_type() const override { std::cout << \"A circle\\n\"; } }; int main() { Circle circle; Shape2D& shape_reference = circle; shape_reference.report_type(); return 0; }    The expression shape_reference.report_type() is written using the base interface, but the call executes Circle::report_type() . The reference does not copy the circle; it refers to the existing object.    Object Slicing  Passing a derived object by value to a function whose parameter is the base type creates a new base object. The derived part is left out. This loss of the derived portion is called object slicing .   Passing by value slices the derived object   #include <iostream> class Shape2D { public: virtual void report_type() const { std::cout << \"A two-dimensional shape\\n\"; } virtual ~Shape2D() = default; }; class Circle : public Shape2D { public: void report_type() const override { std::cout << \"A circle\\n\"; } }; void report_shape_by_value(Shape2D shape) { shape.report_type(); } int main() { Circle circle; report_shape_by_value(circle); return 0; }    The function receives a separate Shape2D object, so the Circle portion is sliced away. Passing a base reference or pointer preserves the complete derived object and allows dynamic dispatch.    A Polymorphic Array of Two-Dimensional Shapes  The following example stores circles, rectangles, ellipses, and triangles in one std::array . The array stores pointers to existing objects; it does not store the objects by value and does not own their lifetimes.   One array can use the common Shape2D interface   #include <array> #include <iostream> class Shape2D { public: virtual double calculate_area() const = 0; virtual ~Shape2D() = default; }; class Circle : public Shape2D { private: double radius; public: Circle(double starting_radius) : radius{starting_radius} { } double calculate_area() const override { return 3.14159 * radius * radius; } }; class Rectangle : public Shape2D { private: double width; double height; public: Rectangle(double starting_width, double starting_height) : width{starting_width}, height{starting_height} { } double calculate_area() const override { return width * height; } }; class Ellipse : public Shape2D { private: double semi_major_axis; double semi_minor_axis; public: Ellipse(double major_axis, double minor_axis) : semi_major_axis{major_axis}, semi_minor_axis{minor_axis} { } double calculate_area() const override { return 3.14159 * semi_major_axis * semi_minor_axis; } }; class Triangle : public Shape2D { private: double base; double height; public: Triangle(double starting_base, double starting_height) : base{starting_base}, height{starting_height} { } double calculate_area() const override { return 0.5 * base * height; } }; int main() { Circle circle{2.0}; Rectangle rectangle{3.0, 4.0}; Ellipse ellipse{3.0, 2.0}; Triangle triangle{3.0, 4.0}; std::array<const Shape2D*, 4> shapes{ &circle, &rectangle, &ellipse, &triangle }; for (const Shape2D* shape : shapes) { std::cout << shape->calculate_area() << '\\n'; } return 0; }    A declaration such as std::array<Shape2D, 4> would not work here because Shape2D is abstract. Even when a base class is concrete, storing derived objects by value can slice away their derived portions. The pointer array preserves the complete objects and lets the virtual call select the correct area calculation.    Why Polymorphic Bases Need Virtual Destructors  A base class used polymorphically should normally have a virtual destructor. This ensures that deleting a derived object through a base pointer runs the derived destructor before the base destructor. The Shape2D examples therefore declare virtual ~Shape2D() = default; .  The shape array above uses pointers to local objects, so it does not call delete . The virtual destructor is still part of the correct polymorphic base-class interface for situations involving dynamically created derived objects.  The following visualization shows dynamic dispatch through a base reference before the complete shape-array example is studied.     Exercises    Why does the shape example use std::array<const Shape2D*, 4> instead of std::array<Shape2D, 4> ?     Pointers are always faster than objects.  The important issue is preserving different derived object types.    Shape2D is abstract, and pointers preserve the complete derived objects.  The array stores addresses while virtual calls use each object's implementation.    std::array can store only pointers.  std::array can store objects of many types, including class objects.    Derived classes cannot contain data members.  Derived classes can contain their own data members.       Which statements about polymorphism are correct? Select all that apply.     A base reference can refer to a derived object.  This allows a common interface to work with derived objects.    A virtual call can select a derived implementation at run time.  This selection is dynamic dispatch.    Passing a derived object by base value preserves every derived member.  Passing by value can cause object slicing.    A polymorphic base class should generally have a virtual destructor.  This supports correct destruction through a base pointer.       What is object slicing?    Object slicing occurs when a derived object is copied into a base object by value, leaving out the derived portion.      Arrange the blocks to create an array of pointers to four existing Shape2D objects.     std::array<const Shape2D*, 4> shapes{    &circle, &rectangle, &ellipse, &triangle    };    std::array<Shape2D, 4> shapes{      "
+},
+{
+  "id": "chapter13_polymorphism_and_dynamic_dispatch-2",
+  "level": "2",
+  "url": "chapter13_polymorphism_and_dynamic_dispatch.html#chapter13_polymorphism_and_dynamic_dispatch-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": " Polymorphism means that one interface can work with objects of different derived types. When a virtual member function is called through a base reference or pointer, C++ selects the implementation belonging to the actual object. This run-time selection is called dynamic dispatch . "
+},
+{
+  "id": "chapter13_subsection_base_references_and_pointers",
+  "level": "2",
+  "url": "chapter13_polymorphism_and_dynamic_dispatch.html#chapter13_subsection_base_references_and_pointers",
+  "type": "Subsection",
+  "number": "13.7.1",
+  "title": "Base References and Pointers",
+  "body": " Base References and Pointers  A base reference or pointer can refer to a derived object. The expression used to call the virtual function can remain the same while the actual object determines which implementation runs.   A base reference invokes derived behavior   #include <iostream> class Shape2D { public: virtual void report_type() const { std::cout << \"A two-dimensional shape\\n\"; } virtual ~Shape2D() = default; }; class Circle : public Shape2D { public: void report_type() const override { std::cout << \"A circle\\n\"; } }; int main() { Circle circle; Shape2D& shape_reference = circle; shape_reference.report_type(); return 0; }    The expression shape_reference.report_type() is written using the base interface, but the call executes Circle::report_type() . The reference does not copy the circle; it refers to the existing object.  "
+},
+{
+  "id": "chapter13_subsection_object_slicing",
+  "level": "2",
+  "url": "chapter13_polymorphism_and_dynamic_dispatch.html#chapter13_subsection_object_slicing",
+  "type": "Subsection",
+  "number": "13.7.2",
+  "title": "Object Slicing",
+  "body": " Object Slicing  Passing a derived object by value to a function whose parameter is the base type creates a new base object. The derived part is left out. This loss of the derived portion is called object slicing .   Passing by value slices the derived object   #include <iostream> class Shape2D { public: virtual void report_type() const { std::cout << \"A two-dimensional shape\\n\"; } virtual ~Shape2D() = default; }; class Circle : public Shape2D { public: void report_type() const override { std::cout << \"A circle\\n\"; } }; void report_shape_by_value(Shape2D shape) { shape.report_type(); } int main() { Circle circle; report_shape_by_value(circle); return 0; }    The function receives a separate Shape2D object, so the Circle portion is sliced away. Passing a base reference or pointer preserves the complete derived object and allows dynamic dispatch.  "
+},
+{
+  "id": "chapter13_subsection_shape2d_polymorphic_array",
+  "level": "2",
+  "url": "chapter13_polymorphism_and_dynamic_dispatch.html#chapter13_subsection_shape2d_polymorphic_array",
+  "type": "Subsection",
+  "number": "13.7.3",
+  "title": "A Polymorphic Array of Two-Dimensional Shapes",
+  "body": " A Polymorphic Array of Two-Dimensional Shapes  The following example stores circles, rectangles, ellipses, and triangles in one std::array . The array stores pointers to existing objects; it does not store the objects by value and does not own their lifetimes.   One array can use the common Shape2D interface   #include <array> #include <iostream> class Shape2D { public: virtual double calculate_area() const = 0; virtual ~Shape2D() = default; }; class Circle : public Shape2D { private: double radius; public: Circle(double starting_radius) : radius{starting_radius} { } double calculate_area() const override { return 3.14159 * radius * radius; } }; class Rectangle : public Shape2D { private: double width; double height; public: Rectangle(double starting_width, double starting_height) : width{starting_width}, height{starting_height} { } double calculate_area() const override { return width * height; } }; class Ellipse : public Shape2D { private: double semi_major_axis; double semi_minor_axis; public: Ellipse(double major_axis, double minor_axis) : semi_major_axis{major_axis}, semi_minor_axis{minor_axis} { } double calculate_area() const override { return 3.14159 * semi_major_axis * semi_minor_axis; } }; class Triangle : public Shape2D { private: double base; double height; public: Triangle(double starting_base, double starting_height) : base{starting_base}, height{starting_height} { } double calculate_area() const override { return 0.5 * base * height; } }; int main() { Circle circle{2.0}; Rectangle rectangle{3.0, 4.0}; Ellipse ellipse{3.0, 2.0}; Triangle triangle{3.0, 4.0}; std::array<const Shape2D*, 4> shapes{ &circle, &rectangle, &ellipse, &triangle }; for (const Shape2D* shape : shapes) { std::cout << shape->calculate_area() << '\\n'; } return 0; }    A declaration such as std::array<Shape2D, 4> would not work here because Shape2D is abstract. Even when a base class is concrete, storing derived objects by value can slice away their derived portions. The pointer array preserves the complete objects and lets the virtual call select the correct area calculation.  "
+},
+{
+  "id": "chapter13_subsection_virtual_destructors",
+  "level": "2",
+  "url": "chapter13_polymorphism_and_dynamic_dispatch.html#chapter13_subsection_virtual_destructors",
+  "type": "Subsection",
+  "number": "13.7.4",
+  "title": "Why Polymorphic Bases Need Virtual Destructors",
+  "body": " Why Polymorphic Bases Need Virtual Destructors  A base class used polymorphically should normally have a virtual destructor. This ensures that deleting a derived object through a base pointer runs the derived destructor before the base destructor. The Shape2D examples therefore declare virtual ~Shape2D() = default; .  The shape array above uses pointers to local objects, so it does not call delete . The virtual destructor is still part of the correct polymorphic base-class interface for situations involving dynamically created derived objects.  The following visualization shows dynamic dispatch through a base reference before the complete shape-array example is studied.   "
+},
+{
+  "id": "exercises_chapter13_polymorphism",
+  "level": "2",
+  "url": "chapter13_polymorphism_and_dynamic_dispatch.html#exercises_chapter13_polymorphism",
+  "type": "Exercises",
+  "number": "13.7.5",
+  "title": "Exercises",
+  "body": " Exercises    Why does the shape example use std::array<const Shape2D*, 4> instead of std::array<Shape2D, 4> ?     Pointers are always faster than objects.  The important issue is preserving different derived object types.    Shape2D is abstract, and pointers preserve the complete derived objects.  The array stores addresses while virtual calls use each object's implementation.    std::array can store only pointers.  std::array can store objects of many types, including class objects.    Derived classes cannot contain data members.  Derived classes can contain their own data members.       Which statements about polymorphism are correct? Select all that apply.     A base reference can refer to a derived object.  This allows a common interface to work with derived objects.    A virtual call can select a derived implementation at run time.  This selection is dynamic dispatch.    Passing a derived object by base value preserves every derived member.  Passing by value can cause object slicing.    A polymorphic base class should generally have a virtual destructor.  This supports correct destruction through a base pointer.       What is object slicing?    Object slicing occurs when a derived object is copied into a base object by value, leaving out the derived portion.      Arrange the blocks to create an array of pointers to four existing Shape2D objects.     std::array<const Shape2D*, 4> shapes{    &circle, &rectangle, &ellipse, &triangle    };    std::array<Shape2D, 4> shapes{     "
+},
+{
+  "id": "chapter13_multiple_inheritance_and_interface_composition",
+  "level": "1",
+  "url": "chapter13_multiple_inheritance_and_interface_composition.html",
+  "type": "Section",
+  "number": "13.8",
+  "title": "Multiple Inheritance and Interface Composition",
+  "body": " Multiple Inheritance and Interface Composition  C++ allows a class to inherit from more than one base class. This is called multiple inheritance . Multiple inheritance can be useful when a concrete class must satisfy several small, independent interfaces.   More Than One Base Class  In a multiple-inheritance declaration, the base classes are separated by commas. In this example, a Report is both printable and savable.   A report implements two independent interfaces   #include <iostream> class Printable { public: virtual void print() const = 0; virtual ~Printable() = default; }; class Savable { public: virtual void save() const = 0; virtual ~Savable() = default; }; class Report : public Printable, public Savable { public: void print() const override { std::cout << \"Report printed\\n\"; } void save() const override { std::cout << \"Report saved\\n\"; } }; int main() { Report report; report.print(); report.save(); return 0; }    The two base classes define separate responsibilities. The concrete Report class supplies both required operations. Each interface can also be used independently through a reference to its base type.    Using Each Interface Separately   #include <iostream> class Printable { public: virtual void print() const = 0; virtual ~Printable() = default; }; class Savable { public: virtual void save() const = 0; virtual ~Savable() = default; }; class Report : public Printable, public Savable { public: void print() const override { std::cout << \"Printing report\\n\"; } void save() const override { std::cout << \"Saving report\\n\"; } }; void print_document(const Printable& document) { document.print(); } void save_document(const Savable& document) { document.save(); } int main() { Report report; print_document(report); save_document(report); return 0; }   The two functions accept only the interface they need. This keeps each function focused: print_document() does not need to know how to save a document, and save_document() does not need to know how to print one.    Benefits and Risks   Multiple inheritance design considerations       Consideration  Potential benefit  Potential risk    Small interfaces  A class can satisfy several independent contracts.  Too many interfaces can make the class difficult to understand.    Shared implementation  Inherited behavior may be reused.  Two bases may provide members with the same name.    Class hierarchy  Different interfaces can be combined explicitly.  Complex hierarchies can create ambiguity and coupling.     Multiple inheritance is easiest to explain when the base classes are small interfaces with distinct responsibilities. When the goal is to combine implementation components, composition is often clearer and easier to maintain.    Ambiguous Members  If two base classes provide members with the same name, a derived class may need to qualify the desired base explicitly. For example, Printable::reset() and Savable::reset() identify two different functions. This is one reason interfaces should have focused, nonconflicting responsibilities.  Multiple inheritance does not mean that every class should inherit from many implementation-heavy classes. Prefer a small number of stable interfaces, and use composition when an object is simply made from reusable parts.  The visualization shows one concrete object implementing two pure interfaces.     Exercises    Why might a class inherit from both Printable and Savable ?     Because every class must have two base classes.  Multiple inheritance is optional and should express a real design.    Because the class must satisfy two independent interfaces.  The concrete class supplies both required operations.    Because composition is impossible in C++.  Composition is often a useful alternative.    Because pure virtual functions automatically create objects.  Pure virtual functions define required operations; they do not create objects.       Which statements about interface-style multiple inheritance are correct? Select all that apply.     A concrete class must implement inherited pure virtual functions.  Implementing the required operations makes the class concrete.    A class can be viewed through either interface's base reference.  The object satisfies both public contracts.    Multiple inheritance always provides simpler code than composition.  Multiple inheritance can increase ambiguity and coupling.    Small, independent interfaces are usually easier to combine safely.  Focused interfaces reduce conflicts and make responsibilities clearer.       When is composition often preferable to multiple inheritance?    Composition is often preferable when the goal is to combine implementation components rather than satisfy several stable interfaces.      Arrange the blocks to declare a class that implements both interfaces.     class Report : public Printable, public Savable {    public:    void print() const override;    void save() const override;    };    class Report : private Printable {      "
+},
+{
+  "id": "chapter13_multiple_inheritance_and_interface_composition-2",
+  "level": "2",
+  "url": "chapter13_multiple_inheritance_and_interface_composition.html#chapter13_multiple_inheritance_and_interface_composition-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "C++ allows a class to inherit from more than one base class. This is called multiple inheritance . Multiple inheritance can be useful when a concrete class must satisfy several small, independent interfaces. "
+},
+{
+  "id": "chapter13_subsection_multiple_base_classes",
+  "level": "2",
+  "url": "chapter13_multiple_inheritance_and_interface_composition.html#chapter13_subsection_multiple_base_classes",
+  "type": "Subsection",
+  "number": "13.8.1",
+  "title": "More Than One Base Class",
+  "body": " More Than One Base Class  In a multiple-inheritance declaration, the base classes are separated by commas. In this example, a Report is both printable and savable.   A report implements two independent interfaces   #include <iostream> class Printable { public: virtual void print() const = 0; virtual ~Printable() = default; }; class Savable { public: virtual void save() const = 0; virtual ~Savable() = default; }; class Report : public Printable, public Savable { public: void print() const override { std::cout << \"Report printed\\n\"; } void save() const override { std::cout << \"Report saved\\n\"; } }; int main() { Report report; report.print(); report.save(); return 0; }    The two base classes define separate responsibilities. The concrete Report class supplies both required operations. Each interface can also be used independently through a reference to its base type.  "
+},
+{
+  "id": "chapter13_subsection_interface_references",
+  "level": "2",
+  "url": "chapter13_multiple_inheritance_and_interface_composition.html#chapter13_subsection_interface_references",
+  "type": "Subsection",
+  "number": "13.8.2",
+  "title": "Using Each Interface Separately",
+  "body": " Using Each Interface Separately   #include <iostream> class Printable { public: virtual void print() const = 0; virtual ~Printable() = default; }; class Savable { public: virtual void save() const = 0; virtual ~Savable() = default; }; class Report : public Printable, public Savable { public: void print() const override { std::cout << \"Printing report\\n\"; } void save() const override { std::cout << \"Saving report\\n\"; } }; void print_document(const Printable& document) { document.print(); } void save_document(const Savable& document) { document.save(); } int main() { Report report; print_document(report); save_document(report); return 0; }   The two functions accept only the interface they need. This keeps each function focused: print_document() does not need to know how to save a document, and save_document() does not need to know how to print one.  "
+},
+{
+  "id": "chapter13_subsection_multiple_inheritance_tradeoffs",
+  "level": "2",
+  "url": "chapter13_multiple_inheritance_and_interface_composition.html#chapter13_subsection_multiple_inheritance_tradeoffs",
+  "type": "Subsection",
+  "number": "13.8.3",
+  "title": "Benefits and Risks",
+  "body": " Benefits and Risks   Multiple inheritance design considerations       Consideration  Potential benefit  Potential risk    Small interfaces  A class can satisfy several independent contracts.  Too many interfaces can make the class difficult to understand.    Shared implementation  Inherited behavior may be reused.  Two bases may provide members with the same name.    Class hierarchy  Different interfaces can be combined explicitly.  Complex hierarchies can create ambiguity and coupling.     Multiple inheritance is easiest to explain when the base classes are small interfaces with distinct responsibilities. When the goal is to combine implementation components, composition is often clearer and easier to maintain.  "
+},
+{
+  "id": "chapter13_subsection_ambiguous_members",
+  "level": "2",
+  "url": "chapter13_multiple_inheritance_and_interface_composition.html#chapter13_subsection_ambiguous_members",
+  "type": "Subsection",
+  "number": "13.8.4",
+  "title": "Ambiguous Members",
+  "body": " Ambiguous Members  If two base classes provide members with the same name, a derived class may need to qualify the desired base explicitly. For example, Printable::reset() and Savable::reset() identify two different functions. This is one reason interfaces should have focused, nonconflicting responsibilities.  Multiple inheritance does not mean that every class should inherit from many implementation-heavy classes. Prefer a small number of stable interfaces, and use composition when an object is simply made from reusable parts.  The visualization shows one concrete object implementing two pure interfaces.   "
+},
+{
+  "id": "exercises_chapter13_multiple_inheritance",
+  "level": "2",
+  "url": "chapter13_multiple_inheritance_and_interface_composition.html#exercises_chapter13_multiple_inheritance",
+  "type": "Exercises",
+  "number": "13.8.5",
+  "title": "Exercises",
+  "body": " Exercises    Why might a class inherit from both Printable and Savable ?     Because every class must have two base classes.  Multiple inheritance is optional and should express a real design.    Because the class must satisfy two independent interfaces.  The concrete class supplies both required operations.    Because composition is impossible in C++.  Composition is often a useful alternative.    Because pure virtual functions automatically create objects.  Pure virtual functions define required operations; they do not create objects.       Which statements about interface-style multiple inheritance are correct? Select all that apply.     A concrete class must implement inherited pure virtual functions.  Implementing the required operations makes the class concrete.    A class can be viewed through either interface's base reference.  The object satisfies both public contracts.    Multiple inheritance always provides simpler code than composition.  Multiple inheritance can increase ambiguity and coupling.    Small, independent interfaces are usually easier to combine safely.  Focused interfaces reduce conflicts and make responsibilities clearer.       When is composition often preferable to multiple inheritance?    Composition is often preferable when the goal is to combine implementation components rather than satisfy several stable interfaces.      Arrange the blocks to declare a class that implements both interfaces.     class Report : public Printable, public Savable {    public:    void print() const override;    void save() const override;    };    class Report : private Printable {     "
+},
+{
+  "id": "chapter13_user_defined_exception_classes",
+  "level": "1",
+  "url": "chapter13_user_defined_exception_classes.html",
+  "type": "Section",
+  "number": "13.9",
+  "title": "User-Defined Exception Classes",
+  "body": " User-Defined Exception Classes  Chapter 11 introduced the mechanics of exception handling: throwing an exception, catching it, and allowing it to propagate when appropriate. A program can also define an exception class that gives a particular error a meaningful type and message.   Deriving a Custom Exception  A user-defined exception can publicly inherit from a standard exception class. Deriving from std::invalid_argument communicates that the caller supplied an unacceptable argument. Deriving from std::runtime_error communicates that an operation failed while the program was running.   A custom exception identifies an invalid score   #include <iostream> #include <stdexcept> #include <string> class InvalidScore : public std::invalid_argument { public: InvalidScore() : std::invalid_argument{ \"Score must be between 0 and 100\" } { } }; void validate_score(int score) { if (score < 0 || score > 100) { throw InvalidScore{}; } } int main() { try { validate_score(125); } catch (const InvalidScore& error) { std::cout << error.what() << '\\n'; } return 0; }    The custom exception constructor forwards a message to the base-class constructor. The inherited what() member function then returns that message. This is usually better than writing a new what() function for every custom exception.    Choosing an Exception Base Class   Common bases for user-defined exceptions       Base class  Use when...  Example derived type    std::invalid_argument  A function receives an unacceptable argument.  InvalidScore    std::out_of_range  An index or requested position is outside an allowed range.  InvalidRecordIndex    std::runtime_error  An operation cannot complete during execution.  StorageFailure     A caller can catch the specific custom type when it needs a precise response. It can also catch a broader standard base such as std::exception when one general response is appropriate.    Catching Specifically or Generally   #include <iostream> #include <stdexcept> class InvalidScore : public std::invalid_argument { public: InvalidScore(int score) : std::invalid_argument{\"Invalid score: \" + std::to_string(score)} { } }; void validate_score(int score) { if (score < 0 || score > 100) { throw InvalidScore{score}; } } int main() { try { validate_score(-4); } catch (const std::exception& error) { std::cout << error.what() << '\\n'; } return 0; }   The catch clause accepts a const std::exception& , so it can handle InvalidScore through its standard exception base. Catching by constant reference avoids another copy and preserves the exception's polymorphic behavior.  The following visualization shows a custom exception being thrown and then caught through its standard exception interface.     Common Standard Exception Classes  The standard library provides a family of exception classes. The classes below are the most useful ones to recognize in an introductory C++ program. They all provide the inherited what() interface, either directly or through a standard exception base class.   Selected standard exception classes and their inheritance relationships     The diagram lists the common standard exception types that students are most likely to encounter. std::exception is the general base class. The logic-error family includes std::logic_error , std::invalid_argument , std::domain_error , std::length_error , and std::out_of_range . The run-time-error family includes std::runtime_error , std::range_error , std::overflow_error , std::underflow_error , and std::system_error . Input\/output failures use std::ios_base::failure , and a failed dynamic allocation can throw std::bad_alloc .  C++17 also defines specialized exceptions for particular library facilities, such as std::filesystem::filesystem_error , std::bad_optional_access , and std::bad_variant_access . Students can study those types when they study the corresponding libraries. For now, recognizing the common hierarchy and choosing an appropriate base class is the main goal.    Catch Specific Exceptions Before General Ones  A specific exception must be caught before one of its base classes. If a general std::exception handler appears first, it will catch the derived exception and the later specific handler will never be reached.   Catch a specific exception before its base class   #include <iostream> #include <stdexcept> int main() { try { throw std::out_of_range{\"Index is outside the valid range\"}; } catch (const std::out_of_range& error) { std::cout << \"Range problem: \" << error.what() << '\\n'; } catch (const std::logic_error& error) { std::cout << \"Logic problem: \" << error.what() << '\\n'; } catch (const std::exception& error) { std::cout << \"Other standard exception: \" << error.what() << '\\n'; } return 0; }      Guidance for Exception Classes    Give the exception a name that describes the error.    Derive publicly from the most appropriate standard exception type.    Pass a useful message to the standard base constructor.    Catch exceptions by const reference.    Do not create a custom exception class when an existing standard type communicates the error clearly.    User-defined exception classes should add meaningful classification or information. They should not be used merely to make ordinary control flow more complicated.    Exercises    Why does InvalidScore inherit from std::invalid_argument ?     Because every exception must inherit from that exact class.  Different standard exception types communicate different categories of errors.    Because the caller supplied an unacceptable argument.  An invalid score is an invalid function argument.    Because the class cannot contain a constructor.  Custom exception classes can have constructors.    Because what() cannot be inherited.  The standard exception interface, including what() , can be inherited.       Which statements about user-defined exception classes are correct? Select all that apply.     A custom exception can publicly inherit from a standard exception type.  Public inheritance allows it to be caught through the standard base interface.    A custom constructor can pass a message to the standard base constructor.  The inherited what() function can then provide that message.    Every custom exception must override what() .  Standard exception classes already provide what() behavior.    A custom exception can be caught through a const std::exception& .  The standard base class provides a general catch interface.       Why should exception objects normally be caught by constant reference?    Catching by constant reference avoids copying the exception and preserves its polymorphic type and message.      Arrange the blocks to define a custom exception derived from std::invalid_argument .     class InvalidScore : public std::invalid_argument {    public:    InvalidScore()    : std::invalid_argument{\"Invalid score\"} {    }    };    class InvalidScore : private std::invalid_argument {      "
+},
+{
+  "id": "chapter13_user_defined_exception_classes-2",
+  "level": "2",
+  "url": "chapter13_user_defined_exception_classes.html#chapter13_user_defined_exception_classes-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Chapter 11 introduced the mechanics of exception handling: throwing an exception, catching it, and allowing it to propagate when appropriate. A program can also define an exception class that gives a particular error a meaningful type and message. "
+},
+{
+  "id": "chapter13_subsection_derive_exception_class",
+  "level": "2",
+  "url": "chapter13_user_defined_exception_classes.html#chapter13_subsection_derive_exception_class",
+  "type": "Subsection",
+  "number": "13.9.1",
+  "title": "Deriving a Custom Exception",
+  "body": " Deriving a Custom Exception  A user-defined exception can publicly inherit from a standard exception class. Deriving from std::invalid_argument communicates that the caller supplied an unacceptable argument. Deriving from std::runtime_error communicates that an operation failed while the program was running.   A custom exception identifies an invalid score   #include <iostream> #include <stdexcept> #include <string> class InvalidScore : public std::invalid_argument { public: InvalidScore() : std::invalid_argument{ \"Score must be between 0 and 100\" } { } }; void validate_score(int score) { if (score < 0 || score > 100) { throw InvalidScore{}; } } int main() { try { validate_score(125); } catch (const InvalidScore& error) { std::cout << error.what() << '\\n'; } return 0; }    The custom exception constructor forwards a message to the base-class constructor. The inherited what() member function then returns that message. This is usually better than writing a new what() function for every custom exception.  "
+},
+{
+  "id": "chapter13_subsection_exception_base_types",
+  "level": "2",
+  "url": "chapter13_user_defined_exception_classes.html#chapter13_subsection_exception_base_types",
+  "type": "Subsection",
+  "number": "13.9.2",
+  "title": "Choosing an Exception Base Class",
+  "body": " Choosing an Exception Base Class   Common bases for user-defined exceptions       Base class  Use when...  Example derived type    std::invalid_argument  A function receives an unacceptable argument.  InvalidScore    std::out_of_range  An index or requested position is outside an allowed range.  InvalidRecordIndex    std::runtime_error  An operation cannot complete during execution.  StorageFailure     A caller can catch the specific custom type when it needs a precise response. It can also catch a broader standard base such as std::exception when one general response is appropriate.  "
+},
+{
+  "id": "chapter13_subsection_catching_custom_exceptions",
+  "level": "2",
+  "url": "chapter13_user_defined_exception_classes.html#chapter13_subsection_catching_custom_exceptions",
+  "type": "Subsection",
+  "number": "13.9.3",
+  "title": "Catching Specifically or Generally",
+  "body": " Catching Specifically or Generally   #include <iostream> #include <stdexcept> class InvalidScore : public std::invalid_argument { public: InvalidScore(int score) : std::invalid_argument{\"Invalid score: \" + std::to_string(score)} { } }; void validate_score(int score) { if (score < 0 || score > 100) { throw InvalidScore{score}; } } int main() { try { validate_score(-4); } catch (const std::exception& error) { std::cout << error.what() << '\\n'; } return 0; }   The catch clause accepts a const std::exception& , so it can handle InvalidScore through its standard exception base. Catching by constant reference avoids another copy and preserves the exception's polymorphic behavior.  The following visualization shows a custom exception being thrown and then caught through its standard exception interface.   "
+},
+{
+  "id": "chapter13_subsection_standard_exception_family",
+  "level": "2",
+  "url": "chapter13_user_defined_exception_classes.html#chapter13_subsection_standard_exception_family",
+  "type": "Subsection",
+  "number": "13.9.4",
+  "title": "Common Standard Exception Classes",
+  "body": " Common Standard Exception Classes  The standard library provides a family of exception classes. The classes below are the most useful ones to recognize in an introductory C++ program. They all provide the inherited what() interface, either directly or through a standard exception base class.   Selected standard exception classes and their inheritance relationships     The diagram lists the common standard exception types that students are most likely to encounter. std::exception is the general base class. The logic-error family includes std::logic_error , std::invalid_argument , std::domain_error , std::length_error , and std::out_of_range . The run-time-error family includes std::runtime_error , std::range_error , std::overflow_error , std::underflow_error , and std::system_error . Input\/output failures use std::ios_base::failure , and a failed dynamic allocation can throw std::bad_alloc .  C++17 also defines specialized exceptions for particular library facilities, such as std::filesystem::filesystem_error , std::bad_optional_access , and std::bad_variant_access . Students can study those types when they study the corresponding libraries. For now, recognizing the common hierarchy and choosing an appropriate base class is the main goal.  "
+},
+{
+  "id": "chapter13_subsection_specific_before_general_catch",
+  "level": "2",
+  "url": "chapter13_user_defined_exception_classes.html#chapter13_subsection_specific_before_general_catch",
+  "type": "Subsection",
+  "number": "13.9.5",
+  "title": "Catch Specific Exceptions Before General Ones",
+  "body": " Catch Specific Exceptions Before General Ones  A specific exception must be caught before one of its base classes. If a general std::exception handler appears first, it will catch the derived exception and the later specific handler will never be reached.   Catch a specific exception before its base class   #include <iostream> #include <stdexcept> int main() { try { throw std::out_of_range{\"Index is outside the valid range\"}; } catch (const std::out_of_range& error) { std::cout << \"Range problem: \" << error.what() << '\\n'; } catch (const std::logic_error& error) { std::cout << \"Logic problem: \" << error.what() << '\\n'; } catch (const std::exception& error) { std::cout << \"Other standard exception: \" << error.what() << '\\n'; } return 0; }    "
+},
+{
+  "id": "chapter13_subsection_exception_design_guidance",
+  "level": "2",
+  "url": "chapter13_user_defined_exception_classes.html#chapter13_subsection_exception_design_guidance",
+  "type": "Subsection",
+  "number": "13.9.6",
+  "title": "Guidance for Exception Classes",
+  "body": " Guidance for Exception Classes    Give the exception a name that describes the error.    Derive publicly from the most appropriate standard exception type.    Pass a useful message to the standard base constructor.    Catch exceptions by const reference.    Do not create a custom exception class when an existing standard type communicates the error clearly.    User-defined exception classes should add meaningful classification or information. They should not be used merely to make ordinary control flow more complicated.  "
+},
+{
+  "id": "exercises_chapter13_user_defined_exceptions",
+  "level": "2",
+  "url": "chapter13_user_defined_exception_classes.html#exercises_chapter13_user_defined_exceptions",
+  "type": "Exercises",
+  "number": "13.9.7",
+  "title": "Exercises",
+  "body": " Exercises    Why does InvalidScore inherit from std::invalid_argument ?     Because every exception must inherit from that exact class.  Different standard exception types communicate different categories of errors.    Because the caller supplied an unacceptable argument.  An invalid score is an invalid function argument.    Because the class cannot contain a constructor.  Custom exception classes can have constructors.    Because what() cannot be inherited.  The standard exception interface, including what() , can be inherited.       Which statements about user-defined exception classes are correct? Select all that apply.     A custom exception can publicly inherit from a standard exception type.  Public inheritance allows it to be caught through the standard base interface.    A custom constructor can pass a message to the standard base constructor.  The inherited what() function can then provide that message.    Every custom exception must override what() .  Standard exception classes already provide what() behavior.    A custom exception can be caught through a const std::exception& .  The standard base class provides a general catch interface.       Why should exception objects normally be caught by constant reference?    Catching by constant reference avoids copying the exception and preserves its polymorphic type and message.      Arrange the blocks to define a custom exception derived from std::invalid_argument .     class InvalidScore : public std::invalid_argument {    public:    InvalidScore()    : std::invalid_argument{\"Invalid score\"} {    }    };    class InvalidScore : private std::invalid_argument {     "
+},
+{
+  "id": "chapter13_glossary",
+  "level": "1",
+  "url": "chapter13_glossary.html",
+  "type": "Glossary",
+  "number": "13.10",
+  "title": "Chapter 13 Glossary",
+  "body": " Chapter 13 Glossary   is-a relationship  A relationship in which one type is a specialized version of another type.    has-a relationship  A relationship in which one object contains or uses another object.    inheritance  A C++ mechanism that allows a derived class to receive and extend a base class's interface and behavior.    base class  The existing class from which another class inherits.    derived class  A class that inherits from and may extend a base class.    composition  A design technique in which an object contains other objects as components.    delegation  Allowing one object or function to ask another component to perform part of an operation.    protected  An access level available within a class and its derived classes, but not directly to ordinary client code.    overriding  Replacing a virtual base-class function with a matching function in a derived class.    virtual function  A member function that can be replaced in a derived class and selected dynamically through a base reference or pointer.    override  A specifier that asks the compiler to verify that a derived function overrides a virtual base function.    final  A specifier that prevents further overriding of a function or further inheritance from a class.    function hiding  The name-lookup behavior in which a derived declaration hides inherited functions with the same name.    polymorphism  The ability to use one interface with objects of different related types.    dynamic dispatch  Run-time selection of a derived virtual function through a base reference or pointer.    object slicing  The loss of a derived object's additional portion when it is copied into a base object by value.    abstract class  A class that cannot be instantiated directly, usually because it has an unimplemented pure virtual function.    pure virtual function  A virtual function declared with = 0 that specifies an operation a concrete derived class must implement.    multiple inheritance  A C++ feature that allows one class to inherit from more than one base class.    wrapper class  A class that contains another object and provides a focused interface around it.    user-defined exception  A programmer-defined exception class that represents a meaningful category of program error.   "
+},
+{
+  "id": "chapter13_glossary_is-a-relationship-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_is-a-relationship-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A relationship in which one type is a specialized version of another type. "
+},
+{
+  "id": "chapter13_glossary_has-a-relationship-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_has-a-relationship-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A relationship in which one object contains or uses another object. "
+},
+{
+  "id": "chapter13_glossary_inheritance-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_inheritance-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A C++ mechanism that allows a derived class to receive and extend a base class's interface and behavior. "
+},
+{
+  "id": "chapter13_glossary_base-class-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_base-class-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The existing class from which another class inherits. "
+},
+{
+  "id": "chapter13_glossary_derived-class-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_derived-class-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A class that inherits from and may extend a base class. "
+},
+{
+  "id": "chapter13_glossary_composition-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_composition-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A design technique in which an object contains other objects as components. "
+},
+{
+  "id": "chapter13_glossary_delegation-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_delegation-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Allowing one object or function to ask another component to perform part of an operation. "
+},
+{
+  "id": "chapter13_glossary_protected-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_protected-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "An access level available within a class and its derived classes, but not directly to ordinary client code. "
+},
+{
+  "id": "chapter13_glossary_overriding-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_overriding-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Replacing a virtual base-class function with a matching function in a derived class. "
+},
+{
+  "id": "chapter13_glossary_virtual-function-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_virtual-function-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A member function that can be replaced in a derived class and selected dynamically through a base reference or pointer. "
+},
+{
+  "id": "chapter13_glossary_override-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_override-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A specifier that asks the compiler to verify that a derived function overrides a virtual base function. "
+},
+{
+  "id": "chapter13_glossary_final-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_final-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A specifier that prevents further overriding of a function or further inheritance from a class. "
+},
+{
+  "id": "chapter13_glossary_function-hiding-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_function-hiding-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The name-lookup behavior in which a derived declaration hides inherited functions with the same name. "
+},
+{
+  "id": "chapter13_glossary_polymorphism-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_polymorphism-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The ability to use one interface with objects of different related types. "
+},
+{
+  "id": "chapter13_glossary_dynamic-dispatch-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_dynamic-dispatch-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "Run-time selection of a derived virtual function through a base reference or pointer. "
+},
+{
+  "id": "chapter13_glossary_object-slicing-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_object-slicing-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "The loss of a derived object's additional portion when it is copied into a base object by value. "
+},
+{
+  "id": "chapter13_glossary_abstract-class-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_abstract-class-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A class that cannot be instantiated directly, usually because it has an unimplemented pure virtual function. "
+},
+{
+  "id": "chapter13_glossary_pure-virtual-function-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_pure-virtual-function-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A virtual function declared with = 0 that specifies an operation a concrete derived class must implement. "
+},
+{
+  "id": "chapter13_glossary_multiple-inheritance-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_multiple-inheritance-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A C++ feature that allows one class to inherit from more than one base class. "
+},
+{
+  "id": "chapter13_glossary_wrapper-class-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_wrapper-class-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A class that contains another object and provides a focused interface around it. "
+},
+{
+  "id": "chapter13_glossary_user-defined-exception-2",
+  "level": "2",
+  "url": "chapter13_glossary.html#chapter13_glossary_user-defined-exception-2",
+  "type": "Paragraph",
+  "number": "",
+  "title": "",
+  "body": "A programmer-defined exception class that represents a meaningful category of program error. "
+},
+{
+  "id": "chapter13_exercises",
+  "level": "1",
+  "url": "chapter13_exercises.html",
+  "type": "Exercises",
+  "number": "13.11",
+  "title": "Chapter 13 Exercises",
+  "body": " Chapter 13 Exercises    Which relationship is represented when a Car contains an Engine ?    Is-a A car is not a specialized kind of engine.  Has-a The car has an engine component.  Overrides-a Overriding concerns inherited virtual functions.  Copies-a Copying is not the relationship described.      Which members can a derived class access directly?    Public base members Public members are available through the inherited interface.  Protected base members Protected members are available to derived classes.  Every private base member Private base members are not directly accessible in derived classes.  Local variables in main() Inheritance does not provide access to unrelated local variables.      Which statement correctly describes the difference between overriding and hiding?    They are two names for exactly the same behavior. Overriding uses a matching virtual function; hiding is based on name lookup.  Overriding replaces a matching virtual function, while hiding can hide base overloads by name. This distinction explains the role of override and using .  Hiding always produces dynamic dispatch. Dynamic dispatch is associated with virtual functions.  Overriding can happen only for static functions. Static functions do not provide virtual dispatch.      Which statement about a pure virtual function is correct?    It always returns zero. = 0 marks the declaration; it is not a return statement.  It requires a concrete derived class to provide an implementation. A pure virtual function defines a required operation.  It makes the function private. Access depends on the surrounding access specifier.  It prevents all derived classes from using the function. Derived classes are expected to implement the operation.      Which statements correctly describe the Shape2D pointer array? Select all that apply.    The array stores addresses of existing shape objects. The array element type is a pointer to Shape2D .  The same virtual call can calculate different shape areas. Dynamic dispatch selects each derived implementation.  The array stores four complete Shape2D objects by value. Shape2D is abstract and the array stores pointers.  The local shape objects must remain alive while the pointers are used. The pointer array does not own those objects.      Why might a class implement both Printable and Savable ?    To avoid writing any member functions. The concrete class must implement the interface operations.  To satisfy two independent public contracts. Each interface describes a different responsibility.  Because multiple inheritance is required for every class. Use it only when the design needs multiple interfaces.  To make all data members automatically public. Inheritance does not change data-member access in that way.      Which base class is most appropriate for an exception reporting an invalid function argument?    std::runtime_error in every situation Use the standard type that best describes the error.  std::invalid_argument An invalid argument is exactly the category represented by this standard type.  std::array std::array is a container, not an exception type.  Shape2D Shape2D is unrelated to exception classification.    "
+},
+{
+  "id": "chapter13_exercise_relationship_choice",
+  "level": "2",
+  "url": "chapter13_exercises.html#chapter13_exercise_relationship_choice",
+  "type": "Exercise",
+  "number": "13.11.1",
+  "title": "",
+  "body": "  Which relationship is represented when a Car contains an Engine ?    Is-a A car is not a specialized kind of engine.  Has-a The car has an engine component.  Overrides-a Overriding concerns inherited virtual functions.  Copies-a Copying is not the relationship described.   "
+},
+{
+  "id": "chapter13_exercise_access_control",
+  "level": "2",
+  "url": "chapter13_exercises.html#chapter13_exercise_access_control",
+  "type": "Exercise",
+  "number": "13.11.2",
+  "title": "",
+  "body": "  Which members can a derived class access directly?    Public base members Public members are available through the inherited interface.  Protected base members Protected members are available to derived classes.  Every private base member Private base members are not directly accessible in derived classes.  Local variables in main() Inheritance does not provide access to unrelated local variables.   "
+},
+{
+  "id": "chapter13_exercise_override_hiding",
+  "level": "2",
+  "url": "chapter13_exercises.html#chapter13_exercise_override_hiding",
+  "type": "Exercise",
+  "number": "13.11.3",
+  "title": "",
+  "body": "  Which statement correctly describes the difference between overriding and hiding?    They are two names for exactly the same behavior. Overriding uses a matching virtual function; hiding is based on name lookup.  Overriding replaces a matching virtual function, while hiding can hide base overloads by name. This distinction explains the role of override and using .  Hiding always produces dynamic dispatch. Dynamic dispatch is associated with virtual functions.  Overriding can happen only for static functions. Static functions do not provide virtual dispatch.   "
+},
+{
+  "id": "chapter13_exercise_abstract_class",
+  "level": "2",
+  "url": "chapter13_exercises.html#chapter13_exercise_abstract_class",
+  "type": "Exercise",
+  "number": "13.11.4",
+  "title": "",
+  "body": "  Which statement about a pure virtual function is correct?    It always returns zero. = 0 marks the declaration; it is not a return statement.  It requires a concrete derived class to provide an implementation. A pure virtual function defines a required operation.  It makes the function private. Access depends on the surrounding access specifier.  It prevents all derived classes from using the function. Derived classes are expected to implement the operation.   "
+},
+{
+  "id": "chapter13_exercise_polymorphic_collection",
+  "level": "2",
+  "url": "chapter13_exercises.html#chapter13_exercise_polymorphic_collection",
+  "type": "Exercise",
+  "number": "13.11.5",
+  "title": "",
+  "body": "  Which statements correctly describe the Shape2D pointer array? Select all that apply.    The array stores addresses of existing shape objects. The array element type is a pointer to Shape2D .  The same virtual call can calculate different shape areas. Dynamic dispatch selects each derived implementation.  The array stores four complete Shape2D objects by value. Shape2D is abstract and the array stores pointers.  The local shape objects must remain alive while the pointers are used. The pointer array does not own those objects.   "
+},
+{
+  "id": "chapter13_exercise_multiple_interfaces",
+  "level": "2",
+  "url": "chapter13_exercises.html#chapter13_exercise_multiple_interfaces",
+  "type": "Exercise",
+  "number": "13.11.6",
+  "title": "",
+  "body": "  Why might a class implement both Printable and Savable ?    To avoid writing any member functions. The concrete class must implement the interface operations.  To satisfy two independent public contracts. Each interface describes a different responsibility.  Because multiple inheritance is required for every class. Use it only when the design needs multiple interfaces.  To make all data members automatically public. Inheritance does not change data-member access in that way.   "
+},
+{
+  "id": "chapter13_exercise_custom_exception",
+  "level": "2",
+  "url": "chapter13_exercises.html#chapter13_exercise_custom_exception",
+  "type": "Exercise",
+  "number": "13.11.7",
+  "title": "",
+  "body": "  Which base class is most appropriate for an exception reporting an invalid function argument?    std::runtime_error in every situation Use the standard type that best describes the error.  std::invalid_argument An invalid argument is exactly the category represented by this standard type.  std::array std::array is a container, not an exception type.  Shape2D Shape2D is unrelated to exception classification.   "
+},
+{
+  "id": "chapter13_mixed_up_code",
+  "level": "1",
+  "url": "chapter13_mixed_up_code.html",
+  "type": "Exercises",
+  "number": "13.12",
+  "title": "Chapter 13 Mixed-Up Code Practice",
+  "body": " Chapter 13 Mixed-Up Code Practice    Arrange the blocks to declare the abstract Shape2D interface.    class Shape2D {  public:  virtual double calculate_area() const = 0;  virtual ~Shape2D() = default;  };  double calculate_area() const;      Arrange the blocks to declare a class implementing two interfaces.    class Report : public Printable, public Savable {  public:  void print() const override;  void save() const override;  };  class Report : private Printable {      Arrange the blocks to declare a custom exception derived from std::invalid_argument .    class InvalidScore : public std::invalid_argument {  public:  InvalidScore()  : std::invalid_argument{\"Invalid score\"} {  }  };  class InvalidScore : private std::invalid_argument {    "
+},
+{
+  "id": "chapter13_mixed_up_shape2d",
+  "level": "2",
+  "url": "chapter13_mixed_up_code.html#chapter13_mixed_up_shape2d",
+  "type": "Exercise",
+  "number": "13.12.yes",
+  "title": "",
+  "body": "  Arrange the blocks to declare the abstract Shape2D interface.    class Shape2D {  public:  virtual double calculate_area() const = 0;  virtual ~Shape2D() = default;  };  double calculate_area() const;   "
+},
+{
+  "id": "chapter13_mixed_up_report",
+  "level": "2",
+  "url": "chapter13_mixed_up_code.html#chapter13_mixed_up_report",
+  "type": "Exercise",
+  "number": "13.12.yes",
+  "title": "",
+  "body": "  Arrange the blocks to declare a class implementing two interfaces.    class Report : public Printable, public Savable {  public:  void print() const override;  void save() const override;  };  class Report : private Printable {   "
+},
+{
+  "id": "chapter13_mixed_up_exception",
+  "level": "2",
+  "url": "chapter13_mixed_up_code.html#chapter13_mixed_up_exception",
+  "type": "Exercise",
+  "number": "13.12.yes",
+  "title": "",
+  "body": "  Arrange the blocks to declare a custom exception derived from std::invalid_argument .    class InvalidScore : public std::invalid_argument {  public:  InvalidScore()  : std::invalid_argument{\"Invalid score\"} {  }  };  class InvalidScore : private std::invalid_argument {   "
+},
+{
+  "id": "chapter13_coding_practice",
+  "level": "1",
+  "url": "chapter13_coding_practice.html",
+  "type": "Exercises",
+  "number": "13.13",
+  "title": "Chapter 13 Coding Practice",
+  "body": " Chapter 13 Coding Practice   Build a Two-Dimensional Shape Hierarchy   Define an abstract Shape2D class with a pure virtual calculate_area() function and a virtual destructor. Implement Circle , Rectangle , Ellipse , and Triangle as derived classes.  Create one object of each type and store pointers to them in a std::array<const Shape2D*, 4> . Use one loop to print each area. Do not allocate the objects dynamically.     Design a Printable and Savable Report   Define two small abstract interfaces, Printable and Savable . Then define a concrete Report class that uses multiple inheritance to implement both interfaces.  Write print_document() and save_document() functions that accept only the interface they need. Demonstrate calling both functions with one Report object.     Validate Scores with a Custom Exception   Define an InvalidScore exception derived from std::invalid_argument . Its constructor should accept an integer score and pass a useful message to the base constructor.  Write validate_score() to throw the exception when a score is outside the range 0 through 100. Catch the exception by constant reference and print its inherited what() message.     Replace Inheritance with Composition   Design a LabeledText wrapper that contains a std::string and a label. Provide member functions to print the labeled text and report its length.  Explain in a short comment why composition is preferable to publicly inheriting from std::string for this design.    "
+},
+{
+  "id": "chapter13_coding_shape_hierarchy",
+  "level": "2",
+  "url": "chapter13_coding_practice.html#chapter13_coding_shape_hierarchy",
+  "type": "Exercise",
+  "number": "13.13.1",
+  "title": "Build a Two-Dimensional Shape Hierarchy.",
+  "body": " Build a Two-Dimensional Shape Hierarchy   Define an abstract Shape2D class with a pure virtual calculate_area() function and a virtual destructor. Implement Circle , Rectangle , Ellipse , and Triangle as derived classes.  Create one object of each type and store pointers to them in a std::array<const Shape2D*, 4> . Use one loop to print each area. Do not allocate the objects dynamically.   "
+},
+{
+  "id": "chapter13_coding_interface_report",
+  "level": "2",
+  "url": "chapter13_coding_practice.html#chapter13_coding_interface_report",
+  "type": "Exercise",
+  "number": "13.13.2",
+  "title": "Design a Printable and Savable Report.",
+  "body": " Design a Printable and Savable Report   Define two small abstract interfaces, Printable and Savable . Then define a concrete Report class that uses multiple inheritance to implement both interfaces.  Write print_document() and save_document() functions that accept only the interface they need. Demonstrate calling both functions with one Report object.   "
+},
+{
+  "id": "chapter13_coding_safe_score",
+  "level": "2",
+  "url": "chapter13_coding_practice.html#chapter13_coding_safe_score",
+  "type": "Exercise",
+  "number": "13.13.3",
+  "title": "Validate Scores with a Custom Exception.",
+  "body": " Validate Scores with a Custom Exception   Define an InvalidScore exception derived from std::invalid_argument . Its constructor should accept an integer score and pass a useful message to the base constructor.  Write validate_score() to throw the exception when a score is outside the range 0 through 100. Catch the exception by constant reference and print its inherited what() message.   "
+},
+{
+  "id": "chapter13_coding_composition_alternative",
+  "level": "2",
+  "url": "chapter13_coding_practice.html#chapter13_coding_composition_alternative",
+  "type": "Exercise",
+  "number": "13.13.4",
+  "title": "Replace Inheritance with Composition.",
+  "body": " Replace Inheritance with Composition   Design a LabeledText wrapper that contains a std::string and a label. Provide member functions to print the labeled text and report its length.  Explain in a short comment why composition is preferable to publicly inheriting from std::string for this design.   "
 }
 ]
 
