@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1900" height="1100" viewBox="0 0 1900 1100"
+     role="img" aria-labelledby="title description">
+  <title id="title">Selected C++ standard exception hierarchy</title>
+  <desc id="description">A readable four-level hierarchy showing std::exception, its direct standard-library branches, and selected logic-error and runtime-error descendants.</desc>
+
+  <defs>
+    <style>
+      .title { font: 700 39px sans-serif; fill: #1f2937; }
+      .subtitle { font: 25px sans-serif; fill: #4b5563; }
+      .box { stroke: #1f2937; stroke-width: 3; rx: 14; ry: 14; }
+      .root { fill: #dbeafe; }
+      .logic { fill: #dcfce7; }
+      .runtime { fill: #fef3c7; }
+      .special { fill: #f3e8ff; }
+      .label { font: 700 29px monospace; fill: #111827; text-anchor: middle; }
+      .small-label { font: 700 25px monospace; fill: #111827; text-anchor: middle; }
+      .note { font: 24px sans-serif; fill: #374151; }
+      .connector { stroke: #4b5563; stroke-width: 3; fill: none; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
+      <path d="M0,0 L0,8 L11,4 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+
+  <text x="950" y="42" class="title" text-anchor="middle">Selected C++ standard exception hierarchy</text>
+  <text x="950" y="75" class="subtitle" text-anchor="middle">Each arrow points from a derived exception toward its base class.</text>
+
+  <!-- Level 1: general standard exception base -->
+  <rect x="650" y="105" width="600" height="95" class="box root"/>
+  <text x="950" y="163" class="label">std::exception</text>
+
+  <!-- Level 2: direct branches -->
+  <path class="connector" marker-end="url(#arrow)" d="M320 270 L790 200"/>
+  <path class="connector" marker-end="url(#arrow)" d="M950 270 L950 200"/>
+  <path class="connector" marker-end="url(#arrow)" d="M1580 270 L1110 200"/>
+
+  <rect x="80" y="270" width="480" height="90" class="box logic"/>
+  <text x="320" y="326" class="label">std::logic_error</text>
+
+  <rect x="710" y="270" width="480" height="90" class="box runtime"/>
+  <text x="950" y="326" class="label">std::runtime_error</text>
+
+  <rect x="1340" y="270" width="480" height="90" class="box special"/>
+  <text x="1580" y="326" class="label">std::bad_alloc</text>
+
+  <!-- Level 3: logic-error descendants -->
+  <text x="20" y="430" class="subtitle" text-anchor="start">Logic-error descendants</text>
+  <path class="connector" marker-end="url(#arrow)" d="M190 495 L320 360"/>
+  <path class="connector" marker-end="url(#arrow)" d="M590 495 L320 360"/>
+  <path class="connector" marker-end="url(#arrow)" d="M990 495 L320 360"/>
+  <path class="connector" marker-end="url(#arrow)" d="M1390 495 L320 360"/>
+
+  <rect x="20" y="495" width="340" height="85" class="box logic"/>
+  <text x="190" y="547" class="small-label">std::invalid_argument</text>
+
+  <rect x="420" y="495" width="340" height="85" class="box logic"/>
+  <text x="590" y="547" class="small-label">std::domain_error</text>
+
+  <rect x="820" y="495" width="340" height="85" class="box logic"/>
+  <text x="990" y="547" class="small-label">std::length_error</text>
+
+  <rect x="1220" y="495" width="340" height="85" class="box logic"/>
+  <text x="1390" y="547" class="small-label">std::out_of_range</text>
+
+  <!-- Level 4: runtime-error descendants -->
+  <text x="20" y="670" class="subtitle" text-anchor="start">Runtime-error descendants</text>
+  <path class="connector" d="M190 735 L190 690 L1700 690"/>
+  <path class="connector" d="M590 735 L590 690"/>
+  <path class="connector" d="M990 735 L990 690"/>
+  <path class="connector" d="M1390 735 L1390 690"/>
+  <path class="connector" marker-end="url(#arrow)" d="M1700 690 L1700 390 L950 390 L950 360"/>
+
+  <rect x="20" y="735" width="340" height="85" class="box runtime"/>
+  <text x="190" y="787" class="small-label">std::range_error</text>
+
+  <rect x="420" y="735" width="340" height="85" class="box runtime"/>
+  <text x="590" y="787" class="small-label">std::overflow_error</text>
+
+  <rect x="820" y="735" width="340" height="85" class="box runtime"/>
+  <text x="990" y="787" class="small-label">std::underflow_error</text>
+
+  <rect x="1220" y="735" width="340" height="85" class="box runtime"/>
+  <text x="1390" y="787" class="small-label">std::system_error</text>
+
+  <!-- A commonly encountered descendant of system_error -->
+  <path class="connector" marker-end="url(#arrow)" d="M1390 940 L1390 820"/>
+  <rect x="1170" y="940" width="440" height="90" class="box runtime"/>
+  <text x="1390" y="978" class="small-label">std::ios_base::</text>
+  <text x="1390" y="1007" class="small-label">failure</text>
+
+  <text x="950" y="1070" class="note" text-anchor="middle">C++17 also provides facility-specific types such as std::filesystem::filesystem_error,</text>
+  <text x="950" y="1095" class="note" text-anchor="middle">std::bad_optional_access, and std::bad_variant_access.</text>
+</svg>

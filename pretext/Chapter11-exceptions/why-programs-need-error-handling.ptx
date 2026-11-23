@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_why-programs-need-error-handling">
+    <title>Why Programs Need Error Handling</title>
+
+    <p>
+        A program can be syntactically correct and still fail when it runs.
+        Users may provide unexpected input, a function may receive an invalid
+        argument, or a needed resource may not be available. Reliable programs
+        anticipate these situations and respond deliberately.
+    </p>
+
+    <subsection xml:id="chapter11_three-kinds-of-errors">
+        <title>Three Kinds of Programming Errors</title>
+
+        <p>
+            It is useful to distinguish errors by when they are discovered and
+            by whether the programmer or the running program can respond to
+            them.
+        </p>
+
+        <table xml:id="table_chapter11_error-kinds">
+            <title>Common kinds of programming errors</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="20%"/>
+                <col width="20%"/>
+                <col width="30%"/>
+                <col width="30%"/>
+                <row header="yes">
+                    <cell><p>Kind of error</p></cell>
+                    <cell><p>When it appears</p></cell>
+                    <cell><p>Example</p></cell>
+                    <cell><p>Typical response</p></cell>
+                </row>
+                <row>
+                    <cell><p>Compile-time error</p></cell>
+                    <cell><p>Before the program runs</p></cell>
+                    <cell><p>A missing semicolon or incompatible type</p></cell>
+                    <cell><p>Correct the source code.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Runtime error</p></cell>
+                    <cell><p>While the program runs</p></cell>
+                    <cell><p>Opening a file that does not exist</p></cell>
+                    <cell><p>Detect the failure and respond safely.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Logic error</p></cell>
+                    <cell><p>While the program runs</p></cell>
+                    <cell><p>Using the wrong formula for an average</p></cell>
+                    <cell><p>Test the result and correct the algorithm.</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            Error handling mainly addresses runtime situations in which the
+            program cannot complete an operation as requested. It cannot repair
+            a syntax error, and it cannot automatically recognize every logic
+            error.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_invalid-conditions">
+        <title>Invalid Conditions Are Part of Program Design</title>
+
+        <p>
+            A function should document and protect its assumptions. A required
+            assumption is called a <term>precondition</term>. A result that the
+            function promises after it succeeds is a <term>postcondition</term>.
+            A rule that must remain true for an object is an
+            <term>invariant</term>.
+        </p>
+
+        <p>
+            For example, an average requires a nonzero number of values. The
+            function below makes that requirement visible to its caller by
+            returning a success value. It does not yet use exceptions; the next
+            sections will introduce exceptions as another way to report failure.
+        </p>
+
+        <listing xml:id="listing_chapter11_report-average-status">
+            <title>Reporting whether an operation succeeded</title>
+            <program xml:id="program_chapter11_report-average-status"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+bool try_calculate_average(int total, int count, double& average) {
+    if (count == 0) {
+        return false;
+    }
+
+    average = static_cast<double>(total) / count;
+    return true;
+}
+
+int main() {
+    double average{};
+
+    if (try_calculate_average(85, 0, average)) {
+        std::cout << average << '\n';
+    }
+    else {
+        std::cout << "No average is available" << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The caller must remember to check the Boolean result before using
+            <c>average</c>. This approach can work well, but every caller must
+            remember to check the status. Exception handling provides another
+            design in which the failure can travel to code prepared to handle
+            it.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_normal-versus-exceptional-flow">
+        <title>Normal Decisions and Exceptional Conditions</title>
+
+        <p>
+            Not every unusual situation should become an exception. A program
+            should use ordinary control flow for expected choices, such as
+            asking whether a user wants to continue. An exception is more
+            appropriate when an operation cannot fulfill its responsibility and
+            the failure must be handled somewhere else.
+        </p>
+
+        <table xml:id="table_chapter11_normal-exceptional-flow">
+            <title>Choosing a response to a condition</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="28%"/>
+                <col width="32%"/>
+                <col width="40%"/>
+                <row header="yes">
+                    <cell><p>Situation</p></cell>
+                    <cell><p>Usually appropriate</p></cell>
+                    <cell><p>Reason</p></cell>
+                </row>
+                <row>
+                    <cell><p>A loop has reached its normal stopping condition.</p></cell>
+                    <cell><p>Ordinary control flow</p></cell>
+                    <cell><p>This is an expected part of the algorithm.</p></cell>
+                </row>
+                <row>
+                    <cell><p>A function receives a value that violates its contract.</p></cell>
+                    <cell><p>An error result or an exception</p></cell>
+                    <cell><p>The caller must be informed that the operation did not succeed.</p></cell>
+                </row>
+                <row>
+                    <cell><p>A file cannot be opened.</p></cell>
+                    <cell><p>An error result or an exception</p></cell>
+                    <cell><p>The requested operation cannot continue normally.</p></cell>
+                </row>
+                <row>
+                    <cell><p>A calculation produces the wrong formula.</p></cell>
+                    <cell><p>Testing and debugging</p></cell>
+                    <cell><p>This is a logic error, not automatically an exception.</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The English word <q>exception</q> means something that falls outside
+            the normal pattern. In C++, an exception is a mechanism for
+            transferring control from the code that detects an exceptional
+            condition to code that is prepared to respond. The next section
+            introduces the syntax for that transfer.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_error-handling-trace">
+        <title>Tracing a Successful and Unsuccessful Call</title>
+
+        <p>
+            The visualization shows that the caller examines the status before
+            deciding whether to use the output value.
+        </p>
+
+        <interactive xml:id="interactive_chapter11_error-status"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Abool%20try_calculate_average%28int%20total%2C%20int%20count%2C%20double%26%20average%29%20%7B%0A%20%20%20%20if%20%28count%20%3D%3D%200%29%20%7B%0A%20%20%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20average%20%3D%20static_cast%3Cdouble%3E%28total%29%20%2F%20count%3B%0A%20%20%20%20return%20true%3B%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20double%20average%7B%7D%3B%0A%20%20%20%20bool%20succeeded%20%3D%20try_calculate_average%2885%2C%200%2C%20average%29%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20succeeded%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=560&amp;codeDivWidth=450&amp;cppShowMemAddrs=true&amp;mode=display&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="4:3">
+        </interactive>
+    </subsection>
+
+    <exercise label="chapter11_error_exercise-kinds">
+        <statement>
+            <p>Which situation is a runtime error?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                            <statement><p>A function returns the wrong answer because its formula is incorrect.</p></statement>
+                            <feedback><p>That is a logic error, not a runtime failure such as a missing file.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>A closing brace is missing.</p></statement>
+                <feedback><p>The compiler can detect this before the program runs.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>An average uses the wrong formula but still produces a number.</p></statement>
+                <feedback><p>That is a logic error: the program runs but computes the wrong result.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>A program cannot open a requested input file.</p></statement>
+                <feedback><p>The program has compiled, but an operation fails while it runs.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A variable has a misleading name.</p></statement>
+                <feedback><p>A misleading name is a design or readability problem, not necessarily a runtime failure.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_error_exercise-precondition">
+        <statement>
+            <p>
+                In <c>try_calculate_average</c>, what condition must be true
+                before the function can calculate an average?
+            </p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>The caller must create a file.</p></statement>
+                <feedback><p>This function performs a calculation and does not use a file.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>total</c> must be positive.</p></statement>
+                <feedback><p>An average can be calculated from a negative total; the divisor is the relevant condition.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p><c>count</c> must be negative.</p></statement>
+                            <feedback><p>The function rejects zero, so it requires a nonzero count; this example uses zero as the invalid case.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p><c>average</c> must already contain a value.</p></statement>
+                <feedback><p>The function writes the calculated result into <c>average</c>.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p><c>count</c> must not be zero.</p></statement>
+                <feedback><p>Division by zero must be prevented before the calculation.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_error_parsons-status-check">
+        <statement>
+            <p>Arrange the lines so the caller checks the status before using the average.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>double average{};</cline></block>
+            <block order="2"><cline>if (try_calculate_average(85, 5, average)) {</cline></block>
+            <block order="3"><cline>std::cout &lt;&lt; average &lt;&lt; '\n';</cline></block>
+            <block order="4"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_error_exercise-response">
+        <statement>
+            <p>
+                Which response is generally most appropriate when a loop
+                reaches its expected stopping condition?
+            </p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                            <statement><p>Throw an exception whenever normal termination occurs.</p></statement>
+                            <feedback><p>An expected stopping condition belongs in ordinary control flow.</p></feedback>
+                        </choice>
+            <choice correct="yes">
+                <statement><p>Use ordinary control flow.</p></statement>
+                <feedback><p>An expected stopping condition is part of normal algorithm behavior.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Ignore the condition and continue forever.</p></statement>
+                <feedback><p>The loop should respond to its normal stopping condition.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Always throw an exception.</p></statement>
+                <feedback><p>Exceptions are not normally needed for expected control flow.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Terminate the operating system.</p></statement>
+                <feedback><p>A normal loop ending is not a system failure.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_error_exercise-runtime-examples">
+        <statement>
+            <p>Select all situations that are discovered while a program is running.</p>
+        </statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice>
+                <statement><p>A closing brace is missing from the source code.</p></statement>
+                <feedback><p>This is a compile-time problem found before normal execution.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>A requested input file is missing when the program tries to open it.</p></statement>
+                <feedback><p>This is a runtime condition discovered during execution.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A variable has a misleading name but the program still compiles and runs.</p></statement>
+                <feedback><p>A misleading name is a design or readability problem, not necessarily a runtime condition.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>A function receives an invalid value from a caller while the program runs.</p></statement>
+                <feedback><p>This condition is discovered during execution and can be handled deliberately.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A calculation uses the wrong formula but still produces a number.</p></statement>
+                <feedback><p>This is a logic error, not necessarily a runtime failure.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+</section>

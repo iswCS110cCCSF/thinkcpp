@@ -1,0 +1,29 @@
+Version 2.56.1 of pretext is available.  You are currently using version 2.51.0.
+To upgrade, run `pretext upgrade`.
+PreTeXt project found in `C:\Users\indik\thinkcpp`.
+Building target web
+XSL conversion of C:\Users\indik\thinkcpp\pretext\main.ptx by C:\Users\indik\.ptx\2.51.0\core\xsl\utilities\pretext-enhanced-source.xsl
+messages from the log for XSL processing (prefaced with a *):
+[33mwarning: [0m* PTX:WARNING: the external directory is specified both within "docinfo" ("directories/@external") and in the publication file ("source/directories/@external").  The "docinfo" value is used; please remove the publication file entry.
+successful application of C:\Users\indik\.ptx\2.51.0\core\xsl\utilities\pretext-enhanced-source.xsl
+discovering source file's directory name: C:\Users\indik\thinkcpp\pretext
+verifying and expanding input directory: C:\Users\indik\thinkcpp\pretext\../assets
+input directory expanded to absolute path: C:\Users\indik\thinkcpp\assets
+[33mwarning: [0mthe external directory is specified both within "docinfo" ("directories/@external") and in the publisher file ("source/directories/@external").  The "docinfo" value is used; please remove the publisher file entry.
+Generating any needed assets.
+Finished generating assets.
+
+Preparing to build into C:\Users\indik\thinkcpp\output\output\html.
+XSL conversion of C:\Users\indik\thinkcpp\pretext\main.ptx by C:\Users\indik\.ptx\2.51.0\core\xsl\utilities\report-publisher-variables.xsl
+successful application of C:\Users\indik\.ptx\2.51.0\core\xsl\utilities\report-publisher-variables.xsl
+Downloading rs services file from https://runestone.academy/cdn/runestone/latest/webpack_static_imports.xml.
+[31m[1mfatal: [0mUnicode strings with encoding declaration are not supported. Please use bytes input or XML fragments without declaration.
+------------------------
+[31mexit: [0mFailed to build without errors.  Exiting...
+
+----------------------------------------------------
+While running pretext, the following errors occurred:
+
+(see log messages above or in the 'logs' folder for more information)
+[31m[1mfatal: [0mUnicode strings with encoding declaration are not supported. Please use bytes input or XML fragments without declaration.
+----------------------------------------------------

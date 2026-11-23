@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude"
          xml:lang="en-US"
-         xml:id="objects-of-vectors">
-  <title>Objects of Vectors</title>
-  <xi:include href='./enumerated-types.ptx'/>
-  <xi:include href='./switch-statement.ptx'/>
-  <xi:include href='./decks.ptx'/>
-  <xi:include href='./another-constructor.ptx'/>
-  <xi:include href='./deck-member-functions.ptx'/>
-  <xi:include href='./shuffling.ptx'/>
-  <xi:include href='./sorting.ptx'/>
-  <xi:include href='./subdecks.ptx'/>
-  <xi:include href='./shuffling-and-dealing.ptx'/>
-  <xi:include href='./mergesort.ptx'/>
-  <xi:include href='./glossary.ptx'/>
-  <xi:include href='./exercises.ptx'/>
-  <xi:include href='./mixed-up-code.ptx'/>
-  <xi:include href='./coding-practice.ptx'/>
+         xml:id="chapter12_inheritance-composition-and-polymorphism">
+
+    <title>Inheritance, Composition, and Polymorphism</title>
+
+	
+	<xi:include href="./13-1-is-a-and-has-a-relationships.ptx"/>
+	<xi:include href="./13-2-inheritance-base-and-derived-classes.ptx"/>
+	<xi:include href="./13-3-composition-building-objects-from-objects.ptx"/>
+	<xi:include href="./13-4-inheritance-trade-offs-and-design-choices.ptx"/>
+	<xi:include href="./13-5-overriding-and-virtual-functions.ptx"/>
+	<xi:include href="./13-6-abstract-classes-and-pure-virtual-functions.ptx"/>	
+	
+    <xi:include href="./13-7-polymorphism-and-dynamic-dispatch.ptx"/>
+    <xi:include href="./13-8-multiple-inheritance-and-interface-composition.ptx"/>
+    <xi:include href="./13-9-user-defined-exception-classes.ptx"/>
+
+    <xi:include href="./glossary.ptx"/>
+    <xi:include href="./exercises.ptx"/>
+    <xi:include href="./mixed-up-code.ptx"/>
+    <xi:include href="./coding-practice.ptx"/>
+	<!--
+    <xi:include href="./glossary.ptx"/>
+    <xi:include href="./exercises.ptx"/>
+    <xi:include href="./mixed-up-code.ptx"/>
+    <xi:include href="./coding-practice.ptx"/>
+	-->
+
 </chapter>

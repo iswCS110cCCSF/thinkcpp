@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter12_fixed-size-binary-records-and-random-access">
+    <title>Fixed-Size Binary Records and Random Access</title>
+
+    <p>
+        A fixed-size binary record occupies the same number of bytes for every
+        record of one format. If each record has size <c>record_size</c>, record
+        number <c>n</c> begins at byte offset <c>n * record_size</c>. Record
+        numbers in this example begin at zero.
+    </p>
+
+    <program xml:id="program_chapter12_fixed-record-write"
+             language="cpp" line-numbers="yes">
+        <code><![CDATA[
+#include <cstdint>
+#include <fstream>
+#include <string>
+
+struct ScoreRecord {
+    std::int32_t student_id;
+    std::int32_t score;
+};
+
+int main() {
+    std::ofstream output_file{
+        "score_records.bin",
+        std::ios::binary
+    };
+
+    if (!output_file) {
+        return 1;
+    }
+
+    ScoreRecord records[]{{101, 92}, {102, 85}, {103, 97}};
+    output_file.write(
+        reinterpret_cast<const char*>(records),
+        sizeof records
+    );
+
+    return 0;
+}
+        ]]></code>
+    </program>
+
+    <p>
+        The example is suitable only when the reader and writer agree on the
+        record layout, integer widths, padding, and byte order. A portable file
+        format should write each field explicitly instead of assuming that a
+        C++ structure has the same layout everywhere.
+    </p>
+
+    <subsection xml:id="chapter12_file-position-operations">
+        <title>File-position operations</title>
+        <table xml:id="table_chapter12_file-position-operations">
+            <title>Reading and writing positions</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="25%"/><col width="75%"/>
+                <row header="yes">
+                    <cell>Operation</cell>
+                    <cell>Meaning</cell>
+                </row>
+                <row><cell><c>tellg()</c></cell><cell>Report the current input, or get, position.</cell></row>
+                <row><cell><c>seekg()</c></cell><cell>Move the input position.</cell></row>
+                <row><cell><c>tellp()</c></cell><cell>Report the current output, or put, position.</cell></row>
+                <row><cell><c>seekp()</c></cell><cell>Move the output position.</cell></row>
+            </tabular>
+        </table>
+
+        <program xml:id="program_chapter12_random-access"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <cstdint>
+#include <fstream>
+#include <iostream>
+
+struct ScoreRecord {
+    std::int32_t student_id;
+    std::int32_t score;
+};
+
+int main() {
+    std::ifstream input_file{
+        "score_records.bin",
+        std::ios::binary
+    };
+
+    if (!input_file) {
+        return 1;
+    }
+
+    std::streamoff record_number{2};
+    std::streamoff record_size{
+        static_cast<std::streamoff>(sizeof(ScoreRecord))
+    };
+    ScoreRecord record{};
+
+    input_file.seekg(record_number * record_size, std::ios::beg);
+    if (input_file.read(
+        reinterpret_cast<char*>(&record),
+        sizeof record
+    )) {
+        std::cout << record.student_id << ": "
+                  << record.score << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter12_random-access-caution">
+        <title>When random access is appropriate</title>
+        <p>
+            Random access is useful when records are fixed-size and the program
+            knows the file format. It is less direct for variable-length text
+            records because later positions cannot be calculated from a simple
+            multiplication. A text program may need an index of positions or
+            may process the file sequentially instead.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_csv-binary-search">
+        <title>Searching a CSV file in binary mode</title>
+
+        <p>
+            CSV records are usually not fixed-size records. A student's name can
+            have different lengths, scores can contain different numbers of
+            digits, and line endings can occupy different numbers of bytes on
+            different systems. Therefore, opening a CSV file with
+            <c>std::ios::binary</c> does not make its records fixed-size. It only
+            asks the stream to preserve the file's bytes without text-mode
+            translation.
+        </p>
+
+        <p>
+            A program can still use byte positions to search a CSV file. It must
+            first scan the file and build an index because it cannot calculate a
+            record's position with <c>record_number * record_size</c>.
+        </p>
+
+        <listing xml:id="listing_chapter12_csv-binary-search">
+            <title>Indexing and searching a CSV file by byte position</title>
+            <program xml:id="program_chapter12_csv-binary-search"
+                     language="cpp" line-numbers="yes">
+                <code><![CDATA[
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <unordered_map>
+
+int main() {
+    std::ifstream input_file{
+        "scores.csv",
+        std::ios::binary
+    };
+
+    if (!input_file) {
+        return 1;
+    }
+
+    std::unordered_map<int, std::streampos> positions;
+    std::string line;
+
+    while (true) {
+        std::streampos position{input_file.tellg()};
+
+        if (!std::getline(input_file, line)) {
+            break;
+        }
+
+        std::istringstream record_stream{line};
+        int student_id{};
+
+        if (record_stream >> student_id) {
+            positions[student_id] = position;
+        }
+    }
+
+    const int target_id{102};
+    const auto found{positions.find(target_id)};
+
+    if (found == positions.end()) {
+        return 1;
+    }
+
+    input_file.clear();
+    input_file.seekg(found->second);
+
+    if (std::getline(input_file, line)) {
+        std::cout << "Found record: " << line << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The first pass scans the CSV file and records the byte position at
+            which each student ID begins. The later <c>seekg()</c> operation can
+            jump directly to the indexed line. This is faster for repeated
+            searches after the index exists, but building the index still
+            requires an initial scan. A database or a deliberately fixed-width
+            binary format may be more appropriate for very large data sets.
+        </p>
+    </subsection>
+
+    <exercise label="chapter12_6_record-offset">
+        <statement><p>If every binary record has size <c>record_size</c>, what is the starting offset of record <c>n</c>?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p><c>n + record_size</c></p></statement><feedback><p>The offset must account for all preceding records.</p></feedback></choice>
+            <choice correct="yes"><statement><p><c>n * record_size</c></p></statement><feedback><p>Each preceding record contributes one full record size.</p></feedback></choice>
+            <choice><statement><p><c>record_size - n</c></p></statement><feedback><p>Subtraction does not locate the nth slot.</p></feedback></choice>
+            <choice><statement><p><c>sizeof(n)</c></p></statement><feedback><p>The index size is unrelated to the record offset.</p></feedback></choice>
+            <choice><statement><p><c>record_size / n</c></p></statement><feedback><p>Division does not identify the record slot.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_6_position-operations">
+        <statement><p>Select all correctly matched file-position operations.</p></statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p><c>tellg()</c> reports the current input position.</p></statement><feedback><p>The get position is used by input operations.</p></feedback></choice>
+            <choice correct="yes"><statement><p><c>seekp()</c> can move where a later write occurs.</p></statement><feedback><p>The put position controls later output.</p></feedback></choice>
+            <choice><statement><p><c>seekg()</c> moves the next output position.</p></statement><feedback><p><c>seekg()</c> moves the input position.</p></feedback></choice>
+            <choice><statement><p><c>tellp()</c> returns the number of records automatically.</p></statement><feedback><p>It reports a position, not a record count.</p></feedback></choice>
+            <choice><statement><p>Seeking makes a binary format portable automatically.</p></statement><feedback><p>Positioning does not solve layout or byte-order differences.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_6_random-access-code" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks to locate and read a selected fixed-size record.</p></statement>
+        <blocks>
+            <block order="1"><cline>std::streamoff offset{record_number * record_size};</cline></block>
+            <block order="2"><cline>input_file.seekg(offset, std::ios::beg);</cline></block>
+            <block order="3"><cline>input_file.read(reinterpret_cast&lt;char*&gt;(&amp;record), sizeof record);</cline></block>
+            <block order="4"><cline>if (input_file) {</cline></block>
+            <block order="5"><cline>    std::cout &lt;&lt; record.score &lt;&lt; '\n';</cline></block>
+            <block order="6"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+</section>

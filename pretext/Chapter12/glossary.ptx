@@ -1,36 +1,26 @@
-<?xml version="1.0" ?><section xml:id="chapter12_glossary">
-    <title>Glossary</title>
-    <glossary>
-        <gi>
-            <title>encode</title>
-            <p>To represent one set of values using another set of values, by
-            constructing a mapping between them.</p>
-        </gi>
-        <gi>
-            <title>abstract parameter</title>
-            <p>A set of parameters that act together as a single parameter.</p>
-        </gi>
-    </glossary>
-    <reading-questions>
-  <exercise label="glossary12">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">encode</premise>
-        <response>To represent one set of values using another set of values, by constructing a
-          mapping between them</response>
-      </match>
-      <match>
-        <premise order="2">abstract parameter</premise>
-        <response>A set of parameters that act together as a single parameter.</response>
-      </match>
-    </cardsort>
-  </exercise>
-    </reading-questions>
-</section>
+<?xml version="1.0" encoding="UTF-8"?>
+<glossary xml:id="chapter12_glossary">
+    <title>Chapter 12 Glossary</title>
+
+    <gi xml:id="chapter12_glossary_stream"><title>stream</title><p>An abstraction that moves data between a program and an endpoint.</p></gi>
+    <gi xml:id="chapter12_glossary_persistence"><title>persistence</title><p>The ability of data to remain available after a program finishes.</p></gi>
+    <gi xml:id="chapter12_glossary_text-file"><title>text file</title><p>A file whose bytes represent characters according to a text encoding and documented format.</p></gi>
+    <gi xml:id="chapter12_glossary_binary-file"><title>binary file</title><p>A file whose bytes represent data according to a binary format.</p></gi>
+    <gi xml:id="chapter12_glossary_record"><title>record</title><p>One complete logical item of data in a file.</p></gi>
+    <gi xml:id="chapter12_glossary_delimiter"><title>delimiter</title><p>A character used to separate fields in a structured text record.</p></gi>
+    <gi xml:id="chapter12_glossary_parser"><title>parser</title><p>Code that interprets input according to a documented format.</p></gi>
+    <gi xml:id="chapter12_glossary_validation"><title>validation</title><p>Checking whether parsed data satisfies structural and application rules.</p></gi>
+    <gi xml:id="chapter12_glossary_csv"><title>CSV</title><p>Comma-separated values, a simple delimited text format.</p></gi>
+    <gi xml:id="chapter12_glossary_token-input"><title>token input</title><p>Formatted input that commonly stops at whitespace.</p></gi>
+    <gi xml:id="chapter12_glossary_line-input"><title>line input</title><p>Input that reads characters through a line ending.</p></gi>
+    <gi xml:id="chapter12_glossary_stream-state"><title>stream state</title><p>Flags describing whether a stream is usable, at end-of-file, or in a failure state.</p></gi>
+    <gi xml:id="chapter12_glossary_object-representation"><title>object representation</title><p>The bytes occupied by an object in memory.</p></gi>
+    <gi xml:id="chapter12_glossary_fixed-size-record"><title>fixed-size record</title><p>A record whose storage size is constant within a file format.</p></gi>
+    <gi xml:id="chapter12_glossary_random-access"><title>random access</title><p>Moving directly to a selected file position instead of reading all earlier data.</p></gi>
+    <gi xml:id="chapter12_glossary_endianness"><title>endianness</title><p>The order in which the bytes of a multi-byte value are stored.</p></gi>
+    <gi xml:id="chapter12_glossary_serialization"><title>serialization</title><p>Converting program data into a representation that can be stored or transmitted.</p></gi>
+    <gi xml:id="chapter12_glossary_deserialization"><title>deserialization</title><p>Reconstructing program data from a stored or transmitted representation.</p></gi>
+    <gi xml:id="chapter12_glossary_padding"><title>padding</title><p>Unused bytes inserted into an object representation for alignment.</p></gi>
+    <gi xml:id="chapter12_glossary_format-version"><title>format version</title><p>An identifier that tells a reader which rules describe a file's data.</p></gi>
+    <gi xml:id="chapter12_glossary_exception-mask"><title>exception mask</title><p>The set of stream-state flags configured to cause exceptions.</p></gi>
+</glossary>

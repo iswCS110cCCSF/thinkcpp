@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_standard-exception-types">
+    <title>Standard Exception Types</title>
+
+    <p>
+        The C++ standard library provides exception classes for common kinds of
+        failure. These classes communicate the category of the problem and
+        provide a message through <c>what()</c>.
+    </p>
+
+    <subsection xml:id="chapter11_exception-hierarchy">
+        <title>A Small Exception Hierarchy</title>
+
+        <p>
+            Many standard exceptions derive from <c>std::exception</c>. Two
+            useful branches are <c>std::logic_error</c> and
+            <c>std::runtime_error</c>. A logic error usually means that a
+            precondition or programming assumption was violated. A runtime
+            error usually depends on a condition discovered while the program
+            is running.
+        </p>
+
+        <table xml:id="table_chapter11_standard-exceptions">
+            <title>Common standard exception types</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="22%"/>
+                <col width="38%"/>
+                <col width="40%"/>
+                <row header="yes">
+                    <cell><p>Type</p></cell>
+                    <cell><p>Typical meaning</p></cell>
+                    <cell><p>Example situation</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>std::invalid_argument</c></p></cell>
+                    <cell><p>An argument has an unacceptable value.</p></cell>
+                    <cell><p>A function receives a negative count.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>std::out_of_range</c></p></cell>
+                    <cell><p>An index or value is outside an allowed range.</p></cell>
+                    <cell><p><c>values.at(8)</c> is used when the valid indices end at 4.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>std::runtime_error</c></p></cell>
+                    <cell><p>A runtime operation cannot complete.</p></cell>
+                    <cell><p>A required external service is unavailable.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>std::exception</c></p></cell>
+                    <cell><p>A general standard exception interface.</p></cell>
+                    <cell><p>A final general handler can report <c>what()</c>.</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The hierarchy lets a handler be specific or general. A handler for
+            <c>std::invalid_argument</c> can respond specifically to invalid
+            arguments. A handler for <c>std::exception</c> can provide a general
+            fallback for many standard exception types.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_exception-messages">
+        <title>Using <c>what()</c> to Inspect an Exception</title>
+
+        <p>
+            The <c>what()</c> member function returns a C-style string describing
+            the exception. The message is useful for logging or explaining the
+            failure, but the exception type communicates the broader category of
+            the problem.
+        </p>
+
+        <listing xml:id="listing_chapter11_out-of-range">
+            <title>Handling an out-of-range access</title>
+            <program xml:id="program_chapter11_out-of-range"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <array>
+#include <iostream>
+#include <stdexcept>
+
+int main() {
+    std::array<int, 3> scores{80, 90, 95};
+
+    try {
+        std::cout << scores.at(3) << '\n';
+    }
+    catch (const std::out_of_range& error) {
+        std::cout << "Access failed: " << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The valid indices are 0, 1, and 2. The call to <c>at(3)</c> throws
+            an <c>std::out_of_range</c> exception before an invalid element is
+            read. Unlike <c>operator[]</c>, <c>at()</c> checks the index and
+            reports a range violation.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_exception-visualization-standard">
+        <title>Tracing a Standard Exception</title>
+
+        <p>
+            The static listing above shows the sequence: <c>at(3)</c> detects an invalid index, throws <c>std::out_of_range</c>, and the handler prints the message returned by <c>what()</c>.
+        </p>
+    </subsection>
+
+    <exercise label="chapter11_standard-exercise-invalid">
+        <statement>
+            <p>Which exception best describes an unacceptable function argument?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p><c>std::bad_name</c></p></statement>
+                <feedback><p><c>std::bad_name</c> is not a standard exception type.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p><c>std::invalid_argument</c></p></statement>
+                <feedback><p>This type communicates that an argument violates the function's requirements.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>std::cout</c></p></statement>
+                <feedback><p><c>std::cout</c> is an output stream, not an exception.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p><c>std::string</c></p></statement>
+                            <feedback><p><c>std::string</c> is a text type, not a standard exception type.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p><c>std::out_of_range</c></p></statement>
+                <feedback><p>This type is better for an index or value outside an allowed range.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_standard-exercise-range">
+        <statement>
+            <p>Why does <c>scores.at(3)</c> throw in the example?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                            <statement><p>The array's first valid index is 1.</p></statement>
+                            <feedback><p><c>std::array</c> uses zero-based indexing, so its valid indices begin at 0.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>The array contains floating-point values.</p></statement>
+                <feedback><p>The element type does not cause this exception.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>The valid indices are 0, 1, and 2.</p></statement>
+                <feedback><p>The array has three elements, so index 3 is outside its valid range.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>std::array</c> cannot be used inside a <c>try</c> block.</p></statement>
+                <feedback><p><c>std::array</c> can be used normally inside a <c>try</c> block.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>at()</c> always throws for every index.</p></statement>
+                <feedback><p><c>at()</c> throws only when its index is invalid.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_standard-parsons-hierarchy">
+        <statement>
+            <p>Arrange the handlers from the more specific type to the general type.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>catch (const std::out_of_range&amp; error) {</cline></block>
+            <block order="2"><cline>std::cout &lt;&lt; error.what() &lt;&lt; '\n';</cline></block>
+            <block order="3"><cline>}</cline></block>
+            <block order="4"><cline>catch (const std::exception&amp; error) {</cline></block>
+            <block order="5"><cline>std::cout &lt;&lt; error.what() &lt;&lt; '\n';</cline></block>
+            <block order="6"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_standard-exercise-what">
+        <statement>
+            <p>What does <c>error.what()</c> provide?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>The line number of every error in the program.</p></statement>
+                <feedback><p><c>what()</c> provides a message, not a complete debugging report.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A Boolean that says whether the program compiled.</p></statement>
+                <feedback><p>Compilation status is not returned by an exception's <c>what()</c>.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>The memory address of the exception object.</p></statement>
+                            <feedback><p><c>what()</c> returns a descriptive message.</p></feedback>
+                        </choice>
+            <choice correct="yes">
+                <statement><p>A message describing the exception.</p></statement>
+                <feedback><p><c>what()</c> returns a descriptive C-style string.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A new exception object.</p></statement>
+                <feedback><p><c>what()</c> describes the current exception; it does not create another one.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_standard-exercise-types">
+        <statement>
+            <p>Select all statements that correctly describe standard exception types.</p>
+        </statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice>
+                <statement><p><c>what()</c> returns the line number where the exception was thrown.</p></statement>
+                <feedback><p><c>what()</c> returns a descriptive message, not a complete source location.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p><c>std::invalid_argument</c> is appropriate when an argument violates a function's requirements.</p></statement>
+                <feedback><p>This exception communicates an unacceptable argument value.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>A handler for <c>std::exception</c> can catch only <c>std::invalid_argument</c>.</p></statement>
+                <feedback><p>The common base type can provide a fallback for many standard exception types.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p><c>std::out_of_range</c> can describe an invalid index used with <c>at()</c>.</p></statement>
+                <feedback><p>An index outside the valid range is a typical use of this exception.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>Every standard exception represents a syntax error found by the compiler.</p></statement>
+                <feedback><p>Standard exceptions describe runtime conditions, not source-code syntax errors.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>

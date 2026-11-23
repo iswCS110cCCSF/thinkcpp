@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="chapter11_component-coding-practice">
+    <title>Chapter 11 Coding Practice</title>
+
+    <exercise label="chapter11_cp_positive-count">
+        <statement>
+            <p>Complete <c>read_positive_count()</c> so it throws <c>std::invalid_argument</c> when the argument is not positive. The supplied <c>main()</c> handles the exception.</p>
+            <program interactive="activecode" label="chapter11_cp_positive-count-activecode">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+int read_positive_count(int count) {
+    // Add the validation and throw statement here.
+}
+
+int main() {
+    try {
+        std::cout << read_positive_count(0) << '\n';
+    }
+    catch (const std::invalid_argument& error) {
+        std::cout << error.what() << '\n';
+    }
+    return 0;
+}
+                ]]></code>
+            </program>
+        </statement>
+    </exercise>
+
+    <exercise label="chapter11_cp_safe-withdrawal">
+        <statement>
+            <p>Complete <c>withdraw_money()</c>. It should throw when the amount is not positive or exceeds the balance, and it should change the balance only after validation succeeds.</p>
+            <program interactive="activecode" label="chapter11_cp_safe-withdrawal-activecode">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+class Account {
+private:
+    double balance;
+
+public:
+    Account(double starting_balance) : balance{starting_balance} {}
+
+    void withdraw_money(double amount) {
+        // Add validation and the state change here.
+    }
+
+    double get_balance() const { return balance; }
+};
+
+int main() {
+    try {
+        Account account{100.00};
+        account.withdraw_money(35.00);
+        std::cout << account.get_balance() << '\n';
+    }
+    catch (const std::invalid_argument& error) {
+        std::cout << error.what() << '\n';
+    }
+    return 0;
+}
+                ]]></code>
+            </program>
+        </statement>
+    </exercise>
+
+    <exercise label="chapter11_cp_recoverable-average">
+        <statement>
+            <p>Complete <c>try_calculate_average()</c> so it returns <c>false</c> when <c>count</c> is zero and writes the average only when the operation succeeds.</p>
+            <program interactive="activecode" label="chapter11_cp_recoverable-average-activecode">
+                <code><![CDATA[
+#include <iostream>
+
+bool try_calculate_average(int total, int count, double& average) {
+    // Add the validation and calculation here.
+}
+
+int main() {
+    double average{};
+    if (try_calculate_average(85, 5, average)) {
+        std::cout << average << '\n';
+    }
+    return 0;
+}
+                ]]></code>
+            </program>
+        </statement>
+    </exercise>
+</exercises>

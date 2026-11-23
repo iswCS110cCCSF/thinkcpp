@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter13_is-a-and-has-a-relationships">
+    <title>Is-A and Has-A Relationships</title>
+
+    <p>
+        Object-oriented design often begins by asking how two types are related.
+        Does one type represent a specialized kind of another type, or does one
+        object simply contain and use another object? These questions lead to two
+        important relationships: <q>is-a</q> and <q>has-a</q>.
+    </p>
+
+    <subsection xml:id="chapter13_subsection_is_a_relationship">
+        <title>The Is-A Relationship</title>
+
+        <p>
+            An <term>is-a relationship</term> means that one type is a specialized
+            version of another type. For example, a circle is a two-dimensional
+            shape, and an hourly employee is an employee. In C++, an is-a
+            relationship can be represented with public inheritance.
+        </p>
+
+        <listing xml:id="listing_chapter13_is_a_relationship">
+            <title>A derived class adds specialized behavior</title>
+            <program xml:id="program_chapter13_is_a_relationship"
+                     language="cpp" interactive="yes" line-numbers="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Employee {
+public:
+    void report_role() const {
+        std::cout << "Employee\n";
+    }
+};
+
+class HourlyEmployee : public Employee {
+public:
+    void report_pay_type() const {
+        std::cout << "Paid by the hour\n";
+    }
+};
+
+int main() {
+    HourlyEmployee employee;
+
+    employee.report_role();
+    employee.report_pay_type();
+
+    return 0;
+}
+            ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            <c>HourlyEmployee</c> inherits the public member function
+            <c>report_role()</c> from <c>Employee</c>. It also has its own member
+            function, <c>report_pay_type()</c>. The derived type is more specific,
+            but it remains usable as an employee.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_has_a_relationship">
+        <title>The Has-A Relationship</title>
+
+        <p>
+            A <term>has-a relationship</term> means that one object contains or
+            uses another object as one of its parts. This design technique is
+            called <term>composition</term>. A car has an engine, a report has a
+            formatter, and a student account has a balance.
+        </p>
+
+        <listing xml:id="listing_chapter13_has_a_relationship">
+            <title>A car contains and uses an engine</title>
+            <program xml:id="program_chapter13_has_a_relationship"
+                     language="cpp" interactive="yes" line-numbers="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Engine {
+public:
+    void start() const {
+        std::cout << "Engine started\n";
+    }
+};
+
+class Car {
+private:
+    Engine engine;
+
+public:
+    void start_car() const {
+        engine.start();
+        std::cout << "Car started\n";
+    }
+};
+
+int main() {
+    Car car;
+    car.start_car();
+
+    return 0;
+}
+            ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            A <c>Car</c> is not a kind of <c>Engine</c>. Instead, a
+            <c>Car</c> has an <c>Engine</c>. The <c>Car</c> delegates the engine's
+            work to its <c>engine</c> member.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_comparing_relationships">
+        <title>Comparing the Two Relationships</title>
+
+        <table xml:id="table_chapter13_is_a_has_a_comparison">
+            <title>Is-a and has-a relationships</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="22%"/>
+                <col width="25%"/>
+                <col width="28%"/>
+                <col width="25%"/>
+                <row header="yes">
+                    <cell><p>Relationship</p></cell>
+                    <cell><p>Meaning</p></cell>
+                    <cell><p>Example</p></cell>
+                    <cell><p>Common C++ design</p></cell>
+                </row>
+                <row>
+                    <cell><p>Is-a</p></cell>
+                    <cell><p>One type is a specialized version of another.</p></cell>
+                    <cell><p>A circle is a shape.</p></cell>
+                    <cell><p>Public inheritance</p></cell>
+                </row>
+                <row>
+                    <cell><p>Has-a</p></cell>
+                    <cell><p>One object contains or uses another object.</p></cell>
+                    <cell><p>A car has an engine.</p></cell>
+                    <cell><p>Composition</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The wording of the relationship is a useful design test. If the
+            sentence <q>A <emphasis>derived type</emphasis> is a
+            <emphasis>base type</emphasis></q> is not accurate, inheritance is
+            probably the wrong tool. If the sentence <q>An object has a component</q>
+            is accurate, composition may be the better choice.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_design_guidance">
+        <title>Design Guidance</title>
+
+        <p>
+            Composition is often easier to change because the containing class
+            depends on a component's public interface rather than becoming part of
+            the component's type hierarchy. Inheritance is appropriate when the
+            derived object must be usable wherever the base type is expected. The
+            next sections examine both choices more closely.
+        </p>
+
+        <p>
+            The following visualization shows composition: a <c>Car</c> object
+            contains an <c>Engine</c> object and asks that engine to start.
+        </p>
+
+        <interactive xml:id="interactive_chapter13_is_a_has_a_relationship"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Engine%20%7B%0Apublic%3A%0A%20%20%20%20void%20start%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Engine%20started%5Cn%22%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aclass%20Car%20%7B%0Aprivate%3A%0A%20%20%20%20Engine%20engine%3B%0A%0Apublic%3A%0A%20%20%20%20void%20start_car%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20engine.start%28%29%3B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Car%20started%5Cn%22%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Car%20car%3B%0A%20%20%20%20car.start_car%28%29%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=360&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+    </subsection>
+
+    <exercises xml:id="exercises_chapter13_is_a_has_a_relationship">
+        <title>Exercises</title>
+
+        <exercise xml:id="exercise_chapter13_is_a_has_a_1">
+            <statement>
+                <p>
+                    Which relationship best describes a <c>Library</c> containing
+                    several <c>Book</c> objects?
+                </p>
+            </statement>
+            <choices randomize="yes">
+                <choice correct="yes">
+                    <statement><p>Has-a</p></statement>
+                    <feedback><p>A library contains or uses books, so composition is appropriate.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Is-a</p></statement>
+                    <feedback><p>A library is not a specialized kind of book.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Overrides-a</p></statement>
+                    <feedback><p>Overriding describes replacing inherited behavior.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Copies-a</p></statement>
+                    <feedback><p>Copying is not the relationship represented here.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_is_a_has_a_multiple">
+            <statement>
+                <p>
+                    Which statements correctly describe composition in the car
+                    example? Select all that apply.
+                </p>
+            </statement>
+            <choices randomize="yes" multiple-correct="yes">
+                <choice correct="yes">
+                    <statement><p><c>Car</c> contains an <c>Engine</c> member.</p></statement>
+                    <feedback><p>This is a has-a relationship.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><c>Car</c> must inherit from <c>Engine</c>.</p></statement>
+                    <feedback><p>Composition does not require inheritance.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><c>Car</c> can delegate engine work to its member.</p></statement>
+                    <feedback><p>Delegation is a common use of composition.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>The contained <c>Engine</c> is automatically a base-class subobject.</p></statement>
+                    <feedback><p>A member object is a component, not a base-class subobject.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_is_a_has_a_2">
+            <statement>
+                <p>
+                    A <c>Circle</c> is a specialized kind of <c>Shape2D</c>.
+                    Which design relationship expresses this idea?
+                </p>
+            </statement>
+            <answer><p>An is-a relationship, commonly represented with public inheritance.</p></answer>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_is_a_has_a_3">
+            <statement>
+                <p>
+                    In the car example, identify the component object and the
+                    operation delegated to it.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    The <c>Car</c> contains an <c>Engine</c> object named
+                    <c>engine</c>, and <c>start_car()</c> delegates work by calling
+                    <c>engine.start()</c>.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_is_a_has_a_parsons"
+                  number="yes"
+                  adaptive="yes"
+                  indentation="show">
+            <statement>
+                <p>
+                    Arrange the blocks to define a <c>Car</c> that contains an
+                    <c>Engine</c> and delegates starting to that engine.
+                </p>
+            </statement>
+            <blocks randomize="yes">
+                <block order="1">
+                    <cline>class Car {</cline>
+                </block>
+                <block order="2">
+                    <cline>private:</cline>
+                </block>
+                <block order="3">
+                    <cline>    Engine engine;</cline>
+                </block>
+                <block order="4">
+                    <cline>public:</cline>
+                </block>
+                <block order="5">
+                    <cline>    void start_car() const {</cline>
+                </block>
+                <block order="6">
+                    <cline>        engine.start();</cline>
+                </block>
+                <block order="7">
+                    <cline>    }</cline>
+                </block>
+                <block order="8">
+                    <cline>};</cline>
+                </block>
+                <block order="1" correct="no">
+                    <cline>class Car : public Engine {</cline>
+                </block>
+            </blocks>
+        </exercise>
+    </exercises>
+</section>

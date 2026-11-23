@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter12_portable-binary-formats-endianness-and-serialization">
+    <title>Portable Binary Formats, Endianness, and Serialization</title>
+
+    <p>
+        A binary representation that works on one machine is not automatically a
+        portable file format. A portable format should document field meanings,
+        field widths, byte order, padding rules, and version information.
+    </p>
+
+    <subsection xml:id="chapter12_endianness">
+        <title>Endianness</title>
+        <p>
+            <term>Endianness</term> describes the order in which the bytes of a
+            multi-byte value are stored. Consider the 32-bit hexadecimal value
+            <c>0x01020304</c>:
+        </p>
+
+        <table xml:id="table_chapter12_endianness">
+            <title>Two common byte orders</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="22%"/><col width="28%"/><col width="50%"/>
+                <row header="yes">
+                    <cell>Byte order</cell>
+                    <cell>Lowest-address byte</cell>
+                    <cell>Byte sequence</cell>
+                </row>
+                <row><cell>Big-endian</cell><cell>Most significant byte</cell><cell><c>01 02 03 04</c></cell></row>
+                <row><cell>Little-endian</cell><cell>Least significant byte</cell><cell><c>04 03 02 01</c></cell></row>
+            </tabular>
+        </table>
+
+        <p>
+            Endianness does not change the mathematical value when a processor
+            interprets its own representation. It matters when raw bytes cross a
+            machine, file-format, or network boundary. C++17 has no standard
+            <c>std::endian</c> facility; that facility was added in C++20.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_fixed-width-portable-values">
+        <title>Fixed-width values do not choose byte order</title>
+        <p>
+            A type such as <c>std::uint32_t</c> communicates that the value uses
+            exactly 32 bits when the implementation provides that type. It does
+            not say whether the most significant or least significant byte comes
+            first. A binary format must specify both the width and the byte order.
+        </p>
+
+        <program xml:id="program_chapter12_explicit-byte-order"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <cstdint>
+
+void write_big_endian(std::uint32_t value, unsigned char bytes[4]) {
+    bytes[0] = static_cast<unsigned char>(value >> 24);
+    bytes[1] = static_cast<unsigned char>(value >> 16);
+    bytes[2] = static_cast<unsigned char>(value >> 8);
+    bytes[3] = static_cast<unsigned char>(value);
+}
+            ]]></code>
+        </program>
+        <p>
+            This function constructs a documented big-endian representation
+            rather than copying the machine's native object bytes. A reader can
+            reverse the process by shifting the bytes back into a 32-bit value.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_serialization">
+        <title>Safe serialization</title>
+        <p>
+            <term>Serialization</term> converts meaningful program data into a
+            storable or transferable representation. <term>Deserialization</term>
+            reconstructs program data from that representation. A safe design
+            serializes fields explicitly rather than blindly writing an entire
+            object.
+        </p>
+
+        <program xml:id="program_chapter12_explicit-serialization"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <cstdint>
+#include <ostream>
+
+struct ScoreRecord {
+    std::uint32_t student_id;
+    std::int32_t score;
+};
+
+void write_score_record(
+    std::ostream& output,
+    const ScoreRecord& record
+) {
+    output.write(
+        reinterpret_cast<const char*>(&record.student_id),
+        sizeof record.student_id
+    );
+    output.write(
+        reinterpret_cast<const char*>(&record.score),
+        sizeof record.score
+    );
+}
+            ]]></code>
+        </program>
+        <p>
+            This example identifies the fields in the format, but it still uses
+            native byte order. A fully portable version would encode each fixed-
+            width value according to the format's documented byte order.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_binary-format-versioning">
+        <title>Version and validation information</title>
+        <p>
+            A durable binary format can begin with a magic value and a version
+            number. A reader can reject an unknown version before interpreting
+            the remaining bytes. It should also check file size, record counts,
+            field ranges, and read success rather than trusting arbitrary input.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_class-persistence">
+        <title>Persisting a class object</title>
+
+        <p>
+            A class object can be persisted by saving the meaningful values of
+            its data members and later using those values to reconstruct another
+            object. The program should not copy the class object's entire memory
+            representation, especially when the class owns strings, pointers, or
+            other resources.
+        </p>
+
+        <listing xml:id="listing_chapter12_class-persistence">
+            <title>Saving and loading a class object</title>
+            <program xml:id="program_chapter12_class-persistence"
+                     language="cpp" line-numbers="yes">
+                <code><![CDATA[
+#include <cstdint>
+#include <fstream>
+#include <iostream>
+#include <istream>
+#include <ostream>
+
+class ScoreRecord {
+private:
+    std::uint32_t student_id{};
+    std::int32_t score{};
+
+public:
+    ScoreRecord() = default;
+
+    ScoreRecord(std::uint32_t starting_id, std::int32_t starting_score)
+        : student_id{starting_id}, score{starting_score} {
+    }
+
+    void save_to(std::ostream& output) const {
+        output.write(
+            reinterpret_cast<const char*>(&student_id),
+            sizeof student_id
+        );
+        output.write(
+            reinterpret_cast<const char*>(&score),
+            sizeof score
+        );
+    }
+
+    bool load_from(std::istream& input) {
+        std::uint32_t loaded_id{};
+        std::int32_t loaded_score{};
+
+        if (!input.read(
+            reinterpret_cast<char*>(&loaded_id),
+            sizeof loaded_id
+        )) {
+            return false;
+        }
+
+        if (!input.read(
+            reinterpret_cast<char*>(&loaded_score),
+            sizeof loaded_score
+        )) {
+            return false;
+        }
+
+        student_id = loaded_id;
+        score = loaded_score;
+        return true;
+    }
+
+    void print_summary() const {
+        std::cout << "Student " << student_id
+                  << ": " << score << '\n';
+    }
+};
+
+int main() {
+    ScoreRecord original{1042, 92};
+
+    {
+        std::ofstream output_file{
+            "score-record.bin",
+            std::ios::binary
+        };
+
+        if (!output_file) {
+            return 1;
+        }
+
+        original.save_to(output_file);
+    }
+
+    ScoreRecord restored{};
+    {
+        std::ifstream input_file{
+            "score-record.bin",
+            std::ios::binary
+        };
+
+        if (!input_file || !restored.load_from(input_file)) {
+            return 1;
+        }
+    }
+
+    restored.print_summary();
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The first object is created in memory, its meaningful fields are
+            written to <c>score-record.bin</c>, and a second object is then
+            populated by reading those fields. The class definition exists in
+            the program both when saving and when loading; the file stores data,
+            not executable class definitions.
+        </p>
+
+        <p>
+            This example uses the machine's native byte order for simplicity.
+            A portable version would encode the fixed-width values using the
+            file format's specified byte order, add a format version, and check
+            limits before allocating or reading data.
+        </p>
+    </subsection>
+
+    <exercise label="chapter12_7_endian-meaning">
+        <statement><p>What does endianness describe?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p>The order of source files during compilation</p></statement><feedback><p>Compilation order is unrelated to byte order.</p></feedback></choice>
+            <choice correct="yes"><statement><p>The order of bytes used to store a multi-byte value</p></statement><feedback><p>Big-endian and little-endian systems arrange those bytes differently.</p></feedback></choice>
+            <choice><statement><p>The number of bits in every integer type</p></statement><feedback><p>Width and byte order are separate properties.</p></feedback></choice>
+            <choice><statement><p>The order in which files are opened</p></statement><feedback><p>Opening order does not describe memory representation.</p></feedback></choice>
+            <choice><statement><p>The order of characters in a string only</p></statement><feedback><p>Endianness concerns byte order in multi-byte representations.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_7_portable-format">
+        <statement><p>Select all details a portable binary format should document.</p></statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p>The width and meaning of each numeric field</p></statement><feedback><p>The reader needs to know how to interpret each field.</p></feedback></choice>
+            <choice correct="yes"><statement><p>The byte order for multi-byte values</p></statement><feedback><p>Readers must know how bytes are arranged.</p></feedback></choice>
+            <choice correct="yes"><statement><p>A version or format identifier</p></statement><feedback><p>Versioning helps readers detect format changes.</p></feedback></choice>
+            <choice><statement><p>That every pointer address can be saved and reused later</p></statement><feedback><p>Addresses are not portable persisted references.</p></feedback></choice>
+            <choice><statement><p>That readers may guess unknown fields</p></statement><feedback><p>Explicit rules are safer than guessing.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_7_endian-code" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks to construct the bytes of a 32-bit value in big-endian order.</p></statement>
+        <blocks>
+            <block order="1"><cline>std::uint32_t value{0x01020304};</cline></block>
+            <block order="2"><cline>bytes[0] = static_cast&lt;unsigned char&gt;(value &gt;&gt; 24);</cline></block>
+            <block order="3"><cline>bytes[1] = static_cast&lt;unsigned char&gt;(value &gt;&gt; 16);</cline></block>
+            <block order="4"><cline>bytes[2] = static_cast&lt;unsigned char&gt;(value &gt;&gt; 8);</cline></block>
+            <block order="5"><cline>bytes[3] = static_cast&lt;unsigned char&gt;(value);</cline></block>
+        </blocks>
+    </exercise>
+</section>

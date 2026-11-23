@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter13_inheritance_base_and_derived_classes">
+    <title>Inheritance: Base and Derived Classes</title>
+
+    <p>
+        <term>Inheritance</term> allows one class to begin with the members of
+        another class and then add or replace behavior. The existing class is the
+        <term>base class</term>, and the new class is the <term>derived class</term>.
+        Public inheritance expresses an is-a relationship.
+    </p>
+
+    <subsection xml:id="chapter13_subsection_inheritance_syntax">
+        <title>Basic Inheritance Syntax</title>
+
+        <p>
+            The syntax places the base class after a colon in the derived-class
+            declaration:
+        </p>
+
+        <listing xml:id="listing_chapter13_basic_inheritance">
+            <title>A derived class inherits a public member</title>
+            <program xml:id="program_chapter13_basic_inheritance"
+                     language="cpp" interactive="yes" line-numbers="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Employee {
+public:
+    void report_role() const {
+        std::cout << "Employee\n";
+    }
+};
+
+class HourlyEmployee : public Employee {
+public:
+    void report_pay_type() const {
+        std::cout << "Paid by the hour\n";
+    }
+};
+
+int main() {
+    HourlyEmployee employee;
+
+    employee.report_role();
+    employee.report_pay_type();
+
+    return 0;
+}
+            ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The public member function <c>report_role()</c> belongs to
+            <c>Employee</c>, but an <c>HourlyEmployee</c> object can call it because
+            it inherits that public member. The derived class also contributes its
+            own <c>report_pay_type()</c> member function.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_base_and_derived_members">
+        <title>Base and Derived Members</title>
+
+        <p>
+            A derived class does not receive unrestricted access to every base-class
+            member. Access control still applies:
+        </p>
+
+        <table xml:id="table_chapter13_inheritance_access">
+            <title>Access to base-class members</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="24%"/>
+                <col width="25%"/>
+                <col width="25%"/>
+                <col width="26%"/>
+                <row header="yes">
+                    <cell>Base member</cell>
+                    <cell>Base class</cell>
+                    <cell>Derived class</cell>
+                    <cell>Unrelated code</cell>
+                </row>
+                <row>
+                    <cell><c>public</c></cell>
+                    <cell>Accessible</cell>
+                    <cell>Accessible</cell>
+                    <cell>Accessible through the public interface</cell>
+                </row>
+                <row>
+                    <cell><c>protected</c></cell>
+                    <cell>Accessible</cell>
+                    <cell>Accessible</cell>
+                    <cell>Not directly accessible</cell>
+                </row>
+                <row>
+                    <cell><c>private</c></cell>
+                    <cell>Accessible</cell>
+                    <cell>Not directly accessible</cell>
+                    <cell>Not directly accessible</cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            A <c>protected</c> member is available to the class that declares it and
+            to derived classes. It is not available to ordinary client code. This
+            can be useful, but protected data also creates tighter coupling between
+            a base class and its derived classes. Private data with public or
+            protected member functions often provides better control.
+        </p>
+
+        <listing xml:id="listing_chapter13_protected_member">
+            <title>A derived class accesses a protected member</title>
+            <program xml:id="program_chapter13_protected_member"
+                     language="cpp" interactive="yes" line-numbers="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <string>
+
+class Employee {
+protected:
+    std::string name;
+
+public:
+    Employee(const std::string& employee_name)
+        : name{employee_name} {
+    }
+};
+
+class HourlyEmployee : public Employee {
+public:
+    HourlyEmployee(const std::string& employee_name)
+        : Employee{employee_name} {
+    }
+
+    void report_name() const {
+        std::cout << name << '\n';
+    }
+};
+
+int main() {
+    HourlyEmployee employee{"Amina"};
+    employee.report_name();
+
+    return 0;
+}
+            ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The derived class can use <c>name</c> because it is protected. However,
+            code in <c>main()</c> cannot access <c>employee.name</c> directly.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_constructor_order">
+        <title>Construction Order</title>
+
+        <p>
+            When a derived object is created, the base-class portion is constructed
+            first. The derived-class portion is constructed afterward. This order
+            ensures that the base part exists before the derived constructor uses
+            it. Destruction occurs in the reverse order; the derived part is
+            destroyed before the base part.
+        </p>
+
+        <listing xml:id="listing_chapter13_constructor_order">
+            <title>Construction and destruction in an inherited class</title>
+            <program xml:id="program_chapter13_constructor_order"
+                     language="cpp" interactive="yes" line-numbers="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Employee {
+public:
+    Employee() {
+        std::cout << "Employee constructed\n";
+    }
+
+    ~Employee() {
+        std::cout << "Employee destroyed\n";
+    }
+};
+
+class HourlyEmployee : public Employee {
+public:
+    HourlyEmployee() {
+        std::cout << "HourlyEmployee constructed\n";
+    }
+
+    ~HourlyEmployee() {
+        std::cout << "HourlyEmployee destroyed\n";
+    }
+};
+
+int main() {
+    HourlyEmployee employee;
+    return 0;
+}
+            ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The output shows that construction proceeds from base to derived, while
+            destruction proceeds from derived to base.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_inheritance_visualization">
+        <title>Visualizing a Base and Derived Object</title>
+
+        <p>
+            The following visualization shows a derived object being created from a
+            base class and then calling members from both classes.
+        </p>
+
+        <interactive xml:id="interactive_chapter13_inheritance_base_derived"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Employee%20%7B%0Apublic%3A%0A%20%20%20%20Employee%28%29%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Employee%20constructed%5Cn%22%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20void%20report_role%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Employee%5Cn%22%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aclass%20HourlyEmployee%20%3A%20public%20Employee%20%7B%0Apublic%3A%0A%20%20%20%20void%20report_pay_type%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Paid%20by%20the%20hour%5Cn%22%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20HourlyEmployee%20employee%3B%0A%20%20%20%20employee.report_role%28%29%3B%0A%20%20%20%20employee.report_pay_type%28%29%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=380&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+    </subsection>
+
+    <exercises xml:id="exercises_chapter13_inheritance_base_and_derived">
+        <title>Exercises</title>
+
+        <exercise xml:id="exercise_chapter13_inheritance_1">
+            <statement>
+                <p>
+                    In <c>class HourlyEmployee : public Employee</c>, which class is
+                    the base class?
+                </p>
+            </statement>
+            <choices randomize="yes">
+                <choice correct="yes">
+                    <statement><p><c>Employee</c></p></statement>
+                    <feedback><p>The class after <c>public</c> is the base class.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><c>HourlyEmployee</c></p></statement>
+                    <feedback><p><c>HourlyEmployee</c> is the derived class.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><c>public</c></p></statement>
+                    <feedback><p><c>public</c> specifies the inheritance access mode.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><c>employee</c></p></statement>
+                    <feedback><p><c>employee</c> is an object, not a class.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_inheritance_2">
+            <statement>
+                <p>
+                    Which member can the derived class access directly but ordinary
+                    code in <c>main()</c> cannot access directly?
+                </p>
+            </statement>
+            <choices randomize="yes">
+                <choice>
+                    <statement><p>A public member</p></statement>
+                    <feedback><p>Public members are available through the public interface.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A protected member</p></statement>
+                    <feedback><p>Protected members are accessible to derived classes but not ordinary client code.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>A private member declared in the base class</p></statement>
+                    <feedback><p>Private base members are not directly accessible in derived classes.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>A local variable in <c>main()</c></p></statement>
+                    <feedback><p>Inheritance does not provide access to local variables.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_inheritance_multiple">
+            <statement>
+                <p>
+                    Which statements about the inheritance example are correct?
+                    Select all that apply.
+                </p>
+            </statement>
+            <choices randomize="yes" multiple-correct="yes">
+                <choice correct="yes">
+                    <statement><p><c>HourlyEmployee</c> can use public members inherited from <c>Employee</c>.</p></statement>
+                    <feedback><p>Public inheritance preserves access to public base members.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><c>HourlyEmployee</c> can directly access every private member of <c>Employee</c>.</p></statement>
+                    <feedback><p>Private base members are not directly accessible in derived classes.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>The base part is constructed before the derived part.</p></statement>
+                    <feedback><p>The base must be initialized before the derived portion.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>The derived part is destroyed before the base part.</p></statement>
+                    <feedback><p>Destruction occurs in the reverse of construction order.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_inheritance_3">
+            <statement>
+                <p>
+                    Place these events in their construction order: construction of
+                    the derived part, construction of the base part, construction of
+                    the derived object's members.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    The base part is constructed first, followed by the derived
+                    object's members, and then the derived constructor body runs.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_inheritance_parsons"
+                  number="yes"
+                  adaptive="yes"
+                  indentation="show">
+            <statement>
+                <p>
+                    Arrange the blocks to define <c>HourlyEmployee</c> as a public
+                    derived class of <c>Employee</c>.
+                </p>
+            </statement>
+            <blocks randomize="yes">
+                <block order="1">
+                    <cline>class HourlyEmployee : public Employee {</cline>
+                </block>
+                <block order="2">
+                    <cline>public:</cline>
+                </block>
+                <block order="3">
+                    <cline>    void report_pay_type() const {</cline>
+                </block>
+                <block order="4">
+                    <cline>        std::cout &lt;&lt; "Paid by the hour\n";</cline>
+                </block>
+                <block order="5">
+                    <cline>    }</cline>
+                </block>
+                <block order="6">
+                    <cline>};</cline>
+                </block>
+                <block order="1" correct="no">
+                    <cline>class HourlyEmployee : private Employee {</cline>
+                </block>
+            </blocks>
+        </exercise>
+    </exercises>
+</section>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter13_composition_building_objects_from_objects">
+    <title>Composition: Building Objects from Other Objects</title>
+
+    <p>
+        <term>Composition</term> means that a class contains one or more objects of
+        other classes as data members. The containing object uses those component
+        objects to carry out its work. Composition is a direct implementation of a
+        has-a relationship.
+    </p>
+
+    <subsection xml:id="chapter13_subsection_component_objects">
+        <title>Objects as Components</title>
+
+        <p>
+            A component is an ordinary data member whose type is another class. In
+            this example, a <c>Car</c> has an <c>Engine</c>. The <c>Car</c> is not a
+            kind of <c>Engine</c>; it uses an engine as one of its parts.
+        </p>
+
+        <listing xml:id="listing_chapter13_car_engine_composition">
+            <title>A car delegates starting to its engine</title>
+            <program xml:id="program_chapter13_car_engine_composition"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+
+class Engine {
+private:
+    std::string model;
+
+public:
+    Engine(const std::string& starting_model)
+        : model{starting_model} {
+    }
+
+    void start() const {
+        std::cout << model << " started\n";
+    }
+};
+
+class Car {
+private:
+    Engine engine;
+
+public:
+    Car(const std::string& engine_model)
+        : engine{engine_model} {
+    }
+
+    void start_car() const {
+        engine.start();
+        std::cout << "Car started\n";
+    }
+};
+
+int main() {
+    Car car{"E-17"};
+    car.start_car();
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The <c>Car</c> constructor initializes its <c>engine</c> member in the
+            member-initializer list. The <c>start_car()</c> function then delegates
+            part of its work to <c>engine.start()</c>.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_component_lifetime">
+        <title>Component Lifetime</title>
+
+        <p>
+            When a component is stored as an ordinary data member, its lifetime is
+            tied to the containing object. The component is constructed as part of
+            the containing object and is destroyed when the containing object is
+            destroyed.
+        </p>
+
+        <p>
+            Construction follows the order of member declarations, not the order in
+            which members appear in the constructor's initializer list. Destruction
+            occurs in the reverse order. This rule ensures that a component remains
+            available for the containing object throughout the containing object's
+            lifetime.
+        </p>
+
+        <table xml:id="table_chapter13_composition_lifetime">
+            <title>Composition and component lifetime</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="25%"/>
+                <col width="25%"/>
+                <col width="25%"/>
+                <col width="25%"/>
+                <row header="yes">
+                    <cell><p>Design</p></cell>
+                    <cell><p>Component storage</p></cell>
+                    <cell><p>Component lifetime</p></cell>
+                    <cell><p>Typical meaning</p></cell>
+                </row>
+                <row>
+                    <cell><p>Composition</p></cell>
+                    <cell><p>Object member</p></cell>
+                    <cell><p>Usually tied to the containing object</p></cell>
+                    <cell><p>A car has an engine</p></cell>
+                </row>
+                <row>
+                    <cell><p>Reference to another object</p></cell>
+                    <cell><p>Reference member or parameter</p></cell>
+                    <cell><p>Managed elsewhere</p></cell>
+                    <cell><p>A report uses a formatter</p></cell>
+                </row>
+                <row>
+                    <cell><p>Inheritance</p></cell>
+                    <cell><p>Base-class subobject</p></cell>
+                    <cell><p>Part of the derived object</p></cell>
+                    <cell><p>A circle is a shape</p></cell>
+                </row>
+            </tabular>
+        </table>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_delegation">
+        <title>Delegating Work to Components</title>
+
+        <p>
+            A containing class can provide a simple public operation while allowing
+            a component to perform specialized work. This separation lets each
+            class focus on one responsibility. The containing class coordinates the
+            operation, and the component class implements its own behavior.
+        </p>
+
+        <p>
+            Composition does not prevent a component from changing later. For
+            example, a car could contain a different engine class in a future design,
+            as long as the car's expected interface remains clear. This flexibility
+            is one reason composition is often preferred for combining implementation
+            details.
+        </p>
+
+        <p>
+            The following visualization shows the <c>Car</c> object containing its
+            <c>Engine</c> component and delegating the start operation.
+        </p>
+
+        <interactive xml:id="interactive_chapter13_composition"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Cstring%3E%0A%0Aclass%20Engine%20%7B%0Aprivate%3A%0A%20%20%20%20std%3A%3Astring%20model%3B%0A%0Apublic%3A%0A%20%20%20%20Engine%28const%20std%3A%3Astring%26%20starting_model%29%0A%20%20%20%20%20%20%20%20%3A%20model%7Bstarting_model%7D%20%7B%0A%20%20%20%20%7D%0A%0A%20%20%20%20void%20start%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20model%20%3C%3C%20%22%20started%5Cn%22%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aclass%20Car%20%7B%0Aprivate%3A%0A%20%20%20%20Engine%20engine%3B%0A%0Apublic%3A%0A%20%20%20%20Car%28const%20std%3A%3Astring%26%20engine_model%29%0A%20%20%20%20%20%20%20%20%3A%20engine%7Bengine_model%7D%20%7B%0A%20%20%20%20%7D%0A%0A%20%20%20%20void%20start_car%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20engine.start%28%29%3B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Car%20started%5Cn%22%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Car%20car%7B%22E-17%22%7D%3B%0A%20%20%20%20car.start_car%28%29%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+    </subsection>
+
+    <exercises xml:id="exercises_chapter13_composition">
+        <title>Exercises</title>
+
+        <exercise xml:id="exercise_chapter13_composition_1">
+            <statement>
+                <p>
+                    Which statement best describes the relationship between
+                    <c>Car</c> and <c>Engine</c>?
+                </p>
+            </statement>
+            <choices randomize="yes">
+                <choice>
+                    <statement><p>A car is a specialized kind of engine.</p></statement>
+                    <feedback><p>The example does not model an is-a relationship.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A car contains an engine and uses it as a component.</p></statement>
+                    <feedback><p>This describes a has-a relationship implemented with composition.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>An engine inherits all members from a car.</p></statement>
+                    <feedback><p>The component relationship does not reverse the roles.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>A car and an engine must be the same class.</p></statement>
+                    <feedback><p>Composition combines objects of different classes.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_composition_multiple">
+            <statement>
+                <p>
+                    Which statements correctly describe composition? Select all
+                    that apply.
+                </p>
+            </statement>
+            <choices randomize="yes" multiple-correct="yes">
+                <choice correct="yes">
+                    <statement><p>A containing object can delegate work to a component.</p></statement>
+                    <feedback><p>Delegation lets each class focus on its own responsibility.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Composition always means that the two classes have an is-a relationship.</p></statement>
+                    <feedback><p>Composition normally represents a has-a relationship.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>An object member can have a lifetime tied to its containing object.</p></statement>
+                    <feedback><p>This is a common form of composition.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>Composition can reduce dependence on a class hierarchy.</p></statement>
+                    <feedback><p>The containing class uses a component instead of becoming its derived class.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_composition_2">
+            <statement>
+                <p>
+                    When a <c>Car</c> object is constructed, when is its
+                    <c>Engine</c> member constructed?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    The <c>Engine</c> member is constructed as part of constructing
+                    the <c>Car</c>, before the body of the <c>Car</c> constructor
+                    runs.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_composition_parsons"
+                  number="yes"
+                  adaptive="yes"
+                  indentation="show">
+            <statement>
+                <p>
+                    Arrange the blocks to define a <c>Car</c> that initializes its
+                    <c>Engine</c> component.
+                </p>
+            </statement>
+            <blocks randomize="yes">
+                <block order="1">
+                    <cline>class Car {</cline>
+                </block>
+                <block order="2">
+                    <cline>private:</cline>
+                </block>
+                <block order="3">
+                    <cline>    Engine engine;</cline>
+                </block>
+                <block order="4">
+                    <cline>public:</cline>
+                </block>
+                <block order="5">
+                    <cline>    Car(const std::string&amp; model)</cline>
+                </block>
+                <block order="6">
+                    <cline>        : engine{model} {</cline>
+                </block>
+                <block order="7">
+                    <cline>    }</cline>
+                </block>
+                <block order="8">
+                    <cline>};</cline>
+                </block>
+                <block order="5" correct="no">
+                    <cline>    Car(const std::string&amp; model) {</cline>
+                </block>
+            </blocks>
+        </exercise>
+    </exercises>
+</section>

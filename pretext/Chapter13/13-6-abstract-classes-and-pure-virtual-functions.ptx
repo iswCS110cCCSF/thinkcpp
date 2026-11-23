@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter13_abstract_classes_and_pure_virtual_functions">
+    <title>Abstract Classes and Pure Virtual Functions</title>
+
+    <p>
+        Sometimes a base class should describe a common interface without
+        representing a complete object on its own. C++ supports this design with an
+        <term>abstract class</term>. An abstract class cannot be instantiated
+        directly, but it can provide a common interface for concrete derived
+        classes.
+    </p>
+
+    <subsection xml:id="chapter13_subsection_pure_virtual_functions">
+        <title>Pure Virtual Functions</title>
+
+        <p>
+            A <term>pure virtual function</term> is declared by placing
+            <c>= 0</c> after its parameter list. The declaration specifies an
+            operation that concrete derived classes must provide.
+        </p>
+
+        <listing xml:id="listing_chapter13_shape2d_abstract_class">
+            <title>A concrete circle implements an abstract shape interface</title>
+            <program xml:id="program_chapter13_shape2d_abstract_class"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Shape2D {
+public:
+    virtual double calculate_area() const = 0;
+    virtual ~Shape2D() = default;
+};
+
+class Circle : public Shape2D {
+private:
+    double radius;
+
+public:
+    Circle(double starting_radius)
+        : radius{starting_radius} {
+    }
+
+    double calculate_area() const override {
+        return 3.14159 * radius * radius;
+    }
+};
+
+int main() {
+    Circle circle{2.0};
+    Shape2D& shape = circle;
+
+    std::cout << shape.calculate_area() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The declaration of <c>calculate_area()</c> tells every concrete shape
+            what operation it must provide. <c>Circle</c> satisfies the interface by
+            defining that function with <c>override</c>.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_abstract_and_concrete_classes">
+        <title>Abstract and Concrete Classes</title>
+
+        <table xml:id="table_chapter13_abstract_and_concrete_classes">
+            <title>Abstract and concrete classes</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="25%"/>
+                <col width="37%"/>
+                <col width="38%"/>
+                <row header="yes">
+                    <cell><p>Feature</p></cell>
+                    <cell><p>Abstract class</p></cell>
+                    <cell><p>Concrete class</p></cell>
+                </row>
+                <row>
+                    <cell><p>Can create objects directly?</p></cell>
+                    <cell><p>No</p></cell>
+                    <cell><p>Yes</p></cell>
+                </row>
+                <row>
+                    <cell><p>Can declare member data?</p></cell>
+                    <cell><p>Yes</p></cell>
+                    <cell><p>Yes</p></cell>
+                </row>
+                <row>
+                    <cell><p>Can define ordinary member functions?</p></cell>
+                    <cell><p>Yes</p></cell>
+                    <cell><p>Yes</p></cell>
+                </row>
+                <row>
+                    <cell><p>Can contain pure virtual functions?</p></cell>
+                    <cell><p>Yes</p></cell>
+                    <cell><p>No requirement</p></cell>
+                </row>
+                <row>
+                    <cell><p>Typical role</p></cell>
+                    <cell><p>Shared interface or incomplete base design</p></cell>
+                    <cell><p>Complete object design</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            A class is abstract if it has at least one pure virtual function that has
+            not been implemented in that class. A derived class becomes concrete
+            only after it implements every inherited pure virtual function that it
+            needs to provide.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_using_abstract_references">
+        <title>Using Abstract References</title>
+
+        <p>
+            Although we cannot create a <c>Shape2D</c> object directly, we can use a
+            reference or pointer of type <c>Shape2D</c> to refer to a concrete
+            derived object. This allows common functions to work with different
+            concrete shapes without knowing their exact types.
+        </p>
+
+        <p>
+            A direct declaration such as <c>Shape2D shape;</c> is invalid because
+            <c>Shape2D</c> is abstract. A declaration such as
+            <c>Shape2D&amp; shape = circle;</c> is valid because the reference refers to
+            the complete concrete <c>Circle</c> object.
+        </p>
+
+        <p>
+            The following visualization shows a concrete <c>Circle</c> being used
+            through an abstract <c>Shape2D</c> reference.
+        </p>
+
+        <interactive xml:id="interactive_chapter13_abstract_shape2d"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Shape2D%20%7B%0Apublic%3A%0A%20%20%20%20virtual%20double%20calculate_area%28%29%20const%20%3D%200%3B%0A%20%20%20%20virtual%20~Shape2D%28%29%20%3D%20default%3B%0A%7D%3B%0A%0Aclass%20Circle%20%3A%20public%20Shape2D%20%7B%0Aprivate%3A%0A%20%20%20%20double%20radius%3B%0A%0Apublic%3A%0A%20%20%20%20Circle%28double%20starting_radius%29%0A%20%20%20%20%20%20%20%20%3A%20radius%7Bstarting_radius%7D%20%7B%0A%20%20%20%20%7D%0A%0A%20%20%20%20double%20calculate_area%28%29%20const%20override%20%7B%0A%20%20%20%20%20%20%20%20return%203.14159%20%2A%20radius%20%2A%20radius%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Circle%20circle%7B2.0%7D%3B%0A%20%20%20%20Shape2D%26%20shape%20%3D%20circle%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20shape.calculate_area%28%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+    </subsection>
+
+    <exercises xml:id="exercises_chapter13_abstract_classes">
+        <title>Exercises</title>
+
+        <exercise xml:id="exercise_chapter13_abstract_1">
+            <statement>
+                <p>
+                    What does the declaration
+                    <c>virtual double calculate_area() const = 0;</c> indicate?
+                </p>
+            </statement>
+            <choices randomize="yes">
+                <choice>
+                    <statement><p>The function always returns zero.</p></statement>
+                    <feedback><p><c>= 0</c> marks the function as pure virtual; it is not an ordinary return statement.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>The function is pure virtual and the class is abstract unless a derived class implements it.</p></statement>
+                    <feedback><p>The declaration defines a required interface operation.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>The function is automatically private.</p></statement>
+                    <feedback><p>Access is controlled by the surrounding access specifier.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>The function can never be overridden.</p></statement>
+                    <feedback><p>Concrete derived classes are expected to implement it.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_abstract_multiple">
+            <statement>
+                <p>
+                    Which statements about abstract classes are correct? Select all
+                    that apply.
+                </p>
+            </statement>
+            <choices randomize="yes" multiple-correct="yes">
+                <choice correct="yes">
+                    <statement><p>An abstract class cannot be instantiated directly.</p></statement>
+                    <feedback><p>At least one pure virtual function remains unimplemented.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>An abstract class can contain ordinary implemented member functions.</p></statement>
+                    <feedback><p>Abstract describes instantiation, not the absence of all implementation.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Every class with a virtual function is abstract.</p></statement>
+                    <feedback><p>A class is abstract when it has an unimplemented pure virtual function.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A derived class can become concrete by implementing inherited pure virtual functions.</p></statement>
+                    <feedback><p>Implementing all required operations completes the derived design.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_abstract_2">
+            <statement>
+                <p>
+                    Why is <c>Shape2D&amp; shape = circle;</c> valid even though a
+                    <c>Shape2D</c> object cannot be created directly?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    The reference refers to an existing concrete <c>Circle</c>
+                    object. It does not attempt to create an abstract
+                    <c>Shape2D</c> object.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_abstract_parsons"
+                  number="yes"
+                  adaptive="yes"
+                  indentation="show">
+            <statement>
+                <p>
+                    Arrange the blocks to declare an abstract <c>Shape2D</c>
+                    interface.
+                </p>
+            </statement>
+            <blocks randomize="yes">
+                <block order="1">
+                    <cline>class Shape2D {</cline>
+                </block>
+                <block order="2">
+                    <cline>public:</cline>
+                </block>
+                <block order="3">
+                    <cline>    virtual double calculate_area() const = 0;</cline>
+                </block>
+                <block order="4">
+                    <cline>    virtual ~Shape2D() = default;</cline>
+                </block>
+                <block order="5">
+                    <cline>};</cline>
+                </block>
+                <block order="3" correct="no">
+                    <cline>    double calculate_area() const;</cline>
+                </block>
+            </blocks>
+        </exercise>
+    </exercises>
+</section>

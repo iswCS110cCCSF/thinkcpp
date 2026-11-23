@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter13_overriding_and_virtual_functions">
+    <title>Overriding and Virtual Functions</title>
+
+    <p>
+        A derived class can provide a new implementation of a member function that
+        it inherits from a base class. This is called <term>overriding</term>. The
+        base function must be virtual for a call through a base reference or pointer
+        to select the derived implementation at run time.
+    </p>
+
+    <subsection xml:id="chapter13_subsection_virtual_member_functions">
+        <title>Virtual Member Functions</title>
+
+        <p>
+            The keyword <c>virtual</c> tells C++ that a derived class may replace a
+            member function. The derived declaration should use <c>override</c> to
+            state explicitly that it is intended to override a base function.
+        </p>
+
+        <listing xml:id="listing_chapter13_overriding_report_role">
+            <title>A derived class overrides a virtual member function</title>
+            <program xml:id="program_chapter13_overriding_report_role"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Employee {
+public:
+    virtual void report_role() const {
+        std::cout << "Employee\n";
+    }
+
+    virtual ~Employee() = default;
+};
+
+class HourlyEmployee : public Employee {
+public:
+    void report_role() const override {
+        std::cout << "Hourly employee\n";
+    }
+};
+
+int main() {
+    HourlyEmployee employee;
+    Employee& employee_reference = employee;
+
+    employee_reference.report_role();
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The reference has the static type <c>Employee&amp;</c>, but it refers to an
+            <c>HourlyEmployee</c> object. Because <c>report_role()</c> is virtual,
+            the call uses the derived implementation.
+        </p>
+
+        <p>
+            The <c>override</c> keyword is valuable because the compiler checks that
+            the derived declaration really matches a virtual base function. A typo,
+            different parameter list, or missing <c>const</c> qualifier then becomes
+            a compiler error instead of an accidental new function.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_override_and_final">
+        <title><c>override</c> and <c>final</c></title>
+
+        <table xml:id="table_chapter13_override_and_final">
+            <title>Keywords for controlling inherited behavior</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="22%"/>
+                <col width="39%"/>
+                <col width="39%"/>
+                <row header="yes">
+                    <cell><p>Keyword</p></cell>
+                    <cell><p>Where it appears</p></cell>
+                    <cell><p>Purpose</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>virtual</c></p></cell>
+                    <cell><p>Base-class member function</p></cell>
+                    <cell><p>Allows a derived class to provide a run-time replacement.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>override</c></p></cell>
+                    <cell><p>Derived member function</p></cell>
+                    <cell><p>Requests a compiler check that a base virtual function is being overridden.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>final</c></p></cell>
+                    <cell><p>Overriding member or class</p></cell>
+                    <cell><p>Prevents further overriding or further derivation.</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            A member function declared with <c>final</c> cannot be overridden by a
+            later derived class. A class declared with <c>final</c> cannot be used as
+            a base class. These restrictions can protect a design when further
+            customization would be unsafe or misleading.
+        </p>
+
+        <program xml:id="program_chapter13_final_member_and_class"
+                 language="cpp" interactive="yes" line-numbers="yes">
+            <code><![CDATA[
+class Report {
+public:
+    virtual void print() const final {
+        // This implementation cannot be overridden.
+    }
+};
+
+class SecureReport final : public Report {
+    // No class may derive from SecureReport.
+};
+
+int main() {
+    SecureReport report;
+    report.print();
+    return 0;
+}
+            ]]></code>
+        </program>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_function_hiding">
+        <title>Overriding and Function Hiding</title>
+
+        <p>
+            A derived declaration can hide all base functions with the same name,
+            even when the parameter lists differ. The <c>using</c> declaration can
+            bring the hidden base overloads into the derived class's overload set.
+        </p>
+
+        <p>
+            Hiding is based on the function's name. It does not require the base
+            function to be virtual, and it does not mean that the derived function
+            replaces the base implementation for polymorphic calls. This makes
+            hiding different from overriding.
+        </p>
+
+        <program xml:id="program_chapter13_function_hiding"
+                 language="cpp" interactive="yes" line-numbers="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Printer {
+public:
+    void print() const {
+        std::cout << "No argument\n";
+    }
+
+    void print(int copies) const {
+        std::cout << copies << " copies\n";
+    }
+};
+
+class ColorPrinter : public Printer {
+public:
+    using Printer::print;
+
+    void print() const {
+        std::cout << "Color output\n";
+    }
+};
+
+int main() {
+    ColorPrinter printer;
+    printer.print();
+    printer.print(2);
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            Without <c>using Printer::print;</c>, the declaration of
+            <c>ColorPrinter::print()</c> would hide the inherited overload
+            <c>Printer::print(int)</c> when called through a <c>ColorPrinter</c>
+            object. The <c>using</c> declaration makes both overloads available.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_comparing_overriding_hiding_overloading">
+        <title>Overriding, Hiding, and Overloading Compared</title>
+
+        <table xml:id="table_chapter13_overriding_hiding_overloading">
+            <title>Three similar but different ideas</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="22%"/>
+                <col width="28%"/>
+                <col width="25%"/>
+                <col width="25%"/>
+                <row header="yes">
+                    <cell><p>Idea</p></cell>
+                    <cell><p>What must match?</p></cell>
+                    <cell><p>When is it selected?</p></cell>
+                    <cell><p>Useful tool</p></cell>
+                </row>
+                <row>
+                    <cell><p>Overriding</p></cell>
+                    <cell><p>A virtual base function's name, parameters, and relevant qualifiers</p></cell>
+                    <cell><p>At run time through a base reference or pointer</p></cell>
+                    <cell><p><c>override</c></p></cell>
+                </row>
+                <row>
+                    <cell><p>Hiding</p></cell>
+                    <cell><p>Only the function name needs to be declared in the derived class</p></cell>
+                    <cell><p>During name lookup</p></cell>
+                    <cell><p><c>using Base::function_name</c></p></cell>
+                </row>
+                <row>
+                    <cell><p>Overloading</p></cell>
+                    <cell><p>Same name in one scope, with different parameter lists</p></cell>
+                    <cell><p>At compile time from the argument types</p></cell>
+                    <cell><p>Function overload resolution</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The <c>const</c> qualifier is part of the relevant member-function
+            signature for overriding. If a base function is declared
+            <c>void display() const</c>, a derived function declared
+            <c>void display()</c> does not override it because the qualifiers differ.
+            Writing <c>override</c> makes the compiler identify this mistake.
+        </p>
+
+        <listing xml:id="listing_chapter13_overriding_hiding_overloading">
+            <title>Overriding and restoring hidden overloads</title>
+            <program xml:id="program_chapter13_overriding_hiding_overloading"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class BasePrinter {
+public:
+    virtual void report(int value) const {
+        std::cout << "Base report: " << value << '\n';
+    }
+
+    void print() const {
+        std::cout << "Base print\n";
+    }
+
+    void print(int copies) const {
+        std::cout << copies << " copies\n";
+    }
+};
+
+class ColorPrinter : public BasePrinter {
+public:
+    void report(int value) const override {
+        std::cout << "Color report: " << value << '\n';
+    }
+
+    using BasePrinter::print;
+
+    void print(double brightness) const {
+        std::cout << "Brightness: " << brightness << '\n';
+    }
+};
+
+int main() {
+    ColorPrinter printer;
+    BasePrinter& printer_reference = printer;
+
+    printer_reference.report(7);
+    printer.print();
+    printer.print(2);
+    printer.print(0.8);
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            <c>report(int)</c> overrides the virtual base function. The derived
+            <c>print(double)</c> would hide the two base <c>print</c> overloads, but
+            <c>using BasePrinter::print;</c> makes those base overloads available
+            again. The calls are therefore resolved for three different argument
+            forms.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_overriding_visualization">
+        <title>Visualizing an Overridden Function</title>
+
+        <p>
+            The visualization shows an <c>Employee</c> reference referring to an
+            <c>HourlyEmployee</c> object and calling the overridden function.
+        </p>
+
+        <interactive xml:id="interactive_chapter13_overriding"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Employee%20%7B%0Apublic%3A%0A%20%20%20%20virtual%20void%20report_role%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Employee%5Cn%22%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20virtual%20~Employee%28%29%20%3D%20default%3B%0A%7D%3B%0A%0Aclass%20HourlyEmployee%20%3A%20public%20Employee%20%7B%0Apublic%3A%0A%20%20%20%20void%20report_role%28%29%20const%20override%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Hourly%20employee%5Cn%22%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20HourlyEmployee%20employee%3B%0A%20%20%20%20Employee%26%20employee_reference%20%3D%20employee%3B%0A%20%20%20%20employee_reference.report_role%28%29%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=390&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+    </subsection>
+
+    <exercises xml:id="exercises_chapter13_overriding">
+        <title>Exercises</title>
+
+        <exercise xml:id="exercise_chapter13_overriding_1">
+            <statement>
+                <p>
+                    What does the <c>override</c> keyword ask the compiler to check?
+                </p>
+            </statement>
+            <choices randomize="yes">
+                <choice>
+                    <statement><p>That the function is private.</p></statement>
+                    <feedback><p><c>override</c> concerns inherited virtual functions, not access.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>That the derived function matches a virtual function in a base class.</p></statement>
+                    <feedback><p>The compiler checks the intended overriding relationship.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>That no object can call the function.</p></statement>
+                    <feedback><p><c>override</c> does not prevent calls.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>That the function is automatically static.</p></statement>
+                    <feedback><p>Overridden functions are associated with object behavior.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_overriding_multiple">
+            <statement>
+                <p>
+                    Which statements about <c>virtual</c>, <c>override</c>, and
+                    <c>final</c> are correct? Select all that apply.
+                </p>
+            </statement>
+            <choices randomize="yes" multiple-correct="yes">
+                <choice correct="yes">
+                    <statement><p><c>override</c> helps detect a mismatch with a base virtual function.</p></statement>
+                    <feedback><p>The compiler checks the intended override.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><c>final</c> always makes a function private.</p></statement>
+                    <feedback><p><c>final</c> controls further overriding, not access.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A virtual base function can be replaced by a derived implementation.</p></statement>
+                    <feedback><p>This is the purpose of virtual dispatch.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A class declared <c>final</c> cannot be used as a base class.</p></statement>
+                    <feedback><p><c>final</c> can prevent further class derivation.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_overriding_hiding_multiple">
+            <statement>
+                <p>
+                    Which statements correctly distinguish overriding from hiding?
+                    Select all that apply.
+                </p>
+            </statement>
+            <choices randomize="yes" multiple-correct="yes">
+                <choice correct="yes">
+                    <statement><p>Overriding requires a matching virtual base function.</p></statement>
+                    <feedback><p>A derived function uses the base virtual interface when it overrides.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>Hiding can occur when a derived function has the same name but different parameters.</p></statement>
+                    <feedback><p>Name lookup can hide all base overloads with that name.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Hiding automatically causes dynamic dispatch through a base reference.</p></statement>
+                    <feedback><p>Dynamic dispatch is associated with virtual overriding, not ordinary name hiding.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A <c>using Base::function_name;</c> declaration can restore hidden base overloads.</p></statement>
+                    <feedback><p>The using declaration brings the base overload set into the derived scope.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_overriding_2">
+            <statement>
+                <p>
+                    Why might a derived class use <c>using Printer::print;</c>?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    It brings hidden base-class overloads named <c>print</c> into the
+                    derived class's overload set.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_overriding_parsons"
+                  number="yes"
+                  adaptive="yes"
+                  indentation="show">
+            <statement>
+                <p>
+                    Arrange the blocks to override <c>report_role()</c> correctly.
+                </p>
+            </statement>
+            <blocks randomize="yes">
+                <block order="1">
+                    <cline>class HourlyEmployee : public Employee {</cline>
+                </block>
+                <block order="2">
+                    <cline>public:</cline>
+                </block>
+                <block order="3">
+                    <cline>    void report_role() const override {</cline>
+                </block>
+                <block order="4">
+                    <cline>        std::cout &lt;&lt; "Hourly employee\n";</cline>
+                </block>
+                <block order="5">
+                    <cline>    }</cline>
+                </block>
+                <block order="6">
+                    <cline>};</cline>
+                </block>
+                <block order="3" correct="no">
+                    <cline>    void report_role(int level) const override {</cline>
+                </block>
+            </blocks>
+        </exercise>
+    </exercises>
+</section>

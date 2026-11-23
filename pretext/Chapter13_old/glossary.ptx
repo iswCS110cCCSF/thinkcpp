@@ -1,0 +1,60 @@
+<?xml version="1.0" ?><section xml:id="chapter13_glossary">
+    <title>Glossary</title>
+    <glossary>
+        <gi>
+            <title>pseudocode</title>
+            <p>A way of designing programs by writing rough drafts in a combination
+            of English and C++.</p>
+        </gi>
+        <gi>
+            <title>helper function</title>
+            <p>Often a small function that does not do anything enormously useful by
+            itself, but which helps another, more useful, function.</p>
+        </gi>
+        <gi>
+            <title>top-down design</title>
+            <p>A method of program development that uses pseudocode to sketch
+            solutions to large problems and design the interfaces of helper
+            functions.</p>
+        </gi>
+        <gi>
+            <title>mergesort</title>
+            <p>An algorithm for sorting a collection of values. Mergesort is faster
+            than the simple algorithm in the previous chapter, especially for
+            large collections.</p>
+        </gi>
+    </glossary>
+    <reading-questions>
+  <exercise label="glossary_13">
+    <statement>
+      <p>Match each phrase with the corresponding definition by dragging the phrase into the
+        appropriate box.</p>
+    </statement>
+    <feedback><p>
+      Try again!
+    </p></feedback>
+    <cardsort>
+      <match>
+        <premise order="1">pseudocode</premise>
+        <response>A way of designing programs by writing rough drafts in a combination of English
+          and C++.</response>
+      </match>
+      <match>
+        <premise order="2">helper function</premise>
+        <response>Often a small function that does not do anything enormously useful by itself, but
+          which helps another, more useful, function.</response>
+      </match>
+      <match>
+        <premise order="3">top-down design</premise>
+        <response>A method of program development that uses pseudocode to sketch solutions to large
+          problems and design the interfaces of helper functions.</response>
+      </match>
+      <match>
+        <premise order="4">mergesort</premise>
+        <response>An algorithm for sorting a collection of values. It is faster than the simple
+          algorithm in the previous chapter, especially for large collections.</response>
+      </match>
+    </cardsort>
+  </exercise>
+    </reading-questions>
+</section>

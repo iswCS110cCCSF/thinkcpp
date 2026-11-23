@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter13_multiple_inheritance_and_interface_composition">
+    <title>Multiple Inheritance and Interface Composition</title>
+
+    <p>
+        C++ allows a class to inherit from more than one base class. This is called
+        <term>multiple inheritance</term>. Multiple inheritance can be useful when
+        a concrete class must satisfy several small, independent interfaces.
+    </p>
+
+    <subsection xml:id="chapter13_subsection_multiple_base_classes">
+        <title>More Than One Base Class</title>
+
+        <p>
+            In a multiple-inheritance declaration, the base classes are separated by
+            commas. In this example, a <c>Report</c> is both printable and savable.
+        </p>
+
+        <listing xml:id="listing_chapter13_multiple_interfaces">
+            <title>A report implements two independent interfaces</title>
+            <program xml:id="program_chapter13_multiple_interfaces"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Printable {
+public:
+    virtual void print() const = 0;
+    virtual ~Printable() = default;
+};
+
+class Savable {
+public:
+    virtual void save() const = 0;
+    virtual ~Savable() = default;
+};
+
+class Report : public Printable, public Savable {
+public:
+    void print() const override {
+        std::cout << "Report printed\n";
+    }
+
+    void save() const override {
+        std::cout << "Report saved\n";
+    }
+};
+
+int main() {
+    Report report;
+    report.print();
+    report.save();
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The two base classes define separate responsibilities. The concrete
+            <c>Report</c> class supplies both required operations. Each interface
+            can also be used independently through a reference to its base type.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_interface_references">
+        <title>Using Each Interface Separately</title>
+
+        <program xml:id="program_chapter13_interface_references"
+                 language="cpp" interactive="yes" line-numbers="yes">
+            <code><![CDATA[
+#include <iostream>
+
+class Printable {
+public:
+    virtual void print() const = 0;
+    virtual ~Printable() = default;
+};
+
+class Savable {
+public:
+    virtual void save() const = 0;
+    virtual ~Savable() = default;
+};
+
+class Report : public Printable, public Savable {
+public:
+    void print() const override {
+        std::cout << "Printing report\n";
+    }
+
+    void save() const override {
+        std::cout << "Saving report\n";
+    }
+};
+
+void print_document(const Printable& document) {
+    document.print();
+}
+
+void save_document(const Savable& document) {
+    document.save();
+}
+
+int main() {
+    Report report;
+    print_document(report);
+    save_document(report);
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The two functions accept only the interface they need. This keeps each
+            function focused: <c>print_document()</c> does not need to know how to
+            save a document, and <c>save_document()</c> does not need to know how to
+            print one.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_multiple_inheritance_tradeoffs">
+        <title>Benefits and Risks</title>
+
+        <table xml:id="table_chapter13_multiple_inheritance_tradeoffs">
+            <title>Multiple inheritance design considerations</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="25%"/>
+                <col width="37%"/>
+                <col width="38%"/>
+                <row header="yes">
+                    <cell><p>Consideration</p></cell>
+                    <cell><p>Potential benefit</p></cell>
+                    <cell><p>Potential risk</p></cell>
+                </row>
+                <row>
+                    <cell><p>Small interfaces</p></cell>
+                    <cell><p>A class can satisfy several independent contracts.</p></cell>
+                    <cell><p>Too many interfaces can make the class difficult to understand.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Shared implementation</p></cell>
+                    <cell><p>Inherited behavior may be reused.</p></cell>
+                    <cell><p>Two bases may provide members with the same name.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Class hierarchy</p></cell>
+                    <cell><p>Different interfaces can be combined explicitly.</p></cell>
+                    <cell><p>Complex hierarchies can create ambiguity and coupling.</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            Multiple inheritance is easiest to explain when the base classes are
+            small interfaces with distinct responsibilities. When the goal is to
+            combine implementation components, composition is often clearer and
+            easier to maintain.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_ambiguous_members">
+        <title>Ambiguous Members</title>
+
+        <p>
+            If two base classes provide members with the same name, a derived class
+            may need to qualify the desired base explicitly. For example,
+            <c>Printable::reset()</c> and <c>Savable::reset()</c> identify two
+            different functions. This is one reason interfaces should have focused,
+            nonconflicting responsibilities.
+        </p>
+
+        <p>
+            Multiple inheritance does not mean that every class should inherit from
+            many implementation-heavy classes. Prefer a small number of stable
+            interfaces, and use composition when an object is simply made from
+            reusable parts.
+        </p>
+
+        <p>
+            The visualization shows one concrete object implementing two pure
+            interfaces.
+        </p>
+
+        <interactive xml:id="interactive_chapter13_multiple_inheritance"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Printable%20%7B%0Apublic%3A%0A%20%20%20%20virtual%20void%20print%28%29%20const%20%3D%200%3B%0A%20%20%20%20virtual%20~Printable%28%29%20%3D%20default%3B%0A%7D%3B%0A%0Aclass%20Savable%20%7B%0Apublic%3A%0A%20%20%20%20virtual%20void%20save%28%29%20const%20%3D%200%3B%0A%20%20%20%20virtual%20~Savable%28%29%20%3D%20default%3B%0A%7D%3B%0A%0Aclass%20Report%20%3A%20public%20Printable%2C%20public%20Savable%20%7B%0Apublic%3A%0A%20%20%20%20void%20print%28%29%20const%20override%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Report%20printed%5Cn%22%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20void%20save%28%29%20const%20override%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22Report%20saved%5Cn%22%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Report%20report%3B%0A%20%20%20%20Printable%26%20printable%20%3D%20report%3B%0A%20%20%20%20Savable%26%20savable%20%3D%20report%3B%0A%20%20%20%20printable.print%28%29%3B%0A%20%20%20%20savable.save%28%29%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=390&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+    </subsection>
+
+    <exercises xml:id="exercises_chapter13_multiple_inheritance">
+        <title>Exercises</title>
+
+        <exercise xml:id="exercise_chapter13_multiple_inheritance_1">
+            <statement>
+                <p>
+                    Why might a class inherit from both <c>Printable</c> and
+                    <c>Savable</c>?
+                </p>
+            </statement>
+            <choices randomize="yes">
+                <choice>
+                    <statement><p>Because every class must have two base classes.</p></statement>
+                    <feedback><p>Multiple inheritance is optional and should express a real design.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>Because the class must satisfy two independent interfaces.</p></statement>
+                    <feedback><p>The concrete class supplies both required operations.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Because composition is impossible in C++.</p></statement>
+                    <feedback><p>Composition is often a useful alternative.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Because pure virtual functions automatically create objects.</p></statement>
+                    <feedback><p>Pure virtual functions define required operations; they do not create objects.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_multiple_inheritance_multiple">
+            <statement>
+                <p>
+                    Which statements about interface-style multiple inheritance are
+                    correct? Select all that apply.
+                </p>
+            </statement>
+            <choices randomize="yes" multiple-correct="yes">
+                <choice correct="yes">
+                    <statement><p>A concrete class must implement inherited pure virtual functions.</p></statement>
+                    <feedback><p>Implementing the required operations makes the class concrete.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A class can be viewed through either interface's base reference.</p></statement>
+                    <feedback><p>The object satisfies both public contracts.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Multiple inheritance always provides simpler code than composition.</p></statement>
+                    <feedback><p>Multiple inheritance can increase ambiguity and coupling.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>Small, independent interfaces are usually easier to combine safely.</p></statement>
+                    <feedback><p>Focused interfaces reduce conflicts and make responsibilities clearer.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_multiple_inheritance_2">
+            <statement>
+                <p>
+                    When is composition often preferable to multiple inheritance?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Composition is often preferable when the goal is to combine
+                    implementation components rather than satisfy several stable
+                    interfaces.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_multiple_inheritance_parsons"
+                  number="yes"
+                  adaptive="yes"
+                  indentation="show">
+            <statement>
+                <p>
+                    Arrange the blocks to declare a class that implements both
+                    interfaces.
+                </p>
+            </statement>
+            <blocks randomize="yes">
+                <block order="1">
+                    <cline>class Report : public Printable, public Savable {</cline>
+                </block>
+                <block order="2">
+                    <cline>public:</cline>
+                </block>
+                <block order="3">
+                    <cline>    void print() const override;</cline>
+                </block>
+                <block order="4">
+                    <cline>    void save() const override;</cline>
+                </block>
+                <block order="5">
+                    <cline>};</cline>
+                </block>
+                <block order="1" correct="no">
+                    <cline>class Report : private Printable {</cline>
+                </block>
+            </blocks>
+        </exercise>
+    </exercises>
+</section>

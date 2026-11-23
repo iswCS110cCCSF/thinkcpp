@@ -1,0 +1,36 @@
+<?xml version="1.0" ?><section xml:id="chapter12_glossary">
+    <title>Glossary</title>
+    <glossary>
+        <gi>
+            <title>encode</title>
+            <p>To represent one set of values using another set of values, by
+            constructing a mapping between them.</p>
+        </gi>
+        <gi>
+            <title>abstract parameter</title>
+            <p>A set of parameters that act together as a single parameter.</p>
+        </gi>
+    </glossary>
+    <reading-questions>
+  <exercise label="glossary12">
+    <statement>
+      <p>Match each phrase with the corresponding definition by dragging the phrase into the
+        appropriate box.</p>
+    </statement>
+    <feedback><p>
+      Try again!
+    </p></feedback>
+    <cardsort>
+      <match>
+        <premise order="1">encode</premise>
+        <response>To represent one set of values using another set of values, by constructing a
+          mapping between them</response>
+      </match>
+      <match>
+        <premise order="2">abstract parameter</premise>
+        <response>A set of parameters that act together as a single parameter.</response>
+      </match>
+    </cardsort>
+  </exercise>
+    </reading-questions>
+</section>

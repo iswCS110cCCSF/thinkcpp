@@ -1,60 +1,89 @@
-<?xml version="1.0" ?><section xml:id="chapter13_glossary">
-    <title>Glossary</title>
-    <glossary>
-        <gi>
-            <title>pseudocode</title>
-            <p>A way of designing programs by writing rough drafts in a combination
-            of English and C++.</p>
-        </gi>
-        <gi>
-            <title>helper function</title>
-            <p>Often a small function that does not do anything enormously useful by
-            itself, but which helps another, more useful, function.</p>
-        </gi>
-        <gi>
-            <title>top-down design</title>
-            <p>A method of program development that uses pseudocode to sketch
-            solutions to large problems and design the interfaces of helper
-            functions.</p>
-        </gi>
-        <gi>
-            <title>mergesort</title>
-            <p>An algorithm for sorting a collection of values. Mergesort is faster
-            than the simple algorithm in the previous chapter, especially for
-            large collections.</p>
-        </gi>
-    </glossary>
-    <reading-questions>
-  <exercise label="glossary_13">
-    <statement>
-      <p>Match each phrase with the corresponding definition by dragging the phrase into the
-        appropriate box.</p>
-    </statement>
-    <feedback><p>
-      Try again!
-    </p></feedback>
-    <cardsort>
-      <match>
-        <premise order="1">pseudocode</premise>
-        <response>A way of designing programs by writing rough drafts in a combination of English
-          and C++.</response>
-      </match>
-      <match>
-        <premise order="2">helper function</premise>
-        <response>Often a small function that does not do anything enormously useful by itself, but
-          which helps another, more useful, function.</response>
-      </match>
-      <match>
-        <premise order="3">top-down design</premise>
-        <response>A method of program development that uses pseudocode to sketch solutions to large
-          problems and design the interfaces of helper functions.</response>
-      </match>
-      <match>
-        <premise order="4">mergesort</premise>
-        <response>An algorithm for sorting a collection of values. It is faster than the simple
-          algorithm in the previous chapter, especially for large collections.</response>
-      </match>
-    </cardsort>
-  </exercise>
-    </reading-questions>
-</section>
+<?xml version="1.0" encoding="UTF-8"?>
+<glossary xml:id="chapter13_glossary">
+    <title>Chapter 13 Glossary</title>
+
+    <gi xml:id="chapter13_glossary_is-a-relationship">
+        <title>is-a relationship</title>
+        <p>A relationship in which one type is a specialized version of another type.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_has-a-relationship">
+        <title>has-a relationship</title>
+        <p>A relationship in which one object contains or uses another object.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_inheritance">
+        <title>inheritance</title>
+        <p>A C++ mechanism that allows a derived class to receive and extend a base class's interface and behavior.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_base-class">
+        <title>base class</title>
+        <p>The existing class from which another class inherits.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_derived-class">
+        <title>derived class</title>
+        <p>A class that inherits from and may extend a base class.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_composition">
+        <title>composition</title>
+        <p>A design technique in which an object contains other objects as components.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_delegation">
+        <title>delegation</title>
+        <p>Allowing one object or function to ask another component to perform part of an operation.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_protected">
+        <title><c>protected</c></title>
+        <p>An access level available within a class and its derived classes, but not directly to ordinary client code.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_overriding">
+        <title>overriding</title>
+        <p>Replacing a virtual base-class function with a matching function in a derived class.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_virtual-function">
+        <title>virtual function</title>
+        <p>A member function that can be replaced in a derived class and selected dynamically through a base reference or pointer.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_override">
+        <title><c>override</c></title>
+        <p>A specifier that asks the compiler to verify that a derived function overrides a virtual base function.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_final">
+        <title><c>final</c></title>
+        <p>A specifier that prevents further overriding of a function or further inheritance from a class.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_function-hiding">
+        <title>function hiding</title>
+        <p>The name-lookup behavior in which a derived declaration hides inherited functions with the same name.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_polymorphism">
+        <title>polymorphism</title>
+        <p>The ability to use one interface with objects of different related types.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_dynamic-dispatch">
+        <title>dynamic dispatch</title>
+        <p>Run-time selection of a derived virtual function through a base reference or pointer.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_object-slicing">
+        <title>object slicing</title>
+        <p>The loss of a derived object's additional portion when it is copied into a base object by value.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_abstract-class">
+        <title>abstract class</title>
+        <p>A class that cannot be instantiated directly, usually because it has an unimplemented pure virtual function.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_pure-virtual-function">
+        <title>pure virtual function</title>
+        <p>A virtual function declared with <c>= 0</c> that specifies an operation a concrete derived class must implement.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_multiple-inheritance">
+        <title>multiple inheritance</title>
+        <p>A C++ feature that allows one class to inherit from more than one base class.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_wrapper-class">
+        <title>wrapper class</title>
+        <p>A class that contains another object and provides a focused interface around it.</p>
+    </gi>
+    <gi xml:id="chapter13_glossary_user-defined-exception">
+        <title>user-defined exception</title>
+        <p>A programmer-defined exception class that represents a meaningful category of program error.</p>
+    </gi>
+</glossary>

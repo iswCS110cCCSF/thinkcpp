@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter11_try-throw-and-catch">
+    <title><c>try</c>, <c>throw</c>, and <c>catch</c></title>
+
+    <p>
+        C++ exceptions provide a second way to report a failed operation. The
+        code that detects the problem can <term>throw</term> an exception. A
+        nearby or calling function can place the operation in a
+        <c>try</c> block and <term>catch</term> the exception.
+    </p>
+
+    <subsection xml:id="chapter11_exception-basic-syntax">
+        <title>The Basic Exception Pattern</title>
+
+        <p>
+            A <c>throw</c> expression stops the normal path through the current
+            operation. C++ then searches for a matching <c>catch</c> handler.
+            If a matching handler is found, control continues in that handler.
+        </p>
+
+        <listing xml:id="listing_chapter11_basic-exception-pattern">
+            <title>Throwing and catching an invalid argument</title>
+            <program xml:id="program_chapter11_basic-exception-pattern"
+                     language="cpp"
+                     interactive="yes"
+                     line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+int read_positive_count(int count) {
+    if (count <= 0) {
+        throw std::invalid_argument("count must be positive");
+    }
+
+    return count;
+}
+
+int main() {
+    try {
+        std::cout << read_positive_count(0) << '\n';
+    }
+    catch (const std::invalid_argument& error) {
+        std::cout << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The call to <c>read_positive_count(0)</c> throws before it returns
+            a value. Therefore, the output expression is not completed. Control
+            moves to the matching <c>catch</c> block, where the program prints
+            the error message.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_exception-control-flow">
+        <title>How Control Moves</title>
+
+        <orderedlist>
+            <li>
+                <p>The program enters the <c>try</c> block.</p>
+            </li>
+            <li>
+                <p>A called function detects a problem and throws an exception.</p>
+            </li>
+            <li>
+                <p>C++ leaves the unfinished normal path.</p>
+            </li>
+            <li>
+                <p>C++ searches for a matching <c>catch</c> handler.</p>
+            </li>
+            <li>
+                <p>The handler responds, or the program terminates if no handler is found.</p>
+            </li>
+        </orderedlist>
+
+        <p>
+            The handler does not resume the failed statement. It handles the
+            failure after the statement has been abandoned. This is different
+            from an <c>if</c> statement, which chooses between normal branches
+            while staying in the ordinary control-flow path.
+        </p>
+
+        <p>
+            An exception should carry information useful to the handler. A
+            standard exception object usually provides a message through its
+            <c>what()</c> member function.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter11_exception-visualization">
+        <title>Tracing the Exception Steps</title>
+
+        <p>
+            The static listing above is the trace for this example. The call enters the <c>try</c> block, the function throws, the unfinished output expression is abandoned, and the matching <c>catch</c> block prints the message.
+        </p>
+    </subsection>
+
+    <exercise label="chapter11_try-exercise-keyword">
+        <statement>
+            <p>Which keyword signals that an exceptional condition has occurred?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p><c>catch</c></p></statement>
+                <feedback><p><c>catch</c> handles an exception after it has been thrown.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>handle</c></p></statement>
+                <feedback><p><c>handle</c> is not the C++ keyword for reporting an exception.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>return</c></p></statement>
+                <feedback><p><c>return</c> completes a function normally; it does not throw an exception.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p><c>error</c></p></statement>
+                            <feedback><p><c>error</c> is not the keyword that transfers control with an exception.</p></feedback>
+                        </choice>
+            <choice correct="yes">
+                <statement><p><c>throw</c></p></statement>
+                <feedback><p><c>throw</c> transfers control with an exception object or value.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_try-exercise-flow">
+        <statement>
+            <p>What happens when <c>read_positive_count(0)</c> throws?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>The function returns zero and continues the output expression.</p></statement>
+                <feedback><p>The function throws before it returns a value.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>The unfinished normal path is abandoned and a matching handler is searched for.</p></statement>
+                <feedback><p>A thrown exception transfers control to a matching <c>catch</c> block.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>The <c>catch</c> block runs and the failed output expression resumes.</p></statement>
+                            <feedback><p>The failed normal path is abandoned; it does not resume after the handler.</p></feedback>
+                        </choice>
+            <choice>
+                <statement><p>The <c>catch</c> block runs before the function is called.</p></statement>
+                <feedback><p>The handler runs only after an exception is thrown.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>The compiler fixes the invalid argument automatically.</p></statement>
+                <feedback><p>Runtime error handling must be designed by the programmer.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_try-parsons-basic">
+        <statement>
+            <p>Arrange the lines to catch an exception from a function call.</p>
+        </statement>
+        <blocks>
+            <block order="1"><cline>try {</cline></block>
+            <block order="2"><cline>read_positive_count(0);</cline></block>
+            <block order="3"><cline>}</cline></block>
+            <block order="4"><cline>catch (const std::invalid_argument&amp; error) {</cline></block>
+            <block order="5"><cline>std::cout &lt;&lt; error.what() &lt;&lt; '\n';</cline></block>
+            <block order="6"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+
+    <exercise label="chapter11_try-exercise-handler">
+        <statement>
+            <p>What is the purpose of the <c>catch</c> block?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice>
+                <statement><p>To declare a new class.</p></statement>
+                <feedback><p>A handler is part of exception control flow, not a class declaration.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>To guarantee that a function returns a value.</p></statement>
+                <feedback><p>A handler responds to failure; it does not automatically return a value.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>To respond to a matching exception.</p></statement>
+                <feedback><p>The handler contains the recovery or reporting action.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>To run every time the <c>try</c> block finishes normally.</p></statement>
+                <feedback><p>A handler runs when a matching exception is thrown.</p></feedback>
+            </choice>
+            <choice>
+                            <statement><p>To choose the normal path before any exception occurs.</p></statement>
+                            <feedback><p>A <c>catch</c> block responds after a matching exception is thrown.</p></feedback>
+                        </choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter11_try-exercise-statements">
+        <statement>
+            <p>Select all statements that accurately describe exception handling.</p>
+        </statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice>
+                <statement><p>A <c>catch</c> block runs every time its <c>try</c> block finishes normally.</p></statement>
+                <feedback><p>A handler runs only when a matching exception is thrown.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p><c>throw</c> transfers control with an exception object or value.</p></statement>
+                <feedback><p>This is the role of <c>throw</c>.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p>An exception automatically repairs the operation that failed.</p></statement>
+                <feedback><p>The handler must report, recover, or otherwise respond deliberately.</p></feedback>
+            </choice>
+            <choice correct="yes">
+                <statement><p>A matching <c>catch</c> block responds after the normal path is abandoned.</p></statement>
+                <feedback><p>The handler responds to the exceptional path.</p></feedback>
+            </choice>
+            <choice>
+                <statement><p><c>try</c> prevents every possible runtime failure.</p></statement>
+                <feedback><p>A <c>try</c> block only provides a region in which exceptions may be handled.</p></feedback>
+            </choice>
+        </choices>
+    </exercise>
+</section>
