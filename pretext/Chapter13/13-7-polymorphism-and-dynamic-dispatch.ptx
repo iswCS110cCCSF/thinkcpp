@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter13_polymorphism_and_dynamic_dispatch">
+    <title>Polymorphism and Dynamic Dispatch</title>
+
+    <p>
+        <term>Polymorphism</term> means that one interface can work with objects of
+        different derived types. When a virtual member function is called through a
+        base reference or pointer, C++ selects the implementation belonging to the
+        actual object. This run-time selection is called <term>dynamic dispatch</term>.
+    </p>
+
+    <subsection xml:id="chapter13_subsection_base_references_and_pointers">
+        <title>Base References and Pointers</title>
+
+        <p>
+            A base reference or pointer can refer to a derived object. The expression
+            used to call the virtual function can remain the same while the actual
+            object determines which implementation runs.
+        </p>
+
+        <listing xml:id="listing_chapter13_dynamic_dispatch">
+            <title>A base reference invokes derived behavior</title>
+            <program xml:id="program_chapter13_dynamic_dispatch"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Shape2D {
+public:
+    virtual void report_type() const {
+        std::cout << "A two-dimensional shape\n";
+    }
+
+    virtual ~Shape2D() = default;
+};
+
+class Circle : public Shape2D {
+public:
+    void report_type() const override {
+        std::cout << "A circle\n";
+    }
+};
+
+int main() {
+    Circle circle;
+    Shape2D& shape_reference = circle;
+
+    shape_reference.report_type();
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The expression <c>shape_reference.report_type()</c> is written using the
+            base interface, but the call executes <c>Circle::report_type()</c>.
+            The reference does not copy the circle; it refers to the existing object.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_object_slicing">
+        <title>Object Slicing</title>
+
+        <p>
+            Passing a derived object by value to a function whose parameter is the
+            base type creates a new base object. The derived part is left out. This
+            loss of the derived portion is called <term>object slicing</term>.
+        </p>
+
+        <listing xml:id="listing_chapter13_object_slicing">
+            <title>Passing by value slices the derived object</title>
+            <program xml:id="program_chapter13_object_slicing"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+
+class Shape2D {
+public:
+    virtual void report_type() const {
+        std::cout << "A two-dimensional shape\n";
+    }
+
+    virtual ~Shape2D() = default;
+};
+
+class Circle : public Shape2D {
+public:
+    void report_type() const override {
+        std::cout << "A circle\n";
+    }
+};
+
+void report_shape_by_value(Shape2D shape) {
+    shape.report_type();
+}
+
+int main() {
+    Circle circle;
+    report_shape_by_value(circle);
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The function receives a separate <c>Shape2D</c> object, so the
+            <c>Circle</c> portion is sliced away. Passing a base reference or pointer
+            preserves the complete derived object and allows dynamic dispatch.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_shape2d_polymorphic_array">
+        <title>A Polymorphic Array of Two-Dimensional Shapes</title>
+
+        <p>
+            The following example stores circles, rectangles, ellipses, and triangles
+            in one <c>std::array</c>. The array stores pointers to existing objects;
+            it does not store the objects by value and does not own their lifetimes.
+        </p>
+
+        <listing xml:id="listing_chapter13_shape2d_polymorphic_array">
+            <title>One array can use the common Shape2D interface</title>
+            <program xml:id="program_chapter13_shape2d_polymorphic_array"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <array>
+#include <iostream>
+
+class Shape2D {
+public:
+    virtual double calculate_area() const = 0;
+    virtual ~Shape2D() = default;
+};
+
+class Circle : public Shape2D {
+private:
+    double radius;
+
+public:
+    Circle(double starting_radius)
+        : radius{starting_radius} {
+    }
+
+    double calculate_area() const override {
+        return 3.14159 * radius * radius;
+    }
+};
+
+class Rectangle : public Shape2D {
+private:
+    double width;
+    double height;
+
+public:
+    Rectangle(double starting_width, double starting_height)
+        : width{starting_width}, height{starting_height} {
+    }
+
+    double calculate_area() const override {
+        return width * height;
+    }
+};
+
+class Ellipse : public Shape2D {
+private:
+    double semi_major_axis;
+    double semi_minor_axis;
+
+public:
+    Ellipse(double major_axis, double minor_axis)
+        : semi_major_axis{major_axis}, semi_minor_axis{minor_axis} {
+    }
+
+    double calculate_area() const override {
+        return 3.14159 * semi_major_axis * semi_minor_axis;
+    }
+};
+
+class Triangle : public Shape2D {
+private:
+    double base;
+    double height;
+
+public:
+    Triangle(double starting_base, double starting_height)
+        : base{starting_base}, height{starting_height} {
+    }
+
+    double calculate_area() const override {
+        return 0.5 * base * height;
+    }
+};
+
+int main() {
+    Circle circle{2.0};
+    Rectangle rectangle{3.0, 4.0};
+    Ellipse ellipse{3.0, 2.0};
+    Triangle triangle{3.0, 4.0};
+
+    std::array<const Shape2D*, 4> shapes{
+        &circle, &rectangle, &ellipse, &triangle
+    };
+
+    for (const Shape2D* shape : shapes) {
+        std::cout << shape->calculate_area() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            A declaration such as <c>std::array&lt;Shape2D, 4&gt;</c> would not work
+            here because <c>Shape2D</c> is abstract. Even when a base class is
+            concrete, storing derived objects by value can slice away their derived
+            portions. The pointer array preserves the complete objects and lets the
+            virtual call select the correct area calculation.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_virtual_destructors">
+        <title>Why Polymorphic Bases Need Virtual Destructors</title>
+
+        <p>
+            A base class used polymorphically should normally have a virtual
+            destructor. This ensures that deleting a derived object through a base
+            pointer runs the derived destructor before the base destructor. The
+            <c>Shape2D</c> examples therefore declare
+            <c>virtual ~Shape2D() = default;</c>.
+        </p>
+
+        <p>
+            The shape array above uses pointers to local objects, so it does not call
+            <c>delete</c>. The virtual destructor is still part of the correct
+            polymorphic base-class interface for situations involving dynamically
+            created derived objects.
+        </p>
+
+        <p>
+            The following visualization shows dynamic dispatch through a base
+            reference before the complete shape-array example is studied.
+        </p>
+
+        <interactive xml:id="interactive_chapter13_polymorphism"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%0Aclass%20Shape2D%20%7B%0Apublic%3A%0A%20%20%20%20virtual%20void%20report_type%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22A%20two-dimensional%20shape%5Cn%22%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20virtual%20~Shape2D%28%29%20%3D%20default%3B%0A%7D%3B%0A%0Aclass%20Circle%20%3A%20public%20Shape2D%20%7B%0Apublic%3A%0A%20%20%20%20void%20report_type%28%29%20const%20override%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20%22A%20circle%5Cn%22%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20Circle%20circle%3B%0A%20%20%20%20Shape2D%26%20shape_reference%20%3D%20circle%3B%0A%20%20%20%20shape_reference.report_type%28%29%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=360&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+    </subsection>
+
+    <exercises xml:id="exercises_chapter13_polymorphism">
+        <title>Exercises</title>
+
+        <exercise xml:id="exercise_chapter13_polymorphism_1">
+            <statement>
+                <p>
+                    Why does the shape example use
+                    <c>std::array&lt;const Shape2D*, 4&gt;</c> instead of
+                    <c>std::array&lt;Shape2D, 4&gt;</c>?
+                </p>
+            </statement>
+            <choices randomize="yes">
+                <choice>
+                    <statement><p>Pointers are always faster than objects.</p></statement>
+                    <feedback><p>The important issue is preserving different derived object types.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p><c>Shape2D</c> is abstract, and pointers preserve the complete derived objects.</p></statement>
+                    <feedback><p>The array stores addresses while virtual calls use each object's implementation.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p><c>std::array</c> can store only pointers.</p></statement>
+                    <feedback><p><c>std::array</c> can store objects of many types, including class objects.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Derived classes cannot contain data members.</p></statement>
+                    <feedback><p>Derived classes can contain their own data members.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_polymorphism_multiple">
+            <statement>
+                <p>
+                    Which statements about polymorphism are correct? Select all
+                    that apply.
+                </p>
+            </statement>
+            <choices randomize="yes" multiple-correct="yes">
+                <choice correct="yes">
+                    <statement><p>A base reference can refer to a derived object.</p></statement>
+                    <feedback><p>This allows a common interface to work with derived objects.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A virtual call can select a derived implementation at run time.</p></statement>
+                    <feedback><p>This selection is dynamic dispatch.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Passing a derived object by base value preserves every derived member.</p></statement>
+                    <feedback><p>Passing by value can cause object slicing.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A polymorphic base class should generally have a virtual destructor.</p></statement>
+                    <feedback><p>This supports correct destruction through a base pointer.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_polymorphism_2">
+            <statement>
+                <p>
+                    What is object slicing?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Object slicing occurs when a derived object is copied into a base
+                    object by value, leaving out the derived portion.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_polymorphism_parsons"
+                  number="yes"
+                  adaptive="yes"
+                  indentation="show">
+            <statement>
+                <p>
+                    Arrange the blocks to create an array of pointers to four
+                    existing <c>Shape2D</c> objects.
+                </p>
+            </statement>
+            <blocks randomize="yes">
+                <block order="1">
+                    <cline>std::array&lt;const Shape2D*, 4&gt; shapes{</cline>
+                </block>
+                <block order="2">
+                    <cline>    &amp;circle, &amp;rectangle, &amp;ellipse, &amp;triangle</cline>
+                </block>
+                <block order="3">
+                    <cline>};</cline>
+                </block>
+                <block order="1" correct="no">
+                    <cline>std::array&lt;Shape2D, 4&gt; shapes{</cline>
+                </block>
+            </blocks>
+        </exercise>
+    </exercises>
+</section>

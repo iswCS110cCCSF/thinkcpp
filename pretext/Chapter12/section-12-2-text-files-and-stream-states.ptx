@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter12_text-files-and-stream-states">
+    <title>Text Files and Stream States</title>
+
+    <p>
+        Text-file programs commonly open a file, perform input or output, test
+        whether each operation succeeded, and close the file. File stream objects
+        can close themselves when they leave scope, but checking the stream after
+        opening is still essential.
+    </p>
+
+    <subsection xml:id="chapter12_write-text-file">
+        <title>Writing a text file</title>
+        <program xml:id="program_chapter12_write-text-file"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <fstream>
+
+int main() {
+    std::ofstream output_file{"scores.txt"};
+
+    if (!output_file) {
+        return 1;
+    }
+
+    output_file << "Amina,92\n";
+    output_file << "Marco,85\n";
+    return 0;
+}
+            ]]></code>
+        </program>
+        <p>
+			Opening an <c>std::ofstream</c> normally creates the file if it does 
+			not already exist. If the file already exists, opening it normally 
+			erases its previous contents before writing. However, we can avoid 
+			overwriting by opening for writing in append mode which we will 
+			discus in Section 12.4.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_read-text-file">
+        <title>Reading tokens and lines</title>
+        <program xml:id="program_chapter12_read-text-file"
+                 language="cpp" line-numbers="yes">
+            <code><![CDATA[
+#include <fstream>
+#include <iostream>
+#include <string>
+
+int main() {
+    std::ifstream input_file{"scores.txt"};
+
+    if (!input_file) {
+        return 1;
+    }
+
+    std::string line;
+    while (std::getline(input_file, line)) {
+        std::cout << "Read line: " << line << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+        <p>
+            Formatted extraction such as <c>input_file &gt;&gt; score</c> is useful
+            for whitespace-separated values. <c>std::getline()</c> is useful when
+            the program must preserve the spaces and delimiters in a complete
+            line.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_stream-state-flags">
+        <title>Stream-state flags</title>
+        <table xml:id="table_chapter12_stream-states">
+            <title>Common stream states</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+            <col width="25%"/><col width="75%"/>
+                <row header="yes">
+                    <cell>State</cell>
+                    <cell>Meaning</cell>
+                </row>
+                <row>
+                    <cell><p><c>good()</c></p></cell>
+                    <cell><p>No stream-state flags are set.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>eof()</c></p></cell>
+                    <cell><p>An input operation reached the end of the stream's input sequence, so <c>eofbit</c> is set.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>fail()</c></p></cell>
+                    <cell><p>An input operation failed, commonly because the input had the wrong format or type. <c>fail()</c> is also true when <c>badbit</c> is set.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>bad()</c></p></cell>
+                    <cell><p>A serious input/output failure occurred, so <c>badbit</c> is set.</p></cell>
+                </row>
+            </tabular>
+        </table>
+        <p>
+            A read loop should normally use the input operation itself as its
+            condition. The body then runs only after a complete requested value
+            has been obtained.
+        </p>
+        <p>
+            These functions inspect flags on the stream; they do not inspect the
+            file object directly. More than one flag can be set at the same time.
+            For example, a failed read at the end of a file may set both
+            <c>eofbit</c> and <c>failbit</c>.
+        </p>
+
+        <p>
+            A stream stores these conditions as state flags. The functions
+            <c>good()</c>, <c>eof()</c>, <c>fail()</c>, and <c>bad()</c> query those
+            flags. In ordinary reading loops, the extraction operation should be
+            the loop condition. The query functions are especially useful when a
+            program needs to diagnose why a loop stopped or decide whether
+            recovery is possible.
+        </p>
+
+        <table xml:id="table_chapter12_stream-state-flag-usage">
+            <title>Stream flags and typical responses</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="25%"/>
+                <col width="75%"/>
+                <row header="yes">
+                    <cell><p>Flag</p></cell>
+                    <cell><p>Typical response</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>goodbit</c></p></cell>
+                    <cell><p>Continue normal processing. No error flags are set.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>eofbit</c></p></cell>
+                    <cell><p>The input has reached its natural end.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>failbit</c></p></cell>
+                    <cell><p>Check the input format or determine whether the operation can be recovered.</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>badbit</c></p></cell>
+                    <cell><p>Report a serious input/output problem; recovery may not be possible.</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            The member function <c>clear()</c> clears the error flags, but it does
+            not repair malformed input or create missing data. A program should
+            address the underlying problem before trying the operation again.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter12_why_not_eof_loop_condition">
+        <title>Why <c>eof()</c> is usually not the loop condition</title>
+        <p>
+            The end-of-file flag is set only after an input operation reaches the
+            end of the input sequence. Therefore, checking <c>eof()</c> before
+            attempting the next read can allow one extra loop iteration.
+        </p>
+
+        <listing xml:id="listing_chapter12_eof_loop_warning">
+            <title>Avoid using <c>eof()</c> as the primary read-loop condition</title>
+            <program xml:id="program_chapter12_eof_loop_warning"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <fstream>
+#include <iostream>
+
+int main() {
+    std::ifstream input_file{"scores.txt"};
+
+    if (!input_file) {
+        return 1;
+    }
+
+    int score{};
+    while (!input_file.eof()) {
+        input_file >> score;
+        std::cout << score << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            On the final iteration, the loop begins before the program attempts
+            the read that reaches the end of the file. The extraction then fails,
+            but the body still prints <c>score</c>. If the input contains a
+            formatting error instead of the end of the file, the loop may not
+            terminate because <c>eofbit</c> is not necessarily set.
+        </p>
+
+        <listing xml:id="listing_chapter12_extraction_loop_condition">
+            <title>Use the extraction operation as the loop condition</title>
+            <program xml:id="program_chapter12_extraction_loop_condition"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <fstream>
+#include <iostream>
+
+int main() {
+    std::ifstream input_file{"scores.txt"};
+
+    if (!input_file) {
+        return 1;
+    }
+
+    int score{};
+    while (input_file >> score) {
+        std::cout << score << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            This version attempts the extraction first and enters the loop only
+            when the operation succeeds.
+        </p>
+    </subsection>
+
+    <exercise label="chapter12_2_line-input">
+        <statement><p>Why is <c>std::getline()</c> useful for a record containing spaces?</p></statement>
+        <choices randomize="yes">
+            <choice><statement><p>It converts every line into a binary object.</p></statement><feedback><p><c>getline()</c> reads characters into a string.</p></feedback></choice>
+            <choice correct="yes"><statement><p>It reads through the line ending instead of stopping at the next whitespace token.</p></statement><feedback><p>This preserves spaces within the line.</p></feedback></choice>
+            <choice><statement><p>It guarantees that the file exists.</p></statement><feedback><p>Opening and checking the file are separate operations.</p></feedback></choice>
+            <choice><statement><p>It automatically validates the record fields.</p></statement><feedback><p>Parsing and validation still belong to the program.</p></feedback></choice>
+            <choice><statement><p>It reads only the first line.</p></statement><feedback><p>A loop can call it repeatedly.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_2_read-loop">
+        <statement><p>Select all correct reasons to test a file stream.</p></statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p>The file may not exist or may be inaccessible.</p></statement><feedback><p>Opening can fail before input begins.</p></feedback></choice>
+            <choice correct="yes"><statement><p>A read operation may reach end-of-file or encounter malformed input.</p></statement><feedback><p>Each operation can change the stream state.</p></feedback></choice>
+            <choice><statement><p>Testing a stream causes all files to become binary.</p></statement><feedback><p>Stream tests do not change the file format.</p></feedback></choice>
+            <choice><statement><p>A successful open guarantees every future read succeeds.</p></statement><feedback><p>Later input can still fail.</p></feedback></choice>
+            <choice><statement><p><c>eof()</c> should always be checked before attempting a read.</p></statement><feedback><p>The read operation should usually be part of the loop condition.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise label="chapter12_2_text-code" number="yes" adaptive="yes" indentation="show">
+        <statement><p>Arrange the blocks to open a text file and print each complete line.</p></statement>
+        <blocks>
+            <block order="1"><cline>std::ifstream input_file{"notes.txt"};</cline></block>
+            <block order="2"><cline>if (!input_file) { return 1; }</cline></block>
+            <block order="3"><cline>std::string line;</cline></block>
+            <block order="4"><cline>while (std::getline(input_file, line)) {</cline></block>
+            <block order="5"><cline>    std::cout &lt;&lt; line &lt;&lt; '\n';</cline></block>
+            <block order="6"><cline>}</cline></block>
+        </blocks>
+    </exercise>
+</section>

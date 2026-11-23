@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter13_inheritance_tradeoffs_and_design_choices">
+    <title>Inheritance Trade-Offs and Design Choices</title>
+
+    <p>
+        Inheritance can express a genuine is-a relationship, but it is not simply a
+        general-purpose mechanism for reusing code. A derived class becomes coupled
+        to the base class's interface and behavior. Before choosing inheritance, we
+        should ask whether the derived object can really be used wherever the base
+        object is expected.
+    </p>
+
+    <subsection xml:id="chapter13_subsection_inheritance_coupling">
+        <title>Inheritance Creates Coupling</title>
+
+        <p>
+            A derived class depends on details of its base class. Changes to the base
+            class can therefore affect every derived class. A short hierarchy may be
+            easy to understand, but a deep hierarchy can make it difficult to locate
+            where behavior comes from.
+        </p>
+
+        <p>
+            Inheritance can also expose behavior that does not make sense for the
+            derived type. If a derived class must disable, reinterpret, or contradict
+            an inherited operation, the proposed is-a relationship may be incorrect.
+            Sharing a few lines of implementation is not enough to justify
+            inheritance.
+        </p>
+
+        <table xml:id="table_chapter13_inheritance_tradeoffs">
+            <title>Common inheritance trade-offs</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="25%"/>
+                <col width="27%"/>
+                <col width="48%"/>
+                <row header="yes">
+                    <cell><p>Concern</p></cell>
+                    <cell><p>What can happen</p></cell>
+                    <cell><p>Design question</p></cell>
+                </row>
+                <row>
+                    <cell><p>Tight coupling</p></cell>
+                    <cell><p>Base-class changes affect derived classes.</p></cell>
+                    <cell><p>Could the behavior be provided by a component instead?</p></cell>
+                </row>
+                <row>
+                    <cell><p>Deep hierarchy</p></cell>
+                    <cell><p>Behavior becomes difficult to trace.</p></cell>
+                    <cell><p>Can the design remain shallow and easy to explain?</p></cell>
+                </row>
+                <row>
+                    <cell><p>Wrong is-a relationship</p></cell>
+                    <cell><p>The derived class inherits unsuitable operations.</p></cell>
+                    <cell><p>Can every derived object substitute for the base object?</p></cell>
+                </row>
+                <row>
+                    <cell><p>Implementation reuse only</p></cell>
+                    <cell><p>The hierarchy communicates a relationship that is not real.</p></cell>
+                    <cell><p>Would composition or a helper function express the goal better?</p></cell>
+                </row>
+            </tabular>
+        </table>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_classes_not_designed_for_inheritance">
+        <title>Not Every Class Is Designed for Inheritance</title>
+
+        <p>
+            C++ does not forbid inheriting from every standard-library class, but a
+            class such as <c>std::string</c> is not generally designed to be a
+            polymorphic base class. It has no virtual destructor for safe deletion
+            through a <c>std::string*</c>, and it does not provide a virtual interface
+            intended for derived customization.
+        </p>
+
+        <p>
+            A wrapper class uses composition to add a label while keeping the
+            original string as a private component:
+        </p>
+
+        <listing xml:id="listing_chapter13_labeled_text_wrapper">
+            <title>A wrapper adds behavior through composition</title>
+            <program xml:id="program_chapter13_labeled_text_wrapper"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <string>
+
+class LabeledText {
+private:
+    std::string text;
+    std::string label;
+
+public:
+    LabeledText(const std::string& starting_label,
+                const std::string& starting_text)
+        : text{starting_text}, label{starting_label} {
+    }
+
+    void print() const {
+        std::cout << label << ": " << text << '\n';
+    }
+
+    std::size_t length() const {
+        return text.length();
+    }
+};
+
+int main() {
+    LabeledText message{"Status", "Ready"};
+    message.print();
+    std::cout << message.length() << '\n';
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            <c>LabeledText</c> is not a specialized kind of <c>std::string</c>. It
+            has a string and provides only the operations that belong in its own
+            interface. This wrapper design avoids making a standard-library class
+            part of an unnecessary inheritance hierarchy.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_prefer_composition_guidance">
+        <title>When Composition Is the Better Choice</title>
+
+        <p>
+            Composition is often a better choice when the goal is to combine
+            implementation components, replace one component with another, or keep
+            class responsibilities independent. Inheritance is more appropriate when
+            a derived object must genuinely satisfy the base type's public contract.
+        </p>
+
+        <table xml:id="table_chapter13_choose_composition_or_inheritance">
+            <title>Choosing between composition and inheritance</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="32%"/>
+                <col width="34%"/>
+                <col width="34%"/>
+                <row header="yes">
+                    <cell><p>Question</p></cell>
+                    <cell><p>Composition is likely when...</p></cell>
+                    <cell><p>Inheritance is likely when...</p></cell>
+                </row>
+                <row>
+                    <cell><p>What is the relationship?</p></cell>
+                    <cell><p>The object has or uses another object.</p></cell>
+                    <cell><p>The object is a specialized version of the base type.</p></cell>
+                </row>
+                <row>
+                    <cell><p>What should change?</p></cell>
+                    <cell><p>A component may be replaced independently.</p></cell>
+                    <cell><p>Derived types share a stable public contract.</p></cell>
+                </row>
+                <row>
+                    <cell><p>Why reuse behavior?</p></cell>
+                    <cell><p>To delegate implementation work.</p></cell>
+                    <cell><p>To support substitutability and shared polymorphic behavior.</p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            <q>Prefer composition over inheritance</q> is useful guidance, not an
+            absolute rule. The important step is to choose the relationship that
+            accurately communicates the design.
+        </p>
+
+        <p>
+            The visualization shows a wrapper object containing a
+            <c>std::string</c> rather than inheriting from it.
+        </p>
+
+        <interactive xml:id="interactive_chapter13_wrapper_composition"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Cstring%3E%0A%0Aclass%20LabeledText%20%7B%0Aprivate%3A%0A%20%20%20%20std%3A%3Astring%20text%3B%0A%20%20%20%20std%3A%3Astring%20label%3B%0A%0Apublic%3A%0A%20%20%20%20LabeledText%28const%20std%3A%3Astring%26%20starting_label%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20const%20std%3A%3Astring%26%20starting_text%29%0A%20%20%20%20%20%20%20%20%3A%20text%7Bstarting_text%7D%2C%20label%7Bstarting_label%7D%20%7B%0A%20%20%20%20%7D%0A%0A%20%20%20%20void%20print%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20label%20%3C%3C%20%22%3A%20%22%20%3C%3C%20text%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20std%3A%3Asize_t%20length%28%29%20const%20%7B%0A%20%20%20%20%20%20%20%20return%20text.length%28%29%3B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20LabeledText%20message%7B%22Status%22%2C%20%22Ready%22%7D%3B%0A%20%20%20%20message.print%28%29%3B%0A%20%20%20%20std%3A%3Acout%20%3C%3C%20message.length%28%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=400&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+    </subsection>
+
+    <exercises xml:id="exercises_chapter13_inheritance_tradeoffs">
+        <title>Exercises</title>
+
+        <exercise xml:id="exercise_chapter13_tradeoffs_1">
+            <statement>
+                <p>
+                    Which design is usually better for adding a label to a
+                    <c>std::string</c>?
+                </p>
+            </statement>
+            <choices randomize="yes">
+                <choice>
+                    <statement><p>Always inherit publicly from <c>std::string</c>.</p></statement>
+                    <feedback><p><c>std::string</c> is not generally designed as a polymorphic base class.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>Use a wrapper class that contains a <c>std::string</c>.</p></statement>
+                    <feedback><p>Composition keeps the string as an implementation component.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Make the label a global variable.</p></statement>
+                    <feedback><p>A global variable does not model the relationship between one label and one string.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Copy the string into every function that prints it.</p></statement>
+                    <feedback><p>Repeated copying does not create a clear object design.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_tradeoffs_multiple">
+            <statement>
+                <p>
+                    Which situations favor composition over inheritance? Select all
+                    that apply.
+                </p>
+            </statement>
+            <choices randomize="yes" multiple-correct="yes">
+                <choice correct="yes">
+                    <statement><p>The object has another object as one of its parts.</p></statement>
+                    <feedback><p>This is a has-a relationship.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A component may need to be replaced independently.</p></statement>
+                    <feedback><p>Composition can reduce dependence on a fixed class hierarchy.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>The derived object must be usable wherever the base type is expected.</p></statement>
+                    <feedback><p>This is a reason to consider inheritance and polymorphism.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>The design goal is to delegate implementation work to another object.</p></statement>
+                    <feedback><p>Delegation is a common composition technique.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_tradeoffs_2">
+            <statement>
+                <p>
+                    Why is sharing a few lines of implementation not, by itself, a
+                    sufficient reason to use inheritance?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Inheritance communicates an is-a relationship and creates
+                    coupling between the base and derived classes. Composition or a
+                    helper function may reuse implementation without making a false
+                    type relationship.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_tradeoffs_parsons"
+                  number="yes"
+                  adaptive="yes"
+                  indentation="show">
+            <statement>
+                <p>
+                    Arrange the blocks to define a wrapper class that contains a
+                    <c>std::string</c>.
+                </p>
+            </statement>
+            <blocks randomize="yes">
+                <block order="1">
+                    <cline>class LabeledText {</cline>
+                </block>
+                <block order="2">
+                    <cline>private:</cline>
+                </block>
+                <block order="3">
+                    <cline>    std::string text;</cline>
+                </block>
+                <block order="4">
+                    <cline>public:</cline>
+                </block>
+                <block order="5">
+                    <cline>    void print() const {</cline>
+                </block>
+                <block order="6">
+                    <cline>        std::cout &lt;&lt; text &lt;&lt; '\n';</cline>
+                </block>
+                <block order="7">
+                    <cline>    }</cline>
+                </block>
+                <block order="8">
+                    <cline>};</cline>
+                </block>
+                <block order="1" correct="no">
+                    <cline>class LabeledText : public std::string {</cline>
+                </block>
+            </blocks>
+        </exercise>
+    </exercises>
+</section>

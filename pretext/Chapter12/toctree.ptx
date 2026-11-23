@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude"
          xml:lang="en-US"
-         xml:id="vectors-of-objects">
-  <title>Vectors of Objects</title>
-  <xi:include href='./composition.ptx'/>
-  <xi:include href='./card-objects.ptx'/>
-  <xi:include href='./the-printcard-function.ptx'/>
-  <xi:include href='./the-equals-function.ptx'/>
-  <xi:include href='./the-isgreater-function.ptx'/>
-  <xi:include href='./vector-of-cards.ptx'/>
-  <xi:include href='./the-printdeck-function.ptx'/>
-  <xi:include href='./searching.ptx'/>
-  <xi:include href='./bisection-search.ptx'/>
-  <xi:include href='./decks-and-subdecks.ptx'/>
-  <xi:include href='./glossary.ptx'/>
-  <xi:include href='./exercises.ptx'/>
-  <xi:include href='./mixed-up-code.ptx'/>
-  <xi:include href='./coding-practice.ptx'/>
+         xml:id="chapter12_file-input-output">
+
+    <title>File Input and Output</title>
+
+    <xi:include href="./section-12-1-files-streams-and-persistent-data.ptx"/>
+    <xi:include href="./section-12-2-text-files-and-stream-states.ptx"/>
+    <xi:include href="./section-12-3-structured-text-records-and-csv.ptx"/>
+    <xi:include href="./section-12-4-text-file-applications-and-file-modes.ptx"/>
+    <xi:include href="./section-12-5-binary-files-bytes-and-object-representation.ptx"/>
+    <xi:include href="./section-12-6-fixed-size-binary-records-and-random-access.ptx"/>
+    <xi:include href="./section-12-7-portable-binary-formats-endianness-and-serialization.ptx"/>
+    <xi:include href="./section-12-8-file-errors-exceptions-and-applications.ptx"/>
+
+    <xi:include href="./glossary.ptx"/>
+    <xi:include href="./exercises.ptx"/>
+    <xi:include href="./mixed-up-code.ptx"/>
+    <xi:include href="./coding-practice.ptx"/>
 </chapter>

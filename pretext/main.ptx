@@ -52,7 +52,9 @@
     <xi:include href="./Chapter14/toctree.ptx"/>
 	-->
 	<!-- Next currently published chapter -->
-	<xi:include href="./Chapter15/toctree.ptx"/>  
+	<xi:include href="./Chapter12/toctree.ptx"/> 
+	<xi:include href="./Chapter13/toctree.ptx"/>  
+	
 </book>
 </pretext>
 

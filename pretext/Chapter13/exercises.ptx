@@ -1,540 +1,88 @@
-<?xml version="1.0"?>
-<exercises xml:id="chapter13_multiple-choice-exercises">
-  <title>Multiple Choice Exercises</title>
-  <exercise label="mce_13_1">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program line-numbers="yes">
-        <code><![CDATA[
-enum Month { JAN = 1, FEB, MAR, APR,
-MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC };
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="chapter13_exercises">
+    <title>Chapter 13 Exercises</title>
 
-int main() {
-  Month m1 = JUL;
-  Month m2 = NOV;
-  std::cout << m1 << " " << m2 << std::endl ;
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
+    <exercise xml:id="chapter13_exercise_relationship_choice">
         <statement>
-          <p>JULY NOVEMBER</p>
+            <p>Which relationship is represented when a <c>Car</c> contains an <c>Engine</c>?</p>
         </statement>
-        <feedback><p>
-          What are the actual values of <c>JUL</c> and <c>NOV</c>?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>JUL NOV</p>
-        </statement>
-        <feedback><p>
-          What do the values of enumerated types map to?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>7 11</p>
-        </statement>
-        <feedback><p>
-          Since we defined <c>JAN</c> to start at 1, <c>JUL</c> and <c>NOV</c> map to 7 and 11.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>6 10</p>
-        </statement>
-        <feedback><p>
-          Take a closer look at our enumerated type definition.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_13_2">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program line-numbers="yes">
-        <code><![CDATA[
-int main() {
- std::string s = "summer";
-  switch (s) {
-    case "spring":
-      std::cout << "It's spring!";
-      break;
-    case "summer":
-      std::cout << "It's summer!";
-    case "fall":
-      std::cout << "It's fall!";
-      break;
-    case "winter":
-      std::cout << "It's winter!";
-    default:
-      std::cout << "Invalid season!";
-      break;
-  }
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>summer</p>
-        </statement>
-        <feedback><p>
-          Although that is the value of <c>s</c>, is that printed?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>It's summer!It's fall!</p>
-        </statement>
-        <feedback><p>
-          This would be the correct answer if this <c>switch</c> statement worked.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>It's summer!It's fall!It's winter!Invalid season!</p>
-        </statement>
-        <feedback><p>
-          Where are the <c>break</c> statements?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Compile error.</p>
-        </statement>
-        <feedback><p>
-          <c>switch</c> statements can't be used on <c>string</c>s.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_13_3">
-    <statement>
-      <p>What is the output of the code below?</p>
-      <program line-numbers="yes">
-        <code><![CDATA[
-enum Season { SPRING, SUMMER, FALL, WINTER };
+        <choices randomize="yes">
+            <choice><statement><p>Is-a</p></statement><feedback><p>A car is not a specialized kind of engine.</p></feedback></choice>
+            <choice correct="yes"><statement><p>Has-a</p></statement><feedback><p>The car has an engine component.</p></feedback></choice>
+            <choice><statement><p>Overrides-a</p></statement><feedback><p>Overriding concerns inherited virtual functions.</p></feedback></choice>
+            <choice><statement><p>Copies-a</p></statement><feedback><p>Copying is not the relationship described.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-int main() {
-  Season s = SUMMER;
-  switch (s) {
-    case SPRING:
-      std::cout << "It's spring!";
-      break;
-    case SUMMER:
-      std::cout << "It's summer!";
-    case FALL:
-      std::cout << "It's fall!";
-      break;
-    case WINTER:
-      std::cout << "It's winter!";
-    default:
-      std::cout << "Invalid season!";
-      break;
-  }
-}
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
+    <exercise xml:id="chapter13_exercise_access_control">
         <statement>
-          <p>SUMMER</p>
+            <p>Which members can a derived class access directly?</p>
         </statement>
-        <feedback><p>
-          Although that is the value of <c>s</c>, is that printed?
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>It's summer!It's fall!</p>
-        </statement>
-        <feedback><p>
-          Since there is no <c>break</c> statement after the case for summer but there is one after
-            fall, this is correct.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>It's summer!It's fall!It's winter!Invalid season!</p>
-        </statement>
-        <feedback><p>
-          Where are the <c>break</c> statements?
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Compile error.</p>
-        </statement>
-        <feedback><p>
-          Since <c>s</c> is an enumerated type, the <c>Season</c>s are mapped to <c>int</c>s, which are
-            valid for <c>switch</c> statements.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_13_4">
-    <statement>
-      <p>Take a look at the <c>struct</c> definition of <c>Entry</c>. If we wanted to make a <c>struct</c> called <c>Dictionary</c>,
-        how can we create a <c> std::vector</c> of <c>Entry</c>s as a member variable?</p>
-      <program line-numbers="yes">
-        <code>
-struct Entry {
- std::string word;
-  int page;
-}
-</code>
-      </program>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<Entry> entries;]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          We create a <c> std::vector</c> with type <c>Entry</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c>Entry entries</c>
-          </p>
-        </statement>
-        <feedback><p>
-          This only creates one <c>Entry</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>
-            <c><![CDATA[ std::vector<Dictionary> Entry]]></c>
-          </p>
-        </statement>
-        <feedback><p>
-          This creates a <c> std::vector</c> of <c>Dictionary</c>s called <c>Entry</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>We can't make an object that contains a <c> std::vector</c>.</p>
-        </statement>
-        <feedback><p>
-          We can have <c> std::vector</c>s inside objects.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_13_5">
-    <statement>
-      <p>What is wrong with the code below?</p>
-      <program line-numbers="yes">
-        <code><![CDATA[
-struct Card {
-  int suit, rank;
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p>Public base members</p></statement><feedback><p>Public members are available through the inherited interface.</p></feedback></choice>
+            <choice correct="yes"><statement><p>Protected base members</p></statement><feedback><p>Protected members are available to derived classes.</p></feedback></choice>
+            <choice><statement><p>Every private base member</p></statement><feedback><p>Private base members are not directly accessible in derived classes.</p></feedback></choice>
+            <choice><statement><p>Local variables in <c>main()</c></p></statement><feedback><p>Inheritance does not provide access to unrelated local variables.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-  Card();
-  Card(int s, int r);
+    <exercise xml:id="chapter13_exercise_override_hiding">
+        <statement>
+            <p>Which statement correctly describes the difference between overriding and hiding?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice><statement><p>They are two names for exactly the same behavior.</p></statement><feedback><p>Overriding uses a matching virtual function; hiding is based on name lookup.</p></feedback></choice>
+            <choice correct="yes"><statement><p>Overriding replaces a matching virtual function, while hiding can hide base overloads by name.</p></statement><feedback><p>This distinction explains the role of <c>override</c> and <c>using</c>.</p></feedback></choice>
+            <choice><statement><p>Hiding always produces dynamic dispatch.</p></statement><feedback><p>Dynamic dispatch is associated with virtual functions.</p></feedback></choice>
+            <choice><statement><p>Overriding can happen only for static functions.</p></statement><feedback><p>Static functions do not provide virtual dispatch.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-  void print() const;
-  bool isGreater(const Card& c2) const;
-  int find(const Deck& deck) const;
-};
+    <exercise xml:id="chapter13_exercise_abstract_class">
+        <statement>
+            <p>Which statement about a pure virtual function is correct?</p>
+        </statement>
+        <choices randomize="yes">
+            <choice><statement><p>It always returns zero.</p></statement><feedback><p><c>= 0</c> marks the declaration; it is not a return statement.</p></feedback></choice>
+            <choice correct="yes"><statement><p>It requires a concrete derived class to provide an implementation.</p></statement><feedback><p>A pure virtual function defines a required operation.</p></feedback></choice>
+            <choice><statement><p>It makes the function private.</p></statement><feedback><p>Access depends on the surrounding access specifier.</p></feedback></choice>
+            <choice><statement><p>It prevents all derived classes from using the function.</p></statement><feedback><p>Derived classes are expected to implement the operation.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-struct Deck {
-  std::vector<Card> cards;
+    <exercise xml:id="chapter13_exercise_polymorphic_collection">
+        <statement>
+            <p>Which statements correctly describe the <c>Shape2D</c> pointer array? Select all that apply.</p>
+        </statement>
+        <choices randomize="yes" multiple-correct="yes">
+            <choice correct="yes"><statement><p>The array stores addresses of existing shape objects.</p></statement><feedback><p>The array element type is a pointer to <c>Shape2D</c>.</p></feedback></choice>
+            <choice correct="yes"><statement><p>The same virtual call can calculate different shape areas.</p></statement><feedback><p>Dynamic dispatch selects each derived implementation.</p></feedback></choice>
+            <choice><statement><p>The array stores four complete <c>Shape2D</c> objects by value.</p></statement><feedback><p><c>Shape2D</c> is abstract and the array stores pointers.</p></feedback></choice>
+            <choice correct="yes"><statement><p>The local shape objects must remain alive while the pointers are used.</p></statement><feedback><p>The pointer array does not own those objects.</p></feedback></choice>
+        </choices>
+    </exercise>
 
-  Deck();
-  Deck(int n);
-  void print() const;
-  int find(const Card& card) const;
-};
-]]></code>
-      </program>
-    </statement>
-    <choices>
-      <choice>
+    <exercise xml:id="chapter13_exercise_multiple_interfaces">
         <statement>
-          <p>We can't have a <c> std::vector</c> in <c>Deck</c>.</p>
+            <p>Why might a class implement both <c>Printable</c> and <c>Savable</c>?</p>
         </statement>
-        <feedback><p>
-          We are allowed to have <c> std::vector</c>s in objects.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
+        <choices randomize="yes">
+            <choice><statement><p>To avoid writing any member functions.</p></statement><feedback><p>The concrete class must implement the interface operations.</p></feedback></choice>
+            <choice correct="yes"><statement><p>To satisfy two independent public contracts.</p></statement><feedback><p>Each interface describes a different responsibility.</p></feedback></choice>
+            <choice><statement><p>Because multiple inheritance is required for every class.</p></statement><feedback><p>Use it only when the design needs multiple interfaces.</p></feedback></choice>
+            <choice><statement><p>To make all data members automatically public.</p></statement><feedback><p>Inheritance does not change data-member access in that way.</p></feedback></choice>
+        </choices>
+    </exercise>
+
+    <exercise xml:id="chapter13_exercise_custom_exception">
         <statement>
-          <p>The definition of <c>Card::find()</c> is invalid.</p>
+            <p>Which base class is most appropriate for an exception reporting an invalid function argument?</p>
         </statement>
-        <feedback><p>
-          The definition references <c>Deck</c>, but <c>Deck</c> is defined after <c>Card</c>.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>We can't define <c>print()</c> in both <c>Card</c> and in <c>Deck</c>.</p>
-        </statement>
-        <feedback><p>
-          Although they have the same name, these are two different <c>print()</c> functions.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Nothing is wrong with the code.</p>
-        </statement>
-        <feedback><p>
-          There is an error in the code. Can you find it?
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_13_6">
-    <statement>
-      <p>Why can't we code our <c>shuffle</c> function to work the exact same way humans shuffle cards?</p>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Our code can't split the deck exactly in half.</p>
-        </statement>
-        <feedback><p>
-          We can split the deck exactly in half.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>The way our code would shuffle cards would be unpredictable.</p>
-        </statement>
-        <feedback><p>
-          Part of the problem is that the cards would be shuffled in a predictable manner.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Our code would result in an infinite loop.</p>
-        </statement>
-        <feedback><p>
-          There's no reason to loop infinitely.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Our code would perform a perfect shuffle.</p>
-        </statement>
-        <feedback><p>
-          Because the cards are shuffled perfectly, the exact ordering of the cards is
-            predictable and thus the cards aren't really shuffled.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_13_7">
-    <statement>
-      <p>What is true about helper functions?</p>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>They are longer than the bigger functions since they do all the work.</p>
-        </statement>
-        <feedback><p>
-          Most helper functions are shorter than the bigger function.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>They are simpler functions that help the bigger function.</p>
-        </statement>
-        <feedback><p>
-          As the name implies, they help a bigger function.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>They shorten the code used in bigger functions.</p>
-        </statement>
-        <feedback><p>
-          Usually the bigger function has repetitive code, which is then put into a helper
-            function to help shorten the bigger function.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>They make debugging easier.</p>
-        </statement>
-        <feedback><p>
-          Since helper functions break down the bigger function into smaller parts, it's easier
-            to isolate and identify issues.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_13_8">
-    <statement>
-      <p>Using pseudocode to figure out what helper functions are needed is a characteristic of
-        what?</p>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Encapsulation</p>
-        </statement>
-        <feedback><p>
-          This is the process of wrapping up a sequence of instructions in a function.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Generalization</p>
-        </statement>
-        <feedback><p>
-          This is the process of taking something specific and making it more general.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Top-down design</p>
-        </statement>
-        <feedback><p>
-          This is the process of using pseudocode to sketch solutions to large problems and
-            design the interfaces of helper functions.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Bottom-up design</p>
-        </statement>
-        <feedback><p>
-          This is the process of writing small, useful functions and then assembling them into
-            larger solutions.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_13_9">
-    <statement>
-      <p>Which of the following can lead to off by one errors?</p>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Running a for loop too little or too many times.</p>
-        </statement>
-        <feedback><p>
-          This can lead to too few iterations or too many iterations.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Forgetting that indexing starts at 0.</p>
-        </statement>
-        <feedback><p>
-          This can lead you to have values that are shifted by one.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Using less than instead of less than or equal to in a while loop.</p>
-        </statement>
-        <feedback><p>
-          This can lead to running the while loop one less times than what you wanted.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>All of the above.</p>
-        </statement>
-        <feedback><p>
-          These can all lead to off by one errors.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_13_10">
-    <statement>
-      <p>What is the amount of time that mergeSort takes?</p>
-    </statement>
-    <choices>
-      <choice correct="yes">
-        <statement>
-          <p>n log n</p>
-        </statement>
-        <feedback><p>
-          This makes mergeSort faster than our previous version of selection sort.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>n!</p>
-        </statement>
-        <feedback><p>
-          mergeSort runs faster than factorial time.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>logn</p>
-        </statement>
-        <feedback><p>
-          mergeSort runs slower than logarithmic time.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>n^2</p>
-        </statement>
-        <feedback><p>
-          This is the time complexity of selection sort.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
-  <exercise label="mce_13_11">
-    <statement>
-      <p>What kind of sorting algorithm is our <c>sortDeck</c> function? You are encouraged to search up
-        these different sorting algorithms!</p>
-    </statement>
-    <choices>
-      <choice>
-        <statement>
-          <p>Bubble sort</p>
-        </statement>
-        <feedback><p>
-          Bubble sort swaps adjacent items and <q>bubbles</q> the lightest items to the top.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Insertion sort</p>
-        </statement>
-        <feedback><p>
-          Insertion sort selects an item from the unsorted section and puts it in the right
-            location in the sorted section.
-        </p></feedback>
-      </choice>
-      <choice correct="yes">
-        <statement>
-          <p>Selection sort</p>
-        </statement>
-        <feedback><p>
-          Selection sort finds the smallest item at each iteration i and puts it at the ith
-            location.
-        </p></feedback>
-      </choice>
-      <choice>
-        <statement>
-          <p>Quicksort</p>
-        </statement>
-        <feedback><p>
-          Quicksort uses recursive calls to partition a list.
-        </p></feedback>
-      </choice>
-    </choices>
-  </exercise>
+        <choices randomize="yes">
+            <choice><statement><p><c>std::runtime_error</c> in every situation</p></statement><feedback><p>Use the standard type that best describes the error.</p></feedback></choice>
+            <choice correct="yes"><statement><p><c>std::invalid_argument</c></p></statement><feedback><p>An invalid argument is exactly the category represented by this standard type.</p></feedback></choice>
+            <choice><statement><p><c>std::array</c></p></statement><feedback><p><c>std::array</c> is a container, not an exception type.</p></feedback></choice>
+            <choice><statement><p><c>Shape2D</c></p></statement><feedback><p><c>Shape2D</c> is unrelated to exception classification.</p></feedback></choice>
+        </choices>
+    </exercise>
 </exercises>

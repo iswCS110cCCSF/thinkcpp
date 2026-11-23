@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="chapter13_user_defined_exception_classes">
+    <title>User-Defined Exception Classes</title>
+
+    <p>
+        Chapter 11 introduced the mechanics of exception handling: throwing an
+        exception, catching it, and allowing it to propagate when appropriate. A
+        program can also define an exception class that gives a particular error a
+        meaningful type and message.
+    </p>
+
+    <subsection xml:id="chapter13_subsection_derive_exception_class">
+        <title>Deriving a Custom Exception</title>
+
+        <p>
+            A user-defined exception can publicly inherit from a standard exception
+            class. Deriving from <c>std::invalid_argument</c> communicates that the
+            caller supplied an unacceptable argument. Deriving from
+            <c>std::runtime_error</c> communicates that an operation failed while
+            the program was running.
+        </p>
+
+        <listing xml:id="listing_chapter13_invalid_score_exception">
+            <title>A custom exception identifies an invalid score</title>
+            <program xml:id="program_chapter13_invalid_score_exception"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+#include <string>
+
+class InvalidScore : public std::invalid_argument {
+public:
+    InvalidScore()
+        : std::invalid_argument{
+              "Score must be between 0 and 100"
+          } {
+    }
+};
+
+void validate_score(int score) {
+    if (score < 0 || score > 100) {
+        throw InvalidScore{};
+    }
+}
+
+int main() {
+    try {
+        validate_score(125);
+    }
+    catch (const InvalidScore& error) {
+        std::cout << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+
+        <p>
+            The custom exception constructor forwards a message to the base-class
+            constructor. The inherited <c>what()</c> member function then returns
+            that message. This is usually better than writing a new <c>what()</c>
+            function for every custom exception.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_exception_base_types">
+        <title>Choosing an Exception Base Class</title>
+
+        <table xml:id="table_chapter13_exception_base_types">
+            <title>Common bases for user-defined exceptions</title>
+            <tabular top="major" left="major" bottom="major" right="major">
+                <col width="28%"/>
+                <col width="36%"/>
+                <col width="36%"/>
+                <row header="yes">
+                    <cell><p>Base class</p></cell>
+                    <cell><p>Use when...</p></cell>
+                    <cell><p>Example derived type</p></cell>
+                </row>
+                <row>
+                    <cell><p><c>std::invalid_argument</c></p></cell>
+                    <cell><p>A function receives an unacceptable argument.</p></cell>
+                    <cell><p><c>InvalidScore</c></p></cell>
+                </row>
+                <row>
+                    <cell><p><c>std::out_of_range</c></p></cell>
+                    <cell><p>An index or requested position is outside an allowed range.</p></cell>
+                    <cell><p><c>InvalidRecordIndex</c></p></cell>
+                </row>
+                <row>
+                    <cell><p><c>std::runtime_error</c></p></cell>
+                    <cell><p>An operation cannot complete during execution.</p></cell>
+                    <cell><p><c>StorageFailure</c></p></cell>
+                </row>
+            </tabular>
+        </table>
+
+        <p>
+            A caller can catch the specific custom type when it needs a precise
+            response. It can also catch a broader standard base such as
+            <c>std::exception</c> when one general response is appropriate.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_catching_custom_exceptions">
+        <title>Catching Specifically or Generally</title>
+
+        <program xml:id="program_chapter13_catching_custom_exception"
+                 language="cpp" interactive="yes" line-numbers="yes">
+            <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+class InvalidScore : public std::invalid_argument {
+public:
+    InvalidScore(int score)
+        : std::invalid_argument{"Invalid score: " + std::to_string(score)} {
+    }
+};
+
+void validate_score(int score) {
+    if (score < 0 || score > 100) {
+        throw InvalidScore{score};
+    }
+}
+
+int main() {
+    try {
+        validate_score(-4);
+    }
+    catch (const std::exception& error) {
+        std::cout << error.what() << '\n';
+    }
+
+    return 0;
+}
+            ]]></code>
+        </program>
+
+        <p>
+            The catch clause accepts a <c>const std::exception&amp;</c>, so it can
+            handle <c>InvalidScore</c> through its standard exception base. Catching
+            by constant reference avoids another copy and preserves the exception's
+            polymorphic behavior.
+        </p>
+
+        <p>
+            The following visualization shows a custom exception being thrown and
+            then caught through its standard exception interface.
+        </p>
+
+        <interactive xml:id="interactive_chapter13_custom_exception"
+                     iframe="https://pythontutor.com/iframe-embed.html#code=%23include%20%3Ciostream%3E%0A%23include%20%3Cstdexcept%3E%0A%0Aclass%20InvalidScore%20%3A%20public%20std%3A%3Ainvalid_argument%20%7B%0Apublic%3A%0A%20%20%20%20InvalidScore%28%29%0A%20%20%20%20%20%20%20%20%3A%20std%3A%3Ainvalid_argument%7B%22Score%20must%20be%20between%200%20and%20100%22%7D%20%7B%0A%20%20%20%20%7D%0A%7D%3B%0A%0Avoid%20validate_score%28int%20score%29%20%7B%0A%20%20%20%20if%20%28score%20%3C%200%20%7C%7C%20score%20%3E%20100%29%20%7B%0A%20%20%20%20%20%20%20%20throw%20InvalidScore%7B%7D%3B%0A%20%20%20%20%7D%0A%7D%0A%0Aint%20main%28%29%20%7B%0A%20%20%20%20try%20%7B%0A%20%20%20%20%20%20%20%20validate_score%28125%29%3B%0A%20%20%20%20%7D%0A%20%20%20%20catch%20%28const%20std%3A%3Aexception%26%20error%29%20%7B%0A%20%20%20%20%20%20%20%20std%3A%3Acout%20%3C%3C%20error.what%28%29%20%3C%3C%20%27%5Cn%27%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%200%3B%0A%7D&amp;codeDivHeight=360&amp;codeDivWidth=420&amp;cppShowMemAddrs=true&amp;curInstr=0&amp;origin=opt-frontend.js&amp;py=cpp_g%2B%2B9.3.0"
+                     width="100%"
+                     aspect="16:10">
+        </interactive>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_standard_exception_family">
+        <title>Common Standard Exception Classes</title>
+
+        <p>
+            The standard library provides a family of exception classes. The classes
+            below are the most useful ones to recognize in an introductory C++
+            program. They all provide the inherited <c>what()</c> interface, either
+            directly or through a standard exception base class.
+        </p>
+
+        <figure xml:id="figure_chapter13_standard_exception_hierarchy">
+            <caption>Selected standard exception classes and their inheritance relationships</caption>
+            <image source="Chapter13/standard-exception-hierarchy.svg" width="100%">
+            </image>
+        </figure>
+
+        <p>
+            The diagram lists the common standard exception types that students are
+            most likely to encounter. <c>std::exception</c> is the general base
+            class. The logic-error family includes <c>std::logic_error</c>,
+            <c>std::invalid_argument</c>, <c>std::domain_error</c>,
+            <c>std::length_error</c>, and <c>std::out_of_range</c>.
+            The run-time-error family includes <c>std::runtime_error</c>,
+            <c>std::range_error</c>, <c>std::overflow_error</c>,
+            <c>std::underflow_error</c>, and <c>std::system_error</c>.
+            Input/output failures use <c>std::ios_base::failure</c>, and a failed
+            dynamic allocation can throw <c>std::bad_alloc</c>.
+        </p>
+
+        <p>
+            C++17 also defines specialized exceptions for particular library
+            facilities, such as <c>std::filesystem::filesystem_error</c>,
+            <c>std::bad_optional_access</c>, and
+            <c>std::bad_variant_access</c>. Students can study those types when they
+            study the corresponding libraries. For now, recognizing the common
+            hierarchy and choosing an appropriate base class is the main goal.
+        </p>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_specific_before_general_catch">
+        <title>Catch Specific Exceptions Before General Ones</title>
+
+        <p>
+            A specific exception must be caught before one of its base classes. If a
+            general <c>std::exception</c> handler appears first, it will catch the
+            derived exception and the later specific handler will never be reached.
+        </p>
+
+        <listing xml:id="listing_chapter13_exception_catch_order">
+            <title>Catch a specific exception before its base class</title>
+            <program xml:id="program_chapter13_exception_catch_order"
+                     language="cpp" interactive="yes" line-numbers="yes">
+                <code><![CDATA[
+#include <iostream>
+#include <stdexcept>
+
+int main() {
+    try {
+        throw std::out_of_range{"Index is outside the valid range"};
+    }
+    catch (const std::out_of_range& error) {
+        std::cout << "Range problem: " << error.what() << '\n';
+    }
+    catch (const std::logic_error& error) {
+        std::cout << "Logic problem: " << error.what() << '\n';
+    }
+    catch (const std::exception& error) {
+        std::cout << "Other standard exception: " << error.what() << '\n';
+    }
+
+    return 0;
+}
+                ]]></code>
+            </program>
+        </listing>
+    </subsection>
+
+    <subsection xml:id="chapter13_subsection_exception_design_guidance">
+        <title>Guidance for Exception Classes</title>
+
+        <ul>
+            <li>
+                <p>Give the exception a name that describes the error.</p>
+            </li>
+            <li>
+                <p>Derive publicly from the most appropriate standard exception type.</p>
+            </li>
+            <li>
+                <p>Pass a useful message to the standard base constructor.</p>
+            </li>
+            <li>
+                <p>Catch exceptions by <c>const</c> reference.</p>
+            </li>
+            <li>
+                <p>Do not create a custom exception class when an existing standard type communicates the error clearly.</p>
+            </li>
+        </ul>
+
+        <p>
+            User-defined exception classes should add meaningful classification or
+            information. They should not be used merely to make ordinary control
+            flow more complicated.
+        </p>
+    </subsection>
+
+    <exercises xml:id="exercises_chapter13_user_defined_exceptions">
+        <title>Exercises</title>
+
+        <exercise xml:id="exercise_chapter13_exception_1">
+            <statement>
+                <p>
+                    Why does <c>InvalidScore</c> inherit from
+                    <c>std::invalid_argument</c>?
+                </p>
+            </statement>
+            <choices randomize="yes">
+                <choice>
+                    <statement><p>Because every exception must inherit from that exact class.</p></statement>
+                    <feedback><p>Different standard exception types communicate different categories of errors.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>Because the caller supplied an unacceptable argument.</p></statement>
+                    <feedback><p>An invalid score is an invalid function argument.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Because the class cannot contain a constructor.</p></statement>
+                    <feedback><p>Custom exception classes can have constructors.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Because <c>what()</c> cannot be inherited.</p></statement>
+                    <feedback><p>The standard exception interface, including <c>what()</c>, can be inherited.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_exception_multiple">
+            <statement>
+                <p>
+                    Which statements about user-defined exception classes are
+                    correct? Select all that apply.
+                </p>
+            </statement>
+            <choices randomize="yes" multiple-correct="yes">
+                <choice correct="yes">
+                    <statement><p>A custom exception can publicly inherit from a standard exception type.</p></statement>
+                    <feedback><p>Public inheritance allows it to be caught through the standard base interface.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A custom constructor can pass a message to the standard base constructor.</p></statement>
+                    <feedback><p>The inherited <c>what()</c> function can then provide that message.</p></feedback>
+                </choice>
+                <choice>
+                    <statement><p>Every custom exception must override <c>what()</c>.</p></statement>
+                    <feedback><p>Standard exception classes already provide <c>what()</c> behavior.</p></feedback>
+                </choice>
+                <choice correct="yes">
+                    <statement><p>A custom exception can be caught through a <c>const std::exception&amp;</c>.</p></statement>
+                    <feedback><p>The standard base class provides a general catch interface.</p></feedback>
+                </choice>
+            </choices>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_exception_2">
+            <statement>
+                <p>
+                    Why should exception objects normally be caught by constant
+                    reference?
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Catching by constant reference avoids copying the exception and
+                    preserves its polymorphic type and message.
+                </p>
+            </answer>
+        </exercise>
+
+        <exercise xml:id="exercise_chapter13_exception_parsons"
+                  number="yes"
+                  adaptive="yes"
+                  indentation="show">
+            <statement>
+                <p>
+                    Arrange the blocks to define a custom exception derived from
+                    <c>std::invalid_argument</c>.
+                </p>
+            </statement>
+            <blocks randomize="yes">
+                <block order="1">
+                    <cline>class InvalidScore : public std::invalid_argument {</cline>
+                </block>
+                <block order="2">
+                    <cline>public:</cline>
+                </block>
+                <block order="3">
+                    <cline>    InvalidScore()</cline>
+                </block>
+                <block order="4">
+                    <cline>        : std::invalid_argument{"Invalid score"} {</cline>
+                </block>
+                <block order="5">
+                    <cline>    }</cline>
+                </block>
+                <block order="6">
+                    <cline>};</cline>
+                </block>
+                <block order="1" correct="no">
+                    <cline>class InvalidScore : private std::invalid_argument {</cline>
+                </block>
+            </blocks>
+        </exercise>
+    </exercises>
+</section>

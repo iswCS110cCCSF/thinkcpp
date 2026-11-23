@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude"
+         xml:lang="en-US"
+         xml:id="vectors-of-objects">
+  <title>Vectors of Objects</title>
+  <xi:include href='./composition.ptx'/>
+  <xi:include href='./card-objects.ptx'/>
+  <xi:include href='./the-printcard-function.ptx'/>
+  <xi:include href='./the-equals-function.ptx'/>
+  <xi:include href='./the-isgreater-function.ptx'/>
+  <xi:include href='./vector-of-cards.ptx'/>
+  <xi:include href='./the-printdeck-function.ptx'/>
+  <xi:include href='./searching.ptx'/>
+  <xi:include href='./bisection-search.ptx'/>
+  <xi:include href='./decks-and-subdecks.ptx'/>
+  <xi:include href='./glossary.ptx'/>
+  <xi:include href='./exercises.ptx'/>
+  <xi:include href='./mixed-up-code.ptx'/>
+  <xi:include href='./coding-practice.ptx'/>
+</chapter>
