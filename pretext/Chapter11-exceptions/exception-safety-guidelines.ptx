@@ -208,7 +208,7 @@ int main() {
             <p>Select all practices that generally improve exception safety.</p>
         </statement>
         <choices randomize="yes" multiple-correct="yes">
-            <choice>
+            <choice correct="yes">
                 <statement><p>Validate important conditions before changing object state.</p></statement>
                 <feedback><p>Early validation helps prevent partial changes.</p></feedback>
             </choice>
