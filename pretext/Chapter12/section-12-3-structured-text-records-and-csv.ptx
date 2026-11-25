@@ -186,10 +186,51 @@ int main() {
     </listing>
 
     <p>
-        By default, opening the output stream replaces an existing file. To add
-        records without replacing earlier contents, open it with
-        <c>std::ios::app</c>. This example assumes that names do not contain
-        unquoted commas; a full CSV implementation must handle quoted fields.
+        By default, opening an <c>std::ofstream</c> for writing into a file
+		creates the file if the file does not exist. If the file already exists,
+        C++ overwrites the existing file causing the loss of original data.
+        This behavior is useful when the program is meant to create a fresh
+        output file, but it would destroy earlier records such as in a growing log file.
+    </p>
+
+    <p>
+        To preserve the existing contents and add new records at the end, open
+        the stream with <c>std::ios::app</c>, where <c>app</c> means
+        <q>append</q>. Each output operation then writes at the end of the file.
+        If the file does not yet exist, append mode creates it.
+    </p>
+
+    <listing xml:id="listing_chapter12_append-csv-file">
+        <title>Appending a record without erasing earlier records</title>
+        <program xml:id="program_chapter12_append-csv-file"
+                 language="cpp" interactive="yes" line-numbers="yes">
+            <code><![CDATA[
+#include <fstream>
+
+int main() {
+    std::ofstream output_file{
+        "scores.csv",
+        std::ios::app
+    };
+
+    if (!output_file) {
+        return 1;
+    }
+
+    output_file << "Noor,88\n";
+    return 0;
+}
+            ]]></code>
+        </program>
+    </listing>
+
+    <p>
+        Running this program again adds another <c>Noor,88</c> record rather than
+        replacing the records already in <c>scores.csv</c>. A program that uses
+        append mode should therefore decide whether duplicate records are
+        acceptable. Both the regular writing example and this append example
+        assume that names do not contain unquoted commas; a full CSV
+        implementation must handle quoted fields.
     </p>
 
     <subsection xml:id="chapter12_tsv-and-json-preview">
