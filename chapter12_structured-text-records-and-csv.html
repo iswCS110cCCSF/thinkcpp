@@ -1163,7 +1163,28 @@ int main() {
 }
 </code></pre></div></div>
 </figure>
-<div class="para" id="chapter12_structured-text-records-and-csv-10">By default, opening the output stream replaces an existing file. To add records without replacing earlier contents, open it with <code class="code-inline tex2jax_ignore">std::ios::app</code>. This example assumes that names do not contain unquoted commas; a full CSV implementation must handle quoted fields.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter12_structured-text-records-and-csv-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+<div class="para" id="chapter12_structured-text-records-and-csv-10">By default, opening an <code class="code-inline tex2jax_ignore">std::ofstream</code> for writing into a file creates the file if the file does not exist. If the file already exists, C++ overwrites the existing file causing the loss of original data. This behavior is useful when the program is meant to create a fresh output file, but it would destroy earlier records such as in a growing log file.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter12_structured-text-records-and-csv-10" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="chapter12_structured-text-records-and-csv-11">To preserve the existing contents and add new records at the end, open the stream with <code class="code-inline tex2jax_ignore">std::ios::app</code>, where <code class="code-inline tex2jax_ignore">app</code> means “append”. Each output operation then writes at the end of the file. If the file does not yet exist, append mode creates it.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter12_structured-text-records-and-csv-11" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="listing_chapter12_append-csv-file"><figcaption><span class="type">Listing</span><span class="space heading-divison-mark heading-divison-mark__space"> </span><span class="codenumber">12.3.5<span class="period heading-divison-mark heading-divison-mark__period">.</span></span><span class="space heading-divison-mark heading-divison-mark__space"> </span>Appending a record without erasing earlier records<div class="autopermalink" aria-hidden="true" data-description="Listing 12.3.5: Appending a record without erasing earlier records"><a tabindex="-1" href="#listing_chapter12_append-csv-file" title="Copy heading and permalink for Listing 12.3.5: Appending a record without erasing earlier records" aria-label="Copy heading and permalink for Listing 12.3.5: Appending a record without erasing earlier records">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program clipboardable line-numbers"><code id="rs-program_chapter12_append-csv-file" class="language-cpp">#include &lt;fstream&gt;
+
+int main() {
+    std::ofstream output_file{
+        "scores.csv",
+        std::ios::app
+    };
+
+    if (!output_file) {
+        return 1;
+    }
+
+    output_file &lt;&lt; "Noor,88\n";
+    return 0;
+}
+</code></pre></div></div>
+</figure>
+<div class="para" id="chapter12_structured-text-records-and-csv-13">Running this program again adds another <code class="code-inline tex2jax_ignore">Noor,88</code> record rather than replacing the records already in <code class="code-inline tex2jax_ignore">scores.csv</code>. A program that uses append mode should therefore decide whether duplicate records are acceptable. Both the regular writing example and this append example assume that names do not contain unquoted commas; a full CSV implementation must handle quoted fields.<div class="autopermalink" aria-hidden="true" data-description="Paragraph"><a tabindex="-1" href="#chapter12_structured-text-records-and-csv-13" title="Copy heading and permalink for Paragraph" aria-label="Copy heading and permalink for Paragraph">🔗</a></div>
 </div>
 <section class="subsection" id="chapter12_tsv-and-json-preview">
 <h2 class="heading hide-type">
